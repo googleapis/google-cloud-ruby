@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.AudienceSegmentService'
 
-            # Retrieves an `AudienceSegment` object.
+            # API to retrieve an `AudienceSegment` object.
             rpc :GetAudienceSegment, ::Google::Ads::AdManager::V1::GetAudienceSegmentRequest, ::Google::Ads::AdManager::V1::AudienceSegment
-            # Lists `AudienceSegment` objects.
+            # API to retrieve a list of `AudienceSegment` objects.
             rpc :ListAudienceSegments, ::Google::Ads::AdManager::V1::ListAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::ListAudienceSegmentsResponse
           end
 

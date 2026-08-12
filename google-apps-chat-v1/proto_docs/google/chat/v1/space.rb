@@ -911,7 +911,6 @@ module Google
         #
         #     - `create_time DESC`
         #     - `relevance DESC`
-        #        [Developer Preview](https://developers.google.com/workspace/preview).
         class SearchSpacesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

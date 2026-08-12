@@ -152,7 +152,6 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
     show_deleted = true
-    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
 
     list_messages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -168,27 +167,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax }) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax do |_result, response|
+        c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_messages ::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax) do |_result, response|
+        c.list_messages ::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax }, call_options) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_messages(::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax), call_options) do |_result, response|
+        c.list_messages(::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,7 +321,6 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
-    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
 
     get_message_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -338,27 +336,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.get_message({ name: name, markup_syntax: markup_syntax }) do |_result, response|
+        c.get_message({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_message name: name, markup_syntax: markup_syntax do |_result, response|
+        c.get_message name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_message ::Google::Apps::Chat::V1::GetMessageRequest.new(name: name, markup_syntax: markup_syntax) do |_result, response|
+        c.get_message ::Google::Apps::Chat::V1::GetMessageRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_message({ name: name, markup_syntax: markup_syntax }, call_options) do |_result, response|
+        c.get_message({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_message(::Google::Apps::Chat::V1::GetMessageRequest.new(name: name, markup_syntax: markup_syntax), call_options) do |_result, response|
+        c.get_message(::Google::Apps::Chat::V1::GetMessageRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,7 +490,6 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
-    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
     view = :SEARCH_MESSAGES_VIEW_UNSPECIFIED
 
     search_messages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -509,27 +506,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view }) do |_result, response|
+        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.search_messages parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view do |_result, response|
+        c.search_messages parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.search_messages ::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view) do |_result, response|
+        c.search_messages ::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view }, call_options) do |_result, response|
+        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.search_messages(::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view), call_options) do |_result, response|
+        c.search_messages(::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

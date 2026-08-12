@@ -292,17 +292,18 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     **Filterable fields:**
-              #
-              #     * `dataType`
-              #     * `description`
-              #     * `displayName`
-              #     * `entityType`
-              #     * `name`
-              #     * `options.customFieldOptionId`
-              #     * `options.displayName`
-              #     * `status`
-              #     * `visibility`
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>dataType</code></li>
+              #       <li><code>description</code></li>
+              #       <li><code>displayName</code></li>
+              #       <li><code>entityType</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>options.customFieldOptionId</code></li>
+              #       <li><code>options.displayName</code></li>
+              #       <li><code>status</code></li>
+              #       <li><code>visibility</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

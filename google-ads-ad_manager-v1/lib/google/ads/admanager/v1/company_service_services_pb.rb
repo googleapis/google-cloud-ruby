@@ -24,8 +24,7 @@ module Google
     module AdManager
       module V1
         module CompanyService
-          # Provides methods for handling [Company][google.ads.admanager.v1.Company]
-          # objects.
+          # Provides methods for handling `Company` objects.
           class Service
 
             include ::GRPC::GenericService
@@ -34,18 +33,10 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.CompanyService'
 
-            # Retrieves a [Company][google.ads.admanager.v1.Company] object.
+            # Retrieves a `Company` object.
             rpc :GetCompany, ::Google::Ads::AdManager::V1::GetCompanyRequest, ::Google::Ads::AdManager::V1::Company
-            # Lists [Company][google.ads.admanager.v1.Company] objects.
+            # Lists `Company` objects.
             rpc :ListCompanies, ::Google::Ads::AdManager::V1::ListCompaniesRequest, ::Google::Ads::AdManager::V1::ListCompaniesResponse
-            # Creates a [Company][google.ads.admanager.v1.Company] object.
-            rpc :CreateCompany, ::Google::Ads::AdManager::V1::CreateCompanyRequest, ::Google::Ads::AdManager::V1::Company
-            # Creates [Company][google.ads.admanager.v1.Company] objects.
-            rpc :BatchCreateCompanies, ::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest, ::Google::Ads::AdManager::V1::BatchCreateCompaniesResponse
-            # Updates a [Company][google.ads.admanager.v1.Company] object.
-            rpc :UpdateCompany, ::Google::Ads::AdManager::V1::UpdateCompanyRequest, ::Google::Ads::AdManager::V1::Company
-            # Batch updates [Company][google.ads.admanager.v1.Company] objects.
-            rpc :BatchUpdateCompanies, ::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest, ::Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse
           end
 
           Stub = Service.rpc_stub_class

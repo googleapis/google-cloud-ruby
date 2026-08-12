@@ -31,8 +31,7 @@ module Google
     module AdManager
       module V1
         ##
-        # Provides methods for handling {::Google::Ads::AdManager::V1::Company Company}
-        # objects.
+        # Provides methods for handling `Company` objects.
         #
         # To load this service and instantiate a REST client:
         #
