@@ -55,12 +55,13 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     **Filterable fields:**
-        #
-        #     * `displayName`
-        #     * `majorVersion`
-        #     * `minorVersion`
-        #     * `name`
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>displayName</code></li>
+        #       <li><code>majorVersion</code></li>
+        #       <li><code>minorVersion</code></li>
+        #       <li><code>name</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

@@ -292,12 +292,13 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     **Filterable fields:**
-              #
-              #     * `displayName`
-              #     * `name`
-              #     * `owner`
-              #     * `visibility`
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>displayName</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>owner</code></li>
+              #       <li><code>visibility</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

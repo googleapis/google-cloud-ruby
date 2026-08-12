@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.TaxonomyCategoryService'
 
-            # Retrieves a `TaxonomyCategory` object.
+            # API to retrieve a `TaxonomyCategory` object.
             rpc :GetTaxonomyCategory, ::Google::Ads::AdManager::V1::GetTaxonomyCategoryRequest, ::Google::Ads::AdManager::V1::TaxonomyCategory
-            # Lists `TaxonomyCategory` objects.
+            # API to retrieve a list of `TaxonomyCategory` objects.
             rpc :ListTaxonomyCategories, ::Google::Ads::AdManager::V1::ListTaxonomyCategoriesRequest, ::Google::Ads::AdManager::V1::ListTaxonomyCategoriesResponse
           end
 

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # Retrieves a `EntitySignalsMapping` object.
+              # API to retrieve a `EntitySignalsMapping` object.
               #
               # @overload get_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `get_entity_signals_mapping` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # Lists `EntitySignalsMapping` objects.
+              # API to retrieve a list of `EntitySignalsMapping` objects.
               #
               # @overload list_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `list_entity_signals_mappings` via a request object, either of type
@@ -365,7 +365,7 @@ module Google
               end
 
               ##
-              # Creates an `EntitySignalsMapping` object.
+              # API to create an `EntitySignalsMapping` object.
               #
               # @overload create_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `create_entity_signals_mapping` via a request object, either of type
@@ -446,7 +446,7 @@ module Google
               end
 
               ##
-              # Updates an `EntitySignalsMapping` object.
+              # API to update an `EntitySignalsMapping` object.
               #
               # @overload update_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `update_entity_signals_mapping` via a request object, either of type
@@ -531,7 +531,7 @@ module Google
               end
 
               ##
-              # Creates `EntitySignalsMapping` objects.
+              # API to batch create `EntitySignalsMapping` objects.
               #
               # @overload batch_create_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `batch_create_entity_signals_mappings` via a request object, either of type
@@ -614,7 +614,7 @@ module Google
               end
 
               ##
-              # Batch updates `EntitySignalsMapping` objects.
+              # API to batch update `EntitySignalsMapping` objects.
               #
               # @overload batch_update_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `batch_update_entity_signals_mappings` via a request object, either of type

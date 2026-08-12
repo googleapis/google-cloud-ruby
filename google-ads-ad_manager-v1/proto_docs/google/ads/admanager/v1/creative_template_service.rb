@@ -55,17 +55,18 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     **Filterable fields:**
-        #
-        #     * `description`
-        #     * `displayName`
-        #     * `interstitial`
-        #     * `name`
-        #     * `nativeEligible`
-        #     * `nativeVideoEligible`
-        #     * `safeFrameCompatible`
-        #     * `status`
-        #     * `type`
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>description</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>interstitial</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>nativeEligible</code></li>
+        #       <li><code>nativeVideoEligible</code></li>
+        #       <li><code>safeFrameCompatible</code></li>
+        #       <li><code>status</code></li>
+        #       <li><code>type</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

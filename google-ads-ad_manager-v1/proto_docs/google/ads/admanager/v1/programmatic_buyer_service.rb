@@ -56,16 +56,17 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     **Filterable fields:**
-        #
-        #     * `agency`
-        #     * `buyerAccountId`
-        #     * `displayName`
-        #     * `name`
-        #     * `parentAccountId`
-        #     * `partnerClientId`
-        #     * `preferredDealsEnabled`
-        #     * `programmaticGuaranteedEnabled`
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>agency</code></li>
+        #       <li><code>buyerAccountId</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>name</code></li>
+        #       <li><code>parentAccountId</code></li>
+        #       <li><code>partnerClientId</code></li>
+        #       <li><code>preferredDealsEnabled</code></li>
+        #       <li><code>programmaticGuaranteedEnabled</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

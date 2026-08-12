@@ -75,16 +75,6 @@ module Google
         #   @return [::String]
         #     Output only. The code used in constructing a live stream master playlist
         #     URL.
-        # @!attribute [rw] slate
-        #   @return [::String]
-        #     Optional. The slate to use for this live stream. If not set, network
-        #     default slate will be used. Format:
-        #     "networks/\\{network_code}/slates/\\{slate_id}"
-        # @!attribute [rw] dvr_window_duration
-        #   @return [::Google::Protobuf::Duration]
-        #     Optional. The duration of the DVR window. If unset the default window as
-        #     provided by the input encoder will be used. Modifying this value for an
-        #     active live stream can impact traffic.
         # @!attribute [rw] enable_dai_authentication_keys
         #   @return [::Boolean]
         #     Optional. Whether the live stream's requests to the IMA SDK API will be
@@ -131,13 +121,6 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The default ad pod duration that will be requested when an ad
         #     break cue-out does not specify a duration. Defaults to 0.
-        # @!attribute [rw] dai_authentication_keys
-        #   @return [::Array<::String>]
-        #     Optional. The list of DaiAuthenticationKey objects used to authenticate
-        #     stream create requests for this live stream. Modifying settings for an
-        #     active live stream may break the stream for some users. Exercise caution.
-        #     Format:
-        #     "networks/\\{network_code}/daiAuthenticationKeys/\\{dai_authentication_key_id}"
         # @!attribute [rw] source_content_configurations
         #   @return [::Array<::String>]
         #     Optional. The list of CdnConfigurations that provide settings for ingesting
@@ -201,16 +184,6 @@ module Google
         #     key may be at most 64 characters and can contain alphanumeric characters
         #     and symbols other than the following:
         #     ", ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character.
-        # @!attribute [rw] dai_encoding_profiles
-        #   @return [::Array<::String>]
-        #     Optional. The list of DaiEncodingProfiles that will be used for this live
-        #     stream event. Format:
-        #     "networks/\\{network_code}/daiEncodingProfiles/\\{dai_encoding_profile_id}"
-        # @!attribute [rw] segment_url_authentication_keys
-        #   @return [::Array<::String>]
-        #     Optional. The list of DaiAuthenticationKeys used to authenticate ad segment
-        #     url requests for this live stream. Format:
-        #     "networks/\\{network_code}/daiAuthenticationKeys/\\{dai_authentication_key_id}"
         # @!attribute [rw] ad_break_markups
         #   @return [::Array<::Google::Ads::AdManager::V1::AdBreakMarkupTypeEnum::AdBreakMarkupType>]
         #     Optional. The formats that will be recognized as ad break start/end

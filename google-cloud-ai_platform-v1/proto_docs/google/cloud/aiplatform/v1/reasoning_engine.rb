@@ -65,9 +65,6 @@ module Google
         #     specified, the `service_account` field will be used if set, otherwise the
         #     default Vertex AI Reasoning Engine Service Agent in the project will be
         #     used.
-        # @!attribute [rw] build_spec
-        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::BuildSpec]
-        #     Optional. Configuration for building container image.
         class ReasoningEngineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -271,28 +268,6 @@ module Google
           #     us-central1-docker.pkg.dev/my-project/my-repo/my-image:tag) of the
           #     container image that is to be run on each worker replica.
           class ContainerSpec
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Specification for building container image.
-          # @!attribute [rw] worker_pool
-          #   @return [::String]
-          #     Optional. The resource name of the Cloud Build WorkerPool to use for
-          #     the build.
-          #     Format:
-          #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`
-          # @!attribute [rw] service_account
-          #   @return [::String]
-          #     Optional. The service account that Cloud Build uses to run the build.
-          #
-          #     This field is only applicable when `worker_pool` is specified (i.e., for
-          #     custom worker pools). If `worker_pool` is not specified, this field is
-          #     ignored and the build runs using the Google-managed service agent.
-          #
-          #     Format: `projects/{project}/serviceAccounts/{service_account}` or
-          #     `{service_account}@{project}.iam.gserviceaccount.com`
-          class BuildSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

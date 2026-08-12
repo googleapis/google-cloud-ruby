@@ -55,24 +55,21 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     **Filterable fields:**
-        #
-        #     * `assetKey`
-        #     * `createTime`
-        #     * `customAssetKey`
-        #     * `daiAuthenticationKeys`
-        #     * `daiEncodingProfiles`
-        #     * `displayName`
-        #     * `dynamicAdInsertionType`
-        #     * `effectiveAssetKey`
-        #     * `endTime`
-        #     * `segmentUrlAuthenticationKeys`
-        #     * `slate`
-        #     * `sourceContentConfigurations`
-        #     * `startTime`
-        #     * `status`
-        #     * `streamingFormat`
-        #     * `updateTime`
+        #     <b>Filterable fields:</b>
+        #     <ul style="list-style-type:none">
+        #       <li><code>assetKey</code></li>
+        #       <li><code>createTime</code></li>
+        #       <li><code>customAssetKey</code></li>
+        #       <li><code>displayName</code></li>
+        #       <li><code>dynamicAdInsertionType</code></li>
+        #       <li><code>effectiveAssetKey</code></li>
+        #       <li><code>endTime</code></li>
+        #       <li><code>sourceContentConfigurations</code></li>
+        #       <li><code>startTime</code></li>
+        #       <li><code>status</code></li>
+        #       <li><code>streamingFormat</code></li>
+        #       <li><code>updateTime</code></li>
+        #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

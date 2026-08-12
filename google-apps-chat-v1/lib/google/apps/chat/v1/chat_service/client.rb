@@ -642,7 +642,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil, markup_syntax: nil)
+            # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil)
             #   Pass arguments to `list_messages` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -719,9 +719,6 @@ module Google
             #     Optional. Whether to include deleted messages. Deleted messages include
             #     deleted time and metadata about their deletion, but message content is
             #     unavailable.
-            #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
-            #     Optional. Specifies the desired output syntax for the Chat message
-            #     `formatted_text` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::Message>]
@@ -1176,7 +1173,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_message(name: nil, markup_syntax: nil)
+            # @overload get_message(name: nil)
             #   Pass arguments to `get_message` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1190,9 +1187,6 @@ module Google
             #     `clientAssignedMessageId` field for `{message}`. For details, see [Name a
             #     message]
             #     (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
-            #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
-            #     Optional. Specifies the desired output syntax for the Chat message
-            #     `formatted_text` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Apps::Chat::V1::Message]
@@ -1550,7 +1544,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_messages(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, markup_syntax: nil, view: nil)
+            # @overload search_messages(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, view: nil)
             #   Pass arguments to `search_messages` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1717,9 +1711,6 @@ module Google
             #     The default ordering is `create_time desc`. Only a single order per query
             #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
             #     is supported, and it must be specified after the order attribute.
-            #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
-            #     Optional. Specifies the desired output syntax for the Chat message
-            #     `formatted_text` field.
             #   @param view [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
             #     Optional. Specifies what kind of search results view to return. The default
             #     is `SEARCH_MESSAGES_VIEW_BASIC`.
@@ -2329,7 +2320,6 @@ module Google
             #
             #     - `create_time DESC`
             #     - `relevance DESC`
-            #        [Developer Preview](https://developers.google.com/workspace/preview).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::Space>]

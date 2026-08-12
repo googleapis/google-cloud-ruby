@@ -292,19 +292,20 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     **Filterable fields:**
-              #
-              #     * `address`
-              #     * `cellPhone`
-              #     * `comment`
-              #     * `company`
-              #     * `displayName`
-              #     * `email`
-              #     * `fax`
-              #     * `name`
-              #     * `status`
-              #     * `title`
-              #     * `workPhone`
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>address</code></li>
+              #       <li><code>cellPhone</code></li>
+              #       <li><code>comment</code></li>
+              #       <li><code>company</code></li>
+              #       <li><code>displayName</code></li>
+              #       <li><code>email</code></li>
+              #       <li><code>fax</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>status</code></li>
+              #       <li><code>title</code></li>
+              #       <li><code>workPhone</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
