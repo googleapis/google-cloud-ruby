@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2026-08-12)
+
+#### Features
+
+* add VertexRanker reranker support to vector search ([#36218](https://github.com/googleapis/google-cloud-ruby/issues/36218)) 
+
 ### 0.1.1 (2026-08-05)
 
 #### Bug Fixes
