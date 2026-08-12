@@ -87,6 +87,7 @@
     "snippets/storage_control/update_organization_intelligence_config.rb",
     "snippets/storage_control/update_project_intelligence_config.rb",
     "snippets/storage_control/update_rapid_cache.rb",
+    "snippets/storage_control/view_object_full_context.rb",
     "test/google/cloud/storage/control/v2/storage_control_operations_test.rb",
     "test/google/cloud/storage/control/v2/storage_control_paths_test.rb",
     "test/google/cloud/storage/control/v2/storage_control_rest_test.rb",

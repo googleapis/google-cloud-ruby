@@ -2452,6 +2452,68 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
     end
   end
 
+  def test_view_object_full_context
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ObjectFullContext.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    generation = 42
+    context_key = "hello world"
+    name = "hello world"
+
+    view_object_full_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :view_object_full_context, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest, request
+      assert_equal 42, request["generation"]
+      assert_equal "hello world", request["context_key"]
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, view_object_full_context_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.view_object_full_context({ generation: generation, context_key: context_key, name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.view_object_full_context generation: generation, context_key: context_key, name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.view_object_full_context ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new(generation: generation, context_key: context_key, name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.view_object_full_context({ generation: generation, context_key: context_key, name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.view_object_full_context(::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new(generation: generation, context_key: context_key, name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, view_object_full_context_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

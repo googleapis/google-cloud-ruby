@@ -320,6 +320,9 @@ module Google
           #   @return [::Google::Cloud::Storage::Control::V2::StorageLayout::HierarchicalNamespace]
           #     Output only. The bucket's hierarchical namespace configuration. If there is
           #     no configuration, the hierarchical namespace is disabled.
+          # @!attribute [r] rapid_cache_info
+          #   @return [::Google::Cloud::Storage::Control::V2::StorageLayout::RapidCacheInfo]
+          #     Output only. The Rapid Cache configuration for the bucket.
           class StorageLayout
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -340,6 +343,16 @@ module Google
             #   @return [::Boolean]
             #     Enables the hierarchical namespace feature.
             class HierarchicalNamespace
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The Rapid Cache configuration for the bucket.
+            # @!attribute [r] cache_type
+            #   @return [::String]
+            #     Output only. The type of cache in the bucket. Set to `rapid-cache` or
+            #     `rapid-cache-ultra`, only if there is a cache present.
+            class RapidCacheInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -1885,6 +1898,59 @@ module Google
                 BUCKET = 2
               end
             end
+          end
+
+          # A full representation of an object context.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Storage::Control::V2::ObjectFullContext::Type]
+          #     The type of the object context.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     The key of the object context, which is unique among contexts of an object.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value of the object context.
+          # @!attribute [rw] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the object context was created.
+          # @!attribute [rw] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the object context was updated.
+          # @!attribute [rw] extended_data
+          #   @return [::Google::Protobuf::Any]
+          #     The extended data of the object context.
+          class ObjectFullContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Types of object contexts.
+            module Type
+              # The type is not specified.
+              TYPE_UNSPECIFIED = 0
+
+              # Custom context.
+              CUSTOM = 1
+
+              # Google context.
+              GOOGLE = 2
+            end
+          end
+
+          # Request message for ViewObjectFullContext.
+          # @!attribute [rw] generation
+          #   @return [::Integer]
+          #     Optional. If present, selects a specific revision of this object (as
+          #     opposed to the latest version, the default).
+          # @!attribute [rw] context_key
+          #   @return [::String]
+          #     Required. The key of the object context to retrieve.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the object.
+          #     Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+          class ViewObjectFullContextRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # List the finding types.
