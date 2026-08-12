@@ -1116,6 +1116,7 @@ libraries:
       - samples/pagination.rb
       - samples/quickstart.rb
     skip_generate: true
+    version: 3.10.0
   - name: google-cloud-confidential_computing
     apis:
       - path: google/cloud/confidentialcomputing/v1
