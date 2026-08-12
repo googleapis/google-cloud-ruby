@@ -1398,6 +1398,181 @@ module Google
             end
 
             ##
+            # Get the policy for a key.
+            #
+            # @overload get_policy(request, options = nil)
+            #   Pass arguments to `get_policy` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::GetPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::GetPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_policy(name: nil)
+            #   Pass arguments to `get_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the policy to get, in the format
+            #     `projects/{project}/keys/{key}/policy`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::GetPolicyRequest.new
+            #
+            #   # Call the get_policy method.
+            #   result = client.get_policy request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::Policy.
+            #   p result
+            #
+            def get_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::GetPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :get_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the policy for a key.
+            #
+            # @overload update_policy(request, options = nil)
+            #   Pass arguments to `update_policy` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::UpdatePolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::UpdatePolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_policy(policy: nil, update_mask: nil)
+            #   Pass arguments to `update_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param policy [::Google::Cloud::RecaptchaEnterprise::V1::Policy, ::Hash]
+            #     Required. The Policy's name is used to identify the policy to update, in
+            #     the format `projects/{project}/keys/{key}/policy`.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The mask to control which fields of the policy get updated. If
+            #     the mask is not present, all fields are updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::UpdatePolicyRequest.new
+            #
+            #   # Call the update_policy method.
+            #   result = client.update_policy request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::Policy.
+            #   p result
+            #
+            def update_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::UpdatePolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.policy&.name
+                header_params["policy.name"] = request.policy.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :update_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
             # Enterprise actions can be executed.
             # A project may have a maximum of 1000 policies.
@@ -2507,6 +2682,16 @@ module Google
                 #
                 attr_reader :get_metrics
                 ##
+                # RPC-specific configuration for `get_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_policy
+                ##
+                # RPC-specific configuration for `update_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_policy
+                ##
                 # RPC-specific configuration for `create_firewall_policy`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2580,6 +2765,10 @@ module Google
                   @list_ip_overrides = ::Gapic::Config::Method.new list_ip_overrides_config
                   get_metrics_config = parent_rpcs.get_metrics if parent_rpcs.respond_to? :get_metrics
                   @get_metrics = ::Gapic::Config::Method.new get_metrics_config
+                  get_policy_config = parent_rpcs.get_policy if parent_rpcs.respond_to? :get_policy
+                  @get_policy = ::Gapic::Config::Method.new get_policy_config
+                  update_policy_config = parent_rpcs.update_policy if parent_rpcs.respond_to? :update_policy
+                  @update_policy = ::Gapic::Config::Method.new update_policy_config
                   create_firewall_policy_config = parent_rpcs.create_firewall_policy if parent_rpcs.respond_to? :create_firewall_policy
                   @create_firewall_policy = ::Gapic::Config::Method.new create_firewall_policy_config
                   list_firewall_policies_config = parent_rpcs.list_firewall_policies if parent_rpcs.respond_to? :list_firewall_policies
