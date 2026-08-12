@@ -901,6 +901,12 @@ module Google
           # @!attribute [rw] dest_path
           #   @return [::String]
           #     Required. Where should the files be placed on the worker.
+          # @!attribute [rw] fetch_tags
+          #   @return [::Boolean]
+          #     Optional. True if remote tags should be fetched too (default false).
+          #     Note: when depth is 1 (default), git fetch only retrieves tags pointing
+          #     to commits within the shallow boundary. Set depth to -1 to fetch all
+          #     historical tags.
           class GitSourceDependency
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
