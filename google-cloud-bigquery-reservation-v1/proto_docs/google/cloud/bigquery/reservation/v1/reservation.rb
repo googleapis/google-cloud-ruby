@@ -847,6 +847,20 @@ module Google
           #       for workload identity pool identities.
           #     * The special value `unknown_or_deleted_user` represents principals which
           #       cannot be read from the user info service, for example deleted users.
+          # @!attribute [rw] precedence
+          #   @return [::Integer]
+          #     Optional. Specifies the priority precedence for this assignment. Used to
+          #     resolve ambiguity when multiple assignments match a single job. Higher
+          #     numerical values represent higher priority (e.g., 20 is higher than 10). If
+          #     unspecified, it defaults to 0. Multiple assignments can share the same
+          #     precedence, but it is recommended to use unique precedence values for
+          #     assignments within the same assignee scope.
+          # @!attribute [rw] condition
+          #   @return [::Google::Type::Expr]
+          #     Optional. Common Expression Language (CEL) condition that defines the
+          #     matching criteria for this assignment.
+          #     The condition must resolve to a boolean value.
+          #     Supported variables will be added later.
           class Assignment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
