@@ -22,7 +22,7 @@ module Google
     module Storage
       module Control
         module V2
-          VERSION = "1.13.1"
+          VERSION = "1.14.0"
         end
       end
     end
