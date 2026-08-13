@@ -2850,7 +2850,7 @@ libraries:
       wrapper_of:
         - v1:1.6
   - name: google-cloud-recaptcha_enterprise-v1
-    version: 1.12.1
+    version: 1.12.2
     apis:
       - path: google/cloud/recaptchaenterprise/v1
         ruby:

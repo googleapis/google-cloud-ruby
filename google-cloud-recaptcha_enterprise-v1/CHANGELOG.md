@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.2 (2026-08-13)
+
+#### Documentation
+
+* A comment for field `account_defender_assessment` in message `.google.cloud.recaptchaenterprise.v1.Assessment` is changed ([#36231](https://github.com/googleapis/google-cloud-ruby/issues/36231)) 
+
 ### 1.12.1 (2026-08-06)
 
 #### Bug Fixes
