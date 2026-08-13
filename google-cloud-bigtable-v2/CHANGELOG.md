@@ -1,5 +1,11 @@
 # Release History
 
+### 1.16.0 (2026-08-13)
+
+#### Features
+
+* add microsecond timestamp precision support ([#36203](https://github.com/googleapis/google-cloud-ruby/issues/36203)) 
+
 ### 1.15.1 (2026-08-05)
 
 #### Bug Fixes
