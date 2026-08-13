@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-08-13)
+
+#### Features
+
+* add option to fetch remote change history (tags) for GitSource dependencies ([#36239](https://github.com/googleapis/google-cloud-ruby/issues/36239)) 
+
 ### 1.13.1 (2026-08-05)
 
 #### Bug Fixes
