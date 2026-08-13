@@ -1,5 +1,12 @@
 # Release History
 
+### 1.13.0 (2026-08-13)
+
+#### Features
+
+* Add a new field `condition` to `bigqueryreservation.googleapis.com/Assignment`, it is Common Expression Language (CEL) condition that defines the matching criteria for this assignment. 
+* Add a new field `precedence` to `bigqueryreservation.googleapis.com/Assignment`,  it specifies the priority precedence for this assignment. Used to resolve ambiguity when multiple assignments match a single job. Higher numerical values represent ... ([#36234](https://github.com/googleapis/google-cloud-ruby/issues/36234)) 
+
 ### 1.12.1 (2026-08-06)
 
 #### Bug Fixes
