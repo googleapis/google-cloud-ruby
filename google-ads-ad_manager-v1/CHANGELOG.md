@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.1.0 (2026-08-14)
+
+#### Features
+
+* add build configuration support to Vertex AI Reasoning Engine 
+
 ### 5.0.2 (2026-08-11)
 
 #### Documentation
