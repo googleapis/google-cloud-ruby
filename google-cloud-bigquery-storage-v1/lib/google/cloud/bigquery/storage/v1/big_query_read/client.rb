@@ -346,7 +346,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload read_rows(read_stream: nil, offset: nil)
+              # @overload read_rows(read_stream: nil, offset: nil, arrow_serialization_options: nil)
               #   Pass arguments to `read_rows` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -357,6 +357,10 @@ module Google
               #     The offset requested must be less than the last row read from Read.
               #     Requesting a larger offset is undefined. If not specified, start reading
               #     from offset zero.
+              #   @param arrow_serialization_options [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions, ::Hash]
+              #     Optional. Options specific to the Apache Arrow output format.
+              #
+              #     This feature is not yet available.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Enumerable<::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]

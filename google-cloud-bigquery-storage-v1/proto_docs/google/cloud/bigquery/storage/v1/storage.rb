@@ -66,6 +66,11 @@ module Google
           #     The offset requested must be less than the last row read from Read.
           #     Requesting a larger offset is undefined. If not specified, start reading
           #     from offset zero.
+          # @!attribute [rw] arrow_serialization_options
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
+          #     Optional. Options specific to the Apache Arrow output format.
+          #
+          #     This feature is not yet available.
           class ReadRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,6 +166,12 @@ module Google
           #     follows is not compressed, which can be useful for cases where compression
           #     does not yield appreciable savings. When uncompressed_byte_size is not
           #     greater than 0, the client should skip decompression.
+          # @!attribute [r] total_estimated_row_count
+          #   @return [::Integer]
+          #     Output only. The total estimated number of rows in the query results.
+          #     Only populated when reading data from a BigQuery job.
+          #
+          #     This feature is not yet available.
           class ReadRowsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,7 +230,7 @@ module Google
           # switching table destinations. You can also switch table destinations within
           # the same connection for the default stream.
           #
-          # The size of a single AppendRowsRequest must be less than 10 MB in size.
+          # The size of a single AppendRowsRequest must be less than 20 MB in size.
           # Requests larger than this return an error, typically `INVALID_ARGUMENT`.
           # @!attribute [rw] write_stream
           #   @return [::String]
@@ -306,6 +317,9 @@ module Google
           #     `NULL` instead of using default values for some columns, you can set
           #     `default_missing_value_interpretation` to `DEFAULT_VALUE` and at the same
           #     time, set `missing_value_interpretations` to `NULL_VALUE` on those columns.
+          # @!attribute [rw] client_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats]
+          #     Optional. Stats and telemetry data gathered on the client side.
           class AppendRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -609,6 +623,71 @@ module Google
 
               # One or more fields in the row has errors.
               FIELDS_ERROR = 1
+            end
+          end
+
+          # Stats and telemetry data gathered on the client side about requests
+          # being sent to the BigQuery Storage service, for internal use only.
+          # @!attribute [rw] request_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats::RequestStats]
+          #     Optional. Per-request stats.
+          # @!attribute [rw] window_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats::WindowStats]
+          #     Optional. Windowed stats.
+          class ClientStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Stats and telemetry data gathered on the client side about a single
+            # request.
+            # @!attribute [rw] send_time_millis
+            #   @return [::Integer]
+            #     Optional. Timestamp indicating when the request was sent over the
+            #     network, expressed in epoch milliseconds.
+            # @!attribute [rw] queued_requests_count
+            #   @return [::Integer]
+            #     Optional. Number of pending requests at the moment this request was sent.
+            #     This includes requests waiting to be sent, and those that are inflight.
+            class RequestStats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Aggregate connection metrics over a window interval.
+            # @!attribute [rw] max_response_latency_millis
+            #   @return [::Integer]
+            #     Optional. The maximum response latency observed in the window, expressed
+            #     in milliseconds.
+            # @!attribute [rw] avg_response_latency_millis
+            #   @return [::Integer]
+            #     Optional. The average response latency observed in the window, expressed
+            #     in milliseconds.
+            # @!attribute [rw] longest_wait_no_response_millis
+            #   @return [::Integer]
+            #     Optional. The longest time spent waiting without receiving a response in
+            #     the window. This could exceed max_response_latency_millis because the
+            #     latter is evaluated only when a response is received. Expressed in
+            #     milliseconds.
+            # @!attribute [rw] requests_sent_count
+            #   @return [::Integer]
+            #     Optional. How many requests were sent in the window.
+            # @!attribute [rw] responses_received_count
+            #   @return [::Integer]
+            #     Optional. How many responses were received in the window.
+            # @!attribute [rw] bytes_sent_count
+            #   @return [::Integer]
+            #     Optional. How many bytes were sent in the window.
+            # @!attribute [rw] window_start_time_epoch_millis
+            #   @return [::Integer]
+            #     Optional. Start time of the window interval for which these stats are
+            #     aggregated, expressed in epoch milliseconds.
+            # @!attribute [rw] window_millis
+            #   @return [::Integer]
+            #     Optional. Duration of the window interval for which these stats are
+            #     aggregated, expressed in milliseconds.
+            class WindowStats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end

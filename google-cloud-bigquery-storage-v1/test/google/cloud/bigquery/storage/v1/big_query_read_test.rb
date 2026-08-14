@@ -137,12 +137,15 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     # Create request parameters for a server streaming method.
     read_stream = "hello world"
     offset = 42
+    arrow_serialization_options = {}
 
     read_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :read_rows, name
       assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest, request
       assert_equal "hello world", request["read_stream"]
       assert_equal 42, request["offset"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions), request["arrow_serialization_options"]
+      assert_equal :arrow_serialization_options, request.output_format_serialization_options
       refute_nil options
     end
 
@@ -153,7 +156,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use hash object
-      c.read_rows({ read_stream: read_stream, offset: offset }) do |response, operation|
+      c.read_rows({ read_stream: read_stream, offset: offset, arrow_serialization_options: arrow_serialization_options }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -162,7 +165,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use named arguments
-      c.read_rows read_stream: read_stream, offset: offset do |response, operation|
+      c.read_rows read_stream: read_stream, offset: offset, arrow_serialization_options: arrow_serialization_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -171,7 +174,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object
-      c.read_rows ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset) do |response, operation|
+      c.read_rows ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset, arrow_serialization_options: arrow_serialization_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -180,7 +183,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use hash object with options
-      c.read_rows({ read_stream: read_stream, offset: offset }, grpc_options) do |response, operation|
+      c.read_rows({ read_stream: read_stream, offset: offset, arrow_serialization_options: arrow_serialization_options }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -189,7 +192,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      c.read_rows(::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset), grpc_options) do |response, operation|
+      c.read_rows(::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset, arrow_serialization_options: arrow_serialization_options), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
