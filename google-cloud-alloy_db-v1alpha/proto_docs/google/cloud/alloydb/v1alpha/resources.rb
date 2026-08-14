@@ -872,6 +872,10 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::PscInstanceConfig]
         #     Optional. The configuration for Private Service Connect (PSC) for the
         #     instance.
+        # @!attribute [r] psc_instance_info
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::PscInstanceInfo]
+        #     Output only. Information about the Private Service Connect (PSC) for the
+        #     instance.
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig]
         #     Optional. Instance-level network configuration.
@@ -1143,7 +1147,49 @@ module Google
           # @!attribute [rw] psc_auto_connections
           #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::PscAutoConnectionConfig>]
           #     Optional. Configurations for setting up PSC service automation.
+          # @!attribute [rw] psc_auto_dns_state
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::PscAutoDnsState]
+          #     Optional. Configuration for setting up PSC auto DNS for the instance.
+          # @!attribute [rw] psc_auto_connection_policy_state
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::PscInstanceConfig::PscAutoConnectionPolicyState]
+          #     Optional. Configuration for setting up PSC auto connection for the
+          #     instance.
           class PscInstanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The state of the PSC auto connection policy.
+            module PscAutoConnectionPolicyState
+              # The state is unspecified. For old instances, this means the PSC auto
+              # connection is disabled. For new instances, this means the PSC auto
+              # connection is enabled by default.
+              PSC_AUTO_CONNECTION_POLICY_STATE_UNSPECIFIED = 0
+
+              # Enables the PSC auto connection for the instance.
+              ENABLED = 1
+
+              # Disables the PSC auto connection for the instance.
+              DISABLED = 2
+            end
+          end
+
+          # Information about the Private Service Connect (PSC) for the instance.
+          # @!attribute [r] effective_psc_auto_dns_enabled
+          #   @return [::Boolean]
+          #     Output only. The effective state of the PSC auto DNS for the instance.
+          # @!attribute [r] psc_auto_dns_names
+          #   @return [::Array<::String>]
+          #     Output only. Specifies the auto DNS names for the instance.
+          # @!attribute [r] effective_psc_auto_connection_policy
+          #   @return [::Boolean]
+          #     Output only. Indicates if the PSC auto connection policy is enabled for
+          #     the instance. For older instances, this will be off by default, but for
+          #     newer instances, this will be auto-enabled.
+          # @!attribute [r] service_connection_policy
+          #   @return [::String]
+          #     Output only. The PSC service connection policy name. The format is
+          #     "projects/<PROJECT_ID>/regions/<REGION_ID>/serviceConnectionPolicies/<alloydb-$NETWORK-$RANDOM-scp>"
+          class PscInstanceInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1313,6 +1359,21 @@ module Google
             REGIONAL = 2
           end
 
+          # The state of the PSC auto DNS.
+          module PscAutoDnsState
+            # The state is unspecified. For old instances, this means the PSC auto DNS
+            # is disabled. For new instances, this means the PSC auto DNS is enabled
+            # by default. Use `effective_psc_auto_dns_enabled` to check the
+            # effective state of the PSC auto DNS.
+            PSC_AUTO_DNS_STATE_UNSPECIFIED = 0
+
+            # Enables the PSC auto DNS for the instance.
+            PSC_AUTO_DNS_STATE_ENABLED = 1
+
+            # Disables the PSC auto DNS for the instance.
+            PSC_AUTO_DNS_STATE_DISABLED = 2
+          end
+
           # Specifies whether an instance needs to spin up.
           module ActivationPolicy
             # The policy is not specified.
@@ -1354,6 +1415,10 @@ module Google
         # @!attribute [r] psc_dns_name
         #   @return [::String]
         #     Output only. The DNS name to use with PSC for the Instance.
+        # @!attribute [r] psc_auto_dns_name
+        #   @return [::String]
+        #     Output only. Specifies the DNS name to use with PSC service automation for
+        #     the Instance.
         class ConnectionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
