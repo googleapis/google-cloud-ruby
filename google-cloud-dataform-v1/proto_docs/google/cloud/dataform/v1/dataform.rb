@@ -1498,6 +1498,11 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1::PipelineConfig]
         #     Optional. The pipeline options which defines the pipeline type and path
         #     within the Git repository.
+        # @!attribute [r] lineage_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether OpenLineage events are emitted for actions in this
+        #     workflow. Reflects the `lineage.enabled` setting from
+        #     `workflow_settings.yaml`.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
