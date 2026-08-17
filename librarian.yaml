@@ -3638,6 +3638,7 @@ libraries:
     apis:
       - path: google/cloud/support/v2
     skip_generate: true
+    version: 1.11.2
   - name: google-cloud-support-v2beta
     apis:
       - path: google/cloud/support/v2beta
