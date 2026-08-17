@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36253](https://github.com/googleapis/google-cloud-ruby/issues/36253)) 
+
 ### 1.11.1 (2026-08-05)
 
 #### Bug Fixes
