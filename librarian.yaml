@@ -716,7 +716,7 @@ libraries:
       wrapper_of:
         - v1:0.25
   - name: google-cloud-bigquery-storage-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/bigquery/storage/v1
         ruby:

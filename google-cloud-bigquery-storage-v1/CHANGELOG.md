@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2026-08-17)
+
+#### Features
+
+* add support for client-side metrics in AppendRowsRequest ([#36256](https://github.com/googleapis/google-cloud-ruby/issues/36256)) 
+
 ### 1.8.1 (2026-08-06)
 
 #### Bug Fixes
