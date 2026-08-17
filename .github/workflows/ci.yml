@@ -70,9 +70,12 @@ jobs:
       # zizmor: ignore[template-injection]
       run: "gem install --no-document toys && npm install linkinator"
     - name: Test ${{ matrix.task }}
-      # zizmor: ignore[template-injection]
+      env:
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_EVENT_PATH: ${{ github.event_path }}
+        GITHUB_EVENT_INPUTS_FLAGS: ${{ github.event.inputs.flags }}
       run: |
-        toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }} ${{ github.event.inputs.flags }}
+        toys ci -v ${{ matrix.task }} --github-event-name=${GITHUB_EVENT_NAME} --github-event-payload=${GITHUB_EVENT_PATH} ${GITHUB_EVENT_INPUTS_FLAGS}
     - name: Open Issues
       if: ${{ failure() }}
       env:
