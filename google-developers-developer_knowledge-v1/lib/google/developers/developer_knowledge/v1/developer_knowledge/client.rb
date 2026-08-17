@@ -212,7 +212,7 @@ module Google
             # Searches for developer knowledge across Google's developer documentation.
             # Returns {::Google::Developers::DeveloperKnowledge::V1::DocumentChunk DocumentChunk}s
             # based on the user's query. There may be many chunks from the same
-            # {::Google::Developers::DeveloperKnowledge::V1::Document Document}.  To retrieve full
+            # {::Google::Developers::DeveloperKnowledge::V1::Document Document}. To retrieve full
             # documents, use
             # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#get_document DeveloperKnowledge.GetDocument}
             # or
