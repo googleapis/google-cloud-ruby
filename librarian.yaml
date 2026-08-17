@@ -3643,6 +3643,7 @@ libraries:
     apis:
       - path: google/cloud/support/v2beta
     skip_generate: true
+    version: 0.8.2
   - name: google-cloud-talent
     apis:
       - path: google/cloud/talent/v4
