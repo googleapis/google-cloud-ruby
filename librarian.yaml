@@ -338,6 +338,7 @@ libraries:
     apis:
       - path: google/cloud/apigeeregistry/v1
     skip_generate: true
+    version: 0.17.0
   - name: google-cloud-app_engine
     apis:
       - path: google/appengine/v1
