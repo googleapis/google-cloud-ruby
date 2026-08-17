@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.1 (2026-08-17)
+
+#### Documentation
+
+* Update documentation for validate_only ([#36255](https://github.com/googleapis/google-cloud-ruby/issues/36255)) 
+
 ### 1.1.0 (2026-08-12)
 
 #### Features
