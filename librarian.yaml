@@ -333,6 +333,7 @@ libraries:
     skip_generate: true
   - name: google-cloud-apigee_registry
     skip_generate: true
+    version: 2.0.0
   - name: google-cloud-apigee_registry-v1
     apis:
       - path: google/cloud/apigeeregistry/v1
