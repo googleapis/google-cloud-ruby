@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.30.0 (2026-08-17)
+
+### ⚠ BREAKING CHANGES
+
+* The type of an existing field `visibility` is changed from `Report.Visibility` to `ReportVisibilityEnum.ReportVisibility` in message `Report`.
+* Fixed batchApproveSuggestedAdUnits HTTP binding
+* The type of an existing field `visibility` is changed from `Report.Visibility` to `ReportVisibilityEnum.ReportVisibility` in message `Report`.
+* Fixed batchApproveSuggestedAdUnits HTTP binding
+
+#### Features
+
+* add build configuration support to Vertex AI Reasoning Engine 
+#### Bug Fixes
+
+* Fixed batchApproveSuggestedAdUnits HTTP binding 
+* The type of an existing field `visibility` is changed from `Report.Visibility` to `ReportVisibilityEnum.ReportVisibility` in message `Report`. 
+* Fixed batchApproveSuggestedAdUnits HTTP binding 
+* The type of an existing field `visibility` is changed from `Report.Visibility` to `ReportVisibilityEnum.ReportVisibility` in message `Report`. 
+
 ### 0.29.0 (2026-08-10)
 
 #### Features
