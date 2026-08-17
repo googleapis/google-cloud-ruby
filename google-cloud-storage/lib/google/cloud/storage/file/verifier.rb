@@ -81,18 +81,18 @@ module Google
           def self._digest_for local_file, digest_class
 
             if local_file.respond_to?(:read)
-              # Case 1: Input is an open stream (File, StringIO, ActionDispatch::Http::UploadedFile, etc.).
+              # Case 1: Input is an open stream (File or StringIO).
               local_file.rewind if local_file.respond_to?(:rewind)
-              digest = digest_class.new
-              while (chunk = local_file.read(16 * 1024))
-                digest.update(chunk)
-              end
+              digest = digest_class.base64digest local_file.read
               local_file.rewind if local_file.respond_to?(:rewind)
-              digest.base64digest
+              digest
             elsif local_file.respond_to?(:to_path) || local_file.is_a?(String)
-              # Case 2: Input is a file path (String, Pathname).
-              digest_class.file(Pathname(local_file).to_path).base64digest
+              # Case 2: Input is a file path (String, Pathname, or object that responds to :to_path).
+              ::File.open Pathname(local_file).to_path, "rb" do |f|
+                digest_class.file(f).base64digest
+              end
             end
+
           end
         end
       end
