@@ -1372,6 +1372,206 @@
       ]
     },
     {
+      "region_tag": "dataform_v1beta1_generated_Dataform_SyncWorkspaceRefs_sync",
+      "title": "Snippet for the sync_workspace_refs call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#sync_workspace_refs.",
+      "file": "dataform/sync_workspace_refs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sync_workspace_refs",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#sync_workspace_refs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "SyncWorkspaceRefs",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.SyncWorkspaceRefs",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_FetchWorkspaceBranches_sync",
+      "title": "Snippet for the fetch_workspace_branches call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_workspace_branches.",
+      "file": "dataform/fetch_workspace_branches.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_workspace_branches",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_workspace_branches",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "FetchWorkspaceBranches",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.FetchWorkspaceBranches",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_DeleteBranch_sync",
+      "title": "Snippet for the delete_branch call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_branch.",
+      "file": "dataform/delete_branch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_branch",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_branch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "DeleteBranch",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteBranch",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CheckoutWorkspaceBranch_sync",
+      "title": "Snippet for the checkout_workspace_branch call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#checkout_workspace_branch.",
+      "file": "dataform/checkout_workspace_branch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "checkout_workspace_branch",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#checkout_workspace_branch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CheckoutWorkspaceBranch",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CheckoutWorkspaceBranch",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_FetchCurrentWorkspaceBranch_sync",
+      "title": "Snippet for the fetch_current_workspace_branch call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_current_workspace_branch.",
+      "file": "dataform/fetch_current_workspace_branch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_current_workspace_branch",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_current_workspace_branch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "FetchCurrentWorkspaceBranch",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.FetchCurrentWorkspaceBranch",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataform_v1beta1_generated_Dataform_PushGitCommits_sync",
       "title": "Snippet for the push_git_commits call in the Dataform service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#push_git_commits.",

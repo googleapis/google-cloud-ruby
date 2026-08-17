@@ -2212,6 +2212,321 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     end
   end
 
+  def test_sync_workspace_refs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    remote_branch_name = "hello world"
+    deepen = 42
+
+    sync_workspace_refs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :sync_workspace_refs, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["remote_branch_name"]
+      assert_equal 42, request["deepen"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, sync_workspace_refs_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.sync_workspace_refs({ name: name, remote_branch_name: remote_branch_name, deepen: deepen }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.sync_workspace_refs name: name, remote_branch_name: remote_branch_name, deepen: deepen do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.sync_workspace_refs ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest.new(name: name, remote_branch_name: remote_branch_name, deepen: deepen) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.sync_workspace_refs({ name: name, remote_branch_name: remote_branch_name, deepen: deepen }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.sync_workspace_refs(::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest.new(name: name, remote_branch_name: remote_branch_name, deepen: deepen), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, sync_workspace_refs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_workspace_branches
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    filter = :BRANCH_FILTER_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_workspace_branches_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_workspace_branches, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :BRANCH_FILTER_UNSPECIFIED, request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_workspace_branches_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_workspace_branches({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_workspace_branches name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_workspace_branches ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_workspace_branches({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_workspace_branches(::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_workspace_branches_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_branch
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    branch = "hello world"
+    force = true
+
+    delete_branch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_branch, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["branch"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_branch_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_branch({ name: name, branch: branch, force: force }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_branch name: name, branch: branch, force: force do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_branch ::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest.new(name: name, branch: branch, force: force) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_branch({ name: name, branch: branch, force: force }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_branch(::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest.new(name: name, branch: branch, force: force), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_branch_client_stub.call_rpc_count
+    end
+  end
+
+  def test_checkout_workspace_branch
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    branch = "hello world"
+    create_if_not_exists = true
+    source_branch = "hello world"
+
+    checkout_workspace_branch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :checkout_workspace_branch, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["branch"]
+      assert_equal true, request["create_if_not_exists"]
+      assert_equal "hello world", request["source_branch"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, checkout_workspace_branch_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.checkout_workspace_branch({ name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.checkout_workspace_branch name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.checkout_workspace_branch ::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest.new(name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.checkout_workspace_branch({ name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.checkout_workspace_branch(::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest.new(name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, checkout_workspace_branch_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_current_workspace_branch
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    fetch_current_workspace_branch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_current_workspace_branch, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_current_workspace_branch_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_current_workspace_branch({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_current_workspace_branch name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_current_workspace_branch ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_current_workspace_branch({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_current_workspace_branch(::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_current_workspace_branch_client_stub.call_rpc_count
+    end
+  end
+
   def test_push_git_commits
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse.new

@@ -3266,6 +3266,450 @@ module Google
               end
 
               ##
+              # Syncs the refs of a Workspace.
+              #
+              # @overload sync_workspace_refs(request, options = nil)
+              #   Pass arguments to `sync_workspace_refs` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload sync_workspace_refs(name: nil, remote_branch_name: nil, deepen: nil)
+              #   Pass arguments to `sync_workspace_refs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The workspace resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+              #   @param remote_branch_name [::String]
+              #     Optional. The name of the branch in the Git remote to which the refs should
+              #     be fetched for. If left unset, all remote branches will be fetched.
+              #   @param deepen [::Integer]
+              #     Optional. Can be used to deepen the commit history of shallow clones.
+              #     Git documentation:
+              #     https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest.new
+              #
+              #   # Call the sync_workspace_refs method.
+              #   result = client.sync_workspace_refs request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse.
+              #   p result
+              #
+              def sync_workspace_refs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.sync_workspace_refs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.sync_workspace_refs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.sync_workspace_refs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.sync_workspace_refs request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches branches in a Workspace.
+              #
+              # @overload fetch_workspace_branches(request, options = nil)
+              #   Pass arguments to `fetch_workspace_branches` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_workspace_branches(name: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `fetch_workspace_branches` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The workspace resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+              #   @param filter [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest::BranchFilter]
+              #     Optional. Filter for the returned list.
+              #   @param page_size [::Integer]
+              #     Optional. Maximum number of branches to return. The server may return fewer
+              #     items than requested. If unspecified, the server will pick an appropriate
+              #     default. The maximum value is 1000; values above 1000 will be coerced to
+              #     1000.
+              #   @param page_token [::String]
+              #     Optional. Page token received from a previous `FetchWorkspaceBranches`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+              #     with the exception of `page_size`, must match the call that provided the
+              #     page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::BranchMetadata>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::BranchMetadata>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest.new
+              #
+              #   # Call the fetch_workspace_branches method.
+              #   result = client.fetch_workspace_branches request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::BranchMetadata.
+              #     p item
+              #   end
+              #
+              def fetch_workspace_branches request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_workspace_branches.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_workspace_branches.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_workspace_branches.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.fetch_workspace_branches request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :fetch_workspace_branches, "branches", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a branch in a Workspace.
+              #
+              # @overload delete_branch(request, options = nil)
+              #   Pass arguments to `delete_branch` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_branch(name: nil, branch: nil, force: nil)
+              #   Pass arguments to `delete_branch` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The workspace resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+              #   @param branch [::String]
+              #     Required. The name of the branch in the Git repository to delete.
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any non-pushed commits on the branch will be
+              #     deleted. Upstream branch name will be the same as the branch to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteBranchRequest.new
+              #
+              #   # Call the delete_branch method.
+              #   result = client.delete_branch request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::DeleteBranchResponse.
+              #   p result
+              #
+              def delete_branch request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_branch.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_branch.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_branch.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.delete_branch request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Checkout a branch in a Workspace.
+              #
+              # @overload checkout_workspace_branch(request, options = nil)
+              #   Pass arguments to `checkout_workspace_branch` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload checkout_workspace_branch(name: nil, branch: nil, create_if_not_exists: nil, source_branch: nil)
+              #   Pass arguments to `checkout_workspace_branch` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The workspace resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+              #   @param branch [::String]
+              #     Required. The name of the branch in the Git repository to which the
+              #     workspace should be checked out.
+              #   @param create_if_not_exists [::Boolean]
+              #     Optional. If set to true and the branch does not exist, it will be created.
+              #     Otherwise, an error will be thrown.
+              #   @param source_branch [::String]
+              #     Optional. The name of the branch in the Git repository from which the new
+              #     branch should be created. If left unset, the workspace's current branch
+              #     name will be used. Accepts only branch names from FetchWorkspaceBranches
+              #     response, and can only be set if `create_if_not_exists` is true. Oherwise,
+              #     an error will be thrown.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest.new
+              #
+              #   # Call the checkout_workspace_branch method.
+              #   result = client.checkout_workspace_branch request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def checkout_workspace_branch request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.checkout_workspace_branch.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.checkout_workspace_branch.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.checkout_workspace_branch.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.checkout_workspace_branch request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches the current branch of a Workspace.
+              #
+              # @overload fetch_current_workspace_branch(request, options = nil)
+              #   Pass arguments to `fetch_current_workspace_branch` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_current_workspace_branch(name: nil)
+              #   Pass arguments to `fetch_current_workspace_branch` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The workspace resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest.new
+              #
+              #   # Call the fetch_current_workspace_branch method.
+              #   result = client.fetch_current_workspace_branch request
+              #
+              #   # The returned object is of type Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse.
+              #   p result
+              #
+              def fetch_current_workspace_branch request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_current_workspace_branch.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_current_workspace_branch.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_current_workspace_branch.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.fetch_current_workspace_branch request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Pushes Git commits from a Workspace to the Repository's remote.
               #
               # @overload push_git_commits(request, options = nil)
@@ -7009,6 +7453,31 @@ module Google
                   #
                   attr_reader :pull_git_commits
                   ##
+                  # RPC-specific configuration for `sync_workspace_refs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :sync_workspace_refs
+                  ##
+                  # RPC-specific configuration for `fetch_workspace_branches`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_workspace_branches
+                  ##
+                  # RPC-specific configuration for `delete_branch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_branch
+                  ##
+                  # RPC-specific configuration for `checkout_workspace_branch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :checkout_workspace_branch
+                  ##
+                  # RPC-specific configuration for `fetch_current_workspace_branch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_current_workspace_branch
+                  ##
                   # RPC-specific configuration for `push_git_commits`
                   # @return [::Gapic::Config::Method]
                   #
@@ -7279,6 +7748,16 @@ module Google
                     @install_npm_packages = ::Gapic::Config::Method.new install_npm_packages_config
                     pull_git_commits_config = parent_rpcs.pull_git_commits if parent_rpcs.respond_to? :pull_git_commits
                     @pull_git_commits = ::Gapic::Config::Method.new pull_git_commits_config
+                    sync_workspace_refs_config = parent_rpcs.sync_workspace_refs if parent_rpcs.respond_to? :sync_workspace_refs
+                    @sync_workspace_refs = ::Gapic::Config::Method.new sync_workspace_refs_config
+                    fetch_workspace_branches_config = parent_rpcs.fetch_workspace_branches if parent_rpcs.respond_to? :fetch_workspace_branches
+                    @fetch_workspace_branches = ::Gapic::Config::Method.new fetch_workspace_branches_config
+                    delete_branch_config = parent_rpcs.delete_branch if parent_rpcs.respond_to? :delete_branch
+                    @delete_branch = ::Gapic::Config::Method.new delete_branch_config
+                    checkout_workspace_branch_config = parent_rpcs.checkout_workspace_branch if parent_rpcs.respond_to? :checkout_workspace_branch
+                    @checkout_workspace_branch = ::Gapic::Config::Method.new checkout_workspace_branch_config
+                    fetch_current_workspace_branch_config = parent_rpcs.fetch_current_workspace_branch if parent_rpcs.respond_to? :fetch_current_workspace_branch
+                    @fetch_current_workspace_branch = ::Gapic::Config::Method.new fetch_current_workspace_branch_config
                     push_git_commits_config = parent_rpcs.push_git_commits if parent_rpcs.respond_to? :push_git_commits
                     @push_git_commits = ::Gapic::Config::Method.new push_git_commits_config
                     fetch_file_git_statuses_config = parent_rpcs.fetch_file_git_statuses if parent_rpcs.respond_to? :fetch_file_git_statuses

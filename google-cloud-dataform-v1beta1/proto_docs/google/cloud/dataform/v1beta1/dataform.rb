@@ -634,10 +634,33 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, workspaces will not be moved if its linked
         #     Repository is moved. Instead, it will be deleted.
+        # @!attribute [rw] original_branch
+        #   @return [::String]
+        #     Optional. Input only. Immutable. The name of the default upstream branch
+        #     for all pull/push operations in the remote repository for this workspace.
+        #     If empty, the HEAD branch from repository will be used.
         # @!attribute [r] private_resource_metadata
         #   @return [::Google::Cloud::Dataform::V1beta1::PrivateResourceMetadata]
         #     Output only. Metadata indicating whether this resource is user-scoped. For
         #     `Workspace` resources, the `user_scoped` field is always `true`.
+        # @!attribute [rw] enable_branch_management
+        #   @return [::Boolean]
+        #     Immutable. Controls the enablement of branch checkout for the
+        #     workspace.
+        #
+        #     When set to True, the workspace will be allowed to checkout branches.
+        # @!attribute [rw] depth
+        #   @return [::Integer]
+        #     Optional. Input only. Immutable. The maximum depth of the Git repository to
+        #     checkout for this workspace. If defined and greater than 0, the Git
+        #     repository will be created as a shallow clone with the given depth,
+        #     otherwise a full clone will be performed. This field is available only for
+        #     GitHub, Gitlab and 1p repositories with enabled branch management.
+        # @!attribute [r] shallow
+        #   @return [::Boolean]
+        #     Output only. If set to true, the workspace was created as a shallow clone.
+        #     Will be set to true if the depth field is set to a value greater than 0,
+        #     otherwise it will be set to false.
         class Workspace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -756,6 +779,82 @@ module Google
 
         # `PullGitCommits` response message.
         class PullGitCommitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `CheckoutWorkspaceBranch` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] branch
+        #   @return [::String]
+        #     Required. The name of the branch in the Git repository to which the
+        #     workspace should be checked out.
+        # @!attribute [rw] create_if_not_exists
+        #   @return [::Boolean]
+        #     Optional. If set to true and the branch does not exist, it will be created.
+        #     Otherwise, an error will be thrown.
+        # @!attribute [rw] source_branch
+        #   @return [::String]
+        #     Optional. The name of the branch in the Git repository from which the new
+        #     branch should be created. If left unset, the workspace's current branch
+        #     name will be used. Accepts only branch names from FetchWorkspaceBranches
+        #     response, and can only be set if `create_if_not_exists` is true. Oherwise,
+        #     an error will be thrown.
+        class CheckoutWorkspaceBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `SyncWorkspaceRefs` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] remote_branch_name
+        #   @return [::String]
+        #     Optional. The name of the branch in the Git remote to which the refs should
+        #     be fetched for. If left unset, all remote branches will be fetched.
+        # @!attribute [rw] deepen
+        #   @return [::Integer]
+        #     Optional. Can be used to deepen the commit history of shallow clones.
+        #     Git documentation:
+        #     https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth
+        class SyncWorkspaceRefsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `SyncWorkspaceRefs` response message.
+        class SyncWorkspaceRefsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteBranch` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] branch
+        #   @return [::String]
+        #     Required. The name of the branch in the Git repository to delete.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any non-pushed commits on the branch will be
+        #     deleted. Upstream branch name will be the same as the branch to delete.
+        class DeleteBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteBranch` response message.
+        class DeleteBranchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1614,6 +1713,11 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
         #     Optional. The pipeline options which defines the pipeline type and path
         #     within the Git repository.
+        # @!attribute [r] lineage_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether OpenLineage events are emitted for actions in this
+        #     workflow. Reflects the `lineage.enabled` setting from
+        #     `workflow_settings.yaml`.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3570,6 +3674,94 @@ module Google
             # The operation has failed.
             FAILED = 3
           end
+        end
+
+        # Request message for `FetchWorkspaceBranches` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest::BranchFilter]
+        #     Optional. Filter for the returned list.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of branches to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `FetchWorkspaceBranches`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
+        class FetchWorkspaceBranchesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Filter for the returned list.
+          module BranchFilter
+            # Default value. This value is unused.
+            BRANCH_FILTER_UNSPECIFIED = 0
+
+            # Returns local branches.
+            LOCAL_ONLY = 1
+
+            # Returns remote branches.
+            REMOTE_ONLY = 2
+
+            # Returns all branches.
+            ALL = 3
+          end
+        end
+
+        # Contains metadata about a branch.
+        # @!attribute [rw] branch_name
+        #   @return [::String]
+        #     The branch name.
+        # @!attribute [rw] last_commit
+        #   @return [::Google::Cloud::Dataform::V1beta1::CommitLogEntry]
+        #     The last commit on the branch.
+        class BranchMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `FetchWorkspaceBranches` method.
+        # @!attribute [rw] branches
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::BranchMetadata>]
+        #     The branches in the workspace.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchWorkspaceBranchesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `FetchCurrentWorkspaceBranch` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        class FetchCurrentWorkspaceBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `FetchCurrentWorkspaceBranch` method.
+        # @!attribute [rw] branch_name
+        #   @return [::String]
+        #     The name of the current branch for the workspace.
+        class FetchCurrentWorkspaceBranchResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the level of detail to return for directory contents.

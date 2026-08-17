@@ -119,6 +119,16 @@ module Google
             rpc :InstallNpmPackages, ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest, ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse
             # Pulls Git commits from the Repository's remote into a Workspace.
             rpc :PullGitCommits, ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest, ::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse
+            # Syncs the refs of a Workspace.
+            rpc :SyncWorkspaceRefs, ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest, ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse
+            # Fetches branches in a Workspace.
+            rpc :FetchWorkspaceBranches, ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest, ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesResponse
+            # Deletes a branch in a Workspace.
+            rpc :DeleteBranch, ::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest, ::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse
+            # Checkout a branch in a Workspace.
+            rpc :CheckoutWorkspaceBranch, ::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest, ::Google::Protobuf::Empty
+            # Fetches the current branch of a Workspace.
+            rpc :FetchCurrentWorkspaceBranch, ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest, ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse
             # Pushes Git commits from a Workspace to the Repository's remote.
             rpc :PushGitCommits, ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest, ::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse
             # Fetches Git statuses for the files in a Workspace.
