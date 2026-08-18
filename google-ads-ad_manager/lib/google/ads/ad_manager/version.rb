@@ -20,7 +20,7 @@
 module Google
   module Ads
     module AdManager
-      VERSION = "5.0.2"
+      VERSION = "6.0.0"
     end
   end
 end

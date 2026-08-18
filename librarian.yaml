@@ -28,7 +28,7 @@ tools:
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 libraries:
   - name: google-ads-ad_manager
-    version: 5.0.2
+    version: 6.0.0
     apis:
       - path: google/ads/admanager/v1
     ruby:
