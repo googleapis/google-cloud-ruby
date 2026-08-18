@@ -214,7 +214,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-ai_platform-v1
-    version: 1.48.0
+    version: 2.0.0
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
