@@ -1352,6 +1352,7 @@ libraries:
     apis:
       - path: google/cloud/dataform/v1
     skip_generate: true
+    version: 1.2.0
   - name: google-cloud-dataform-v1beta1
     apis:
       - path: google/cloud/dataform/v1beta1
