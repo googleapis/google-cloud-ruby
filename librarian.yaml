@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.37.0
+version: v0.38.0
 sources:
   googleapis:
     commit: 57394718a71457aa37ab002352b22081976bdd91
@@ -332,13 +332,13 @@ libraries:
             ruby-cloud-env-prefix: APIGEE_CONNECT
     skip_generate: true
   - name: google-cloud-apigee_registry
-    skip_generate: true
     version: 2.0.0
+    skip_generate: true
   - name: google-cloud-apigee_registry-v1
+    version: 0.17.0
     apis:
       - path: google/cloud/apigeeregistry/v1
     skip_generate: true
-    version: 0.17.0
   - name: google-cloud-app_engine
     apis:
       - path: google/appengine/v1
@@ -739,6 +739,7 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
     skip_generate: true
   - name: google-cloud-bigtable-v2
+    version: 1.16.0
     apis:
       - path: google/bigtable/v2
         ruby:
@@ -748,7 +749,6 @@ libraries:
       - lib/google/cloud/bigtable/v2/bigtable/helpers.rb
       - test/google/cloud/bigtable/v2/bigtable/helpers_test.rb
     skip_generate: true
-    version: 1.16.0
   - name: google-cloud-billing
     apis:
       - path: google/cloud/billing/v1
@@ -835,13 +835,13 @@ libraries:
       wrapper_of:
         - v1:0.26
   - name: google-cloud-build-v1
+    version: 1.14.0
     apis:
       - path: google/devtools/cloudbuild/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_BUILD
     skip_generate: true
-    version: 1.14.0
   - name: google-cloud-build-v2
     apis:
       - path: google/devtools/cloudbuild/v2
@@ -1016,6 +1016,7 @@ libraries:
       wrapper_of:
         - v1:2.15
   - name: google-cloud-compute-v1
+    version: 3.10.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -1120,7 +1121,6 @@ libraries:
       - samples/pagination.rb
       - samples/quickstart.rb
     skip_generate: true
-    version: 3.10.0
   - name: google-cloud-confidential_computing
     apis:
       - path: google/cloud/confidentialcomputing/v1
@@ -3635,15 +3635,15 @@ libraries:
       wrapper_of:
         - v2:0.3
   - name: google-cloud-support-v2
+    version: 1.11.2
     apis:
       - path: google/cloud/support/v2
     skip_generate: true
-    version: 1.11.2
   - name: google-cloud-support-v2beta
+    version: 0.8.2
     apis:
       - path: google/cloud/support/v2beta
     skip_generate: true
-    version: 0.8.2
   - name: google-cloud-talent
     apis:
       - path: google/cloud/talent/v4
@@ -4006,13 +4006,13 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-video-transcoder-v1
+    version: 2.6.1
     apis:
       - path: google/cloud/video/transcoder/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRANSCODER
     skip_generate: true
-    version: 2.6.1
   - name: google-cloud-video_intelligence
     apis:
       - path: google/cloud/videointelligence/v1
