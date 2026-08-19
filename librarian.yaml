@@ -748,7 +748,7 @@ libraries:
       - lib/google/cloud/bigtable/v2/bigtable/helpers.rb
       - test/google/cloud/bigtable/v2/bigtable/helpers_test.rb
     skip_generate: true
-    version: 1.16.0
+    version: 1.17.0
   - name: google-cloud-billing
     apis:
       - path: google/cloud/billing/v1
