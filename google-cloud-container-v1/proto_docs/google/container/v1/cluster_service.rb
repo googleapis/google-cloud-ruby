@@ -61,6 +61,7 @@ module Google
         #     kernel.shmmni
         #     kernel.shmmax
         #     kernel.shmall
+        #     kernel.core_pattern
         #     kernel.perf_event_paranoid
         #     kernel.sched_rt_runtime_us
         #     kernel.softlockup_panic
@@ -126,6 +127,12 @@ module Google
         # @!attribute [rw] accurate_time_config
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::AccurateTimeConfig]
         #     Optional. The accurate time configuration for the node pool.
+        # @!attribute [rw] node_vfio_config
+        #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::NodeVfioConfig]
+        #     Optional. Contains VFIO-related configurations for this node.
+        # @!attribute [rw] disk_io_scheduler
+        #   @return [::Google::Cloud::Container::V1::DiskIoScheduler]
+        #     Optional. Controls the configuration for the disk IO scheduler.
         class LinuxNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,6 +312,24 @@ module Google
           #   @return [::Boolean]
           #     Enables enhanced time synchronization using PTP-KVM.
           class AccurateTimeConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration settings for VFIO (Virtual Function I/O) on a node.
+          # VFIO allows safe, unprivileged, userspace drivers to access I/O devices.
+          # @!attribute [rw] dma_entry_limit
+          #   @return [::Integer]
+          #     Optional. Specifies the maximum number of DMA entries (pages) that can be
+          #     mapped by the VFIO IOMMU type 1 driver for a container. This limit
+          #     affects the total amount of host memory that can be pinned for direct
+          #     device access, which is often critical for high-performance devices like
+          #     TPUs and GPUs. This setting corresponds to the kernel parameter at:
+          #     `/sys/module/vfio_iommu_type1/parameters/dma_entry_limit`.
+          #     The default value in the kernel is `65535`. Higher values may be
+          #     needed for workloads mapping large memory regions.
+          #     Supported values are integers between `65535` and `4194304`.
+          class NodeVfioConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -628,9 +653,13 @@ module Google
           end
         end
 
-        # TopologyManager defines the configuration options for Topology Manager
-        # feature. See
-        # https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/
+        # TopologyManager defines the configuration options for the
+        # [`kubelet` Topology Manager
+        # component](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/).
+        # For more information about the supported machine types and versions for the
+        # Topology Manager in GKE, see
+        # [Customizing node system
+        # configuration](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/node-system-config#kubelet-resource-managers).
         # @!attribute [rw] policy
         #   @return [::String]
         #     Configures the strategy for resource alignment.
@@ -1463,6 +1492,10 @@ module Google
             # Must consume from a specific reservation. Must specify key value fields
             # for specifying the reservations.
             SPECIFIC_RESERVATION = 3
+
+            # Consume any reservation available. If no reservation is available, fail
+            # the node creation.
+            ANY_RESERVATION_THEN_FAIL = 4
           end
         end
 
@@ -2805,6 +2838,15 @@ module Google
         # @!attribute [r] current_master_version
         #   @return [::String]
         #     Output only. The current software version of the master endpoint.
+        # @!attribute [r] current_emulated_version
+        #   @return [::String]
+        #     Output only. The current emulated version of the master endpoint.
+        #     The version is in minor version format, e.g. 1.30.
+        #     No value or empty string means the cluster has no emulated version.
+        # @!attribute [rw] rollback_safe_upgrade
+        #   @return [::Google::Cloud::Container::V1::RollbackSafeUpgrade]
+        #     Optional. The rollback safe upgrade information of the cluster.
+        #     This field is used when user manually triggers a rollback safe upgrade.
         # @!attribute [r] current_node_version
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3648,6 +3690,9 @@ module Google
         # @!attribute [rw] desired_control_plane_egress
         #   @return [::Google::Cloud::Container::V1::ControlPlaneEgress]
         #     The desired control plane egress control config for the cluster.
+        # @!attribute [rw] desired_rollback_safe_upgrade
+        #   @return [::Google::Cloud::Container::V1::RollbackSafeUpgrade]
+        #     Optional. The desired rollback safe upgrade configuration.
         # @!attribute [rw] desired_managed_opentelemetry_config
         #   @return [::Google::Cloud::Container::V1::ManagedOpenTelemetryConfig]
         #     The desired managed open telemetry configuration.
@@ -3660,6 +3705,9 @@ module Google
         # @!attribute [rw] desired_node_creation_config
         #   @return [::Google::Cloud::Container::V1::NodeCreationConfig]
         #     Optional. The desired NodeCreationConfig for the cluster.
+        # @!attribute [rw] desired_emulated_version
+        #   @return [::String]
+        #     Optional. The desired emulated version for the cluster.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4318,6 +4366,10 @@ module Google
         # @!attribute [rw] taint_config
         #   @return [::Google::Cloud::Container::V1::TaintConfig]
         #     The taint configuration for the node pool.
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Container::V1::NodePool::NodePoolMaintenancePolicy]
+        #     Optional. Specifies the maintenance policy for the node pool, including
+        #     maintenance exclusion options.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5077,9 +5129,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::MaxPodsConstraint]
         #     The constraint on the maximum number of pods that can be run
         #     simultaneously on a node in the node pool.
-        # @!attribute [rw] conditions
+        # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Container::V1::StatusCondition>]
-        #     Which conditions caused the current node pool state.
+        #     Output only. Which conditions caused the current node pool state.
         # @!attribute [r] pod_ipv4_cidr_size
         #   @return [::Integer]
         #     Output only. The pod CIDR block size per node in this node pool.
@@ -5093,11 +5145,11 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo]
         #     Output only. Update info contains relevant information during a node
         #     pool update.
-        # @!attribute [rw] etag
+        # @!attribute [r] etag
         #   @return [::String]
-        #     This checksum is computed by the server based on the value of node pool
-        #     fields, and may be sent on update requests to ensure the client has an
-        #     up-to-date value before proceeding.
+        #     Output only. This checksum is computed by the server based on the value of
+        #     node pool fields, and may be sent on update requests to ensure the client
+        #     has an up-to-date value before proceeding.
         # @!attribute [rw] queued_provisioning
         #   @return [::Google::Cloud::Container::V1::NodePool::QueuedProvisioning]
         #     Specifies the configuration of queued provisioning.
@@ -5110,6 +5162,9 @@ module Google
         # @!attribute [rw] maintenance_policy
         #   @return [::Google::Cloud::Container::V1::NodePool::NodePoolMaintenancePolicy]
         #     Optional. Specifies the maintenance policy for the node pool.
+        # @!attribute [r] kubelet_cert_info
+        #   @return [::Google::Cloud::Container::V1::NodePool::KubeletCertInfo]
+        #     Output only. Contains expiry information about the kubelet certificate.
         class NodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5323,6 +5378,18 @@ module Google
           #   @return [::Google::Cloud::Container::V1::NodePool::ExclusionUntilEndOfSupport]
           #     Optional. The exclusion until end of support for the node pool.
           class NodePoolMaintenancePolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains expiry information about the kubelet certificate.
+          # @!attribute [r] tpm_bootstrap_cert_expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only.
+          # @!attribute [r] non_tpm_bootstrap_cert_expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only.
+          class KubeletCertInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -6644,7 +6711,8 @@ module Google
 
           # Possible values for 'channel'.
           module Channel
-            # No channel specified.
+            # Deprecated: No channel specified. it will be removed in the future, use
+            # RAPID, REGULAR, STABLE or EXTENDED instead.
             UNSPECIFIED = 0
 
             # RAPID channel is offered on an early access basis for customers who want
@@ -7201,6 +7269,12 @@ module Google
         # @!attribute [rw] target_version
         #   @return [::String]
         #     The target version for the upgrade.
+        # @!attribute [r] current_emulated_version
+        #   @return [::String]
+        #     Output only. The current emulated version before the upgrade.
+        # @!attribute [r] target_emulated_version
+        #   @return [::String]
+        #     Output only. The target emulated version for the upgrade.
         # @!attribute [rw] resource
         #   @return [::String]
         #     Optional relative path to the resource. For example in node pool upgrades,
@@ -7230,6 +7304,12 @@ module Google
         # @!attribute [rw] target_version
         #   @return [::String]
         #     The target version for the upgrade.
+        # @!attribute [r] current_emulated_version
+        #   @return [::String]
+        #     Output only. The current emulated version before the upgrade.
+        # @!attribute [r] target_emulated_version
+        #   @return [::String]
+        #     Output only. The target emulated version for the upgrade.
         # @!attribute [rw] resource
         #   @return [::String]
         #     Optional relative path to the resource. For example in node pool upgrades,
@@ -7537,6 +7617,9 @@ module Google
 
             # horizontal pod autoscaler decision logs
             KCP_HPA = 9
+
+            # vertical pod autoscaler decision logs
+            KCP_VPA = 10
           end
         end
 
@@ -7911,6 +7994,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DiskIoScheduler contains the configuration for the disk IO scheduler.
+        # @!attribute [rw] node_system_io_scheduler
+        #   @return [::String]
+        #     Optional. Configures the IO scheduler for the boot disk or ephemeral lssd
+        #     that runs node system workloads. Supported values are `mq-deadline`, `bfq`,
+        #     `kyber`, `none`.
+        # @!attribute [rw] node_attached_disk_io_scheduler
+        #   @return [::String]
+        #     Optional. Configures the IO scheduler for the attached disks.
+        #     Supported values are `mq-deadline`, `bfq`, `kyber`, `none`.
+        class DiskIoScheduler
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral
         # storage using Local SSDs.
         # @!attribute [rw] local_ssd_count
@@ -8074,6 +8172,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # RollbackSafeUpgrade is the configuration for the rollback safe upgrade.
+        # @!attribute [rw] control_plane_soak_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. A user-defined period for the cluster remains in the rollbackable
+        #     state. ex: \\{seconds: 21600}.
+        class RollbackSafeUpgrade
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # FetchClusterUpgradeInfoRequest fetches the upgrade information of a cluster.
         # @!attribute [rw] name
         #   @return [::String]
@@ -8110,6 +8218,9 @@ module Google
         # @!attribute [rw] end_of_extended_support_timestamp
         #   @return [::String]
         #     The cluster's current minor version's end of extended support timestamp.
+        # @!attribute [r] rollback_safe_upgrade_status
+        #   @return [::Google::Cloud::Container::V1::RollbackSafeUpgradeStatus]
+        #     Output only. The cluster's rollback-safe upgrade status.
         class ClusterUpgradeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8161,6 +8272,33 @@ module Google
           end
         end
 
+        # RollbackSafeUpgradeStatus contains the rollback-safe upgrade status of a
+        # cluster.
+        # @!attribute [r] mode
+        #   @return [::Google::Cloud::Container::V1::RollbackSafeUpgradeStatus::Mode]
+        #     Output only. The mode of the rollback-safe upgrade.
+        # @!attribute [r] control_plane_upgrade_rollback_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The rollback-safe mode expiration time.
+        # @!attribute [r] previous_version
+        #   @return [::String]
+        #     Output only. The GKE version that the cluster previously used before
+        #     step-one upgrade.
+        class RollbackSafeUpgradeStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode indicates the mode of the rollback-safe upgrade.
+          module Mode
+            # MODE_UNSPECIFIED means it's in regular upgrade mode.
+            MODE_UNSPECIFIED = 0
+
+            # KCP_MINOR_UPGRADE_ROLLBACK_SAFE_MODE means it's in rollback-safe mode
+            # after a KCP minor version step-one upgrade.
+            KCP_MINOR_UPGRADE_ROLLBACK_SAFE_MODE = 1
+          end
+        end
+
         # UpgradeDetails contains detailed information of each individual upgrade
         # operation.
         # @!attribute [r] state
@@ -8181,6 +8319,12 @@ module Google
         # @!attribute [rw] start_type
         #   @return [::Google::Cloud::Container::V1::UpgradeDetails::StartType]
         #     The start type of the upgrade.
+        # @!attribute [r] initial_emulated_version
+        #   @return [::String]
+        #     Output only. The emulated version before the upgrade.
+        # @!attribute [r] target_emulated_version
+        #   @return [::String]
+        #     Output only. The emulated version after the upgrade.
         class UpgradeDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8254,6 +8398,10 @@ module Google
         # @!attribute [rw] end_of_extended_support_timestamp
         #   @return [::String]
         #     The node pool's current minor version's end of extended support timestamp.
+        # @!attribute [r] custom_image_info
+        #   @return [::Google::Cloud::Container::V1::CustomImageInfo]
+        #     Output only. Upgrade info for the node pool specific to the usage of custom
+        #     images.
         class NodePoolUpgradeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8295,6 +8443,29 @@ module Google
             # SYSTEM_CONFIG indicates the cluster upgrade is paused by system config.
             SYSTEM_CONFIG = 4
           end
+        end
+
+        # Contains the custom image info for a node pool.
+        # @!attribute [r] upgrade_message
+        #   @return [::String]
+        #     Output only. The human-readable upgrade message for the custom image.
+        class CustomImageInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CompleteControlPlaneUpgradeRequest sets the name of target cluster to
+        # complete upgrade.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name (project, location, cluster) of the cluster to complete
+        #     upgrade. Specified in the format `projects/*/locations/*/clusters/*`.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. API request version that initiates this operation.
+        class CompleteControlPlaneUpgradeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for scheduled upgrades on the cluster.
