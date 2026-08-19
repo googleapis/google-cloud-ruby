@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.23.0 (2026-08-19)
+
+#### Features
+
+* add support for PSC as default ([#36259](https://github.com/googleapis/google-cloud-ruby/issues/36259)) 
+
 ### 0.22.1 (2026-08-05)
 
 #### Bug Fixes
