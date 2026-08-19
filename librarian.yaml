@@ -1359,6 +1359,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-common=~>1.9
     skip_generate: true
+    version: 1.2.0
   - name: google-cloud-dataplex
     apis:
       - path: google/cloud/dataplex/v1

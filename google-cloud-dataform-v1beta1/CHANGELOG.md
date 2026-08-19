@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add fields `original_branch`, `enable_branch_management`, `depth`, and `shallow` to message `.google.cloud.dataform.v1beta1.Workspace` ([#36280](https://github.com/googleapis/google-cloud-ruby/issues/36280)) 
+
 ### 1.1.0 (2026-08-05)
 
 #### Features
