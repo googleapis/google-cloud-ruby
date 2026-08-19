@@ -232,7 +232,9 @@ module Google
               #
               #   @param query [::String]
               #     Required. Provides the raw query string provided by the user, such as "How
-              #     to create a Cloud Storage bucket?".
+              #     to create a Cloud Storage bucket?". The query must not exceed 500
+              #     characters; values longer than 500 characters will result in an
+              #     `INVALID_ARGUMENT` error.
               #   @param page_size [::Integer]
               #     Optional. Specifies the maximum number of results to return. The service
               #     may return fewer than this value.
@@ -253,6 +255,8 @@ module Google
               #
               #     Supported fields for filtering:
               #
+              #     * `content_length_bytes` (INTEGER): The length of the `Document.content`
+              #       field in bytes.
               #     * `data_source` (STRING): The source of the document, e.g.
               #       `docs.cloud.google.com`. See
               #       https://developers.google.com/knowledge/reference/corpus-reference for
@@ -262,6 +266,8 @@ module Google
               #       markdown content or metadata.
               #     * `uri` (STRING): The document URI, e.g.
               #       `https://docs.cloud.google.com/bigquery/docs/tables`.
+              #
+              #     INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
               #
               #     STRING fields support `=` (equals) and `!=` (not equals) operators for
               #     **exact match** on the whole string. Partial match, prefix match, and
@@ -280,6 +286,8 @@ module Google
               #
               #     Examples:
               #
+              #     * Filter by `Document.content_length_bytes`:
+              #       `content_length_bytes < 50000`
               #     * `data_source = "docs.cloud.google.com" OR data_source =
               #       "firebase.google.com"`
               #     * `data_source != "firebase.google.com"`
@@ -376,6 +384,9 @@ module Google
               #     Required. Specifies the name of the document to retrieve.
               #     Format: `documents/{uri_without_scheme}`
               #     Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+              #
+              #     The name must not exceed 500 characters; values longer than 500 characters
+              #     will result in an `INVALID_ARGUMENT` error.
               #   @param view [::Google::Developers::DeveloperKnowledge::V1::DocumentView]
               #     Optional. Specifies the
               #     {::Google::Developers::DeveloperKnowledge::V1::DocumentView DocumentView} of the
@@ -465,6 +476,9 @@ module Google
               #
               #     Format: `documents/{uri_without_scheme}`
               #     Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+              #
+              #     Each name must not exceed 500 characters; values longer than 500 characters
+              #     will result in an `INVALID_ARGUMENT` error.
               #   @param view [::Google::Developers::DeveloperKnowledge::V1::DocumentView]
               #     Optional. Specifies the
               #     {::Google::Developers::DeveloperKnowledge::V1::DocumentView DocumentView} of the
