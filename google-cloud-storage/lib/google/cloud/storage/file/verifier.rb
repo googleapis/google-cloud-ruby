@@ -92,7 +92,6 @@ module Google
                 digest_class.file(f).base64digest
               end
             end
-
           end
         end
       end
