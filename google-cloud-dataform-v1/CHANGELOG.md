@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add output-only field `lineage_enabled` to message `.google.cloud.dataform.v1.WorkflowInvocation` ([#36281](https://github.com/googleapis/google-cloud-ruby/issues/36281)) 
+
 ### 1.1.0 (2026-08-05)
 
 #### Features
