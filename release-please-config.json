@@ -897,6 +897,14 @@
       "component": "google-cloud-firestore-v1",
       "version_file": "lib/google/cloud/firestore/v1/version.rb"
     },
+    "google-cloud-ftp": {
+      "component": "google-cloud-ftp",
+      "version_file": "lib/google/cloud/ftp/version.rb"
+    },
+    "google-cloud-ftp-v1": {
+      "component": "google-cloud-ftp-v1",
+      "version_file": "lib/google/cloud/ftp/v1/version.rb"
+    },
     "google-cloud-functions": {
       "component": "google-cloud-functions",
       "version_file": "lib/google/cloud/functions/version.rb"
@@ -2033,13 +2041,13 @@
       "component": "google-maps-isochrones-v1",
       "version_file": "lib/google/maps/isochrones/v1/version.rb"
     },
-    "google-maps-route_optimization-v1": {
-      "component": "google-maps-route_optimization-v1",
-      "version_file": "lib/google/maps/route_optimization/v1/version.rb"
-    },
     "google-maps-route_optimization": {
       "component": "google-maps-route_optimization",
       "version_file": "lib/google/maps/route_optimization/version.rb"
+    },
+    "google-maps-route_optimization-v1": {
+      "component": "google-maps-route_optimization-v1",
+      "version_file": "lib/google/maps/route_optimization/v1/version.rb"
     },
     "google-shopping-css": {
       "component": "google-shopping-css",

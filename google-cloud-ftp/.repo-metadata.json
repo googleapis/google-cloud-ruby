@@ -1,0 +1,17 @@
+{
+    "api_id": "ftp.googleapis.com",
+    "api_shortname": "ftp",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-ftp/latest",
+    "distribution_name": "google-cloud-ftp",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "ftp",
+    "name_pretty": "Cloud FTP API",
+    "product_documentation": "https://docs.cloud.google.com/cloud-ftp",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "A managed, cloud-native solution to move data in and out of Google Cloud by using SSH File Transfer Protocol (SFTP).",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/cloud-ftp",
+    "library_type": "GAPIC_AUTO"
+}

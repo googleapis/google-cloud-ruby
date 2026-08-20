@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-cloud-ftp-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.ftp.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_ListServers_sync",
+      "title": "Snippet for the list_servers call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#list_servers.",
+      "file": "cloud_ftp/list_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_servers",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#list_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::ListServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ftp::V1::ListServersResponse",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListServers",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.ListServers",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_GetServer_sync",
+      "title": "Snippet for the get_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#get_server.",
+      "file": "cloud_ftp/get_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#get_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::GetServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ftp::V1::Server",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.GetServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_CreateServer_sync",
+      "title": "Snippet for the create_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#create_server.",
+      "file": "cloud_ftp/create_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#create_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::CreateServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.CreateServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_UpdateServer_sync",
+      "title": "Snippet for the update_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#update_server.",
+      "file": "cloud_ftp/update_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#update_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::UpdateServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.UpdateServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_DeleteServer_sync",
+      "title": "Snippet for the delete_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#delete_server.",
+      "file": "cloud_ftp/delete_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#delete_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::DeleteServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.DeleteServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_ListUsers_sync",
+      "title": "Snippet for the list_users call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#list_users.",
+      "file": "cloud_ftp/list_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_users",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#list_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::ListUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ftp::V1::ListUsersResponse",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListUsers",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.ListUsers",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_GetUser_sync",
+      "title": "Snippet for the get_user call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#get_user.",
+      "file": "cloud_ftp/get_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#get_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::GetUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ftp::V1::User",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetUser",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.GetUser",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_CreateUser_sync",
+      "title": "Snippet for the create_user call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#create_user.",
+      "file": "cloud_ftp/create_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#create_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::CreateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateUser",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.CreateUser",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_UpdateUser_sync",
+      "title": "Snippet for the update_user call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#update_user.",
+      "file": "cloud_ftp/update_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#update_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::UpdateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateUser",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.UpdateUser",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_DeleteUser_sync",
+      "title": "Snippet for the delete_user call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#delete_user.",
+      "file": "cloud_ftp/delete_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#delete_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::DeleteUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteUser",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.DeleteUser",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_StartServer_sync",
+      "title": "Snippet for the start_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#start_server.",
+      "file": "cloud_ftp/start_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#start_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::StartServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "StartServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.StartServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ftp_v1_generated_CloudFtp_StopServer_sync",
+      "title": "Snippet for the stop_server call in the CloudFtp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#stop_server.",
+      "file": "cloud_ftp/stop_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_server",
+        "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client#stop_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ftp::V1::StopServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFtp::Rest::Client",
+          "full_name": "::Google::Cloud::Ftp::V1::CloudFtp::Rest::Client"
+        },
+        "method": {
+          "short_name": "StopServer",
+          "full_name": "google.cloud.ftp.v1.CloudFtp.StopServer",
+          "service": {
+            "short_name": "CloudFtp",
+            "full_name": "google.cloud.ftp.v1.CloudFtp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
