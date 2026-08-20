@@ -1198,6 +1198,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CONTAINER
     skip_generate: true
+    version: 1.18.0
   - name: google-cloud-container-v1beta1
     apis:
       - path: google/container/v1beta1
