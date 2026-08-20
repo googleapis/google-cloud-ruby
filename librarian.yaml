@@ -246,6 +246,7 @@ libraries:
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
     skip_generate: true
   - name: google-cloud-alloy_db-v1alpha
+    version: 0.23.0
     apis:
       - path: google/cloud/alloydb/v1alpha
         ruby:
@@ -253,7 +254,6 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
     skip_generate: true
-    version: 0.23.0
   - name: google-cloud-alloy_db-v1beta
     version: 0.24.0
     apis:
@@ -1350,18 +1350,18 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-dataform-v1
+    version: 1.2.0
     apis:
       - path: google/cloud/dataform/v1
     skip_generate: true
-    version: 1.2.0
   - name: google-cloud-dataform-v1beta1
+    version: 1.2.0
     apis:
       - path: google/cloud/dataform/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-common=~>1.9
     skip_generate: true
-    version: 1.2.0
   - name: google-cloud-dataplex
     apis:
       - path: google/cloud/dataplex/v1
