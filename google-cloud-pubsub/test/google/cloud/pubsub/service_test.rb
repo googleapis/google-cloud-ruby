@@ -218,6 +218,30 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
+  it "configures the V1::SubscriptionAdmin::Client with logger" do
+    custom_logger = Logger.new $stdout
+    service = Google::Cloud::PubSub::Service.new project, credentials, logger: custom_logger
+    _(service.subscription_admin.configure.logger).must_equal custom_logger
+  end
+
+  it "configures the V1::TopicAdmin::Client with logger" do
+    custom_logger = Logger.new $stdout
+    service = Google::Cloud::PubSub::Service.new project, credentials, logger: custom_logger
+    _(service.topic_admin.configure.logger).must_equal custom_logger
+  end
+
+  it "configures the V1::SchemaService::Client with logger" do
+    custom_logger = Logger.new $stdout
+    service = Google::Cloud::PubSub::Service.new project, credentials, logger: custom_logger
+    _(service.schemas.configure.logger).must_equal custom_logger
+  end
+
+  it "configures the IAMPolicy client with logger" do
+    custom_logger = Logger.new $stdout
+    service = Google::Cloud::PubSub::Service.new project, credentials, logger: custom_logger
+    _(service.iam.configure.logger).must_equal custom_logger
+  end
+
   it "should raise errors other than grpc on ack" do
     service = Google::Cloud::PubSub::Service.new project, nil, logger: mock_logging
     mocked_subscription_admin = Minitest::Mock.new

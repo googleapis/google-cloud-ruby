@@ -103,7 +103,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -159,7 +159,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -192,7 +192,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -240,7 +240,7 @@ describe Google::Cloud do
         _(timeout).must_equal timeout
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
       }
 
       # Clear all environment variables
@@ -265,7 +265,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_equal endpoint
         _(universe_domain).must_be :nil?
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
         OpenStruct.new project: project, credentials: credentials
       }
 
@@ -294,7 +294,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_equal actual_universe_domain
-        _(logger).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(logger).must_be_kind_of Logger
         OpenStruct.new project: project, credentials: credentials
       }
 
@@ -344,7 +344,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -388,7 +388,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -427,7 +427,7 @@ describe Google::Cloud do
         _(timeout).must_be :nil?
         _(host).must_be :nil?
         _(universe_domain).must_be :nil?
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -464,7 +464,7 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_equal 42.0
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -502,7 +502,7 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
         _(timeout).must_equal 42.0
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 
@@ -537,7 +537,7 @@ describe Google::Cloud do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, universe_domain: nil, **kwargs) {
         _(host).must_equal actual_endpoint
         _(universe_domain).must_equal actual_universe_domain
-        _(kwargs[:logger]).must_be_kind_of Google::Cloud::PubSub::InternalLogger
+        _(kwargs[:logger]).must_be_kind_of Logger
         OpenStruct.new project: project
       }
 

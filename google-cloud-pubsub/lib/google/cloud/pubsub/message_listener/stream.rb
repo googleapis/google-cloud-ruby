@@ -115,7 +115,7 @@ module Google
             synchronize do
               break if @stopped
 
-              subscriber.service.logger.log :info, "subscriber-streams" do
+              subscriber.service.internal_logger.log :info, "subscriber-streams" do
                 "stopping stream for subscription #{@subscriber.subscription_name}"
               end
               # Close the stream by pushing the sentinel value.
@@ -185,13 +185,13 @@ module Google
           end
 
           def log_info msg
-            subscriber.service.logger.log :info, "subscriber-streams" do
+            subscriber.service.internal_logger.log :info, "subscriber-streams" do
               msg
             end
           end
 
           def log_error msg
-            subscriber.service.logger.log :error, "subscriber-streams" do
+            subscriber.service.internal_logger.log :error, "subscriber-streams" do
               msg
             end
           end
@@ -289,7 +289,7 @@ module Google
             synchronize do
               # Don't allow a stream to restart if already stopped
               if @stopped
-                subscriber.service.logger.log :debug, "subscriber-streams" do
+                subscriber.service.internal_logger.log :debug, "subscriber-streams" do
                   "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
                   " stopped"
                 end
@@ -319,7 +319,7 @@ module Google
               @stream_open = false
             end
             enum = @subscriber.service.streaming_pull @request_queue.each, options
-            subscriber.service.logger.log :info, "subscriber-streams" do
+            subscriber.service.internal_logger.log :info, "subscriber-streams" do
               "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
             end
 
@@ -396,7 +396,7 @@ module Google
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable => e
             status_code = e.respond_to?(:code) ? e.code : e.class.name
-            subscriber.service.logger.log :error, "subscriber-streams" do
+            subscriber.service.internal_logger.log :error, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended with status " \
               "#{status_code}; will be retried."
             end
@@ -404,13 +404,13 @@ module Google
             backoff_and_wait!
             retry
           rescue RestartStream
-            subscriber.service.logger.log :info, "subscriber-streams" do
+            subscriber.service.internal_logger.log :info, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
             end
             backoff_and_wait!
             retry
           rescue StandardError => e
-            subscriber.service.logger.log :error, "subscriber-streams" do
+            subscriber.service.internal_logger.log :error, "subscriber-streams" do
               "error on stream for subscription #{@subscriber.subscription_name}: #{e.inspect}"
             end
             @subscriber.error! e
@@ -463,12 +463,12 @@ module Google
           end
 
           def perform_callback_sync rec_msg
-            subscriber.service.logger.log :info, "callback-delivery" do
+            subscriber.service.internal_logger.log :info, "callback-delivery" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
             end
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
-            subscriber.service.logger.log :info, "callback-exceptions" do
+            subscriber.service.internal_logger.log :info, "callback-exceptions" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
                 "#{e.inspect}"
             end
@@ -498,7 +498,7 @@ module Google
             return unless pause_streaming?
 
             @paused = true
-            subscriber.service.logger.log :info, "subscriber-flow-control" do
+            subscriber.service.internal_logger.log :info, "subscriber-flow-control" do
               "subscriber for #{@subscriber.subscription_name} is client-side flow control blocked"
             end
           end
@@ -519,7 +519,7 @@ module Google
               # leaving last_pong_at stale. Updating timestamp guarantees the monitor thread will not trigger an immediate
               # false-positive restart while the reader thread wakes up to drain buffered frames.
               @keepalive_monitor.record_pong!
-              subscriber.service.logger.log :info, "subscriber-flow-control" do
+              subscriber.service.internal_logger.log :info, "subscriber-flow-control" do
                 "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
               end
               # Signal to the background thread that we are unpaused
