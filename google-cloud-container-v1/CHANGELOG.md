@@ -1,5 +1,11 @@
 # Release History
 
+### 1.18.0 (2026-08-20)
+
+#### Features
+
+* support for rollback-safe upgrade ([#36300](https://github.com/googleapis/google-cloud-ruby/issues/36300)) 
+
 ### 1.17.1 (2026-08-05)
 
 #### Bug Fixes
