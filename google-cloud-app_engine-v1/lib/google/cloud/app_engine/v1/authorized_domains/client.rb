@@ -70,6 +70,8 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
