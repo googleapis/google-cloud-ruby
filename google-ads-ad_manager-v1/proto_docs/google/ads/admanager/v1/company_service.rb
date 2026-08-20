@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Request object for `GetCompany` method.
+        # Request object for [GetCompany][] method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Company.
@@ -31,23 +31,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for `ListCompanies` method.
+        # Request object for [ListCompanies][] method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of Companies.
+        #     Required. The parent, which owns this collection of [Companies][].
         #     Format: `networks/{network_code}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of `Companies` to return. The service may
-        #     return fewer than this value. If unspecified, at most 50 `Companies` will
+        #     Optional. The maximum number of [Companies][] to return. The service may
+        #     return fewer than this value. If unspecified, at most 50 [Companies][] will
         #     be returned. The maximum value is 1000; values greater than 1000 will be
         #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListCompanies` call.
+        #     Optional. A page token, received from a previous [ListCompanies][] call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListCompanies` must
+        #     When paginating, all other parameters provided to [ListCompanies][] must
         #     match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -55,22 +55,21 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>address</code></li>
-        #       <li><code>comment</code></li>
-        #       <li><code>companyId</code></li>
-        #       <li><code>creditStatus</code></li>
-        #       <li><code>displayName</code></li>
-        #       <li><code>email</code></li>
-        #       <li><code>externalId</code></li>
-        #       <li><code>fax</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>phone</code></li>
-        #       <li><code>thirdPartyCompanyId</code></li>
-        #       <li><code>type</code></li>
-        #       <li><code>updateTime</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `address`
+        #     * `comment`
+        #     * `companyId`
+        #     * `creditStatus`
+        #     * `displayName`
+        #     * `email`
+        #     * `externalId`
+        #     * `fax`
+        #     * `name`
+        #     * `phone`
+        #     * `thirdPartyCompanyId`
+        #     * `type`
+        #     * `updateTime`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -84,18 +83,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for `ListCompaniesRequest` containing matching `Company`
-        # objects.
+        # Response object for
+        # {::Google::Ads::AdManager::V1::ListCompaniesRequest ListCompaniesRequest}
+        # containing matching {::Google::Ads::AdManager::V1::Company Company} objects.
         # @!attribute [rw] companies
         #   @return [::Array<::Google::Ads::AdManager::V1::Company>]
-        #     The `Company` objects from the specified network.
+        #     The {::Google::Ads::AdManager::V1::Company Company} objects from the specified
+        #     network.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         # @!attribute [rw] total_size
         #   @return [::Integer]
-        #     Total number of `Company` objects.
+        #     Total number of {::Google::Ads::AdManager::V1::Company Company} objects.
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
@@ -107,6 +108,85 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCompaniesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for [CreateCompany][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this
+        #     {::Google::Ads::AdManager::V1::Company Company} will be created. Format:
+        #     `networks/{network_code}`
+        # @!attribute [rw] company
+        #   @return [::Google::Ads::AdManager::V1::Company]
+        #     Required. The {::Google::Ads::AdManager::V1::Company Company} to create.
+        class CreateCompanyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for [BatchCreateCompanies][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where [Companies][] will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateCompanyRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateCompanyRequest>]
+        #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateCompaniesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for [BatchCreateCompanies][] method.
+        # @!attribute [rw] companies
+        #   @return [::Array<::Google::Ads::AdManager::V1::Company>]
+        #     The {::Google::Ads::AdManager::V1::Company Company} objects created.
+        class BatchCreateCompaniesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for [UpdateCompany][] method.
+        # @!attribute [rw] company
+        #   @return [::Google::Ads::AdManager::V1::Company]
+        #     Required. The {::Google::Ads::AdManager::V1::Company Company} to update.
+        #
+        #     The {::Google::Ads::AdManager::V1::Company Company}'s `name` is used to identify
+        #     the {::Google::Ads::AdManager::V1::Company Company} to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateCompanyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for [BatchUpdateCompanies][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where [Companies][] will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateCompanyRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateCompanyRequest>]
+        #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateCompaniesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for [BatchUpdateCompanies][] method.
+        # @!attribute [rw] companies
+        #   @return [::Array<::Google::Ads::AdManager::V1::Company>]
+        #     The {::Google::Ads::AdManager::V1::Company Company} objects updated.
+        class BatchUpdateCompaniesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

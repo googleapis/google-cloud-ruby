@@ -33,17 +33,17 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.EntitySignalsMappingService'
 
-            # API to retrieve a `EntitySignalsMapping` object.
+            # Retrieves a `EntitySignalsMapping` object.
             rpc :GetEntitySignalsMapping, ::Google::Ads::AdManager::V1::GetEntitySignalsMappingRequest, ::Google::Ads::AdManager::V1::EntitySignalsMapping
-            # API to retrieve a list of `EntitySignalsMapping` objects.
+            # Lists `EntitySignalsMapping` objects.
             rpc :ListEntitySignalsMappings, ::Google::Ads::AdManager::V1::ListEntitySignalsMappingsRequest, ::Google::Ads::AdManager::V1::ListEntitySignalsMappingsResponse
-            # API to create an `EntitySignalsMapping` object.
+            # Creates an `EntitySignalsMapping` object.
             rpc :CreateEntitySignalsMapping, ::Google::Ads::AdManager::V1::CreateEntitySignalsMappingRequest, ::Google::Ads::AdManager::V1::EntitySignalsMapping
-            # API to update an `EntitySignalsMapping` object.
+            # Updates an `EntitySignalsMapping` object.
             rpc :UpdateEntitySignalsMapping, ::Google::Ads::AdManager::V1::UpdateEntitySignalsMappingRequest, ::Google::Ads::AdManager::V1::EntitySignalsMapping
-            # API to batch create `EntitySignalsMapping` objects.
+            # Creates `EntitySignalsMapping` objects.
             rpc :BatchCreateEntitySignalsMappings, ::Google::Ads::AdManager::V1::BatchCreateEntitySignalsMappingsRequest, ::Google::Ads::AdManager::V1::BatchCreateEntitySignalsMappingsResponse
-            # API to batch update `EntitySignalsMapping` objects.
+            # Batch updates `EntitySignalsMapping` objects.
             rpc :BatchUpdateEntitySignalsMappings, ::Google::Ads::AdManager::V1::BatchUpdateEntitySignalsMappingsRequest, ::Google::Ads::AdManager::V1::BatchUpdateEntitySignalsMappingsResponse
           end
 

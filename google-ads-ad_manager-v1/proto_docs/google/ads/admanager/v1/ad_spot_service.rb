@@ -55,14 +55,13 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>canonicalDisplayName</code></li>
-        #       <li><code>customSpot</code></li>
-        #       <li><code>displayName</code></li>
-        #       <li><code>flexible</code></li>
-        #       <li><code>name</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `canonicalDisplayName`
+        #     * `customSpot`
+        #     * `displayName`
+        #     * `flexible`
+        #     * `name`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
