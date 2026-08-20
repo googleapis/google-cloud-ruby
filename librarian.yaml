@@ -4322,6 +4322,7 @@ libraries:
     apis:
       - path: google/developers/knowledge/v1
     skip_generate: true
+    version: 0.3.0
   - name: google-iam-client
     apis:
       - path: google/iam/v2
