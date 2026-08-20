@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2026-08-20)
+
+#### Features
+
+* You can now filter by `content_length_bytes` ([#36301](https://github.com/googleapis/google-cloud-ruby/issues/36301)) 
+
 ### 0.2.2 (2026-08-05)
 
 #### Bug Fixes
