@@ -1244,13 +1244,13 @@ libraries:
       wrapper_of:
         - v1:1.6
   - name: google-cloud-container-v1
+    version: 1.18.0
     apis:
       - path: google/container/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CONTAINER
     skip_generate: true
-    version: 1.18.0
   - name: google-cloud-container-v1beta1
     version: 0.57.1
     apis:
