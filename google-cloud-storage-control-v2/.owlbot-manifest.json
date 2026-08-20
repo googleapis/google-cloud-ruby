@@ -58,6 +58,7 @@
     "snippets/storage_control/delete_folder_recursive.rb",
     "snippets/storage_control/delete_managed_folder.rb",
     "snippets/storage_control/disable_anywhere_cache.rb",
+    "snippets/storage_control/disable_rapid_cache.rb",
     "snippets/storage_control/get_anywhere_cache.rb",
     "snippets/storage_control/get_folder.rb",
     "snippets/storage_control/get_folder_intelligence_config.rb",
