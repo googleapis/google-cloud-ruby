@@ -234,7 +234,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -246,7 +245,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
-    skip_generate: true
   - name: google-cloud-alloy_db-v1alpha
     version: 0.23.0
     apis:
@@ -255,7 +253,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
-    skip_generate: true
   - name: google-cloud-alloy_db-v1beta
     version: 0.24.0
     apis:
@@ -264,7 +261,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1beta
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
-    skip_generate: true
   - name: google-cloud-api_gateway
     version: 2.2.1
     apis:
@@ -272,7 +268,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: API_GATEWAY
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:2.0
@@ -283,12 +278,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: API_GATEWAY
-    skip_generate: true
   - name: google-cloud-api_hub
     version: 1.0.1
     apis:
       - path: google/cloud/apihub/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -296,12 +289,10 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/apihub/v1
-    skip_generate: true
   - name: google-cloud-api_keys
     version: 1.5.1
     apis:
       - path: google/api/apikeys/v2
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.5
@@ -309,12 +300,10 @@ libraries:
     version: 0.14.1
     apis:
       - path: google/api/apikeys/v2
-    skip_generate: true
   - name: google-cloud-api_registry
     version: 0.3.1
     apis:
       - path: google/cloud/apiregistry/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -322,7 +311,6 @@ libraries:
     version: 0.4.1
     apis:
       - path: google/cloud/apiregistry/v1beta
-    skip_generate: true
   - name: google-cloud-apigee_connect
     version: 1.7.1
     apis:
@@ -330,7 +318,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APIGEE_CONNECT
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.6
@@ -341,7 +328,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APIGEE_CONNECT
-    skip_generate: true
   - name: google-cloud-apigee_registry
     version: 2.0.0
     skip_generate: true
@@ -357,7 +343,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APP_ENGINE
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.9
@@ -368,12 +353,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APP_ENGINE
-    skip_generate: true
   - name: google-cloud-app_hub
     version: 2.2.1
     apis:
       - path: google/cloud/apphub/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -381,7 +364,6 @@ libraries:
     version: 1.7.1
     apis:
       - path: google/cloud/apphub/v1
-    skip_generate: true
   - name: google-cloud-app_optimize
     version: 1.0.1
     apis:
