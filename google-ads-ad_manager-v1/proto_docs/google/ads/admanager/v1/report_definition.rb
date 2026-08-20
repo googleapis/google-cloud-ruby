@@ -629,7 +629,7 @@ module Google
             #
             # Corresponds to "Landing page domain" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `STRING`
             ADVERTISER_DOMAIN_NAME = 242
@@ -2327,7 +2327,8 @@ module Google
             #
             # Corresponds to "City ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             CITY_ID = 459
@@ -2350,7 +2351,8 @@ module Google
             #
             # Corresponds to "Advertiser ID (classified)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REACH`
             #
             # Data format: `IDENTIFIER`
             CLASSIFIED_ADVERTISER_ID = 133
@@ -2362,7 +2364,8 @@ module Google
             #
             # Corresponds to "Advertiser (classified)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REACH`
             #
             # Data format: `STRING`
             CLASSIFIED_ADVERTISER_NAME = 134
@@ -3853,6 +3856,10 @@ module Google
             # Data format: `STRING_LIST`
             KEY_VALUES_SET = 713
 
+            # The landing page domain name of the advertiser.
+            # This will eventually replace ADVERTISER_DOMAIN_NAME.
+            LANDING_PAGE_DOMAIN = 242
+
             # The agency of the order associated with the line item.
             #
             #
@@ -4680,7 +4687,8 @@ module Google
             #
             # Corresponds to "Metro ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             METRO_ID = 453
@@ -5041,6 +5049,17 @@ module Google
             #
             # Data format: `STRING`
             NO_FILL_REASON_CATEGORY_NAME = 587
+
+            # Number of ads served in a pod response.
+            #
+            #
+            #
+            # Corresponds to "Number of ads in pod" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            NUM_ADS_IN_POD = 804
 
             # Operating system category.
             #
@@ -6037,6 +6056,29 @@ module Google
             # Data format: `STRING`
             REQUESTED_AD_SIZES = 352
 
+            # The orientation of the creative requested.
+            #
+            #
+            #
+            # Corresponds to "Requested creative orientation value" in the Ad Manager
+            # UI (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM_LIST`
+            REQUESTED_CREATIVE_ORIENTATION = 828
+
+            # Localized name of the requested creative orientation.
+            #
+            #
+            #
+            # Corresponds to "Requested creative orientation" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING_LIST`
+            REQUESTED_CREATIVE_ORIENTATION_NAME = 829
+
             # Request type ENUM
             #
             #
@@ -6685,7 +6727,7 @@ module Google
             # Corresponds to "Position of pod" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `REAL_TIME_VIDEO`
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             VIDEO_POSITION_OF_POD = 539
@@ -10702,6 +10744,21 @@ module Google
             # Data format: `PERCENT`
             CTR = 3
 
+            # For standard ads, your ad clickthrough rate (CTR) is the number of ad
+            #  clicks divided by the number of individual ad impressions expressed as a
+            #  fraction. Ad CTR = Clicks / Ad impressions. Counts companion impressions
+            #  in the number of ad impressions.
+            #
+            #
+            #
+            # Corresponds to "Total CTR with companion" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
+            #
+            # Data format: `PERCENT`
+            CTR_WITH_COMPANION = 742
+
             # Number of bids received for a deal.
             #
             #
@@ -11166,6 +11223,19 @@ module Google
             #
             # Data format: `INTEGER`
             IMPRESSIONS = 1
+
+            # Total impressions from the Google Ad Manager server, AdSense,
+            #  Ad Exchange, and yield group partners, including companion ads.
+            #
+            #
+            #
+            # Corresponds to "Total impressions with companion" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
+            #
+            # Data format: `INTEGER`
+            IMPRESSIONS_WITH_COMPANION = 741
 
             # The number of impressions (via begin to render methodology) considered
             #  inactive, as defined by served to a device receiving ad or bid requests
@@ -11856,6 +11926,39 @@ module Google
             #
             # Data format: `INTEGER`
             PARTNER_SOLD_IMPRESSIONS = 123
+
+            # Total pod eCPM.
+            #
+            #
+            #
+            # Corresponds to "Total pod eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            POD_ECPM = 738
+
+            # Total pod eCPM without CPD.
+            #
+            #
+            #
+            # Corresponds to "Total pod eCPM without CPD" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            POD_ECPM_WITHOUT_CPD = 739
+
+            # Total pod views.
+            #
+            #
+            #
+            # Corresponds to "Total pod views" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            POD_VIEWS = 740
 
             # The total number of ad requests eligible for programmatic inventory,
             #  including Programmatic Guaranteed, Preferred Deals, backfill, and open

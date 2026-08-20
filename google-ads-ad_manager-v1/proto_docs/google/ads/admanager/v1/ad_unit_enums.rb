@@ -85,6 +85,29 @@ module Google
             BLANK = 2
           end
         end
+
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::RefreshRateTypeEnum::RefreshRateType RefreshRateType}
+        class RefreshRateTypeEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the refresh rate control type for an ad unit.
+          # New values may be added in the future.
+          module RefreshRateType
+            # Default value. This value is unused.
+            REFRESH_RATE_TYPE_UNSPECIFIED = 0
+
+            # Indicates refresh is disabled.
+            DISABLED = 1
+
+            # Represents the Google optimized refresh rate.
+            OPTIMIZED = 2
+
+            # Represents a fixed interval refresh rate.
+            FIXED_INTERVAL = 3
+          end
+        end
       end
     end
   end

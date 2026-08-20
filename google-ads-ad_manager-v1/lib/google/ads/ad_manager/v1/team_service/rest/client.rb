@@ -292,16 +292,15 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>accessType</code></li>
-              #       <li><code>allCompaniesAccess</code></li>
-              #       <li><code>allInventoryAccess</code></li>
-              #       <li><code>description</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>status</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `accessType`
+              #     * `allCompaniesAccess`
+              #     * `allInventoryAccess`
+              #     * `description`
+              #     * `displayName`
+              #     * `name`
+              #     * `status`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an `AudienceSegment` object.
+              # Retrieves an `AudienceSegment` object.
               #
               # @overload get_audience_segment(request, options = nil)
               #   Pass arguments to `get_audience_segment` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `AudienceSegment` objects.
+              # Lists `AudienceSegment` objects.
               #
               # @overload list_audience_segments(request, options = nil)
               #   Pass arguments to `list_audience_segments` via a request object, either of type
@@ -292,10 +292,9 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>displayName</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `displayName`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
