@@ -740,7 +740,7 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
     skip_generate: true
   - name: google-cloud-bigtable-v2
-    version: 1.16.0
+    version: 1.17.0
     apis:
       - path: google/bigtable/v2
         ruby:
