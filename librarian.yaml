@@ -1773,6 +1773,19 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: FIRESTORE
     skip_generate: true
+  - name: google-cloud-ftp
+    version: 0.0.1
+    apis:
+      - path: google/cloud/ftp/v1
+    copyright_year: "2026"
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-ftp-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/ftp/v1
+    copyright_year: "2026"
   - name: google-cloud-functions
     apis:
       - path: google/cloud/functions/v2
