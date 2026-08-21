@@ -56,9 +56,11 @@ module Google
         # `version` parameter. If the BigQueryRead service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # Raises an exception if the currently installed versioned client gem for the
-        # given API version does not support the BigQueryRead service.
+        # given API version does not support the given transport of the BigQueryRead service.
         # You can determine whether the method will succeed by calling
         # {Google::Cloud::Bigquery::Storage.big_query_read_available?}.
         #
@@ -70,9 +72,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.big_query_read version: :v1, &block
+        def self.big_query_read version: :v1, transport: :grpc, &block
           require "google/cloud/bigquery/storage/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::Storage
@@ -80,6 +83,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Bigquery::Storage.const_get(package_name).const_get(:BigQueryRead)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -92,9 +96,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.big_query_read_available? version: :v1
+        def self.big_query_read_available? version: :v1, transport: :grpc
           require "google/cloud/bigquery/storage/#{version.to_s.downcase}"
           package_name = Google::Cloud::Bigquery::Storage
                          .constants
@@ -104,6 +109,10 @@ module Google
           service_module = Google::Cloud::Bigquery::Storage.const_get package_name
           return false unless service_module.const_defined? :BigQueryRead
           service_module = service_module.const_get :BigQueryRead
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
           service_module.const_defined? :Client
         rescue ::LoadError
           false
@@ -119,9 +128,11 @@ module Google
         # `version` parameter. If the BigQueryWrite service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # Raises an exception if the currently installed versioned client gem for the
-        # given API version does not support the BigQueryWrite service.
+        # given API version does not support the given transport of the BigQueryWrite service.
         # You can determine whether the method will succeed by calling
         # {Google::Cloud::Bigquery::Storage.big_query_write_available?}.
         #
@@ -136,9 +147,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.big_query_write version: :v1, &block
+        def self.big_query_write version: :v1, transport: :grpc, &block
           require "google/cloud/bigquery/storage/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::Storage
@@ -146,6 +158,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Bigquery::Storage.const_get(package_name).const_get(:BigQueryWrite)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 
@@ -158,9 +171,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.big_query_write_available? version: :v1
+        def self.big_query_write_available? version: :v1, transport: :grpc
           require "google/cloud/bigquery/storage/#{version.to_s.downcase}"
           package_name = Google::Cloud::Bigquery::Storage
                          .constants
@@ -170,6 +184,10 @@ module Google
           service_module = Google::Cloud::Bigquery::Storage.const_get package_name
           return false unless service_module.const_defined? :BigQueryWrite
           service_module = service_module.const_get :BigQueryWrite
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
           service_module.const_defined? :Client
         rescue ::LoadError
           false

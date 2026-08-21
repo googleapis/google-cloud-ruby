@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Data Policy Service provides APIs for managing the BigQuery label-policy bindings."
-  gem.summary       = "API Client library for the BigQuery Data Policy Service V1beta1 API"
+  gem.description   = "Allows users to manage BigQuery data policies."
+  gem.summary       = "Allows users to manage BigQuery data policies."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

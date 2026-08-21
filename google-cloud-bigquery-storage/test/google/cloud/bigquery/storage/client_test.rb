@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/bigquery/storage"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,24 +42,44 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
   end
 
   def test_big_query_read_grpc
-    skip unless Google::Cloud::Bigquery::Storage.big_query_read_available?
+    skip unless Google::Cloud::Bigquery::Storage.big_query_read_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Bigquery::Storage.big_query_read do |config|
+      client = Google::Cloud::Bigquery::Storage.big_query_read transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client, client
     end
   end
 
+  def test_big_query_read_rest
+    skip unless Google::Cloud::Bigquery::Storage.big_query_read_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Bigquery::Storage.big_query_read transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Rest::Client, client
+    end
+  end
+
   def test_big_query_write_grpc
-    skip unless Google::Cloud::Bigquery::Storage.big_query_write_available?
+    skip unless Google::Cloud::Bigquery::Storage.big_query_write_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Bigquery::Storage.big_query_write do |config|
+      client = Google::Cloud::Bigquery::Storage.big_query_write transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client, client
+    end
+  end
+
+  def test_big_query_write_rest
+    skip unless Google::Cloud::Bigquery::Storage.big_query_write_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Bigquery::Storage.big_query_write transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Rest::Client, client
     end
   end
 end

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery."
-  gem.summary       = "API Client library for the BigQuery Migration API"
+  gem.description   = "The migration service, exposing apis for migration jobs operations, and agent management."
+  gem.summary       = "The migration service, exposing apis for migration jobs operations, and agent management."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
