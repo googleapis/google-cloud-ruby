@@ -384,7 +384,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ARTIFACT_REGISTRY
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.3
@@ -395,7 +394,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ARTIFACT_REGISTRY
-    skip_generate: true
   - name: google-cloud-artifact_registry-v1beta2
     version: 0.20.1
     apis:
@@ -403,7 +401,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ARTIFACT_REGISTRY
-    skip_generate: true
   - name: google-cloud-asset
     version: 1.10.1
     apis:
@@ -435,7 +432,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -446,7 +442,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
-    skip_generate: true
   - name: google-cloud-assured_workloads-v1beta1
     version: 0.26.1
     apis:
@@ -454,12 +449,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
-    skip_generate: true
   - name: google-cloud-audit_manager
     version: 1.1.0
     apis:
       - path: google/cloud/auditmanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -467,7 +460,6 @@ libraries:
     version: 1.1.1
     apis:
       - path: google/cloud/auditmanager/v1
-    skip_generate: true
   - name: google-cloud-automl
     version: 2.2.1
     apis:
@@ -483,7 +475,6 @@ libraries:
       - MIGRATING.md
       - acceptance/google/cloud/automl/v1beta1/automl_service_smoke_test.rb
       - lib/google/cloud/automl/helpers.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -520,7 +511,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: Backupdr=BackupDR
             ruby-cloud-path-override: backup_dr=backupdr
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -532,12 +522,10 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: Backupdr=BackupDR
             ruby-cloud-path-override: backup_dr=backupdr
-    skip_generate: true
   - name: google-cloud-bare_metal_solution
     version: 2.2.1
     apis:
       - path: google/cloud/baremetalsolution/v2
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:1.0
@@ -545,12 +533,10 @@ libraries:
     version: 1.6.1
     apis:
       - path: google/cloud/baremetalsolution/v2
-    skip_generate: true
   - name: google-cloud-batch
     version: 2.2.1
     apis:
       - path: google/cloud/batch/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -558,7 +544,6 @@ libraries:
     version: 1.8.2
     apis:
       - path: google/cloud/batch/v1
-    skip_generate: true
   - name: google-cloud-beyond_corp
     version: 1.6.1
     apis:
@@ -574,7 +559,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
-    skip_generate: true
   - name: google-cloud-beyond_corp-app_connectors-v1
     version: 0.13.1
     apis:
@@ -582,7 +566,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
-    skip_generate: true
   - name: google-cloud-beyond_corp-app_gateways-v1
     version: 0.13.1
     apis:
@@ -590,7 +573,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
-    skip_generate: true
   - name: google-cloud-beyond_corp-client_gateways-v1
     version: 0.13.1
     apis:
@@ -598,12 +580,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
-    skip_generate: true
   - name: google-cloud-bigquery-analytics_hub
     version: 1.5.1
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.5
@@ -611,7 +591,6 @@ libraries:
     version: 0.20.1
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
-    skip_generate: true
   - name: google-cloud-bigquery-connection
     version: 1.8.1
     apis:
@@ -619,7 +598,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_CONNECTION
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.17
@@ -630,7 +608,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_CONNECTION
-    skip_generate: true
   - name: google-cloud-bigquery-data_exchange
     version: 0.7.1
     apis:
