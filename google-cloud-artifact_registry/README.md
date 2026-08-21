@@ -1,8 +1,7 @@
 # Ruby Client for the Artifact Registry API
 
-API Client library for the Artifact Registry API
+Store and manage build artifacts in a scalable and integrated service built on Google infrastructure.
 
-Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-artifact_registry-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-artifact_registry-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-artifact_registry-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/artifact-registry/)
-for more usage information.
 
 ## Quick Start
 
