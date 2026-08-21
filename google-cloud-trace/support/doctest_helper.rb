@@ -16,6 +16,8 @@
 require "google/cloud/trace"
 require "minitest/rg"
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 require "active_record"
 
 module Google
