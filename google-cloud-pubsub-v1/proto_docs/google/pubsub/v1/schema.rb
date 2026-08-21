@@ -34,6 +34,11 @@ module Google
         #     The definition of the schema. This should contain a string representing
         #     the full definition of the schema that is a valid schema definition of
         #     the type specified in `type`.
+        # @!attribute [rw] compiled_proto_schema
+        #   @return [::Google::Cloud::PubSub::V1::CompiledProtoSchema]
+        #     Optional. Configuration for a schema provided as a pre-compiled Protocol
+        #     Buffer FileDescriptorSet. The `type` field above must be set to
+        #     PROTOCOL_BUFFER.
         # @!attribute [r] revision_id
         #   @return [::String]
         #     Output only. Immutable. The revision ID of the schema.
@@ -272,6 +277,18 @@ module Google
         # Response for the `ValidateMessage` method.
         # Empty for now.
         class ValidateMessageResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration specific to compiled Protocol Buffer schemas.
+        # @!attribute [rw] root_message
+        #   @return [::String]
+        #     Required. The name of the root message type in the schema.
+        # @!attribute [rw] compiled_bytes
+        #   @return [::String]
+        #     Required. The compiled FileDescriptorSet binary.
+        class CompiledProtoSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
