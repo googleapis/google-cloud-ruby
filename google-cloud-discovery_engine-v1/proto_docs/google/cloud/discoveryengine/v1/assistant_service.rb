@@ -63,6 +63,9 @@ module Google
         # @!attribute [rw] user_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistUserMetadata]
         #     Optional. Information about the user initiating the query.
+        # @!attribute [rw] agents_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::AgentsSpec]
+        #     Optional. Specification of agents that are used to serve the request.
         # @!attribute [rw] tools_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::ToolsSpec]
         #     Optional. Specification of tools that are used to serve the request.
@@ -72,6 +75,28 @@ module Google
         class StreamAssistRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specification of agents that are used to serve the request.
+          # @!attribute [rw] agent_specs
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::AgentsSpec::AgentSpec>]
+          #     Optional. Specification of agents that are used to serve the request.
+          class AgentsSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Specification of an agent.
+            # @!attribute [rw] agent_id
+            #   @return [::String]
+            #     Required. ID to identify the agent resource serving the request.
+            #
+            #     This field must conform to
+            #     [RFC-1034](https://tools.ietf.org/html/rfc1034)
+            #     with a length limit of 63 characters.
+            class AgentSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # Specification of tools that are used to serve the request.
           # @!attribute [rw] vertex_ai_search_spec
