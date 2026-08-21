@@ -2,7 +2,6 @@
 
 API for reading and writing the contents of Bigtable tables associated with a Google Cloud project.
 
-Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.read_rows request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/bigtable)
+See also the [Product Documentation](https://cloud.google.com/bigtable/docs)
 for general usage information.
 
 ## Debug Logging

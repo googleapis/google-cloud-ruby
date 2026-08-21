@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/bigtable/admin/v2/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-bigtable-admin-v2/$1

@@ -1,13 +1,12 @@
-# Ruby Client for the BigQuery Data Transfer Service V1 API
+# Ruby Client for the BigQuery Data Transfer V1 API
 
 Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
 
-Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the BigQuery Data Transfer Service V1 API. Most users should consider using
+specific version of the BigQuery Data Transfer V1 API. Most users should consider using
 the main client gem,
 [google-cloud-bigquery-data_transfer](https://rubygems.org/gems/google-cloud-bigquery-data_transfer).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_data_source request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)
-for general usage information.
 
 ## Debug Logging
 

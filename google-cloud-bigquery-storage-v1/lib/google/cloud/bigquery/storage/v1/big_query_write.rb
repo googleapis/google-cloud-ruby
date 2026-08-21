@@ -25,6 +25,7 @@ require "google/cloud/bigquery/storage/v1/version"
 require "google/cloud/bigquery/storage/v1/big_query_write/credentials"
 require "google/cloud/bigquery/storage/v1/big_query_write/paths"
 require "google/cloud/bigquery/storage/v1/big_query_write/client"
+require "google/cloud/bigquery/storage/v1/big_query_write/rest"
 
 module Google
   module Cloud
@@ -43,6 +44,11 @@ module Google
           #
           #     require "google/cloud/bigquery/storage/v1/big_query_write"
           #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/storage/v1/big_query_write/rest"
+          #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Rest::Client.new
           #
           module BigQueryWrite
           end

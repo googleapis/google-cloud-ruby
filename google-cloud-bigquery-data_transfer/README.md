@@ -1,8 +1,7 @@
-# Ruby Client for the BigQuery Data Transfer Service API
+# Ruby Client for the BigQuery Data Transfer API
 
-API Client library for the BigQuery Data Transfer Service API
+Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
 
-Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-data_transfer-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-data_transfer-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)
-for more usage information.
 
 ## Quick Start
 

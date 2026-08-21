@@ -1,8 +1,7 @@
-# Ruby Client for the BigQuery Data Policy Service V1beta1 API
+# Ruby Client for the BigQuery Data Policy API
 
-API Client library for the BigQuery Data Policy Service V1beta1 API
+Allows users to manage BigQuery data policies.
 
-The Data Policy Service provides APIs for managing the BigQuery label-policy bindings.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-data_policies-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-data_policies-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_policies-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/bigquery)
-for more usage information.
 
 ## Quick Start
 

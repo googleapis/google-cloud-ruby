@@ -1,8 +1,7 @@
 # Ruby Client for the Binary Authorization API
 
-API Client library for the Binary Authorization API
+The management interface for Binary Authorization, a service that provides policy-based deployment validation and control for images deployed to Google Kubernetes Engine (GKE), Anthos Service Mesh, Anthos Clusters, and Cloud Run.
 
-Binary Authorization is a service on Google Cloud that provides centralized software supply-chain security for applications that run on Google Kubernetes Engine (GKE) and GKE on-prem.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-binary_authorization-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-binary_authorization-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/binary-authorization/)
-for more usage information.
 
 ## Quick Start
 

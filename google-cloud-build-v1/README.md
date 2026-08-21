@@ -2,7 +2,6 @@
 
 Creates and manages builds on Google Cloud Platform.
 
-Cloud Build is a service that executes your builds on Google Cloud Platform infrastructure. Cloud Build can import source code from Google Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket, execute a build to your specifications, and produce artifacts such as Docker containers or Java archives.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_build request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-build-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/build/docs)
-for general usage information.
 
 ## Debug Logging
 

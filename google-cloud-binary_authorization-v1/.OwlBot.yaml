@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/binaryauthorization/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-binary_authorization-v1/$1

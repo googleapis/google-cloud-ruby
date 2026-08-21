@@ -25,6 +25,7 @@ require "google/cloud/bigtable/v2/version"
 require "google/cloud/bigtable/v2/bigtable/credentials"
 require "google/cloud/bigtable/v2/bigtable/paths"
 require "google/cloud/bigtable/v2/bigtable/client"
+require "google/cloud/bigtable/v2/bigtable/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/bigtable/v2/bigtable"
         #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/bigtable/v2/bigtable/rest"
+        #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Rest::Client.new
         #
         module Bigtable
         end
