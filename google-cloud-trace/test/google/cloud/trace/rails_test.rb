@@ -58,6 +58,7 @@ describe Google::Cloud::Trace::Railtie do
           _(config.max_data_length).must_equal 123
           _(config.sampler).must_equal "test-sampler"
           _(config.span_id_generator).must_equal a_test_generator
+          _(config.default_labels).must_equal({})
         end
       end
     end
@@ -71,6 +72,7 @@ describe Google::Cloud::Trace::Railtie do
         config.max_data_length = 345
         config.sampler = "another-test-sampler"
         config.span_id_generator = another_generator
+        config.default_labels = { '/component' => 'test-service' }
       end
 
       STDOUT.stub :puts, nil do
@@ -84,6 +86,7 @@ describe Google::Cloud::Trace::Railtie do
           _(config.max_data_length).must_equal 345
           _(config.sampler).must_equal "another-test-sampler"
           _(config.span_id_generator).must_equal another_generator
+          _(config.default_labels).must_equal({ '/component' => 'test-service' })
         end
       end
     end
