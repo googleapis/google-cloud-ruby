@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An API key is a simple encrypted string that you can use when calling Google Cloud APIs. The API Keys service manages the API keys associated with developer projects. Note that google-cloud-api_keys-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-api_keys instead. See the readme for more details."
+  gem.description   = "Manages the API keys associated with developer projects. Note that google-cloud-api_keys-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-api_keys instead. See the readme for more details."
   gem.summary       = "Manages the API keys associated with developer projects."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

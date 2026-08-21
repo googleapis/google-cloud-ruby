@@ -1,8 +1,7 @@
 # Ruby Client for the Apigee Connect V1 API
 
-API Client library for the Apigee Connect V1 API
+Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet.
 
-Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet. If you use Apigee Connect, you do not need to configure the MART ingress gateway with a host alias and an authorized DNS certificate.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_connections request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_connect-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/apigee/docs/hybrid/v1.4/apigee-connect)
-for general usage information.
 
 ## Debug Logging
 

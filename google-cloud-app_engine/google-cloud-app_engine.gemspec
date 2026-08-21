@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The App Engine Admin API provisions and manages your App Engine applications."
-  gem.summary       = "API Client library for the App Engine Admin API"
+  gem.description   = "Provisions and manages developers' App Engine applications."
+  gem.summary       = "Provisions and manages developers' App Engine applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
