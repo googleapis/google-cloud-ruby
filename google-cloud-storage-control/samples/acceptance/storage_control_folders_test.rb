@@ -78,20 +78,8 @@ describe "Storage Control Folders" do
     end
 
     # delete parent folder recursively
-    begin
-      assert_output "Deleted folder recursively: #{folder_name}\n" do
-        delete_folder_recursive bucket_name: bucket_name, folder_name: folder_name
-      end
-    rescue Minitest::UnexpectedError => e
-      is_invalid_arg = e.error.is_a? Google::Cloud::InvalidArgumentError
-      is_not_enabled = e.error.message.include? "Recursive folder delete is not enabled for this bucket"
-      raise e unless is_invalid_arg && is_not_enabled
-
-      skip "Skipping recursive delete test because the feature is not enabled for this bucket."
-    rescue Google::Cloud::InvalidArgumentError => e
-      raise e unless e.message.include? "Recursive folder delete is not enabled for this bucket"
-
-      skip "Skipping recursive delete test because the feature is not enabled for this bucket."
+    assert_output "Deleted folder recursively: #{folder_name}\n" do
+      delete_folder_recursive bucket_name: bucket_name, folder_name: folder_name
     end
   end
 end
