@@ -76,8 +76,8 @@ module Google
         #     Format: `gs://{bucket}/{object}`.
         # @!attribute [rw] artifacts_gcs_bucket
         #   @return [::String]
-        #     Optional. User-defined location of Cloud Build logs and artifacts in Google
-        #     Cloud Storage. Format: `gs://{bucket}/{folder}`
+        #     User-defined location of Cloud Build logs and artifacts in Google Cloud
+        #     Storage. Format: `gs://{bucket}/{folder}`
         #
         #     A default bucket will be bootstrapped if the field is not set or empty.
         #     Default bucket format: `gs://<project number>-<region>-blueprint-config`
@@ -101,8 +101,8 @@ module Google
         #     Not all resource types are supported, refer to documentation.
         # @!attribute [rw] worker_pool
         #   @return [::String]
-        #     Optional. The user-specified Cloud Build worker pool resource in which the
-        #     Cloud Build job will execute. Format:
+        #     The user-specified Cloud Build worker pool resource in which the Cloud
+        #     Build job will execute. Format:
         #     `projects/{project}/locations/{location}/workerPools/{workerPoolId}`.
         #     If this field is unspecified, the default Cloud Build worker pool will be
         #     used.
@@ -111,7 +111,7 @@ module Google
         #     Output only. Current lock state of the deployment.
         # @!attribute [rw] tf_version_constraint
         #   @return [::String]
-        #     Optional. The user-specified Terraform version constraint.
+        #     The user-specified Terraform version constraint.
         #     Example: "=1.3.10".
         # @!attribute [r] tf_version
         #   @return [::String]
@@ -958,15 +958,15 @@ module Google
         # A set of files in a Git repository.
         # @!attribute [rw] repo
         #   @return [::String]
-        #     Optional. Repository URL.
+        #     Repository URL.
         #     Example: 'https://github.com/kubernetes/examples.git'
         # @!attribute [rw] directory
         #   @return [::String]
-        #     Optional. Subdirectory inside the repository.
+        #     Subdirectory inside the repository.
         #     Example: 'staging/my-package'
         # @!attribute [rw] ref
         #   @return [::String]
-        #     Optional. Git reference (e.g. branch or tag).
+        #     Git reference (e.g. branch or tag).
         class GitSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -986,6 +986,9 @@ module Google
         #   @return [::String]
         #     Output only. Location of Deployment operations logs in
         #     `gs://{bucket}/{object}` format.
+        # @!attribute [r] apply_results_available
+        #   @return [::Boolean]
+        #     Output only. Indicating if early apply results are available.
         class DeploymentOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1350,10 +1353,10 @@ module Google
         #     Output only. Current state of the preview.
         # @!attribute [rw] deployment
         #   @return [::String]
-        #     Optional. Optional deployment reference. If specified, the preview will be
-        #     performed using the provided deployment's current state and use any
-        #     relevant fields from the deployment unless explicitly specified in the
-        #     preview create request.
+        #     Optional. Deployment reference. If specified, the preview will be performed
+        #     using the provided deployment's current state and use any relevant fields
+        #     from the deployment unless explicitly specified in the preview create
+        #     request.
         # @!attribute [rw] preview_mode
         #   @return [::Google::Cloud::ConfigService::V1::Preview::PreviewMode]
         #     Optional. Current mode of preview.
@@ -1364,7 +1367,7 @@ module Google
         #     Format: `projects/{projectID}/serviceAccounts/{serviceAccount}`
         # @!attribute [rw] artifacts_gcs_bucket
         #   @return [::String]
-        #     Optional. User-defined location of Cloud Build logs, artifacts, and
+        #     User-defined location of Cloud Build logs, artifacts, and
         #     in Google Cloud Storage.
         #     Format: `gs://{bucket}/{folder}`
         #     A default bucket will be bootstrapped if the field is not set or empty
@@ -1376,12 +1379,12 @@ module Google
         #     defined, that artifact bucket is used.
         # @!attribute [rw] worker_pool
         #   @return [::String]
-        #     Optional. The user-specified Worker Pool resource in which the Cloud Build
-        #     job will execute. Format
-        #     projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId} If this
-        #     field is unspecified, the default Cloud Build worker pool will be used. If
-        #     omitted and deployment resource ref provided has worker_pool defined, that
-        #     worker pool is used.
+        #     The user-specified Worker Pool resource in which the Cloud Build job will
+        #     execute.
+        #     Format projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId}
+        #     If this field is unspecified, the default Cloud Build worker pool will be
+        #     used. If omitted and deployment resource ref provided has worker_pool
+        #     defined, that worker pool is used.
         # @!attribute [r] error_code
         #   @return [::Google::Cloud::ConfigService::V1::Preview::ErrorCode]
         #     Output only. Code describing any errors that may have occurred.
@@ -1412,7 +1415,7 @@ module Google
         #     It is in the format of "Major.Minor.Patch", for example, "1.3.10".
         # @!attribute [rw] tf_version_constraint
         #   @return [::String]
-        #     Optional. The user-specified Terraform version constraint.
+        #     The user-specified Terraform version constraint.
         #     Example: "=1.3.10".
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
