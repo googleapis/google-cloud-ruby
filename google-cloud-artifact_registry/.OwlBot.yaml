@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/devtools/artifactregistry/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-artifact_registry/$1

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure."
-  gem.summary       = "API Client library for the Artifact Registry API"
+  gem.description   = "Store and manage build artifacts in a scalable and integrated service built on Google infrastructure."
+  gem.summary       = "Store and manage build artifacts in a scalable and integrated service built on Google infrastructure."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
