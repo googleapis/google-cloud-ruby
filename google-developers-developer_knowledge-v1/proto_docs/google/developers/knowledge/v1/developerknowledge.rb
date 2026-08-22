@@ -343,6 +343,11 @@ module Google
         #     or
         #     {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#batch_get_documents DeveloperKnowledge.BatchGetDocuments}
         #     to fetch the full document content.
+        # @!attribute [r] relevance_score
+        #   @return [::Float]
+        #     Output only. Represents the relevance score of the chunk to the search
+        #     query. Higher score indicates higher chunk relevance. The score is in range
+        #     [0.0, 1.0].
         class DocumentChunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
