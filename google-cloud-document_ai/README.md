@@ -1,8 +1,7 @@
-# Ruby Client for the Document AI API
+# Ruby Client for the Cloud Document AI API
 
-API Client library for the Document AI API
+Service to parse structured information from unstructured or semi-structured documents using state-of-the-art Google AI such as natural language, computer vision, translation, and AutoML.
 
-Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-document_ai-v*`.

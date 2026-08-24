@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Data Fusion API
 
-API Client library for the Cloud Data Fusion API
+Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
 
-Cloud Data Fusion is a fully managed, cloud-native, enterprise data integration service for quickly building and managing data pipelines.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-data_fusion-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-data_fusion-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-data_fusion-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/data-fusion)
-for more usage information.
 
 ## Quick Start
 

@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/api/cloudquotas/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-cloud_quotas-v1/$1

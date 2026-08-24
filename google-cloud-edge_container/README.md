@@ -1,8 +1,7 @@
 # Ruby Client for the Distributed Cloud Edge Container API
 
-API Client library for the Distributed Cloud Edge Container API
+Google Distributed Cloud Edge is a fully managed product that brings Google Cloud infrastructure and services closer to where data is being generated and consumed.
 
-google-cloud-edge_container is the official client library for the Distributed Cloud Edge Container API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-edge_container-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-edge_container-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-edge_container-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/distributed-cloud/edge/latest/docs/overview)
-for more usage information.
 
 ## Quick Start
 

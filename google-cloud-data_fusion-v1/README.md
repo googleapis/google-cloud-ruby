@@ -2,7 +2,6 @@
 
 Cloud Data Fusion is a fully-managed, cloud native, enterprise data integration service for quickly building and managing data pipelines. It provides a graphical interface to increase time efficiency and reduce complexity, and allows business users, developers, and data scientists to easily and reliably build scalable data integration solutions to cleanse, prepare, blend, transfer and transform data without having to wrestle with infrastructure.
 
-Cloud Data Fusion is a fully managed, cloud-native, enterprise data integration service for quickly building and managing data pipelines.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_available_versions request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-data_fusion-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/data-fusion)
-for general usage information.
 
 ## Debug Logging
 

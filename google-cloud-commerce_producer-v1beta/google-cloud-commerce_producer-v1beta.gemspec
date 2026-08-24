@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Using this API, partners can: * Manage private offers extended to specific customer billing accounts. * Attach documents to private offers, such as custom EULAs or Statements of Work. * Publish private offers to make them available to customers. # Data Model The following resources are exposed by this API: * **Service**: Represents a service offered by a partner on Google Cloud Marketplace. * **StandardOffer**: Represents a standard offer for a product, which can be used as a base for private offers. * **PrivateOffer**: Represents a customized offer extended to a specific customer billing account. * **PrivateOfferDocument**: Represents a document attached to a private offer. * **SkuGroup**: Represents a group of SKUs (Stock Keeping Units) used for pricing or commitment. * **Sku**: Represents a SKU (Stock Keeping Unit) used for pricing or commitment. Note that google-cloud-commerce_producer-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce_producer instead. See the readme for more details."
+  gem.description   = "Partner API for the Cloud Commerce Producer API Early Access. Note that google-cloud-commerce_producer-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce_producer instead. See the readme for more details."
   gem.summary       = "Partner API for the Cloud Commerce Producer API Early Access."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

@@ -2,7 +2,6 @@
 
 Enables management and configuration of domain names.
 
-The Cloud Domains API provides registration, management and configuration of domain names.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.search_domains request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-domains-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/domains)
-for general usage information.
 
 ## Debug Logging
 

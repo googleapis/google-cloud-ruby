@@ -90,7 +90,6 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::AssistantService::Rest::ClientTe
     query = {}
     session = "hello world"
     user_metadata = {}
-    agents_spec = {}
     tools_spec = {}
     generation_spec = {}
 
@@ -108,27 +107,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::AssistantService::Rest::ClientTe
         end
 
         # Use hash object
-        c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, agents_spec: agents_spec, tools_spec: tools_spec, generation_spec: generation_spec }) do |_result, response|
+        c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        c.stream_assist name: name, query: query, session: session, user_metadata: user_metadata, agents_spec: agents_spec, tools_spec: tools_spec, generation_spec: generation_spec do |_result, response|
+        c.stream_assist name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        c.stream_assist ::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, agents_spec: agents_spec, tools_spec: tools_spec, generation_spec: generation_spec) do |_result, response|
+        c.stream_assist ::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, agents_spec: agents_spec, tools_spec: tools_spec, generation_spec: generation_spec }, call_options) do |_result, response|
+        c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        c.stream_assist(::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, agents_spec: agents_spec, tools_spec: tools_spec, generation_spec: generation_spec), call_options) do |_result, response|
+        c.stream_assist(::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

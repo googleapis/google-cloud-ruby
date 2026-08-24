@@ -1,13 +1,12 @@
-# Ruby Client for the Firestore in Datastore mode Admin V1 API
+# Ruby Client for the Cloud Datastore V1 API
 
 Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
 
-Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Firestore in Datastore mode Admin V1 API. Most users should consider using
+specific version of the Cloud Datastore V1 API. Most users should consider using
 the main client gem,
 [google-cloud-datastore-admin](https://rubygems.org/gems/google-cloud-datastore-admin).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.export_entities request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-datastore-admin-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/datastore)
-for general usage information.
 
 ## Debug Logging
 
