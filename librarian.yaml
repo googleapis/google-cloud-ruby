@@ -254,7 +254,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
   - name: google-cloud-alloy_db-v1beta
-    version: 0.24.0
+    version: 0.24.1
     apis:
       - path: google/cloud/alloydb/v1beta
         ruby:
