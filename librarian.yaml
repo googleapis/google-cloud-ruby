@@ -227,7 +227,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
             ruby-cloud-service-override: AiPlatform=AIPlatform
   - name: google-cloud-alloy_db
-    version: 2.3.1
+    version: 2.3.2
     apis:
       - path: google/cloud/alloydb/v1
         ruby:
