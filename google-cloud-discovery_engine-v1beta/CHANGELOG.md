@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.29.0 (2026-08-24)
+
+#### Features
+
+* expose StreamAssistRequest agents_spec and agent_id ([#36315](https://github.com/googleapis/google-cloud-ruby/issues/36315)) 
+
 ### 0.28.1 (2026-08-05)
 
 #### Bug Fixes
