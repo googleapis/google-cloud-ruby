@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.2 (2026-08-24)
+
+#### Bug Fixes
+
+* onboarding library batch 4 ([#36312](https://github.com/googleapis/google-cloud-ruby/issues/36312)) 
+
 ### 1.7.1 (2026-08-05)
 
 #### Bug Fixes

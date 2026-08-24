@@ -337,7 +337,7 @@ libraries:
       - path: google/cloud/apigeeregistry/v1
     skip_generate: true
   - name: google-cloud-app_engine
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/appengine/v1
         ruby:
