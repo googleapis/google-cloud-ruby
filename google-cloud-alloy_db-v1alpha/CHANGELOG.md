@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.23.1 (2026-08-24)
+
+#### Bug Fixes
+
+* onboarding library batch 4 ([#36312](https://github.com/googleapis/google-cloud-ruby/issues/36312)) 
+
 ### 0.23.0 (2026-08-19)
 
 #### Features
