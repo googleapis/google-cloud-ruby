@@ -1842,7 +1842,7 @@ libraries:
             ruby-cloud-env-prefix: FIRESTORE
     skip_generate: true
   - name: google-cloud-ftp
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
