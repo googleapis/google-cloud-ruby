@@ -347,7 +347,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-app_engine-v1
-    version: 1.8.1
+    version: 1.8.2
     apis:
       - path: google/appengine/v1
         ruby:
