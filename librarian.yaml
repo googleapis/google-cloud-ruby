@@ -312,7 +312,7 @@ libraries:
     apis:
       - path: google/cloud/apiregistry/v1beta
   - name: google-cloud-apigee_connect
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/cloud/apigeeconnect/v1
         ruby:
