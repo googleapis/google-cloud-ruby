@@ -238,7 +238,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-alloy_db-v1
-    version: 1.10.1
+    version: 1.10.2
     apis:
       - path: google/cloud/alloydb/v1
         ruby:
