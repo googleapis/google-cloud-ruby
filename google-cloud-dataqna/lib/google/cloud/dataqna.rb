@@ -55,9 +55,11 @@ module Google
       # `version` parameter. If the AutoSuggestionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the AutoSuggestionService service.
+      # given API version does not support the given transport of the AutoSuggestionService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::DataQnA.auto_suggestion_service_available?}.
       #
@@ -132,9 +134,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.auto_suggestion_service version: :v1alpha, &block
+      def self.auto_suggestion_service version: :v1alpha, transport: :grpc, &block
         require "google/cloud/dataqna/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataQnA
@@ -142,6 +145,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:AutoSuggestionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -154,9 +158,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.auto_suggestion_service_available? version: :v1alpha
+      def self.auto_suggestion_service_available? version: :v1alpha, transport: :grpc
         require "google/cloud/dataqna/#{version.to_s.downcase}"
         package_name = Google::Cloud::DataQnA
                        .constants
@@ -166,6 +171,10 @@ module Google
         service_module = Google::Cloud::DataQnA.const_get package_name
         return false unless service_module.const_defined? :AutoSuggestionService
         service_module = service_module.const_get :AutoSuggestionService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false
@@ -181,9 +190,11 @@ module Google
       # `version` parameter. If the QuestionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the QuestionService service.
+      # given API version does not support the given transport of the QuestionService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::DataQnA.question_service_available?}.
       #
@@ -207,9 +218,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.question_service version: :v1alpha, &block
+      def self.question_service version: :v1alpha, transport: :grpc, &block
         require "google/cloud/dataqna/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DataQnA
@@ -217,6 +229,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:QuestionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -229,9 +242,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.question_service_available? version: :v1alpha
+      def self.question_service_available? version: :v1alpha, transport: :grpc
         require "google/cloud/dataqna/#{version.to_s.downcase}"
         package_name = Google::Cloud::DataQnA
                        .constants
@@ -241,6 +255,10 @@ module Google
         service_module = Google::Cloud::DataQnA.const_get package_name
         return false unless service_module.const_defined? :QuestionService
         service_module = service_module.const_get :QuestionService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false

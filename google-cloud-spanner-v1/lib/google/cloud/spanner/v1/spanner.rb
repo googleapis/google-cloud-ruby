@@ -25,6 +25,7 @@ require "google/cloud/spanner/v1/version"
 require "google/cloud/spanner/v1/spanner/credentials"
 require "google/cloud/spanner/v1/spanner/paths"
 require "google/cloud/spanner/v1/spanner/client"
+require "google/cloud/spanner/v1/spanner/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/spanner/v1/spanner"
         #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/spanner/v1/spanner/rest"
+        #     client = ::Google::Cloud::Spanner::V1::Spanner::Rest::Client.new
         #
         module Spanner
         end

@@ -19,6 +19,7 @@
 require "helper"
 require "google/cloud/oracle_database"
 require "gapic/common"
+require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::OracleDatabase::ClientConstructionMinitest < Minitest::Test
@@ -40,10 +41,21 @@ class Google::Cloud::OracleDatabase::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_oracle_database_grpc
+    skip unless Google::Cloud::OracleDatabase.oracle_database_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::OracleDatabase.oracle_database transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client, client
+    end
+  end
+
   def test_oracle_database_rest
-    skip unless Google::Cloud::OracleDatabase.oracle_database_available?
+    skip unless Google::Cloud::OracleDatabase.oracle_database_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::OracleDatabase.oracle_database do |config|
+      client = Google::Cloud::OracleDatabase.oracle_database transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client, client

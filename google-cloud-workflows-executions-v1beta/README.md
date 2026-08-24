@@ -1,13 +1,12 @@
-# Ruby Client for the Workflows Executions V1beta API
+# Ruby Client for the Workflow Executions V1BETA API
 
 Manages user-provided workflows.
 
-Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Workflows Executions V1beta API. Most users should consider using
+specific version of the Workflow Executions V1BETA API. Most users should consider using
 the main client gem,
 [google-cloud-workflows](https://rubygems.org/gems/google-cloud-workflows).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_executions request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1beta/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/workflows/)
-for general usage information.
 
 ## Debug Logging
 

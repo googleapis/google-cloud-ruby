@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/dataqna/v1alpha/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-dataqna-v1alpha/$1

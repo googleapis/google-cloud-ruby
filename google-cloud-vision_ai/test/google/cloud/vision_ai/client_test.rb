@@ -41,6 +41,27 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_health_check_service_grpc
+    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::VisionAI.health_check_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::VisionAI::V1::HealthCheckService::Client, client
+    end
+  end
+
+  def test_health_check_service_rest
+    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::VisionAI.health_check_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::VisionAI::V1::HealthCheckService::Rest::Client, client
+    end
+  end
+
   def test_live_video_analytics_grpc
     skip unless Google::Cloud::VisionAI.live_video_analytics_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -143,27 +164,6 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::VisionAI::V1::Warehouse::Rest::Client, client
-    end
-  end
-
-  def test_health_check_service_grpc
-    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::VisionAI.health_check_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::VisionAI::V1::HealthCheckService::Client, client
-    end
-  end
-
-  def test_health_check_service_rest
-    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::VisionAI.health_check_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::VisionAI::V1::HealthCheckService::Rest::Client, client
     end
   end
 end

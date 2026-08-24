@@ -25,6 +25,7 @@ require "google/cloud/pubsub/v1/version"
 require "google/cloud/pubsub/v1/topic_admin/credentials"
 require "google/cloud/pubsub/v1/topic_admin/paths"
 require "google/cloud/pubsub/v1/topic_admin/client"
+require "google/cloud/pubsub/v1/topic_admin/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/pubsub/v1/topic_admin"
         #     client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/pubsub/v1/topic_admin/rest"
+        #     client = ::Google::Cloud::PubSub::V1::TopicAdmin::Rest::Client.new
         #
         module TopicAdmin
         end

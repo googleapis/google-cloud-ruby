@@ -2,7 +2,6 @@
 
 The Oracle Database@Google Cloud API provides a set of APIs to manage Oracle database services, such as Exadata and Autonomous Databases.
 
-The Oracle Database@Google Cloud API provides a set of APIs to manage Oracle database services, such as Exadata and Autonomous Databases.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-oracle_database-v*`.

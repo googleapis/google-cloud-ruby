@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/dataqna/v1alpha"
       #     client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dataqna/v1alpha"
+      #     client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Rest::Client.new
+      #
       module V1alpha
       end
     end
