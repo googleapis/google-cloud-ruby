@@ -1,5 +1,11 @@
 # Release History
 
+### 3.4.1 (2026-08-24)
+
+#### Bug Fixes
+
+* Propagate logger to v1 admin and schema clients ([#32440](https://github.com/googleapis/google-cloud-ruby/issues/32440)) ([#36298](https://github.com/googleapis/google-cloud-ruby/issues/36298)) 
+
 ### 3.4.0 (2026-07-29)
 
 #### Features
