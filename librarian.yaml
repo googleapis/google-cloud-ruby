@@ -286,7 +286,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-api_hub-v1
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/apihub/v1
   - name: google-cloud-api_keys
