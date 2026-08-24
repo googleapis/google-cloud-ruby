@@ -8,7 +8,7 @@
     "name": "ftp",
     "name_pretty": "Cloud FTP V1 API",
     "product_documentation": "https://docs.cloud.google.com/cloud-ftp",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "A managed, cloud-native solution to move data in and out of Google Cloud by using SSH File Transfer Protocol (SFTP). Note that google-cloud-ftp-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-ftp instead. See the readme for more details.",
