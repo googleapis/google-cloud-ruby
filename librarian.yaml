@@ -361,7 +361,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-app_hub-v1
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/cloud/apphub/v1
   - name: google-cloud-app_optimize
