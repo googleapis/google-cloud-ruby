@@ -279,7 +279,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: API_GATEWAY
   - name: google-cloud-api_hub
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/apihub/v1
     ruby:
