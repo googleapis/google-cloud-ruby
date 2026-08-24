@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/vision_ai"
 
-client = Google::Cloud::VisionAI.live_video_analytics do |config|
+client = Google::Cloud::VisionAI.health_check_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::VisionAI.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::VisionAI.live_video_analytics
+client = Google::Cloud::VisionAI.health_check_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/vision_ai"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::VisionAI.live_video_analytics
+client = Google::Cloud::VisionAI.health_check_service
 ```
 
 ### Local ADC file

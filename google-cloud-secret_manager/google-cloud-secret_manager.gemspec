@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud."
-  gem.summary       = "API Client library for the Secret Manager API"
+  gem.description   = "Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security."
+  gem.summary       = "Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

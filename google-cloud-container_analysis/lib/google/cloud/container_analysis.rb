@@ -55,9 +55,11 @@ module Google
       # `version` parameter. If the ContainerAnalysis service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the ContainerAnalysis service.
+      # given API version does not support the given transport of the ContainerAnalysis service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::ContainerAnalysis.container_analysis_available?}.
       #
@@ -79,9 +81,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.container_analysis version: :v1, &block
+      def self.container_analysis version: :v1, transport: :grpc, &block
         require "google/cloud/container_analysis/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ContainerAnalysis
@@ -89,6 +92,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ContainerAnalysis.const_get(package_name).const_get(:ContainerAnalysis)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -101,9 +105,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.container_analysis_available? version: :v1
+      def self.container_analysis_available? version: :v1, transport: :grpc
         require "google/cloud/container_analysis/#{version.to_s.downcase}"
         package_name = Google::Cloud::ContainerAnalysis
                        .constants
@@ -113,6 +118,10 @@ module Google
         service_module = Google::Cloud::ContainerAnalysis.const_get package_name
         return false unless service_module.const_defined? :ContainerAnalysis
         service_module = service_module.const_get :ContainerAnalysis
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false

@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/container_analysis"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::ContainerAnalysis::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,13 +42,23 @@ class Google::Cloud::ContainerAnalysis::ClientConstructionMinitest < Minitest::T
   end
 
   def test_container_analysis_grpc
-    skip unless Google::Cloud::ContainerAnalysis.container_analysis_available?
+    skip unless Google::Cloud::ContainerAnalysis.container_analysis_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ContainerAnalysis.container_analysis do |config|
+      client = Google::Cloud::ContainerAnalysis.container_analysis transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client, client
+    end
+  end
+
+  def test_container_analysis_rest
+    skip unless Google::Cloud::ContainerAnalysis.container_analysis_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::ContainerAnalysis.container_analysis transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Rest::Client, client
     end
   end
 end

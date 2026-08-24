@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/support"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Support::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,46 +42,86 @@ class Google::Cloud::Support::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_case_attachment_service_grpc
-    skip unless Google::Cloud::Support.case_attachment_service_available?
+    skip unless Google::Cloud::Support.case_attachment_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Support.case_attachment_service do |config|
+      client = Google::Cloud::Support.case_attachment_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Support::V2::CaseAttachmentService::Client, client
     end
   end
 
+  def test_case_attachment_service_rest
+    skip unless Google::Cloud::Support.case_attachment_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Support.case_attachment_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Support::V2::CaseAttachmentService::Rest::Client, client
+    end
+  end
+
   def test_case_service_grpc
-    skip unless Google::Cloud::Support.case_service_available?
+    skip unless Google::Cloud::Support.case_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Support.case_service do |config|
+      client = Google::Cloud::Support.case_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Support::V2::CaseService::Client, client
     end
   end
 
+  def test_case_service_rest
+    skip unless Google::Cloud::Support.case_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Support.case_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Support::V2::CaseService::Rest::Client, client
+    end
+  end
+
   def test_comment_service_grpc
-    skip unless Google::Cloud::Support.comment_service_available?
+    skip unless Google::Cloud::Support.comment_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Support.comment_service do |config|
+      client = Google::Cloud::Support.comment_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Support::V2::CommentService::Client, client
     end
   end
 
+  def test_comment_service_rest
+    skip unless Google::Cloud::Support.comment_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Support.comment_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Support::V2::CommentService::Rest::Client, client
+    end
+  end
+
   def test_support_event_subscription_service_grpc
-    skip unless Google::Cloud::Support.support_event_subscription_service_available?
+    skip unless Google::Cloud::Support.support_event_subscription_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Support.support_event_subscription_service do |config|
+      client = Google::Cloud::Support.support_event_subscription_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Support::V2::SupportEventSubscriptionService::Client, client
+    end
+  end
+
+  def test_support_event_subscription_service_rest
+    skip unless Google::Cloud::Support.support_event_subscription_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Support.support_event_subscription_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Support::V2::SupportEventSubscriptionService::Rest::Client, client
     end
   end
 end

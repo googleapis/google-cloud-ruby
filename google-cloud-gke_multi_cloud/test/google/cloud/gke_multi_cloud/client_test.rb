@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/gke_multi_cloud"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,35 +42,65 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_attached_clusters_grpc
-    skip unless Google::Cloud::GkeMultiCloud.attached_clusters_available?
+    skip unless Google::Cloud::GkeMultiCloud.attached_clusters_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GkeMultiCloud.attached_clusters do |config|
+      client = Google::Cloud::GkeMultiCloud.attached_clusters transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client, client
     end
   end
 
+  def test_attached_clusters_rest
+    skip unless Google::Cloud::GkeMultiCloud.attached_clusters_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::GkeMultiCloud.attached_clusters transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::Client, client
+    end
+  end
+
   def test_aws_clusters_grpc
-    skip unless Google::Cloud::GkeMultiCloud.aws_clusters_available?
+    skip unless Google::Cloud::GkeMultiCloud.aws_clusters_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GkeMultiCloud.aws_clusters do |config|
+      client = Google::Cloud::GkeMultiCloud.aws_clusters transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client, client
     end
   end
 
+  def test_aws_clusters_rest
+    skip unless Google::Cloud::GkeMultiCloud.aws_clusters_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::GkeMultiCloud.aws_clusters transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client, client
+    end
+  end
+
   def test_azure_clusters_grpc
-    skip unless Google::Cloud::GkeMultiCloud.azure_clusters_available?
+    skip unless Google::Cloud::GkeMultiCloud.azure_clusters_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GkeMultiCloud.azure_clusters do |config|
+      client = Google::Cloud::GkeMultiCloud.azure_clusters transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client, client
+    end
+  end
+
+  def test_azure_clusters_rest
+    skip unless Google::Cloud::GkeMultiCloud.azure_clusters_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::GkeMultiCloud.azure_clusters transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::Client, client
     end
   end
 end

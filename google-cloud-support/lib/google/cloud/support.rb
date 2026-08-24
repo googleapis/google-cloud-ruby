@@ -55,9 +55,11 @@ module Google
       # `version` parameter. If the CaseAttachmentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the CaseAttachmentService service.
+      # given API version does not support the given transport of the CaseAttachmentService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::Support.case_attachment_service_available?}.
       #
@@ -67,9 +69,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.case_attachment_service version: :v2, &block
+      def self.case_attachment_service version: :v2, transport: :grpc, &block
         require "google/cloud/support/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Support
@@ -77,6 +80,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Support.const_get(package_name).const_get(:CaseAttachmentService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -89,9 +93,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.case_attachment_service_available? version: :v2
+      def self.case_attachment_service_available? version: :v2, transport: :grpc
         require "google/cloud/support/#{version.to_s.downcase}"
         package_name = Google::Cloud::Support
                        .constants
@@ -101,6 +106,10 @@ module Google
         service_module = Google::Cloud::Support.const_get package_name
         return false unless service_module.const_defined? :CaseAttachmentService
         service_module = service_module.const_get :CaseAttachmentService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false
@@ -116,9 +125,11 @@ module Google
       # `version` parameter. If the CaseService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the CaseService service.
+      # given API version does not support the given transport of the CaseService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::Support.case_service_available?}.
       #
@@ -128,9 +139,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.case_service version: :v2, &block
+      def self.case_service version: :v2, transport: :grpc, &block
         require "google/cloud/support/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Support
@@ -138,6 +150,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Support.const_get(package_name).const_get(:CaseService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -150,9 +163,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.case_service_available? version: :v2
+      def self.case_service_available? version: :v2, transport: :grpc
         require "google/cloud/support/#{version.to_s.downcase}"
         package_name = Google::Cloud::Support
                        .constants
@@ -162,6 +176,10 @@ module Google
         service_module = Google::Cloud::Support.const_get package_name
         return false unless service_module.const_defined? :CaseService
         service_module = service_module.const_get :CaseService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false
@@ -177,9 +195,11 @@ module Google
       # `version` parameter. If the CommentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the CommentService service.
+      # given API version does not support the given transport of the CommentService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::Support.comment_service_available?}.
       #
@@ -189,9 +209,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.comment_service version: :v2, &block
+      def self.comment_service version: :v2, transport: :grpc, &block
         require "google/cloud/support/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Support
@@ -199,6 +220,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Support.const_get(package_name).const_get(:CommentService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -211,9 +233,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.comment_service_available? version: :v2
+      def self.comment_service_available? version: :v2, transport: :grpc
         require "google/cloud/support/#{version.to_s.downcase}"
         package_name = Google::Cloud::Support
                        .constants
@@ -223,6 +246,10 @@ module Google
         service_module = Google::Cloud::Support.const_get package_name
         return false unless service_module.const_defined? :CommentService
         service_module = service_module.const_get :CommentService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false
@@ -238,9 +265,11 @@ module Google
       # `version` parameter. If the SupportEventSubscriptionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the SupportEventSubscriptionService service.
+      # given API version does not support the given transport of the SupportEventSubscriptionService service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::Support.support_event_subscription_service_available?}.
       #
@@ -250,9 +279,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.support_event_subscription_service version: :v2, &block
+      def self.support_event_subscription_service version: :v2, transport: :grpc, &block
         require "google/cloud/support/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Support
@@ -260,6 +290,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Support.const_get(package_name).const_get(:SupportEventSubscriptionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -272,9 +303,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.support_event_subscription_service_available? version: :v2
+      def self.support_event_subscription_service_available? version: :v2, transport: :grpc
         require "google/cloud/support/#{version.to_s.downcase}"
         package_name = Google::Cloud::Support
                        .constants
@@ -284,6 +316,10 @@ module Google
         service_module = Google::Cloud::Support.const_get package_name
         return false unless service_module.const_defined? :SupportEventSubscriptionService
         service_module = service_module.const_get :SupportEventSubscriptionService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false

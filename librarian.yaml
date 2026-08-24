@@ -1227,7 +1227,6 @@ libraries:
       - samples/acceptance/helper.rb
       - samples/acceptance/sample_test.rb
       - samples/sample.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.9
@@ -1424,7 +1423,6 @@ libraries:
             ruby-cloud-env-prefix: BIGQUERY_DATAQNA
             ruby-cloud-namespace-override: Dataqna=DataQnA
             ruby-cloud-path-override: data_qn_a=dataqna
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1alpha:0.6
@@ -1987,7 +1985,6 @@ libraries:
     version: 1.5.1
     apis:
       - path: google/cloud/gkemulticloud/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.8
@@ -2362,7 +2359,6 @@ libraries:
     version: 1.2.1
     apis:
       - path: google/cloud/memorystore/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -2612,7 +2608,6 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/oracledatabase/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -3363,7 +3358,6 @@ libraries:
       - samples/view_regional_secret_labels.rb
       - samples/view_secret_annotations.rb
       - samples/view_secret_labels.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -3611,7 +3605,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SERVICE_USAGE
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.6
@@ -3754,7 +3747,6 @@ libraries:
       - samples/storage_control_rename_folder.rb
       - samples/storage_control_resume_anywhere_cache.rb
       - samples/storage_control_update_anywhere_cache.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.0
@@ -3837,7 +3829,6 @@ libraries:
     version: 1.4.1
     apis:
       - path: google/cloud/support/v2
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.3
@@ -4366,7 +4357,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::VisionAI
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0

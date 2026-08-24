@@ -34,6 +34,7 @@ require "google/cloud/config"
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
   config.add_field! :lib_version,   nil, match: ::String
+  config.add_field! :interceptors,  nil, match: ::Array
   config.add_field! :timeout,       nil, match: ::Numeric
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
@@ -48,15 +49,17 @@ module Google
       # Create a new client object for OracleDatabase.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-oracle_database-v1/latest/Google-Cloud-OracleDatabase-V1-OracleDatabase-Rest-Client)
-      # for a REST client for version V1 of the API.
+      # [Google::Cloud::OracleDatabase::V1::OracleDatabase::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-oracle_database-v1/latest/Google-Cloud-OracleDatabase-V1-OracleDatabase-Client)
+      # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OracleDatabase service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the OracleDatabase service.
+      # given API version does not support the given transport of the OracleDatabase service.
       # You can determine whether the method will succeed by calling
       # {Google::Cloud::OracleDatabase.oracle_database_available?}.
       #
@@ -66,9 +69,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.oracle_database version: :v1, &block
+      def self.oracle_database version: :v1, transport: :grpc, &block
         require "google/cloud/oracle_database/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::OracleDatabase
@@ -76,7 +80,8 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::OracleDatabase.const_get(package_name).const_get(:OracleDatabase)
-        service_module.const_get(:Rest).const_get(:Client).new(&block)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -88,9 +93,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.oracle_database_available? version: :v1
+      def self.oracle_database_available? version: :v1, transport: :grpc
         require "google/cloud/oracle_database/#{version.to_s.downcase}"
         package_name = Google::Cloud::OracleDatabase
                        .constants
@@ -100,8 +106,10 @@ module Google
         service_module = Google::Cloud::OracleDatabase.const_get package_name
         return false unless service_module.const_defined? :OracleDatabase
         service_module = service_module.const_get :OracleDatabase
-        return false unless service_module.const_defined? :Rest
-        service_module = service_module.const_get :Rest
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
         service_module.const_defined? :Client
       rescue ::LoadError
         false
@@ -119,6 +127,8 @@ module Google
       #   The library name as recorded in instrumentation and logging.
       # * `lib_version` (*type:* `String`) -
       #   The library version as recorded in instrumentation and logging.
+      # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
+      #   An array of interceptors that are run before calls are executed.
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
