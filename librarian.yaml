@@ -297,7 +297,7 @@ libraries:
       wrapper_of:
         - v2:0.5
   - name: google-cloud-api_keys-v2
-    version: 0.14.1
+    version: 0.14.2
     apis:
       - path: google/api/apikeys/v2
   - name: google-cloud-api_registry
