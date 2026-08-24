@@ -1,13 +1,12 @@
-# Ruby Client for the Google Cloud Deploy V1 API
+# Ruby Client for the Cloud Deploy V1 API
 
-API Client library for the Google Cloud Deploy V1 API
+Cloud Deploy is a service that automates delivery of your applications to a series of target environments in a defined sequence.
 
-Google Cloud Deploy is a managed service that automates delivery of your applications to a series of target environments in a defined promotion sequence.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Cloud Deploy V1 API. Most users should consider using
+specific version of the Cloud Deploy V1 API. Most users should consider using
 the main client gem,
 [google-cloud-deploy](https://rubygems.org/gems/google-cloud-deploy).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_delivery_pipelines request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-deploy-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/deploy/)
-for general usage information.
 
 ## Debug Logging
 

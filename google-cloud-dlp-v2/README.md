@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Data Loss Prevention (DLP) V2 API
+# Ruby Client for the Sensitive Data Protection (DLP) V2 API
 
 Discover and protect your sensitive data. A fully managed service designed to help you discover, classify, and protect your valuable data assets with ease.
 
-Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Data Loss Prevention (DLP) V2 API. Most users should consider using
+specific version of the Sensitive Data Protection (DLP) V2 API. Most users should consider using
 the main client gem,
 [google-cloud-dlp](https://rubygems.org/gems/google-cloud-dlp).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.inspect_content request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dlp-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/dlp)
-for general usage information.
 
 ## Debug Logging
 

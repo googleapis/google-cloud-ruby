@@ -19,4 +19,3 @@
 # This gem does not autoload during Bundler.require. To load this gem,
 # issue explicit require statements for the packages desired, e.g.:
 # require "google/cloud/dataform/v1beta1"
-# require "google/longrunning"

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Developer Connect streamlines integration with third-party source code management platforms by simplifying authentication, authorization, and networking configuration."
-  gem.summary       = "Connect third-party source code management to Google."
+  gem.description   = "Connect third-party source code management to Google"
+  gem.summary       = "Connect third-party source code management to Google"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

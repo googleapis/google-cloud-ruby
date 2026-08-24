@@ -1,5 +1,5 @@
 --no-private
---title="Dataplex API"
+--title="Cloud Dataplex API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

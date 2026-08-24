@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dataform is a service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery."
-  gem.summary       = "API Client library for the Dataform API"
+  gem.description   = "Service to develop, version control, and operationalize SQL pipelines in BigQuery."
+  gem.summary       = "Service to develop, version control, and operationalize SQL pipelines in BigQuery."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

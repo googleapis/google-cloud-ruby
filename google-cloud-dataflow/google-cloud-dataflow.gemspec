@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dataflow is a managed service for executing a wide variety of data processing patterns."
-  gem.summary       = "API Client library for the Dataflow API"
+  gem.description   = "Manages Google Cloud Dataflow projects on Google Cloud Platform."
+  gem.summary       = "Manages Google Cloud Dataflow projects on Google Cloud Platform."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/channel/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-channel/$1

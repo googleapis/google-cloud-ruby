@@ -1,8 +1,7 @@
 # Ruby Client for the Datastream API
 
-API Client library for the Datastream API
+Datastream is a serverless and easy-to-use change data capture (CDC) and replication service that lets you synchronize data reliably, and with minimal latency.
 
-Datastream is a serverless and easy-to-use change data capture (CDC) and replication service. It allows you to synchronize data across heterogeneous databases and applications reliably, and with minimal latency and downtime.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-datastream-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-datastream-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-datastream-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/datastream/)
-for more usage information.
 
 ## Quick Start
 

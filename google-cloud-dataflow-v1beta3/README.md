@@ -1,13 +1,12 @@
-# Ruby Client for the Dataflow V1beta3 API
+# Ruby Client for the Dataflow V1BETA3 API
 
 Manages Google Cloud Dataflow projects on Google Cloud Platform.
 
-Dataflow is a managed service for executing a wide variety of data processing patterns.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Dataflow V1beta3 API. Most users should consider using
+specific version of the Dataflow V1BETA3 API. Most users should consider using
 the main client gem,
 [google-cloud-dataflow](https://rubygems.org/gems/google-cloud-dataflow).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_snapshot request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/dataflow)
-for general usage information.
 
 ## Debug Logging
 
