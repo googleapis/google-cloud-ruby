@@ -26,6 +26,7 @@ require "google/cloud/network_connectivity/v1beta/data_transfer_service/credenti
 require "google/cloud/network_connectivity/v1beta/data_transfer_service/paths"
 require "google/cloud/network_connectivity/v1beta/data_transfer_service/operations"
 require "google/cloud/network_connectivity/v1beta/data_transfer_service/client"
+require "google/cloud/network_connectivity/v1beta/data_transfer_service/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/network_connectivity/v1beta/data_transfer_service"
         #     client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_connectivity/v1beta/data_transfer_service/rest"
+        #     client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Rest::Client.new
         #
         module DataTransferService
         end

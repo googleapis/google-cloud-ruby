@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/build/v2"
       #     client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/build/v2"
+      #     client = ::Google::Cloud::Build::V2::RepositoryManager::Rest::Client.new
+      #
       module V2
       end
     end

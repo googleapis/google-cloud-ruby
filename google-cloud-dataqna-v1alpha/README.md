@@ -1,4 +1,4 @@
-# Ruby Client for the BigQuery Data QnA V1alpha API
+# Ruby Client for the Data QnA V1ALPHA API
 
 Data QnA is a natural language question and answer service for BigQuery data.
 
@@ -6,7 +6,7 @@ Data QnA is a natural language question and answer service for BigQuery data.
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the BigQuery Data QnA V1alpha API. Most users should consider using
+specific version of the Data QnA V1ALPHA API. Most users should consider using
 the main client gem,
 [google-cloud-dataqna](https://rubygems.org/gems/google-cloud-dataqna).
 See the section below titled *Which client should I use?* for more information.

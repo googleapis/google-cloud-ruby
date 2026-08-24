@@ -825,7 +825,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_BUILD
-    skip_generate: true
   - name: google-cloud-capacity_planner
     version: 0.4.1
     apis:
@@ -1243,7 +1242,6 @@ libraries:
     keep:
       - lib/google/cloud/container_analysis/v1/container_analysis/helpers.rb
       - test/google/cloud/container_analysis/v1/grafeas_client_test.rb
-    skip_generate: true
   - name: google-cloud-data_catalog
     version: 2.3.1
     apis:
@@ -1439,7 +1437,6 @@ libraries:
             ruby-cloud-env-prefix: BIGQUERY_DATAQNA
             ruby-cloud-namespace-override: Dataqna=DataQnA
             ruby-cloud-path-override: data_qn_a=dataqna
-    skip_generate: true
   - name: google-cloud-datastore-admin
     version: 0.7.1
     apis:
@@ -2521,7 +2518,6 @@ libraries:
     version: 0.3.1
     apis:
       - path: google/cloud/networkconnectivity/v1beta
-    skip_generate: true
   - name: google-cloud-network_management
     version: 2.3.1
     apis:
@@ -2979,7 +2975,6 @@ libraries:
       - test/google/cloud/pubsub/v1/iam_policy_test.rb
       - test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb
       - test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb
-    skip_generate: true
   - name: google-cloud-rapid_migration_assessment
     version: 2.2.1
     apis:
@@ -3672,7 +3667,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPANNER
-    skip_generate: true
   - name: google-cloud-speech
     version: 2.2.1
     apis:
@@ -3851,7 +3845,6 @@ libraries:
     version: 1.11.2
     apis:
       - path: google/cloud/support/v2
-    skip_generate: true
   - name: google-cloud-support-v2beta
     version: 0.8.2
     apis:
@@ -4521,7 +4514,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
             ruby-cloud-wrapper-gem-override: google-cloud-workflows
-    skip_generate: true
   - name: google-cloud-workflows-v1
     version: 2.6.1
     apis:
@@ -4625,7 +4617,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM
-    skip_generate: true
   - name: google-iam-v2
     version: 0.13.1
     apis:

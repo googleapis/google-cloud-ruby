@@ -26,6 +26,7 @@ require "google/cloud/build/v2/repository_manager/credentials"
 require "google/cloud/build/v2/repository_manager/paths"
 require "google/cloud/build/v2/repository_manager/operations"
 require "google/cloud/build/v2/repository_manager/client"
+require "google/cloud/build/v2/repository_manager/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/build/v2/repository_manager"
         #     client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/build/v2/repository_manager/rest"
+        #     client = ::Google::Cloud::Build::V2::RepositoryManager::Rest::Client.new
         #
         module RepositoryManager
         end

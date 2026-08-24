@@ -1,13 +1,12 @@
-# Ruby Client for the Google IAM V1beta API
+# Ruby Client for the Identity and Access Management (IAM) V1BETA API
 
-Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Note: This API is tied to the IAM service account credentials API (iamcredentials.googleapis.com). Enabling or disabling this API will also enable or disable the IAM service account credentials API.
+<p>Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.</p> <aside class="note"><b>Note:</b> This API is tied to the <a href="/iam/docs/reference/credentials/rest">IAM service account credentials API</a> (<code>iamcredentials.googleapis.com</code>). Enabling or disabling this API will also enable or disable the IAM service account credentials API.</aside>
 
-Pre-release client for the WorkloadIdentityPools service.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google IAM V1beta API. Most users should consider using
+specific version of the Identity and Access Management (IAM) V1BETA API. Most users should consider using
 the main client gem,
 [google-iam](https://rubygems.org/gems/google-iam).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_workload_identity_pools request
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-iam-v1beta)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers)
-for general usage information.
 
 ## Debug Logging
 

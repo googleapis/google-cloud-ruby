@@ -25,6 +25,7 @@ require "google/cloud/pubsub/v1/version"
 require "google/cloud/pubsub/v1/schema_service/credentials"
 require "google/cloud/pubsub/v1/schema_service/paths"
 require "google/cloud/pubsub/v1/schema_service/client"
+require "google/cloud/pubsub/v1/schema_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/pubsub/v1/schema_service"
         #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/pubsub/v1/schema_service/rest"
+        #     client = ::Google::Cloud::PubSub::V1::SchemaService::Rest::Client.new
         #
         module SchemaService
         end

@@ -25,6 +25,7 @@ require "google/cloud/support/v2/version"
 require "google/cloud/support/v2/case_attachment_service/credentials"
 require "google/cloud/support/v2/case_attachment_service/paths"
 require "google/cloud/support/v2/case_attachment_service/client"
+require "google/cloud/support/v2/case_attachment_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/support/v2/case_attachment_service"
         #     client = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/support/v2/case_attachment_service/rest"
+        #     client = ::Google::Cloud::Support::V2::CaseAttachmentService::Rest::Client.new
         #
         module CaseAttachmentService
         end

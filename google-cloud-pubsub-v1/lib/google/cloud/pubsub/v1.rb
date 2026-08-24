@@ -32,6 +32,11 @@ module Google
       #     require "google/cloud/pubsub/v1"
       #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/pubsub/v1"
+      #     client = ::Google::Cloud::PubSub::V1::SchemaService::Rest::Client.new
+      #
       module V1
       end
     end

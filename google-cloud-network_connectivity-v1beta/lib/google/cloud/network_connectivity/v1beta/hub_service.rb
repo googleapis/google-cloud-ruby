@@ -26,6 +26,7 @@ require "google/cloud/network_connectivity/v1beta/hub_service/credentials"
 require "google/cloud/network_connectivity/v1beta/hub_service/paths"
 require "google/cloud/network_connectivity/v1beta/hub_service/operations"
 require "google/cloud/network_connectivity/v1beta/hub_service/client"
+require "google/cloud/network_connectivity/v1beta/hub_service/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/network_connectivity/v1beta/hub_service"
         #     client = ::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_connectivity/v1beta/hub_service/rest"
+        #     client = ::Google::Cloud::NetworkConnectivity::V1beta::HubService::Rest::Client.new
         #
         module HubService
         end

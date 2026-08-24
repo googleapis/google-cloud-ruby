@@ -33,6 +33,11 @@ module Google
       #     require "google/cloud/support/v2"
       #     client = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/support/v2"
+      #     client = ::Google::Cloud::Support::V2::CaseAttachmentService::Rest::Client.new
+      #
       module V2
       end
     end

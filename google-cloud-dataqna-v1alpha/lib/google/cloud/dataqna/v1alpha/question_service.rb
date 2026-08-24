@@ -25,6 +25,7 @@ require "google/cloud/dataqna/v1alpha/version"
 require "google/cloud/dataqna/v1alpha/question_service/credentials"
 require "google/cloud/dataqna/v1alpha/question_service/paths"
 require "google/cloud/dataqna/v1alpha/question_service/client"
+require "google/cloud/dataqna/v1alpha/question_service/rest"
 
 module Google
   module Cloud
@@ -51,6 +52,11 @@ module Google
         #
         #     require "google/cloud/dataqna/v1alpha/question_service"
         #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataqna/v1alpha/question_service/rest"
+        #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Rest::Client.new
         #
         module QuestionService
         end
