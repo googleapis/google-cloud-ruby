@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.1 (2026-08-24)
+
+#### Documentation
+
+* A comment for field `principal` in message `.google.cloud.bigquery.reservation.v1.Assignment` is changed ([#36316](https://github.com/googleapis/google-cloud-ruby/issues/36316)) 
+
 ### 1.13.0 (2026-08-13)
 
 #### Features
