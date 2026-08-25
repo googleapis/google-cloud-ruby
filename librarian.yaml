@@ -1124,7 +1124,7 @@ libraries:
     apis:
       - path: google/cloud/config/v1
   - name: google-cloud-connectors
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/connectors/v1
     ruby:
