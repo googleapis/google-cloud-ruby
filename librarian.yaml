@@ -1275,7 +1275,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DATA_LABELING
   - name: google-cloud-database_center
-    version: 0.3.1
+    version: 0.3.2
     apis:
       - path: google/cloud/databasecenter/v1beta
     ruby:
