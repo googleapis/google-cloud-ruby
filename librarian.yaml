@@ -833,7 +833,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-capacity_planner-v1beta
-    version: 0.5.1
+    version: 0.5.2
     apis:
       - path: google/cloud/capacityplanner/v1beta
   - name: google-cloud-certificate_manager
