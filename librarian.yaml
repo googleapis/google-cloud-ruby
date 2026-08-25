@@ -1282,7 +1282,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-database_center-v1beta
-    version: 0.8.1
+    version: 0.8.2
     apis:
       - path: google/cloud/databasecenter/v1beta
   - name: google-cloud-dataflow
