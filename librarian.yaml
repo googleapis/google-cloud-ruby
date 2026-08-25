@@ -685,7 +685,7 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-bigquery-reservation-v1
-    version: 1.13.0
+    version: 1.13.1
     apis:
       - path: google/cloud/bigquery/reservation/v1
         ruby:
