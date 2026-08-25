@@ -1604,7 +1604,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DOMAINS
   - name: google-cloud-edge_container
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/edgecontainer/v1
     ruby:
