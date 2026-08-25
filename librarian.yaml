@@ -1113,7 +1113,7 @@ libraries:
     apis:
       - path: google/cloud/configdelivery/v1
   - name: google-cloud-config_service
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/config/v1
     ruby:
