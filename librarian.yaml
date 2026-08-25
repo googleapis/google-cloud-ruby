@@ -1142,7 +1142,7 @@ libraries:
       wrapper_of:
         - v1:0.20
   - name: google-cloud-contact_center_insights-v1
-    version: 1.11.1
+    version: 1.11.2
     apis:
       - path: google/cloud/contactcenterinsights/v1
   - name: google-cloud-container
