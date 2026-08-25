@@ -2,7 +2,6 @@
 
 A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud.
 
-A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 

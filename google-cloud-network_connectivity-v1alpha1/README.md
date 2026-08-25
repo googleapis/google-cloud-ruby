@@ -1,13 +1,12 @@
-# Ruby Client for the Network Connectivity V1alpha1 API
+# Ruby Client for the Network Connectivity V1ALPHA1 API
 
 The Network Connectivity API will be home to various services which provide information pertaining to network connectivity.
 
-Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Network Connectivity V1alpha1 API. Most users should consider using
+specific version of the Network Connectivity V1ALPHA1 API. Most users should consider using
 the main client gem,
 [google-cloud-network_connectivity](https://rubygems.org/gems/google-cloud-network_connectivity).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_hubs request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1alpha1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/network-connectivity/docs)
-for general usage information.
 
 ## Debug Logging
 

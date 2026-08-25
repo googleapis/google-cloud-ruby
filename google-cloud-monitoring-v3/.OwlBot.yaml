@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/monitoring/v3/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-monitoring-v3/$1

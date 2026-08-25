@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets."
-  gem.summary       = "API Client library for the Cloud Optimization API"
+  gem.summary       = "Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

@@ -2,7 +2,6 @@
 
 Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
-Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.get_document request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/firestore)
-for general usage information.
 
 ## Debug Logging
 

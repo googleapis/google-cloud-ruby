@@ -1256,7 +1256,7 @@ if $PROGRAM_NAME == __FILE__
   instance = Snippets.new
   methods = instance.public_methods(false).sort
   args = ARGV.dup
-  help = ARGV.any? { |a| ["help", "--help", "-h"].include? a }
+  help = ARGV.intersect? ["help", "--help", "-h"]
 
   command = args.shift
   project = ENV["GOOGLE_CLOUD_PROJECT"]

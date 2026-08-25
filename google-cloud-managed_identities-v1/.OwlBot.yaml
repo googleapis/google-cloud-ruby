@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/managedidentities/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-managed_identities-v1/$1

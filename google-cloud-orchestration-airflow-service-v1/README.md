@@ -2,7 +2,6 @@
 
 Manages Apache Airflow environments on Google Cloud Platform.
 
-The client library for the Cloud Composer API, built on the popular Apache Airflow open source project. Cloud Composer is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflows that span across clouds and on-premises data centers.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_environment request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-orchestration-airflow-service-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/composer)
-for general usage information.
 
 ## Debug Logging
 

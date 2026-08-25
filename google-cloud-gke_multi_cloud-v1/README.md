@@ -1,13 +1,12 @@
-# Ruby Client for the Anthos Multi-Cloud V1 API
+# Ruby Client for the GKE Multi-Cloud V1 API
 
 GKE Multi-Cloud provides a way to manage Kubernetes clusters that run on AWS and Azure infrastructure using the GKE Multi-Cloud API. Combined with Connect, you can manage Kubernetes clusters on Google Cloud, AWS, and Azure from the Google Cloud Console. When you create a cluster with GKE Multi-Cloud, Google creates the resources needed and brings up a cluster on your behalf. You can deploy workloads with the GKE Multi-Cloud API or the gcloud and kubectl command-line tools.
 
-Anthos Multi-Cloud provides a way to manage Kubernetes clusters that run on AWS and Azure infrastructure using the Anthos Multi-Cloud API. Combined with Connect, you can manage Kubernetes clusters on Google Cloud, AWS, and Azure from the Google Cloud Console.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Anthos Multi-Cloud V1 API. Most users should consider using
+specific version of the GKE Multi-Cloud V1 API. Most users should consider using
 the main client gem,
 [google-cloud-gke_multi_cloud](https://rubygems.org/gems/google-cloud-gke_multi_cloud).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.create_attached_cluster request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/anthos/clusters/docs/multi-cloud)
+See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/multi-cloud/docs)
 for general usage information.
 
 ## Debug Logging

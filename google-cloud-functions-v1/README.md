@@ -2,7 +2,6 @@
 
 Manages lightweight user-provided functions executed in response to events.
 
-The Cloud Functions API manages lightweight user-provided functions executed in response to events.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_functions request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/functions)
-for general usage information.
 
 ## Debug Logging
 

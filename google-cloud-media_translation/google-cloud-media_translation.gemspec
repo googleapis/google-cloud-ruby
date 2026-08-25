@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Media Translation API delivers real-time speech translation to your content and applications directly from your audio data. Leveraging Google???s machine learning technologies, the API offers enhanced accuracy and simplified integration while equipping you with a comprehensive set of features to further refine your translation results. Improve user experience with low-latency streaming translation and scale quickly with straightforward internationalization."
-  gem.summary       = "API Client library for the Media Translation API"
+  gem.description   = "The Media Translation API provides enterprise-quality translation from/to various media types."
+  gem.summary       = "The Media Translation API provides enterprise-quality translation from/to various media types."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

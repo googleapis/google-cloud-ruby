@@ -1,8 +1,7 @@
 # Ruby Client for the KMS Inventory API
 
-API Client library for the KMS Inventory API
+Cloud Key Management Service (Cloud KMS) lets you create and manage cryptographic keys for use in compatible Google Cloud services and in your own applications.
 
-google-cloud-kms-inventory is the official client library for the KMS Inventory API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-kms-inventory-v*`.

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The Network Management API provides a collection of network performance monitoring and diagnostic capabilities."
-  gem.summary       = "API Client library for the Network Management API"
+  gem.summary       = "The Network Management API provides a collection of network performance monitoring and diagnostic capabilities."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

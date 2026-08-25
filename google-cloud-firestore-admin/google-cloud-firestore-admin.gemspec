@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development."
-  gem.summary       = "API Client library for the Cloud Firestore Admin API"
+  gem.description   = "Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development."
+  gem.summary       = "Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

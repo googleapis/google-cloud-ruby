@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-financial_services-v1 is the official client library for the Financial Services V1 API. Note that google-cloud-financial_services-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-financial_services instead. See the readme for more details."
-  gem.summary       = "API Client library for the Financial Services V1 API"
+  gem.description   = "A unified AI platform for financial services, leveraging Google's global framework for security and compliance. Note that google-cloud-financial_services-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-financial_services instead. See the readme for more details."
+  gem.summary       = "A unified AI platform for financial services, leveraging Google's global framework for security and compliance."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

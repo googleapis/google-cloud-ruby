@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Natural Language API
 
-API Client library for the Cloud Natural Language API
+Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers.
 
-Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-language-v*`.
@@ -19,7 +18,7 @@ client gems:
 [google-cloud-language-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest),
 [google-cloud-language-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v2/latest).
 
-See also the [Product Documentation](https://cloud.google.com/natural-language)
+See also the [Product Documentation](https://cloud.google.com/natural-language/docs)
 for more usage information.
 
 ## Quick Start

@@ -2,7 +2,6 @@
 
 The Dataproc Metastore API is used to manage the lifecycle and configuration of metastore services.
 
-Dataproc Metastore is a fully managed, highly available within a region, autohealing serverless Apache Hive metastore (HMS) on Google Cloud for data analytics products. It supports HMS and serves as a critical component for managing the metadata of relational entities and provides interoperability between data processing applications in the open source data ecosystem.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_services request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/dataproc-metastore/)
-for general usage information.
 
 ## Debug Logging
 

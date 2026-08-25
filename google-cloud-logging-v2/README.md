@@ -2,7 +2,6 @@
 
 Writes log entries and manages your Cloud Logging configuration.
 
-The Cloud Logging API lets you programmatically read and write log entries, set up exclusions, create logs-based metrics, and manage export sinks.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.delete_log request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-logging-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/logging)
+See also the [Product Documentation](https://cloud.google.com/logging/docs/)
 for general usage information.
 
 ## Debug Logging

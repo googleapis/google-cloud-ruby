@@ -1,8 +1,7 @@
 # Ruby Client for the Network Management API
 
-API Client library for the Network Management API
-
 The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.
+
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-network_management-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-network_management-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-network_management-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest)
-for more usage information.
 
 ## Quick Start
 
