@@ -948,7 +948,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-cloud_security_compliance-v1
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
   - name: google-cloud-commerce-consumer-procurement
