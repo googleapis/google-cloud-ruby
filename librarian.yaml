@@ -1247,7 +1247,7 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/v1beta1
   - name: google-cloud-data_fusion
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/datafusion/v1
     ruby:
