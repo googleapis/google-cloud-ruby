@@ -22,7 +22,7 @@ module Google
     module Commerce
       module Consumer
         module Procurement
-          VERSION = "1.4.1"
+          VERSION = "1.4.2"
         end
       end
     end
