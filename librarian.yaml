@@ -1232,7 +1232,7 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
   - name: google-cloud-data_catalog-lineage-v1
-    version: 0.16.1
+    version: 0.16.2
     apis:
       - path: google/cloud/datacatalog/lineage/v1
   - name: google-cloud-data_catalog-v1
