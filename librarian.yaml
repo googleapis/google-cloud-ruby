@@ -1494,7 +1494,7 @@ libraries:
             ruby-cloud-env-prefix: DIALOGFLOW
             ruby-cloud-namespace-override: Cx=CX
   - name: google-cloud-dialogflow-v2
-    version: 1.17.1
+    version: 1.17.2
     apis:
       - path: google/cloud/dialogflow/v2
         ruby:
