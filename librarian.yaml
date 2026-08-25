@@ -941,7 +941,7 @@ libraries:
     apis:
       - path: google/api/cloudquotas/v1beta
   - name: google-cloud-cloud_security_compliance
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     ruby:
