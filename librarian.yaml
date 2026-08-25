@@ -963,7 +963,7 @@ libraries:
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
   - name: google-cloud-commerce_producer
-    version: 0.1.1
+    version: 0.1.2
     apis:
       - path: google/cloud/commerceproducer/v1beta
     ruby:
