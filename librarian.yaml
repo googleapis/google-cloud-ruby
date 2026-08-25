@@ -1102,7 +1102,7 @@ libraries:
     apis:
       - path: google/cloud/confidentialcomputing/v1
   - name: google-cloud-config_delivery
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/configdelivery/v1alpha
     ruby:
