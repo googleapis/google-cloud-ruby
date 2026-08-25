@@ -906,7 +906,7 @@ libraries:
     apis:
       - path: google/cloud/cloudcontrolspartner/v1beta
   - name: google-cloud-cloud_dms
-    version: 1.6.1
+    version: 1.6.2
     apis:
       - path: google/cloud/clouddms/v1
         ruby:
