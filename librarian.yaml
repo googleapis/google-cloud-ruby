@@ -1297,7 +1297,7 @@ libraries:
       wrapper_of:
         - v1beta3:0.8
   - name: google-cloud-dataflow-v1beta3
-    version: 0.17.1
+    version: 0.17.2
     apis:
       - path: google/dataflow/v1beta3
         ruby:
