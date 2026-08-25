@@ -1616,7 +1616,7 @@ libraries:
       - path: google/cloud/edgecontainer/v1
     skip_generate: true
   - name: google-cloud-edge_network
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/edgenetwork/v1
     ruby:
