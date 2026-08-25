@@ -1,13 +1,12 @@
-# Ruby Client for the Identity-Aware Proxy V1 API
+# Ruby Client for the Cloud Identity-Aware Proxy V1 API
 
 Controls access to cloud applications running on Google Cloud Platform.
 
-IAP lets you establish a central authorization layer for applications accessed by HTTPS, so you can use an application-level access control model instead of relying on network-level firewalls.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Identity-Aware Proxy V1 API. Most users should consider using
+specific version of the Cloud Identity-Aware Proxy V1 API. Most users should consider using
 the main client gem,
 [google-cloud-iap](https://rubygems.org/gems/google-cloud-iap).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.set_iam_policy request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-iap-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/iap/)
-for general usage information.
 
 ## Debug Logging
 

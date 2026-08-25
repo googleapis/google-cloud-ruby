@@ -1,8 +1,7 @@
 # Ruby Client for the Data Analytics API with Gemini V1BETA API
 
-The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
+Developers can use the Conversational Analytics API, accessed through geminidataanalytics.googleapis.com, to build an artificial intelligence (AI)-powered chat interface, or data agent, that answers questions about structured data in BigQuery, Looker, and Looker Studio using natural language.
 
-The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
 
 https://github.com/googleapis/google-cloud-ruby
 

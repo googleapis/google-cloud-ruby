@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-lustre is the official client library for the Google Cloud Managed Lustre API."
-  gem.summary       = "API Client library for the Google Cloud Managed Lustre API"
+  gem.description   = "Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications."
+  gem.summary       = "Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

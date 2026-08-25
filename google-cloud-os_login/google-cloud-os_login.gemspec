@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Use OS Login to manage SSH access to your instances using IAM without having to create and manage individual SSH keys. OS Login maintains a consistent Linux user identity across VM instances and is the recommended way to manage many users across multiple instances or projects."
-  gem.summary       = "API Client library for the Cloud OS Login API"
+  gem.description   = "You can use OS Login to manage access to your VM instances using IAM roles."
+  gem.summary       = "You can use OS Login to manage access to your VM instances using IAM roles."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

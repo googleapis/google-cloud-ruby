@@ -1,8 +1,7 @@
 # Ruby Client for the Google Cloud Managed Lustre API
 
-API Client library for the Google Cloud Managed Lustre API
+Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications.
 
-google-cloud-lustre is the official client library for the Google Cloud Managed Lustre API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-lustre-v*`.

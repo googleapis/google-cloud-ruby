@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Monitoring Metrics Scopes V1 API
+# Ruby Client for the Cloud Monitoring V1 API
 
-Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation.
+Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Cloud Monitoring documentation](https://cloud.google.com/monitoring/docs).
 
-Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Metrics Scopes API manages the list of monitored projects and accounts.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Monitoring Metrics Scopes V1 API. Most users should consider using
+specific version of the Cloud Monitoring V1 API. Most users should consider using
 the main client gem,
 [google-cloud-monitoring](https://rubygems.org/gems/google-cloud-monitoring).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_metrics_scope request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/monitoring/settings/manage-api)
-for general usage information.
 
 ## Debug Logging
 

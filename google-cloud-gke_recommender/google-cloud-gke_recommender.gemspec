@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "GKE Recommender API."
-  gem.summary       = "GKE Recommender API."
+  gem.description   = "GKE Recommender API"
+  gem.summary       = "GKE Recommender API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

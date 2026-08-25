@@ -1,8 +1,7 @@
-# Ruby Client for the Filestore API
+# Ruby Client for the Cloud Filestore API
 
-API Client library for the Filestore API
+The Cloud Filestore API is used for creating and managing cloud file servers.
 
-Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-filestore-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-filestore-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-filestore-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/filestore/)
-for more usage information.
 
 ## Quick Start
 

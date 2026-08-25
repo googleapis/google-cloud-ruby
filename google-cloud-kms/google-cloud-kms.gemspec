@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications."
-  gem.summary       = "API Client library for the Cloud Key Management Service (KMS) API"
+  gem.summary       = "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

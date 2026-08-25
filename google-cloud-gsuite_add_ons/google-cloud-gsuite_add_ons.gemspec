@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Add-ons are customized applications that integrate with Google Workspace productivity applications."
-  gem.summary       = "API Client library for the Google Workspace Add-ons API"
+  gem.description   = "Add-ons are customized applications that extend Google Workspace applications."
+  gem.summary       = "Add-ons are customized applications that extend Google Workspace applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

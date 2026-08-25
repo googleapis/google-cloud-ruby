@@ -1,13 +1,12 @@
-# Ruby Client for the GKE Hub V1beta1 API
+# Ruby Client for the GKE Hub V1BETA1 API
 
-API Client library for the GKE Hub V1beta1 API
+The GKE Hub service handles the registration of many Kubernetes clusters to Google Cloud, and the management of multi-cluster features over those clusters.
 
-The GKE Hub API centrally manages features and services on all your Kubernetes clusters running in a variety of environments, including Google cloud, on premises in customer datacenters, or other third party clouds.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the GKE Hub V1beta1 API. Most users should consider using
+specific version of the GKE Hub V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-gke_hub](https://rubygems.org/gems/google-cloud-gke_hub).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_memberships request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_hub-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/anthos/clusters/docs)
-for general usage information.
 
 ## Debug Logging
 
