@@ -1420,7 +1420,7 @@ libraries:
     apis:
       - path: google/cloud/datastream/v1
   - name: google-cloud-datastream-v1alpha1
-    version: 0.15.1
+    version: 0.15.2
     apis:
       - path: google/cloud/datastream/v1alpha1
   - name: google-cloud-deploy
