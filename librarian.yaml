@@ -1661,7 +1661,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-eventarc-publishing
-    version: 1.5.1
+    version: 1.5.2
     apis:
       - path: google/cloud/eventarc/publishing/v1
         ruby:
