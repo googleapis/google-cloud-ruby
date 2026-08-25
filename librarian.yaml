@@ -1376,7 +1376,7 @@ libraries:
             ruby-cloud-namespace-override: Dataqna=DataQnA
             ruby-cloud-path-override: data_qn_a=dataqna
   - name: google-cloud-datastore-admin
-    version: 0.7.1
+    version: 0.7.2
     apis:
       - path: google/datastore/admin/v1
         ruby:
