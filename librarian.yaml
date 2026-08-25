@@ -1330,7 +1330,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-dataplex-v1
-    version: 2.10.1
+    version: 2.10.2
     apis:
       - path: google/cloud/dataplex/v1
   - name: google-cloud-dataproc
