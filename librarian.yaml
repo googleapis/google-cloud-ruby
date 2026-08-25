@@ -1564,7 +1564,7 @@ libraries:
       wrapper_of:
         - v1:1.4
   - name: google-cloud-document_ai-v1
-    version: 1.13.1
+    version: 1.13.2
     apis:
       - path: google/cloud/documentai/v1
         ruby:
