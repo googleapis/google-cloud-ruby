@@ -1517,7 +1517,7 @@ libraries:
     apis:
       - path: google/cloud/discoveryengine/v1beta
   - name: google-cloud-dlp
-    version: 1.10.1
+    version: 1.10.2
     apis:
       - path: google/privacy/dlp/v2
         ruby:

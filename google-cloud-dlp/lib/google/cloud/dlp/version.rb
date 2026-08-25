@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dlp
-      VERSION = "1.10.1"
+      VERSION = "1.10.2"
     end
   end
 end
