@@ -844,7 +844,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-certificate_manager-v1
-    version: 1.5.1
+    version: 1.5.2
     apis:
       - path: google/cloud/certificatemanager/v1
   - name: google-cloud-ces
