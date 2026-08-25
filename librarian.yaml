@@ -1580,7 +1580,7 @@ libraries:
             ruby-cloud-env-prefix: DOCUMENT_AI
             ruby-cloud-namespace-override: DocumentAi=DocumentAI
   - name: google-cloud-domains
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/domains/v1beta1
         ruby:
