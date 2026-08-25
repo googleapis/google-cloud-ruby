@@ -859,7 +859,7 @@ libraries:
     apis:
       - path: google/cloud/ces/v1
   - name: google-cloud-ces-v1beta
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/ces/v1beta
   - name: google-cloud-channel
