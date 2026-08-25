@@ -89,6 +89,8 @@ module Google
               rpc :CreateRapidCache, ::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest, ::Google::Longrunning::Operation
               # Updates a Rapid Cache instance.
               rpc :UpdateRapidCache, ::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest, ::Google::Longrunning::Operation
+              # Disables a Rapid Cache instance.
+              rpc :DisableRapidCache, ::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest, ::Google::Longrunning::Operation
               # Gets a Rapid Cache instance.
               rpc :GetRapidCache, ::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest, ::Google::Cloud::Storage::Control::V2::RapidCache
               # Lists Rapid Cache instances for a given bucket.

@@ -1,13 +1,12 @@
-# Ruby Client for the Retail V2 API
+# Ruby Client for the Vertex AI Search for commerce V2 API
 
 AI Commerce Search API is made up of Search, Browse and Recommendations. These discovery AI solutions help you implement personalized search, browse and recommendations, based on machine learning models, across your websites and mobile applications.
 
-Retail enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Retail V2 API. Most users should consider using
+specific version of the Vertex AI Search for commerce V2 API. Most users should consider using
 the main client gem,
 [google-cloud-retail](https://rubygems.org/gems/google-cloud-retail).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.export_analytics_metrics request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/retail/docs/apis)
-for general usage information.
 
 ## Debug Logging
 

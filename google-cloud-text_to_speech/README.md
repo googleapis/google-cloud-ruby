@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Text-to-Speech API
 
-API Client library for the Cloud Text-to-Speech API
+Synthesizes natural-sounding speech by applying powerful neural network models.
 
-Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-text_to_speech-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-text_to_speech-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-text_to_speech-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/text-to-speech)
-for more usage information.
 
 ## Quick Start
 

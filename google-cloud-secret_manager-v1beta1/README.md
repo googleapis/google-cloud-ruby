@@ -1,13 +1,12 @@
-# Ruby Client for the Secret Manager V1beta1 API
+# Ruby Client for the Secret Manager V1BETA1 API
 
 Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security.
 
-Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Secret Manager V1beta1 API. Most users should consider using
+specific version of the Secret Manager V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-secret_manager](https://rubygems.org/gems/google-cloud-secret_manager).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.list_secrets request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1beta1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/secret-manager)
+See also the [Product Documentation](https://cloud.google.com/secret-manager/docs/overview)
 for general usage information.
 
 ## Debug Logging

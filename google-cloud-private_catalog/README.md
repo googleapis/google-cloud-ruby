@@ -1,8 +1,7 @@
-# Ruby Client for the Private Catalog API
+# Ruby Client for the Cloud Private Catalog API
 
-API Client library for the Private Catalog API
+Enable cloud users to discover private catalogs and products in their organizations.
 
-With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-private_catalog-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-private_catalog-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-private_catalog-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/private-catalog/)
-for more usage information.
 
 ## Quick Start
 

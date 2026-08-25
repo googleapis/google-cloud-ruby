@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Speech-to-Text API
 
-API Client library for the Cloud Speech-to-Text API
+Converts audio to text by applying powerful neural network models.
 
-Google Speech-to-Text enables developers to convert audio to text by applying powerful neural network models in an easy-to-use API. The API recognizes more than 120 languages and variants to support your global user base. You can enable voice command-and-control, transcribe audio from call centers, and more. It can process real-time streaming or prerecorded audio, using Google's machine learning technology.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-speech-v*`.
@@ -18,9 +17,6 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-speech-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v1/latest),
 [google-cloud-speech-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v2/latest).
-
-See also the [Product Documentation](https://cloud.google.com/speech-to-text)
-for more usage information.
 
 ## Quick Start
 

@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/devtools/cloudprofiler/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-profiler/$1

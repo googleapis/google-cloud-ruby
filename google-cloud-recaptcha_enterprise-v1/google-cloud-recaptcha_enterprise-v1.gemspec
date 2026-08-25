@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "reCAPTCHA Enterprise is a service that protects your site from spam and abuse. Note that google-cloud-recaptcha_enterprise-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-recaptcha_enterprise instead. See the readme for more details."
+  gem.description   = "Help protect your website from fraudulent activity, spam, and abuse without creating friction. Note that google-cloud-recaptcha_enterprise-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-recaptcha_enterprise instead. See the readme for more details."
   gem.summary       = "Help protect your website from fraudulent activity, spam, and abuse without creating friction."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

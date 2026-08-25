@@ -1,5 +1,5 @@
 --no-private
---title="Retail API"
+--title="Vertex AI Search for commerce API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

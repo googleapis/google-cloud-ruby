@@ -2,7 +2,6 @@
 
 Regionally deployed, single-tenant managed source code repository hosted on Google Cloud.
 
-Regionally deployed, single-tenant managed source code repository hosted on Google Cloud.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-secure_source_manager-v*`.

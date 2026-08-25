@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Creates and manages Redis instances on the Google Cloud Platform."
-  gem.summary       = "API Client library for the Google Cloud Memorystore for Redis API"
+  gem.summary       = "Creates and manages Redis instances on the Google Cloud Platform."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

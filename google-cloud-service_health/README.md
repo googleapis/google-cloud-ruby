@@ -2,7 +2,6 @@
 
 Personalized Service Health helps you gain visibility into disruptive events impacting Google Cloud products.
 
-Personalized Service Health helps you gain visibility into disruptive events impacting Google Cloud products.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-service_health-v*`.

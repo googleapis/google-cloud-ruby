@@ -1,13 +1,12 @@
-# Ruby Client for the Resource Manager V3 API
+# Ruby Client for the Cloud Resource Manager V3 API
 
 Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
-Google Cloud provides container resources such as organizations and projects that allow you to group and hierarchically organize other Google Cloud resources. This hierarchical organization helps you manage common aspects of your resources, such as access control and configuration settings. The Resource Manager API enables you to programmatically manage these container resources.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Resource Manager V3 API. Most users should consider using
+specific version of the Cloud Resource Manager V3 API. Most users should consider using
 the main client gem,
 [google-cloud-resource_manager](https://rubygems.org/gems/google-cloud-resource_manager).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_folder request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager-v3/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/resource-manager/)
-for general usage information.
 
 ## Debug Logging
 

@@ -725,6 +725,26 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Message returned in the metadata field of the Operation resource for
+          # DeleteRapidCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class DisableRapidCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # An Anywhere Cache Instance.
           # @!attribute [rw] name
           #   @return [::String]
@@ -997,6 +1017,21 @@ module Google
           #     format, but other formats are still accepted. This request is only
           #     idempotent if a `request_id` is provided.
           class UpdateRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DisableRapidCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class DisableRapidCacheRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

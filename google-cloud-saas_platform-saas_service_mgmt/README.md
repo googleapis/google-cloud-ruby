@@ -2,7 +2,6 @@
 
 Model, deploy, and operate your SaaS at scale.
 
-App Lifecycle Manager Overview.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-saas_platform-saas_service_mgmt-v*`.

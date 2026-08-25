@@ -1,13 +1,12 @@
-# Ruby Client for the Certificate Authority Service V1 API
+# Ruby Client for the Certificate Authority V1 API
 
 The Certificate Authority Service API is a highly-available, scalable service that enables you to simplify and automate the management of private certificate authorities (CAs) while staying in control of your private keys.
 
-Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Certificate Authority Service V1 API. Most users should consider using
+specific version of the Certificate Authority V1 API. Most users should consider using
 the main client gem,
 [google-cloud-security-private_ca](https://rubygems.org/gems/google-cloud-security-private_ca).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_certificate request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security-private_ca-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/certificate-authority-service/)
-for general usage information.
 
 ## Debug Logging
 

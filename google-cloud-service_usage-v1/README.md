@@ -2,7 +2,6 @@
 
 Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.
 
-Service Usage is an infrastructure service of Google Cloud that lets you list and manage other APIs and services in your Cloud projects. You can list and manage Google Cloud services and their APIs, as well as services created using Cloud Endpoints.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.enable_service request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-service_usage-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/service-usage/)
-for general usage information.
 
 ## Debug Logging
 

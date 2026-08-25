@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/texttospeech/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-text_to_speech/$1

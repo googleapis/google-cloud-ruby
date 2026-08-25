@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Tasks API
 
-API Client library for the Cloud Tasks API
+Manages the execution of large numbers of distributed requests.
 
-Cloud Tasks is a fully managed service that allows you to manage the execution, dispatch and delivery of a large number of distributed tasks. You can asynchronously perform work outside of a user request. Your tasks can be executed on App Engine or any arbitrary HTTP endpoint.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-tasks-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-tasks-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-tasks-v2/latest).
-
-See also the [Product Documentation](https://cloud.google.com/tasks)
-for more usage information.
 
 ## Quick Start
 

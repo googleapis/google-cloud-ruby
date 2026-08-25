@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/phishingprotection/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-phishing_protection/$1
