@@ -837,7 +837,7 @@ libraries:
     apis:
       - path: google/cloud/capacityplanner/v1beta
   - name: google-cloud-certificate_manager
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/certificatemanager/v1
     ruby:
