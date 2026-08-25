@@ -1,4 +1,4 @@
-# Ruby Client for the BeyondCorp AppConnectors V1 API
+# Ruby Client for the BeyondCorp V1 API
 
 Beyondcorp Enterprise provides identity and context aware access controls for enterprise resources and enables zero-trust access. Using the Beyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem connectivity using the App Connector hybrid connectivity solution.
 
@@ -6,7 +6,7 @@ Beyondcorp Enterprise provides identity and context aware access controls for en
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the BeyondCorp AppConnectors V1 API. Most users should consider using
+specific version of the BeyondCorp V1 API. Most users should consider using
 the main client gem,
 [google-cloud-beyond_corp](https://rubygems.org/gems/google-cloud-beyond_corp).
 See the section below titled *Which client should I use?* for more information.
@@ -38,9 +38,6 @@ response = client.list_app_connectors request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/beyondcorp/)
-for general usage information.
 
 ## Debug Logging
 
