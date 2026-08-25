@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Talent Solution V4beta1 API
+# Ruby Client for the Cloud Talent Solution V4BETA1 API
 
 Cloud Talent Solution provides the capability to create, read, update, and delete job postings, as well as search jobs based on keywords and filters.
 
-Transform your job search and candidate matching capabilities with Cloud Talent Solution, designed to support enterprise talent acquisition technology and evolve with your growing needs. This AI solution includes features such as Job Search and Profile Search to provide candidates and employers with an enhanced talent acquisition experience.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Talent Solution V4beta1 API. Most users should consider using
+specific version of the Cloud Talent Solution V4BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-talent](https://rubygems.org/gems/google-cloud-talent).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_company request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/solutions/talent-solution)
-for general usage information.
 
 ## Debug Logging
 

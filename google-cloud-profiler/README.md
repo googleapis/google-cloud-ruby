@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Profiler API
 
-API Client library for the Cloud Profiler API
+Manages continuous profiling information.
 
-Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-profiler-v*`.

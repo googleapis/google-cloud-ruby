@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/speech/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-speech-v1/$1

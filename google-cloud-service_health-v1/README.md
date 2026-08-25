@@ -2,7 +2,6 @@
 
 Personalized Service Health helps you gain visibility into disruptive events impacting Google Cloud products.
 
-Personalized Service Health helps you gain visibility into disruptive events impacting Google Cloud products.
 
 https://github.com/googleapis/google-cloud-ruby
 

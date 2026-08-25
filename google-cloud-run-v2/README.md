@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Run V2 API
+# Ruby Client for the Cloud Run Admin V2 API
 
 Deploy and manage user provided container images that scale automatically based on incoming requests. The Cloud Run Admin API v1 follows the Knative Serving API specification, while v2 is aligned with Google Cloud AIP-based API standards, as described in https://google.aip.dev/.
 
-Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Run V2 API. Most users should consider using
+specific version of the Cloud Run Admin V2 API. Most users should consider using
 the main client gem,
 [google-cloud-run-client](https://rubygems.org/gems/google-cloud-run-client).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.submit_build request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/run/)
-for general usage information.
 
 ## Debug Logging
 

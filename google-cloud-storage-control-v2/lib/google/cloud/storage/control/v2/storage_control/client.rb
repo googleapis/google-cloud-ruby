@@ -2483,6 +2483,108 @@ module Google
               end
 
               ##
+              # Disables a Rapid Cache instance.
+              #
+              # @overload disable_rapid_cache(request, options = nil)
+              #   Pass arguments to `disable_rapid_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload disable_rapid_cache(name: nil, request_id: nil)
+              #   Pass arguments to `disable_rapid_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest.new
+              #
+              #   # Call the disable_rapid_cache method.
+              #   result = client.disable_rapid_cache request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def disable_rapid_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.disable_rapid_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.disable_rapid_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.disable_rapid_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :disable_rapid_cache, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets a Rapid Cache instance.
               #
               # @overload get_rapid_cache(request, options = nil)
@@ -4434,6 +4536,11 @@ module Google
                   #
                   attr_reader :update_rapid_cache
                   ##
+                  # RPC-specific configuration for `disable_rapid_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :disable_rapid_cache
+                  ##
                   # RPC-specific configuration for `get_rapid_cache`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4563,6 +4670,8 @@ module Google
                     @create_rapid_cache = ::Gapic::Config::Method.new create_rapid_cache_config
                     update_rapid_cache_config = parent_rpcs.update_rapid_cache if parent_rpcs.respond_to? :update_rapid_cache
                     @update_rapid_cache = ::Gapic::Config::Method.new update_rapid_cache_config
+                    disable_rapid_cache_config = parent_rpcs.disable_rapid_cache if parent_rpcs.respond_to? :disable_rapid_cache
+                    @disable_rapid_cache = ::Gapic::Config::Method.new disable_rapid_cache_config
                     get_rapid_cache_config = parent_rpcs.get_rapid_cache if parent_rpcs.respond_to? :get_rapid_cache
                     @get_rapid_cache = ::Gapic::Config::Method.new get_rapid_cache_config
                     list_rapid_caches_config = parent_rpcs.list_rapid_caches if parent_rpcs.respond_to? :list_rapid_caches

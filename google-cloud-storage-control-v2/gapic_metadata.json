@@ -115,6 +115,11 @@
                 "update_rapid_cache"
               ]
             },
+            "DisableRapidCache": {
+              "methods": [
+                "disable_rapid_cache"
+              ]
+            },
             "GetRapidCache": {
               "methods": [
                 "get_rapid_cache"

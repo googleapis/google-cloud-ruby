@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services."
-  gem.summary       = "API Client library for the Recommender API"
+  gem.description   = "Recommenders generate recommendations that fall into six value categories that can help you optimize your cloud in a variety of ways."
+  gem.summary       = "Recommenders generate recommendations that fall into six value categories that can help you optimize your cloud in a variety of ways."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

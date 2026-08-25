@@ -2,7 +2,6 @@
 
 The Rapid Migration Assessment service is our first-party migration assessment and planning tool.
 
-The Rapid Migration Assessment service is our first-party migration assessment and planning tool.
 
 https://github.com/googleapis/google-cloud-ruby
 
