@@ -1221,7 +1221,7 @@ libraries:
       wrapper_of:
         - v1:0.6
   - name: google-cloud-data_catalog-lineage-config_management
-    version: 0.1.1
+    version: 0.1.2
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     ruby:
