@@ -926,7 +926,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::CloudDMS::V1
             ruby-cloud-namespace-override: CloudDms=CloudDMS
   - name: google-cloud-cloud_quotas
-    version: 2.3.1
+    version: 2.3.2
     apis:
       - path: google/api/cloudquotas/v1
     ruby:
