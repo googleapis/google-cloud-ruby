@@ -937,7 +937,7 @@ libraries:
     apis:
       - path: google/api/cloudquotas/v1
   - name: google-cloud-cloud_quotas-v1beta
-    version: 0.10.1
+    version: 0.10.2
     apis:
       - path: google/api/cloudquotas/v1beta
   - name: google-cloud-cloud_security_compliance
