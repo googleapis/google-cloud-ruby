@@ -1254,7 +1254,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-data_fusion-v1
-    version: 2.6.1
+    version: 2.6.2
     apis:
       - path: google/cloud/datafusion/v1
   - name: google-cloud-data_labeling
