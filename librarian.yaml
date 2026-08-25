@@ -1146,7 +1146,7 @@ libraries:
     apis:
       - path: google/cloud/contactcenterinsights/v1
   - name: google-cloud-container
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/container/v1
         ruby:
