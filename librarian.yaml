@@ -1445,7 +1445,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-developer_connect-v1
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/cloud/developerconnect/v1
   - name: google-cloud-device_streaming
