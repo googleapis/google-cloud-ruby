@@ -1,8 +1,7 @@
 # Ruby Client for the Backup and DR Service V1 API
 
-API Client library for the Backup and DR Service V1 API
+Backup and DR Service is a managed service that provides backup and recovery of workloads running in Google Cloud.
 
-google-cloud-backupdr-v1 is the official client library for the Backup and DR Service V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 

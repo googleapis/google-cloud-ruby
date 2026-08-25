@@ -1,8 +1,7 @@
-# Ruby Client for the Assured Workloads for Government API
+# Ruby Client for the Assured Workloads API
 
-API Client library for the Assured Workloads for Government API
+Assured Workloads lets you secure your workloads and accelerate your path to running compliant workloads on Google Cloud.
 
-Assured Workloads for Government secures government workloads and accelerates the path to running compliant workloads on Google Cloud.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-assured_workloads-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-assured_workloads-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-assured_workloads-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/assured-workloads/)
-for more usage information.
 
 ## Quick Start
 
