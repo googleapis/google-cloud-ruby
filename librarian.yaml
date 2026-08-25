@@ -863,7 +863,7 @@ libraries:
     apis:
       - path: google/cloud/ces/v1beta
   - name: google-cloud-channel
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/channel/v1
         ruby:
