@@ -1627,7 +1627,7 @@ libraries:
     apis:
       - path: google/cloud/edgenetwork/v1
   - name: google-cloud-error_reporting-v1beta1
-    version: 0.17.1
+    version: 0.17.2
     apis:
       - path: google/devtools/clouderrorreporting/v1beta1
         ruby:
