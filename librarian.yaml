@@ -873,7 +873,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-channel-v1
-    version: 2.6.1
+    version: 2.6.2
     apis:
       - path: google/cloud/channel/v1
         ruby:
