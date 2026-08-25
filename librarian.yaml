@@ -1623,7 +1623,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-edge_network-v1
-    version: 2.6.1
+    version: 2.6.2
     apis:
       - path: google/cloud/edgenetwork/v1
   - name: google-cloud-error_reporting-v1beta1
