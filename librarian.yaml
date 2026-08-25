@@ -1424,7 +1424,7 @@ libraries:
     apis:
       - path: google/cloud/datastream/v1alpha1
   - name: google-cloud-deploy
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/deploy/v1
     ruby:
