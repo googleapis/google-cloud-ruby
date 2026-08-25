@@ -959,7 +959,7 @@ libraries:
       wrapper_of:
         - v1:1.1
   - name: google-cloud-commerce-consumer-procurement-v1
-    version: 1.9.1
+    version: 1.9.2
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
   - name: google-cloud-commerce_producer
