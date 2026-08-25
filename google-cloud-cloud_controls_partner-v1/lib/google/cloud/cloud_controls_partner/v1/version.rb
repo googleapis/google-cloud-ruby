@@ -21,7 +21,7 @@ module Google
   module Cloud
     module CloudControlsPartner
       module V1
-        VERSION = "2.4.1"
+        VERSION = "2.4.2"
       end
     end
   end

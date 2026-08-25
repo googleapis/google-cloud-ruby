@@ -898,7 +898,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-cloud_controls_partner-v1
-    version: 2.4.1
+    version: 2.4.2
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
   - name: google-cloud-cloud_controls_partner-v1beta
