@@ -1323,7 +1323,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-common=~>1.9
   - name: google-cloud-dataplex
-    version: 2.4.1
+    version: 2.4.2
     apis:
       - path: google/cloud/dataplex/v1
     ruby:
