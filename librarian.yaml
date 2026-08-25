@@ -880,7 +880,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CHANNEL
   - name: google-cloud-chronicle
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/chronicle/v1
     ruby:
