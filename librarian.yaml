@@ -1312,7 +1312,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-dataform-v1
-    version: 1.2.0
+    version: 1.2.1
     apis:
       - path: google/cloud/dataform/v1
   - name: google-cloud-dataform-v1beta1
