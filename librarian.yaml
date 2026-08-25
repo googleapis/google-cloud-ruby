@@ -1268,7 +1268,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.7
   - name: google-cloud-data_labeling-v1beta1
-    version: 0.16.1
+    version: 0.16.2
     apis:
       - path: google/cloud/datalabeling/v1beta1
         ruby:
