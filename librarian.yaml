@@ -1348,7 +1348,7 @@ libraries:
       wrapper_of:
         - v1:0.24
   - name: google-cloud-dataproc-v1
-    version: 1.17.1
+    version: 1.17.2
     apis:
       - path: google/cloud/dataproc/v1
         ruby:
