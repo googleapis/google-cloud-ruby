@@ -1305,7 +1305,7 @@ libraries:
             ruby-cloud-env-prefix: DATAFLOW
             ruby-cloud-service-override: JobsV1Beta3=Jobs;MessagesV1Beta3=Messages;MetricsV1Beta3=Metrics;SnapshotsV1Beta3=Snapshots
   - name: google-cloud-dataform
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/dataform/v1beta1
     ruby:
