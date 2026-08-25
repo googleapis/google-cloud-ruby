@@ -917,7 +917,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-cloud_dms-v1
-    version: 1.8.1
+    version: 1.8.2
     apis:
       - path: google/cloud/clouddms/v1
         ruby:
