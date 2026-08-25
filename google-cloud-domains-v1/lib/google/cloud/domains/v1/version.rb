@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Domains
       module V1
-        VERSION = "1.5.1"
+        VERSION = "1.5.2"
       end
     end
   end
