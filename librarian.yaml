@@ -1539,7 +1539,7 @@ libraries:
       wrapper_of:
         - v2:0.20
   - name: google-cloud-dlp-v2
-    version: 1.18.1
+    version: 1.18.2
     apis:
       - path: google/privacy/dlp/v2
         ruby:
