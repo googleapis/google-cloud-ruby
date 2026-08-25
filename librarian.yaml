@@ -1572,7 +1572,7 @@ libraries:
             ruby-cloud-env-prefix: DOCUMENT_AI
             ruby-cloud-namespace-override: DocumentAi=DocumentAI
   - name: google-cloud-document_ai-v1beta3
-    version: 0.49.1
+    version: 0.49.2
     apis:
       - path: google/cloud/documentai/v1beta3
         ruby:
