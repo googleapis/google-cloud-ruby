@@ -1409,7 +1409,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DATASTORE
   - name: google-cloud-datastream
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/datastream/v1
     ruby:
