@@ -891,7 +891,7 @@ libraries:
     apis:
       - path: google/cloud/chronicle/v1
   - name: google-cloud-cloud_controls_partner
-    version: 2.2.1
+    version: 2.2.2
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
     ruby:
