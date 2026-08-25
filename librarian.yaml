@@ -1486,7 +1486,7 @@ libraries:
       wrapper_of:
         - v3:0.24
   - name: google-cloud-dialogflow-cx-v3
-    version: 1.12.2
+    version: 1.12.3
     apis:
       - path: google/cloud/dialogflow/cx/v3
         ruby:
