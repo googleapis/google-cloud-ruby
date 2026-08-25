@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-capacity_planner-v1beta",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "language": "RUBY",
     "apis": [
       {
