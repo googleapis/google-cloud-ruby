@@ -323,7 +323,7 @@
   "google-cloud-database_center+FILLER": "0.0.0",
   "google-cloud-database_center-v1beta": "0.8.1",
   "google-cloud-database_center-v1beta+FILLER": "0.0.0",
-  "google-cloud-dataflow": "0.9.1",
+  "google-cloud-dataflow": "0.9.2",
   "google-cloud-dataflow+FILLER": "0.0.0",
   "google-cloud-dataflow-v1beta3": "0.17.1",
   "google-cloud-dataflow-v1beta3+FILLER": "0.0.0",

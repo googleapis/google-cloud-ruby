@@ -1286,7 +1286,7 @@ libraries:
     apis:
       - path: google/cloud/databasecenter/v1beta
   - name: google-cloud-dataflow
-    version: 0.9.1
+    version: 0.9.2
     apis:
       - path: google/dataflow/v1beta3
         ruby:
