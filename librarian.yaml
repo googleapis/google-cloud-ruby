@@ -1334,7 +1334,7 @@ libraries:
     apis:
       - path: google/cloud/dataplex/v1
   - name: google-cloud-dataproc
-    version: 2.9.1
+    version: 2.9.2
     apis:
       - path: google/cloud/dataproc/v1
         ruby:
