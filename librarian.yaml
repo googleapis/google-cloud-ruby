@@ -1460,7 +1460,7 @@ libraries:
     apis:
       - path: google/cloud/devicestreaming/v1
   - name: google-cloud-dialogflow
-    version: 1.15.1
+    version: 1.15.2
     apis:
       - path: google/cloud/dialogflow/v2
         ruby:
