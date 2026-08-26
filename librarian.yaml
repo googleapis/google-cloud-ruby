@@ -3551,7 +3551,7 @@ libraries:
     apis:
       - path: google/storagetransfer/v1
   - name: google-cloud-support
-    version: 1.4.1
+    version: 1.4.2
     apis:
       - path: google/cloud/support/v2
     ruby:
