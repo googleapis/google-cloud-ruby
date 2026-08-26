@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/developers/knowledge/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-developers-developer_knowledge-v1/$1

@@ -2,7 +2,6 @@
 
 API for managing VPC access connectors.
 
-Serverless VPC Access enables you to connect from a serverless environment on Google Cloud (Cloud Run, Cloud Functions, or the App Engine standard environment) directly to your VPC network. This connection makes it possible for your serverless environment to access Compute Engine VM instances, Memorystore instances, and any other resources with an internal IP address.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_connector request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vpc_access-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/vpc/docs/serverless-vpc-access)
-for general usage information.
 
 ## Debug Logging
 

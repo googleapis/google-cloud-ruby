@@ -1,6 +1,6 @@
 # Authentication
 
-The recommended way to authenticate to the google-cloud-vm_migration library is to use
+The recommended way to authenticate to the grafeas library is to use
 [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials).
 To review all of your authentication options, see [Credentials lookup](#credential-lookup).
 
@@ -26,7 +26,7 @@ For more information about setting up authentication for a local development env
 
 ## Credential Lookup
 
-The google-cloud-vm_migration library provides several mechanisms to configure your system.
+The grafeas library provides several mechanisms to configure your system.
 Generally, using Application Default Credentials to facilitate automatic 
 credentials discovery is the easist method. But if you need to explicitly specify
 credentials, there are several methods available to you.
@@ -54,9 +54,9 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
-require "google/cloud/vm_migration"
+require "grafeas"
 
-client = Google::Cloud::VMMigration.vm_migration do |config|
+client = Grafeas.grafeas do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -64,13 +64,13 @@ end
 To configure a credentials file globally for all clients:
 
 ```ruby
-require "google/cloud/vm_migration"
+require "grafeas"
 
-Google::Cloud::VMMigration.configure do |config|
+Grafeas.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::VMMigration.vm_migration
+client = Grafeas.grafeas
 ```
 
 ### Environment Variables
@@ -89,18 +89,18 @@ Note: Service account keys are a security risk if not managed correctly. You sho
 [choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
 whenever possible.
 
-The environment variables that google-cloud-vm_migration
+The environment variables that grafeas
 checks for credentials are:
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/vm_migration"
+require "grafeas"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::VMMigration.vm_migration
+client = Grafeas.grafeas
 ```
 
 ### Local ADC file

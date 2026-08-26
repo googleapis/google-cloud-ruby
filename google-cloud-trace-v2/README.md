@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Trace V2 API
+# Ruby Client for the Stackdriver Trace V2 API
 
 Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenTelemetry.
 
-The Cloud Trace API lets you send and retrieve latency data to and from Cloud Trace. This API provides low-level interfaces for interacting directly with the feature. For some languages, you can use OpenTelemetry, a set of open source tracing and stats instrumentation libraries that work with multiple backends.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Trace V2 API. Most users should consider using
+specific version of the Stackdriver Trace V2 API. Most users should consider using
 the main client gem,
 [google-cloud-trace](https://rubygems.org/gems/google-cloud-trace).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.batch_write_spans request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-trace-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/trace)
-for general usage information.
 
 ## Debug Logging
 

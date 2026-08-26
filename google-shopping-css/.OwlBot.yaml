@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/shopping/css/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-shopping-css/$1

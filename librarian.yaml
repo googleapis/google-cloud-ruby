@@ -3673,7 +3673,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TEXTTOSPEECH
-    skip_generate: true
   - name: google-cloud-tpu
     version: 1.6.1
     apis:
@@ -3681,7 +3680,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_TPU
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.6
@@ -3692,7 +3690,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_TPU
-    skip_generate: true
   - name: google-cloud-trace-v1
     version: 1.6.1
     apis:
@@ -3700,7 +3697,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRACE
-    skip_generate: true
   - name: google-cloud-trace-v2
     version: 1.5.1
     apis:
@@ -3708,7 +3704,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRACE
-    skip_generate: true
   - name: google-cloud-translate
     version: 3.9.1
     apis:
@@ -3726,7 +3721,6 @@ libraries:
       - acceptance/translate_v3_smoke_test.rb
       - lib/google/cloud/translate/helpers.rb
       - test/google/cloud/translate/helpers_test.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v3:0.11
@@ -3738,12 +3732,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRANSLATE
-    skip_generate: true
   - name: google-cloud-vector_search
     version: 0.1.1
     apis:
       - path: google/cloud/vectorsearch/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -3751,7 +3743,6 @@ libraries:
     version: 0.2.0
     apis:
       - path: google/cloud/vectorsearch/v1
-    skip_generate: true
   - name: google-cloud-video-live_stream
     version: 2.2.1
     apis:
@@ -3810,7 +3801,6 @@ libraries:
       - samples/update_channel.rb
       - samples/update_input.rb
       - samples/update_pool.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:2.0
@@ -3818,7 +3808,6 @@ libraries:
     version: 2.7.1
     apis:
       - path: google/cloud/video/livestream/v1
-    skip_generate: true
   - name: google-cloud-video-stitcher
     version: 1.3.1
     apis:
@@ -3889,7 +3878,6 @@ libraries:
       - samples/update_cdn_key_akamai.rb
       - samples/update_slate.rb
       - samples/update_vod_config.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.8
@@ -3897,7 +3885,6 @@ libraries:
     version: 1.7.1
     apis:
       - path: google/cloud/video/stitcher/v1
-    skip_generate: true
   - name: google-cloud-video-transcoder
     version: 2.2.1
     apis:
@@ -3932,7 +3919,6 @@ libraries:
       - samples/get_job_template.rb
       - samples/list_job_templates.rb
       - samples/list_jobs.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:2.0
@@ -3943,7 +3929,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRANSCODER
-    skip_generate: true
   - name: google-cloud-video_intelligence
     version: 4.2.1
     apis:
@@ -3954,7 +3939,6 @@ libraries:
     keep:
       - MIGRATING.md
       - acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -3965,7 +3949,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
-    skip_generate: true
   - name: google-cloud-video_intelligence-v1beta2
     version: 0.17.1
     apis:
@@ -3973,7 +3956,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
-    skip_generate: true
   - name: google-cloud-video_intelligence-v1p1beta1
     version: 0.17.1
     apis:
@@ -3981,7 +3963,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
-    skip_generate: true
   - name: google-cloud-video_intelligence-v1p2beta1
     version: 0.18.1
     apis:
@@ -3989,7 +3970,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
-    skip_generate: true
   - name: google-cloud-video_intelligence-v1p3beta1
     version: 0.14.1
     apis:
@@ -3997,7 +3977,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
-    skip_generate: true
   - name: google-cloud-vision
     version: 2.2.1
     apis:
@@ -4009,7 +3988,6 @@ libraries:
       - MIGRATING.md
       - acceptance/data
       - acceptance/google/cloud/vision/image_annotator_smoke_test.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -4091,7 +4069,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: VmMigration=VMMigration
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:2.0
@@ -4102,12 +4079,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: VmMigration=VMMigration
-    skip_generate: true
   - name: google-cloud-vmware_engine
     version: 2.2.1
     apis:
       - path: google/cloud/vmwareengine/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -4123,7 +4098,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VPC_ACCESS
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.7
@@ -4134,7 +4108,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VPC_ACCESS
-    skip_generate: true
   - name: google-cloud-web_risk
     version: 2.2.1
     apis:
@@ -4144,7 +4117,6 @@ libraries:
             ruby-cloud-env-prefix: WEBRISK
     keep:
       - MIGRATING.md
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -4155,7 +4127,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEBRISK
-    skip_generate: true
   - name: google-cloud-web_risk-v1beta1
     version: 0.16.1
     apis:
@@ -4164,7 +4135,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEBRISK
             ruby-cloud-service-override: WebRiskServiceV1Beta1=WebRiskService
-    skip_generate: true
   - name: google-cloud-web_security_scanner
     version: 2.2.1
     apis:
@@ -4172,7 +4142,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.2
@@ -4183,7 +4152,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
-    skip_generate: true
   - name: google-cloud-web_security_scanner-v1beta
     version: 0.15.1
     apis:
@@ -4191,7 +4159,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
-    skip_generate: true
   - name: google-cloud-workflows
     version: 3.2.1
     apis:
@@ -4211,7 +4178,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
             ruby-cloud-wrapper-gem-override: google-cloud-workflows
-    skip_generate: true
   - name: google-cloud-workflows-executions-v1beta
     version: 0.14.1
     apis:
@@ -4227,7 +4193,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
-    skip_generate: true
   - name: google-cloud-workflows-v1beta
     version: 0.17.1
     apis:
@@ -4235,12 +4200,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
-    skip_generate: true
   - name: google-cloud-workload_manager
     version: 0.2.1
     apis:
       - path: google/cloud/workloadmanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4248,12 +4211,10 @@ libraries:
     version: 0.2.1
     apis:
       - path: google/cloud/workloadmanager/v1
-    skip_generate: true
   - name: google-cloud-workstations
     version: 2.2.1
     apis:
       - path: google/cloud/workstations/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -4261,17 +4222,14 @@ libraries:
     version: 1.6.1
     apis:
       - path: google/cloud/workstations/v1
-    skip_generate: true
   - name: google-cloud-workstations-v1beta
     version: 0.10.1
     apis:
       - path: google/cloud/workstations/v1beta
-    skip_generate: true
   - name: google-developers-developer_knowledge
     version: 0.2.1
     apis:
       - path: google/developers/knowledge/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4279,7 +4237,6 @@ libraries:
     version: 0.3.0
     apis:
       - path: google/developers/knowledge/v1
-    skip_generate: true
   - name: google-iam-client
     version: 1.3.1
     apis:
@@ -4297,7 +4254,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM_CREDENTIALS
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.8
@@ -4308,7 +4264,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM_CREDENTIALS
-    skip_generate: true
   - name: google-iam-v1
     version: 1.7.1
     apis:
@@ -4330,22 +4285,18 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-iam-client
-    skip_generate: true
   - name: google-iam-v3
     version: 0.6.0
     apis:
       - path: google/iam/v3
-    skip_generate: true
   - name: google-iam-v3beta
     version: 0.7.1
     apis:
       - path: google/iam/v3beta
-    skip_generate: true
   - name: google-identity-access_context_manager
     version: 1.7.1
     apis:
       - path: google/identity/accesscontextmanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.7
@@ -4358,7 +4309,6 @@ libraries:
     version: 1.3.1
     apis:
       - path: google/maps/fleetengine/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4366,7 +4316,6 @@ libraries:
     version: 1.3.1
     apis:
       - path: google/maps/fleetengine/delivery/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4377,7 +4326,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-geo-type=>0.0+<2.a
-    skip_generate: true
   - name: google-maps-fleet_engine-v1
     version: 0.10.1
     apis:
@@ -4385,12 +4333,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-geo-type=>0.0+<2.a
-    skip_generate: true
   - name: google-maps-isochrones
     version: 0.1.1
     apis:
       - path: google/maps/isochrones/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4398,7 +4344,6 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/maps/isochrones/v1
-    skip_generate: true
   - name: google-maps-route_optimization
     version: 0.1.0
     apis:
@@ -4416,7 +4361,6 @@ libraries:
     version: 1.4.1
     apis:
       - path: google/shopping/css/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -4427,12 +4371,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-accounts
     version: 0.8.1
     apis:
       - path: google/shopping/merchant/accounts/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.2
@@ -4443,7 +4385,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-accounts-v1beta
     version: 0.14.1
     apis:
@@ -4451,12 +4392,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-conversions
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/conversions/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4464,17 +4403,14 @@ libraries:
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/conversions/v1
-    skip_generate: true
   - name: google-shopping-merchant-conversions-v1beta
     version: 0.7.1
     apis:
       - path: google/shopping/merchant/conversions/v1beta
-    skip_generate: true
   - name: google-shopping-merchant-data_sources
     version: 0.5.1
     apis:
       - path: google/shopping/merchant/datasources/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.2
@@ -4485,7 +4421,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-data_sources-v1beta
     version: 0.9.0
     apis:
@@ -4493,12 +4428,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-inventories
     version: 0.7.1
     apis:
       - path: google/shopping/merchant/inventories/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.2
@@ -4509,7 +4442,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-inventories-v1beta
     version: 0.11.0
     apis:
@@ -4517,12 +4449,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-issue_resolution
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/issueresolution/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4533,7 +4463,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-issue_resolution-v1beta
     version: 0.6.0
     apis:
@@ -4541,12 +4470,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-lfp
     version: 0.5.1
     apis:
       - path: google/shopping/merchant/lfp/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4557,7 +4484,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-lfp-v1beta
     version: 0.8.0
     apis:
@@ -4565,12 +4491,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-notifications
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/notifications/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4578,7 +4502,6 @@ libraries:
     version: 0.4.0
     apis:
       - path: google/shopping/merchant/notifications/v1
-    skip_generate: true
   - name: google-shopping-merchant-notifications-v1beta
     version: 0.7.0
     apis:
@@ -4586,12 +4509,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-order_tracking
     version: 0.3.1
     apis:
       - path: google/shopping/merchant/ordertracking/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4602,7 +4523,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-order_tracking-v1beta
     version: 0.4.0
     apis:
@@ -4610,12 +4530,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-products
     version: 0.5.1
     apis:
       - path: google/shopping/merchant/products/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4626,7 +4544,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-products-v1beta
     version: 0.11.0
     apis:
@@ -4634,12 +4551,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-promotions
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/promotions/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4650,7 +4565,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-promotions-v1beta
     version: 0.7.0
     apis:
@@ -4658,12 +4572,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-quota
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/quota/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4671,17 +4583,14 @@ libraries:
     version: 0.5.0
     apis:
       - path: google/shopping/merchant/quota/v1
-    skip_generate: true
   - name: google-shopping-merchant-quota-v1beta
     version: 0.7.0
     apis:
       - path: google/shopping/merchant/quota/v1beta
-    skip_generate: true
   - name: google-shopping-merchant-reports
     version: 0.6.1
     apis:
       - path: google/shopping/merchant/reports/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.3
@@ -4692,7 +4601,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-    skip_generate: true
   - name: google-shopping-merchant-reports-v1beta
     version: 0.12.0
     apis:
@@ -4700,12 +4608,10 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: google-shopping-merchant-reviews
     version: 0.4.1
     apis:
       - path: google/shopping/merchant/reviews/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -4716,7 +4622,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
-    skip_generate: true
   - name: grafeas
     version: 1.8.1
     apis:
@@ -4727,7 +4632,6 @@ libraries:
             ruby-cloud-migration-version: "1.0"
     keep:
       - MIGRATING.md
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.14
