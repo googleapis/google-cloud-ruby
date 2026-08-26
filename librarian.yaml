@@ -1367,7 +1367,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.6
   - name: google-cloud-dataqna-v1alpha
-    version: 0.13.1
+    version: 0.13.2
     apis:
       - path: google/cloud/dataqna/v1alpha
         ruby:
