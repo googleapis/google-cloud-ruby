@@ -302,8 +302,9 @@ module Google
               #     resource. For example:
               #       "123/environment": "production",
               #       "123/costCenter": "marketing"
-              #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-              #     using tags with Pub/Sub resources.
+              #     See
+              #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+              #     for more information on using tags with Pub/Sub resources.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::PubSub::V1::Topic]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

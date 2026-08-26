@@ -37,6 +37,16 @@ module Google
             rpc :GetAudienceSegment, ::Google::Ads::AdManager::V1::GetAudienceSegmentRequest, ::Google::Ads::AdManager::V1::AudienceSegment
             # Lists `AudienceSegment` objects.
             rpc :ListAudienceSegments, ::Google::Ads::AdManager::V1::ListAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::ListAudienceSegmentsResponse
+            # Activates `AudienceSegment` objects.
+            rpc :BatchActivateAudienceSegments, ::Google::Ads::AdManager::V1::BatchActivateAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::BatchActivateAudienceSegmentsResponse
+            # Deactivates `AudienceSegment` objects.
+            rpc :BatchDeactivateAudienceSegments, ::Google::Ads::AdManager::V1::BatchDeactivateAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateAudienceSegmentsResponse
+            # Approves `AudienceSegment` objects.
+            rpc :BatchApproveAudienceSegments, ::Google::Ads::AdManager::V1::BatchApproveAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::BatchApproveAudienceSegmentsResponse
+            # Rejects `AudienceSegment` objects.
+            rpc :BatchRejectAudienceSegments, ::Google::Ads::AdManager::V1::BatchRejectAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::BatchRejectAudienceSegmentsResponse
+            # Populates `AudienceSegment` objects.
+            rpc :BatchPopulateAudienceSegments, ::Google::Ads::AdManager::V1::BatchPopulateAudienceSegmentsRequest, ::Google::Ads::AdManager::V1::BatchPopulateAudienceSegmentsResponse
           end
 
           Stub = Service.rpc_stub_class

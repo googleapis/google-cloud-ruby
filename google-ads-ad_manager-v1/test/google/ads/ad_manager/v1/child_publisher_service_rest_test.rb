@@ -411,6 +411,226 @@ class ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::ClientTest < Mi
     end
   end
 
+  def test_batch_resend_child_publisher_invitation_emails
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_resend_child_publisher_invitation_emails_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::ServiceStub.stub :transcode_batch_resend_child_publisher_invitation_emails_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_resend_child_publisher_invitation_emails_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_resend_child_publisher_invitation_emails({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_resend_child_publisher_invitation_emails parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_resend_child_publisher_invitation_emails ::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_resend_child_publisher_invitation_emails({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_resend_child_publisher_invitation_emails(::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_resend_child_publisher_invitation_emails_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_renegotiate_child_publisher_agreements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_renegotiate_child_publisher_agreements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::ServiceStub.stub :transcode_batch_renegotiate_child_publisher_agreements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_renegotiate_child_publisher_agreements_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_renegotiate_child_publisher_agreements({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_renegotiate_child_publisher_agreements parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_renegotiate_child_publisher_agreements ::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_renegotiate_child_publisher_agreements({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_renegotiate_child_publisher_agreements(::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_renegotiate_child_publisher_agreements_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_reject_child_publishers
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_reject_child_publishers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::ServiceStub.stub :transcode_batch_reject_child_publishers_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_reject_child_publishers_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_reject_child_publishers({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_reject_child_publishers parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_reject_child_publishers ::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_reject_child_publishers({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_reject_child_publishers(::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_reject_child_publishers_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_withdraw_child_publishers
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_withdraw_child_publishers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::ServiceStub.stub :transcode_batch_withdraw_child_publishers_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_withdraw_child_publishers_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_withdraw_child_publishers({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_withdraw_child_publishers parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_withdraw_child_publishers ::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_withdraw_child_publishers({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_withdraw_child_publishers(::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_withdraw_child_publishers_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

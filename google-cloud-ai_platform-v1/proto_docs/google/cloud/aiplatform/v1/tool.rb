@@ -112,6 +112,13 @@ module Google
           #     by checking for an active Parallel.ai subscription through the Google
           #     Cloud Marketplace.
           #     See https://docs.parallel.ai/search/search-quickstart for more details.
+          # @!attribute [rw] enable_zero_data_retention
+          #   @return [::Boolean]
+          #     Optional. Instructs Vertex Grounding to use Parallel's Zero Data
+          #     Retention Marketplace product. If this value is "false" or omitted, the
+          #     Parallel Web Search for Grounding standard subscription will be used. If
+          #     this value is "true", the Parallel Web Search for Grounding - ZDR
+          #     subscription will be used.
           # @!attribute [rw] custom_configs
           #   @return [::Google::Protobuf::Struct]
           #     Optional. Custom configs for ParallelAiSearch.

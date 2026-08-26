@@ -25,6 +25,37 @@ module Google
           # Path helper methods for the NetworkService API.
           module Paths
             ##
+            # Create a fully-qualified AdUnit resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adUnits/{ad_unit}`
+            #
+            # @param network_code [String]
+            # @param ad_unit [String]
+            #
+            # @return [::String]
+            def ad_unit_path network_code:, ad_unit:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adUnits/#{ad_unit}"
+            end
+
+            ##
+            # Create a fully-qualified DefaultThirdPartyDataDeclaration resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/defaultThirdPartyDataDeclaration`
+            #
+            # @param network_code [String]
+            #
+            # @return [::String]
+            def default_third_party_data_declaration_path network_code:
+              "networks/#{network_code}/defaultThirdPartyDataDeclaration"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:

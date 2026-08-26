@@ -37,6 +37,26 @@ module Google
             rpc :GetNetwork, ::Google::Ads::AdManager::V1::GetNetworkRequest, ::Google::Ads::AdManager::V1::Network
             # Retrieves all the networks the current user has access to.
             rpc :ListNetworks, ::Google::Ads::AdManager::V1::ListNetworksRequest, ::Google::Ads::AdManager::V1::ListNetworksResponse
+            # Updates a `Network` object. Currently, only the network display name can be
+            # updated.
+            rpc :UpdateNetwork, ::Google::Ads::AdManager::V1::UpdateNetworkRequest, ::Google::Ads::AdManager::V1::Network
+            # Provisions a test network associated with the current user. Only one test
+            # network can be provisioned per user.
+            #
+            # Before the test network can be used, you must complete setup in the Ad
+            # Manager UI. If the test network's owner is a service account, you must add
+            # a non-service account user by calling UserService.CreateUser.
+            #
+            # Test networks are limited in the following ways:
+            #
+            #   * Test networks have a maximum of 10,000 objects per entity type.
+            #   * Test networks cannot serve ads.
+            #   * Reports on serving data have zero rows.
+            #   * Forecast service results contain mock data.
+            #   * Test networks do not have Ad Manager 360 or premium features enabled.
+            rpc :ProvisionTestNetwork, ::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest, ::Google::Ads::AdManager::V1::Network
+            # Returns the [DefaultThirdPartyDataDeclaration] for this network.
+            rpc :GetDefaultThirdPartyDataDeclaration, ::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest, ::Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration
           end
 
           Stub = Service.rpc_stub_class

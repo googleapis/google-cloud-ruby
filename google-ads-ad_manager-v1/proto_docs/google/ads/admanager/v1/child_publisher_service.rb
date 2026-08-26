@@ -202,6 +202,144 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message to renegotiate a
+        # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}'s agreement (i.e.,
+        # invite with updated terms).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated. Format:
+        #     `networks/{network_code}/childPublisher/{child_publisher_id}`
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. The display name to set for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        # @!attribute [rw] email_address
+        #   @return [::String]
+        #     Optional. The email address to set for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Optional. The resource name of the Ad Manager network to set for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        #
+        #     This field may not update the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}'s Ad Manager
+        #     network if it is already associated with one.
+        #
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] delegation_type
+        #   @return [::Google::Ads::AdManager::V1::DelegationTypeEnum::DelegationType]
+        #     Optional. The type of delegation to set for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        # @!attribute [rw] parent_revenue_share_millipercent
+        #   @return [::Integer]
+        #     Optional. The revenue share to set that the parent publisher will receive
+        #     in millipercent (e.g., 15000 millipercent is %15) for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        #
+        #     This field is only settable for Manage Account
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s of non-reseller
+        #     parent publishers. Otherwise, it is ignored and always 100%.
+        # @!attribute [rw] seller_id
+        #   @return [::String]
+        #     Optional. The seller ID to set for the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} whose agreement is
+        #     being renegotiated.
+        #
+        #     This field is only applicable to Manage Inventory
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s.
+        class RenegotiateChildPublisherAgreementRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [BatchRenegotiateChildPublisherAgreements][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::RenegotiateChildPublisherAgreementRequest>]
+        #     Required. The requests to renegotiate
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} agreements.
+        class BatchRenegotiateChildPublisherAgreementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [BatchRenegotiateChildPublisherAgreements][] method.
+        class BatchRenegotiateChildPublisherAgreementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [BatchResendChildPublisherInvitationEmails][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names of the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s that should be
+        #     resent invitation emails. Format:
+        #     `networks/{network_code}/childPublisher/{child_publisher_id}`
+        class BatchResendChildPublisherInvitationEmailsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [BatchResendChildPublisherInvitationEmails][] method.
+        class BatchResendChildPublisherInvitationEmailsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [BatchWithdrawChildPublishers][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names of the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to withdraw.
+        #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
+        class BatchWithdrawChildPublishersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [BatchWithdrawChildPublishers][] method.
+        class BatchWithdrawChildPublishersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for [BatchRejectChildPublishers][] method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names of the
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to reject.
+        #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
+        class BatchRejectChildPublishersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [BatchRejectChildPublishers][] method.
+        class BatchRejectChildPublishersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

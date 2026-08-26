@@ -48,6 +48,44 @@ module Google
             # Batch updates [ChildPublisher][google.ads.admanager.v1.ChildPublisher]
             # objects.
             rpc :BatchUpdateChildPublishers, ::Google::Ads::AdManager::V1::BatchUpdateChildPublishersRequest, ::Google::Ads::AdManager::V1::BatchUpdateChildPublishersResponse
+            # Batch resends invitation emails to
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s.
+            #
+            # Only expired and pending
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s can be sent
+            # invitation emails. Rejected, withdrawn, and accepted
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s will be ignored.
+            rpc :BatchResendChildPublisherInvitationEmails, ::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest, ::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsResponse
+            # Batch renegotiates [ChildPublisher][google.ads.admanager.v1.ChildPublisher]
+            # agreements (i.e., invite with updated terms).
+            #
+            # Only the agreements of rejected or withdrawn
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s can be
+            # renegotiated. Expired, pending, and accepted
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s will be ignored.
+            rpc :BatchRenegotiateChildPublisherAgreements, ::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest, ::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsResponse
+            # Batch rejects [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s.
+            #
+            # Only pending or active
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s can be rejected.
+            # Expired, rejected, and withdrawn
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s will be ignored.
+            #
+            # This method is only intended to be called in response to a child user
+            # rejecting an invitation and exists to support the rejection of
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s that are not yet
+            # associated with an Ad Manager network.
+            #
+            # To sever the relationship from the parent publisher's side, use
+            # [BatchWithdrawChildPublisher][].
+            rpc :BatchRejectChildPublishers, ::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest, ::Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse
+            # Batch withdraws [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s.
+            #
+            # Only expired, pending, and accepted
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s can be withdrawn.
+            # Rejected or withdrawn
+            # [ChildPublisher][google.ads.admanager.v1.ChildPublisher]s will be ignored.
+            rpc :BatchWithdrawChildPublishers, ::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest, ::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse
           end
 
           Stub = Service.rpc_stub_class

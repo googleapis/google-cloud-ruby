@@ -157,6 +157,12 @@ module Google
 
               # The Kinesis consumer does not exist.
               CONSUMER_NOT_FOUND = 5
+
+              # Indicates an error state where the ingestion source cannot be
+              # processed because the selected ingestion region is not permitted
+              # by the Regional Access Boundary (RAB) restrictions on the project's
+              # service account.
+              CONFLICTING_REGION_CONSTRAINTS = 6
             end
           end
 
@@ -256,6 +262,12 @@ module Google
               # The Cloud Storage bucket has too many objects, ingestion will be
               # paused.
               TOO_MANY_OBJECTS = 5
+
+              # Indicates an error state where the ingestion source cannot be
+              # processed because the selected ingestion region is not permitted
+              # by the Regional Access Boundary (RAB) restrictions on the project's
+              # service account.
+              CONFLICTING_REGION_CONSTRAINTS = 8
             end
           end
 
@@ -319,6 +331,12 @@ module Google
 
               # The provided Event Hubs resource group couldn't be found.
               RESOURCE_GROUP_NOT_FOUND = 7
+
+              # Indicates an error state where the ingestion source cannot be
+              # processed because the selected ingestion region is not permitted
+              # by the Regional Access Boundary (RAB) restrictions on the project's
+              # service account.
+              CONFLICTING_REGION_CONSTRAINTS = 8
             end
           end
 
@@ -369,6 +387,12 @@ module Google
 
               # The provided topic wasn't found.
               TOPIC_NOT_FOUND = 5
+
+              # Indicates an error state where the ingestion source cannot be
+              # processed because the selected ingestion region is not permitted
+              # by the Regional Access Boundary (RAB) restrictions on the project's
+              # service account.
+              CONFLICTING_REGION_CONSTRAINTS = 6
             end
           end
 
@@ -423,6 +447,12 @@ module Google
 
               # The provided topic wasn't found.
               TOPIC_NOT_FOUND = 6
+
+              # Indicates an error state where the ingestion source cannot be
+              # processed because the selected ingestion region is not permitted
+              # by the Regional Access Boundary (RAB) restrictions on the project's
+              # service account.
+              CONFLICTING_REGION_CONSTRAINTS = 7
             end
           end
         end
@@ -753,6 +783,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for compressing/decompressing message data using a
+        # user-specified compression algorithm.
+        # @!attribute [rw] compression_algorithm
+        #   @return [::Google::Cloud::PubSub::V1::Compression::CompressionAlgorithm]
+        #     Required. Specifies the compression algorithm to use.
+        # @!attribute [rw] compression_mode
+        #   @return [::Google::Cloud::PubSub::V1::Compression::CompressionMode]
+        #     Required. Specifies whether to compress or decompress the message.
+        class Compression
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The compression algorithm to use.
+          module CompressionAlgorithm
+            # Unspecified algorithm.
+            COMPRESSION_ALGORITHM_UNSPECIFIED = 0
+
+            # ZLIB compression.
+            ZLIB = 1
+          end
+
+          # The mode of the compression SMT.
+          module CompressionMode
+            # Unspecified mode.
+            COMPRESSION_MODE_UNSPECIFIED = 0
+
+            # Compress.
+            COMPRESS = 1
+
+            # Decompress.
+            DECOMPRESS = 2
+          end
+        end
+
         # Configuration for making inference requests against Vertex AI models.
         # @!attribute [rw] endpoint
         #   @return [::String]
@@ -793,14 +857,19 @@ module Google
         #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
         #     are specified on a resource, each must have a unique `function_name`.
         #
-        #     Note: The following fields are mutually exclusive: `javascript_udf`, `ai_inference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `javascript_udf`, `compression`, `ai_inference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] compression
+        #   @return [::Google::Cloud::PubSub::V1::Compression]
+        #     Optional. Compression/Decompression.
+        #
+        #     Note: The following fields are mutually exclusive: `compression`, `javascript_udf`, `ai_inference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ai_inference
         #   @return [::Google::Cloud::PubSub::V1::AIInference]
         #     Optional. AI Inference. Specifies the Vertex AI endpoint that inference
         #     requests built from the Pub/Sub message data and provided parameters will
         #     be sent to.
         #
-        #     Note: The following fields are mutually exclusive: `ai_inference`, `javascript_udf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ai_inference`, `javascript_udf`, `compression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enabled
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
@@ -873,8 +942,9 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
-        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-        #     using tags with Pub/Sub resources.
+        #     See
+        #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+        #     for more information on using tags with Pub/Sub resources.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1137,9 +1207,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A subscription resource. If none of `push_config`, `bigquery_config`, or
-        # `cloud_storage_config` is set, then the subscriber will pull and ack messages
-        # using API methods. At most one of these fields may be set.
+        # A subscription resource. If none of `push_config`, `bigquery_config`,
+        # `cloud_storage_config`, or `bigtable_config` is set, then the subscriber will
+        # pull and ack messages using API methods. At most one of these fields may be
+        # set.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Identifier. The name of the subscription. It must have the format
@@ -1298,8 +1369,9 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
-        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-        #     using tags with Pub/Sub resources.
+        #     See
+        #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+        #     for more information on using tags with Pub/Sub resources.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1551,11 +1623,13 @@ module Google
         #     a JSON object in the attributes column.
         # @!attribute [rw] drop_unknown_fields
         #   @return [::Boolean]
-        #     Optional. When true and use_topic_schema is true, any fields that are a
-        #     part of the topic schema that are not part of the BigQuery table schema are
-        #     dropped when writing to BigQuery. Otherwise, the schemas must be kept in
-        #     sync and any messages with extra fields are not written and remain in the
-        #     subscription's backlog.
+        #     Optional. If true and `use_topic_schema` is true, drops any fields that are
+        #     part of the topic schema that are not part of the BigQuery table schema
+        #     when writing to BigQuery. Otherwise, the schemas must be kept in sync and
+        #     any messages with extra fields are not written and remain in the
+        #     subscription's backlog. If true and `use_table_schema` is true, drops any
+        #     fields in the message that are not part of the BigQuery table schema when
+        #     writing to BigQuery. Otherwise, the write to BigQuery will fail.
         # @!attribute [r] state
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig::State]
         #     Output only. An output-only field that indicates whether or not the
@@ -1612,8 +1686,9 @@ module Google
 
         # Configuration for a Bigtable subscription. The Pub/Sub message will be
         # written to a Bigtable row as follows:
-        # - row key: subscription name and message ID delimited by #.
-        # - columns: message bytes written to a single column family "data" with an
+        # - row key: subscription name, message ID hash, and message ID delimited by
+        #   `#`.
+        # - columns: message bytes written to a single column family `data` with an
         #   empty-string column qualifier.
         # - cell timestamp: the message publish timestamp.
         # @!attribute [rw] table
@@ -1660,16 +1735,15 @@ module Google
             # The subscription can actively send messages to Bigtable.
             ACTIVE = 1
 
-            # Cannot write to Bigtable because the instance, table, or app profile
-            # does not exist.
+            # Unused in the current implementation. Placeholder for future use.
             NOT_FOUND = 2
 
-            # Cannot write to Bigtable because the app profile is not configured for
-            # single-cluster routing.
+            # Unused in the current implementation. Placeholder for future use.
             APP_PROFILE_MISCONFIGURED = 3
 
             # Cannot write to Bigtable because of permission denied errors.
             # This can happen if:
+            # - The Bigtable instance, table, or app profile does not exist.
             # - The Pub/Sub service agent has not been granted the
             #   [appropriate Bigtable IAM permission
             #   bigtable.tables.mutateRows](\\{$universe.dns_names.final_documentation_domain}/bigtable/docs/access-control#permissions)
@@ -1677,8 +1751,9 @@ module Google
             #   ([instructions](\\{$universe.dns_names.final_documentation_domain}/service-usage/docs/enable-disable))
             PERMISSION_DENIED = 4
 
-            # Cannot write to Bigtable because of a missing column family ("data") or
-            # if there is no structured row key for the subscription name + message ID.
+            # Cannot write to Bigtable because of a missing column family (`data`), or
+            # if there is no structured row key for the subscription name + message ID,
+            # if because the app profile is not configured for single-cluster routing.
             SCHEMA_MISMATCH = 5
 
             # Cannot write to the destination because enforce_in_transit is set to true
@@ -2186,8 +2261,9 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
-        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-        #     using tags with Pub/Sub resources.
+        #     See
+        #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+        #     for more information on using tags with Pub/Sub resources.
         class CreateSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

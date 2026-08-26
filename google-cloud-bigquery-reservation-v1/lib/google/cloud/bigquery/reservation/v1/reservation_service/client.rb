@@ -3112,6 +3112,93 @@ module Google
               end
 
               ##
+              # Updates an existing reservation group resource.
+              #
+              # @overload update_reservation_group(request, options = nil)
+              #   Pass arguments to `update_reservation_group` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_reservation_group(reservation_group: nil, update_mask: nil)
+              #   Pass arguments to `update_reservation_group` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param reservation_group [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup, ::Hash]
+              #     Required. Content of the reservation group to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Standard field mask for the set of fields to be updated.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateReservationGroupRequest.new
+              #
+              #   # Call the update_reservation_group method.
+              #   result = client.update_reservation_group request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.
+              #   p result
+              #
+              def update_reservation_group request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_reservation_group.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.reservation_group&.name
+                  header_params["reservation_group.name"] = request.reservation_group.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_reservation_group.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_reservation_group.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :update_reservation_group, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ReservationService API.
               #
               # This class represents the configuration for ReservationService,
@@ -3441,6 +3528,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_reservation_groups
+                  ##
+                  # RPC-specific configuration for `update_reservation_group`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_reservation_group
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3502,6 +3594,8 @@ module Google
                     @delete_reservation_group = ::Gapic::Config::Method.new delete_reservation_group_config
                     list_reservation_groups_config = parent_rpcs.list_reservation_groups if parent_rpcs.respond_to? :list_reservation_groups
                     @list_reservation_groups = ::Gapic::Config::Method.new list_reservation_groups_config
+                    update_reservation_group_config = parent_rpcs.update_reservation_group if parent_rpcs.respond_to? :update_reservation_group
+                    @update_reservation_group = ::Gapic::Config::Method.new update_reservation_group_config
 
                     yield self if block_given?
                   end

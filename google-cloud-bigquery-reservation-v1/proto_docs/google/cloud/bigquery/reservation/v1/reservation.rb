@@ -184,6 +184,13 @@ module Google
           #     resources are distributed.
           #
           #     This feature is not yet generally available.
+          # @!attribute [r] reservation_group_path
+          #   @return [::Array<::String>]
+          #     Output only. The reservation group path of the reservation from root to
+          #     leaf. The order of elements matters: the first element is the top level
+          #     group and the last element is the direct parent reservation group. For
+          #     example, if a reservation is under group-1 -> group-2 -> group-3, then the
+          #     reservation group path is ["group-1", "group-2", "group-3"].
           class Reservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -328,6 +335,21 @@ module Google
           #     The reservation_group_id must only contain lower case alphanumeric
           #     characters or dashes. It must start with a letter and must not end with a
           #     dash. Its maximum length is 64 characters.
+          # @!attribute [rw] parent_group
+          #   @return [::String]
+          #     Optional. The parent reservation group of the reservation group.
+          #     Format: `projects/*/locations/*/reservationGroups/team1-prod` for non-root
+          #     reservation groups, or `projects/*/locations/*` for root reservation
+          #     groups.
+          # @!attribute [r] creation_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Creation time of the reservation group.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Last update time of the reservation group via a user
+          #     operation. This timestamp is updated only when an update operation
+          #     explicitly targets this reservation group directly. It is not updated when
+          #     parent or child groups are created, updated, or deleted.
           class ReservationGroup
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,6 +433,8 @@ module Google
               # error code `google.rpc.Code.INVALID_ARGUMENT`.
               COMMITMENT_PLAN_UNSPECIFIED = 0
 
+              # Deprecated: Flex commitments are deprecated. Please use Edition-based
+              # capacity commitments.
               # Flex commitments have committed period of 1 minute after becoming ACTIVE.
               # After that, they are not in a committed period anymore and can be removed
               # any time.
@@ -650,6 +674,19 @@ module Google
           end
 
           # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_reservation_group ReservationService.UpdateReservationGroup}.
+          # @!attribute [rw] reservation_group
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+          #     Required. Content of the reservation group to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. Standard field mask for the set of fields to be updated.
+          class UpdateReservationGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
           # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_capacity_commitment ReservationService.CreateCapacityCommitment}.
           # @!attribute [rw] parent
           #   @return [::String]
@@ -833,10 +870,10 @@ module Google
           # @!attribute [rw] principal
           #   @return [::String]
           #     Optional. Represents the principal for this assignment. If not empty, jobs
-          #     run by this principal will utilize the associated reservation. Otherwise,
-          #     jobs will fall back to using the reservation assigned to the project,
-          #     folder, or organization (in that order). If no reservation is assigned at
-          #     any of these levels, on-demand capacity will be used.
+          #     run by this principal utilize the associated reservation. Otherwise, jobs
+          #     fall back to using the reservation assigned to the project, folder,
+          #     or organization, in that order. If no reservation is assigned at any of
+          #     these levels, on-demand capacity is used.
           #
           #     The supported formats are:
           #
@@ -846,7 +883,7 @@ module Google
           #     * `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID`
           #       for workload identity pool identities.
           #     * The special value `unknown_or_deleted_user` represents principals which
-          #       cannot be read from the user info service, for example deleted users.
+          #       cannot be read from the user info service, for example, deleted users.
           # @!attribute [rw] precedence
           #   @return [::Integer]
           #     Optional. Specifies the priority precedence for this assignment. Used to
@@ -904,6 +941,11 @@ module Google
               # take priority over a default BACKGROUND reservation assignment (if it
               # exists).
               BACKGROUND_SEARCH_INDEX_REFRESH = 9
+
+              # Automated materialized view refresh jobs will use the reservation.
+              # Reservations with this job type will take priority over a default QUERY
+              # reservation assignment (if it exists).
+              AUTOMATIC_MATERIALIZED_VIEW_REFRESH = 10
             end
 
             # Assignment will remain in PENDING state if no active capacity commitment is

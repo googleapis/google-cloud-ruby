@@ -440,6 +440,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_native_style_service_rest
+    skip unless Google::Ads::AdManager.native_style_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.native_style_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::NativeStyleService::Rest::Client, client
+    end
+  end
+
   def test_network_service_rest
     skip unless Google::Ads::AdManager.network_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
