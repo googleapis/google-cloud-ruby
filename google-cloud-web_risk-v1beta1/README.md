@@ -1,13 +1,12 @@
-# Ruby Client for the Web Risk V1beta1 API
-
-API Client library for the Web Risk V1beta1 API
+# Ruby Client for the Web Risk V1BETA1 API
 
 Web Risk is an enterprise security product that lets your client applications check URLs against Google's constantly updated lists of unsafe web resources.
+
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Web Risk V1beta1 API. Most users should consider using
+specific version of the Web Risk V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-web_risk](https://rubygems.org/gems/google-cloud-web_risk).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.compute_threat_list_diff request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-web_risk-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/web-risk)
-for general usage information.
 
 ## Debug Logging
 

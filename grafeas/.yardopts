@@ -1,5 +1,5 @@
 --no-private
---title="Grafeas API"
+--title="Container Analysis API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
@@ -7,5 +7,6 @@
 ./lib/**/*.rb
 -
 README.md
+AUTHENTICATION.md
 MIGRATING.md
 LICENSE.md

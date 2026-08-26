@@ -2,7 +2,6 @@
 
 Manage workflow definitions. To execute workflows and manage executions, see the Workflows Executions API.
 
-Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_workflows request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/workflows/)
-for general usage information.
 
 ## Debug Logging
 
