@@ -4272,7 +4272,7 @@ libraries:
       - README.md
     skip_generate: true
   - name: google-iam-v1beta
-    version: 0.15.1
+    version: 0.15.2
     apis:
       - path: google/iam/v1beta
         ruby:
