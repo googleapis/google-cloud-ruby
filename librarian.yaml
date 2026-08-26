@@ -2200,7 +2200,7 @@ libraries:
             ruby-cloud-env-prefix: MEMCACHE
     skip_generate: true
   - name: google-cloud-memorystore
-    version: 1.2.1
+    version: 1.2.2
     apis:
       - path: google/cloud/memorystore/v1
     ruby:
