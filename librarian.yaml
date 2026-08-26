@@ -4045,7 +4045,7 @@ libraries:
       - test/google/cloud/vision/v1p4beta1/image_annotator_helpers_test.rb
     skip_generate: true
   - name: google-cloud-vision_ai
-    version: 1.2.1
+    version: 1.2.2
     apis:
       - path: google/cloud/visionai/v1
         ruby:
