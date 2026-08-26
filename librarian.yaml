@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.39.0
+version: v0.39.1-0.20260826134152-ac994bb1d7f1
 sources:
   googleapis:
     commit: 4bbbca6b4e74d9c3e599c07ebafc405098ee3036
@@ -4642,4 +4642,4 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GRAFEAS
-    skip_generate: true
+            ruby-cloud-generic-endpoint: true
