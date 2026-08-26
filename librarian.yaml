@@ -3558,7 +3558,7 @@ libraries:
       wrapper_of:
         - v2:0.3
   - name: google-cloud-support-v2
-    version: 1.11.2
+    version: 1.11.3
     apis:
       - path: google/cloud/support/v2
   - name: google-cloud-support-v2beta
