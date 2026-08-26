@@ -2422,7 +2422,7 @@ libraries:
     apis:
       - path: google/cloud/optimization/v1
   - name: google-cloud-oracle_database
-    version: 1.0.1
+    version: 1.0.2
     apis:
       - path: google/cloud/oracledatabase/v1
     ruby:
