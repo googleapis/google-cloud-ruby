@@ -1355,7 +1355,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DATAPROC
   - name: google-cloud-dataqna
-    version: 0.8.1
+    version: 0.8.2
     apis:
       - path: google/cloud/dataqna/v1alpha
         ruby:
