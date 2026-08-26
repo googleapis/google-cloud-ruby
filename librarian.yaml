@@ -3392,7 +3392,7 @@ libraries:
             ruby-cloud-env-prefix: SPANNER
             ruby-cloud-wrapper-gem-override: google-cloud-spanner
   - name: google-cloud-spanner-v1
-    version: 1.19.1
+    version: 1.19.2
     apis:
       - path: google/spanner/v1
         ruby:
