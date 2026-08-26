@@ -278,6 +278,31 @@
               "methods": [
                 "list_audience_segments"
               ]
+            },
+            "BatchActivateAudienceSegments": {
+              "methods": [
+                "batch_activate_audience_segments"
+              ]
+            },
+            "BatchDeactivateAudienceSegments": {
+              "methods": [
+                "batch_deactivate_audience_segments"
+              ]
+            },
+            "BatchApproveAudienceSegments": {
+              "methods": [
+                "batch_approve_audience_segments"
+              ]
+            },
+            "BatchRejectAudienceSegments": {
+              "methods": [
+                "batch_reject_audience_segments"
+              ]
+            },
+            "BatchPopulateAudienceSegments": {
+              "methods": [
+                "batch_populate_audience_segments"
+              ]
             }
           }
         }
@@ -422,6 +447,26 @@
             "BatchUpdateChildPublishers": {
               "methods": [
                 "batch_update_child_publishers"
+              ]
+            },
+            "BatchResendChildPublisherInvitationEmails": {
+              "methods": [
+                "batch_resend_child_publisher_invitation_emails"
+              ]
+            },
+            "BatchRenegotiateChildPublisherAgreements": {
+              "methods": [
+                "batch_renegotiate_child_publisher_agreements"
+              ]
+            },
+            "BatchRejectChildPublishers": {
+              "methods": [
+                "batch_reject_child_publishers"
+              ]
+            },
+            "BatchWithdrawChildPublishers": {
+              "methods": [
+                "batch_withdraw_child_publishers"
               ]
             }
           }
@@ -1310,6 +1355,50 @@
         }
       }
     },
+    "NativeStyleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::NativeStyleService::Client",
+          "rpcs": {
+            "GetNativeStyle": {
+              "methods": [
+                "get_native_style"
+              ]
+            },
+            "ListNativeStyles": {
+              "methods": [
+                "list_native_styles"
+              ]
+            },
+            "BatchCreateNativeStyles": {
+              "methods": [
+                "batch_create_native_styles"
+              ]
+            },
+            "BatchUpdateNativeStyles": {
+              "methods": [
+                "batch_update_native_styles"
+              ]
+            },
+            "BatchActivateNativeStyles": {
+              "methods": [
+                "batch_activate_native_styles"
+              ]
+            },
+            "BatchDeactivateNativeStyles": {
+              "methods": [
+                "batch_deactivate_native_styles"
+              ]
+            },
+            "BatchArchiveNativeStyles": {
+              "methods": [
+                "batch_archive_native_styles"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkService": {
       "clients": {
         "grpc": {
@@ -1323,6 +1412,21 @@
             "ListNetworks": {
               "methods": [
                 "list_networks"
+              ]
+            },
+            "UpdateNetwork": {
+              "methods": [
+                "update_network"
+              ]
+            },
+            "ProvisionTestNetwork": {
+              "methods": [
+                "provision_test_network"
+              ]
+            },
+            "GetDefaultThirdPartyDataDeclaration": {
+              "methods": [
+                "get_default_third_party_data_declaration"
               ]
             }
           }

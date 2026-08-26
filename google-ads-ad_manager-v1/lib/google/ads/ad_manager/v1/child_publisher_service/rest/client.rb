@@ -725,6 +725,364 @@ module Google
               end
 
               ##
+              # Batch resends invitation emails to
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s.
+              #
+              # Only expired and pending
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s can be sent
+              # invitation emails. Rejected, withdrawn, and accepted
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be ignored.
+              #
+              # @overload batch_resend_child_publisher_invitation_emails(request, options = nil)
+              #   Pass arguments to `batch_resend_child_publisher_invitation_emails` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_resend_child_publisher_invitation_emails(parent: nil, names: nil)
+              #   Pass arguments to `batch_resend_child_publisher_invitation_emails` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. Resource names of the
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s that should be
+              #     resent invitation emails. Format:
+              #     `networks/{network_code}/childPublisher/{child_publisher_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest.new
+              #
+              #   # Call the batch_resend_child_publisher_invitation_emails method.
+              #   result = client.batch_resend_child_publisher_invitation_emails request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsResponse.
+              #   p result
+              #
+              def batch_resend_child_publisher_invitation_emails request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchResendChildPublisherInvitationEmailsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_resend_child_publisher_invitation_emails.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_resend_child_publisher_invitation_emails.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_resend_child_publisher_invitation_emails.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @child_publisher_service_stub.batch_resend_child_publisher_invitation_emails request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch renegotiates {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}
+              # agreements (i.e., invite with updated terms).
+              #
+              # Only the agreements of rejected or withdrawn
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s can be
+              # renegotiated. Expired, pending, and accepted
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be ignored.
+              #
+              # @overload batch_renegotiate_child_publisher_agreements(request, options = nil)
+              #   Pass arguments to `batch_renegotiate_child_publisher_agreements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_renegotiate_child_publisher_agreements(parent: nil, requests: nil)
+              #   Pass arguments to `batch_renegotiate_child_publisher_agreements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::RenegotiateChildPublisherAgreementRequest, ::Hash>]
+              #     Required. The requests to renegotiate
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} agreements.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest.new
+              #
+              #   # Call the batch_renegotiate_child_publisher_agreements method.
+              #   result = client.batch_renegotiate_child_publisher_agreements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsResponse.
+              #   p result
+              #
+              def batch_renegotiate_child_publisher_agreements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchRenegotiateChildPublisherAgreementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_renegotiate_child_publisher_agreements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_renegotiate_child_publisher_agreements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_renegotiate_child_publisher_agreements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @child_publisher_service_stub.batch_renegotiate_child_publisher_agreements request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch rejects {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s.
+              #
+              # Only pending or active
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s can be rejected.
+              # Expired, rejected, and withdrawn
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be ignored.
+              #
+              # This method is only intended to be called in response to a child user
+              # rejecting an invitation and exists to support the rejection of
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s that are not yet
+              # associated with an Ad Manager network.
+              #
+              # To sever the relationship from the parent publisher's side, use
+              # [BatchWithdrawChildPublisher][].
+              #
+              # @overload batch_reject_child_publishers(request, options = nil)
+              #   Pass arguments to `batch_reject_child_publishers` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_reject_child_publishers(parent: nil, names: nil)
+              #   Pass arguments to `batch_reject_child_publishers` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. Resource names of the
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to reject.
+              #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest.new
+              #
+              #   # Call the batch_reject_child_publishers method.
+              #   result = client.batch_reject_child_publishers request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse.
+              #   p result
+              #
+              def batch_reject_child_publishers request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchRejectChildPublishersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_reject_child_publishers.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_reject_child_publishers.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_reject_child_publishers.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @child_publisher_service_stub.batch_reject_child_publishers request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch withdraws {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s.
+              #
+              # Only expired, pending, and accepted
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s can be withdrawn.
+              # Rejected or withdrawn
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be ignored.
+              #
+              # @overload batch_withdraw_child_publishers(request, options = nil)
+              #   Pass arguments to `batch_withdraw_child_publishers` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_withdraw_child_publishers(parent: nil, names: nil)
+              #   Pass arguments to `batch_withdraw_child_publishers` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. Resource names of the
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to withdraw.
+              #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest.new
+              #
+              #   # Call the batch_withdraw_child_publishers method.
+              #   result = client.batch_withdraw_child_publishers request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse.
+              #   p result
+              #
+              def batch_withdraw_child_publishers request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_withdraw_child_publishers.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_withdraw_child_publishers.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_withdraw_child_publishers.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @child_publisher_service_stub.batch_withdraw_child_publishers request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ChildPublisherService REST API.
               #
               # This class represents the configuration for ChildPublisherService REST,
@@ -902,6 +1260,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :batch_update_child_publishers
+                  ##
+                  # RPC-specific configuration for `batch_resend_child_publisher_invitation_emails`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_resend_child_publisher_invitation_emails
+                  ##
+                  # RPC-specific configuration for `batch_renegotiate_child_publisher_agreements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_renegotiate_child_publisher_agreements
+                  ##
+                  # RPC-specific configuration for `batch_reject_child_publishers`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_reject_child_publishers
+                  ##
+                  # RPC-specific configuration for `batch_withdraw_child_publishers`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_withdraw_child_publishers
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -917,6 +1295,14 @@ module Google
                     @update_child_publisher = ::Gapic::Config::Method.new update_child_publisher_config
                     batch_update_child_publishers_config = parent_rpcs.batch_update_child_publishers if parent_rpcs.respond_to? :batch_update_child_publishers
                     @batch_update_child_publishers = ::Gapic::Config::Method.new batch_update_child_publishers_config
+                    batch_resend_child_publisher_invitation_emails_config = parent_rpcs.batch_resend_child_publisher_invitation_emails if parent_rpcs.respond_to? :batch_resend_child_publisher_invitation_emails
+                    @batch_resend_child_publisher_invitation_emails = ::Gapic::Config::Method.new batch_resend_child_publisher_invitation_emails_config
+                    batch_renegotiate_child_publisher_agreements_config = parent_rpcs.batch_renegotiate_child_publisher_agreements if parent_rpcs.respond_to? :batch_renegotiate_child_publisher_agreements
+                    @batch_renegotiate_child_publisher_agreements = ::Gapic::Config::Method.new batch_renegotiate_child_publisher_agreements_config
+                    batch_reject_child_publishers_config = parent_rpcs.batch_reject_child_publishers if parent_rpcs.respond_to? :batch_reject_child_publishers
+                    @batch_reject_child_publishers = ::Gapic::Config::Method.new batch_reject_child_publishers_config
+                    batch_withdraw_child_publishers_config = parent_rpcs.batch_withdraw_child_publishers if parent_rpcs.respond_to? :batch_withdraw_child_publishers
+                    @batch_withdraw_child_publishers = ::Gapic::Config::Method.new batch_withdraw_child_publishers_config
 
                     yield self if block_given?
                   end

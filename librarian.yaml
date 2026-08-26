@@ -15,8 +15,8 @@ language: ruby
 version: v0.39.1-0.20260826134152-ac994bb1d7f1
 sources:
   googleapis:
-    commit: 4bbbca6b4e74d9c3e599c07ebafc405098ee3036
-    sha256: ccbf99f927e0ae45e8a43c3b6785409acfd05755c4c092141f5e2cc8139b1487
+    commit: 40c9c54b96bfc48dc7794aa55166c3b560abdbd4
+    sha256: 47ae8d43cc86bacf8458ed6eb460347483b56765339600672343741ea7244add
 tools:
   gem:
     - name: gapic-generator-cloud

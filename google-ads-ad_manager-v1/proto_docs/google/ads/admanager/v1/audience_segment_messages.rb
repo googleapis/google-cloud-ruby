@@ -22,20 +22,170 @@ module Google
     module AdManager
       module V1
         # The `AudienceSegment` resource.
+        # @!attribute [rw] non_rule_based_first_party_audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment::NonRuleBasedFirstPartyAudienceSegment]
+        #     Optional. An `AudienceSegment` owned by the publisher network that does
+        #     not contain a rule. Cookies are usually added to these segments through
+        #     cookie upload.
+        #
+        #     Note: The following fields are mutually exclusive: `non_rule_based_first_party_audience_segment`, `rule_based_first_party_audience_segment`, `third_party_audience_segment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rule_based_first_party_audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment::RuleBasedFirstPartyAudienceSegment]
+        #     Optional. An `AudienceSegment` owned by the publisher network that
+        #     contains a rule.
+        #
+        #     Note: The following fields are mutually exclusive: `rule_based_first_party_audience_segment`, `non_rule_based_first_party_audience_segment`, `third_party_audience_segment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] third_party_audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment::ThirdPartyAudienceSegment]
+        #     Output only. An `AudienceSegment` owned by a data provider and licensed
+        #     to the Ad Manager publisher network.
+        #
+        #     Note: The following fields are mutually exclusive: `third_party_audience_segment`, `non_rule_based_first_party_audience_segment`, `rule_based_first_party_audience_segment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the `AudienceSegment`.
         #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
-        #     The `audience_segment_id` may have up to 1 of the following suffixes:
+        #     The `audience_segment_id` is not always numerical and may have one of
+        #     the following suffixes:
         #       - `~direct` for directly licensed third-party segments
         #       - `~global` for globally licensed third-party segments
+        # @!attribute [r] shared_id
+        #   @return [::Integer]
+        #     Output only. The ID of the `AudienceSegment`. Up to two resources may share
+        #     this ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Display name of the `AudienceSegment`. The attribute has a
         #     maximum length of 255 characters.
+        # @!attribute [rw] category_ids
+        #   @return [::Array<::Integer>]
+        #     Optional. Unordered list. IDs of the categories that this audience segment
+        #     belongs to. See `segment_categories` for additional information about the
+        #     categories.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the `AudienceSegment`. This has a maximum length
+        #     of 8192 characters.
+        # @!attribute [r] status
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegmentStatusEnum::AudienceSegmentStatus]
+        #     Output only. Non-empty default. Status of the `AudienceSegment` used to
+        #     determine whether the segment is available for targeting. Defaults to
+        #     `ACTIVE` if not set.
+        # @!attribute [r] size
+        #   @return [::Integer]
+        #     Output only. Number of unique identifiers in the `AudienceSegment`.
+        # @!attribute [r] mobile_web_size
+        #   @return [::Integer]
+        #     Output only. Number of unique mobile web identifiers in the
+        #     `AudienceSegment`.
+        # @!attribute [r] idfa_size
+        #   @return [::Integer]
+        #     Output only. Number of unique Identifier for Advertisers (IDFA) identifiers
+        #     in the `AudienceSegment`.
+        # @!attribute [r] ad_id_size
+        #   @return [::Integer]
+        #     Output only. Number of unique AdID identifiers in the `AudienceSegment`.
+        # @!attribute [r] ppid_size
+        #   @return [::Integer]
+        #     Output only. Number of unique publisher-provided (PPID) identifiers in the
+        #     `AudienceSegment`.
+        # @!attribute [r] data_provider_display_name
+        #   @return [::String]
+        #     Output only. Display name of the owner data provider. For a first-party
+        #     audience segment, this is the display name of the publisher network.
+        #     Otherwise, this is the display name of the entity providing the audience
+        #     segment.
+        # @!attribute [r] segment_type
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegmentTypeEnum::AudienceSegmentType]
+        #     Output only. Non-empty default. Type of the `AudienceSegment`. Every
+        #     `AudienceSegment` is either `FIRST_PARTY` or `THIRD_PARTY`.
         class AudienceSegment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An `AudienceSegment` owned by the publisher network that does not contain
+          # a rule. Cookies are usually added to these segments through cookie upload.
+          # @!attribute [rw] membership_expiration_days
+          #   @return [::Integer]
+          #     Required. Number of days after which a user's cookie will be removed from
+          #     the `AudienceSegment` due to inactivity. The field can be between 1 and
+          #     540.
+          class NonRuleBasedFirstPartyAudienceSegment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An `AudienceSegment` owned by the publisher network that contains a rule.
+          # @!attribute [rw] page_views
+          #   @return [::Integer]
+          #     Required. Number of times a user's cookie must match the `rule` before
+          #     it's associated with the `AudienceSegment`. This is used with
+          #     `recency_days` to determine eligibility of the association. This
+          #     attribute is between 1 and 12.
+          # @!attribute [rw] recency_days
+          #   @return [::Integer]
+          #     Optional. Number of days within which a user's cookie must match the
+          #     `rule` before it's associated with the `AudienceSegment`. This is used
+          #     with `page_views` to determine eligibility of the association. This
+          #     attribute is required if `page_views` is greater than 1. When set, it can
+          #     be between 1 and 30.
+          # @!attribute [rw] membership_expiration_days
+          #   @return [::Integer]
+          #     Required. Number of days after which a user's cookie will be removed from
+          #     the `AudienceSegment` due to inactivity. The field can be between 1 and
+          #     540.
+          # @!attribute [rw] rule
+          #   @return [::Google::Ads::AdManager::V1::AudienceSegment::Rule]
+          #     Required. The rule definition which determines the eligibility criteria
+          #     for the `AudienceSegment`.
+          class RuleBasedFirstPartyAudienceSegment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An `AudienceSegment` owned by a data provider and licensed to the
+          # Ad Manager publisher network.
+          # @!attribute [r] approval_status
+          #   @return [::Google::Ads::AdManager::V1::AudienceSegmentApprovalStatusEnum::AudienceSegmentApprovalStatus]
+          #     Output only. Whether the publisher has approved or rejected the segment.
+          # @!attribute [r] cost
+          #   @return [::Google::Type::Money]
+          #     Output only. The CPM cost for the given segment. This is assigned by the
+          #     data provider. The CPM cost comes from the active pricing if it exists,
+          #     otherwise it comes from the latest pricing.
+          # @!attribute [r] license_type
+          #   @return [::Google::Ads::AdManager::V1::AudienceSegmentLicenseTypeEnum::AudienceSegmentLicenseType]
+          #     Output only. The license type of the external segment.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time which this segment becomes available for use. It is
+          #     assigned by the data provider.
+          # @!attribute [r] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time which this segment ceases to be available. It is
+          #     assigned by the data provider.
+          class ThirdPartyAudienceSegment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Eligibility criteria for a user to be part of an `AudienceSegment`.
+          # @!attribute [rw] inventory_targeting
+          #   @return [::Google::Ads::AdManager::V1::InventoryTargeting]
+          #     Required. Specification of inventory (i.e. ad units and placements) that
+          #     are part of the rule of the RuleBasedFirstPartyAudienceSegment.
+          # @!attribute [rw] custom_targeting
+          #   @return [::Google::Ads::AdManager::V1::CustomTargeting]
+          #     Optional. Specification of custom criteria that are part of the rule of
+          #     the RuleBasedFirstPartyAudienceSegment. Once specified, the server may
+          #     return a normalized but equivalent representation of the rule. There are
+          #     up to 3 levels of custom criteria allowed. See
+          #     {::Google::Ads::AdManager::V1::CustomTargeting CustomTargeting} and its
+          #     sub-messages for limitations.
+          class Rule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

@@ -281,7 +281,7 @@ module Google
               # report is run.
               LAST_6_MONTHS = 19
 
-              # The entire previous 6 calendar months preceding the calendar month the
+              # The entire previous 12 calendar months preceding the calendar month the
               # report is run.
               LAST_12_MONTHS = 20
 
@@ -3162,7 +3162,8 @@ module Google
             # Corresponds to "Demand subchannel value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             DEMAND_SUBCHANNEL = 22
@@ -3173,7 +3174,8 @@ module Google
             #
             # Corresponds to "Demand subchannel" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             DEMAND_SUBCHANNEL_NAME = 23
@@ -3552,6 +3554,17 @@ module Google
             #
             # Data format: `STRING`
             HEADER_BIDDER_INTEGRATION_TYPE_NAME = 719
+
+            # High engagement ads allowed.
+            #
+            #
+            #
+            # Corresponds to "High engagement ads allowed" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `BOOLEAN`
+            HIGH_ENGAGEMENT_ADS_ALLOWED = 838
 
             # Breaks down reporting data by hour in one day.
             #
@@ -6779,6 +6792,29 @@ module Google
             #
             # Data format: `STRING`
             VIDEO_STITCHER_TYPE_NAME = 753
+
+            # Web interstitial trigger type.
+            #
+            #
+            #
+            # Corresponds to "Web interstitial trigger type value" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            WEB_INTERSTITIAL_TRIGGER_TYPE = 826
+
+            # Localized name of the web interstitial trigger type.
+            #
+            #
+            #
+            # Corresponds to "Web interstitial trigger type" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            WEB_INTERSTITIAL_TRIGGER_TYPE_NAME = 827
 
             # Web property code
             #

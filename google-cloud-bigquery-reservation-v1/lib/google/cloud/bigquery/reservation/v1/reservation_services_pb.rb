@@ -286,6 +286,8 @@ module Google
               rpc :DeleteReservationGroup, ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest, ::Google::Protobuf::Empty
               # Lists all the reservation groups for the project in the specified location.
               rpc :ListReservationGroups, ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest, ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsResponse
+              # Updates an existing reservation group resource.
+              rpc :UpdateReservationGroup, ::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationGroupRequest, ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup
             end
 
             Stub = Service.rpc_stub_class
