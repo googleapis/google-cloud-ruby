@@ -217,4 +217,53 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     listener.stop
     listener.wait!
   end
+
+  it "nacks unprocessed messages when stopped with nack_immediately" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    stub = StreamingPullStub.new [[pull_res1]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    message_received = Concurrent::Event.new
+    block_callback = Concurrent::Event.new
+
+    listener = subscriber.listen streams: 1 do |_msg|
+      message_received.set
+      block_callback.wait
+    end
+    listener.instance_variable_set :@shutdown_behavior, :nack_immediately
+
+    listener.start
+    message_received.wait
+
+    listener.stream_pool.first.stop
+    block_callback.set
+    listener.buffer.stop
+
+    # Verifies that exactly one 0-second ModifyAckDeadline (NACK) was dispatched.
+    assert_equal 1, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+  end
+
+  it "waits for processing when stopped with wait_for_processing" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    stub = StreamingPullStub.new [[pull_res1]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    message_processed = Concurrent::Event.new
+
+    listener = subscriber.listen streams: 1 do |_msg|
+      message_processed.set
+    end
+
+    listener.start
+    message_processed.wait
+
+    stream = listener.stream_pool.first
+    stream.stop
+    stream.wait!
+    listener.buffer.stop
+
+    assert message_processed.set?
+    # Confirms that no 0-second ModifyAckDeadline (NACK) was dispatched.
+    assert_equal 0, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+  end
 end
