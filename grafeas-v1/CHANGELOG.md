@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.1 (2026-08-27)
+
+#### Bug Fixes
+
+* onboard grafeas-v1 to Librarian ([#36468](https://github.com/googleapis/google-cloud-ruby/issues/36468)) 
+
 ### 1.10.0 (2026-07-27)
 
 #### Features

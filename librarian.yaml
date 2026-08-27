@@ -4636,7 +4636,7 @@ libraries:
       wrapper_of:
         - v1:0.14
   - name: grafeas-v1
-    version: 1.10.0
+    version: 1.10.1
     apis:
       - path: grafeas/v1
         ruby:
