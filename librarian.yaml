@@ -1120,7 +1120,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-config_service-v1
-    version: 2.11.0
+    version: 2.12.0
     apis:
       - path: google/cloud/config/v1
   - name: google-cloud-connectors
