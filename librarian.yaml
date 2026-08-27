@@ -2739,7 +2739,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: PROFILER
   - name: google-cloud-pubsub-v1
-    version: 1.16.1
+    version: 1.17.0
     apis:
       - path: google/pubsub/v1
         ruby:

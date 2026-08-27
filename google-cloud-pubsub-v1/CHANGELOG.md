@@ -1,5 +1,15 @@
 # Release History
 
+### 1.17.0 (2026-08-27)
+
+#### Features
+
+* Add compiled_proto_schema to Schema for schema imports ([#36319](https://github.com/googleapis/google-cloud-ruby/issues/36319)) 
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
 ### 1.16.1 (2026-08-06)
 
 #### Bug Fixes
