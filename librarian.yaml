@@ -1513,7 +1513,7 @@ libraries:
       - path: google/cloud/discoveryengine/v1
     skip_generate: true
   - name: google-cloud-discovery_engine-v1beta
-    version: 0.29.0
+    version: 0.30.0
     apis:
       - path: google/cloud/discoveryengine/v1beta
   - name: google-cloud-dlp
