@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2026-08-27)
+
+#### Features
+
+* publish public v1 proto for DocumentChunk.relevance_score ([#36320](https://github.com/googleapis/google-cloud-ruby/issues/36320)) 
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
 ### 0.3.0 (2026-08-20)
 
 #### Features
