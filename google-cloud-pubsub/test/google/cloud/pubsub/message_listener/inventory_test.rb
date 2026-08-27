@@ -271,4 +271,43 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
 
     _(inventory.min_duration_per_lease_extension).must_equal 10
   end
+
+  it "waits until inventory is empty" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    assert inventory.wait_until_empty(0.01)
+
+    inventory.add rec_msg1_grpc
+    refute inventory.empty?
+
+    thread = Thread.new do
+      inventory.remove "ack-id-1111"
+    end
+
+    result = inventory.wait_until_empty 1.0
+    thread.join
+    assert result
+    assert inventory.empty?
+  end
+
+  it "returns false when wait_until_empty times out" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    inventory.add rec_msg1_grpc
+    result = inventory.wait_until_empty 0.01
+    refute result
+    refute inventory.empty?
+  end
 end
