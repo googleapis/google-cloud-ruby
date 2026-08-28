@@ -324,6 +324,16 @@ module Google
         #       acknowledgement ({ReceivedMessage#ack!}) and modify ack deadline
         #       messages ({ReceivedMessage#nack!},
         #       {ReceivedMessage#modify_ack_deadline!}). Default is 4.
+        # @param [Symbol] shutdown_behavior The strategy used to handle
+        #   unprocessed messages when stopping the subscriber.
+        #   Supported values:
+        #   * `:wait_for_processing` (default) - Waits for in-flight callbacks
+        #     to complete and acknowledge or nack messages.
+        #   * `:nack_immediately` - Immediately nacks all unprocessed messages
+        #     back to Pub/Sub for rapid redelivery to other subscribers.
+        # @param [Numeric, nil] shutdown_timeout The maximum number of seconds
+        #   to wait during shutdown before forcing remaining in-flight messages
+        #   to be nacked. Default is `nil` (blocks indefinitely until callbacks finish).
         #
         # @yield [received_message] a block for processing new messages
         # @yieldparam [ReceivedMessage] received_message the newly received
@@ -408,13 +418,16 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
-        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
+        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {},
+                   shutdown_behavior: :wait_for_processing, shutdown_timeout: nil, &block
           ensure_service!
           deadline ||= self.deadline
           message_ordering = message_ordering? if message_ordering.nil?
 
           MessageListener.new name, block, deadline: deadline, streams: streams, inventory: inventory,
-                                      message_ordering: message_ordering, threads: threads, service: service
+                                      message_ordering: message_ordering, threads: threads,
+                                      shutdown_behavior: shutdown_behavior, shutdown_timeout: shutdown_timeout,
+                                      service: service
         end
 
         ##
