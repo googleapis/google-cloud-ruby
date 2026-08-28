@@ -310,4 +310,27 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
     refute result
     refute inventory.empty?
   end
+
+  it "returns when stopped even if inventory is not empty" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    inventory.add rec_msg1_grpc
+    refute inventory.empty?
+
+    thread = Thread.new do
+      sleep 0.05
+      inventory.stop
+    end
+
+    result = inventory.wait_until_empty
+    thread.join
+    refute result
+    refute inventory.empty?
+  end
 end
