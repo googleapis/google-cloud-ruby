@@ -121,14 +121,14 @@ module Google
 
               if timeout
                 target_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
-                while !@inventory.empty?
+                while !@inventory.empty? && !@stopped
                   remaining = target_time - Process.clock_gettime(Process::CLOCK_MONOTONIC)
                   break if remaining <= 0
 
                   @wait_cond.wait remaining
                 end
               else
-                @wait_cond.wait_while { !@inventory.empty? }
+                @wait_cond.wait_while { !@inventory.empty? && !@stopped }
               end
               @inventory.empty?
             end

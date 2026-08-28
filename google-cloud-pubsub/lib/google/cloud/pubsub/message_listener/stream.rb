@@ -134,11 +134,11 @@ module Google
 
               @keepalive_monitor.stop
 
-              # When :nack_immediately, release all queued messages immediately.
-              nack_unprocessed_messages! if nack_immediately?
-
-              # Stop accepting new callbacks while letting queued callbacks complete.
-              @callback_thread_pool.shutdown
+              # When :nack_immediately, release all queued messages immediately and shut down callback pool.
+              if nack_immediately?
+                nack_unprocessed_messages!
+                @callback_thread_pool.shutdown
+              end
             end
 
             self
@@ -191,15 +191,18 @@ module Google
           # @param [Numeric, nil] timeout The maximum seconds to wait, or nil to wait indefinitely.
           # @return [Stream] self for chaining.
           def wait! timeout = nil
+            deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout if timeout
             emptied = @inventory.wait_until_empty timeout
             nack_unprocessed_messages! unless emptied
-            @callback_thread_pool.wait_for_termination timeout
- 
+
+            @callback_thread_pool.shutdown
+            pool_timeout = [deadline - Process.clock_gettime(Process::CLOCK_MONOTONIC), 0].max if deadline
+            @callback_thread_pool.wait_for_termination pool_timeout
+
             # Once all callbacks are finished and inventory is clear, stop the inventory.
             @inventory.stop
             self
           end
-
 
           def request_queue_active?
             !@request_queue.nil?
@@ -511,7 +514,7 @@ module Google
             @subscriber.error! e
           ensure
             release rec_msg
-            if @sequencer && running?
+            if @sequencer && !nack_immediately?
               begin
                 @sequencer.next rec_msg
               rescue OrderedMessageDeliveryError => e
