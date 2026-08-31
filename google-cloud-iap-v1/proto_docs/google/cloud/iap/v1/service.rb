@@ -503,7 +503,7 @@ module Google
         #   @return [::String]
         #     Required. User input string expression. Should be of the form
         #     `attributes.saml_attributes.filter(attribute, attribute.name in
-        #     ['\\{attribute_name}', '\\{attribute_name}'])`
+        #     ['{attribute_name}', '{attribute_name}'])`
         class ValidateIapAttributeExpressionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

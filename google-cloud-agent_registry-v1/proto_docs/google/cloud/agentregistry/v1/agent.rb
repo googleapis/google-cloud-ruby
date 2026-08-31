@@ -67,10 +67,10 @@ module Google
         #     Output only. Attributes of the Agent.
         #     Valid values:
         #
-        #      * `agentregistry.googleapis.com/system/Framework`: {"framework":
+        #      * `agentregistry.googleapis.com/system/Framework`: \\{"framework":
         #      "google-adk"} - the agent framework used to develop the Agent. Example
         #      values: "google-adk", "langchain", "custom".
-        #      * `agentregistry.googleapis.com/system/RuntimeIdentity`: {"principal":
+        #      * `agentregistry.googleapis.com/system/RuntimeIdentity`: \\{"principal":
         #      "principal://..."} - the runtime identity associated with the Agent.
         #      * `agentregistry.googleapis.com/system/RuntimeReference`: \\{"uri": "//..."}
         #      - the URI of the underlying resource hosting the Agent, for

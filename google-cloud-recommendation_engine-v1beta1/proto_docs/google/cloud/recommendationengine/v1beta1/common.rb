@@ -33,7 +33,7 @@ module Google
         #     Feature names and values must be UTF-8 encoded strings.
         #
         #     For example: `{ "colors": {"value": ["yellow", "green"]},
-        #                     "sizes": \\{"value":["S", "M"]}`
+        #                     "sizes": {"value":["S", "M"]}`
         # @!attribute [rw] numerical_features
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecommendationEngine::V1beta1::FeatureMap::FloatList}]
         #     Numerical features. Some examples would be the height/weight of a product,
@@ -42,7 +42,7 @@ module Google
         #     Feature names must be UTF-8 encoded strings.
         #
         #     For example: `{ "lengths_cm": {"value":[2.3, 15.4]},
-        #                     "heights_cm": \\{"value":[8.1, 6.4]} }`
+        #                     "heights_cm": {"value":[8.1, 6.4]} }`
         class FeatureMap
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

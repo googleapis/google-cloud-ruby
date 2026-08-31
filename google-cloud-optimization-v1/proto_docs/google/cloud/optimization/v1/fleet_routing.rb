@@ -2914,7 +2914,7 @@ module Google
         #     done as follows:
         #     ```
         #     fields { name: "vehicles" index: 4}
-        #     fields { name: "shipments" index: 2 sub_field \\{name: "pickups" index: 0} }
+        #     fields { name: "shipments" index: 2 sub_field {name: "pickups" index: 0} }
         #     ```
         #     Note, however, that the cardinality of `fields` should not change for a
         #     given error code.
