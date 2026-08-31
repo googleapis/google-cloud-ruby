@@ -800,7 +800,7 @@ module Google
           #     location parts of the resource name must match the project and location of
           #     the lineage resource being created. Examples:
           #
-          #     - `{source_type: COMPOSER, name:
+          #     - `\\{source_type: COMPOSER, name:
           #       "projects/foo/locations/us/environments/bar"}`
           #     - `{source_type: BIGQUERY, name: "projects/foo/locations/eu"}`
           #     - `{source_type: CUSTOM,   name: "myCustomIntegration"}`

@@ -1676,7 +1676,7 @@ module Google
               #   @param filter [::String]
               #     Optional. An expression for filtering the results of the request. Only the
               #     `shape_family` and `gcp_oracle_zone_id` fields are supported in the
-              #     following format: `shape_family="{shape_family}" AND
+              #     following format: `shape_family="\\{shape_family}" AND
               #     gcp_oracle_zone_id="\\{gcp_oracle_zone_id}"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::MinorVersion>]
@@ -1773,7 +1773,7 @@ module Google
               #     Optional. An expression for filtering the results of the request. The
               #     `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
               #     are supported in the following format:
-              #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+              #     `gcp_oracle_zone_id="\\{gcp_oracle_zone_id}" AND
               #     shape_family="\\{shape_family}" AND database_edition="\\{database_edition}"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbSystemShape>]

@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the `ResourceBundle`. Format is
-        #     `projects/{project}/locations/{location}/resourceBundle
+        #     `projects/\\{project}/locations/\\{location}/resourceBundle
         #     /[a-z][a-z0-9\-]\\{0,62}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

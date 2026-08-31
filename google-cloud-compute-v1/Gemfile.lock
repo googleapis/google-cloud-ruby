@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    google-cloud-compute-v1 (3.9.0)
+    google-cloud-compute-v1 (3.10.0)
       gapic-common (~> 1.3)
       google-cloud-common (~> 1.0)
       google-cloud-errors (~> 1.0)
@@ -235,7 +235,7 @@ CHECKSUMS
   faraday-retry (2.4.0) sha256=7b79c48fb7e56526faf247b12d94a680071ff40c9fda7cf1ec1549439ad11ebe
   gapic-common (1.3.0) sha256=4e5d9be1effb7366e2cda13c0f44922285d5613ac8de8b9b18c2c835fe4faa91
   google-cloud-common (1.10.0) sha256=f8036aa5a5f6a32d9ccab652f0f52a996ac02f5be83f403075465e8ba99238ee
-  google-cloud-compute-v1 (3.9.0)
+  google-cloud-compute-v1 (3.10.0)
   google-cloud-env (2.4.0) sha256=01cb35ecee5d1c4d1cd4deaed8bb5bddc838e296bcc2a35c5d1ddd07ce40d28d
   google-cloud-errors (1.7.0) sha256=6e682f42d89aae08689f36f28495de629d756da076bafff0003bac7f8042ebb3
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b

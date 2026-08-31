@@ -45,7 +45,7 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [r] data_path_id
         #   @return [::Integer]
-        #     Output only. Identifier used by the data-path. Unique within `{container,
+        #     Output only. Identifier used by the data-path. Unique within `\\{container,
         #     location}`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]

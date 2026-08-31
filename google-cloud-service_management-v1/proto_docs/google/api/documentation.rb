@@ -161,7 +161,7 @@ module Google
     #     `[Java][Tutorial.Java]`.
     # @!attribute [rw] content
     #   @return [::String]
-    #     The Markdown content of the page. You can use ```(== include {path}
+    #     The Markdown content of the page. You can use ```(== include \\{path}
     #     ==)``` to include content from a Markdown file. The content can be used
     #     to produce the documentation page such as HTML format page.
     # @!attribute [rw] subpages

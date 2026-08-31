@@ -605,7 +605,7 @@ module Google
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::Message>]
           #     Required. The messages that the Summary will be generated from. It is
           #     expected that this message content is already redacted and does not
-          #     contain any PII. Required fields: {content, language_code, participant,
+          #     contain any PII. Required fields: \\{content, language_code, participant,
           #     participant_role} Optional fields: \\{send_time} If send_time is not
           #     provided, then the messages must be provided in chronological order.
           # @!attribute [rw] parent

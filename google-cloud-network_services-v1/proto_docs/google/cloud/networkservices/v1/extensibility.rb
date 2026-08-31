@@ -108,7 +108,7 @@ module Google
           #     value is used instead of an image tag.
           #
           #     * Generic artifacts: the `plugin_config_uri` must be in this format:
-          #     `projects/{project}/locations/{location}/repositories/{repository}/
+          #     `projects/\\{project}/locations/\\{location}/repositories/\\{repository}/
           #     genericArtifacts/\\{package}:\\{version}`.
           #     The specified package and version must contain a file with the name
           #     `plugin.config`. When a new `WasmPluginVersion` resource is
@@ -144,7 +144,7 @@ module Google
           #     is used instead of an image tag.
           #
           #     * Generic artifacts: the `image_uri` must be in this format:
-          #     `projects/{project}/locations/{location}/repositories/{repository}/
+          #     `projects/\\{project}/locations/\\{location}/repositories/\\{repository}/
           #     genericArtifacts/\\{package}:\\{version}`.
           #     The specified package and version must contain a file with the name
           #     `plugin.wasm`. When a new `WasmPluginVersion` resource is created, the
@@ -295,7 +295,7 @@ module Google
         #     value is used instead of an image tag.
         #
         #     * Generic artifacts: the `plugin_config_uri` must be in this format:
-        #     `projects/{project}/locations/{location}/repositories/{repository}/
+        #     `projects/\\{project}/locations/\\{location}/repositories/\\{repository}/
         #     genericArtifacts/\\{package}:\\{version}`.
         #     The specified package and version must contain a file with the name
         #     `plugin.config`. When a new `WasmPluginVersion` resource is
@@ -306,7 +306,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the `WasmPluginVersion` resource in the following
-        #     format: `projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/
+        #     format: `projects/\\{project}/locations/\\{location}/wasmPlugins/\\{wasm_plugin}/
         #     versions/\\{wasm_plugin_version}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -336,7 +336,7 @@ module Google
         #     is used instead of an image tag.
         #
         #     * Generic artifacts: the `image_uri` must be in this format:
-        #     `projects/{project}/locations/{location}/repositories/{repository}/
+        #     `projects/\\{project}/locations/\\{location}/repositories/\\{repository}/
         #     genericArtifacts/\\{package}:\\{version}`.
         #     The specified package and version must contain a file with the name
         #     `plugin.wasm`. When a new `WasmPluginVersion` resource is created, the

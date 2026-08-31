@@ -52,7 +52,7 @@ module Google
         #     Output only. Attributes of the MCP Server.
         #     Valid values:
         #
-        #      * `agentregistry.googleapis.com/system/RuntimeIdentity`: {"principal":
+        #      * `agentregistry.googleapis.com/system/RuntimeIdentity`: \\{"principal":
         #      "principal://..."} - the runtime identity associated with the MCP Server.
         #      * `agentregistry.googleapis.com/system/RuntimeReference`: \\{"uri": "//..."}
         #      - the URI of the underlying resource hosting the MCP Server, for

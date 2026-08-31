@@ -629,7 +629,7 @@ module Google
         #     the documents.
         #
         #     For {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} it is the
-        #     key of the JSON field. For instance, `my_id` for JSON `{"my_id":
+        #     key of the JSON field. For instance, `my_id` for JSON `\\{"my_id":
         #     "some_uuid"}`. For others, it may be the column name of the table where the
         #     unique ids are stored.
         #

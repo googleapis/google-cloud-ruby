@@ -397,7 +397,7 @@ module Google
         # entire file path (i.e., everything in the url after the bucket name) must
         # match the regular expression.
         #
-        # For example, given the input `{bucket_name: "mybucket", include_regex:
+        # For example, given the input `\\{bucket_name: "mybucket", include_regex:
         # ["directory1/.*"], exclude_regex:
         # ["directory1/excluded.*"]}`:
         #

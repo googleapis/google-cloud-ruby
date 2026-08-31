@@ -600,7 +600,7 @@ module Google
           #   @return [::Array<::Google::Shopping::Type::Price>]
           #     Required. A list of inclusive order price upper bounds. The last price's
           #     value can be infinity by setting price amount_micros = -1. For example
-          #     `[{"amount_micros": 10000000, "currency_code": "USD"},
+          #     `[\\{"amount_micros": 10000000, "currency_code": "USD"},
           #     \\{"amount_micros": 500000000, "currency_code": "USD"},
           #     \\{"amount_micros": -1, "currency_code": "USD"}]` represents the headers
           #     "<= $10", "<= $500", and "> $500". All prices within a service must have
@@ -610,7 +610,7 @@ module Google
           #   @return [::Array<::Google::Shopping::Type::Weight>]
           #     Required. A list of inclusive order weight upper bounds. The last weight's
           #     value can be infinity by setting price amount_micros = -1. For example
-          #     `[{"amount_micros": 10000000, "unit": "kg"}, {"amount_micros": 50000000,
+          #     `[\\{"amount_micros": 10000000, "unit": "kg"}, \\{"amount_micros": 50000000,
           #     "unit": "kg"},
           #     \\{"amount_micros": -1, "unit": "kg"}]` represents the headers
           #     "<= 10kg", "<= 50kg", and "> 50kg". All weights within a service must have

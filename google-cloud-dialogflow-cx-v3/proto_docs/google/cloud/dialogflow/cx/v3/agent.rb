@@ -205,7 +205,7 @@ module Google
             # @!attribute [rw] engine
             #   @return [::String]
             #     Required. The full name of the Gen App Builder engine related to this
-            #     agent if there is one. Format: `projects/{Project ID}/locations/{Location
+            #     agent if there is one. Format: `projects/\\{Project ID}/locations/\\{Location
             #     ID}/collections/\\{Collection ID}/engines/\\{Engine ID}`
             class GenAppBuilderSettings
               include ::Google::Protobuf::MessageExts

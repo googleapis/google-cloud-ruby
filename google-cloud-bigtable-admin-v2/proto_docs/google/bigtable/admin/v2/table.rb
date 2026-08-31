@@ -540,7 +540,7 @@ module Google
           #   @return [::String]
           #     A globally unique identifier for the backup which cannot be
           #     changed. Values are of the form
-          #     `projects/{project}/instances/{instance}/clusters/{cluster}/
+          #     `projects/\\{project}/instances/\\{instance}/clusters/\\{cluster}/
           #        backups/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
           #     The final segment of the name must be between 1 and 50 characters
           #     in length.

@@ -248,7 +248,7 @@ module Google
         #     country of a customer. Numerical features. Some examples would be the
         #     height/weight of a product, or age of a customer.
         #
-        #     For example: `{ "vendor": {"text": ["vendor123", "vendor456"]},
+        #     For example: `{ "vendor": \\{"text": ["vendor123", "vendor456"]},
         #     "lengths_cm": \\{"numbers":[2.3, 15.4]}, "heights_cm": \\{"numbers":[8.1, 6.4]}
         #     }`.
         #

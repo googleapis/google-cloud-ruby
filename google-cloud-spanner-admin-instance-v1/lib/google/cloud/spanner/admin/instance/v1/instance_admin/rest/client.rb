@@ -1099,7 +1099,7 @@ module Google
                   #
                   #   @param parent [::String]
                   #     Required. The instance whose instance partitions should be listed. Values
-                  #     are of the form `projects/<project>/instances/<instance>`. Use `{instance}
+                  #     are of the form `projects/<project>/instances/<instance>`. Use `\\{instance}
                   #     = '-'` to list instance partitions for all Instances in a project, e.g.,
                   #     `projects/myproject/instances/-`.
                   #   @param page_size [::Integer]

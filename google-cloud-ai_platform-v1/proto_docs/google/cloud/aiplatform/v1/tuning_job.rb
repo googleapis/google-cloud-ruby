@@ -148,7 +148,7 @@ module Google
         #     parent model with version 1. Otherwise the version id will be incremented
         #     by 1 from the last version ID in the parent model. E.g.,
         #
-        #     `projects/{project}/locations/{location}/models/{model}@{last_version_id +
+        #     `projects/\\{project}/locations/\\{location}/models/\\{model}@\\{last_version_id +
         #     1}`
         # @!attribute [r] endpoint
         #   @return [::String]

@@ -29,7 +29,7 @@ module Google
         #
         # Example plain-text message body:
         # ```
-        # Hello @FooBot how are you!"
+        # Hello `@FooBot` how are you!"
         # ```
         #
         # The corresponding annotations metadata:

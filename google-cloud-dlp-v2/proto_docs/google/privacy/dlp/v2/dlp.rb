@@ -3008,7 +3008,7 @@ module Google
             # a-z
             ALPHA_LOWER_CASE = 3
 
-            # US Punctuation, one of !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+            # US Punctuation, one of !"#$%&'()*+,-./:;<=>?@[\]^_`\\{|}~
             PUNCTUATION = 4
 
             # Whitespace character, one of [ \t\n\x0B\f\r]

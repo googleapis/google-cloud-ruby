@@ -897,7 +897,7 @@ module Google
         # For example, the following JSON creates a divider:
         #
         # ```
-        # "divider": {}
+        # "divider": \\{}
         # ```
         class Divider
           include ::Google::Protobuf::MessageExts
@@ -1751,7 +1751,7 @@ module Google
         #     settings under **Customize**.
         # @!attribute [rw] weight
         #   @return [::Integer]
-        #     The stroke weight of the icon. Choose from {100, 200, 300, 400,
+        #     The stroke weight of the icon. Choose from \\{100, 200, 300, 400,
         #     500, 600, 700}. If absent, default value is 400. If any other value is
         #     specified, the default value is used.
         #

@@ -215,7 +215,7 @@ module Google
         #     A SQL query can be parameterized. In PLAN mode, these parameters can be
         #     undeclared. This indicates the field names and types for those undeclared
         #     parameters in the SQL query. For example, a SQL query like `"SELECT * FROM
-        #     Users where UserId = @userId and UserName = @userName "` could return a
+        #     Users where UserId = `@userId` and UserName = `@userName` "` could return a
         #     `undeclared_parameters` value like:
         #
         #         "fields": [
