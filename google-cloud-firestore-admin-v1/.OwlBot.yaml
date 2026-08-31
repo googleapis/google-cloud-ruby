@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/firestore/admin/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-firestore-admin-v1/$1

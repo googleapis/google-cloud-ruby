@@ -1,8 +1,7 @@
 # Ruby Client for the Distributed Cloud Edge Container V1 API
 
-API Client library for the Distributed Cloud Edge Container V1 API
+Google Distributed Cloud Edge is a fully managed product that brings Google Cloud infrastructure and services closer to where data is being generated and consumed.
 
-google-cloud-edge_container-v1 is the official client library for the Distributed Cloud Edge Container V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_clusters request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-edge_container-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/distributed-cloud/edge/latest/docs/overview)
-for general usage information.
 
 ## Debug Logging
 

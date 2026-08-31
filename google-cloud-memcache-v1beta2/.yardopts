@@ -1,5 +1,5 @@
 --no-private
---title="Google Cloud Memorystore for Memcached API"
+--title="Cloud Memorystore for Memcached V1BETA2 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

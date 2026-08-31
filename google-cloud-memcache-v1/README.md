@@ -1,4 +1,4 @@
-# Ruby Client for the Google Cloud Memorystore for Memcached V1 API
+# Ruby Client for the Cloud Memorystore for Memcached V1 API
 
 Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.
 
@@ -6,7 +6,7 @@ Google Cloud Memorystore for Memcached API is used for creating and managing Mem
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Cloud Memorystore for Memcached V1 API. Most users should consider using
+specific version of the Cloud Memorystore for Memcached V1 API. Most users should consider using
 the main client gem,
 [google-cloud-memcache](https://rubygems.org/gems/google-cloud-memcache).
 See the section below titled *Which client should I use?* for more information.
@@ -38,9 +38,6 @@ response = client.list_instances request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-memcache-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/memorystore/docs/memcached/)
-for general usage information.
 
 ## Debug Logging
 

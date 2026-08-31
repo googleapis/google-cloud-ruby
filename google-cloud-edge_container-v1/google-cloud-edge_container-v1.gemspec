@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-edge_container-v1 is the official client library for the Distributed Cloud Edge Container V1 API. Note that google-cloud-edge_container-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-edge_container instead. See the readme for more details."
-  gem.summary       = "API Client library for the Distributed Cloud Edge Container V1 API"
+  gem.description   = "Google Distributed Cloud Edge is a fully managed product that brings Google Cloud infrastructure and services closer to where data is being generated and consumed. Note that google-cloud-edge_container-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-edge_container instead. See the readme for more details."
+  gem.summary       = "Google Distributed Cloud Edge is a fully managed product that brings Google Cloud infrastructure and services closer to where data is being generated and consumed."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
