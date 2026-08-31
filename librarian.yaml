@@ -1511,7 +1511,6 @@ libraries:
     version: 2.11.0
     apis:
       - path: google/cloud/discoveryengine/v1
-    skip_generate: true
   - name: google-cloud-discovery_engine-v1beta
     version: 0.30.0
     apis:
@@ -1614,7 +1613,6 @@ libraries:
     version: 1.5.1
     apis:
       - path: google/cloud/edgecontainer/v1
-    skip_generate: true
   - name: google-cloud-edge_network
     version: 2.2.1
     apis:
@@ -1726,7 +1724,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: FIRESTORE
-    skip_generate: true
   - name: google-cloud-firestore-v1
     version: 2.5.0
     apis:
@@ -2002,7 +1999,6 @@ libraries:
       - lib/google/cloud/kms/v1/iam_policy/client.rb
       - lib/google/cloud/kms/v1/iam_policy/credentials.rb
       - test/google/cloud/kms/v1/iam_policy_test.rb
-    skip_generate: true
   - name: google-cloud-language
     version: 2.2.1
     apis:
@@ -2190,7 +2186,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MEMCACHE
-    skip_generate: true
   - name: google-cloud-memcache-v1beta2
     version: 0.18.1
     apis:
@@ -2198,7 +2193,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MEMCACHE
-    skip_generate: true
   - name: google-cloud-memorystore
     version: 1.2.2
     apis:
@@ -2315,7 +2309,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: Netapp=NetApp
             ruby-cloud-path-override: net_app=netapp
-    skip_generate: true
   - name: google-cloud-network_connectivity
     version: 2.5.1
     apis:
@@ -2432,7 +2425,6 @@ libraries:
     version: 1.1.0
     apis:
       - path: google/cloud/oracledatabase/v1
-    skip_generate: true
   - name: google-cloud-orchestration-airflow-service
     version: 1.7.1
     apis:
@@ -2985,7 +2977,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SCHEDULER
-    skip_generate: true
   - name: google-cloud-scheduler-v1beta1
     version: 0.18.1
     apis:
@@ -2993,7 +2984,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SCHEDULER
-    skip_generate: true
   - name: google-cloud-secret_manager
     version: 2.2.1
     apis:
@@ -3617,7 +3607,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
-    skip_generate: true
   - name: google-cloud-tasks-v2beta2
     version: 0.18.1
     apis:
@@ -3625,7 +3614,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
-    skip_generate: true
   - name: google-cloud-tasks-v2beta3
     version: 0.20.1
     apis:
@@ -3633,7 +3621,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
-    skip_generate: true
   - name: google-cloud-telco_automation
     version: 2.2.1
     apis:
@@ -4090,7 +4077,6 @@ libraries:
     version: 1.5.1
     apis:
       - path: google/cloud/vmwareengine/v1
-    skip_generate: true
   - name: google-cloud-vpc_access
     version: 1.7.1
     apis:
