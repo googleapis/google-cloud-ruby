@@ -2701,7 +2701,6 @@ libraries:
     version: 1.2.1
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
@@ -2709,7 +2708,6 @@ libraries:
     version: 1.7.1
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
-    skip_generate: true
   - name: google-cloud-product_registry
     version: 0.1.1
     apis:
