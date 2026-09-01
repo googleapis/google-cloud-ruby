@@ -1173,7 +1173,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CONTAINER
   - name: google-cloud-container_analysis
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/devtools/containeranalysis/v1
         ruby:
