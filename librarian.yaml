@@ -1822,7 +1822,7 @@ libraries:
       wrapper_of:
         - v1:0.2
   - name: google-cloud-gke_connect-gateway-v1
-    version: 0.9.1
+    version: 0.9.2
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
   - name: google-cloud-gke_connect-gateway-v1beta1
