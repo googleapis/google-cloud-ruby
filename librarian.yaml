@@ -488,7 +488,6 @@ libraries:
             ruby-cloud-yard-strict: "false"
     keep:
       - lib/google/cloud/automl/v1/_helpers.rb
-    skip_generate: true
   - name: google-cloud-automl-v1beta1
     version: 0.19.1
     apis:
@@ -500,7 +499,6 @@ libraries:
             ruby-cloud-path-override: auto_ml=automl
     keep:
       - lib/google/cloud/automl/v1beta1/_helpers.rb
-    skip_generate: true
   - name: google-cloud-backupdr
     version: 2.3.1
     apis:
