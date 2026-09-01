@@ -2695,7 +2695,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-privileged_access_manager-v1
-    version: 1.7.1
+    version: 1.7.2
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
   - name: google-cloud-product_registry
