@@ -2185,7 +2185,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MEMCACHE
   - name: google-cloud-memcache-v1beta2
-    version: 0.18.1
+    version: 0.18.2
     apis:
       - path: google/cloud/memcache/v1beta2
         ruby:
