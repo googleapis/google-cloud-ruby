@@ -1740,7 +1740,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-ftp-v1
-    version: 0.1.0
+    version: 0.1.1
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
