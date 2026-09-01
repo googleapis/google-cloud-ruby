@@ -2,7 +2,6 @@
 
 The App Optimize API provides developers and platform teams with tools to monitor, analyze, and improve the performance and cost-efficiency of their cloud applications.
 
-The App Optimize API provides developers and platform teams with tools to monitor, analyze, and improve the performance and cost-efficiency of their cloud applications.
 
 https://github.com/googleapis/google-cloud-ruby
 
