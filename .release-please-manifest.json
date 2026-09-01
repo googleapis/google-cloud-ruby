@@ -471,7 +471,7 @@
   "google-cloud-gke_backup-v1+FILLER": "0.0.0",
   "google-cloud-gke_connect-gateway": "2.3.1",
   "google-cloud-gke_connect-gateway+FILLER": "0.0.0",
-  "google-cloud-gke_connect-gateway-v1": "0.9.1",
+  "google-cloud-gke_connect-gateway-v1": "0.9.2",
   "google-cloud-gke_connect-gateway-v1+FILLER": "0.0.0",
   "google-cloud-gke_connect-gateway-v1beta1": "0.14.1",
   "google-cloud-gke_connect-gateway-v1beta1+FILLER": "0.0.0",
