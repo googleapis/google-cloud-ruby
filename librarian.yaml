@@ -1718,7 +1718,7 @@ libraries:
       wrapper_of:
         - v1:0.14
   - name: google-cloud-firestore-admin-v1
-    version: 1.14.1
+    version: 1.14.2
     apis:
       - path: google/firestore/admin/v1
         ruby:
