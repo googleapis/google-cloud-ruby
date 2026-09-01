@@ -2420,7 +2420,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-oracle_database-v1
-    version: 1.1.0
+    version: 1.1.1
     apis:
       - path: google/cloud/oracledatabase/v1
   - name: google-cloud-orchestration-airflow-service

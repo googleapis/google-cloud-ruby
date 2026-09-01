@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
 ### 1.1.0 (2026-08-12)
 
 #### Features
