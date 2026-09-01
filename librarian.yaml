@@ -368,7 +368,6 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/appoptimize/v1beta
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
@@ -376,7 +375,6 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/appoptimize/v1beta
-    skip_generate: true
   - name: google-cloud-artifact_registry
     version: 2.2.1
     apis:
