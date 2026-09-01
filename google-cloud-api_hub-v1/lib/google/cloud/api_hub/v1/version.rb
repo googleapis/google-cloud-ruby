@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ApiHub
       module V1
-        VERSION = "1.0.2"
+        VERSION = "1.0.3"
       end
     end
   end
