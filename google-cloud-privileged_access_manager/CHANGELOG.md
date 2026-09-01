@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding google-cloud-privileged_access_manager to Librarian ([#36485](https://github.com/googleapis/google-cloud-ruby/issues/36485)) 
+
 ### 1.2.1 (2026-08-05)
 
 #### Bug Fixes

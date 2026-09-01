@@ -2688,7 +2688,7 @@ libraries:
             ruby-cloud-env-prefix: PRIVATE_CATALOG
             ruby-cloud-yard-strict: "false"
   - name: google-cloud-privileged_access_manager
-    version: 1.2.1
+    version: 1.2.2
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
     ruby:
