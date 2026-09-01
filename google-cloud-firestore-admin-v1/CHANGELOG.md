@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
 ### 1.14.1 (2026-08-06)
 
 #### Bug Fixes
