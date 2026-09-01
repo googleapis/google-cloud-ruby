@@ -1508,7 +1508,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-discovery_engine-v1
-    version: 2.11.0
+    version: 2.11.1
     apis:
       - path: google/cloud/discoveryengine/v1
   - name: google-cloud-discovery_engine-v1beta

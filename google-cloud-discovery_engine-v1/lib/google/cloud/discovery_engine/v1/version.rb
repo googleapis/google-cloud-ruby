@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1
-        VERSION = "2.11.0"
+        VERSION = "2.11.1"
       end
     end
   end
