@@ -111,6 +111,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ContentPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/contentPolicies/{content_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param content_policy [String]
+            #
+            # @return [::String]
+            def content_policy_path project:, location:, content_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/contentPolicies/#{content_policy}"
+            end
+
+            ##
             # Create a fully-qualified DeidentifyTemplate resource string.
             #
             # @overload deidentify_template_path(organization:, deidentify_template:)

@@ -266,6 +266,7 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::C
     tpm_attestation = {}
     challenge = "hello world"
     options = {}
+    platform_type = :PLATFORM_TYPE_UNSPECIFIED
 
     verify_confidential_gke_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -281,27 +282,27 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::C
         end
 
         # Use hash object
-        c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options }) do |_result, response|
+        c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.verify_confidential_gke tpm_attestation: tpm_attestation, challenge: challenge, options: options do |_result, response|
+        c.verify_confidential_gke tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.verify_confidential_gke ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options) do |_result, response|
+        c.verify_confidential_gke ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options }, call_options) do |_result, response|
+        c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.verify_confidential_gke(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options), call_options) do |_result, response|
+        c.verify_confidential_gke(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

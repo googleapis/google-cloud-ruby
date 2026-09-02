@@ -686,7 +686,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represents a protobuf schema.
+          # Represents a collection of protobuf schemas.
           # @!attribute [rw] proto_descriptors
           #   @return [::String]
           #     Required. Contains a protobuf-serialized
@@ -709,6 +709,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Represents a collection of Avro schemas.
+          # @!attribute [rw] json_schemas
+          #   @return [::Array<::String>]
+          #     Required. The Avro schemas in JSON format.
+          #     Each element must be the content of a valid, self-contained Avro schema
+          #     file (.avsc), as described in https://avro.apache.org/docs/1.8.1/spec.html.
+          #     Use repeated elements to include multiple Avro schema files in a single
+          #     bundle.
+          class AvroSchema
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A named collection of related schemas.
           # @!attribute [rw] name
           #   @return [::String]
@@ -718,6 +731,13 @@ module Google
           # @!attribute [rw] proto_schema
           #   @return [::Google::Cloud::Bigtable::Admin::V2::ProtoSchema]
           #     Schema for Protobufs.
+          #
+          #     Note: The following fields are mutually exclusive: `proto_schema`, `avro_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] avro_schema
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::AvroSchema]
+          #     Optional. Schema for Avros.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_schema`, `proto_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] etag
           #   @return [::String]
           #     Optional. The etag for this schema bundle.

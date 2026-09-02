@@ -271,9 +271,21 @@ module Google
           # @!attribute [rw] translation_task_result
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationTaskResult]
           #     Details specific to translation task types.
+          # @!attribute [rw] task_outputs
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigquery::Migration::V2::TaskOutput}]
+          #     The map of task output types to the task outputs, e.g. "LINEAGE".
           class MigrationTaskResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::TaskOutput]
+            class TaskOutputsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Translation specific result details from the migration task.
@@ -289,6 +301,168 @@ module Google
           class TranslationTaskResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The task output for a task type including the status and any errors.
+          # @!attribute [rw] lineage_output
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput]
+          #     The output of the task with output type "LINEAGE".
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::TaskOutput::State]
+          #     Output only. The current state of the task output.
+          # @!attribute [rw] processing_error
+          #   @return [::Google::Rpc::ErrorInfo]
+          #     An explanation that may be populated when the task output is in FAILED
+          #     state.
+          class TaskOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible task output states.
+            module State
+              # Task output state is unspecified.
+              STATE_UNSPECIFIED = 0
+
+              # Task output is pending.
+              PENDING = 1
+
+              # Task output is succeeded.
+              SUCCEEDED = 2
+
+              # Task output is failed. This does not mean that there is no useful
+              # information in the output; partial outputs or failure details may be
+              # available.
+              FAILED = 3
+            end
+          end
+
+          # The output of a task with output type "LINEAGE".
+          #
+          # Actual generated lineage can be queried separately (see
+          # {::Google::Cloud::Bigquery::Migration::V2::LineageOutput#webapp_uri webapp_uri}),
+          # this message contains only metadata: processing status, errors, etc.
+          # @!attribute [rw] webapp_uri
+          #   @return [::String]
+          #     The URI of the webapp that visualizes the lineage.
+          #     The user needs the `bigquerymigration.googleapis.com/lineageDbs.query` IAM
+          #     permission to use the webapp.
+          # @!attribute [r] recognized_inputs
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::RecognizedInput>]
+          #     Output only. Recognized lineage inputs.
+          #
+          #     All inputs are processed only if the task succeeds and all work is in state
+          #     [SUCCEEDED](ProgressReport.WorkSummary.State.SUCCEEDED) (in particular,
+          #     nothing is [SKIPPED](ProgressReport.WorkSummary.State.SKIPPED)).
+          #
+          #     Even with all inputs processed successfully, there may be transpiler errors
+          #     present leading to inaccurate lineage.
+          # @!attribute [r] processing_progress_reports
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport>]
+          #     Output only. Work processing progress reports broken up by processing
+          #     stage.
+          class LineageOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about lineage input of the given type that lineage generation
+            # recognized.
+            #
+            # If you expected to process more of the given input, verify your input was
+            # uploaded and is in the correct format and the request to generate lineage
+            # correctly specified the input location.
+            # @!attribute [r] type
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::RecognizedInput::Type]
+            #     Output only. The type of the input.
+            # @!attribute [r] uncompressed_size_bytes
+            #   @return [::Integer]
+            #     Output only. The uncompressed size of the recognized input of the given
+            #     type.
+            class RecognizedInput
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Input type recognized by the lineage processing.
+              module Type
+                # The type is not specified.
+                TYPE_UNSPECIFIED = 0
+
+                # The input is metadata.
+                METADATA = 1
+
+                # The input is a query log.
+                QUERY_LOG = 2
+
+                # The input is a SQL script.
+                SCRIPT = 3
+              end
+            end
+
+            # Breaks down processing progress of work.
+            # @!attribute [r] processing_stage
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::ProcessingStage]
+            #     Output only. The processing stage this progress report describes.
+            # @!attribute [r] work_summaries
+            #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::WorkSummary>]
+            #     Output only. Summaries of work broken up by the state of the work. Each
+            #     work summary describes how much work is in the given state.
+            #
+            #     To get numbers for the total work covered, aggregate the numbers from all
+            #     summaries.
+            class ProgressReport
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Summary of work in the given state.
+              # @!attribute [r] state
+              #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::WorkSummary::State]
+              #     Output only. The state of the work this summary describes.
+              # @!attribute [r] size
+              #   @return [::Integer]
+              #     Output only. Size of the work in the given State.
+              #
+              #     Size counts "units of work". Units represent arbitrary division of
+              #     work; there's no expectation each unit takes similar time to process.
+              # @!attribute [r] comment
+              #   @return [::String]
+              #     Output only. Human-readable comment.
+              class WorkSummary
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # States of work. Each piece of work is in exactly one state.
+                # [SUCCEEDED], [FAILED] and [SKIPPED] are terminal states; work in the
+                # [IN_PROGRESS] will eventually transition to one of the terminal states.
+                module State
+                  # The state is not specified.
+                  STATE_UNSPECIFIED = 0
+
+                  # Work that was processed successfully.
+                  SUCCEEDED = 1
+
+                  # Work that failed processing.
+                  FAILED = 2
+
+                  # Work that is currently being processed or queued for processing.
+                  IN_PROGRESS = 3
+
+                  # Work that was recognised as necessary to fully process inputs but was
+                  # skipped due to system limitations.
+                  SKIPPED = 4
+                end
+              end
+
+              # The processing stage the progress report describes.
+              module ProcessingStage
+                # The stage is not specified.
+                PROCESSING_STAGE_UNSPECIFIED = 0
+
+                # The input ingestion stage.
+                INPUT_INGESTION = 1000
+
+                # The lineage DB postprocessing stage.
+                POSTPROCESSING = 2000
+              end
+            end
           end
         end
       end

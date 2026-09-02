@@ -556,6 +556,10 @@ module Google
         # @!attribute [rw] options
         #   @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions]
         #     Optional. A collection of fields that modify the token output.
+        # @!attribute [rw] platform_type
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::PlatformType]
+        #     Optional. Optional platform security architecture hint for the verifier
+        #     engine. Defaults to `VIRTUALIZED_CVM` behavior if unspecified.
         class VerifyConfidentialGkeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -577,6 +581,19 @@ module Google
           class ConfidentialGkeOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Platform types supported by Confidential GKE.
+          # This enum is not frozen, and new values may be added in the future.
+          module PlatformType
+            # Unspecified platform type, defaults to `VIRTUALIZED_CVM`.
+            PLATFORM_TYPE_UNSPECIFIED = 0
+
+            # Standard virtualized Confidential GKE VM.
+            VIRTUALIZED_CVM = 1
+
+            # Bare Metal host using a vTPM.
+            BARE_METAL_VTPM = 2
           end
         end
 

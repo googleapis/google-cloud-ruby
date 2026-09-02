@@ -281,6 +281,7 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
     tpm_attestation = {}
     challenge = "hello world"
     options = {}
+    platform_type = :PLATFORM_TYPE_UNSPECIFIED
 
     verify_confidential_gke_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :verify_confidential_gke, name
@@ -289,6 +290,7 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
       assert_equal :tpm_attestation, request.tee_attestation
       assert_equal "hello world", request["challenge"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions), request["options"]
+      assert_equal :PLATFORM_TYPE_UNSPECIFIED, request["platform_type"]
       refute_nil options
     end
 
@@ -299,31 +301,31 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
       end
 
       # Use hash object
-      c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options }) do |response, operation|
+      c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.verify_confidential_gke tpm_attestation: tpm_attestation, challenge: challenge, options: options do |response, operation|
+      c.verify_confidential_gke tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.verify_confidential_gke ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options) do |response, operation|
+      c.verify_confidential_gke ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options }, grpc_options) do |response, operation|
+      c.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.verify_confidential_gke(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options), grpc_options) do |response, operation|
+      c.verify_confidential_gke(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge, options: options, platform_type: platform_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

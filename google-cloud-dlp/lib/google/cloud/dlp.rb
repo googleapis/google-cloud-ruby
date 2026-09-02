@@ -69,7 +69,7 @@ module Google
       # inspection, classification, and de-identification platform that works
       # on text, images, and Google Cloud storage repositories.
       # To learn more about concepts and find how-to guides see
-      # https://cloud.google.com/sensitive-data-protection/docs/.
+      # https://docs.cloud.google.com/sensitive-data-protection/docs/.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
