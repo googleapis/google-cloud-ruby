@@ -35,7 +35,7 @@ module Google
         # inspection, classification, and de-identification platform that works
         # on text, images, and Google Cloud storage repositories.
         # To learn more about concepts and find how-to guides see
-        # https://cloud.google.com/sensitive-data-protection/docs/.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/.
         #
         # To load this service and instantiate a REST client:
         #

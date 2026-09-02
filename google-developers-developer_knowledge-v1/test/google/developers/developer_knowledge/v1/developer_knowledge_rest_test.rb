@@ -254,6 +254,7 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
 
     # Create request parameters for a unary method.
     query = "hello world"
+    filter = "hello world"
 
     answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -269,27 +270,27 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
         end
 
         # Use hash object
-        c.answer_query({ query: query }) do |_result, response|
+        c.answer_query({ query: query, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.answer_query query: query do |_result, response|
+        c.answer_query query: query, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query) do |_result, response|
+        c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.answer_query({ query: query }, call_options) do |_result, response|
+        c.answer_query({ query: query, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query), call_options) do |_result, response|
+        c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

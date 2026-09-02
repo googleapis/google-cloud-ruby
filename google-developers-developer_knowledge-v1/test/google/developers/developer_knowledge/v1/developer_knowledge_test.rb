@@ -261,11 +261,13 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
 
     # Create request parameters for a unary method.
     query = "hello world"
+    filter = "hello world"
 
     answer_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :answer_query, name
       assert_kind_of ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest, request
       assert_equal "hello world", request["query"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -276,31 +278,31 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
       end
 
       # Use hash object
-      c.answer_query({ query: query }) do |response, operation|
+      c.answer_query({ query: query, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.answer_query query: query do |response, operation|
+      c.answer_query query: query, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query) do |response, operation|
+      c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.answer_query({ query: query }, grpc_options) do |response, operation|
+      c.answer_query({ query: query, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query), grpc_options) do |response, operation|
+      c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

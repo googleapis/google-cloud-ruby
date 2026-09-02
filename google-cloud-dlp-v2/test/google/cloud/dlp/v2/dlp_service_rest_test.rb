@@ -3155,6 +3155,282 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_content_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::ContentPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    content_policy = {}
+    content_policy_id = "hello world"
+
+    create_content_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_create_content_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_content_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_content_policy({ parent: parent, content_policy: content_policy, content_policy_id: content_policy_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_content_policy parent: parent, content_policy: content_policy, content_policy_id: content_policy_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_content_policy ::Google::Cloud::Dlp::V2::CreateContentPolicyRequest.new(parent: parent, content_policy: content_policy, content_policy_id: content_policy_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_content_policy({ parent: parent, content_policy: content_policy, content_policy_id: content_policy_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_content_policy(::Google::Cloud::Dlp::V2::CreateContentPolicyRequest.new(parent: parent, content_policy: content_policy, content_policy_id: content_policy_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_content_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_content_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::ContentPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    content_policy = {}
+    update_mask = {}
+
+    update_content_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_update_content_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_content_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_content_policy({ name: name, content_policy: content_policy, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_content_policy name: name, content_policy: content_policy, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_content_policy ::Google::Cloud::Dlp::V2::UpdateContentPolicyRequest.new(name: name, content_policy: content_policy, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_content_policy({ name: name, content_policy: content_policy, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_content_policy(::Google::Cloud::Dlp::V2::UpdateContentPolicyRequest.new(name: name, content_policy: content_policy, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_content_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_content_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::ContentPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_content_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_get_content_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_content_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_content_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_content_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_content_policy ::Google::Cloud::Dlp::V2::GetContentPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_content_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_content_policy(::Google::Cloud::Dlp::V2::GetContentPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_content_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_content_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::Dlp::V2::ListContentPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_content_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_list_content_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_content_policies_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_content_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_content_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_content_policies ::Google::Cloud::Dlp::V2::ListContentPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_content_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_content_policies(::Google::Cloud::Dlp::V2::ListContentPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_content_policies_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_content_policy
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_content_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dlp::V2::DlpService::Rest::ServiceStub.stub :transcode_delete_content_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_content_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_content_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_content_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_content_policy ::Google::Cloud::Dlp::V2::DeleteContentPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_content_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_content_policy(::Google::Cloud::Dlp::V2::DeleteContentPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_content_policy_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -32,7 +32,7 @@ module Google
           # inspection, classification, and de-identification platform that works
           # on text, images, and Google Cloud storage repositories.
           # To learn more about concepts and find how-to guides see
-          # https://cloud.google.com/sensitive-data-protection/docs/.
+          # https://docs.cloud.google.com/sensitive-data-protection/docs/.
           #
           class Client
             # @private
@@ -404,9 +404,9 @@ module Google
             # be all types, but may change over time as detectors are updated.
             #
             # For how to guides, see
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-images
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-text,
             #
             # @overload inspect_content(request, options = nil)
             #   Pass arguments to `inspect_content` via a request object, either of type
@@ -428,7 +428,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -522,7 +522,7 @@ module Google
             # Redacts potentially sensitive info from an image.
             # This method has limits on input size, processing time, and output size.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
             # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in this request, the
@@ -552,7 +552,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -661,7 +661,7 @@ module Google
             # De-identifies potentially sensitive info from a ContentItem.
             # This method has limits on input size and output size.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
             # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in this request, the
@@ -688,7 +688,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -799,7 +799,7 @@ module Google
             ##
             # Re-identifies content that has been de-identified.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
             # to learn more.
             #
             # @overload reidentify_content(request, options = nil)
@@ -822,7 +822,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -933,7 +933,7 @@ module Google
             ##
             # Returns a list of the sensitive information types that the DLP API
             # supports. See
-            # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference
             # to learn more.
             #
             # @overload list_info_types(request, options = nil)
@@ -1027,7 +1027,7 @@ module Google
             # Creates an InspectTemplate for reusing frequently used configuration
             # for inspecting content, images, and storage.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
             # to learn more.
             #
             # @overload create_inspect_template(request, options = nil)
@@ -1050,7 +1050,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -1143,7 +1143,7 @@ module Google
             ##
             # Updates the InspectTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
             # to learn more.
             #
             # @overload update_inspect_template(request, options = nil)
@@ -1237,7 +1237,7 @@ module Google
             ##
             # Gets an InspectTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
             # to learn more.
             #
             # @overload get_inspect_template(request, options = nil)
@@ -1327,7 +1327,7 @@ module Google
             ##
             # Lists InspectTemplates.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
             # to learn more.
             #
             # @overload list_inspect_templates(request, options = nil)
@@ -1350,7 +1350,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -1462,7 +1462,7 @@ module Google
             ##
             # Deletes an InspectTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
             # to learn more.
             #
             # @overload delete_inspect_template(request, options = nil)
@@ -1553,7 +1553,7 @@ module Google
             # Creates a DeidentifyTemplate for reusing frequently used configuration
             # for de-identifying content, images, and storage.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
             # to learn more.
             #
             # @overload create_deidentify_template(request, options = nil)
@@ -1576,7 +1576,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -1669,7 +1669,7 @@ module Google
             ##
             # Updates the DeidentifyTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
             # to learn more.
             #
             # @overload update_deidentify_template(request, options = nil)
@@ -1764,7 +1764,7 @@ module Google
             ##
             # Gets a DeidentifyTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
             # to learn more.
             #
             # @overload get_deidentify_template(request, options = nil)
@@ -1854,7 +1854,7 @@ module Google
             ##
             # Lists DeidentifyTemplates.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
             # to learn more.
             #
             # @overload list_deidentify_templates(request, options = nil)
@@ -1877,7 +1877,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -1989,7 +1989,7 @@ module Google
             ##
             # Deletes a DeidentifyTemplate.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
             # to learn more.
             #
             # @overload delete_deidentify_template(request, options = nil)
@@ -2081,7 +2081,7 @@ module Google
             # Creates a job trigger to run DLP actions such as scanning storage for
             # sensitive information on a set schedule.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
             # to learn more.
             #
             # @overload create_job_trigger(request, options = nil)
@@ -2104,7 +2104,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -2193,7 +2193,7 @@ module Google
             ##
             # Updates a job trigger.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
             # to learn more.
             #
             # @overload update_job_trigger(request, options = nil)
@@ -2376,7 +2376,7 @@ module Google
             ##
             # Gets a job trigger.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
             # to learn more.
             #
             # @overload get_job_trigger(request, options = nil)
@@ -2465,7 +2465,7 @@ module Google
             ##
             # Lists job triggers.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
             # to learn more.
             #
             # @overload list_job_triggers(request, options = nil)
@@ -2488,7 +2488,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -2627,7 +2627,7 @@ module Google
             ##
             # Deletes a job trigger.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
             # to learn more.
             #
             # @overload delete_job_trigger(request, options = nil)
@@ -3290,9 +3290,9 @@ module Google
             ##
             # Creates a new job to inspect storage or calculate risk metrics.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
             # to learn more.
             #
             # When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
@@ -3319,7 +3319,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -3415,9 +3415,9 @@ module Google
             ##
             # Lists DlpJobs that match the specified filter in the request.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
             # to learn more.
             #
             # @overload list_dlp_jobs(request, options = nil)
@@ -3440,7 +3440,7 @@ module Google
             #
             #     The format of this value varies depending on whether you have [specified a
             #     processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -3579,9 +3579,9 @@ module Google
             ##
             # Gets the latest state of a long-running DlpJob.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
             # to learn more.
             #
             # @overload get_dlp_job(request, options = nil)
@@ -3671,9 +3671,9 @@ module Google
             # no longer interested in the DlpJob result. The job will be canceled if
             # possible.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
             # to learn more.
             #
             # @overload delete_dlp_job(request, options = nil)
@@ -3763,9 +3763,9 @@ module Google
             # makes a best effort to cancel the DlpJob, but success is not
             # guaranteed.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
             # and
-            # https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
             # to learn more.
             #
             # @overload cancel_dlp_job(request, options = nil)
@@ -3853,7 +3853,7 @@ module Google
             ##
             # Creates a pre-built stored infoType to be used for inspection.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             #
             # @overload create_stored_info_type(request, options = nil)
@@ -3876,7 +3876,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -3970,7 +3970,7 @@ module Google
             # Updates the stored infoType by creating a new version. The existing version
             # will continue to be used until the new version is ready.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             #
             # @overload update_stored_info_type(request, options = nil)
@@ -4066,7 +4066,7 @@ module Google
             ##
             # Gets a stored infoType.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             #
             # @overload get_stored_info_type(request, options = nil)
@@ -4156,7 +4156,7 @@ module Google
             ##
             # Lists stored infoTypes.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             #
             # @overload list_stored_info_types(request, options = nil)
@@ -4179,7 +4179,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+            #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
             #
             #     + Projects scope, location specified:
             #       `projects/{project_id}/locations/{location_id}`
@@ -4288,7 +4288,7 @@ module Google
             ##
             # Deletes a stored infoType.
             # See
-            # https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+            # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
             # to learn more.
             #
             # @overload delete_stored_info_type(request, options = nil)
@@ -6243,6 +6243,465 @@ module Google
             end
 
             ##
+            # Create a ContentPolicy.
+            #
+            # @overload create_content_policy(request, options = nil)
+            #   Pass arguments to `create_content_policy` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::CreateContentPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::CreateContentPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_content_policy(parent: nil, content_policy: nil, content_policy_id: nil)
+            #   Pass arguments to `create_content_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent resource name.
+            #
+            #     The format of this value varies depending on the scope of the request
+            #     (project):
+            #
+            #     + Projects scope:
+            #       `projects/{project_id}/locations/{location_id}`
+            #   @param content_policy [::Google::Cloud::Dlp::V2::ContentPolicy, ::Hash]
+            #     Required. The content_policy resource.
+            #   @param content_policy_id [::String]
+            #     Optional. The content policy ID can contain uppercase and lowercase
+            #     letters, numbers, and hyphens; that is, it must match the regular
+            #     expression:
+            #       `[a-zA-Z\d-_]+`.
+            #     The maximum length is 100 characters. If empty, the system will generate
+            #     a random id.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ContentPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::ContentPolicy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateContentPolicyRequest.new
+            #
+            #   # Call the create_content_policy method.
+            #   result = client.create_content_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ContentPolicy.
+            #   p result
+            #
+            def create_content_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateContentPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_content_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_content_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_content_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :create_content_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a ContentPolicy.
+            #
+            # @overload update_content_policy(request, options = nil)
+            #   Pass arguments to `update_content_policy` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::UpdateContentPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::UpdateContentPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_content_policy(name: nil, content_policy: nil, update_mask: nil)
+            #   Pass arguments to `update_content_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name in the format:
+            #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+            #   @param content_policy [::Google::Cloud::Dlp::V2::ContentPolicy, ::Hash]
+            #     Required. The content_policy with new values for the relevant fields.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Mask to control which fields get updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ContentPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::ContentPolicy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateContentPolicyRequest.new
+            #
+            #   # Call the update_content_policy method.
+            #   result = client.update_content_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ContentPolicy.
+            #   p result
+            #
+            def update_content_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateContentPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_content_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_content_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_content_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :update_content_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a ContentPolicy.
+            #
+            # @overload get_content_policy(request, options = nil)
+            #   Pass arguments to `get_content_policy` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::GetContentPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::GetContentPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_content_policy(name: nil)
+            #   Pass arguments to `get_content_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name in the format:
+            #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ContentPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dlp::V2::ContentPolicy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetContentPolicyRequest.new
+            #
+            #   # Call the get_content_policy method.
+            #   result = client.get_content_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ContentPolicy.
+            #   p result
+            #
+            def get_content_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetContentPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_content_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_content_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_content_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :get_content_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists ContentPolicies in a parent.
+            #
+            # @overload list_content_policies(request, options = nil)
+            #   Pass arguments to `list_content_policies` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::ListContentPoliciesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::ListContentPoliciesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_content_policies(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_content_policies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the project,
+            #     for example, `projects/project-id/locations/asia`.
+            #   @param page_size [::Integer]
+            #     Optional. Number of results per page, max 1000.
+            #   @param page_token [::String]
+            #     Optional. Page token from a previous page to return the next set of
+            #     results. If set, all other request fields must match the original request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ContentPolicy>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::ContentPolicy>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListContentPoliciesRequest.new
+            #
+            #   # Call the list_content_policies method.
+            #   result = client.list_content_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::ContentPolicy.
+            #     p item
+            #   end
+            #
+            def list_content_policies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListContentPoliciesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_content_policies.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_content_policies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_content_policies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :list_content_policies, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_content_policies, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a ContentPolicy.
+            #
+            # @overload delete_content_policy(request, options = nil)
+            #   Pass arguments to `delete_content_policy` via a request object, either of type
+            #   {::Google::Cloud::Dlp::V2::DeleteContentPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteContentPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_content_policy(name: nil)
+            #   Pass arguments to `delete_content_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of the ContentPolicy to be deleted, in the format:
+            #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteContentPolicyRequest.new
+            #
+            #   # Call the delete_content_policy method.
+            #   result = client.delete_content_policy request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_content_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteContentPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_content_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dlp::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_content_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_content_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dlp_service_stub.call_rpc :delete_content_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DlpService API.
             #
             # This class represents the configuration for DlpService,
@@ -6702,6 +7161,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_connection
+                ##
+                # RPC-specific configuration for `create_content_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_content_policy
+                ##
+                # RPC-specific configuration for `update_content_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_content_policy
+                ##
+                # RPC-specific configuration for `get_content_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_content_policy
+                ##
+                # RPC-specific configuration for `list_content_policies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_content_policies
+                ##
+                # RPC-specific configuration for `delete_content_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_content_policy
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -6815,6 +7299,16 @@ module Google
                   @delete_connection = ::Gapic::Config::Method.new delete_connection_config
                   update_connection_config = parent_rpcs.update_connection if parent_rpcs.respond_to? :update_connection
                   @update_connection = ::Gapic::Config::Method.new update_connection_config
+                  create_content_policy_config = parent_rpcs.create_content_policy if parent_rpcs.respond_to? :create_content_policy
+                  @create_content_policy = ::Gapic::Config::Method.new create_content_policy_config
+                  update_content_policy_config = parent_rpcs.update_content_policy if parent_rpcs.respond_to? :update_content_policy
+                  @update_content_policy = ::Gapic::Config::Method.new update_content_policy_config
+                  get_content_policy_config = parent_rpcs.get_content_policy if parent_rpcs.respond_to? :get_content_policy
+                  @get_content_policy = ::Gapic::Config::Method.new get_content_policy_config
+                  list_content_policies_config = parent_rpcs.list_content_policies if parent_rpcs.respond_to? :list_content_policies
+                  @list_content_policies = ::Gapic::Config::Method.new list_content_policies_config
+                  delete_content_policy_config = parent_rpcs.delete_content_policy if parent_rpcs.respond_to? :delete_content_policy
+                  @delete_content_policy = ::Gapic::Config::Method.new delete_content_policy_config
 
                   yield self if block_given?
                 end

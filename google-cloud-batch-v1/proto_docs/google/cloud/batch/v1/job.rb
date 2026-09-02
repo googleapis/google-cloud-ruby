@@ -637,9 +637,27 @@ module Google
           #     https://cloud.google.com/vpc/docs/configure-private-google-access and
           #     https://cloud.google.com/nat/docs/gce-example#create-nat for more
           #     information.
+          # @!attribute [rw] nic_type
+          #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::NetworkInterface::NicType]
+          #     Optional. The NIC type of the network interface.
           class NetworkInterface
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Compute Engine VM instance NIC type.
+            module NicType
+              # No type specified.
+              NIC_TYPE_UNSPECIFIED = 0
+
+              # GVNIC
+              GVNIC = 1
+
+              # IRDMA
+              IRDMA = 2
+
+              # MRDMA
+              MRDMA = 3
+            end
           end
 
           # NetworkPolicy describes VM instance network configurations.

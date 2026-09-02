@@ -284,6 +284,31 @@
               "methods": [
                 "update_connection"
               ]
+            },
+            "CreateContentPolicy": {
+              "methods": [
+                "create_content_policy"
+              ]
+            },
+            "UpdateContentPolicy": {
+              "methods": [
+                "update_content_policy"
+              ]
+            },
+            "GetContentPolicy": {
+              "methods": [
+                "get_content_policy"
+              ]
+            },
+            "ListContentPolicies": {
+              "methods": [
+                "list_content_policies"
+              ]
+            },
+            "DeleteContentPolicy": {
+              "methods": [
+                "delete_content_policy"
+              ]
             }
           }
         }

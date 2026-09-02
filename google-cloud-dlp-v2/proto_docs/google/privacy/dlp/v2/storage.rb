@@ -27,7 +27,7 @@ module Google
         #     Name of the information type. Either a name of your choosing when
         #     creating a CustomInfoType, or one of the names listed
         #     at
-        #     https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference
         #     when specifying a built-in type.  When sending Cloud DLP results to Data
         #     Catalog, infoType names should conform to the pattern
         #     `[A-Za-z0-9$_-]{1,64}`.
@@ -112,28 +112,33 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     A list of phrases to detect as a CustomInfoType.
         #
-        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`, `file_label_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression based CustomInfoType.
         #
-        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`, `file_label_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] surrogate_type
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::SurrogateType]
         #     Message for detecting output from deidentification transformations that
         #     support reversing.
         #
-        #     Note: The following fields are mutually exclusive: `surrogate_type`, `dictionary`, `regex`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `surrogate_type`, `dictionary`, `regex`, `stored_type`, `metadata_key_value_expression`, `file_label_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stored_type
         #   @return [::Google::Cloud::Dlp::V2::StoredType]
         #     Loads an existing `StoredInfoType` resource.
         #
-        #     Note: The following fields are mutually exclusive: `stored_type`, `dictionary`, `regex`, `surrogate_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `stored_type`, `dictionary`, `regex`, `surrogate_type`, `metadata_key_value_expression`, `file_label_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata_key_value_expression
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::MetadataKeyValueExpression]
         #     Key-value pair to detect in the metadata.
         #
-        #     Note: The following fields are mutually exclusive: `metadata_key_value_expression`, `dictionary`, `regex`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `metadata_key_value_expression`, `dictionary`, `regex`, `surrogate_type`, `stored_type`, `file_label_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] file_label_info_type
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::FileLabelInfoType]
+        #     File label to detect.
+        #
+        #     Note: The following fields are mutually exclusive: `file_label_info_type`, `dictionary`, `regex`, `surrogate_type`, `stored_type`, `metadata_key_value_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] detection_rules
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
@@ -174,9 +179,9 @@ module Google
           # Dictionary words containing a large number of characters that are not
           # letters or digits may result in unexpected findings because such characters
           # are treated as whitespace. The
-          # [limits](https://cloud.google.com/sensitive-data-protection/limits) page
-          # contains details about the size limits of dictionaries. For dictionaries
-          # that do not fit within these constraints, consider using
+          # [limits](https://docs.cloud.google.com/sensitive-data-protection/limits)
+          # page contains details about the size limits of dictionaries. For
+          # dictionaries that do not fit within these constraints, consider using
           # `LargeCustomDictionaryConfig` in the `StoredInfoType` API.
           # @!attribute [rw] word_list
           #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
@@ -222,7 +227,7 @@ module Google
 
           # Message for detecting output from deidentification transformations
           # such as
-          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+          # [`CryptoReplaceFfxFpeConfig`](https://docs.cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
           # output. This should be used in conjunction with a field on the
@@ -247,6 +252,57 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for a custom infoType that detects file labels.
+          # @!attribute [rw] sensitivity_label
+          #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::FileLabelInfoType::SensitivityLabel]
+          #     Sensitivity labels published by Microsoft.
+          #
+          #     Note: The following fields are mutually exclusive: `sensitivity_label`, `google_drive_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] google_drive_label
+          #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::FileLabelInfoType::GoogleDriveLabel]
+          #     Google Drive labels published by Google.
+          #
+          #     Note: The following fields are mutually exclusive: `google_drive_label`, `sensitivity_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class FileLabelInfoType
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Sensitivity labels published by Microsoft.
+            # @!attribute [rw] guid
+            #   @return [::String]
+            #     The GUID of the sensitivity label.
+            class SensitivityLabel
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Google Drive labels published by Google.
+            # @!attribute [rw] label_id
+            #   @return [::String]
+            #     The [label
+            #     ID](https://developers.google.com/workspace/drive/labels/guides/overview)
+            #     of the Google Drive label.
+            # @!attribute [rw] label_fields_to_match
+            #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType::FileLabelInfoType::GoogleDriveLabel::LabelField>]
+            #     The field values of the Google Drive label to match.
+            class GoogleDriveLabel
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The field values of the Google Drive label to match.
+              # @!attribute [rw] id
+              #   @return [::String]
+              #     The identifier of the Label Field.
+              # @!attribute [rw] value
+              #   @return [::String]
+              #     The value of the Label Field to match.
+              class LabelField
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
           # Deprecated; use `InspectionRuleSet` instead. Rule for modifying a
           # `CustomInfoType` to alter behavior under certain circumstances, depending
           # on the specific details of the rule. Not supported for the `surrogate_type`
@@ -266,7 +322,7 @@ module Google
             #     if you want to modify the likelihood of an entire column of findngs,
             #     set this to 1. For more information, see
             #     [Hotword example: Set the match likelihood of a table column]
-            #     (https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
+            #     (https://docs.cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] window_after
             #   @return [::Integer]
             #     Number of characters after the finding to consider.
@@ -318,7 +374,7 @@ module Google
             #     For tabular data, if you want to modify the likelihood of an entire
             #     column of findngs, see
             #     [Hotword example: Set the match likelihood of a table column]
-            #     (https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
+            #     (https://docs.cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes-likelihood#match-column-values).
             # @!attribute [rw] likelihood_adjustment
             #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
             #     Likelihood adjustment to apply to all matching findings.
@@ -460,7 +516,7 @@ module Google
         #     This field can't be set if de-identification is requested. For certain file
         #     types, setting this field has no effect. For more information, see [Limits
         #     on bytes scanned per
-        #     file](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
+        #     file](https://docs.cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] bytes_limit_per_file_percent
         #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
@@ -470,7 +526,7 @@ module Google
         #     This field can't be set if de-identification is requested. For certain file
         #     types, setting this field has no effect. For more information, see [Limits
         #     on bytes scanned per
-        #     file](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
+        #     file](https://docs.cloud.google.com/sensitive-data-protection/docs/supported-file-types#max-byte-size-per-file).
         # @!attribute [rw] file_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -576,7 +632,7 @@ module Google
         #     TimespanConfig.
         #
         #     Caution: A [known
-        #     issue](https://cloud.google.com/sensitive-data-protection/docs/known-issues#bq-sampling)
+        #     issue](https://docs.cloud.google.com/sensitive-data-protection/docs/known-issues#bq-sampling)
         #     is causing the `rowsLimitPercent` field to behave unexpectedly. We
         #     recommend using `rowsLimit` instead.
         # @!attribute [rw] sample_method
@@ -670,7 +726,7 @@ module Google
           #     `TIMESTAMP`, and `DATETIME`.
           #
           #     If your BigQuery table is [partitioned at ingestion
-          #     time](https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time),
+          #     time](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time),
           #     you can use any of the following pseudo-columns as your timestamp field.
           #     When used with Cloud DLP, these pseudo-column names are case sensitive.
           #
@@ -687,7 +743,7 @@ module Google
           #
           #     See the
           #     [known
-          #     issue](https://cloud.google.com/sensitive-data-protection/docs/known-issues#bq-timespan)
+          #     issue](https://docs.cloud.google.com/sensitive-data-protection/docs/known-issues#bq-timespan)
           #     related to this operation.
           # @!attribute [rw] enable_auto_population_of_timespan_config
           #   @return [::Boolean]
@@ -705,7 +761,7 @@ module Google
           #     timestamp will result in skipped rows.
           #
           #     See the [known
-          #     issue](https://cloud.google.com/sensitive-data-protection/docs/known-issues#recently-streamed-data)
+          #     issue](https://docs.cloud.google.com/sensitive-data-protection/docs/known-issues#recently-streamed-data)
           #     related to this operation.
           class TimespanConfig
             include ::Google::Protobuf::MessageExts
@@ -952,7 +1008,7 @@ module Google
         #
         # For more information about each likelihood level
         # and how likelihood works, see [Match
-        # likelihood](https://cloud.google.com/sensitive-data-protection/docs/likelihood).
+        # likelihood](https://docs.cloud.google.com/sensitive-data-protection/docs/likelihood).
         module Likelihood
           # Default value; same as POSSIBLE.
           LIKELIHOOD_UNSPECIFIED = 0

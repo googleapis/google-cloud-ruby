@@ -525,7 +525,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil, options: nil)
+              # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil, options: nil, platform_type: nil)
               #   Pass arguments to `verify_confidential_gke` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -539,6 +539,9 @@ module Google
               #     provided Challenge will be consumed, and cannot be used again.
               #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions, ::Hash]
               #     Optional. A collection of fields that modify the token output.
+              #   @param platform_type [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::PlatformType]
+              #     Optional. Optional platform security architecture hint for the verifier
+              #     engine. Defaults to `VIRTUALIZED_CVM` behavior if unspecified.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

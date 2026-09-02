@@ -26,35 +26,45 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryTableReferences]
         #     References to BigQuery tables.
         #
-        #     Note: The following fields are mutually exclusive: `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] studio
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::StudioDatasourceReferences]
         #     References to Looker Studio datasources.
         #
-        #     Note: The following fields are mutually exclusive: `studio`, `bq`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `studio`, `bq`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] looker
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerExploreReferences]
         #     References to Looker Explores.
         #
-        #     Note: The following fields are mutually exclusive: `looker`, `bq`, `studio`, `alloydb`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `looker`, `bq`, `studio`, `alloydb`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alloydb
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AlloyDbReference]
         #     Reference to an AlloyDB database. Only supported for the `QueryData`
         #     method.
         #
-        #     Note: The following fields are mutually exclusive: `alloydb`, `bq`, `studio`, `looker`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `alloydb`, `bq`, `studio`, `looker`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spanner_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SpannerReference]
         #     Reference to a Spanner database. Only supported for the `QueryData`
         #     method.
         #
-        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bq`, `studio`, `looker`, `alloydb`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bq`, `studio`, `looker`, `alloydb`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::CloudSqlReference]
         #     Reference to a CloudSql database. Only supported for the `QueryData`
         #     method.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bigtable_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigtableReference]
+        #     Reference to a Bigtable instance.
+        #
+        #     Note: The following fields are mutually exclusive: `bigtable_reference`, `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] firestore_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::FirestoreReference]
+        #     Reference to a Firestore database.
+        #
+        #     Note: The following fields are mutually exclusive: `firestore_reference`, `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DatasourceReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +82,9 @@ module Google
         #     Note: Data sources must exclusively use either tables or property graphs,
         #     not both. When using property graphs, a maximum of one graph reference is
         #     supported.
+        # @!attribute [rw] agent_context_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AgentContextReference]
+        #     Optional. Parameters for retrieving data from Agent Context.
         class BigQueryTableReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,6 +202,72 @@ module Google
         #     specifies a table and can optionally include the table's schema to provide
         #     context for the query.
         class AlloyDbDatabaseReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing reference to a Bigtable instance and agent context.
+        # @!attribute [rw] database_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigtableDatabaseReference]
+        #     Required. Singular proto that supports specifying which database and tables
+        #     to include.
+        # @!attribute [rw] agent_context_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AgentContextReference]
+        #     Optional. Parameters for retrieving data from Agent Context.
+        class BigtableReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing reference to Bigtable database.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The project the instance belongs to.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     Required. The instance id.
+        # @!attribute [rw] table_ids
+        #   @return [::Array<::String>]
+        #     Optional. The table ids. Denotes all tables if unset.
+        # @!attribute [rw] database_table_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::DatabaseTableReference>]
+        #     Optional. References to tables within the database. Each reference
+        #     specifies a table and can optionally include the table's schema to provide
+        #     context for the query.
+        class BigtableDatabaseReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing reference to a Firestore database and agent context.
+        # @!attribute [rw] database_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::FirestoreDatabaseReference]
+        #     Required. Singular proto that supports specifying which database and tables
+        #     to include.
+        # @!attribute [rw] agent_context_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AgentContextReference]
+        #     Optional. Parameters for retrieving data from Agent Context.
+        class FirestoreReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing a reference to a single Firestore database.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. Project the firestore database belongs to.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     Required. The database id.
+        # @!attribute [rw] collection_ids
+        #   @return [::Array<::String>]
+        #     Optional. The collection ids. Denotes all collections if unset.
+        # @!attribute [rw] database_table_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::DatabaseTableReference>]
+        #     Optional. References to collections within the database. Each reference
+        #     specifies a collection and can optionally include the collection's schema
+        #     to provide context for the query.
+        class FirestoreDatabaseReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -394,37 +473,47 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryTableReference]
         #     A reference to a BigQuery table.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] studio_datasource_id
         #   @return [::String]
         #     A reference to a Looker Studio datasource.
         #
-        #     Note: The following fields are mutually exclusive: `studio_datasource_id`, `bigquery_table_reference`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `studio_datasource_id`, `bigquery_table_reference`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] looker_explore_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerExploreReference]
         #     A reference to a Looker explore.
         #
-        #     Note: The following fields are mutually exclusive: `looker_explore_reference`, `bigquery_table_reference`, `studio_datasource_id`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `looker_explore_reference`, `bigquery_table_reference`, `studio_datasource_id`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alloy_db_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AlloyDbReference]
         #     A reference to an AlloyDB database.
         #
-        #     Note: The following fields are mutually exclusive: `alloy_db_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `alloy_db_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spanner_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SpannerReference]
         #     A reference to a Spanner database.
         #
-        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::CloudSqlReference]
         #     A reference to a CloudSQL database.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `bigtable_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bigtable_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigtableReference]
+        #     A reference to a Bigtable instance.
+        #
+        #     Note: The following fields are mutually exclusive: `bigtable_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_property_graph_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryPropertyGraphReference]
         #     A reference to a BigQuery property graph.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_property_graph_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_property_graph_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `firestore_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] firestore_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::FirestoreReference]
+        #     A reference to a Firestore database.
+        #
+        #     Note: The following fields are mutually exclusive: `firestore_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigtable_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Schema]
         #     Optional. The schema of the datasource.
