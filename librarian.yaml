@@ -544,9 +544,28 @@ libraries:
       - path: google/cloud/batch/v1
   - name: google-cloud-beyond_corp
     version: 1.6.1
+    title_override: BeyondCorp API
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
-    skip_generate: true
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_connections
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/appconnectors/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_connectors
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/appgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_gateways
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/clientgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-client_gateways
+            ruby-cloud-wrapper-of: v1:0.4
     ruby:
       wrapper_of:
         - v1:0.4
@@ -2253,6 +2272,18 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MONITORING
             ruby-cloud-migration-version: "1.0"
+      - path: google/monitoring/dashboard/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING_DASHBOARD
+            ruby-cloud-gem-name: google-cloud-monitoring-dashboard
+            ruby-cloud-wrapper-of: v1:0.14
+      - path: google/monitoring/metricsscope/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING_METRICS_SCOPE
+            ruby-cloud-gem-name: google-cloud-monitoring-metrics_scope
+            ruby-cloud-wrapper-of: v1:0.5
     keep:
       - MIGRATING.md
       - acceptance/google/cloud/monitoring/v3/metric_service_smoke_test.rb
@@ -2266,7 +2297,6 @@ libraries:
       - samples/metrics.rb
       - samples/quickstart.rb
       - samples/uptime_check.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v3:0.15
@@ -2657,7 +2687,11 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: POLICY_TROUBLESHOOTER
-    skip_generate: true
+      - path: google/cloud/policytroubleshooter/iam/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-policy_troubleshooter-iam
+            ruby-cloud-wrapper-of: v3:0.3
     ruby:
       wrapper_of:
         - v1:0.10
@@ -4154,7 +4188,12 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
-    skip_generate: true
+      - path: google/cloud/workflows/executions/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+            ruby-cloud-gem-name: google-cloud-workflows-executions
+            ruby-cloud-wrapper-of: v1:1.2
     ruby:
       wrapper_of:
         - v1:2.0
