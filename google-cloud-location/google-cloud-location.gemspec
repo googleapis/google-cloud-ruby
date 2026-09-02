@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An add-on interface used by some Google API clients to provide location management calls."
-  gem.summary       = "API Client library for the Locations API"
+  gem.description   = "This API provides static metadata about Google Cloud Platform. Currently, it only provides basic information about Google Cloud locations, such as zones, regions, and countries."
+  gem.summary       = "This API provides static metadata about Google Cloud Platform. Currently, it only provides basic information about Google Cloud locations, such as zones, regions, and countries."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
