@@ -2061,10 +2061,11 @@ libraries:
             ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
   - name: google-cloud-location
     version: 1.5.1
+    apis:
+      - path: google/cloud/location
     keep:
       - README.md
       - .repo-metadata.json
-    skip_generate: true
   - name: google-cloud-location_finder
     version: 1.0.1
     apis:
