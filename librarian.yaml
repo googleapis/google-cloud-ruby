@@ -1793,7 +1793,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-gemini_data_analytics-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
