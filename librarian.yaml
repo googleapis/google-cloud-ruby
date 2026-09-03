@@ -4076,7 +4076,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-vmware_engine-v1
-    version: 1.5.1
+    version: 1.5.2
     apis:
       - path: google/cloud/vmwareengine/v1
   - name: google-cloud-vpc_access
