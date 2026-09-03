@@ -669,7 +669,7 @@ libraries:
       wrapper_of:
         - v2:0.9
   - name: google-cloud-bigquery-migration-v2
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/bigquery/migration/v2
   - name: google-cloud-bigquery-reservation
