@@ -2980,7 +2980,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SCHEDULER
   - name: google-cloud-scheduler-v1beta1
-    version: 0.18.1
+    version: 0.18.2
     apis:
       - path: google/cloud/scheduler/v1beta1
         ruby:
