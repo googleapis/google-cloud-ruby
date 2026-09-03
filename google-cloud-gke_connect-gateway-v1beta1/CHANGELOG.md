@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.2 (2026-09-03)
+
+#### Bug Fixes
+
+* update librarian to v0.39.1-0.20260831182628-509cd77c2487 to respect "all: rest" 
+
 ### 0.14.1 (2026-08-06)
 
 #### Bug Fixes
