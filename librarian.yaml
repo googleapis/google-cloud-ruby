@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.40.0
+version: v0.40.1-0.20260903215010-a325c538d912
 sources:
   googleapis:
     commit: 00ff8fcb95cafbac573cc449b0d1a039244f1b4b
@@ -546,10 +546,26 @@ libraries:
     version: 1.6.1
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
-    skip_generate: true
-    ruby:
-      wrapper_of:
-        - v1:0.4
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_connections
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/appconnectors/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_connectors
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/appgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-app_gateways
+            ruby-cloud-wrapper-of: v1:0.4
+      - path: google/cloud/beyondcorp/clientgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-beyond_corp-client_gateways
+            ruby-cloud-wrapper-of: v1:0.4
+    title_override: BeyondCorp API
   - name: google-cloud-beyond_corp-app_connections-v1
     version: 0.13.1
     apis:
@@ -2253,6 +2269,19 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MONITORING
             ruby-cloud-migration-version: "1.0"
+            ruby-cloud-wrapper-of: v3:0.15
+      - path: google/monitoring/dashboard/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING_DASHBOARD
+            ruby-cloud-gem-name: google-cloud-monitoring-dashboard
+            ruby-cloud-wrapper-of: v1:0.14
+      - path: google/monitoring/metricsscope/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING_METRICS_SCOPE
+            ruby-cloud-gem-name: google-cloud-monitoring-metrics_scope
+            ruby-cloud-wrapper-of: v1:0.5
     keep:
       - MIGRATING.md
       - acceptance/google/cloud/monitoring/v3/metric_service_smoke_test.rb
@@ -2266,10 +2295,6 @@ libraries:
       - samples/metrics.rb
       - samples/quickstart.rb
       - samples/uptime_check.rb
-    skip_generate: true
-    ruby:
-      wrapper_of:
-        - v3:0.15
   - name: google-cloud-monitoring-dashboard-v1
     version: 1.7.1
     apis:
@@ -2657,10 +2682,12 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: POLICY_TROUBLESHOOTER
-    skip_generate: true
-    ruby:
-      wrapper_of:
-        - v1:0.10
+            ruby-cloud-wrapper-of: v1:0.10
+      - path: google/cloud/policytroubleshooter/iam/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-name: google-cloud-policy_troubleshooter-iam
+            ruby-cloud-wrapper-of: v3:0.3
   - name: google-cloud-policy_troubleshooter-iam-v3
     version: 0.12.1
     apis:
@@ -4154,10 +4181,13 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
-    skip_generate: true
-    ruby:
-      wrapper_of:
-        - v1:2.0
+            ruby-cloud-wrapper-of: v1:2.0
+      - path: google/cloud/workflows/executions/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+            ruby-cloud-gem-name: google-cloud-workflows-executions
+            ruby-cloud-wrapper-of: v1:1.2
   - name: google-cloud-workflows-executions-v1
     version: 1.6.1
     apis:
