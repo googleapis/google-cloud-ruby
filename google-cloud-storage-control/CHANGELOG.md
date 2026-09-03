@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.2 (2026-09-03)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
 ### 1.4.1 (2026-08-05)
 
 #### Bug Fixes
