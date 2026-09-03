@@ -4222,7 +4222,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-developers-developer_knowledge-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/developers/knowledge/v1
   - name: google-iam-client
