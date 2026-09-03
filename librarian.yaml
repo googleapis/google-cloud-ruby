@@ -2926,9 +2926,11 @@ libraries:
     version: 1.8.1
     apis:
       - path: google/cloud/run/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-renamed-from: google-cloud-run
     keep:
       - lib/google/cloud/run/client/version.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.17
@@ -4229,9 +4231,11 @@ libraries:
     version: 1.3.1
     apis:
       - path: google/iam/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-renamed-from: google-iam
     keep:
       - lib/google/iam/client/version.rb
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.5
