@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.3 (2026-09-03)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
 ### 2.2.2 (2026-09-01)
 
 #### Bug Fixes
