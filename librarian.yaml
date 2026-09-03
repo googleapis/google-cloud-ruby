@@ -1826,7 +1826,7 @@ libraries:
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
   - name: google-cloud-gke_connect-gateway-v1beta1
-    version: 0.14.1
+    version: 0.14.2
     apis:
       - path: google/cloud/gkeconnect/gateway/v1beta1
         ruby:
