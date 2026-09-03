@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.14.1 (2026-09-03)
+
+#### Bug Fixes
+
+* prepare release google-cloud-storage-control-v2 ([#36470](https://github.com/googleapis/google-cloud-ruby/issues/36470)) 
+
 ### 1.14.0 (2026-08-13)
 
 #### Features
@@ -151,5 +157,3 @@
 * Initial release of generated google-cloud-storage-control-v2 client ([#25743](https://github.com/googleapis/google-cloud-ruby/issues/25743)) 
 
 ## Release History
-
-

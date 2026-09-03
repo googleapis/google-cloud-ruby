@@ -3475,7 +3475,7 @@ libraries:
       wrapper_of:
         - v2:0.0
   - name: google-cloud-storage-control-v2
-    version: 1.14.0
+    version: 1.14.1
     apis:
       - path: google/storage/control/v2
   - name: google-cloud-storage_batch_operations
