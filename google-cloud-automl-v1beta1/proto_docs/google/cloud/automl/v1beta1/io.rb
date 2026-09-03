@@ -1073,8 +1073,7 @@ module Google
         #                ubuntu 16.04 operating system. See more at
         #                [containers
         #
-        #     quickstart](https:
-        #     //cloud.google.com/vision/automl/docs/containers-gcs-quickstart)
+        #     quickstart](https://cloud.google.com/vision/automl/docs/containers-gcs-quickstart)
         #     * core_ml - Used for iOS mobile devices.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -1189,8 +1188,7 @@ module Google
         #     Required. Google Contained Registry URI of the new image, up to 2000
         #     characters long. See
         #
-        #     https:
-        #     //cloud.google.com/container-registry/do
+        #     https://cloud.google.com/container-registry/do
         #     // cs/pushing-and-pulling#pushing_an_image_to_a_registry
         #     Accepted forms:
         #     * [HOSTNAME]/[PROJECT-ID]/[IMAGE]

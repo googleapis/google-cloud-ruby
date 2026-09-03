@@ -2,7 +2,6 @@
 
 Train high-quality custom machine learning models with minimum effort and machine learning expertise.
 
-AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.predict request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-automl-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/automl)
-for general usage information.
 
 ## Debug Logging
 
