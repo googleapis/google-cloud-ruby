@@ -1096,7 +1096,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-confidential_computing-v1
-    version: 2.4.1
+    version: 2.5.0
     apis:
       - path: google/cloud/confidentialcomputing/v1
   - name: google-cloud-config_delivery
