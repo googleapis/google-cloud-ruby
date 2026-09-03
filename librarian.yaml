@@ -539,7 +539,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-batch-v1
-    version: 1.8.2
+    version: 1.9.0
     apis:
       - path: google/cloud/batch/v1
   - name: google-cloud-beyond_corp
