@@ -707,7 +707,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_STORAGE
   - name: google-cloud-bigtable-admin-v2
-    version: 1.19.0
+    version: 1.20.0
     apis:
       - path: google/bigtable/admin/v2
         ruby:
