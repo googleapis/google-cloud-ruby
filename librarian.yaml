@@ -1797,7 +1797,7 @@ libraries:
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
   - name: google-cloud-gke_backup
