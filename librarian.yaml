@@ -2182,7 +2182,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-memcache-v1
-    version: 2.6.1
+    version: 2.6.2
     apis:
       - path: google/cloud/memcache/v1
         ruby:
