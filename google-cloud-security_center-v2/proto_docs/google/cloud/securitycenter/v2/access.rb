@@ -61,7 +61,7 @@ module Google
         #     `principal://iam.googleapis.com/{identity pool name}/subject/{subject}`.
         #     Some GKE identities, such as GKE_WORKLOAD, FREEFORM, and GKE_HUB_WORKLOAD,
         #     still use the legacy format `serviceAccount:{identity pool
-        #     name}[\\{subject}]`.
+        #     name}[{subject}]`.
         # @!attribute [rw] service_account_key_name
         #   @return [::String]
         #     The name of the service account key that was used to create or exchange
@@ -98,7 +98,7 @@ module Google
         #     As compared to `principal_email`, supports principals that aren't
         #     associated with email addresses, such as third party principals. For most
         #     identities, the format will be `principal://iam.googleapis.com/{identity
-        #     pool name}/subjects/\\{subject}` except for some GKE identities
+        #     pool name}/subjects/{subject}` except for some GKE identities
         #     (GKE_WORKLOAD, FREEFORM, GKE_HUB_WORKLOAD) that are still in the legacy
         #     format `serviceAccount:{identity pool name}[{subject}]`
         class ServiceAccountDelegationInfo

@@ -109,7 +109,7 @@ module Google
           #
           #     * Generic artifacts: the `plugin_config_uri` must be in this format:
           #     `projects/{project}/locations/{location}/repositories/{repository}/
-          #     genericArtifacts/\\{package}:\\{version}`.
+          #     genericArtifacts/{package}:{version}`.
           #     The specified package and version must contain a file with the name
           #     `plugin.config`. When a new `WasmPluginVersion` resource is
           #     created, the checksum of the contents of the file is saved in the
@@ -145,7 +145,7 @@ module Google
           #
           #     * Generic artifacts: the `image_uri` must be in this format:
           #     `projects/{project}/locations/{location}/repositories/{repository}/
-          #     genericArtifacts/\\{package}:\\{version}`.
+          #     genericArtifacts/{package}:{version}`.
           #     The specified package and version must contain a file with the name
           #     `plugin.wasm`. When a new `WasmPluginVersion` resource is created, the
           #     checksum of the contents of the file is saved in the `image_digest`
@@ -296,7 +296,7 @@ module Google
         #
         #     * Generic artifacts: the `plugin_config_uri` must be in this format:
         #     `projects/{project}/locations/{location}/repositories/{repository}/
-        #     genericArtifacts/\\{package}:\\{version}`.
+        #     genericArtifacts/{package}:{version}`.
         #     The specified package and version must contain a file with the name
         #     `plugin.config`. When a new `WasmPluginVersion` resource is
         #     created, the checksum of the contents of the file is saved in the
@@ -307,7 +307,7 @@ module Google
         #   @return [::String]
         #     Identifier. Name of the `WasmPluginVersion` resource in the following
         #     format: `projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/
-        #     versions/\\{wasm_plugin_version}`.
+        #     versions/{wasm_plugin_version}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the resource was created.
@@ -337,7 +337,7 @@ module Google
         #
         #     * Generic artifacts: the `image_uri` must be in this format:
         #     `projects/{project}/locations/{location}/repositories/{repository}/
-        #     genericArtifacts/\\{package}:\\{version}`.
+        #     genericArtifacts/{package}:{version}`.
         #     The specified package and version must contain a file with the name
         #     `plugin.wasm`. When a new `WasmPluginVersion` resource is created, the
         #     checksum of the contents of the file is saved in the `image_digest`
