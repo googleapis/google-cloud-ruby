@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Vision V1p3beta1 API
+# Ruby Client for the Cloud Vision V1P3BETA1 API
 
 Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
 
-Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Vision V1p3beta1 API. Most users should consider using
+specific version of the Cloud Vision V1P3BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-vision](https://rubygems.org/gems/google-cloud-vision).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_product_set request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vision-v1p3beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/vision)
-for general usage information.
 
 ## Debug Logging
 
