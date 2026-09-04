@@ -60,6 +60,12 @@ module Google
       #   acknowledgement ({ReceivedMessage#ack!}) and delay messages
       #   ({ReceivedMessage#nack!}, {ReceivedMessage#modify_ack_deadline!}).
       #   Default is 4.
+      # @attr_reader [Symbol] shutdown_behavior The strategy used to handle
+      #   unprocessed messages when stopping the subscriber (`:wait_for_processing`
+      #   or `:nack_immediately`). Default is `:wait_for_processing`.
+      # @attr_reader [Numeric, nil] shutdown_timeout The maximum number of
+      #   seconds to wait during shutdown before forcing remaining messages
+      #   to be nacked. Default is `nil`.
       #
       class MessageListener
         include MonitorMixin
@@ -72,6 +78,7 @@ module Google
         attr_reader :callback_threads
         attr_reader :push_threads
         attr_reader :shutdown_behavior
+        attr_reader :shutdown_timeout
 
         ##
         # @private Implementation attributes.
@@ -84,7 +91,7 @@ module Google
         ##
         # @private Create an empty {MessageListener} object.
         def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
-                       threads: {}, service: nil
+                       threads: {}, shutdown_behavior: :wait_for_processing, shutdown_timeout: nil, service: nil
           super() # to init MonitorMixin
 
           @callback = callback
@@ -92,7 +99,16 @@ module Google
           @subscription_name = subscription_name
           @deadline = deadline || 60
           @streams = streams || 1
-          @shutdown_behavior = :wait_for_processing
+          @shutdown_behavior = shutdown_behavior || :wait_for_processing
+          @shutdown_timeout = shutdown_timeout
+
+          unless [:wait_for_processing, :nack_immediately].include? @shutdown_behavior
+            raise ArgumentError, "Invalid shutdown_behavior: #{@shutdown_behavior.inspect}"
+          end
+          if @shutdown_timeout && (!@shutdown_timeout.is_a?(Numeric) || @shutdown_timeout.negative?)
+            raise ArgumentError, "Invalid shutdown_timeout: #{@shutdown_timeout.inspect}"
+          end
+
           coerce_inventory inventory
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
@@ -147,7 +163,7 @@ module Google
             @started = false
             @stopped = true
             @stream_pool.map(&:stop)
-            wait_stop_buffer_thread!
+            wait_stop_buffer_thread! @shutdown_timeout
             self
           end
         end
@@ -162,12 +178,14 @@ module Google
         # stopped.
         #
         # @param [Number, nil] timeout The number of seconds to block until the
-        #   subscriber is fully stopped. Default will block indefinitely.
+        #   subscriber is fully stopped. Default will block indefinitely or use
+        #   configured `shutdown_timeout`.
         #
         # @return [MessageListener] returns self so calls can be chained.
         #
         def wait! timeout = nil
-          wait_stop_buffer_thread!
+          timeout ||= @shutdown_timeout
+          wait_stop_buffer_thread! timeout
           @wait_stop_buffer_thread.join timeout
           self
         end
@@ -180,11 +198,13 @@ module Google
         # The same as calling {#stop} and {#wait!}.
         #
         # @param [Number, nil] timeout The number of seconds to block until the
-        #   listener is fully stopped. Default will block indefinitely.
+        #   listener is fully stopped. Default will block indefinitely or use
+        #   configured `shutdown_timeout`.
         #
         # @return [MessageListener] returns self so calls can be chained.
         #
         def stop! timeout = nil
+          timeout ||= @shutdown_timeout
           stop
           wait! timeout
         end
@@ -367,10 +387,10 @@ module Google
 
         ##
         # Starts a new thread to call wait! (blocking) on each Stream and then stop the TimedUnaryBuffer.
-        def wait_stop_buffer_thread!
+        def wait_stop_buffer_thread! timeout = nil
           synchronize do
             @wait_stop_buffer_thread ||= Thread.new do
-              @stream_pool.map(&:wait!)
+              @stream_pool.each { |s| s.wait! timeout }
               # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
               @buffer.stop
             end

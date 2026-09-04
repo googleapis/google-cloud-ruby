@@ -226,11 +226,10 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     message_received = Concurrent::Event.new
     block_callback = Concurrent::Event.new
 
-    listener = subscriber.listen streams: 1 do |_msg|
+    listener = subscriber.listen streams: 1, shutdown_behavior: :nack_immediately do |_msg|
       message_received.set
       block_callback.wait
     end
-    listener.instance_variable_set :@shutdown_behavior, :nack_immediately
 
     listener.start
     message_received.wait
