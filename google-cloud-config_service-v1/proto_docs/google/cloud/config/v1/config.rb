@@ -47,7 +47,7 @@ module Google
         #   @return [::String]
         #     Output only. Revision name that was most recently applied.
         #     Format: `projects/{project}/locations/{location}/deployments/{deployment}/
-        #     revisions/\\{revision}`
+        #     revisions/{revision}`
         # @!attribute [r] state_detail
         #   @return [::String]
         #     Output only. Additional information regarding the current state.
@@ -794,7 +794,7 @@ module Google
         #   @return [::String]
         #     Revision name. Format:
         #     `projects/{project}/locations/{location}/deployments/{deployment}/
-        #     revisions/\\{revision}`
+        #     revisions/{revision}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the revision was created.

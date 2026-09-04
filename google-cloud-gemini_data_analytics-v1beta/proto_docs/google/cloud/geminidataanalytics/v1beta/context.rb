@@ -172,7 +172,7 @@ module Google
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::QueryParameter>]
         #     Optional. The list of query parameters.
         #     Example: The parameterized SQL query
-        #     "SELECT * FROM my_table WHERE id = @id" can be matched with any value of
+        #     "SELECT * FROM my_table WHERE id = `@id`" can be matched with any value of
         #     id.
         class ExampleQuery
           include ::Google::Protobuf::MessageExts

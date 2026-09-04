@@ -900,7 +900,7 @@ module Google
         # be a partial response, depending on the page size in the ListJobsRequest.
         # However, if the project does not have any jobs, an instance of
         # ListJobsResponse is not returned and the requests's response
-        # body is empty {}.
+        # body is empty \\{}.
         # @!attribute [rw] jobs
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::Job>]
         #     A subset of the requested job information.

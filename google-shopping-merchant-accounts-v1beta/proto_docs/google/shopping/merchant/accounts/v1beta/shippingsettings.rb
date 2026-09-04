@@ -595,8 +595,8 @@ module Google
           #     Required. A list of inclusive order price upper bounds. The last price's
           #     value can be infinity by setting price amount_micros = -1. For example
           #     `[{"amount_micros": 10000000, "currency_code": "USD"},
-          #     \\{"amount_micros": 500000000, "currency_code": "USD"},
-          #     \\{"amount_micros": -1, "currency_code": "USD"}]` represents the headers
+          #     {"amount_micros": 500000000, "currency_code": "USD"},
+          #     {"amount_micros": -1, "currency_code": "USD"}]` represents the headers
           #     "<= $10", "<= $500", and "> $500". All prices within a service must have
           #     the same currency. Must be non-empty. Must be positive except -1. Can only
           #     be set if all other fields are not set.
@@ -606,7 +606,7 @@ module Google
           #     value can be infinity by setting price amount_micros = -1. For example
           #     `[{"amount_micros": 10000000, "unit": "kg"}, {"amount_micros": 50000000,
           #     "unit": "kg"},
-          #     \\{"amount_micros": -1, "unit": "kg"}]` represents the headers
+          #     {"amount_micros": -1, "unit": "kg"}]` represents the headers
           #     "<= 10kg", "<= 50kg", and "> 50kg". All weights within a service must have
           #     the same unit. Must be non-empty. Must be positive except -1. Can only be
           #     set if all other fields are not set.

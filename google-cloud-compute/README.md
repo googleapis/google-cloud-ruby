@@ -1,8 +1,7 @@
-# Ruby Client for the Google Cloud Compute API
+# Ruby Client for the Compute Engine API
 
-API Client library for the Google Cloud Compute API
+Compute Engine is an infrastructure as a service (IaaS) product that offers self-managed virtual machine (VM) instances and bare metal instances.
 
-google-cloud-compute is the official client library for the Google Cloud Compute API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-compute-v*`.

@@ -398,7 +398,7 @@ module Google
             # supportApiService = googleapiclient.discovery.build(
             #     serviceName="cloudsupport",
             #     version=api_version,
-            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
             # )
             #
             # request = supportApiService.cases().comments().get(
