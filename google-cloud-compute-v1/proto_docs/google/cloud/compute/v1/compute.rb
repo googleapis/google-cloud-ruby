@@ -219,6 +219,13 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the resource.
+        # @!attribute [rw] resource_metadata
+        #   @return [::Google::Cloud::Compute::V1::ResourceMetadata]
+        #     Output only. Contains standard resource metadata for an AcceleratorType
+        #     resource. It is populated for each instance of the AcceleratorType
+        #     resource, and includes the api_version the
+        #     instance was retrieved through, and its canonical
+        #     resource_type name.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     Output only. [Output Only] Server-defined, fully qualified URL for this resource.
@@ -9687,7 +9694,8 @@ module Google
         #     handle additional traffic or is fully loaded. For usage guidelines, see
         #     Connection balancing mode.
         #
-        #     Backends must use compatible balancing modes. For more information, see
+        #     Backends must use compatible balancing modes. Backends of a backend
+        #     service may use different balancing modes. For more information, see
         #     Supported balancing modes and target capacity settings and
         #     Restrictions and guidance for instance groups.
         #
@@ -9723,6 +9731,9 @@ module Google
         #   @return [::Boolean]
         #     This field designates whether this is a failover backend. More than one
         #     failover backend can be configured for a given BackendService.
+        #
+        #     This field can only be used for a regional external Passthrough Network
+        #     Load Balancer or a regional internal Passthrough Network Load Balancer.
         # @!attribute [rw] group
         #   @return [::String]
         #     The fully-qualified URL of aninstance
@@ -9817,6 +9828,15 @@ module Google
         #        capacity, backends in this layer would be used and traffic would be
         #        assigned based on the load balancing algorithm you use. This is the
         #        default
+        #
+        #
+        #
+        #     For global external Passthrough Network Load Balancers, the following
+        #     restrictions apply:
+        #
+        #        - At most one backend can be marked as PREFERRED.
+        #        - PREFERRED and DEFAULT backends cannot reside
+        #        in the same Cloud region.
         #     Check the Preference enum for the list of possible values.
         # @!attribute [rw] traffic_duration
         #   @return [::String]
@@ -9829,7 +9849,8 @@ module Google
           # handle additional traffic or is fully loaded. For usage guidelines, see
           # Connection balancing mode.
           #
-          # Backends must use compatible balancing modes. For more information, see
+          # Backends must use compatible balancing modes. Backends of a backend
+          # service may use different balancing modes. For more information, see
           # Supported balancing modes and target capacity settings and
           # Restrictions and guidance for instance groups.
           #
@@ -9868,6 +9889,15 @@ module Google
           #    capacity, backends in this layer would be used and traffic would be
           #    assigned based on the load balancing algorithm you use. This is the
           #    default
+          #
+          #
+          #
+          # For global external Passthrough Network Load Balancers, the following
+          # restrictions apply:
+          #
+          #    - At most one backend can be marked as PREFERRED.
+          #    - PREFERRED and DEFAULT backends cannot reside
+          #    in the same Cloud region.
           module Preference
             # A value indicating that the enum field is not set.
             UNDEFINED_PREFERENCE = 0
@@ -10067,14 +10097,17 @@ module Google
         # @!attribute [rw] cache_mode
         #   @return [::String]
         #     Specifies the cache setting for all responses from this backend.
-        #     The possible values are:USE_ORIGIN_HEADERS Requires the origin to set valid caching
+        #     The possible values are:
+        #     USE_ORIGIN_HEADERS Requires the origin to set valid caching
         #     headers to cache content. Responses without these headers will not be
         #     cached at Google's edge, and will require a full trip to the origin on
         #     every request, potentially impacting performance and increasing load on
-        #     the origin server.FORCE_CACHE_ALL Cache all content, ignoring any "private",
+        #     the origin server.
+        #     FORCE_CACHE_ALL Cache all content, ignoring any "private",
         #     "no-store" or "no-cache" directives in Cache-Control response headers.
         #     Warning: this may result in Cloud CDN caching private,
-        #     per-user (user identifiable) content.CACHE_ALL_STATIC Automatically cache static content,
+        #     per-user (user identifiable) content.
+        #     CACHE_ALL_STATIC Automatically cache static content,
         #     including common image formats, media (video and audio), and web assets
         #     (JavaScript and CSS). Requests and responses that are marked as
         #     uncacheable, as well as dynamic content (including HTML), will not be
@@ -10183,14 +10216,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Specifies the cache setting for all responses from this backend.
-          # The possible values are:USE_ORIGIN_HEADERS Requires the origin to set valid caching
+          # The possible values are:
+          # USE_ORIGIN_HEADERS Requires the origin to set valid caching
           # headers to cache content. Responses without these headers will not be
           # cached at Google's edge, and will require a full trip to the origin on
           # every request, potentially impacting performance and increasing load on
-          # the origin server.FORCE_CACHE_ALL Cache all content, ignoring any "private",
+          # the origin server.
+          # FORCE_CACHE_ALL Cache all content, ignoring any "private",
           # "no-store" or "no-cache" directives in Cache-Control response headers.
           # Warning: this may result in Cloud CDN caching private,
-          # per-user (user identifiable) content.CACHE_ALL_STATIC Automatically cache static content,
+          # per-user (user identifiable) content.
+          # CACHE_ALL_STATIC Automatically cache static content,
           # including common image formats, media (video and audio), and web assets
           # (JavaScript and CSS). Requests and responses that are marked as
           # uncacheable, as well as dynamic content (including HTML), will not be
@@ -10541,8 +10577,8 @@ module Google
         #     Balancers](https://cloud.google.com/load-balancing/docs/internal/failover-overview)
         #     and [external passthrough Network Load
         #     Balancers](https://cloud.google.com/load-balancing/docs/network/networklb-failover-overview).
-        #
-        #     failoverPolicy cannot be specified with haPolicy.
+        #     failoverPolicy cannot be specified with haPolicy.failoverPolicy cannot be used by global external Passthrough
+        #     Network Load Balancers.
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object.
@@ -10581,9 +10617,9 @@ module Google
         #     haPolicy requires customers to be responsible for tracking backend
         #     endpoint health and electing a leader among the healthy endpoints.
         #     Therefore, haPolicy cannot be specified with healthChecks.
-        #
-        #     haPolicy can only be specified for External Passthrough Network Load
-        #     Balancers and Internal Passthrough Network Load Balancers.
+        #     haPolicy can only be specified for External Passthrough
+        #     Network Load Balancers and Internal Passthrough Network Load Balancers.haPolicy cannot be used by global external Passthrough Network
+        #     Load Balancers.
         # @!attribute [rw] health_checks
         #   @return [::Array<::String>]
         #     The list of URLs to the healthChecks, httpHealthChecks (legacy), or
@@ -10648,8 +10684,8 @@ module Google
         #   @return [::String]
         #     Specifies the load balancer type. A backend service
         #     created for one type of load balancer cannot be used with another.
-        #     For more information, refer toChoosing
-        #     a load balancer.
+        #     For more information, refer to
+        #     Backend services product and scheme table.
         #     Check the LoadBalancingScheme enum for the list of possible values.
         # @!attribute [rw] locality_lb_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceLocalityLoadBalancingPolicyConfig>]
@@ -10695,28 +10731,40 @@ module Google
         #        If set, the Backend Service responses are expected to contain non-standard
         #        HTTP response header field Endpoint-Load-Metrics. The reported
         #        metrics to use for computing the weights are specified via thecustomMetrics field.
+        #        - WEIGHTED_MAGLEV: Per-endpoint weighted load balancing via
+        #        health check reported weights. If set, the backend service must configure
+        #        an HTTP-based Health Check, and health check replies are expected to
+        #        contain the non-standard HTTP response header fieldX-Load-Balancing-Endpoint-Weight to specify the per-endpoint
+        #        weights. If set, load balancing is weighted based on the per-endpoint
+        #        weights reported in the last processed health check replies, as long as
+        #        every instance either reported a valid weight or had UNAVAILABLE_WEIGHT.
+        #        Otherwise, load balancing remains equal-weight.
         #
-        #        This field is applicable to either:
-        #           - A regional backend service with the service protocol set to HTTP,
-        #           HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
-        #           INTERNAL_MANAGED.
-        #           - A global backend service with the
-        #           load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or
-        #           EXTERNAL_MANAGED.
         #
         #
-        #        If sessionAffinity is not configured—that is, if session
-        #        affinity remains at the default value of NONE—then the
-        #        default value for localityLbPolicy
-        #        is ROUND_ROBIN. If session affinity is set to a value other
-        #        than NONE,
-        #        then the default value for localityLbPolicy isMAGLEV.
+        #     This field is applicable to either:
         #
-        #        Only ROUND_ROBIN and RING_HASH are supported
-        #        when the backend service is referenced by a URL map that is bound to
-        #        target gRPC proxy that has validateForProxyless field set to true.
+        #        - A regional backend service with the service protocol set to HTTP,
+        #        HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
+        #        INTERNAL_MANAGED.
+        #        - A global backend service with the
+        #        load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or
+        #        EXTERNAL_MANAGED.
         #
-        #        localityLbPolicy cannot be specified with haPolicy.
+        #
+        #
+        #     If sessionAffinity is not configured—that is, if session
+        #     affinity remains at the default value of NONE—then the
+        #     default value for localityLbPolicy
+        #     is ROUND_ROBIN. If session affinity is set to a value other
+        #     than NONE,
+        #     then the default value for localityLbPolicy isMAGLEV.
+        #
+        #     Only ROUND_ROBIN and RING_HASH are supported
+        #     when the backend service is referenced by a URL map that is bound to
+        #     target gRPC proxy that has validateForProxyless field set to true.
+        #
+        #     localityLbPolicy cannot be specified with haPolicy.
         #     Check the LocalityLbPolicy enum for the list of possible values.
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::BackendServiceLogConfig]
@@ -10832,13 +10880,13 @@ module Google
         #     Balancers, omit port_name.
         # @!attribute [rw] protocol
         #   @return [::String]
-        #     The protocol this BackendService uses to communicate
-        #     with backends.
+        #     The protocol this BackendService uses to communicate with backends.
         #
-        #     Possible values are HTTP, HTTPS, HTTP2, H2C, TCP, SSL, UDP or GRPC.
-        #     depending on the chosen load balancer or Traffic Director configuration.
-        #     Refer to the documentation for the load balancers or for Traffic Director
-        #     for more information.
+        #     Possible values are HTTP, HTTPS, HTTP2, H2C, TCP, SSL, UDP, GRPC, or
+        #     UNSPECIFIED, depending on the chosen load balancer or Traffic Director
+        #     configuration.
+        #     Refer to
+        #     Load balancing features for more information.
         #
         #     Must be set to GRPC when the backend service is referenced by a URL map
         #     that is bound to target gRPC proxy.
@@ -11032,8 +11080,8 @@ module Google
 
           # Specifies the load balancer type. A backend service
           # created for one type of load balancer cannot be used with another.
-          # For more information, refer toChoosing
-          # a load balancer.
+          # For more information, refer to
+          # Backend services product and scheme table.
           module LoadBalancingScheme
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
@@ -11089,28 +11137,40 @@ module Google
           #    If set, the Backend Service responses are expected to contain non-standard
           #    HTTP response header field Endpoint-Load-Metrics. The reported
           #    metrics to use for computing the weights are specified via thecustomMetrics field.
+          #    - WEIGHTED_MAGLEV: Per-endpoint weighted load balancing via
+          #    health check reported weights. If set, the backend service must configure
+          #    an HTTP-based Health Check, and health check replies are expected to
+          #    contain the non-standard HTTP response header fieldX-Load-Balancing-Endpoint-Weight to specify the per-endpoint
+          #    weights. If set, load balancing is weighted based on the per-endpoint
+          #    weights reported in the last processed health check replies, as long as
+          #    every instance either reported a valid weight or had UNAVAILABLE_WEIGHT.
+          #    Otherwise, load balancing remains equal-weight.
           #
-          #    This field is applicable to either:
-          #       - A regional backend service with the service protocol set to HTTP,
-          #       HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
-          #       INTERNAL_MANAGED.
-          #       - A global backend service with the
-          #       load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or
-          #       EXTERNAL_MANAGED.
           #
           #
-          #    If sessionAffinity is not configured—that is, if session
-          #    affinity remains at the default value of NONE—then the
-          #    default value for localityLbPolicy
-          #    is ROUND_ROBIN. If session affinity is set to a value other
-          #    than NONE,
-          #    then the default value for localityLbPolicy isMAGLEV.
+          # This field is applicable to either:
           #
-          #    Only ROUND_ROBIN and RING_HASH are supported
-          #    when the backend service is referenced by a URL map that is bound to
-          #    target gRPC proxy that has validateForProxyless field set to true.
+          #    - A regional backend service with the service protocol set to HTTP,
+          #    HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
+          #    INTERNAL_MANAGED.
+          #    - A global backend service with the
+          #    load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or
+          #    EXTERNAL_MANAGED.
           #
-          #    localityLbPolicy cannot be specified with haPolicy.
+          #
+          #
+          # If sessionAffinity is not configured—that is, if session
+          # affinity remains at the default value of NONE—then the
+          # default value for localityLbPolicy
+          # is ROUND_ROBIN. If session affinity is set to a value other
+          # than NONE,
+          # then the default value for localityLbPolicy isMAGLEV.
+          #
+          # Only ROUND_ROBIN and RING_HASH are supported
+          # when the backend service is referenced by a URL map that is bound to
+          # target gRPC proxy that has validateForProxyless field set to true.
+          #
+          # localityLbPolicy cannot be specified with haPolicy.
           module LocalityLbPolicy
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCALITY_LB_POLICY = 0
@@ -11174,13 +11234,13 @@ module Google
             WEIGHTED_ROUND_ROBIN = 5_584_977
           end
 
-          # The protocol this BackendService uses to communicate
-          # with backends.
+          # The protocol this BackendService uses to communicate with backends.
           #
-          # Possible values are HTTP, HTTPS, HTTP2, H2C, TCP, SSL, UDP or GRPC.
-          # depending on the chosen load balancer or Traffic Director configuration.
-          # Refer to the documentation for the load balancers or for Traffic Director
-          # for more information.
+          # Possible values are HTTP, HTTPS, HTTP2, H2C, TCP, SSL, UDP, GRPC, or
+          # UNSPECIFIED, depending on the chosen load balancer or Traffic Director
+          # configuration.
+          # Refer to
+          # Load balancing features for more information.
           #
           # Must be set to GRPC when the backend service is referenced by a URL map
           # that is bound to target gRPC proxy.
@@ -11328,14 +11388,17 @@ module Google
         # @!attribute [rw] cache_mode
         #   @return [::String]
         #     Specifies the cache setting for all responses from this backend.
-        #     The possible values are:USE_ORIGIN_HEADERS Requires the origin to set valid caching
+        #     The possible values are:
+        #     USE_ORIGIN_HEADERS Requires the origin to set valid caching
         #     headers to cache content. Responses without these headers will not be
         #     cached at Google's edge, and will require a full trip to the origin on
         #     every request, potentially impacting performance and increasing load on
-        #     the origin server.FORCE_CACHE_ALL Cache all content, ignoring any "private",
+        #     the origin server.
+        #     FORCE_CACHE_ALL Cache all content, ignoring any "private",
         #     "no-store" or "no-cache" directives in Cache-Control response headers.
         #     Warning: this may result in Cloud CDN caching private,
-        #     per-user (user identifiable) content.CACHE_ALL_STATIC Automatically cache static content,
+        #     per-user (user identifiable) content.
+        #     CACHE_ALL_STATIC Automatically cache static content,
         #     including common image formats, media (video and audio), and web assets
         #     (JavaScript and CSS). Requests and responses that are marked as
         #     uncacheable, as well as dynamic content (including HTML), will not be
@@ -11444,14 +11507,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Specifies the cache setting for all responses from this backend.
-          # The possible values are:USE_ORIGIN_HEADERS Requires the origin to set valid caching
+          # The possible values are:
+          # USE_ORIGIN_HEADERS Requires the origin to set valid caching
           # headers to cache content. Responses without these headers will not be
           # cached at Google's edge, and will require a full trip to the origin on
           # every request, potentially impacting performance and increasing load on
-          # the origin server.FORCE_CACHE_ALL Cache all content, ignoring any "private",
+          # the origin server.
+          # FORCE_CACHE_ALL Cache all content, ignoring any "private",
           # "no-store" or "no-cache" directives in Cache-Control response headers.
           # Warning: this may result in Cloud CDN caching private,
-          # per-user (user identifiable) content.CACHE_ALL_STATIC Automatically cache static content,
+          # per-user (user identifiable) content.
+          # CACHE_ALL_STATIC Automatically cache static content,
           # including common image formats, media (video and audio), and web assets
           # (JavaScript and CSS). Requests and responses that are marked as
           # uncacheable, as well as dynamic content (including HTML), will not be
@@ -12365,6 +12431,46 @@ module Google
         #     networksecurity.googleapis.com namespace. Can be used in authenticating
         #     TLS connections to the backend, as specified by the authenticationMode
         #     field. Can only be specified if authenticationMode is not NONE.
+        # @!attribute [rw] identity
+        #   @return [::String]
+        #     Assigns the Managed Identity for the BackendService Workload.
+        #
+        #
+        #     Use this property to configure the load balancer back-end to use
+        #     certificates and roots of trust provisioned by the Managed Workload
+        #     Identity system.
+        #
+        #      The `identity` property is the
+        #     fully-specified SPIFFE ID to use in the SVID presented by the Load
+        #     Balancer Workload.
+        #
+        #      The SPIFFE ID must be a resource starting with the
+        #     `trustDomain` property value, followed by the path to the Managed
+        #     Workload Identity.
+        #
+        #      Supported SPIFFE ID format:
+        #
+        #        - //<trust_domain>/ns/<namespace>/sa/<subject>
+        #
+        #
+        #     The Trust Domain within the Managed Identity must refer to a valid
+        #     Workload Identity Pool. The TrustConfig and CertificateIssuanceConfig
+        #     will be inherited from the Workload Identity Pool.
+        #
+        #      Restrictions:
+        #
+        #        - If you set the `identity` property, you cannot manually set
+        #        the following fields:
+        #            - tlsSettings.sni
+        #           - tlsSettings.subjectAltNames
+        #           - tlsSettings.authenticationConfig
+        #
+        #
+        #     When defining a `identity` for a RegionBackendServices, the
+        #     corresponding Workload Identity Pool must have a ca_pool
+        #     configured in the same region.
+        #
+        #      The system will set up a read-onlytlsSettings.authenticationConfig for the Managed Identity.
         # @!attribute [rw] sni
         #   @return [::String]
         #     Server Name Indication - see RFC3546 section 3.1. If set, the load
@@ -14162,6 +14268,15 @@ module Google
             # CUD bucket for C4N (dual Diorite) machines.
             NETWORK_OPTIMIZED_C4N = 147_027_572
 
+            # CUD bucket for NETWORK_OPTIMIZED_U4C machines.
+            NETWORK_OPTIMIZED_U4C = 147_044_859
+
+            # CUD bucket for NETWORK_OPTIMIZED_U4P machines.
+            NETWORK_OPTIMIZED_U4P = 147_044_872
+
+            # CUD bucket for NETWORK_OPTIMIZED_U4S machines.
+            NETWORK_OPTIMIZED_U4S = 147_044_875
+
             STORAGE_OPTIMIZED_Z3 = 316_796_085
 
             # Note for internal users: When adding a new enum Type for v1, make sure
@@ -14501,6 +14616,9 @@ module Google
           module ConfidentialInstanceType
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_INSTANCE_TYPE = 0
+
+            # Bare Metal Secure AI.
+            BMSAI = 63_328_144
 
             # Arm Confidential Compute Architecture.
             CCA = 66_529
@@ -21105,6 +21223,8 @@ module Google
         #
         #
         #
+        #     The IP address can only be set at creation. Once set, it cannot be updated.
+        #
         #     The forwarding rule's target or backendService,
         #     and in most cases, also the loadBalancingScheme, determine the
         #     type of IP address that you can use. For detailed information, see
@@ -21113,6 +21233,10 @@ module Google
         #
         #     When reading an IPAddress, the API always returns the IP
         #     address number.
+        #
+        #     When creating a global external Passthrough Network Load Balancer
+        #     forwarding rule (a parent forwarding rule), you must use theIPAddresses field, but the Google Cloud generated child
+        #     forwarding rules set the IPAddress field instead. Refer to theavailabilityGroup field for further details.
         # @!attribute [rw] I_p_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies.
@@ -21160,8 +21284,18 @@ module Google
         # @!attribute [rw] backend_service
         #   @return [::String]
         #     Identifies the backend service to which the forwarding rule sends traffic.
-        #     Required for internal and external passthrough Network Load Balancers;
-        #     must be omitted for all other load balancer types.
+        #
+        #     It is a required field for the following load balancers:
+        #
+        #        - Internal passthrough Network Load Balancers
+        #        - Backend service-based regional external passthrough Network Load
+        #        Balancers
+        #        - Global external passthrough Network Load Balancers
+        #
+        #
+        #
+        #     It cannot be set by other load balancer types and protocol forwarding
+        #     rules.
         # @!attribute [rw] base_forwarding_rule
         #   @return [::String]
         #     Output only. [Output Only] The URL for the corresponding base forwarding rule. By base
@@ -21266,8 +21400,8 @@ module Google
         #   @return [::String]
         #     Specifies the forwarding rule type.
         #
-        #     For more information about forwarding rules, refer to
-        #     Forwarding rule concepts.
+        #     For more information, refer to
+        #     Forwarding rule product and scheme table.
         #     Check the LoadBalancingScheme enum for the list of possible values.
         # @!attribute [rw] metadata_filters
         #   @return [::Array<::Google::Cloud::Compute::V1::MetadataFilter>]
@@ -21304,6 +21438,13 @@ module Google
         #     For Private Service Connect forwarding rules that forward traffic to Google
         #     APIs, the forwarding rule name must be a 1-20 characters string with
         #     lowercase letters and numbers and must start with a letter.
+        #
+        #     For global external Passthrough Network Load Balancer forwarding rules, the
+        #     forwarding rule name must be 1-43 characters long. For each global external
+        #     Passthrough Network Load Balancer forwarding rule (a parent forwarding
+        #     rule) that you create, Google Cloud generates two output-only child
+        #     forwarding rules that are named by concatenating the parent forwarding rule
+        #     name with the `-ag0` and `-ag1` suffixes, respectively. Refer to theavailabilityGroup field for further details.
         # @!attribute [rw] network
         #   @return [::String]
         #     This field is not used for global external load balancing.
@@ -21354,7 +21495,8 @@ module Google
         #
         #
         #     For external forwarding rules, two or more forwarding rules cannot use the
-        #     same [IPAddress, IPProtocol] pair, and cannot have overlappingportRanges.
+        #     same [IPAddress, IPProtocol] pair (specified inIPAddress, IPAddresses, IPProtocol
+        #     fields) if they have overlapping portRanges.
         #
         #     For internal forwarding rules within the same VPC network, two or more
         #     forwarding rules cannot use the same [IPAddress, IPProtocol]
@@ -21381,8 +21523,8 @@ module Google
         #
         #
         #     For external forwarding rules, two or more forwarding rules cannot use the
-        #     same [IPAddress, IPProtocol] pair if they share at least one
-        #     port number.
+        #     same [IPAddress, IPProtocol] pair (specified inIPAddress, IPAddresses, IPProtocol
+        #     fields) if they share at least one port number.
         #
         #     For internal forwarding rules within the same VPC network, two or more
         #     forwarding rules cannot use the same [IPAddress, IPProtocol]
@@ -21467,6 +21609,15 @@ module Google
         #
         #
         #          -  For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment. The target is not mutable once set as a service attachment.
+        #
+        #
+        #
+        #     The following load balancers cannot set the target field (they should set the backendService field instead):
+        #
+        #        - Internal passthrough Network Load Balancers
+        #        - Backend service-based regional external passthrough Network Load
+        #        Balancers
+        #        - Global external passthrough Network Load Balancers
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21549,8 +21700,8 @@ module Google
 
           # Specifies the forwarding rule type.
           #
-          # For more information about forwarding rules, refer to
-          # Forwarding rule concepts.
+          # For more information, refer to
+          # Forwarding rule product and scheme table.
           module LoadBalancingScheme
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
@@ -21826,6 +21977,18 @@ module Google
         #     does not exist already, it is created automatically at the time of Approval
         #     with INACTIVE state till specified start-time. Either provide the
         #     reservation_name or a name_prefix.
+        # @!attribute [rw] resource_metadata
+        #   @return [::Google::Cloud::Compute::V1::ResourceMetadata]
+        #     Output only. Contains standard resource metadata for an FutureReservation
+        #     resource. It is populated for each instance of the FutureReservation
+        #     resource, and includes the api_version the
+        #     instance was retrieved through, and its canonical
+        #     resource_type name.
+        # @!attribute [rw] resource_name
+        #   @return [::String]
+        #     Name of the resource intended to be delivered. Name should conform to
+        #     RFC1035. This will be the name of storage pool or Exapool for persistent
+        #     disk FRs.
         # @!attribute [rw] scheduling_type
         #   @return [::String]
         #     Maintenance information for this reservation
@@ -21851,6 +22014,9 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatus]
         #     Output only. [Output only] Status of the Future Reservation
+        # @!attribute [rw] storage_pool_properties
+        #   @return [::Google::Cloud::Compute::V1::FutureReservationStoragePoolProperties]
+        #     Storage pool details for the future reservation.
         # @!attribute [rw] time_window
         #   @return [::Google::Cloud::Compute::V1::FutureReservationTimeWindow]
         #     Time window for this Future Reservation.
@@ -21865,6 +22031,9 @@ module Google
           module ConfidentialComputeType
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
+
+            # Bare Metal Secure AI.
+            CONFIDENTIAL_COMPUTE_TYPE_BMSAI = 103_738_250
 
             # Intel Trust Domain Extensions.
             CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
@@ -22031,6 +22200,9 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. Fully qualified urls of the automatically created reservations at
         #     start_time.
+        # @!attribute [rw] exapool_provisioned_capacity_gb
+        #   @return [::Google::Cloud::Compute::V1::StoragePoolExapoolProvisionedCapacityGb]
+        #     Output only. Exapool provisioned capacities for each SKU type.
         # @!attribute [rw] existing_matching_usage_info
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusExistingMatchingUsageInfo]
         #     Output only. [Output Only] Represents the existing matching usage for the future
@@ -22060,6 +22232,9 @@ module Google
         #     Check the ProcurementStatus enum for the list of possible values.
         # @!attribute [rw] specific_sku_properties
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusSpecificSKUProperties]
+        # @!attribute [rw] storage_pool_provisioned_capacity
+        #   @return [::Google::Cloud::Compute::V1::FutureReservationStoragePoolProvisionedCapacity]
+        #     Output only. Storage pool provisioned capacities for each SKU type.
         class FutureReservationStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22256,6 +22431,38 @@ module Google
         #     ID of the instance template used to populate the Future Reservation
         #     properties.
         class FutureReservationStatusSpecificSKUProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Storage pool properties for the future reservation.
+        # @!attribute [rw] requested_exapool_provisioned_capacity_gb
+        #   @return [::Google::Cloud::Compute::V1::StoragePoolExapoolProvisionedCapacityGb]
+        #     Requested exapool provisioned capacity in GiB.
+        # @!attribute [rw] requested_storage_pool_provisioned_capacity
+        #   @return [::Google::Cloud::Compute::V1::FutureReservationStoragePoolProvisionedCapacity]
+        #     Requested storage pool provisioned capacity.
+        # @!attribute [rw] storage_pool_type
+        #   @return [::String]
+        #     Type of the storage pool.
+        class FutureReservationStoragePoolProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Storage pool provisioned capacities for each SKU type.
+        # @!attribute [rw] pool_provisioned_capacity_gb
+        #   @return [::Integer]
+        #     Size of the storage pool in GiB.
+        # @!attribute [rw] pool_provisioned_iops
+        #   @return [::Integer]
+        #     Provisioned IOPS of the storage pool. Only relevant if the storage pool
+        #     type is hyperdisk-balanced.
+        # @!attribute [rw] pool_provisioned_throughput
+        #   @return [::Integer]
+        #     Provisioned throughput of the storage pool in MiB/s. Only relevant if
+        #     the storage pool type is hyperdisk-balanced or hyperdisk-throughput.
+        class FutureReservationStoragePoolProvisionedCapacity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -23302,6 +23509,115 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata for GetHealth operations.
+        # @!attribute [rw] health_info
+        #   @return [::Google::Cloud::Compute::V1::GetHealthOperationMetadataHealthInfo]
+        #     Output only. The health information.
+        class GetHealthOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Health information.
+        # @!attribute [rw] availability_slo_status
+        #   @return [::String]
+        #     Output only. The availability SLO status.
+        #     Check the AvailabilitySloStatus enum for the list of possible values.
+        # @!attribute [rw] health_status
+        #   @return [::String]
+        #     Output only. The health status.
+        #     Check the HealthStatus enum for the list of possible values.
+        # @!attribute [rw] repair_category
+        #   @return [::String]
+        #     Output only. The repair category.
+        #     Check the RepairCategory enum for the list of possible values.
+        # @!attribute [rw] unhealthy_reason
+        #   @return [::String]
+        #     Output only. The reason for unhealthy status.
+        #     Check the UnhealthyReason enum for the list of possible values.
+        # @!attribute [rw] update_time
+        #   @return [::String]
+        #     Output only. The time when health info was updated.
+        class GetHealthOperationMetadataHealthInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Output only. The availability SLO status.
+          module AvailabilitySloStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_AVAILABILITY_SLO_STATUS = 0
+
+            # The slot availability is in SLO.
+            AVAILABILITY_SLO_STATUS_IN_SLO = 142_966_428
+
+            # The slot availability is out of SLO.
+            AVAILABILITY_SLO_STATUS_OUT_OF_SLO = 112_099_455
+
+            # The slot availability is unknown.
+            AVAILABILITY_SLO_STATUS_SLO_UNKNOWN = 280_579_681
+
+            # Unspecified availability SLO status.
+            AVAILABILITY_SLO_STATUS_UNSPECIFIED = 481_084_279
+          end
+
+          # Output only. The health status.
+          module HealthStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATUS = 0
+
+            # The reservation slot is healthy.
+            HEALTH_STATUS_HEALTHY = 281_715_315
+
+            # The reservation slot is unhealthy.
+            HEALTH_STATUS_UNHEALTHY = 476_038_202
+
+            # Unspecified health status.
+            HEALTH_STATUS_UNSPECIFIED = 482_246_925
+          end
+
+          # Output only. The repair category.
+          module RepairCategory
+            # A value indicating that the enum field is not set.
+            UNDEFINED_REPAIR_CATEGORY = 0
+
+            # The repair is because of critical failures, that are scoped outside
+            # emergent maintenance
+            REPAIR_CATEGORY_CRITICAL_FAILURE = 58_241_977
+
+            # The repair is because of an emergent maintenance
+            REPAIR_CATEGORY_EMERGENT_MAINTENANCE = 400_869_148
+
+            # The repair is because of a planned maintenance
+            REPAIR_CATEGORY_PLANNED_MAINTENANCE = 489_286_537
+
+            # Unspecified repair category.
+            REPAIR_CATEGORY_UNSPECIFIED = 287_264_456
+
+            # The repair is because of a user reported fault
+            REPAIR_CATEGORY_USER_REPORTED_FAULT = 227_760_443
+          end
+
+          # Output only. The reason for unhealthy status.
+          module UnhealthyReason
+            # A value indicating that the enum field is not set.
+            UNDEFINED_UNHEALTHY_REASON = 0
+
+            # The slot is unhealthy because there is a pending repair, waiting for
+            # customer approval
+            UNHEALTHY_REASON_PENDING_USER_APPROVAL = 315_397_455
+
+            # The slot is unhealthy because repair is in progress
+            UNHEALTHY_REASON_REPAIRING = 199_320_309
+
+            # The slot is unhealthy because a vm cannot be scheduled on it, and no
+            # repairs are running on the slot
+            UNHEALTHY_REASON_UNSCHEDULABLE = 118_083_439
+
+            # Unspecified unhealthy reason.
+            UNHEALTHY_REASON_UNSPECIFIED = 337_725_687
+          end
+        end
+
         # A request message for RegionBackendServices.GetHealth. See the method description for details.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -23345,6 +23661,30 @@ module Google
         #   @return [::String]
         #     Name of the region scoping this request.
         class GetHealthRegionHealthSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ReservationSlots.GetHealth. See the method description for details.
+        # @!attribute [rw] parent_name
+        #   @return [::String]
+        #     The name of the parent reservation, parent block and parent sub-block. In
+        #     the format of
+        #     reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}/reservationSubBlocks/\\{reservation_sub_block_name}
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests.
+        # @!attribute [rw] reservation_slot
+        #   @return [::String]
+        #     The name of the reservation slot.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request. Zone name should conform to RFC1035.
+        class GetHealthReservationSlotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -26660,6 +27000,7 @@ module Google
         #        - IDPF
         #        - SNP_SVSM_CAPABLE
         #        - CCA_CAPABLE
+        #        - SUSPEND_SAFE_FPR
         #
         #
         #     For more information, see
@@ -26685,6 +27026,7 @@ module Google
           #    - IDPF
           #    - SNP_SVSM_CAPABLE
           #    - CCA_CAPABLE
+          #    - SUSPEND_SAFE_FPR
           #
           #
           # For more information, see
@@ -26716,6 +27058,10 @@ module Google
             SEV_SNP_CAPABLE = 426_919
 
             SNP_SVSM_CAPABLE = 52_921_460
+
+            # Indicates the guest OS is safe for free page reporting (FPR) during
+            # suspend.
+            SUSPEND_SAFE_FPR = 223_956_441
 
             TDX_CAPABLE = 240_446_133
 
@@ -27964,9 +28310,6 @@ module Google
           end
 
           # Health state of the IPv4 address of the instance.
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # HEALTHY
-          # UNHEALTHY
           module HealthState
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
@@ -28047,21 +28390,20 @@ module Google
 
           # Health state of the network endpoint determined based on the health checks
           # configured.
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # DRAINING
-          # HEALTHY
-          # UNHEALTHY
-          # UNKNOWN
           module HealthState
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
+            # Endpoint is being drained.
             DRAINING = 480_455_402
 
+            # Endpoint is healthy.
             HEALTHY = 439_801_213
 
+            # Endpoint is unhealthy.
             UNHEALTHY = 462_118_084
 
+            # Health status of the endpoint is unknown.
             UNKNOWN = 433_141_802
           end
 
@@ -32220,6 +32562,7 @@ module Google
         #
         #
         #     For example: zones/us-central1-f/machineTypes/custom-4-5120
+        #
         #     For a full list of restrictions, read theSpecifications
         #     for custom machine types.
         # @!attribute [rw] metadata
@@ -32569,6 +32912,10 @@ module Google
         #     Alternative machine types to use for instances that are created from
         #     these properties. This field only accepts a machine type names, for
         #     example `n2-standard-4` and not URLs or partial URLs.
+        # @!attribute [rw] min_cpu_platform
+        #   @return [::String]
+        #     Name of the minimum CPU platform to be used by this instance selection.
+        #     e.g. 'Intel Ice Lake'.
         # @!attribute [rw] rank
         #   @return [::Integer]
         #     Rank when prioritizing the shape flexibilities.
@@ -33156,15 +33503,16 @@ module Google
           #    by recreating it. For more information, see About
           #    repairing VMs in a MIG.
           #    - DO_NOTHING: MIG does not repair a failed VM.
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # DO_NOTHING
-          # REPAIR
           module DefaultActionOnFailure
             # A value indicating that the enum field is not set.
             UNDEFINED_DEFAULT_ACTION_ON_FAILURE = 0
 
+            # MIG does not repair a failed VM.
             DO_NOTHING = 451_307_513
 
+            # (default): MIG automatically repairs a failed VM by recreating it.
+            # For more information, see About
+            # repairing VMs in a MIG.
             REPAIR = 266_277_773
           end
 
@@ -35958,6 +36306,9 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     Output only. [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. Server-defined URL for this resource with the resource id.
         # @!attribute [rw] state
         #   @return [::String]
         #     Output only. [Output Only] The current state of Interconnect functionality, which can
@@ -38532,6 +38883,14 @@ module Google
         #     Output only. The remote location for Cross-Site Interconnect wires. This specifies an
         #     InterconnectLocation city (metropolitan area designator), which itself
         #     may match multiple InterconnectLocations.
+        # @!attribute [rw] max_dynamic_path_bandwidth_gbps
+        #   @return [::Integer]
+        #     Output only. The maximum unmetered bandwidth for dynamic paths allowable per
+        #     WireGroup for this metro.
+        # @!attribute [rw] max_fixed_path_bandwidth_gbps
+        #   @return [::Integer]
+        #     Output only. The maximum unmetered bandwidth for fixed paths allowable per WireGroup
+        #     for this metro.
         class InterconnectLocationCrossSiteInterconnectInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -55349,6 +55708,12 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceShutdownDetails]
         #     Output only. Specifies the graceful shutdown details if the instance is in
         #     `PENDING_STOP` state or there is a programmed stop scheduled.
+        # @!attribute [rw] target_status
+        #   @return [::String]
+        #     Output only. The eventual status of the instance. The instance group
+        #     manager will not be identified as stable till each managed instance reaches
+        #     its targetStatus.
+        #     Check the TargetStatus enum for the list of possible values.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceVersion]
         #     Output only. [Output Only] Intended version of this instance.
@@ -55442,9 +55807,6 @@ module Google
 
           # Output only. [Output Only] The status of the instance. This field is empty when
           # the instance does not exist.
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # STOPPING
-          # SUSPENDING
           module InstanceStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATUS = 0
@@ -55476,16 +55838,40 @@ module Google
             # The instance has stopped successfully.
             STOPPED = 444_276_141
 
+            # The instance is currently stopping (either being deleted or killed).
             STOPPING = 350_791_796
 
             # The instance has suspended.
             SUSPENDED = 51_223_995
 
+            # The instance is suspending.
             SUSPENDING = 514_206_246
 
             # The instance has stopped (either by explicit action or underlying
             # failure).
             TERMINATED = 250_018_339
+          end
+
+          # Output only. The eventual status of the instance. The instance group
+          # manager will not be identified as stable till each managed instance reaches
+          # its targetStatus.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # RUNNING
+          # STOPPED
+          # SUSPENDED
+          module TargetStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TARGET_STATUS = 0
+
+            # The managed instance will eventually be ABANDONED, i.e. dissociated
+            # from the managed instance group.
+            ABANDONED = 81_797_556
+
+            # The managed instance will eventually be DELETED.
+            DELETED = 120_962_041
+
+            # Only present to map the STATUS_INVALID value.
+            INVALID = 530_283_991
           end
         end
 
@@ -56638,6 +57024,11 @@ module Google
 
             # The network endpoint is represented by an IP address.
             GCE_VM_IP = 401_880_793
+
+            # The network endpoint for targeting a specific network interface of a
+            # VM instance in configurations with multiple network interfaces on the
+            # same network.
+            GCE_VM_IP_DEDICATED_BACKEND = 321_618_974
 
             # The network endpoint is represented by IP address and port pair.
             GCE_VM_IP_PORT = 501_838_375
@@ -57823,8 +58214,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # PRIVATE_SERVICE_CONNECT
+
           module AddressPurposes
             # A value indicating that the enum field is not set.
             UNDEFINED_ADDRESS_PURPOSES = 0
@@ -57847,6 +58237,8 @@ module Google
             # External IP automatically reserved for Cloud NAT.
             NAT_AUTO = 163_666_477
 
+            # A private network IP address that can be used to configure Private
+            # Service Connect. This purpose can be specified only forGLOBAL addresses of Type INTERNAL
             PRIVATE_SERVICE_CONNECT = 48_134_724
 
             # A regional internal IP address range reserved for Serverless.
@@ -58419,9 +58811,6 @@ module Google
           # Allows to define a preferred approach for handling inter-region cost in
           # the selection process when using the STANDARD BGP best path
           # selection algorithm. Can be DEFAULT orADD_COST_TO_MED.
-          # Additional supported values which may be not listed in the enum directly due to technical reasons:
-          # ADD_COST_TO_MED
-          # DEFAULT
           module BgpInterRegionCost
             # A value indicating that the enum field is not set.
             UNDEFINED_BGP_INTER_REGION_COST = 0
@@ -59553,6 +59942,9 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Error]
         #     [Output Only] If errors are generated during processing of the operation,
         #     this field will be populated.
+        # @!attribute [rw] get_health_operation_metadata
+        #   @return [::Google::Cloud::Compute::V1::GetHealthOperationMetadata]
+        #     Output only. Metadata for GetHealth operations.
         # @!attribute [rw] get_version_operation_metadata
         #   @return [::Google::Cloud::Compute::V1::GetVersionOperationMetadata]
         # @!attribute [rw] http_error_message
@@ -64571,7 +64963,7 @@ module Google
         #       {
         #        "key": "scope",
         #        "value": "zones/us-east1-d"
-        #       }
+        #       }]
         # @!attribute [rw] message
         #   @return [::String]
         #     [Output Only] A human-readable description of the warning code.
@@ -64830,6 +65222,42 @@ module Google
         #   @return [::String]
         #     URL of the resource to which this reference points.
         class Reference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The spec for modifying the path using a regular expression.
+        # @!attribute [rw] path_pattern
+        #   @return [::String]
+        #     Required. The regular expression used to match against the URL path.
+        #     It uses RE2 syntax with the following constraints:
+        #
+        #
+        #          - Any single character operators
+        #          - Groups are allowed to have only submatch operator inside
+        #          - Groups are allowed only without any char repetition, e.g.
+        #          .*
+        #          - Any char repetition, e.g. .*, is
+        #          only allowed to be used in a single regex together with:
+        #
+        #
+        #                 - Empty string operators
+        #                 - Other repetitions
+        #                 - Ranges
+        #                 - Repetitions of ranges
+        #
+        #
+        #          - Ranges are only allowed to have:
+        #
+        #
+        #                 - Character range
+        #                 - Digits range
+        #                 - Symbols listed in characters allowed for ranges
+        # @!attribute [rw] path_substitution
+        #   @return [::String]
+        #     Required. Required when path pattern is specified. Used to rewrite matching parts of
+        #     the path.
+        class RegexRewrite
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -66483,6 +66911,13 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::AllocationReservationSharingPolicy]
         #     Specify the reservation sharing policy. If unspecified, the reservation
         #     will not be shared with Google Cloud managed services.
+        # @!attribute [rw] resource_metadata
+        #   @return [::Google::Cloud::Compute::V1::ResourceMetadata]
+        #     Output only. [Output Only] Contains standard resource metadata for an Allocation
+        #     resource. It is populated for each instance of the Allocation
+        #     resource, and includes the api_version the
+        #     instance was retrieved through, and its canonical
+        #     resource_type name.
         # @!attribute [rw] resource_policies
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource policies to be added to this reservation. The key is defined by
@@ -66547,6 +66982,9 @@ module Google
           module ConfidentialComputeType
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
+
+            # Bare Metal Secure AI.
+            CONFIDENTIAL_COMPUTE_TYPE_BMSAI = 103_738_250
 
             # Intel Trust Domain Extensions.
             CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
@@ -67763,6 +68201,21 @@ module Google
         #     A URI referencing one of the instance groups or network endpoint groups
         #     listed in the backend service.
         class ResourceGroupReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Standardized resource metadata common to all compute resources.
+        # @!attribute [rw] api_version
+        #   @return [::String]
+        #     The version of the API interface that this resource was retrieved through.
+        #     For example, `"2025-01-01"` or `"2025-01-01-preview"`.
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     The canonical resource type name in the format of a resource type
+        #     as defined by [AIP-123](https://google.aip.dev/123).
+        #     For example, `"compute.googleapis.com/Instance"`.
+        class ResourceMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -72635,10 +73088,13 @@ module Google
         #        which is resolved based on "userIpRequestHeaders" configured with the
         #        security policy. If there is no "userIpRequestHeaders" configuration or
         #        an IP address cannot be resolved from it, the key type defaults toIP.
+        #        - ASN: The autonomous system number of the originating
+        #        client. If not available, the key type defaults toALL.
+        #        - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
+        #        client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
+        #        key type defaults to ALL.
         #
-        #     - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
-        #     client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
-        #     key type defaults to ALL.
+        #
         #     For "fairshare" action, this value is limited to ALL i.e. a single rate
         #     limit threshold is enforced for all the requests matching the rule.
         #     Check the EnforceOnKey enum for the list of possible values.
@@ -72716,10 +73172,13 @@ module Google
           #    which is resolved based on "userIpRequestHeaders" configured with the
           #    security policy. If there is no "userIpRequestHeaders" configuration or
           #    an IP address cannot be resolved from it, the key type defaults toIP.
+          #    - ASN: The autonomous system number of the originating
+          #    client. If not available, the key type defaults toALL.
+          #    - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
+          #    client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
+          #    key type defaults to ALL.
           #
-          # - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
-          # client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
-          # key type defaults to ALL.
+          #
           # For "fairshare" action, this value is limited to ALL i.e. a single rate
           # limit threshold is enforced for all the requests matching the rule.
           module EnforceOnKey
@@ -72727,6 +73186,8 @@ module Google
             UNDEFINED_ENFORCE_ON_KEY = 0
 
             ALL = 64_897
+
+            ASN = 65_116
 
             HTTP_COOKIE = 494_981_627
 
@@ -72794,10 +73255,11 @@ module Google
         #        which is resolved based on "userIpRequestHeaders" configured with the
         #        security policy. If there is no "userIpRequestHeaders" configuration
         #        or an IP address cannot be resolved from it, the key type defaults toIP.
-        #
-        #     - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
-        #     client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
-        #     key type defaults to ALL.
+        #        - ASN: The autonomous system number of the originating
+        #        client. If not available, the key type defaults toALL.
+        #        - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
+        #        client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
+        #        key type defaults to ALL.
         #     Check the EnforceOnKeyType enum for the list of possible values.
         class SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig
           include ::Google::Protobuf::MessageExts
@@ -72839,15 +73301,18 @@ module Google
           #    which is resolved based on "userIpRequestHeaders" configured with the
           #    security policy. If there is no "userIpRequestHeaders" configuration
           #    or an IP address cannot be resolved from it, the key type defaults toIP.
-          #
-          # - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
-          # client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
-          # key type defaults to ALL.
+          #    - ASN: The autonomous system number of the originating
+          #    client. If not available, the key type defaults toALL.
+          #    - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the
+          #    client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the
+          #    key type defaults to ALL.
           module EnforceOnKeyType
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY_TYPE = 0
 
             ALL = 64_897
+
+            ASN = 65_116
 
             HTTP_COOKIE = 494_981_627
 
@@ -79023,6 +79488,17 @@ module Google
             # All ranges assigned to the VM NIC will respond to ARP.
             ARP_ALL_RANGES = 445_655_380
 
+            # VMs will receive an ARP response from a VM instance owning the target IP
+            # address within the subnetwork's primary CIDR range, if such a VM instance
+            # exists and is running.
+            ARP_BROADCAST_PRIMARY_RANGE = 123_887_458
+
+            # Combines ARP_BROADCAST_PRIMARY_RANGE with MAC learning. Enables cache
+            # mapping between IP addresses and custom MAC addresses of instances and
+            # use of it to set the correct destination MAC address. If this option is
+            # chosen, the subnetwork must have /24 or a smaller CIDR range.
+            ARP_BROADCAST_PRIMARY_RANGE_WITH_LEARNING = 425_592_922
+
             # Only the primary range of the VM NIC will respond to ARP.
             ARP_PRIMARY_RANGE = 120_210_048
           end
@@ -80543,7 +81019,8 @@ module Google
         #     The server-defined URL for the resource. This field is applicable only when
         #     the containing target pool is serving a forwarding rule as the primary
         #     pool, and its failoverRatio field is properly set to a value
-        #     between [0, 1].backupPool and failoverRatio together define
+        #     between [0, 1].
+        #     backupPool and failoverRatio together define
         #     the fallback behavior of the primary target pool: if the ratio of the
         #     healthy instances in the primary pool is at or belowfailoverRatio, traffic arriving at the load-balanced
         #     IP will be directed to the backup pool.
@@ -84246,6 +84723,9 @@ module Google
         #     required.
         #
         #     Only one of path_prefix_rewrite orpath_template_rewrite may be specified.
+        # @!attribute [rw] regex_rewrite
+        #   @return [::Google::Cloud::Compute::V1::RegexRewrite]
+        #     The regex rewrite to be applied to the URL. Only one ofpathPrefixRewrite, pathTemplateRewrite, orregexRewrite may be specified.
         class UrlRewrite
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -85716,7 +86196,7 @@ module Google
         #       {
         #        "key": "scope",
         #        "value": "zones/us-east1-d"
-        #       }
+        #       }]
         # @!attribute [rw] message
         #   @return [::String]
         #     [Output Only] A human-readable description of the warning code.
@@ -85851,7 +86331,7 @@ module Google
         #       {
         #        "key": "scope",
         #        "value": "zones/us-east1-d"
-        #       }
+        #       }]
         # @!attribute [rw] message
         #   @return [::String]
         #     [Output Only] A human-readable description of the warning code.
