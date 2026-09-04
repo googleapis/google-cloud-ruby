@@ -3644,7 +3644,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
   - name: google-cloud-tasks-v2beta3
-    version: 0.20.1
+    version: 0.20.2
     apis:
       - path: google/cloud/tasks/v2beta3
         ruby:
