@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.40.1-0.20260903215010-a325c538d912
+version: v0.40.1-0.20260904160715-39fbb3f6fecb
 sources:
   googleapis:
     commit: 00ff8fcb95cafbac573cc449b0d1a039244f1b4b
@@ -4287,8 +4287,12 @@ libraries:
     apis:
       - path: google/iam/v1
     keep:
+      - .yardopts
+      - google-iam-v1.gemspec
       - README.md
-    skip_generate: true
+    ruby:
+      delete_generation_output_paths:
+        - AUTHENTICATION.md
   - name: google-iam-v1beta
     version: 0.15.2
     apis:
