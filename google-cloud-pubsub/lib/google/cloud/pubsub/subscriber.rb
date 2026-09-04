@@ -418,6 +418,42 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
+        # @example Immediately release unprocessed messages on shutdown:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen shutdown_behavior: :nack_immediately do |received_message|
+        #     # process message
+        #     puts "Data: #{received_message.message.data}"
+        #     received_message.acknowledge!
+        #   end
+        #
+        #   listener.start
+        #
+        #   # Shut down immediately, releasing (nacking) any unprocessed messages
+        #   listener.stop!
+        #
+        # @example Gracefully shut down with a custom timeout:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen shutdown_behavior: :wait_for_processing, shutdown_timeout: 30 do |received_message|
+        #     # process message
+        #     puts "Data: #{received_message.message.data}"
+        #     received_message.acknowledge!
+        #   end
+        #
+        #   listener.start
+        #
+        #   # Wait up to 30 seconds for in-flight callbacks before forcing remaining to nack
+        #   listener.stop!
+        #
         def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {},
                    shutdown_behavior: :wait_for_processing, shutdown_timeout: nil, &block
           ensure_service!
