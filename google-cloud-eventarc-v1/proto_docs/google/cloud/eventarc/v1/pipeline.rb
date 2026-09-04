@@ -297,7 +297,7 @@ module Google
             #
             #     ```
             #     {
-            #       "headers": headers.merge(\\{"new-header-key": "new-header-value"}),
+            #       "headers": headers.merge({"new-header-key": "new-header-value"}),
             #       "body": "new-body"
             #     }
             #     ```

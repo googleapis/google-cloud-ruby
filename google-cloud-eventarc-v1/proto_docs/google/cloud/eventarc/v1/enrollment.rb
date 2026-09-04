@@ -66,7 +66,7 @@ module Google
         #   @return [::String]
         #     Required. Destination is the Pipeline that the Enrollment is delivering to.
         #     It must point to the full resource name of a Pipeline. Format:
-        #     "projects/\\{PROJECT_ID}/locations/\\{region}/pipelines/{PIPELINE_ID)"
+        #     "projects/\\{PROJECT_ID}/locations/\\{region}/pipelines/\\{PIPELINE_ID)"
         class Enrollment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

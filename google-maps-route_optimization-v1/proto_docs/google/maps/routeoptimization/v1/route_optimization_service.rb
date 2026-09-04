@@ -2559,9 +2559,9 @@ module Google
         #     The total duration should be equal to the sum of all durations above.
         #     For routes, it also corresponds to:
         #     ```
-        #     {::Google::Maps::RouteOptimization::V1::ShipmentRoute#vehicle_end_time ShipmentRoute.vehicle_end_time}
+        #     [ShipmentRoute.vehicle_end_time][google.maps.routeoptimization.v1.ShipmentRoute.vehicle_end_time]
         #     -
-        #     {::Google::Maps::RouteOptimization::V1::ShipmentRoute#vehicle_start_time ShipmentRoute.vehicle_start_time}
+        #     [ShipmentRoute.vehicle_start_time][google.maps.routeoptimization.v1.ShipmentRoute.vehicle_start_time]
         #     ```
         # @!attribute [rw] travel_distance_meters
         #   @return [::Float]
@@ -2814,7 +2814,7 @@ module Google
         #     done as follows:
         #     ```
         #     fields { name: "vehicles" index: 4}
-        #     fields { name: "shipments" index: 2 sub_field \\{name: "pickups" index: 0} }
+        #     fields { name: "shipments" index: 2 sub_field {name: "pickups" index: 0} }
         #     ```
         #     Note, however, that the cardinality of `fields` should not change for a
         #     given error code.

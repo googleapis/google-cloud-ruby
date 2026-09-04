@@ -219,8 +219,8 @@ module Google
               #     A filter that can be used to retrieve specific rule execution errors.
               #     Only the following filters are allowed:
               #     ```
-              #       rule = "\\{Rule.name}"
-              #       curated_rule = "\\{CuratedRule.name}"
+              #       rule = "{Rule.name}"
+              #       curated_rule = "{CuratedRule.name}"
               #     ```
               #     The value for rule or curated_rule must be a valid rule resource name or a
               #     valid curated rule resource name specified in quotes.
@@ -231,9 +231,9 @@ module Google
               #     corresponding to the most recent revision of the rule will be returned. So
               #     these variations are all allowed:
               #     ```
-              #       rule = "\\{Rule.name}"
-              #       rule = "\\{Rule.name}@\\{Rule.revision_id}"
-              #       rule = "\\{Rule.name}@-"
+              #       rule = "{Rule.name}"
+              #       rule = "{Rule.name}@{Rule.revision_id}"
+              #       rule = "{Rule.name}@-"
               #     ```
               #     Revision IDs are not supported for curated rules.
               # @yield [result, operation] Access the result along with the TransportOperation object
