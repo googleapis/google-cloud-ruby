@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API."
-  gem.summary       = "API Client library for the Google Cloud Compute V1 API"
+  gem.description   = "Compute Engine is an infrastructure as a service (IaaS) product that offers self-managed virtual machine (VM) instances and bare metal instances. Note that google-cloud-compute-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-compute instead. See the readme for more details."
+  gem.summary       = "Compute Engine is an infrastructure as a service (IaaS) product that offers self-managed virtual machine (VM) instances and bare metal instances."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
