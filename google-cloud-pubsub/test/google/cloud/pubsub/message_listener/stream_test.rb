@@ -217,4 +217,131 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     listener.stop
     listener.wait!
   end
+
+  it "nacks unprocessed messages when stopped with nack_immediately" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    stub = StreamingPullStub.new [[pull_res1]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    message_received = Concurrent::Event.new
+    block_callback = Concurrent::Event.new
+
+    listener = subscriber.listen streams: 1 do |_msg|
+      message_received.set
+      block_callback.wait
+    end
+    listener.instance_variable_set :@shutdown_behavior, :nack_immediately
+
+    listener.start
+    message_received.wait
+
+    listener.stream_pool.first.stop
+    block_callback.set
+    listener.buffer.stop
+
+    # Verifies that exactly one 0-second ModifyAckDeadline (NACK) was dispatched.
+    assert_equal 1, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+  end
+
+  it "waits for processing when stopped with wait_for_processing" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    stub = StreamingPullStub.new [[pull_res1]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    message_processed = Concurrent::Event.new
+
+    listener = subscriber.listen streams: 1 do |_msg|
+      message_processed.set
+    end
+
+    listener.start
+    message_processed.wait
+
+    stream = listener.stream_pool.first
+    stream.stop
+    stream.wait!
+    listener.buffer.stop
+
+    assert message_processed.set?
+    # Confirms that no 0-second ModifyAckDeadline (NACK) was dispatched.
+    assert_equal 0, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+  end
+
+  it "processes subsequent ordered messages when stopped with wait_for_processing" do
+    ordered_msg1_grpc = Google::Cloud::PubSub::V1::ReceivedMessage.new(
+      rec_message_hash("msg-1", 1111).tap { |h| h[:message][:ordering_key] = "key1" }
+    )
+    ordered_msg2_grpc = Google::Cloud::PubSub::V1::ReceivedMessage.new(
+      rec_message_hash("msg-2", 2222).tap { |h| h[:message][:ordering_key] = "key1" }
+    )
+    pull_res = Google::Cloud::PubSub::V1::StreamingPullResponse.new(
+      received_messages: [ordered_msg1_grpc, ordered_msg2_grpc]
+    )
+    stub = StreamingPullStub.new [[pull_res]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    first_message_received = Concurrent::Event.new
+    block_first_message = Concurrent::Event.new
+    processed_messages = []
+
+    ordered_subscriber = Google::Cloud::PubSub::Subscriber.from_grpc(
+      Google::Cloud::PubSub::V1::Subscription.new(sub_hash.merge(enable_message_ordering: true)),
+      pubsub.service
+    )
+
+    listener = ordered_subscriber.listen streams: 1 do |msg|
+      if msg.data == "msg-1"
+        first_message_received.set
+        block_first_message.wait
+      end
+      processed_messages << msg.data
+      msg.ack!
+    end
+
+    listener.start
+    first_message_received.wait
+
+    stream = listener.stream_pool.first
+    # Stop the stream while msg-1 is still running and msg-2 is queued in sequencer
+    stream.stop
+    block_first_message.set
+
+    stream.wait! 2.0
+    listener.buffer.stop
+
+    assert_equal ["msg-1", "msg-2"], processed_messages
+    assert_equal 0, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+  end
+
+  it "respects overall timeout budget across inventory and callback thread pool in wait!" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    stub = StreamingPullStub.new [[pull_res1]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    message_received = Concurrent::Event.new
+    block_callback = Concurrent::Event.new
+
+    listener = subscriber.listen streams: 1 do |_msg|
+      message_received.set
+      block_callback.wait
+    end
+
+    listener.start
+    message_received.wait
+
+    stream = listener.stream_pool.first
+    stream.stop
+
+    start_time = Process.clock_gettime Process::CLOCK_MONOTONIC
+    # Wait with a short timeout of 0.2s while callback is blocked
+    stream.wait! 0.2
+    elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
+
+    block_callback.set
+    listener.buffer.stop
+
+    # Total wait time should be bounded near 0.2s, and well below 2x timeout (0.4s)
+    assert_operator elapsed, :>=, 0.15
+    assert_operator elapsed, :<, 0.35
+  end
 end

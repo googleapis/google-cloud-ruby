@@ -111,6 +111,11 @@ module Google
             self
           end
 
+          ##
+          # @private
+          # Stops pulling messages from the subscription.
+          #
+          # @return [Stream] self for chaining.
           def stop
             synchronize do
               break if @stopped
@@ -129,20 +134,42 @@ module Google
 
               @keepalive_monitor.stop
 
-              # Now that the reception thread is stopped, immediately stop the
-              # callback thread pool. All queued callbacks will see the stream
-              # is stopped and perform a noop.
-              @callback_thread_pool.shutdown
-
-              # Once all the callbacks are stopped, we can stop the inventory.
-              @inventory.stop
+              # When :nack_immediately, release all queued messages immediately and shut down callback pool.
+              if nack_immediately?
+                nack_unprocessed_messages!
+                @callback_thread_pool.shutdown
+              end
             end
 
             self
           end
 
+          ##
+          # @private
+          # Nacks all messages currently held in inventory.
+          def nack_unprocessed_messages!
+            synchronize do
+              ack_ids = @inventory.ack_ids
+              return if ack_ids.empty?
+
+              @subscriber.buffer.modify_ack_deadline 0, ack_ids
+              @inventory.remove ack_ids
+            end
+          end
+
           def stopped?
             synchronize { @stopped }
+          end
+
+          ##
+          # @private
+          # Returns whether the subscriber is stopped and configured to nack unprocessed messages immediately.
+          #
+          # @return [Boolean]
+          def nack_immediately?
+            return false unless @stopped
+
+            @subscriber.shutdown_behavior == :nack_immediately
           end
 
           def stream_open?
@@ -157,13 +184,25 @@ module Google
             !stopped?
           end
 
+          ##
+          # @private
+          # Blocks until all received messages are processed, or until timeout expires.
+          #
+          # @param [Numeric, nil] timeout The maximum seconds to wait, or nil to wait indefinitely.
+          # @return [Stream] self for chaining.
           def wait! timeout = nil
-            # Wait for all queued callbacks to be processed.
-            @callback_thread_pool.wait_for_termination timeout
+            deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout if timeout
+            emptied = @inventory.wait_until_empty timeout
+            nack_unprocessed_messages! unless emptied
 
+            @callback_thread_pool.shutdown
+            pool_timeout = [deadline - Process.clock_gettime(Process::CLOCK_MONOTONIC), 0].max if deadline
+            @callback_thread_pool.wait_for_termination pool_timeout
+
+            # Once all callbacks are finished and inventory is clear, stop the inventory.
+            @inventory.stop
             self
           end
-
 
           def request_queue_active?
             !@request_queue.nil?
@@ -466,7 +505,7 @@ module Google
             subscriber.service.internal_logger.log :info, "callback-delivery" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
             end
-            @subscriber.callback.call rec_msg unless stopped?
+            @subscriber.callback.call rec_msg unless nack_immediately?
           rescue StandardError => e
             subscriber.service.internal_logger.log :info, "callback-exceptions" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
@@ -475,7 +514,7 @@ module Google
             @subscriber.error! e
           ensure
             release rec_msg
-            if @sequencer && running?
+            if @sequencer && !nack_immediately?
               begin
                 @sequencer.next rec_msg
               rescue OrderedMessageDeliveryError => e
