@@ -23,6 +23,8 @@ tools:
       version: 0.51.1
     - name: grpc-tools
       version: 1.78.1
+    - name: toys
+      version: 0.22.0
   protoc:
     version: "33.2"
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
@@ -4024,7 +4026,9 @@ libraries:
       - owlbot-templates/image_annotator_helpers.erb
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1/image_annotator_helpers_test.rb
-    skip_generate: true
+    ruby:
+      toys_tasks:
+        - generate-helpers
   - name: google-cloud-vision-v1p3beta1
     version: 0.20.1
     apis:
@@ -4042,7 +4046,9 @@ libraries:
       - owlbot-templates/image_annotator_helpers.erb
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1p3beta1/image_annotator_helpers_test.rb
-    skip_generate: true
+    ruby:
+      toys_tasks:
+        - generate-helpers
   - name: google-cloud-vision-v1p4beta1
     version: 0.16.1
     apis:
@@ -4059,7 +4065,9 @@ libraries:
       - owlbot-templates/image_annotator_helpers.erb
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1p4beta1/image_annotator_helpers_test.rb
-    skip_generate: true
+    ruby:
+      toys_tasks:
+        - generate-helpers
   - name: google-cloud-vision_ai
     version: 1.2.2
     apis:
