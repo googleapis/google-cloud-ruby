@@ -1338,7 +1338,7 @@ module Google
             #     Examples:
             #
             #     * `pubsub.topic.{PROJECT_ID}.{TOPIC_ID}`
-            #     * `pubsub.topic.{PROJECT_ID}.`\``{TOPIC.ID.SEPARATED.WITH.DOTS}`\`
+            #     * `pubsub.topic.{PROJECT_ID}.`\``\\{TOPIC.ID.SEPARATED.WITH.DOTS}`\`
             #     * `bigquery.table.{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}`
             #     * `bigquery.dataset.{PROJECT_ID}.{DATASET_ID}`
             #     * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
