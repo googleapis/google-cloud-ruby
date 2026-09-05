@@ -58,6 +58,9 @@ require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 require_relative "../storage_move_object"
+require_relative "../storage_disable_soft_delete"
+require_relative "../storage_get_soft_delete_policy"
+require_relative "../storage_set_soft_delete_policy"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -674,6 +677,29 @@ describe "Buckets Snippets" do
     it 'returns nil for unreachable if return_partial_success_flag is not passed' do
       result = list_buckets_with_partial_success return_partial_success_flag: nil
       assert_nil result
+    end
+  end
+
+  describe "soft_delete_policy" do
+    it "get_soft_delete_policy, set_soft_delete_policy, disable_soft_delete" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      storage_client.create_bucket bucket_name
+
+      assert_output(/Soft delete policy for #{bucket_name}:/) do
+        get_soft_delete_policy bucket_name: bucket_name
+      end
+
+      assert_output(/Soft delete retention duration for #{bucket_name} is now 604800 seconds\./) do
+        set_soft_delete_policy bucket_name: bucket_name, retention_duration_seconds: 604800
+      end
+
+      assert_output(/Soft delete retention duration for #{bucket_name} is now 0 seconds\./) do
+        disable_soft_delete bucket_name: bucket_name
+      end
+
+      delete_bucket_helper bucket_name
     end
   end
 end
