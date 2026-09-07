@@ -1,5 +1,17 @@
 # Release History
 
+### 0.18.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 0.18.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35056](https://github.com/googleapis/google-cloud-ruby/issues/35056)) 
+
 ### 0.18.0 (2026-06-11)
 
 #### Features

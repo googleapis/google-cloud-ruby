@@ -1,8 +1,7 @@
 # Ruby Client for the Developer Connect V1 API
 
-Connect third-party source code management to Google.
+Connect third-party source code management to Google
 
-Developer Connect streamlines integration with third-party source code management platforms by simplifying authentication, authorization, and networking configuration.
 
 https://github.com/googleapis/google-cloud-ruby
 

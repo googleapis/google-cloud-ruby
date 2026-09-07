@@ -45,6 +45,272 @@ module Google
         end
 
         # Wrapper for
+        # {::Google::Ads::AdManager::V1::McmReadinessStatusEnum::McmReadinessStatus McmReadinessStatus}
+        class McmReadinessStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of the MCM child publisher's Ad Manager network onboarding readiness
+          # status
+          module McmReadinessStatus
+            # No value specified
+            MCM_READINESS_STATUS_UNSPECIFIED = 0
+
+            # Indicates the invitation to the child is declined or withdrawn.
+            INACTIVE = 1
+
+            # Indicates the MCM setup has not yet completed. It could be child not yet
+            # accepted the invitation, Google found noncompliance settings or child has
+            # not yet completed identity or address verifications.
+            NOT_READY = 2
+
+            # Indicates MCM setup has completed. Including the child publisher accepted
+            # the invite, Google found it to be compliant with its policies, i.e. no
+            # policy violations were found, related verifications have completed and
+            # the child publisher can be served ads.
+            READY = 3
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::DelegationInvitationStatusEnum::DelegationInvitationStatus DelegationInvitationStatus}
+        class DelegationInvitationStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of the association between networks. When a parent network requests
+          # access, it is marked as pending. Once the child network accepts the
+          # agreement, it is marked as accepted.
+          module DelegationInvitationStatus
+            # No value specified
+            DELEGATION_INVITATION_STATUS_UNSPECIFIED = 0
+
+            # Indicates the association request from the parent network is accepted by
+            # the child network.
+            ACCEPTED = 1
+
+            # Indicates the invite was sent to the child publisher more than 90 days
+            # ago, due to which it has been deactivated.
+            EXPIRED = 2
+
+            # Indicates the child publisher has not acted on the invite from the
+            # parent.
+            PENDING = 3
+
+            # Indicates the child publisher has declined the invite.
+            REJECTED = 4
+
+            # Indicates the parent network withdrew the invite.
+            WITHDRAWN = 5
+
+            # Indicates the invitation was disapproved by Google.
+            DEACTIVATED_BY_AD_MANAGER = 6
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::DelegationAccountStatusEnum::DelegationAccountStatus DelegationAccountStatus}
+        class DelegationAccountStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of the MCM child publisher's Ad Manager account with respect to
+          # delegated serving. In order for the child network to be served ads for
+          # MCM, it must have accepted the invite from the parent network, and must
+          # have passed Google's policy compliance verifications.
+          module DelegationAccountStatus
+            # No value specified
+            DELEGATION_ACCOUNT_STATUS_UNSPECIFIED = 0
+
+            # Indicates the child publisher has not acted on the invite from the
+            # parent.
+            INVITED = 1
+
+            # Indicates the child publisher has declined the invite.
+            DECLINED = 2
+
+            # Indicates the child publisher accepted the invite, and Google found it to
+            # be compliant with its policies, i.e. no policy violations were found,
+            # and the child publisher can be served ads.
+            APPROVED = 3
+
+            # Indicates the child publisher has closed their own account.
+            CLOSED_BY_PUBLISHER = 4
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for invalid activity.
+            CLOSED_INVALID_ACTIVITY = 5
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for violating its policies.
+            CLOSED_POLICY_VIOLATION = 6
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # a Googler.
+            DEACTIVATED_BY_AD_MANAGER = 7
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for being a duplicate of another account.
+            DISAPPROVED_DUPLICATE_ACCOUNT = 8
+
+            # Indicates the child publisher accepted the invite, but was disapproved as
+            # ineligible by Google.
+            DISAPPROVED_INELIGIBLE = 9
+
+            # Indicates the child publisher has accepted the invite, and is awaiting
+            # Google's policy compliance verifications.
+            PENDING_GOOGLE_APPROVAL = 10
+
+            # Indicates the invite was sent to the child publisher more than 90 days
+            # ago, due to which it has been deactivated.
+            EXPIRED = 11
+
+            # Indicates either the child publisher disconnected from the parent
+            # network, or the parent network withdrew the invite.
+            INACTIVE = 12
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::DelegationApprovalStatusEnum::DelegationApprovalStatus DelegationApprovalStatus}
+        class DelegationApprovalStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of the MCM child publisher's Ad Manager network with respect to
+          # delegated serving. It is only valid when the invitation is accepted by the
+          # child network. If the child has not yet accepted the parent's invite, this
+          # will be null.
+          module DelegationApprovalStatus
+            # No value specified
+            DELEGATION_APPROVAL_STATUS_UNSPECIFIED = 0
+
+            # Indicates the child publisher accepted the invite, and Google found it to
+            # be compliant with its policies, i.e. no policy violations were found,
+            # and the child publisher can be served ads.
+            APPROVED = 1
+
+            # Indicates the child publisher has closed their own account.
+            CLOSED_BY_PUBLISHER = 2
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for invalid activity.
+            CLOSED_INVALID_ACTIVITY = 3
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for violating its policies.
+            CLOSED_POLICY_VIOLATION = 4
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # a Googler.
+            DEACTIVATED_BY_AD_MANAGER = 5
+
+            # Indicates the child publisher accepted the invite, but was disapproved by
+            # Google for being a duplicate of another account.
+            DISAPPROVED_DUPLICATE_ACCOUNT = 6
+
+            # Indicates the child publisher accepted the invite, but was disapproved as
+            # ineligible by Google.
+            DISAPPROVED_INELIGIBLE = 7
+
+            # Indicates the child publisher has accepted the invite, and is awaiting
+            # Google's policy compliance verifications.
+            PENDING_GOOGLE_APPROVAL = 8
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::ChildPublisherIdentityVerificationStatusEnum::ChildPublisherIdentityVerificationStatus ChildPublisherIdentityVerificationStatus}
+        class ChildPublisherIdentityVerificationStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of the Mcm child identity verification.
+          module ChildPublisherIdentityVerificationStatus
+            # No value specified
+            CHILD_PUBLISHER_IDENTITY_VERIFICATION_STATUS_UNSPECIFIED = 0
+
+            # Indicates publisher is exempt from identify verification.
+            EXEMPT = 1
+
+            # Indicates publisher hasn't completed identity verification before the
+            # expiration date.
+            EXPIRED = 2
+
+            # Indicates publisher failed identity verification.
+            FAILED = 3
+
+            # Indicates publisher is pending identity verification.
+            PENDING = 4
+
+            # Indicates publisher is not eligible for identity verification.
+            NOT_ELIGIBLE = 5
+
+            # Indicates publisher has completed identity verification.
+            VERIFIED = 6
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::ChildPublisherAddressVerificationStatusEnum::ChildPublisherAddressVerificationStatus ChildPublisherAddressVerificationStatus}
+        class ChildPublisherAddressVerificationStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of the Mcm child address verification.
+          module ChildPublisherAddressVerificationStatus
+            # No value specified
+            CHILD_PUBLISHER_ADDRESS_VERIFICATION_STATUS_UNSPECIFIED = 0
+
+            # Indicates publisher is exempt from address verification.
+            EXEMPT = 1
+
+            # Indicates publisher hasn't completed address verification before the
+            # expiration date.
+            EXPIRED = 2
+
+            # Indicates publisher failed address verification.
+            FAILED = 3
+
+            # Indicates publisher's address pin has been mailed and must be verified.
+            PENDING = 4
+
+            # Indicates publisher is not eligible for address verification.
+            NOT_ELIGIBLE = 5
+
+            # Indicates publisher's address is verified.
+            VERIFIED = 6
+          end
+        end
+
+        # Wrapper for
+        # {::Google::Ads::AdManager::V1::ChildPublisherOnboardingTaskEnum::ChildPublisherOnboardingTask ChildPublisherOnboardingTask}
+        class ChildPublisherOnboardingTaskEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The pending tasks that must be completed by the child publisher before
+          # Google's policy complicance (i.e.,
+          # {::Google::Ads::AdManager::V1::DelegationApprovalStatusEnum::DelegationApprovalStatus::PENDING_GOOGLE_APPROVAL PENDING_GOOGLE_APPROVAL})
+          # can be verified.
+          module ChildPublisherOnboardingTask
+            # No value specified
+            CHILD_PUBLISHER_ONBOARDING_TASK_UNSPECIFIED = 0
+
+            # Indicates the child publisher is required to create a payments billing
+            # profile.
+            BILLING_PROFILE_CREATION = 1
+
+            # Indicates the child publisher is required to verify their phone number.
+            PHONE_PIN_VERIFICATION = 2
+
+            # Indicates the child publisher is required to setup their Ad Manager
+            # account.
+            AD_MANAGER_ACCOUNT_SETUP = 4
+          end
+        end
+
+        # Wrapper for
         # {::Google::Ads::AdManager::V1::McmEarningsProductTypeEnum::McmEarningsProductType McmEarningsProductType}
         class McmEarningsProductTypeEnum
           include ::Google::Protobuf::MessageExts

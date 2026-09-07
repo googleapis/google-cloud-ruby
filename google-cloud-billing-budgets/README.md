@@ -1,8 +1,7 @@
-# Ruby Client for the Billing Budgets API
+# Ruby Client for the Cloud Billing Budget API
 
-API Client library for the Billing Budgets API
+The Cloud Billing Budget API stores Cloud Billing budgets, which define a budget plan and the rules to execute as spend is tracked against that plan.
 
-Provides methods to view, create, and manage Cloud Billing budgets programmatically at scale.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-billing-budgets-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-billing-budgets-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-billing-budgets-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/billing/docs/how-to/budget-api-overview)
-for more usage information.
 
 ## Quick Start
 

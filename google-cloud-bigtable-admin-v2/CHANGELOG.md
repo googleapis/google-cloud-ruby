@@ -1,5 +1,23 @@
 # Release History
 
+### 1.20.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 1.19.0 (2026-08-11)
+
+#### Features
+
+* add microsecond timestamp precision support ([#36215](https://github.com/googleapis/google-cloud-ruby/issues/36215)) 
+
+### 1.18.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
 ### 1.18.0 (2026-06-11)
 
 #### Features

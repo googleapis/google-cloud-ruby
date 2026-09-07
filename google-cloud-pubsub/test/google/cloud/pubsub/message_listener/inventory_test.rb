@@ -76,7 +76,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
@@ -141,7 +142,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
@@ -219,7 +221,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
   it "removes expired items" do
     logging_mock = Minitest::Mock.new
     logging_mock.expect :log_expiry, nil, [Array]
-    service_mock = OpenStruct.new logger: logging_mock
+    service_mock = OpenStruct.new internal_logger: logging_mock
     listener_mock = OpenStruct.new service: service_mock
     stream_mock = OpenStruct.new subscriber: listener_mock
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,9 @@ module Google
               "https://www.googleapis.com/auth/chat.admin.memberships.readonly",
               "https://www.googleapis.com/auth/chat.admin.spaces",
               "https://www.googleapis.com/auth/chat.admin.spaces.readonly",
+              "https://www.googleapis.com/auth/chat.app.all.memberships.readonly",
+              "https://www.googleapis.com/auth/chat.app.all.messages.readonly",
+              "https://www.googleapis.com/auth/chat.app.all.spaces.readonly",
               "https://www.googleapis.com/auth/chat.app.delete",
               "https://www.googleapis.com/auth/chat.app.memberships",
               "https://www.googleapis.com/auth/chat.app.memberships.readonly",

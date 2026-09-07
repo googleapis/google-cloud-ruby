@@ -2,7 +2,6 @@
 
 Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering.
 
-Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering.
 
 https://github.com/googleapis/google-cloud-ruby
 

@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add fields `original_branch`, `enable_branch_management`, `depth`, and `shallow` to message `.google.cloud.dataform.v1beta1.Workspace` ([#36280](https://github.com/googleapis/google-cloud-ruby/issues/36280)) 
+
+### 1.1.0 (2026-08-05)
+
+#### Features
+
+* add workflow trigger configuration support ([#35075](https://github.com/googleapis/google-cloud-ruby/issues/35075)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+
 ### 1.0.0 (2026-07-17)
 
 #### Features

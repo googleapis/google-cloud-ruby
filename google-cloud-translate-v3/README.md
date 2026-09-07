@@ -2,7 +2,6 @@
 
 Integrates text translation into your website or application.
 
-Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.translate_text request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v3/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/translate)
-for general usage information.
 
 ## Debug Logging
 

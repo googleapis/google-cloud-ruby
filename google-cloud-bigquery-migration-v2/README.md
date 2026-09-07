@@ -2,7 +2,6 @@
 
 The migration service, exposing apis for migration jobs operations, and agent management.
 
-The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_migration_workflow request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/migration-intro)
-for general usage information.
 
 ## Debug Logging
 

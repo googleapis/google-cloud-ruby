@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -4370,7 +4370,7 @@ module Google
                                                           uri_template: "/v1/{ontap_path}",
                                                           body: "*",
                                                           matches: [
-                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/.*)?$}, true]
+                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -4391,7 +4391,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{ontap_path}",
                                                           matches: [
-                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/.*)?$}, true]
+                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -4412,7 +4412,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{ontap_path}",
                                                           matches: [
-                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/.*)?$}, true]
+                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -4434,7 +4434,7 @@ module Google
                                                           uri_template: "/v1/{ontap_path}",
                                                           body: "*",
                                                           matches: [
-                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/.*)?$}, true]
+                                                            ["ontap_path", %r{^projects/[^/]+/locations/[^/]+/storagePools/[^/]+/ontap(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

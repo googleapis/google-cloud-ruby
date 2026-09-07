@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Scheduler V1beta1 API
+# Ruby Client for the Cloud Scheduler V1BETA1 API
 
 Creates and manages jobs run on a regular recurring schedule.
 
-Cloud Scheduler is a fully managed enterprise-grade cron job scheduler. It allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more. You can automate everything, including retries in case of failure to reduce manual toil and intervention. Cloud Scheduler even acts as a single pane of glass, allowing you to manage all your automation tasks from one place.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Scheduler V1beta1 API. Most users should consider using
+specific version of the Cloud Scheduler V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-scheduler](https://rubygems.org/gems/google-cloud-scheduler).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_jobs request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/scheduler)
-for general usage information.
 
 ## Debug Logging
 

@@ -2,7 +2,6 @@
 
 Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security.
 
-Secret Manager Overview.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.list_secrets request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1beta2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/secret-manager)
+See also the [Product Documentation](https://cloud.google.com/secret-manager/docs/overview)
 for general usage information.
 
 ## Debug Logging

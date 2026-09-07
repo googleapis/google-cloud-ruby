@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ module Google
         #   @return [::Integer]
         #     Output only. Report ID.
         # @!attribute [rw] visibility
-        #   @return [::Google::Ads::AdManager::V1::Report::Visibility]
+        #   @return [::Google::Ads::AdManager::V1::ReportVisibilityEnum::ReportVisibility]
         #     Optional. The visibility of a report.
         # @!attribute [rw] report_definition
         #   @return [::Google::Ads::AdManager::V1::ReportDefinition]
@@ -55,26 +55,6 @@ module Google
         class Report
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # The visibility of a report.
-          module Visibility
-            # Default value. Reports with hidden visibility won't appear in the Ad
-            # Manager UI.
-            HIDDEN = 0
-
-            # Reports with draft visibility will appear in the Ad Manager UI only if
-            # the user has configured the UI to show them.
-            DRAFT = 1
-
-            # Reports with this visibility will appear in the Ad Manager UI.
-            VISIBLE = 2
-
-            # Deprecated: Use `VISIBLE`.
-            # Reports with saved visibility will appear in the Ad Manager UI by
-            # default. This is an alias for `VISIBLE` and will be removed in the
-            # future.
-            SAVED = 2
-          end
         end
 
         # A table containing report data including dimension and metric values.

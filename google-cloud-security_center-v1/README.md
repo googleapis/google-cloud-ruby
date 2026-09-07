@@ -1,4 +1,4 @@
-# Ruby Client for the Cloud Security Command Center V1 API
+# Ruby Client for the Security Command Center V1 API
 
 Security Command Center API provides access to temporal views of assets and findings within an organization.
 
@@ -6,7 +6,7 @@ Security Command Center API provides access to temporal views of assets and find
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Security Command Center V1 API. Most users should consider using
+specific version of the Security Command Center V1 API. Most users should consider using
 the main client gem,
 [google-cloud-security_center](https://rubygems.org/gems/google-cloud-security_center).
 See the section below titled *Which client should I use?* for more information.
@@ -39,7 +39,7 @@ response = client.bulk_mute_findings request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/security-command-center)
+See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/reference/rest)
 for general usage information.
 
 ## Debug Logging

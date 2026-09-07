@@ -154,6 +154,11 @@
               "methods": [
                 "list_reservation_groups"
               ]
+            },
+            "UpdateReservationGroup": {
+              "methods": [
+                "update_reservation_group"
+              ]
             }
           }
         }

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models."
-  gem.summary       = "API Client library for the AI Platform Data Labeling Service API"
+  gem.description   = "Public API for Google Cloud AI Data Labeling Service."
+  gem.summary       = "Public API for Google Cloud AI Data Labeling Service."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

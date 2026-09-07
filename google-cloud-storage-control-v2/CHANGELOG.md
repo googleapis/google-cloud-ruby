@@ -1,5 +1,29 @@
 # Changelog
 
+### 1.14.0 (2026-08-13)
+
+#### Features
+
+* add ViewObjectFullContext RPC and RapidCacheInfo in Storage Control v2 ([#36229](https://github.com/googleapis/google-cloud-ruby/issues/36229)) 
+
+### 1.13.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 1.13.0 (2026-07-30)
+
+#### Features
+
+* Add new CreateRapidCache (https://github.com/googleapis/google-cloud-ruby/pull/35015) 
+* Add new GetRapidCache 
+* Add new ListRapidCache 
+* Add new UpdateRapidCache 
+#### Documentation
+
+* Update reference documentation for the `StorageControl` service, including `IntelligenceFindings`, `AnywhereCache`, and related configuration messages. 
+
 ### 1.12.0 (2026-06-11)
 
 #### Features
@@ -127,3 +151,5 @@
 * Initial release of generated google-cloud-storage-control-v2 client ([#25743](https://github.com/googleapis/google-cloud-ruby/issues/25743)) 
 
 ## Release History
+
+

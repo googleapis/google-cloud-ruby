@@ -56,7 +56,7 @@ describe Google::Cloud::PubSub::MessageListener, :error, :mock_pubsub do
 
     listener_retries = 0
     while called < 3
-      fail "total number of calls were never made" if listener_retries > 100
+      fail "total number of calls were never made" if listener_retries > 500
       listener_retries += 1
       sleep 0.01
     end

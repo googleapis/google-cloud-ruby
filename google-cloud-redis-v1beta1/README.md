@@ -1,4 +1,4 @@
-# Ruby Client for the Google Cloud Memorystore for Redis V1beta1 API
+# Ruby Client for the Google Cloud Memorystore for Redis V1BETA1 API
 
 Creates and manages Redis instances on the Google Cloud Platform.
 
@@ -6,7 +6,7 @@ Creates and manages Redis instances on the Google Cloud Platform.
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Cloud Memorystore for Redis V1beta1 API. Most users should consider using
+specific version of the Google Cloud Memorystore for Redis V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-redis](https://rubygems.org/gems/google-cloud-redis).
 See the section below titled *Which client should I use?* for more information.

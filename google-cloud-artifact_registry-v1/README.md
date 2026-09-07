@@ -2,7 +2,6 @@
 
 Store and manage build artifacts in a scalable and integrated service built on Google infrastructure.
 
-Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_docker_images request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-artifact_registry-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/artifact-registry/)
-for general usage information.
 
 ## Debug Logging
 

@@ -2,7 +2,6 @@
 
 Manages your Cloud Monitoring data and configurations.
 
-Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_alert_policies request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/monitoring)
-for general usage information.
 
 ## Debug Logging
 

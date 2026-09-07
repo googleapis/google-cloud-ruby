@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-audit_manager is the official client library for the Audit Manager API."
-  gem.summary       = "API Client library for the Audit Manager API"
+  gem.description   = "The Audit Manager API allows customers to manage compliance audits."
+  gem.summary       = "The Audit Manager API allows customers to manage compliance audits."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

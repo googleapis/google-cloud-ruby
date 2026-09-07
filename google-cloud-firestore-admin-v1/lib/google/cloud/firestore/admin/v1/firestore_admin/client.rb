@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -3394,13 +3394,13 @@ module Google
 
                 header_params = {}
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["project_id"] = regex_match["project_id".to_s]
                   end
                 end
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["database_id"] = regex_match["database_id".to_s]
                   end

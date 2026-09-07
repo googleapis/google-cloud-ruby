@@ -1,8 +1,7 @@
 # Ruby Client for the Network Connectivity API
 
-API Client library for the Network Connectivity API
+This API enables connectivity with and between Google Cloud resources.
 
-Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-network_connectivity-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-network_connectivity-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/network-connectivity/docs)
-for more usage information.
 
 ## Quick Start
 

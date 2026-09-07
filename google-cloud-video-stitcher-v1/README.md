@@ -1,8 +1,7 @@
 # Ruby Client for the Video Stitcher V1 API
 
-API Client library for the Video Stitcher V1 API
+The Video Stitcher API allows you to manipulate video content to dynamically insert ads prior to delivery to client devices.
 
-The Video Stitcher API allows you to manipulate video content to dynamically insert ads prior to delivery to client devices. Using the Video Stitcher API, you can monetize your video-on-demand (VOD) and livestreaming videos by inserting ads as described by metadata stored on ad servers.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_cdn_key request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video-stitcher-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/video-stitcher/)
-for general usage information.
 
 ## Debug Logging
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,10 +55,23 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>displayName</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `adIdSize`
+        #     * `categoryIds`
+        #     * `dataProviderDisplayName`
+        #     * `displayName`
+        #     * `idfaSize`
+        #     * `mobileWebSize`
+        #     * `ppidSize`
+        #     * `segmentType`
+        #     * `sharedId`
+        #     * `size`
+        #     * `status`
+        #     * `thirdPartyAudienceSegment.approvalStatus`
+        #     * `thirdPartyAudienceSegment.cost`
+        #     * `thirdPartyAudienceSegment.endTime`
+        #     * `thirdPartyAudienceSegment.startTime`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -95,6 +108,116 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names for the AudienceSegments.
+        #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        class BatchActivateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `BatchActivateAudienceSegments` method.
+        # @!attribute [rw] change_count
+        #   @return [::Integer]
+        #     Number of audience segments activated.
+        class BatchActivateAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names for the AudienceSegments.
+        #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        class BatchDeactivateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `BatchDeactivateAudienceSegments` method.
+        # @!attribute [rw] change_count
+        #   @return [::Integer]
+        #     Number of audience segments deactivated.
+        class BatchDeactivateAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchApproveAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names for the AudienceSegments.
+        #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        class BatchApproveAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `BatchApproveAudienceSegments` method.
+        # @!attribute [rw] change_count
+        #   @return [::Integer]
+        #     Number of audience segments approved.
+        class BatchApproveAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchRejectAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names for the AudienceSegments.
+        #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        class BatchRejectAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `BatchRejectAudienceSegments` method.
+        # @!attribute [rw] change_count
+        #   @return [::Integer]
+        #     Number of audience segments rejected.
+        class BatchRejectAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchPopulateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. Resource names for the AudienceSegments.
+        #     Format: `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        class BatchPopulateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `BatchPopulateAudienceSegments` method.
+        # @!attribute [rw] change_count
+        #   @return [::Integer]
+        #     Number of audience segments populated.
+        class BatchPopulateAudienceSegmentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

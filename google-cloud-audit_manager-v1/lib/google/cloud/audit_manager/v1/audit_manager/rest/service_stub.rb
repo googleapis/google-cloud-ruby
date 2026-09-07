@@ -458,6 +458,14 @@ module Google
                                                             ["scope", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{scope}/auditScopeReports:generate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["scope", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -486,6 +494,14 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["scope", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{scope}/auditReports:generate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["scope", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -549,6 +565,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/auditReports/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/auditReports/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

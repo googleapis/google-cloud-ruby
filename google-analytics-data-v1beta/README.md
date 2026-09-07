@@ -1,13 +1,12 @@
-# Ruby Client for the Google Analytics Data V1beta API
+# Ruby Client for the Google Analytics Data V1BETA API
 
 Accesses report data in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning.
 
-The Google Analytics Data API provides programmatic methods to access report data in Google Analytics 4 (GA4) properties. Google Analytics 4 helps you understand how people use your web, iOS, or Android app.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Analytics Data V1beta API. Most users should consider using
+specific version of the Google Analytics Data V1BETA API. Most users should consider using
 the main client gem,
 [google-analytics-data](https://rubygems.org/gems/google-analytics-data).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.run_report request
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-data-v1beta)
 for class and method documentation.
-
-See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)
-for general usage information.
 
 ## Debug Logging
 

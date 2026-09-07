@@ -2,7 +2,6 @@
 
 Agent Registry is a centralized, unified catalog that lets you store, discover, and govern Model Context Protocol (MCP) servers, tools, and AI agents within Google Cloud.
 
-Agent Registry provides the core infrastructure for your environment, bringing together autonomous agents with the consistent data contexts and tools that MCP servers offer. By consolidating these services, Agent Registry resolves common challenges in complex AI deployments, such as fragmented tool access, isolated data, and redundant services.
 
 https://github.com/googleapis/google-cloud-ruby
 

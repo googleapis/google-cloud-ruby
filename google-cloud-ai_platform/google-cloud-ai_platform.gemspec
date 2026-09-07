@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research."
-  gem.summary       = "API Client library for the Vertex AI API"
+  gem.description   = "Train high-quality custom machine learning models with minimal machine learning expertise and effort."
+  gem.summary       = "Train high-quality custom machine learning models with minimal machine learning expertise and effort."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

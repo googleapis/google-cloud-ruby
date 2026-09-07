@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.24.1 (2026-08-24)
+
+#### Bug Fixes
+
+* onboarding library batch 4 ([#36312](https://github.com/googleapis/google-cloud-ruby/issues/36312)) 
+
+### 0.24.0 (2026-08-17)
+
+#### Features
+
+* add support for PSC as default ([#36257](https://github.com/googleapis/google-cloud-ruby/issues/36257)) 
+
+### 0.23.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+
 ### 0.23.0 (2026-06-11)
 
 #### Features

@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Build API
 
-API Client library for the Cloud Build API
+Creates and manages builds on Google Cloud Platform.
 
-Cloud Build is a service that executes your builds on Google Cloud Platform infrastructure. Cloud Build can import source code from Google Cloud Storage, Cloud Source Repositories, GitHub, or Bitbucket, execute a build to your specifications, and produce artifacts such as Docker containers or Java archives.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-build-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-build-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-build-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/build/docs)
-for more usage information.
 
 ## Quick Start
 

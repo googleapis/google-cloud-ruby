@@ -1,8 +1,7 @@
 # Ruby Client for the BigQuery Connection API
 
-API Client library for the BigQuery Connection API
+Allows users to manage BigQuery connections to external data sources.
 
-The BigQuery Connection API allows users to manage BigQuery connections to external data sources.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-connection-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-connection-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-connection-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/bigqueryconnection)
-for more usage information.
 
 ## Quick Start
 

@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud OS Config V1 API
+# Ruby Client for the OS Config V1 API
 
 OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.
 
-Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud OS Config V1 API. Most users should consider using
+specific version of the OS Config V1 API. Most users should consider using
 the main client gem,
 [google-cloud-os_config](https://rubygems.org/gems/google-cloud-os_config).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.execute_patch_job request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/compute/docs/manage-os)
-for general usage information.
 
 ## Debug Logging
 

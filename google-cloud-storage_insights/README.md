@@ -1,6 +1,6 @@
 # Ruby Client for the Storage Insights API
 
-Provides insights capability on Google Cloud Storage.
+Provides insights capability on Google Cloud Storage
 
 
 Actual client classes for the various versions of this API are defined in

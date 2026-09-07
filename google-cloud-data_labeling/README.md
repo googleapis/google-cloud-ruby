@@ -1,8 +1,7 @@
-# Ruby Client for the AI Platform Data Labeling Service API
+# Ruby Client for the Data Labeling API
 
-API Client library for the AI Platform Data Labeling Service API
+Public API for Google Cloud AI Data Labeling Service.
 
-AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-data_labeling-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-data_labeling-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-data_labeling-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/ai-platform/data-labeling/docs)
-for more usage information.
 
 ## Quick Start
 

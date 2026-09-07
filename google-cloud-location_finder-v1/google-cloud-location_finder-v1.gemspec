@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-location_finder-v1 is the official client library for the Cloud Location Finder V1 API. Note that google-cloud-location_finder-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-location_finder instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cloud Location Finder V1 API"
+  gem.description   = "Cloud Location Finder is a public API that offers a repository of all Google Cloud and Google Distributed Cloud locations, as well as cloud locations for other cloud providers. Note that google-cloud-location_finder-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-location_finder instead. See the readme for more details."
+  gem.summary       = "Cloud Location Finder is a public API that offers a repository of all Google Cloud and Google Distributed Cloud locations, as well as cloud locations for other cloud providers."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

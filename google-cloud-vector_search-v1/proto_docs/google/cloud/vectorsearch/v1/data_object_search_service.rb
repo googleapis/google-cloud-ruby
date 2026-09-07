@@ -359,6 +359,9 @@ module Google
         # @!attribute [rw] rrf
         #   @return [::Google::Cloud::VectorSearch::V1::ReciprocalRankFusion]
         #     Reciprocal Rank Fusion ranking.
+        # @!attribute [rw] vertex_ranker
+        #   @return [::Google::Cloud::VectorSearch::V1::VertexRanker]
+        #     Optional. Vertex AI ranking.
         class Ranker
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -371,6 +374,41 @@ module Google
         class ReciprocalRankFusion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a ranker using the Vertex AI ranking service.
+        # See https://cloud.google.com/generative-ai-app-builder/docs/ranking for
+        # details.
+        # @!attribute [rw] text_record_spec
+        #   @return [::Google::Cloud::VectorSearch::V1::VertexRanker::TextRecordSpec]
+        #     The record spec for text search.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The model used for ranking documents. The list of available
+        #     models is described in
+        #     https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking#models.
+        #     Currently, only `semantic-ranker-fast@latest` is supported.
+        # @!attribute [rw] top_n
+        #   @return [::Integer]
+        #     Required. The number of documents to be processed for ranking.
+        class VertexRanker
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The record spec for text search.
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Required. The query against which the records are ranked and scored.
+          # @!attribute [rw] title_template
+          #   @return [::String]
+          #     Optional. The template used to generate the record's title.
+          # @!attribute [rw] content_template
+          #   @return [::String]
+          #     Optional. The template used to generate the record's content.
+          class TextRecordSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A response from a batch search operation.

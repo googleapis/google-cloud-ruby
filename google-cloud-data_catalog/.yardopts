@@ -1,5 +1,5 @@
 --no-private
---title="Data Catalog API"
+--title="Google Cloud Data Catalog API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

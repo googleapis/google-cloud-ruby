@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation."
-  gem.summary       = "API Client library for the Cloud Monitoring API"
+  gem.description   = "Manages your Cloud Monitoring data and configurations."
+  gem.summary       = "Manages your Cloud Monitoring data and configurations."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

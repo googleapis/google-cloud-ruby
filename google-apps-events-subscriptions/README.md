@@ -2,7 +2,6 @@
 
 The Google Workspace Events API lets you subscribe to events and manage change notifications across Google Workspace applications.
 
-The Google Workspace Events API lets you subscribe to events and manage change notifications across Google Workspace applications.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-apps-events-subscriptions-v*`.

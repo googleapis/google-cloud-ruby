@@ -1,13 +1,12 @@
-# Ruby Client for the Service Directory V1beta1 API
+# Ruby Client for the Service Directory V1BETA1 API
 
 Service Directory is a platform for discovering, publishing, and connecting services.
 
-Service directory is the single place to register, browse, and resolve application services.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Service Directory V1beta1 API. Most users should consider using
+specific version of the Service Directory V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-service_directory](https://rubygems.org/gems/google-cloud-service_directory).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.resolve_service request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-service_directory-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/service-directory)
-for general usage information.
 
 ## Debug Logging
 

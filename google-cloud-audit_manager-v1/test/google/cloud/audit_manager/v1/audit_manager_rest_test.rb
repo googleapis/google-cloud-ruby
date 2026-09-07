@@ -203,6 +203,7 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     compliance_standard = "hello world"
     report_format = :AUDIT_REPORT_FORMAT_UNSPECIFIED
     compliance_framework = "hello world"
+    validate_only = true
 
     generate_audit_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -218,27 +219,27 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
+        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
+        c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
+        c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
+        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
+        c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

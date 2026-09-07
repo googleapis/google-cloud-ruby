@@ -2,7 +2,6 @@
 
 The Rapid Migration Assessment service is our first-party migration assessment and planning tool.
 
-The Rapid Migration Assessment service is our first-party migration assessment and planning tool.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-rapid_migration_assessment-v*`.

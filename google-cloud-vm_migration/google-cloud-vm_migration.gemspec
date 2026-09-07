@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Migrate for Compute Engine enables you to migrate (Lift and Shift) your virtual machines (VMs), with minor automatic modifications, from your source environment to Google Compute Engine."
-  gem.summary       = "API Client library for the Migrate for Compute Engine API"
+  gem.description   = "Use the Migrate to Virtual Machines API to programmatically migrate workloads."
+  gem.summary       = "Use the Migrate to Virtual Machines API to programmatically migrate workloads."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

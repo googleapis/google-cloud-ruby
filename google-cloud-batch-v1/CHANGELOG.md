@@ -1,5 +1,23 @@
 # Changelog
 
+### 1.9.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 1.8.2 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+
+### 1.8.1 (2026-07-23)
+
+#### Documentation
+
+* restrict `allowed_locations` region or zone values to the same region where the job is created ([#34994](https://github.com/googleapis/google-cloud-ruby/issues/34994)) 
+
 ### 1.8.0 (2026-06-11)
 
 #### Features

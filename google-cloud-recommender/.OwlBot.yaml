@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/recommender/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-recommender/$1

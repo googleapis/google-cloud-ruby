@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Analytics Hub is a data exchange platform that enables you to share data and insights at scale across organizational boundaries with a robust security and privacy framework. With Analytics Hub, you can discover and access a data library curated by various data providers. Note that google-cloud-bigquery-analytics_hub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-analytics_hub instead. See the readme for more details."
+  gem.description   = "Exchange data and analytics assets securely and efficiently. Note that google-cloud-bigquery-analytics_hub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-analytics_hub instead. See the readme for more details."
   gem.summary       = "Exchange data and analytics assets securely and efficiently."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

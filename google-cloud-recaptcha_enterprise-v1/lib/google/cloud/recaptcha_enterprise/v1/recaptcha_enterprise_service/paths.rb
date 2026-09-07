@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,6 +90,23 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/keys/#{key}/metrics"
+            end
+
+            ##
+            # Create a fully-qualified Policy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/keys/{key}/policy`
+            #
+            # @param project [String]
+            # @param key [String]
+            #
+            # @return [::String]
+            def policy_path project:, key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/keys/#{key}/policy"
             end
 
             ##

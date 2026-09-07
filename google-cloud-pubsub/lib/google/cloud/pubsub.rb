@@ -122,7 +122,6 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        logger = Google::Cloud::PubSub::InternalLogger.new logger
         service = PubSub::Service.new project_id, credentials,
                                       host: endpoint,
                                       timeout: timeout,

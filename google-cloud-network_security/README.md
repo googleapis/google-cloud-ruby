@@ -2,7 +2,7 @@
 
 API Client library for the Network Security API
 
-The client library for the Google Network Security V1beta1 API.
+google-cloud-network_security is the official client library for the Network Security API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-network_security-v*`.
@@ -17,9 +17,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-network_security-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/traffic-director/docs/reference/network-security/rest/)
-for more usage information.
 
 ## Quick Start
 

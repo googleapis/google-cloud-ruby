@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -206,6 +206,44 @@ module Google
                 raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
 
                 "projects/#{project}/buckets/#{bucket}/managedFolders/#{managed_folder}"
+              end
+
+              ##
+              # Create a fully-qualified Object resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/objects/{object}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param object [String]
+              #
+              # @return [::String]
+              def object_path project:, bucket:, object:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/objects/#{object}"
+              end
+
+              ##
+              # Create a fully-qualified RapidCache resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param rapid_cache [String]
+              #
+              # @return [::String]
+              def rapid_cache_path project:, bucket:, rapid_cache:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/rapidCaches/#{rapid_cache}"
               end
 
               ##

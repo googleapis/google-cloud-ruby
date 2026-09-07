@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/bigquery/analyticshub/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-bigquery-analytics_hub/$1

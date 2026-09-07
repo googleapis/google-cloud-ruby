@@ -1,8 +1,7 @@
-# Ruby Client for the Grafeas API
+# Ruby Client for the Container Analysis API
 
-API Client library for the Grafeas API
+An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts.
 
-The Grafeas API stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `grafeas-v*`.
@@ -18,14 +17,18 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [grafeas-v1](https://cloud.google.com/ruby/docs/reference/grafeas-v1/latest).
 
-See also the [Product Documentation](https://grafeas.io)
-for more usage information.
-
 ## Quick Start
 
 ```
 $ gem install grafeas
 ```
+
+In order to use this library, you first need to go through the following steps:
+
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/containeranalysis.googleapis.com)
+1. [Set up authentication.](AUTHENTICATION.md)
 
 ```ruby
 require "grafeas"

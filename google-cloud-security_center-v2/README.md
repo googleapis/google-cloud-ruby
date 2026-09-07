@@ -2,7 +2,6 @@
 
 Security Command Center API provides access to temporal views of assets and findings within an organization.
 
-Security Command Center API provides access to temporal views of assets and findings within an organization.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.batch_create_resource_value_configs request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/security-command-center)
+See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/reference/rest)
 for general usage information.
 
 ## Debug Logging

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory."
-  gem.summary       = "API Client library for the Managed Service for Microsoft Active Directory API API"
+  gem.description   = "The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory (AD)."
+  gem.summary       = "The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory (AD)."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

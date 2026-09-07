@@ -1,6 +1,6 @@
 # Ruby Client for the GKE Recommender V1 API
 
-GKE Recommender API.
+GKE Recommender API
 
 
 https://github.com/googleapis/google-cloud-ruby

@@ -1,8 +1,7 @@
 # Ruby Client for the Connect Gateway API
 
-API Client library for the Connect Gateway API
+The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters.
 
-The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-gke_connect-gateway-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-gke_connect-gateway-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/anthos/multicluster-management/gateway/)
+See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/enterprise/multicluster-management/gateway)
 for more usage information.
 
 ## Quick Start

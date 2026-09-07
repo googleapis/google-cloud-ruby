@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add output-only field `lineage_enabled` to message `.google.cloud.dataform.v1.WorkflowInvocation` ([#36281](https://github.com/googleapis/google-cloud-ruby/issues/36281)) 
+
+### 1.1.0 (2026-08-05)
+
+#### Features
+
+* add PipelineConfig to support different pipeline types and paths ([#35074](https://github.com/googleapis/google-cloud-ruby/issues/35074)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35050](https://github.com/googleapis/google-cloud-ruby/issues/35050)) 
+
 ### 1.0.0 (2026-07-17)
 
 #### Features

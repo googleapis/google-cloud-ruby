@@ -21,6 +21,7 @@
   "static": [
     ".OwlBot.yaml",
     ".owlbot.rb",
+    "Gemfile.lock",
     "lib/google/iam/client/version.rb"
   ]
 }

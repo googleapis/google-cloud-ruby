@@ -131,6 +131,11 @@
               "methods": [
                 "undelete_support_event_subscription"
               ]
+            },
+            "ExpungeSupportEventSubscription": {
+              "methods": [
+                "expunge_support_event_subscription"
+              ]
             }
           }
         }

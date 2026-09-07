@@ -1,8 +1,7 @@
 # Ruby Client for the Financial Services V1 API
 
-API Client library for the Financial Services V1 API
+A unified AI platform for financial services, leveraging Google's global framework for security and compliance.
 
-google-cloud-financial_services-v1 is the official client library for the Financial Services V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 

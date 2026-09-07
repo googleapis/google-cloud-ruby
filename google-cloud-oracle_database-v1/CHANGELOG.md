@@ -1,5 +1,23 @@
 # Changelog
 
+### 1.1.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale CMEK, VM Storage options ([#36228](https://github.com/googleapis/google-cloud-ruby/issues/36228)) 
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35058](https://github.com/googleapis/google-cloud-ruby/issues/35058)) 
+
 ### 1.0.0 (2026-07-17)
 
 #### Features

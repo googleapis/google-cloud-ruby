@@ -2,7 +2,6 @@
 
 Help protect your website from fraudulent activity, spam, and abuse without creating friction.
 
-reCAPTCHA Enterprise is a service that protects your site from spam and abuse.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_assessment request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recaptcha_enterprise-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/recaptcha-enterprise)
-for general usage information.
 
 ## Debug Logging
 

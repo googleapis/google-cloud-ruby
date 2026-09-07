@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ module Google
         #     Optional. The user-agent string of the device for the given context.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     Optional. The IP address of the device for the given context.
+        #     Optional. The IP address of the device for the given context. Required when
+        #     used in an {::Google::Ads::DataManager::V1::AdEvent AdEvent}.
         #
         #     **Note:** Google Ads does not support IP address matching for end users in
         #     the European Economic Area (EEA), United Kingdom (UK), or Switzerland (CH).

@@ -2,7 +2,6 @@
 
 Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
-Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-resource_manager-v*`.

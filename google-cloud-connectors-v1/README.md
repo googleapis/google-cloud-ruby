@@ -2,7 +2,6 @@
 
 Enables users to create and manage connections to Google Cloud services and third-party business applications using the Connectors interface.
 
-Enables users to create and manage connections to Google Cloud services and third-party business applications using the Connectors interface.
 
 https://github.com/googleapis/google-cloud-ruby
 

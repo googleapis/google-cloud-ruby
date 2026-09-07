@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An API for accessing Advisory Notifications in Google Cloud."
-  gem.summary       = "An API for accessing Advisory Notifications in Google Cloud."
+  gem.description   = "An API for accessing Advisory Notifications in Google Cloud"
+  gem.summary       = "An API for accessing Advisory Notifications in Google Cloud"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

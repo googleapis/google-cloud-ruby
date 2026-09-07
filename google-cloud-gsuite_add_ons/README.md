@@ -1,8 +1,7 @@
-# Ruby Client for the Google Workspace Add-ons API
+# Ruby Client for the Google Workspace add-ons API
 
-API Client library for the Google Workspace Add-ons API
+Add-ons are customized applications that extend Google Workspace applications.
 
-Add-ons are customized applications that integrate with Google Workspace productivity applications.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-gsuite_add_ons-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-gsuite_add_ons-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-gsuite_add_ons-v1/latest).
-
-See also the [Product Documentation](https://developers.google.com/workspace/add-ons/)
-for more usage information.
 
 ## Quick Start
 

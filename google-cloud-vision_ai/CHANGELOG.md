@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.2.2 (2026-08-26)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.2.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35065](https://github.com/googleapis/google-cloud-ruby/issues/35065)) 
+#### Documentation
+
+* Update copyright year 
+
 ### 1.2.0 (2026-06-11)
 
 #### Features

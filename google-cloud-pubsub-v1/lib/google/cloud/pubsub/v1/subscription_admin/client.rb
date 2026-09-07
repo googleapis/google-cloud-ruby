@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -432,8 +432,9 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
-            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-            #     using tags with Pub/Sub resources.
+            #     See
+            #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+            #     for more information on using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -1591,8 +1592,9 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
-            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
-            #     using tags with Pub/Sub resources.
+            #     See
+            #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+            #     for more information on using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]

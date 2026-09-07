@@ -45,6 +45,11 @@
                 "delete_message"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "search_messages"
+              ]
+            },
             "GetAttachment": {
               "methods": [
                 "get_attachment"

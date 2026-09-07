@@ -2,7 +2,6 @@
 
 Converts audio to text by applying powerful neural network models.
 
-Google Speech-to-Text enables developers to convert audio to text by applying powerful neural network models in an easy-to-use API. The API recognizes more than 120 languages and variants to support your global user base. You can enable voice command-and-control, transcribe audio from call centers, and more. It can process real-time streaming or prerecorded audio, using Google's machine learning technology.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.recognize request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/speech-to-text)
-for general usage information.
 
 ## Debug Logging
 

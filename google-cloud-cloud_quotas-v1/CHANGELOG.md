@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.6.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35048](https://github.com/googleapis/google-cloud-ruby/issues/35048)) 
+
+### 2.6.0 (2026-07-23)
+
+#### Features
+
+* publish Cloud Quotas v1 GA client library protos and GAPIC Bazel rules ([#34993](https://github.com/googleapis/google-cloud-ruby/issues/34993)) 
+
 ### 2.5.0 (2026-06-11)
 
 #### Features

@@ -1,13 +1,12 @@
-# Ruby Client for the Service Control API V1 API
+# Ruby Client for the Service Control V1 API
 
 Provides admission control and telemetry reporting for services integrated with Service Infrastructure.
 
-The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Service Control API V1 API. Most users should consider using
+specific version of the Service Control V1 API. Most users should consider using
 the main client gem,
 [google-cloud-service_control](https://rubygems.org/gems/google-cloud-service_control).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.allocate_quota request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/service-infrastructure/docs/overview/)
-for general usage information.
 
 ## Debug Logging
 

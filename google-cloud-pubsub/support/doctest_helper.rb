@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "minitest/mock"
 require "ostruct"
 
 require "google/cloud/pubsub"
@@ -67,7 +68,7 @@ end
 def mock_pubsub
   Google::Cloud::PubSub.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    pubsub = Google::Cloud::PubSub::Project.new(Google::Cloud::PubSub::Service.new("my-project", credentials))
+    pubsub = Google::Cloud::PubSub::Project.new(Google::Cloud::PubSub::Service.new("my-project", credentials, logger: Google::Cloud::PubSub::InternalLogger.new(nil)))
 
     pubsub.service.mocked_topic_admin = Minitest::Mock.new
     pubsub.service.mocked_subscription_admin = Minitest::Mock.new
@@ -94,14 +95,14 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
     end
   end
 
   doctest.before "Google::Cloud::PubSub" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
     end
   end
@@ -110,7 +111,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Message" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
       mock_subscription_admin.expect :get_subscription, subscription_resp, subscription: subscription_path("my-topic-sub")
       mock_subscription_admin.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
@@ -125,7 +126,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Project" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
     end
   end
@@ -140,7 +141,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscription_admin.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
+      mock_subscription_admin.expect :acknowledge_internal, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
     end
   end
 
@@ -165,14 +166,14 @@ YARD::Doctest.configure do |doctest|
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscription_admin.expect :modify_ack_deadline, nil, [Hash]
+      mock_subscription_admin.expect :modify_ack_deadline_internal, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#reject!" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_subscription_admin.expect :get_subscription, subscription_resp, subscription: subscription_path("my-topic-sub")
-      mock_subscription_admin.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscription_admin.expect :pull_internal, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
       mock_subscription_admin.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -190,16 +191,16 @@ YARD::Doctest.configure do |doctest|
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscription_admin.expect :acknowledge, nil, [Hash]
+      mock_subscription_admin.expect :acknowledge_internal, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscriber#wait_for_messages" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_subscription_admin.expect :get_subscription, subscription_resp("my-topic-sub"), subscription: subscription_path("my-topic-sub")
-      mock_subscription_admin.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
+      mock_subscription_admin.expect :pull_internal, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
                              subscription: subscription_path("my-topic-sub"), max_messages: 100, return_immediately: false
-      mock_subscription_admin.expect :acknowledge, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
+      mock_subscription_admin.expect :acknowledge_internal, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
     end
   end
 
@@ -213,27 +214,27 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Subscriber#pull@The `immediate: false` option is now recommended to avoid adverse impacts on pull operations:" do
      mock_pubsub do |mock_topic_admin, mock_subscription_admin|
      mock_subscription_admin.expect :get_subscription, subscription_resp("my-topic-sub"), subscription: subscription_path("my-topic-sub")
-     mock_subscription_admin.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
+     mock_subscription_admin.expect :pull_internal, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
                              subscription: subscription_path("my-topic-sub"), max_messages: 100, return_immediately: false
-     mock_subscription_admin.expect :acknowledge, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
+     mock_subscription_admin.expect :acknowledge_internal, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscriber#pull@A maximum number of messages returned can also be specified:" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_subscription_admin.expect :get_subscription, subscription_resp("my-topic-sub"), subscription: subscription_path("my-topic-sub")
-      mock_subscription_admin.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
+      mock_subscription_admin.expect :pull_internal, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
                              subscription: subscription_path("my-topic-sub"), max_messages: 10, return_immediately: false
-      mock_subscription_admin.expect :acknowledge, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
+      mock_subscription_admin.expect :acknowledge_internal, nil, subscription: subscription_path("my-topic-sub"), ack_ids: ["2"]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscriber#modify_ack_deadline" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_subscription_admin.expect :get_subscription, subscription_resp, subscription: subscription_path("my-topic-sub")
-      mock_subscription_admin.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
+      mock_subscription_admin.expect :pull_internal, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]),
                              subscription: subscription_path("my-sub"), max_messages: 100, return_immediately: false
-      mock_subscription_admin.expect :modify_ack_deadline, nil, subscription: subscription_path("my-sub"), ack_ids: ["2"], ack_deadline_seconds: 120
+      mock_subscription_admin.expect :modify_ack_deadline_internal, nil, subscription: subscription_path("my-sub"), ack_ids: ["2"], ack_deadline_seconds: 120
 
 
     end
@@ -262,7 +263,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscription_admin.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-ordered-topic-sub", ["2"], Hash]
+      mock_subscription_admin.expect :acknowledge_internal, nil, ["projects/my-project/subscriptions/my-ordered-topic-sub", ["2"], Hash]
     end
   end
 
@@ -276,7 +277,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscription_admin.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscription_admin.expect :acknowledge, nil, [Hash]
+      mock_subscription_admin.expect :acknowledge_internal, nil, [Hash]
     end
   end
 
@@ -286,28 +287,34 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Publisher" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic-only")
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Publisher#reload!" do
+    mock_pubsub do |mock_topic_admin, mock_subscription_admin|
+      mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Publisher#async_publisher" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Publisher#publish" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Publisher#publish@Additionally, a message can be published with attributes:" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-topic")
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
@@ -319,14 +326,14 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Publisher#publish@Ordered messages are supported using ordering_key:" do
     mock_pubsub do |mock_topic_admin, mock_subscription_admin|
       mock_topic_admin.expect :get_topic, topic_resp, topic: topic_path("my-ordered-topic")
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
@@ -347,7 +354,7 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_topic_admin.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
+      mock_topic_admin.expect :publish_internal, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
     end
   end
 end

@@ -2,7 +2,6 @@
 
 Build event-driven applications on Google Cloud Platform.
 
-Eventarc lets you asynchronously deliver events from Google services, SaaS, and your own apps using loosely coupled services that react to state changes. Eventarc requires no infrastructure management ??? you can optimize productivity and costs while building a modern, event-driven solution.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.get_trigger request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-eventarc-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/eventarc/)
-for general usage information.
 
 ## Debug Logging
 

@@ -4,12 +4,6 @@
   "draft": false,
   "include-component-in-tag": true,
   "include-v-in-tag": true,
-  "prerelease": false,
-  "release-type": "ruby-yoshi",
-  "skip-github-release": false,
-  "separate-pull-requests": true,
-  "tag-separator": "/",
-  "sequential-calls": true,
   "packages": {
     "google-ads-ad_manager": {
       "component": "google-ads-ad_manager",
@@ -903,6 +897,14 @@
       "component": "google-cloud-firestore-v1",
       "version_file": "lib/google/cloud/firestore/v1/version.rb"
     },
+    "google-cloud-ftp": {
+      "component": "google-cloud-ftp",
+      "version_file": "lib/google/cloud/ftp/version.rb"
+    },
+    "google-cloud-ftp-v1": {
+      "component": "google-cloud-ftp-v1",
+      "version_file": "lib/google/cloud/ftp/v1/version.rb"
+    },
     "google-cloud-functions": {
       "component": "google-cloud-functions",
       "version_file": "lib/google/cloud/functions/version.rb"
@@ -1667,6 +1669,10 @@
       "component": "google-cloud-sql-v1",
       "version_file": "lib/google/cloud/sql/v1/version.rb"
     },
+    "google-cloud-sql-v1beta4": {
+      "component": "google-cloud-sql-v1beta4",
+      "version_file": "lib/google/cloud/sql/v1beta4/version.rb"
+    },
     "google-cloud-storage": {
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
@@ -2035,6 +2041,14 @@
       "component": "google-maps-isochrones-v1",
       "version_file": "lib/google/maps/isochrones/v1/version.rb"
     },
+    "google-maps-route_optimization": {
+      "component": "google-maps-route_optimization",
+      "version_file": "lib/google/maps/route_optimization/version.rb"
+    },
+    "google-maps-route_optimization-v1": {
+      "component": "google-maps-route_optimization-v1",
+      "version_file": "lib/google/maps/route_optimization/v1/version.rb"
+    },
     "google-shopping-css": {
       "component": "google-shopping-css",
       "version_file": "lib/google/shopping/css/version.rb"
@@ -2211,5 +2225,11 @@
       "component": "stackdriver-core",
       "version_file": "lib/stackdriver/core/version.rb"
     }
-  }
+  },
+  "prerelease": false,
+  "release-type": "ruby-librarian",
+  "separate-pull-requests": true,
+  "sequential-calls": true,
+  "skip-github-release": false,
+  "tag-separator": "/"
 }

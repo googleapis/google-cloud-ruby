@@ -26,6 +26,7 @@ require "google/cloud/network_connectivity/v1beta/transport_manager/credentials"
 require "google/cloud/network_connectivity/v1beta/transport_manager/paths"
 require "google/cloud/network_connectivity/v1beta/transport_manager/operations"
 require "google/cloud/network_connectivity/v1beta/transport_manager/client"
+require "google/cloud/network_connectivity/v1beta/transport_manager/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/network_connectivity/v1beta/transport_manager"
         #     client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_connectivity/v1beta/transport_manager/rest"
+        #     client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Rest::Client.new
         #
         module TransportManager
         end

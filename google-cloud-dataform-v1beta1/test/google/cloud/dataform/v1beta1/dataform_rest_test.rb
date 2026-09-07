@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1867,6 +1867,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
     # Create request parameters for a unary method.
     workspace = "hello world"
+    pipeline_config = {}
 
     install_npm_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1882,27 +1883,27 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
         end
 
         # Use hash object
-        c.install_npm_packages({ workspace: workspace }) do |_result, response|
+        c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.install_npm_packages workspace: workspace do |_result, response|
+        c.install_npm_packages workspace: workspace, pipeline_config: pipeline_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace) do |_result, response|
+        c.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.install_npm_packages({ workspace: workspace }, call_options) do |_result, response|
+        c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace), call_options) do |_result, response|
+        c.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1964,6 +1965,286 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
         # Verify method calls
         assert_equal 5, pull_git_commits_client_stub.call_count
+      end
+    end
+  end
+
+  def test_sync_workspace_refs
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    remote_branch_name = "hello world"
+    deepen = 42
+
+    sync_workspace_refs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_sync_workspace_refs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, sync_workspace_refs_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.sync_workspace_refs({ name: name, remote_branch_name: remote_branch_name, deepen: deepen }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.sync_workspace_refs name: name, remote_branch_name: remote_branch_name, deepen: deepen do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.sync_workspace_refs ::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest.new(name: name, remote_branch_name: remote_branch_name, deepen: deepen) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.sync_workspace_refs({ name: name, remote_branch_name: remote_branch_name, deepen: deepen }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.sync_workspace_refs(::Google::Cloud::Dataform::V1beta1::SyncWorkspaceRefsRequest.new(name: name, remote_branch_name: remote_branch_name, deepen: deepen), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, sync_workspace_refs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_workspace_branches
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    filter = :BRANCH_FILTER_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_workspace_branches_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_workspace_branches_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_workspace_branches_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_workspace_branches({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_workspace_branches name: name, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_workspace_branches ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_workspace_branches({ name: name, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_workspace_branches(::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_workspace_branches_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_branch
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::DeleteBranchResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    branch = "hello world"
+    force = true
+
+    delete_branch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_branch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_branch_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_branch({ name: name, branch: branch, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_branch name: name, branch: branch, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_branch ::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest.new(name: name, branch: branch, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_branch({ name: name, branch: branch, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_branch(::Google::Cloud::Dataform::V1beta1::DeleteBranchRequest.new(name: name, branch: branch, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_branch_client_stub.call_count
+      end
+    end
+  end
+
+  def test_checkout_workspace_branch
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    branch = "hello world"
+    create_if_not_exists = true
+    source_branch = "hello world"
+
+    checkout_workspace_branch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_checkout_workspace_branch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, checkout_workspace_branch_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.checkout_workspace_branch({ name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.checkout_workspace_branch name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.checkout_workspace_branch ::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest.new(name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.checkout_workspace_branch({ name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.checkout_workspace_branch(::Google::Cloud::Dataform::V1beta1::CheckoutWorkspaceBranchRequest.new(name: name, branch: branch, create_if_not_exists: create_if_not_exists, source_branch: source_branch), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, checkout_workspace_branch_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_current_workspace_branch
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    fetch_current_workspace_branch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_current_workspace_branch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_current_workspace_branch_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_current_workspace_branch({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_current_workspace_branch name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_current_workspace_branch ::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_current_workspace_branch({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_current_workspace_branch(::Google::Cloud::Dataform::V1beta1::FetchCurrentWorkspaceBranchRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_current_workspace_branch_client_stub.call_count
       end
     end
   end

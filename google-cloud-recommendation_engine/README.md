@@ -1,8 +1,7 @@
 # Ruby Client for the Recommendations AI API
 
-API Client library for the Recommendations AI API
+Recommendations AI service enables customers to build end-to-end personalized recommendation systems without requiring a high level of expertise in machine learning, recommendation system, or Google Cloud.
 
-Recommendations AI enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-recommendation_engine-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-recommendation_engine-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/recommendations)
-for more usage information.
 
 ## Quick Start
 

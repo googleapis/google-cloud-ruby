@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dataproc Metastore is a fully managed, highly available within a region, autohealing serverless Apache Hive metastore (HMS) on Google Cloud for data analytics products. It supports HMS and serves as a critical component for managing the metadata of relational entities and provides interoperability between data processing applications in the open source data ecosystem."
-  gem.summary       = "API Client library for the Dataproc Metastore API"
+  gem.description   = "The Dataproc Metastore API is used to manage the lifecycle and configuration of metastore services."
+  gem.summary       = "The Dataproc Metastore API is used to manage the lifecycle and configuration of metastore services."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

@@ -1,4 +1,4 @@
-# Cloud Video Intelligence V1p3beta1 Protocol Buffer Documentation
+# Cloud Video Intelligence V1P3BETA1 Protocol Buffer Documentation
 
 These files are for the YARD documentation of the generated protobuf files.
 They are not intended to be required or loaded at runtime.

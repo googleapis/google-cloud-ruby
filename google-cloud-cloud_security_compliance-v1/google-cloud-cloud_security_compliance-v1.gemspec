@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-cloud_security_compliance-v1 is the official client library for the Cloud Security Compliance V1 API. Note that google-cloud-cloud_security_compliance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_security_compliance instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cloud Security Compliance V1 API"
+  gem.description   = "Compliance Manager uses software-defined controls that let you assess support for multiple compliance programs and security requirements within a Google Cloud organization. Note that google-cloud-cloud_security_compliance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_security_compliance instead. See the readme for more details."
+  gem.summary       = "Compliance Manager uses software-defined controls that let you assess support for multiple compliance programs and security requirements within a Google Cloud organization."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

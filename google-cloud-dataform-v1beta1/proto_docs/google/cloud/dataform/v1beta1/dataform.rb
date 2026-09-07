@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -634,10 +634,33 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, workspaces will not be moved if its linked
         #     Repository is moved. Instead, it will be deleted.
+        # @!attribute [rw] original_branch
+        #   @return [::String]
+        #     Optional. Input only. Immutable. The name of the default upstream branch
+        #     for all pull/push operations in the remote repository for this workspace.
+        #     If empty, the HEAD branch from repository will be used.
         # @!attribute [r] private_resource_metadata
         #   @return [::Google::Cloud::Dataform::V1beta1::PrivateResourceMetadata]
         #     Output only. Metadata indicating whether this resource is user-scoped. For
         #     `Workspace` resources, the `user_scoped` field is always `true`.
+        # @!attribute [rw] enable_branch_management
+        #   @return [::Boolean]
+        #     Immutable. Controls the enablement of branch checkout for the
+        #     workspace.
+        #
+        #     When set to True, the workspace will be allowed to checkout branches.
+        # @!attribute [rw] depth
+        #   @return [::Integer]
+        #     Optional. Input only. Immutable. The maximum depth of the Git repository to
+        #     checkout for this workspace. If defined and greater than 0, the Git
+        #     repository will be created as a shallow clone with the given depth,
+        #     otherwise a full clone will be performed. This field is available only for
+        #     GitHub, Gitlab and 1p repositories with enabled branch management.
+        # @!attribute [r] shallow
+        #   @return [::Boolean]
+        #     Output only. If set to true, the workspace was created as a shallow clone.
+        #     Will be set to true if the depth field is set to a value greater than 0,
+        #     otherwise it will be set to false.
         class Workspace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -756,6 +779,82 @@ module Google
 
         # `PullGitCommits` response message.
         class PullGitCommitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `CheckoutWorkspaceBranch` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] branch
+        #   @return [::String]
+        #     Required. The name of the branch in the Git repository to which the
+        #     workspace should be checked out.
+        # @!attribute [rw] create_if_not_exists
+        #   @return [::Boolean]
+        #     Optional. If set to true and the branch does not exist, it will be created.
+        #     Otherwise, an error will be thrown.
+        # @!attribute [rw] source_branch
+        #   @return [::String]
+        #     Optional. The name of the branch in the Git repository from which the new
+        #     branch should be created. If left unset, the workspace's current branch
+        #     name will be used. Accepts only branch names from FetchWorkspaceBranches
+        #     response, and can only be set if `create_if_not_exists` is true. Oherwise,
+        #     an error will be thrown.
+        class CheckoutWorkspaceBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `SyncWorkspaceRefs` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] remote_branch_name
+        #   @return [::String]
+        #     Optional. The name of the branch in the Git remote to which the refs should
+        #     be fetched for. If left unset, all remote branches will be fetched.
+        # @!attribute [rw] deepen
+        #   @return [::Integer]
+        #     Optional. Can be used to deepen the commit history of shallow clones.
+        #     Git documentation:
+        #     https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth
+        class SyncWorkspaceRefsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `SyncWorkspaceRefs` response message.
+        class SyncWorkspaceRefsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteBranch` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] branch
+        #   @return [::String]
+        #     Required. The name of the branch in the Git repository to delete.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any non-pushed commits on the branch will be
+        #     deleted. Upstream branch name will be the same as the branch to delete.
+        class DeleteBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteBranch` response message.
+        class DeleteBranchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1231,6 +1330,10 @@ module Google
         # @!attribute [rw] workspace
         #   @return [::String]
         #     Required. The workspace's name.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class InstallNpmPackagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1264,9 +1367,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_release_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::ReleaseConfig::ScheduledReleaseRecord>]
         #     Output only. Records of the 10 most recent scheduled release attempts,
@@ -1459,6 +1562,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `CompilationResult` resource is `user_scoped` only if it is sourced
         #     from a workspace.
+        # @!attribute [r] gcs_repository_snapshot_metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::GcsRepositorySnapshotMetadata]
+        #     Output only. Metadata about the repository snapshot used by scheduled
+        #     notebooks.
         class CompilationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1482,6 +1589,88 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Represents a trigger configuration for a workflow.
+        # @!attribute [rw] condition
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowTriggerConfig::Condition]
+        #     Optional. The condition to use when triggering the workflow.
+        # @!attribute [rw] workflow_triggers
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::WorkflowTrigger>]
+        #     Required. The trigger definitions to invoke a workflow.
+        # @!attribute [rw] min_execution_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Minimum duration between two consecutive executions. If not
+        #     specified, the workflow will be executed every time trigger conditions are
+        #     met and there is no ongoing workflow execution.
+        # @!attribute [rw] max_wait_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The effective maximum wait time duration for the trigger
+        #     condition to be met. If not specified, the workflow won't be triggered
+        #     until conditions are met.
+        # @!attribute [r] recent_trigger_evaluation_records
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::TriggerEvaluationRecord>]
+        #     Output only. Records of the 10 most recent trigger evaluations, ordered
+        #     in descending order of `evaluation_time`. Updated whenever the service
+        #     evaluates the trigger conditions (via polling or upon receiving a push
+        #     event).
+        # @!attribute [r] last_successful_evaluation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of the last successful trigger evaluation.
+        class WorkflowTriggerConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The condition to use when triggering the workflow.
+          module Condition
+            # If CONDITION_UNSPECIFIED, the default value is ANY.
+            CONDITION_UNSPECIFIED = 0
+
+            # If ALL, all the trigger config conditions must be met before a workflow
+            # is invoked.
+            ALL = 1
+
+            # If ANY, at least one of the trigger config conditions must be met
+            # before a workflow is invoked.
+            ANY = 2
+          end
+        end
+
+        # A record of an attempt to evaluate trigger conditions.
+        # @!attribute [r] evaluation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of this trigger evaluation attempt.
+        # @!attribute [r] status
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The status of the trigger evaluation.
+        #     Success is indicated by a code of 0 (OK). Message will only be present
+        #     if the status code is non-zero.
+        class TriggerEvaluationRecord
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The trigger definition to invoke a workflow.
+        # @!attribute [rw] table_update_trigger
+        #   @return [::Google::Cloud::Dataform::V1beta1::TableUpdateTrigger]
+        #     The table update trigger configuration.
+        class WorkflowTrigger
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a table update trigger configuration.
+        # @!attribute [rw] table
+        #   @return [::Google::Cloud::Dataform::V1beta1::Target]
+        #     The target table to trigger the workflow.
+        # @!attribute [r] trigger_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The modification time of this table that resulted
+        #     in an invocation of the workflow. This would be updated by the triggering
+        #     service after a successful workflow invocation.
+        class TableUpdateTrigger
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configures various aspects of Dataform code compilation.
@@ -1520,6 +1709,15 @@ module Google
         # @!attribute [rw] default_notebook_runtime_options
         #   @return [::Google::Cloud::Dataform::V1beta1::NotebookRuntimeOptions]
         #     Optional. The default notebook runtime options.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
+        # @!attribute [r] lineage_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether OpenLineage events are emitted for actions in this
+        #     workflow. Reflects the `lineage.enabled` setting from
+        #     `workflow_settings.yaml`.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1534,11 +1732,43 @@ module Google
           end
         end
 
+        # Metadata about a repository snapshot stored in Google Cloud Storage.
+        # @!attribute [r] repository_snapshot_uri
+        #   @return [::String]
+        #     Output only. The Google Cloud Storage URI of the repository snapshot.
+        # @!attribute [r] crc32c_checksum
+        #   @return [::String]
+        #     Output only. The crc32c checksum of the repository snapshot, big-endian
+        #     base64 encoded.
+        # @!attribute [r] generation
+        #   @return [::Integer]
+        #     Output only. The generation number of the Cloud Storage object. See
+        #     https://cloud.google.com/storage/docs/metadata#generation-number.
+        class GcsRepositorySnapshotMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configures the destination for a repository snapshot.
+        # @!attribute [rw] repository_snapshot_uri
+        #   @return [::String]
+        #     Optional. The Google Cloud Storage destination to upload the repository
+        #     snapshot to. Format: `gs://bucket-name/path/`.
+        class GcsRepositorySnapshotDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configures various aspects of Dataform notebook runtime.
         # @!attribute [rw] gcs_output_bucket
         #   @return [::String]
         #     Optional. The Google Cloud Storage location to upload the result to.
         #     Format: `gs://bucket-name`.
+        # @!attribute [rw] gcs_repository_snapshot_destination
+        #   @return [::Google::Cloud::Dataform::V1beta1::GcsRepositorySnapshotDestination]
+        #     Optional. The Google Cloud Storage destination to upload the snapshot to.
+        #     For empty URI it defaults to the provided gcs_output_bucket.
+        #     Format: `gs://bucket-name/path/`.
         # @!attribute [rw] ai_platform_notebook_runtime_template
         #   @return [::String]
         #     Optional. The resource name of the [Colab runtime template]
@@ -1548,6 +1778,36 @@ module Google
         class NotebookRuntimeOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the pipeline type and path within the Git repository.
+        # @!attribute [rw] pipeline_type
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig::PipelineType]
+        #     Required. The type of the pipeline.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. The relative path within the Git repository where the pipeline is
+        #     defined. For example, for a Dataform pipeline, it is a path to the folder
+        #     where `workflow_settings.yaml` or `dataform.json` is located.
+        class PipelineConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the pipeline. This may be extended in the future.
+          # In case of UNSPECIFIED, the error will be thrown.
+          module PipelineType
+            # Default value. This value is unused.
+            PIPELINE_TYPE_UNSPECIFIED = 0
+
+            # Regular Dataform pipeline.
+            DATAFORM = 1
+
+            # SQL single file asset.
+            SQL = 3
+
+            # Notebook single file asset.
+            NOTEBOOK = 4
+          end
         end
 
         # `ListCompilationResults` request message.
@@ -2116,9 +2376,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_execution_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::WorkflowConfig::ScheduledExecutionRecord>]
         #     Output only. Records of the 10 most recent scheduled execution attempts,
@@ -2138,6 +2398,10 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [rw] workflow_trigger_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowTriggerConfig]
+        #     Optional. Trigger configuration for this workflow.
+        #     If present, the workflow will be triggered based on the specified triggers.
         class WorkflowConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2346,6 +2610,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `WorkflowInvocation` resource is `user_scoped` only if it is sourced
         #     from a compilation result and the compilation result is user-scoped.
+        # @!attribute [r] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Output only. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class WorkflowInvocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2536,6 +2804,9 @@ module Google
           #     executed the notebook in contents and also the ID used for the outputs
           #     created in Google Cloud Storage buckets. Only set once the job has
           #     started to run.
+          # @!attribute [r] file_path
+          #   @return [::String]
+          #     Output only. The path to the notebook file in the repository.
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3403,6 +3674,94 @@ module Google
             # The operation has failed.
             FAILED = 3
           end
+        end
+
+        # Request message for `FetchWorkspaceBranches` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceBranchesRequest::BranchFilter]
+        #     Optional. Filter for the returned list.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of branches to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `FetchWorkspaceBranches`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
+        class FetchWorkspaceBranchesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Filter for the returned list.
+          module BranchFilter
+            # Default value. This value is unused.
+            BRANCH_FILTER_UNSPECIFIED = 0
+
+            # Returns local branches.
+            LOCAL_ONLY = 1
+
+            # Returns remote branches.
+            REMOTE_ONLY = 2
+
+            # Returns all branches.
+            ALL = 3
+          end
+        end
+
+        # Contains metadata about a branch.
+        # @!attribute [rw] branch_name
+        #   @return [::String]
+        #     The branch name.
+        # @!attribute [rw] last_commit
+        #   @return [::Google::Cloud::Dataform::V1beta1::CommitLogEntry]
+        #     The last commit on the branch.
+        class BranchMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `FetchWorkspaceBranches` method.
+        # @!attribute [rw] branches
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::BranchMetadata>]
+        #     The branches in the workspace.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchWorkspaceBranchesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `FetchCurrentWorkspaceBranch` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/workspaces/\\{workspace}
+        class FetchCurrentWorkspaceBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `FetchCurrentWorkspaceBranch` method.
+        # @!attribute [rw] branch_name
+        #   @return [::String]
+        #     The name of the current branch for the workspace.
+        class FetchCurrentWorkspaceBranchResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the level of detail to return for directory contents.

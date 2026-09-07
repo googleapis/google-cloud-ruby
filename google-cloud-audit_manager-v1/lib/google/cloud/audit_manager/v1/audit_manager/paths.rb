@@ -45,6 +45,15 @@ module Google
             #   @param location [String]
             #   @param audit_report [String]
             #
+            # @overload audit_report_path(organization:, location:, audit_report:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/auditReports/{audit_report}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param audit_report [String]
+            #
             # @return [::String]
             def audit_report_path **args
               resources = {
@@ -59,6 +68,12 @@ module Google
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "folders/#{folder}/locations/#{location}/auditReports/#{audit_report}"
+                end),
+                "audit_report:location:organization" => (proc do |organization:, location:, audit_report:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/auditReports/#{audit_report}"
                 end)
               }
 
@@ -138,6 +153,23 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified OrganizationLocation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/locations/{location}`
+            #
+            # @param organization [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def organization_location_path organization:, location:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+              "organizations/#{organization}/locations/#{location}"
             end
 
             ##

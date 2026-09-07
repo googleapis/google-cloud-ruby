@@ -2,7 +2,6 @@
 
 This API is a prerequisite for leveraging Artifact Analysis scanning capabilities in both Artifact Registry and with Advanced Vulnerability Insights (runtime scanning) in GKE. In addition, the Container Analysis API is an implementation of the Grafeas API, which enables storing, querying, and retrieval of critical metadata about all of your software artifacts.
 
-The Container Analysis API is an implementation of Grafeas. It stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.set_iam_policy request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-container_analysis-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/container-registry/docs/container-analysis)
-for general usage information.
 
 ## Debug Logging
 

@@ -2,7 +2,6 @@
 
 Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering.
 
-Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-cloud_controls_partner-v*`.

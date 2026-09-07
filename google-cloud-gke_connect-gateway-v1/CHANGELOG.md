@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.9.2 (2026-09-01)
+
+#### Bug Fixes
+
+* update librarian to v0.39.1-0.20260831182628-509cd77c2487 to respect "all: rest" 
+
+### 0.9.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35054](https://github.com/googleapis/google-cloud-ruby/issues/35054)) 
+
 ### 0.9.0 (2026-06-11)
 
 #### Features

@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Life Sciences V2beta API
+# Ruby Client for the Cloud Life Sciences V2BETA API
 
 Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data.
 
-Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Life Sciences V2beta API. Most users should consider using
+specific version of the Cloud Life Sciences V2BETA API. Most users should consider using
 the main client gem,
 [google-cloud-life_sciences](https://rubygems.org/gems/google-cloud-life_sciences).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.run_pipeline request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/life-sciences/)
-for general usage information.
 
 ## Debug Logging
 

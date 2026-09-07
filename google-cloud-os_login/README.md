@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud OS Login API
 
-API Client library for the Cloud OS Login API
+You can use OS Login to manage access to your VM instances using IAM roles.
 
-Use OS Login to manage SSH access to your instances using IAM without having to create and manage individual SSH keys. OS Login maintains a consistent Linux user identity across VM instances and is the recommended way to manage many users across multiple instances or projects.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-os_login-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-os_login-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/compute/docs/oslogin)
-for more usage information.
 
 ## Quick Start
 

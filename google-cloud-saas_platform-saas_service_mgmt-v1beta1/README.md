@@ -2,7 +2,6 @@
 
 Model, deploy, and operate your SaaS at scale.
 
-App Lifecycle Manager Overview.
 
 https://github.com/googleapis/google-cloud-ruby
 

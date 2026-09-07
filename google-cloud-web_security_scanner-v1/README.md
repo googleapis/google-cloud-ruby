@@ -2,7 +2,6 @@
 
 Scans your Compute and App Engine apps for common web vulnerabilities.
 
-Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_scan_config request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/)
-for general usage information.
 
 ## Debug Logging
 

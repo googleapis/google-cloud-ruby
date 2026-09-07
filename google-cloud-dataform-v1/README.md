@@ -2,7 +2,6 @@
 
 Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
-Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dataform/v1"
 
-client = ::Google::Longrunning::Operations::Client.new
-request = ::Google::Longrunning::ListOperationsRequest.new # (request fields as keyword arguments...)
-response = client.list_operations request
+client = ::Google::Cloud::Dataform::V1::Dataform::Client.new
+request = ::Google::Cloud::Dataform::V1::GetTeamFolderRequest.new # (request fields as keyword arguments...)
+response = client.get_team_folder request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1/latest)
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/dataform/v1"
 require "logger"
 
-client = ::Google::Longrunning::Operations::Client.new do |config|
+client = ::Google::Cloud::Dataform::V1::Dataform::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

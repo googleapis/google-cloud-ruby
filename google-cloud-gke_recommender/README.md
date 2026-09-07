@@ -1,6 +1,6 @@
 # Ruby Client for the GKE Recommender API
 
-GKE Recommender API.
+GKE Recommender API
 
 
 Actual client classes for the various versions of this API are defined in

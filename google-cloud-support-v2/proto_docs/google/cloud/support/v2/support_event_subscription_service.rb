@@ -130,6 +130,17 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for ExpungeSupportEventSubscription.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the support event subscription to expunge.
+        #     Format:
+        #     organizations/\\{organization_id}/supportEventSubscriptions/\\{subscription_id}
+        class ExpungeSupportEventSubscriptionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

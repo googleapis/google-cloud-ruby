@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1212,8 +1212,10 @@ module Google
         #     It supports the following cases:
         #
         #        -
-        #          Case 1: PublicDelegatedPrefix (PDP) for BYOIP external IPv4
-        #          addresses. The PDP must support enhanced IPv4 allocations.
+        #          Case 1: PublicDelegatedPrefix (PDP) for BYOIP external
+        #          addresses. If an IPv4 PDP is used, the PDP must support enhanced IPv4
+        #          allocations. If an IPv6 PDP is used, the PDP must be in
+        #          EXTERNAL_IPV6_FORWARDING_RULE_CREATION mode.
         #        -
         #          Case 2: Internal Range for global internal addresses.
         #
@@ -1316,6 +1318,12 @@ module Google
         #          - `PRIVATE_SERVICE_CONNECT` for a private network address that is
         #          used to configure Private Service Connect. Only global internal addresses
         #          can use this purpose.
+        #          - `PASSTHROUGH_LOAD_BALANCER_AVAILABILITY_GROUP0` for addresses
+        #          that can only be assigned to global external Passthrough Network Load
+        #          Balancer forwarding rules, as an Availability Group 0 address.
+        #          - `PASSTHROUGH_LOAD_BALANCER_AVAILABILITY_GROUP1` for addresses that
+        #          can only be assigned to global external Passthrough Network Load Balancer
+        #          forwarding rules, as an Availability Group 1 address.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
@@ -1447,6 +1455,12 @@ module Google
           #      - `PRIVATE_SERVICE_CONNECT` for a private network address that is
           #      used to configure Private Service Connect. Only global internal addresses
           #      can use this purpose.
+          #      - `PASSTHROUGH_LOAD_BALANCER_AVAILABILITY_GROUP0` for addresses
+          #      that can only be assigned to global external Passthrough Network Load
+          #      Balancer forwarding rules, as an Availability Group 0 address.
+          #      - `PASSTHROUGH_LOAD_BALANCER_AVAILABILITY_GROUP1` for addresses that
+          #      can only be assigned to global external Passthrough Network Load Balancer
+          #      forwarding rules, as an Availability Group 1 address.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -1463,7 +1477,7 @@ module Google
             # of subnet/route in the VPC network and its peering networks. After the
             # VLAN attachment is created with the reserved IP address range, when
             # creating a new VPN gateway, its interface IP address is allocated
-            # from the associated VLAN attachment’s IP address range.
+            # from the associated VLAN attachment's IP address range.
             IPSEC_INTERCONNECT = 340_437_251
 
             # External IP automatically reserved for Cloud NAT.
@@ -8554,6 +8568,50 @@ module Google
         #     is 500 GB.
         # @!attribute [rw] disk_type
         #   @return [::String]
+        #     Specifies the disk type used for the boot disk or an additional data
+        #     disk. For valid disk type values, see
+        #     Supported types for Hyperdisk volumes and
+        #     Persistent Disk type variables.
+        #
+        #     When creating a single instance, you must provide either the full or
+        #     partial URL of the disk type. For example, the following values are
+        #     valid:
+        #
+        #
+        #          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType
+        #          - projects/project/zones/zone/diskTypes/diskType
+        #          - zones/zone/diskTypes/diskType
+        #
+        #
+        #
+        #     When creating an instance template, instance flexibility policy, or when
+        #     creating or updating an all-instances configuration, you specify the
+        #     disk type without a URL, for example, hyperdisk-balanced.
+        #
+        #     If you omit this field for a disk, the default disk type depends on
+        #     the instance's machine series, as follows.
+        #
+        #
+        #         - For first- and second-generation machine series like N1, N2, T2, and
+        #         M1, the
+        #            default disk type is Standard Persistent Disk
+        #            (pd-standard).
+        #         - For C3, C3D, and M3 the default is Balanced Persistent Disk
+        #         (pd-balanced).
+        #        - For other third-generation machine
+        #         series like A3, H3, Z3, all
+        #             fourth-generation types like C4, N4, M4, and newer machine series,
+        #             the default is Hyperdisk Balanced
+        #             (hyperdisk-balanced).
+        #
+        #
+        #
+        #     The disk type you specify must be compatible with the instance's machine
+        #     series. For a list of machine series that support Persistent Disk, see Machine
+        #     series support for Persistent Disk.
+        #
+        #     For a list of machine series that support Hyperdisk, seeMachine
+        #     series support for Hyperdisk.
         # @!attribute [rw] enable_confidential_compute
         #   @return [::Boolean]
         #     Whether this disk is using confidential compute mode.
@@ -10814,7 +10872,11 @@ module Google
         #     URL to networkservices.ServiceLbPolicy resource.
         #
         #     Can only be set if load balancing scheme is EXTERNAL_MANAGED,
-        #     INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.
+        #     INTERNAL_MANAGED or INTERNAL_SELF_MANAGED for a global backend service, and
+        #     EXTERNAL_MANAGED or INTERNAL_MANAGED for a regional backend service. For a
+        #     global backend service, the service lb policy must be global. For a
+        #     regional backend service, the service lb policy must be regional and in the
+        #     same region.
         # @!attribute [rw] session_affinity
         #   @return [::String]
         #     Type of session affinity to use. The default is NONE.
@@ -14097,6 +14159,9 @@ module Google
             # CUD bucket for X4 machine with 960 vCPUs and 16TB of memory.
             MEMORY_OPTIMIZED_X4_960_16T = 424_752_534
 
+            # CUD bucket for C4N (dual Diorite) machines.
+            NETWORK_OPTIMIZED_C4N = 147_027_572
+
             STORAGE_OPTIMIZED_Z3 = 316_796_085
 
             # Note for internal users: When adding a new enum Type for v1, make sure
@@ -14911,6 +14976,7 @@ module Google
         #     "kmsKeyServiceAccount": "name@project_id.iam.gserviceaccount.com/
         # @!attribute [rw] raw_key
         #   @return [::String]
+        #     [DEPRECATED] CSEK is no longer supported. Use CMEK instead.
         #     Specifies a 256-bit customer-supplied
         #     encryption key, encoded in RFC
         #     4648 base64 to either encrypt or decrypt this resource. You can
@@ -14921,6 +14987,7 @@ module Google
         #     "SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0="
         # @!attribute [rw] rsa_encrypted_key
         #   @return [::String]
+        #     [DEPRECATED] CSEK is no longer supported. Use CMEK instead.
         #     Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit
         #     customer-supplied encryption key to either encrypt or decrypt this
         #     resource. You can provide either the rawKey or thersaEncryptedKey.
@@ -14945,6 +15012,7 @@ module Google
         #     https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
         # @!attribute [rw] sha256
         #   @return [::String]
+        #     [DEPRECATED] CSEK is no longer supported. Use CMEK instead.
         #     [Output only] TheRFC
         #     4648 base64 encoded SHA-256 hash of the customer-supplied
         #     encryption key that protects this resource.
@@ -15769,6 +15837,9 @@ module Google
         # @!attribute [rw] instance
         #   @return [::String]
         #     Name of the instance resource to delete.
+        # @!attribute [rw] no_graceful_shutdown
+        #   @return [::Boolean]
+        #     If set to true, Graceful Shutdown is skipped.
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID for this request.
@@ -19668,14 +19739,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Container for structured error details providing additional context
+        # specific to the encountered error code.
         # @!attribute [rw] error_info
         #   @return [::Google::Cloud::Compute::V1::ErrorInfo]
+        #     Error information containing structured domain, reason, and metadata.
         # @!attribute [rw] help
         #   @return [::Google::Cloud::Compute::V1::Help]
+        #     Links and information to help the user resolve the error.
         # @!attribute [rw] localized_message
         #   @return [::Google::Cloud::Compute::V1::LocalizedMessage]
+        #     A localized human-readable error message intended for end users.
         # @!attribute [rw] quota_info
         #   @return [::Google::Cloud::Compute::V1::QuotaExceededInfo]
+        #     Details about quota limits and metrics when a quota is exceeded.
         class ErrorDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19745,6 +19822,8 @@ module Google
           end
         end
 
+        # Represents a single error encountered during the processing of an
+        # operation.
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] The error type identifier for this error.
@@ -23288,6 +23367,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Hosts.Get. See the method description for details.
+        # @!attribute [rw] association
+        #   @return [::String]
+        #     The parent resource association for the Host. This field specifies the
+        #     hierarchical context (e.g., reservation, block, sub-block) when
+        #     accessing the host. For example, reservations/reservation_name,
+        #     reservations/reservation_name/reservationBlocks/reservation_block_name or
+        #     reservations/reservation_name/reservationBlocks/reservation_block_name/reservationSubBlocks/reservation_sub_block_name.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     The name of the host, formatted as RFC1035 or a resource ID
+        #     number.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The project ID for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request, formatted as RFC1035.
+        class GetHostRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for BackendBuckets.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -24997,6 +25099,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ReliabilityRisks.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] reliability_risk
+        #   @return [::String]
+        #     Name of the ReliabilityRisk resource to return.
+        class GetReliabilityRiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for ReservationBlocks.Get. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -25639,6 +25753,35 @@ module Google
         #   @return [::String]
         #     Name of the UrlMap resource to return.
         class GetUrlMapRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Hosts.GetVersion. See the method description for details.
+        # @!attribute [rw] association
+        #   @return [::String]
+        #     The parent resource association for the Host. This field specifies the
+        #     hierarchical context (e.g., reservation, block, sub-block) when
+        #     accessing the host.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     The name of the host, formatted as RFC1035 or a resource ID
+        #     number.
+        # @!attribute [rw] hosts_get_version_request_resource
+        #   @return [::Google::Cloud::Compute::V1::HostsGetVersionRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request. Zone name should conform to RFC1035.
+        class GetVersionHostRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27187,7 +27330,7 @@ module Google
         #     on what other health check fields are supported and what other resources
         #     can use this health check:
         #
-        #        - SSL, HTTP2, and GRPC protocols are not supported.
+        #        - SSL, HTTP2, GRPC, and GRPC_WITH_TLS protocols are not supported.
         #        - The TCP request field is not supported.
         #        - The proxyHeader field for HTTP, HTTPS, and TCP is not
         #        supported.
@@ -27205,8 +27348,9 @@ module Google
         #     value than checkIntervalSec.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Specifies the type of the healthCheck, either TCP,SSL, HTTP, HTTPS,HTTP2 or GRPC. Exactly one of the
-        #     protocol-specific health check fields must be specified, which must matchtype field.
+        #     Specifies the type of the healthCheck, either TCP,SSL, HTTP, HTTPS,HTTP2, GRPC or GRPC_WITH_TLS.
+        #     Exactly one of the protocol-specific health check fields must be specified,
+        #     which must match type field.
         #     Check the Type enum for the list of possible values.
         # @!attribute [rw] unhealthy_threshold
         #   @return [::Integer]
@@ -27216,8 +27360,9 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies the type of the healthCheck, either TCP,SSL, HTTP, HTTPS,HTTP2 or GRPC. Exactly one of the
-          # protocol-specific health check fields must be specified, which must matchtype field.
+          # Specifies the type of the healthCheck, either TCP,SSL, HTTP, HTTPS,HTTP2, GRPC or GRPC_WITH_TLS.
+          # Exactly one of the protocol-specific health check fields must be specified,
+          # which must match type field.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -27958,6 +28103,87 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents a host resource.
+        # @!attribute [rw] alias_links
+        #   @return [::Array<::String>]
+        #     Output only. All aliases for this resource.
+        #     e.g.
+        #     projects/123/zones/us-centra1-a/reservation/r1/reservationBlock/b1/hosts/h1
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     Output only. The creation timestamp, formatted asRFC3339 text.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     Output only. The unique identifier for this resource. This identifier is
+        #     defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. The type of resource. Alwayscompute#host for hosts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Output only. The name of the host.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. The self link of the host.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. The self link with id of the host.
+        # @!attribute [rw] state
+        #   @return [::String]
+        #     Output only. The state of the host.
+        #     Check the State enum for the list of possible values.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Compute::V1::HostStatus]
+        #     Output only. The status of the host
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Output only. The zone in which the host resides.
+        class Host
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Output only. The state of the host.
+          module State
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATE = 0
+
+            # The host has allocated all its resources.
+            ACTIVE = 314_733_318
+
+            # The resources are being allocated for the host.
+            CREATING = 455_564_985
+
+            # The host is currently being deleted.
+            DELETING = 528_602_024
+
+            STATE_UNSPECIFIED = 470_755_401
+
+            # The host is currently unavailable.
+            UNAVAILABLE = 413_756_464
+          end
+        end
+
+        # @!attribute [rw] block
+        #   @return [::String]
+        #     The unique identifier of the capacity block within the cluster.
+        # @!attribute [rw] cluster
+        #   @return [::String]
+        #     The cluster name of the reservation sub-block.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     The unique identifier of the capacity host within the capacity sub-block.
+        # @!attribute [rw] sub_block
+        #   @return [::String]
+        #     The unique identifier of the capacity sub-block within the capacity
+        #     block.
+        class HostPhysicalTopology
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # UrlMaps
         # A host-matching rule for a URL. If matched, will use the namedPathMatcher to select the BackendService.
         # @!attribute [rw] description
@@ -27980,6 +28206,72 @@ module Google
         #     The name of the PathMatcher to use to match the path portion
         #     of the URL if the hostRule matches the URL's host portion.
         class HostRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] physical_topology
+        #   @return [::Google::Cloud::Compute::V1::HostPhysicalTopology]
+        #     Output only. The physical topology of the reservation sub-block, if
+        #     present
+        # @!attribute [rw] running_instances
+        #   @return [::Array<::String>]
+        #     Output only. The URIs of the instances currently running on this host.
+        class HostStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] sbom_selections
+        #   @return [::Array<::String>]
+        #     The SBOM selection to return. Duplicate values in the list will be ignored.
+        #     Check the SbomSelections enum for the list of possible values.
+        class HostsGetVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module SbomSelections
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SBOM_SELECTIONS = 0
+
+            SBOM_SELECTION_CURRENT = 423_856_692
+
+            SBOM_SELECTION_TARGET = 152_837_462
+
+            SBOM_SELECTION_UNSPECIFIED = 379_615_858
+          end
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     The unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::Host>]
+        #     A list of host resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     The type of resource. Always compute#host for a list of hosts.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     The server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     Unreachable resources.
+        #     end_interface: MixerListResponseWithEtagBuilder
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     An informational warning message.
+        class HostsListResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -32131,6 +32423,9 @@ module Google
             # from Dynamic Workload Scheduler (DWS).
             PENDING = 35_394_935
 
+            # The instance is gracefully shutting down.
+            PENDING_STOP = 362_509_770
+
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
 
@@ -33663,7 +33958,7 @@ module Google
         # InstanceGroupManagers.applyUpdatesToInstances
         # @!attribute [rw] all_instances
         #   @return [::Boolean]
-        #     Flag to update all instances instead of specified list of “instances”.
+        #     Flag to update all instances instead of specified list of "instances".
         #     If the flag is set to true then the instances may not be specified
         #     in the request.
         # @!attribute [rw] instances
@@ -33806,11 +34101,12 @@ module Google
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
-        #     Output only. [Output Only] The list of errors of the managed instance group.
+        #     Output only. The list of errors of the managed instance group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     Output only. [Output Only] This token allows you to get the next page of results for
-        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     Output only. This token allows you to get the next page of results for list requests.
+        #     If the number of results is larger than maxResults
+        #     , then use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
@@ -34750,6 +35046,9 @@ module Google
             # For Flex Start provisioning instance is waiting for available capacity
             # from Dynamic Workload Scheduler (DWS).
             PENDING = 35_394_935
+
+            # The instance is gracefully shutting down.
+            PENDING_STOP = 362_509_770
 
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
@@ -42117,6 +42416,118 @@ module Google
         #     single zone scope either returns all resources in the zone or no resources,
         #     with an error code.
         class ListHealthChecksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Hosts.List. See the method description for details.
+        # @!attribute [rw] association
+        #   @return [::String]
+        #     The parent resource association for the Host. This field specifies the
+        #     hierarchical context (e.g., reservation, block, sub-block) when
+        #     accessing the host. For example, reservations/reservation_name,
+        #     reservations/reservation_name/reservationBlocks/reservation_block_name or
+        #     reservations/reservation_name/reservationBlocks/reservation_block_name/reservationSubBlocks/reservation_sub_block_name.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request, formatted as RFC1035.
+        class ListHostsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -50171,6 +50582,108 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ReliabilityRisks.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListReliabilityRisksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for ReservationBlocks.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -54944,6 +55457,9 @@ module Google
             # from Dynamic Workload Scheduler (DWS).
             PENDING = 35_394_935
 
+            # The instance is gracefully shutting down.
+            PENDING_STOP = 362_509_770
+
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
 
@@ -57325,7 +57841,7 @@ module Google
             # of subnet/route in the VPC network and its peering networks. After the
             # VLAN attachment is created with the reserved IP address range, when
             # creating a new VPN gateway, its interface IP address is allocated
-            # from the associated VLAN attachment’s IP address range.
+            # from the associated VLAN attachment's IP address range.
             IPSEC_INTERCONNECT = 340_437_251
 
             # External IP automatically reserved for Cloud NAT.
@@ -59140,10 +59656,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
+            # The operation has completed processing successfully or with an error.
             DONE = 2_104_194
 
+            # The operation is waiting to be processed.
             PENDING = 35_394_935
 
+            # The operation is actively being processed.
             RUNNING = 121_282_975
           end
         end
@@ -64656,7 +65175,7 @@ module Google
         # RegionInstanceGroupManagers.applyUpdatesToInstances
         # @!attribute [rw] all_instances
         #   @return [::Boolean]
-        #     Flag to update all instances instead of specified list of “instances”.
+        #     Flag to update all instances instead of specified list of "instances".
         #     If the flag is set to true then the instances may not be specified
         #     in the request.
         # @!attribute [rw] instances
@@ -65156,6 +65675,76 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
         #     Content of the UrlMap to be validated.
         class RegionUrlMapsValidateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a ReliabilityRisk resource.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     Output only. [Output Only] Creation timestamp in RFC3339
+        #     text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional textual description of the resource; provided when the
+        #     resource is created.
+        # @!attribute [rw] details
+        #   @return [::Google::Cloud::Compute::V1::RiskDetails]
+        #     [Output Only] Details of the reliability risk resource
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of resource. Always compute#reliabilityRisk
+        #     for reliability risks.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. The name must be 1-63 characters long and
+        #     comply with RFC1035.
+        # @!attribute [rw] recommendation
+        #   @return [::Google::Cloud::Compute::V1::RiskRecommendation]
+        #     The recommendation to mitigate the risk.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
+        class ReliabilityRisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the List method of ReliabilityRisksService.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     [Output Only] An ETag of the resource.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::ReliabilityRisk>]
+        #     A list of ReliabilityRisk resources.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     Output only. [Output Only] Unreachable resources.
+        #     end_interface: MixerListResponseWithEtagBuilder
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class ReliabilityRisksListResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -67728,6 +68317,9 @@ module Google
         #     Output only. [Output Only] Reservation information that the instance is consuming from.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusScheduling]
+        # @!attribute [rw] shutdown_details
+        #   @return [::Google::Cloud::Compute::V1::ResourceStatusShutdownDetails]
+        #     Output only. [Output Only] Details about the instance stopping state.
         # @!attribute [rw] upcoming_maintenance
         #   @return [::Google::Cloud::Compute::V1::UpcomingMaintenance]
         class ResourceStatus
@@ -67822,6 +68414,14 @@ module Google
         #   @return [::String]
         #     Output only. [Output Only] The full resource name of the reservation that this
         #     instance is consuming from.
+        # @!attribute [rw] consumed_reservation_block
+        #   @return [::String]
+        #     Output only. [Output Only] The full resource name of the reservation block that this
+        #     instance is consuming from.
+        # @!attribute [rw] consumed_reservation_sub_block
+        #   @return [::String]
+        #     Output only. [Output Only] The full resource name of the reservation sub-block that
+        #     this instance is consuming from.
         class ResourceStatusReservationConsumptionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67832,9 +68432,62 @@ module Google
         #     Specifies the availability domain to place the instance in. The value
         #     must be a number between 1 and the number of availability domains
         #     specified in the spread placement policy attached to the instance.
+        # @!attribute [rw] graceful_shutdown_timestamp
+        #   @return [::String]
+        #     Output only. Specifies the timestamp, when the instance will start graceful shutdown
+        #     process, in RFC3339 text format.
+        # @!attribute [rw] termination_timestamp
+        #   @return [::String]
+        #     Time in future when the instance will be terminated inRFC3339 text format.
         class ResourceStatusScheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies if the instance is in `PENDING_STOP` state or there is a
+        # programmed stop scheduled.
+        # @!attribute [rw] max_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     The duration for graceful shutdown. Only applicable when
+        #     `stop_state=PENDING_STOP`.
+        # @!attribute [rw] request_timestamp
+        #   @return [::String]
+        #     Past timestamp indicating the beginning of current `stopState` in RFC3339 text format.
+        # @!attribute [rw] stop_state
+        #   @return [::String]
+        #     Current stopping state of the instance.
+        #     Check the StopState enum for the list of possible values.
+        # @!attribute [rw] target_state
+        #   @return [::String]
+        #     Target instance state.
+        #     Check the TargetState enum for the list of possible values.
+        class ResourceStatusShutdownDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Current stopping state of the instance.
+          module StopState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STOP_STATE = 0
+
+            # The instance is gracefully shutting down.
+            PENDING_STOP = 362_509_770
+
+            # The instance is stopping.
+            STOPPING = 350_791_796
+          end
+
+          # Target instance state.
+          module TargetState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TARGET_STATE = 0
+
+            # The instance will be deleted.
+            DELETED = 120_962_041
+
+            # The instance will be stopped.
+            STOPPED = 444_276_141
+          end
         end
 
         # A request message for Instances.Resume. See the method description for details.
@@ -67962,6 +68615,93 @@ module Google
         #   @return [::String]
         #     Required. Name of the Rollout resource to resume.
         class ResumeRolloutRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Detailed insights and metrics about a detected reliability risk.
+        # @!attribute [rw] duration
+        #   @return [::String]
+        #     The duration of the risk since it was detected.
+        # @!attribute [rw] global_dns_insight
+        #   @return [::Google::Cloud::Compute::V1::RiskDetailsGlobalDnsInsight]
+        #     Insight details for global DNS risk.
+        # @!attribute [rw] last_update_timestamp
+        #   @return [::String]
+        #     The last time the risk was updated.
+        # @!attribute [rw] severity
+        #   @return [::String]
+        #     The severity of the risk.
+        #     Check the Severity enum for the list of possible values.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The type of risk.
+        #     Check the Type enum for the list of possible values.
+        class RiskDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The severity of the risk.
+          module Severity
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SEVERITY = 0
+
+            # Critical severity.
+            CRITICAL = 50_423_711
+
+            # High severity.
+            HIGH = 2_217_378
+
+            # Low severity.
+            LOW = 75_572
+
+            # Medium severity.
+            MEDIUM = 122_782_581
+
+            # No severity specified. The default value.
+            SEVERITY_UNSPECIFIED = 304_082_133
+          end
+
+          # The type of risk.
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            # Risk type related to global DNS.
+            GLOBAL_DNS = 164_472_429
+
+            # Default value. This value is unused.
+            RISK_TYPE_UNSPECIFIED = 71_308_546
+          end
+        end
+
+        # Detailed insights for a global DNS reliability risk.
+        # @!attribute [rw] project_default_is_global_dns
+        #   @return [::Boolean]
+        #     Indicates whether the project's default DNS setting is global DNS.
+        # @!attribute [rw] query_observation_window
+        #   @return [::String]
+        #     The observation window for the query counts.
+        # @!attribute [rw] risky_query_count
+        #   @return [::Integer]
+        #     The number of queries that are risky. This is always less than or
+        #     equal to total_query_count.
+        # @!attribute [rw] total_query_count
+        #   @return [::Integer]
+        #     The total number of queries in the observation window.
+        class RiskDetailsGlobalDnsInsight
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Recommendation for mitigating a reliability risk, including a reference URL.
+        # @!attribute [rw] content
+        #   @return [::String]
+        #     Mitigation guide for the risk.
+        # @!attribute [rw] reference_url
+        #   @return [::String]
+        #     URL referencing a more detailed mitigation guide.
+        class RiskRecommendation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -70752,6 +71492,8 @@ module Google
         #     Specifies the availability domain to place the instance in. The value
         #     must be a number between 1 and the number of availability domains
         #     specified in the spread placement policy attached to the instance.
+        # @!attribute [rw] graceful_shutdown
+        #   @return [::Google::Cloud::Compute::V1::SchedulingGracefulShutdown]
         # @!attribute [rw] host_error_timeout_seconds
         #   @return [::Integer]
         #     Specify the time in seconds for host error detection, the value must be
@@ -70803,6 +71545,11 @@ module Google
         #     instance creation or while the instance isstopped and
         #     therefore, in a `TERMINATED` state. SeeInstance Life
         #     Cycle for more information on the possible instance states.
+        # @!attribute [rw] preemption_notice_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     Specifies the Metadata Service preemption notice duration before the GCE ACPI G2
+        #     Soft Off signal is triggered for Spot VMs only. If not specified,
+        #     there will be no wait before the G2 Soft Off signal is triggered.
         # @!attribute [rw] provisioning_model
         #   @return [::String]
         #     Specifies the provisioning model of the instance.
@@ -70875,6 +71622,20 @@ module Google
             # Standard provisioning with user controlled runtime, no discounts.
             STANDARD = 484_642_493
           end
+        end
+
+        # The configuration for gracefully shutting down the instance.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Opts-in for graceful shutdown.
+        # @!attribute [rw] max_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     The time allotted for the instance to gracefully shut down. If the
+        #     graceful shutdown isn't complete after this time, then the instance
+        #     transitions to the STOPPING state.
+        class SchedulingGracefulShutdown
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Node Affinity: the configuration of desired nodes onto which this Instance
@@ -77231,6 +77992,9 @@ module Google
         # @!attribute [rw] instance
         #   @return [::String]
         #     Name of the instance resource to stop.
+        # @!attribute [rw] no_graceful_shutdown
+        #   @return [::Boolean]
+        #     If set to true, Graceful Shutdown is skipped.
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID for this request.
@@ -77347,7 +78111,7 @@ module Google
         #     create the resource.
         # @!attribute [rw] exapool_provisioned_capacity_gb
         #   @return [::Google::Cloud::Compute::V1::StoragePoolExapoolProvisionedCapacityGb]
-        #     Output only. [Output Only] Provisioned capacities for each SKU for this Exapool in GiB
+        #     Provisioned capacities for each SKU for this Exapool in GiB
         # @!attribute [rw] id
         #   @return [::Integer]
         #     Output only. [Output Only] The unique identifier for the resource. This identifier is
@@ -77410,6 +78174,9 @@ module Google
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
         #     Output only. [Output Only] Server-defined URL for this resource's resource id.
+        # @!attribute [rw] share_settings
+        #   @return [::Google::Cloud::Compute::V1::StoragePoolShareSettings]
+        #     Share settings for the storage pool.
         # @!attribute [rw] state
         #   @return [::String]
         #     Output only. [Output Only] The status of storage pool creation.
@@ -77764,6 +78531,34 @@ module Google
         #     minus some amount that is allowed per disk that is not counted towards
         #     pool's throughput capacity.
         class StoragePoolResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Share settings for the storage pool.
+        # @!attribute [rw] project_map
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::StoragePoolShareSettingsProjectConfig}]
+        #     A map of project id and project config.
+        class StoragePoolShareSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::StoragePoolShareSettingsProjectConfig]
+          class ProjectMapEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Config for each project in the share settings.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project ID, should be same as the key of this project config in the
+        #     parent map.
+        class StoragePoolShareSettingsProjectConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -1,8 +1,7 @@
 # Ruby Client for the Access Approval API
 
-API Client library for the Access Approval API
-
 An API for controlling access to data by Google personnel.
+
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-access_approval-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-access_approval-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-access_approval-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/access-approval/)
+See also the [Product Documentation](https://cloud.google.com/access-approval/docs)
 for more usage information.
 
 ## Quick Start

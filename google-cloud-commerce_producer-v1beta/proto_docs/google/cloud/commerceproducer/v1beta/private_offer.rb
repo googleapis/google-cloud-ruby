@@ -551,6 +551,10 @@ module Google
           #   @return [::Google::Cloud::CommerceProducer::V1beta::PrivateOffer::SingleProductOffer::RevenueShare]
           #     Output only. Revenue share information for this Private Offer.
           #     Not included for `PRIVATE_OFFER_VIEW_BASIC`.
+          # @!attribute [rw] additional_contract_value
+          #   @return [::Google::Cloud::CommerceProducer::V1beta::PrivateOffer::SingleProductOffer::AdditionalContractValue]
+          #     Optional. Additional contract value that the customer is legally
+          #     obligated to spend on the product over the duration of the offer.
           class SingleProductOffer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -981,6 +985,55 @@ module Google
             #     will keep 80% of the revenue after renewal.
             #     .
             class RevenueShare
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Additional contract value that represents a spend obligation or target
+            # contract value tracked out-of-band by the partner.
+            # @!attribute [rw] contract_value
+            #   @return [::Google::Type::Money]
+            #     Optional. The absolute, cumulative contract value of the customer's
+            #     spend obligation that is added on top of the automatically billed fees
+            #     from Google. This amount is not automatically billed or invoiced by
+            #     Google; instead, it is tracked as a legal spend guarantee to be met via
+            #     usage reporting and manually trued-up by partners.
+            #
+            #     The overall total contract value of the offer is calculated as the
+            #     sum of Google-billed fees (from installments), plus this additional
+            #     contract value.
+            #
+            #     For amendments, this field must be set to the new cumulative
+            #     additional total.
+            #
+            #     For example:
+            #
+            #     * Initial Offer: 3 installments of $15 (total $45 billed by Google)
+            #       plus an `additional_contract_value` of $100 (billed by Partner, with
+            #       true-ups happening at the end of the offer's term).
+            #       The overall total contract value of the offer is $145 ($45 + $100).
+            #     * Amended Offer: 6 installments of $15 (total $90 billed by Google)
+            #       plus an `additional_contract_value` of $70 (billed by Partner, with
+            #       true-ups happening at the end of the offer's term).
+            #       The overall total contract value of the amended offer is $160
+            #       ($90 + $70).
+            #
+            #     Must be non-negative. The maximum allowed value is 1,000,000,000 USD.
+            # @!attribute [rw] eligible_skus
+            #   @return [::Array<::String>]
+            #     Optional. The resource names of the SKUs whose tracked usage is
+            #     eligible to contribute toward satisfying this additional contract value
+            #     obligation.
+            #
+            #     This list explicitly separates core spend obligations from exclusions
+            #     like overage fees, which do not count toward meeting the customer's
+            #     legal spend commitment.
+            #
+            #     Must be non-empty for the offer to be published.
+            #
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}/services/\\{service}/skus/\\{sku}
+            class AdditionalContractValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

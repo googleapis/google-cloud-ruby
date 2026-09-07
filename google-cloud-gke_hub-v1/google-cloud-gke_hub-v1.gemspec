@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The GKE Hub API centrally manages features and services on all your Kubernetes clusters running in a variety of environments, including Google cloud, on premises in customer datacenters, or other third party clouds. Note that google-cloud-gke_hub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_hub instead. See the readme for more details."
-  gem.summary       = "API Client library for the GKE Hub V1 API"
+  gem.description   = "The GKE Hub service handles the registration of many Kubernetes clusters to Google Cloud, and the management of multi-cluster features over those clusters. Note that google-cloud-gke_hub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_hub instead. See the readme for more details."
+  gem.summary       = "The GKE Hub service handles the registration of many Kubernetes clusters to Google Cloud, and the management of multi-cluster features over those clusters."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

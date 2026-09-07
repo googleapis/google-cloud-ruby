@@ -205,7 +205,7 @@ module Google
               # Searches for developer knowledge across Google's developer documentation.
               # Returns {::Google::Developers::DeveloperKnowledge::V1::DocumentChunk DocumentChunk}s
               # based on the user's query. There may be many chunks from the same
-              # {::Google::Developers::DeveloperKnowledge::V1::Document Document}.  To retrieve full
+              # {::Google::Developers::DeveloperKnowledge::V1::Document Document}. To retrieve full
               # documents, use
               # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client#get_document DeveloperKnowledge.GetDocument}
               # or
@@ -232,7 +232,9 @@ module Google
               #
               #   @param query [::String]
               #     Required. Provides the raw query string provided by the user, such as "How
-              #     to create a Cloud Storage bucket?".
+              #     to create a Cloud Storage bucket?". The query must not exceed 500
+              #     characters; values longer than 500 characters will result in an
+              #     `INVALID_ARGUMENT` error.
               #   @param page_size [::Integer]
               #     Optional. Specifies the maximum number of results to return. The service
               #     may return fewer than this value.
@@ -253,6 +255,8 @@ module Google
               #
               #     Supported fields for filtering:
               #
+              #     * `content_length_bytes` (INTEGER): The length of the `Document.content`
+              #       field in bytes.
               #     * `data_source` (STRING): The source of the document, e.g.
               #       `docs.cloud.google.com`. See
               #       https://developers.google.com/knowledge/reference/corpus-reference for
@@ -262,6 +266,8 @@ module Google
               #       markdown content or metadata.
               #     * `uri` (STRING): The document URI, e.g.
               #       `https://docs.cloud.google.com/bigquery/docs/tables`.
+              #
+              #     INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
               #
               #     STRING fields support `=` (equals) and `!=` (not equals) operators for
               #     **exact match** on the whole string. Partial match, prefix match, and
@@ -280,6 +286,8 @@ module Google
               #
               #     Examples:
               #
+              #     * Filter by `Document.content_length_bytes`:
+              #       `content_length_bytes < 50000`
               #     * `data_source = "docs.cloud.google.com" OR data_source =
               #       "firebase.google.com"`
               #     * `data_source != "firebase.google.com"`
@@ -376,6 +384,9 @@ module Google
               #     Required. Specifies the name of the document to retrieve.
               #     Format: `documents/{uri_without_scheme}`
               #     Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+              #
+              #     The name must not exceed 500 characters; values longer than 500 characters
+              #     will result in an `INVALID_ARGUMENT` error.
               #   @param view [::Google::Developers::DeveloperKnowledge::V1::DocumentView]
               #     Optional. Specifies the
               #     {::Google::Developers::DeveloperKnowledge::V1::DocumentView DocumentView} of the
@@ -465,6 +476,9 @@ module Google
               #
               #     Format: `documents/{uri_without_scheme}`
               #     Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+              #
+              #     Each name must not exceed 500 characters; values longer than 500 characters
+              #     will result in an `INVALID_ARGUMENT` error.
               #   @param view [::Google::Developers::DeveloperKnowledge::V1::DocumentView]
               #     Optional. Specifies the
               #     {::Google::Developers::DeveloperKnowledge::V1::DocumentView DocumentView} of the
@@ -542,13 +556,59 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload answer_query(query: nil)
+              # @overload answer_query(query: nil, filter: nil)
               #   Pass arguments to `answer_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param query [::String]
               #     Required. The query to answer.
+              #   @param filter [::String]
+              #     Optional. Applies a strict filter to the search results used to ground the
+              #     answer. The expression supports a subset of the syntax described at
+              #     https://google.aip.dev/160.
+              #
+              #     Supported fields for filtering:
+              #
+              #     * `content_length_bytes` (INTEGER): The length of the `Document.content`
+              #       field in bytes.
+              #     * `data_source` (STRING): The source of the document, e.g.
+              #       `docs.cloud.google.com`. See
+              #       https://developers.google.com/knowledge/reference/corpus-reference for
+              #       the complete list of data sources in the corpus.
+              #     * `update_time` (TIMESTAMP): The timestamp of when the document was last
+              #       meaningfully updated. A meaningful update is one that changes document's
+              #       markdown content or metadata.
+              #     * `uri` (STRING): The document URI, e.g.
+              #       `https://docs.cloud.google.com/bigquery/docs/tables`.
+              #
+              #     INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
+              #
+              #     STRING fields support `=` (equals) and `!=` (not equals) operators for
+              #     **exact match** on the whole string. Partial match, prefix match, and
+              #     regexp match are not supported.
+              #
+              #     TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
+              #     Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
+              #
+              #     You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
+              #     operators. `OR` has higher precedence than `AND`. Use parentheses for
+              #     explicit precedence grouping.
+              #
+              #     Examples:
+              #
+              #     * Filter by `Document.content_length_bytes`:
+              #       `content_length_bytes < 50000`
+              #     * `data_source = "docs.cloud.google.com" OR data_source =
+              #       "firebase.google.com"`
+              #     * `data_source != "firebase.google.com"`
+              #     * `update_time < "2024-01-01T00:00:00Z"`
+              #     * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
+              #       "developer.chrome.com" OR data_source = "web.dev")`
+              #     * `uri = "https://docs.cloud.google.com/release-notes"`
+              #
+              #     The `filter` string must not exceed 500 characters; values longer than 500
+              #     characters will result in an `INVALID_ARGUMENT` error.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

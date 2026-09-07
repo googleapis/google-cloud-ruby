@@ -1,8 +1,7 @@
 # Ruby Client for the BigQuery Reservation API
 
-API Client library for the BigQuery Reservation API
+A service to modify your BigQuery reservations.
 
-The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-reservation-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-reservation-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/reservations)
-for more usage information.
 
 ## Quick Start
 

@@ -13,6 +13,8 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 
 require "grpc"
 require "google/cloud/datastore"

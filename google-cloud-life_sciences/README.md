@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Life Sciences API
 
-API Client library for the Cloud Life Sciences API
+Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data.
 
-Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-life_sciences-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-life_sciences-v2beta](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest).
-
-See also the [Product Documentation](https://cloud.google.com/life-sciences/)
-for more usage information.
 
 ## Quick Start
 

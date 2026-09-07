@@ -1,8 +1,7 @@
 # Ruby Client for the Financial Services API
 
-API Client library for the Financial Services API
+A unified AI platform for financial services, leveraging Google's global framework for security and compliance.
 
-google-cloud-financial_services is the official client library for the Financial Services API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-financial_services-v*`.

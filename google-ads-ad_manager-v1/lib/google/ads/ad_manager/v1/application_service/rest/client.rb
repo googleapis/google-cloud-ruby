@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -292,18 +292,17 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>appStoreId</code></li>
-              #       <li><code>appStores</code></li>
-              #       <li><code>applicationCode</code></li>
-              #       <li><code>approvalStatus</code></li>
-              #       <li><code>archived</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>platform</code></li>
-              #       <li><code>webviewClaimingStatus</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `appStoreId`
+              #     * `appStores`
+              #     * `applicationCode`
+              #     * `approvalStatus`
+              #     * `archived`
+              #     * `displayName`
+              #     * `name`
+              #     * `platform`
+              #     * `webviewClaimingStatus`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

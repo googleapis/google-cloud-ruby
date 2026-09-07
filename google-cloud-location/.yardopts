@@ -1,5 +1,5 @@
 --no-private
---title="Locations API"
+--title="Cloud Metadata API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

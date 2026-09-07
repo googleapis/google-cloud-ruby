@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Access Context Manager allows enterprises to configure access levels which map to a policy defined on request attributes."
-  gem.summary       = "API Client library for the Access Context Manager API"
+  gem.description   = "An API for setting attribute based access control to requests to GCP services."
+  gem.summary       = "An API for setting attribute based access control to requests to GCP services."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

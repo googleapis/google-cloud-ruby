@@ -1,13 +1,12 @@
-# Ruby Client for the Web Security Scanner V1beta API
+# Ruby Client for the Web Security Scanner V1BETA API
 
 Scans your Compute and App Engine apps for common web vulnerabilities.
 
-Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Web Security Scanner V1beta API. Most users should consider using
+specific version of the Web Security Scanner V1BETA API. Most users should consider using
 the main client gem,
 [google-cloud-web_security_scanner](https://rubygems.org/gems/google-cloud-web_security_scanner).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_scan_config request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1beta/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/)
-for general usage information.
 
 ## Debug Logging
 

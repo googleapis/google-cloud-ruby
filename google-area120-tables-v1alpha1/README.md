@@ -1,13 +1,12 @@
-# Ruby Client for the Area 120 Tables V1alpha1 API
+# Ruby Client for the Area120 Tables V1ALPHA1 API
 
-API Client library for the Area 120 Tables V1alpha1 API
+Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator.
 
-Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Area 120 Tables V1alpha1 API. Most users should consider using
+specific version of the Area120 Tables V1ALPHA1 API. Most users should consider using
 the main client gem,
 [google-area120-tables](https://rubygems.org/gems/google-area120-tables).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_table request
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-area120-tables-v1alpha1)
 for class and method documentation.
-
-See also the [Product Documentation](https://tables.area120.google.com/u/0/about#/)
-for general usage information.
 
 ## Debug Logging
 

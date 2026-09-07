@@ -1,13 +1,12 @@
-# Ruby Client for the Managed Service for Microsoft Active Directory API V1 API
+# Ruby Client for the Managed Service for Microsoft Active Directory V1 API
 
 The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory (AD).
 
-The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Managed Service for Microsoft Active Directory API V1 API. Most users should consider using
+specific version of the Managed Service for Microsoft Active Directory V1 API. Most users should consider using
 the main client gem,
 [google-cloud-managed_identities](https://rubygems.org/gems/google-cloud-managed_identities).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_microsoft_ad_domain request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-managed_identities-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/managed-microsoft-ad/)
-for general usage information.
 
 ## Debug Logging
 

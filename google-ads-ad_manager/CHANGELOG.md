@@ -1,5 +1,46 @@
 # Changelog
 
+### 5.1.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 5.0.2 (2026-08-11)
+
+#### Documentation
+
+* Onboard to Librarian & Update README ([#36214](https://github.com/googleapis/google-cloud-ruby/issues/36214)) 
+
+### 5.0.1 (2026-08-05)
+
+#### Documentation
+
+* Update copyright year ([#35088](https://github.com/googleapis/google-cloud-ruby/issues/35088)) 
+
+### 5.0.0 (2026-07-30)
+
+### ⚠ BREAKING CHANGES
+
+* Moved Schedule messages from report_messages.proto to report_delivery.proto
+* Added additional LineItem fields
+
+#### Features
+
+* Added additional LineItem fields 
+* Added BatchActivateContentBundles and BatchDeactivateContentBundles methods to ContentBundleService 
+* Added CreativeSetService 
+* Added OrderService write methods and additional stats fields. 
+* Added SlateService 
+* Added TargetingPresetService update methods 
+* Added the Creative entity 
+#### Bug Fixes
+
+* Moved Schedule messages from report_messages.proto to report_delivery.proto 
+#### Documentation
+
+* Updated method descriptions to use a consistent style 
+
 ### 4.2.0 (2026-07-20)
 
 #### Features

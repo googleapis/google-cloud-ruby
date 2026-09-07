@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -113,6 +113,15 @@ module Google
             # Use pessimistic concurrency control for the new transaction.
             PESSIMISTIC = 2
           end
+        end
+
+        # Options for a server request.
+        # @!attribute [rw] request_tags
+        #   @return [::Array<::String>]
+        #     The request tags for the request.
+        class RequestOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ require "google/ads/ad_manager/v1/bandwidth_group_service/rest"
 require "google/ads/ad_manager/v1/browser_language_service/rest"
 require "google/ads/ad_manager/v1/browser_service/rest"
 require "google/ads/ad_manager/v1/cdn_config_service/rest"
+require "google/ads/ad_manager/v1/child_publisher_service/rest"
 require "google/ads/ad_manager/v1/cms_metadata_key_service/rest"
 require "google/ads/ad_manager/v1/cms_metadata_value_service/rest"
 require "google/ads/ad_manager/v1/company_service/rest"
@@ -36,9 +37,12 @@ require "google/ads/ad_manager/v1/content_label_service/rest"
 require "google/ads/ad_manager/v1/content_service/rest"
 require "google/ads/ad_manager/v1/creative_set_service/rest"
 require "google/ads/ad_manager/v1/creative_template_service/rest"
+require "google/ads/ad_manager/v1/creative_wrapper_service/rest"
 require "google/ads/ad_manager/v1/custom_field_service/rest"
 require "google/ads/ad_manager/v1/custom_targeting_key_service/rest"
 require "google/ads/ad_manager/v1/custom_targeting_value_service/rest"
+require "google/ads/ad_manager/v1/dai_authentication_key_service/rest"
+require "google/ads/ad_manager/v1/dai_encoding_profile_service/rest"
 require "google/ads/ad_manager/v1/device_capability_service/rest"
 require "google/ads/ad_manager/v1/device_category_service/rest"
 require "google/ads/ad_manager/v1/device_manufacturer_service/rest"
@@ -52,10 +56,12 @@ require "google/ads/ad_manager/v1/mcm_earnings_service/rest"
 require "google/ads/ad_manager/v1/mobile_carrier_service/rest"
 require "google/ads/ad_manager/v1/mobile_device_service/rest"
 require "google/ads/ad_manager/v1/mobile_device_submodel_service/rest"
+require "google/ads/ad_manager/v1/native_style_service/rest"
 require "google/ads/ad_manager/v1/network_service/rest"
 require "google/ads/ad_manager/v1/operating_system_service/rest"
 require "google/ads/ad_manager/v1/operating_system_version_service/rest"
 require "google/ads/ad_manager/v1/order_service/rest"
+require "google/ads/ad_manager/v1/partner_service/rest"
 require "google/ads/ad_manager/v1/placement_service/rest"
 require "google/ads/ad_manager/v1/private_auction_deal_service/rest"
 require "google/ads/ad_manager/v1/private_auction_service/rest"
@@ -71,6 +77,7 @@ require "google/ads/ad_manager/v1/taxonomy_category_service/rest"
 require "google/ads/ad_manager/v1/team_service/rest"
 require "google/ads/ad_manager/v1/third_party_company_service/rest"
 require "google/ads/ad_manager/v1/user_service/rest"
+require "google/ads/ad_manager/v1/viewability_provider_service/rest"
 require "google/ads/ad_manager/v1/version"
 
 module Google

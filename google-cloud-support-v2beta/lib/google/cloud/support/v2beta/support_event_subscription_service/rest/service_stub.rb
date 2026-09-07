@@ -314,6 +314,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the expunge_support_event_subscription REST call
+              #
+              # @param request_pb [::Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def expunge_support_event_subscription request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_expunge_support_event_subscription_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "expunge_support_event_subscription",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the create_support_event_subscription REST call
@@ -329,7 +369,7 @@ module Google
                                                           uri_template: "/v2beta/{parent}/supportEventSubscriptions",
                                                           body: "support_event_subscription",
                                                           matches: [
-                                                            ["parent", %r{^[^/]+/[^/]+/?$}, false]
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -350,7 +390,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2beta/{name}",
                                                           matches: [
-                                                            ["name", %r{^[^/]+/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -371,7 +411,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2beta/{parent}/supportEventSubscriptions",
                                                           matches: [
-                                                            ["parent", %r{^[^/]+/[^/]+/?$}, false]
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -393,7 +433,7 @@ module Google
                                                           uri_template: "/v2beta/{support_event_subscription.name}",
                                                           body: "support_event_subscription",
                                                           matches: [
-                                                            ["support_event_subscription.name", %r{^[^/]+/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
+                                                            ["support_event_subscription.name", %r{^organizations/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -414,7 +454,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v2beta/{name}",
                                                           matches: [
-                                                            ["name", %r{^[^/]+/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -436,7 +476,29 @@ module Google
                                                           uri_template: "/v2beta/{name}:undelete",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^[^/]+/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the expunge_support_event_subscription REST call
+              #
+              # @param request_pb [::Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_expunge_support_event_subscription_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v2beta/{name}:expunge",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/supportEventSubscriptions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

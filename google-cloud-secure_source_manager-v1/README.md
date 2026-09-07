@@ -2,7 +2,6 @@
 
 Regionally deployed, single-tenant managed source code repository hosted on Google Cloud.
 
-Regionally deployed, single-tenant managed source code repository hosted on Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 

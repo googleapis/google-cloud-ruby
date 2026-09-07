@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/datastore/admin/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-datastore-admin/$1

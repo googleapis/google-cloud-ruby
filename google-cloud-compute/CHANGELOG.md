@@ -1,5 +1,23 @@
 # Changelog
 
+### 1.20.0 (2026-08-10)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
+### 1.19.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+#### Documentation
+
+* Update copyright year ([#35090](https://github.com/googleapis/google-cloud-ruby/issues/35090)) 
+
 ### 1.19.0 (2026-06-11)
 
 #### Features

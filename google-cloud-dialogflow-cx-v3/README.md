@@ -1,13 +1,12 @@
-# Ruby Client for the Dialogflow CX V3 API
+# Ruby Client for the Dialogflow V3 API
 
 Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
 
-Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow CX, providing an advanced agent type suitable for large or very complex agents.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Dialogflow CX V3 API. Most users should consider using
+specific version of the Dialogflow V3 API. Most users should consider using
 the main client gem,
 [google-cloud-dialogflow-cx](https://rubygems.org/gems/google-cloud-dialogflow-cx).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.list_pages request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/dialogflow)
+See also the [Product Documentation](https://docs.cloud.google.com/dialogflow/docs)
 for general usage information.
 
 ## Debug Logging

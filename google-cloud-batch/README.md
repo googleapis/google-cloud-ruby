@@ -1,8 +1,7 @@
 # Ruby Client for the Batch API
 
-API Client library for the Batch API
+An API to manage the running of Batch resources on Google Cloud Platform.
 
-Google Cloud Batch is a fully managed service used by scientists, VFX artists, developers to easily and efficiently run batch workloads on Google Cloud. This service manages provisioning of resources to satisfy the requirements of the batch jobs for a variety of workloads including ML, HPC, VFX rendering, transcoding, genomics and others.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-batch-v*`.

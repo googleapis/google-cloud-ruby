@@ -2,7 +2,6 @@
 
 Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
-Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-shopping-css-v*`.

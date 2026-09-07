@@ -2,7 +2,6 @@
 
 The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters.
 
-The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters.
 
 https://github.com/googleapis/google-cloud-ruby
 

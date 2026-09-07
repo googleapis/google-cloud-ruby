@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Cloud Functions API manages lightweight user-provided functions executed in response to events."
-  gem.summary       = "API Client library for the Cloud Functions API"
+  gem.description   = "Manages lightweight user-provided functions executed in response to events."
+  gem.summary       = "Manages lightweight user-provided functions executed in response to events."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

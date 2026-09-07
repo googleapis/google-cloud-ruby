@@ -1,8 +1,7 @@
 # Ruby Client for the App Engine Admin API
 
-API Client library for the App Engine Admin API
+Provisions and manages developers' App Engine applications.
 
-The App Engine Admin API provisions and manages your App Engine applications.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-app_engine-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-app_engine-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/appengine/docs/admin-api/)
-for more usage information.
 
 ## Quick Start
 

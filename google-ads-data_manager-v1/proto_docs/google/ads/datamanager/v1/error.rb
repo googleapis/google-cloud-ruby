@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -413,6 +413,14 @@ module Google
 
           # Insights missing for this dimension.
           INSIGHTS_MISSING_FOR_DIMENSION = 123
+
+          # A required prerequisite link (such as a Google Ads link) must exist for
+          # the Google Analytics property to perform this operation.
+          REQUIRED_PREREQUISITE_LINK_MISSING = 124
+
+          # The remove as of time must be in the past or present. Future timestamps are
+          # not permitted for removing audience members.
+          INVALID_REMOVE_AS_OF_TIME = 125
         end
       end
     end

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Certificate Manager lets you acquire and manage Transport Layer Security (TLS) (SSL) certificates for use with classic external HTTP(S) load balancers in Google Cloud. Note that google-cloud-certificate_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-certificate_manager instead. See the readme for more details."
-  gem.summary       = "API Client library for the Certificate Manager V1 API"
+  gem.description   = "Certificate Manager simplifies the acquisition, deployment, and management of Transport Layer Security (TLS) certificates. Note that google-cloud-certificate_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-certificate_manager instead. See the readme for more details."
+  gem.summary       = "Certificate Manager simplifies the acquisition, deployment, and management of Transport Layer Security (TLS) certificates."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

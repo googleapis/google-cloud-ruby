@@ -48,6 +48,13 @@ module Google
         # @!attribute [rw] table_references
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1::BigQueryTableReference>]
         #     Optional. References to BigQuery tables.
+        # @!attribute [rw] property_graph_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1::BigQueryPropertyGraphReference>]
+        #     Optional. References to BigQuery graphs.
+        #
+        #     Note: "property graph" is the former name for BigQuery Graph. The field and
+        #     message names retain the original term for backward compatibility; both
+        #     refer to the same resource.
         class BigQueryTableReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

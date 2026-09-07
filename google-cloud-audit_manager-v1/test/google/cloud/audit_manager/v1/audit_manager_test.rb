@@ -200,6 +200,7 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
     compliance_standard = "hello world"
     report_format = :AUDIT_REPORT_FORMAT_UNSPECIFIED
     compliance_framework = "hello world"
+    validate_only = true
 
     generate_audit_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_audit_report, name
@@ -210,6 +211,7 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
       assert_equal "hello world", request["compliance_standard"]
       assert_equal :AUDIT_REPORT_FORMAT_UNSPECIFIED, request["report_format"]
       assert_equal "hello world", request["compliance_framework"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -220,35 +222,35 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
+      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
+      c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
+      c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
+      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
+      c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

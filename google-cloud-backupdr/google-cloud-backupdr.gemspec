@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-backupdr is the official client library for the Backup and DR Service API."
-  gem.summary       = "API Client library for the Backup and DR Service API"
+  gem.description   = "Backup and DR Service is a managed service that provides backup and recovery of workloads running in Google Cloud."
+  gem.summary       = "Backup and DR Service is a managed service that provides backup and recovery of workloads running in Google Cloud."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

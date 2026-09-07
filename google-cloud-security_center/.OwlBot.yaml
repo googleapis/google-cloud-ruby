@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/securitycenter/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-security_center/$1

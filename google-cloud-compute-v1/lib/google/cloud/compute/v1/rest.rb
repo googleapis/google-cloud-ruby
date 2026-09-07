@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ require "google/cloud/compute/v1/global_organization_operations/rest"
 require "google/cloud/compute/v1/global_public_delegated_prefixes/rest"
 require "google/cloud/compute/v1/global_vm_extension_policies/rest"
 require "google/cloud/compute/v1/health_checks/rest"
+require "google/cloud/compute/v1/hosts/rest"
 require "google/cloud/compute/v1/image_family_views/rest"
 require "google/cloud/compute/v1/images/rest"
 require "google/cloud/compute/v1/instance_group_manager_resize_requests/rest"
@@ -106,6 +107,7 @@ require "google/cloud/compute/v1/region_target_tcp_proxies/rest"
 require "google/cloud/compute/v1/region_url_maps/rest"
 require "google/cloud/compute/v1/region_zones/rest"
 require "google/cloud/compute/v1/regions/rest"
+require "google/cloud/compute/v1/reliability_risks/rest"
 require "google/cloud/compute/v1/reservation_blocks/rest"
 require "google/cloud/compute/v1/reservation_slots/rest"
 require "google/cloud/compute/v1/reservation_sub_blocks/rest"

@@ -2,7 +2,6 @@
 
 License Manager is a tool to manage and track third-party licenses on Google Cloud.
 
-License Manager is a tool to manage and track third-party licenses on Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 

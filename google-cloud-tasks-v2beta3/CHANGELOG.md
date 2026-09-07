@@ -1,5 +1,17 @@
 # Release History
 
+### 0.20.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 0.20.0 (2026-07-23)
+
+#### Features
+
+* add BatchCreateTasks and BatchDeleteTasks to CloudTasks v2beta3 ([#34978](https://github.com/googleapis/google-cloud-ruby/issues/34978)) 
+
 ### 0.19.0 (2026-06-11)
 
 #### Features

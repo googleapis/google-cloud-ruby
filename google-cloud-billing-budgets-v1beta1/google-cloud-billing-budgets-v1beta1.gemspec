@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Provides methods to view, create, and manage Cloud Billing budgets programmatically at scale. Note that google-cloud-billing-budgets-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-billing-budgets instead. See the readme for more details."
+  gem.description   = "The Cloud Billing Budget API stores Cloud Billing budgets, which define a budget plan and the rules to execute as spend is tracked against that plan. Note that google-cloud-billing-budgets-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-billing-budgets instead. See the readme for more details."
   gem.summary       = "The Cloud Billing Budget API stores Cloud Billing budgets, which define a budget plan and the rules to execute as spend is tracked against that plan."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

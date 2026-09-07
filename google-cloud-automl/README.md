@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud AutoML API
 
-API Client library for the Cloud AutoML API
+Train high-quality custom machine learning models with minimum effort and machine learning expertise.
 
-AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-automl-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-automl-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-automl-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/automl)
-for more usage information.
 
 ## Quick Start
 

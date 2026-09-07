@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Provides insights capability on Google Cloud Storage."
-  gem.summary       = "Provides insights capability on Google Cloud Storage."
+  gem.description   = "Provides insights capability on Google Cloud Storage"
+  gem.summary       = "Provides insights capability on Google Cloud Storage"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

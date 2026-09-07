@@ -221,7 +221,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload stream_assist(name: nil, query: nil, session: nil, user_metadata: nil, tools_spec: nil, generation_spec: nil)
+              # @overload stream_assist(name: nil, query: nil, session: nil, user_metadata: nil, agents_spec: nil, tools_spec: nil, generation_spec: nil)
               #   Pass arguments to `stream_assist` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -247,6 +247,8 @@ module Google
               #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}`
               #   @param user_metadata [::Google::Cloud::DiscoveryEngine::V1beta::AssistUserMetadata, ::Hash]
               #     Optional. Information about the user initiating the query.
+              #   @param agents_spec [::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest::AgentsSpec, ::Hash]
+              #     Optional. Specification of agents that are used to serve the request.
               #   @param tools_spec [::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest::ToolsSpec, ::Hash]
               #     Optional. Specification of tools that are used to serve the request.
               #   @param generation_spec [::Google::Cloud::DiscoveryEngine::V1beta::StreamAssistRequest::GenerationSpec, ::Hash]

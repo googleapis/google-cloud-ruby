@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,24 +55,23 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>cmsMetadataValues</code></li>
-        #       <li><code>cmsSources.contentSource</code></li>
-        #       <li><code>cmsSources.contentSourceDisplayName</code></li>
-        #       <li><code>contentBundles</code></li>
-        #       <li><code>contentStatusSource</code></li>
-        #       <li><code>dashIngestStatus</code></li>
-        #       <li><code>displayName</code></li>
-        #       <li><code>duration</code></li>
-        #       <li><code>hlsIngestStatus</code></li>
-        #       <li><code>importTime</code></li>
-        #       <li><code>lastDashIngestTime</code></li>
-        #       <li><code>lastHlsIngestTime</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>status</code></li>
-        #       <li><code>updateTime</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `cmsMetadataValues`
+        #     * `cmsSources.contentSource`
+        #     * `cmsSources.contentSourceDisplayName`
+        #     * `contentBundles`
+        #     * `contentStatusSource`
+        #     * `dashIngestStatus`
+        #     * `displayName`
+        #     * `duration`
+        #     * `hlsIngestStatus`
+        #     * `importTime`
+        #     * `lastDashIngestTime`
+        #     * `lastHlsIngestTime`
+        #     * `name`
+        #     * `status`
+        #     * `updateTime`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

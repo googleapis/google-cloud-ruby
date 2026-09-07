@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites."
-  gem.summary       = "API Client library for the Cloud AutoML API"
+  gem.description   = "Train high-quality custom machine learning models with minimum effort and machine learning expertise."
+  gem.summary       = "Train high-quality custom machine learning models with minimum effort and machine learning expertise."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

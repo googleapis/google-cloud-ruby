@@ -58,14 +58,13 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>companyGvlId</code></li>
-        #       <li><code>displayName</code></li>
-        #       <li><code>gdprStatus</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>policyUrl</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `companyGvlId`
+        #     * `displayName`
+        #     * `gdprStatus`
+        #     * `name`
+        #     * `policyUrl`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

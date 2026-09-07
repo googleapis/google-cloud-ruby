@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Commerce Consumer Procurement API
 
-Enables consumers to procure products served by Cloud Marketplace platform.
+Enables consumers to procure products served by Cloud Marketplace platform
 
 
 Actual client classes for the various versions of this API are defined in
