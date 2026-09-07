@@ -684,7 +684,6 @@ describe "Buckets Snippets" do
     it "get_soft_delete_policy, set_soft_delete_policy, disable_soft_delete" do
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
-
       storage_client.create_bucket bucket_name
 
       assert_output(/Soft delete policy for #{bucket_name}:/) do
