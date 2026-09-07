@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,6 +92,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientPathsTest < Minitest:
     end
   end
 
+  def test_playbook_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.playbook_path project: "value0", location: "value1", agent: "value2", playbook: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/playbooks/value3", path
+    end
+  end
+
   def test_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -119,6 +131,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientPathsTest < Minitest:
 
       path = client.session_entity_type_path project: "value0", location: "value1", agent: "value2", environment: "value3", session: "value4", entity_type: "value5"
       assert_equal "projects/value0/locations/value1/agents/value2/environments/value3/sessions/value4/entityTypes/value5", path
+    end
+  end
+
+  def test_tool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.tool_path project: "value0", location: "value1", agent: "value2", tool: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/tools/value3", path
     end
   end
 

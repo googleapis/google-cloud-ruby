@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -276,6 +276,77 @@ module Google
         #   @return [::Float]
         #     Confidence score of this corroboration.
         class Claim
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Agentic Retrieval Ask API for RAG.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts VertexRagService.AskContexts}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location from which to retrieve
+        #     RagContexts. The users must have permission to make a call in the project.
+        #     Format:
+        #     `projects/{project}/locations/{location}`.
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::AIPlatform::V1::RagQuery]
+        #     Required. Single RAG retrieve query.
+        # @!attribute [rw] tools
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
+        #     Optional. The tools to use for AskContexts.
+        class AskContextsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts VertexRagService.AskContexts}.
+        # @!attribute [rw] response
+        #   @return [::String]
+        #     The Retrieval Response.
+        # @!attribute [rw] contexts
+        #   @return [::Google::Cloud::AIPlatform::V1::RagContexts]
+        #     The contexts of the query.
+        class AskContextsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts VertexRagService.AsyncRetrieveContexts}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location from which to retrieve
+        #     RagContexts. The users must have permission to make a call in the project.
+        #     Format:
+        #     `projects/{project}/locations/{location}`.
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::AIPlatform::V1::RagQuery]
+        #     Required. Single RAG retrieve query.
+        # @!attribute [rw] tools
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
+        #     Optional. The tools to use for AskContexts.
+        class AsyncRetrieveContextsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts VertexRagService.AsyncRetrieveContexts}.
+        # @!attribute [rw] contexts
+        #   @return [::Google::Cloud::AIPlatform::V1::RagContexts]
+        #     The contexts of the query.
+        class AsyncRetrieveContextsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for AsyncRetrieveContextsOperation.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        class AsyncRetrieveContextsOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

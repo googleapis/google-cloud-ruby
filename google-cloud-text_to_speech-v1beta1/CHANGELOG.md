@@ -1,5 +1,35 @@
 # Release History
 
+### 0.31.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35064](https://github.com/googleapis/google-cloud-ruby/issues/35064)) 
+
+### 0.31.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34057](https://github.com/googleapis/google-cloud-ruby/issues/34057)) 
+
+### 0.30.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
+### 0.29.0 (2026-04-02)
+
+#### Features
+
+* Support safety settings for Gemini voices and deprecate `relax_safety_filters` ([#33464](https://github.com/googleapis/google-cloud-ruby/issues/33464)) 
+
+### 0.28.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies to Ruby v4 and drop support for Ruby v3.1
+
 ### 0.27.1 (2025-10-27)
 
 #### Documentation

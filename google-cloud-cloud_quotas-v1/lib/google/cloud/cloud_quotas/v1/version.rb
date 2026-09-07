@@ -21,7 +21,7 @@ module Google
   module Cloud
     module CloudQuotas
       module V1
-        VERSION = "2.2.1"
+        VERSION = "2.6.1"
       end
     end
   end

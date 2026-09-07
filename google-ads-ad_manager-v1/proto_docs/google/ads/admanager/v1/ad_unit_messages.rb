@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the AdUnit.
         #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
         # @!attribute [r] ad_unit_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. AdUnit ID.
+        #     Output only. Deprecated: AdUnit ID.
         # @!attribute [rw] parent_ad_unit
         #   @return [::String]
         #     Required. Immutable. The AdUnit's parent. Every ad unit has a parent except
@@ -132,6 +133,10 @@ module Google
         #     from the AdSense content network. This attribute defaults to the ad unit's
         #     parent or ancestor's setting if one has been set. If no ancestor of the ad
         #     unit has set appliedAdsenseEnabled, the attribute is defaulted to true.
+        # @!attribute [rw] refresh_rate_type
+        #   @return [::Google::Ads::AdManager::V1::RefreshRateTypeEnum::RefreshRateType]
+        #     Optional. Non-empty default. Defines the type of refresh rate control for
+        #     this ad unit. This field defaults to `DISABLED`.
         class AdUnit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,32 +98,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::
     ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::ServiceStub.stub :transcode_register_gcp_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, register_gcp_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.register_gcp({ name: name, developer_email: developer_email }) do |_result, response|
+        c.register_gcp({ name: name, developer_email: developer_email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.register_gcp name: name, developer_email: developer_email do |_result, response|
+        c.register_gcp name: name, developer_email: developer_email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.register_gcp ::Google::Shopping::Merchant::Accounts::V1::RegisterGcpRequest.new(name: name, developer_email: developer_email) do |_result, response|
+        c.register_gcp ::Google::Shopping::Merchant::Accounts::V1::RegisterGcpRequest.new(name: name, developer_email: developer_email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.register_gcp({ name: name, developer_email: developer_email }, call_options) do |_result, response|
+        c.register_gcp({ name: name, developer_email: developer_email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.register_gcp(::Google::Shopping::Merchant::Accounts::V1::RegisterGcpRequest.new(name: name, developer_email: developer_email), call_options) do |_result, response|
+        c.register_gcp(::Google::Shopping::Merchant::Accounts::V1::RegisterGcpRequest.new(name: name, developer_email: developer_email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::
     ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::ServiceStub.stub :transcode_get_developer_registration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_developer_registration_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_developer_registration({ name: name }) do |_result, response|
+        c.get_developer_registration({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_developer_registration name: name do |_result, response|
+        c.get_developer_registration name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_developer_registration ::Google::Shopping::Merchant::Accounts::V1::GetDeveloperRegistrationRequest.new(name: name) do |_result, response|
+        c.get_developer_registration ::Google::Shopping::Merchant::Accounts::V1::GetDeveloperRegistrationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_developer_registration({ name: name }, call_options) do |_result, response|
+        c.get_developer_registration({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_developer_registration(::Google::Shopping::Merchant::Accounts::V1::GetDeveloperRegistrationRequest.new(name: name), call_options) do |_result, response|
+        c.get_developer_registration(::Google::Shopping::Merchant::Accounts::V1::GetDeveloperRegistrationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,37 +206,85 @@ class ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::
     ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::ServiceStub.stub :transcode_unregister_gcp_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unregister_gcp_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unregister_gcp({ name: name }) do |_result, response|
+        c.unregister_gcp({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unregister_gcp name: name do |_result, response|
+        c.unregister_gcp name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unregister_gcp ::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest.new(name: name) do |_result, response|
+        c.unregister_gcp ::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unregister_gcp({ name: name }, call_options) do |_result, response|
+        c.unregister_gcp({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unregister_gcp(::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest.new(name: name), call_options) do |_result, response|
+        c.unregister_gcp(::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, unregister_gcp_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_account_for_gcp_registration
+    # Create test objects.
+    client_result = ::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+
+    get_account_for_gcp_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::ServiceStub.stub :transcode_get_account_for_gcp_registration_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_account_for_gcp_registration_client_stub do
+        # Create client
+        c = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_account_for_gcp_registration({  }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_account_for_gcp_registration ::Google::Protobuf::Empty.new() do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_account_for_gcp_registration({  }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_account_for_gcp_registration(::Google::Protobuf::Empty.new(), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 4, get_account_for_gcp_registration_client_stub.call_count
       end
     end
   end

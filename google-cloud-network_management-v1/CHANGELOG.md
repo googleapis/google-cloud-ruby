@@ -1,5 +1,57 @@
 # Changelog
 
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 2.12.0 (2026-06-25)
+
+#### Features
+
+* add DMS Private Connection ([#34654](https://github.com/googleapis/google-cloud-ruby/issues/34654)) 
+* add fields and messages for Cloud Run jobs ([#34648](https://github.com/googleapis/google-cloud-ruby/issues/34648)) 
+
+### 2.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
+### 2.10.1 (2026-04-15)
+
+#### Documentation
+
+* Update comment for the `region` field in `RouteInfo` ([#33822](https://github.com/googleapis/google-cloud-ruby/issues/33822)) 
+
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 2.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.8.0 (2026-03-05)
+
+#### Features
+
+* Add API fields related to GKE Pods and Network Policies ([#32779](https://github.com/googleapis/google-cloud-ruby/issues/32779)) 
+
+### 2.7.0 (2026-02-04)
+
+#### Features
+
+* add fields and messages for GKE Pods and IP masquerading ([#32387](https://github.com/googleapis/google-cloud-ruby/issues/32387)) 
+#### Documentation
+
+* update comments 
+
 ### 2.6.0 (2025-11-03)
 
 #### Features

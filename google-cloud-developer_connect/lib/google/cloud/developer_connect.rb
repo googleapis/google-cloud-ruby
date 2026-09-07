@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ module Google
       #
       # The InsightsConfig resource is the core configuration object to capture
       # events from your Software Development Lifecycle. It acts as the central hub
-      # for managing how Developer connect understands your application, its runtime
+      # for managing how Developer Connect understands your application, its runtime
       # environments, and the artifacts deployed within them.
       # A user can create an InsightsConfig, list previously-requested
       # InsightsConfigs or get InsightsConfigs by their ID to determine the status of
@@ -216,6 +216,7 @@ module Google
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
       #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
       #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
       #     * `:retry_codes` (*type:* `Array<String>`) -
       #       The error codes that should trigger a retry.
       #

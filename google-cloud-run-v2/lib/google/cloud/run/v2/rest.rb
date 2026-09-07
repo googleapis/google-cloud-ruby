@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 require "google/cloud/run/v2/builds/rest"
 require "google/cloud/run/v2/executions/rest"
+require "google/cloud/run/v2/instances/rest"
 require "google/cloud/run/v2/jobs/rest"
 require "google/cloud/run/v2/revisions/rest"
 require "google/cloud/run/v2/services/rest"

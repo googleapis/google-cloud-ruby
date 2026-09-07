@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,6 +51,14 @@ module Google
                   ["name", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                 ],
                 body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{name}",
+                matches: [
+                  ["name", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                ],
+                body: nil
               )
             ]
             default_config.bindings_override["google.cloud.location.Locations.ListLocations"] = [
@@ -60,6 +68,14 @@ module Google
                 uri_template: "/v1/{name}/locations",
                 matches: [
                   ["name", %r{^organizations/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{name}/locations",
+                matches: [
+                  ["name", %r{^projects/[^/]+/?$}, false]
                 ],
                 body: nil
               )

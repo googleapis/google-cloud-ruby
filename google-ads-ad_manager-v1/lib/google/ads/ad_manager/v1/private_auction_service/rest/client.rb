@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `PrivateAuction` object.
+              # Retrieves a `PrivateAuction` object.
               #
               # @overload get_private_auction(request, options = nil)
               #   Pass arguments to `get_private_auction` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `PrivateAuction` objects.
+              # Lists `PrivateAuction` objects.
               #
               # @overload list_private_auctions(request, options = nil)
               #   Pass arguments to `list_private_auctions` via a request object, either of type
@@ -281,7 +281,7 @@ module Google
               #     Optional. The maximum number of `PrivateAuctions` to return. The service
               #     may return fewer than this value. If unspecified, at most 50
               #     `PrivateAuctions` will be returned. The maximum value is 1000;
-              #     values above 1000 will be coerced to 1000.
+              #     values greater than 1000 will be coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListPrivateAuctions`
               #     call. Provide this to retrieve the subsequent page.
@@ -364,7 +364,7 @@ module Google
               end
 
               ##
-              # API to create a `PrivateAuction` object.
+              # Creates a `PrivateAuction` object.
               #
               # @overload create_private_auction(request, options = nil)
               #   Pass arguments to `create_private_auction` via a request object, either of type
@@ -445,7 +445,7 @@ module Google
               end
 
               ##
-              # API to update a `PrivateAuction` object.
+              # Updates a `PrivateAuction` object.
               #
               # @overload update_private_auction(request, options = nil)
               #   Pass arguments to `update_private_auction` via a request object, either of type
@@ -468,7 +468,7 @@ module Google
               #     The `PrivateAuction`'s `name` is used to identify the
               #     `PrivateAuction` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::PrivateAuction]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -597,6 +597,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -669,6 +670,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

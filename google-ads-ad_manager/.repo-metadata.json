@@ -11,7 +11,7 @@
     "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API.",
+    "ruby-cloud-description": "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read and write Ad Manager data and run reports using the API.",
     "ruby-cloud-product-url": "https://developers.google.com/ad-manager/api/beta",
     "library_type": "GAPIC_MANUAL"
 }

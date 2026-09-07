@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -134,7 +134,12 @@ module Google
         #     if {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} have a
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}, with the
-        #     resource name in the format `projects/*/locations/*/ekmConnections/*`.
+        #     resource name in the format `projects/*/locations/*/ekmConnections/*`. Only
+        #     applicable if {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}
+        #     have a {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT},
+        #     with the resource name in the format
+        #     `projects/*/locations/*/singleTenantHsmInstances/*`.
         #     Note, this list is non-exhaustive and may apply to additional
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels} in the future.
         # @!attribute [rw] key_access_justifications_policy
@@ -147,6 +152,10 @@ module Google
         #     justification codes.
         #     https://cloud.google.com/assured-workloads/key-access-justifications/docs/justification-codes
         #     By default, this field is absent, and all justification codes are allowed.
+        #     If the
+        #     `key_access_justifications_policy.allowed_access_reasons`
+        #     is empty (zero allowed justification code), all encrypt, decrypt, and sign
+        #     operations will fail.
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -204,6 +213,10 @@ module Google
             # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey]
             # and [Decapsulate][google.cloud.kms.v1.KeyManagementService.Decapsulate].
             KEY_ENCAPSULATION = 10
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # for AES key
+            AES_WRAPPING = 11
           end
         end
 
@@ -388,6 +401,24 @@ module Google
         #     Output only. Whether or not this key version is eligible for reimport, by
         #     being specified as a target in
         #     [ImportCryptoKeyVersionRequest.crypto_key_version][google.cloud.kms.v1.ImportCryptoKeyVersionRequest.crypto_key_version].
+        # @!attribute [rw] trusted_wrapping_enabled
+        #   @return [::Boolean]
+        #     Immutable. Field indicating that the key may be wrapped by a trusted key.
+        #     This field can be set for all key purposes except
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT},
+        #     and is only valid for keys with protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+        #     This field can only be set at creation or import time via
+        #     [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion],
+        #     or
+        #     [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+        # @!attribute [r] hsm_trusted
+        #   @return [::Boolean]
+        #     Output only. Field indicating that the key wrapping key is trusted.
+        #     This field is only valid for key purpose
+        #     [AES_256_WRAPPING][CryptoKey.CryptoKeyPurpose.AES_256_WRAPPING], and
+        #     protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
         class CryptoKeyVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -566,12 +597,43 @@ module Google
             KEM_XWING = 63
 
             # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version.
+            PQ_SIGN_ML_DSA_44 = 68
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
             # security level 3. Randomized version.
             PQ_SIGN_ML_DSA_65 = 56
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version.
+            PQ_SIGN_ML_DSA_87 = 69
 
             # The post-quantum stateless hash-based digital signature algorithm, at
             # security level 1. Randomized version.
             PQ_SIGN_SLH_DSA_SHA2_128S = 57
+
+            # The post-quantum stateless hash-based digital signature algorithm, at
+            # security level 1. Randomized pre-hash version supporting SHA256 digests.
+            PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 3. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
+
+            # AES key wrap with zero padding algorithm (RFC 5649). Can only be used
+            # by keys with purpose AES_WRAPPING.
+            AES_256_KWP = 73
           end
 
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
@@ -859,6 +921,13 @@ module Google
         #     Output only. The public key with which to wrap key material prior to
         #     import. Only returned if {::Google::Cloud::Kms::V1::ImportJob#state state} is
         #     {::Google::Cloud::Kms::V1::ImportJob::ImportJobState::ACTIVE ACTIVE}.
+        # @!attribute [r] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Output only. Specifies the
+        #     {::Google::Cloud::Kms::V1::ImportJob::WrappingPublicKey WrappingPublicKey} format
+        #     provided by the customer in the
+        #     [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+        #     request.
         # @!attribute [r] attestation
         #   @return [::Google::Cloud::Kms::V1::KeyOperationAttestation]
         #     Output only. Statement that was generated and signed by the key creator
@@ -867,6 +936,15 @@ module Google
         #     Only present if the chosen
         #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod ImportMethod} is one with a
         #     protection level of {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM}.
+        # @!attribute [rw] crypto_key_backend
+        #   @return [::String]
+        #     Immutable. The resource name of the backend environment where the key
+        #     material for the wrapping key resides and where all related cryptographic
+        #     operations are performed. Currently, this field is only populated for keys
+        #     stored in HSM_SINGLE_TENANT. Note, this list is non-exhaustive and may
+        #     apply to additional {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels}
+        #     in the future. Supported resources:
+        #     * `"projects/*/locations/*/singleTenantHsmInstances/*"`
         class ImportJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -881,6 +959,19 @@ module Google
           #     Considerations](https://tools.ietf.org/html/rfc7468#section-2) and
           #     [Textual Encoding of Subject Public Key Info]
           #     (https://tools.ietf.org/html/rfc7468#section-13).
+          #     This field gets populated by default for RSA-based import methods, if no
+          #     public_key_format is specified in the request.
+          #     If you want to retrieve the wrapping key of an
+          #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} in some other format, use
+          #     [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+          #     and set the public_key_format to the desired public key format.
+          # @!attribute [r] data
+          #   @return [::String]
+          #     Output only. Contains the public key, formatted according to the
+          #     {::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat PublicKey.PublicKeyFormat}
+          #     specified in the
+          #     [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob]
+          #     request.
           class WrappingPublicKey
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -936,6 +1027,33 @@ module Google
             # to technical limitations of RSA wrapping, this method cannot be used to
             # wrap RSA keys for import.
             RSA_OAEP_4096_SHA256 = 6
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the ML-KEM-768 KEM. For more
+            # details, see the [ML-KEM HPKE
+            # standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+            HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM = 8
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the ML-KEM-1024 KEM. For more
+            # details, see the [ML-KEM HPKE
+            # standard](http://datatracker.ietf.org/doc/draft-ietf-hpke-pq/01/).
+            HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM = 9
+
+            # Represents the Hybrid Public Key Encryption (HPKE) Scheme originally
+            # defined in [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180). It
+            # involves wrapping the raw key with an ephemeral AES key, derived with
+            # HKDF-SHA256 from an encryption context, that is, in turn obtained from
+            # the receiver’s public key with the help of the X-Wing hybrid KEM. For
+            # more details, see the [X-Wing
+            # standard](http://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem/09/).
+            HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM = 10
           end
 
           # The state of the {::Google::Cloud::Kms::V1::ImportJob ImportJob}, indicating if
@@ -987,15 +1105,45 @@ module Google
         # {::Google::Cloud::Kms::V1::KeyAccessJustificationsPolicy KeyAccessJustificationsPolicy}
         # specifies zero or more allowed
         # {::Google::Cloud::Kms::V1::AccessReason AccessReason} values for encrypt, decrypt,
-        # and sign operations on a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+        # and sign operations on a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} or
+        # [KeyAccessJustificationsPolicyConfig][google.cloud.kms.v1.KeyAccessJustificationsPolicyConfig]
+        # (the default Key Access Justifications policy).
         # @!attribute [rw] allowed_access_reasons
         #   @return [::Array<::Google::Cloud::Kms::V1::AccessReason>]
         #     The list of allowed reasons for access to a
-        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Zero allowed access reasons
-        #     means all encrypt, decrypt, and sign operations for the
-        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with this policy will
-        #     fail.
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Note that empty
+        #     allowed_access_reasons has a different meaning depending on where this
+        #     message appears. If this is under
+        #     [KeyAccessJustificationsPolicyConfig][google.cloud.kms.v1.KeyAccessJustificationsPolicyConfig],
+        #     it means allow-all. If this is under
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}, it means deny-all.
         class KeyAccessJustificationsPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A RetiredResource resource represents the record of a deleted
+        # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Its purpose is to provide
+        # visibility into retained user data and to prevent reuse of these names for
+        # new {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The resource name for this
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} in the format
+        #     `projects/*/locations/*/retiredResources/*`.
+        # @!attribute [r] original_resource
+        #   @return [::String]
+        #     Output only. The full resource name of the original
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that was deleted in the format
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [r] resource_type
+        #   @return [::String]
+        #     Output only. The resource type of the original deleted resource.
+        # @!attribute [r] delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the original resource was deleted and this
+        #     RetiredResource record was created.
+        class RetiredResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1018,6 +1166,9 @@ module Google
 
           # Crypto operations are performed in an EKM-over-VPC backend.
           EXTERNAL_VPC = 4
+
+          # Crypto operations are performed in a single-tenant HSM.
+          HSM_SINGLE_TENANT = 5
         end
 
         # Describes the reason for a data access. Please refer to
@@ -1050,6 +1201,12 @@ module Google
           # No reason is expected for this key request.
           REASON_NOT_EXPECTED = 7
 
+          # Deprecated: This code is no longer generated by
+          # Google Cloud. The GOOGLE_RESPONSE_TO_PRODUCTION_ALERT justification codes
+          # available in both Key Access Justifications and Access Transparency logs
+          # provide customer-visible signals of emergency access in more precise
+          # contexts.
+          #
           # Customer uses their account to perform any access to their own data which
           # their IAM policy authorizes, and one of the following is true:
           #
@@ -1060,6 +1217,12 @@ module Google
           #   within the past 7 days.
           MODIFIED_CUSTOMER_INITIATED_ACCESS = 8
 
+          # Deprecated: This code is no longer generated by
+          # Google Cloud. The GOOGLE_RESPONSE_TO_PRODUCTION_ALERT justification codes
+          # available in both Key Access Justifications and Access Transparency logs
+          # provide customer-visible signals of emergency access in more precise
+          # contexts.
+          #
           # Google systems access customer data to help optimize the structure of the
           # data or quality for future uses by the customer, and one of the following
           # is true:

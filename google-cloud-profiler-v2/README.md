@@ -2,7 +2,6 @@
 
 Manages continuous profiling information.
 
-Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

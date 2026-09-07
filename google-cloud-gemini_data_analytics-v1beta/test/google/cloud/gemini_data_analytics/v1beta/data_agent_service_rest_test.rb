@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -102,32 +102,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_list_data_agents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_agents_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
+        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
+        c.list_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
+        c.list_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -162,32 +162,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_list_accessible_data_agents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_accessible_data_agents_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_accessible_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }) do |_result, response|
+        c.list_accessible_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_accessible_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter do |_result, response|
+        c.list_accessible_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_accessible_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter) do |_result, response|
+        c.list_accessible_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_accessible_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }, call_options) do |_result, response|
+        c.list_accessible_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_accessible_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter), call_options) do |_result, response|
+        c.list_accessible_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -216,32 +216,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_get_data_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_agent({ name: name }) do |_result, response|
+        c.get_data_agent({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_agent name: name do |_result, response|
+        c.get_data_agent name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest.new(name: name) do |_result, response|
+        c.get_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_agent({ name: name }, call_options) do |_result, response|
+        c.get_data_agent({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -273,37 +273,94 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_create_data_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_agent({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }) do |_result, response|
+        c.create_data_agent({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_agent parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id do |_result, response|
+        c.create_data_agent parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id) do |_result, response|
+        c.create_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_agent({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+        c.create_data_agent({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+        c.create_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, create_data_agent_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    data_agent_id = "hello world"
+    data_agent = {}
+    request_id = "hello world"
+
+    create_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_create_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_data_agent_sync_client_stub do
+        # Create client
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_data_agent_sync parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_data_agent_sync_client_stub.call_count
       end
     end
   end
@@ -329,37 +386,93 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_update_data_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_agent({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }) do |_result, response|
+        c.update_data_agent({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_agent update_mask: update_mask, data_agent: data_agent, request_id: request_id do |_result, response|
+        c.update_data_agent update_mask: update_mask, data_agent: data_agent, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id) do |_result, response|
+        c.update_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_agent({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+        c.update_data_agent({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+        c.update_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, update_data_agent_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    data_agent = {}
+    request_id = "hello world"
+
+    update_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_update_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_data_agent_sync_client_stub do
+        # Create client
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_data_agent_sync update_mask: update_mask, data_agent: data_agent, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_data_agent_sync_client_stub.call_count
       end
     end
   end
@@ -384,37 +497,92 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_delete_data_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_agent({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_data_agent({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_agent name: name, request_id: request_id do |_result, response|
+        c.delete_data_agent name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_data_agent ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_agent({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_data_agent({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_data_agent(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_data_agent_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_delete_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_data_agent_sync_client_stub do
+        # Create client
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_data_agent_sync({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_data_agent_sync name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_data_agent_sync({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_data_agent_sync_client_stub.call_count
       end
     end
   end
@@ -439,32 +607,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -495,32 +663,32 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -1,5 +1,146 @@
 # Changelog
 
+### 1.49.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 1.48.0 (2026-08-11)
+
+#### Features
+
+* add Tool.ExaAiSearch to Vertex AI v1 ([#36201](https://github.com/googleapis/google-cloud-ruby/issues/36201)) 
+#### Bug Fixes
+
+* onboard google-cloud-ai_platform and google-cloud-ai_platform-v1 ([#36204](https://github.com/googleapis/google-cloud-ruby/issues/36204)) 
+
+### 1.47.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+
+### 1.47.0 (2026-07-21)
+
+#### Features
+
+* add Route to GroundingChunk.Maps in Vertex AI v1 ([#34981](https://github.com/googleapis/google-cloud-ruby/issues/34981)) 
+#### Documentation
+
+* expand GroundingChunk.Maps documentation to describe route support 
+
+### 1.46.0 (2026-07-13)
+
+#### Features
+
+* expose retrieval_queries in GroundingMetadata for the v1 API ([#34743](https://github.com/googleapis/google-cloud-ruby/issues/34743)) 
+
+### 1.45.0 (2026-07-09)
+
+#### Features
+
+* Add identity_type to Reasoning Engine public protos ([#34717](https://github.com/googleapis/google-cloud-ruby/issues/34717)) 
+
+### 1.44.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34038](https://github.com/googleapis/google-cloud-ruby/issues/34038)) 
+
+### 1.43.0 (2026-05-08)
+
+#### Features
+
+* Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1 API ([#33916](https://github.com/googleapis/google-cloud-ruby/issues/33916)) 
+
+### 1.42.0 (2026-05-07)
+
+#### Features
+
+* Making grounding with parallel.ai available on SDK ([#33877](https://github.com/googleapis/google-cloud-ruby/issues/33877)) 
+
+### 1.41.0 (2026-04-15)
+
+#### Features
+
+* Model Registry CopyModel BYOSA ([#33833](https://github.com/googleapis/google-cloud-ruby/issues/33833)) 
+
+### 1.40.0 (2026-04-03)
+
+#### Features
+
+* add evaluation metrics and autorater configuration to the AI Platform v1 API ([#33660](https://github.com/googleapis/google-cloud-ruby/issues/33660)) 
+
+### 1.39.0 (2026-04-02)
+
+#### Features
+
+* Add container_spec to Reasoning Engine public protos ([#33456](https://github.com/googleapis/google-cloud-ruby/issues/33456)) 
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 1.38.0 (2026-03-19)
+
+#### Features
+
+* Add custom session id field to create session v1 ([#32806](https://github.com/googleapis/google-cloud-ruby/issues/32806)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.37.0 (2026-03-05)
+
+#### Features
+
+* add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([#32776](https://github.com/googleapis/google-cloud-ruby/issues/32776)) 
+
+### 1.36.0 (2026-02-24)
+
+#### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#32443](https://github.com/googleapis/google-cloud-ruby/issues/32443)) 
+* add max_concurrent_active_run_count field to Schedule message 
+
+### 1.35.0 (2026-02-08)
+
+#### Features
+
+* Add `fps` to message `VideoMetadata` 
+#### Documentation
+
+* update documentation of `.google.cloud.aiplatform.v1.DatasetService`, `.google.cloud.aiplatform.v1.Dataset`, and `.google.cloud.aiplatform.v1.DatasetVersion` ([#32408](https://github.com/googleapis/google-cloud-ruby/issues/32408)) 
+
+### 1.34.0 (2026-01-13)
+
+#### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#32302](https://github.com/googleapis/google-cloud-ruby/issues/32302)) 
+#### Documentation
+
+* Update comments for machine resources and autoscaling 
+
+### 1.33.0 (2025-12-11)
+
+#### Features
+
+* add streaming function call argument API changes ([#32249](https://github.com/googleapis/google-cloud-ruby/issues/32249)) 
+#### Bug Fixes
+
+* fix issue when using UrlContext tool 
+
+### 1.32.0 (2025-12-03)
+
+#### Features
+
+* Expose zone when creating a FeatureOnlineStore 
+#### Documentation
+
+* update `ReplicatedVoiceConfig.mime_type` comment ([#32229](https://github.com/googleapis/google-cloud-ruby/issues/32229)) 
+
+### 1.31.0 (2025-11-21)
+
+#### Features
+
+* Add support for developer connect based deployment ([#32116](https://github.com/googleapis/google-cloud-ruby/issues/32116)) 
+
 ### 1.30.1 (2025-10-27)
 
 #### Documentation

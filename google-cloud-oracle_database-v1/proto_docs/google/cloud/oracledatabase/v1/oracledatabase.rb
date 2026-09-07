@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,6 +52,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token for fetching next page of response.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListCloudExadataInfrastructuresResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +155,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to fetch the next page of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListCloudVmClustersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -328,8 +336,8 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. An expression for filtering the results of the request. Only the
-        #     shape, gcp_oracle_zone and gi_version fields are supported in this format:
-        #     `shape="{shape}"`.
+        #     `shape` and `gcp_oracle_zone_id` fields are supported in the following
+        #     format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
         class ListGiVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -362,9 +370,11 @@ module Google
         #     Optional. A token identifying a page of results the server should return.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. An expression for filtering the results of the request. Only the
-        #     gcp_oracle_zone_id field is supported in this format:
-        #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+        #     Optional. An expression for filtering the results of the request. The
+        #     `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+        #     are supported in the following format:
+        #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+        #     shape_family="\\{shape_family}" AND database_edition="\\{database_edition}"`.
         class ListDbSystemShapesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,6 +458,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListAutonomousDatabasesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -588,7 +602,8 @@ module Google
         #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
         # @!attribute [rw] peer_autonomous_database
         #   @return [::String]
-        #     Required. The peer database name to switch over to.
+        #     Optional. The peer database name to switch over to. Required for
+        #     cross-region standby, and must be omitted for in-region Data Guard.
         class SwitchoverAutonomousDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -601,8 +616,45 @@ module Google
         #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
         # @!attribute [rw] peer_autonomous_database
         #   @return [::String]
-        #     Required. The peer database name to fail over to.
+        #     Optional. The peer database name to fail over to. Required for cross-region
+        #     standby, and must be omitted for in-region Data Guard.
         class FailoverAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for getting refreshable clones for an Autonomous Database.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Autonomous Database resource whose refreshable clones are to
+        #     be listed. Format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}
+        class GetAutonomousDatabaseRefreshableClonesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for getting the Autonomous Database refreshable clones.
+        # @!attribute [rw] autonomous_database_refreshable_clones
+        #   @return [::Array<::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClone>]
+        #     The list of Autonomous Database refreshable clones.
+        class AutonomousDatabaseRefreshableClones
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for RefreshAutonomousDatabase method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the AutonomousDatabase resource.
+        #     Format:
+        #     projects/\\{project}/location/\\{location}/autonomousDatabases/\\{autonomous_database}
+        # @!attribute [rw] refresh_cutoff_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Required. The timestamp to which the Autonomous Database refreshable clone
+        #     will be refreshed. Changes made in the primary database after this
+        #     timestamp are not part of the data refresh.
+        class RefreshAutonomousDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -838,6 +890,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListExadbVmClustersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

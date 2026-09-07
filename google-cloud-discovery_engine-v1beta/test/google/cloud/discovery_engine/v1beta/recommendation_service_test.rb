@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -94,36 +94,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::ClientTes
 
     Gapic::ServiceStub.stub :new, recommend_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }) do |response, operation|
+      c.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.recommend serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels do |response, operation|
+      c.recommend serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.recommend ::Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels) do |response, operation|
+      c.recommend ::Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }, grpc_options) do |response, operation|
+      c.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.recommend(::Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels), grpc_options) do |response, operation|
+      c.recommend(::Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

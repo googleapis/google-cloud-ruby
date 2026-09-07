@@ -779,6 +779,16 @@
               "methods": [
                 "get_reporting_identity_settings"
               ]
+            },
+            "UpdateReportingIdentitySettings": {
+              "methods": [
+                "update_reporting_identity_settings"
+              ]
+            },
+            "GetUserProvidedDataSettings": {
+              "methods": [
+                "get_user_provided_data_settings"
+              ]
             }
           }
         }

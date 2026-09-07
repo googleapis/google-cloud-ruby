@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,32 +101,32 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client
     ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_list_insights_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_insights_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_insights_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_insights_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_insights_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_insights_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_insights_configs ::Google::Cloud::Developerconnect::V1::ListInsightsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_insights_configs ::Google::Cloud::Developerconnect::V1::ListInsightsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_insights_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_insights_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_insights_configs(::Google::Cloud::Developerconnect::V1::ListInsightsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_insights_configs(::Google::Cloud::Developerconnect::V1::ListInsightsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client
     ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_create_insights_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_insights_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_insights_config({ parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only }) do |_result, response|
+        c.create_insights_config({ parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_insights_config parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only do |_result, response|
+        c.create_insights_config parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_insights_config ::Google::Cloud::Developerconnect::V1::CreateInsightsConfigRequest.new(parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only) do |_result, response|
+        c.create_insights_config ::Google::Cloud::Developerconnect::V1::CreateInsightsConfigRequest.new(parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_insights_config({ parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_insights_config({ parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_insights_config(::Google::Cloud::Developerconnect::V1::CreateInsightsConfigRequest.new(parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only), call_options) do |_result, response|
+        c.create_insights_config(::Google::Cloud::Developerconnect::V1::CreateInsightsConfigRequest.new(parent: parent, insights_config_id: insights_config_id, insights_config: insights_config, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client
     ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_get_insights_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_insights_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_insights_config({ name: name }) do |_result, response|
+        c.get_insights_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_insights_config name: name do |_result, response|
+        c.get_insights_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_insights_config ::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest.new(name: name) do |_result, response|
+        c.get_insights_config ::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_insights_config({ name: name }, call_options) do |_result, response|
+        c.get_insights_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_insights_config(::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_insights_config(::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client
     ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_update_insights_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_insights_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_insights_config({ insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+        c.update_insights_config({ insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_insights_config insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+        c.update_insights_config insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_insights_config ::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest.new(insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+        c.update_insights_config ::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest.new(insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_insights_config({ insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_insights_config({ insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_insights_config(::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest.new(insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+        c.update_insights_config(::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest.new(insights_config: insights_config, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -326,37 +326,148 @@ class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client
     ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_delete_insights_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_insights_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_insights_config({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.delete_insights_config({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_insights_config name: name, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
+        c.delete_insights_config name: name, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_insights_config ::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
+        c.delete_insights_config ::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_insights_config({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.delete_insights_config({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_insights_config(::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.delete_insights_config(::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_insights_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_deployment_event
+    # Create test objects.
+    client_result = ::Google::Cloud::Developerconnect::V1::DeploymentEvent.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_deployment_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_get_deployment_event_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_deployment_event_client_stub do
+        # Create client
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_deployment_event({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_deployment_event name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_deployment_event ::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_deployment_event({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_deployment_event(::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_deployment_event_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_deployment_events
+    # Create test objects.
+    client_result = ::Google::Cloud::Developerconnect::V1::ListDeploymentEventsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_deployment_events_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::ServiceStub.stub :transcode_list_deployment_events_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_deployment_events_client_stub do
+        # Create client
+        c = ::Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_deployment_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_deployment_events parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_deployment_events ::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_deployment_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_deployment_events(::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_deployment_events_client_stub.call_count
       end
     end
   end

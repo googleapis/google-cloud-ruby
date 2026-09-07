@@ -1,0 +1,17 @@
+{
+    "api_id": "isochrones.googleapis.com",
+    "api_shortname": "isochrones",
+    "client_documentation": "https://rubydoc.info/gems/google-maps-isochrones-v1",
+    "distribution_name": "google-maps-isochrones-v1",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "isochrones",
+    "name_pretty": "Isochrones V1 API",
+    "product_documentation": "https://developers.google.com/maps/documentation/isochrones/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "isochrones.googleapis.com API. Note that google-maps-isochrones-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-maps-isochrones instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://developers.google.com/maps/documentation/isochrones/overview",
+    "library_type": "GAPIC_AUTO"
+}

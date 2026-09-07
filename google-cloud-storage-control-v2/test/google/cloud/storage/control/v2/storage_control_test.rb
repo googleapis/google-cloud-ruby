@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,36 +90,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }) do |response, operation|
+      c.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_folder parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id do |response, operation|
+      c.create_folder parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_folder ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id) do |response, operation|
+      c.create_folder ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_folder(::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id), grpc_options) do |response, operation|
+      c.create_folder(::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -156,36 +156,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+      c.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+      c.delete_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_folder ::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+      c.delete_folder ::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_folder(::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_folder(::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,36 +222,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+      c.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+      c.get_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_folder ::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+      c.get_folder ::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+      c.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_folder(::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+      c.get_folder(::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -294,40 +294,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_folders_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }) do |response, operation|
+      c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_folders parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id do |response, operation|
+      c.list_folders parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_folders ::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id) do |response, operation|
+      c.list_folders ::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }, grpc_options) do |response, operation|
+      c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_folders(::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id), grpc_options) do |response, operation|
+      c.list_folders(::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -367,40 +367,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, rename_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+      c.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rename_folder name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+      c.rename_folder name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rename_folder ::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+      c.rename_folder ::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+      c.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rename_folder(::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+      c.rename_folder(::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -408,6 +408,77 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, rename_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_folder_recursive
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    delete_folder_recursive_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_folder_recursive, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["if_metageneration_match"]
+      assert request.has_if_metageneration_match?
+      assert_equal 42, request["if_metageneration_not_match"]
+      assert request.has_if_metageneration_not_match?
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_folder_recursive_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_folder_recursive name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_folder_recursive ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_folder_recursive(::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_folder_recursive_client_stub.call_rpc_count
     end
   end
 
@@ -434,36 +505,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_storage_layout_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }) do |response, operation|
+      c.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_storage_layout name: name, prefix: prefix, request_id: request_id do |response, operation|
+      c.get_storage_layout name: name, prefix: prefix, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_storage_layout ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id) do |response, operation|
+      c.get_storage_layout ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }, grpc_options) do |response, operation|
+      c.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_storage_layout(::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id), grpc_options) do |response, operation|
+      c.get_storage_layout(::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -498,36 +569,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_managed_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_managed_folder({ parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id }) do |response, operation|
+      c.create_managed_folder({ parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_managed_folder parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id do |response, operation|
+      c.create_managed_folder parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_managed_folder ::Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new(parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id) do |response, operation|
+      c.create_managed_folder ::Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new(parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_managed_folder({ parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_managed_folder({ parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_managed_folder(::Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new(parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id), grpc_options) do |response, operation|
+      c.create_managed_folder(::Google::Cloud::Storage::Control::V2::CreateManagedFolderRequest.new(parent: parent, managed_folder: managed_folder, managed_folder_id: managed_folder_id, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -566,36 +637,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_managed_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id }) do |response, operation|
+      c.delete_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_managed_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id do |response, operation|
+      c.delete_managed_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_managed_folder ::Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id) do |response, operation|
+      c.delete_managed_folder ::Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_managed_folder(::Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_managed_folder(::Google::Cloud::Storage::Control::V2::DeleteManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, allow_non_empty: allow_non_empty, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -632,36 +703,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_managed_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+      c.get_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_managed_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+      c.get_managed_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_managed_folder ::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+      c.get_managed_folder ::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+      c.get_managed_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_managed_folder(::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+      c.get_managed_folder(::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -698,40 +769,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_managed_folders_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_managed_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id }) do |response, operation|
+      c.list_managed_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_managed_folders parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id do |response, operation|
+      c.list_managed_folders parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_managed_folders ::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id) do |response, operation|
+      c.list_managed_folders ::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_managed_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id }, grpc_options) do |response, operation|
+      c.list_managed_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_managed_folders(::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id), grpc_options) do |response, operation|
+      c.list_managed_folders(::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -739,6 +810,74 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, list_managed_folders_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_managed_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ManagedFolder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    managed_folder = {}
+    update_mask = {}
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    update_managed_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_managed_folder, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::ManagedFolder), request["managed_folder"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal 42, request["if_metageneration_match"]
+      assert request.has_if_metageneration_match?
+      assert_equal 42, request["if_metageneration_not_match"]
+      assert request.has_if_metageneration_not_match?
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_managed_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_managed_folder({ managed_folder: managed_folder, update_mask: update_mask, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_managed_folder managed_folder: managed_folder, update_mask: update_mask, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_managed_folder ::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest.new(managed_folder: managed_folder, update_mask: update_mask, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_managed_folder({ managed_folder: managed_folder, update_mask: update_mask, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_managed_folder(::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest.new(managed_folder: managed_folder, update_mask: update_mask, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_managed_folder_client_stub.call_rpc_count
     end
   end
 
@@ -765,40 +904,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }) do |response, operation|
+      c.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_anywhere_cache parent: parent, anywhere_cache: anywhere_cache, request_id: request_id do |response, operation|
+      c.create_anywhere_cache parent: parent, anywhere_cache: anywhere_cache, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_anywhere_cache ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id) do |response, operation|
+      c.create_anywhere_cache ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_anywhere_cache(::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id), grpc_options) do |response, operation|
+      c.create_anywhere_cache(::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -832,40 +971,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_anywhere_cache anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_anywhere_cache anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_anywhere_cache ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_anywhere_cache ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_anywhere_cache(::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_anywhere_cache(::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -897,36 +1036,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, disable_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.disable_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+      c.disable_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_anywhere_cache name: name, request_id: request_id do |response, operation|
+      c.disable_anywhere_cache name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_anywhere_cache ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.disable_anywhere_cache ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.disable_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_anywhere_cache(::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.disable_anywhere_cache(::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -957,36 +1096,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, pause_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+      c.pause_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_anywhere_cache name: name, request_id: request_id do |response, operation|
+      c.pause_anywhere_cache name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_anywhere_cache ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.pause_anywhere_cache ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.pause_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_anywhere_cache(::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.pause_anywhere_cache(::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1017,36 +1156,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, resume_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+      c.resume_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_anywhere_cache name: name, request_id: request_id do |response, operation|
+      c.resume_anywhere_cache name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_anywhere_cache ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.resume_anywhere_cache ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.resume_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_anywhere_cache(::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.resume_anywhere_cache(::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1077,36 +1216,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_anywhere_cache_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+      c.get_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_anywhere_cache name: name, request_id: request_id do |response, operation|
+      c.get_anywhere_cache name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_anywhere_cache ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.get_anywhere_cache ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.get_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_anywhere_cache(::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.get_anywhere_cache(::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1141,40 +1280,40 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_anywhere_caches_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }) do |response, operation|
+      c.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_anywhere_caches parent: parent, page_size: page_size, page_token: page_token, request_id: request_id do |response, operation|
+      c.list_anywhere_caches parent: parent, page_size: page_size, page_token: page_token, request_id: request_id do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_anywhere_caches ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id) do |response, operation|
+      c.list_anywhere_caches ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }, grpc_options) do |response, operation|
+      c.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_anywhere_caches(::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id), grpc_options) do |response, operation|
+      c.list_anywhere_caches(::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1182,6 +1321,334 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, list_anywhere_caches_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_rapid_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rapid_cache = {}
+    request_id = "hello world"
+
+    create_rapid_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_rapid_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::RapidCache), request["rapid_cache"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_rapid_cache_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_rapid_cache({ parent: parent, rapid_cache: rapid_cache, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_rapid_cache parent: parent, rapid_cache: rapid_cache, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_rapid_cache ::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest.new(parent: parent, rapid_cache: rapid_cache, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_rapid_cache({ parent: parent, rapid_cache: rapid_cache, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_rapid_cache(::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest.new(parent: parent, rapid_cache: rapid_cache, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_rapid_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_rapid_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rapid_cache = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_rapid_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_rapid_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::RapidCache), request["rapid_cache"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_rapid_cache_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_rapid_cache({ rapid_cache: rapid_cache, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_rapid_cache rapid_cache: rapid_cache, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_rapid_cache ::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest.new(rapid_cache: rapid_cache, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_rapid_cache({ rapid_cache: rapid_cache, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_rapid_cache(::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest.new(rapid_cache: rapid_cache, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_rapid_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_disable_rapid_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    disable_rapid_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :disable_rapid_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, disable_rapid_cache_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.disable_rapid_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.disable_rapid_cache name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.disable_rapid_cache ::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.disable_rapid_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.disable_rapid_cache(::Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, disable_rapid_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_rapid_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::RapidCache.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    get_rapid_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_rapid_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_rapid_cache_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_rapid_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_rapid_cache name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_rapid_cache ::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_rapid_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_rapid_cache(::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_rapid_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_rapid_caches
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ListRapidCachesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    request_id = "hello world"
+
+    list_rapid_caches_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_rapid_caches, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_rapid_caches_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_rapid_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_rapid_caches parent: parent, page_size: page_size, page_token: page_token, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_rapid_caches ::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_rapid_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_rapid_caches(::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_rapid_caches_client_stub.call_rpc_count
     end
   end
 
@@ -1204,36 +1671,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_project_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_project_intelligence_config({ name: name }) do |response, operation|
+      c.get_project_intelligence_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_project_intelligence_config name: name do |response, operation|
+      c.get_project_intelligence_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_project_intelligence_config ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name) do |response, operation|
+      c.get_project_intelligence_config ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_project_intelligence_config({ name: name }, grpc_options) do |response, operation|
+      c.get_project_intelligence_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_project_intelligence_config(::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_project_intelligence_config(::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1266,36 +1733,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_project_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_project_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_project_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_project_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_project_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_project_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_project_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1324,36 +1791,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_folder_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_folder_intelligence_config({ name: name }) do |response, operation|
+      c.get_folder_intelligence_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_folder_intelligence_config name: name do |response, operation|
+      c.get_folder_intelligence_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name) do |response, operation|
+      c.get_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_folder_intelligence_config({ name: name }, grpc_options) do |response, operation|
+      c.get_folder_intelligence_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1386,36 +1853,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_folder_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_folder_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_folder_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1444,36 +1911,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_organization_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization_intelligence_config({ name: name }) do |response, operation|
+      c.get_organization_intelligence_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization_intelligence_config name: name do |response, operation|
+      c.get_organization_intelligence_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name) do |response, operation|
+      c.get_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization_intelligence_config({ name: name }, grpc_options) do |response, operation|
+      c.get_organization_intelligence_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1506,36 +1973,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_organization_intelligence_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_organization_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_organization_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1566,36 +2033,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1628,36 +2095,36 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1688,42 +2155,427 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, test_iam_permissions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_intelligence_finding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceFinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_intelligence_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_intelligence_finding, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_intelligence_finding_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_intelligence_finding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_intelligence_finding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_intelligence_finding ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_intelligence_finding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_intelligence_finding(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_intelligence_finding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_intelligence_findings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_intelligence_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_intelligence_findings, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_intelligence_findings_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_intelligence_findings parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_intelligence_findings ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_intelligence_findings(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_intelligence_findings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_summarize_intelligence_findings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource_scope = :RESOURCE_SCOPE_UNSPECIFIED
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    summarize_intelligence_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :summarize_intelligence_findings, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal :RESOURCE_SCOPE_UNSPECIFIED, request["resource_scope"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, summarize_intelligence_findings_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.summarize_intelligence_findings parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.summarize_intelligence_findings ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.summarize_intelligence_findings(::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, summarize_intelligence_findings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_intelligence_finding_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_intelligence_finding_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_intelligence_finding_revision, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_intelligence_finding_revision_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_intelligence_finding_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_intelligence_finding_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_intelligence_finding_revision ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_intelligence_finding_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_intelligence_finding_revision(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_intelligence_finding_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_intelligence_finding_revisions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_intelligence_finding_revisions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_intelligence_finding_revisions, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_intelligence_finding_revisions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_intelligence_finding_revisions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_intelligence_finding_revisions ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_intelligence_finding_revisions(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_intelligence_finding_revisions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_view_object_full_context
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ObjectFullContext.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    generation = 42
+    context_key = "hello world"
+    name = "hello world"
+
+    view_object_full_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :view_object_full_context, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest, request
+      assert_equal 42, request["generation"]
+      assert_equal "hello world", request["context_key"]
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, view_object_full_context_client_stub do
+      # Create client
+      c = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.view_object_full_context({ generation: generation, context_key: context_key, name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.view_object_full_context generation: generation, context_key: context_key, name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.view_object_full_context ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new(generation: generation, context_key: context_key, name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.view_object_full_context({ generation: generation, context_key: context_key, name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.view_object_full_context(::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new(generation: generation, context_key: context_key, name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, view_object_full_context_client_stub.call_rpc_count
     end
   end
 

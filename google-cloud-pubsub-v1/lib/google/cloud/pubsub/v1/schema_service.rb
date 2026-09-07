@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/pubsub/v1/version"
 require "google/cloud/pubsub/v1/schema_service/credentials"
 require "google/cloud/pubsub/v1/schema_service/paths"
 require "google/cloud/pubsub/v1/schema_service/client"
+require "google/cloud/pubsub/v1/schema_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/pubsub/v1/schema_service"
         #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/pubsub/v1/schema_service/rest"
+        #     client = ::Google::Cloud::PubSub::V1::SchemaService::Rest::Client.new
         #
         module SchemaService
         end

@@ -1,5 +1,67 @@
 # Changelog
 
+### 1.1.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale CMEK, VM Storage options ([#36228](https://github.com/googleapis/google-cloud-ruby/issues/36228)) 
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35058](https://github.com/googleapis/google-cloud-ruby/issues/35058)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.16.0 (2026-06-25)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale on Dedicated Infrastructure ([#34649](https://github.com/googleapis/google-cloud-ruby/issues/34649)) 
+
+### 0.15.0 (2026-06-17)
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618))
+
+#### Bug Fixes
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618)) 
+
+### 0.14.0 (2026-06-11)
+
+#### Features
+
+* add v1 client libraries for Oracle Database Goldengate ([#34029](https://github.com/googleapis/google-cloud-ruby/issues/34029)) 
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
+### 0.13.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.11.1 (2025-10-27)
 
 #### Documentation

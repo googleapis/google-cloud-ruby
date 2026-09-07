@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -184,6 +184,11 @@ module Google
 
             # A Chat space rich link type. For example, a space smart chip.
             CHAT_SPACE = 2
+
+            # A Gmail message rich link type. Specifically, a Gmail chip from [Share to
+            # Chat](https://support.google.com/chat?p=chat_gmail). The API only
+            # supports reading messages with GMAIL_MESSAGE rich links.
+            GMAIL_MESSAGE = 3
 
             # A Meet message rich link type. For example, a Meet chip.
             MEET_SPACE = 4

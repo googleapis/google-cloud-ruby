@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-policy_troubleshooter-iam-v3 is the official client library for the Policy Troubleshooter V3 API. Note that google-cloud-policy_troubleshooter-iam-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter-iam instead. See the readme for more details."
-  gem.summary       = "API Client library for the Policy Troubleshooter V3 API"
+  gem.description   = "Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access. Note that google-cloud-policy_troubleshooter-iam-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter-iam instead. See the readme for more details."
+  gem.summary       = "Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -21,9 +21,9 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-iam-v1", "> 0.5", "< 2.a"
   gem.add_dependency "google-iam-v2", "> 0.3", "< 2.a"

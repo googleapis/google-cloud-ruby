@@ -2,7 +2,6 @@
 
 A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud.
 
-A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-migration_center-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

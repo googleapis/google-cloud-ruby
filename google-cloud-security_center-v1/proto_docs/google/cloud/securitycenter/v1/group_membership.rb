@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,6 +40,9 @@ module Google
 
             # Group represents a toxic combination.
             GROUP_TYPE_TOXIC_COMBINATION = 1
+
+            # Group represents a chokepoint.
+            GROUP_TYPE_CHOKEPOINT = 3
           end
         end
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +60,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_advice_rest
+    skip unless Google::Cloud::Compute.advice_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.advice do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::Advice::Rest::Client, client
+    end
+  end
+
   def test_autoscalers_rest
     skip unless Google::Cloud::Compute.autoscalers_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -87,6 +97,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::BackendServices::Rest::Client, client
+    end
+  end
+
+  def test_cross_site_networks_rest
+    skip unless Google::Cloud::Compute.cross_site_networks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.cross_site_networks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::CrossSiteNetworks::Rest::Client, client
     end
   end
 
@@ -150,6 +170,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_future_reservations_rest
+    skip unless Google::Cloud::Compute.future_reservations_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.future_reservations do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::FutureReservations::Rest::Client, client
+    end
+  end
+
   def test_global_addresses_rest
     skip unless Google::Cloud::Compute.global_addresses_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -210,6 +240,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_global_vm_extension_policies_rest
+    skip unless Google::Cloud::Compute.global_vm_extension_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.global_vm_extension_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::GlobalVmExtensionPolicies::Rest::Client, client
+    end
+  end
+
   def test_health_checks_rest
     skip unless Google::Cloud::Compute.health_checks_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -217,6 +257,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::HealthChecks::Rest::Client, client
+    end
+  end
+
+  def test_hosts_rest
+    skip unless Google::Cloud::Compute.hosts_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.hosts do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::Hosts::Rest::Client, client
     end
   end
 
@@ -297,6 +347,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::Instances::Rest::Client, client
+    end
+  end
+
+  def test_instant_snapshot_groups_rest
+    skip unless Google::Cloud::Compute.instant_snapshot_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.instant_snapshot_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InstantSnapshotGroups::Rest::Client, client
     end
   end
 
@@ -570,6 +630,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_backend_buckets_rest
+    skip unless Google::Cloud::Compute.region_backend_buckets_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_backend_buckets do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionBackendBuckets::Rest::Client, client
+    end
+  end
+
   def test_region_backend_services_rest
     skip unless Google::Cloud::Compute.region_backend_services_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -587,6 +657,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionCommitments::Rest::Client, client
+    end
+  end
+
+  def test_region_composite_health_checks_rest
+    skip unless Google::Cloud::Compute.region_composite_health_checks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_composite_health_checks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client, client
     end
   end
 
@@ -610,6 +690,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_health_aggregation_policies_rest
+    skip unless Google::Cloud::Compute.region_health_aggregation_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_health_aggregation_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionHealthAggregationPolicies::Rest::Client, client
+    end
+  end
+
   def test_region_health_check_services_rest
     skip unless Google::Cloud::Compute.region_health_check_services_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -627,6 +717,26 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionHealthChecks::Rest::Client, client
+    end
+  end
+
+  def test_region_health_sources_rest
+    skip unless Google::Cloud::Compute.region_health_sources_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_health_sources do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionHealthSources::Rest::Client, client
+    end
+  end
+
+  def test_region_instance_group_manager_resize_requests_rest
+    skip unless Google::Cloud::Compute.region_instance_group_manager_resize_requests_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_instance_group_manager_resize_requests do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client, client
     end
   end
 
@@ -667,6 +777,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionInstances::Rest::Client, client
+    end
+  end
+
+  def test_region_instant_snapshot_groups_rest
+    skip unless Google::Cloud::Compute.region_instant_snapshot_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_instant_snapshot_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionInstantSnapshotGroups::Rest::Client, client
     end
   end
 
@@ -727,6 +847,26 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client, client
+    end
+  end
+
+  def test_region_snapshot_settings_rest
+    skip unless Google::Cloud::Compute.region_snapshot_settings_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_snapshot_settings do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client, client
+    end
+  end
+
+  def test_region_snapshots_rest
+    skip unless Google::Cloud::Compute.region_snapshots_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_snapshots do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client, client
     end
   end
 
@@ -810,6 +950,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_reliability_risks_rest
+    skip unless Google::Cloud::Compute.reliability_risks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.reliability_risks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ReliabilityRisks::Rest::Client, client
+    end
+  end
+
   def test_reservation_blocks_rest
     skip unless Google::Cloud::Compute.reservation_blocks_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -817,6 +967,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client, client
+    end
+  end
+
+  def test_reservation_slots_rest
+    skip unless Google::Cloud::Compute.reservation_slots_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.reservation_slots do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ReservationSlots::Rest::Client, client
     end
   end
 
@@ -847,6 +1007,26 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client, client
+    end
+  end
+
+  def test_rollout_plans_rest
+    skip unless Google::Cloud::Compute.rollout_plans_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.rollout_plans do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RolloutPlans::Rest::Client, client
+    end
+  end
+
+  def test_rollouts_rest
+    skip unless Google::Cloud::Compute.rollouts_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.rollouts do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::Rollouts::Rest::Client, client
     end
   end
 
@@ -1070,6 +1250,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_wire_groups_rest
+    skip unless Google::Cloud::Compute.wire_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.wire_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::WireGroups::Rest::Client, client
+    end
+  end
+
   def test_zone_operations_rest
     skip unless Google::Cloud::Compute.zone_operations_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -1077,6 +1267,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ZoneOperations::Rest::Client, client
+    end
+  end
+
+  def test_zone_vm_extension_policies_rest
+    skip unless Google::Cloud::Compute.zone_vm_extension_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.zone_vm_extension_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client, client
     end
   end
 

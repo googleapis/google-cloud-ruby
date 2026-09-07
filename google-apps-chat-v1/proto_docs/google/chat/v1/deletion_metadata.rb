@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ module Google
             # User deleted their own message.
             CREATOR = 1
 
-            # A space manager deleted the message.
+            # An owner or manager deleted the message.
             SPACE_OWNER = 2
 
             # A Google Workspace administrator deleted the message. Administrators can

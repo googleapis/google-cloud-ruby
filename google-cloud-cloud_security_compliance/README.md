@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Security Compliance API
 
-API Client library for the Cloud Security Compliance API
+Compliance Manager uses software-defined controls that let you assess support for multiple compliance programs and security requirements within a Google Cloud organization.
 
-google-cloud-cloud_security_compliance is the official client library for the Cloud Security Compliance API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-cloud_security_compliance-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -1,5 +1,42 @@
 # Changelog
 
+### 2.8.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35061](https://github.com/googleapis/google-cloud-ruby/issues/35061)) 
+
+### 2.8.0 (2026-07-07)
+
+#### Features
+
+* Support per-repository identity for repositories ([#34710](https://github.com/googleapis/google-cloud-ruby/issues/34710)) 
+
+### 2.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34054](https://github.com/googleapis/google-cloud-ruby/issues/34054)) 
+
+### 2.6.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33481](https://github.com/googleapis/google-cloud-ruby/issues/33481)) 
+
+### 2.6.0 (2026-04-02)
+
+#### Features
+
+* Add CustomHostConfig to configure custom hostnames for private instances ([#33445](https://github.com/googleapis/google-cloud-ruby/issues/33445)) 
+* publish client batch config schema ([#33438](https://github.com/googleapis/google-cloud-ruby/issues/33438)) 
+
+### 2.5.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation

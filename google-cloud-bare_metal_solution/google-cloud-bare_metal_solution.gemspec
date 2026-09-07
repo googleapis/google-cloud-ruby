@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Bare Metal Solution is a managed solution that provides purpose-built HPE or Atos bare-metal servers in regional extensions that are connected to Google Cloud by a managed, high-performance connection with a low-latency network fabric."
-  gem.summary       = "API Client library for the Bare Metal Solution API"
+  gem.description   = "Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center."
+  gem.summary       = "Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-bare_metal_solution-v2", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.6"

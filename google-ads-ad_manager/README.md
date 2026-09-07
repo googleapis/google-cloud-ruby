@@ -2,7 +2,6 @@
 
 Manage your Ad Manager inventory, run reports and more.
 
-The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-ads-ad_manager-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

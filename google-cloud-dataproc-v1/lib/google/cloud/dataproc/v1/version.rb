@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dataproc
       module V1
-        VERSION = "1.9.1"
+        VERSION = "1.17.1"
       end
     end
   end

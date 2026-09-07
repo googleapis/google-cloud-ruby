@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Firestore Admin V1 API
+# Ruby Client for the Cloud Firestore V1 API
 
 Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
-Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Firestore Admin V1 API. Most users should consider using
+specific version of the Cloud Firestore V1 API. Most users should consider using
 the main client gem,
 [google-cloud-firestore-admin](https://rubygems.org/gems/google-cloud-firestore-admin).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_index request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-admin-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/firestore)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -114,7 +114,7 @@ module Google
         # Event type: `google.workspace.chat.message.v1.deleted`
         # @!attribute [rw] message
         #   @return [::Google::Apps::Chat::V1::Message]
-        #     The deleted message. Only the `name`, `createTime`, `deleteTime`, and
+        #     The deleted message. Only the `name`, `createTime`, and
         #     `deletionMetadata` fields are populated.
         class MessageDeletedEventData
           include ::Google::Protobuf::MessageExts

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Assured Workloads for Government secures government workloads and accelerates the path to running compliant workloads on Google Cloud."
-  gem.summary       = "API Client library for the Assured Workloads for Government API"
+  gem.description   = "Assured Workloads lets you secure your workloads and accelerate your path to running compliant workloads on Google Cloud."
+  gem.summary       = "Assured Workloads lets you secure your workloads and accelerate your path to running compliant workloads on Google Cloud."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-assured_workloads-v1", "~> 1.2"
   gem.add_dependency "google-cloud-core", "~> 1.6"

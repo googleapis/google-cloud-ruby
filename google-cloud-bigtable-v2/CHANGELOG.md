@@ -1,5 +1,61 @@
 # Release History
 
+### 1.17.0 (2026-08-24)
+
+#### Features
+
+* add microsecond_timestamp feature flag ([#36258](https://github.com/googleapis/google-cloud-ruby/issues/36258)) 
+
+### 1.16.0 (2026-08-13)
+
+#### Features
+
+* add microsecond timestamp precision support ([#36203](https://github.com/googleapis/google-cloud-ruby/issues/36203)) 
+
+### 1.15.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 1.14.0 (2026-06-08)
+
+#### Features
+
+* add support for filtering SampleRowKeys to a specific row_range ([#34020](https://github.com/googleapis/google-cloud-ruby/issues/34020)) 
+
+### 1.13.0 (2026-06-03)
+
+#### Features
+
+* add session based protocol 
+* add value_bitmask_filter to the read API 
+* Add view parameters to ExecuteQueryRequest ([#33815](https://github.com/googleapis/google-cloud-ruby/issues/33815)) 
+#### Bug Fixes
+
+* Existing value `SESSION_TYPE_TEST = -1` is changed to `SESSION_TYPE_TEST = 9999` in enum `SessionType` 
+#### Documentation
+
+* update various comments 
+
+### 1.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.11.0 (2025-11-18)
+
+#### Features
+
+* add PeerInfo proto in Bigtable API ([#32167](https://github.com/googleapis/google-cloud-ruby/issues/32167)) 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation

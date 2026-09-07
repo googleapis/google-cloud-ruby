@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,6 +66,11 @@ module Google
           #     The offset requested must be less than the last row read from Read.
           #     Requesting a larger offset is undefined. If not specified, start reading
           #     from offset zero.
+          # @!attribute [rw] arrow_serialization_options
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
+          #     Optional. Options specific to the Apache Arrow output format.
+          #
+          #     This feature is not yet available.
           class ReadRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,6 +166,12 @@ module Google
           #     follows is not compressed, which can be useful for cases where compression
           #     does not yield appreciable savings. When uncompressed_byte_size is not
           #     greater than 0, the client should skip decompression.
+          # @!attribute [r] total_estimated_row_count
+          #   @return [::Integer]
+          #     Output only. The total estimated number of rows in the query results.
+          #     Only populated when reading data from a BigQuery job.
+          #
+          #     This feature is not yet available.
           class ReadRowsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,7 +230,7 @@ module Google
           # switching table destinations. You can also switch table destinations within
           # the same connection for the default stream.
           #
-          # The size of a single AppendRowsRequest must be less than 10 MB in size.
+          # The size of a single AppendRowsRequest must be less than 20 MB in size.
           # Requests larger than this return an error, typically `INVALID_ARGUMENT`.
           # @!attribute [rw] write_stream
           #   @return [::String]
@@ -268,8 +279,7 @@ module Google
           #     Note: The following fields are mutually exclusive: `proto_rows`, `arrow_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] arrow_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ArrowData]
-          #     Rows in arrow format. This is an experimental feature only selected for
-          #     allowlisted customers.
+          #     Rows in arrow format.
           #
           #     Note: The following fields are mutually exclusive: `arrow_rows`, `proto_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trace_id
@@ -300,20 +310,21 @@ module Google
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::MissingValueInterpretation]
           #     Optional. Default missing value interpretation for all columns in the
           #     table. When a value is specified on an `AppendRowsRequest`, it is applied
-          #     to all requests on the connection from that point forward, until a
-          #     subsequent `AppendRowsRequest` sets it to a different value.
+          #     to all requests from that point forward, until a subsequent
+          #     `AppendRowsRequest` sets it to a different value.
           #     `missing_value_interpretation` can override
           #     `default_missing_value_interpretation`. For example, if you want to write
           #     `NULL` instead of using default values for some columns, you can set
           #     `default_missing_value_interpretation` to `DEFAULT_VALUE` and at the same
           #     time, set `missing_value_interpretations` to `NULL_VALUE` on those columns.
+          # @!attribute [rw] client_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats]
+          #     Optional. Stats and telemetry data gathered on the client side.
           class AppendRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Arrow schema and data.
-            # Arrow format is an experimental feature only selected for allowlisted
-            # customers.
             # @!attribute [rw] writer_schema
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
             #     Optional. Arrow Schema used to serialize the data.
@@ -329,8 +340,8 @@ module Google
             # requests.
             # @!attribute [rw] writer_schema
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoSchema]
-            #     The protocol buffer schema used to serialize the data. Provide this value
-            #     whenever:
+            #     Optional. The protocol buffer schema used to serialize the data. Provide
+            #     this value whenever:
             #
             #     * You send the first request of an RPC connection.
             #
@@ -339,7 +350,7 @@ module Google
             #     * You specify a new destination table.
             # @!attribute [rw] rows
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoRows]
-            #     Serialized row data in protobuf message format.
+            #     Required. Serialized row data in protobuf message format.
             #     Currently, the backend expects the serialized rows to adhere to
             #     proto2 semantics when appending rows, particularly with respect to
             #     how default values are encoded.
@@ -612,6 +623,71 @@ module Google
 
               # One or more fields in the row has errors.
               FIELDS_ERROR = 1
+            end
+          end
+
+          # Stats and telemetry data gathered on the client side about requests
+          # being sent to the BigQuery Storage service, for internal use only.
+          # @!attribute [rw] request_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats::RequestStats]
+          #     Optional. Per-request stats.
+          # @!attribute [rw] window_stats
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ClientStats::WindowStats]
+          #     Optional. Windowed stats.
+          class ClientStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Stats and telemetry data gathered on the client side about a single
+            # request.
+            # @!attribute [rw] send_time_millis
+            #   @return [::Integer]
+            #     Optional. Timestamp indicating when the request was sent over the
+            #     network, expressed in epoch milliseconds.
+            # @!attribute [rw] queued_requests_count
+            #   @return [::Integer]
+            #     Optional. Number of pending requests at the moment this request was sent.
+            #     This includes requests waiting to be sent, and those that are inflight.
+            class RequestStats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Aggregate connection metrics over a window interval.
+            # @!attribute [rw] max_response_latency_millis
+            #   @return [::Integer]
+            #     Optional. The maximum response latency observed in the window, expressed
+            #     in milliseconds.
+            # @!attribute [rw] avg_response_latency_millis
+            #   @return [::Integer]
+            #     Optional. The average response latency observed in the window, expressed
+            #     in milliseconds.
+            # @!attribute [rw] longest_wait_no_response_millis
+            #   @return [::Integer]
+            #     Optional. The longest time spent waiting without receiving a response in
+            #     the window. This could exceed max_response_latency_millis because the
+            #     latter is evaluated only when a response is received. Expressed in
+            #     milliseconds.
+            # @!attribute [rw] requests_sent_count
+            #   @return [::Integer]
+            #     Optional. How many requests were sent in the window.
+            # @!attribute [rw] responses_received_count
+            #   @return [::Integer]
+            #     Optional. How many responses were received in the window.
+            # @!attribute [rw] bytes_sent_count
+            #   @return [::Integer]
+            #     Optional. How many bytes were sent in the window.
+            # @!attribute [rw] window_start_time_epoch_millis
+            #   @return [::Integer]
+            #     Optional. Start time of the window interval for which these stats are
+            #     aggregated, expressed in epoch milliseconds.
+            # @!attribute [rw] window_millis
+            #   @return [::Integer]
+            #     Optional. Duration of the window interval for which these stats are
+            #     aggregated, expressed in milliseconds.
+            class WindowStats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end

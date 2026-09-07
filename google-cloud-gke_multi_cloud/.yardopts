@@ -1,5 +1,5 @@
 --no-private
---title="Anthos Multi-Cloud API"
+--title="GKE Multi-Cloud API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

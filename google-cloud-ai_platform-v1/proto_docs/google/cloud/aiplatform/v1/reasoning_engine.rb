@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,13 @@ module Google
         # @!attribute [rw] source_code_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec]
         #     Deploy from source code files with a defined entrypoint.
+        #
+        #     Note: The following fields are mutually exclusive: `source_code_spec`, `container_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] container_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::ContainerSpec]
+        #     Deploy from a container image with a defined entrypoint and commands.
+        #
+        #     Note: The following fields are mutually exclusive: `container_spec`, `source_code_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account that the Reasoning Engine artifact runs as.
@@ -52,6 +59,15 @@ module Google
         #     Optional. The OSS agent framework used to develop the agent.
         #     Currently supported values: "google-adk", "langchain", "langgraph", "ag2",
         #     "llama-index", "custom".
+        # @!attribute [rw] identity_type
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::IdentityType]
+        #     Optional. The identity type to use for the Reasoning Engine. If not
+        #     specified, the `service_account` field will be used if set, otherwise the
+        #     default Vertex AI Reasoning Engine Service Agent in the project will be
+        #     used.
+        # @!attribute [rw] build_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::BuildSpec]
+        #     Optional. Configuration for building container image.
         class ReasoningEngineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,8 +85,9 @@ module Google
           #     Optional. The Cloud Storage URI of the `requirements.txt` file
           # @!attribute [rw] python_version
           #   @return [::String]
-          #     Optional. The Python version. Currently support 3.8, 3.9, 3.10, 3.11.
-          #     If not specified, default value is 3.10.
+          #     Optional. The Python version. Supported values
+          #     are 3.9, 3.10, 3.11, 3.12, 3.13. If not specified, the default value
+          #     is 3.10.
           class PackageSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,9 +152,23 @@ module Google
           # @!attribute [rw] inline_source
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::InlineSource]
           #     Source code is provided directly in the request.
+          #
+          #     Note: The following fields are mutually exclusive: `inline_source`, `developer_connect_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] developer_connect_source
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::DeveloperConnectSource]
+          #     Source code is in a Git repository managed by Developer Connect.
+          #
+          #     Note: The following fields are mutually exclusive: `developer_connect_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] python_spec
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::PythonSpec]
           #     Configuration for a Python application.
+          #
+          #     Note: The following fields are mutually exclusive: `python_spec`, `image_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] image_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::ImageSpec]
+          #     Optional. Configuration for building an image with custom config file.
+          #
+          #     Note: The following fields are mutually exclusive: `image_spec`, `python_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SourceCodeSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,9 +177,60 @@ module Google
             # @!attribute [rw] source_archive
             #   @return [::String]
             #     Required. Input only. The application source code archive, provided as
-            #     a compressed tarball
-            #     (.tar.gz) file.
+            #     a compressed tarball (.tar.gz) file.
             class InlineSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The image spec for building an image (within a single build step), based
+            # on the config file (i.e. Dockerfile) in the source directory.
+            # @!attribute [rw] build_args
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. Build arguments to be used. They will be passed through
+            #     --build-arg flags.
+            class ImageSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class BuildArgsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Specifies the configuration for fetching source code from a Git
+            # repository that is managed by Developer Connect. This includes the
+            # repository, revision, and directory to use.
+            # @!attribute [rw] git_repository_link
+            #   @return [::String]
+            #     Required. The Developer Connect Git repository link, formatted as
+            #     `projects/*/locations/*/connections/*/gitRepositoryLink/*`.
+            # @!attribute [rw] dir
+            #   @return [::String]
+            #     Required. Directory, relative to the source root, in which to run the
+            #     build.
+            # @!attribute [rw] revision
+            #   @return [::String]
+            #     Required. The revision to fetch from the Git repository such as a
+            #     branch, a tag, a commit SHA, or any Git ref.
+            class DeveloperConnectConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies source code to be fetched from a Git repository managed through
+            # the Developer Connect service.
+            # @!attribute [rw] config
+            #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::DeveloperConnectConfig]
+            #     Required. The Developer Connect configuration that defines the
+            #     specific repository, revision, and directory to use as the source code
+            #     root.
+            class DeveloperConnectSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -180,6 +262,55 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Specification for deploying from a container image.
+          # @!attribute [rw] image_uri
+          #   @return [::String]
+          #     Required. The Artifact Registry Docker image URI (e.g.,
+          #     us-central1-docker.pkg.dev/my-project/my-repo/my-image:tag) of the
+          #     container image that is to be run on each worker replica.
+          class ContainerSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specification for building container image.
+          # @!attribute [rw] worker_pool
+          #   @return [::String]
+          #     Optional. The resource name of the Cloud Build WorkerPool to use for
+          #     the build.
+          #     Format:
+          #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`
+          # @!attribute [rw] service_account
+          #   @return [::String]
+          #     Optional. The service account that Cloud Build uses to run the build.
+          #
+          #     This field is only applicable when `worker_pool` is specified (i.e., for
+          #     custom worker pools). If `worker_pool` is not specified, this field is
+          #     ignored and the build runs using the Google-managed service agent.
+          #
+          #     Format: `projects/{project}/serviceAccounts/{service_account}` or
+          #     `{service_account}@{project}.iam.gserviceaccount.com`
+          class BuildSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The identity type to use for the Reasoning Engine.
+          module IdentityType
+            # Default value. Use a custom service account if the `service_account`
+            # field is set, otherwise use the default Vertex AI Reasoning Engine
+            # Service Agent in the project. Same behavior as SERVICE_ACCOUNT.
+            IDENTITY_TYPE_UNSPECIFIED = 0
+
+            # Use a custom service account if the `service_account` field is set,
+            # otherwise use the default Vertex AI Reasoning Engine Service Agent in the
+            # project.
+            SERVICE_ACCOUNT = 2
+
+            # Use Agent Identity. The `service_account` field must not be set.
+            AGENT_IDENTITY = 3
           end
         end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,32 +97,32 @@ class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::ClientTest < 
     ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::ServiceStub.stub :transcode_troubleshoot_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, troubleshoot_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.troubleshoot_iam_policy({ access_tuple: access_tuple }) do |_result, response|
+        c.troubleshoot_iam_policy({ access_tuple: access_tuple }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.troubleshoot_iam_policy access_tuple: access_tuple do |_result, response|
+        c.troubleshoot_iam_policy access_tuple: access_tuple do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.troubleshoot_iam_policy ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple) do |_result, response|
+        c.troubleshoot_iam_policy ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.troubleshoot_iam_policy({ access_tuple: access_tuple }, call_options) do |_result, response|
+        c.troubleshoot_iam_policy({ access_tuple: access_tuple }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.troubleshoot_iam_policy(::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), call_options) do |_result, response|
+        c.troubleshoot_iam_policy(::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

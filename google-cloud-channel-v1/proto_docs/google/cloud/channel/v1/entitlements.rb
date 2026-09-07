@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -89,6 +89,11 @@ module Google
         #   @return [::String]
         #     Optional. The billing account resource name that is used to pay for this
         #     entitlement.
+        # @!attribute [rw] price_reference_id
+        #   @return [::String]
+        #     Optional. Price reference ID for the offer. Only for offers that require
+        #     additional price information. Used to guarantee that the pricing is
+        #     consistent between quoting the offer and placing the order.
         class Entitlement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

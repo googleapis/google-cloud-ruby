@@ -13,6 +13,8 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 
 require "google/cloud/bigquery"
 require "google/cloud/storage"

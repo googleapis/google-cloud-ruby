@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -362,6 +362,33 @@ module Google
         #     and no associated detections. Regardless of this field's value, the rule
         #     deployment associated with this rule will also be deleted.
         class DeleteRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for VerifyRuleText method.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The name of the parent resource, which is the SecOps instance
+        #     associated with the request. Format:
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        # @!attribute [rw] rule_text
+        #   @return [::String]
+        #     Required. The rule text to verify as a UTF-8 string.
+        class VerifyRuleTextRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for VerifyRuleText method.
+        # @!attribute [rw] success
+        #   @return [::Boolean]
+        #     Whether or not the rule text was successfully verified.
+        # @!attribute [rw] compilation_diagnostics
+        #   @return [::Array<::Google::Cloud::Chronicle::V1::CompilationDiagnostic>]
+        #     A list of a rule's corresponding compilation diagnostic messages
+        #     such as compilation errors and compilation warnings.
+        class VerifyRuleTextResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

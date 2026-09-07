@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,9 +90,15 @@ module Google
         end
 
         # The cluster config.
+        # @!attribute [rw] cluster_type
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterType]
+        #     Optional. The type of the cluster.
         # @!attribute [rw] cluster_tier
         #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterTier]
         #     Optional. The cluster tier.
+        # @!attribute [rw] engine
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::Engine]
+        #     Optional. The cluster engine.
         # @!attribute [rw] config_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage job
@@ -182,6 +188,22 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # The type of the cluster.
+          module ClusterType
+            # Not set.
+            CLUSTER_TYPE_UNSPECIFIED = 0
+
+            # Standard dataproc cluster with a minimum of two primary workers.
+            STANDARD = 1
+
+            # https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/single-node-clusters
+            SINGLE_NODE = 2
+
+            # Clusters that can use only secondary workers and be scaled down to zero
+            # secondary worker nodes.
+            ZERO_SCALE = 3
+          end
+
           # The cluster tier.
           module ClusterTier
             # Not set. Works the same as CLUSTER_TIER_STANDARD.
@@ -192,6 +214,18 @@ module Google
 
             # Premium Dataproc cluster.
             CLUSTER_TIER_PREMIUM = 2
+          end
+
+          # The cluster engine.
+          module Engine
+            # The engine is not specified. Works the same as ENGINE_DEFAULT.
+            ENGINE_UNSPECIFIED = 0
+
+            # The cluster is a default engine cluster.
+            DEFAULT = 1
+
+            # The cluster is a lightning engine cluster.
+            LIGHTNING = 2
           end
         end
 
@@ -426,7 +460,13 @@ module Google
         # @!attribute [rw] confidential_instance_config
         #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig]
         #     Optional. Confidential Instance Config for clusters using [Confidential
-        #     VMs](https://cloud.google.com/compute/confidential-vm/docs).
+        #     VMs](https://cloud.google.com/confidential-computing/confidential-vm/docs).
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. [Resource manager tags]
+        #     (https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing)
+        #     to add to all instances (see [Use secure tags]
+        #     (https://cloud.google.com/dataproc/docs/guides/use-secure-tags)).
         class GceClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -436,6 +476,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -503,14 +552,38 @@ module Google
         end
 
         # Confidential Instance Config for clusters using [Confidential
-        # VMs](https://cloud.google.com/compute/confidential-vm/docs)
+        # VMs](https://cloud.google.com/confidential-computing/confidential-vm/docs)
         # @!attribute [rw] enable_confidential_compute
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Defines whether the instance should have confidential compute
-        #     enabled.
+        #     Optional. Deprecated: Use 'confidential_instance_type' instead.
+        #     Defines whether the instance should have confidential compute enabled.
+        # @!attribute [rw] confidential_instance_type
+        #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig::ConfidentialInstanceType]
+        #     Optional. Defines the type of Confidential Compute technology to use.
         class ConfidentialInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of Confidential Compute technology as per [Confidential Computing
+          # types](https://cloud.google.com/confidential-computing/confidential-vm/docs/create-a-confidential-vm-instance#create-instance).
+          # New values may be added in the future.
+          module ConfidentialInstanceType
+            # Confidential Instance Type is not specified.
+            CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0
+
+            # [AMD Secure Encrypted
+            # Virtualization](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#amd_sev)
+            SEV = 1
+
+            # [AMD Secure Encrypted Virtualization-Secure Nested
+            # Paging](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#amd_sev-snp)
+            SEV_SNP = 2
+
+            # [Intel Trust Domain
+            # Extensions](https://cloud.google.com/confidential-computing/confidential-vm/docs/confidential-vm-overview#intel_tdx)
+            TDX = 3
+          end
         end
 
         # The config settings for Compute Engine resources in
@@ -758,6 +831,12 @@ module Google
           #     machine-type with priority rank and fallback to next rank based on
           #     availability. Machine types and instance selections with the same
           #     priority have the same preference.
+          # @!attribute [rw] disk_config
+          #   @return [::Google::Cloud::Dataproc::V1::DiskConfig]
+          #     Optional. Disk configuration to apply to the instances in this instance
+          #     selection. If specified on any entry in instanceSelectionList, then it
+          #     must be specified on every entry in instanceSelectionList and the
+          #     instanceGroupConfig must not specify any diskConfig.
           class InstanceSelection
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -806,13 +885,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Specifies the config of disk options for a group of VM instances.
+        # Specifies the config of boot disk and attached disk options for a group of VM
+        # instances.
         # @!attribute [rw] boot_disk_type
         #   @return [::String]
-        #     Optional. Type of the boot disk (default is "pd-standard").
-        #     Valid values: "pd-balanced" (Persistent Disk Balanced Solid State Drive),
-        #     "pd-ssd" (Persistent Disk Solid State Drive),
-        #     or "pd-standard" (Persistent Disk Hard Disk Drive).
+        #     Optional. Type of the boot disk (default is `pd-standard`).
+        #     Valid values: `pd-balanced` (Persistent Disk Balanced Solid State Drive),
+        #     `pd-ssd` (Persistent Disk Solid State Drive),
+        #     or `pd-standard` (Persistent Disk Hard Disk Drive).
         #     See [Disk types](https://cloud.google.com/compute/docs/disks#disk-types).
         # @!attribute [rw] boot_disk_size_gb
         #   @return [::Integer]
@@ -830,25 +910,71 @@ module Google
         #     selected.
         # @!attribute [rw] local_ssd_interface
         #   @return [::String]
-        #     Optional. Interface type of local SSDs (default is "scsi").
-        #     Valid values: "scsi" (Small Computer System Interface),
-        #     "nvme" (Non-Volatile Memory Express).
+        #     Optional. Interface type of local SSDs (default is `scsi`).
+        #     Valid values: `scsi` (Small Computer System Interface),
+        #     `nvme` (Non-Volatile Memory Express).
         #     See [local SSD
         #     performance](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
         # @!attribute [rw] boot_disk_provisioned_iops
         #   @return [::Integer]
         #     Optional. Indicates how many IOPS to provision for the disk. This sets the
-        #     number of I/O operations per second that the disk can handle. Note: This
-        #     field is only supported if boot_disk_type is hyperdisk-balanced.
+        #     number of I/O operations per second that the disk can handle.
+        #     **This field is supported only if
+        #     {::Google::Cloud::Dataproc::V1::DiskConfig#boot_disk_type boot_disk_type} is
+        #     `hyperdisk-balanced`.**
         # @!attribute [rw] boot_disk_provisioned_throughput
         #   @return [::Integer]
         #     Optional. Indicates how much throughput to provision for the disk. This
         #     sets the number of throughput mb per second that the disk can handle.
-        #     Values must be greater than or equal to 1. Note: This field is only
-        #     supported if boot_disk_type is hyperdisk-balanced.
+        #     Values must be greater than or equal to 1. **This field is supported only
+        #     if {::Google::Cloud::Dataproc::V1::DiskConfig#boot_disk_type boot_disk_type} is
+        #     `hyperdisk-balanced`.**
+        # @!attribute [rw] attached_disk_configs
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::AttachedDiskConfig>]
+        #     Optional. A list of attached disk configs for a group of VM instances.
         class DiskConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the config of attached disk options for single VM instance.
+        # @!attribute [rw] disk_type
+        #   @return [::Google::Cloud::Dataproc::V1::AttachedDiskConfig::DiskType]
+        #     Optional. Disk type.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Optional. Disk size in GB.
+        # @!attribute [rw] provisioned_iops
+        #   @return [::Integer]
+        #     Optional. Indicates how many IOPS to provision for the attached disk. This
+        #     sets the number of I/O operations per second that the disk can handle. See
+        #     https://cloud.google.com/compute/docs/disks/hyperdisks#hyperdisk-features
+        # @!attribute [rw] provisioned_throughput
+        #   @return [::Integer]
+        #     Optional. Indicates how much throughput to provision for the attached
+        #     disk. This sets the number of throughput mb per second that the disk can
+        #     handle. See
+        #     https://cloud.google.com/compute/docs/disks/hyperdisks#hyperdisk-features
+        class AttachedDiskConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          module DiskType
+            # Required unspecified disk type.
+            DISK_TYPE_UNSPECIFIED = 0
+
+            # Hyperdisk Balanced disk type.
+            HYPERDISK_BALANCED = 1
+
+            # Hyperdisk Extreme disk type.
+            HYPERDISK_EXTREME = 2
+
+            # Hyperdisk ML disk type.
+            HYPERDISK_ML = 3
+
+            # Hyperdisk Throughput disk type.
+            HYPERDISK_THROUGHPUT = 4
+          end
         end
 
         # Node group identification and configuration information.
@@ -1187,6 +1313,29 @@ module Google
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         #
         #     Note: The following fields are mutually exclusive: `auto_delete_ttl`, `auto_delete_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] idle_stop_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The duration to keep the cluster started while idling (when no
+        #     jobs are running). Passing this threshold will cause the cluster to be
+        #     stopped. Minimum value is 5 minutes; maximum value is 14 days (see JSON
+        #     representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        # @!attribute [rw] auto_stop_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The time when cluster will be auto-stopped (see JSON
+        #     representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Note: The following fields are mutually exclusive: `auto_stop_time`, `auto_stop_ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_stop_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The lifetime duration of the cluster. The cluster will be
+        #     auto-stopped at the end of this period, calculated from the time of
+        #     submission of the create or update cluster request. Minimum value is 10
+        #     minutes; maximum value is 14 days (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Note: The following fields are mutually exclusive: `auto_stop_ttl`, `auto_stop_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] idle_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when cluster became idle (most recent job finished)

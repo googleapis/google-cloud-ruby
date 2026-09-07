@@ -1,5 +1,52 @@
 # Release History
 
+### 1.62.1 (2026-08-24)
+
+#### Bug Fixes
+
+* Remove accept encoding gzip for metadata ([#33896](https://github.com/googleapis/google-cloud-ruby/issues/33896)) 
+
+### 1.62.0 (2026-07-02)
+
+#### Features
+
+* Making crc32c default for download ([#34002](https://github.com/googleapis/google-cloud-ruby/issues/34002)) 
+* Support delete source object ([#34619](https://github.com/googleapis/google-cloud-ruby/issues/34619)) 
+* support delete source objects on compose ([#34665](https://github.com/googleapis/google-cloud-ruby/issues/34665)) 
+
+### 1.61.0 (2026-06-11)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and support v4.0 ([#33814](https://github.com/googleapis/google-cloud-ruby/issues/33814)) 
+
+### 1.60.0 (2026-05-11)
+
+#### Features
+
+* add support for object context ([#32902](https://github.com/googleapis/google-cloud-ruby/issues/32902)) 
+* setting default checksum ([#33331](https://github.com/googleapis/google-cloud-ruby/issues/33331)) 
+* Support bucket encryption config ([#33452](https://github.com/googleapis/google-cloud-ruby/issues/33452)) 
+
+### 1.59.0 (2026-03-19)
+
+#### Features
+
+* Adding dependencies for Ruby 4.0 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.58.0 (2026-01-08)
+
+#### Features
+
+* Adding support for partial success bucket list  ([#32173](https://github.com/googleapis/google-cloud-ruby/issues/32173)) 
+
+### 1.57.1 (2025-11-04)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#31776](https://github.com/googleapis/google-cloud-ruby/issues/31776)) 
+
 ### 1.57.0 (2025-08-15)
 
 #### Features

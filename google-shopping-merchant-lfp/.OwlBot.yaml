@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/shopping/merchant/lfp/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-shopping-merchant-lfp/$1

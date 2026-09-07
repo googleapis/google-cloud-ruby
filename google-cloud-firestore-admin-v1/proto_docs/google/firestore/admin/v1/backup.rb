@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,11 @@ module Google
           #     Output only. The unique resource name of the Backup.
           #
           #     Format is `projects/{project}/locations/{location}/backups/{backup}`.
+          #
+          #     The location in the name will be the Standard Managed Multi-Region (SMMR)
+          #     location (e.g. `us`) if the backup was created with an SMMR location, or
+          #     the Google Managed Multi-Region (GMMR) location (e.g. `nam5`) if the backup
+          #     was created with a GMMR location.
           # @!attribute [r] database
           #   @return [::String]
           #     Output only. Name of the Firestore database that the backup is from.

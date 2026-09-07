@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ClientTest < Mini
     ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ServiceStub.stub :transcode_retrieve_contexts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_contexts_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_contexts({ vertex_rag_store: vertex_rag_store, parent: parent, query: query }) do |_result, response|
+        c.retrieve_contexts({ vertex_rag_store: vertex_rag_store, parent: parent, query: query }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_contexts vertex_rag_store: vertex_rag_store, parent: parent, query: query do |_result, response|
+        c.retrieve_contexts vertex_rag_store: vertex_rag_store, parent: parent, query: query do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_contexts ::Google::Cloud::AIPlatform::V1::RetrieveContextsRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, query: query) do |_result, response|
+        c.retrieve_contexts ::Google::Cloud::AIPlatform::V1::RetrieveContextsRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, query: query) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_contexts({ vertex_rag_store: vertex_rag_store, parent: parent, query: query }, call_options) do |_result, response|
+        c.retrieve_contexts({ vertex_rag_store: vertex_rag_store, parent: parent, query: query }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_contexts(::Google::Cloud::AIPlatform::V1::RetrieveContextsRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, query: query), call_options) do |_result, response|
+        c.retrieve_contexts(::Google::Cloud::AIPlatform::V1::RetrieveContextsRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, query: query), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ClientTest < Mini
     ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ServiceStub.stub :transcode_augment_prompt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, augment_prompt_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.augment_prompt({ vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model }) do |_result, response|
+        c.augment_prompt({ vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.augment_prompt vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model do |_result, response|
+        c.augment_prompt vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.augment_prompt ::Google::Cloud::AIPlatform::V1::AugmentPromptRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model) do |_result, response|
+        c.augment_prompt ::Google::Cloud::AIPlatform::V1::AugmentPromptRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.augment_prompt({ vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model }, call_options) do |_result, response|
+        c.augment_prompt({ vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.augment_prompt(::Google::Cloud::AIPlatform::V1::AugmentPromptRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model), call_options) do |_result, response|
+        c.augment_prompt(::Google::Cloud::AIPlatform::V1::AugmentPromptRequest.new(vertex_rag_store: vertex_rag_store, parent: parent, contents: contents, model: model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,37 +213,149 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ClientTest < Mini
     ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ServiceStub.stub :transcode_corroborate_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, corroborate_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.corroborate_content({ parent: parent, content: content, facts: facts, parameters: parameters }) do |_result, response|
+        c.corroborate_content({ parent: parent, content: content, facts: facts, parameters: parameters }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.corroborate_content parent: parent, content: content, facts: facts, parameters: parameters do |_result, response|
+        c.corroborate_content parent: parent, content: content, facts: facts, parameters: parameters do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.corroborate_content ::Google::Cloud::AIPlatform::V1::CorroborateContentRequest.new(parent: parent, content: content, facts: facts, parameters: parameters) do |_result, response|
+        c.corroborate_content ::Google::Cloud::AIPlatform::V1::CorroborateContentRequest.new(parent: parent, content: content, facts: facts, parameters: parameters) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.corroborate_content({ parent: parent, content: content, facts: facts, parameters: parameters }, call_options) do |_result, response|
+        c.corroborate_content({ parent: parent, content: content, facts: facts, parameters: parameters }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.corroborate_content(::Google::Cloud::AIPlatform::V1::CorroborateContentRequest.new(parent: parent, content: content, facts: facts, parameters: parameters), call_options) do |_result, response|
+        c.corroborate_content(::Google::Cloud::AIPlatform::V1::CorroborateContentRequest.new(parent: parent, content: content, facts: facts, parameters: parameters), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, corroborate_content_client_stub.call_count
+      end
+    end
+  end
+
+  def test_ask_contexts
+    # Create test objects.
+    client_result = ::Google::Cloud::AIPlatform::V1::AskContextsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    query = {}
+    tools = [{}]
+
+    ask_contexts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ServiceStub.stub :transcode_ask_contexts_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, ask_contexts_client_stub do
+        # Create client
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.ask_contexts({ parent: parent, query: query, tools: tools }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.ask_contexts parent: parent, query: query, tools: tools do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.ask_contexts ::Google::Cloud::AIPlatform::V1::AskContextsRequest.new(parent: parent, query: query, tools: tools) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.ask_contexts({ parent: parent, query: query, tools: tools }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.ask_contexts(::Google::Cloud::AIPlatform::V1::AskContextsRequest.new(parent: parent, query: query, tools: tools), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, ask_contexts_client_stub.call_count
+      end
+    end
+  end
+
+  def test_async_retrieve_contexts
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    query = {}
+    tools = [{}]
+
+    async_retrieve_contexts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::ServiceStub.stub :transcode_async_retrieve_contexts_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, async_retrieve_contexts_client_stub do
+        # Create client
+        c = ::Google::Cloud::AIPlatform::V1::VertexRagService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.async_retrieve_contexts({ parent: parent, query: query, tools: tools }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.async_retrieve_contexts parent: parent, query: query, tools: tools do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.async_retrieve_contexts ::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest.new(parent: parent, query: query, tools: tools) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.async_retrieve_contexts({ parent: parent, query: query, tools: tools }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.async_retrieve_contexts(::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest.new(parent: parent, query: query, tools: tools), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, async_retrieve_contexts_client_stub.call_count
       end
     end
   end

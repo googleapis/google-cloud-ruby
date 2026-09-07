@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,9 +29,12 @@ require "google/cloud/dialogflow/cx/v3/transition_route_groups/rest"
 require "google/cloud/dialogflow/cx/v3/test_cases/rest"
 require "google/cloud/dialogflow/cx/v3/webhooks/rest"
 require "google/cloud/dialogflow/cx/v3/environments/rest"
+require "google/cloud/dialogflow/cx/v3/examples/rest"
 require "google/cloud/dialogflow/cx/v3/experiments/rest"
 require "google/cloud/dialogflow/cx/v3/generators/rest"
+require "google/cloud/dialogflow/cx/v3/playbooks/rest"
 require "google/cloud/dialogflow/cx/v3/security_settings_service/rest"
+require "google/cloud/dialogflow/cx/v3/tools/rest"
 require "google/cloud/dialogflow/cx/v3/versions/rest"
 require "google/cloud/dialogflow/cx/v3/bindings_override"
 require "google/cloud/dialogflow/cx/v3/version"

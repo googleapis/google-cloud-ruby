@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -221,6 +221,29 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for DeleteFolderRecursive.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the folder being deleted, however all of its contents
+          #     will be deleted too. Format:
+          #     `projects/{project}/buckets/{bucket}/folders/{folder}`
+          # @!attribute [rw] if_metageneration_match
+          #   @return [::Integer]
+          #     Optional. Makes the operation only succeed conditional on whether the root
+          #     folder's current metageneration matches the given value.
+          # @!attribute [rw] if_metageneration_not_match
+          #   @return [::Integer]
+          #     Optional. Makes the operation only succeed conditional on whether the root
+          #     folder's current metageneration does not match the given value.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class DeleteFolderRecursiveRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The message contains metadata that is common to all Storage Control
           # long-running operations, present in its `google.longrunning.Operation`
           # messages, and accessible via `metadata.common_metadata`.
@@ -264,6 +287,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Message returned in the metadata field of the Operation resource for
+          # DeleteFolderRecursive operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] folder_id
+          #   @return [::String]
+          #     The path of the folder recursively deleted.
+          class DeleteFolderRecursiveMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The storage layout configuration of a bucket.
           # @!attribute [r] name
           #   @return [::String]
@@ -284,6 +320,9 @@ module Google
           #   @return [::Google::Cloud::Storage::Control::V2::StorageLayout::HierarchicalNamespace]
           #     Output only. The bucket's hierarchical namespace configuration. If there is
           #     no configuration, the hierarchical namespace is disabled.
+          # @!attribute [r] rapid_cache_info
+          #   @return [::Google::Cloud::Storage::Control::V2::StorageLayout::RapidCacheInfo]
+          #     Output only. The Rapid Cache configuration for the bucket.
           class StorageLayout
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -304,6 +343,16 @@ module Google
             #   @return [::Boolean]
             #     Enables the hierarchical namespace feature.
             class HierarchicalNamespace
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The Rapid Cache configuration for the bucket.
+            # @!attribute [r] cache_type
+            #   @return [::String]
+            #     Output only. The type of cache in the bucket. Set to `rapid-cache` or
+            #     `rapid-cache-ultra`, only if there is a cache present.
+            class RapidCacheInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -344,9 +393,60 @@ module Google
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The modification time of the managed folder.
+          # @!attribute [rw] rapid_cache_config
+          #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig]
+          #     Rapid Cache configuration for a managed prefix.
           class ManagedFolder
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Rapid Cache configuration for a managed prefix. This configuration is used
+            # to determine how the rapid cache behaves for objects under the managed
+            # folder.
+            # @!attribute [rw] policies
+            #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy}]
+            #     Optional. A map of rapid_cache_id to RapidCachePolicy for this prefix.
+            #     Currently, the key rapid_cache_id is the zone. However, the
+            #     field is generalized as rapid_cache_id to align the policy lifetime
+            #     with the cache instance lifetime. This allows for a future transition
+            #     from zone to a cache id if required.
+            class RapidCacheConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Rapid Cache policy for a managed folder.
+              # @!attribute [rw] rapid_cache_id
+              #   @return [::String]
+              #     Required. The identifier for the rapid cache.
+              # @!attribute [rw] ingest_on_write
+              #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy::IngestOnWrite]
+              #     Required. If enabled, objects in the Managed Folder will be ingested
+              #     into the cache when they are written.
+              class RapidCachePolicy
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The behavior of the rapid cache when an object is written.
+                module IngestOnWrite
+                  # The behavior is not specified at this resource level.
+                  # It should be inherited from the parent resource's configuration.
+                  # This is the default value.
+                  INGEST_ON_WRITE_UNSPECIFIED = 0
+
+                  # Ingestion on write is explicitly enabled for this resource.
+                  INGEST_ON_WRITE_ENABLED = 1
+                end
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy]
+              class PoliciesEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
 
           # Request message for GetManagedFolder.
@@ -462,6 +562,39 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for UpdateManagedFolder.
+          # @!attribute [rw] managed_folder
+          #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder]
+          #     Required. Properties of the managed folder being updated. Currently, this
+          #     RPC only supports updating the `rapid_cache_config` field in
+          #     `managed_folder`.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. Update mask for managed_folder.
+          #     Currently, this RPC only supports updating the `rapid_cache_config`
+          #     field in `managed_folder`. This field also supports update mask for the
+          #     subfields in the map of `rapid_cache_config`. The user can specify the
+          #     update mask for `rapid_cache_config.policies` and
+          #     `rapid_cache_config.policies.<key>`, but patching is not supported for
+          #     a field within `RapidCachePolicy.policies.<key>`, like
+          #     rapid_cache_config.policies.[key].ingest_on_write.
+          # @!attribute [rw] if_metageneration_match
+          #   @return [::Integer]
+          #     Optional. The operation succeeds conditional on the managed folder's
+          #     current metageneration matching the value here specified.
+          # @!attribute [rw] if_metageneration_not_match
+          #   @return [::Integer]
+          #     Optional. The operation succeeds conditional on the managed folder's
+          #     current metageneration NOT matching the value here specified.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class UpdateManagedFolderRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Message returned in the metadata field of the Operation resource for
           # CreateAnywhereCache operations.
           # @!attribute [rw] common_metadata
@@ -484,7 +617,45 @@ module Google
           #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
           #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
           #     applied if not specified in the create request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
           class CreateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # CreateRapidCache operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Rapid Cache entry's TTL. A cache-level config that is applied to all new
+          #     cache entries on admission. Default ttl value (24hrs) is applied if not
+          #     specified in the create request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
+          #     applied if not specified in the create request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class CreateRapidCacheMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -508,10 +679,68 @@ module Google
           #     update, this field equals to the new value specified in the Update request.
           # @!attribute [rw] admission_policy
           #   @return [::String]
-          #     L4 Cache entry Admission Policy in kebab-case (e.g.,
+          #     Optional. Anywhere Cache entry Admission Policy in kebab-case (e.g.,
           #     "admit-on-first-miss"). If `admission_policy` is pending
           #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Specifies whether objects are ingested into the cache upon write. If not
+          #     set, it defaults to false.
           class UpdateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # UpdateRapidCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Rapid Cache entry's TTL between 1h and 7days. A cache-level config that
+          #     is applied to all new cache entries on admission. If `ttl` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Optional. Rapid Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). If `admission_policy` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Specifies whether objects are ingested into the cache upon write. If not
+          #     set, it defaults to false.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class UpdateRapidCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # DeleteRapidCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class DisableRapidCacheMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -540,7 +769,8 @@ module Google
           #     create request.
           # @!attribute [r] state
           #   @return [::String]
-          #     Output only. Cache state including RUNNING, CREATING, DISABLED and PAUSED.
+          #     Output only. Cache state including `running`, `creating`, `disabled` and
+          #     `paused`.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Time when Anywhere cache instance is allocated.
@@ -553,6 +783,10 @@ module Google
           #     Output only. True if there is an active update operation against this cache
           #     instance. Subsequential update requests will be rejected if this field is
           #     true. Output only.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
           class AnywhereCache
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -697,6 +931,159 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A Rapid Cache Instance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Immutable. The resource name of this RapidCache.
+          #     Format:
+          #     projects/\\{project}/buckets/\\{bucket}/rapidCaches/\\{rapid_cache}
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Immutable. The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Immutable. The type of Rapid Cache this represents. Valid values include:
+          #     'rapid-cache' and 'rapid-cache-ultra'.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Cache entry TTL (ranges between 1h to 7d). This is a cache-level config
+          #     that defines how long a cache entry can live. Default ttl value (24hrs)
+          #     is applied if not specified in the create request. TTL must be in whole
+          #     seconds.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Cache admission policy. Valid policies includes:
+          #     no_read_admission, admit-on-first-miss and admit-on-second-miss. Defaults
+          #     to admit-on-first-miss for both AC and RCU. Default value is applied if not
+          #     specified in the create request.
+          # @!attribute [r] state
+          #   @return [::String]
+          #     Output only. Cache state including running, creating, and disabled.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Rapid cache instance is allocated.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Rapid cache instance is last updated, including
+          #     creation.
+          # @!attribute [r] pending_update
+          #   @return [::Boolean]
+          #     Output only. True if there is an active update operation against this cache
+          #     instance. Subsequential update requests will be rejected if this field is
+          #     true. Output only.
+          class RapidCache
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateRapidCache.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          #     Format: `projects/{project}/buckets/{bucket}`
+          # @!attribute [rw] rapid_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::RapidCache]
+          #     Required. The RapidCache to create. Default values for ingest_on_write, ttl
+          #     and admission_policy will be applied if not specified in the request.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class CreateRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateRapidCache.
+          # @!attribute [rw] rapid_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::RapidCache]
+          #     Required. The RapidCache to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. List of fields to be updated. Mutable fields of RapidCache
+          #     include `ttl`, `admission_policy` and `ingest_on_write`.
+          #
+          #     To specify ALL fields, specify a single field with the value `*`. Note: We
+          #     recommend against doing this. If a new field is introduced at a later time,
+          #     an older client updating with the `*` may accidentally reset the new
+          #     field's value.
+          #
+          #     Not specifying any fields is an error.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class UpdateRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DisableRapidCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class DisableRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for GetRapidCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class GetRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListRapidCaches.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of caches to return in a single response.
+          #     The service will use this parameter or 1,000 items, whichever is smaller.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A previously-returned page token representing part of the larger set of
+          #     results to view.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class ListRapidCachesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListRapidCaches.
+          # @!attribute [rw] rapid_caches
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::RapidCache>]
+          #     The list of rapid caches.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListRapidCachesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The `IntelligenceConfig` resource associated with your organization, folder,
           # or project.
           # @!attribute [rw] name
@@ -827,7 +1214,7 @@ module Google
             # signifies the edition used for configuring the `IntelligenceConfig`
             # resource and can only take the following values:
             # `EDITION_CONFIG_UNSPECIFIED`, `INHERIT`, `DISABLED`, `STANDARD` and
-            # `TRIAL`.
+            # `EVALUATE`.
             module EditionConfig
               # This is an unknown edition of the resource.
               EDITION_CONFIG_UNSPECIFIED = 0
@@ -849,17 +1236,14 @@ module Google
               # using filters. At the end of the trial period, the `IntelligenceConfig`
               # resource is upgraded to `STANDARD` edition.
               TRIAL = 5
+
+              # The `IntelligenceConfig` resource is of ESSENTIALS edition.
+              ESSENTIALS = 6
             end
           end
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your organization.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the organization.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -879,12 +1263,6 @@ module Google
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your folder.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -904,12 +1282,6 @@ module Google
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your project.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -929,12 +1301,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # organization.
-          #
-          # **IAM Permissions**
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the organization.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -948,12 +1314,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # folder.
-          #
-          # **IAM Permissions**
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -967,12 +1327,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # project.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission
-          # on the project.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -982,6 +1336,697 @@ module Google
           class GetProjectIntelligenceConfigRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The `IntelligenceFinding` resource that represents a security, performance,
+          # or cost-related finding about a project or bucket.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of `IntelligenceFinding`.
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. A short description about the finding.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingType]
+          #     Output only. Type of this finding.
+          # @!attribute [r] category
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingCategory]
+          #     Output only. Category of this finding.
+          # @!attribute [r] severity
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingSeverity]
+          #     Output only. Severity of the finding.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the finding was created.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the finding was last updated.
+          # @!attribute [r] target_resource
+          #   @return [::String]
+          #     Output only. The fully qualified resource name of the resource that this
+          #     `IntelligenceFinding` applies to. eg:
+          #     - `storage.googleapis.com/projects/_/buckets/b1`
+          #     - `cloudresourecemanager.googleapis.com/projects/p1`
+          # @!attribute [r] associated_resources
+          #   @return [::Array<::String>]
+          #     Output only. Contains GCP resource names that are
+          #     relevant to this `IntelligenceFinding`. The `target_resource` is also added
+          #     as part of `associated_resources`. eg:
+          #     - `storage.googleapis.com/projects/_/buckets/b1`
+          #     - `cloudresourecemanager.googleapis.com/projects/p1`
+          # @!attribute [r] observation_period
+          #   @return [::Google::Type::Interval]
+          #     Output only. The time interval during which the underlying data was used to
+          #     generate this `IntelligenceFinding`.
+          # @!attribute [r] coldline_and_archival_storage_operations_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike]
+          #     Output only. `IntelligenceFinding` about a spike in Class A/B operations
+          #     on Coldline or Archive Cloud Storage objects.
+          #
+          #     Note: The following fields are mutually exclusive: `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `cross_region_egress_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] throttled_requests_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike]
+          #     Output only. `IntelligenceFinding` about a spike in throttled requests
+          #     (429 errors) within a project.
+          #
+          #     Note: The following fields are mutually exclusive: `throttled_requests_spike`, `coldline_and_archival_storage_operations_spike`, `cross_region_egress_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] cross_region_egress_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike]
+          #     Output only. `IntelligenceFinding` about a spike in cross-region egress.
+          #
+          #     Note: The following fields are mutually exclusive: `cross_region_egress_spike`, `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] storage_growth_above_trend
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::StorageGrowthAboveTrend]
+          #     Output only. `IntelligenceFinding` about growth in storage above the
+          #     expected trend.
+          #
+          #     Note: The following fields are mutually exclusive: `storage_growth_above_trend`, `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `cross_region_egress_spike`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class IntelligenceFinding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents a finding about a spike in Class A/B operations on Coldline
+            # or Archive Cloud Storage objects.
+            # This corresponds to the `COLD_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE`
+            # finding type.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in operations across the project.
+            # @!attribute [r] total_operations_count
+            #   @return [::Integer]
+            #     Output only. The total count of operations across the project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution>]
+            #     Output only. A list of the top buckets driving the increase in
+            #     operations.
+            class ColdlineAndArchivalStorageOperationsSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the operation spike details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in operations for the bucket.
+              # @!attribute [r] total_operations_count
+              #   @return [::Integer]
+              #     Output only. The total count of operations for the bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of the top object prefixes driving the increase
+                #     in operations.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents the operation spike details for an object prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in operations for the object
+                  #     prefix.
+                  # @!attribute [r] total_operations_count
+                  #   @return [::Integer]
+                  #     Output only. The total count of operations for the object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a spike in cross-region egress from Cloud
+            # Storage.
+            # This corresponds to the `CROSS_REGION_EGRESS_SPIKE` finding type.
+            # @!attribute [r] total_egress_bytes
+            #   @return [::Integer]
+            #     Output only. The total cross-region egress volume in bytes across the
+            #     project.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in cross-region egress across the
+            #     project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in cross-region
+            #     egress.
+            class CrossRegionEgressSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the cross-region egress spike details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] total_egress_bytes
+              #   @return [::Integer]
+              #     Output only. The total cross-region egress volume in bytes for the
+              #     bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in cross-region egress for the
+              #     bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of the top object prefixes driving the increase
+                #     in cross-region egress.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents the cross-region egress spike details for an object
+                  # prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] total_egress_bytes
+                  #   @return [::Integer]
+                  #     Output only. The total cross-region egress volume in bytes from the
+                  #     object prefix.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in cross-region egress for the
+                  #     object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a spike in throttled requests (429 errors)
+            # within a project.
+            # This corresponds to the `THROTTLED_REQUEST_SPIKE` finding type.
+            # @!attribute [r] throttled_requests
+            #   @return [::Integer]
+            #     Output only. The count of throttled requests across the project.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in throttled requests across the
+            #     project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in throttled
+            #     requests.
+            class ThrottledRequestSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the throttled requests details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] throttled_requests
+              #   @return [::Integer]
+              #     Output only. The count of throttled requests for the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in throttled requests for the
+              #     bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of top object prefixes driving the increase in
+                #     throttled requests.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents throttled requests details for an object prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] throttled_requests
+                  #   @return [::Integer]
+                  #     Output only. The count of throttled requests for the object prefix.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in throttled requests for the
+                  #     object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a storage growth above the expected trend.
+            # This corresponds to the `STORAGE_GROWTH_ABOVE_TREND` finding type.
+            # @!attribute [r] total_storage_growth_bytes
+            #   @return [::Integer]
+            #     Output only. The total storage growth in bytes.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in storage growth.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::StorageGrowthAboveTrend::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in storage
+            #     growth.
+            class StorageGrowthAboveTrend
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the storage growth details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] total_storage_growth_bytes
+              #   @return [::Integer]
+              #     Output only. The total storage growth in bytes for the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in storage growth for the bucket.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # An `IntelligenceFindingRevision` represents a specific revision of an
+          # `IntelligenceFinding` resource.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. The resource name of `IntelligenceFindingRevision`.
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+          # @!attribute [r] snapshot
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+          #     Output only. The snapshot of the `IntelligenceFinding` at the time the
+          #     revision was created. This field contains the full finding details as they
+          #     existed for the revision.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp when the revision was created.
+          class IntelligenceFindingRevision
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceFinding` resource associated with a
+          # project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceFinding` resource.
+          #
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          class GetIntelligenceFindingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to list `IntelligenceFinding` resources associated with
+          # a project.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent of the `IntelligenceFinding` resource.
+          #
+          #     Format: `projects/{project}/locations/{location}`
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter expression to be applied.
+          #     Supports filtering by `type` and `associated_resources`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of `IntelligenceFinding` resources to return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous `ListIntelligenceFindings`
+          #     call. Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `ListIntelligenceFindings` must match the call that provided the page
+          #     token.
+          class ListIntelligenceFindingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message to list the `IntelligenceFinding` resources associated with
+          # a project.
+          # @!attribute [rw] intelligence_findings
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+          #     The `IntelligenceFinding` resources from the specified project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token to retrieve the next page of results.
+          #     Pass this value in the `page_token` field in the subsequent call.
+          class ListIntelligenceFindingsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to summarize the intelligence findings for the specified
+          # scope (organization, folder or project).
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The scope to summarize the findings for.
+          #     Format:
+          #     - `organizations/{organization}/locations/{location}`
+          #     - `folders/{folder}/locations/{location}`
+          #     - `projects/{project}/locations/{location}`
+          # @!attribute [rw] resource_scope
+          #   @return [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest::ResourceScope]
+          #     Optional. Determines the granularity of the findings
+          #     when the `parent` is an organization or folder.
+          #
+          #     - `PARENT` (or not set): A single summary is
+          #       returned for each insight type, aggregated across the entire `parent`
+          #       scope.
+          #     - `PROJECT`: A separate summary is returned for each
+          #       insight type for every project within the `parent` scope.
+          #
+          #     The only supported values are `PARENT` and `PROJECT`.
+          #     If no value is specified, the API behaviour defaults to the `PARENT`.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter expression, following AIP-160.
+          #     Supports filtering by FindingType.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of findings to return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous
+          #     `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+          #     subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `SummarizeIntelligenceFindings` must match the call that provided the page
+          #     token.
+          class SummarizeIntelligenceFindingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The list of resource scopes.
+            module ResourceScope
+              # The default behavior. Falls back to PARENT behaviour
+              RESOURCE_SCOPE_UNSPECIFIED = 0
+
+              # Summaries are aggregated at the level of the `parent` resource.
+              PARENT = 1
+
+              # Summaries are broken down by each project within the `parent` scope.
+              PROJECT = 2
+            end
+          end
+
+          # Response message to summarize the intelligence findings for a specified
+          # scope (organization, folder or project).
+          # @!attribute [rw] finding_summaries
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+          #     The list of `FindingSummary` summaries.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token to retrieve the next page of results.
+          #     Pass this value in the `page_token` field in the subsequent call to
+          #     `SummarizeIntelligenceFindings` to retrieve the next page of results.
+          class SummarizeIntelligenceFindingsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceFindingRevision` resource associated
+          # with a project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceFindingRevision` resource.
+          #     ## Format:
+          #
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+          class GetIntelligenceFindingRevisionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to list `IntelligenceFindingRevision` resources associated
+          # with a project.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent of the `IntelligenceFindingRevision` resource.
+          #     ## Format:
+          #
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of `IntelligenceFindingRevision` resources to
+          #     return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous
+          #     `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+          #     subsequent page.
+          class ListIntelligenceFindingRevisionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message to list `IntelligenceFindingRevision` resources associated
+          # with a project.
+          # @!attribute [rw] intelligence_finding_revisions
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+          #     The `IntelligenceFindingRevision` resources from the specified project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token that can be sent as `page_token` to retrieve the next page.
+          class ListIntelligenceFindingRevisionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A summary of findings generated for an organization, a folder, or a project.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingType]
+          #     Output only. The type of the finding.
+          # @!attribute [r] category
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingCategory]
+          #     Output only. The category of finding.
+          # @!attribute [r] target_resource
+          #   @return [::String]
+          #     Output only. The fully qualified Cloud resource name for which this
+          #     summary was generated.
+          #     eg: `//cloudresourcemanager.googleapis.com/projects/p1`
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation time of the earliest finding that this summary is
+          #     based on.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time of the most recent update among all the findings that
+          #     this summary is based on.
+          # @!attribute [rw] severity
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingSeverity]
+          #     Severity of the finding.
+          # @!attribute [r] summary_details
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::FindingSummary::SummaryDetails>]
+          #     Output only. List of `SummaryDetails`.
+          class FindingSummary
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Details about the `FindingSummary` resource.
+            # @!attribute [rw] count
+            #   @return [::Integer]
+            #     The count of impacted resources.
+            #
+            #     Note: The following fields are mutually exclusive: `count`, `percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] percentage
+            #   @return [::Float]
+            #     The percentage of impacted resources.
+            #
+            #     Note: The following fields are mutually exclusive: `percentage`, `count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] resource_type
+            #   @return [::Google::Cloud::Storage::Control::V2::FindingSummary::SummaryDetails::ResourceType]
+            #     Output only. The type of Cloud resource this summary detail applies to.
+            # @!attribute [r] description
+            #   @return [::String]
+            #     Output only. A short description about the FindingSummary
+            class SummaryDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The list of resource types.
+              module ResourceType
+                # Resource type is unspecified.
+                RESOURCE_TYPE_UNSPECIFIED = 0
+
+                # Resource type is project.
+                PROJECT = 1
+
+                # Resource type is bucket.
+                BUCKET = 2
+              end
+            end
+          end
+
+          # A full representation of an object context.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Storage::Control::V2::ObjectFullContext::Type]
+          #     The type of the object context.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     The key of the object context, which is unique among contexts of an object.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value of the object context.
+          # @!attribute [rw] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the object context was created.
+          # @!attribute [rw] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the object context was updated.
+          # @!attribute [rw] extended_data
+          #   @return [::Google::Protobuf::Any]
+          #     The extended data of the object context.
+          class ObjectFullContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Types of object contexts.
+            module Type
+              # The type is not specified.
+              TYPE_UNSPECIFIED = 0
+
+              # Custom context.
+              CUSTOM = 1
+
+              # Google context.
+              GOOGLE = 2
+            end
+          end
+
+          # Request message for ViewObjectFullContext.
+          # @!attribute [rw] generation
+          #   @return [::Integer]
+          #     Optional. If present, selects a specific revision of this object (as
+          #     opposed to the latest version, the default).
+          # @!attribute [rw] context_key
+          #   @return [::String]
+          #     Required. The key of the object context to retrieve.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the object.
+          #     Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+          class ViewObjectFullContextRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # List the finding types.
+          module FindingType
+            # Finding type is unspecified.
+            FINDING_TYPE_UNSPECIFIED = 0
+
+            # Finding is about a spike in Class A/B operations on Coldline or Archive
+            # Cloud Storage objects.
+            FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE = 1
+
+            # Finding is about a spike in throttled requests (429 errors) within a
+            # project.
+            FINDING_TYPE_THROTTLED_REQUEST_SPIKE = 2
+
+            # Finding is about a spike in cross region egress in Cloud Storage.
+            FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE = 3
+
+            # Finding is about growth in storage above the expected trend.
+            FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND = 4
+          end
+
+          # List of categories a finding falls under.
+          module FindingCategory
+            # Category is unspecified.
+            FINDING_CATEGORY_UNSPECIFIED = 0
+
+            # Category is 'Data Management'.
+            FINDING_CATEGORY_DATA_MANAGEMENT = 1
+
+            # Category is 'Performance'.
+            FINDING_CATEGORY_PERFORMANCE = 2
+          end
+
+          # Severity of the `IntelligenceFinding` resource.
+          module FindingSeverity
+            # Severity is unspecified.
+            FINDING_SEVERITY_UNSPECIFIED = 0
+
+            # Severity is critical.
+            FINDING_SEVERITY_CRITICAL = 1
           end
         end
       end

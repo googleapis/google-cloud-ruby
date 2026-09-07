@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14, 13]
                 }
 
-                default_config.rpcs.streaming_pull.timeout = 900.0
+                default_config.rpcs.streaming_pull.timeout = 1800.0
                 default_config.rpcs.streaming_pull.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 4, retry_codes: [4, 8, 10, 13, 14]
                 }
@@ -304,13 +304,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil, tags: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, bigtable_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil, tags: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the subscription. It must have the format
+            #     Required. Identifier. The name of the subscription. It must have the format
             #     `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
             #     start with a letter, and contain only letters (`[A-Za-z]`), numbers
             #     (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
@@ -329,6 +329,9 @@ module Google
             #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
             #     Optional. If delivery to Google Cloud Storage is used with this
             #     subscription, this field is used to configure it.
+            #   @param bigtable_config [::Google::Cloud::PubSub::V1::BigtableConfig, ::Hash]
+            #     Optional. If delivery to Bigtable is used with this subscription, this
+            #     field is used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     Optional. The approximate amount of time (on a best-effort basis) Pub/Sub
             #     waits for the subscriber to acknowledge receipt before resending the
@@ -429,6 +432,9 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See
+            #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+            #     for more information on using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -1586,6 +1592,9 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See
+            #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+            #     for more information on using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -2045,6 +2054,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -2128,6 +2138,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

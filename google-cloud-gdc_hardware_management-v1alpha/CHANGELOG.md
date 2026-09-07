@@ -1,5 +1,39 @@
 # Changelog
 
+### 0.15.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 0.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34047](https://github.com/googleapis/google-cloud-ruby/issues/34047)) 
+
+### 0.14.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33478](https://github.com/googleapis/google-cloud-ruby/issues/33478)) 
+
+### 0.14.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.13.0 (2026-03-19)
+
+#### Features
+
+* Add `OFFLINE` state to Zone resources ([#32804](https://github.com/googleapis/google-cloud-ruby/issues/32804)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.12.1 (2025-10-27)
 
 #### Documentation

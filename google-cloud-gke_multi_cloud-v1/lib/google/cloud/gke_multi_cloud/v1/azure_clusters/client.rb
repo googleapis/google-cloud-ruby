@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,6 +47,8 @@ module Google
             #
             # See {::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client::Configuration}
             # for a description of the configuration fields.
+            #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             #
             # @example
             #
@@ -281,6 +283,8 @@ module Google
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_azure_client(request, options = nil)
             #   Pass arguments to `create_azure_client` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::CreateAzureClientRequest} or an equivalent Hash.
@@ -398,6 +402,8 @@ module Google
             # Describes a specific
             # {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_azure_client(request, options = nil)
             #   Pass arguments to `get_azure_client` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureClientRequest} or an equivalent Hash.
@@ -492,6 +498,8 @@ module Google
             ##
             # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
             # resources on a given Google Cloud project and region.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_azure_clients(request, options = nil)
             #   Pass arguments to `list_azure_clients` via a request object, either of type
@@ -610,6 +618,8 @@ module Google
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_azure_client(request, options = nil)
             #   Pass arguments to `delete_azure_client` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::DeleteAzureClientRequest} or an equivalent Hash.
@@ -726,6 +736,8 @@ module Google
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_azure_cluster(request, options = nil)
             #   Pass arguments to `create_azure_cluster` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::CreateAzureClusterRequest} or an equivalent Hash.
@@ -841,6 +853,8 @@ module Google
 
             ##
             # Updates an {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_azure_cluster(request, options = nil)
             #   Pass arguments to `update_azure_cluster` via a request object, either of type
@@ -962,6 +976,8 @@ module Google
             # Describes a specific
             # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_azure_cluster(request, options = nil)
             #   Pass arguments to `get_azure_cluster` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureClusterRequest} or an equivalent Hash.
@@ -1055,6 +1071,8 @@ module Google
             ##
             # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
             # resources on a given Google Cloud project and region.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_azure_clusters(request, options = nil)
             #   Pass arguments to `list_azure_clusters` via a request object, either of type
@@ -1172,6 +1190,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload delete_azure_cluster(request, options = nil)
             #   Pass arguments to `delete_azure_cluster` via a request object, either of type
@@ -1296,6 +1316,8 @@ module Google
             ##
             # Generates an access token for a cluster agent.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload generate_azure_cluster_agent_token(request, options = nil)
             #   Pass arguments to `generate_azure_cluster_agent_token` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAzureClusterAgentTokenRequest} or an equivalent Hash.
@@ -1400,6 +1422,8 @@ module Google
             # Generates a short-lived access token to authenticate to a given
             # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload generate_azure_access_token(request, options = nil)
             #   Pass arguments to `generate_azure_access_token` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAzureAccessTokenRequest} or an equivalent Hash.
@@ -1498,6 +1522,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload create_azure_node_pool(request, options = nil)
             #   Pass arguments to `create_azure_node_pool` via a request object, either of type
@@ -1616,6 +1642,8 @@ module Google
             ##
             # Updates an {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload update_azure_node_pool(request, options = nil)
             #   Pass arguments to `update_azure_node_pool` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::UpdateAzureNodePoolRequest} or an equivalent Hash.
@@ -1726,6 +1754,8 @@ module Google
             # Describes a specific
             # {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_azure_node_pool(request, options = nil)
             #   Pass arguments to `get_azure_node_pool` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest} or an equivalent Hash.
@@ -1820,6 +1850,8 @@ module Google
             # Lists all {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
             # resources on a given
             # {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_azure_node_pools(request, options = nil)
             #   Pass arguments to `list_azure_node_pools` via a request object, either of type
@@ -1935,6 +1967,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload delete_azure_node_pool(request, options = nil)
             #   Pass arguments to `delete_azure_node_pool` via a request object, either of type
@@ -2065,6 +2099,8 @@ module Google
             # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
             # for details.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_azure_open_id_config(request, options = nil)
             #   Pass arguments to `get_azure_open_id_config` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureOpenIdConfigRequest} or an equivalent Hash.
@@ -2153,6 +2189,8 @@ module Google
             # Gets the public component of the cluster signing keys in
             # JSON Web Key format.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_azure_json_web_keys(request, options = nil)
             #   Pass arguments to `get_azure_json_web_keys` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAzureJsonWebKeysRequest} or an equivalent Hash.
@@ -2240,6 +2278,8 @@ module Google
             ##
             # Returns information, such as supported Azure regions and Kubernetes
             # versions, on a given Google Cloud location.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload get_azure_server_config(request, options = nil)
             #   Pass arguments to `get_azure_server_config` via a request object, either of type
@@ -2427,6 +2467,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -2510,6 +2551,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

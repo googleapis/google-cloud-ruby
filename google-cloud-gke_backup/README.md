@@ -1,8 +1,7 @@
 # Ruby Client for the Backup for GKE API
 
-API Client library for the Backup for GKE API
+Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters.
 
-Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-gke_backup-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-gke_backup-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_backup-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/)
+See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/concepts/backup-for-gke)
 for more usage information.
 
 ## Quick Start
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

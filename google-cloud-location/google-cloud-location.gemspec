@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An add-on interface used by some Google API clients to provide location management calls."
-  gem.summary       = "API Client library for the Locations API"
+  gem.description   = "This API provides static metadata about Google Cloud Platform. Currently, it only provides basic information about Google Cloud locations, such as zones, regions, and countries."
+  gem.summary       = "This API provides static metadata about Google Cloud Platform. Currently, it only provides basic information about Google Cloud locations, such as zones, regions, and countries."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

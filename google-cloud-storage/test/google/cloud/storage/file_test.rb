@@ -208,9 +208,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself to a file" do
-    # Stub the md5 to match.
-    def file.md5
-      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    # Stub the crc32c to match.
+    def file.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     Tempfile.open "google-cloud" do |tmpfile|
@@ -237,8 +237,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     data = "Hello world!"
     gzipped_data = gzip_data data
 
-    # Stub the md5 to match.
-    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+    # Stub the crc32c to match.
+    file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
@@ -263,8 +263,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     data = "Hello world!"
     gzipped_data = gzip_data data
 
-    # Stub the md5 to match.
-    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+    # Stub the crc32c to match.
+    file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
@@ -286,14 +286,15 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself to a file by path" do
-    # Stub the md5 to match.
-    def file.md5
-      "1B2M2Y8AsgTpgAmY7PhCfg=="
+    # Stub the crc32c to match.
+    def file.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
       tmpfile.write "yay!"
+      tmpfile.rewind
 
       mock = Minitest::Mock.new
       mock.expect :get_object, [tmpfile, download_http_resp],
@@ -309,14 +310,15 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself to a file with user_project set to true" do
-    # Stub the md5 to match.
-    def file_user_project.md5
-      "1B2M2Y8AsgTpgAmY7PhCfg=="
+    # Stub the crc32c to match.
+    def file_user_project.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
       tmpfile.write "yay!"
+      tmpfile.rewind
 
       mock = Minitest::Mock.new
       mock.expect :get_object, [tmpfile, download_http_resp],
@@ -332,9 +334,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself to an IO" do
-    # Stub the md5 to match.
-    def file.md5
-      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    # Stub the crc32c to match.
+    def file.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     data = "yay!"
@@ -357,8 +359,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     gzipped_data = gzip_data data
     downloadio = StringIO.new
 
-    # Stub the md5 to match.
-    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+    # Stub the crc32c to match.
+    file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     mock = Minitest::Mock.new
     mock.expect :get_object, [StringIO.new(gzipped_data), download_http_resp(gzip: true)],
@@ -378,8 +380,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     gzipped_data = gzip_data data
     downloadio = StringIO.new
 
-    # Stub the md5 to match.
-    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+    # Stub the crc32c to match.
+    file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     mock = Minitest::Mock.new
     mock.expect :get_object, [StringIO.new(gzipped_data), download_http_resp(gzip: true)],
@@ -395,9 +397,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself by specifying an IO" do
-    # Stub the md5 to match.
-    def file.md5
-      "X7A8HRvZUCT5gbq0KNDL8Q=="
+    # Stub the crc32c to match.
+    def file.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     downloadio = StringIO.new
@@ -416,14 +418,15 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   it "can download itself with customer-supplied encryption key" do
-    # Stub the md5 to match.
-    def file.md5
-      "1B2M2Y8AsgTpgAmY7PhCfg=="
+    # Stub the crc32c to match the content "yay!".
+    def file.crc32c
+      Digest::CRC32c.base64digest "yay!"
     end
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
       tmpfile.write "yay!"
+      tmpfile.rewind
 
       mock = Minitest::Mock.new
       mock.expect :get_object, [nil, download_http_resp], # using encryption keys seems to return nil
@@ -469,7 +472,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   describe "verified downloads" do
-    it "verifies m5d by default" do
+    it "verifies crc32c by default" do
       # Stub these values
       def file.md5; "md5="; end
       def file.crc32c; "crc32c="; end
@@ -481,17 +484,17 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
         bucket.service.mocked_service = mock
 
-        mocked_md5 = Minitest::Mock.new
-        mocked_md5.expect :md5_mock, file.md5
-        stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
-        stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+        stubbed_md5 = lambda { |_| fail "Should not be called!" }
+        mocked_crc32c = Minitest::Mock.new
+        mocked_crc32c.expect :crc32c_mock, file.crc32c
+        stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
         Google::Cloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
           Google::Cloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
             file.download tmpfile
           end
         end
-        mocked_md5.verify
+        mocked_crc32c.verify
         mock.verify
       end
     end
@@ -637,10 +640,10 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
         bucket.service.mocked_service = mock
 
-        mocked_md5 = Minitest::Mock.new
-        mocked_md5.expect :md5_mock, "NOPE="
-        stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
-        stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+        stubbed_md5 = lambda { |_| fail "Should not be called!" }
+        mocked_crc32c = Minitest::Mock.new
+        mocked_crc32c.expect :crc32c_mock, "NOPE!"
+        stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
         Google::Cloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
           Google::Cloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
@@ -649,7 +652,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
             end
           end
         end
-        mocked_md5.verify
+        mocked_crc32c.verify
         mock.verify
       end
     end
@@ -1492,7 +1495,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, generations[0]).to_json),
       [bucket.name, file_name], **get_object_args
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
-      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, soft_deleted: nil, options: {}
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, filter: nil,soft_deleted: nil, options: {}
 
     bucket.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -1518,7 +1521,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, generations[0]).to_json),
       [bucket_user_project.name, file_name], **get_object_args(user_project: "test")
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
-      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test", match_glob: nil, include_folders_as_prefixes: nil, soft_deleted: nil, options: {}
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test", match_glob: nil, include_folders_as_prefixes: nil, filter:nil, soft_deleted: nil, options: {}
 
     bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock

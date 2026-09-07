@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,8 +43,9 @@ module Google
         #     Format:
         #     `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping_id}`
         # @!attribute [r] entity_signals_mapping_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `EntitySignalsMapping` ID.
+        #     Output only. Deprecated: `EntitySignalsMapping` ID.
         # @!attribute [rw] taxonomy_category_ids
         #   @return [::Array<::Integer>]
         #     Optional. The IDs of the categories that are associated with the

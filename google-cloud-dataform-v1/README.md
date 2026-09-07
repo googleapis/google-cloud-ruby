@@ -2,7 +2,6 @@
 
 Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
-Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -33,8 +32,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dataform/v1"
 
 client = ::Google::Cloud::Dataform::V1::Dataform::Client.new
-request = ::Google::Cloud::Dataform::V1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+request = ::Google::Cloud::Dataform::V1::GetTeamFolderRequest.new # (request fields as keyword arguments...)
+response = client.get_team_folder request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1/latest)
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

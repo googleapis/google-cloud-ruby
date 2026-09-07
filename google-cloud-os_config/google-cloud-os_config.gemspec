@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances."
-  gem.summary       = "API Client library for the Cloud OS Config API"
+  gem.description   = "OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances."
+  gem.summary       = "OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-os_config-v1", ">= 0.15", "< 2.a"

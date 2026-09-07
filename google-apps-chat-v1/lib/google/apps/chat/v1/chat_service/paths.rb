@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,20 @@ module Google
               raise ::ArgumentError, "message cannot contain /" if message.to_s.include? "/"
 
               "spaces/#{space}/messages/#{message}/attachments/#{attachment}"
+            end
+
+            ##
+            # Create a fully-qualified Availability resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/availability`
+            #
+            # @param user [String]
+            #
+            # @return [::String]
+            def availability_path user:
+              "users/#{user}/availability"
             end
 
             ##
@@ -127,6 +141,42 @@ module Google
               raise ::ArgumentError, "message cannot contain /" if message.to_s.include? "/"
 
               "spaces/#{space}/messages/#{message}/reactions/#{reaction}"
+            end
+
+            ##
+            # Create a fully-qualified Section resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/sections/{section}`
+            #
+            # @param user [String]
+            # @param section [String]
+            #
+            # @return [::String]
+            def section_path user:, section:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+
+              "users/#{user}/sections/#{section}"
+            end
+
+            ##
+            # Create a fully-qualified SectionItem resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/sections/{section}/items/{item}`
+            #
+            # @param user [String]
+            # @param section [String]
+            # @param item [String]
+            #
+            # @return [::String]
+            def section_item_path user:, section:, item:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+              raise ::ArgumentError, "section cannot contain /" if section.to_s.include? "/"
+
+              "users/#{user}/sections/#{section}/items/#{item}"
             end
 
             ##
@@ -228,6 +278,20 @@ module Google
               raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
 
               "users/#{user}/spaces/#{space}/threads/#{thread}/threadReadState"
+            end
+
+            ##
+            # Create a fully-qualified User resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}`
+            #
+            # @param user [String]
+            #
+            # @return [::String]
+            def user_path user:
+              "users/#{user}"
             end
 
             extend self

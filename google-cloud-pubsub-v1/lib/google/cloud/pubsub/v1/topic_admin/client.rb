@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -265,7 +265,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the topic. It must have the format
+            #     Required. Identifier. The name of the topic. It must have the format
             #     `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
             #     and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
             #     underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -308,6 +308,9 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See
+            #     https://\\{$universe.dns_names.final_documentation_domain}/pubsub/docs/tags
+            #     for more information on using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
@@ -1201,6 +1204,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -1284,6 +1288,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

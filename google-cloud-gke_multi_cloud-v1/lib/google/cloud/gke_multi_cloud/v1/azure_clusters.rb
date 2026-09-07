@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +35,8 @@ module Google
         ##
         # The AzureClusters API provides a single centrally managed service
         # to create and manage Anthos clusters that run on Azure infrastructure.
+        #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
         #
         # @example Load this service and instantiate a gRPC client
         #

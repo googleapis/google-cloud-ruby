@@ -1,5 +1,38 @@
 # Changelog
 
+### 1.8.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 1.8.0 (2026-07-09)
+
+#### Features
+
+* add support for new signature algorithm in PkixPublicKey SignatureAlgorithm ([#34711](https://github.com/googleapis/google-cloud-ruby/issues/34711)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Added line_number to FileLocation 
+* Upgrade dependencies for Ruby 4.0 
+* upgrade protobuf from v25.7 to v31.0 ([#32810](https://github.com/googleapis/google-cloud-ruby/issues/32810)) 
+
+### 1.5.0 (2026-02-24)
+
+#### Features
+
+* A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#32452](https://github.com/googleapis/google-cloud-ruby/issues/32452)) 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation

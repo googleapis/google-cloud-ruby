@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,5 +18,4 @@
 
 # This gem does not autoload during Bundler.require. To load this gem,
 # issue explicit require statements for the packages desired, e.g.:
-# require "google/iam/v1"
 # require "google/cloud/storage/control/v2"

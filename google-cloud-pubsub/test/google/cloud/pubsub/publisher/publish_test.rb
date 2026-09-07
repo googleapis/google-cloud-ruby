@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
 
   it "publishes a message with multibyte characters" do
    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".b)
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
@@ -61,13 +61,13 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.verify
 
     _(msg).must_be_kind_of Google::Cloud::PubSub::Message
-    _(msg.data).must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
+    _(msg.data).must_equal "\xE3\x81\x82".b
     _(msg.message_id).must_equal "msg1"
   end
 
   it "publishes a message using an IO-ish object" do
    messages = [
-      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".b)
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
@@ -88,7 +88,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.verify
 
     _(msg).must_be_kind_of Google::Cloud::PubSub::Message
-    _(msg.data).must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
+    _(msg.data).must_equal "\xE3\x81\x82".b
     _(msg.message_id).must_equal "msg1"
   end
 

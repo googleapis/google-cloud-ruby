@@ -1,5 +1,54 @@
 # Changelog
 
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35048](https://github.com/googleapis/google-cloud-ruby/issues/35048)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.9.0 (2026-07-07)
+
+#### Features
+
+* GA FindingsRefinementService Client libraries ([#34709](https://github.com/googleapis/google-cloud-ruby/issues/34709)) 
+
+### 0.8.0 (2026-06-18)
+
+#### Features
+
+* GA RuleExecutionErrorService Client libraries ([#34624](https://github.com/googleapis/google-cloud-ruby/issues/34624)) 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34042](https://github.com/googleapis/google-cloud-ruby/issues/34042)) 
+
+### 0.6.0 (2026-05-06)
+
+#### Features
+
+* Adding Client Libraries for BigQueryExportService ([#33899](https://github.com/googleapis/google-cloud-ruby/issues/33899)) 
+* Support NativeDashboardService, DashboardChartService, DashboardQueryService, FeaturedContentNativeDashboardService, FeaturedContentMetadata for v1 
+
+### 0.5.0 (2026-04-15)
+
+#### Features
+
+* Add DataTableService to Chronicle v1 Client Libraries ([#33831](https://github.com/googleapis/google-cloud-ruby/issues/33831)) 
+
+### 0.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation

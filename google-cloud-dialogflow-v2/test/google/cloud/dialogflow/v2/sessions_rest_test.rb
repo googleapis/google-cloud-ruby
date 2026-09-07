@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -102,32 +102,32 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Sessions::Rest::ServiceStub.stub :transcode_detect_intent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, detect_intent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }) do |_result, response|
+        c.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio do |_result, response|
+        c.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detect_intent ::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio) do |_result, response|
+        c.detect_intent ::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }, call_options) do |_result, response|
+        c.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detect_intent(::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio), call_options) do |_result, response|
+        c.detect_intent(::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

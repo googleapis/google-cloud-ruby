@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,10 +57,16 @@ module Google
         #     Output only. The source instance of the backup.
         #     Format:
         #     projects/\\{project}/instances/\\{instance}
+        # @!attribute [r] instance_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The instance creation timestamp.
         # @!attribute [r] instance_tier
         #   @return [::String]
         #     Output only. The tier (or machine type) for this instance. Example:
         #     `db-custom-1-3840`
+        # @!attribute [r] instance_delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The instance delete timestamp.
         class CloudSqlInstanceBackupProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

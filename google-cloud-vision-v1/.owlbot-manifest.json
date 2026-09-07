@@ -103,6 +103,7 @@
     ".OwlBot.yaml",
     ".owlbot.rb",
     ".toys/generate-helpers.rb",
+    "Gemfile.lock",
     "acceptance/data",
     "acceptance/google/cloud/vision/v1/helpers_smoke_test.rb",
     "acceptance/google/cloud/vision/v1/image_annotator_smoke_test.rb",

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ def fetch_report_result_rows
   # The returned object is of type Gapic::PagedEnumerable. You can iterate
   # over elements, and API calls will be issued to fetch pages as needed.
   result.each do |item|
-    # Each element is of type ::Google::Ads::AdManager::V1::Report::DataTable::Row.
+    # Each element is of type ::Google::Ads::AdManager::V1::ReportDataTable::Row.
     p item
   end
 end

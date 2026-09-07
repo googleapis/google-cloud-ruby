@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,9 +29,12 @@ require "google/cloud/dialogflow/cx/v3/transition_route_groups"
 require "google/cloud/dialogflow/cx/v3/test_cases"
 require "google/cloud/dialogflow/cx/v3/webhooks"
 require "google/cloud/dialogflow/cx/v3/environments"
+require "google/cloud/dialogflow/cx/v3/examples"
 require "google/cloud/dialogflow/cx/v3/experiments"
 require "google/cloud/dialogflow/cx/v3/generators"
+require "google/cloud/dialogflow/cx/v3/playbooks"
 require "google/cloud/dialogflow/cx/v3/security_settings_service"
+require "google/cloud/dialogflow/cx/v3/tools"
 require "google/cloud/dialogflow/cx/v3/versions"
 require "google/cloud/dialogflow/cx/v3/version"
 

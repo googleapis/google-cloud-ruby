@@ -1,5 +1,31 @@
 # Changelog
 
+### 1.12.2 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 1.12.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 bit rate with deprecation and DETECT_INTENT_RESPONSE_VIEW_BASIC ([#34639](https://github.com/googleapis/google-cloud-ruby/issues/34639)) 
+
+### 1.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* updated v3 dialogflow client libraries 
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation

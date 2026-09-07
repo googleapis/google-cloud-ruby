@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ module Google
           # Credentials for the PrivateAuctionService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/admanager"
+              "https://www.googleapis.com/auth/admanager",
+              "https://www.googleapis.com/auth/admanager.readonly"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

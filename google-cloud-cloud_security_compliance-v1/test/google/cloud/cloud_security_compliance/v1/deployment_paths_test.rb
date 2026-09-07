@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,24 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::ClientPathsTest 
 
       path = client.cloud_control_deployment_path organization: "value0", location: "value1", cloud_control_deployment: "value2"
       assert_equal "organizations/value0/locations/value1/cloudControlDeployments/value2", path
+
+      path = client.cloud_control_deployment_path project: "value0", location: "value1", cloud_control_deployment: "value2"
+      assert_equal "projects/value0/locations/value1/cloudControlDeployments/value2", path
+    end
+  end
+
+  def test_framework_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.framework_path organization: "value0", location: "value1", framework: "value2"
+      assert_equal "organizations/value0/locations/value1/frameworks/value2", path
+
+      path = client.framework_path project: "value0", location: "value1", framework: "value2"
+      assert_equal "projects/value0/locations/value1/frameworks/value2", path
     end
   end
 
@@ -62,6 +80,21 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::ClientPathsTest 
 
       path = client.framework_deployment_path organization: "value0", location: "value1", framework_deployment: "value2"
       assert_equal "organizations/value0/locations/value1/frameworkDeployments/value2", path
+
+      path = client.framework_deployment_path project: "value0", location: "value1", framework_deployment: "value2"
+      assert_equal "projects/value0/locations/value1/frameworkDeployments/value2", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 

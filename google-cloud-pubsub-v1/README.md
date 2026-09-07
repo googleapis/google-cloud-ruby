@@ -2,7 +2,6 @@
 
 Provides reliable, many-to-many, asynchronous messaging between applications.
 
-Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.create_schema request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-pubsub-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/pubsub)
+See also the [Product Documentation](https://cloud.google.com/pubsub/docs)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

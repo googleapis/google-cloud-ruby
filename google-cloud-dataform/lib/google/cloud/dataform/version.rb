@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dataform
-      VERSION = "0.5.2"
+      VERSION = "1.0.1"
     end
   end
 end

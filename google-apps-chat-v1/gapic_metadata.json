@@ -45,6 +45,11 @@
                 "delete_message"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "search_messages"
+              ]
+            },
             "GetAttachment": {
               "methods": [
                 "get_attachment"
@@ -98,6 +103,11 @@
             "FindDirectMessage": {
               "methods": [
                 "find_direct_message"
+              ]
+            },
+            "FindGroupChats": {
+              "methods": [
+                "find_group_chats"
               ]
             },
             "CreateMembership": {
@@ -165,6 +175,31 @@
                 "get_thread_read_state"
               ]
             },
+            "GetAvailability": {
+              "methods": [
+                "get_availability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "mark_as_active"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "mark_as_away"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "mark_as_do_not_disturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "update_availability"
+              ]
+            },
             "GetSpaceEvent": {
               "methods": [
                 "get_space_event"
@@ -183,6 +218,41 @@
             "UpdateSpaceNotificationSetting": {
               "methods": [
                 "update_space_notification_setting"
+              ]
+            },
+            "CreateSection": {
+              "methods": [
+                "create_section"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "delete_section"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "update_section"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "list_sections"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "position_section"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "list_section_items"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "move_section_item"
               ]
             }
           }

@@ -1,5 +1,60 @@
 # Changelog
 
+### 2.12.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 2.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 2.11.0 (2026-05-07)
+
+#### Features
+
+* add ScaleType for Storage Pools and LargeCapacityConfig for Volumes ([#33881](https://github.com/googleapis/google-cloud-ruby/issues/33881)) 
+#### Documentation
+
+* A comment for field `large_capacity` in message `.google.cloud.netapp.v1.Volume` is changed 
+
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* Add ONTAP passthrough APIs ([#33444](https://github.com/googleapis/google-cloud-ruby/issues/33444)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 2.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.8.0 (2026-01-23)
+
+#### Features
+
+* Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#32365](https://github.com/googleapis/google-cloud-ruby/issues/32365)) 
+#### Documentation
+
+* A comment for field `backup_retention_policy` in message `.google.cloud.netapp.v1.BackupVault` is changed 
+
+### 2.7.0 (2025-11-21)
+
+#### Features
+
+* Add Squash Mode to Export Policy ([#32216](https://github.com/googleapis/google-cloud-ruby/issues/32216)) 
+
 ### 2.6.1 (2025-10-27)
 
 #### Documentation

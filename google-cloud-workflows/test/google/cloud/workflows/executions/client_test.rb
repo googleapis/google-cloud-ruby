@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/workflows/executions"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Workflows::Executions::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,13 +42,23 @@ class Google::Cloud::Workflows::Executions::ClientConstructionMinitest < Minites
   end
 
   def test_executions_grpc
-    skip unless Google::Cloud::Workflows::Executions.executions_available?
+    skip unless Google::Cloud::Workflows::Executions.executions_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Workflows::Executions.executions do |config|
+      client = Google::Cloud::Workflows::Executions.executions transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Workflows::Executions::V1::Executions::Client, client
+    end
+  end
+
+  def test_executions_rest
+    skip unless Google::Cloud::Workflows::Executions.executions_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Workflows::Executions.executions transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client, client
     end
   end
 end

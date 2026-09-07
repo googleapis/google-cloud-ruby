@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -106,11 +106,11 @@ module Google
             # Information for a pretrained Google-managed foundation model.
             # @!attribute [rw] finetuning_allowed
             #   @return [::Boolean]
-            #     Whether finetuning is allowed for this base processor version.
+            #     Whether fine tuning is allowed for this base processor version.
             # @!attribute [rw] min_train_labeled_documents
             #   @return [::Integer]
             #     The minimum number of labeled documents in the training dataset
-            #     required for finetuning.
+            #     required for fine tuning.
             class FoundationGenAiModelInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

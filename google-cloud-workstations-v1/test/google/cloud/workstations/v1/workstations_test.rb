@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,36 +82,36 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_workstation_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workstation_cluster({ name: name }) do |response, operation|
+      c.get_workstation_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workstation_cluster name: name do |response, operation|
+      c.get_workstation_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workstation_cluster ::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name) do |response, operation|
+      c.get_workstation_cluster ::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workstation_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_workstation_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workstation_cluster(::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workstation_cluster(::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -132,6 +132,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstation_clusters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workstation_clusters, name
@@ -139,45 +140,46 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_workstation_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,40 +215,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_workstation_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }) do |response, operation|
+      c.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workstation_cluster parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only do |response, operation|
+      c.create_workstation_cluster parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workstation_cluster ::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only) do |response, operation|
+      c.create_workstation_cluster ::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workstation_cluster(::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_workstation_cluster(::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -282,40 +284,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_workstation_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+      c.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workstation_cluster workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+      c.update_workstation_cluster workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workstation_cluster ::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+      c.update_workstation_cluster ::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workstation_cluster(::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_workstation_cluster(::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -351,40 +353,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_workstation_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
+      c.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workstation_cluster name: name, validate_only: validate_only, etag: etag, force: force do |response, operation|
+      c.delete_workstation_cluster name: name, validate_only: validate_only, etag: etag, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workstation_cluster ::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |response, operation|
+      c.delete_workstation_cluster ::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
+      c.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workstation_cluster(::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
+      c.delete_workstation_cluster(::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -414,36 +416,36 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_workstation_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workstation_config({ name: name }) do |response, operation|
+      c.get_workstation_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workstation_config name: name do |response, operation|
+      c.get_workstation_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workstation_config ::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name) do |response, operation|
+      c.get_workstation_config ::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workstation_config({ name: name }, grpc_options) do |response, operation|
+      c.get_workstation_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workstation_config(::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workstation_config(::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,6 +466,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstation_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workstation_configs, name
@@ -471,45 +474,46 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_workstation_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -543,40 +547,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_usable_workstation_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_usable_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_usable_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_usable_workstation_configs ::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_usable_workstation_configs ::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_usable_workstation_configs(::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_usable_workstation_configs(::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -612,40 +616,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_workstation_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }) do |response, operation|
+      c.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workstation_config parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only do |response, operation|
+      c.create_workstation_config parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workstation_config ::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only) do |response, operation|
+      c.create_workstation_config ::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workstation_config(::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_workstation_config(::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -681,40 +685,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_workstation_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+      c.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workstation_config workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+      c.update_workstation_config workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workstation_config ::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+      c.update_workstation_config ::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workstation_config(::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_workstation_config(::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -750,40 +754,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_workstation_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
+      c.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workstation_config name: name, validate_only: validate_only, etag: etag, force: force do |response, operation|
+      c.delete_workstation_config name: name, validate_only: validate_only, etag: etag, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workstation_config ::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |response, operation|
+      c.delete_workstation_config ::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
+      c.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workstation_config(::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
+      c.delete_workstation_config(::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -813,36 +817,36 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workstation({ name: name }) do |response, operation|
+      c.get_workstation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workstation name: name do |response, operation|
+      c.get_workstation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workstation ::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name) do |response, operation|
+      c.get_workstation ::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workstation({ name: name }, grpc_options) do |response, operation|
+      c.get_workstation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workstation(::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workstation(::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -863,6 +867,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_workstations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workstations, name
@@ -870,45 +875,46 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_workstations_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workstations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_workstations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -942,40 +948,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_usable_workstations_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_usable_workstations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_usable_workstations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_usable_workstations ::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_usable_workstations ::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_usable_workstations(::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_usable_workstations(::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1011,40 +1017,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }) do |response, operation|
+      c.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workstation parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only do |response, operation|
+      c.create_workstation parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workstation ::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only) do |response, operation|
+      c.create_workstation ::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workstation(::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_workstation(::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1080,40 +1086,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+      c.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workstation workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+      c.update_workstation workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workstation ::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+      c.update_workstation ::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workstation(::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_workstation(::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1147,40 +1153,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workstation({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_workstation({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workstation name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_workstation name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workstation ::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_workstation ::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workstation({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_workstation({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workstation(::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_workstation(::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1202,6 +1208,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
     name = "hello world"
     validate_only = true
     etag = "hello world"
+    boost_config = "hello world"
 
     start_workstation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_workstation, name
@@ -1209,45 +1216,46 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
       assert_equal "hello world", request["name"]
       assert_equal true, request["validate_only"]
       assert_equal "hello world", request["etag"]
+      assert_equal "hello world", request["boost_config"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, start_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_workstation({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_workstation name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.start_workstation name: name, validate_only: validate_only, etag: etag, boost_config: boost_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_workstation({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1281,40 +1289,40 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, stop_workstation_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_workstation({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.stop_workstation({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_workstation name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.stop_workstation name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_workstation ::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.stop_workstation ::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_workstation({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.stop_workstation({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_workstation(::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.stop_workstation(::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1335,6 +1343,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     expire_time = {}
     workstation = "hello world"
+    port = 42
 
     generate_access_token_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_access_token, name
@@ -1342,41 +1351,42 @@ class ::Google::Cloud::Workstations::V1::Workstations::ClientTest < Minitest::Te
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
       assert_equal :expire_time, request.expiration
       assert_equal "hello world", request["workstation"]
+      assert_equal 42, request["port"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, generate_access_token_client_stub do
       # Create client
-      client = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
+      c = ::Google::Cloud::Workstations::V1::Workstations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_access_token({ expire_time: expire_time, workstation: workstation }) do |response, operation|
+      c.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_access_token expire_time: expire_time, workstation: workstation do |response, operation|
+      c.generate_access_token expire_time: expire_time, workstation: workstation, port: port do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation) do |response, operation|
+      c.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_access_token({ expire_time: expire_time, workstation: workstation }, grpc_options) do |response, operation|
+      c.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation), grpc_options) do |response, operation|
+      c.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

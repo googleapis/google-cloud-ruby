@@ -1,5 +1,53 @@
 # Changelog
 
+### 0.30.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 0.29.0 (2026-08-24)
+
+#### Features
+
+* expose StreamAssistRequest agents_spec and agent_id ([#36315](https://github.com/googleapis/google-cloud-ruby/issues/36315)) 
+
+### 0.28.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 0.28.0 (2026-06-17)
+
+#### Features
+
+* regenerate v1beta proto snapshot for feature parity with v1 ([#34615](https://github.com/googleapis/google-cloud-ruby/issues/34615)) 
+
+### 0.27.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 0.26.0 (2026-04-15)
+
+#### Features
+
+* add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta ([#33829](https://github.com/googleapis/google-cloud-ruby/issues/33829)) 
+
+### 0.25.0 (2026-03-31)
+
+#### Features
+
+* Update DataStoreSpec and add BoostSpec to SearchService ([#33322](https://github.com/googleapis/google-cloud-ruby/issues/33322)) 
+
+### 0.24.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.23.1 (2025-10-27)
 
 #### Documentation

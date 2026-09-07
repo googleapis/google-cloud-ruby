@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/domains/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-domains/$1

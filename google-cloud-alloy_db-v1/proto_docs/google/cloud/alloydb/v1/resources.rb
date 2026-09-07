@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -480,7 +480,7 @@ module Google
         #     system actions like failover or maintenance.
         # @!attribute [rw] initial_user
         #   @return [::Google::Cloud::AlloyDB::V1::UserPassword]
-        #     Input only. Initial user to setup during cluster creation. Required.
+        #     Input only. Initial user to setup during cluster creation.
         #     If used in `RestoreCluster` this is ignored.
         # @!attribute [rw] automated_backup_policy
         #   @return [::Google::Cloud::AlloyDB::V1::AutomatedBackupPolicy]
@@ -546,6 +546,9 @@ module Google
         #     "123/environment": "production",
         #     "123/costCenter": "marketing"
         #     ```
+        # @!attribute [rw] dataplex_config
+        #   @return [::Google::Cloud::AlloyDB::V1::Cluster::DataplexConfig]
+        #     Optional. Configuration for Dataplex integration.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -624,6 +627,17 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     grace end time of the cluster.
           class TrialMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for Dataplex integration.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Dataplex is enabled by default for resources such as clusters and
+          #     instances. This flag controls the integration of AlloyDB PG
+          #     resources (like databases, schemas, and tables) with Dataplex."
+          class DataplexConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1709,6 +1723,9 @@ module Google
 
           # The database version is Postgres 17.
           POSTGRES_17 = 5
+
+          # The database version is Postgres 18.
+          POSTGRES_18 = 6
         end
 
         # Subscription_type added to distinguish between Standard and Trial

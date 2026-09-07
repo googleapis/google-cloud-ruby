@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module FinancialServices
-      VERSION = "0.1.2"
+      VERSION = "1.0.1"
     end
   end
 end

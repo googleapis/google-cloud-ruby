@@ -1,5 +1,58 @@
 # Changelog
 
+### 1.11.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35056](https://github.com/googleapis/google-cloud-ruby/issues/35056)) 
+
+### 1.11.0 (2026-07-20)
+
+#### Features
+
+* Add support for Basic Auth feature to Memorystore for Valkey ([#34900](https://github.com/googleapis/google-cloud-ruby/issues/34900)) 
+
+### 1.10.0 (2026-07-10)
+
+#### Features
+
+* Add support for self managed migrations feature to Memorystore for Valkey ([#34725](https://github.com/googleapis/google-cloud-ruby/issues/34725)) 
+
+### 1.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 1.8.0 (2026-05-07)
+
+#### Features
+
+* [Memorystore for Valkey] Updating new node types added 
+* support grpc transport in memorystore v1 ([#33887](https://github.com/googleapis/google-cloud-ruby/issues/33887)) 
+
+### 1.7.0 (2026-04-02)
+
+#### Features
+
+* [Memorystore for Valkey] Add support for Flexible CA feature ([#33459](https://github.com/googleapis/google-cloud-ruby/issues/33459)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.5.0 (2025-12-16)
+
+#### Features
+
+* A new field `Instance.simulate_maintenance_event` is added to message `.google.cloud.memorystore.v1.` ([#32274](https://github.com/googleapis/google-cloud-ruby/issues/32274)) 
+* A new field `satisfies_pzs` is added to message `.google.cloud.memorystore.v1.Instance` 
+
 ### 1.4.0 (2025-10-08)
 
 #### Features

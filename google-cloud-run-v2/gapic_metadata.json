@@ -48,6 +48,45 @@
         }
       }
     },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Run::V2::Instances::Client",
+          "rpcs": {
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stop_instance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "start_instance"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Jobs": {
       "clients": {
         "grpc": {

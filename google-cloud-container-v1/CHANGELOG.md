@@ -1,5 +1,53 @@
 # Release History
 
+### 1.18.0 (2026-08-20)
+
+#### Features
+
+* support for rollback-safe upgrade ([#36300](https://github.com/googleapis/google-cloud-ruby/issues/36300)) 
+
+### 1.17.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+
+### 1.17.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.16.0 (2026-06-02)
+
+#### Features
+
+* add custom node image configuration ([#33996](https://github.com/googleapis/google-cloud-ruby/issues/33996)) 
+
+### 1.15.0 (2026-05-18)
+
+#### Features
+
+* add confidential instance type and hyperdisk support to GKE API ([#33941](https://github.com/googleapis/google-cloud-ruby/issues/33941)) 
+
+### 1.14.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 1.13.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.12.0 (2026-02-04)
+
+#### Features
+
+* Add SwapConfig to enable and configure swap memory for node pools ([#32388](https://github.com/googleapis/google-cloud-ruby/issues/32388)) 
+
 ### 1.11.1 (2025-10-27)
 
 #### Documentation

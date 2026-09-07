@@ -1,5 +1,28 @@
 # Release History
 
+### 1.8.1 (2026-08-04)
+
+#### Documentation
+
+* Update copyright year 
+
+### 1.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34062](https://github.com/googleapis/google-cloud-ruby/issues/34062)) 
+
+### 1.7.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.6.0 (2026-03-18)
+
+#### Features
+
+
 ### 1.5.3 (2025-09-12)
 
 #### Documentation

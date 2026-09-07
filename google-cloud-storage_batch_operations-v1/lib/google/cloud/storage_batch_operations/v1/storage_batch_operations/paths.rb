@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,27 @@ module Google
         module StorageBatchOperations
           # Path helper methods for the StorageBatchOperations API.
           module Paths
+            ##
+            # Create a fully-qualified BucketOperation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/jobs/{job}/bucketOperations/{bucket_operation}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param job [String]
+            # @param bucket_operation [String]
+            #
+            # @return [::String]
+            def bucket_operation_path project:, location:, job:, bucket_operation:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "job cannot contain /" if job.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/jobs/#{job}/bucketOperations/#{bucket_operation}"
+            end
+
             ##
             # Create a fully-qualified CryptoKey resource string.
             #

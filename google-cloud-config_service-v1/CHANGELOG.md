@@ -1,5 +1,54 @@
 # Changelog
 
+### 2.12.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 2.11.0 (2026-08-24)
+
+#### Features
+
+* add indicator if early apply results are available ([#36314](https://github.com/googleapis/google-cloud-ruby/issues/36314)) 
+
+### 2.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+
+### 2.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 2.9.0 (2026-04-14)
+
+#### Features
+
+* adding DeploymentGroups, you can now manage deployment of multiple module root dependencies in a single DAG ([#33816](https://github.com/googleapis/google-cloud-ruby/issues/33816)) 
+
+### 2.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 2.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.6.0 (2026-01-13)
+
+#### Features
+
+* add support for enabling automigration from deprecated Terraform versions ([#32341](https://github.com/googleapis/google-cloud-ruby/issues/32341)) 
+* added error code when failing import values from an external source 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation

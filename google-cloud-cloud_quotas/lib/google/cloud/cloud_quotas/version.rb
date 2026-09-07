@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module CloudQuotas
-      VERSION = "2.0.2"
+      VERSION = "2.3.1"
     end
   end
 end

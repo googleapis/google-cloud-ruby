@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,11 @@ module Google
     module Memorystore
       ##
       # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
+      #
+      #     require "google/cloud/memorystore/v1beta"
+      #     client = ::Google::Cloud::Memorystore::V1beta::Memorystore::Client.new
       #
       # @example Load this package, including all its services, and instantiate a REST client
       #

@@ -1,5 +1,55 @@
 # Release History
 
+### 1.17.0 (2026-08-27)
+
+#### Features
+
+* Add compiled_proto_schema to Schema for schema imports ([#36319](https://github.com/googleapis/google-cloud-ruby/issues/36319)) 
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.16.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35059](https://github.com/googleapis/google-cloud-ruby/issues/35059)) 
+
+### 1.16.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34053](https://github.com/googleapis/google-cloud-ruby/issues/34053)) 
+
+### 1.15.0 (2026-05-01)
+
+#### Features
+
+* Add AIInference MessageTransform type 
+* Add BigtableConfig type 
+* add custom prompt config in the request and return prompt in the response 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* increase streaming pull timeout ([#32300](https://github.com/googleapis/google-cloud-ruby/issues/32300)) 
+#### Documentation
+
+* A comment for field `analytics_hub_subscription_info` in message `.google.pubsub.v1.Subscription` is updated 
+* A comment for field `subscription` in message `.google.pubsub.v1.CreateSnapshotRequest` is updated 
+* A comment for field `topic` in message `.google.pubsub.v1.Subscription` is updated 
+* add tags documentation links to Pub/Sub resource tags fields 
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+
+### 1.14.2 (2025-12-17)
+
+#### Documentation
+
+* Add the IDENTIFIER field behavior annotation to fields of Cloud Pub/Sub methods that represent a specific identity and need to be sourced with additional care ([#32251](https://github.com/googleapis/google-cloud-ruby/issues/32251)) 
+
 ### 1.14.1 (2025-10-27)
 
 #### Documentation

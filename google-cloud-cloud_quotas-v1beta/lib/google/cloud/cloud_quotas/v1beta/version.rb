@@ -21,7 +21,7 @@ module Google
   module Cloud
     module CloudQuotas
       module V1beta
-        VERSION = "0.6.1"
+        VERSION = "0.10.1"
       end
     end
   end

@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 (2026-06-11)
+
+#### Features
+
+* enable self-signed JWT by default ([#33974](https://github.com/googleapis/google-cloud-ruby/issues/33974)) 
+* Update minimum Ruby to 3.2 ([#33981](https://github.com/googleapis/google-cloud-ruby/issues/33981)) 
+
 ### 1.1.0 (2025-03-04)
 
 #### Features

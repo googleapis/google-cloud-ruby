@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -353,8 +353,7 @@ module Google
                 ##
                 # Deletes a Merchant Center account user. Executing this method requires
                 # admin access. The user to be deleted can't be the last admin user of that
-                # account. Also a user is protected from deletion if it
-                # is managed by Business Manager"
+                # account.
                 #
                 # @overload delete_user(request, options = nil)
                 #   Pass arguments to `delete_user` via a request object, either of type
@@ -620,6 +619,86 @@ module Google
                 end
 
                 ##
+                # Updates the user that is represented by the caller from pending to
+                # verified.
+                #
+                # @overload verify_self(request, options = nil)
+                #   Pass arguments to `verify_self` via a request object, either of type
+                #   {::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload verify_self(account: nil)
+                #   Pass arguments to `verify_self` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param account [::String]
+                #     Required. The name of the account under which the caller is a user.
+                #     Format: `accounts/{account}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Shopping::Merchant::Accounts::V1::User]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Shopping::Merchant::Accounts::V1::User]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/shopping/merchant/accounts/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Shopping::Merchant::Accounts::V1::UserService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest.new
+                #
+                #   # Call the verify_self method.
+                #   result = client.verify_self request
+                #
+                #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1::User.
+                #   p result
+                #
+                def verify_self request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.verify_self.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.verify_self.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.verify_self.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @user_service_stub.verify_self request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the UserService REST API.
                 #
                 # This class represents the configuration for UserService REST,
@@ -689,6 +768,7 @@ module Google
                 #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #       trigger a retry.
                 #   @return [::Hash]
@@ -761,6 +841,7 @@ module Google
                   #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                   #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                   #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                  #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                   #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                   #         trigger a retry.
                   #
@@ -790,6 +871,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_users
+                    ##
+                    # RPC-specific configuration for `verify_self`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :verify_self
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -803,6 +889,8 @@ module Google
                       @update_user = ::Gapic::Config::Method.new update_user_config
                       list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
                       @list_users = ::Gapic::Config::Method.new list_users_config
+                      verify_self_config = parent_rpcs.verify_self if parent_rpcs.respond_to? :verify_self
+                      @verify_self = ::Gapic::Config::Method.new verify_self_config
 
                       yield self if block_given?
                     end

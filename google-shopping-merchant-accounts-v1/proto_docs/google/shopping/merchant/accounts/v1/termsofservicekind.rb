@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ module Google
             # Default value. This value is unused.
             TERMS_OF_SERVICE_KIND_UNSPECIFIED = 0
 
-            # Merchant Center application.
+            # Terms of service for the Merchant Center application.
             MERCHANT_CENTER = 1
           end
         end

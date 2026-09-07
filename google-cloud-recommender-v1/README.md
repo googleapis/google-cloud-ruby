@@ -1,8 +1,7 @@
 # Ruby Client for the Recommender V1 API
 
-API Client library for the Recommender V1 API
+Recommenders generate recommendations that fall into six value categories that can help you optimize your cloud in a variety of ways.
 
-Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_insights request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recommender-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/recommender)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

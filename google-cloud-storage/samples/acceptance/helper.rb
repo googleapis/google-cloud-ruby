@@ -15,6 +15,16 @@
 require "google/cloud/errors"
 require "google/cloud/kms"
 require "google/cloud/storage"
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
+  end
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
@@ -24,6 +34,10 @@ require "securerandom"
 require "uri"
 require "ostruct"
 
+PAP_SKIP_MESSAGE = "Skipping this test due to a change in GCS behavior that disallows copying " \
+                   "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+                   "access prevention is enforced. See " \
+                   "https://cloud.google.com/storage/docs/public-access-prevention for more details.".freeze
 
 def fixture_bucket
   storage_client = Google::Cloud::Storage.new

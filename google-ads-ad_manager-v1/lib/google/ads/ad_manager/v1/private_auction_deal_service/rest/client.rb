@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `PrivateAuctionDeal` object.
+              # Retrieves a `PrivateAuctionDeal` object.
               #
               # @overload get_private_auction_deal(request, options = nil)
               #   Pass arguments to `get_private_auction_deal` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `PrivateAuctionDeal` objects.
+              # Lists `PrivateAuctionDeal` objects.
               #
               # @overload list_private_auction_deals(request, options = nil)
               #   Pass arguments to `list_private_auction_deals` via a request object, either of type
@@ -282,7 +282,7 @@ module Google
               #     Optional. The maximum number of `PrivateAuctionDeals` to return. The
               #     service may return fewer than this value. If unspecified, at most 50
               #     `PrivateAuctionDeals` will be returned. The maximum value is 1000;
-              #     values above 1000 will be coerced to 1000.
+              #     values greater than 1000 will be coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListPrivateAuctionDeals`
               #     call. Provide this to retrieve the subsequent page.
@@ -292,8 +292,24 @@ module Google
               #     token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     **Filterable fields:**
+              #
+              #     * `auctionPriorityEnabled`
+              #     * `blockOverrideEnabled`
+              #     * `buyerAccountId`
+              #     * `buyerPermissionType`
+              #     * `endTime`
+              #     * `externalDealId`
+              #     * `floorPrice`
+              #     * `name`
+              #     * `privateAuctionDealId`
+              #     * `privateAuctionDisplayName`
+              #     * `privateAuctionId`
+              #     * `status`
+              #     * `updateTime`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -365,7 +381,7 @@ module Google
               end
 
               ##
-              # API to create a `PrivateAuctionDeal` object.
+              # Creates a `PrivateAuctionDeal` object.
               #
               # @overload create_private_auction_deal(request, options = nil)
               #   Pass arguments to `create_private_auction_deal` via a request object, either of type
@@ -446,7 +462,7 @@ module Google
               end
 
               ##
-              # API to update a `PrivateAuctionDeal` object.
+              # Updates a `PrivateAuctionDeal` object.
               #
               # @overload update_private_auction_deal(request, options = nil)
               #   Pass arguments to `update_private_auction_deal` via a request object, either of type
@@ -469,7 +485,7 @@ module Google
               #     The `PrivateAuctionDeal`'s `name` is used to identify the
               #     `PrivateAuctionDeal` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::PrivateAuctionDeal]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -598,6 +614,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -670,6 +687,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

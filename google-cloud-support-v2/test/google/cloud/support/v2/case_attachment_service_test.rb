@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,40 +86,40 @@ class ::Google::Cloud::Support::V2::CaseAttachmentService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_attachments_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_attachments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_attachments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_attachments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_attachments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_attachments ::Google::Cloud::Support::V2::ListAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_attachments ::Google::Cloud::Support::V2::ListAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_attachments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_attachments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_attachments(::Google::Cloud::Support::V2::ListAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_attachments(::Google::Cloud::Support::V2::ListAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -127,6 +127,64 @@ class ::Google::Cloud::Support::V2::CaseAttachmentService::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_attachments_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_attachment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Support::V2::Attachment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_attachment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_attachment, name
+      assert_kind_of ::Google::Cloud::Support::V2::GetAttachmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_attachment_client_stub do
+      # Create client
+      c = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_attachment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_attachment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_attachment ::Google::Cloud::Support::V2::GetAttachmentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_attachment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_attachment(::Google::Cloud::Support::V2::GetAttachmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_attachment_client_stub.call_rpc_count
     end
   end
 

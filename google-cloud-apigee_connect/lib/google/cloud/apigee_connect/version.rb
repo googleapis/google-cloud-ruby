@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module ApigeeConnect
-      VERSION = "1.5.2"
+      VERSION = "1.7.2"
     end
   end
 end

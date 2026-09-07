@@ -2,7 +2,6 @@
 
 Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
-Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

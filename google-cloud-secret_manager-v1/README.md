@@ -2,7 +2,6 @@
 
 Stores sensitive data such as API keys, passwords, and certificates. Provides convenience while improving security.
 
-Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.list_secrets request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/secret-manager)
+See also the [Product Documentation](https://cloud.google.com/secret-manager/docs/overview)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

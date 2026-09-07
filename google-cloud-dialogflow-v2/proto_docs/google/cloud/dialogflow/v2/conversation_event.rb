@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +60,8 @@ module Google
 
             # An existing conversation has closed. This is fired when a telephone call
             # is terminated, or a conversation is closed via the API.
+            # The event is fired for every CompleteConversation call, even if the
+            # conversation is already closed.
             CONVERSATION_FINISHED = 2
 
             # An existing conversation has received notification from Dialogflow that

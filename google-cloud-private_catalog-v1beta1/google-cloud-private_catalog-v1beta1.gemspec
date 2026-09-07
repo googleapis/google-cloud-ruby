@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions. Note that google-cloud-private_catalog-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-private_catalog instead. See the readme for more details."
+  gem.description   = "Enable cloud users to discover private catalogs and products in their organizations. Note that google-cloud-private_catalog-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-private_catalog instead. See the readme for more details."
   gem.summary       = "Enable cloud users to discover private catalogs and products in their organizations."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

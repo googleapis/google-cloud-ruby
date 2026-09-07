@@ -19,14 +19,15 @@ TASKS = [
   "rubocop",
   "build",
   "yard",
+  "doctest",
   "linkinator",
   "acceptance",
   "conformance",
   "samples-main",
   "samples-latest",
 ].freeze
-OPTIONAL_TASKS = ["conformance"].freeze
-ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"].freeze
+OPTIONAL_TASKS = ["conformance", "doctest"].freeze
+ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "doctest", "linkinator"].freeze
 FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
 desc "Run CI tasks."
@@ -237,8 +238,8 @@ def interpret_github_event
       logger.info "Using local commits"
       [base_commit, head_commit]
     end
-  base_ref = nil if base_ref&.empty?
-  head_ref = nil if head_ref&.empty?
+  base_ref = nil if base_ref && base_ref.empty?
+  head_ref = nil if head_ref && head_ref.empty?
   [base_ref, head_ref]
 end
 

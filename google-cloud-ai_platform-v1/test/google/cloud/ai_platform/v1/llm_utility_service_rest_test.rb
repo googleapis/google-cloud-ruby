@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -103,32 +103,32 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ServiceStub.stub :transcode_count_tokens_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, count_tokens_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config }) do |_result, response|
+        c.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.count_tokens endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config do |_result, response|
+        c.count_tokens endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.count_tokens ::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config) do |_result, response|
+        c.count_tokens ::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config }, call_options) do |_result, response|
+        c.count_tokens({ endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.count_tokens(::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config), call_options) do |_result, response|
+        c.count_tokens(::Google::Cloud::AIPlatform::V1::CountTokensRequest.new(endpoint: endpoint, model: model, instances: instances, contents: contents, system_instruction: system_instruction, tools: tools, generation_config: generation_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -160,32 +160,32 @@ class ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::ServiceStub.stub :transcode_compute_tokens_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, compute_tokens_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::LlmUtilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }) do |_result, response|
+        c.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compute_tokens endpoint: endpoint, instances: instances, model: model, contents: contents do |_result, response|
+        c.compute_tokens endpoint: endpoint, instances: instances, model: model, contents: contents do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents) do |_result, response|
+        c.compute_tokens ::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }, call_options) do |_result, response|
+        c.compute_tokens({ endpoint: endpoint, instances: instances, model: model, contents: contents }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents), call_options) do |_result, response|
+        c.compute_tokens(::Google::Cloud::AIPlatform::V1::ComputeTokensRequest.new(endpoint: endpoint, instances: instances, model: model, contents: contents), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

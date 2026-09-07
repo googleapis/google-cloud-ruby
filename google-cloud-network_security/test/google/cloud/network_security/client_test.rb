@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,27 @@ class Google::Cloud::NetworkSecurity::ClientConstructionMinitest < Minitest::Tes
 
     def logger
       nil
+    end
+  end
+
+  def test_dns_threat_detector_service_grpc
+    skip unless Google::Cloud::NetworkSecurity.dns_threat_detector_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkSecurity.dns_threat_detector_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client, client
+    end
+  end
+
+  def test_dns_threat_detector_service_rest
+    skip unless Google::Cloud::NetworkSecurity.dns_threat_detector_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::NetworkSecurity.dns_threat_detector_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Rest::Client, client
     end
   end
 

@@ -2,7 +2,6 @@
 
 The Maintenance API provides a centralized view of planned disruptive maintenance events across supported Google Cloud products. It offers users visibility into upcoming, ongoing, and completed maintenance, along with controls to manage certain maintenance activities, such as mainteance windows, rescheduling, and on-demand updates.
 
-The Maintenance API provides a centralized view of planned disruptive maintenance events across supported Google Cloud products. It offers users visibility into upcoming, ongoing, and completed maintenance, along with controls to manage certain maintenance activities, such as mainteance windows, rescheduling, and on-demand updates.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

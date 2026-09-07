@@ -1,5 +1,50 @@
 # Release History
 
+### 1.17.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 1.17.0 (2026-06-30)
+
+#### Features
+
+* speech activity event is configurable through InputAudioConfig.enable_voice_activity_events ([#34671](https://github.com/googleapis/google-cloud-ruby/issues/34671)) 
+
+### 1.16.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 ([#34638](https://github.com/googleapis/google-cloud-ruby/issues/34638)) 
+
+### 1.16.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 1.15.0 (2026-03-31)
+
+#### Features
+
+* updated v2 dialogflow client libraries ([#33327](https://github.com/googleapis/google-cloud-ruby/issues/33327)) 
+
+### 1.14.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.13.0 (2025-12-16)
+
+#### Features
+
+* updated v2 dialogflow client libraries ([#32266](https://github.com/googleapis/google-cloud-ruby/issues/32266)) 
+#### Documentation
+
+* updated v2 dialogflow client libraries 
+
 ### 1.12.1 (2025-10-27)
 
 #### Documentation

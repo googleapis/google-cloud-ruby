@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -103,6 +103,13 @@ module Google
         #     Required. Maximum number of runs that can be started concurrently for this
         #     Schedule. This is the limit for starting the scheduled requests and not the
         #     execution of the operations/jobs created by the requests (if applicable).
+        # @!attribute [rw] max_concurrent_active_run_count
+        #   @return [::Integer]
+        #     Optional. Specifies the maximum number of active runs that can be executed
+        #     concurrently for this Schedule. This limits the number of runs that can be
+        #     in a non-terminal state at the same time.
+        #     Currently, this field is only supported for requests of type
+        #     CreatePipelineJobRequest.
         # @!attribute [rw] allow_queueing
         #   @return [::Boolean]
         #     Optional. Whether new scheduled runs can be queued when max_concurrent_runs

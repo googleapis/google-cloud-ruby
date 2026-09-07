@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks."
-  gem.summary       = "API Client library for the Service Control API API"
+  gem.description   = "Provides admission control and telemetry reporting for services integrated with Service Infrastructure."
+  gem.summary       = "Provides admission control and telemetry reporting for services integrated with Service Infrastructure."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-service_control-v1", ">= 0.9", "< 2.a"

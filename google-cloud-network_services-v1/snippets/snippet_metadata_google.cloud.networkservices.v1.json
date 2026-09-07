@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_services-v1",
-    "version": "2.6.1",
+    "version": "2.12.1",
     "language": "RUBY",
     "apis": [
       {
@@ -395,6 +395,206 @@
         "method": {
           "short_name": "DeleteLbRouteExtension",
           "full_name": "google.cloud.networkservices.v1.DepService.DeleteLbRouteExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_ListLbEdgeExtensions_sync",
+      "title": "Snippet for the list_lb_edge_extensions call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#list_lb_edge_extensions.",
+      "file": "dep_service/list_lb_edge_extensions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_lb_edge_extensions",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#list_lb_edge_extensions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsResponse",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "ListLbEdgeExtensions",
+          "full_name": "google.cloud.networkservices.v1.DepService.ListLbEdgeExtensions",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_GetLbEdgeExtension_sync",
+      "title": "Snippet for the get_lb_edge_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#get_lb_edge_extension.",
+      "file": "dep_service/get_lb_edge_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_lb_edge_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#get_lb_edge_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::LbEdgeExtension",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "GetLbEdgeExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.GetLbEdgeExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_CreateLbEdgeExtension_sync",
+      "title": "Snippet for the create_lb_edge_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#create_lb_edge_extension.",
+      "file": "dep_service/create_lb_edge_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_lb_edge_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#create_lb_edge_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "CreateLbEdgeExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.CreateLbEdgeExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_UpdateLbEdgeExtension_sync",
+      "title": "Snippet for the update_lb_edge_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#update_lb_edge_extension.",
+      "file": "dep_service/update_lb_edge_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_lb_edge_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#update_lb_edge_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "UpdateLbEdgeExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.UpdateLbEdgeExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_DeleteLbEdgeExtension_sync",
+      "title": "Snippet for the delete_lb_edge_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#delete_lb_edge_extension.",
+      "file": "dep_service/delete_lb_edge_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_lb_edge_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#delete_lb_edge_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "DeleteLbEdgeExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.DeleteLbEdgeExtension",
           "service": {
             "short_name": "DepService",
             "full_name": "google.cloud.networkservices.v1.DepService"
@@ -2927,6 +3127,206 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListAgentGateways_sync",
+      "title": "Snippet for the list_agent_gateways call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_agent_gateways.",
+      "file": "network_services/list_agent_gateways.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_agent_gateways",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_agent_gateways",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListAgentGatewaysResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListAgentGateways",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListAgentGateways",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetAgentGateway_sync",
+      "title": "Snippet for the get_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_agent_gateway.",
+      "file": "network_services/get_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::AgentGateway",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_CreateAgentGateway_sync",
+      "title": "Snippet for the create_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_agent_gateway.",
+      "file": "network_services/create_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "CreateAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.CreateAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_UpdateAgentGateway_sync",
+      "title": "Snippet for the update_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_agent_gateway.",
+      "file": "network_services/update_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "UpdateAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.UpdateAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_DeleteAgentGateway_sync",
+      "title": "Snippet for the delete_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_agent_gateway.",
+      "file": "network_services/delete_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "DeleteAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

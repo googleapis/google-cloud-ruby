@@ -1,5 +1,56 @@
 # Changelog
 
+### 0.8.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36254](https://github.com/googleapis/google-cloud-ruby/issues/36254)) 
+
+### 0.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 0.8.0 (2026-07-27)
+
+#### Features
+
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching ([#35019](https://github.com/googleapis/google-cloud-ruby/issues/35019)) 
+
+### 0.7.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34681](https://github.com/googleapis/google-cloud-ruby/issues/34681)) 
+
+### 0.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
+### 0.5.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 0.5.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 0.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation

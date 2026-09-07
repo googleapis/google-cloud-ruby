@@ -2,7 +2,6 @@
 
 Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center.
 
-Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

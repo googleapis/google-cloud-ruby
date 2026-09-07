@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/vmmigration/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-vm_migration/$1

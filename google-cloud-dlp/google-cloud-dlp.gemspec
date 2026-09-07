@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories."
-  gem.summary       = "API Client library for the Cloud Data Loss Prevention (DLP) API"
+  gem.description   = "Discover and protect your sensitive data. A fully managed service designed to help you discover, classify, and protect your valuable data assets with ease."
+  gem.summary       = "Discover and protect your sensitive data. A fully managed service designed to help you discover, classify, and protect your valuable data assets with ease."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-dlp-v2", ">= 0.20", "< 2.a"

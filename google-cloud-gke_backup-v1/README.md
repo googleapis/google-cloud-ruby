@@ -2,7 +2,6 @@
 
 Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters.
 
-Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.create_backup_plan request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_backup-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/)
+See also the [Product Documentation](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/concepts/backup-for-gke)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,27 +45,6 @@ module Google
               raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/lakes/#{lake}/zones/#{zone}/assets/#{asset}"
-            end
-
-            ##
-            # Create a fully-qualified Environment resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param lake [String]
-            # @param environment [String]
-            #
-            # @return [::String]
-            def environment_path project:, location:, lake:, environment:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "lake cannot contain /" if lake.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/lakes/#{lake}/environments/#{environment}"
             end
 
             ##

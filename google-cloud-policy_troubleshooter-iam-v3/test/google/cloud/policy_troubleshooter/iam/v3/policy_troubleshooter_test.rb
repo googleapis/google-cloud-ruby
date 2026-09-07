@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,36 +82,36 @@ class ::Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::Clie
 
     Gapic::ServiceStub.stub :new, troubleshoot_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::Client.new do |config|
+      c = ::Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.troubleshoot_iam_policy({ access_tuple: access_tuple }) do |response, operation|
+      c.troubleshoot_iam_policy({ access_tuple: access_tuple }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.troubleshoot_iam_policy access_tuple: access_tuple do |response, operation|
+      c.troubleshoot_iam_policy access_tuple: access_tuple do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.troubleshoot_iam_policy ::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple) do |response, operation|
+      c.troubleshoot_iam_policy ::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.troubleshoot_iam_policy({ access_tuple: access_tuple }, grpc_options) do |response, operation|
+      c.troubleshoot_iam_policy({ access_tuple: access_tuple }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.troubleshoot_iam_policy(::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), grpc_options) do |response, operation|
+      c.troubleshoot_iam_policy(::Google::Cloud::PolicyTroubleshooter::Iam::V3::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

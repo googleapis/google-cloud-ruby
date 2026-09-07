@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis. Note that google-cloud-bigquery-data_transfer-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-data_transfer instead. See the readme for more details."
+  gem.description   = "Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis. Note that google-cloud-bigquery-data_transfer-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-data_transfer instead. See the readme for more details."
   gem.summary       = "Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -21,9 +21,9 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-cloud-location", "~> 1.0"
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -104,32 +104,32 @@ class ::Google::Cloud::Retail::V2::PredictionService::Rest::ClientTest < Minites
     ::Google::Cloud::Retail::V2::PredictionService::Rest::ServiceStub.stub :transcode_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, predict_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }) do |_result, response|
+        c.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.predict placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels do |_result, response|
+        c.predict placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.predict ::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels) do |_result, response|
+        c.predict ::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }, call_options) do |_result, response|
+        c.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.predict(::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels), call_options) do |_result, response|
+        c.predict(::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

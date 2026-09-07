@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ module Google
         # Configuration for an InsightType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of insight type config.
+        #     Identifier. Name of insight type config.
         #     Eg,
         #     projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config
         # @!attribute [rw] insight_type_generation_config

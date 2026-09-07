@@ -327,8 +327,8 @@ module Google
         end
 
         ##
-        # The last error for the job, if any errors have occurred. Returns a
-        # hash.
+        # Output only. Final error result of the job. If present, indicates that
+        # the job has completed and was unsuccessful.
         #
         # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
         #   reference
@@ -346,8 +346,10 @@ module Google
         end
 
         ##
-        # The errors for the job, if any errors have occurred. Returns an array
-        # of hash objects. See {#error}.
+        # Output only. The first errors encountered during the running of the
+        # job. The final message includes the number of errors that caused the
+        # process to stop. Errors here do not necessarily mean that the job has
+        # not completed or was unsuccessful.
         #
         # @return [Array<Hash>, nil] Returns an array of hashes containing
         #   `reason` and `message` keys:

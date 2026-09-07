@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -231,6 +231,9 @@ module Google
             # @!attribute [rw] audio_export_pattern
             #   @return [::String]
             #     Filename pattern for exported audio.
+            #     \\{conversation} and \\{timestamp} are placeholders that will be replaced
+            #     with the conversation ID and epoch micros of the conversation.
+            #     For example, "\\{conversation}/recording_\\{timestamp}.mulaw".
             # @!attribute [rw] enable_audio_redaction
             #   @return [::Boolean]
             #     Enable audio redaction if it is true.

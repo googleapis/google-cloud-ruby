@@ -1,8 +1,7 @@
 # Ruby Client for the IAM Service Account Credentials API
 
-API Client library for the IAM Service Account Credentials API
+Creates short-lived, limited-privilege credentials for IAM service accounts.
 
-The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-iam-credentials-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-iam-credentials-v1](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/iam)
-for more usage information.
 
 ## Quick Start
 
@@ -74,7 +70,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

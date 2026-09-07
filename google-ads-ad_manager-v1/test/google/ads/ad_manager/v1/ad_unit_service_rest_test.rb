@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::AdUnitService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_get_ad_unit_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_ad_unit_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_ad_unit({ name: name }) do |_result, response|
+        c.get_ad_unit({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_ad_unit name: name do |_result, response|
+        c.get_ad_unit name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_ad_unit ::Google::Ads::AdManager::V1::GetAdUnitRequest.new(name: name) do |_result, response|
+        c.get_ad_unit ::Google::Ads::AdManager::V1::GetAdUnitRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_ad_unit({ name: name }, call_options) do |_result, response|
+        c.get_ad_unit({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_ad_unit(::Google::Ads::AdManager::V1::GetAdUnitRequest.new(name: name), call_options) do |_result, response|
+        c.get_ad_unit(::Google::Ads::AdManager::V1::GetAdUnitRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::AdUnitService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_list_ad_units_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ad_units_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ad_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_ad_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ad_units parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_ad_units parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ad_units ::Google::Ads::AdManager::V1::ListAdUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_ad_units ::Google::Ads::AdManager::V1::ListAdUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ad_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_ad_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ad_units(::Google::Ads::AdManager::V1::ListAdUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_ad_units(::Google::Ads::AdManager::V1::ListAdUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -215,37 +215,422 @@ class ::Google::Ads::AdManager::V1::AdUnitService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_list_ad_unit_sizes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ad_unit_sizes_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ad_unit_sizes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_ad_unit_sizes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ad_unit_sizes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_ad_unit_sizes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ad_unit_sizes ::Google::Ads::AdManager::V1::ListAdUnitSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_ad_unit_sizes ::Google::Ads::AdManager::V1::ListAdUnitSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ad_unit_sizes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_ad_unit_sizes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ad_unit_sizes(::Google::Ads::AdManager::V1::ListAdUnitSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_ad_unit_sizes(::Google::Ads::AdManager::V1::ListAdUnitSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, list_ad_unit_sizes_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_ad_unit
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::AdUnit.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    ad_unit = {}
+
+    create_ad_unit_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_create_ad_unit_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_ad_unit_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_ad_unit({ parent: parent, ad_unit: ad_unit }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_ad_unit parent: parent, ad_unit: ad_unit do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_ad_unit ::Google::Ads::AdManager::V1::CreateAdUnitRequest.new(parent: parent, ad_unit: ad_unit) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_ad_unit({ parent: parent, ad_unit: ad_unit }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_ad_unit(::Google::Ads::AdManager::V1::CreateAdUnitRequest.new(parent: parent, ad_unit: ad_unit), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_ad_unit_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_ad_unit
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::AdUnit.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ad_unit = {}
+    update_mask = {}
+
+    update_ad_unit_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_update_ad_unit_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_ad_unit_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_ad_unit({ ad_unit: ad_unit, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_ad_unit ad_unit: ad_unit, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_ad_unit ::Google::Ads::AdManager::V1::UpdateAdUnitRequest.new(ad_unit: ad_unit, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_ad_unit({ ad_unit: ad_unit, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_ad_unit(::Google::Ads::AdManager::V1::UpdateAdUnitRequest.new(ad_unit: ad_unit, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_ad_unit_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_ad_units
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_ad_units_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_batch_create_ad_units_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_ad_units_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_ad_units({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_ad_units parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_ad_units ::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_ad_units({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_ad_units(::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_ad_units_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_ad_units
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_ad_units_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_batch_update_ad_units_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_ad_units_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_ad_units({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_ad_units parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_ad_units ::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_ad_units({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_ad_units(::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_ad_units_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_ad_units
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_ad_units_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_batch_activate_ad_units_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_ad_units_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_ad_units({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_ad_units parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_ad_units ::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_ad_units({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_ad_units(::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_ad_units_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_ad_units
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_ad_units_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_batch_deactivate_ad_units_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_ad_units_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_deactivate_ad_units({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_deactivate_ad_units parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_deactivate_ad_units ::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_deactivate_ad_units({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_deactivate_ad_units(::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_ad_units_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_archive_ad_units
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchArchiveAdUnitsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_archive_ad_units_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdUnitService::Rest::ServiceStub.stub :transcode_batch_archive_ad_units_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_archive_ad_units_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_archive_ad_units({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_archive_ad_units parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_archive_ad_units ::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_archive_ad_units({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_archive_ad_units(::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_archive_ad_units_client_stub.call_count
       end
     end
   end

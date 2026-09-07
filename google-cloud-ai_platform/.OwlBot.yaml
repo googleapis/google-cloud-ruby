@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/aiplatform/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-ai_platform/$1

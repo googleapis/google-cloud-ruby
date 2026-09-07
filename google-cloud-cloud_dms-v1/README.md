@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Database Migration Service V1 API
+# Ruby Client for the Database Migration V1 API
 
 Manage Cloud Database Migration Service resources on Google Cloud Platform.
 
-Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Database Migration Service V1 API. Most users should consider using
+specific version of the Database Migration V1 API. Most users should consider using
 the main client gem,
 [google-cloud-cloud_dms](https://rubygems.org/gems/google-cloud-cloud_dms).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_migration_jobs request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_dms-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/database-migration/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -100,6 +100,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/backupVaults/#{backup_vault}"
+            end
+
+            ##
+            # Create a fully-qualified HostGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/hostGroups/{host_group}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param host_group [String]
+            #
+            # @return [::String]
+            def host_group_path project:, location:, host_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/hostGroups/#{host_group}"
             end
 
             ##

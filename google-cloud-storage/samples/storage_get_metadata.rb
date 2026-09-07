@@ -41,6 +41,7 @@ def get_metadata bucket_name:, file_name:
   puts "md5_hash: #{file.md5}"
   puts "Cache-control: #{file.cache_control}"
   puts "Content-type: #{file.content_type}"
+  puts "Contexts: #{file.contexts}"
   puts "Content-disposition: #{file.content_disposition}"
   puts "Content-encoding: #{file.content_encoding}"
   puts "Content-language: #{file.content_language}"

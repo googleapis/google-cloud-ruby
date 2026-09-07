@@ -34,6 +34,16 @@
               "methods": [
                 "cancel_job"
               ]
+            },
+            "ListBucketOperations": {
+              "methods": [
+                "list_bucket_operations"
+              ]
+            },
+            "GetBucketOperation": {
+              "methods": [
+                "get_bucket_operation"
+              ]
             }
           }
         }

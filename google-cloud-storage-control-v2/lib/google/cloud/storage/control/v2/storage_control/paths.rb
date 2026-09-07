@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -133,6 +133,63 @@ module Google
               end
 
               ##
+              # Create a fully-qualified IntelligenceFinding resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param intelligence_finding [String]
+              #
+              # @return [::String]
+              def intelligence_finding_path project:, location:, intelligence_finding:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/intelligenceFindings/#{intelligence_finding}"
+              end
+
+              ##
+              # Create a fully-qualified IntelligenceFindingRevision resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param intelligence_finding [String]
+              # @param revision [String]
+              #
+              # @return [::String]
+              def intelligence_finding_revision_path project:, location:, intelligence_finding:, revision:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "intelligence_finding cannot contain /" if intelligence_finding.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/intelligenceFindings/#{intelligence_finding}/revisions/#{revision}"
+              end
+
+              ##
+              # Create a fully-qualified Location resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}`
+              #
+              # @param project [String]
+              # @param location [String]
+              #
+              # @return [::String]
+              def location_path project:, location:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}"
+              end
+
+              ##
               # Create a fully-qualified ManagedFolder resource string.
               #
               # The resource will be in the following format:
@@ -149,6 +206,44 @@ module Google
                 raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
 
                 "projects/#{project}/buckets/#{bucket}/managedFolders/#{managed_folder}"
+              end
+
+              ##
+              # Create a fully-qualified Object resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/objects/{object}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param object [String]
+              #
+              # @return [::String]
+              def object_path project:, bucket:, object:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/objects/#{object}"
+              end
+
+              ##
+              # Create a fully-qualified RapidCache resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param rapid_cache [String]
+              #
+              # @return [::String]
+              def rapid_cache_path project:, bucket:, rapid_cache:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/rapidCaches/#{rapid_cache}"
               end
 
               ##

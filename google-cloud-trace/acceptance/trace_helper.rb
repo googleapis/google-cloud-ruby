@@ -15,6 +15,16 @@
 require "simplecov"
 
 gem "minitest"
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
+  end
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
@@ -43,7 +53,7 @@ module Acceptance
     extend Minitest::Spec::DSL
 
     let(:simple_span_name) { "/path/to/#{@test_id}" }
-    let(:simple_span_labels) { { "foo" => "bar" } }
+    let(:simple_span_labels) { { "foo" => "bar", "gcp.project_id" => @tracer.project } }
 
     def simple_trace
       tc = Stackdriver::Core::TraceContext.new.with is_new: false, span_id: 123

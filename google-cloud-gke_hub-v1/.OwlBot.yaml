@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/gkehub/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-gke_hub-v1/$1

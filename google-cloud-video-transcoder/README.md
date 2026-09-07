@@ -1,8 +1,7 @@
 # Ruby Client for the Transcoder API
 
-API Client library for the Transcoder API
+This API converts video files into formats suitable for consumer distribution. For more information, see the <a href="https://cloud.google.com/transcoder/docs/concepts/overview">Transcoder API overview</a>.
 
-The Transcoder API allows you to convert video files and package them for optimized delivery to web, mobile and connected TVs.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-video-transcoder-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-video-transcoder-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/transcoder/)
-for more usage information.
 
 ## Quick Start
 
@@ -74,7 +70,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

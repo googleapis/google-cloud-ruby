@@ -1,5 +1,61 @@
 # Changelog
 
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add fields `original_branch`, `enable_branch_management`, `depth`, and `shallow` to message `.google.cloud.dataform.v1beta1.Workspace` ([#36280](https://github.com/googleapis/google-cloud-ruby/issues/36280)) 
+
+### 1.1.0 (2026-08-05)
+
+#### Features
+
+* add workflow trigger configuration support ([#35075](https://github.com/googleapis/google-cloud-ruby/issues/35075)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.16.0 (2026-06-24)
+
+#### Features
+
+* Add Developer Connect integration for Git repository authentication 
+* Add directory metadata views to retrieve file sizes and modification timestamps 
+* Add effective default branch field and granular access token error status for repositories 
+* Add long-running operations for asynchronous repository deletion 
+* Add support for recursive folder and team folder deletions ([#34643](https://github.com/googleapis/google-cloud-ruby/issues/34643)) 
+#### Documentation
+
+* Clarify field usage guidelines and default values in API reference documentation 
+
+### 0.15.0 (2026-06-11)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32442](https://github.com/googleapis/google-cloud-ruby/issues/32442)) 
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* rename client variable in tests 
+#### Documentation
+
+* fix documentation formatting 
+* list Ruby 3.2+ as supported versions in README 
+* update license year 
+* update SelectiveGapicGeneration usage doc 
+* update various comments 
+
 ### 0.14.1 (2025-10-27)
 
 #### Documentation

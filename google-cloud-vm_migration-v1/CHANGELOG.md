@@ -1,5 +1,39 @@
 # Changelog
 
+### 2.9.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35065](https://github.com/googleapis/google-cloud-ruby/issues/35065)) 
+
+### 2.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34058](https://github.com/googleapis/google-cloud-ruby/issues/34058)) 
+
+### 2.8.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33483](https://github.com/googleapis/google-cloud-ruby/issues/33483)) 
+
+### 2.7.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.6.0 (2025-11-19)
+
+#### Features
+
+* add adaptation modifiers and guest OS features to ImageImport target details 
+* add adaptation modifiers and storage pools to MigratingVM target defaults ([#32205](https://github.com/googleapis/google-cloud-ruby/issues/32205)) 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation

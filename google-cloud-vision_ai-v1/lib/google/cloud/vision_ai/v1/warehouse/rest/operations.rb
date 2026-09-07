@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ module Google
               API_VERSION = ""
 
               # @private
-              DEFAULT_ENDPOINT_TEMPLATE = "visionai.$UNIVERSE_DOMAIN$"
+              DEFAULT_ENDPOINT_TEMPLATE = "warehouse-visionai.$UNIVERSE_DOMAIN$"
 
               # @private
               attr_reader :operations_stub
@@ -541,6 +541,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -563,7 +564,7 @@ module Google
 
                 # @private
                 # The endpoint specific to the default "googleapis.com" universe. Deprecated.
-                DEFAULT_ENDPOINT = "visionai.googleapis.com"
+                DEFAULT_ENDPOINT = "warehouse-visionai.googleapis.com"
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
@@ -613,6 +614,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

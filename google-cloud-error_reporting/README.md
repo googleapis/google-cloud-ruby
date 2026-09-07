@@ -168,9 +168,12 @@ Google::Cloud.configure do |config|
   # Shared parameters
   config.project_id = "your-project-id"
   config.keyfile = "/path/to/key.json"
+  config.quota_project = "your-billing-project"
+
   # Or Error Reporting specific parameters
   config.error_reporting.project_id = "your-project-id"
   config.error_reporting.keyfile = "/path/to/key.json"
+  config.error_reporting.quota_project = "your-billing-project"
 end
 ```
 
@@ -213,7 +216,7 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

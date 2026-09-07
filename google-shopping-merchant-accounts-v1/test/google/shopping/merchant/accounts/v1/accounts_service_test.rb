@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_account({ name: name }) do |response, operation|
+      c.get_account({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_account name: name do |response, operation|
+      c.get_account name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_account ::Google::Shopping::Merchant::Accounts::V1::GetAccountRequest.new(name: name) do |response, operation|
+      c.get_account ::Google::Shopping::Merchant::Accounts::V1::GetAccountRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_account({ name: name }, grpc_options) do |response, operation|
+      c.get_account({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_account(::Google::Shopping::Merchant::Accounts::V1::GetAccountRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_account(::Google::Shopping::Merchant::Accounts::V1::GetAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -132,6 +132,7 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
     account = {}
     user = [{}]
     service = [{}]
+    set_alias = [{}]
 
     create_and_configure_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_and_configure_account, name
@@ -139,47 +140,108 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Accounts::V1::Account), request["account"]
       assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::AddUser, request["user"].first
       assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::AddAccountService, request["service"].first
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship, request["set_alias"].first
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_and_configure_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_and_configure_account({ account: account, user: user, service: service }) do |response, operation|
+      c.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_and_configure_account account: account, user: user, service: service do |response, operation|
+      c.create_and_configure_account account: account, user: user, service: service, set_alias: set_alias do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service) do |response, operation|
+      c.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_and_configure_account({ account: account, user: user, service: service }, grpc_options) do |response, operation|
+      c.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service), grpc_options) do |response, operation|
+      c.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, create_and_configure_account_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_test_account
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1::Account.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    account = {}
+
+    create_test_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_test_account, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Accounts::V1::Account), request["account"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_test_account_client_stub do
+      # Create client
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_test_account({ parent: parent, account: account }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_test_account parent: parent, account: account do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_test_account ::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest.new(parent: parent, account: account) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_test_account({ parent: parent, account: account }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_test_account(::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest.new(parent: parent, account: account), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_test_account_client_stub.call_rpc_count
     end
   end
 
@@ -204,36 +266,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_account({ name: name, force: force }) do |response, operation|
+      c.delete_account({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_account name: name, force: force do |response, operation|
+      c.delete_account name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_account ::Google::Shopping::Merchant::Accounts::V1::DeleteAccountRequest.new(name: name, force: force) do |response, operation|
+      c.delete_account ::Google::Shopping::Merchant::Accounts::V1::DeleteAccountRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_account({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_account({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_account(::Google::Shopping::Merchant::Accounts::V1::DeleteAccountRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_account(::Google::Shopping::Merchant::Accounts::V1::DeleteAccountRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -264,36 +326,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_account({ account: account, update_mask: update_mask }) do |response, operation|
+      c.update_account({ account: account, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_account account: account, update_mask: update_mask do |response, operation|
+      c.update_account account: account, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_account ::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRequest.new(account: account, update_mask: update_mask) do |response, operation|
+      c.update_account ::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRequest.new(account: account, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_account({ account: account, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_account({ account: account, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_account(::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRequest.new(account: account, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_account(::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRequest.new(account: account, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -326,40 +388,40 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_accounts_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_accounts({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_accounts({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_accounts page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_accounts page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_accounts ::Google::Shopping::Merchant::Accounts::V1::ListAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_accounts ::Google::Shopping::Merchant::Accounts::V1::ListAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_accounts({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_accounts({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_accounts(::Google::Shopping::Merchant::Accounts::V1::ListAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_accounts(::Google::Shopping::Merchant::Accounts::V1::ListAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -393,40 +455,40 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_sub_accounts_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sub_accounts({ provider: provider, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_sub_accounts({ provider: provider, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sub_accounts provider: provider, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_sub_accounts provider: provider, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sub_accounts ::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsRequest.new(provider: provider, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_sub_accounts ::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsRequest.new(provider: provider, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sub_accounts({ provider: provider, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_sub_accounts({ provider: provider, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sub_accounts(::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsRequest.new(provider: provider, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_sub_accounts(::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsRequest.new(provider: provider, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

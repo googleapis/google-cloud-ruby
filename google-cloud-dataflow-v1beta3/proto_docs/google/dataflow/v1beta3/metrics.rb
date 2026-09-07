@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,6 @@ module Google
         end
 
         # Describes the state of a metric.
-        # Next ID: 14
         # @!attribute [rw] name
         #   @return [::Google::Cloud::Dataflow::V1beta3::MetricStructuredName]
         #     Name of the metric.
@@ -97,6 +96,12 @@ module Google
         #   @return [::Google::Protobuf::Value]
         #     Worker-computed aggregate value for the "Trie" aggregation kind.  The only
         #     possible value type is a BoundedTrieNode.
+        # @!attribute [rw] bounded_trie
+        #   @return [::Google::Protobuf::Value]
+        #     Worker-computed aggregate value for the "Trie" aggregation kind.  The only
+        #     possible value type is a BoundedTrieNode.
+        #     Introduced this field to avoid breaking older SDKs when Dataflow service
+        #     starts to populate the `bounded_trie` field.
         # @!attribute [rw] distribution
         #   @return [::Google::Protobuf::Value]
         #     A struct value describing properties of a distribution of numeric values.

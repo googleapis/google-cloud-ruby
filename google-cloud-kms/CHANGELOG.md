@@ -1,5 +1,36 @@
 # Release History
 
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35055](https://github.com/googleapis/google-cloud-ruby/issues/35055)) 
+#### Documentation
+
+* Update copyright year ([#35094](https://github.com/googleapis/google-cloud-ruby/issues/35094)) 
+
+### 2.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34048](https://github.com/googleapis/google-cloud-ruby/issues/34048)) 
+
+### 2.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+
+### 2.10.0 (2026-01-23)
+
+#### Features
+
+* add the SingleTenantHsm functionality including the management API and resource types ([#32371](https://github.com/googleapis/google-cloud-ruby/issues/32371)) 
+#### Documentation
+
+* A comment for field `crypto_key_backend` in message `.google.cloud.kms.v1.CryptoKey` is expanded to include SingleTenantHsmInstances 
+
 ### 2.9.3 (2025-09-12)
 
 #### Documentation

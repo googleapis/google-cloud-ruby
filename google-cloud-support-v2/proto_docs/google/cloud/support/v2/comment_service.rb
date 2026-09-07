@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,15 @@ module Google
         #   @return [::Google::Cloud::Support::V2::Comment]
         #     Required. The comment to be added.
         class CreateCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetComment endpoint.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the comment to retrieve.
+        class GetCommentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

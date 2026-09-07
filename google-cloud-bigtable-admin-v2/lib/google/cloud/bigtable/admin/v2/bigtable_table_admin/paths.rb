@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -124,6 +124,23 @@ module Google
                 raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                 "projects/#{project}/instances/#{instance}"
+              end
+
+              ##
+              # Create a fully-qualified Location resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}`
+              #
+              # @param project [String]
+              # @param location [String]
+              #
+              # @return [::String]
+              def location_path project:, location:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}"
               end
 
               ##

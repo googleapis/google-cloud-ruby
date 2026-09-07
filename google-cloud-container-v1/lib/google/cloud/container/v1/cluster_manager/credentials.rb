@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ module Google
           # Credentials for the ClusterManager API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/container",
+              "https://www.googleapis.com/auth/container.read-only"
             ]
             self.env_vars = [
               "CONTAINER_CREDENTIALS",

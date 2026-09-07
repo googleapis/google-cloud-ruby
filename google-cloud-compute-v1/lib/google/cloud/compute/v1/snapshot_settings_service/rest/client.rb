@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -295,7 +295,19 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param snapshot_settings_resource [::Google::Cloud::Compute::V1::SnapshotSettings, ::Hash]
               #     The body resource for this request
               #   @param update_mask [::String]
@@ -437,6 +449,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -509,6 +522,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

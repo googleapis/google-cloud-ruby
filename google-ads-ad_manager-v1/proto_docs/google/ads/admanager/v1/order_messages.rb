@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the `Order`.
         #     Format: `networks/{network_code}/orders/{order_id}`
         # @!attribute [r] order_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. Order ID.
+        #     Output only. Deprecated: Order ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Order.  This value has a maximum length
@@ -42,8 +43,9 @@ module Google
         #     Order. Format: "networks/\\{network_code}/users/\\{user_id}"
         # @!attribute [rw] advertiser_contacts
         #   @return [::Array<::String>]
-        #     Optional. The resource names of Contacts from the advertiser of this Order.
-        #     Format: "networks/\\{network_code}/contacts/\\{contact_id}"
+        #     Optional. Unordered list. The resource names of Contacts from the
+        #     advertiser of this Order. Format:
+        #     "networks/\\{network_code}/contacts/\\{contact_id}"
         # @!attribute [rw] advertiser
         #   @return [::String]
         #     Required. The resource name of the Company, which is of type
@@ -69,22 +71,21 @@ module Google
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. The resource name of the User who created the Order on behalf
-        #     of the advertiser. This value is assigned by Google. Format:
-        #     "networks/\\{network_code}/users/\\{user_id}"
+        #     of the advertiser. Format: "networks/\\{network_code}/users/\\{user_id}"
         # @!attribute [r] currency_code
         #   @return [::String]
         #     Output only. The ISO 4217 3-letter currency code for the currency used by
         #     the Order. This value is the network's currency code.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The instant at which the Order and its associated line items
-        #     are eligible to begin serving. This attribute is derived from the line item
-        #     of the order that has the earliest LineItem.start_time.
+        #     Output only. The instant at which the Order and its associated Line items
+        #     are eligible to begin serving. This attribute is derived from the Line item
+        #     of the order that has the earliest `LineItem.start_time`.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The instant at which the Order and its associated line items
-        #     stop being served. This attribute is derived from the line item of the
-        #     order that has the latest LineItem.end_time.
+        #     Output only. The instant at which the Order and its associated Line items
+        #     stop being served. This attribute is derived from the Line item of the
+        #     order that has the latest `LineItem.end_time`.
         # @!attribute [r] unlimited_end_time
         #   @return [::Boolean]
         #     Output only. Indicates whether or not this Order has an end time.
@@ -97,8 +98,7 @@ module Google
         #     Output only. The archival status of the Order.
         # @!attribute [r] last_modified_by_app
         #   @return [::String]
-        #     Output only. The application which modified this order. This attribute is
-        #     assigned by Google.
+        #     Output only. The application which modified this order.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The instant this Order was last modified.
@@ -139,6 +139,19 @@ module Google
         # @!attribute [rw] custom_field_values
         #   @return [::Array<::Google::Ads::AdManager::V1::CustomFieldValue>]
         #     Optional. The set of custom field values to this order.
+        # @!attribute [r] impressions_delivered
+        #   @return [::Integer]
+        #     Output only. The total number of impressions delivered for Line items in
+        #     this order.
+        # @!attribute [r] total_clicks_delivered
+        #   @return [::Integer]
+        #     Output only. Total clicks delivered for all Line items of this `Order`.
+        #     This value is calculated from the associated `LineItem` values.
+        # @!attribute [r] total_viewable_impressions_delivered
+        #   @return [::Integer]
+        #     Output only. Total viewable impressions delivered for all Line items of
+        #     this `Order`. This value is calculated from the associated `LineItem`
+        #     values.
         class Order
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

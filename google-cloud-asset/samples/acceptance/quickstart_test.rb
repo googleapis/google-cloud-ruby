@@ -40,8 +40,7 @@ describe "Asset Quickstart" do
     Google::Cloud::Pubsub.new
   end
   let :topic do
-    topic = pubsub.create_topic "ruby_asset_samples_#{SecureRandom.hex}"
-    topic
+    pubsub.topic_admin.create_topic name: "projects/#{project_id}/topics/ruby_asset_samples_#{SecureRandom.hex}"
   end
   let :asset_names do
     ["//storage.googleapis.com/#{bucket.name}"]
@@ -94,7 +93,7 @@ describe "Asset Quickstart" do
 
   describe "create_feed" do
     after do
-      topic.delete
+      pubsub.topic_admin.delete_topic topic: topic.name
     end
     it "creates a feed for a set of assets" do
       asset_names = ["//storage.googleapis.com/#{bucket.name}"]
@@ -137,14 +136,17 @@ describe "Asset Quickstart" do
   describe "search_all_iam_policies" do
     it "searches all policies bound to the owner" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
-      role = "roles/owner"
-      out, _err = capture_io do
-        search_all_iam_policies(
-          scope: "projects/#{project}",
-          query: "policy:#{role}"
-        )
+      role = "roles/storage.admin"
+      retry_action EmptyResponseError do
+        out, _err = capture_io do
+          search_all_iam_policies(
+            scope: "projects/#{project}",
+            query: "policy:#{role}"
+          )
+        end
+        raise EmptyResponseError if out.empty?
+        assert_match(/#{role}/, out)
       end
-      assert_match(/#{role}/, out)
     end
   end
 

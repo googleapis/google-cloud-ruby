@@ -1,5 +1,41 @@
 # Changelog
 
+### 0.7.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35067](https://github.com/googleapis/google-cloud-ruby/issues/35067)) 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34060](https://github.com/googleapis/google-cloud-ruby/issues/34060)) 
+
+### 0.6.0 (2026-05-12)
+
+#### Features
+
+* new iam v3beta client for AccessPolicies 
+
+### 0.5.0 (2026-05-07)
+
+#### Features
+
+* new iam v3beta client for AccessPolicies ([#33878](https://github.com/googleapis/google-cloud-ruby/issues/33878)) 
+
+### 0.4.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.4.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation

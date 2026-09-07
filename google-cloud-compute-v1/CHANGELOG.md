@@ -1,5 +1,50 @@
 # Release History
 
+### 3.10.0 (2026-08-12)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
+### 3.9.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+
+### 3.9.0 (2026-07-20)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260629 ([#1213](https://github.com/googleapis/google-cloud-ruby/issues/1213)) ([#34847](https://github.com/googleapis/google-cloud-ruby/issues/34847)) 
+
+### 3.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 3.7.0 (2026-05-18)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260422 ([#1193](https://github.com/googleapis/google-cloud-ruby/issues/1193)) ([#33964](https://github.com/googleapis/google-cloud-ruby/issues/33964)) 
+
+### 3.6.0 (2026-05-06)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260410 ([#1185](https://github.com/googleapis/google-cloud-ruby/issues/1185)) ([#33892](https://github.com/googleapis/google-cloud-ruby/issues/33892)) 
+
+### 3.5.0 (2026-04-03)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260227 ([#33658](https://github.com/googleapis/google-cloud-ruby/issues/33658)) 
+
 ### 3.4.0 (2025-09-17)
 
 #### Features

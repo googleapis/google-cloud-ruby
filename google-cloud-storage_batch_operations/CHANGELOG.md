@@ -1,5 +1,39 @@
 # Changelog
 
+### 1.0.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+#### Documentation
+
+* Update copyright year ([#35098](https://github.com/googleapis/google-cloud-ruby/issues/35098)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
+### 0.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.2.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response ([#32325](https://github.com/googleapis/google-cloud-ruby/issues/32325)) 
+* update min_speaker_count and max_speaker_count to be optional 
+
 ### 0.1.2 (2025-09-12)
 
 #### Documentation

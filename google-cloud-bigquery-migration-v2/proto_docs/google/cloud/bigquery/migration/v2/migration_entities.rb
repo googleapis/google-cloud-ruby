@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,12 +42,12 @@ module Google
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow::State]
           #     Output only. That status of the workflow.
-          # @!attribute [rw] create_time
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the workflow was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the workflow was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the workflow was last updated.
+          #     Output only. Time when the workflow was last updated.
           class MigrationWorkflow
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,29 +86,43 @@ module Google
 
           # A single task for a migration which has details about the configuration of
           # the task.
+          # @!attribute [rw] assessment_task_details
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::AssessmentTaskDetails]
+          #     Task configuration for Assessment.
+          #
+          #     Note: The following fields are mutually exclusive: `assessment_task_details`, `translation_config_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] translation_config_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationConfigDetails]
           #     Task configuration for CW Batch/Offline SQL Translation.
           #
-          #     Note: The following fields are mutually exclusive: `translation_config_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `translation_config_details`, `assessment_task_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] translation_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationDetails]
           #     Task details for unified SQL Translation.
           #
-          #     Note: The following fields are mutually exclusive: `translation_details`, `translation_config_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `translation_details`, `assessment_task_details`, `translation_config_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] id
           #   @return [::String]
           #     Output only. Immutable. The unique identifier for the migration task. The
           #     ID is server-generated.
           # @!attribute [rw] type
           #   @return [::String]
-          #     The type of the task. This must be one of the supported task types:
-          #     Translation_Teradata2BQ, Translation_Redshift2BQ, Translation_Bteq2BQ,
-          #     Translation_Oracle2BQ, Translation_HiveQL2BQ, Translation_SparkSQL2BQ,
-          #     Translation_Snowflake2BQ, Translation_Netezza2BQ,
-          #     Translation_AzureSynapse2BQ, Translation_Vertica2BQ,
-          #     Translation_SQLServer2BQ, Translation_Presto2BQ, Translation_MySQL2BQ,
-          #     Translation_Postgresql2BQ, Translation_SQLite2BQ, Translation_Greenplum2BQ.
+          #     The type of the task. This must be one of the supported task types.
+          #
+          #     Assessment:
+          #
+          #     - `Assessment_Hive` - Assessment for Hive.
+          #     - `Assessment_Redshift` - Assessment for Redshift.
+          #     - `Assessment_Snowflake` - Assessment for Snowflake.
+          #     - `Assessment_Teradata_v2` - Assessment for Teradata.
+          #     - `Assessment_Oracle` - Assessment for Oracle.
+          #     - `Assessment_Hadoop` - Assessment for Hadoop.
+          #     - `Assessment_Informatica` - Assessment for Informatica.
+          #
+          #     Translation:
+          #     See [Supported Task
+          #     Types](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types)
+          #     for a list of supported task types.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTask::State]
           #     Output only. The current state of the task.
@@ -116,35 +130,37 @@ module Google
           #   @return [::Google::Rpc::ErrorInfo]
           #     Output only. An explanation that may be populated when the task is in
           #     FAILED state.
-          # @!attribute [rw] create_time
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the task was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the task was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the task was last updated.
+          #     Output only. Time when the task was last updated.
           # @!attribute [r] resource_error_details
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::ResourceErrorDetail>]
           #     Output only. Provides details to errors and issues encountered while
           #     processing the task. Presence of error details does not mean that the task
           #     failed.
-          # @!attribute [rw] resource_error_count
+          # @!attribute [r] resource_error_count
           #   @return [::Integer]
-          #     The number or resources with errors. Note: This is not the total
-          #     number of errors as each resource can have more than one error.
-          #     This is used to indicate truncation by having a `resource_error_count`
-          #     that is higher than the size of `resource_error_details`.
-          # @!attribute [rw] metrics
+          #     Output only. The number or resources with errors. Note: This is not the
+          #     total number of errors as each resource can have more than one error. This
+          #     is used to indicate truncation by having a `resource_error_count` that is
+          #     higher than the size of `resource_error_details`.
+          # @!attribute [r] metrics
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::TimeSeries>]
-          #     The metrics for the task.
+          #     Output only. The metrics for the task.
           # @!attribute [r] task_result
           #   @return [::Google::Cloud::Bigquery::Migration::V2::MigrationTaskResult]
           #     Output only. The result of the task.
-          # @!attribute [rw] total_processing_error_count
+          # @!attribute [r] total_processing_error_count
           #   @return [::Integer]
-          #     Count of all the processing errors in this task and its subtasks.
-          # @!attribute [rw] total_resource_error_count
+          #     Output only. Count of all the processing errors in this task and its
+          #     subtasks.
+          # @!attribute [r] total_resource_error_count
           #   @return [::Integer]
-          #     Count of all the resource errors in this task and its subtasks.
+          #     Output only. Count of all the resource errors in this task and its
+          #     subtasks.
           class MigrationTask
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,7 +179,7 @@ module Google
               # The task is running, i.e. its subtasks are ready for execution.
               RUNNING = 3
 
-              # Tha task is paused. Assigned subtasks can continue, but no new subtasks
+              # The task is paused. Assigned subtasks can continue, but no new subtasks
               # will be scheduled.
               PAUSED = 4
 
@@ -205,21 +221,21 @@ module Google
           #     Output only. Provides details to errors and issues encountered while
           #     processing the subtask. Presence of error details does not mean that the
           #     subtask failed.
-          # @!attribute [rw] resource_error_count
+          # @!attribute [r] resource_error_count
           #   @return [::Integer]
-          #     The number or resources with errors. Note: This is not the total
-          #     number of errors as each resource can have more than one error.
-          #     This is used to indicate truncation by having a `resource_error_count`
-          #     that is higher than the size of `resource_error_details`.
-          # @!attribute [rw] create_time
+          #     Output only. The number or resources with errors. Note: This is not the
+          #     total number of errors as each resource can have more than one error. This
+          #     is used to indicate truncation by having a `resource_error_count` that is
+          #     higher than the size of `resource_error_details`.
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the subtask was created.
-          # @!attribute [rw] last_update_time
+          #     Output only. Time when the subtask was created.
+          # @!attribute [r] last_update_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Time when the subtask was last updated.
-          # @!attribute [rw] metrics
+          #     Output only. Time when the subtask was last updated.
+          # @!attribute [r] metrics
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::TimeSeries>]
-          #     The metrics for the subtask.
+          #     Output only. The metrics for the subtask.
           class MigrationSubtask
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -255,9 +271,21 @@ module Google
           # @!attribute [rw] translation_task_result
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationTaskResult]
           #     Details specific to translation task types.
+          # @!attribute [rw] task_outputs
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigquery::Migration::V2::TaskOutput}]
+          #     The map of task output types to the task outputs, e.g. "LINEAGE".
           class MigrationTaskResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::TaskOutput]
+            class TaskOutputsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Translation specific result details from the migration task.
@@ -267,9 +295,174 @@ module Google
           # @!attribute [rw] report_log_messages
           #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::GcsReportLogMessage>]
           #     The records from the aggregate CSV report for a migration workflow.
+          # @!attribute [rw] console_uri
+          #   @return [::String]
+          #     The Cloud Console URI for the migration workflow.
           class TranslationTaskResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The task output for a task type including the status and any errors.
+          # @!attribute [rw] lineage_output
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput]
+          #     The output of the task with output type "LINEAGE".
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::TaskOutput::State]
+          #     Output only. The current state of the task output.
+          # @!attribute [rw] processing_error
+          #   @return [::Google::Rpc::ErrorInfo]
+          #     An explanation that may be populated when the task output is in FAILED
+          #     state.
+          class TaskOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible task output states.
+            module State
+              # Task output state is unspecified.
+              STATE_UNSPECIFIED = 0
+
+              # Task output is pending.
+              PENDING = 1
+
+              # Task output is succeeded.
+              SUCCEEDED = 2
+
+              # Task output is failed. This does not mean that there is no useful
+              # information in the output; partial outputs or failure details may be
+              # available.
+              FAILED = 3
+            end
+          end
+
+          # The output of a task with output type "LINEAGE".
+          #
+          # Actual generated lineage can be queried separately (see
+          # {::Google::Cloud::Bigquery::Migration::V2::LineageOutput#webapp_uri webapp_uri}),
+          # this message contains only metadata: processing status, errors, etc.
+          # @!attribute [rw] webapp_uri
+          #   @return [::String]
+          #     The URI of the webapp that visualizes the lineage.
+          #     The user needs the `bigquerymigration.googleapis.com/lineageDbs.query` IAM
+          #     permission to use the webapp.
+          # @!attribute [r] recognized_inputs
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::RecognizedInput>]
+          #     Output only. Recognized lineage inputs.
+          #
+          #     All inputs are processed only if the task succeeds and all work is in state
+          #     [SUCCEEDED](ProgressReport.WorkSummary.State.SUCCEEDED) (in particular,
+          #     nothing is [SKIPPED](ProgressReport.WorkSummary.State.SKIPPED)).
+          #
+          #     Even with all inputs processed successfully, there may be transpiler errors
+          #     present leading to inaccurate lineage.
+          # @!attribute [r] processing_progress_reports
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport>]
+          #     Output only. Work processing progress reports broken up by processing
+          #     stage.
+          class LineageOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about lineage input of the given type that lineage generation
+            # recognized.
+            #
+            # If you expected to process more of the given input, verify your input was
+            # uploaded and is in the correct format and the request to generate lineage
+            # correctly specified the input location.
+            # @!attribute [r] type
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::RecognizedInput::Type]
+            #     Output only. The type of the input.
+            # @!attribute [r] uncompressed_size_bytes
+            #   @return [::Integer]
+            #     Output only. The uncompressed size of the recognized input of the given
+            #     type.
+            class RecognizedInput
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Input type recognized by the lineage processing.
+              module Type
+                # The type is not specified.
+                TYPE_UNSPECIFIED = 0
+
+                # The input is metadata.
+                METADATA = 1
+
+                # The input is a query log.
+                QUERY_LOG = 2
+
+                # The input is a SQL script.
+                SCRIPT = 3
+              end
+            end
+
+            # Breaks down processing progress of work.
+            # @!attribute [r] processing_stage
+            #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::ProcessingStage]
+            #     Output only. The processing stage this progress report describes.
+            # @!attribute [r] work_summaries
+            #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::WorkSummary>]
+            #     Output only. Summaries of work broken up by the state of the work. Each
+            #     work summary describes how much work is in the given state.
+            #
+            #     To get numbers for the total work covered, aggregate the numbers from all
+            #     summaries.
+            class ProgressReport
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Summary of work in the given state.
+              # @!attribute [r] state
+              #   @return [::Google::Cloud::Bigquery::Migration::V2::LineageOutput::ProgressReport::WorkSummary::State]
+              #     Output only. The state of the work this summary describes.
+              # @!attribute [r] size
+              #   @return [::Integer]
+              #     Output only. Size of the work in the given State.
+              #
+              #     Size counts "units of work". Units represent arbitrary division of
+              #     work; there's no expectation each unit takes similar time to process.
+              # @!attribute [r] comment
+              #   @return [::String]
+              #     Output only. Human-readable comment.
+              class WorkSummary
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # States of work. Each piece of work is in exactly one state.
+                # [SUCCEEDED], [FAILED] and [SKIPPED] are terminal states; work in the
+                # [IN_PROGRESS] will eventually transition to one of the terminal states.
+                module State
+                  # The state is not specified.
+                  STATE_UNSPECIFIED = 0
+
+                  # Work that was processed successfully.
+                  SUCCEEDED = 1
+
+                  # Work that failed processing.
+                  FAILED = 2
+
+                  # Work that is currently being processed or queued for processing.
+                  IN_PROGRESS = 3
+
+                  # Work that was recognised as necessary to fully process inputs but was
+                  # skipped due to system limitations.
+                  SKIPPED = 4
+                end
+              end
+
+              # The processing stage the progress report describes.
+              module ProcessingStage
+                # The stage is not specified.
+                PROCESSING_STAGE_UNSPECIFIED = 0
+
+                # The input ingestion stage.
+                INPUT_INGESTION = 1000
+
+                # The lineage DB postprocessing stage.
+                POSTPROCESSING = 2000
+              end
+            end
           end
         end
       end

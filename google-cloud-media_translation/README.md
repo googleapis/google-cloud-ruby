@@ -1,8 +1,7 @@
 # Ruby Client for the Media Translation API
 
-API Client library for the Media Translation API
+The Media Translation API provides enterprise-quality translation from/to various media types.
 
-Media Translation API delivers real-time speech translation to your content and applications directly from your audio data. Leveraging Google’s machine learning technologies, the API offers enhanced accuracy and simplified integration while equipping you with a comprehensive set of features to further refine your translation results. Improve user experience with low-latency streaming translation and scale quickly with straightforward internationalization.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-media_translation-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-media_translation-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-media_translation-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/media-translation/)
-for more usage information.
 
 ## Quick Start
 
@@ -70,7 +66,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

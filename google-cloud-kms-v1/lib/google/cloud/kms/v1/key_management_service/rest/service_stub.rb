@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -234,6 +234,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the list_retired_resources REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ListRetiredResourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::ListRetiredResourcesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::ListRetiredResourcesResponse]
+              #   A result object deserialized from the server's reply
+              def list_retired_resources request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_retired_resources_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_retired_resources",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Kms::V1::ListRetiredResourcesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the get_key_ring REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::GetKeyRingRequest]
@@ -434,6 +474,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_retired_resource REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::GetRetiredResourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::RetiredResource]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::RetiredResource]
+              #   A result object deserialized from the server's reply
+              def get_retired_resource request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_retired_resource_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_retired_resource",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Kms::V1::RetiredResource.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the create_key_ring REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::CreateKeyRingRequest]
@@ -554,6 +634,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the delete_crypto_key REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_crypto_key request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_crypto_key_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_crypto_key",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_crypto_key_version request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_crypto_key_version_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_crypto_key_version",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the import_crypto_key_version REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest]
@@ -587,6 +747,86 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Kms::V1::CryptoKeyVersion.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the import_trusted_key_wrapped_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+              #   A result object deserialized from the server's reply
+              def import_trusted_key_wrapped_crypto_key_version request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_import_trusted_key_wrapped_crypto_key_version_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "import_trusted_key_wrapped_crypto_key_version",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Kms::V1::CryptoKeyVersion.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the export_trusted_key_wrapped_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse]
+              #   A result object deserialized from the server's reply
+              def export_trusted_key_wrapped_crypto_key_version request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_export_trusted_key_wrapped_crypto_key_version_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "export_trusted_key_wrapped_crypto_key_version",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -1320,6 +1560,27 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the list_retired_resources REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ListRetiredResourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_retired_resources_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/retiredResources",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the get_key_ring REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::GetKeyRingRequest]
@@ -1425,6 +1686,27 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the get_retired_resource REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::GetRetiredResourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_retired_resource_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/retiredResources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the create_key_ring REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::CreateKeyRingRequest]
@@ -1491,6 +1773,48 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the delete_crypto_key REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_crypto_key_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_crypto_key_version_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys/[^/]+/cryptoKeyVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the import_crypto_key_version REST call
               #
               # @param request_pb [::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest]
@@ -1505,6 +1829,49 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the import_trusted_key_wrapped_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_import_trusted_key_wrapped_crypto_key_version_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/cryptoKeyVersions:importTrustedKeyWrappedCryptoKeyVersion",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the export_trusted_key_wrapped_crypto_key_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_export_trusted_key_wrapped_crypto_key_version_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:exportTrustedKeyWrappedCryptoKeyVersion",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys/[^/]+/cryptoKeyVersions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1658,7 +2025,7 @@ module Google
                                                           uri_template: "/v1/{name}:encrypt",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

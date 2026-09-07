@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::NetworkService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::NetworkService::Rest::ServiceStub.stub :transcode_get_network_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_network_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_network({ name: name }) do |_result, response|
+        c.get_network({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_network name: name do |_result, response|
+        c.get_network name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_network ::Google::Ads::AdManager::V1::GetNetworkRequest.new(name: name) do |_result, response|
+        c.get_network ::Google::Ads::AdManager::V1::GetNetworkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_network({ name: name }, call_options) do |_result, response|
+        c.get_network({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_network(::Google::Ads::AdManager::V1::GetNetworkRequest.new(name: name), call_options) do |_result, response|
+        c.get_network(::Google::Ads::AdManager::V1::GetNetworkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -140,6 +140,9 @@ class ::Google::Ads::AdManager::V1::NetworkService::Rest::ClientTest < Minitest:
     call_options = {}
 
     # Create request parameters for a unary method.
+    page_size = 42
+    page_token = "hello world"
+    skip = 42
 
     list_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -150,32 +153,194 @@ class ::Google::Ads::AdManager::V1::NetworkService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::NetworkService::Rest::ServiceStub.stub :transcode_list_networks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_networks_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_networks({  }) do |_result, response|
+        c.list_networks({ page_size: page_size, page_token: page_token, skip: skip }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_networks page_size: page_size, page_token: page_token, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_networks ::Google::Ads::AdManager::V1::ListNetworksRequest.new() do |_result, response|
+        c.list_networks ::Google::Ads::AdManager::V1::ListNetworksRequest.new(page_size: page_size, page_token: page_token, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_networks({  }, call_options) do |_result, response|
+        c.list_networks({ page_size: page_size, page_token: page_token, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_networks(::Google::Ads::AdManager::V1::ListNetworksRequest.new(), call_options) do |_result, response|
+        c.list_networks(::Google::Ads::AdManager::V1::ListNetworksRequest.new(page_size: page_size, page_token: page_token, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
-        assert_equal 4, list_networks_client_stub.call_count
+        assert_equal 5, list_networks_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_network
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Network.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    network = {}
+    update_mask = {}
+
+    update_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::NetworkService::Rest::ServiceStub.stub :transcode_update_network_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_network_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_network({ network: network, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_network network: network, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_network ::Google::Ads::AdManager::V1::UpdateNetworkRequest.new(network: network, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_network({ network: network, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_network(::Google::Ads::AdManager::V1::UpdateNetworkRequest.new(network: network, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_network_client_stub.call_count
+      end
+    end
+  end
+
+  def test_provision_test_network
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Network.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+
+    provision_test_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::NetworkService::Rest::ServiceStub.stub :transcode_provision_test_network_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, provision_test_network_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.provision_test_network({  }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.provision_test_network ::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest.new() do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.provision_test_network({  }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.provision_test_network(::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest.new(), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 4, provision_test_network_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_default_third_party_data_declaration
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_default_third_party_data_declaration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::NetworkService::Rest::ServiceStub.stub :transcode_get_default_third_party_data_declaration_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_default_third_party_data_declaration_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::NetworkService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_default_third_party_data_declaration({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_default_third_party_data_declaration name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_default_third_party_data_declaration ::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_default_third_party_data_declaration({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_default_third_party_data_declaration(::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_default_third_party_data_declaration_client_stub.call_count
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -770,6 +770,9 @@ module Google
 
             # The Zone is ready for site turnup.
             READY_FOR_SITE_TURNUP = 6
+
+            # The Zone is offline.
+            OFFLINE = 9
 
             # The Zone failed in factory turnup checks.
             CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7

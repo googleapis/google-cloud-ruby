@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The App Engine Admin API provisions and manages your App Engine applications."
-  gem.summary       = "API Client library for the App Engine Admin API"
+  gem.description   = "Provisions and manages developers' App Engine applications."
+  gem.summary       = "Provisions and manages developers' App Engine applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-app_engine-v1", ">= 0.9", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"

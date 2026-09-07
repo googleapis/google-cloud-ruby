@@ -1,8 +1,7 @@
 # Ruby Client for the Parallelstore V1BETA API
 
-API Client library for the Parallelstore V1BETA API
+Parallelstore is a high performance, managed parallel file service based on DAOS. It delivers up to 6x greater read throughput performance compared to competitive Lustre scratch offerings.
 
-google-cloud-parallelstore-v1beta is the official client library for the Parallelstore V1BETA API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

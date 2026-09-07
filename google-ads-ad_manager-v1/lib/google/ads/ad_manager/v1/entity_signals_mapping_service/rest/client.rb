@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `EntitySignalsMapping` object.
+              # Retrieves a `EntitySignalsMapping` object.
               #
               # @overload get_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `get_entity_signals_mapping` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `EntitySignalsMapping` objects.
+              # Lists `EntitySignalsMapping` objects.
               #
               # @overload list_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `list_entity_signals_mappings` via a request object, either of type
@@ -365,7 +365,7 @@ module Google
               end
 
               ##
-              # API to create an `EntitySignalsMapping` object.
+              # Creates an `EntitySignalsMapping` object.
               #
               # @overload create_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `create_entity_signals_mapping` via a request object, either of type
@@ -446,7 +446,7 @@ module Google
               end
 
               ##
-              # API to update an `EntitySignalsMapping` object.
+              # Updates an `EntitySignalsMapping` object.
               #
               # @overload update_entity_signals_mapping(request, options = nil)
               #   Pass arguments to `update_entity_signals_mapping` via a request object, either of type
@@ -471,7 +471,7 @@ module Google
               #     Format:
               #     `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}`
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::EntitySignalsMapping]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -531,7 +531,7 @@ module Google
               end
 
               ##
-              # API to batch create `EntitySignalsMapping` objects.
+              # Creates `EntitySignalsMapping` objects.
               #
               # @overload batch_create_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `batch_create_entity_signals_mappings` via a request object, either of type
@@ -614,7 +614,7 @@ module Google
               end
 
               ##
-              # API to batch update `EntitySignalsMapping` objects.
+              # Batch updates `EntitySignalsMapping` objects.
               #
               # @overload batch_update_entity_signals_mappings(request, options = nil)
               #   Pass arguments to `batch_update_entity_signals_mappings` via a request object, either of type
@@ -766,6 +766,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -838,6 +839,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

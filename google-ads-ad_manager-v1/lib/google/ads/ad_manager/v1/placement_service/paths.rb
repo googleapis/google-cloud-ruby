@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,23 @@ module Google
         module PlacementService
           # Path helper methods for the PlacementService API.
           module Paths
+            ##
+            # Create a fully-qualified AdUnit resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adUnits/{ad_unit}`
+            #
+            # @param network_code [String]
+            # @param ad_unit [String]
+            #
+            # @return [::String]
+            def ad_unit_path network_code:, ad_unit:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adUnits/#{ad_unit}"
+            end
+
             ##
             # Create a fully-qualified Network resource string.
             #

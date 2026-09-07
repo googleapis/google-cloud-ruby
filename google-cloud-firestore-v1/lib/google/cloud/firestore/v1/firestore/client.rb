@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ module Google
 
                 default_config.rpcs.batch_get_documents.timeout = 300.0
                 default_config.rpcs.batch_get_documents.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
@@ -118,17 +118,22 @@ module Google
 
                 default_config.rpcs.run_query.timeout = 300.0
                 default_config.rpcs.run_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
+                }
+
+                default_config.rpcs.execute_pipeline.timeout = 300.0
+                default_config.rpcs.execute_pipeline.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13]
                 }
 
                 default_config.rpcs.run_aggregation_query.timeout = 300.0
                 default_config.rpcs.run_aggregation_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.partition_query.timeout = 300.0
                 default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                 }
 
                 default_config.rpcs.write.timeout = 86_400.0
@@ -294,7 +299,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_document(name: nil, mask: nil, transaction: nil, read_time: nil)
+            # @overload get_document(name: nil, mask: nil, transaction: nil, read_time: nil, request_options: nil)
             #   Pass arguments to `get_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -319,6 +324,8 @@ module Google
             #     minute timestamp within the past 7 days.
             #
             #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::Document]
@@ -397,7 +404,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_documents(parent: nil, collection_id: nil, page_size: nil, page_token: nil, order_by: nil, mask: nil, transaction: nil, read_time: nil, show_missing: nil)
+            # @overload list_documents(parent: nil, collection_id: nil, page_size: nil, page_token: nil, order_by: nil, mask: nil, transaction: nil, read_time: nil, show_missing: nil, request_options: nil)
             #   Pass arguments to `list_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -462,6 +469,8 @@ module Google
             #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
             #
             #     Requests with `show_missing` may not specify `where` or `order_by`.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
@@ -549,7 +558,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_document(document: nil, update_mask: nil, mask: nil, current_document: nil)
+            # @overload update_document(document: nil, update_mask: nil, mask: nil, current_document: nil, request_options: nil)
             #   Pass arguments to `update_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -573,6 +582,8 @@ module Google
             #   @param current_document [::Google::Cloud::Firestore::V1::Precondition, ::Hash]
             #     An optional precondition on the document.
             #     The request will fail if this is set and not met by the target document.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::Document]
@@ -651,7 +662,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_document(name: nil, current_document: nil)
+            # @overload delete_document(name: nil, current_document: nil, request_options: nil)
             #   Pass arguments to `delete_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -662,6 +673,8 @@ module Google
             #   @param current_document [::Google::Cloud::Firestore::V1::Precondition, ::Hash]
             #     An optional precondition on the document.
             #     The request will fail if this is set and not met by the target document.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -743,7 +756,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_get_documents(database: nil, documents: nil, mask: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            # @overload batch_get_documents(database: nil, documents: nil, mask: nil, transaction: nil, new_transaction: nil, read_time: nil, request_options: nil)
             #   Pass arguments to `batch_get_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -780,6 +793,8 @@ module Google
             #     minute timestamp within the past 7 days.
             #
             #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`, `new_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
@@ -861,7 +876,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(database: nil, options: nil)
+            # @overload begin_transaction(database: nil, options: nil, request_options: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -872,6 +887,8 @@ module Google
             #   @param options [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
             #     The options for the transaction.
             #     Defaults to a read-write transaction.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::BeginTransactionResponse]
@@ -950,7 +967,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(database: nil, writes: nil, transaction: nil)
+            # @overload commit(database: nil, writes: nil, transaction: nil, request_options: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -964,6 +981,8 @@ module Google
             #     Always executed atomically and in order.
             #   @param transaction [::String]
             #     If set, applies all writes in this transaction, and commits it.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::CommitResponse]
@@ -1042,7 +1061,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload rollback(database: nil, transaction: nil)
+            # @overload rollback(database: nil, transaction: nil, request_options: nil)
             #   Pass arguments to `rollback` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1052,6 +1071,8 @@ module Google
             #     `projects/{project_id}/databases/{database_id}`.
             #   @param transaction [::String]
             #     Required. The transaction to roll back.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1130,7 +1151,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
+            # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil, request_options: nil)
             #   Pass arguments to `run_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1168,6 +1189,8 @@ module Google
             #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
             #     Optional. Explain options for the query. If set, additional query
             #     statistics will be returned. If not, only query results will be returned.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
@@ -1237,6 +1260,133 @@ module Google
             end
 
             ##
+            # Executes a pipeline query.
+            #
+            # @overload execute_pipeline(request, options = nil)
+            #   Pass arguments to `execute_pipeline` via a request object, either of type
+            #   {::Google::Cloud::Firestore::V1::ExecutePipelineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Firestore::V1::ExecutePipelineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil, auto_commit_transaction: nil, request_options: nil)
+            #   Pass arguments to `execute_pipeline` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param database [::String]
+            #     Required. Database identifier, in the form
+            #     `projects/{project}/databases/{database}`.
+            #   @param structured_pipeline [::Google::Cloud::Firestore::V1::StructuredPipeline, ::Hash]
+            #     A pipelined operation.
+            #   @param transaction [::String]
+            #     Run the query within an already active transaction.
+            #
+            #     The value here is the opaque transaction ID to execute the query in.
+            #
+            #     Note: The following parameters are mutually exclusive: `transaction`, `new_transaction`, `read_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
+            #     Execute the pipeline in a new transaction.
+            #
+            #     The identifier of the newly created transaction will be returned in the
+            #     first response on the stream. This defaults to a read-only transaction.
+            #
+            #     Note: The following parameters are mutually exclusive: `new_transaction`, `transaction`, `read_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Execute the pipeline in a snapshot transaction at the given time.
+            #
+            #     This must be a microsecond precision timestamp within the past one hour,
+            #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+            #     minute timestamp within the past 7 days.
+            #
+            #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`, `new_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param auto_commit_transaction [::Boolean]
+            #     Optional. Automatically commits the transaction after the pipeline has been
+            #     executed. Only permitted in combination with `transaction` or
+            #     `new_transaction`.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::ExecutePipelineResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Firestore::V1::ExecutePipelineResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::ExecutePipelineRequest.new
+            #
+            #   # Call the execute_pipeline method to start streaming.
+            #   output = client.execute_pipeline request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::ExecutePipelineResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def execute_pipeline request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::V1::ExecutePipelineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.execute_pipeline.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Firestore::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.database
+                regex_match = %r{^projects/(?<project_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.database
+                if regex_match
+                  header_params["project_id"] = regex_match["project_id".to_s]
+                end
+              end
+              if request.database
+                regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.database
+                if regex_match
+                  header_params["database_id"] = regex_match["database_id".to_s]
+                end
+              end
+
+              request_params_header = URI.encode_www_form header_params
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.execute_pipeline.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.execute_pipeline.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @firestore_stub.call_rpc :execute_pipeline, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Runs an aggregation query.
             #
             # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like
@@ -1261,7 +1411,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
+            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil, request_options: nil)
             #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1299,6 +1449,8 @@ module Google
             #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
             #     Optional. Explain options for the query. If set, additional query
             #     statistics will be returned. If not, only query results will be returned.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
@@ -1382,7 +1534,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil)
+            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil, request_options: nil)
             #   Pass arguments to `partition_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1434,6 +1586,8 @@ module Google
             #     This must be a microsecond precision timestamp within the past one hour,
             #     or if Point-in-Time Recovery is enabled, can additionally be a whole
             #     minute timestamp within the past 7 days.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
@@ -1676,7 +1830,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil)
+            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil, request_options: nil)
             #   Pass arguments to `list_collection_ids` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1686,6 +1840,9 @@ module Google
             #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
             #     For example:
             #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+            #
+            #     Use `projects/{project_id}/databases/{database_id}/documents` to list
+            #     top-level collections.
             #   @param page_size [::Integer]
             #     The maximum number of results to return.
             #   @param page_token [::String]
@@ -1697,6 +1854,8 @@ module Google
             #     This must be a microsecond precision timestamp within the past one hour,
             #     or if Point-in-Time Recovery is enabled, can additionally be a whole
             #     minute timestamp within the past 7 days.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
@@ -1784,7 +1943,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_write(database: nil, writes: nil, labels: nil)
+            # @overload batch_write(database: nil, writes: nil, labels: nil, request_options: nil)
             #   Pass arguments to `batch_write` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1800,6 +1959,8 @@ module Google
             #     document more than once per request.
             #   @param labels [::Hash{::String => ::String}]
             #     Labels associated with this batch write.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::BatchWriteResponse]
@@ -1878,7 +2039,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_document(parent: nil, collection_id: nil, document_id: nil, document: nil, mask: nil)
+            # @overload create_document(parent: nil, collection_id: nil, document_id: nil, document: nil, mask: nil, request_options: nil)
             #   Pass arguments to `create_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1901,6 +2062,8 @@ module Google
             #
             #     If the document has a field that is not present in this mask, that field
             #     will not be returned in the response.
+            #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+            #     Optional. Any additional options for the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::Document]
@@ -2065,6 +2228,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -2148,6 +2312,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #
@@ -2197,6 +2362,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_query
+                ##
+                # RPC-specific configuration for `execute_pipeline`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :execute_pipeline
                 ##
                 # RPC-specific configuration for `run_aggregation_query`
                 # @return [::Gapic::Config::Method]
@@ -2253,6 +2423,8 @@ module Google
                   @rollback = ::Gapic::Config::Method.new rollback_config
                   run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                   @run_query = ::Gapic::Config::Method.new run_query_config
+                  execute_pipeline_config = parent_rpcs.execute_pipeline if parent_rpcs.respond_to? :execute_pipeline
+                  @execute_pipeline = ::Gapic::Config::Method.new execute_pipeline_config
                   run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
                   @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                   partition_query_config = parent_rpcs.partition_query if parent_rpcs.respond_to? :partition_query

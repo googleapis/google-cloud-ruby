@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,40 +90,40 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_key_rings_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_key_rings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_key_rings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_key_rings ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_key_rings ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_key_rings(::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_key_rings(::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -163,40 +163,40 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_crypto_keys_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by do |response, operation|
+      c.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_crypto_keys ::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by) do |response, operation|
+      c.list_crypto_keys ::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_crypto_keys(::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_crypto_keys(::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -236,40 +236,40 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_crypto_key_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_crypto_key_versions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |response, operation|
+      c.list_crypto_key_versions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_crypto_key_versions ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |response, operation|
+      c.list_crypto_key_versions ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_crypto_key_versions(::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_crypto_key_versions(::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -307,40 +307,40 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_import_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_import_jobs ::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_import_jobs ::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_import_jobs(::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_import_jobs(::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -348,6 +348,73 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
       # Verify method calls
       assert_equal 5, list_import_jobs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_retired_resources
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::ListRetiredResourcesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_retired_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_retired_resources, name
+      assert_kind_of ::Google::Cloud::Kms::V1::ListRetiredResourcesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_retired_resources_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_retired_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_retired_resources parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_retired_resources ::Google::Cloud::Kms::V1::ListRetiredResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_retired_resources({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_retired_resources(::Google::Cloud::Kms::V1::ListRetiredResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_retired_resources_client_stub.call_rpc_count
     end
   end
 
@@ -370,36 +437,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_key_ring_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_key_ring({ name: name }) do |response, operation|
+      c.get_key_ring({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_key_ring name: name do |response, operation|
+      c.get_key_ring name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_key_ring ::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name) do |response, operation|
+      c.get_key_ring ::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_key_ring({ name: name }, grpc_options) do |response, operation|
+      c.get_key_ring({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_key_ring(::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_key_ring(::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -428,36 +495,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_crypto_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_crypto_key({ name: name }) do |response, operation|
+      c.get_crypto_key({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_crypto_key name: name do |response, operation|
+      c.get_crypto_key name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_crypto_key ::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name) do |response, operation|
+      c.get_crypto_key ::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_crypto_key({ name: name }, grpc_options) do |response, operation|
+      c.get_crypto_key({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_crypto_key(::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_crypto_key(::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -486,36 +553,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_crypto_key_version({ name: name }) do |response, operation|
+      c.get_crypto_key_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_crypto_key_version name: name do |response, operation|
+      c.get_crypto_key_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_crypto_key_version ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name) do |response, operation|
+      c.get_crypto_key_version ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_crypto_key_version({ name: name }, grpc_options) do |response, operation|
+      c.get_crypto_key_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_crypto_key_version(::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_crypto_key_version(::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -546,36 +613,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_public_key({ name: name, public_key_format: public_key_format }) do |response, operation|
+      c.get_public_key({ name: name, public_key_format: public_key_format }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_public_key name: name, public_key_format: public_key_format do |response, operation|
+      c.get_public_key name: name, public_key_format: public_key_format do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_public_key ::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format) do |response, operation|
+      c.get_public_key ::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_public_key({ name: name, public_key_format: public_key_format }, grpc_options) do |response, operation|
+      c.get_public_key({ name: name, public_key_format: public_key_format }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_public_key(::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format), grpc_options) do |response, operation|
+      c.get_public_key(::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -594,52 +661,112 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     name = "hello world"
+    public_key_format = :PUBLIC_KEY_FORMAT_UNSPECIFIED
 
     get_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_import_job, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetImportJobRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :PUBLIC_KEY_FORMAT_UNSPECIFIED, request["public_key_format"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_import_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_import_job({ name: name }) do |response, operation|
+      c.get_import_job({ name: name, public_key_format: public_key_format }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_import_job name: name do |response, operation|
+      c.get_import_job name: name, public_key_format: public_key_format do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name) do |response, operation|
+      c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_import_job({ name: name }, grpc_options) do |response, operation|
+      c.get_import_job({ name: name, public_key_format: public_key_format }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, get_import_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_retired_resource
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::RetiredResource.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_retired_resource_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_retired_resource, name
+      assert_kind_of ::Google::Cloud::Kms::V1::GetRetiredResourceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_retired_resource_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_retired_resource({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_retired_resource name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_retired_resource ::Google::Cloud::Kms::V1::GetRetiredResourceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_retired_resource({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_retired_resource(::Google::Cloud::Kms::V1::GetRetiredResourceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_retired_resource_client_stub.call_rpc_count
     end
   end
 
@@ -666,36 +793,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_key_ring_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }) do |response, operation|
+      c.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_key_ring parent: parent, key_ring_id: key_ring_id, key_ring: key_ring do |response, operation|
+      c.create_key_ring parent: parent, key_ring_id: key_ring_id, key_ring: key_ring do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_key_ring ::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring) do |response, operation|
+      c.create_key_ring ::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }, grpc_options) do |response, operation|
+      c.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_key_ring(::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), grpc_options) do |response, operation|
+      c.create_key_ring(::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -717,6 +844,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     crypto_key_id = "hello world"
     crypto_key = {}
     skip_initial_version_creation = true
+    trusted_wrapping_enabled = true
 
     create_crypto_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_crypto_key, name
@@ -725,41 +853,42 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["crypto_key_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKey), request["crypto_key"]
       assert_equal true, request["skip_initial_version_creation"]
+      assert_equal true, request["trusted_wrapping_enabled"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_crypto_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }) do |response, operation|
+      c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation do |response, operation|
+      c.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation) do |response, operation|
+      c.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }, grpc_options) do |response, operation|
+      c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation), grpc_options) do |response, operation|
+      c.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -790,42 +919,168 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }) do |response, operation|
+      c.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_crypto_key_version parent: parent, crypto_key_version: crypto_key_version do |response, operation|
+      c.create_crypto_key_version parent: parent, crypto_key_version: crypto_key_version do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_crypto_key_version ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version) do |response, operation|
+      c.create_crypto_key_version ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }, grpc_options) do |response, operation|
+      c.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_crypto_key_version(::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), grpc_options) do |response, operation|
+      c.create_crypto_key_version(::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, create_crypto_key_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_crypto_key
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_crypto_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_crypto_key, name
+      assert_kind_of ::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_crypto_key_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_crypto_key({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_crypto_key name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_crypto_key ::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_crypto_key({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_crypto_key(::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_crypto_key_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_crypto_key_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_crypto_key_version, name
+      assert_kind_of ::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_crypto_key_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_crypto_key_version({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_crypto_key_version name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_crypto_key_version ::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_crypto_key_version({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_crypto_key_version(::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_crypto_key_version_client_stub.call_rpc_count
     end
   end
 
@@ -843,6 +1098,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     import_job = "hello world"
     wrapped_key = "hello world"
     rsa_aes_wrapped_key = "hello world"
+    trusted_wrapping_enabled = true
 
     import_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_crypto_key_version, name
@@ -854,47 +1110,174 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["wrapped_key"]
       assert_equal "hello world", request["rsa_aes_wrapped_key"]
       assert_equal :rsa_aes_wrapped_key, request.wrapped_key_material
+      assert_equal true, request["trusted_wrapping_enabled"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, import_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |response, operation|
+      c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |response, operation|
+      c.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |response, operation|
+      c.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, grpc_options) do |response, operation|
+      c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
+      c.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, import_crypto_key_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_import_trusted_key_wrapped_crypto_key_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::CryptoKeyVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    importing_key = "hello world"
+    crypto_key_version = "hello world"
+    wrapped_key = "hello world"
+    algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+
+    import_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_trusted_key_wrapped_crypto_key_version, name
+      assert_kind_of ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["importing_key"]
+      assert_equal "hello world", request["crypto_key_version"]
+      assert_equal "hello world", request["wrapped_key"]
+      assert_equal :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, request["algorithm"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_trusted_key_wrapped_crypto_key_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.import_trusted_key_wrapped_crypto_key_version parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.import_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.import_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_trusted_key_wrapped_crypto_key_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_export_trusted_key_wrapped_crypto_key_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    wrapping_key = "hello world"
+
+    export_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_trusted_key_wrapped_crypto_key_version, name
+      assert_kind_of ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["wrapping_key"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_trusted_key_wrapped_crypto_key_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.export_trusted_key_wrapped_crypto_key_version name: name, wrapping_key: wrapping_key do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.export_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.export_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_trusted_key_wrapped_crypto_key_version_client_stub.call_rpc_count
     end
   end
 
@@ -921,36 +1304,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_import_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }) do |response, operation|
+      c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job do |response, operation|
+      c.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_import_job ::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job) do |response, operation|
+      c.create_import_job ::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }, grpc_options) do |response, operation|
+      c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_import_job(::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), grpc_options) do |response, operation|
+      c.create_import_job(::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -981,36 +1364,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_crypto_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }) do |response, operation|
+      c.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_crypto_key crypto_key: crypto_key, update_mask: update_mask do |response, operation|
+      c.update_crypto_key crypto_key: crypto_key, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_crypto_key ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask) do |response, operation|
+      c.update_crypto_key ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_crypto_key(::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_crypto_key(::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1041,36 +1424,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }) do |response, operation|
+      c.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_crypto_key_version crypto_key_version: crypto_key_version, update_mask: update_mask do |response, operation|
+      c.update_crypto_key_version crypto_key_version: crypto_key_version, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_crypto_key_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask) do |response, operation|
+      c.update_crypto_key_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_crypto_key_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_crypto_key_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1101,36 +1484,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_crypto_key_primary_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }) do |response, operation|
+      c.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_crypto_key_primary_version name: name, crypto_key_version_id: crypto_key_version_id do |response, operation|
+      c.update_crypto_key_primary_version name: name, crypto_key_version_id: crypto_key_version_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_crypto_key_primary_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id) do |response, operation|
+      c.update_crypto_key_primary_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }, grpc_options) do |response, operation|
+      c.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_crypto_key_primary_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), grpc_options) do |response, operation|
+      c.update_crypto_key_primary_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1159,36 +1542,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, destroy_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.destroy_crypto_key_version({ name: name }) do |response, operation|
+      c.destroy_crypto_key_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.destroy_crypto_key_version name: name do |response, operation|
+      c.destroy_crypto_key_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.destroy_crypto_key_version ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name) do |response, operation|
+      c.destroy_crypto_key_version ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.destroy_crypto_key_version({ name: name }, grpc_options) do |response, operation|
+      c.destroy_crypto_key_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.destroy_crypto_key_version(::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.destroy_crypto_key_version(::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1217,36 +1600,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, restore_crypto_key_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_crypto_key_version({ name: name }) do |response, operation|
+      c.restore_crypto_key_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_crypto_key_version name: name do |response, operation|
+      c.restore_crypto_key_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_crypto_key_version ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name) do |response, operation|
+      c.restore_crypto_key_version ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_crypto_key_version({ name: name }, grpc_options) do |response, operation|
+      c.restore_crypto_key_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_crypto_key_version(::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.restore_crypto_key_version(::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1283,36 +1666,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, encrypt_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
+      c.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
+      c.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
+      c.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
+      c.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.encrypt(::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
+      c.encrypt(::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1349,36 +1732,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, decrypt_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
+      c.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
+      c.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
+      c.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
+      c.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.decrypt(::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
+      c.decrypt(::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1419,36 +1802,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, raw_encrypt_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
+      c.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
+      c.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
+      c.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
+      c.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
+      c.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1491,36 +1874,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, raw_decrypt_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
+      c.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
+      c.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
+      c.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
+      c.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
+      c.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1557,36 +1940,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, asymmetric_sign_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |response, operation|
+      c.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |response, operation|
+      c.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |response, operation|
+      c.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
+      c.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
+      c.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1619,36 +2002,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, asymmetric_decrypt_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |response, operation|
+      c.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_decrypt name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |response, operation|
+      c.asymmetric_decrypt name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |response, operation|
+      c.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, grpc_options) do |response, operation|
+      c.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_decrypt(::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options) do |response, operation|
+      c.asymmetric_decrypt(::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1681,36 +2064,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, mac_sign_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }) do |response, operation|
+      c.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mac_sign name: name, data: data, data_crc32c: data_crc32c do |response, operation|
+      c.mac_sign name: name, data: data, data_crc32c: data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mac_sign ::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c) do |response, operation|
+      c.mac_sign ::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
+      c.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mac_sign(::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
+      c.mac_sign(::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1747,36 +2130,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, mac_verify_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }) do |response, operation|
+      c.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mac_verify name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c do |response, operation|
+      c.mac_verify name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mac_verify ::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c) do |response, operation|
+      c.mac_verify ::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }, grpc_options) do |response, operation|
+      c.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mac_verify(::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c), grpc_options) do |response, operation|
+      c.mac_verify(::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1809,36 +2192,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, decapsulate_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |response, operation|
+      c.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.decapsulate name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |response, operation|
+      c.decapsulate name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.decapsulate ::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |response, operation|
+      c.decapsulate ::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, grpc_options) do |response, operation|
+      c.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.decapsulate(::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options) do |response, operation|
+      c.decapsulate(::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1871,36 +2254,36 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, generate_random_bytes_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }) do |response, operation|
+      c.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_random_bytes location: location, length_bytes: length_bytes, protection_level: protection_level do |response, operation|
+      c.generate_random_bytes location: location, length_bytes: length_bytes, protection_level: protection_level do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_random_bytes ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level) do |response, operation|
+      c.generate_random_bytes ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }, grpc_options) do |response, operation|
+      c.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_random_bytes(::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level), grpc_options) do |response, operation|
+      c.generate_random_bytes(::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1947,5 +2330,19 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_kind_of ::Google::Cloud::Kms::V1::KeyManagementService::Client, client
       assert_equal creds, client.configure.credentials
     end
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Kms::V1::KeyManagementService::Operations, client.operations_client
   end
 end

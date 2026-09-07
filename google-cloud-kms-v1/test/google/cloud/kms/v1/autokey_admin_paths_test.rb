@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,9 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientPathsTest < Minitest::Test
 
       path = client.autokey_config_path folder: "value0"
       assert_equal "folders/value0/autokeyConfig", path
+
+      path = client.autokey_config_path project: "value0"
+      assert_equal "projects/value0/autokeyConfig", path
     end
   end
 

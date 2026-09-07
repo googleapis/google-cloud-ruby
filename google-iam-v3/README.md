@@ -2,7 +2,6 @@
 
 Manages identity and access control for Google Cloud resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Enabling this API also enables the IAM Service Account Credentials API (iamcredentials.googleapis.com). However, disabling this API doesn't disable the IAM Service Account Credentials API.
 
-Manages identity and access control for Google Cloud resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Enabling this API also enables the IAM Service Account Credentials API (iamcredentials.googleapis.com). However, disabling this API doesn't disable the IAM Service Account Credentials API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/iam/v3"
 
-client = ::Google::Iam::V3::PolicyBindings::Client.new
-request = ::Google::Iam::V3::CreatePolicyBindingRequest.new # (request fields as keyword arguments...)
-response = client.create_policy_binding request
+client = ::Google::Iam::V3::AccessPolicies::Client.new
+request = ::Google::Iam::V3::CreateAccessPolicyRequest.new # (request fields as keyword arguments...)
+response = client.create_access_policy request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-v3/latest)
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/iam/v3"
 require "logger"
 
-client = ::Google::Iam::V3::PolicyBindings::Client.new do |config|
+client = ::Google::Iam::V3::AccessPolicies::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

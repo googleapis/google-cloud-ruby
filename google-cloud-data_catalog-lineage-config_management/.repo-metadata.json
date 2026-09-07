@@ -1,0 +1,17 @@
+{
+    "api_id": "datalineage.googleapis.com",
+    "api_shortname": "datalineage",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-lineage-config_management/latest",
+    "distribution_name": "google-cloud-data_catalog-lineage-config_management",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "datalineage",
+    "name_pretty": "Data Lineage API",
+    "product_documentation": "https://cloud.google.com/dataplex/docs/about-data-lineage",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-data_catalog-lineage-config_management is the official client library for the Data Lineage API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/dataplex/docs/about-data-lineage",
+    "library_type": "GAPIC_MANUAL"
+}

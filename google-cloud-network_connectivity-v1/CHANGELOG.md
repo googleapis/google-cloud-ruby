@@ -1,5 +1,45 @@
 # Changelog
 
+### 1.15.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 1.14.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
+### 1.13.0 (2026-04-02)
+
+#### Features
+
+* add origin to AttributeContext.Request ([#33461](https://github.com/googleapis/google-cloud-ruby/issues/33461)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update comments and formatting 
+
+### 1.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.11.0 (2026-01-23)
+
+#### Features
+
+* Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#32370](https://github.com/googleapis/google-cloud-ruby/issues/32370)) 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-financial_services is the official client library for the Financial Services API."
-  gem.summary       = "API Client library for the Financial Services API"
+  gem.description   = "A unified AI platform for financial services, leveraging Google's global framework for security and compliance."
+  gem.summary       = "A unified AI platform for financial services, leveraging Google's global framework for security and compliance."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-financial_services-v1", ">= 0.0", "< 2.a"

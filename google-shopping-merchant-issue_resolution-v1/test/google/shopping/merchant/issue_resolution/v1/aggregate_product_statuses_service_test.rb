@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,40 +88,40 @@ class ::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatuse
 
     Gapic::ServiceStub.stub :new, list_aggregate_product_statuses_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_aggregate_product_statuses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_aggregate_product_statuses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_aggregate_product_statuses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_aggregate_product_statuses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_aggregate_product_statuses ::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_aggregate_product_statuses ::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_aggregate_product_statuses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_aggregate_product_statuses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_aggregate_product_statuses(::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_aggregate_product_statuses(::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

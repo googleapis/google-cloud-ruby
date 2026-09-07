@@ -1,8 +1,7 @@
 # Ruby Client for the Essential Contacts V1 API
 
-API Client library for the Essential Contacts V1 API
+Essential Contacts helps you direct critical Google Cloud notifications to the appropriate personnel across your projects, folders, and organization resources.
 
-Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_contact request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-essential_contacts-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/managing-notification-contacts/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

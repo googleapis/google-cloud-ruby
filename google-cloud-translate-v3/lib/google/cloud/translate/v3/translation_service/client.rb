@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -2918,7 +2918,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload adaptive_mt_translate(parent: nil, dataset: nil, content: nil, reference_sentence_config: nil, glossary_config: nil)
+            # @overload adaptive_mt_translate(parent: nil, dataset: nil, content: nil, mime_type: nil, reference_sentence_config: nil, glossary_config: nil)
             #   Pass arguments to `adaptive_mt_translate` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2932,6 +2932,8 @@ module Google
             #     `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
             #   @param content [::Array<::String>]
             #     Required. The content of the input in string format.
+            #   @param mime_type [::String]
+            #     The format of the source text.
             #   @param reference_sentence_config [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentenceConfig, ::Hash]
             #     Configuration for caller provided reference sentences.
             #   @param glossary_config [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::GlossaryConfig, ::Hash]
@@ -4245,6 +4247,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -4328,6 +4331,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

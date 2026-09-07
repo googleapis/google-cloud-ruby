@@ -1,5 +1,34 @@
 # Release History
 
+### 2.6.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35048](https://github.com/googleapis/google-cloud-ruby/issues/35048)) 
+
+### 2.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34042](https://github.com/googleapis/google-cloud-ruby/issues/34042)) 
+
+### 2.5.0 (2026-05-06)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig` 
+#### Documentation
+
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+* update SelectiveGapicGeneration usage doc ([#32231](https://github.com/googleapis/google-cloud-ruby/issues/32231)) 
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation

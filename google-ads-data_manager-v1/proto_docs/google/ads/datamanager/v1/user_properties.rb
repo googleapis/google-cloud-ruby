@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,27 @@ module Google
         # @!attribute [rw] customer_value_bucket
         #   @return [::Google::Ads::DataManager::V1::CustomerValueBucket]
         #     Optional. The advertiser-assessed value of the customer.
+        # @!attribute [rw] additional_user_properties
+        #   @return [::Array<::Google::Ads::DataManager::V1::UserProperty>]
+        #     Optional. A bucket of any additional [user
+        #     properties](https://developers.google.com/analytics/devguides/collection/protocol/ga4/user-properties)
+        #     for the user associated with this event.
         class UserProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A bucket of any additional [user
+        # properties](https://developers.google.com/analytics/devguides/collection/protocol/ga4/user-properties)
+        # for the user associated with this event.
+        # @!attribute [rw] property_name
+        #   @return [::String]
+        #     Required. The name of the user property to use.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Required. The string representation of the value of the user property to
+        #     use.
+        class UserProperty
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

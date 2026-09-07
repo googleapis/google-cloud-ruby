@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models. Note that google-cloud-data_labeling-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-data_labeling instead. See the readme for more details."
+  gem.description   = "Public API for Google Cloud AI Data Labeling Service. Note that google-cloud-data_labeling-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-data_labeling instead. See the readme for more details."
   gem.summary       = "Public API for Google Cloud AI Data Labeling Service."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

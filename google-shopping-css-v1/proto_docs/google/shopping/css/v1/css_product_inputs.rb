@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ module Google
         # across Google surfaces.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the CSS Product input.
+        #     Identifier. The name of the CSS Product input.
         #     Format:
         #     `accounts/{account}/cssProductInputs/{css_product_input}`, where the
         #     last section `css_product_input` consists of 3 parts:

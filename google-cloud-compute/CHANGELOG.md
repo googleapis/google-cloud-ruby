@@ -1,5 +1,71 @@
 # Changelog
 
+### 1.20.0 (2026-08-10)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
+### 1.19.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+#### Documentation
+
+* Update copyright year ([#35090](https://github.com/googleapis/google-cloud-ruby/issues/35090)) 
+
+### 1.19.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.19.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.18.0 (2026-05-18)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260422 ([#1193](https://github.com/googleapis/google-cloud-ruby/issues/1193)) ([#33963](https://github.com/googleapis/google-cloud-ruby/issues/33963)) 
+
+### 1.17.0 (2026-05-06)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260331 ([#33891](https://github.com/googleapis/google-cloud-ruby/issues/33891)) 
+
+### 1.16.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.15.0 (2026-03-05)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260213 ([#32784](https://github.com/googleapis/google-cloud-ruby/issues/32784)) 
+
+### 1.14.0 (2025-12-16)
+
+#### Features
+
+* [DIREGAPIC] Update v1 API definitions to revision 20251202 ([#32270](https://github.com/googleapis/google-cloud-ruby/issues/32270)) 
+
+### 1.13.0 (2025-12-11)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20251031 ([#32244](https://github.com/googleapis/google-cloud-ruby/issues/32244)) 
+
 ### 1.12.0 (2025-10-16)
 
 #### Features

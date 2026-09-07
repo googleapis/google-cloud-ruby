@@ -2,7 +2,6 @@
 
 Enables Fleet Engine for access to the On Demand Rides and Deliveries and Last Mile Fleet Solution APIs. Customer's use of Google Maps Content in the Cloud Logging Services is subject to the Google Maps Platform Terms of Service located at https://cloud.google.com/maps-platform/terms.
 
-Enables Fleet Engine for access to the On Demand Rides and Deliveries and Last Mile Fleet Solution APIs. Customer's use of Google Maps Content in the Cloud Logging Services is subject to the Google Maps Platform Terms of Service located at https://cloud.google.com/maps-platform/terms.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-maps-fleet_engine-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

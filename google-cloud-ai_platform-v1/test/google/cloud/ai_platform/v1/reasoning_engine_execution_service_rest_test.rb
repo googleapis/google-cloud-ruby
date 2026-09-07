@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Cl
     ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::ServiceStub.stub :transcode_query_reasoning_engine_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_reasoning_engine_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_reasoning_engine({ name: name, input: input, class_method: class_method }) do |_result, response|
+        c.query_reasoning_engine({ name: name, input: input, class_method: class_method }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_reasoning_engine name: name, input: input, class_method: class_method do |_result, response|
+        c.query_reasoning_engine name: name, input: input, class_method: class_method do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_reasoning_engine ::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method) do |_result, response|
+        c.query_reasoning_engine ::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_reasoning_engine({ name: name, input: input, class_method: class_method }, call_options) do |_result, response|
+        c.query_reasoning_engine({ name: name, input: input, class_method: class_method }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_reasoning_engine(::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method), call_options) do |_result, response|
+        c.query_reasoning_engine(::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,37 +155,148 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Cl
     ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::ServiceStub.stub :transcode_stream_query_reasoning_engine_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stream_query_reasoning_engine_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stream_query_reasoning_engine({ name: name, input: input, class_method: class_method }) do |_result, response|
+        c.stream_query_reasoning_engine({ name: name, input: input, class_method: class_method }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.stream_query_reasoning_engine name: name, input: input, class_method: class_method do |_result, response|
+        c.stream_query_reasoning_engine name: name, input: input, class_method: class_method do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.stream_query_reasoning_engine ::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method) do |_result, response|
+        c.stream_query_reasoning_engine ::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.stream_query_reasoning_engine({ name: name, input: input, class_method: class_method }, call_options) do |_result, response|
+        c.stream_query_reasoning_engine({ name: name, input: input, class_method: class_method }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.stream_query_reasoning_engine(::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method), call_options) do |_result, response|
+        c.stream_query_reasoning_engine(::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest.new(name: name, input: input, class_method: class_method), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Verify method calls
         assert_equal 5, stream_query_reasoning_engine_client_stub.call_count
+      end
+    end
+  end
+
+  def test_async_query_reasoning_engine
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    input_gcs_uri = "hello world"
+    output_gcs_uri = "hello world"
+
+    async_query_reasoning_engine_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::ServiceStub.stub :transcode_async_query_reasoning_engine_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, async_query_reasoning_engine_client_stub do
+        # Create client
+        c = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.async_query_reasoning_engine({ name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.async_query_reasoning_engine name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.async_query_reasoning_engine ::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest.new(name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.async_query_reasoning_engine({ name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.async_query_reasoning_engine(::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest.new(name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, async_query_reasoning_engine_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_async_query_reasoning_engine
+    # Create test objects.
+    client_result = ::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    operation_name = "hello world"
+
+    cancel_async_query_reasoning_engine_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::ServiceStub.stub :transcode_cancel_async_query_reasoning_engine_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_async_query_reasoning_engine_client_stub do
+        # Create client
+        c = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.cancel_async_query_reasoning_engine({ name: name, operation_name: operation_name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.cancel_async_query_reasoning_engine name: name, operation_name: operation_name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.cancel_async_query_reasoning_engine ::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest.new(name: name, operation_name: operation_name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.cancel_async_query_reasoning_engine({ name: name, operation_name: operation_name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.cancel_async_query_reasoning_engine(::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest.new(name: name, operation_name: operation_name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_async_query_reasoning_engine_client_stub.call_count
       end
     end
   end

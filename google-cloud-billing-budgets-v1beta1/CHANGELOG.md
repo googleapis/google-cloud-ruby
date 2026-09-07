@@ -1,5 +1,23 @@
 # Release History
 
+### 0.18.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 0.18.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 0.17.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.16.1 (2025-10-27)
 
 #### Documentation

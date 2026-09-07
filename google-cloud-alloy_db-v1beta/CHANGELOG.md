@@ -1,5 +1,42 @@
 # Changelog
 
+### 0.24.1 (2026-08-24)
+
+#### Bug Fixes
+
+* onboarding library batch 4 ([#36312](https://github.com/googleapis/google-cloud-ruby/issues/36312)) 
+
+### 0.24.0 (2026-08-17)
+
+#### Features
+
+* add support for PSC as default ([#36257](https://github.com/googleapis/google-cloud-ruby/issues/36257)) 
+
+### 0.23.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+
+### 0.23.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34038](https://github.com/googleapis/google-cloud-ruby/issues/34038)) 
+
+### 0.22.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.21.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 0.20.1 (2025-10-27)
 
 #### Documentation

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Identifier. The resource name of the DatasetVersion.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this DatasetVersion was created.

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -71,6 +71,21 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientPathsTest 
 
       path = client.data_store_path project: "value0", location: "value1", collection: "value2", data_store: "value3"
       assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3", path
+    end
+  end
+
+  def test_document_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.document_path project: "value0", location: "value1", data_store: "value2", branch: "value3", document: "value4"
+      assert_equal "projects/value0/locations/value1/dataStores/value2/branches/value3/documents/value4", path
+
+      path = client.document_path project: "value0", location: "value1", collection: "value2", data_store: "value3", branch: "value4", document: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3/branches/value4/documents/value5", path
     end
   end
 

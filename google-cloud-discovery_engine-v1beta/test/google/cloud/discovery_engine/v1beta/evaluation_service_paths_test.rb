@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,6 +140,9 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientPathsTe
 
       path = client.session_path project: "value0", location: "value1", collection: "value2", engine: "value3", session: "value4"
       assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/sessions/value4", path
+
+      path = client.session_path project: "value0", location: "value1", collection: "value2", engine: "value3", collaborative_project: "value4", session: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/collaborativeProjects/value4/sessions/value5", path
     end
   end
 end

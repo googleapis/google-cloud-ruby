@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -215,7 +215,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload stream_assist(name: nil, query: nil, session: nil, user_metadata: nil, tools_spec: nil, generation_spec: nil)
+              # @overload stream_assist(name: nil, query: nil, session: nil, user_metadata: nil, agents_spec: nil, tools_spec: nil, generation_spec: nil)
               #   Pass arguments to `stream_assist` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -241,6 +241,8 @@ module Google
               #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}`
               #   @param user_metadata [::Google::Cloud::DiscoveryEngine::V1::AssistUserMetadata, ::Hash]
               #     Optional. Information about the user initiating the query.
+              #   @param agents_spec [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::AgentsSpec, ::Hash]
+              #     Optional. Specification of agents that are used to serve the request.
               #   @param tools_spec [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::ToolsSpec, ::Hash]
               #     Optional. Specification of tools that are used to serve the request.
               #   @param generation_spec [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::GenerationSpec, ::Hash]
@@ -378,6 +380,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -450,6 +453,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

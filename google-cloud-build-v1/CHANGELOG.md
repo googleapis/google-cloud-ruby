@@ -1,5 +1,41 @@
 # Release History
 
+### 1.14.0 (2026-08-13)
+
+#### Features
+
+* add option to fetch remote change history (tags) for GitSource dependencies ([#36239](https://github.com/googleapis/google-cloud-ruby/issues/36239)) 
+
+### 1.13.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 1.13.0 (2026-06-25)
+
+#### Features
+
+* Add E2_STANDARD_2 machine type to Cloud Build API ([#34651](https://github.com/googleapis/google-cloud-ruby/issues/34651)) 
+
+### 1.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 1.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.10.0 (2025-12-17)
+
+#### Features
+
+* Update GCB with latest proto changes ([#32228](https://github.com/googleapis/google-cloud-ruby/issues/32228)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

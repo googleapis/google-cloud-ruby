@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,18 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::ClientPathsTest 
 
     def logger
       nil
+    end
+  end
+
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
     end
   end
 

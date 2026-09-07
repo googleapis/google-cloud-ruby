@@ -1,13 +1,12 @@
-# Ruby Client for the Google Analytics Admin V1alpha API
+# Ruby Client for the Google Analytics Admin V1ALPHA API
 
 Manage properties in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning.
 
-The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Analytics Admin V1alpha API. Most users should consider using
+specific version of the Google Analytics Admin V1ALPHA API. Most users should consider using
 the main client gem,
 [google-analytics-admin](https://rubygems.org/gems/google-analytics-admin).
 See the section below titled *Which client should I use?* for more information.
@@ -83,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

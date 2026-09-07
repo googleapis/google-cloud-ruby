@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,27 @@ module Google
         module ReasoningEngineService
           # Path helper methods for the ReasoningEngineService API.
           module Paths
+            ##
+            # Create a fully-qualified GitRepositoryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            # @param git_repository_link [String]
+            #
+            # @return [::String]
+            def git_repository_link_path project:, location:, connection:, git_repository_link:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "connection cannot contain /" if connection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}/gitRepositoryLinks/#{git_repository_link}"
+            end
+
             ##
             # Create a fully-qualified Location resource string.
             #

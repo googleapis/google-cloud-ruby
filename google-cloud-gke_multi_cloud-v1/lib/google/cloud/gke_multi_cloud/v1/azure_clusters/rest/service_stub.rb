@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ module Google
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             class ServiceStub
               # @private
               def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:

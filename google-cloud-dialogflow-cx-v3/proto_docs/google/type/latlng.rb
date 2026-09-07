@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ module Google
   module Type
     # An object that represents a latitude/longitude pair. This is expressed as a
     # pair of doubles to represent degrees latitude and degrees longitude. Unless
-    # specified otherwise, this must conform to the
-    # <a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84
-    # standard</a>. Values must be within normalized ranges.
+    # specified otherwise, this object must conform to the
+    # <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#1984_version">
+    # WGS84 standard</a>. Values must be within normalized ranges.
     # @!attribute [rw] latitude
     #   @return [::Float]
     #     The latitude in degrees. It must be in the range [-90.0, +90.0].

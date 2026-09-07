@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,25 @@ module Google
               raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}/addresses/#{address}"
+            end
+
+            ##
+            # Create a fully-qualified AgentGateway resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/agentGateways/{agent_gateway}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param agent_gateway [String]
+            #
+            # @return [::String]
+            def agent_gateway_path project:, location:, agent_gateway:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/agentGateways/#{agent_gateway}"
             end
 
             ##
@@ -404,6 +423,25 @@ module Google
               raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}/subnetworks/#{subnetwork}"
+            end
+
+            ##
+            # Create a fully-qualified TargetTcpProxy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/targetTcpProxies/{target_tcp_proxy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param target_tcp_proxy [String]
+            #
+            # @return [::String]
+            def target_tcp_proxy_path project:, location:, target_tcp_proxy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/targetTcpProxies/#{target_tcp_proxy}"
             end
 
             ##

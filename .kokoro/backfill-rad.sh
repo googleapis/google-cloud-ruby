@@ -8,5 +8,4 @@ export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
 gem install --no-document toys
-toys release install-python-tools -v
-toys rad backfill -v $LIBRARIES_VERSIONS < /dev/null
+toys release perform -v --reporter-org=googleapis --gems=$LIBRARIES_VERSIONS --enable-rad --force-republish < /dev/null

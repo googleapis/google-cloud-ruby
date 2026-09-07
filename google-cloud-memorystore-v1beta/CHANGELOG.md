@@ -1,5 +1,48 @@
 # Changelog
 
+### 0.14.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35056](https://github.com/googleapis/google-cloud-ruby/issues/35056)) 
+
+### 0.14.0 (2026-07-20)
+
+#### Features
+
+* A new resource_definition `cloudkms.googleapis.com/CryptoKey` is added ([#34790](https://github.com/googleapis/google-cloud-ruby/issues/34790)) 
+
+### 0.13.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 0.12.0 (2026-05-07)
+
+#### Features
+
+* [Memorystore for Valkey] Updating new node types added 
+* support grpc transport in memorystore v1beta ([#33889](https://github.com/googleapis/google-cloud-ruby/issues/33889)) 
+
+### 0.11.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Valkey] Add support for Flexible CA feature ([#33661](https://github.com/googleapis/google-cloud-ruby/issues/33661)) 
+
+### 0.10.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 0.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.8.0 (2025-10-08)
 
 #### Features

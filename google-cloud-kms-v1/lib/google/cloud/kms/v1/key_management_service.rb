@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ require "google/cloud/kms/v1/version"
 
 require "google/cloud/kms/v1/key_management_service/credentials"
 require "google/cloud/kms/v1/key_management_service/paths"
+require "google/cloud/kms/v1/key_management_service/operations"
 require "google/cloud/kms/v1/key_management_service/client"
 require "google/cloud/kms/v1/key_management_service/rest"
 

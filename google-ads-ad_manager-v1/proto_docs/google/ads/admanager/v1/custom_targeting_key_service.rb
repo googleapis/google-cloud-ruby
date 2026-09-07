@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,8 +53,17 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     **Filterable fields:**
+        #
+        #     * `adTagName`
+        #     * `displayName`
+        #     * `name`
+        #     * `reportableType`
+        #     * `status`
+        #     * `type`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -83,7 +92,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -91,6 +100,124 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCustomTargetingKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateCustomTargetingKey` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `CustomTargetingKey` will be
+        #     created. Format: `networks/{network_code}`
+        # @!attribute [rw] custom_targeting_key
+        #   @return [::Google::Ads::AdManager::V1::CustomTargetingKey]
+        #     Required. The `CustomTargetingKey` to create.
+        class CreateCustomTargetingKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateCustomTargetingKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CustomTargetingKeys` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateCustomTargetingKeyRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest>]
+        #     Required. The `CustomTargetingKey` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateCustomTargetingKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateCustomTargetingKeys` method.
+        # @!attribute [rw] custom_targeting_keys
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomTargetingKey>]
+        #     The `CustomTargetingKey` objects created.
+        class BatchCreateCustomTargetingKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateCustomTargetingKey` method.
+        # @!attribute [rw] custom_targeting_key
+        #   @return [::Google::Ads::AdManager::V1::CustomTargetingKey]
+        #     Required. The `CustomTargetingKey` to update.
+        #
+        #     The `CustomTargetingKey`'s `name` is used to identify the
+        #     `CustomTargetingKey` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateCustomTargetingKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateCustomTargetingKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CustomTargetingKeys` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateCustomTargetingKeyRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest>]
+        #     Required. The `CustomTargetingKey` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateCustomTargetingKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateCustomTargetingKeys` method.
+        # @!attribute [rw] custom_targeting_keys
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomTargetingKey>]
+        #     The `CustomTargetingKey` objects updated.
+        class BatchUpdateCustomTargetingKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateCustomTargetingKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CustomTargetingKey`s to activate.
+        #     Format:
+        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+        class BatchActivateCustomTargetingKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateCustomTargetingKeys` method.
+        class BatchActivateCustomTargetingKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateCustomTargetingKeys` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CustomTargetingKey`s to deactivate.
+        #     Format:
+        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+        class BatchDeactivateCustomTargetingKeysRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateCustomTargetingKeys` method.
+        class BatchDeactivateCustomTargetingKeysResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

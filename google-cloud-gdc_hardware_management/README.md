@@ -1,8 +1,7 @@
 # Ruby Client for the GDC Hardware Management API
 
-API Client library for the GDC Hardware Management API
+GDC is a fully managed software and hardware solution for data centers and edge locations to address regulatory, local data processing, survivability, and low-latency needs.
 
-google-cloud-gdc_hardware_management is the official client library for the GDC Hardware Management API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-gdc_hardware_management-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

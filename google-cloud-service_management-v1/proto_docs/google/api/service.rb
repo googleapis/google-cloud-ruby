@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -135,8 +135,7 @@ module Google
     # @!attribute [rw] monitored_resources
     #   @return [::Array<::Google::Api::MonitoredResourceDescriptor>]
     #     Defines the monitored resources used by this service. This is required
-    #     by the {::Google::Api::Service#monitoring Service.monitoring} and
-    #     {::Google::Api::Service#logging Service.logging} configurations.
+    #     by the `Service.monitoring` and `Service.logging` configurations.
     # @!attribute [rw] billing
     #   @return [::Google::Api::Billing]
     #     Billing configuration.

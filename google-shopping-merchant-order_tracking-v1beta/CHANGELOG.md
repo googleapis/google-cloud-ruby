@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.3.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
+### 0.3.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+#### Documentation
+
+* update API common type documentation ([#33450](https://github.com/googleapis/google-cloud-ruby/issues/33450)) 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation

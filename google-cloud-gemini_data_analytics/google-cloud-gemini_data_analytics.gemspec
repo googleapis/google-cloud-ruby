@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-gemini_data_analytics is the official client library for the Data Analytics API with Gemini API."
-  gem.summary       = "API Client library for the Data Analytics API with Gemini API"
+  gem.description   = "Developers can use the Conversational Analytics API, accessed through geminidataanalytics.googleapis.com, to build an artificial intelligence (AI)-powered chat interface, or data agent, that answers questions about structured data in BigQuery, Looker, and Looker Studio using natural language."
+  gem.summary       = "Developers can use the Conversational Analytics API, accessed through geminidataanalytics.googleapis.com, to build an artificial intelligence (AI)-powered chat interface, or data agent, that answers questions about structured data in BigQuery, Looker, and Looker Studio using natural language."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-gemini_data_analytics-v1beta", ">= 0.0", "< 2.a"

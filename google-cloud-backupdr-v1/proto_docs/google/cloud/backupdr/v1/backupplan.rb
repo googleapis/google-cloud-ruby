@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ module Google
         #     Vault Service Account.
         # @!attribute [rw] log_retention_days
         #   @return [::Integer]
-        #     Optional. Applicable only for CloudSQL resource_type.
+        #     Optional. Applicable only for CloudSQL and AlloyDB resource_type.
         #
         #     Configures how long logs will be stored. It is defined in “days”. This
         #     value should be greater than or equal to minimum enforced log retention

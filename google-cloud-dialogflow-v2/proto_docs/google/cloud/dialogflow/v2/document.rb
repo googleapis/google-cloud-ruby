@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -414,6 +414,9 @@ module Google
         # @!attribute [rw] export_operation_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::ExportOperationMetadata]
         #     Metadata for the Export Data Operation such as the destination of export.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class KnowledgeOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

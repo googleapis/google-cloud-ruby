@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@ module Google
     module Dataflow
       module V1beta3
         ##
-        # Provides a method to create and modify Google Cloud Dataflow jobs.
-        # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
+        # Provides a method to create and modify Dataflow jobs.
+        # A Job is a multi-stage computation graph run by the Dataflow service.
         #
         # @example Load this service and instantiate a gRPC client
         #

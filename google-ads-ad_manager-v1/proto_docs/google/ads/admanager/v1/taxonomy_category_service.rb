@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.

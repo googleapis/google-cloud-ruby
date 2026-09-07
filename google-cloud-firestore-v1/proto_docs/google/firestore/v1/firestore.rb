@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,6 +47,9 @@ module Google
         #     minute timestamp within the past 7 days.
         #
         #     Note: The following fields are mutually exclusive: `read_time`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class GetDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,6 +126,9 @@ module Google
         #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
         #
         #     Requests with `show_missing` may not specify `where` or `order_by`.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class ListDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -168,6 +174,9 @@ module Google
         #
         #     If the document has a field that is not present in this mask, that field
         #     will not be returned in the response.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class CreateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,6 +207,9 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::Precondition]
         #     An optional precondition on the document.
         #     The request will fail if this is set and not met by the target document.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class UpdateDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,6 +225,9 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::Precondition]
         #     An optional precondition on the document.
         #     The request will fail if this is set and not met by the target document.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class DeleteDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +273,9 @@ module Google
         #     minute timestamp within the past 7 days.
         #
         #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class BatchGetDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,6 +321,9 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     The options for the transaction.
         #     Defaults to a read-write transaction.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class BeginTransactionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -331,6 +352,9 @@ module Google
         # @!attribute [rw] transaction
         #   @return [::String]
         #     If set, applies all writes in this transaction, and commits it.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,6 +384,9 @@ module Google
         # @!attribute [rw] transaction
         #   @return [::String]
         #     Required. The transaction to roll back.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class RollbackRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,6 +432,9 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
         #     statistics will be returned. If not, only query results will be returned.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -450,6 +480,100 @@ module Google
         end
 
         # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#execute_pipeline Firestore.ExecutePipeline}.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Database identifier, in the form
+        #     `projects/{project}/databases/{database}`.
+        # @!attribute [rw] structured_pipeline
+        #   @return [::Google::Cloud::Firestore::V1::StructuredPipeline]
+        #     A pipelined operation.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     Run the query within an already active transaction.
+        #
+        #     The value here is the opaque transaction ID to execute the query in.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] new_transaction
+        #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
+        #     Execute the pipeline in a new transaction.
+        #
+        #     The identifier of the newly created transaction will be returned in the
+        #     first response on the stream. This defaults to a read-only transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Execute the pipeline in a snapshot transaction at the given time.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_commit_transaction
+        #   @return [::Boolean]
+        #     Optional. Automatically commits the transaction after the pipeline has been
+        #     executed. Only permitted in combination with `transaction` or
+        #     `new_transaction`.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
+        class ExecutePipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for [Firestore.Execute][].
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     Newly created transaction identifier.
+        #
+        #     This field is only specified as part of the first response from the server,
+        #     alongside the `results` field when the original request specified
+        #     [ExecuteRequest.new_transaction][].
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Firestore::V1::Document>]
+        #     An ordered batch of results returned executing a pipeline.
+        #
+        #     The batch size is variable, and can even be zero for when only a partial
+        #     progress message is returned.
+        #
+        #     The fields present in the returned documents are only those that were
+        #     explicitly requested in the pipeline, this includes those like
+        #     {::Google::Cloud::Firestore::V1::Document#name `__name__`} and
+        #     {::Google::Cloud::Firestore::V1::Document#update_time `__update_time__`}. This is
+        #     explicitly a divergence from `Firestore.RunQuery` / `Firestore.GetDocument`
+        #     RPCs which always return such fields even when they are not specified in
+        #     the {::Google::Cloud::Firestore::V1::DocumentMask `mask`}.
+        # @!attribute [rw] execution_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the results are valid.
+        #
+        #     This is a (not strictly) monotonically increasing value across multiple
+        #     responses in the same stream. The API guarantees that all previously
+        #     returned results are still valid at the latest `execution_time`. This
+        #     allows the API consumer to treat the query if it ran at the latest
+        #     `execution_time` returned.
+        #
+        #     If the query returns no results, a response with `execution_time` and no
+        #     `results` will be sent, and this represents the time at which the operation
+        #     was run.
+        # @!attribute [rw] explain_stats
+        #   @return [::Google::Cloud::Firestore::V1::ExplainStats]
+        #     Query explain stats.
+        #
+        #     This is present on the **last** response if the request configured explain
+        #     to run in 'analyze' or 'explain' mode in the pipeline options. If the query
+        #     does not return any results, a response with `explain_stats` and no
+        #     `results` will still be sent.
+        class ExecutePipelineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
         # {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -490,6 +614,9 @@ module Google
         #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
         #     statistics will be returned. If not, only query results will be returned.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class RunAggregationQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -583,6 +710,9 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class PartitionQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -666,6 +796,9 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this write request.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class WriteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -724,6 +857,9 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this target change.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class ListenRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -813,7 +949,7 @@ module Google
         #     will immediately send a response with a `TargetChange::Remove` event.
         #
         #     Note that if the client sends multiple `AddTarget` requests
-        #     without an ID, the order of IDs returned in `TargetChage.target_ids` are
+        #     without an ID, the order of IDs returned in `TargetChange.target_ids` are
         #     undefined. Therefore, clients should provide a target ID instead of relying
         #     on the server to assign one.
         #
@@ -938,6 +1074,9 @@ module Google
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
         #     For example:
         #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+        #
+        #     Use `projects/{project_id}/databases/{database_id}/documents` to list
+        #     top-level collections.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of results to return.
@@ -952,6 +1091,9 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class ListCollectionIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -986,6 +1128,9 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this batch write.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Firestore::V1::RequestOptions]
+        #     Optional. Any additional options for the request.
         class BatchWriteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ module Google
         # A representation of a session template.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the session template.
+        #     Required. Identifier. The resource name of the session template.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Brief description of the template.
@@ -113,7 +113,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `jupyter_session`, `spark_connect_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_connect_session
         #   @return [::Google::Cloud::Dataproc::V1::SparkConnectConfig]
-        #     Optional. Spark Connect session config.
+        #     Optional. Spark connect session config.
         #
         #     Note: The following fields are mutually exclusive: `spark_connect_session`, `jupyter_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] creator

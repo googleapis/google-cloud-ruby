@@ -1,13 +1,12 @@
-# Ruby Client for the Google Workspace Add-ons V1 API
+# Ruby Client for the Google Workspace add-ons V1 API
 
-API Client library for the Google Workspace Add-ons V1 API
+Add-ons are customized applications that extend Google Workspace applications.
 
-Add-ons are customized applications that integrate with Google Workspace productivity applications.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Workspace Add-ons V1 API. Most users should consider using
+specific version of the Google Workspace add-ons V1 API. Most users should consider using
 the main client gem,
 [google-cloud-gsuite_add_ons](https://rubygems.org/gems/google-cloud-gsuite_add_ons).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_authorization request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gsuite_add_ons-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://developers.google.com/workspace/add-ons/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

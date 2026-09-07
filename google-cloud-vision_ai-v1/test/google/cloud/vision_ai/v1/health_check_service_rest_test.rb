@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,32 +97,32 @@ class ::Google::Cloud::VisionAI::V1::HealthCheckService::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::HealthCheckService::Rest::ServiceStub.stub :transcode_health_check_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, health_check_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::HealthCheckService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::HealthCheckService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.health_check({ cluster: cluster }) do |_result, response|
+        c.health_check({ cluster: cluster }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.health_check cluster: cluster do |_result, response|
+        c.health_check cluster: cluster do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.health_check ::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster) do |_result, response|
+        c.health_check ::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.health_check({ cluster: cluster }, call_options) do |_result, response|
+        c.health_check({ cluster: cluster }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.health_check(::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster), call_options) do |_result, response|
+        c.health_check(::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

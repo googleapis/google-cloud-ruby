@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,29 @@ module Google
         module Memorystore
           # Path helper methods for the Memorystore API.
           module Paths
+            ##
+            # Create a fully-qualified AuthToken resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param token_auth_user [String]
+            # @param auth_token [String]
+            #
+            # @return [::String]
+            def auth_token_path project:, location:, instance:, token_auth_user:, auth_token:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+              raise ::ArgumentError, "token_auth_user cannot contain /" if token_auth_user.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/tokenAuthUsers/#{token_auth_user}/authTokens/#{auth_token}"
+            end
+
             ##
             # Create a fully-qualified Backup resource string.
             #
@@ -62,6 +85,69 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/backupCollections/#{backup_collection}"
+            end
+
+            ##
+            # Create a fully-qualified CaPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/caPools/{ca_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ca_pool [String]
+            #
+            # @return [::String]
+            def ca_pool_path project:, location:, ca_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/caPools/#{ca_pool}"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKeyVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            # @param crypto_key_version [String]
+            #
+            # @return [::String]
+            def crypto_key_version_path project:, location:, key_ring:, crypto_key:, crypto_key_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
             end
 
             ##
@@ -137,6 +223,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NetworkAttachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/networkAttachments/{network_attachment}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param network_attachment [String]
+            #
+            # @return [::String]
+            def network_attachment_path project:, region:, network_attachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/networkAttachments/#{network_attachment}"
+            end
+
+            ##
             # Create a fully-qualified ServiceAttachment resource string.
             #
             # The resource will be in the following format:
@@ -153,6 +258,44 @@ module Google
               raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}/serviceAttachments/#{service_attachment}"
+            end
+
+            ##
+            # Create a fully-qualified SharedRegionalCertificateAuthority resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def shared_regional_certificate_authority_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/sharedRegionalCertificateAuthority"
+            end
+
+            ##
+            # Create a fully-qualified TokenAuthUser resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/tokenAuthUsers/{token_auth_user}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param token_auth_user [String]
+            #
+            # @return [::String]
+            def token_auth_user_path project:, location:, instance:, token_auth_user:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/tokenAuthUsers/#{token_auth_user}"
             end
 
             extend self

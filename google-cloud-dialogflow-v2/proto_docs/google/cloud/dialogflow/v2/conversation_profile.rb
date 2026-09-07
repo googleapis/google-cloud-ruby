@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -79,6 +79,9 @@ module Google
         #     languages.
         #     This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
         #     language tag. Example: "en-US".
+        # @!attribute [rw] sip_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SipConfig]
+        #     Optional. Configuration for SIP connections.
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     The time zone of this conversational profile from the
@@ -281,6 +284,34 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enable query suggestion only.
           #     Supported features: KNOWLEDGE_ASSIST
+          # @!attribute [rw] enable_response_debug_info
+          #   @return [::Boolean]
+          #     Optional. Enable returning detailed reasons for suggestion results.
+          #
+          #     For example, with this field disabled, Knowledge Search feature returns
+          #     NotFound error when no answer is found for the input query. Enabling this
+          #     field will change the behavior to return an OK response with
+          #     detailed information indicating the lack of results.
+          #
+          #     Supported features: KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST
+          # @!attribute [rw] rai_settings
+          #   @return [::Google::Cloud::Dialogflow::V2::RaiSettings]
+          #     Optional. Settings for Responsible AI checks.
+          #     Supported features:  KNOWLEDGE_ASSIST
+          # @!attribute [rw] suggestion_trigger_event
+          #   @return [::Google::Cloud::Dialogflow::V2::TriggerEvent]
+          #     Optional. The trigger event for suggestion.
+          #     If unspecified, it will be `CUSTOMER_MESSAGE`.
+          #     Supported features: KNOWLEDGE_ASSIST
+          #     For KNOWLEDGE_ASSIST, these four trigger events are supported:
+          #     1. TRIGGER_EVENT_UNSPECIFIED
+          #     2. END_OF_UTTERANCE
+          #     3. CUSTOMER_MESSAGE
+          #     4. AGENT_MESSAGE
+          # @!attribute [rw] disable_query_search_context
+          #   @return [::Boolean]
+          #     Optional. If true, disable appending available search context to the
+          #     search query. Supported features: KNOWLEDGE_ASSIST
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -330,6 +361,23 @@ module Google
           #     enable_event_based_suggestion must be set to true to receive the
           #     responses from high latency features in Pub/Sub. High latency feature(s):
           #     KNOWLEDGE_ASSIST
+          # @!attribute [rw] skip_empty_event_based_suggestion
+          #   @return [::Boolean]
+          #     Optional. Enable skipping event based suggestion if the suggestion is
+          #     empty.
+          #
+          #     For example, with this field disabled, Knowledge Assist feature sends
+          #     a Pub/Sub message when there are no suggestions. Enabling this field
+          #     will change the behavior to skip the Pub/Sub message in this situation.
+          # @!attribute [rw] use_unredacted_conversation_data
+          #   @return [::Boolean]
+          #     Optional. If true,
+          #     use unredacted transcript data (Supported features: AI_COACH) and
+          #     use unredacted ingested context (Supported features: All Agent Assist
+          #     features)
+          # @!attribute [rw] enable_async_tool_call
+          #   @return [::Boolean]
+          #     Optional. If true, enable asynchronous execution of tools.
           class SuggestionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -524,7 +572,7 @@ module Google
           # Custom conversation models used in agent assist feature.
           #
           # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY,
-          # CONVERSATION_SUMMARIZATION.
+          # CONVERSATION_SUMMARIZATION
           # @!attribute [rw] model
           #   @return [::String]
           #     Conversation model resource name. Format: `projects/<Project
@@ -534,11 +582,12 @@ module Google
           #     Version of current baseline model. It will be ignored if
           #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig#model model}
           #     is set. Valid versions are:
-          #       Article Suggestion baseline model:
-          #         - 0.9
-          #         - 1.0 (default)
-          #       Summarization baseline model:
-          #         - 1.0
+          #
+          #     - Article Suggestion baseline model:
+          #       - 0.9
+          #       - 1.0 (default)
+          #     - Summarization baseline model:
+          #       - 1.0
           class ConversationModelConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -570,6 +619,30 @@ module Google
           #     If unspecified, defaults to false. Sentiment analysis inspects user input
           #     and identifies the prevailing subjective opinion, especially to determine
           #     a user's attitude as positive, negative, or neutral:
+          #     https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#message StreamingAnalyzeContentResponse.message.SentimentAnalysisResult}.
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse#message AnalyzeContentResponse.message.SentimentAnalysisResult}
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages Conversations.ListMessages}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::ListMessagesResponse#messages ListMessagesResponse.messages.SentimentAnalysisResult}
+          #     If Pub/Sub notification is configured, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::ConversationEvent#new_message_payload ConversationEvent.new_message_payload.SentimentAnalysisResult}.
+          # @!attribute [rw] enable_sentiment_analysis_v3
+          #   @return [::Boolean]
+          #     Optional. Enables sentiment analysis for audio input and conversation
+          #     messages. If unspecified, defaults to false. If this flag is set to true,
+          #     other 'enable_sentiment_analysis' fields will be ignored.
+          #
+          #     Sentiment analysis inspects user input and identifies the prevailing
+          #     subjective opinion, especially to determine a user's attitude as
+          #     positive, negative, or neutral.
           #     https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
           #     For
           #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}
@@ -689,6 +762,39 @@ module Google
         #     to Stackdriver in the conversation project as JSON format
         #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
         class LoggingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the SIP configuration.
+        # @!attribute [rw] create_conversation_on_the_fly
+        #   @return [::Boolean]
+        #     Asks Dialogflow Telephony to create the conversation provided in the SIP
+        #     header on the fly when the call comes in.
+        # @!attribute [rw] inactive_start
+        #   @return [::Boolean]
+        #     Starts the conversation with inactive SDP directives
+        # @!attribute [rw] max_audio_recording_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Max duration for audio recording.
+        #     Overrides the default value of 15 min.
+        #     Max value is 8 hours.
+        # @!attribute [rw] allow_virtual_agent_interaction
+        #   @return [::Boolean]
+        #     Allows interactions with a Dialogflow virtual agent even if the call is
+        #     connected for SIPREC purposes.
+        # @!attribute [rw] keep_conversation_running
+        #   @return [::Boolean]
+        #     Keeps the conversation running even if the call is disconnected.
+        # @!attribute [rw] copy_inbound_call_leg_headers
+        #   @return [::Array<::String>]
+        #     List of inbound call leg headers to be copied to outbound call legs created
+        #     later.
+        # @!attribute [rw] ignore_reinvite_media_direction
+        #   @return [::Boolean]
+        #     Ignores any media direction in the reINVITE SDP offer. Reuse the previous
+        #     media direction.
+        class SipConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

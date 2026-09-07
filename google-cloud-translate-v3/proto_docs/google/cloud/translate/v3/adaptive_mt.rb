@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -137,6 +137,9 @@ module Google
         # @!attribute [rw] content
         #   @return [::Array<::String>]
         #     Required. The content of the input in string format.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     The format of the source text.
         # @!attribute [rw] reference_sentence_config
         #   @return [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentenceConfig]
         #     Configuration for caller provided reference sentences.

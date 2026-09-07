@@ -75,6 +75,16 @@
                 "get_metrics"
               ]
             },
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
             "CreateFirewallPolicy": {
               "methods": [
                 "create_firewall_policy"

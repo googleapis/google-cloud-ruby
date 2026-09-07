@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,32 +101,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_list_key_rings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_key_rings_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_key_rings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_key_rings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_key_rings ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_key_rings ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_key_rings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_key_rings(::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_key_rings(::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -160,32 +160,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_list_crypto_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_crypto_keys_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by do |_result, response|
+        c.list_crypto_keys parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_crypto_keys ::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by) do |_result, response|
+        c.list_crypto_keys ::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_crypto_keys({ parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_crypto_keys(::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_crypto_keys(::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -219,32 +219,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_list_crypto_key_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_crypto_key_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_crypto_key_versions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |_result, response|
+        c.list_crypto_key_versions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_crypto_key_versions ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |_result, response|
+        c.list_crypto_key_versions ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_crypto_key_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_crypto_key_versions(::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_crypto_key_versions(::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -277,37 +277,93 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_list_import_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_import_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_import_jobs ::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_import_jobs ::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_import_jobs(::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_import_jobs(::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, list_import_jobs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_retired_resources
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::ListRetiredResourcesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_retired_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_list_retired_resources_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_retired_resources_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_retired_resources({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_retired_resources parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_retired_resources ::Google::Cloud::Kms::V1::ListRetiredResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_retired_resources({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_retired_resources(::Google::Cloud::Kms::V1::ListRetiredResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_retired_resources_client_stub.call_count
       end
     end
   end
@@ -331,32 +387,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_key_ring_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_key_ring_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_key_ring({ name: name }) do |_result, response|
+        c.get_key_ring({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_key_ring name: name do |_result, response|
+        c.get_key_ring name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_key_ring ::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name) do |_result, response|
+        c.get_key_ring ::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_key_ring({ name: name }, call_options) do |_result, response|
+        c.get_key_ring({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_key_ring(::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), call_options) do |_result, response|
+        c.get_key_ring(::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -385,32 +441,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_crypto_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_crypto_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_crypto_key({ name: name }) do |_result, response|
+        c.get_crypto_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_crypto_key name: name do |_result, response|
+        c.get_crypto_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_crypto_key ::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name) do |_result, response|
+        c.get_crypto_key ::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_crypto_key({ name: name }, call_options) do |_result, response|
+        c.get_crypto_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_crypto_key(::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), call_options) do |_result, response|
+        c.get_crypto_key(::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -439,32 +495,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_crypto_key_version({ name: name }) do |_result, response|
+        c.get_crypto_key_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_crypto_key_version name: name do |_result, response|
+        c.get_crypto_key_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_crypto_key_version ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name) do |_result, response|
+        c.get_crypto_key_version ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_crypto_key_version({ name: name }, call_options) do |_result, response|
+        c.get_crypto_key_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_crypto_key_version(::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_crypto_key_version(::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -494,32 +550,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_public_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_public_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_public_key({ name: name, public_key_format: public_key_format }) do |_result, response|
+        c.get_public_key({ name: name, public_key_format: public_key_format }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_public_key name: name, public_key_format: public_key_format do |_result, response|
+        c.get_public_key name: name, public_key_format: public_key_format do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_public_key ::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format) do |_result, response|
+        c.get_public_key ::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_public_key({ name: name, public_key_format: public_key_format }, call_options) do |_result, response|
+        c.get_public_key({ name: name, public_key_format: public_key_format }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_public_key(::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format), call_options) do |_result, response|
+        c.get_public_key(::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name, public_key_format: public_key_format), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -538,6 +594,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
 
     # Create request parameters for a unary method.
     name = "hello world"
+    public_key_format = :PUBLIC_KEY_FORMAT_UNSPECIFIED
 
     get_import_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -548,37 +605,91 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_import_job({ name: name }) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_import_job name: name do |_result, response|
+        c.get_import_job name: name, public_key_format: public_key_format do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name) do |_result, response|
+        c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_import_job({ name: name }, call_options) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, get_import_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_retired_resource
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::RetiredResource.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_retired_resource_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_get_retired_resource_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_retired_resource_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_retired_resource({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_retired_resource name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_retired_resource ::Google::Cloud::Kms::V1::GetRetiredResourceRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_retired_resource({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_retired_resource(::Google::Cloud::Kms::V1::GetRetiredResourceRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_retired_resource_client_stub.call_count
       end
     end
   end
@@ -604,32 +715,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_create_key_ring_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_key_ring_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }) do |_result, response|
+        c.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_key_ring parent: parent, key_ring_id: key_ring_id, key_ring: key_ring do |_result, response|
+        c.create_key_ring parent: parent, key_ring_id: key_ring_id, key_ring: key_ring do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_key_ring ::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring) do |_result, response|
+        c.create_key_ring ::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }, call_options) do |_result, response|
+        c.create_key_ring({ parent: parent, key_ring_id: key_ring_id, key_ring: key_ring }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_key_ring(::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), call_options) do |_result, response|
+        c.create_key_ring(::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -651,6 +762,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     crypto_key_id = "hello world"
     crypto_key = {}
     skip_initial_version_creation = true
+    trusted_wrapping_enabled = true
 
     create_crypto_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -661,32 +773,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_create_crypto_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_crypto_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }) do |_result, response|
+        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation do |_result, response|
+        c.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation) do |_result, response|
+        c.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }, call_options) do |_result, response|
+        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation), call_options) do |_result, response|
+        c.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -716,37 +828,145 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_create_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }) do |_result, response|
+        c.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_crypto_key_version parent: parent, crypto_key_version: crypto_key_version do |_result, response|
+        c.create_crypto_key_version parent: parent, crypto_key_version: crypto_key_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_crypto_key_version ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version) do |_result, response|
+        c.create_crypto_key_version ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }, call_options) do |_result, response|
+        c.create_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_crypto_key_version(::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), call_options) do |_result, response|
+        c.create_crypto_key_version(::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, create_crypto_key_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_crypto_key
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_crypto_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_delete_crypto_key_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_crypto_key_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_crypto_key({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_crypto_key name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_crypto_key ::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_crypto_key({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_crypto_key(::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_crypto_key_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_crypto_key_version
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_delete_crypto_key_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_crypto_key_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_crypto_key_version({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_crypto_key_version name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_crypto_key_version ::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_crypto_key_version({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_crypto_key_version(::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_crypto_key_version_client_stub.call_count
       end
     end
   end
@@ -765,6 +985,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     import_job = "hello world"
     wrapped_key = "hello world"
     rsa_aes_wrapped_key = "hello world"
+    trusted_wrapping_enabled = true
 
     import_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -775,37 +996,150 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_import_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |_result, response|
+        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |_result, response|
+        c.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |_result, response|
+        c.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, call_options) do |_result, response|
+        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key), call_options) do |_result, response|
+        c.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, import_crypto_key_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_import_trusted_key_wrapped_crypto_key_version
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::CryptoKeyVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    importing_key = "hello world"
+    crypto_key_version = "hello world"
+    wrapped_key = "hello world"
+    algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+
+    import_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_import_trusted_key_wrapped_crypto_key_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_trusted_key_wrapped_crypto_key_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.import_trusted_key_wrapped_crypto_key_version parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.import_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.import_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_trusted_key_wrapped_crypto_key_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_trusted_key_wrapped_crypto_key_version
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    wrapping_key = "hello world"
+
+    export_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_export_trusted_key_wrapped_crypto_key_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_trusted_key_wrapped_crypto_key_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.export_trusted_key_wrapped_crypto_key_version name: name, wrapping_key: wrapping_key do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.export_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.export_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_trusted_key_wrapped_crypto_key_version_client_stub.call_count
       end
     end
   end
@@ -831,32 +1165,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_create_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }) do |_result, response|
+        c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job do |_result, response|
+        c.create_import_job parent: parent, import_job_id: import_job_id, import_job: import_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_import_job ::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job) do |_result, response|
+        c.create_import_job ::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }, call_options) do |_result, response|
+        c.create_import_job({ parent: parent, import_job_id: import_job_id, import_job: import_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_import_job(::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), call_options) do |_result, response|
+        c.create_import_job(::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +1220,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_update_crypto_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_crypto_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }) do |_result, response|
+        c.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_crypto_key crypto_key: crypto_key, update_mask: update_mask do |_result, response|
+        c.update_crypto_key crypto_key: crypto_key, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_crypto_key ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask) do |_result, response|
+        c.update_crypto_key ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_crypto_key({ crypto_key: crypto_key, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_crypto_key(::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), call_options) do |_result, response|
+        c.update_crypto_key(::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -941,32 +1275,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_update_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }) do |_result, response|
+        c.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_crypto_key_version crypto_key_version: crypto_key_version, update_mask: update_mask do |_result, response|
+        c.update_crypto_key_version crypto_key_version: crypto_key_version, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_crypto_key_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask) do |_result, response|
+        c.update_crypto_key_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_crypto_key_version({ crypto_key_version: crypto_key_version, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_crypto_key_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), call_options) do |_result, response|
+        c.update_crypto_key_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -996,32 +1330,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_update_crypto_key_primary_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_crypto_key_primary_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }) do |_result, response|
+        c.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_crypto_key_primary_version name: name, crypto_key_version_id: crypto_key_version_id do |_result, response|
+        c.update_crypto_key_primary_version name: name, crypto_key_version_id: crypto_key_version_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_crypto_key_primary_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id) do |_result, response|
+        c.update_crypto_key_primary_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }, call_options) do |_result, response|
+        c.update_crypto_key_primary_version({ name: name, crypto_key_version_id: crypto_key_version_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_crypto_key_primary_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), call_options) do |_result, response|
+        c.update_crypto_key_primary_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1050,32 +1384,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_destroy_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, destroy_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.destroy_crypto_key_version({ name: name }) do |_result, response|
+        c.destroy_crypto_key_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.destroy_crypto_key_version name: name do |_result, response|
+        c.destroy_crypto_key_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.destroy_crypto_key_version ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name) do |_result, response|
+        c.destroy_crypto_key_version ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.destroy_crypto_key_version({ name: name }, call_options) do |_result, response|
+        c.destroy_crypto_key_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.destroy_crypto_key_version(::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
+        c.destroy_crypto_key_version(::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1104,32 +1438,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_restore_crypto_key_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_crypto_key_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_crypto_key_version({ name: name }) do |_result, response|
+        c.restore_crypto_key_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_crypto_key_version name: name do |_result, response|
+        c.restore_crypto_key_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_crypto_key_version ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name) do |_result, response|
+        c.restore_crypto_key_version ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_crypto_key_version({ name: name }, call_options) do |_result, response|
+        c.restore_crypto_key_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_crypto_key_version(::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
+        c.restore_crypto_key_version(::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1162,32 +1496,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_encrypt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, encrypt_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |_result, response|
+        c.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |_result, response|
+        c.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |_result, response|
+        c.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, call_options) do |_result, response|
+        c.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.encrypt(::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), call_options) do |_result, response|
+        c.encrypt(::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1220,32 +1554,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_decrypt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, decrypt_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |_result, response|
+        c.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |_result, response|
+        c.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |_result, response|
+        c.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, call_options) do |_result, response|
+        c.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.decrypt(::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), call_options) do |_result, response|
+        c.decrypt(::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1280,32 +1614,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_raw_encrypt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, raw_encrypt_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
+        c.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
+        c.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
+        c.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
+        c.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
+        c.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1341,32 +1675,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_raw_decrypt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, raw_decrypt_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
+        c.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
+        c.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
+        c.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
+        c.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
+        c.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1399,32 +1733,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_asymmetric_sign_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, asymmetric_sign_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |_result, response|
+        c.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |_result, response|
+        c.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |_result, response|
+        c.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, call_options) do |_result, response|
+        c.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), call_options) do |_result, response|
+        c.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1455,32 +1789,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_asymmetric_decrypt_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, asymmetric_decrypt_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |_result, response|
+        c.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.asymmetric_decrypt name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |_result, response|
+        c.asymmetric_decrypt name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |_result, response|
+        c.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, call_options) do |_result, response|
+        c.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.asymmetric_decrypt(::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), call_options) do |_result, response|
+        c.asymmetric_decrypt(::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1511,32 +1845,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_mac_sign_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, mac_sign_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }) do |_result, response|
+        c.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.mac_sign name: name, data: data, data_crc32c: data_crc32c do |_result, response|
+        c.mac_sign name: name, data: data, data_crc32c: data_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.mac_sign ::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c) do |_result, response|
+        c.mac_sign ::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }, call_options) do |_result, response|
+        c.mac_sign({ name: name, data: data, data_crc32c: data_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.mac_sign(::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c), call_options) do |_result, response|
+        c.mac_sign(::Google::Cloud::Kms::V1::MacSignRequest.new(name: name, data: data, data_crc32c: data_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1569,32 +1903,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_mac_verify_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, mac_verify_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }) do |_result, response|
+        c.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.mac_verify name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c do |_result, response|
+        c.mac_verify name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.mac_verify ::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c) do |_result, response|
+        c.mac_verify ::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }, call_options) do |_result, response|
+        c.mac_verify({ name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.mac_verify(::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c), call_options) do |_result, response|
+        c.mac_verify(::Google::Cloud::Kms::V1::MacVerifyRequest.new(name: name, data: data, data_crc32c: data_crc32c, mac: mac, mac_crc32c: mac_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1625,32 +1959,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_decapsulate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, decapsulate_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |_result, response|
+        c.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.decapsulate name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |_result, response|
+        c.decapsulate name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.decapsulate ::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |_result, response|
+        c.decapsulate ::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, call_options) do |_result, response|
+        c.decapsulate({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.decapsulate(::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), call_options) do |_result, response|
+        c.decapsulate(::Google::Cloud::Kms::V1::DecapsulateRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1681,32 +2015,32 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_generate_random_bytes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_random_bytes_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }) do |_result, response|
+        c.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_random_bytes location: location, length_bytes: length_bytes, protection_level: protection_level do |_result, response|
+        c.generate_random_bytes location: location, length_bytes: length_bytes, protection_level: protection_level do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_random_bytes ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level) do |_result, response|
+        c.generate_random_bytes ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }, call_options) do |_result, response|
+        c.generate_random_bytes({ location: location, length_bytes: length_bytes, protection_level: protection_level }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_random_bytes(::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level), call_options) do |_result, response|
+        c.generate_random_bytes(::Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new(location: location, length_bytes: length_bytes, protection_level: protection_level), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

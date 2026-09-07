@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/apps/events/subscriptions/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-apps-events-subscriptions/$1

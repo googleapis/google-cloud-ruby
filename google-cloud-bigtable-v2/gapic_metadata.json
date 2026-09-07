@@ -64,6 +64,26 @@
               "methods": [
                 "execute_query"
               ]
+            },
+            "GetClientConfiguration": {
+              "methods": [
+                "get_client_configuration"
+              ]
+            },
+            "OpenTable": {
+              "methods": [
+                "open_table"
+              ]
+            },
+            "OpenAuthorizedView": {
+              "methods": [
+                "open_authorized_view"
+              ]
+            },
+            "OpenMaterializedView": {
+              "methods": [
+                "open_materialized_view"
+              ]
             }
           }
         }

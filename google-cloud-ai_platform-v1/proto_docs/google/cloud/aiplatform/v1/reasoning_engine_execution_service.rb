@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,6 +64,69 @@ module Google
         #     Optional. Class method to be used for the stream query.
         #     It is optional and defaults to "stream_query" if unspecified.
         class StreamQueryReasoningEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ReasoningEngine resource to use.
+        #     Format:
+        #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+        # @!attribute [rw] input_gcs_uri
+        #   @return [::String]
+        #     Optional. Input Cloud Storage URI for the Async query.
+        # @!attribute [rw] output_gcs_uri
+        #   @return [::String]
+        #     Optional. Output Cloud Storage URI for the Async query.
+        class AsyncQueryReasoningEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation metadata message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class AsyncQueryReasoningEngineOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] output_gcs_uri
+        #   @return [::String]
+        #     Output Cloud Storage URI for the Async query.
+        class AsyncQueryReasoningEngineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ReasoningEngine resource to use.
+        #     Format:
+        #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+        # @!attribute [rw] operation_name
+        #   @return [::String]
+        #     Required. The name of the longrunning operation returned from
+        #     AsyncQueryReasoningEngine.
+        #     Format:
+        #     `projects/{project}/locations/{location}/operations/{operation}`
+        class CancelAsyncQueryReasoningEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine}.
+        class CancelAsyncQueryReasoningEngineResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

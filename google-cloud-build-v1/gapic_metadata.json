@@ -99,6 +99,11 @@
               "methods": [
                 "list_worker_pools"
               ]
+            },
+            "GetDefaultServiceAccount": {
+              "methods": [
+                "get_default_service_account"
+              ]
             }
           }
         }

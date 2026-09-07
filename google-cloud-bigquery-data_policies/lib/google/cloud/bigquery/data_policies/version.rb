@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigquery
       module DataPolicies
-        VERSION = "2.0.2"
+        VERSION = "2.2.1"
       end
     end
   end

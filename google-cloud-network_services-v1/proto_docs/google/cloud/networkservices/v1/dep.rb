@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,12 +62,14 @@ module Google
           # A single extension in the chain to execute for the matching request.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The name for this extension.
+          #     Optional. The name for this extension.
           #     The name is logged as part of the HTTP request logs.
           #     The name must conform with RFC-1034, is restricted to lower-cased
           #     letters, numbers and hyphens, and can have a maximum length of 63
           #     characters. Additionally, the first character must be a letter and the
           #     last a letter or a number.
+          #
+          #     This field is required except for AuthzExtension.
           # @!attribute [rw] authority
           #   @return [::String]
           #     Optional. The `:authority` header in the gRPC request sent from Envoy
@@ -112,6 +114,10 @@ module Google
           #
           #     For the `LbEdgeExtension` resource, this field is required and must only
           #     contain `REQUEST_HEADERS` event.
+          #
+          #     For the `AuthzExtension` resource, this field is optional.
+          #     `REQUEST_HEADERS` is the only supported event. If unspecified,
+          #     `REQUEST_HEADERS` event is assumed as supported.
           # @!attribute [rw] timeout
           #   @return [::Google::Protobuf::Duration]
           #     Optional. Specifies the timeout for each individual message on the
@@ -141,13 +147,27 @@ module Google
           #     Optional. List of the HTTP headers to forward to the extension
           #     (from the client or backend). If omitted, all headers are sent.
           #     Each element is a string indicating the header name.
+          # @!attribute [rw] forward_attributes
+          #   @return [::Array<::String>]
+          #     Optional. List of the Envoy attributes to forward to the extension
+          #     server. The attributes provided here are included as part of the
+          #     `ProcessingRequest.attributes` field (of type
+          #     `map<string, google.protobuf.Struct>`), where the keys are the attribute
+          #     names. Refer to the
+          #     [documentation](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference#attributes)
+          #     for the names of attributes that can be forwarded. If omitted, no
+          #     attributes are sent. Each element is a string indicating the
+          #     attribute name.
           # @!attribute [rw] metadata
           #   @return [::Google::Protobuf::Struct]
           #     Optional. The metadata provided here is included as part of the
           #     `metadata_context` (of type `google.protobuf.Struct`) in the
           #     `ProcessingRequest` message sent to the extension server.
           #
-          #     The metadata is available under the namespace
+          #     For `AuthzExtension` resources, the metadata is available under the
+          #     namespace `com.google.authz_extension.<resource_name>`.
+          #     For other types of extensions, the metadata is available under the
+          #     namespace
           #     `com.google.<extension_type>.<resource_name>.<extension_chain_name>.<extension_name>`.
           #     For example:
           #     `com.google.lb_traffic_extension.lbtrafficextension1.chain1.ext1`.
@@ -171,6 +191,45 @@ module Google
           #     * The length of each key must be less than 64 characters.
           #     * The length of each value must be less than 1024 characters.
           #     * All values must be strings.
+          # @!attribute [rw] request_body_send_mode
+          #   @return [::Google::Cloud::NetworkServices::V1::BodySendMode]
+          #     Optional. Configures the send mode for request body processing.
+          #
+          #     The field can only be set if `supported_events` includes `REQUEST_BODY`.
+          #     If `supported_events` includes `REQUEST_BODY`,
+          #     but `request_body_send_mode` is unset, the default value `STREAMED` is
+          #     used.
+          #
+          #     When this field is set to `FULL_DUPLEX_STREAMED`, `supported_events`
+          #     must include both `REQUEST_BODY` and `REQUEST_TRAILERS`.
+          #
+          #     This field can be set only for `LbTrafficExtension` and
+          #     `LbRouteExtension` resources, and only when the `service` field of the
+          #     extension points to a `BackendService`. Only `FULL_DUPLEX_STREAMED` mode
+          #     is supported for `LbRouteExtension` resources.
+          # @!attribute [rw] response_body_send_mode
+          #   @return [::Google::Cloud::NetworkServices::V1::BodySendMode]
+          #     Optional. Configures the send mode for response processing. If
+          #     unspecified, the default value `STREAMED` is used.
+          #
+          #     The field can only be set if `supported_events` includes `RESPONSE_BODY`.
+          #     If `supported_events` includes `RESPONSE_BODY`, but
+          #     `response_body_send_mode` is unset, the default value `STREAMED` is used.
+          #
+          #     When this field is set to `FULL_DUPLEX_STREAMED`, `supported_events`
+          #     must include both `RESPONSE_BODY` and `RESPONSE_TRAILERS`.
+          #
+          #     This field can be set only for `LbTrafficExtension` resources, and only
+          #     when the `service` field of the extension points to a `BackendService`.
+          # @!attribute [rw] observability_mode
+          #   @return [::Boolean]
+          #     Optional. When set to `true`, the calls to the extension backend are
+          #     performed asynchronously, without pausing the processing of the ongoing
+          #     request. In this mode, only `STREAMED` (default) body processing is
+          #     supported. Responses, if any, are ignored.
+          #
+          #     Supported by regional `LbTrafficExtension` and `LbRouteExtension`
+          #     resources.
           class Extension
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -613,6 +672,198 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `LbEdgeExtension` is a resource that lets the extension service influence
+        # the selection of backend services and Cloud CDN cache keys by modifying
+        # request headers.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Identifier. Name of the `LbEdgeExtension` resource in the
+        #     following format:
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the resource was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the resource was updated.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. A human-readable description of the resource.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Set of labels associated with the `LbEdgeExtension` resource.
+        #
+        #     The format must comply with [the requirements for
+        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+        #     for Google Cloud resources.
+        # @!attribute [rw] forwarding_rules
+        #   @return [::Array<::String>]
+        #     Required. A list of references to the forwarding rules to which this
+        #     service extension is attached. At least one forwarding rule is required.
+        #     Only one `LbEdgeExtension` resource can be associated with a forwarding
+        #     rule.
+        # @!attribute [rw] extension_chains
+        #   @return [::Array<::Google::Cloud::NetworkServices::V1::ExtensionChain>]
+        #     Required. A set of ordered extension chains that contain the match
+        #     conditions and extensions to execute. Match conditions for each extension
+        #     chain are evaluated in sequence for a given request. The first extension
+        #     chain that has a condition that matches the request is executed.
+        #     Any subsequent extension chains do not execute.
+        #     Limited to 5 extension chains per resource.
+        # @!attribute [rw] load_balancing_scheme
+        #   @return [::Google::Cloud::NetworkServices::V1::LoadBalancingScheme]
+        #     Required. All forwarding rules referenced by this extension must
+        #     share the same load balancing scheme.
+        #     Supported values: `EXTERNAL_MANAGED`.
+        class LbEdgeExtension
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Message for requesting list of `LbEdgeExtension` resources.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project and location from which the `LbEdgeExtension`
+        #     resources are listed. These values are specified in the following format:
+        #     `projects/{project}/locations/{location}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. The server might return fewer items than
+        #     requested. If unspecified, the server picks an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results that the server returns.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Hint about how to order the results.
+        class ListLbEdgeExtensionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing `LbEdgeExtension` resources.
+        # @!attribute [rw] lb_edge_extensions
+        #   @return [::Array<::Google::Cloud::NetworkServices::V1::LbEdgeExtension>]
+        #     The list of `LbEdgeExtension` resources.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results that the server returns.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListLbEdgeExtensionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for getting a `LbEdgeExtension` resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. A name of the `LbEdgeExtension` resource to get. Must be in the
+        #     format
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        class GetLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for creating a `LbEdgeExtension` resource.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the `LbEdgeExtension` resource. Must be in
+        #     the format `projects/{project}/locations/{location}`.
+        # @!attribute [rw] lb_edge_extension_id
+        #   @return [::String]
+        #     Required. User-provided ID of the `LbEdgeExtension` resource to be created.
+        # @!attribute [rw] lb_edge_extension
+        #   @return [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+        #     Required. `LbEdgeExtension` resource to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for updating a `LbEdgeExtension` resource.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Used to specify the fields to be overwritten in the
+        #     `LbEdgeExtension` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field is overwritten if it is in the mask. If the
+        #     user does not specify a mask, then all fields are overwritten.
+        # @!attribute [rw] lb_edge_extension
+        #   @return [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+        #     Required. `LbEdgeExtension` resource being updated.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting a `LbEdgeExtension` resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `LbEdgeExtension` resource to delete. Must be in
+        #     the format
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `AuthzExtension` is a resource that allows traffic forwarding
         # to a callout backend service to make an authorization decision.
         # @!attribute [rw] name
@@ -639,15 +890,17 @@ module Google
         #     resources.
         # @!attribute [rw] load_balancing_scheme
         #   @return [::Google::Cloud::NetworkServices::V1::LoadBalancingScheme]
-        #     Required. All backend services and forwarding rules referenced by this
+        #     Optional. All backend services and forwarding rules referenced by this
         #     extension must share the same load balancing scheme. Supported values:
-        #     `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. For more information, refer to
+        #     `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. Can be omitted for AuthzExtensions
+        #     that do not reference a backend service. For more information, refer to
         #     [Backend services
         #     overview](https://cloud.google.com/load-balancing/docs/backend-service).
         # @!attribute [rw] authority
         #   @return [::String]
-        #     Required. The `:authority` header in the gRPC request sent from Envoy
-        #     to the extension service.
+        #     Optional. The `:authority` header in the gRPC request sent from Envoy to
+        #     the extension service. It is required when the `service` field points to a
+        #     backend service or a wasm plugin.
         # @!attribute [rw] service
         #   @return [::String]
         #     Required. The reference to the service that runs the extension.
@@ -696,10 +949,23 @@ module Google
         #     Optional. List of the HTTP headers to forward to the extension
         #     (from the client). If omitted, all headers are sent.
         #     Each element is a string indicating the header name.
+        # @!attribute [rw] forward_attributes
+        #   @return [::Array<::String>]
+        #     Optional. List of the Envoy attributes to forward to the extension server.
+        #     The attributes provided here are included as part of the
+        #     `ProcessingRequest.attributes` field (of type
+        #     `map<string, google.protobuf.Struct>`), where the keys are the attribute
+        #     names. Refer to the
+        #     [documentation](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference#attributes)
+        #     for the names of attributes that can be forwarded. If omitted, no
+        #     attributes are sent. Each element is a string indicating the
+        #     attribute name.
         # @!attribute [rw] wire_format
         #   @return [::Google::Cloud::NetworkServices::V1::WireFormat]
         #     Optional. The format of communication supported by the callout extension.
-        #     If not specified, the default value `EXT_PROC_GRPC` is used.
+        #     This field is supported only for regional `AuthzExtension` resources. If
+        #     not specified, the default value `EXT_PROC_GRPC` is used. Global
+        #     `AuthzExtension` resources use the `EXT_PROC_GRPC` wire format.
         class AuthzExtension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -907,6 +1173,35 @@ module Google
           # `supported_events` for a client request are sent as part of the same
           # gRPC stream.
           EXT_PROC_GRPC = 1
+
+          # The extension service uses Envoy's `ext_authz` gRPC API. The backend
+          # service for the extension must use HTTP2 or H2C as the protocol.
+          # `EXT_AUTHZ_GRPC` is only supported for regional `AuthzExtension` resources.
+          EXT_AUTHZ_GRPC = 3
+        end
+
+        # The send mode for body processing.
+        module BodySendMode
+          # Default value. Do not use.
+          BODY_SEND_MODE_UNSPECIFIED = 0
+
+          # Calls to the extension are executed in the streamed mode. Subsequent
+          # chunks will be sent only after the previous chunks have been processed.
+          #
+          # The content of the body chunks is sent one way to the extension. Extension
+          # may send modified chunks back.
+          #
+          # This is the default value if the processing mode is not specified.
+          BODY_SEND_MODE_STREAMED = 1
+
+          # Calls are executed in the full duplex mode. Subsequent chunks will be sent
+          # for processing without waiting for the response for the previous chunk or
+          # for the response for `REQUEST_HEADERS` event.
+          #
+          # Extension can freely modify or chunk the body contents. If the extension
+          # doesn't send the body contents back, the next extension in the chain or the
+          # upstream will receive an empty body.
+          BODY_SEND_MODE_FULL_DUPLEX_STREAMED = 2
         end
       end
     end

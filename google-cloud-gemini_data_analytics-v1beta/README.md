@@ -1,8 +1,7 @@
 # Ruby Client for the Data Analytics API with Gemini V1BETA API
 
-API Client library for the Data Analytics API with Gemini V1BETA API
+Developers can use the Conversational Analytics API, accessed through geminidataanalytics.googleapis.com, to build an artificial intelligence (AI)-powered chat interface, or data agent, that answers questions about structured data in BigQuery, Looker, and Looker Studio using natural language.
 
-google-cloud-gemini_data_analytics-v1beta is the official client library for the Data Analytics API with Gemini V1BETA API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

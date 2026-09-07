@@ -66,7 +66,7 @@ Google::Apis.logger = my_logger
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.1+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

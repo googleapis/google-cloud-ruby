@@ -23,7 +23,7 @@ include :exec, e: true
 
 def run
   data = {}
-  capture(["gsutil", "ls", "gs://docs-staging-v2"]).split("\n").each do |url|
+  capture(["gcloud", "storage", "ls", "gs://docs-staging-v2"]).split("\n").each do |url|
     if url =~ %r{^gs://docs-staging-v2/docfx-ruby-(.+)-v(\d+\.\d+\.\d+)\.tar\.gz$}
       (data[Regexp.last_match[1]] ||= []) << Gem::Version.new(Regexp.last_match[2])
     end

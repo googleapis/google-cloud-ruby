@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -123,6 +123,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified RetiredResource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/retiredResources/{retired_resource}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param retired_resource [String]
+            #
+            # @return [::String]
+            def retired_resource_path project:, location:, retired_resource:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/retiredResources/#{retired_resource}"
             end
 
             extend self

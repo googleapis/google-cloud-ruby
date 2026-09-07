@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,11 +45,6 @@ module Google
         #     user-managed).
         #
         #     Note: The following fields are mutually exclusive: `unmanaged_dataset_config`, `gcs_managed_config`, `document_warehouse_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] spanner_indexing_config
-        #   @return [::Google::Cloud::DocumentAI::V1beta3::Dataset::SpannerIndexingConfig]
-        #     Optional. A lightweight indexing source with low latency and high
-        #     reliability, but lacking advanced features like CMEK and content-based
-        #     search.
         # @!attribute [rw] name
         #   @return [::String]
         #     Dataset resource name.
@@ -94,12 +89,6 @@ module Google
 
           # Configuration specific to an unmanaged dataset.
           class UnmanagedDatasetConfig
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Configuration specific to spanner-based indexing.
-          class SpannerIndexingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -2,7 +2,6 @@
 
 The Storage Control API lets you perform metadata-specific, control plane, and long-running operations. The Storage Control API creates one space to perform metadata-specific, control plane, and long-running operations apart from the Storage API. Separating these operations from the Storage API improves API standardization and lets you run faster releases.
 
-The Google Cloud Storage API allows applications to read and write data through the abstractions of buckets and objects, which are similar to directories and files except that buckets cannot contain other buckets, and directory-level operations (like directory rename) are not supported. Buckets share a single global namespace, and each bucket belongs to a specific project that has an associated owner that pays for the data stored in the bucket. This API is accessed using standard gRPC requests.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -30,11 +29,11 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/iam/v1"
+require "google/cloud/storage/control/v2"
 
-client = ::Google::Iam::V1::IAMPolicy::Client.new
-request = ::Google::Iam::V1::SetIamPolicyRequest.new # (request fields as keyword arguments...)
-response = client.set_iam_policy request
+client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+request = ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new # (request fields as keyword arguments...)
+response = client.create_folder request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-storage-control-v2/latest)
@@ -72,10 +71,10 @@ You can customize logging by modifying the `logger` configuration when
 constructing a client object. For example:
 
 ```ruby
-require "google/iam/v1"
+require "google/cloud/storage/control/v2"
 require "logger"
 
-client = ::Google::Iam::V1::IAMPolicy::Client.new do |config|
+client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

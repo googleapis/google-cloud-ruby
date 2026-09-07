@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
 
     Gapic::ServiceStub.stub :new, streaming_translate_speech_client_stub do
       # Create client
-      client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
+      c = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -90,7 +90,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_translate_speech enum_input do |response, operation|
+      c.streaming_translate_speech enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse, r
@@ -102,7 +102,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_translate_speech stream_input do |response, operation|
+      c.streaming_translate_speech stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse, r
@@ -117,7 +117,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_translate_speech enum_input, grpc_options do |response, operation|
+      c.streaming_translate_speech enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse, r
@@ -129,7 +129,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_translate_speech stream_input, grpc_options do |response, operation|
+      c.streaming_translate_speech stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechResponse, r

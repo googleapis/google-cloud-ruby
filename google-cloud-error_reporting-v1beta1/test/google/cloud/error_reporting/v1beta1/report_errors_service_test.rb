@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -84,36 +84,36 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::ClientTest 
 
     Gapic::ServiceStub.stub :new, report_error_event_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.report_error_event({ project_name: project_name, event: event }) do |response, operation|
+      c.report_error_event({ project_name: project_name, event: event }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.report_error_event project_name: project_name, event: event do |response, operation|
+      c.report_error_event project_name: project_name, event: event do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.report_error_event ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event) do |response, operation|
+      c.report_error_event ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.report_error_event({ project_name: project_name, event: event }, grpc_options) do |response, operation|
+      c.report_error_event({ project_name: project_name, event: event }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.report_error_event(::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event), grpc_options) do |response, operation|
+      c.report_error_event(::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

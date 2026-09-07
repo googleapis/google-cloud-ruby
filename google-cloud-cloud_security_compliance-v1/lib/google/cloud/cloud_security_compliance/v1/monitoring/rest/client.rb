@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -231,7 +231,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_framework_compliance_summaries(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              # @overload list_framework_compliance_summaries(parent: nil, page_size: nil, page_token: nil, filter: nil, view: nil)
               #   Pass arguments to `list_framework_compliance_summaries` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -246,6 +246,8 @@ module Google
               #     should return.
               #   @param filter [::String]
               #     Optional. The filtering results.
+              #   @param view [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkComplianceSummaryView]
+              #     Optional. Specifies the level of detail to return in the response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudSecurityCompliance::V1::FrameworkComplianceSummary>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -417,7 +419,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload fetch_framework_compliance_report(name: nil, end_time: nil)
+              # @overload fetch_framework_compliance_report(name: nil, end_time: nil, filter: nil)
               #   Pass arguments to `fetch_framework_compliance_report` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -426,6 +428,8 @@ module Google
               #     Required. The name of the framework compliance report to retrieve.
               #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Optional. The end time of the report.
+              #   @param filter [::String]
+              #     Optional. The filtering results.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkComplianceReport]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -735,6 +739,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -814,6 +819,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

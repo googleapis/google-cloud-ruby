@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -191,7 +191,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Report` object.
+              # Retrieves a `Report` object.
               #
               # @overload get_report(request, options = nil)
               #   Pass arguments to `get_report` via a request object, either of type
@@ -270,7 +270,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Report` objects.
+              # Lists `Report` objects.
               #
               # @overload list_reports(request, options = nil)
               #   Pass arguments to `list_reports` via a request object, either of type
@@ -293,8 +293,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `Reports` to return. The service may return
               #     fewer than this value. If unspecified, at most 50 `Reports` will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
-              #     1000.
+              #     returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListReports` call.
               #     Provide this to retrieve the subsequent page.
@@ -376,7 +376,7 @@ module Google
               end
 
               ##
-              # API to create a `Report` object.
+              # Creates a `Report` object.
               #
               # @overload create_report(request, options = nil)
               #   Pass arguments to `create_report` via a request object, either of type
@@ -457,7 +457,7 @@ module Google
               end
 
               ##
-              # API to update a `Report` object.
+              # Updates a `Report` object.
               #
               # @overload update_report(request, options = nil)
               #   Pass arguments to `update_report` via a request object, either of type
@@ -477,7 +477,7 @@ module Google
               #   @param report [::Google::Ads::AdManager::V1::Report, ::Hash]
               #     Required. The `Report` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::Report]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -538,7 +538,7 @@ module Google
 
               ##
               # Initiates the execution of an existing report asynchronously. Users can
-              # get the report by polling this operation via
+              # get the report by polling this operation using
               # `OperationsService.GetOperation`.
               # Poll every 5 seconds initially, with an exponential
               # backoff. Once a report is complete, the operation will contain a
@@ -659,15 +659,16 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of rows to return. The service may return
               #     fewer than this value. If unspecified, at most 1,000 rows will be returned.
-              #     The maximum value is 10,000; values above 10,000 will be reduced to 10,000.
+              #     The maximum value is 10,000; values greater than 10,000 will be reduced to
+              #     10,000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `FetchReportResultRows`
               #     call. Provide this to retrieve the second and subsequent batches of rows.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Report::DataTable::Row>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::ReportDataTable::Row>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Report::DataTable::Row>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::ReportDataTable::Row>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -686,7 +687,7 @@ module Google
               #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
               #   # over elements, and API calls will be issued to fetch pages as needed.
               #   result.each do |item|
-              #     # Each element is of type ::Google::Ads::AdManager::V1::Report::DataTable::Row.
+              #     # Each element is of type ::Google::Ads::AdManager::V1::ReportDataTable::Row.
               #     p item
               #   end
               #
@@ -797,6 +798,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -869,6 +871,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

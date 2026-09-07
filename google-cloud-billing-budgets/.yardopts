@@ -1,5 +1,5 @@
 --no-private
---title="Billing Budgets API"
+--title="Cloud Billing Budget API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

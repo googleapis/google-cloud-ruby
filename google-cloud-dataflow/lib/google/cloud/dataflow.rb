@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -135,8 +135,8 @@ module Google
       #
       # ## About Jobs
       #
-      # Provides a method to create and modify Google Cloud Dataflow jobs.
-      # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
+      # Provides a method to create and modify Dataflow jobs.
+      # A Job is a multi-stage computation graph run by the Dataflow service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
@@ -206,8 +206,7 @@ module Google
       #
       # ## About Messages
       #
-      # The Dataflow Messages API is used for monitoring the progress of
-      # Dataflow jobs.
+      # The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
@@ -277,8 +276,7 @@ module Google
       #
       # ## About Metrics
       #
-      # The Dataflow Metrics API lets you monitor the progress of Dataflow
-      # jobs.
+      # The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
@@ -491,6 +489,7 @@ module Google
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
       #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
       #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
       #     * `:retry_codes` (*type:* `Array<String>`) -
       #       The error codes that should trigger a retry.
       #

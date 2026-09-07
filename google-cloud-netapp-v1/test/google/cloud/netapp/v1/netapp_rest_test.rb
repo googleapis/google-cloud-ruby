@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,32 +101,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_storage_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_storage_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_storage_pools parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_storage_pools parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_storage_pools ::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_storage_pools ::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_storage_pools({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_storage_pools(::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_storage_pools(::Google::Cloud::NetApp::V1::ListStoragePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_storage_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_storage_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }) do |_result, response|
+        c.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_storage_pool parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool do |_result, response|
+        c.create_storage_pool parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_storage_pool ::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool) do |_result, response|
+        c.create_storage_pool ::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }, call_options) do |_result, response|
+        c.create_storage_pool({ parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_storage_pool(::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool), call_options) do |_result, response|
+        c.create_storage_pool(::Google::Cloud::NetApp::V1::CreateStoragePoolRequest.new(parent: parent, storage_pool_id: storage_pool_id, storage_pool: storage_pool), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_storage_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_storage_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_storage_pool({ name: name }) do |_result, response|
+        c.get_storage_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_storage_pool name: name do |_result, response|
+        c.get_storage_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_storage_pool ::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name) do |_result, response|
+        c.get_storage_pool ::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_storage_pool({ name: name }, call_options) do |_result, response|
+        c.get_storage_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_storage_pool(::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_storage_pool(::Google::Cloud::NetApp::V1::GetStoragePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_storage_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_storage_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }) do |_result, response|
+        c.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_storage_pool update_mask: update_mask, storage_pool: storage_pool do |_result, response|
+        c.update_storage_pool update_mask: update_mask, storage_pool: storage_pool do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_storage_pool ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool) do |_result, response|
+        c.update_storage_pool ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }, call_options) do |_result, response|
+        c.update_storage_pool({ update_mask: update_mask, storage_pool: storage_pool }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_storage_pool(::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool), call_options) do |_result, response|
+        c.update_storage_pool(::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest.new(update_mask: update_mask, storage_pool: storage_pool), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_storage_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_storage_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_storage_pool({ name: name }) do |_result, response|
+        c.delete_storage_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_storage_pool name: name do |_result, response|
+        c.delete_storage_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_storage_pool ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name) do |_result, response|
+        c.delete_storage_pool ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_storage_pool({ name: name }, call_options) do |_result, response|
+        c.delete_storage_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_storage_pool(::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name), call_options) do |_result, response|
+        c.delete_storage_pool(::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_validate_directory_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_directory_service_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_directory_service({ name: name, directory_service_type: directory_service_type }) do |_result, response|
+        c.validate_directory_service({ name: name, directory_service_type: directory_service_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_directory_service name: name, directory_service_type: directory_service_type do |_result, response|
+        c.validate_directory_service name: name, directory_service_type: directory_service_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_directory_service ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type) do |_result, response|
+        c.validate_directory_service ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_directory_service({ name: name, directory_service_type: directory_service_type }, call_options) do |_result, response|
+        c.validate_directory_service({ name: name, directory_service_type: directory_service_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_directory_service(::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type), call_options) do |_result, response|
+        c.validate_directory_service(::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new(name: name, directory_service_type: directory_service_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_switch_active_replica_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, switch_active_replica_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.switch_active_replica_zone({ name: name }) do |_result, response|
+        c.switch_active_replica_zone({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.switch_active_replica_zone name: name do |_result, response|
+        c.switch_active_replica_zone name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.switch_active_replica_zone ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name) do |_result, response|
+        c.switch_active_replica_zone ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.switch_active_replica_zone({ name: name }, call_options) do |_result, response|
+        c.switch_active_replica_zone({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.switch_active_replica_zone(::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name), call_options) do |_result, response|
+        c.switch_active_replica_zone(::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_volumes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_volumes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_volumes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_volumes ::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_volumes ::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_volumes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_volumes(::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_volumes(::Google::Cloud::NetApp::V1::ListVolumesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -541,32 +541,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_volume({ name: name }) do |_result, response|
+        c.get_volume({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_volume name: name do |_result, response|
+        c.get_volume name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_volume ::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name) do |_result, response|
+        c.get_volume ::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_volume({ name: name }, call_options) do |_result, response|
+        c.get_volume({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_volume(::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name), call_options) do |_result, response|
+        c.get_volume(::Google::Cloud::NetApp::V1::GetVolumeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -597,32 +597,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_volume({ parent: parent, volume_id: volume_id, volume: volume }) do |_result, response|
+        c.create_volume({ parent: parent, volume_id: volume_id, volume: volume }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_volume parent: parent, volume_id: volume_id, volume: volume do |_result, response|
+        c.create_volume parent: parent, volume_id: volume_id, volume: volume do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_volume ::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume) do |_result, response|
+        c.create_volume ::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_volume({ parent: parent, volume_id: volume_id, volume: volume }, call_options) do |_result, response|
+        c.create_volume({ parent: parent, volume_id: volume_id, volume: volume }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_volume(::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume), call_options) do |_result, response|
+        c.create_volume(::Google::Cloud::NetApp::V1::CreateVolumeRequest.new(parent: parent, volume_id: volume_id, volume: volume), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -652,32 +652,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_volume({ update_mask: update_mask, volume: volume }) do |_result, response|
+        c.update_volume({ update_mask: update_mask, volume: volume }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_volume update_mask: update_mask, volume: volume do |_result, response|
+        c.update_volume update_mask: update_mask, volume: volume do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_volume ::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume) do |_result, response|
+        c.update_volume ::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_volume({ update_mask: update_mask, volume: volume }, call_options) do |_result, response|
+        c.update_volume({ update_mask: update_mask, volume: volume }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_volume(::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume), call_options) do |_result, response|
+        c.update_volume(::Google::Cloud::NetApp::V1::UpdateVolumeRequest.new(update_mask: update_mask, volume: volume), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -707,32 +707,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_volume({ name: name, force: force }) do |_result, response|
+        c.delete_volume({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_volume name: name, force: force do |_result, response|
+        c.delete_volume name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_volume ::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force) do |_result, response|
+        c.delete_volume ::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_volume({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_volume({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_volume(::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_volume(::Google::Cloud::NetApp::V1::DeleteVolumeRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -762,37 +762,95 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_revert_volume_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, revert_volume_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.revert_volume({ name: name, snapshot_id: snapshot_id }) do |_result, response|
+        c.revert_volume({ name: name, snapshot_id: snapshot_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.revert_volume name: name, snapshot_id: snapshot_id do |_result, response|
+        c.revert_volume name: name, snapshot_id: snapshot_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.revert_volume ::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id) do |_result, response|
+        c.revert_volume ::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.revert_volume({ name: name, snapshot_id: snapshot_id }, call_options) do |_result, response|
+        c.revert_volume({ name: name, snapshot_id: snapshot_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.revert_volume(::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id), call_options) do |_result, response|
+        c.revert_volume(::Google::Cloud::NetApp::V1::RevertVolumeRequest.new(name: name, snapshot_id: snapshot_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, revert_volume_client_stub.call_count
+      end
+    end
+  end
+
+  def test_establish_volume_peering
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_cluster_name = "hello world"
+    peer_svm_name = "hello world"
+    peer_ip_addresses = ["hello world"]
+    peer_volume_name = "hello world"
+
+    establish_volume_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_establish_volume_peering_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, establish_volume_peering_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.establish_volume_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.establish_volume_peering ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.establish_volume_peering(::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, establish_volume_peering_client_stub.call_count
       end
     end
   end
@@ -820,32 +878,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_snapshots_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_snapshots_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_snapshots ::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_snapshots ::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_snapshots(::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_snapshots(::Google::Cloud::NetApp::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -874,32 +932,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_snapshot({ name: name }) do |_result, response|
+        c.get_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_snapshot name: name do |_result, response|
+        c.get_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_snapshot ::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name) do |_result, response|
+        c.get_snapshot ::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_snapshot({ name: name }, call_options) do |_result, response|
+        c.get_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_snapshot(::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.get_snapshot(::Google::Cloud::NetApp::V1::GetSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -930,32 +988,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }) do |_result, response|
+        c.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_snapshot parent: parent, snapshot: snapshot, snapshot_id: snapshot_id do |_result, response|
+        c.create_snapshot parent: parent, snapshot: snapshot, snapshot_id: snapshot_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_snapshot ::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id) do |_result, response|
+        c.create_snapshot ::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }, call_options) do |_result, response|
+        c.create_snapshot({ parent: parent, snapshot: snapshot, snapshot_id: snapshot_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_snapshot(::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id), call_options) do |_result, response|
+        c.create_snapshot(::Google::Cloud::NetApp::V1::CreateSnapshotRequest.new(parent: parent, snapshot: snapshot, snapshot_id: snapshot_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -984,32 +1042,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_snapshot({ name: name }) do |_result, response|
+        c.delete_snapshot({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_snapshot name: name do |_result, response|
+        c.delete_snapshot name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_snapshot ::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name) do |_result, response|
+        c.delete_snapshot ::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_snapshot({ name: name }, call_options) do |_result, response|
+        c.delete_snapshot({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_snapshot(::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name), call_options) do |_result, response|
+        c.delete_snapshot(::Google::Cloud::NetApp::V1::DeleteSnapshotRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1039,32 +1097,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |_result, response|
+        c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_snapshot update_mask: update_mask, snapshot: snapshot do |_result, response|
+        c.update_snapshot update_mask: update_mask, snapshot: snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_snapshot ::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |_result, response|
+        c.update_snapshot ::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, call_options) do |_result, response|
+        c.update_snapshot({ update_mask: update_mask, snapshot: snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_snapshot(::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), call_options) do |_result, response|
+        c.update_snapshot(::Google::Cloud::NetApp::V1::UpdateSnapshotRequest.new(update_mask: update_mask, snapshot: snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1097,32 +1155,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_active_directories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_active_directories_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_active_directories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_active_directories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_active_directories ::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_active_directories ::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_active_directories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_active_directories(::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_active_directories(::Google::Cloud::NetApp::V1::ListActiveDirectoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1151,32 +1209,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_active_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_active_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_active_directory({ name: name }) do |_result, response|
+        c.get_active_directory({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_active_directory name: name do |_result, response|
+        c.get_active_directory name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_active_directory ::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name) do |_result, response|
+        c.get_active_directory ::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_active_directory({ name: name }, call_options) do |_result, response|
+        c.get_active_directory({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_active_directory(::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name), call_options) do |_result, response|
+        c.get_active_directory(::Google::Cloud::NetApp::V1::GetActiveDirectoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1207,32 +1265,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_active_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_active_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }) do |_result, response|
+        c.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_active_directory parent: parent, active_directory: active_directory, active_directory_id: active_directory_id do |_result, response|
+        c.create_active_directory parent: parent, active_directory: active_directory, active_directory_id: active_directory_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_active_directory ::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id) do |_result, response|
+        c.create_active_directory ::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }, call_options) do |_result, response|
+        c.create_active_directory({ parent: parent, active_directory: active_directory, active_directory_id: active_directory_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_active_directory(::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id), call_options) do |_result, response|
+        c.create_active_directory(::Google::Cloud::NetApp::V1::CreateActiveDirectoryRequest.new(parent: parent, active_directory: active_directory, active_directory_id: active_directory_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1262,32 +1320,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_active_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_active_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_active_directory({ update_mask: update_mask, active_directory: active_directory }) do |_result, response|
+        c.update_active_directory({ update_mask: update_mask, active_directory: active_directory }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_active_directory update_mask: update_mask, active_directory: active_directory do |_result, response|
+        c.update_active_directory update_mask: update_mask, active_directory: active_directory do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_active_directory ::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory) do |_result, response|
+        c.update_active_directory ::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_active_directory({ update_mask: update_mask, active_directory: active_directory }, call_options) do |_result, response|
+        c.update_active_directory({ update_mask: update_mask, active_directory: active_directory }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_active_directory(::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory), call_options) do |_result, response|
+        c.update_active_directory(::Google::Cloud::NetApp::V1::UpdateActiveDirectoryRequest.new(update_mask: update_mask, active_directory: active_directory), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1316,32 +1374,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_active_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_active_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_active_directory({ name: name }) do |_result, response|
+        c.delete_active_directory({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_active_directory name: name do |_result, response|
+        c.delete_active_directory name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_active_directory ::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name) do |_result, response|
+        c.delete_active_directory ::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_active_directory({ name: name }, call_options) do |_result, response|
+        c.delete_active_directory({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_active_directory(::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_active_directory(::Google::Cloud::NetApp::V1::DeleteActiveDirectoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1374,32 +1432,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_kms_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_kms_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_kms_configs parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_kms_configs parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_kms_configs ::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_kms_configs ::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_kms_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_kms_configs(::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_kms_configs(::Google::Cloud::NetApp::V1::ListKmsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1430,32 +1488,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_kms_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_kms_config_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }) do |_result, response|
+        c.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_kms_config parent: parent, kms_config_id: kms_config_id, kms_config: kms_config do |_result, response|
+        c.create_kms_config parent: parent, kms_config_id: kms_config_id, kms_config: kms_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_kms_config ::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config) do |_result, response|
+        c.create_kms_config ::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }, call_options) do |_result, response|
+        c.create_kms_config({ parent: parent, kms_config_id: kms_config_id, kms_config: kms_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_kms_config(::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config), call_options) do |_result, response|
+        c.create_kms_config(::Google::Cloud::NetApp::V1::CreateKmsConfigRequest.new(parent: parent, kms_config_id: kms_config_id, kms_config: kms_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1484,32 +1542,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_kms_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_kms_config_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_kms_config({ name: name }) do |_result, response|
+        c.get_kms_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_kms_config name: name do |_result, response|
+        c.get_kms_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_kms_config ::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name) do |_result, response|
+        c.get_kms_config ::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_kms_config({ name: name }, call_options) do |_result, response|
+        c.get_kms_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_kms_config(::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_kms_config(::Google::Cloud::NetApp::V1::GetKmsConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1539,32 +1597,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_kms_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_kms_config_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_kms_config({ update_mask: update_mask, kms_config: kms_config }) do |_result, response|
+        c.update_kms_config({ update_mask: update_mask, kms_config: kms_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_kms_config update_mask: update_mask, kms_config: kms_config do |_result, response|
+        c.update_kms_config update_mask: update_mask, kms_config: kms_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_kms_config ::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config) do |_result, response|
+        c.update_kms_config ::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_kms_config({ update_mask: update_mask, kms_config: kms_config }, call_options) do |_result, response|
+        c.update_kms_config({ update_mask: update_mask, kms_config: kms_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_kms_config(::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config), call_options) do |_result, response|
+        c.update_kms_config(::Google::Cloud::NetApp::V1::UpdateKmsConfigRequest.new(update_mask: update_mask, kms_config: kms_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1593,32 +1651,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_encrypt_volumes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, encrypt_volumes_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.encrypt_volumes({ name: name }) do |_result, response|
+        c.encrypt_volumes({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.encrypt_volumes name: name do |_result, response|
+        c.encrypt_volumes name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.encrypt_volumes ::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name) do |_result, response|
+        c.encrypt_volumes ::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.encrypt_volumes({ name: name }, call_options) do |_result, response|
+        c.encrypt_volumes({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.encrypt_volumes(::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name), call_options) do |_result, response|
+        c.encrypt_volumes(::Google::Cloud::NetApp::V1::EncryptVolumesRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1647,32 +1705,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_verify_kms_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, verify_kms_config_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.verify_kms_config({ name: name }) do |_result, response|
+        c.verify_kms_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.verify_kms_config name: name do |_result, response|
+        c.verify_kms_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.verify_kms_config ::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name) do |_result, response|
+        c.verify_kms_config ::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.verify_kms_config({ name: name }, call_options) do |_result, response|
+        c.verify_kms_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.verify_kms_config(::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name), call_options) do |_result, response|
+        c.verify_kms_config(::Google::Cloud::NetApp::V1::VerifyKmsConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1701,32 +1759,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_kms_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_kms_config_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_kms_config({ name: name }) do |_result, response|
+        c.delete_kms_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_kms_config name: name do |_result, response|
+        c.delete_kms_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_kms_config ::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name) do |_result, response|
+        c.delete_kms_config ::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_kms_config({ name: name }, call_options) do |_result, response|
+        c.delete_kms_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_kms_config(::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_kms_config(::Google::Cloud::NetApp::V1::DeleteKmsConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1759,32 +1817,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_replications_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_replications_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_replications parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_replications parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_replications ::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_replications ::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_replications({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_replications(::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_replications(::Google::Cloud::NetApp::V1::ListReplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1813,32 +1871,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_replication({ name: name }) do |_result, response|
+        c.get_replication({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_replication name: name do |_result, response|
+        c.get_replication name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_replication ::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name) do |_result, response|
+        c.get_replication ::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_replication({ name: name }, call_options) do |_result, response|
+        c.get_replication({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_replication(::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name), call_options) do |_result, response|
+        c.get_replication(::Google::Cloud::NetApp::V1::GetReplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1869,32 +1927,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_replication({ parent: parent, replication: replication, replication_id: replication_id }) do |_result, response|
+        c.create_replication({ parent: parent, replication: replication, replication_id: replication_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_replication parent: parent, replication: replication, replication_id: replication_id do |_result, response|
+        c.create_replication parent: parent, replication: replication, replication_id: replication_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_replication ::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id) do |_result, response|
+        c.create_replication ::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_replication({ parent: parent, replication: replication, replication_id: replication_id }, call_options) do |_result, response|
+        c.create_replication({ parent: parent, replication: replication, replication_id: replication_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_replication(::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id), call_options) do |_result, response|
+        c.create_replication(::Google::Cloud::NetApp::V1::CreateReplicationRequest.new(parent: parent, replication: replication, replication_id: replication_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1923,32 +1981,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_replication({ name: name }) do |_result, response|
+        c.delete_replication({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_replication name: name do |_result, response|
+        c.delete_replication name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_replication ::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name) do |_result, response|
+        c.delete_replication ::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_replication({ name: name }, call_options) do |_result, response|
+        c.delete_replication({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_replication(::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_replication(::Google::Cloud::NetApp::V1::DeleteReplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1978,32 +2036,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_replication({ update_mask: update_mask, replication: replication }) do |_result, response|
+        c.update_replication({ update_mask: update_mask, replication: replication }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_replication update_mask: update_mask, replication: replication do |_result, response|
+        c.update_replication update_mask: update_mask, replication: replication do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_replication ::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication) do |_result, response|
+        c.update_replication ::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_replication({ update_mask: update_mask, replication: replication }, call_options) do |_result, response|
+        c.update_replication({ update_mask: update_mask, replication: replication }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_replication(::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication), call_options) do |_result, response|
+        c.update_replication(::Google::Cloud::NetApp::V1::UpdateReplicationRequest.new(update_mask: update_mask, replication: replication), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2033,32 +2091,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_stop_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_replication({ name: name, force: force }) do |_result, response|
+        c.stop_replication({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_replication name: name, force: force do |_result, response|
+        c.stop_replication name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_replication ::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force) do |_result, response|
+        c.stop_replication ::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_replication({ name: name, force: force }, call_options) do |_result, response|
+        c.stop_replication({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_replication(::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.stop_replication(::Google::Cloud::NetApp::V1::StopReplicationRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2087,32 +2145,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_resume_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_replication({ name: name }) do |_result, response|
+        c.resume_replication({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_replication name: name do |_result, response|
+        c.resume_replication name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_replication ::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name) do |_result, response|
+        c.resume_replication ::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_replication({ name: name }, call_options) do |_result, response|
+        c.resume_replication({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_replication(::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name), call_options) do |_result, response|
+        c.resume_replication(::Google::Cloud::NetApp::V1::ResumeReplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2141,32 +2199,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_reverse_replication_direction_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reverse_replication_direction_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reverse_replication_direction({ name: name }) do |_result, response|
+        c.reverse_replication_direction({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reverse_replication_direction name: name do |_result, response|
+        c.reverse_replication_direction name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reverse_replication_direction ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name) do |_result, response|
+        c.reverse_replication_direction ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reverse_replication_direction({ name: name }, call_options) do |_result, response|
+        c.reverse_replication_direction({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reverse_replication_direction(::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name), call_options) do |_result, response|
+        c.reverse_replication_direction(::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2199,32 +2257,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_establish_peering_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, establish_peering_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |_result, response|
+        c.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.establish_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |_result, response|
+        c.establish_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.establish_peering ::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |_result, response|
+        c.establish_peering ::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, call_options) do |_result, response|
+        c.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.establish_peering(::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), call_options) do |_result, response|
+        c.establish_peering(::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2253,32 +2311,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_sync_replication_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, sync_replication_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.sync_replication({ name: name }) do |_result, response|
+        c.sync_replication({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.sync_replication name: name do |_result, response|
+        c.sync_replication name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.sync_replication ::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name) do |_result, response|
+        c.sync_replication ::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.sync_replication({ name: name }, call_options) do |_result, response|
+        c.sync_replication({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.sync_replication(::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name), call_options) do |_result, response|
+        c.sync_replication(::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2309,32 +2367,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }) do |_result, response|
+        c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault do |_result, response|
+        c.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_vault ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault) do |_result, response|
+        c.create_backup_vault ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }, call_options) do |_result, response|
+        c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_vault(::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault), call_options) do |_result, response|
+        c.create_backup_vault(::Google::Cloud::NetApp::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2363,32 +2421,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_vault({ name: name }) do |_result, response|
+        c.get_backup_vault({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_vault name: name do |_result, response|
+        c.get_backup_vault name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_vault ::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name) do |_result, response|
+        c.get_backup_vault ::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_vault({ name: name }, call_options) do |_result, response|
+        c.get_backup_vault({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_vault(::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_vault(::Google::Cloud::NetApp::V1::GetBackupVaultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2421,32 +2479,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_backup_vaults_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_vaults_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_vaults ::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_backup_vaults ::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_vaults(::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_backup_vaults(::Google::Cloud::NetApp::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2476,32 +2534,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }) do |_result, response|
+        c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_vault update_mask: update_mask, backup_vault: backup_vault do |_result, response|
+        c.update_backup_vault update_mask: update_mask, backup_vault: backup_vault do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_vault ::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault) do |_result, response|
+        c.update_backup_vault ::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }, call_options) do |_result, response|
+        c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_vault(::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault), call_options) do |_result, response|
+        c.update_backup_vault(::Google::Cloud::NetApp::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2530,32 +2588,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_vault({ name: name }) do |_result, response|
+        c.delete_backup_vault({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_vault name: name do |_result, response|
+        c.delete_backup_vault name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_vault ::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name) do |_result, response|
+        c.delete_backup_vault ::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_vault({ name: name }, call_options) do |_result, response|
+        c.delete_backup_vault({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_vault(::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup_vault(::Google::Cloud::NetApp::V1::DeleteBackupVaultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2586,32 +2644,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup }) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup parent: parent, backup_id: backup_id, backup: backup do |_result, response|
+        c.create_backup parent: parent, backup_id: backup_id, backup: backup do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup ::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup) do |_result, response|
+        c.create_backup ::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup }, call_options) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup(::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup), call_options) do |_result, response|
+        c.create_backup(::Google::Cloud::NetApp::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2640,32 +2698,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::NetApp::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2698,32 +2756,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_backups parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_backups ::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::NetApp::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2752,32 +2810,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name }) do |_result, response|
+        c.delete_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name do |_result, response|
+        c.delete_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name) do |_result, response|
+        c.delete_backup ::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name }, call_options) do |_result, response|
+        c.delete_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::NetApp::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2807,32 +2865,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup({ update_mask: update_mask, backup: backup }) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup update_mask: update_mask, backup: backup do |_result, response|
+        c.update_backup update_mask: update_mask, backup: backup do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup ::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup) do |_result, response|
+        c.update_backup ::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup({ update_mask: update_mask, backup: backup }, call_options) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup(::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup), call_options) do |_result, response|
+        c.update_backup(::Google::Cloud::NetApp::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2863,32 +2921,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_backup_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }) do |_result, response|
+        c.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_policy parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id do |_result, response|
+        c.create_backup_policy parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_policy ::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id) do |_result, response|
+        c.create_backup_policy ::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }, call_options) do |_result, response|
+        c.create_backup_policy({ parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_policy(::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id), call_options) do |_result, response|
+        c.create_backup_policy(::Google::Cloud::NetApp::V1::CreateBackupPolicyRequest.new(parent: parent, backup_policy: backup_policy, backup_policy_id: backup_policy_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2917,32 +2975,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_backup_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_policy({ name: name }) do |_result, response|
+        c.get_backup_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_policy name: name do |_result, response|
+        c.get_backup_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_policy ::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name) do |_result, response|
+        c.get_backup_policy ::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_policy({ name: name }, call_options) do |_result, response|
+        c.get_backup_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_policy(::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_policy(::Google::Cloud::NetApp::V1::GetBackupPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2975,32 +3033,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_backup_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_backup_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_policies ::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_backup_policies ::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_backup_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_policies(::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_backup_policies(::Google::Cloud::NetApp::V1::ListBackupPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3030,32 +3088,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_backup_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }) do |_result, response|
+        c.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_policy update_mask: update_mask, backup_policy: backup_policy do |_result, response|
+        c.update_backup_policy update_mask: update_mask, backup_policy: backup_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_policy ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy) do |_result, response|
+        c.update_backup_policy ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }, call_options) do |_result, response|
+        c.update_backup_policy({ update_mask: update_mask, backup_policy: backup_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_policy(::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy), call_options) do |_result, response|
+        c.update_backup_policy(::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest.new(update_mask: update_mask, backup_policy: backup_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3084,32 +3142,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_backup_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_policy({ name: name }) do |_result, response|
+        c.delete_backup_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_policy name: name do |_result, response|
+        c.delete_backup_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_policy ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name) do |_result, response|
+        c.delete_backup_policy ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_policy({ name: name }, call_options) do |_result, response|
+        c.delete_backup_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_policy(::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup_policy(::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3142,32 +3200,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_quota_rules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_quota_rules_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_quota_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_quota_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_quota_rules ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_quota_rules ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_quota_rules(::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_quota_rules(::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3196,32 +3254,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_quota_rule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_quota_rule_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_quota_rule({ name: name }) do |_result, response|
+        c.get_quota_rule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_quota_rule name: name do |_result, response|
+        c.get_quota_rule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_quota_rule ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name) do |_result, response|
+        c.get_quota_rule ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_quota_rule({ name: name }, call_options) do |_result, response|
+        c.get_quota_rule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_quota_rule(::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name), call_options) do |_result, response|
+        c.get_quota_rule(::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3252,32 +3310,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_quota_rule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_quota_rule_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }) do |_result, response|
+        c.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_quota_rule parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id do |_result, response|
+        c.create_quota_rule parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_quota_rule ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id) do |_result, response|
+        c.create_quota_rule ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }, call_options) do |_result, response|
+        c.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_quota_rule(::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id), call_options) do |_result, response|
+        c.create_quota_rule(::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3307,32 +3365,32 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_quota_rule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_quota_rule_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }) do |_result, response|
+        c.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_quota_rule update_mask: update_mask, quota_rule: quota_rule do |_result, response|
+        c.update_quota_rule update_mask: update_mask, quota_rule: quota_rule do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_quota_rule ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule) do |_result, response|
+        c.update_quota_rule ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }, call_options) do |_result, response|
+        c.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_quota_rule(::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule), call_options) do |_result, response|
+        c.update_quota_rule(::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3361,37 +3419,589 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_quota_rule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_quota_rule_client_stub do
         # Create client
-        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_quota_rule({ name: name }) do |_result, response|
+        c.delete_quota_rule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_quota_rule name: name do |_result, response|
+        c.delete_quota_rule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_quota_rule ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name) do |_result, response|
+        c.delete_quota_rule ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_quota_rule({ name: name }, call_options) do |_result, response|
+        c.delete_quota_rule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_quota_rule(::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name), call_options) do |_result, response|
+        c.delete_quota_rule(::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_quota_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_restore_backup_files
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    backup = "hello world"
+    file_list = ["hello world"]
+    restore_destination_path = "hello world"
+
+    restore_backup_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_restore_backup_files_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, restore_backup_files_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.restore_backup_files name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.restore_backup_files ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.restore_backup_files(::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, restore_backup_files_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_host_groups
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ListHostGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_host_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_host_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_host_groups_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_host_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_host_groups ::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_host_groups(::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_host_groups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_host_group
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::HostGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_host_group_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_host_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_host_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_host_group ::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_host_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_host_group(::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    host_group = {}
+    host_group_id = "hello world"
+
+    create_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_host_group_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_host_group parent: parent, host_group: host_group, host_group_id: host_group_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_host_group ::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_host_group(::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    host_group = {}
+    update_mask = {}
+
+    update_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_host_group_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_host_group({ host_group: host_group, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_host_group host_group: host_group, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_host_group ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_host_group({ host_group: host_group, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_host_group(::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_host_group_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_host_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_host_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_host_group ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_host_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_host_group(::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_post
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_post_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_post_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_post_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.execute_ontap_post({ body: body, ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.execute_ontap_post body: body, ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.execute_ontap_post ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.execute_ontap_post({ body: body, ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.execute_ontap_post(::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_post_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_get
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_get_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.execute_ontap_get({ ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.execute_ontap_get ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.execute_ontap_get ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.execute_ontap_get({ ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.execute_ontap_get(::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_get_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_delete
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_delete_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.execute_ontap_delete({ ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.execute_ontap_delete ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.execute_ontap_delete ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.execute_ontap_delete({ ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.execute_ontap_delete(::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_delete_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_patch
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_patch_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.execute_ontap_patch({ body: body, ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.execute_ontap_patch body: body, ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.execute_ontap_patch ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.execute_ontap_patch({ body: body, ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.execute_ontap_patch(::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_patch_client_stub.call_count
       end
     end
   end

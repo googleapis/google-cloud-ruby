@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ require "google/cloud/ai_platform/v1/pipeline_service/rest"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/rest"
 require "google/cloud/ai_platform/v1/reasoning_engine_service/rest"
 require "google/cloud/ai_platform/v1/schedule_service/rest"
+require "google/cloud/ai_platform/v1/session_service/rest"
 require "google/cloud/ai_platform/v1/specialist_pool_service/rest"
 require "google/cloud/ai_platform/v1/tensorboard_service/rest"
 require "google/cloud/ai_platform/v1/vertex_rag_data_service/rest"

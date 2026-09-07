@@ -1,5 +1,41 @@
 # Release History
 
+### 0.43.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
+### 0.43.0 (2026-06-22)
+
+#### Features
+
+* add a can_edit field to the PropertySummary resource to indicate if a user has permission to edit the property ([#34640](https://github.com/googleapis/google-cloud-ruby/issues/34640)) 
+
+### 0.42.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34037](https://github.com/googleapis/google-cloud-ruby/issues/34037)) 
+
+### 0.41.0 (2026-04-15)
+
+#### Features
+
+* add UserProvidedDataSettings resource and GetUserProvidedDataSettings RPC to Google Analytics ([#33837](https://github.com/googleapis/google-cloud-ruby/issues/33837)) 
+
+### 0.40.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.39.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.38.1 (2025-10-27)
 
 #### Documentation

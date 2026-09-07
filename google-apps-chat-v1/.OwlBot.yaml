@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/chat/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-apps-chat-v1/$1

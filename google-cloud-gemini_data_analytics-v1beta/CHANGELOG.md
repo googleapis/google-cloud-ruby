@@ -1,5 +1,93 @@
 # Changelog
 
+### 1.1.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 1.0.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34047](https://github.com/googleapis/google-cloud-ruby/issues/34047)) 
+
+### 0.10.0 (2026-06-08)
+
+### ⚠ BREAKING CHANGES
+
+* Changed proto3 optional flag of an existing field `value` in message `.google.cloud.geminidataanalytics.v1beta.LookerQuery` ([#34011](https://github.com/googleapis/google-cloud-ruby/issues/34011))
+
+#### Bug Fixes
+
+* Changed proto3 optional flag of an existing field `value` in message `.google.cloud.geminidataanalytics.v1beta.LookerQuery` ([#34011](https://github.com/googleapis/google-cloud-ruby/issues/34011)) 
+
+### 0.9.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33478](https://github.com/googleapis/google-cloud-ruby/issues/33478)) 
+
+### 0.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+
+### 0.8.0 (2026-03-19)
+
+#### Features
+
+* add `ParameterizedSecureViewParameters` message and field for PSV support 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* add ClarificationMessage, thought-signature, formatted-data ([#32410](https://github.com/googleapis/google-cloud-ruby/issues/32410)) 
+
+### 0.6.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add LookerGoldenQuery to Context 
+* added sync APIs for the CRUD operations of Data Agent ([#32297](https://github.com/googleapis/google-cloud-ruby/issues/32297)) 
+
+### 0.5.1 (2025-12-16)
+
+#### Documentation
+
+* specify the data sources supported only by the QueryData API ([#32275](https://github.com/googleapis/google-cloud-ruby/issues/32275)) 
+
+### 0.5.0 (2025-12-16)
+
+#### Features
+
+* A new message `AgentContextReference` is added 
+* add a QueryData API for NL2SQL conversion ([#32258](https://github.com/googleapis/google-cloud-ruby/issues/32258)) 
+
+### 0.4.0 (2025-11-12)
+
+#### Features
+
+* Adding a new SchemaRelationship message to define relationships between table schema ([#32165](https://github.com/googleapis/google-cloud-ruby/issues/32165)) 
+* Adding a new TextType PROGRESS to provide informational messages about an agent's progress for supporting more granular Agent RAG tools 
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation

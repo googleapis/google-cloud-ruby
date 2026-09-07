@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,36 +82,36 @@ class ::Google::Cloud::VisionAI::V1::HealthCheckService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, health_check_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::HealthCheckService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::HealthCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.health_check({ cluster: cluster }) do |response, operation|
+      c.health_check({ cluster: cluster }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.health_check cluster: cluster do |response, operation|
+      c.health_check cluster: cluster do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.health_check ::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster) do |response, operation|
+      c.health_check ::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.health_check({ cluster: cluster }, grpc_options) do |response, operation|
+      c.health_check({ cluster: cluster }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.health_check(::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster), grpc_options) do |response, operation|
+      c.health_check(::Google::Cloud::VisionAI::V1::HealthCheckRequest.new(cluster: cluster), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

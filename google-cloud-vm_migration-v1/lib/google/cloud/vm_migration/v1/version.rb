@@ -21,7 +21,7 @@ module Google
   module Cloud
     module VMMigration
       module V1
-        VERSION = "2.5.1"
+        VERSION = "2.9.1"
       end
     end
   end

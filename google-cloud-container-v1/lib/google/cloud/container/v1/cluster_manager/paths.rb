@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,6 +64,25 @@ module Google
               raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
+            end
+
+            ##
+            # Create a fully-qualified Subnetwork resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/subnetworks/{subnetwork}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param subnetwork [String]
+            #
+            # @return [::String]
+            def subnetwork_path project:, region:, subnetwork:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/subnetworks/#{subnetwork}"
             end
 
             ##

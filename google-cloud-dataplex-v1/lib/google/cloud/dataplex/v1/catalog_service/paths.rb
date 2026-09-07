@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -157,6 +157,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified MetadataFeed resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param metadata_feed [String]
+            #
+            # @return [::String]
+            def metadata_feed_path project:, location:, metadata_feed:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/metadataFeeds/#{metadata_feed}"
             end
 
             ##

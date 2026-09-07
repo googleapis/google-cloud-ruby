@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -351,6 +351,40 @@ module Google
                   yield result, operation if block_given?
                   result
                 end
+              end
+
+              ##
+              # Baseline implementation for the stream_answer_query REST call
+              #
+              # @param request_pb [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yieldparam chunk [::String] The chunk of data received during server streaming.
+              #
+              # @return [::Gapic::Rest::TransportOperation]
+              def stream_answer_query(request_pb, options = nil, &)
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_stream_answer_query_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "stream_answer_query",
+                  options: options,
+                  is_server_streaming: true,
+                  &
+                )
+                ::Gapic::Rest::TransportOperation.new response
               end
 
               ##
@@ -842,6 +876,44 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1beta/{serving_config}:answer",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["serving_config", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/servingConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the stream_answer_query REST call
+              #
+              # @param request_pb [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_stream_answer_query_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{serving_config}:streamAnswer",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["serving_config", %r{^projects/[^/]+/locations/[^/]+/dataStores/[^/]+/servingConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{serving_config}:streamAnswer",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["serving_config", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/servingConfigs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{serving_config}:streamAnswer",
                                                           body: "*",
                                                           matches: [
                                                             ["serving_config", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/servingConfigs/[^/]+/?$}, false]

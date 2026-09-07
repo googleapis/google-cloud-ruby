@@ -87,7 +87,54 @@ module Google
         #   `projects/{project_id}/topics/{topic_id}`.
         #
         def name
+          return @resource_name if reference?
           @grpc.name
+        end
+
+        ##
+        # Determines whether the publisher object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the publisher was created with a resource
+        #   representation, `false` otherwise.
+        #
+        def reference?
+          @grpc.nil?
+        end
+
+        ##
+        # Determines whether the publisher object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the publisher was created with a resource
+        #   representation, `false` otherwise.
+        #
+        def resource?
+          !@grpc.nil?
+        end
+
+
+        ##
+        # Reloads the publisher with current data from the Pub/Sub service.
+        #
+        # @return [Google::Cloud::PubSub::Publisher] Returns the reloaded
+        #   publisher
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   publisher = pubsub.publisher "my-topic", skip_lookup: true
+        #
+        #   publisher.reload!
+        #
+        def reload!
+          ensure_service!
+          topic_path = service.topic_path name
+          @grpc = service.topic_admin.get_topic topic: topic_path
+          @resource_name = nil
+          self
         end
 
         ##
@@ -176,7 +223,8 @@ module Google
 
           block&.call batch
           return nil if batch.messages.count.zero?
-          batch.publish_batch_messages name, service
+          reason = block_given? ? "synchronous publish multiple" : "synchronous publish single"
+          batch.publish_batch_messages name, service, reason: reason
         end
 
         ##
@@ -291,7 +339,6 @@ module Google
         #
         def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           ensure_service!
-
           @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.publish data, attributes, ordering_key: ordering_key, **extra_attrs, &callback
         end
@@ -351,6 +398,16 @@ module Google
           end
         end
 
+        ##
+        # @private New reference {Publisher} from a topic name without making
+        # a HTTP request.
+        def self.from_name name, service, options = {}
+          name = service.topic_path name, options
+          from_grpc(nil, service, async: options[:async]).tap do |t|
+            t.instance_variable_set :@resource_name, name
+          end
+        end
+
         protected
 
         ##
@@ -358,12 +415,6 @@ module Google
         # available.
         def ensure_service!
           raise "Must have active connection to service" unless service
-        end
-
-        ##
-        # Ensures a Google::Cloud::PubSub::V1::Topic object exists.
-        def ensure_grpc!
-          ensure_service!
         end
       end
     end

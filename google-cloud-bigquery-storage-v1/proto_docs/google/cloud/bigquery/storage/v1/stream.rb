@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -248,10 +248,10 @@ module Google
           # @!attribute [rw] write_mode
           #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
           #     Immutable. Mode of the stream.
-          # @!attribute [rw] location
+          # @!attribute [r] location
           #   @return [::String]
-          #     Immutable. The geographic location where the stream's dataset resides. See
-          #     https://cloud.google.com/bigquery/docs/locations for supported
+          #     Output only. The geographic location where the stream's dataset resides.
+          #     See https://cloud.google.com/bigquery/docs/locations for supported
           #     locations.
           class WriteStream
             include ::Google::Protobuf::MessageExts

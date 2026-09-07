@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,34 +75,89 @@ module Google
 
                     default_config.timeout = 60.0
 
+                    default_config.rpcs.create_folder.timeout = 60.0
+                    default_config.rpcs.create_folder.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.get_folder.timeout = 60.0
+                    default_config.rpcs.get_folder.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.list_folders.timeout = 60.0
+                    default_config.rpcs.list_folders.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.rename_folder.timeout = 60.0
+                    default_config.rpcs.rename_folder.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.delete_folder_recursive.timeout = 60.0
+                    default_config.rpcs.delete_folder_recursive.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.get_storage_layout.timeout = 60.0
+                    default_config.rpcs.get_storage_layout.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
                     default_config.rpcs.get_project_intelligence_config.timeout = 60.0
                     default_config.rpcs.get_project_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config.rpcs.update_project_intelligence_config.timeout = 60.0
                     default_config.rpcs.update_project_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config.rpcs.get_folder_intelligence_config.timeout = 60.0
                     default_config.rpcs.get_folder_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config.rpcs.update_folder_intelligence_config.timeout = 60.0
                     default_config.rpcs.update_folder_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config.rpcs.get_organization_intelligence_config.timeout = 60.0
                     default_config.rpcs.get_organization_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config.rpcs.update_organization_intelligence_config.timeout = 60.0
                     default_config.rpcs.update_organization_intelligence_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.get_intelligence_finding.timeout = 60.0
+                    default_config.rpcs.get_intelligence_finding.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.list_intelligence_findings.timeout = 60.0
+                    default_config.rpcs.list_intelligence_findings.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.summarize_intelligence_findings.timeout = 60.0
+                    default_config.rpcs.summarize_intelligence_findings.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.get_intelligence_finding_revision.timeout = 60.0
+                    default_config.rpcs.get_intelligence_finding_revision.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
+                    }
+
+                    default_config.rpcs.list_intelligence_finding_revisions.timeout = 60.0
+                    default_config.rpcs.list_intelligence_finding_revisions.retry_policy = {
+                      initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                     }
 
                     default_config
@@ -179,6 +234,13 @@ module Google
                   @quota_project_id = @config.quota_project
                   @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                  @operations_client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Operations.new do |config|
+                    config.credentials = credentials
+                    config.quota_project = @quota_project_id
+                    config.endpoint = @config.endpoint
+                    config.universe_domain = @config.universe_domain
+                  end
+
                   @storage_control_stub = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.new(
                     endpoint: @config.endpoint,
                     endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -199,6 +261,13 @@ module Google
                 end
 
                 ##
+                # Get the associated client for long-running operations.
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Operations]
+                #
+                attr_reader :operations_client
+
+                ##
                 # The logger used for request/response debug logging.
                 #
                 # @return [Logger]
@@ -208,6 +277,680 @@ module Google
                 end
 
                 # Service calls
+
+                ##
+                # Creates a new folder. This operation is only applicable to a hierarchical
+                # namespace enabled bucket.
+                #
+                # @overload create_folder(request, options = nil)
+                #   Pass arguments to `create_folder` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::CreateFolderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::CreateFolderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_folder(parent: nil, folder: nil, folder_id: nil, recursive: nil, request_id: nil)
+                #   Pass arguments to `create_folder` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. Name of the bucket in which the folder will reside. The bucket
+                #     must be a hierarchical namespace enabled bucket.
+                #   @param folder [::Google::Cloud::Storage::Control::V2::Folder, ::Hash]
+                #     Required. Properties of the new folder being created.
+                #     The bucket and name of the folder are specified in the parent and folder_id
+                #     fields, respectively. Populating those fields in `folder` will result in an
+                #     error.
+                #   @param folder_id [::String]
+                #     Required. The full name of a folder, including all its parent folders.
+                #     Folders use single '/' characters as a delimiter.
+                #     The folder_id must end with a slash.
+                #     For example, the folder_id of "books/biographies/" would create a new
+                #     "biographies/" folder under the "books/" folder.
+                #   @param recursive [::Boolean]
+                #     Optional. If true, parent folder doesn't have to be present and all missing
+                #     ancestor folders will be created atomically.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::Folder]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::Folder]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::CreateFolderRequest.new
+                #
+                #   # Call the create_folder method.
+                #   result = client.create_folder request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::Folder.
+                #   p result
+                #
+                def create_folder request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::CreateFolderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_folder.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_folder.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_folder.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.create_folder request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Permanently deletes an empty folder. This operation is only applicable to a
+                # hierarchical namespace enabled bucket.
+                #
+                # @overload delete_folder(request, options = nil)
+                #   Pass arguments to `delete_folder` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::DeleteFolderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::DeleteFolderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_folder(name: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+                #   Pass arguments to `delete_folder` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Name of the folder.
+                #     Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+                #   @param if_metageneration_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the folder's
+                #     current metageneration matches the given value.
+                #   @param if_metageneration_not_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the folder's
+                #     current metageneration does not match the given value.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new
+                #
+                #   # Call the delete_folder method.
+                #   result = client.delete_folder request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_folder request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::DeleteFolderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_folder.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_folder.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_folder.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.delete_folder request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns metadata for the specified folder. This operation is only
+                # applicable to a hierarchical namespace enabled bucket.
+                #
+                # @overload get_folder(request, options = nil)
+                #   Pass arguments to `get_folder` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::GetFolderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::GetFolderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_folder(name: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+                #   Pass arguments to `get_folder` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Name of the folder.
+                #     Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+                #   @param if_metageneration_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the folder's
+                #     current metageneration matches the given value.
+                #   @param if_metageneration_not_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the folder's
+                #     current metageneration does not match the given value.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::Folder]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::Folder]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::GetFolderRequest.new
+                #
+                #   # Call the get_folder method.
+                #   result = client.get_folder request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::Folder.
+                #   p result
+                #
+                def get_folder request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetFolderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_folder.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_folder.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_folder.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.get_folder request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Retrieves a list of folders. This operation is only applicable to a
+                # hierarchical namespace enabled bucket.
+                #
+                # @overload list_folders(request, options = nil)
+                #   Pass arguments to `list_folders` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::ListFoldersRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::ListFoldersRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_folders(parent: nil, page_size: nil, page_token: nil, prefix: nil, delimiter: nil, lexicographic_start: nil, lexicographic_end: nil, request_id: nil)
+                #   Pass arguments to `list_folders` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. Name of the bucket in which to look for folders. The bucket must
+                #     be a hierarchical namespace enabled bucket.
+                #   @param page_size [::Integer]
+                #     Optional. Maximum number of folders to return in a single response. The
+                #     service will use this parameter or 1,000 items, whichever is smaller.
+                #   @param page_token [::String]
+                #     Optional. A previously-returned page token representing part of the larger
+                #     set of results to view.
+                #   @param prefix [::String]
+                #     Optional. Filter results to folders whose names begin with this prefix.
+                #     If set, the value must either be an empty string or end with a '/'.
+                #   @param delimiter [::String]
+                #     Optional. If set, returns results in a directory-like mode. The results
+                #     will only include folders that either exactly match the above prefix, or
+                #     are one level below the prefix. The only supported value is '/'.
+                #   @param lexicographic_start [::String]
+                #     Optional. Filter results to folders whose names are lexicographically equal
+                #     to or after lexicographic_start. If lexicographic_end is also set, the
+                #     folders listed have names between lexicographic_start (inclusive) and
+                #     lexicographic_end (exclusive).
+                #   @param lexicographic_end [::String]
+                #     Optional. Filter results to folders whose names are lexicographically
+                #     before lexicographic_end. If lexicographic_start is also set, the folders
+                #     listed have names between lexicographic_start (inclusive) and
+                #     lexicographic_end (exclusive).
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::Folder>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::Folder>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::ListFoldersRequest.new
+                #
+                #   # Call the list_folders method.
+                #   result = client.list_folders request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Storage::Control::V2::Folder.
+                #     p item
+                #   end
+                #
+                def list_folders request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListFoldersRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_folders.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_folders.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_folders.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.list_folders request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @storage_control_stub, :list_folders, "folders", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Renames a source folder to a destination folder. This operation is only
+                # applicable to a hierarchical namespace enabled bucket. During a rename, the
+                # source and destination folders are locked until the long running operation
+                # completes.
+                #
+                # @overload rename_folder(request, options = nil)
+                #   Pass arguments to `rename_folder` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::RenameFolderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::RenameFolderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload rename_folder(name: nil, destination_folder_id: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+                #   Pass arguments to `rename_folder` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Name of the source folder being renamed.
+                #     Format: `projects/{project}/buckets/{bucket}/folders/{folder}`
+                #   @param destination_folder_id [::String]
+                #     Required. The destination folder ID, e.g. `foo/bar/`.
+                #   @param if_metageneration_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the source
+                #     folder's current metageneration matches the given value.
+                #   @param if_metageneration_not_match [::Integer]
+                #     Makes the operation only succeed conditional on whether the source
+                #     folder's current metageneration does not match the given value.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted. This request is only
+                #     idempotent if a `request_id` is provided.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::RenameFolderRequest.new
+                #
+                #   # Call the rename_folder method.
+                #   result = client.rename_folder request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def rename_folder request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::RenameFolderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.rename_folder.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.rename_folder.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.rename_folder.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.rename_folder request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a folder recursively. This operation is only applicable to a
+                # hierarchical namespace enabled bucket.
+                #
+                # @overload delete_folder_recursive(request, options = nil)
+                #   Pass arguments to `delete_folder_recursive` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_folder_recursive(name: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+                #   Pass arguments to `delete_folder_recursive` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Name of the folder being deleted, however all of its contents
+                #     will be deleted too. Format:
+                #     `projects/{project}/buckets/{bucket}/folders/{folder}`
+                #   @param if_metageneration_match [::Integer]
+                #     Optional. Makes the operation only succeed conditional on whether the root
+                #     folder's current metageneration matches the given value.
+                #   @param if_metageneration_not_match [::Integer]
+                #     Optional. Makes the operation only succeed conditional on whether the root
+                #     folder's current metageneration does not match the given value.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new
+                #
+                #   # Call the delete_folder_recursive method.
+                #   result = client.delete_folder_recursive request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def delete_folder_recursive request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_folder_recursive.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_folder_recursive.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_folder_recursive.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.delete_folder_recursive request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns the storage layout configuration for a given bucket.
+                #
+                # @overload get_storage_layout(request, options = nil)
+                #   Pass arguments to `get_storage_layout` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_storage_layout(name: nil, prefix: nil, request_id: nil)
+                #   Pass arguments to `get_storage_layout` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the StorageLayout resource.
+                #     Format: `projects/{project}/buckets/{bucket}/storageLayout`
+                #   @param prefix [::String]
+                #     An optional prefix used for permission check. It is useful when the caller
+                #     only has limited permissions under a specific prefix.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. UUID is the recommended
+                #     format, but other formats are still accepted.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::StorageLayout]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::StorageLayout]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new
+                #
+                #   # Call the get_storage_layout method.
+                #   result = client.get_storage_layout request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::StorageLayout.
+                #   p result
+                #
+                def get_storage_layout request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_storage_layout.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_storage_layout.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_storage_layout.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.get_storage_layout request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
 
                 ##
                 # Returns the Project scoped singleton IntelligenceConfig resource.
@@ -708,6 +1451,575 @@ module Google
                 end
 
                 ##
+                # Gets the `IntelligenceFinding` for a project.
+                #
+                # @overload get_intelligence_finding(request, options = nil)
+                #   Pass arguments to `get_intelligence_finding` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_intelligence_finding(name: nil)
+                #   Pass arguments to `get_intelligence_finding` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the `IntelligenceFinding` resource.
+                #
+                #     Format:
+                #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new
+                #
+                #   # Call the get_intelligence_finding method.
+                #   result = client.get_intelligence_finding request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceFinding.
+                #   p result
+                #
+                def get_intelligence_finding request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_intelligence_finding.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_intelligence_finding.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_intelligence_finding.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.get_intelligence_finding request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Lists the `IntelligenceFinding` resources for the specified the project.
+                #
+                # @overload list_intelligence_findings(request, options = nil)
+                #   Pass arguments to `list_intelligence_findings` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_intelligence_findings(parent: nil, filter: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_intelligence_findings` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent of the `IntelligenceFinding` resource.
+                #
+                #     Format: `projects/{project}/locations/{location}`
+                #   @param filter [::String]
+                #     Optional. The filter expression to be applied.
+                #     Supports filtering by `type` and `associated_resources`.
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of `IntelligenceFinding` resources to return.
+                #
+                #     The maximum value is `100`; values above `100` will be coerced to `100`.
+                #     The default value is `100`.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous `ListIntelligenceFindings`
+                #     call. Provide this to retrieve the subsequent page.
+                #
+                #     When paginating, all other parameters provided to
+                #     `ListIntelligenceFindings` must match the call that provided the page
+                #     token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new
+                #
+                #   # Call the list_intelligence_findings method.
+                #   result = client.list_intelligence_findings request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Storage::Control::V2::IntelligenceFinding.
+                #     p item
+                #   end
+                #
+                def list_intelligence_findings request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_intelligence_findings.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_intelligence_findings.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_intelligence_findings.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.list_intelligence_findings request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @storage_control_stub, :list_intelligence_findings, "intelligence_findings", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Summarizes the intelligence findings for the specified scope (organization,
+                # folder or project).
+                #
+                # @overload summarize_intelligence_findings(request, options = nil)
+                #   Pass arguments to `summarize_intelligence_findings` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload summarize_intelligence_findings(parent: nil, resource_scope: nil, filter: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `summarize_intelligence_findings` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The scope to summarize the findings for.
+                #     Format:
+                #     - `organizations/{organization}/locations/{location}`
+                #     - `folders/{folder}/locations/{location}`
+                #     - `projects/{project}/locations/{location}`
+                #   @param resource_scope [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest::ResourceScope]
+                #     Optional. Determines the granularity of the findings
+                #     when the `parent` is an organization or folder.
+                #
+                #     - `PARENT` (or not set): A single summary is
+                #       returned for each insight type, aggregated across the entire `parent`
+                #       scope.
+                #     - `PROJECT`: A separate summary is returned for each
+                #       insight type for every project within the `parent` scope.
+                #
+                #     The only supported values are `PARENT` and `PROJECT`.
+                #     If no value is specified, the API behaviour defaults to the `PARENT`.
+                #   @param filter [::String]
+                #     Optional. The filter expression, following AIP-160.
+                #     Supports filtering by FindingType.
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of findings to return.
+                #
+                #     The maximum value is `100`; values above `100` will be coerced to `100`.
+                #     The default value is `100`.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous
+                #     `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+                #     subsequent page.
+                #
+                #     When paginating, all other parameters provided to
+                #     `SummarizeIntelligenceFindings` must match the call that provided the page
+                #     token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new
+                #
+                #   # Call the summarize_intelligence_findings method.
+                #   result = client.summarize_intelligence_findings request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Storage::Control::V2::FindingSummary.
+                #     p item
+                #   end
+                #
+                def summarize_intelligence_findings request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.summarize_intelligence_findings.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.summarize_intelligence_findings.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.summarize_intelligence_findings.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.summarize_intelligence_findings request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @storage_control_stub, :summarize_intelligence_findings, "finding_summaries", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Gets the `IntelligenceFindingRevision` resource.
+                #
+                # @overload get_intelligence_finding_revision(request, options = nil)
+                #   Pass arguments to `get_intelligence_finding_revision` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_intelligence_finding_revision(name: nil)
+                #   Pass arguments to `get_intelligence_finding_revision` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the `IntelligenceFindingRevision` resource.
+                #     ## Format:
+                #
+                #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new
+                #
+                #   # Call the get_intelligence_finding_revision method.
+                #   result = client.get_intelligence_finding_revision request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.
+                #   p result
+                #
+                def get_intelligence_finding_revision request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_intelligence_finding_revision.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_intelligence_finding_revision.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_intelligence_finding_revision.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.get_intelligence_finding_revision request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Lists all the revisions of an `IntelligenceFinding` resource.
+                #
+                # @overload list_intelligence_finding_revisions(request, options = nil)
+                #   Pass arguments to `list_intelligence_finding_revisions` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_intelligence_finding_revisions(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_intelligence_finding_revisions` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent of the `IntelligenceFindingRevision` resource.
+                #     ## Format:
+                #
+                #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of `IntelligenceFindingRevision` resources to
+                #     return.
+                #
+                #     The maximum value is `100`; values above `100` will be coerced to `100`.
+                #     The default value is `100`.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous
+                #     `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+                #     subsequent page.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new
+                #
+                #   # Call the list_intelligence_finding_revisions method.
+                #   result = client.list_intelligence_finding_revisions request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.
+                #     p item
+                #   end
+                #
+                def list_intelligence_finding_revisions request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_intelligence_finding_revisions.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_intelligence_finding_revisions.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_intelligence_finding_revisions.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.list_intelligence_finding_revisions request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @storage_control_stub, :list_intelligence_finding_revisions, "intelligence_finding_revisions", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Retrieves the full content of an object context, including its key, value,
+                # and any associated extended data for a given context key.
+                #
+                # Object contexts can optionally contain extended data. If an object context
+                # contains extended data, the metadata payload structure will contain only
+                # its type URL. To retrieve the full extended data, call this method.
+                #
+                # Returns the complete representation of the context as an
+                # {::Google::Cloud::Storage::Control::V2::ObjectFullContext `ObjectFullContext`}.
+                #
+                # @overload view_object_full_context(request, options = nil)
+                #   Pass arguments to `view_object_full_context` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload view_object_full_context(generation: nil, context_key: nil, name: nil)
+                #   Pass arguments to `view_object_full_context` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param generation [::Integer]
+                #     Optional. If present, selects a specific revision of this object (as
+                #     opposed to the latest version, the default).
+                #   @param context_key [::String]
+                #     Required. The key of the object context to retrieve.
+                #   @param name [::String]
+                #     Required. The name of the object.
+                #     Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new
+                #
+                #   # Call the view_object_full_context method.
+                #   result = client.view_object_full_context request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::ObjectFullContext.
+                #   p result
+                #
+                def view_object_full_context request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.view_object_full_context.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.view_object_full_context.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.view_object_full_context.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.view_object_full_context request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the StorageControl REST API.
                 #
                 # This class represents the configuration for StorageControl REST,
@@ -723,17 +2035,17 @@ module Google
                 # @example
                 #
                 #   # Modify the global config, setting the timeout for
-                #   # get_project_intelligence_config to 20 seconds,
+                #   # create_folder to 20 seconds,
                 #   # and all remaining timeouts to 10 seconds.
                 #   ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.configure do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.get_project_intelligence_config.timeout = 20.0
+                #     config.rpcs.create_folder.timeout = 20.0
                 #   end
                 #
                 #   # Apply the above configuration only to a new client.
                 #   client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
                 #     config.timeout = 10.0
-                #     config.rpcs.get_project_intelligence_config.timeout = 20.0
+                #     config.rpcs.create_folder.timeout = 20.0
                 #   end
                 #
                 # @!attribute [rw] endpoint
@@ -777,6 +2089,7 @@ module Google
                 #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #       trigger a retry.
                 #   @return [::Hash]
@@ -849,10 +2162,46 @@ module Google
                   #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                   #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                   #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                  #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                   #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                   #         trigger a retry.
                   #
                   class Rpcs
+                    ##
+                    # RPC-specific configuration for `create_folder`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_folder
+                    ##
+                    # RPC-specific configuration for `delete_folder`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_folder
+                    ##
+                    # RPC-specific configuration for `get_folder`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_folder
+                    ##
+                    # RPC-specific configuration for `list_folders`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_folders
+                    ##
+                    # RPC-specific configuration for `rename_folder`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :rename_folder
+                    ##
+                    # RPC-specific configuration for `delete_folder_recursive`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_folder_recursive
+                    ##
+                    # RPC-specific configuration for `get_storage_layout`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_storage_layout
                     ##
                     # RPC-specific configuration for `get_project_intelligence_config`
                     # @return [::Gapic::Config::Method]
@@ -883,9 +2232,53 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :update_organization_intelligence_config
+                    ##
+                    # RPC-specific configuration for `get_intelligence_finding`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_intelligence_finding
+                    ##
+                    # RPC-specific configuration for `list_intelligence_findings`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_intelligence_findings
+                    ##
+                    # RPC-specific configuration for `summarize_intelligence_findings`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :summarize_intelligence_findings
+                    ##
+                    # RPC-specific configuration for `get_intelligence_finding_revision`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_intelligence_finding_revision
+                    ##
+                    # RPC-specific configuration for `list_intelligence_finding_revisions`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_intelligence_finding_revisions
+                    ##
+                    # RPC-specific configuration for `view_object_full_context`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :view_object_full_context
 
                     # @private
                     def initialize parent_rpcs = nil
+                      create_folder_config = parent_rpcs.create_folder if parent_rpcs.respond_to? :create_folder
+                      @create_folder = ::Gapic::Config::Method.new create_folder_config
+                      delete_folder_config = parent_rpcs.delete_folder if parent_rpcs.respond_to? :delete_folder
+                      @delete_folder = ::Gapic::Config::Method.new delete_folder_config
+                      get_folder_config = parent_rpcs.get_folder if parent_rpcs.respond_to? :get_folder
+                      @get_folder = ::Gapic::Config::Method.new get_folder_config
+                      list_folders_config = parent_rpcs.list_folders if parent_rpcs.respond_to? :list_folders
+                      @list_folders = ::Gapic::Config::Method.new list_folders_config
+                      rename_folder_config = parent_rpcs.rename_folder if parent_rpcs.respond_to? :rename_folder
+                      @rename_folder = ::Gapic::Config::Method.new rename_folder_config
+                      delete_folder_recursive_config = parent_rpcs.delete_folder_recursive if parent_rpcs.respond_to? :delete_folder_recursive
+                      @delete_folder_recursive = ::Gapic::Config::Method.new delete_folder_recursive_config
+                      get_storage_layout_config = parent_rpcs.get_storage_layout if parent_rpcs.respond_to? :get_storage_layout
+                      @get_storage_layout = ::Gapic::Config::Method.new get_storage_layout_config
                       get_project_intelligence_config_config = parent_rpcs.get_project_intelligence_config if parent_rpcs.respond_to? :get_project_intelligence_config
                       @get_project_intelligence_config = ::Gapic::Config::Method.new get_project_intelligence_config_config
                       update_project_intelligence_config_config = parent_rpcs.update_project_intelligence_config if parent_rpcs.respond_to? :update_project_intelligence_config
@@ -898,6 +2291,18 @@ module Google
                       @get_organization_intelligence_config = ::Gapic::Config::Method.new get_organization_intelligence_config_config
                       update_organization_intelligence_config_config = parent_rpcs.update_organization_intelligence_config if parent_rpcs.respond_to? :update_organization_intelligence_config
                       @update_organization_intelligence_config = ::Gapic::Config::Method.new update_organization_intelligence_config_config
+                      get_intelligence_finding_config = parent_rpcs.get_intelligence_finding if parent_rpcs.respond_to? :get_intelligence_finding
+                      @get_intelligence_finding = ::Gapic::Config::Method.new get_intelligence_finding_config
+                      list_intelligence_findings_config = parent_rpcs.list_intelligence_findings if parent_rpcs.respond_to? :list_intelligence_findings
+                      @list_intelligence_findings = ::Gapic::Config::Method.new list_intelligence_findings_config
+                      summarize_intelligence_findings_config = parent_rpcs.summarize_intelligence_findings if parent_rpcs.respond_to? :summarize_intelligence_findings
+                      @summarize_intelligence_findings = ::Gapic::Config::Method.new summarize_intelligence_findings_config
+                      get_intelligence_finding_revision_config = parent_rpcs.get_intelligence_finding_revision if parent_rpcs.respond_to? :get_intelligence_finding_revision
+                      @get_intelligence_finding_revision = ::Gapic::Config::Method.new get_intelligence_finding_revision_config
+                      list_intelligence_finding_revisions_config = parent_rpcs.list_intelligence_finding_revisions if parent_rpcs.respond_to? :list_intelligence_finding_revisions
+                      @list_intelligence_finding_revisions = ::Gapic::Config::Method.new list_intelligence_finding_revisions_config
+                      view_object_full_context_config = parent_rpcs.view_object_full_context if parent_rpcs.respond_to? :view_object_full_context
+                      @view_object_full_context = ::Gapic::Config::Method.new view_object_full_context_config
 
                       yield self if block_given?
                     end

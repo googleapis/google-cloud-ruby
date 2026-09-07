@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically. Note that google-area120-tables-v1alpha1 is a version-specific client library. For most uses, we recommend installing the main client library google-area120-tables instead. See the readme for more details."
-  gem.summary       = "API Client library for the Area 120 Tables V1alpha1 API"
+  gem.description   = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator. Note that google-area120-tables-v1alpha1 is a version-specific client library. For most uses, we recommend installing the main client library google-area120-tables instead. See the readme for more details."
+  gem.summary       = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

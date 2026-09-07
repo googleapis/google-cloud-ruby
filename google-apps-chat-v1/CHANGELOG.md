@@ -1,5 +1,100 @@
 # Changelog
 
+### 0.29.0 (2026-08-10)
+
+#### Features
+
+* Allow users to search for spaces without requiring admin privileges- [#36200](https://github.com/googleapis/google-cloud-ruby/issues/36200) 
+
+### 0.28.0 (2026-08-05)
+
+#### Features
+
+* Addition of the Search Messages API ([#35039](https://github.com/googleapis/google-cloud-ruby/issues/35039)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
+### 0.27.0 (2026-07-23)
+
+#### Features
+
+* Addition of Membership Affiliation information ([#34989](https://github.com/googleapis/google-cloud-ruby/issues/34989)) 
+
+### 0.26.0 (2026-07-13)
+
+#### Features
+
+* Add access permission settings to Space resource for configuring space discovery and join permissions ([#34741](https://github.com/googleapis/google-cloud-ruby/issues/34741)) 
+
+### 0.25.0 (2026-07-09)
+
+#### Features
+
+* Add Availability Api's ([#34718](https://github.com/googleapis/google-cloud-ruby/issues/34718)) 
+
+### 0.24.0 (2026-06-18)
+
+#### Features
+
+* add new FORWARD QuoteType enum in the QuotedMessageMetadata proto ([#34630](https://github.com/googleapis/google-cloud-ruby/issues/34630)) 
+
+### 0.23.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#33876](https://github.com/googleapis/google-cloud-ruby/issues/33876)) 
+
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.21.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.20.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.19.0 (2026-02-08)
+
+#### Features
+
+* Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto 
+#### Documentation
+
+* update reference documentation for `SelectionInput.DROPDOWN` to include dynamic data sources and autosuggestion ([#32413](https://github.com/googleapis/google-cloud-ruby/issues/32413)) 
+
+### 0.18.0 (2025-12-16)
+
+#### Features
+
+* Addition of GMAIL_MESSAGE value for RichLinkType enum in the RichLinkMetadata proto ([#32271](https://github.com/googleapis/google-cloud-ruby/issues/32271)) 
+
+### 0.17.0 (2025-11-21)
+
+#### Features
+
+* Add `Carousel` widget 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#31779](https://github.com/googleapis/google-cloud-ruby/issues/31779)) 
+
 ### 0.16.0 (2025-09-11)
 
 #### Features

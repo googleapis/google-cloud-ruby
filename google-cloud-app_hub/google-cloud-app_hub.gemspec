@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-app_hub is the official client library for the App Hub API."
-  gem.summary       = "API Client library for the App Hub API"
+  gem.description   = "App Hub acts as the foundational data model and central registry for your applications on Google Cloud."
+  gem.summary       = "App Hub acts as the foundational data model and central registry for your applications on Google Cloud."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-app_hub-v1", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.6"

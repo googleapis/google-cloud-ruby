@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,32 +99,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ProjectService::Rest::ClientTest < M
     ::Google::Cloud::DiscoveryEngine::V1::ProjectService::Rest::ServiceStub.stub :transcode_provision_project_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, provision_project_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ProjectService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ProjectService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |_result, response|
+        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |_result, response|
+        c.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.provision_project ::Google::Cloud::DiscoveryEngine::V1::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |_result, response|
+        c.provision_project ::Google::Cloud::DiscoveryEngine::V1::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, call_options) do |_result, response|
+        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.provision_project(::Google::Cloud::DiscoveryEngine::V1::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), call_options) do |_result, response|
+        c.provision_project(::Google::Cloud::DiscoveryEngine::V1::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

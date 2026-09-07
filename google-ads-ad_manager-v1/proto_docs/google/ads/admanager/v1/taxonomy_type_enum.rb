@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +35,9 @@ module Google
 
             # The IAB Audience Taxonomy v1.1.
             TAXONOMY_IAB_AUDIENCE_1_1 = 3
+
+            # The IAB Content Taxonomy v1.0.
+            TAXONOMY_IAB_CONTENT_1_0 = 8
 
             # The IAB Content Taxonomy v2.1.
             TAXONOMY_IAB_CONTENT_2_1 = 4

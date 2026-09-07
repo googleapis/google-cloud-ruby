@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -107,6 +107,15 @@ module Google
           #   @return [::String]
           #     Optional. A SQL expression to specify the [default value]
           #     (https://cloud.google.com/bigquery/docs/default-values) for this field.
+          # @!attribute [rw] timestamp_precision
+          #   @return [::Google::Protobuf::Int64Value]
+          #     Optional. Precision (maximum number of total digits in base 10) for seconds
+          #     of TIMESTAMP type.
+          #
+          #     Possible values include:
+          #
+          #     * 6 (Default, for TIMESTAMP type with microsecond precision)
+          #     * 12 (For TIMESTAMP type with picosecond precision)
           # @!attribute [rw] range_element_type
           #   @return [::Google::Cloud::Bigquery::Storage::V1::TableFieldSchema::FieldElementType]
           #     Optional. The subtype of the RANGE, if the type of this field is RANGE. If

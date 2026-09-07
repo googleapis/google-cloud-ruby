@@ -1,8 +1,7 @@
 # Ruby Client for the Web Security Scanner API
 
-API Client library for the Web Security Scanner API
+Scans your Compute and App Engine apps for common web vulnerabilities.
 
-Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-web_security_scanner-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-web_security_scanner-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/)
-for more usage information.
 
 ## Quick Start
 
@@ -74,7 +70,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

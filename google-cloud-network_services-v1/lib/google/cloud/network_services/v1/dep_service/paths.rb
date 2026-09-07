@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/authzExtensions/#{authz_extension}"
+            end
+
+            ##
+            # Create a fully-qualified LbEdgeExtension resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param lb_edge_extension [String]
+            #
+            # @return [::String]
+            def lb_edge_extension_path project:, location:, lb_edge_extension:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/lbEdgeExtensions/#{lb_edge_extension}"
             end
 
             ##

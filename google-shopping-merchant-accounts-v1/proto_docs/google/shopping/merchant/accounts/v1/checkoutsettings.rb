@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,10 +85,11 @@ module Google
           #     URI settings for cart or checkout URL.
           # @!attribute [rw] eligible_destinations
           #   @return [::Array<::Google::Shopping::Type::Destination::DestinationEnum>]
-          #     Optional. The destinations (also known as [Marketing
+          #     Optional. Required for the create operation. The destinations (also known
+          #     as [Marketing
           #     methods](https://support.google.com/merchants/answer/15130232)) to which
-          #     the checkout program applies, valid destination values are `SHOPPING_ADS`,
-          #     `FREE_LISTINGS`
+          #     the checkout program applies. Valid destination values are `SHOPPING_ADS`
+          #     and `FREE_LISTINGS`.
           # @!attribute [r] enrollment_state
           #   @return [::Google::Shopping::Merchant::Accounts::V1::CheckoutSettings::CheckoutEnrollmentState]
           #     Output only. Reflects the merchant enrollment state in `Checkout` program.

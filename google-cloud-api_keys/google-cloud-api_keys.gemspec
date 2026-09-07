@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An API key is a simple encrypted string that you can use when calling Google Cloud APIs. The API Keys service manages the API keys associated with developer projects."
-  gem.summary       = "API Client library for the API Keys API"
+  gem.description   = "Manages the API keys associated with developer projects."
+  gem.summary       = "Manages the API keys associated with developer projects."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-api_keys-v2", ">= 0.5", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"

@@ -2,7 +2,6 @@
 
 Train high-quality custom machine learning models with minimal machine learning expertise and effort.
 
-Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.generate_synthetic_data request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/vertex-ai/docs/)
+See also the [Product Documentation](https://cloud.google.com/ai-platform/docs)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

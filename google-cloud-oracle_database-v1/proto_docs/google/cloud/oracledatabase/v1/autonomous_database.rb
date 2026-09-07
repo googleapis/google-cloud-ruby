@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,20 +30,28 @@ module Google
         #     projects/\\{project}/locations/\\{region}/autonomousDatabases/\\{autonomous_database}
         # @!attribute [rw] database
         #   @return [::String]
-        #     Optional. The name of the Autonomous Database. The database name must be
-        #     unique in the project. The name must begin with a letter and can contain a
-        #     maximum of 30 alphanumeric characters.
+        #     Optional. Immutable. The name of the Autonomous Database. The database name
+        #     must be unique in the project. The name must begin with a letter and can
+        #     contain a maximum of 30 alphanumeric characters.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The display name for the Autonomous Database. The name does not
-        #     have to be unique within your project.
+        #     Optional. Immutable. The display name for the Autonomous Database. The name
+        #     does not have to be unique within your project.
         # @!attribute [r] entitlement_id
         #   @return [::String]
         #     Output only. The ID of the subscription entitlement associated with the
         #     Autonomous Database.
         # @!attribute [rw] admin_password
         #   @return [::String]
-        #     Optional. The password for the default ADMIN user.
+        #     Optional. Immutable. The password for the default ADMIN user.
+        #     Note: Only one of `admin_password_secret_version` or `admin_password` can
+        #     be populated.
+        # @!attribute [rw] admin_password_secret_version
+        #   @return [::String]
+        #     Optional. Immutable. The resource name of a secret version in Secret
+        #     Manager which contains the database admin user's password. Format:
+        #     projects/\\{project}/secrets/\\{secret}/versions/\\{version}. Note: Only one of
+        #     `admin_password_secret_version` or `admin_password` can be populated.
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseProperties]
         #     Optional. The properties of the Autonomous Database.
@@ -52,28 +60,30 @@ module Google
         #     Optional. The labels or tags associated with the Autonomous Database.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Optional. The name of the VPC network used by the Autonomous Database in
-        #     the following format: projects/\\{project}/global/networks/\\{network}
+        #     Optional. Immutable. The name of the VPC network used by the Autonomous
+        #     Database in the following format:
+        #     projects/\\{project}/global/networks/\\{network}
         # @!attribute [rw] cidr
         #   @return [::String]
-        #     Optional. The subnet CIDR range for the Autonomous Database.
+        #     Optional. Immutable. The subnet CIDR range for the Autonomous Database.
         # @!attribute [rw] odb_network
         #   @return [::String]
-        #     Optional. The name of the OdbNetwork associated with the Autonomous
-        #     Database. Format:
+        #     Optional. Immutable. The name of the OdbNetwork associated with the
+        #     Autonomous Database. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network} It is
         #     optional but if specified, this should match the parent ODBNetwork of the
         #     OdbSubnet.
         # @!attribute [rw] odb_subnet
         #   @return [::String]
-        #     Optional. The name of the OdbSubnet associated with the Autonomous
-        #     Database. Format:
+        #     Optional. Immutable. The name of the OdbSubnet associated with the
+        #     Autonomous Database. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
         # @!attribute [rw] source_config
         #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig]
-        #     Optional. The source Autonomous Database configuration for the standby
-        #     Autonomous Database. The source Autonomous Database is configured while
-        #     creating the Peer Autonomous Database and can't be updated after creation.
+        #     Optional. Immutable. The source Autonomous Database configuration for the
+        #     standby Autonomous Database. The source Autonomous Database is configured
+        #     while creating the Peer Autonomous Database and can't be updated after
+        #     creation.
         # @!attribute [r] peer_autonomous_databases
         #   @return [::Array<::String>]
         #     Output only. The peer Autonomous Database names of the given Autonomous
@@ -108,9 +118,101 @@ module Google
         #   @return [::Boolean]
         #     Optional. This field specifies if the replication of automatic backups is
         #     enabled when creating a Data Guard.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::SourceType]
+        #     Optional. The source type of the Autonomous Database.
+        # @!attribute [rw] clone_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::CloneType]
+        #     Optional. The clone type of the Autonomous Database. This field is only
+        #     applicable in case of cloning
+        # @!attribute [rw] refreshable_mode
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::RefreshableMode]
+        #     Optional. The refresh mode of the clone.
+        # @!attribute [rw] auto_refresh_frequency_seconds
+        #   @return [::Integer]
+        #     Optional. The frequency in seconds a refreshable clone is refreshed after
+        #     auto-refresh is enabled.
+        # @!attribute [rw] auto_refresh_point_lag_seconds
+        #   @return [::Integer]
+        #     Optional. The time, in seconds, the data of the automatic refreshable clone
+        #     lags the primary database at the point of refresh.
+        # @!attribute [rw] auto_refresh_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The date and time that auto-refreshing will begin for an
+        #     Autonomous Database refreshable clone. This value controls only the start
+        #     time for the first refresh operation.
+        # @!attribute [rw] autonomous_database_backup
+        #   @return [::String]
+        #     Optional. The name of the Autonomous Database Backup resource with the
+        #     format:
+        #     projects/\\{project}/locations/\\{region}/autonomousDatabaseBackups/\\{autonomous_database_backup}
+        #     Required when source_type is BACKUP_FROM_ID.
+        # @!attribute [rw] backup_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The timestamp specified for the point-in-time clone of the source
+        #     Autonomous Database. This field is only applicable
+        #     in case of BACKUP_FROM_TIMESTAMP source type and when
+        #     use_latest_available_backup is false.
+        # @!attribute [rw] use_latest_available_backup
+        #   @return [::Boolean]
+        #     Optional. Clone from latest available backup timestamp. This field is only
+        #     applicable in case of BACKUP_FROM_TIMESTAMP source type.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The refresh mode of a refreshable clone.
+          module RefreshableMode
+            # Default unspecified value.
+            REFRESHABLE_MODE_UNSPECIFIED = 0
+
+            # Automatic refresh.
+            AUTOMATIC = 1
+
+            # Manual refresh.
+            MANUAL = 2
+          end
+
+          # Specifies the source of the database. For example, a clone or peer from an
+          # existing database.
+          # This enum may be expanded to include other source types in the future.
+          module SourceType
+            # Default unspecified value.
+            SOURCE_TYPE_UNSPECIFIED = 0
+
+            # Clone database from an existing database specified in
+            # autonomous_database field.
+            CLONE_DATABASE = 1
+
+            # Create a cross-region disaster recovery peer adb from an existing adb.
+            CROSS_REGION_DISASTER_RECOVERY = 2
+
+            # Create a refreshable clone from an existing database specified in
+            # autonomous_database field.
+            CLONE_TO_REFRESHABLE = 3
+
+            # Create clone from the backup resource.
+            BACKUP_FROM_ID = 4
+
+            # Create clone from backup specified by backup_time
+            # field, or use latest available backup if use_latest_available_backup is
+            # true. The autonomous_database field must specify the source database
+            # to clone from.
+            BACKUP_FROM_TIMESTAMP = 5
+          end
+
+          # The clone type of the Autonomous Database.
+          module CloneType
+            # Default unspecified value.
+            CLONE_TYPE_UNSPECIFIED = 0
+
+            # Creates a new database with the source database's data and metadata.
+            FULL = 1
+
+            # Creates a new database that includes all the source database schema
+            # metadata, but none of the source database data.
+            METADATA = 2
+          end
         end
 
         # The properties of an Autonomous Database.
@@ -120,71 +222,79 @@ module Google
         #     https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle
         # @!attribute [rw] compute_count
         #   @return [::Float]
-        #     Optional. The number of compute servers for the Autonomous Database.
+        #     Optional. Immutable. The number of compute servers for the Autonomous
+        #     Database.
         # @!attribute [rw] cpu_core_count
         #   @return [::Integer]
-        #     Optional. The number of CPU cores to be made available to the database.
+        #     Optional. Immutable. The number of CPU cores to be made available to the
+        #     database.
         # @!attribute [rw] data_storage_size_tb
         #   @return [::Integer]
-        #     Optional. The size of the data stored in the database, in terabytes.
+        #     Optional. Immutable. The size of the data stored in the database, in
+        #     terabytes.
         # @!attribute [rw] data_storage_size_gb
         #   @return [::Integer]
-        #     Optional. The size of the data stored in the database, in gigabytes.
+        #     Optional. Immutable. The size of the data stored in the database, in
+        #     gigabytes.
         # @!attribute [rw] db_workload
         #   @return [::Google::Cloud::OracleDatabase::V1::DBWorkload]
-        #     Required. The workload type of the Autonomous Database.
+        #     Required. Immutable. The workload type of the Autonomous Database.
         # @!attribute [rw] db_edition
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseProperties::DatabaseEdition]
-        #     Optional. The edition of the Autonomous Databases.
+        #     Optional. Immutable. The edition of the Autonomous Databases.
         # @!attribute [rw] character_set
         #   @return [::String]
-        #     Optional. The character set for the Autonomous Database. The default is
-        #     AL32UTF8.
+        #     Optional. Immutable. The character set for the Autonomous Database. The
+        #     default is AL32UTF8.
         # @!attribute [rw] n_character_set
         #   @return [::String]
-        #     Optional. The national character set for the Autonomous Database. The
-        #     default is AL16UTF16.
+        #     Optional. Immutable. The national character set for the Autonomous
+        #     Database. The default is AL16UTF16.
         # @!attribute [rw] private_endpoint_ip
         #   @return [::String]
-        #     Optional. The private endpoint IP address for the Autonomous Database.
+        #     Optional. Immutable. The private endpoint IP address for the Autonomous
+        #     Database.
         # @!attribute [rw] private_endpoint_label
         #   @return [::String]
-        #     Optional. The private endpoint label for the Autonomous Database.
+        #     Optional. Immutable. The private endpoint label for the Autonomous
+        #     Database.
         # @!attribute [rw] db_version
         #   @return [::String]
-        #     Optional. The Oracle Database version for the Autonomous Database.
+        #     Optional. Immutable. The Oracle Database version for the Autonomous
+        #     Database.
         # @!attribute [rw] is_auto_scaling_enabled
         #   @return [::Boolean]
-        #     Optional. This field indicates if auto scaling is enabled for the
-        #     Autonomous Database CPU core count.
+        #     Optional. Immutable. This field indicates if auto scaling is enabled for
+        #     the Autonomous Database CPU core count.
         # @!attribute [rw] is_storage_auto_scaling_enabled
         #   @return [::Boolean]
-        #     Optional. This field indicates if auto scaling is enabled for the
-        #     Autonomous Database storage.
+        #     Optional. Immutable. This field indicates if auto scaling is enabled for
+        #     the Autonomous Database storage.
         # @!attribute [rw] license_type
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseProperties::LicenseType]
-        #     Required. The license type used for the Autonomous Database.
+        #     Required. Immutable. The license type used for the Autonomous Database.
         # @!attribute [rw] customer_contacts
         #   @return [::Array<::Google::Cloud::OracleDatabase::V1::CustomerContact>]
-        #     Optional. The list of customer contacts.
+        #     Optional. Immutable. The list of customer contacts.
         # @!attribute [rw] secret_id
         #   @return [::String]
-        #     Optional. The ID of the Oracle Cloud Infrastructure vault secret.
+        #     Optional. Immutable. The ID of the Oracle Cloud Infrastructure vault
+        #     secret.
         # @!attribute [rw] vault_id
         #   @return [::String]
-        #     Optional. The ID of the Oracle Cloud Infrastructure vault.
+        #     Optional. Immutable. The ID of the Oracle Cloud Infrastructure vault.
         # @!attribute [rw] maintenance_schedule_type
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseProperties::MaintenanceScheduleType]
-        #     Optional. The maintenance schedule of the Autonomous Database.
+        #     Optional. Immutable. The maintenance schedule of the Autonomous Database.
         # @!attribute [rw] mtls_connection_required
         #   @return [::Boolean]
-        #     Optional. This field specifies if the Autonomous Database requires mTLS
-        #     connections.
+        #     Optional. Immutable. This field specifies if the Autonomous Database
+        #     requires mTLS connections.
         # @!attribute [rw] backup_retention_period_days
         #   @return [::Integer]
-        #     Optional. The retention period for the Autonomous Database. This field is
-        #     specified in days, can range from 1 day to 60 days, and has a default value
-        #     of 60 days.
+        #     Optional. Immutable. The retention period for the Autonomous Database. This
+        #     field is specified in days, can range from 1 day to 60 days, and has a
+        #     default value of 60 days.
         # @!attribute [r] actual_used_data_storage_size_tb
         #   @return [::Float]
         #     Output only. The amount of storage currently being used for user and system
@@ -236,13 +346,18 @@ module Google
         #     Output only. The memory assigned to in-memory tables in an Autonomous
         #     Database.
         # @!attribute [r] is_local_data_guard_enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. This field indicates whether the Autonomous Database has local
-        #     (in-region) Data Guard enabled.
+        #     Output only. Deprecated: Please use `local_data_guard_enabled` instead.
+        #     This field indicates whether the Autonomous Database has local (in-region)
+        #     Data Guard enabled.
         # @!attribute [r] local_adg_auto_failover_max_data_loss_limit
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. This field indicates the maximum data loss limit for an
-        #     Autonomous Database, in seconds.
+        #     Output only. Deprecated: Please use
+        #     `local_adg_auto_failover_max_data_loss_limit_duration` instead.
+        #     This field indicates the maximum data loss limit for an Autonomous
+        #     Database, in seconds.
         # @!attribute [r] local_standby_db
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseStandbySummary]
         #     Output only. The details of the Autonomous Data Guard standby database.
@@ -329,7 +444,8 @@ module Google
         #     Output only. The date and time when maintenance will end.
         # @!attribute [rw] allowlisted_ips
         #   @return [::Array<::String>]
-        #     Optional. The list of allowlisted IP addresses for the Autonomous Database.
+        #     Optional. Immutable. The list of allowlisted IP addresses for the
+        #     Autonomous Database.
         # @!attribute [rw] encryption_key
         #   @return [::Google::Cloud::OracleDatabase::V1::EncryptionKey]
         #     Optional. The encryption key used to encrypt the Autonomous Database.
@@ -343,6 +459,20 @@ module Google
         #   @return [::String]
         #     Output only. An Oracle-managed Google Cloud service account on which
         #     customers can grant roles to access resources in the customer project.
+        # @!attribute [rw] local_data_guard_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the Autonomous Database has a local (in-region)
+        #     standby database. Not applicable to cross-region Data Guard or dedicated
+        #     Exadata infrastructure.
+        # @!attribute [rw] local_adg_auto_failover_max_data_loss_limit_duration
+        #   @return [::Integer]
+        #     Optional. This field indicates the maximum data loss limit for an
+        #     Autonomous Database, in seconds.
+        # @!attribute [rw] refreshable_clone
+        #   @return [::Boolean]
+        #     Optional. Indicates if the Autonomous Database is a refreshable clone. This
+        #     field is used in update flow to connect / disconnect a refreshable clone
+        #     from its source database.
         class AutonomousDatabaseProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -394,6 +524,9 @@ module Google
 
             # Backup based recovery.
             BACKUP_BASED = 2
+
+            # Local disaster recovery is not available.
+            NOT_AVAILABLE = 3
           end
 
           # Varies states of the Data Safe registration for the Autonomous Database.
@@ -813,6 +946,18 @@ module Google
         #   @return [::Google::Type::TimeOfDay]
         #     Output only. Auto stop time.
         class ScheduledOperationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An Autonomous Database refreshable clone
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The GCP resource name of the Autonomous Database.
+        # @!attribute [r] region
+        #   @return [::String]
+        #     Output only. The Google Cloud region where the refreshable clone exists.
+        class AutonomousDatabaseRefreshableClone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

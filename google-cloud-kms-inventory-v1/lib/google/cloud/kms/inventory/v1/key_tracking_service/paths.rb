@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,20 @@ module Google
               # @return [::String]
               def organization_path organization:
                 "organizations/#{organization}"
+              end
+
+              ##
+              # Create a fully-qualified Project resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}`
+              #
+              # @param project [String]
+              #
+              # @return [::String]
+              def project_path project:
+                "projects/#{project}"
               end
 
               ##

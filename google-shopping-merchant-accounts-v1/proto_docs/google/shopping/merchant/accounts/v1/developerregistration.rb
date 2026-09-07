@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,13 +44,16 @@ module Google
           #     `accounts/{account}/developerRegistration`
           # @!attribute [rw] developer_email
           #   @return [::String]
-          #     Immutable. If the developer email provided is associated with a user in the
-          #     merchant account provided, the user will be updated to have "API developer"
-          #     access type and the email preference corresponding to that user will be
-          #     updated to have the new "API notifications" preference. If the developer
-          #     email provided is not associated with any user we will just add it as a
-          #     contact. The email preference corresponding to that contact will have the
-          #     new "API notifications" preference
+          #     Immutable. Optional field. Developer role can be also added by using
+          #     `users.update` method. If the developer email provided is associated with a
+          #     user in the provided merchant account, the user will be updated to have
+          #     `API_DEVELOPER` `access_rights` and the email preference corresponding to
+          #     that user will be updated to have the new API notifications preference. If
+          #     the developer email provided is not associated with any user, it is added
+          #     as a contact. The email preference corresponding to that contact will have
+          #     the new API notifications preference. Make sure the email used is
+          #     associated with a Google Account and is not a service account as service
+          #     accounts can't receive emails.
           class RegisterGcpRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +75,15 @@ module Google
           #   @return [::String]
           #     Required. The `name` (ID) of the developer registration.
           class GetDeveloperRegistrationRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for the GetAccountForGcpRegistration method.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the merchant account id that the GCP is registered with.
+          class GetAccountForGcpRegistrationResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

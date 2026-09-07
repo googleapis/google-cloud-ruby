@@ -1,8 +1,7 @@
 # Ruby Client for the Contact Center AI Insights V1 API
 
-API Client library for the Contact Center AI Insights V1 API
+Contact Center Insights provides out-of-the-box and custom modeling techniques to make it easier for contact center teams to better understand customer interaction data.
 
-Contact Center AI Insights helps users detect and visualize patterns in their contact center data. Understanding conversational data drives business value, improves operational efficiency, and provides a voice for customer feedback.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_conversation request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-contact_center_insights-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/contact-center/insights/docs)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

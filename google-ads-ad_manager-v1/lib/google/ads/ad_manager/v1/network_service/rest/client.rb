@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a Network object.
+              # Retrieves a `Network` object.
               #
               # @overload get_network(request, options = nil)
               #   Pass arguments to `get_network` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve all the networks the current user has access to.
+              # Retrieves all the networks the current user has access to.
               #
               # @overload list_networks(request, options = nil)
               #   Pass arguments to `list_networks` via a request object, either of type
@@ -267,11 +267,30 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_networks(page_size: nil, page_token: nil, skip: nil)
+              #   Pass arguments to `list_networks` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `Network`s to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 `Network`s will be
+              #     returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListNetworks` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListNetworks` must match
+              #     the call that provided the page token.
+              #   @param skip [::Integer]
+              #     Optional. Number of individual resources to skip while paginating.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Ads::AdManager::V1::ListNetworksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Network>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Ads::AdManager::V1::ListNetworksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Network>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -287,8 +306,12 @@ module Google
               #   # Call the list_networks method.
               #   result = client.list_networks request
               #
-              #   # The returned object is of type Google::Ads::AdManager::V1::ListNetworksResponse.
-              #   p result
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Ads::AdManager::V1::Network.
+              #     p item
+              #   end
               #
               def list_networks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -319,6 +342,253 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @network_service_stub.list_networks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_service_stub, :list_networks, "networks", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `Network` object. Currently, only the network display name can be
+              # updated.
+              #
+              # @overload update_network(request, options = nil)
+              #   Pass arguments to `update_network` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateNetworkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateNetworkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_network(network: nil, update_mask: nil)
+              #   Pass arguments to `update_network` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network [::Google::Ads::AdManager::V1::Network, ::Hash]
+              #     Required. The `Network` to update.
+              #
+              #     The `Network`'s `name` is used to identify the `Network` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Network]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Network]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::NetworkService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateNetworkRequest.new
+              #
+              #   # Call the update_network method.
+              #   result = client.update_network request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Network.
+              #   p result
+              #
+              def update_network request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateNetworkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_network.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_network.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_network.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_service_stub.update_network request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Provisions a test network associated with the current user. Only one test
+              # network can be provisioned per user.
+              #
+              # Before the test network can be used, you must complete setup in the Ad
+              # Manager UI. If the test network's owner is a service account, you must add
+              # a non-service account user by calling UserService.CreateUser.
+              #
+              # Test networks are limited in the following ways:
+              #
+              #   * Test networks have a maximum of 10,000 objects per entity type.
+              #   * Test networks cannot serve ads.
+              #   * Reports on serving data have zero rows.
+              #   * Forecast service results contain mock data.
+              #   * Test networks do not have Ad Manager 360 or premium features enabled.
+              #
+              # @overload provision_test_network(request, options = nil)
+              #   Pass arguments to `provision_test_network` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Network]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Network]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::NetworkService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::ProvisionTestNetworkRequest.new
+              #
+              #   # Call the provision_test_network method.
+              #   result = client.provision_test_network request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Network.
+              #   p result
+              #
+              def provision_test_network request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::ProvisionTestNetworkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.provision_test_network.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.provision_test_network.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.provision_test_network.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_service_stub.provision_test_network request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the [DefaultThirdPartyDataDeclaration] for this network.
+              #
+              # @overload get_default_third_party_data_declaration(request, options = nil)
+              #   Pass arguments to `get_default_third_party_data_declaration` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_default_third_party_data_declaration(name: nil)
+              #   Pass arguments to `get_default_third_party_data_declaration` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of DefaultThirdPartyDataDeclaration.
+              #     Format: networks/\\{network_code}/defaultThirdPartyDataDeclaration
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::NetworkService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest.new
+              #
+              #   # Call the get_default_third_party_data_declaration method.
+              #   result = client.get_default_third_party_data_declaration request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration.
+              #   p result
+              #
+              def get_default_third_party_data_declaration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::GetDefaultThirdPartyDataDeclarationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_default_third_party_data_declaration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_default_third_party_data_declaration.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_default_third_party_data_declaration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_service_stub.get_default_third_party_data_declaration request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -395,6 +665,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -467,6 +738,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -481,6 +753,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_networks
+                  ##
+                  # RPC-specific configuration for `update_network`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_network
+                  ##
+                  # RPC-specific configuration for `provision_test_network`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :provision_test_network
+                  ##
+                  # RPC-specific configuration for `get_default_third_party_data_declaration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_default_third_party_data_declaration
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -488,6 +775,12 @@ module Google
                     @get_network = ::Gapic::Config::Method.new get_network_config
                     list_networks_config = parent_rpcs.list_networks if parent_rpcs.respond_to? :list_networks
                     @list_networks = ::Gapic::Config::Method.new list_networks_config
+                    update_network_config = parent_rpcs.update_network if parent_rpcs.respond_to? :update_network
+                    @update_network = ::Gapic::Config::Method.new update_network_config
+                    provision_test_network_config = parent_rpcs.provision_test_network if parent_rpcs.respond_to? :provision_test_network
+                    @provision_test_network = ::Gapic::Config::Method.new provision_test_network_config
+                    get_default_third_party_data_declaration_config = parent_rpcs.get_default_third_party_data_declaration if parent_rpcs.respond_to? :get_default_third_party_data_declaration
+                    @get_default_third_party_data_declaration = ::Gapic::Config::Method.new get_default_third_party_data_declaration_config
 
                     yield self if block_given?
                   end

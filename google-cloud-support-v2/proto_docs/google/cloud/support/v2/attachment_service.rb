@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,6 +40,15 @@ module Google
         #     A token identifying the page of results to return. If unspecified, the
         #     first page is retrieved.
         class ListAttachmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for getting an attachment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the attachment to get.
+        class GetAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

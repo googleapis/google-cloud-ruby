@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -102,14 +102,6 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/lakes/[^/]+/environments/[^/]+/?$}, false]
-                ],
-                body: nil
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :get,
-                uri_template: "/v1/{resource}:getIamPolicy",
-                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/dataScans/[^/]+/?$}, false]
                 ],
                 body: nil
@@ -214,7 +206,23 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataDomains/[^/]+/?$}, false]
                 ],
                 body: nil
               )
@@ -257,14 +265,6 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/lakes/[^/]+/environments/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1/{resource}:setIamPolicy",
-                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/dataScans/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -385,7 +385,7 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataDomains/[^/]+/?$}, false]
                 ],
                 body: "*"
               )
@@ -428,14 +428,6 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/lakes/[^/]+/environments/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1/{resource}:testIamPermissions",
-                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/dataScans/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -556,7 +548,7 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataDomains/[^/]+/?$}, false]
                 ],
                 body: "*"
               )

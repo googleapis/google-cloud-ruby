@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,6 +98,18 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientPathsTest < Minitest
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_retired_resource_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.retired_resource_path project: "value0", location: "value1", retired_resource: "value2"
+      assert_equal "projects/value0/locations/value1/retiredResources/value2", path
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,32 +99,32 @@ class ::Google::Cloud::Compute::V1::ImageFamilyViews::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::ImageFamilyViews::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ImageFamilyViews::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ImageFamilyViews::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ family: family, project: project, zone: zone }) do |_result, response|
+        c.get({ family: family, project: project, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get family: family, project: project, zone: zone do |_result, response|
+        c.get family: family, project: project, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ family: family, project: project, zone: zone }, call_options) do |_result, response|
+        c.get({ family: family, project: project, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetImageFamilyViewRequest.new(family: family, project: project, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

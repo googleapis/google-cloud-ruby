@@ -2,7 +2,6 @@
 
 Builds conversational interfaces (for example, chatbots, and voice-powered apps and devices).
 
-Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow ES, providing the standard agent type suitable for small and simple agents.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.get_agent request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/dialogflow)
+See also the [Product Documentation](https://docs.cloud.google.com/dialogflow/docs)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

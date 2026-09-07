@@ -89,6 +89,11 @@
               "methods": [
                 "batch_write"
               ]
+            },
+            "FetchCacheUpdate": {
+              "methods": [
+                "fetch_cache_update"
+              ]
             }
           }
         }

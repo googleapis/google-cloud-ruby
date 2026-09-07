@@ -2,7 +2,6 @@
 
 A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
-A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-ads-data_manager-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

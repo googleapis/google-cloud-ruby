@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters. Note that google-cloud-gke_connect-gateway-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_connect-gateway instead. See the readme for more details."
+  gem.description   = "The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters. Note that google-cloud-gke_connect-gateway-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_connect-gateway instead. See the readme for more details."
   gem.summary       = "The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

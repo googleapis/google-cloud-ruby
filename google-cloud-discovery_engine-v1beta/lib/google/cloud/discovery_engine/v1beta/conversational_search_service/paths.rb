@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -96,6 +96,31 @@ module Google
               resource = resources[args.keys.sort.join(":")]
               raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified AssistAnswer resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param collection [String]
+            # @param engine [String]
+            # @param session [String]
+            # @param assist_answer [String]
+            #
+            # @return [::String]
+            def assist_answer_path project:, location:, collection:, engine:, session:, assist_answer:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+              raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+              raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}/assistAnswers/#{assist_answer}"
             end
 
             ##
@@ -424,6 +449,18 @@ module Google
             #   @param engine [String]
             #   @param session [String]
             #
+            # @overload session_path(project:, location:, collection:, engine:, collaborative_project:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param collaborative_project [String]
+            #   @param session [String]
+            #
             # @return [::String]
             def session_path **args
               resources = {
@@ -449,6 +486,15 @@ module Google
                   raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}"
+                end),
+                "collaborative_project:collection:engine:location:project:session" => (proc do |project:, location:, collection:, engine:, collaborative_project:, session:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+                  raise ::ArgumentError, "collaborative_project cannot contain /" if collaborative_project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/collaborativeProjects/#{collaborative_project}/sessions/#{session}"
                 end)
               }
 

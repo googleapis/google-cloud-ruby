@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dataform is a service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery."
-  gem.summary       = "API Client library for the Dataform API"
+  gem.description   = "Service to develop, version control, and operationalize SQL pipelines in BigQuery."
+  gem.summary       = "Service to develop, version control, and operationalize SQL pipelines in BigQuery."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-dataform-v1beta1", ">= 0.6", "< 2.a"

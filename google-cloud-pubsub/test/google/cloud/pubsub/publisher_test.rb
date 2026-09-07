@@ -141,4 +141,45 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     _(msgs.last.message_id).must_equal "msg2"
     _(msgs.last.attributes["format"]).must_equal "none"
   end
+
+  it "can be created with skip_lookup: true" do
+    mock = Minitest::Mock.new
+    pubsub.service.mocked_topic_admin = mock
+
+    publisher = pubsub.publisher topic_name, skip_lookup: true
+
+    _(publisher.name).must_equal topic_path(topic_name)
+    _(publisher).must_be :reference?
+
+    mock.verify
+  end
+
+  it "does not reload the resource when publishing if created with skip_lookup: true" do
+    mock = Minitest::Mock.new
+    pubsub.service.mocked_topic_admin = mock
+
+    publisher = pubsub.publisher topic_name, skip_lookup: true
+
+    _(publisher).must_be :reference?
+
+    # Expect publish to be called
+    message = "new-message-here"
+    encoded_msg = message.encode(Encoding::ASCII_8BIT)
+    messages = [
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg)
+    ]
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
+    expected_request = {topic: topic_path(topic_name), messages: messages}
+    
+    mock.expect :publish_internal, publish_res do |actual_request, actual_option|
+      actual_request == expected_request && actual_option.nil?
+    end
+
+    msg = publisher.publish message
+
+    _(publisher).must_be :reference?
+    _(msg.message_id).must_equal "msg1"
+
+    mock.verify
+  end
 end

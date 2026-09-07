@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,6 +65,11 @@ module Google
         #     Optional. Immutable. The deletion time of the membership, such as when a
         #     member left or was removed from a space. This field is output only, except
         #     when used to import historical memberships in import mode spaces.
+        # @!attribute [r] affiliation
+        #   @return [::Google::Apps::Chat::V1::Membership::Affiliation]
+        #     Output only. A user's relationship to the Workspace organization that owns
+        #     the space. In spaces owned by consumer accounts, the affiliation of all
+        #     members is `EXTERNAL`.
         class Membership
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,16 +100,88 @@ module Google
             #  assigned this role (other enum values might be used in the future).
             MEMBERSHIP_ROLE_UNSPECIFIED = 0
 
-            # A member of the space. The user has basic permissions, like sending
-            # messages to the space. In 1:1 and unnamed group conversations, everyone
+            # A member of the space. In the Chat UI, this role is called Member.
+            #
+            # The user has basic permissions, like sending
+            # messages to the space.
+            # Managers and owners can grant members additional permissions in a space,
+            # including:
+            #
+            # - Add or remove members.
+            # - Modify space details.
+            # - Turn history on or off.
+            # - Mention everyone in the space with `@all`.
+            # - Manage Chat apps and webhooks installed in the space.
+            #
+            # In direct messages and unnamed group conversations, everyone
             # has this role.
             ROLE_MEMBER = 1
 
-            # A space manager. The user has all basic permissions plus administrative
-            # permissions that let them manage the space, like adding or removing
-            # members. Only supported in
-            # {::Google::Apps::Chat::V1::Space::SpaceType SpaceType.SPACE}.
+            # A space owner. In the Chat UI, this role is called Owner.
+            #
+            # The user has the complete set of space permissions to manage the space,
+            # including:
+            #
+            # - Change the role of other members in the space to member, manager, or
+            # owner.
+            # - Delete the space.
+            #
+            # Only supported in
+            # {::Google::Apps::Chat::V1::Space::SpaceType SpaceType.SPACE} (named spaces).
+            #
+            # To learn more, see
+            # [Learn more about your role as a space
+            # owner or manager](https://support.google.com/chat/answer/11833441).
             ROLE_MANAGER = 2
+
+            # A space manager. In the Chat UI, this role is called Manager.
+            #
+            # The user has all basic permissions of `ROLE_MEMBER`,
+            # and can be granted a subset of administrative permissions by an owner.
+            # By default, managers have all the permissions of an owner except for the
+            # ability to:
+            #
+            # - Delete the space.
+            # - Make another space member an owner.
+            # - Change an owner's role.
+            #
+            # By default, managers permissions include but aren't limited to:
+            #
+            # - Make another member a manager.
+            # - Delete messages in the space.
+            # - Manage space permissions.
+            # - Receive notifications for requests to join the space if the manager
+            #   has the "manage members" permission in the space settings.
+            # - Make a space discoverable.
+            #
+            # Only supported in
+            # {::Google::Apps::Chat::V1::Space::SpaceType SpaceType.SPACE} (named spaces).
+            #
+            # To learn more, see
+            # [Manage space settings](https://support.google.com/chat/answer/13340792).
+            ROLE_ASSISTANT_MANAGER = 4
+          end
+
+          # Represents the affiliation of a user to the Google Workspace organization
+          # that owns the space. This enum may have more values added in the future.
+          module Affiliation
+            # Default value. This value is unused.
+            AFFILIATION_UNSPECIFIED = 0
+
+            # An account managed by the same Google Workspace organization that owns
+            # the space.
+            INTERNAL = 1
+
+            # An account external to the Google Workspace organization that owns the
+            # space (e.g., a consumer account, or an account managed by a different
+            # Workspace organization).
+            EXTERNAL = 2
+
+            # An account managed by the Workspace organization that owns the space,
+            # but provisioned for a user who is external to the organization (e.g., a
+            # Guest user). To learn more about guests, see
+            # https://support.google.com/chat/answer/16997417.
+            MANAGED_EXTERNAL = 3
           end
         end
 

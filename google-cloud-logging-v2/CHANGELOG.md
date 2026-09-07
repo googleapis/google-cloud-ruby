@@ -1,5 +1,26 @@
 # Release History
 
+### 1.7.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35055](https://github.com/googleapis/google-cloud-ruby/issues/35055)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34049](https://github.com/googleapis/google-cloud-ruby/issues/34049)) 
+
+### 1.6.0 (2026-05-14)
+
+#### Features
+
+* publish client batch config schema 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33435](https://github.com/googleapis/google-cloud-ruby/issues/33435)) 
+
 ### 1.5.1 (2025-10-27)
 
 #### Documentation

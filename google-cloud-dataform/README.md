@@ -1,8 +1,7 @@
 # Ruby Client for the Dataform API
 
-API Client library for the Dataform API
+Service to develop, version control, and operationalize SQL pipelines in BigQuery.
 
-Dataform is a service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-dataform-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-dataform-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1beta1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/dataform)
+See also the [Product Documentation](https://cloud.google.com/dataform/docs/overview)
 for more usage information.
 
 ## Quick Start
@@ -38,8 +37,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dataform"
 
 client = Google::Cloud::Dataform.dataform
-request = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+request = ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new # (request fields as keyword arguments...)
+response = client.get_team_folder request
 ```
 
 ## Debug Logging
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

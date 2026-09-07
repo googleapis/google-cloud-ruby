@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an `AdBreak` object.
+              # Retrieves an `AdBreak` object.
               #
               # Query an ad break by its resource name or custom asset key. Check the
               # resource's `breakState` field to determine its state.
@@ -263,7 +263,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `AdBreak` objects.
+              # Lists `AdBreak` objects.
               #
               # By default, when no `orderBy` query parameter is specified, ad breaks are
               # ordered reverse chronologically. However, ad breaks with a 'breakState' of
@@ -376,7 +376,7 @@ module Google
               end
 
               ##
-              # API to create an `AdBreak` object.
+              # Creates an `AdBreak` object.
               #
               # Informs DAI of an upcoming ad break for a live stream event, with an
               # optional expected start time. DAI will begin decisioning ads for the break
@@ -483,7 +483,7 @@ module Google
               end
 
               ##
-              # API to update an `AdBreak` object.
+              # Updates an `AdBreak` object.
               #
               # Modify an ad break when its state is
               # {::Google::Ads::AdManager::V1::AdBreakStateEnum::AdBreakState::SCHEDULED `SCHEDULED`}.
@@ -508,7 +508,7 @@ module Google
               #
               #     The `AdBreak`'s `name` is used to identify the `AdBreak` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::AdBreak]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -568,7 +568,7 @@ module Google
               end
 
               ##
-              # API to delete an `AdBreak` object.
+              # Deletes an `AdBreak` object.
               #
               # Deletes and cancels an incomplete ad break, mitigating the need to wait
               # for the current break to serve before recreating an ad break. You can
@@ -726,6 +726,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -798,6 +799,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,33 +55,155 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The rule to exclude image findings based on spatial relationships with
+        # other image findings. For example, exclude an image finding if it overlaps
+        # with another image finding.
+        # This rule is silently ignored if the content being inspected is not an image.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     A list of image-supported infoTypes—excluding [document
+        #      infoTypes](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference#documents)—to
+        #      be used as context for the exclusion rule. A finding is excluded if
+        #      its bounding box has the specified spatial relationship (defined by
+        #      `image_containment_type`) with a finding of an infoType in this list.
+        #
+        #      For example, if `InspectionRuleSet.info_types` includes
+        #      `OBJECT_TYPE/PERSON` and this `exclusion_rule` specifies `info_types` as
+        #      `OBJECT_TYPE/PERSON/PASSPORT` with `image_containment_type` set to
+        #      `encloses`, then `OBJECT_TYPE/PERSON` findings will be excluded if they
+        #      are fully contained within the bounding box of an
+        #      `OBJECT_TYPE/PERSON/PASSPORT` finding.
+        # @!attribute [rw] image_containment_type
+        #   @return [::Google::Cloud::Dlp::V2::ImageContainmentType]
+        #     Specifies the required spatial relationship between the bounding boxes
+        #     of the target finding and the context infoType findings.
+        class ExcludeByImageFindings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The rule that specifies conditions when findings of infoTypes specified in
         # `InspectionRuleSet` are removed from results.
         # @!attribute [rw] dictionary
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     Dictionary which defines the rule.
         #
-        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression which defines the rule.
         #
-        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `exclude_info_types`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclude_info_types
         #   @return [::Google::Cloud::Dlp::V2::ExcludeInfoTypes]
         #     Set of infoTypes for which findings would affect this rule.
         #
-        #     Note: The following fields are mutually exclusive: `exclude_info_types`, `dictionary`, `regex`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclude_info_types`, `dictionary`, `regex`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclude_by_hotword
         #   @return [::Google::Cloud::Dlp::V2::ExcludeByHotword]
         #     Drop if the hotword rule is contained in the proximate context. For
         #     tabular data, the context includes the column name.
         #
-        #     Note: The following fields are mutually exclusive: `exclude_by_hotword`, `dictionary`, `regex`, `exclude_info_types`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclude_by_hotword`, `dictionary`, `regex`, `exclude_info_types`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] exclude_by_image_findings
+        #   @return [::Google::Cloud::Dlp::V2::ExcludeByImageFindings]
+        #     Exclude findings based on image containment rules. For example, exclude
+        #     an image finding if it overlaps with another image finding.
+        #
+        #     Note: The following fields are mutually exclusive: `exclude_by_image_findings`, `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] matching_type
         #   @return [::Google::Cloud::Dlp::V2::MatchingType]
         #     How the rule is applied, see MatchingType documentation for details.
         class ExclusionRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdjustmentRule condition for matching infoTypes.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     Sensitive Data Protection adjusts the likelihood of a finding if that
+        #     finding also matches one of these infoTypes.
+        #
+        #     For example, you can create a rule to adjust the likelihood of a
+        #     `PHONE_NUMBER` finding if the string is found within a document that is
+        #     classified as `DOCUMENT_TYPE/HR/RESUME`. To configure this, set
+        #     `PHONE_NUMBER` in `InspectionRuleSet.info_types`. Add an `adjustment_rule`
+        #     with an `adjust_by_matching_info_types.info_types` that contains
+        #     `DOCUMENT_TYPE/HR/RESUME`. In this case, the likelihood of the
+        #     `PHONE_NUMBER` finding is adjusted, but the likelihood of the
+        #     `DOCUMENT_TYPE/HR/RESUME` finding is not.
+        # @!attribute [rw] min_likelihood
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
+        #     Required. Minimum likelihood of the
+        #     `adjust_by_matching_info_types.info_types` finding. If the likelihood is
+        #     lower than this value, Sensitive Data Protection doesn't adjust the
+        #     likelihood of the `InspectionRuleSet.info_types` finding.
+        # @!attribute [rw] matching_type
+        #   @return [::Google::Cloud::Dlp::V2::MatchingType]
+        #     How the adjustment rule is applied.
+        #
+        #     Only `MATCHING_TYPE_PARTIAL_MATCH` is supported:
+        #
+        #     - Partial match: adjusts the findings of infoTypes specified in the
+        #     inspection rule when they have a nonempty intersection with a finding of an
+        #     infoType specified in this adjustment rule.
+        class AdjustByMatchingInfoTypes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdjustmentRule condition for image findings.
+        # This rule is silently ignored if the content being inspected is not an image.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     A list of image-supported infoTypes—excluding [document
+        #     infoTypes](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference#documents)—to
+        #     be used as context for the adjustment rule. Sensitive Data Protection
+        #     adjusts the likelihood of an image finding if its bounding box has the
+        #     specified spatial relationship (defined by `image_containment_type`) with a
+        #     finding of an infoType in this list.
+        #
+        #     For example, you can create a rule to adjust the likelihood of a
+        #     `US_PASSPORT` finding if it is enclosed by a finding of
+        #     `OBJECT_TYPE/PERSON/PASSPORT`. To configure this, set `US_PASSPORT` in
+        #     `InspectionRuleSet.info_types`. Add an `adjustment_rule` with an
+        #     `adjust_by_image_findings.info_types` that contains
+        #     `OBJECT_TYPE/PERSON/PASSPORT` and `image_containment_type` set
+        #     to `encloses`. In this case, the likelihood of the `US_PASSPORT` finding is
+        #     adjusted, but the likelihood of the `OBJECT_TYPE/PERSON/PASSPORT`
+        #     finding is not.
+        # @!attribute [rw] min_likelihood
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
+        #     Required. Minimum likelihood of the
+        #     `adjust_by_image_findings.info_types` finding. If the likelihood is
+        #     lower than this value, Sensitive Data Protection doesn't adjust the
+        #     likelihood of the `InspectionRuleSet.info_types` finding.
+        # @!attribute [rw] image_containment_type
+        #   @return [::Google::Cloud::Dlp::V2::ImageContainmentType]
+        #     Specifies the required spatial relationship between the bounding boxes
+        #     of the target finding and the context infoType findings.
+        class AdjustByImageFindings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Rule that specifies conditions when a certain infoType's finding details
+        # should be adjusted.
+        # @!attribute [rw] adjust_by_matching_info_types
+        #   @return [::Google::Cloud::Dlp::V2::AdjustByMatchingInfoTypes]
+        #     Set of infoTypes for which findings would affect this rule.
+        #
+        #     Note: The following fields are mutually exclusive: `adjust_by_matching_info_types`, `adjust_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] adjust_by_image_findings
+        #   @return [::Google::Cloud::Dlp::V2::AdjustByImageFindings]
+        #     AdjustmentRule condition for image findings.
+        #
+        #     Note: The following fields are mutually exclusive: `adjust_by_image_findings`, `adjust_by_matching_info_types`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] likelihood_adjustment
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+        #     Likelihood adjustment to apply to the infoType.
+        class AdjustmentRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -92,12 +214,17 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
         #     Hotword-based detection rule.
         #
-        #     Note: The following fields are mutually exclusive: `hotword_rule`, `exclusion_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `hotword_rule`, `exclusion_rule`, `adjustment_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusion_rule
         #   @return [::Google::Cloud::Dlp::V2::ExclusionRule]
         #     Exclusion rule.
         #
-        #     Note: The following fields are mutually exclusive: `exclusion_rule`, `hotword_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclusion_rule`, `hotword_rule`, `adjustment_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] adjustment_rule
+        #   @return [::Google::Cloud::Dlp::V2::AdjustmentRule]
+        #     Adjustment rule.
+        #
+        #     Note: The following fields are mutually exclusive: `adjustment_rule`, `hotword_rule`, `exclusion_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class InspectionRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,7 +250,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     Restricts what info_types to look for. The values must correspond to
         #     InfoType values returned by ListInfoTypes or listed at
-        #     https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference.
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference.
         #
         #     When no InfoTypes or CustomInfoTypes are specified in a request, the
         #     system may automatically choose a default list of detectors to run, which
@@ -140,7 +267,7 @@ module Google
         #     In general, the highest likelihood setting yields the fewest findings in
         #     results and the lowest chance of a false positive. For more information,
         #     see [Match
-        #     likelihood](https://cloud.google.com/sensitive-data-protection/docs/likelihood).
+        #     likelihood](https://docs.cloud.google.com/sensitive-data-protection/docs/likelihood).
         # @!attribute [rw] min_likelihood_per_info_type
         #   @return [::Array<::Google::Cloud::Dlp::V2::InspectConfig::InfoTypeLikelihood>]
         #     Minimum likelihood per infotype. For each infotype, a user can specify a
@@ -177,7 +304,7 @@ module Google
         # @!attribute [rw] custom_info_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType>]
         #     CustomInfoTypes provided by the user. See
-        #     https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes
         #     to learn more.
         # @!attribute [rw] content_options
         #   @return [::Array<::Google::Cloud::Dlp::V2::ContentOption>]
@@ -186,7 +313,8 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::InspectionRuleSet>]
         #     Set of rules to apply to the findings for this InspectConfig.
         #     Exclusion rules, contained in the set are executed in the end, other
-        #     rules are executed in the order they are specified for each info type.
+        #     rules are executed in the order they are specified for each info type. Not
+        #     supported for the `metadata_key_value_expression` CustomInfoType.
         class InspectConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -281,7 +409,7 @@ module Google
 
           # The type of data being sent for inspection. To learn more, see
           # [Supported file
-          # types](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types).
+          # types](https://docs.cloud.google.com/sensitive-data-protection/docs/supported-file-types).
           #
           # Only the first frame of each multiframe image is inspected. Metadata and
           # other frames aren't inspected.
@@ -347,26 +475,119 @@ module Google
         #   @return [::String]
         #     String data to inspect or redact.
         #
-        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dlp::V2::Table]
         #     Structured content for inspection. See
-        #     https://cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
         #     to learn more.
         #
-        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] byte_item
         #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces `type` and `data`.
         #
-        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] conversation
+        #   @return [::Google::Cloud::Dlp::V2::Conversation]
+        #     Represents a conversation (either complete or a slice).
+        #     It is assumed that all included messages are contiguous and ordered in
+        #     chronological order.
+        #
+        #     Note: The following fields are mutually exclusive: `conversation`, `value`, `table`, `byte_item`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] batch_content_item
+        #   @return [::Google::Cloud::Dlp::V2::BatchContentItem]
+        #     Represents a batch of items to inspect.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_content_item`, `value`, `table`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] content_metadata
+        #   @return [::Google::Cloud::Dlp::V2::ContentMetadata]
+        #     User provided metadata for the content.
         class ContentItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata on content to be scanned.
+        # @!attribute [rw] properties
+        #   @return [::Array<::Google::Cloud::Dlp::V2::KeyValueMetadataProperty>]
+        #     User provided key-value pairs of content metadata.
+        # @!attribute [rw] file_labels
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileLabel>]
+        #     Optional. The file labels associated with the content.
+        class ContentMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Complete conversation or slice of a conversation.
+        # It is assumed that all included messages are contiguous and ordered in
+        # chronological order.
+        # @!attribute [rw] messages
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ConversationMessage>]
+        #     Messages exchanged within this conversation.
+        #     The maximum number of messages allowed is 50k.
+        #     The order of the messages is assumed to be chronological and will be used
+        #     to index findings in the response.
+        class Conversation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Single message in a conversation.
+        # @!attribute [rw] content
+        #   @return [::String]
+        #     The contents of this message.
+        # @!attribute [rw] message_type
+        #   @return [::Google::Cloud::Dlp::V2::ConversationMessage::MessageType]
+        #     The type of message.
+        # @!attribute [rw] participant_id
+        #   @return [::String]
+        #     Optional. The identifier of the participant,
+        #     for example 'test-user' or 'gemini'.
+        #     The participant ID can contain lowercase letters, numbers, and hyphens;
+        #     that is, it must match the regular expression:
+        #     `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+        #     The maximum length is 63 characters.
+        class ConversationMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of message.
+          # New values may be added in the future.
+          module MessageType
+            # Unused.
+            MESSAGE_TYPE_UNSPECIFIED = 0
+
+            # Message contains content to be inspected.
+            CONTENT = 1
+
+            # Message contains context only and will not have findings reported from
+            # it during inspection or redacted from it during de-identification.
+            CONTEXT = 2
+          end
+        end
+
+        # Represents a batch of content to inspect or redact.
+        # @!attribute [rw] string_value_batch
+        #   @return [::Google::Cloud::Dlp::V2::StringValueBatch]
+        #     Optional. Represents a batch of string values to inspect or redact.
+        class BatchContentItem
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a batch of string values to inspect or redact.
+        # @!attribute [rw] values
+        #   @return [::Array<::String>]
+        #     Optional. Represents string data to inspect or redact.
+        class StringValueBatch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
-        # https://cloud.google.com/sensitive-data-protection/docs/inspecting-structured-text#inspecting_a_table
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-structured-text#inspecting_a_table
         # to learn more.
         # @!attribute [rw] headers
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
@@ -385,6 +606,69 @@ module Google
           class Row
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A key-value pair in the Metadata.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The key of the property.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The value of the property.
+        class KeyValueMetadataProperty
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a file label.
+        # @!attribute [rw] sensitivity_label
+        #   @return [::Google::Cloud::Dlp::V2::FileLabel::SensitivityLabelMetadata]
+        #     Sensitivity labels published by Microsoft.
+        #
+        #     Note: The following fields are mutually exclusive: `sensitivity_label`, `google_drive_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] google_drive_label
+        #   @return [::Google::Cloud::Dlp::V2::FileLabel::GoogleDriveLabelMetadata]
+        #     Google Drive labels published by Google.
+        #
+        #     Note: The following fields are mutually exclusive: `google_drive_label`, `sensitivity_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class FileLabel
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Sensitivity labels published by Microsoft.
+          # @!attribute [rw] guid
+          #   @return [::String]
+          #     Required. The GUID of the sensitivity label.
+          class SensitivityLabelMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Google Drive labels published by Google.
+          # @!attribute [rw] label_id
+          #   @return [::String]
+          #     The [label
+          #     ID](https://developers.google.com/workspace/drive/labels/guides/overview)
+          #     of the Google Drive label.
+          # @!attribute [rw] label_fields
+          #   @return [::Array<::Google::Cloud::Dlp::V2::FileLabel::GoogleDriveLabelMetadata::LabelFieldMetadata>]
+          #     The field values of the Google Drive label
+          class GoogleDriveLabelMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The field values of the Google Drive label
+            # @!attribute [rw] id
+            #   @return [::String]
+            #     The identifier of the Label Field.
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Dlp::V2::Value]
+            #     The value of the Label Field.
+            class LabelFieldMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 
@@ -524,22 +808,32 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::RecordLocation]
         #     Location within a row or record of a database table.
         #
-        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_location
         #   @return [::Google::Cloud::Dlp::V2::ImageLocation]
         #     Location within an image's pixels.
         #
-        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_location
         #   @return [::Google::Cloud::Dlp::V2::DocumentLocation]
         #     Location data for document files.
         #
-        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata_location
         #   @return [::Google::Cloud::Dlp::V2::MetadataLocation]
         #     Location within the metadata for inspected content.
         #
-        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] conversation_location
+        #   @return [::Google::Cloud::Dlp::V2::ConversationLocation]
+        #     Location within a conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `conversation_location`, `record_location`, `image_location`, `document_location`, `metadata_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] batch_content_location
+        #   @return [::Google::Cloud::Dlp::V2::BatchContentLocation]
+        #     Location within a batch of content.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_content_location`, `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Finding container modification timestamp, if applicable. For Cloud Storage,
@@ -555,6 +849,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Location within a conversation.
+        # @!attribute [rw] message_index
+        #   @return [::Integer]
+        #     Matches an index of a message in the conversation provided in the
+        #     request.
+        #
+        #     Note: The following fields are mutually exclusive: `message_index`, `all_messages`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] all_messages
+        #   @return [::Google::Cloud::Dlp::V2::ConversationLocation::AllMessages]
+        #     If set, indicates that the finding applies to all messages in the
+        #     conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `all_messages`, `message_index`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ConversationLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # If set, indicates that the finding applies to all messages in the
+          # conversation.
+          class AllMessages
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Location within a batch of content.
+        # @!attribute [rw] item_index
+        #   @return [::Integer]
+        #     Matches an index of a batch item in the batch provided in the request.
+        class BatchContentLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata Location
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dlp::V2::MetadataType]
@@ -562,6 +890,13 @@ module Google
         # @!attribute [rw] storage_label
         #   @return [::Google::Cloud::Dlp::V2::StorageMetadataLabel]
         #     Storage metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_label`, `key_value_metadata_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] key_value_metadata_label
+        #   @return [::Google::Cloud::Dlp::V2::KeyValueMetadataLabel]
+        #     Metadata key that contains the finding.
+        #
+        #     Note: The following fields are mutually exclusive: `key_value_metadata_label`, `storage_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MetadataLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -572,6 +907,20 @@ module Google
         #   @return [::String]
         #     Label name.
         class StorageMetadataLabel
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata key that contains a finding.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The metadata key. The format depends on the source of the metadata.
+        #
+        #     Example:
+        #
+        #     - `MSIP_Label_122709e3-8f6b-4860-985f-7f722a94f61e_Enabled` (a Microsoft
+        #       Purview Information Protection key example)
+        class KeyValueMetadataLabel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -684,7 +1033,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Bounding box encompassing detected text within an image.
+        # Bounding box encompassing detected text within an image. Coordinates are in
+        # pixels and strictly within the image or frame bounds.
         # @!attribute [rw] top
         #   @return [::Integer]
         #     Top coordinate of the bounding box. (0,0) is upper left.
@@ -710,7 +1060,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -825,7 +1175,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -898,7 +1248,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -971,7 +1321,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -1104,18 +1454,18 @@ module Google
         # @!attribute [rw] requested_options
         #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails::RequestedOptions]
         #     The configuration used for this job.
-        # @!attribute [rw] result
+        # @!attribute [r] result
         #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails::Result]
-        #     A summary of the outcome of this inspection job.
+        #     Output only. A summary of the outcome of this inspection job.
         class InspectDataSourceDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Snapshot of the inspection configuration.
-          # @!attribute [rw] snapshot_inspect_template
+          # @!attribute [r] snapshot_inspect_template
           #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
-          #     If run with an InspectTemplate, a snapshot of its state at the time of
-          #     this run.
+          #     Output only. If run with an InspectTemplate, a snapshot of its state at
+          #     the time of this run.
           # @!attribute [rw] job_config
           #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
           #     Inspect config.
@@ -1308,9 +1658,27 @@ module Google
         #     General infoTypes are infoTypes that encompass multiple specific infoTypes.
         #     For example, the "GEOGRAPHIC_DATA" general infoType would have set for this
         #     field "LOCATION", "LOCATION_COORDINATES", and "STREET_ADDRESS".
+        # @!attribute [rw] launch_status
+        #   @return [::Google::Cloud::Dlp::V2::InfoTypeDescription::InfoTypeLaunchStatus]
+        #     The launch status of the infoType.
         class InfoTypeDescription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The launch status of an infoType.
+          module InfoTypeLaunchStatus
+            # Unspecified.
+            INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED = 0
+
+            # InfoType is generally available.
+            GENERAL_AVAILABILITY = 1
+
+            # InfoType is in public preview.
+            PUBLIC_PREVIEW = 2
+
+            # InfoType is in private preview.
+            PRIVATE_PREVIEW = 3
+          end
         end
 
         # Classification of infoTypes to organize them according to geographic
@@ -1598,7 +1966,7 @@ module Google
         end
 
         # Configuration for a risk analysis job. See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-risk-analysis
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-risk-analysis
         # to learn more.
         # @!attribute [rw] privacy_metric
         #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric]
@@ -1903,34 +2271,34 @@ module Google
         # @!attribute [rw] requested_source_table
         #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Input dataset to compute metrics over.
-        # @!attribute [rw] numerical_stats_result
+        # @!attribute [r] numerical_stats_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::NumericalStatsResult]
-        #     Numerical stats result
+        #     Output only. Numerical stats result
         #
         #     Note: The following fields are mutually exclusive: `numerical_stats_result`, `categorical_stats_result`, `k_anonymity_result`, `l_diversity_result`, `k_map_estimation_result`, `delta_presence_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] categorical_stats_result
+        # @!attribute [r] categorical_stats_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult]
-        #     Categorical stats result
+        #     Output only. Categorical stats result
         #
         #     Note: The following fields are mutually exclusive: `categorical_stats_result`, `numerical_stats_result`, `k_anonymity_result`, `l_diversity_result`, `k_map_estimation_result`, `delta_presence_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] k_anonymity_result
+        # @!attribute [r] k_anonymity_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult]
-        #     K-anonymity result
+        #     Output only. K-anonymity result
         #
         #     Note: The following fields are mutually exclusive: `k_anonymity_result`, `numerical_stats_result`, `categorical_stats_result`, `l_diversity_result`, `k_map_estimation_result`, `delta_presence_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] l_diversity_result
+        # @!attribute [r] l_diversity_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult]
-        #     L-divesity result
+        #     Output only. L-divesity result
         #
         #     Note: The following fields are mutually exclusive: `l_diversity_result`, `numerical_stats_result`, `categorical_stats_result`, `k_anonymity_result`, `k_map_estimation_result`, `delta_presence_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] k_map_estimation_result
+        # @!attribute [r] k_map_estimation_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult]
-        #     K-map result
+        #     Output only. K-map result
         #
         #     Note: The following fields are mutually exclusive: `k_map_estimation_result`, `numerical_stats_result`, `categorical_stats_result`, `k_anonymity_result`, `l_diversity_result`, `delta_presence_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] delta_presence_estimation_result
+        # @!attribute [r] delta_presence_estimation_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
-        #     Delta-presence result
+        #     Output only. Delta-presence result
         #
         #     Note: The following fields are mutually exclusive: `delta_presence_estimation_result`, `numerical_stats_result`, `categorical_stats_result`, `k_anonymity_result`, `l_diversity_result`, `k_map_estimation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] requested_options
@@ -2553,7 +2921,8 @@ module Google
         # Outputs a base64 encoded representation of the hashed output
         # (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
         # Currently, only string and integer values can be hashed.
-        # See https://cloud.google.com/sensitive-data-protection/docs/pseudonymization
+        # See
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/pseudonymization
         # to learn more.
         # @!attribute [rw] crypto_key
         #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
@@ -2643,8 +3012,8 @@ module Google
         # @!attribute [rw] word_list
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
         #     A list of words to select from for random replacement. The
-        #     [limits](https://cloud.google.com/sensitive-data-protection/limits) page
-        #     contains details about the size limits of dictionaries.
+        #     [limits](https://docs.cloud.google.com/sensitive-data-protection/limits)
+        #     page contains details about the size limits of dictionaries.
         class ReplaceDictionaryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2768,8 +3137,8 @@ module Google
         # be transformed to match the type of the bound before comparing.
         #
         # See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
-        # learn more.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-bucketing
+        # to learn more.
         # @!attribute [rw] lower_bound
         #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Required. Lower bound value of buckets. All values less than `lower_bound`
@@ -2801,8 +3170,8 @@ module Google
         # will first attempt converting the type of the data to be transformed to match
         # the type of the bound before comparing.
         # See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
-        # learn more.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-bucketing
+        # to learn more.
         # @!attribute [rw] buckets
         #   @return [::Array<::Google::Cloud::Dlp::V2::BucketingConfig::Bucket>]
         #     Set of buckets. Ranges must be non-overlapping.
@@ -2835,8 +3204,8 @@ module Google
         # will be replaced with the same surrogate. Identifiers must be at least two
         # characters long. In the case that the identifier is the empty string, it will
         # be skipped. See
-        # https://cloud.google.com/sensitive-data-protection/docs/pseudonymization to
-        # learn more.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/pseudonymization
+        # to learn more.
         #
         # Note: We recommend using  CryptoDeterministicConfig for all use cases which
         # do not require preserving the input alphabet space and size, plus warrant
@@ -2903,7 +3272,7 @@ module Google
         #
         #     This annotation identifies the surrogate when inspecting content using the
         #     custom infoType
-        #     [`SurrogateType`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/InspectConfig#surrogatetype).
+        #     [`SurrogateType`](https://docs.cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/InspectConfig#surrogatetype).
         #     This facilitates reversal of the surrogate when it occurs in free text.
         #
         #     In order for inspection to work properly, the name of this infoType must
@@ -2999,7 +3368,7 @@ module Google
         # dlp.kms.encrypt
         #
         # For more information, see [Creating a wrapped key]
-        # (https://cloud.google.com/sensitive-data-protection/docs/create-wrapped-key).
+        # (https://docs.cloud.google.com/sensitive-data-protection/docs/create-wrapped-key).
         #
         # Note: When you use Cloud KMS for cryptographic operations,
         # [charges apply](https://cloud.google.com/kms/pricing).
@@ -3016,7 +3385,7 @@ module Google
 
         # Shifts dates by random number of days, with option to be consistent for the
         # same context. See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-date-shifting
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-date-shifting
         # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [::Integer]
@@ -3436,8 +3805,8 @@ module Google
         # The inspectTemplate contains a configuration (set of types of sensitive data
         # to be detected) to be used anywhere you otherwise would normally specify
         # InspectConfig. See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
-        # learn more.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-templates
+        # to learn more.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The template name.
@@ -3460,6 +3829,12 @@ module Google
         # @!attribute [rw] inspect_config
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     The core content of the template. Configuration of the scanning process.
+        # @!attribute [rw] allow_limited_availability_info_types
+        #   @return [::Boolean]
+        #     Optional. Enables the use of [limited-availability built-in
+        #     infoTypes](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference#limited-availability-infotypes)
+        #     in inspect_config. These infoTypes are supported only in specific regions
+        #     and can cause scanning errors if used elsewhere.
         class InspectTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3467,8 +3842,8 @@ module Google
 
         # DeidentifyTemplates contains instructions on how to de-identify content.
         # See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
-        # learn more.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-templates
+        # to learn more.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The template name.
@@ -3527,12 +3902,12 @@ module Google
 
         # Contains a configuration to make API calls on a repeating basis.
         # See
-        # https://cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
         # to learn more.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Unique resource name for the triggeredJob, assigned by the service when the
-        #     triggeredJob is created, for example
+        #     Output only. Unique resource name for the triggeredJob, assigned by the
+        #     service when the triggeredJob is created, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -3606,7 +3981,8 @@ module Google
         end
 
         # A task to execute on the completion of a job.
-        # See https://cloud.google.com/sensitive-data-protection/docs/concepts-actions
+        # See
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-actions
         # to learn more.
         # @!attribute [rw] save_findings
         #   @return [::Google::Cloud::Dlp::V2::Action::SaveFindings]
@@ -3624,8 +4000,11 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `publish_summary_to_cscc`, `save_findings`, `pub_sub`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_findings_to_cloud_data_catalog
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
-        #     Publish findings to Cloud Datahub.
+        #     Deprecated because Data Catalog is being turned down. Use
+        #     publish_findings_to_dataplex_catalog to publish findings to Dataplex
+        #     Universal Catalog.
         #
         #     Note: The following fields are mutually exclusive: `publish_findings_to_cloud_data_catalog`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_findings_to_dataplex_catalog
@@ -3642,7 +4021,7 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
         #     Sends an email when the job completes. The email goes to IAM project
         #     owners and technical [Essential
-        #     Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
+        #     Contacts](https://docs.cloud.google.com/resource-manager/docs/managing-notification-contacts).
         #
         #     Note: The following fields are mutually exclusive: `job_notification_emails`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_stackdriver
@@ -3669,7 +4048,7 @@ module Google
           # Publish a message into a given Pub/Sub topic when DlpJob has completed. The
           # message contains a single field, `DlpJobName`, which is equal to the
           # finished job's
-          # [`DlpJob.name`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
+          # [`DlpJob.name`](https://docs.cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
           # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
           #   @return [::String]
@@ -3721,7 +4100,7 @@ module Google
           # Publish findings of a DlpJob to Dataplex Universal Catalog as a
           # `sensitive-data-protection-job-result` aspect. For more information,
           # see [Send inspection results to Dataplex Universal Catalog as
-          # aspects](https://cloud.google.com/sensitive-data-protection/docs/add-aspects-inspection-job).
+          # aspects](https://docs.cloud.google.com/sensitive-data-protection/docs/add-aspects-inspection-job).
           #
           # Aspects are stored in Dataplex Universal Catalog storage and are
           # governed by service-specific policies for Dataplex Universal Catalog. For
@@ -3834,7 +4213,7 @@ module Google
 
           # Sends an email when the job completes. The email goes to IAM project owners
           # and technical [Essential
-          # Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
+          # Contacts](https://docs.cloud.google.com/resource-manager/docs/managing-notification-contacts).
           class JobNotificationEmails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3888,7 +4267,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -3956,7 +4335,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -4034,7 +4413,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -4229,7 +4608,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -4273,7 +4652,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -4408,7 +4787,7 @@ module Google
         #     Publishes generated data profiles to Google Security Operations.
         #     For more information, see [Use Sensitive Data Protection data in
         #     context-aware
-        #     analytics](https://cloud.google.com/chronicle/docs/detection/usecase-dlp-high-risk-user-download).
+        #     analytics](https://docs.cloud.google.com/chronicle/docs/detection/usecase-dlp-high-risk-user-download).
         #
         #     Note: The following fields are mutually exclusive: `publish_to_chronicle`, `export_data`, `pub_sub_notification`, `publish_to_scc`, `tag_resources`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_scc
@@ -4445,9 +4824,9 @@ module Google
           #       generated and the dataset and table are created, the discovery scan
           #       configuration will be updated with the dataset and table names.
           #     * See [Analyze data profiles stored in
-          #     BigQuery](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles).
+          #     BigQuery](https://docs.cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles).
           #     * See [Sample queries for your BigQuery
-          #     table](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#sample_sql_queries).
+          #     table](https://docs.cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#sample_sql_queries).
           #     *  Data is inserted using [streaming
           #        insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
           #        and so data may be in the buffer for a period of time after the
@@ -4457,8 +4836,8 @@ module Google
           #        visible to queries by the time your topic receives the Pub/Sub
           #        notification.
           #      * The best practice is to use the same table for an entire organization
-          #        so that you can take advantage of the [provided Looker
-          #        reports](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report).
+          #        so that you can take advantage of the [provided Data Studio
+          #        reports](https://docs.cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report).
           #        If you use VPC Service Controls to define security perimeters, then
           #        you must use a separate table for each boundary.
           # @!attribute [rw] sample_findings_table
@@ -4530,7 +4909,8 @@ module Google
 
           # Create Dataplex Universal Catalog aspects for profiled resources with the
           # aspect type Sensitive Data Protection Profile. To learn more about aspects,
-          # see https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
+          # see
+          # https://docs.cloud.google.com/sensitive-data-protection/docs/add-aspects.
           # @!attribute [rw] lower_data_risk_to_low
           #   @return [::Boolean]
           #     Whether creating a Dataplex Universal Catalog aspect for a profiled
@@ -4545,10 +4925,10 @@ module Google
           end
 
           # If set, attaches the [tags]
-          # (https://cloud.google.com/resource-manager/docs/tags/tags-overview)
+          # (https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview)
           # provided to profiled resources. Tags support [access
-          # control](https://cloud.google.com/iam/docs/tags-access-control). You can
-          # conditionally grant or deny access to a resource based on whether the
+          # control](https://docs.cloud.google.com/iam/docs/tags-access-control). You
+          # can conditionally grant or deny access to a resource based on whether the
           # resource has a specific tag.
           # @!attribute [rw] tag_conditions
           #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction::TagResources::TagCondition>]
@@ -4565,11 +4945,11 @@ module Google
           #   @return [::Boolean]
           #     Whether applying a tag to a resource should lower the risk of the profile
           #     for that resource. For example, in conjunction with an [IAM deny
-          #     policy](https://cloud.google.com/iam/docs/deny-overview), you can deny
-          #     all principals a permission if a tag value is present, mitigating the
-          #     risk of the resource. This also lowers the data risk of resources at the
-          #     lower levels of the resource hierarchy. For example, reducing the data
-          #     risk of a table data profile also reduces the data risk of the
+          #     policy](https://docs.cloud.google.com/iam/docs/deny-overview), you can
+          #     deny all principals a permission if a tag value is present, mitigating
+          #     the risk of the resource. This also lowers the data risk of resources at
+          #     the lower levels of the resource hierarchy. For example, reducing the
+          #     data risk of a table data profile also reduces the data risk of the
           #     constituent column data profiles.
           class TagResources
             include ::Google::Protobuf::MessageExts
@@ -4633,7 +5013,7 @@ module Google
         # @!attribute [rw] infotype
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The [type of
-        #     content](https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference)
+        #     content](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference)
         #     that might have been found.
         # @!attribute [rw] quote_info
         #   @return [::Google::Cloud::Dlp::V2::QuoteInfo]
@@ -4700,7 +5080,7 @@ module Google
         #
         # The generated data profiles are retained according to the
         # [data retention policy]
-        # (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
+        # (https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
         # @!attribute [rw] location
         #   @return [::Google::Cloud::Dlp::V2::DataProfileLocation]
         #     The data to scan.
@@ -4729,7 +5109,7 @@ module Google
         #     scanned.
         #
         #     For more information, see
-        #     https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
         # @!attribute [rw] data_profile_actions
         #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
         #     Actions to execute at the completion of the job.
@@ -4806,11 +5186,11 @@ module Google
         #
         # The generated data profiles are retained according to the
         # [data retention policy]
-        # (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
-        # @!attribute [rw] name
+        # (https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
+        # @!attribute [r] name
         #   @return [::String]
-        #     Unique resource name for the DiscoveryConfig, assigned by the service when
-        #     the DiscoveryConfig is created, for example
+        #     Output only. Unique resource name for the DiscoveryConfig, assigned by the
+        #     service when the DiscoveryConfig is created, for example
         #     `projects/dlp-test-project/locations/global/discoveryConfigs/53234423`.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -4838,7 +5218,7 @@ module Google
         #     scanned.
         #
         #     For more information, see
-        #     https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
+        #     https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
         # @!attribute [rw] actions
         #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
         #     Actions to execute at the completion of scanning.
@@ -5357,7 +5737,7 @@ module Google
         # No inspect template should be included in the discovery config for a
         # security benchmarks scan. Instead, the built-in list of secrets and
         # credentials infoTypes will be used (see
-        # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference#credentials_and_secrets).
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference#credentials_and_secrets).
         #
         # Credentials and secrets discovered will be reported as vulnerabilities to
         # Security Command Center.
@@ -5437,7 +5817,7 @@ module Google
         #     For a resource to match the tag filters, the resource must have all of the
         #     provided tags attached. Tags refer to Resource Manager tags bound to the
         #     resource or its ancestors. For more information, see [Manage
-        #     schedules](https://cloud.google.com/sensitive-data-protection/docs/profile-project-cloud-storage#manage-schedules).
+        #     schedules](https://docs.cloud.google.com/sensitive-data-protection/docs/profile-project-cloud-storage#manage-schedules).
         class FileStoreCollection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5531,8 +5911,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The attribute of an object. See
-          # https://cloud.google.com/storage/docs/storage-classes for more information
-          # on storage classes.
+          # https://docs.cloud.google.com/storage/docs/storage-classes for more
+          # information on storage classes.
           module CloudStorageObjectAttribute
             # Unused.
             CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED = 0
@@ -5574,12 +5954,14 @@ module Google
             # Scan buckets regardless of the attribute.
             ALL_SUPPORTED_BUCKETS = 1
 
-            # Buckets with [Autoclass](https://cloud.google.com/storage/docs/autoclass)
+            # Buckets with
+            # [Autoclass](https://docs.cloud.google.com/storage/docs/autoclass)
             # disabled. Only one of
             # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set.
             AUTOCLASS_DISABLED = 2
 
-            # Buckets with [Autoclass](https://cloud.google.com/storage/docs/autoclass)
+            # Buckets with
+            # [Autoclass](https://docs.cloud.google.com/storage/docs/autoclass)
             # enabled. Only one of
             # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set. Scanning
             # Autoclass-enabled buckets can affect object storage classes.
@@ -5608,7 +5990,7 @@ module Google
 
         # Target used to match against for discovery of resources from other clouds.
         # An [AWS connector in Security Command Center
-        # (Enterprise](https://cloud.google.com/security-command-center/docs/connect-scc-to-aws)
+        # (Enterprise](https://docs.cloud.google.com/security-command-center/docs/connect-scc-to-aws)
         # is required to use this feature.
         # @!attribute [rw] data_source_type
         #   @return [::Google::Cloud::Dlp::V2::DataSourceType]
@@ -5969,11 +6351,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Identifies a single Vertex AI dataset.
+        # Identifies a single Vertex AI resource. Only datasets are
+        # supported.
         # @!attribute [rw] dataset_resource_name
         #   @return [::String]
-        #     Required. The name of the dataset resource. If set within a project-level
+        #     Required. The name of the Vertex AI resource. If set within a project-level
         #     configuration, the specified resource must be within the project.
+        #     Examples:
+        #
+        #     * `projects/{project}/locations/{location}/datasets/{dataset}`
         class VertexDatasetResourceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6014,15 +6400,15 @@ module Google
         end
 
         # Combines all of the information about a DLP job.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The server-assigned name.
+        #     Output only. The server-assigned name.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dlp::V2::DlpJobType]
         #     The type of job.
-        # @!attribute [rw] state
+        # @!attribute [r] state
         #   @return [::Google::Cloud::Dlp::V2::DlpJob::JobState]
-        #     State of a job.
+        #     Output only. State of a job.
         # @!attribute [rw] risk_details
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails]
         #     Results from analyzing risk of a data source.
@@ -6033,28 +6419,28 @@ module Google
         #     Results from inspecting a data source.
         #
         #     Note: The following fields are mutually exclusive: `inspect_details`, `risk_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the job was created.
-        # @!attribute [rw] start_time
+        #     Output only. Time when the job was created.
+        # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the job started.
-        # @!attribute [rw] end_time
+        #     Output only. Time when the job started.
+        # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the job finished.
-        # @!attribute [rw] last_modified
+        #     Output only. Time when the job finished.
+        # @!attribute [r] last_modified
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the job was last modified by the system.
-        # @!attribute [rw] job_trigger_name
+        #     Output only. Time when the job was last modified by the system.
+        # @!attribute [r] job_trigger_name
         #   @return [::String]
-        #     If created by a job trigger, the resource name of the trigger that
-        #     instantiated the job.
-        # @!attribute [rw] errors
+        #     Output only. If created by a job trigger, the resource name of the trigger
+        #     that instantiated the job.
+        # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
-        #     A stream of errors encountered running the job.
-        # @!attribute [rw] action_details
+        #     Output only. A stream of errors encountered running the job.
+        # @!attribute [r] action_details
         #   @return [::Array<::Google::Cloud::Dlp::V2::ActionDetails>]
-        #     Events that should occur after the job has completed.
+        #     Output only. Events that should occur after the job has completed.
         class DlpJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6105,7 +6491,7 @@ module Google
         #
         #     The format of this value varies depending on whether you have [specified a
         #     processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -6227,7 +6613,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -6296,7 +6682,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -6371,10 +6757,10 @@ module Google
 
         # Configuration for a custom dictionary created from a data source of any size
         # up to the maximum size defined in the
-        # [limits](https://cloud.google.com/sensitive-data-protection/limits) page. The
-        # artifacts of dictionary creation are stored in the specified Cloud Storage
-        # location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
-        # that satisfy the size requirements.
+        # [limits](https://docs.cloud.google.com/sensitive-data-protection/limits)
+        # page. The artifacts of dictionary creation are stored in the specified Cloud
+        # Storage location. Consider using `CustomInfoType.Dictionary` for smaller
+        # dictionaries that satisfy the size requirements.
         # @!attribute [rw] output_path
         #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
         #     Location to store dictionary artifacts in Cloud Storage. These files
@@ -6407,7 +6793,7 @@ module Google
 
         # Configuration for stored infoTypes. All fields and subfield are provided
         # by the user. For more information, see
-        # https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of the StoredInfoType (max 256 characters).
@@ -6448,20 +6834,20 @@ module Google
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     StoredInfoType configuration.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Create timestamp of the version. Read-only, determined by the system
-        #     when the version is created.
-        # @!attribute [rw] state
+        #     Output only. Create timestamp of the version. Read-only, determined by the
+        #     system when the version is created.
+        # @!attribute [r] state
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeState]
-        #     Stored info type version state. Read-only, updated by the system
-        #     during dictionary creation.
-        # @!attribute [rw] errors
+        #     Output only. Stored info type version state. Read-only, updated by the
+        #     system during dictionary creation.
+        # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
-        #     Errors that occurred when creating this storedInfoType version, or
-        #     anomalies detected in the storedInfoType data that render it unusable. Only
-        #     the five most recent errors will be displayed, with the most recent error
-        #     appearing first.
+        #     Output only. Errors that occurred when creating this storedInfoType
+        #     version, or anomalies detected in the storedInfoType data that render it
+        #     unusable. Only the five most recent errors will be displayed, with the most
+        #     recent error appearing first.
         #
         #     For example, some of the data for stored custom dictionaries is put in
         #     the user's Cloud Storage bucket, and if this data is modified or
@@ -6471,9 +6857,9 @@ module Google
         #     use the UpdateStoredInfoType API method to create another version of the
         #     storedInfoType to continue using it, reusing the same `config` if it was
         #     not the source of the error.
-        # @!attribute [rw] stats
+        # @!attribute [r] stats
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeStats]
-        #     Statistics about this storedInfoType version.
+        #     Output only. Statistics about this storedInfoType version.
         class StoredInfoTypeVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6481,9 +6867,9 @@ module Google
 
         # StoredInfoType resource message that contains information about the current
         # version and any pending updates.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Resource name.
+        #     Output only. Resource name.
         # @!attribute [rw] current_version
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeVersion]
         #     Current version of the stored info type.
@@ -6503,7 +6889,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -6573,7 +6959,7 @@ module Google
         #
         #     The format of this value varies depending on the scope of the request
         #     (project or organization) and whether you have [specified a processing
-        #     location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+        #     location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
         #
         #     + Projects scope, location specified:
         #       `projects/{project_id}/locations/{location_id}`
@@ -6737,6 +7123,48 @@ module Google
 
         # Quota exceeded errors will be thrown once quota has been met.
         class HybridInspectResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the relationship between bounding boxes for image findings.
+        # @!attribute [rw] encloses
+        #   @return [::Google::Cloud::Dlp::V2::Encloses]
+        #     The context finding's bounding box must fully contain the target
+        #     finding's bounding box.
+        #
+        #     Note: The following fields are mutually exclusive: `encloses`, `fully_inside`, `overlaps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] fully_inside
+        #   @return [::Google::Cloud::Dlp::V2::FullyInside]
+        #     The context finding's bounding box must be fully inside the target
+        #     finding's bounding box.
+        #
+        #     Note: The following fields are mutually exclusive: `fully_inside`, `encloses`, `overlaps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] overlaps
+        #   @return [::Google::Cloud::Dlp::V2::Overlap]
+        #     The context finding's bounding box and the target finding's bounding box
+        #     must have a non-zero intersection.
+        #
+        #     Note: The following fields are mutually exclusive: `overlaps`, `encloses`, `fully_inside`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ImageContainmentType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition for overlapping bounding boxes.
+        class Overlap
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition where one bounding box encloses another.
+        class Encloses
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition where one bounding box is fully inside another.
+        class FullyInside
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7104,7 +7532,7 @@ module Google
         # @!attribute [rw] dataset_location
         #   @return [::String]
         #     If supported, the location where the dataset's data is stored.
-        #     See https://cloud.google.com/bigquery/docs/locations for supported
+        #     See https://docs.cloud.google.com/bigquery/docs/locations for supported
         #     locations.
         # @!attribute [rw] dataset_id
         #   @return [::String]
@@ -7286,7 +7714,7 @@ module Google
         # @!attribute [rw] dataset_location
         #   @return [::String]
         #     If supported, the location where the dataset's data is stored.
-        #     See https://cloud.google.com/bigquery/docs/locations for supported
+        #     See https://docs.cloud.google.com/bigquery/docs/locations for supported
         #     BigQuery locations.
         # @!attribute [rw] dataset_id
         #   @return [::String]
@@ -7441,7 +7869,7 @@ module Google
         #     The location of the file store.
         #
         #     * Cloud Storage:
-        #     https://cloud.google.com/storage/docs/locations#available-locations
+        #     https://docs.cloud.google.com/storage/docs/locations#available-locations
         #     * Amazon S3:
         #     https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
         # @!attribute [rw] data_storage_locations
@@ -8088,8 +8516,8 @@ module Google
 
         # Use IAM authentication to connect. This requires the Cloud SQL IAM feature
         # to be enabled on the instance, which is not the default for Cloud SQL.
-        # See https://cloud.google.com/sql/docs/postgres/authentication and
-        # https://cloud.google.com/sql/docs/mysql/authentication.
+        # See https://docs.cloud.google.com/sql/docs/postgres/authentication and
+        # https://docs.cloud.google.com/sql/docs/mysql/authentication.
         class CloudSqlIamCredential
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8154,9 +8582,9 @@ module Google
         end
 
         # Message used to identify the type of resource being profiled.
-        # @!attribute [r] data_source
+        # @!attribute [rw] data_source
         #   @return [::String]
-        #     Output only. An identifying string to the type of resource being profiled.
+        #     A string that identifies the type of resource being profiled.
         #     Current values:
         #
         #     * google/bigquery/table
@@ -8309,7 +8737,7 @@ module Google
           end
 
           # The signal used to determine the category.
-          # This list may increase over time.
+          # New values may be added in the future.
           module Signal
             # Unused.
             SIGNAL_UNSPECIFIED = 0
@@ -8317,16 +8745,21 @@ module Google
             # One or more machine learning models are present.
             MODEL = 1
 
-            # A table appears to be a text embedding.
+            # A table appears to contain text embeddings.
             TEXT_EMBEDDING = 2
 
+            # A table appears to contain embeddings of any type (for example, text,
+            # image, multimodal). The `TEXT_EMBEDDING` signal might also be present if
+            # the table contains text embeddings.
+            EMBEDDING = 7
+
             # The [Cloud SQL Vertex
-            # AI](https://cloud.google.com/sql/docs/postgres/integrate-cloud-sql-with-vertex-ai)
+            # AI](https://docs.cloud.google.com/sql/docs/postgres/integrate-cloud-sql-with-vertex-ai)
             # plugin is installed on the database.
             VERTEX_PLUGIN = 3
 
             # Support for [Cloud SQL vector
-            # embeddings](https://cloud.google.com/sql/docs/mysql/enable-vector-search)
+            # embeddings](https://docs.cloud.google.com/sql/docs/mysql/enable-vector-search)
             # is enabled on the database.
             VECTOR_PLUGIN = 4
 
@@ -8339,6 +8772,252 @@ module Google
           end
         end
 
+        # Request message for CreateContentPolicy.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name.
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project):
+        #
+        #     + Projects scope:
+        #       `projects/{project_id}/locations/{location_id}`
+        # @!attribute [rw] content_policy
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy]
+        #     Required. The content_policy resource.
+        # @!attribute [rw] content_policy_id
+        #   @return [::String]
+        #     Optional. The content policy ID can contain uppercase and lowercase
+        #     letters, numbers, and hyphens; that is, it must match the regular
+        #     expression:
+        #       `[a-zA-Z\d-_]+`.
+        #     The maximum length is 100 characters. If empty, the system will generate
+        #     a random id.
+        class CreateContentPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetContentPolicy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name in the format:
+        #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+        class GetContentPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListContentPolicies.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the project,
+        #     for example, `projects/project-id/locations/asia`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of results per page, max 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token from a previous page to return the next set of
+        #     results. If set, all other request fields must match the original request.
+        class ListContentPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListContentPolicies.
+        # @!attribute [rw] content_policies
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ContentPolicy>]
+        #     List of content policies.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. An empty value means there are
+        #     no more results.
+        class ListContentPoliciesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateContentPolicy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name in the format:
+        #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+        # @!attribute [rw] content_policy
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy]
+        #     Required. The content_policy with new values for the relevant fields.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask to control which fields get updated.
+        class UpdateContentPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteContentPolicy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the ContentPolicy to be deleted, in the format:
+        #     `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+        class DeleteContentPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A policy to apply to content based on its inspection findings.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of the policy.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The creation timestamp of a contentPolicy; output-only field.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last update timestamp of a contentPolicy; output-only
+        #     field.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name (max 63 chars)
+        # @!attribute [rw] inspect_config
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
+        #     Optional. InspectConfig to use to produce findings.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ContentPolicy::PolicyRule>]
+        #     Required. Policies to apply, based on the findings returned by inspection.
+        #     The first rule to match applies.
+        # @!attribute [rw] unsupported_file_type
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyAction]
+        #     Optional. Action to take if the content is an unsupported file type.
+        # @!attribute [rw] input_too_large
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyAction]
+        #     Optional. Action to take if the content is a supported file type but is too
+        #     large to be scanned.
+        # @!attribute [rw] failed_to_scan_supported_file_type
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyAction]
+        #     Optional. Action to take if the content is a supported file type and size
+        #     but fails to be scanned, for example because the file is encrypted or
+        #     corrupted.
+        # @!attribute [rw] default_action
+        #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyAction]
+        #     Action to take if the content is scanned and no rules match.
+        #     Defaults to returning an ALLOW verdict if not set.
+        # @!attribute [rw] logging_configs
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ContentPolicy::LoggingConfig>]
+        #     Optional. Log the actions taken by the content policy to external systems.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
+        #     Output only. A stream of errors encountered when the policy was applied.
+        #     Output only field. Will return the last 100 errors. Whenever the policy is
+        #     modified this list will be cleared.
+        class ContentPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A possible action to take when applying a content policy.
+          # @!attribute [rw] return_verdict
+          #   @return [::Google::Cloud::Dlp::V2::ContentPolicyVerdict]
+          #     Optional. If set, the verdict will be returned to the user.
+          class PolicyAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A single policy rule. The first rule to match from the list above controls
+          # the result.
+          # @!attribute [rw] conditions
+          #   @return [::Array<::Google::Cloud::Dlp::V2::ContentPolicy::PolicyRule::PolicyCondition>]
+          #     Optional. Conditions that must match for this rule to apply.
+          #     All conditions must match (`AND`). For `OR` conditions, use multiple
+          #     rules.
+          # @!attribute [rw] action
+          #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyAction]
+          #     Required. Action to take if this rule applies.
+          class PolicyRule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A condition that must match for this rule to apply.
+            # @!attribute [rw] info_type_condition
+            #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyRule::PolicyCondition::InfoTypeCondition]
+            #     A condition based on info types.
+            class PolicyCondition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # A info type based condition.
+              # @!attribute [rw] min_count
+              #   @return [::Integer]
+              #     Optional. The minimum total number of findings of all matching info
+              #     types required for this condition to evaluate to true. Defaults to 1
+              #     if unset.
+              # @!attribute [rw] info_types
+              #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::PolicyRule::PolicyCondition::InfoTypeCondition::InfoTypes]
+              #     match any of these info types.
+              #
+              #     Note: The following fields are mutually exclusive: `info_types`, `any_info_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] any_info_type
+              #   @return [::Google::Protobuf::Empty]
+              #     match any info types.
+              #
+              #     Note: The following fields are mutually exclusive: `any_info_type`, `info_types`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class InfoTypeCondition
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Info types to match.
+                # @!attribute [rw] info_type_names
+                #   @return [::Array<::String>]
+                #     Required. A list of info types to match.
+                class InfoTypes
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
+            end
+          end
+
+          # A single logging configuration.
+          # @!attribute [rw] log_to_big_query
+          #   @return [::Google::Cloud::Dlp::V2::ContentPolicy::LoggingConfig::LogToBigQuery]
+          #     Optional. Log the actions taken to a BigQuery table.
+          class LoggingConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for logging content policy actions to BigQuery.
+            # @!attribute [rw] project_id
+            #   @return [::String]
+            #     Required. The ID of the project containing the BigQuery table to write
+            #     to.
+            # @!attribute [rw] dataset_id
+            #   @return [::String]
+            #     Required. The ID of the dataset containing the BigQuery table to write
+            #     to.
+            # @!attribute [rw] table_id
+            #   @return [::String]
+            #     Required. The ID of the BigQuery table to write to.
+            class LogToBigQuery
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Possible results of applying a content policy. This may expand to include
+        # additional result types in the future.
+        module ContentPolicyVerdict
+          # Not used.
+          CONTENT_POLICY_VERDICT_UNSPECIFIED = 0
+
+          # The policy allows the provided content to be used.
+          ALLOW = 1
+
+          # The policy prevents the provided content from being used. This should
+          # result in a blocked file upload, exclusion from training dataset, or
+          # other similar block action. (specific action will depend on the caller).
+          BLOCK = 2
+        end
+
         # Enum of possible outcomes of transformations. SUCCESS if transformation and
         # storing of transformation was successful, otherwise, reason for not
         # transforming.
@@ -8346,21 +9025,20 @@ module Google
           # Unused.
           STATE_TYPE_UNSPECIFIED = 0
 
-          # This will be set when a finding could not be transformed (i.e. outside user
+          # This is set when a finding cannot be transformed (i.e. outside user
           # set bucket range).
           INVALID_TRANSFORM = 1
 
-          # This will be set when a BigQuery transformation was successful but could
-          # not be stored back in BigQuery because the transformed row exceeds
-          # BigQuery's max row size.
+          # This is set when a transformation is successful but cannot be stored in
+          # BigQuery because the transformed row exceeds BigQuery's max row size.
           BIGQUERY_MAX_ROW_SIZE_EXCEEDED = 2
 
-          # This will be set when there is a finding in the custom metadata of a file,
+          # This is set when there is a finding in the custom metadata of a file,
           # but at the write time of the transformed file, this key / value pair is
           # unretrievable.
           METADATA_UNRETRIEVABLE = 3
 
-          # This will be set when the transformation and storing of it is successful.
+          # This is set when the transformation and its storage are successful.
           SUCCESS = 4
         end
 
@@ -8546,31 +9224,43 @@ module Google
 
         # Type of the match which can be applied to different ways of matching, like
         # Dictionary, regular expression and intersecting with findings of another
-        # info type.
+        # infoType.
         module MatchingType
           # Invalid.
           MATCHING_TYPE_UNSPECIFIED = 0
 
           # Full match.
           #
-          # - Dictionary: join of Dictionary results matched complete finding quote
-          # - Regex: all regex matches fill a finding quote start to end
-          # - Exclude info type: completely inside affecting info types findings
+          # - Dictionary: join of Dictionary results matched the complete finding quote
+          # - Regex: all regex matches fill a finding quote from start to end
+          # - Exclude infoType: completely inside affecting infoTypes findings
           MATCHING_TYPE_FULL_MATCH = 1
 
           # Partial match.
           #
           # - Dictionary: at least one of the tokens in the finding matches
           # - Regex: substring of the finding matches
-          # - Exclude info type: intersects with affecting info types findings
+          # - Exclude infoType: intersects with affecting infoTypes findings
           MATCHING_TYPE_PARTIAL_MATCH = 2
 
           # Inverse match.
           #
           # - Dictionary: no tokens in the finding match the dictionary
           # - Regex: finding doesn't match the regex
-          # - Exclude info type: no intersection with affecting info types findings
+          # - Exclude infoType: no intersection with affecting infoTypes findings
           MATCHING_TYPE_INVERSE_MATCH = 3
+
+          # Rule-specific match.
+          #
+          # The matching logic is based on the specific rule being used. This is
+          # required for rules where the matching behavior is not a simple string
+          # comparison (e.g., image containment). This matching type can only be
+          # used with the `ExcludeByImageFindings` rule.
+          #
+          # - Exclude by image findings: The matching logic is defined within
+          #   `ExcludeByImageFindings` based on spatial relationships between bounding
+          #   boxes.
+          MATCHING_TYPE_RULE_SPECIFIC = 4
         end
 
         # Deprecated and unused.
@@ -8592,6 +9282,12 @@ module Google
 
           # General file metadata provided by Cloud Storage.
           STORAGE_METADATA = 2
+
+          # Metadata extracted from the files.
+          CONTENT_METADATA = 3
+
+          # Metadata provided by the client.
+          CLIENT_PROVIDED_METADATA = 4
         end
 
         # Parts of the APIs which use certain infoTypes.

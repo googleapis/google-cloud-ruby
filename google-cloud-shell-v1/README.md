@@ -2,7 +2,6 @@
 
 Allows users to start, configure, and connect to interactive shell sessions running in the cloud.
 
-Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.get_environment request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-shell-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/shell/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

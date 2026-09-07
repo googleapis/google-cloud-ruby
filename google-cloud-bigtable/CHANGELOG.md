@@ -1,5 +1,23 @@
 # Release History
 
+### 2.13.0 (2026-06-11)
+
+#### Features
+
+* Update minimum Ruby to 3.2 ([#33981](https://github.com/googleapis/google-cloud-ruby/issues/33981)) 
+
+### 2.12.3 (2025-12-16)
+
+#### Documentation
+
+* Fixing markdown mistakes in samples README ([#32272](https://github.com/googleapis/google-cloud-ruby/issues/32272)) 
+
+### 2.12.2 (2025-11-04)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
 ### 2.12.1 (2025-08-12)
 
 #### Bug Fixes

@@ -1,13 +1,12 @@
-# Ruby Client for the Google Cloud VMware Engine V1 API
+# Ruby Client for the VMware Engine V1 API
 
 The Google VMware Engine API lets you programmatically manage VMware environments.
 
-Google Cloud VMware Engine is a fully managed service that lets you run the VMware platform in Google Cloud. VMware Engine provides you with VMware operational continuity so you can benefit from a cloud consumption model and lower your total cost of ownership. VMware Engine also offers on-demand provisioning, pay-as-you-grow, and capacity optimization.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Google Cloud VMware Engine V1 API. Most users should consider using
+specific version of the VMware Engine V1 API. Most users should consider using
 the main client gem,
 [google-cloud-vmware_engine](https://rubygems.org/gems/google-cloud-vmware_engine).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_private_clouds request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vmware_engine-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/vmware-engine/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

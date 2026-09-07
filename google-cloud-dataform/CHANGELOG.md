@@ -1,5 +1,44 @@
 # Changelog
 
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+#### Documentation
+
+* Update copyright year ([#35091](https://github.com/googleapis/google-cloud-ruby/issues/35091)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34044](https://github.com/googleapis/google-cloud-ruby/issues/34044)) 
+
+### 0.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34044](https://github.com/googleapis/google-cloud-ruby/issues/34044)) 
+
+### 0.7.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.6.0 (2026-02-24)
+
+#### Features
+
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([#32441](https://github.com/googleapis/google-cloud-ruby/issues/32441)) 
+
 ### 0.5.2 (2025-09-12)
 
 #### Documentation

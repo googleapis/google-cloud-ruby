@@ -2,7 +2,6 @@
 
 Integrates text translation into your website or application.
 
-Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.translate_text request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v3/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/translate)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

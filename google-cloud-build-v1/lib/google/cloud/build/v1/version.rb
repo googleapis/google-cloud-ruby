@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Build
       module V1
-        VERSION = "1.9.1"
+        VERSION = "1.14.0"
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,11 +67,6 @@ module Google
           #   @return [::Google::Shopping::Merchant::DataSources::V1::PrimaryProductDataSource::DefaultRule]
           #     Optional. Default rule management of the data source. If set, the linked
           #     data sources will be replaced.
-          # @!attribute [r] contains_custom_rules
-          #   @return [::Boolean]
-          #     Output only. The existing data source setup contains at least one custom
-          #     (non-default) rule and therefore its management through the
-          #     `default_rule_data_sources` field should be treated with caution.
           # @!attribute [rw] destinations
           #   @return [::Array<::Google::Shopping::Merchant::DataSources::V1::PrimaryProductDataSource::Destination>]
           #     Optional. A list of destinations describing where products of the data

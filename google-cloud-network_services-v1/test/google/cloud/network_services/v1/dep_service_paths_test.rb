@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,18 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientPathsTest < Minite
 
       path = client.authz_extension_path project: "value0", location: "value1", authz_extension: "value2"
       assert_equal "projects/value0/locations/value1/authzExtensions/value2", path
+    end
+  end
+
+  def test_lb_edge_extension_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.lb_edge_extension_path project: "value0", location: "value1", lb_edge_extension: "value2"
+      assert_equal "projects/value0/locations/value1/lbEdgeExtensions/value2", path
     end
   end
 

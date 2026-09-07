@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -132,6 +132,36 @@ module Google
             end
 
             # The layout parsing configurations for documents.
+            # @!attribute [rw] enable_table_annotation
+            #   @return [::Boolean]
+            #     Optional. If true, the LLM based annotation is added to the table
+            #     during parsing.
+            # @!attribute [rw] enable_image_annotation
+            #   @return [::Boolean]
+            #     Optional. If true, the LLM based annotation is added to the image
+            #     during parsing.
+            # @!attribute [rw] enable_llm_layout_parsing
+            #   @return [::Boolean]
+            #     Optional. If true, the pdf layout will be refined using an LLM.
+            # @!attribute [rw] structured_content_types
+            #   @return [::Array<::String>]
+            #     Optional. Contains the required structure types to extract from the
+            #     document. Supported values:
+            #
+            #     * `shareholder-structure`
+            # @!attribute [rw] exclude_html_elements
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML elements to exclude from the parsed content.
+            # @!attribute [rw] exclude_html_classes
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML classes to exclude from the parsed content.
+            # @!attribute [rw] exclude_html_ids
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML ids to exclude from the parsed content.
+            # @!attribute [rw] enable_get_processed_document
+            #   @return [::Boolean]
+            #     Optional. If true, the processed document will be made available for
+            #     the GetProcessedDocument API.
             class LayoutParsingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

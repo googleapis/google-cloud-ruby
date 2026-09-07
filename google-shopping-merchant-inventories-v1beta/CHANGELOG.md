@@ -1,5 +1,35 @@
 # Changelog
 
+### 0.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.10.1 (2026-04-09)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.10.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.9.0 (2025-11-19)
+
+#### Features
+
+* Added the `product_id_base64_url_encoded`. This allows for product IDs containing special characters to be correctly handled when base64url-encoded ([#32172](https://github.com/googleapis/google-cloud-ruby/issues/32172)) 
+#### Bug Fixes
+
+* removing parameters before stable release ([#32197](https://github.com/googleapis/google-cloud-ruby/issues/32197)) 
+#### Documentation
+
+* Updated the API summary and overview in the service configuration 
+
 ### 0.8.1 (2025-10-27)
 
 #### Documentation

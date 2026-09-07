@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ module Google
         #   @return [::String]
         #     The referer URL of the request, as defined in
         #     [HTTP/1.1 Header Field
-        #     Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+        #     Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
         # @!attribute [rw] latency
         #   @return [::Google::Protobuf::Duration]
         #     The request processing latency on the server, from the time the request was

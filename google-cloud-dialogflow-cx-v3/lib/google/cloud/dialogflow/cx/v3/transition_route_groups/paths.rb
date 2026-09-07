@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -128,6 +128,27 @@ module Google
                 raise ::ArgumentError, "flow cannot contain /" if flow.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/agents/#{agent}/flows/#{flow}/pages/#{page}"
+              end
+
+              ##
+              # Create a fully-qualified Tool resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/agents/{agent}/tools/{tool}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param agent [String]
+              # @param tool [String]
+              #
+              # @return [::String]
+              def tool_path project:, location:, agent:, tool:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/agents/#{agent}/tools/#{tool}"
               end
 
               ##

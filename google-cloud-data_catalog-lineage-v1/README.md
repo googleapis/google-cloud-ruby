@@ -1,8 +1,7 @@
 # Ruby Client for the Data Lineage V1 API
 
-API Client library for the Data Lineage V1 API
+Data lineage is a visual map that tracks the entire lifecycle of your data. It shows you where your data comes from (the origin), where it travels (the destinations), and all the changes or transformations that happen along the way.
 
-DataCatalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage. Lineage is used to track data flows between assets over time. You can create Lineage Events to record lineage between multiple sources and a single target, for example, when table data is based on data from multiple tables.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.process_open_lineage_run_event request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-lineage-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/data-catalog/docs/reference/data-lineage/rpc)
+See also the [Product Documentation](https://cloud.google.com/dataplex/docs/about-data-lineage)
 for general usage information.
 
 ## Debug Logging
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

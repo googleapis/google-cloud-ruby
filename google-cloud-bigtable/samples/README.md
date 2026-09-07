@@ -84,12 +84,12 @@ Expected output similar to:
 
 ### Hello World
 
-View the [Hello World][hello_world.rb] sample to see a basic usage of
+View the [Hello World](hello_world.rb) sample to see a basic usage of
 the Cloud Bigtable client library.
 
 ### Instance Admin
 
-View the [source code][instanceadmin.rb].
+View the [source code](instanceadmin.rb).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/instanceadmin.rb)
 

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Google Cloud Deploy is a managed service that automates delivery of your applications to a series of target environments in a defined promotion sequence."
-  gem.summary       = "API Client library for the Google Cloud Deploy API"
+  gem.description   = "Cloud Deploy is a service that automates delivery of your applications to a series of target environments in a defined sequence."
+  gem.summary       = "Cloud Deploy is a service that automates delivery of your applications to a series of target environments in a defined sequence."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-deploy-v1", "~> 2.0"

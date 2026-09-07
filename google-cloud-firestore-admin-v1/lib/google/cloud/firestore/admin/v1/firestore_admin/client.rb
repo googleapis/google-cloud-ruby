@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -999,8 +999,8 @@ module Google
               #     Required. Database to export. Should be of the form:
               #     `projects/{project_id}/databases/{database_id}`.
               #   @param collection_ids [::Array<::String>]
-              #     Which collection IDs to export. Unspecified means all collections. Each
-              #     collection ID in this list must be unique.
+              #     IDs of the collection groups to export. Unspecified means all
+              #     collection groups. Each collection group in this list must be unique.
               #   @param output_uri_prefix [::String]
               #     The output URI. Currently only supports Google Cloud Storage URIs of the
               #     form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
@@ -1125,8 +1125,9 @@ module Google
               #     Required. Database to import into. Should be of the form:
               #     `projects/{project_id}/databases/{database_id}`.
               #   @param collection_ids [::Array<::String>]
-              #     Which collection IDs to import. Unspecified means all collections included
-              #     in the import. Each collection ID in this list must be unique.
+              #     IDs of the collection groups to import. Unspecified means all collection
+              #     groups that were included in the export. Each collection group in this list
+              #     must be unique.
               #   @param input_uri_prefix [::String]
               #     Location of the exported files.
               #     This must match the output_uri_prefix of an ExportDocumentsResponse from
@@ -1363,7 +1364,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -2743,7 +2744,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #   @param backup [::String]
               #     Required. Backup to restore from. Must be from the same project as the
               #     parent.
@@ -3324,7 +3325,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #   @param pitr_snapshot [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot, ::Hash]
               #     Required. Specification of the PITR data to clone from. The source database
               #     must exist.
@@ -3393,13 +3394,13 @@ module Google
 
                 header_params = {}
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["project_id"] = regex_match["project_id".to_s]
                   end
                 end
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["database_id"] = regex_match["database_id".to_s]
                   end
@@ -3521,6 +3522,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -3604,6 +3606,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

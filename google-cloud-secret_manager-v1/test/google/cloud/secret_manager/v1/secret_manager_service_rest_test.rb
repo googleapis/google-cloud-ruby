@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -100,32 +100,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_list_secrets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_secrets_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_secrets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_secrets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_secrets ::Google::Cloud::SecretManager::V1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_secrets ::Google::Cloud::SecretManager::V1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_secrets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_secrets(::Google::Cloud::SecretManager::V1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_secrets(::Google::Cloud::SecretManager::V1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_create_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_secret({ parent: parent, secret_id: secret_id, secret: secret }) do |_result, response|
+        c.create_secret({ parent: parent, secret_id: secret_id, secret: secret }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_secret parent: parent, secret_id: secret_id, secret: secret do |_result, response|
+        c.create_secret parent: parent, secret_id: secret_id, secret: secret do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_secret ::Google::Cloud::SecretManager::V1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret) do |_result, response|
+        c.create_secret ::Google::Cloud::SecretManager::V1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_secret({ parent: parent, secret_id: secret_id, secret: secret }, call_options) do |_result, response|
+        c.create_secret({ parent: parent, secret_id: secret_id, secret: secret }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_secret(::Google::Cloud::SecretManager::V1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), call_options) do |_result, response|
+        c.create_secret(::Google::Cloud::SecretManager::V1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_add_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_secret_version({ parent: parent, payload: payload }) do |_result, response|
+        c.add_secret_version({ parent: parent, payload: payload }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_secret_version parent: parent, payload: payload do |_result, response|
+        c.add_secret_version parent: parent, payload: payload do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_secret_version ::Google::Cloud::SecretManager::V1::AddSecretVersionRequest.new(parent: parent, payload: payload) do |_result, response|
+        c.add_secret_version ::Google::Cloud::SecretManager::V1::AddSecretVersionRequest.new(parent: parent, payload: payload) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_secret_version({ parent: parent, payload: payload }, call_options) do |_result, response|
+        c.add_secret_version({ parent: parent, payload: payload }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_secret_version(::Google::Cloud::SecretManager::V1::AddSecretVersionRequest.new(parent: parent, payload: payload), call_options) do |_result, response|
+        c.add_secret_version(::Google::Cloud::SecretManager::V1::AddSecretVersionRequest.new(parent: parent, payload: payload), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_get_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_secret({ name: name }) do |_result, response|
+        c.get_secret({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_secret name: name do |_result, response|
+        c.get_secret name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_secret ::Google::Cloud::SecretManager::V1::GetSecretRequest.new(name: name) do |_result, response|
+        c.get_secret ::Google::Cloud::SecretManager::V1::GetSecretRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_secret({ name: name }, call_options) do |_result, response|
+        c.get_secret({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_secret(::Google::Cloud::SecretManager::V1::GetSecretRequest.new(name: name), call_options) do |_result, response|
+        c.get_secret(::Google::Cloud::SecretManager::V1::GetSecretRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_update_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_secret({ secret: secret, update_mask: update_mask }) do |_result, response|
+        c.update_secret({ secret: secret, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_secret secret: secret, update_mask: update_mask do |_result, response|
+        c.update_secret secret: secret, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_secret ::Google::Cloud::SecretManager::V1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask) do |_result, response|
+        c.update_secret ::Google::Cloud::SecretManager::V1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_secret({ secret: secret, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_secret({ secret: secret, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_secret(::Google::Cloud::SecretManager::V1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), call_options) do |_result, response|
+        c.update_secret(::Google::Cloud::SecretManager::V1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_delete_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_secret({ name: name, etag: etag }) do |_result, response|
+        c.delete_secret({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_secret name: name, etag: etag do |_result, response|
+        c.delete_secret name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_secret ::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_secret ::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_secret({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_secret({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_secret(::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_secret(::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_list_secret_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_secret_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_secret_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_secret_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_secret_versions ::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_secret_versions ::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_secret_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_secret_versions(::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_secret_versions(::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_get_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_secret_version({ name: name }) do |_result, response|
+        c.get_secret_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_secret_version name: name do |_result, response|
+        c.get_secret_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_secret_version ::Google::Cloud::SecretManager::V1::GetSecretVersionRequest.new(name: name) do |_result, response|
+        c.get_secret_version ::Google::Cloud::SecretManager::V1::GetSecretVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_secret_version({ name: name }, call_options) do |_result, response|
+        c.get_secret_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_secret_version(::Google::Cloud::SecretManager::V1::GetSecretVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_secret_version(::Google::Cloud::SecretManager::V1::GetSecretVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -540,32 +540,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_access_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, access_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.access_secret_version({ name: name }) do |_result, response|
+        c.access_secret_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.access_secret_version name: name do |_result, response|
+        c.access_secret_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.access_secret_version ::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest.new(name: name) do |_result, response|
+        c.access_secret_version ::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.access_secret_version({ name: name }, call_options) do |_result, response|
+        c.access_secret_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.access_secret_version(::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest.new(name: name), call_options) do |_result, response|
+        c.access_secret_version(::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -595,32 +595,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_disable_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_secret_version({ name: name, etag: etag }) do |_result, response|
+        c.disable_secret_version({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_secret_version name: name, etag: etag do |_result, response|
+        c.disable_secret_version name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_secret_version ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag) do |_result, response|
+        c.disable_secret_version ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
+        c.disable_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_secret_version(::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.disable_secret_version(::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -650,32 +650,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_enable_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_secret_version({ name: name, etag: etag }) do |_result, response|
+        c.enable_secret_version({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_secret_version name: name, etag: etag do |_result, response|
+        c.enable_secret_version name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_secret_version ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag) do |_result, response|
+        c.enable_secret_version ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
+        c.enable_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_secret_version(::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.enable_secret_version(::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -705,32 +705,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_destroy_secret_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, destroy_secret_version_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.destroy_secret_version({ name: name, etag: etag }) do |_result, response|
+        c.destroy_secret_version({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.destroy_secret_version name: name, etag: etag do |_result, response|
+        c.destroy_secret_version name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.destroy_secret_version ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag) do |_result, response|
+        c.destroy_secret_version ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.destroy_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
+        c.destroy_secret_version({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.destroy_secret_version(::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.destroy_secret_version(::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,32 +761,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -816,32 +816,32 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -871,37 +871,146 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_enable_managed_rotation
+    # Create test objects.
+    client_result = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    cloud_sql_single_user_credentials = {}
+
+    enable_managed_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_enable_managed_rotation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, enable_managed_rotation_client_stub do
+        # Create client
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.enable_managed_rotation parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.enable_managed_rotation ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.enable_managed_rotation(::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, enable_managed_rotation_client_stub.call_count
+      end
+    end
+  end
+
+  def test_rotate_secret
+    # Create test objects.
+    client_result = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    rotate_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_rotate_secret_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, rotate_secret_client_stub do
+        # Create client
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.rotate_secret({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.rotate_secret parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.rotate_secret ::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.rotate_secret({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.rotate_secret(::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, rotate_secret_client_stub.call_count
       end
     end
   end

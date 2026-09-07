@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/dataform/v1/bindings_override"
 
 require "google/cloud/dataform/v1/dataform/credentials"
 require "google/cloud/dataform/v1/dataform/paths"
+require "google/cloud/dataform/v1/dataform/rest/operations"
 require "google/cloud/dataform/v1/dataform/rest/client"
 
 module Google

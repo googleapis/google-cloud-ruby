@@ -1,5 +1,41 @@
 # Release History
 
+### 2.5.0 (2026-08-05)
+
+#### Features
+
+* add RequestOptions and request_options to Firestore v1 protos ([#35073](https://github.com/googleapis/google-cloud-ruby/issues/35073)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 2.4.0 (2026-06-11)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* expose the variable definition in the Cloud Firestore API 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32783](https://github.com/googleapis/google-cloud-ruby/issues/32783)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* fix documentation formatting 
+* update API common type documentation 
+* update license year 
+* update various comments 
+
+### 2.3.0 (2025-12-11)
+
+#### Features
+
+* publish the pipelines API to the stable branch ([#32250](https://github.com/googleapis/google-cloud-ruby/issues/32250)) 
+#### Documentation
+
+* minor api documentation changes 
+
 ### 2.2.1 (2025-10-27)
 
 #### Documentation

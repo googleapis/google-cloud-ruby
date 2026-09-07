@@ -1,5 +1,56 @@
 # Release History
 
+### 3.4.1 (2026-08-24)
+
+#### Bug Fixes
+
+* Propagate logger to v1 admin and schema clients ([#32440](https://github.com/googleapis/google-cloud-ruby/issues/32440)) ([#36298](https://github.com/googleapis/google-cloud-ruby/issues/36298)) 
+
+### 3.4.0 (2026-07-29)
+
+#### Features
+
+* implement streaming keep-alive logic ([#34653](https://github.com/googleapis/google-cloud-ruby/issues/34653)) 
+
+### 3.3.0 (2026-06-11)
+
+#### Features
+
+* Upgrade to Ruby 3.2 minimum ([#33944](https://github.com/googleapis/google-cloud-ruby/issues/33944)) 
+
+### 3.2.1 (2026-03-04)
+
+#### Bug Fixes
+
+* clean up warnings for pubsub veneer ([#32785](https://github.com/googleapis/google-cloud-ruby/issues/32785)) 
+
+### 3.2.0 (2026-01-30)
+
+#### Features
+
+* Support adhoc debug logging ([#32404](https://github.com/googleapis/google-cloud-ruby/issues/32404)) 
+
+### 3.1.1 (2025-12-16)
+
+#### Bug Fixes
+
+* Remove get_topic lookup when publishing via lazy loading ([#32273](https://github.com/googleapis/google-cloud-ruby/issues/32273)) 
+
+### 3.1.0 (2025-12-12)
+
+#### Features
+
+* Add skip_lookup to Project#publisher to enable lazy loading ([#32263](https://github.com/googleapis/google-cloud-ruby/issues/32263)) 
+#### Documentation
+
+* Fix overview documentation URL 
+
+### 3.0.3 (2025-11-04)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
 ### 3.0.2 (2025-08-12)
 
 #### Bug Fixes

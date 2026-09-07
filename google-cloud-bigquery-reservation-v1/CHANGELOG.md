@@ -1,5 +1,54 @@
 # Release History
 
+### 1.14.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 1.13.1 (2026-08-24)
+
+#### Documentation
+
+* A comment for field `principal` in message `.google.cloud.bigquery.reservation.v1.Assignment` is changed ([#36316](https://github.com/googleapis/google-cloud-ruby/issues/36316)) 
+
+### 1.13.0 (2026-08-13)
+
+#### Features
+
+* Add a new field `condition` to `bigqueryreservation.googleapis.com/Assignment`, it is Common Expression Language (CEL) condition that defines the matching criteria for this assignment. 
+* Add a new field `precedence` to `bigqueryreservation.googleapis.com/Assignment`,  it specifies the priority precedence for this assignment. Used to resolve ambiguity when multiple assignments match a single job. Higher numerical values represent ... ([#36234](https://github.com/googleapis/google-cloud-ruby/issues/36234)) 
+
+### 1.12.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 1.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* add principal field to BigQuery Reservation Assignment ([#33832](https://github.com/googleapis/google-cloud-ruby/issues/33832)) 
+
+### 1.10.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.9.2 (2026-01-13)
+
+#### Documentation
+
+* change comment indicating `enable_gemini_in_bigquery` field for BigQuery Reservation Assignments is deprecated ([#32306](https://github.com/googleapis/google-cloud-ruby/issues/32306)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

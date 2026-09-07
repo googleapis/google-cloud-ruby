@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ module Google
     # @!attribute [rw] environment
     #   @return [::String]
     #     The service controller environment to use. If empty, no control plane
-    #     feature (like quota and billing) will be enabled. The recommended value for
-    #     most services is servicecontrol.googleapis.com
+    #     features (like quota and billing) will be enabled. The recommended value
+    #     for most services is servicecontrol.googleapis.com.
     # @!attribute [rw] method_policies
     #   @return [::Array<::Google::Api::MethodPolicy>]
     #     Defines policies applying to the API methods of the service.

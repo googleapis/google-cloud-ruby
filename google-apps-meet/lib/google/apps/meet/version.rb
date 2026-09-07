@@ -20,7 +20,7 @@
 module Google
   module Apps
     module Meet
-      VERSION = "1.1.2"
+      VERSION = "1.3.1"
     end
   end
 end

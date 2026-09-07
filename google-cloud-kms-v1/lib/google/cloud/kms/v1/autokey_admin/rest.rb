@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,13 +33,15 @@ module Google
       module V1
         ##
         # Provides interfaces for managing [Cloud KMS
-        # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
-        # configurations. A configuration is inherited by all descendent projects. A
-        # configuration at one folder overrides any other configurations in its
-        # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
-        # Autokey, so that users working in a descendant project can request
-        # provisioned {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}, ready for Customer
-        # Managed Encryption Key (CMEK) use, on-demand.
+        # Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
+        # project-level configurations. A configuration is inherited by all descendent
+        # folders and projects. A configuration at a folder or project overrides any
+        # other configurations in its ancestry. Setting a configuration on a folder is
+        # a prerequisite for Cloud KMS Autokey, so that users working in a descendant
+        # project can request provisioned {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys},
+        # ready for Customer Managed Encryption Key (CMEK) use, on-demand when using
+        # the dedicated key project mode. This is not required when using the delegated
+        # key management mode for same-project keys.
         #
         # To load this service and instantiate a REST client:
         #

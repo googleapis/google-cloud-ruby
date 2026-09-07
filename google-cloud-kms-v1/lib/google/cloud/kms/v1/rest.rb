@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 require "google/cloud/kms/v1/autokey/rest"
 require "google/cloud/kms/v1/autokey_admin/rest"
 require "google/cloud/kms/v1/ekm_service/rest"
+require "google/cloud/kms/v1/hsm_management/rest"
 require "google/cloud/kms/v1/key_management_service/rest"
 require "google/cloud/kms/v1/bindings_override"
 require "google/cloud/kms/v1/version"

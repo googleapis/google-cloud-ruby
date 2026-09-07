@@ -1,5 +1,47 @@
 # Release History
 
+### 1.15.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+#### Documentation
+
+* Update copyright year ([#35091](https://github.com/googleapis/google-cloud-ruby/issues/35091)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 1.14.0 (2026-03-31)
+
+#### Features
+
+* updated v2 dialogflow client libraries ([#33326](https://github.com/googleapis/google-cloud-ruby/issues/33326)) 
+
+### 1.13.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.12.0 (2025-12-16)
+
+#### Features
+
+* updated v2 dialogflow client libraries ([#32265](https://github.com/googleapis/google-cloud-ruby/issues/32265)) 
+#### Documentation
+
+* updated v2 dialogflow client libraries 
+
 ### 1.11.3 (2025-09-12)
 
 #### Documentation

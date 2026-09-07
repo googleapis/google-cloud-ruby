@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,18 +50,6 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::ClientPathsTest < Minitest
 
       path = client.asset_path project: "value0", location: "value1", lake: "value2", zone: "value3", asset: "value4"
       assert_equal "projects/value0/locations/value1/lakes/value2/zones/value3/assets/value4", path
-    end
-  end
-
-  def test_environment_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::Dataplex::V1::DataplexService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.environment_path project: "value0", location: "value1", lake: "value2", environment: "value3"
-      assert_equal "projects/value0/locations/value1/lakes/value2/environments/value3", path
     end
   end
 

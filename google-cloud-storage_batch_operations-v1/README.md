@@ -1,8 +1,7 @@
 # Ruby Client for the Storage Batch Operations V1 API
 
-API Client library for the Storage Batch Operations V1 API
+Cloud Storage Batch Operations is a Cloud Storage capability that lets you perform operations on billions of objects in a serverless manner.
 
-google-cloud-storage_batch_operations-v1 is the official client library for the Storage Batch Operations V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

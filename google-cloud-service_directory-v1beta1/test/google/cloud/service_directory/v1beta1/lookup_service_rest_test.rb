@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -99,32 +99,32 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::ClientTes
     ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::ServiceStub.stub :transcode_resolve_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resolve_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resolve_service({ name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter }) do |_result, response|
+        c.resolve_service({ name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resolve_service name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter do |_result, response|
+        c.resolve_service name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resolve_service ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter) do |_result, response|
+        c.resolve_service ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resolve_service({ name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter }, call_options) do |_result, response|
+        c.resolve_service({ name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resolve_service(::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), call_options) do |_result, response|
+        c.resolve_service(::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

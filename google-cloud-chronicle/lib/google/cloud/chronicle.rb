@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,6 +45,216 @@ end
 module Google
   module Cloud
     module Chronicle
+      ##
+      # Create a new client object for BigQueryExportService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::BigQueryExportService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-BigQueryExportService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the BigQueryExportService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the BigQueryExportService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.big_query_export_service_available?}.
+      #
+      # ## About BigQueryExportService
+      #
+      # Service for managing BigQuery export configurations for Chronicle instances.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.big_query_export_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:BigQueryExportService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the BigQueryExportService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.big_query_export_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the BigQueryExportService service,
+      # or if the versioned client gem needs an update to support the BigQueryExportService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.big_query_export_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :BigQueryExportService
+        service_module = service_module.const_get :BigQueryExportService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for DashboardQueryService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::DashboardQueryService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-DashboardQueryService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DashboardQueryService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DashboardQueryService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.dashboard_query_service_available?}.
+      #
+      # ## About DashboardQueryService
+      #
+      # A service providing functionality for managing dashboards' queries.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.dashboard_query_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:DashboardQueryService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DashboardQueryService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.dashboard_query_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DashboardQueryService service,
+      # or if the versioned client gem needs an update to support the DashboardQueryService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.dashboard_query_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :DashboardQueryService
+        service_module = service_module.const_get :DashboardQueryService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for DashboardChartService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::DashboardChartService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-DashboardChartService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DashboardChartService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DashboardChartService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.dashboard_chart_service_available?}.
+      #
+      # ## About DashboardChartService
+      #
+      # A service providing functionality for managing dashboards' charts.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.dashboard_chart_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:DashboardChartService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DashboardChartService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.dashboard_chart_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DashboardChartService service,
+      # or if the versioned client gem needs an update to support the DashboardChartService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.dashboard_chart_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :DashboardChartService
+        service_module = service_module.const_get :DashboardChartService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
       ##
       # Create a new client object for DataAccessControlService.
       #
@@ -117,6 +327,76 @@ module Google
       end
 
       ##
+      # Create a new client object for DataTableService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::DataTableService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-DataTableService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DataTableService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataTableService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.data_table_service_available?}.
+      #
+      # ## About DataTableService
+      #
+      # DataTableManager provides an interface for managing data tables.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.data_table_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:DataTableService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DataTableService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.data_table_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataTableService service,
+      # or if the versioned client gem needs an update to support the DataTableService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.data_table_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :DataTableService
+        service_module = service_module.const_get :DataTableService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for EntityService.
       #
       # By default, this returns an instance of
@@ -177,6 +457,219 @@ module Google
         service_module = Google::Cloud::Chronicle.const_get package_name
         return false unless service_module.const_defined? :EntityService
         service_module = service_module.const_get :EntityService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for NativeDashboardService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::NativeDashboardService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-NativeDashboardService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the NativeDashboardService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the NativeDashboardService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.native_dashboard_service_available?}.
+      #
+      # ## About NativeDashboardService
+      #
+      # A service providing functionality for managing native dashboards.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.native_dashboard_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:NativeDashboardService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the NativeDashboardService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.native_dashboard_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the NativeDashboardService service,
+      # or if the versioned client gem needs an update to support the NativeDashboardService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.native_dashboard_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :NativeDashboardService
+        service_module = service_module.const_get :NativeDashboardService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for FeaturedContentNativeDashboardService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-FeaturedContentNativeDashboardService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FeaturedContentNativeDashboardService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the FeaturedContentNativeDashboardService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.featured_content_native_dashboard_service_available?}.
+      #
+      # ## About FeaturedContentNativeDashboardService
+      #
+      # This service provides functionality for managing
+      # FeaturedContentNativeDashboard.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.featured_content_native_dashboard_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:FeaturedContentNativeDashboardService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the FeaturedContentNativeDashboardService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.featured_content_native_dashboard_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the FeaturedContentNativeDashboardService service,
+      # or if the versioned client gem needs an update to support the FeaturedContentNativeDashboardService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.featured_content_native_dashboard_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :FeaturedContentNativeDashboardService
+        service_module = service_module.const_get :FeaturedContentNativeDashboardService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for FindingsRefinementService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::FindingsRefinementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-FindingsRefinementService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FindingsRefinementService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the FindingsRefinementService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.findings_refinement_service_available?}.
+      #
+      # ## About FindingsRefinementService
+      #
+      # FindingsRefinementService provides an interface for filtering out
+      # findings that are unlikely to be real threats to prevent them
+      # from triggering alerts or notifications.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.findings_refinement_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:FindingsRefinementService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the FindingsRefinementService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.findings_refinement_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the FindingsRefinementService service,
+      # or if the versioned client gem needs an update to support the FindingsRefinementService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.findings_refinement_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :FindingsRefinementService
+        service_module = service_module.const_get :FindingsRefinementService
         if transport == :rest
           return false unless service_module.const_defined? :Rest
           service_module = service_module.const_get :Rest
@@ -397,6 +890,77 @@ module Google
       end
 
       ##
+      # Create a new client object for RuleExecutionErrorService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-RuleExecutionErrorService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RuleExecutionErrorService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the RuleExecutionErrorService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.rule_execution_error_service_available?}.
+      #
+      # ## About RuleExecutionErrorService
+      #
+      # RuleExecutionErrorService contains endpoints related to rule execution
+      # errors.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.rule_execution_error_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:RuleExecutionErrorService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RuleExecutionErrorService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.rule_execution_error_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RuleExecutionErrorService service,
+      # or if the versioned client gem needs an update to support the RuleExecutionErrorService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.rule_execution_error_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :RuleExecutionErrorService
+        service_module = service_module.const_get :RuleExecutionErrorService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Configure the google-cloud-chronicle library.
       #
       # The following configuration parameters are supported:
@@ -419,6 +983,7 @@ module Google
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
       #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
       #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
       #     * `:retry_codes` (*type:* `Array<String>`) -
       #       The error codes that should trigger a retry.
       #

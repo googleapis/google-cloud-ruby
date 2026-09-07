@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,63 +62,6 @@ module Google
                   ["name", %r{^projects/[^/]+/?$}, false]
                 ],
                 body: nil
-              )
-            ]
-            default_config.bindings_override["google.iam.v1.IAMPolicy.GetIamPolicy"] = [
-
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :get,
-                uri_template: "/v1beta1/{resource}:getIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
-                ],
-                body: nil
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :get,
-                uri_template: "/v1beta1/{resource}:getIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
-                ],
-                body: nil
-              )
-            ]
-            default_config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"] = [
-
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:setIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:setIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
-                ],
-                body: "*"
-              )
-            ]
-            default_config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"] = [
-
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:testIamPermissions",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:testIamPermissions",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
-                ],
-                body: "*"
               )
             ]
             default_config

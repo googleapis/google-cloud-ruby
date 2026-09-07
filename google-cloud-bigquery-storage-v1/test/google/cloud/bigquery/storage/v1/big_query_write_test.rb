@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -84,36 +84,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_write_stream_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_write_stream({ parent: parent, write_stream: write_stream }) do |response, operation|
+      c.create_write_stream({ parent: parent, write_stream: write_stream }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_write_stream parent: parent, write_stream: write_stream do |response, operation|
+      c.create_write_stream parent: parent, write_stream: write_stream do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_write_stream ::Google::Cloud::Bigquery::Storage::V1::CreateWriteStreamRequest.new(parent: parent, write_stream: write_stream) do |response, operation|
+      c.create_write_stream ::Google::Cloud::Bigquery::Storage::V1::CreateWriteStreamRequest.new(parent: parent, write_stream: write_stream) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_write_stream({ parent: parent, write_stream: write_stream }, grpc_options) do |response, operation|
+      c.create_write_stream({ parent: parent, write_stream: write_stream }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_write_stream(::Google::Cloud::Bigquery::Storage::V1::CreateWriteStreamRequest.new(parent: parent, write_stream: write_stream), grpc_options) do |response, operation|
+      c.create_write_stream(::Google::Cloud::Bigquery::Storage::V1::CreateWriteStreamRequest.new(parent: parent, write_stream: write_stream), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -137,6 +137,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
     trace_id = "hello world"
     missing_value_interpretations = {}
     default_missing_value_interpretation = :MISSING_VALUE_INTERPRETATION_UNSPECIFIED
+    client_stats = {}
 
     append_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :append_rows, name
@@ -147,15 +148,15 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, append_rows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats
       enum_input = [request_hash, request_proto].to_enum
-      client.append_rows enum_input do |response, operation|
+      c.append_rows enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse, r
@@ -164,10 +165,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats
       stream_input = Gapic::StreamInput.new
-      client.append_rows stream_input do |response, operation|
+      c.append_rows stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse, r
@@ -179,10 +180,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats
       enum_input = [request_hash, request_proto].to_enum
-      client.append_rows enum_input, grpc_options do |response, operation|
+      c.append_rows enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse, r
@@ -191,10 +192,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation }
-      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation
+      request_hash = { write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats }
+      request_proto = ::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new write_stream: write_stream, offset: offset, proto_rows: proto_rows, trace_id: trace_id, missing_value_interpretations: missing_value_interpretations, default_missing_value_interpretation: default_missing_value_interpretation, client_stats: client_stats
       stream_input = Gapic::StreamInput.new
-      client.append_rows stream_input, grpc_options do |response, operation|
+      c.append_rows stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse, r
@@ -217,6 +218,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
           assert_equal "hello world", r["trace_id"]
           assert_equal({}, r["missing_value_interpretations"].to_h)
           assert_equal :MISSING_VALUE_INTERPRETATION_UNSPECIFIED, r["default_missing_value_interpretation"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Storage::V1::ClientStats), r["client_stats"]
         end
       end
     end
@@ -243,36 +245,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_write_stream_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_write_stream({ name: name, view: view }) do |response, operation|
+      c.get_write_stream({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_write_stream name: name, view: view do |response, operation|
+      c.get_write_stream name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_write_stream ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view) do |response, operation|
+      c.get_write_stream ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_write_stream({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_write_stream({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_write_stream(::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_write_stream(::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -301,36 +303,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, finalize_write_stream_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.finalize_write_stream({ name: name }) do |response, operation|
+      c.finalize_write_stream({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.finalize_write_stream name: name do |response, operation|
+      c.finalize_write_stream name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.finalize_write_stream ::Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamRequest.new(name: name) do |response, operation|
+      c.finalize_write_stream ::Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.finalize_write_stream({ name: name }, grpc_options) do |response, operation|
+      c.finalize_write_stream({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.finalize_write_stream(::Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamRequest.new(name: name), grpc_options) do |response, operation|
+      c.finalize_write_stream(::Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -361,36 +363,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, batch_commit_write_streams_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_commit_write_streams({ parent: parent, write_streams: write_streams }) do |response, operation|
+      c.batch_commit_write_streams({ parent: parent, write_streams: write_streams }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_commit_write_streams parent: parent, write_streams: write_streams do |response, operation|
+      c.batch_commit_write_streams parent: parent, write_streams: write_streams do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_commit_write_streams ::Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new(parent: parent, write_streams: write_streams) do |response, operation|
+      c.batch_commit_write_streams ::Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new(parent: parent, write_streams: write_streams) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_commit_write_streams({ parent: parent, write_streams: write_streams }, grpc_options) do |response, operation|
+      c.batch_commit_write_streams({ parent: parent, write_streams: write_streams }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_commit_write_streams(::Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new(parent: parent, write_streams: write_streams), grpc_options) do |response, operation|
+      c.batch_commit_write_streams(::Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new(parent: parent, write_streams: write_streams), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -421,36 +423,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, flush_rows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.flush_rows({ write_stream: write_stream, offset: offset }) do |response, operation|
+      c.flush_rows({ write_stream: write_stream, offset: offset }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.flush_rows write_stream: write_stream, offset: offset do |response, operation|
+      c.flush_rows write_stream: write_stream, offset: offset do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.flush_rows ::Google::Cloud::Bigquery::Storage::V1::FlushRowsRequest.new(write_stream: write_stream, offset: offset) do |response, operation|
+      c.flush_rows ::Google::Cloud::Bigquery::Storage::V1::FlushRowsRequest.new(write_stream: write_stream, offset: offset) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.flush_rows({ write_stream: write_stream, offset: offset }, grpc_options) do |response, operation|
+      c.flush_rows({ write_stream: write_stream, offset: offset }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.flush_rows(::Google::Cloud::Bigquery::Storage::V1::FlushRowsRequest.new(write_stream: write_stream, offset: offset), grpc_options) do |response, operation|
+      c.flush_rows(::Google::Cloud::Bigquery::Storage::V1::FlushRowsRequest.new(write_stream: write_stream, offset: offset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

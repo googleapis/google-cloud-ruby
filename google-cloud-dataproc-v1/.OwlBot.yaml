@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/dataproc/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-dataproc-v1/$1

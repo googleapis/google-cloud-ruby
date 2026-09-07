@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1026,7 +1026,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_stateless_suggestion(parent: nil, generator: nil, generator_name: nil, context_references: nil, conversation_context: nil, trigger_events: nil)
+            # @overload generate_stateless_suggestion(parent: nil, generator: nil, generator_name: nil, context_references: nil, conversation_context: nil, trigger_events: nil, security_settings: nil)
             #   Pass arguments to `generate_stateless_suggestion` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1054,6 +1054,15 @@ module Google
             #   @param trigger_events [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
             #     Optional. A list of trigger events. Generator will be triggered only if
             #     it's trigger event is included here.
+            #   @param security_settings [::String]
+            #     Optional. Name of the CX SecuritySettings which is used to redact generated
+            #     response. If this field is empty, try to fetch v2 security_settings, which
+            #     is a project level setting. If this field is empty and no v2
+            #     security_settings set up in this project, no redaction will be done.
+            #
+            #     Format:
+            #     `projects/<Project ID>/locations/<Location ID>/securitySettings/<Security
+            #     Settings ID>`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionResponse]
@@ -1448,6 +1457,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -1531,6 +1541,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

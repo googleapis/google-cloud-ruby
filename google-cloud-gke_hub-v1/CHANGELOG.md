@@ -1,5 +1,37 @@
 # Changelog
 
+### 2.6.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35054](https://github.com/googleapis/google-cloud-ruby/issues/35054)) 
+
+### 2.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34047](https://github.com/googleapis/google-cloud-ruby/issues/34047)) 
+
+### 2.5.0 (2026-05-06)
+
+#### Features
+
+* Add GKE Hub teams scope and RBAC GAPIC 
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* publish client batch config schema 
+* publish new error reasons 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* add rbacrolebindingactuation dependency ([#32414](https://github.com/googleapis/google-cloud-ruby/issues/32414)) 
+#### Documentation
+
+* fix documentation formatting 
+* update license year 
+* update SelectiveGapicGeneration usage doc 
+* update various comments 
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation

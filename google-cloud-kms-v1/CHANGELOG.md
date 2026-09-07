@@ -1,5 +1,70 @@
 # Release History
 
+### 1.15.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35055](https://github.com/googleapis/google-cloud-ruby/issues/35055)) 
+
+### 1.15.0 (2026-07-21)
+
+#### Features
+
+* Add support for trusted key wrapping and HSM key trust upgrades ([#34849](https://github.com/googleapis/google-cloud-ruby/issues/34849)) 
+
+### 1.14.0 (2026-06-30)
+
+#### Features
+
+* add support for post-quantum (PQ) import methods ([#34676](https://github.com/googleapis/google-cloud-ruby/issues/34676)) 
+
+### 1.13.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34048](https://github.com/googleapis/google-cloud-ruby/issues/34048)) 
+
+### 1.12.1 (2026-05-07)
+
+#### Documentation
+
+* Update the comment for duration value `unrefreshed_duration_until_disable` to accurately reflect the system-defined duration ([#33875](https://github.com/googleapis/google-cloud-ruby/issues/33875)) 
+
+### 1.12.0 (2026-04-15)
+
+#### Features
+
+* support external-μ in the Digest ([#33827](https://github.com/googleapis/google-cloud-ruby/issues/33827)) 
+
+### 1.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+* Add more post-quantum (PQ) signature algorithms to CryptoKeyVersion 
+* Added DeleteCryptoKey and DeleteCryptoKeyVersion RPCs to permanently remove resources 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* Clarify supported resources for the crypto_key_backend field in ImportJob 
+* Update documentation for AutokeyAdmin service and messages to support folder and project-level configurations 
+
+### 1.10.0 (2026-01-23)
+
+#### Features
+
+* add the SingleTenantHsm functionality including the management API and resource types ([#32372](https://github.com/googleapis/google-cloud-ruby/issues/32372)) 
+#### Documentation
+
+* A comment for field `crypto_key_backend` in message `.google.cloud.kms.v1.CryptoKey` is expanded to include SingleTenantHsmInstances 
+
+### 1.9.2 (2026-01-13)
+
+#### Documentation
+
+* Marking MODIFIED_CUSTOMER_INITIATED_ACCESS and MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION Key Access Justification codes as deprecated in favor of GOOGLE_RESPONSE_TO_PRODUCTION_ALERT ([#32337](https://github.com/googleapis/google-cloud-ruby/issues/32337)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

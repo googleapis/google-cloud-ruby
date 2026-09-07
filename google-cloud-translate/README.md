@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Translation API
 
-API Client library for the Cloud Translation API
+Integrates text translation into your website or application.
 
-Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-translate-v*`.
@@ -18,9 +17,6 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-translate-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v2/latest),
 [google-cloud-translate-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-translate-v3/latest).
-
-See also the [Product Documentation](https://cloud.google.com/translate)
-for more usage information.
 
 ## Quick Start
 
@@ -84,7 +80,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically."
-  gem.summary       = "API Client library for the Area 120 Tables API"
+  gem.description   = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
+  gem.summary       = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-area120-tables-v1alpha1", ">= 0.7", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"

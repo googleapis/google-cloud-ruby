@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ module Google
         #     Required. The ID of the account. For example, your Google Ads account ID.
         # @!attribute [rw] account_type
         #   @return [::Google::Ads::DataManager::V1::ProductAccount::AccountType]
-        #     Optional. The type of the account. For example, `GOOGLE_ADS`.
+        #     Required. The type of the account. For example, `GOOGLE_ADS`.
         #     Either `account_type` or the deprecated `product` is required.
         #     If both are set, the values must match.
         class ProductAccount
@@ -95,6 +95,15 @@ module Google
 
             # Data Partner.
             DATA_PARTNER = 4
+
+            # Google Analytics.
+            GOOGLE_ANALYTICS_PROPERTY = 5
+
+            # Google Ad Manager audience link.
+            GOOGLE_AD_MANAGER_AUDIENCE_LINK = 6
+
+            # Floodlight configuration.
+            FLOODLIGHT_CONFIG = 7
           end
         end
 

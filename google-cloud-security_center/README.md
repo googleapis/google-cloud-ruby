@@ -1,8 +1,7 @@
 # Ruby Client for the Security Command Center API
 
-API Client library for the Security Command Center API
-
 Security Command Center API provides access to temporal views of assets and findings within an organization.
+
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-security_center-v*`.
@@ -19,7 +18,7 @@ client gems:
 [google-cloud-security_center-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1/latest),
 [google-cloud-security_center-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v2/latest).
 
-See also the [Product Documentation](https://cloud.google.com/security-command-center)
+See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/reference/rest)
 for more usage information.
 
 ## Quick Start
@@ -76,7 +75,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -229,7 +229,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil)
+                # @overload detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil, response_view: nil)
                 #   Pass arguments to `detect_intent` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -258,6 +258,10 @@ module Google
                 #     Required. The input specification.
                 #   @param output_audio_config [::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig, ::Hash]
                 #     Instructs the speech synthesizer how to generate the output audio.
+                #   @param response_view [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponseView]
+                #     Optional. Specifies which fields in the
+                #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} to return. If not
+                #     set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -333,7 +337,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload server_streaming_detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil)
+                # @overload server_streaming_detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil, response_view: nil)
                 #   Pass arguments to `server_streaming_detect_intent` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -362,6 +366,10 @@ module Google
                 #     Required. The input specification.
                 #   @param output_audio_config [::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig, ::Hash]
                 #     Instructs the speech synthesizer how to generate the output audio.
+                #   @param response_view [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponseView]
+                #     Optional. Specifies which fields in the
+                #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} to return. If not
+                #     set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
                 # @return [::Enumerable<::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -768,6 +776,7 @@ module Google
                 #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #       trigger a retry.
                 #   @return [::Hash]
@@ -847,6 +856,7 @@ module Google
                   #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                   #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                   #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                  #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                   #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                   #         trigger a retry.
                   #

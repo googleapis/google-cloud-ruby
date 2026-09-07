@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module PolicyTroubleshooter
-      VERSION = "1.7.2"
+      VERSION = "1.9.1"
     end
   end
 end

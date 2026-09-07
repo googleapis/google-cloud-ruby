@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -212,6 +212,14 @@ module Google
                                                             ["autokey_config.name", %r{^folders/[^/]+/autokeyConfig/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{autokey_config.name}",
+                                                          body: "autokey_config",
+                                                          matches: [
+                                                            ["autokey_config.name", %r{^projects/[^/]+/autokeyConfig/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -231,6 +239,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^folders/[^/]+/autokeyConfig/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/autokeyConfig/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

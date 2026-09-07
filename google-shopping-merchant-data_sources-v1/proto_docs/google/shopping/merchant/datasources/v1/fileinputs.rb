@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,21 +86,11 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # The required fields vary based on the frequency of fetching. For a
-              # monthly
-              # fetch schedule,
-              # `day of
-              # month`
-              # and
-              # [hour of
-              # day][https://developers.google.com/merchant/api/reference/rest/datasources_v1beta/accounts.dataSources#timeofday]
-              # are required. For a weekly fetch schedule,
-              # [day of
-              # week][https://developers.google.com/merchant/api/reference/rest/datasources_v1beta/accounts.dataSources#dayofweek]
-              # and [hour of
-              # day][https://developers.google.com/merchant/api/reference/rest/datasources_v1beta/accounts.dataSources#timeofday]
-              # are required. For a daily fetch schedule, only an [hour of
-              # day][https://developers.google.com/merchant/api/reference/rest/datasources_v1beta/accounts.dataSources#timeofday]
-              # is required.
+              # monthly fetch schedule, `day of month` and [hour of
+              # day](../Shared.Types/TimeOfDay) are required. For a weekly fetch
+              # schedule, [day of week](../Shared.Types/DayOfWeek) and [hour of
+              # day](../Shared.Types/TimeOfDay) are required. For a daily fetch schedule,
+              # only an [hour of day](../Shared.Types/TimeOfDay) is required.
               module Frequency
                 # Frequency unspecified.
                 FREQUENCY_UNSPECIFIED = 0

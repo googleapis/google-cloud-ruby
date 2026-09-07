@@ -1,5 +1,26 @@
 # Release History
 
+### 3.2.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+#### Documentation
+
+* Update copyright year ([#35089](https://github.com/googleapis/google-cloud-ruby/issues/35089)) 
+
+### 3.2.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 3.1.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 3.0.2 (2025-09-12)
 
 #### Documentation

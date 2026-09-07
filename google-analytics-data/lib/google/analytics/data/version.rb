@@ -20,7 +20,7 @@
 module Google
   module Analytics
     module Data
-      VERSION = "0.7.2"
+      VERSION = "0.9.1"
     end
   end
 end

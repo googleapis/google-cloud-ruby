@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -117,6 +117,10 @@ module Grafeas
     #   @return [::Grafeas::V1::LayerDetails]
     #     Each package found in a file should have its own layer metadata (that is,
     #     information from the origin layer of the package).
+    # @!attribute [rw] line_number
+    #   @return [::Integer]
+    #     Line number in the file where the package was found.
+    #     Optional field that only applies to source repository scanning.
     class FileLocation
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,6 +136,9 @@ module Grafeas
     # @!attribute [rw] layer_count
     #   @return [::Integer]
     #     The number of layers that the base image is composed of.
+    # @!attribute [rw] registry
+    #   @return [::String]
+    #     The registry in which the base image is from.
     class BaseImage
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

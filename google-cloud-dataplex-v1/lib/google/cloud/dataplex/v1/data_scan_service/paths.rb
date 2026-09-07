@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -121,6 +121,27 @@ module Google
               raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/lakes/#{lake}/zones/#{zone}/entities/#{entity}"
+            end
+
+            ##
+            # Create a fully-qualified Entry resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            # @param entry [String]
+            #
+            # @return [::String]
+            def entry_path project:, location:, entry_group:, entry:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entries/#{entry}"
             end
 
             ##

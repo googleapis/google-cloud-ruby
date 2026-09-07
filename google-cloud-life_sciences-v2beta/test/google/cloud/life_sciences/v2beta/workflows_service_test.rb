@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,40 +88,40 @@ class ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, run_pipeline_client_stub do
       # Create client
-      client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
+      c = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }) do |response, operation|
+      c.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_pipeline parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic do |response, operation|
+      c.run_pipeline parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_pipeline ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic) do |response, operation|
+      c.run_pipeline ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }, grpc_options) do |response, operation|
+      c.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_pipeline(::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic), grpc_options) do |response, operation|
+      c.run_pipeline(::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

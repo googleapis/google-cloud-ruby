@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ module Google
         # Label assigned by CSS domain or CSS group to one of its sub-accounts.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the label.
+        #     Identifier. The resource name of the label.
         #     Format: accounts/\\{account}/labels/\\{label}
         # @!attribute [r] label_id
         #   @return [::Integer]

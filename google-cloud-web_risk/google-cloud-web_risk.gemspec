@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Web Risk is an enterprise security product that lets your client applications check URLs against Google's constantly updated lists of unsafe web resources."
-  gem.summary       = "API Client library for the Web Risk API"
+  gem.summary       = "Web Risk is an enterprise security product that lets your client applications check URLs against Google's constantly updated lists of unsafe web resources."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-web_risk-v1", "~> 1.2"

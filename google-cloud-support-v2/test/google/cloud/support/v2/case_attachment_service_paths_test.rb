@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,21 @@ class ::Google::Cloud::Support::V2::CaseAttachmentService::ClientPathsTest < Min
 
     def logger
       nil
+    end
+  end
+
+  def test_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Support::V2::CaseAttachmentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.attachment_path organization: "value0", case: "value1", attachment_id: "value2"
+      assert_equal "organizations/value0/cases/value1/attachments/value2", path
+
+      path = client.attachment_path project: "value0", case: "value1", attachment_id: "value2"
+      assert_equal "projects/value0/cases/value1/attachments/value2", path
     end
   end
 

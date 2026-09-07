@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -96,40 +96,40 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::ClientT
 
     Gapic::ServiceStub.stub :new, predict_client_stub do
       # Create client
-      client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.predict({ name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels }) do |response, operation|
+      c.predict({ name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.predict name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels do |response, operation|
+      c.predict name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.predict ::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels) do |response, operation|
+      c.predict ::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.predict({ name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels }, grpc_options) do |response, operation|
+      c.predict({ name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.predict(::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels), grpc_options) do |response, operation|
+      c.predict(::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

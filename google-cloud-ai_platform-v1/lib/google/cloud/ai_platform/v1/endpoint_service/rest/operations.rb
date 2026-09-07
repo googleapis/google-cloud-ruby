@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -640,6 +640,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -712,6 +713,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -1553,6 +1555,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/reasoningEngines/[^/]+/sessions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -1673,6 +1682,13 @@ module Google
                                                           uri_template: "/v1/{name}:wait",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/features/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
+                                                            ["name", %r{^reasoningEngines/[^/]+/sessions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2281,6 +2297,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -2380,6 +2403,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/features/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2967,6 +2997,13 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -3066,6 +3103,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/featureOnlineStores/[^/]+/featureViews/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -3639,6 +3683,13 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/v1/{name}:cancel",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -3703,6 +3754,13 @@ module Google
                                                           uri_template: "/v1/{name}:cancel",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/tensorboards/[^/]+/experiments/[^/]+/runs/[^/]+/timeSeries/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          matches: [
+                                                            ["name", %r{^reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -4297,6 +4355,13 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/v1/{name}:wait",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:wait",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -4396,6 +4461,13 @@ module Google
                                                           uri_template: "/v1/{name}:wait",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/features/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:wait",
+                                                          matches: [
+                                                            ["name", %r{^reasoningEngines/[^/]+/sessions/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

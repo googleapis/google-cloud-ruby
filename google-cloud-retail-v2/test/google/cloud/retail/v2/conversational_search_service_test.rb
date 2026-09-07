@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -102,12 +102,12 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, conversational_search_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }) do |response, operation|
+      c.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Retail::V2::ConversationalSearchResponse, r
@@ -116,7 +116,7 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::ClientTest < Min
       end
 
       # Use named arguments
-      client.conversational_search placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings do |response, operation|
+      c.conversational_search placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Retail::V2::ConversationalSearchResponse, r
@@ -125,7 +125,7 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::ClientTest < Min
       end
 
       # Use protobuf object
-      client.conversational_search ::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings) do |response, operation|
+      c.conversational_search ::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Retail::V2::ConversationalSearchResponse, r
@@ -134,7 +134,7 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::ClientTest < Min
       end
 
       # Use hash object with options
-      client.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }, grpc_options) do |response, operation|
+      c.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Retail::V2::ConversationalSearchResponse, r
@@ -143,7 +143,7 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::ClientTest < Min
       end
 
       # Use protobuf object with options
-      client.conversational_search(::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings), grpc_options) do |response, operation|
+      c.conversational_search(::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Retail::V2::ConversationalSearchResponse, r

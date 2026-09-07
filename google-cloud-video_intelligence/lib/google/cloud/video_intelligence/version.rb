@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module VideoIntelligence
-      VERSION = "4.0.3"
+      VERSION = "4.2.1"
     end
   end
 end

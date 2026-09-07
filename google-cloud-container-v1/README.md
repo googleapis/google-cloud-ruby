@@ -39,9 +39,6 @@ response = client.list_clusters request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-container-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/kubernetes-engine)
-for general usage information.
-
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot
@@ -85,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

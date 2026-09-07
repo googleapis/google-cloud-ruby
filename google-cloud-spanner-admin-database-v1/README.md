@@ -1,4 +1,4 @@
-# Ruby Client for the Cloud Spanner Database Admin V1 API
+# Ruby Client for the Cloud Spanner V1 API
 
 Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
 
@@ -6,7 +6,7 @@ Cloud Spanner is a managed, mission-critical, globally consistent and scalable r
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Spanner Database Admin V1 API. Most users should consider using
+specific version of the Cloud Spanner V1 API. Most users should consider using
 the main client gem,
 [google-cloud-spanner](https://rubygems.org/gems/google-cloud-spanner).
 See the section below titled *Which client should I use?* for more information.
@@ -39,7 +39,7 @@ response = client.list_databases request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-spanner-admin-database-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/spanner)
+See also the [Product Documentation](https://cloud.google.com/spanner/)
 for general usage information.
 
 ## Debug Logging
@@ -85,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

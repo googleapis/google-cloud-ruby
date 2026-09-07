@@ -1,8 +1,7 @@
 # Ruby Client for the Chronicle V1 API
 
-The Google Cloud Security Operations API, popularly known as the Chronicle API, serves endpoints that enable security analysts to analyze and mitigate a security threat throughout its lifecycle.
+The Google Cloud Security Operations API (Chronicle API) provides endpoints that help analysts investigate and mitigate security threats throughout their lifecycle.
 
-The Google Cloud Security Operations API, popularly known as the Chronicle API, serves endpoints that enable security analysts to analyze and mitigate a security threat throughout its lifecycle.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/chronicle/v1"
 
-client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new
-request = ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new # (request fields as keyword arguments...)
-response = client.create_data_access_label request
+client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new
+request = ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new # (request fields as keyword arguments...)
+response = client.get_big_query_export request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest)
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/chronicle/v1"
 require "logger"
 
-client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

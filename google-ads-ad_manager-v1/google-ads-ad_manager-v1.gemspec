@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API. Note that google-ads-ad_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-ads-ad_manager instead. See the readme for more details."
+  gem.description   = "Manage your Ad Manager inventory, run reports and more. Note that google-ads-ad_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-ads-ad_manager instead. See the readme for more details."
   gem.summary       = "Manage your Ad Manager inventory, run reports and more."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.2"
+  gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

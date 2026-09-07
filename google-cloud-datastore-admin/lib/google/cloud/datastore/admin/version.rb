@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Datastore
       module Admin
-        VERSION = "0.5.2"
+        VERSION = "0.7.1"
       end
     end
   end

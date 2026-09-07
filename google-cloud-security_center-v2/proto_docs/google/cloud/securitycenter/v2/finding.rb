@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -316,6 +316,15 @@ module Google
         # @!attribute [rw] vertex_ai
         #   @return [::Google::Cloud::SecurityCenter::V2::VertexAi]
         #     VertexAi associated with the finding.
+        # @!attribute [rw] agent
+        #   @return [::Google::Cloud::SecurityCenter::V2::Agent]
+        #     Primary Agent that the specified finding was flagged for
+        # @!attribute [rw] agent_sessions
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::AgentSession>]
+        #     Conversational session(s) where the finding occurred.
+        # @!attribute [rw] agent_anomaly
+        #   @return [::Google::Cloud::SecurityCenter::V2::AgentAnomaly]
+        #     Details about behavior anomalies detected in AI agents.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

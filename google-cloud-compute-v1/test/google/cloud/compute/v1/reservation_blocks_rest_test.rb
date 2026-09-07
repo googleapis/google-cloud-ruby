@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,37 +101,95 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }) do |_result, response|
+        c.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone do |_result, response|
+        c.get project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }, call_options) do |_result, response|
+        c.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, get_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    options_requested_policy_version = 42
+    parent_resource = "hello world"
+    project = "hello world"
+    resource = "hello world"
+    zone = "hello world"
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, parent_resource: parent_resource, project: project, resource: resource, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_iam_policy options_requested_policy_version: options_requested_policy_version, parent_resource: parent_resource, project: project, resource: resource, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyReservationBlockRequest.new(options_requested_policy_version: options_requested_policy_version, parent_resource: parent_resource, project: project, resource: resource, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, parent_resource: parent_resource, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyReservationBlockRequest.new(options_requested_policy_version: options_requested_policy_version, parent_resource: parent_resource, project: project, resource: resource, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_iam_policy_client_stub.call_count
       end
     end
   end
@@ -162,32 +220,32 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -221,37 +279,153 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_perform_maintenance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, perform_maintenance_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }) do |_result, response|
+        c.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.perform_maintenance project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone do |_result, response|
+        c.perform_maintenance project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.perform_maintenance ::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone) do |_result, response|
+        c.perform_maintenance ::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }, call_options) do |_result, response|
+        c.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.perform_maintenance(::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone), call_options) do |_result, response|
+        c.perform_maintenance(::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, perform_maintenance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent_resource = "hello world"
+    project = "hello world"
+    resource = "hello world"
+    zone = "hello world"
+    zone_set_nested_policy_request_resource = {}
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.set_iam_policy({ parent_resource: parent_resource, project: project, resource: resource, zone: zone, zone_set_nested_policy_request_resource: zone_set_nested_policy_request_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.set_iam_policy parent_resource: parent_resource, project: project, resource: resource, zone: zone, zone_set_nested_policy_request_resource: zone_set_nested_policy_request_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyReservationBlockRequest.new(parent_resource: parent_resource, project: project, resource: resource, zone: zone, zone_set_nested_policy_request_resource: zone_set_nested_policy_request_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.set_iam_policy({ parent_resource: parent_resource, project: project, resource: resource, zone: zone, zone_set_nested_policy_request_resource: zone_set_nested_policy_request_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyReservationBlockRequest.new(parent_resource: parent_resource, project: project, resource: resource, zone: zone, zone_set_nested_policy_request_resource: zone_set_nested_policy_request_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent_resource = "hello world"
+    project = "hello world"
+    resource = "hello world"
+    test_permissions_request_resource = {}
+    zone = "hello world"
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.test_iam_permissions({ parent_resource: parent_resource, project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.test_iam_permissions parent_resource: parent_resource, project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsReservationBlockRequest.new(parent_resource: parent_resource, project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.test_iam_permissions({ parent_resource: parent_resource, project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsReservationBlockRequest.new(parent_resource: parent_resource, project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
       end
     end
   end

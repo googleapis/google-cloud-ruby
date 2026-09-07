@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,36 +82,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_occurrence_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_occurrence({ name: name }) do |response, operation|
+      c.get_occurrence({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_occurrence name: name do |response, operation|
+      c.get_occurrence name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_occurrence ::Grafeas::V1::GetOccurrenceRequest.new(name: name) do |response, operation|
+      c.get_occurrence ::Grafeas::V1::GetOccurrenceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_occurrence({ name: name }, grpc_options) do |response, operation|
+      c.get_occurrence({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_occurrence(::Grafeas::V1::GetOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_occurrence(::Grafeas::V1::GetOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -133,6 +133,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_occurrences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_occurrences, name
@@ -141,45 +142,46 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_occurrences_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_occurrences parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_occurrences parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_occurrences ::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_occurrences ::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_occurrences(::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_occurrences(::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -209,36 +211,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_occurrence_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_occurrence({ name: name }) do |response, operation|
+      c.delete_occurrence({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_occurrence name: name do |response, operation|
+      c.delete_occurrence name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_occurrence ::Grafeas::V1::DeleteOccurrenceRequest.new(name: name) do |response, operation|
+      c.delete_occurrence ::Grafeas::V1::DeleteOccurrenceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_occurrence({ name: name }, grpc_options) do |response, operation|
+      c.delete_occurrence({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_occurrence(::Grafeas::V1::DeleteOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_occurrence(::Grafeas::V1::DeleteOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +271,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_occurrence_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_occurrence({ parent: parent, occurrence: occurrence }) do |response, operation|
+      c.create_occurrence({ parent: parent, occurrence: occurrence }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_occurrence parent: parent, occurrence: occurrence do |response, operation|
+      c.create_occurrence parent: parent, occurrence: occurrence do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_occurrence ::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence) do |response, operation|
+      c.create_occurrence ::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_occurrence({ parent: parent, occurrence: occurrence }, grpc_options) do |response, operation|
+      c.create_occurrence({ parent: parent, occurrence: occurrence }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_occurrence(::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence), grpc_options) do |response, operation|
+      c.create_occurrence(::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +331,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_create_occurrences_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_occurrences({ parent: parent, occurrences: occurrences }) do |response, operation|
+      c.batch_create_occurrences({ parent: parent, occurrences: occurrences }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_occurrences parent: parent, occurrences: occurrences do |response, operation|
+      c.batch_create_occurrences parent: parent, occurrences: occurrences do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_occurrences ::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences) do |response, operation|
+      c.batch_create_occurrences ::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_occurrences({ parent: parent, occurrences: occurrences }, grpc_options) do |response, operation|
+      c.batch_create_occurrences({ parent: parent, occurrences: occurrences }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_occurrences(::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences), grpc_options) do |response, operation|
+      c.batch_create_occurrences(::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,36 +393,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_occurrence_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_occurrence({ name: name, occurrence: occurrence, update_mask: update_mask }) do |response, operation|
+      c.update_occurrence({ name: name, occurrence: occurrence, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_occurrence name: name, occurrence: occurrence, update_mask: update_mask do |response, operation|
+      c.update_occurrence name: name, occurrence: occurrence, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_occurrence ::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask) do |response, operation|
+      c.update_occurrence ::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_occurrence({ name: name, occurrence: occurrence, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_occurrence({ name: name, occurrence: occurrence, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_occurrence(::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_occurrence(::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -449,36 +451,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_occurrence_note_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_occurrence_note({ name: name }) do |response, operation|
+      c.get_occurrence_note({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_occurrence_note name: name do |response, operation|
+      c.get_occurrence_note name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_occurrence_note ::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name) do |response, operation|
+      c.get_occurrence_note ::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_occurrence_note({ name: name }, grpc_options) do |response, operation|
+      c.get_occurrence_note({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_occurrence_note(::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_occurrence_note(::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -507,36 +509,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_note_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_note({ name: name }) do |response, operation|
+      c.get_note({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_note name: name do |response, operation|
+      c.get_note name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_note ::Grafeas::V1::GetNoteRequest.new(name: name) do |response, operation|
+      c.get_note ::Grafeas::V1::GetNoteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_note({ name: name }, grpc_options) do |response, operation|
+      c.get_note({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_note(::Grafeas::V1::GetNoteRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_note(::Grafeas::V1::GetNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -558,6 +560,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_notes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notes, name
@@ -566,45 +569,46 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_notes_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_notes parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notes ::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_notes ::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notes(::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_notes(::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -634,36 +638,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_note_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_note({ name: name }) do |response, operation|
+      c.delete_note({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_note name: name do |response, operation|
+      c.delete_note name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_note ::Grafeas::V1::DeleteNoteRequest.new(name: name) do |response, operation|
+      c.delete_note ::Grafeas::V1::DeleteNoteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_note({ name: name }, grpc_options) do |response, operation|
+      c.delete_note({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_note(::Grafeas::V1::DeleteNoteRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_note(::Grafeas::V1::DeleteNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -696,36 +700,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_note_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_note({ parent: parent, note_id: note_id, note: note }) do |response, operation|
+      c.create_note({ parent: parent, note_id: note_id, note: note }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_note parent: parent, note_id: note_id, note: note do |response, operation|
+      c.create_note parent: parent, note_id: note_id, note: note do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_note ::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note) do |response, operation|
+      c.create_note ::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_note({ parent: parent, note_id: note_id, note: note }, grpc_options) do |response, operation|
+      c.create_note({ parent: parent, note_id: note_id, note: note }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_note(::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note), grpc_options) do |response, operation|
+      c.create_note(::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -756,36 +760,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_create_notes_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_notes({ parent: parent, notes: notes }) do |response, operation|
+      c.batch_create_notes({ parent: parent, notes: notes }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_notes parent: parent, notes: notes do |response, operation|
+      c.batch_create_notes parent: parent, notes: notes do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_notes ::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes) do |response, operation|
+      c.batch_create_notes ::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_notes({ parent: parent, notes: notes }, grpc_options) do |response, operation|
+      c.batch_create_notes({ parent: parent, notes: notes }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_notes(::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes), grpc_options) do |response, operation|
+      c.batch_create_notes(::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -818,36 +822,36 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_note_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_note({ name: name, note: note, update_mask: update_mask }) do |response, operation|
+      c.update_note({ name: name, note: note, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_note name: name, note: note, update_mask: update_mask do |response, operation|
+      c.update_note name: name, note: note, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_note ::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask) do |response, operation|
+      c.update_note ::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_note({ name: name, note: note, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_note({ name: name, note: note, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_note(::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_note(::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -882,40 +886,40 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_note_occurrences_client_stub do
       # Create client
-      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+      c = ::Grafeas::V1::Grafeas::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_note_occurrences({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_note_occurrences({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_note_occurrences name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_note_occurrences name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_note_occurrences ::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_note_occurrences ::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_note_occurrences({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_note_occurrences({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_note_occurrences(::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_note_occurrences(::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

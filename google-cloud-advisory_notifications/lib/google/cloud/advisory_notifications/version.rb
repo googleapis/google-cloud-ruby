@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module AdvisoryNotifications
-      VERSION = "1.3.2"
+      VERSION = "1.5.1"
     end
   end
 end

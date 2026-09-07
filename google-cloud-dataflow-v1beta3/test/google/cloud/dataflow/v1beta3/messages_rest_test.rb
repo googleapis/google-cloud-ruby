@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -104,32 +104,32 @@ class ::Google::Cloud::Dataflow::V1beta3::Messages::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataflow::V1beta3::Messages::Rest::ServiceStub.stub :transcode_list_job_messages_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_job_messages_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::Messages::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::Messages::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }) do |_result, response|
+        c.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_job_messages project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location do |_result, response|
+        c.list_job_messages project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_job_messages ::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location) do |_result, response|
+        c.list_job_messages ::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }, call_options) do |_result, response|
+        c.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_job_messages(::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location), call_options) do |_result, response|
+        c.list_job_messages(::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

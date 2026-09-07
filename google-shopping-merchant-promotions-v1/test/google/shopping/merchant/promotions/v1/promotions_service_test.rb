@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,36 +86,36 @@ class ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::ClientTes
 
     Gapic::ServiceStub.stub :new, insert_promotion_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_promotion({ parent: parent, promotion: promotion, data_source: data_source }) do |response, operation|
+      c.insert_promotion({ parent: parent, promotion: promotion, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_promotion parent: parent, promotion: promotion, data_source: data_source do |response, operation|
+      c.insert_promotion parent: parent, promotion: promotion, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_promotion ::Google::Shopping::Merchant::Promotions::V1::InsertPromotionRequest.new(parent: parent, promotion: promotion, data_source: data_source) do |response, operation|
+      c.insert_promotion ::Google::Shopping::Merchant::Promotions::V1::InsertPromotionRequest.new(parent: parent, promotion: promotion, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_promotion({ parent: parent, promotion: promotion, data_source: data_source }, grpc_options) do |response, operation|
+      c.insert_promotion({ parent: parent, promotion: promotion, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_promotion(::Google::Shopping::Merchant::Promotions::V1::InsertPromotionRequest.new(parent: parent, promotion: promotion, data_source: data_source), grpc_options) do |response, operation|
+      c.insert_promotion(::Google::Shopping::Merchant::Promotions::V1::InsertPromotionRequest.new(parent: parent, promotion: promotion, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::ClientTes
 
     Gapic::ServiceStub.stub :new, get_promotion_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_promotion({ name: name }) do |response, operation|
+      c.get_promotion({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_promotion name: name do |response, operation|
+      c.get_promotion name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_promotion ::Google::Shopping::Merchant::Promotions::V1::GetPromotionRequest.new(name: name) do |response, operation|
+      c.get_promotion ::Google::Shopping::Merchant::Promotions::V1::GetPromotionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_promotion({ name: name }, grpc_options) do |response, operation|
+      c.get_promotion({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_promotion(::Google::Shopping::Merchant::Promotions::V1::GetPromotionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_promotion(::Google::Shopping::Merchant::Promotions::V1::GetPromotionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::ClientTes
 
     Gapic::ServiceStub.stub :new, list_promotions_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_promotions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_promotions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_promotions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_promotions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_promotions ::Google::Shopping::Merchant::Promotions::V1::ListPromotionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_promotions ::Google::Shopping::Merchant::Promotions::V1::ListPromotionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_promotions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_promotions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_promotions(::Google::Shopping::Merchant::Promotions::V1::ListPromotionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_promotions(::Google::Shopping::Merchant::Promotions::V1::ListPromotionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

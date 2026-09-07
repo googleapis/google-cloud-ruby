@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,9 @@ module Google
         #     Format:
         #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
         # @!attribute [r] custom_targeting_key_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `CustomTargetingKey` ID.
+        #     Output only. Deprecated: `CustomTargetingKey` ID.
         # @!attribute [rw] ad_tag_name
         #   @return [::String]
         #     Immutable. Name of the key. Keys can contain up to 10 characters each. You

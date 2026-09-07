@@ -1,5 +1,47 @@
 # Changelog
 
+### 1.9.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 1.8.2 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+
+### 1.8.1 (2026-07-23)
+
+#### Documentation
+
+* restrict `allowed_locations` region or zone values to the same region where the job is created ([#34994](https://github.com/googleapis/google-cloud-ruby/issues/34994)) 
+
+### 1.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34040](https://github.com/googleapis/google-cloud-ruby/issues/34040)) 
+
+### 1.7.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33430](https://github.com/googleapis/google-cloud-ruby/issues/33430)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.5.0 (2025-11-19)
+
+#### Features
+
+* added new provisioning models ([#32207](https://github.com/googleapis/google-cloud-ruby/issues/32207)) 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation

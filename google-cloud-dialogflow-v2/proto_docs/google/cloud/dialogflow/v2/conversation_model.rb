@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -435,6 +435,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp when the request to create conversation model is submitted. The
         #     time is measured on server side.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class CreateConversationModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -477,6 +480,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp when request to deploy conversation model was submitted. The time
         #     is measured on server side.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class DeployConversationModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -493,6 +499,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp when the request to undeploy conversation model was submitted.
         #     The time is measured on server side.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class UndeployConversationModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -509,6 +518,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp when delete conversation model request was created. The time is
         #     measured on server side.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class DeleteConversationModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,6 +83,9 @@ module Google
           #   @return [::String]
           #     Human readable description for better understanding an intent like its
           #     scope, content, result etc. Maximum character limit: 140 characters.
+          # @!attribute [rw] dtmf_pattern
+          #   @return [::String]
+          #     Optional. Matching DTMF pattern for the intent.
           class Intent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

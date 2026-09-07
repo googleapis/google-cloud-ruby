@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Billing
       module Budgets
-        VERSION = "3.0.2"
+        VERSION = "3.2.1"
       end
     end
   end

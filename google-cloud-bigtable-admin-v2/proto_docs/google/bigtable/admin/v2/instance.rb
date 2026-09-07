@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
           #     The type of the instance. Defaults to `PRODUCTION`.
+          # @!attribute [rw] edition
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::Edition]
+          #     Optional. The edition of the instance. See
+          #     {::Google::Cloud::Bigtable::Admin::V2::Instance::Edition Edition} for details.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Labels are a flexible and lightweight mechanism for organizing cloud
@@ -126,6 +130,29 @@ module Google
               # DEPRECATED: Prefer PRODUCTION for all use cases, as it no longer enforces
               # a higher minimum node count than DEVELOPMENT.
               DEVELOPMENT = 2
+            end
+
+            # Possible editions of an instance.
+            #
+            # An edition is a specific tier of Cloud Bigtable. Each edition is tailored
+            # to different customer needs. Higher tiers offer more features and better
+            # performance.
+            module Edition
+              # The edition is unspecified. This is treated as `ENTERPRISE`.
+              EDITION_UNSPECIFIED = 0
+
+              # The Enterprise edition. This is the default offering that is designed to
+              # meet the needs of most enterprise workloads.
+              ENTERPRISE = 1
+
+              # The Enterprise Plus edition. This is a premium tier that is designed for
+              # demanding, multi-tenant workloads requiring the highest levels of
+              # performance, scale, and global availability.
+              #
+              # The nodes in the Enterprise Plus tier come at a higher cost than the
+              # Enterprise tier. Any Enterprise Plus features must be disabled before
+              # downgrading to Enterprise.
+              ENTERPRISE_PLUS = 2
             end
           end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -173,6 +173,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources KeyManagementService.ListRetiredResources}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project-specific location holding the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}, in the format
+        #     `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Optional limit on the number of
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} to be included in
+        #     the response. Further
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResources} can subsequently be
+        #     obtained by including the
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}
+        #     in a subsequent request. If unspecified, the server will pick an
+        #     appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Optional pagination token, returned earlier via
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesResponse#next_page_token ListRetiredResourcesResponse.next_page_token}.
+        class ListRetiredResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings KeyManagementService.ListKeyRings}.
         # @!attribute [rw] key_rings
@@ -266,6 +292,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Response message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources KeyManagementService.ListRetiredResources}.
+        # @!attribute [rw] retired_resources
+        #   @return [::Array<::Google::Cloud::Kms::V1::RetiredResource>]
+        #     The list of {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results. Pass this value in
+        #     {::Google::Cloud::Kms::V1::ListRetiredResourcesRequest#page_token ListRetiredResourcesRequest.page_token}
+        #     to retrieve the next page of results.
+        # @!attribute [rw] total_size
+        #   @return [::Integer]
+        #     The total number of {::Google::Cloud::Kms::V1::RetiredResource RetiredResources}
+        #     that matched the query.
+        class ListRetiredResourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_key_ring KeyManagementService.GetKeyRing}.
         # @!attribute [rw] name
@@ -325,7 +370,29 @@ module Google
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the
         #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+        # @!attribute [rw] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Optional. Specifies the [WrappingPublicKey][] format.
+        #     If not specified:
+        #       * For RSA-based import methods, the wrapping key will be returned in PEM
+        #       format
+        #       * For pure ML-KEM-based import methods, the wrapping key will be returned
+        #       in the raw bytes format specified in FIPS-203
+        #       * For X-Wing-based import methods, the wrapping key will be returned in
+        #       the raw bytes format specified in
+        #       https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
         class GetImportJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_retired_resource KeyManagementService.GetRetiredResource}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::RetiredResource#name name} of the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} to get.
+        class GetRetiredResourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -374,6 +441,17 @@ module Google
         #     or
         #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version ImportCryptoKeyVersion}
         #     before you can use this {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+        # @!attribute [rw] trusted_wrapping_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether trusted wrapping will be enabled on the first
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} created for this
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. This field is only supported
+        #     for keys with
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level CryptoKeyVersionTemplate.protection_level}
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+        #     This field is supported for all
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurposes} except
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
         class CreateCryptoKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -391,6 +469,28 @@ module Google
         #     Required. A {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
         #     initial field values.
         class CreateCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key KeyManagementService.DeleteCryptoKey}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to delete.
+        class DeleteCryptoKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version KeyManagementService.DeleteCryptoKeyVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to delete.
+        class DeleteCryptoKeyVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -487,7 +587,112 @@ module Google
         #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#wrapped_key wrapped_key}.
         #     Prefer to use that field in new work. Either that field or this field
         #     (but not both) must be specified.
+        # @!attribute [rw] trusted_wrapping_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether trusted wrapping will be enabled on the imported
+        #     [CryptoKeyVersion]. This field is only supported for keys with
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level CryptoKeyVersionTemplate.protection_level}
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+        #     This field is supported for all
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurposes} besides
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
         class ImportCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_trusted_key_wrapped_crypto_key_version KeyManagementService.ImportTrustedKeyWrappedCryptoKeyVersion}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to be imported into.
+        # @!attribute [rw] importing_key
+        #   @return [::String]
+        #     Required. Required - the CKV of the trusted key used to import.
+        #     This can be the name of a CryptoKeyVersion or a CryptoKey.
+        # @!attribute [rw] crypto_key_version
+        #   @return [::String]
+        #     Optional. The optional {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of
+        #     an existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to
+        #     target for an import operation. If this field is not present, a new
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} containing the
+        #     supplied key material is created.
+        #
+        #     If this field is present, the supplied key material is imported into
+        #     the existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. To
+        #     import into an existing
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
+        #     {::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest#parent ImportTrustedKeyWrappedCryptoKeyVersionRequest.parent},
+        #     have been previously created via
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_trusted_key_wrapped_crypto_key_version ImportTrustedKeyWrappedCryptoKeyVersion},
+        #     and be in
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}
+        #     or
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
+        #     state. The key material and algorithm must match the previous
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} exactly if the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} has ever contained
+        #     key material
+        # @!attribute [rw] wrapped_key
+        #   @return [::String]
+        #     Required. The target key pre-wrapped on premises.
+        # @!attribute [rw] algorithm
+        #   @return [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
+        #     Required. Required - The
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm}
+        #     of the key being imported. This does not need to match the
+        #     {::Google::Cloud::Kms::V1::CryptoKey#version_template version_template} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} this version imports into.
+        class ImportTrustedKeyWrappedCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#export_trusted_key_wrapped_crypto_key_version KeyManagementService.ExportTrustedKeyWrappedCryptoKeyVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to export. The
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must have
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#trusted_wrapping_enabled trusted_wrapping_enabled}
+        #     set to true.
+        # @!attribute [rw] wrapping_key
+        #   @return [::String]
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as a
+        #     wrapping key. The {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+        #     must have {::Google::Cloud::Kms::V1::CryptoKeyVersion#hsm_trusted hsm_trusted}
+        #     set to true.
+        class ExportTrustedKeyWrappedCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#export_trusted_key_wrapped_crypto_key_version KeyManagementService.ExportTrustedKeyWrappedCryptoKeyVersion}.
+        # @!attribute [rw] wrapped_key
+        #   @return [::String]
+        #     The wrapped key material.
+        # @!attribute [rw] wrapped_key_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse#wrapped_key ExportTrustedKeyWrappedCryptoKeyVersionResponse.wrapped_key}.
+        #     An integrity check of
+        #     {::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse#wrapped_key ExportTrustedKeyWrappedCryptoKeyVersionResponse.wrapped_key}
+        #     can be performed by computing the CRC32C checksum of
+        #     {::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse#wrapped_key ExportTrustedKeyWrappedCryptoKeyVersionResponse.wrapped_key}
+        #     and comparing your results to this field. Discard the response in case of
+        #     non-matching checksum values, and perform a limited number of retries. A
+        #     persistent mismatch may indicate an issue in your computation of the CRC32C
+        #     checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        class ExportTrustedKeyWrappedCryptoKeyVersionResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1761,17 +1966,25 @@ module Google
         #   @return [::String]
         #     A message digest produced with the SHA-256 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha384
         #   @return [::String]
         #     A message digest produced with the SHA-384 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha512
         #   @return [::String]
         #     A message digest produced with the SHA-512 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] external_mu
+        #   @return [::String]
+        #     A message digest produced with SHAKE-256, to be used with ML-DSA
+        #     external-μ algorithms only. See "message representative" note in
+        #     section 6.2, algorithm 7 of the FIPS-204 standard:
+        #     https://doi.org/10.6028/nist.fips.204
+        #
+        #     Note: The following fields are mutually exclusive: `external_mu`, `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Digest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1791,7 +2004,35 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} can be created in
         #     this location.
+        # @!attribute [rw] hsm_single_tenant_available
+        #   @return [::Boolean]
+        #     Indicates whether {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}
+        #     can be created in this location.
         class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the metadata of the
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key KeyManagementService.DeleteCryptoKey}
+        # long-running operation.
+        # @!attribute [r] retired_resource
+        #   @return [::String]
+        #     Output only. The resource name of the
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} created as a result
+        #     of this operation, in the format
+        #     `projects/*/locations/*/retiredResources/*`.
+        class DeleteCryptoKeyMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the metadata of the
+        # {::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version KeyManagementService.DeleteCryptoKeyVersion}
+        # long-running operation.
+        class DeleteCryptoKeyVersionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

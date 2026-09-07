@@ -1,5 +1,53 @@
 # Changelog
 
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 2.12.0 (2026-07-27)
+
+#### Features
+
+* deprecate client_tls_policy field from Endpoint Policy proto ([#35025](https://github.com/googleapis/google-cloud-ruby/issues/35025)) 
+
+### 2.11.0 (2026-07-21)
+
+#### Features
+
+* A new field `resource_uris` is added to message `.google.cloud.networkservices.v1.AgentGateway` ([#34979](https://github.com/googleapis/google-cloud-ruby/issues/34979)) 
+
+### 2.10.1 (2026-06-18)
+
+#### Documentation
+
+* fix unclosed backtick in AgentGateway registries comment ([#34606](https://github.com/googleapis/google-cloud-ruby/issues/34606)) 
+
+### 2.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
+### 2.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 2.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.7.0 (2025-11-06)
+
+#### Features
+
+* Add support for LbEdgeExtension resource in NetworkServices API ([#32153](https://github.com/googleapis/google-cloud-ruby/issues/32153)) 
+
 ### 2.6.1 (2025-10-27)
 
 #### Documentation

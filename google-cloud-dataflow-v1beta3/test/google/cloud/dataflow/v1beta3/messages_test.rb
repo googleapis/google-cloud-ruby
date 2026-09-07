@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -96,40 +96,40 @@ class ::Google::Cloud::Dataflow::V1beta3::Messages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_job_messages_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Messages::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Messages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }) do |response, operation|
+      c.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_job_messages project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location do |response, operation|
+      c.list_job_messages project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_job_messages ::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location) do |response, operation|
+      c.list_job_messages ::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }, grpc_options) do |response, operation|
+      c.list_job_messages({ project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_job_messages(::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location), grpc_options) do |response, operation|
+      c.list_job_messages(::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new(project_id: project_id, job_id: job_id, minimum_importance: minimum_importance, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, location: location), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

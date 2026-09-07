@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -277,6 +277,9 @@ module Google
         # @!attribute [rw] nfs_mounts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::NfsMount>]
         #     Optional. List of NFS mount spec.
+        # @!attribute [rw] lustre_mounts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::LustreMount>]
+        #     Optional. List of Lustre mounts.
         # @!attribute [rw] disk_spec
         #   @return [::Google::Cloud::AIPlatform::V1::DiskSpec]
         #     Disk spec.

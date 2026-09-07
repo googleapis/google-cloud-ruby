@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,27 @@ module Google
         module InsightsConfigService
           # Path helper methods for the InsightsConfigService API.
           module Paths
+            ##
+            # Create a fully-qualified DeploymentEvent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param insights_config [String]
+            # @param deployment_event [String]
+            #
+            # @return [::String]
+            def deployment_event_path project:, location:, insights_config:, deployment_event:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "insights_config cannot contain /" if insights_config.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/insightsConfigs/#{insights_config}/deploymentEvents/#{deployment_event}"
+            end
+
             ##
             # Create a fully-qualified InsightsConfig resource string.
             #

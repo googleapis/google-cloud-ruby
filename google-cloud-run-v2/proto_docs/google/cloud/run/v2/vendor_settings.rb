@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,6 +140,11 @@ module Google
         # @!attribute [rw] scaling_mode
         #   @return [::Google::Cloud::Run::V2::ServiceScaling::ScalingMode]
         #     Optional. The scaling mode for the service.
+        # @!attribute [rw] max_instance_count
+        #   @return [::Integer]
+        #     Optional. total max instances for the service. This number of instances is
+        #     divided among all revisions with specified traffic based on the percent
+        #     of traffic they are receiving.
         # @!attribute [rw] manual_instance_count
         #   @return [::Integer]
         #     Optional. total instance count for the service in manual scaling mode. This

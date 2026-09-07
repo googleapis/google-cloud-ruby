@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development."
-  gem.summary       = "API Client library for the Cloud Firestore Admin API"
+  gem.description   = "Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development."
+  gem.summary       = "Accesses the NoSQL document database built for automatic scaling, high performance, and ease of application development."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-firestore-admin-v1", ">= 0.14", "< 2.a"

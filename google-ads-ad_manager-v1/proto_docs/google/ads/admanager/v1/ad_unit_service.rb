@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,8 +40,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of AdUnits to return. The service may return
         #     fewer than this value. If unspecified, at most 50 ad units will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     returned. The maximum value is 1000; values greater than 1000 will be
+        #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListAdUnits` call.
@@ -52,8 +52,23 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
-        #     See syntax details at
-        #     https://developers.google.com/ad-manager/api/beta/filters
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     **Filterable fields:**
+        #
+        #     * `adUnitCode`
+        #     * `adUnitSizes.canonicalName`
+        #     * `displayName`
+        #     * `effectiveAdsenseEnabled`
+        #     * `explicitlyTargeted`
+        #     * `externalSetTopBoxChannelId`
+        #     * `hasChildren`
+        #     * `name`
+        #     * `parentAdUnit`
+        #     * `status`
+        #     * `teams`
+        #     * `updateTime`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -81,7 +96,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -89,6 +104,84 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateAdUnit` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `AdUnit` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] ad_unit
+        #   @return [::Google::Ads::AdManager::V1::AdUnit]
+        #     Required. The `AdUnit` to create.
+        class CreateAdUnitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateAdUnit` method.
+        # @!attribute [rw] ad_unit
+        #   @return [::Google::Ads::AdManager::V1::AdUnit]
+        #     Required. The `AdUnit` to update.
+        #
+        #     The `AdUnit`'s name is used to identify the `AdUnit` to update. Format:
+        #     `networks/{network_code}/adUnits/{ad_unit_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateAdUnitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AdUnits` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateAdUnitRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateAdUnitRequest>]
+        #     Required. The `AdUnit` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateAdUnits` method.
+        # @!attribute [rw] ad_units
+        #   @return [::Array<::Google::Ads::AdManager::V1::AdUnit>]
+        #     The `AdUnit` objects created.
+        class BatchCreateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AdUnits` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateAdUnitRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateAdUnitRequest>]
+        #     Required. The `AdUnit` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateAdUnits` method.
+        # @!attribute [rw] ad_units
+        #   @return [::Array<::Google::Ads::AdManager::V1::AdUnit>]
+        #     The `AdUnit` objects updated.
+        class BatchUpdateAdUnitsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -102,8 +195,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of AdUnitSizes to return. The service may
         #     return fewer than this value. If unspecified, at most 50 ad unit sizes will
-        #     be returned. The maximum value is 1000; values above 1000 will be coerced
-        #     to 1000.
+        #     be returned. The maximum value is 1000; values greater than 1000 will be
+        #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListAdUnitSizes` call.
@@ -143,7 +236,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -151,6 +244,63 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListAdUnitSizesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to activate.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchActivateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateAdUnits` method.
+        class BatchActivateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchDeactivateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to deactivate.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchDeactivateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateAdUnits` method.
+        class BatchDeactivateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchArchiveAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to archive.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchArchiveAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchiveAdUnits` method.
+        class BatchArchiveAdUnitsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

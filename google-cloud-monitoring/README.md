@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Monitoring API
 
-API Client library for the Cloud Monitoring API
+Manages your Cloud Monitoring data and configurations.
 
-Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-monitoring-v*`.
@@ -19,9 +18,6 @@ client gems:
 [google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest),
 [google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
 [google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/monitoring)
-for more usage information.
 
 ## Quick Start
 
@@ -86,7 +82,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

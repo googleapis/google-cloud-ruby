@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,7 +64,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Detailed row-level warning with field paths.
+        # @!attribute [rw] reason
+        #   @return [::Google::Ads::DataManager::V1::WarningReason]
+        #     The warning reason.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The detailed warning message describing the issue.
+        # @!attribute [rw] field
+        #   @return [::String]
+        #     The field path that triggered the warning. Uses the same format as
+        #     [google.rpc.BadRequest.FieldViolation.field][google.rpc.BadRequest.FieldViolation.field].
+        class FieldWarning
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The processing error reason.
+        # New reasons may be added in the future.
         module ProcessingErrorReason
           # The processing error reason is unknown.
           PROCESSING_ERROR_REASON_UNSPECIFIED = 0
@@ -147,6 +164,9 @@ module Google
           # The system did not have the permissions needed to access the KEK.
           PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED = 24
 
+          # The system failed to authenticate with AWS.
+          PROCESSING_ERROR_REASON_AWS_AUTH_FAILED = 27
+
           # Failed to decrypt the
           # {::Google::Ads::DataManager::V1::UserIdentifier UserIdentifier} data using the
           # DEK.
@@ -155,6 +175,61 @@ module Google
           # The user attempted to ingest events with an ad identifier that isn't
           # from the operating account's ads.
           PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER = 26
+
+          # One-per-click conversion actions cannot be used with BRAIDs.
+          PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID = 28
+
+          # The match ID can not be found.
+          PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND = 29
+
+          # The user ID can not be found for the match ID.
+          PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID = 30
+
+          # The user ID can not be found for the GCLID.
+          PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID = 31
+
+          # The user ID can not be found for the DCLID.
+          PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID = 32
+
+          # There are ad identifiers that are invalid.
+          PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS = 33
+
+          # The mobile ID format is invalid.
+          PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT = 34
+
+          # The original conversions can't be found.
+          PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND = 35
+
+          # The event ID (dclid or impression ID) cannot be decoded.
+          PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR = 36
+
+          # The user ID cannot be found for the given impression ID.
+          PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID = 37
+
+          # The user ID cannot be found.
+          PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND = 38
+
+          # The event timestamp on the event was earlier than the associated click.
+          PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK = 39
+
+          # The click occurred too recently.
+          PROCESSING_ERROR_REASON_TOO_RECENT_CLICK = 40
+
+          # The event can't be attributed to a click (GCLID). This may be because the
+          # click did not come from a Google Ads campaign, for example.
+          PROCESSING_ERROR_REASON_INVALID_CLICK = 41
+
+          # The click from the event isn't associated with the
+          # {::Google::Ads::DataManager::V1::Destination#operating_account `operating_account`}
+          # of the destination.
+          PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK = 42
+
+          # A corresponding click can't be found that matches the provided attributes.
+          PROCESSING_ERROR_REASON_CLICK_NOT_FOUND = 43
+
+          # External attribution data is missing. Sending events to a destination for
+          # an external attribution conversion action isn't supported.
+          PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44
         end
 
         # The processing warning reason.
@@ -182,13 +257,87 @@ module Google
           # exist.
           PROCESSING_WARNING_REASON_INVALID_KEK = 6
 
-          # Failed to decrypt th
+          # Failed to decrypt the
           # {::Google::Ads::DataManager::V1::UserIdentifier UserIdentifier} data using the
           # DEK.
           PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7
 
           # Internal error.
           PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8
+
+          # The system failed to authenticate with AWS.
+          PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
+        end
+
+        # Reasons for non-blocking warnings returned during ingestion.
+        module WarningReason
+          # Unspecified warning reason.
+          WARNING_REASON_UNSPECIFIED = 0
+
+          # A custom variable in
+          # {::Google::Ads::DataManager::V1::Event#custom_variables `custom_variables`} is
+          # not enabled in the account.
+          WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 1
+
+          # A custom variable value in
+          # {::Google::Ads::DataManager::V1::Event#custom_variables `custom_variables`} is
+          # not among the predefined allowed values configured for the custom variable
+          # on the destination account.
+          WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED = 2
+
+          # The {::Google::Ads::DataManager::V1::Event#cart_data `cart_data`} is not
+          # supported with {::Google::Ads::DataManager::V1::AdIdentifiers#gbraid `gbraid`}
+          # or {::Google::Ads::DataManager::V1::AdIdentifiers#wbraid `wbraid`}.
+          WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID = 3
+
+          # The
+          # {::Google::Ads::DataManager::V1::Item#merchant_product_id `merchant_product_id`}
+          # is missing in the cart item.
+          WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING = 4
+
+          # The {::Google::Ads::DataManager::V1::Item#unit_price `unit_price`} is missing in
+          # the cart item.
+          WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING = 5
+
+          # Generic warning reason for issues that do not fit into other specific
+          # categories.
+          WARNING_REASON_GENERIC = 6
+
+          # The {::Google::Ads::DataManager::V1::Event#client_id `client_id`} is invalid.
+          WARNING_REASON_INVALID_CLIENT_ID = 7
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#subdivision_code `subdivision_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_SUBDIVISION_CODE = 8
+
+          # The {::Google::Ads::DataManager::V1::EventLocation#region_code `region_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_REGION_CODE = 9
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#subcontinent_code `subcontinent_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_SUBCONTINENT_CODE = 10
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#continent_code `continent_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_CONTINENT_CODE = 11
+
+          # The device {::Google::Ads::DataManager::V1::DeviceInfo#category `category`}
+          # is invalid.
+          WARNING_REASON_INVALID_DEVICE_CATEGORY = 12
+
+          # The device
+          # {::Google::Ads::DataManager::V1::DeviceInfo#screen_height `screen_height`} or
+          # {::Google::Ads::DataManager::V1::DeviceInfo#screen_width `screen_width`} is
+          # invalid.
+          WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION = 13
+
+          # The {::Google::Ads::DataManager::V1::CartData#merchant_id `merchant_id`} is
+          # invalid.
+          WARNING_REASON_INVALID_MERCHANT_ID = 14
         end
       end
     end

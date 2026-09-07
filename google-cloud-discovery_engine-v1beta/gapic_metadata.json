@@ -5,6 +5,136 @@
   "protoPackage": "google.cloud.discoveryengine.v1beta",
   "libraryPackage": "::Google::Cloud::DiscoveryEngine::V1beta",
   "services": {
+    "AclConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "update_acl_config"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "get_acl_config"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client",
+          "rpcs": {
+            "StreamGenerateGroundedContent": {
+              "methods": [
+                "stream_generate_grounded_content"
+              ]
+            },
+            "GenerateGroundedContent": {
+              "methods": [
+                "generate_grounded_content"
+              ]
+            },
+            "CheckGrounding": {
+              "methods": [
+                "check_grounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            },
+            "SearchLite": {
+              "methods": [
+                "search_lite"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AssistantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::AssistantService::Client",
+          "rpcs": {
+            "StreamAssist": {
+              "methods": [
+                "stream_assist"
+              ]
+            },
+            "CreateAssistant": {
+              "methods": [
+                "create_assistant"
+              ]
+            },
+            "DeleteAssistant": {
+              "methods": [
+                "delete_assistant"
+              ]
+            },
+            "UpdateAssistant": {
+              "methods": [
+                "update_assistant"
+              ]
+            },
+            "GetAssistant": {
+              "methods": [
+                "get_assistant"
+              ]
+            },
+            "ListAssistants": {
+              "methods": [
+                "list_assistants"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmekConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::CmekConfigService::Client",
+          "rpcs": {
+            "UpdateCmekConfig": {
+              "methods": [
+                "update_cmek_config"
+              ]
+            },
+            "GetCmekConfig": {
+              "methods": [
+                "get_cmek_config"
+              ]
+            },
+            "ListCmekConfigs": {
+              "methods": [
+                "list_cmek_configs"
+              ]
+            },
+            "DeleteCmekConfig": {
+              "methods": [
+                "delete_cmek_config"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompletionService": {
       "clients": {
         "grpc": {
@@ -39,6 +169,11 @@
               "methods": [
                 "purge_completion_suggestions"
               ]
+            },
+            "RemoveSuggestion": {
+              "methods": [
+                "remove_suggestion"
+              ]
             }
           }
         }
@@ -72,25 +207,6 @@
             "ListControls": {
               "methods": [
                 "list_controls"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "SearchService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client",
-          "rpcs": {
-            "Search": {
-              "methods": [
-                "search"
-              ]
-            },
-            "SearchLite": {
-              "methods": [
-                "search_lite"
               ]
             }
           }
@@ -135,6 +251,11 @@
             "AnswerQuery": {
               "methods": [
                 "answer_query"
+              ]
+            },
+            "StreamAnswerQuery": {
+              "methods": [
+                "stream_answer_query"
               ]
             },
             "GetAnswer": {
@@ -298,6 +419,16 @@
               "methods": [
                 "tune_engine"
               ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
             }
           }
         }
@@ -332,24 +463,83 @@
         }
       }
     },
-    "GroundedGenerationService": {
+    "IdentityMappingStoreService": {
       "clients": {
         "grpc": {
-          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client",
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::IdentityMappingStoreService::Client",
           "rpcs": {
-            "StreamGenerateGroundedContent": {
+            "CreateIdentityMappingStore": {
               "methods": [
-                "stream_generate_grounded_content"
+                "create_identity_mapping_store"
               ]
             },
-            "GenerateGroundedContent": {
+            "GetIdentityMappingStore": {
               "methods": [
-                "generate_grounded_content"
+                "get_identity_mapping_store"
               ]
             },
-            "CheckGrounding": {
+            "DeleteIdentityMappingStore": {
               "methods": [
-                "check_grounding"
+                "delete_identity_mapping_store"
+              ]
+            },
+            "ImportIdentityMappings": {
+              "methods": [
+                "import_identity_mappings"
+              ]
+            },
+            "PurgeIdentityMappings": {
+              "methods": [
+                "purge_identity_mappings"
+              ]
+            },
+            "ListIdentityMappings": {
+              "methods": [
+                "list_identity_mappings"
+              ]
+            },
+            "ListIdentityMappingStores": {
+              "methods": [
+                "list_identity_mapping_stores"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::LicenseConfigService::Client",
+          "rpcs": {
+            "CreateLicenseConfig": {
+              "methods": [
+                "create_license_config"
+              ]
+            },
+            "UpdateLicenseConfig": {
+              "methods": [
+                "update_license_config"
+              ]
+            },
+            "GetLicenseConfig": {
+              "methods": [
+                "get_license_config"
+              ]
+            },
+            "ListLicenseConfigs": {
+              "methods": [
+                "list_license_configs"
+              ]
+            },
+            "DistributeLicenseConfig": {
+              "methods": [
+                "distribute_license_config"
+              ]
+            },
+            "RetractLicenseConfig": {
+              "methods": [
+                "retract_license_config"
               ]
             }
           }
@@ -529,6 +719,16 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client",
           "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "create_serving_config"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "delete_serving_config"
+              ]
+            },
             "UpdateServingConfig": {
               "methods": [
                 "update_serving_config"
@@ -689,6 +889,49 @@
             "ImportUserEvents": {
               "methods": [
                 "import_user_events"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserLicenseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::UserLicenseService::Client",
+          "rpcs": {
+            "ListUserLicenses": {
+              "methods": [
+                "list_user_licenses"
+              ]
+            },
+            "ListLicenseConfigsUsageStats": {
+              "methods": [
+                "list_license_configs_usage_stats"
+              ]
+            },
+            "BatchUpdateUserLicenses": {
+              "methods": [
+                "batch_update_user_licenses"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::UserStoreService::Client",
+          "rpcs": {
+            "GetUserStore": {
+              "methods": [
+                "get_user_store"
+              ]
+            },
+            "UpdateUserStore": {
+              "methods": [
+                "update_user_store"
               ]
             }
           }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -95,6 +95,42 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientPathsTest < M
     end
   end
 
+  def test_intelligence_finding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.intelligence_finding_path project: "value0", location: "value1", intelligence_finding: "value2"
+      assert_equal "projects/value0/locations/value1/intelligenceFindings/value2", path
+    end
+  end
+
+  def test_intelligence_finding_revision_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.intelligence_finding_revision_path project: "value0", location: "value1", intelligence_finding: "value2", revision: "value3"
+      assert_equal "projects/value0/locations/value1/intelligenceFindings/value2/revisions/value3", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
   def test_managed_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -104,6 +140,30 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientPathsTest < M
 
       path = client.managed_folder_path project: "value0", bucket: "value1", managed_folder: "value2"
       assert_equal "projects/value0/buckets/value1/managedFolders/value2", path
+    end
+  end
+
+  def test_object_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.object_path project: "value0", bucket: "value1", object: "value2"
+      assert_equal "projects/value0/buckets/value1/objects/value2", path
+    end
+  end
+
+  def test_rapid_cache_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.rapid_cache_path project: "value0", bucket: "value1", rapid_cache: "value2"
+      assert_equal "projects/value0/buckets/value1/rapidCaches/value2", path
     end
   end
 

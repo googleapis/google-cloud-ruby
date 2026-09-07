@@ -1,8 +1,7 @@
 # Ruby Client for the Storage Batch Operations API
 
-API Client library for the Storage Batch Operations API
+Cloud Storage Batch Operations is a Cloud Storage capability that lets you perform operations on billions of objects in a serverless manner.
 
-google-cloud-storage_batch_operations is the official client library for the Storage Batch Operations API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-storage_batch_operations-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

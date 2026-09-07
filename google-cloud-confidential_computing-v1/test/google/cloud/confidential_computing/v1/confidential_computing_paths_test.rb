@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,18 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientP
 
       path = client.challenge_path project: "value0", location: "value1", uuid: "value2"
       assert_equal "projects/value0/locations/value1/challenges/value2", path
+    end
+  end
+
+  def test_instance_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_path project: "value0", zone: "value1", instance: "value2"
+      assert_equal "projects/value0/zones/value1/instances/value2", path
     end
   end
 

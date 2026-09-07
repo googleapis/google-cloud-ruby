@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ module Google
               API_VERSION = ""
 
               # @private
-              DEFAULT_ENDPOINT_TEMPLATE = "visionai.$UNIVERSE_DOMAIN$"
+              DEFAULT_ENDPOINT_TEMPLATE = "warehouse-visionai.$UNIVERSE_DOMAIN$"
 
               include Paths
 
@@ -203,6 +203,7 @@ module Google
                   config.quota_project = @quota_project_id
                   config.endpoint = @warehouse_stub.endpoint
                   config.universe_domain = @warehouse_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
                   config.logger = @warehouse_stub.logger if config.respond_to? :logger=
                 end
 
@@ -4405,7 +4406,7 @@ module Google
               #     If negative, INVALID_ARGUMENT error will be returned.
               #     If unspecified or 0, API will pick a default size, which is 10.
               #     If the requested page size is larger than the maximum size, API will pick
-              #     the maximum size, which is 100.
+              #     the maximum size, which is 200.
               #   @param page_token [::String]
               #     The continuation token to fetch the next page. If empty, it means it is
               #     fetching the first page.
@@ -5885,6 +5886,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -5907,7 +5909,7 @@ module Google
 
                 # @private
                 # The endpoint specific to the default "googleapis.com" universe. Deprecated.
-                DEFAULT_ENDPOINT = "visionai.googleapis.com"
+                DEFAULT_ENDPOINT = "warehouse-visionai.googleapis.com"
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
@@ -5922,6 +5924,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
                 config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
@@ -5957,6 +5966,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,32 +98,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::ClientTe
     ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::ServiceStub.stub :transcode_update_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
+        c.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_serving_config ::Google::Cloud::DiscoveryEngine::V1::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
+        c.update_serving_config ::Google::Cloud::DiscoveryEngine::V1::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_serving_config(::Google::Cloud::DiscoveryEngine::V1::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_serving_config(::Google::Cloud::DiscoveryEngine::V1::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

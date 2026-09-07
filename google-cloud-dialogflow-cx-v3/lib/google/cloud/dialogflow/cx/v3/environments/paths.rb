@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,6 +63,25 @@ module Google
                 raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/agents/#{agent}/environments/#{environment}"
+              end
+
+              ##
+              # Create a fully-qualified SecretVersion resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/secrets/{secret}/versions/{version}`
+              #
+              # @param project [String]
+              # @param secret [String]
+              # @param version [String]
+              #
+              # @return [::String]
+              def secret_version_path project:, secret:, version:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+
+                "projects/#{project}/secrets/#{secret}/versions/#{version}"
               end
 
               ##

@@ -1,5 +1,50 @@
 # Changelog
 
+### 0.23.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 0.22.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 0.22.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 0.21.0 (2026-05-22)
+
+#### Features
+
+* add support for assessment tasks in BigQuery Migration API ([#33975](https://github.com/googleapis/google-cloud-ruby/issues/33975)) 
+
+### 0.20.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
+### 0.19.0 (2026-04-02)
+
+#### Features
+
+* add origin to AttributeContext.Request ([#33462](https://github.com/googleapis/google-cloud-ruby/issues/33462)) 
+#### Documentation
+
+* update comments and formatting 
+
+### 0.18.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.17.1 (2025-10-27)
 
 #### Documentation

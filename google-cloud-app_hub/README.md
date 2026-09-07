@@ -1,8 +1,7 @@
 # Ruby Client for the App Hub API
 
-API Client library for the App Hub API
+App Hub acts as the foundational data model and central registry for your applications on Google Cloud.
 
-google-cloud-app_hub is the official client library for the App Hub API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-app_hub-v*`.
@@ -74,7 +73,7 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

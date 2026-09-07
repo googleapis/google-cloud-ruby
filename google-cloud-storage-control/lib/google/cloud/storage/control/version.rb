@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Storage
       module Control
-        VERSION = "1.1.2"
+        VERSION = "1.4.1"
       end
     end
   end

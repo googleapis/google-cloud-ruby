@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ module Google
         #     Identifier. The resource name of the `CustomField`.
         #     Format: `networks/{network_code}/customFields/{custom_field}`
         # @!attribute [r] custom_field_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. Unique ID of the CustomField. This attribute is assigned by
-        #     Google.
+        #     Output only. Deprecated: Unique ID of the CustomField.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Name of the CustomField. The max length is 127 characters.
@@ -60,9 +60,9 @@ module Google
         end
 
         # An option for a drop-down `CustomField`.
-        # @!attribute [r] custom_field_option_id
+        # @!attribute [rw] custom_field_option_id
         #   @return [::Integer]
-        #     Output only. `CustomFieldOption` ID.
+        #     Optional. Non-empty default. `CustomFieldOption` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the `CustomFieldOption`.

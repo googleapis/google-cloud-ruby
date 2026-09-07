@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -231,7 +231,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Parent value of QuotaInfo resources.
+              #     Required. Identifier. Parent value of QuotaInfo resources.
               #     Listing across different resource containers (such as 'projects/-') is not
               #     allowed.
               #
@@ -327,7 +327,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the quota info.
+              #     Required. Identifier. The resource name of the quota info.
               #
               #     An example name:
               #     `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
@@ -408,7 +408,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Parent value of QuotaPreference resources.
+              #     Required. Identifier. Parent value of QuotaPreference resources.
               #     Listing across different resource containers (such as 'projects/-') is not
               #     allowed.
               #
@@ -520,7 +520,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Name of the resource
+              #     Required. Identifier. Name of the resource
               #
               #     Example name:
               #     `projects/123/locations/global/quota_preferences/my-config-for-us-east1`
@@ -601,7 +601,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Value for parent.
+              #     Required. Identifier. Value for parent.
               #
               #     Example:
               #     `projects/123/locations/global`
@@ -834,6 +834,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -906,6 +907,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

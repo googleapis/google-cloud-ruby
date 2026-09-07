@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -151,10 +151,10 @@ module Google
           NONE = 1
 
           # Envoy will insert default internal debug headers into upstream requests:
-          # x-envoy-attempt-count
-          # x-envoy-is-timeout-retry
-          # x-envoy-expected-rq-timeout-ms
-          # x-envoy-original-path
+          # x-envoy-attempt-count,
+          # x-envoy-is-timeout-retry,
+          # x-envoy-expected-rq-timeout-ms,
+          # x-envoy-original-path,
           # x-envoy-upstream-stream-duration-ms
           DEBUG_HEADERS = 2
         end

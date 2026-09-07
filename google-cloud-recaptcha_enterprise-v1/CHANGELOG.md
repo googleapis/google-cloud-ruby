@@ -1,5 +1,39 @@
 # Release History
 
+### 1.12.2 (2026-08-13)
+
+#### Documentation
+
+* A comment for field `account_defender_assessment` in message `.google.cloud.recaptchaenterprise.v1.Assessment` is changed ([#36231](https://github.com/googleapis/google-cloud-ruby/issues/36231)) 
+
+### 1.12.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35059](https://github.com/googleapis/google-cloud-ruby/issues/35059)) 
+
+### 1.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34053](https://github.com/googleapis/google-cloud-ruby/issues/34053)) 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
+### 1.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.10.0 (2025-12-17)
+
+#### Features
+
+* add risk reasons to FraudPreventionAssessment 
+* add verifiedBots field to RiskAnalysis and definitions for a Bot object to store metadata for a detected bot ([#32269](https://github.com/googleapis/google-cloud-ruby/issues/32269)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

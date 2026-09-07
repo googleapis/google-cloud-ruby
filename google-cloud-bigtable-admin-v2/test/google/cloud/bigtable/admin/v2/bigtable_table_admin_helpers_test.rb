@@ -153,7 +153,8 @@ describe "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client helpe
         client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
           config.credentials = grpc_channel
         end
-        token = client.wait_for_replication(table_name, timeout: 1.5, mock_delay: true)
+        retry_policy = Gapic::Common::RetryPolicy.new timeout: 1.5, jitter: 0.0
+        token = client.wait_for_replication(table_name, retry_policy: retry_policy, mock_delay: true)
         assert_equal consistency_token, token
         assert client_stub.expectations_empty?
       end

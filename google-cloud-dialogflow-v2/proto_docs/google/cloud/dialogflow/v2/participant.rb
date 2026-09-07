@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,9 +50,9 @@ module Google
         #        Dialogflow adds the obfuscated user id with the participant.
         #
         #     2. If you set this field in
-        #        {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest#participant AnalyzeContent}
-        #        or
-        #        {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#participant StreamingAnalyzeContent},
+        #        [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.obfuscated_external_user_id]
+        #        or [StreamingAnalyzeContent]
+        #        [google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.obfuscated_external_user_id],
         #        Dialogflow will update
         #        {::Google::Cloud::Dialogflow::V2::Participant#obfuscated_external_user_id Participant.obfuscated_external_user_id}.
         #
@@ -63,6 +63,11 @@ module Google
         #     Dialogflow uses this user id for billing and measurement purposes. For
         #     example, Dialogflow determines whether a user in one conversation returned
         #     in a later conversation.
+        #
+        #     Additionally, to link an escalated Virtual Agent conversation
+        #     with its corresponding Agent Assist conversation for analytics, this field
+        #     in Agent Assist conversations should be populated to indicate the user id
+        #     of the `END_USER` participant in the escalated conversation.
         #
         #     Note:
         #
@@ -90,6 +95,18 @@ module Google
         #       value: "agent"
         #     }
         #     ```
+        # @!attribute [rw] agent_desktop_source
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::AgentDesktopSource]
+        #     Optional. For tracking the utilization of prebuilt Agent Assist integration
+        #     modules. This field is only inscope for Integration type that include UI
+        #     Modules, Backend Modules, and Agent Desktop connector, it is out of scope
+        #     for CCaaS and Direct Integration.
+        #     For each human agent, prebuilt UI Modules needs to trigger the
+        #     UpdateParticipant API to update this field. Both
+        #     {::Google::Cloud::Dialogflow::V2::CreateParticipantRequest#participant CreateParticipantRequest}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest#participant UpdateParticipantRequest}
+        #     will be supported.
         class Participant
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -117,6 +134,29 @@ module Google
             # Participant is an end user that has called or chatted with
             # Dialogflow services.
             END_USER = 3
+          end
+
+          # Enumeration of the Agent Desktop Source when using prebuilt Agent
+          # Assist integration modules.
+          module AgentDesktopSource
+            # Agent Desktop Source is not specified.
+            AGENT_DESKTOP_SOURCE_UNSPECIFIED = 0
+
+            # Agent Desktop Source is Live Person.
+            LIVE_PERSON = 1
+
+            # Agent Desktop Source is Genesys Cloud.
+            GENESYS_CLOUD = 2
+
+            # Agent Desktop Source is Twilio.
+            TWILIO = 3
+
+            # Agent Desktop Source is Salesforce.
+            SALESFORCE = 4
+
+            # UI Modules are in use but the desktop is either not currently released or
+            # setting this field to the applicable desktop.
+            OTHER = 8
           end
         end
 
@@ -487,6 +527,11 @@ module Google
         #     is not enabled, response stream still contains only one final response even
         #     if some `Fulfillment`s in Dialogflow CX agent have been configured to
         #     return partial responses.
+        # @!attribute [rw] output_multiple_utterances
+        #   @return [::Boolean]
+        #     Optional. If multiple uttereances are detected in the audio stream, process
+        #     them individually instead of stitching them together to form a single
+        #     utterance.
         # @!attribute [rw] enable_debugging_info
         #   @return [::Boolean]
         #     If true, `StreamingAnalyzeContentResponse.debugging_info` will get
@@ -502,8 +547,11 @@ module Google
         #
         # 1.  If the input was set to streaming audio, the first one or more messages
         #     contain `recognition_result`. Each `recognition_result` represents a more
-        #     complete transcript of what the user said. The last `recognition_result`
-        #     has `is_final` set to `true`.
+        #     complete transcript of what the user said. When a user speaks multiple
+        #     sentences, the API will emit multiple messages where `is_final = true`.
+        #     Each time the system detects a distinct pause or completed thought, it
+        #     locks in that segment, marks it `is_final = true`, and then immediately
+        #     starts a new recognition cycle for the next sentence on the same stream.
         #
         # 2.  In virtual agent stage: if `enable_partial_automated_agent_reply` is
         #     true, the following N (currently 1 <= N <= 4) messages
@@ -1074,18 +1122,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the selection of a suggestion.
+        # Represents the action to take for a tool call that requires confirmation.
         # @!attribute [rw] answer_record
         #   @return [::String]
-        #     Required. The ID of a suggestion selected by the human agent.
-        #     The suggestion(s) were generated in a previous call to
-        #     request Dialogflow assist.
-        #     The format is:
-        #     `projects/<Project ID>/locations/<Location ID>/answerRecords/<Answer Record
-        #     ID>` where <Answer Record ID> is an alphanumeric string.
+        #     Required. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/answerRecords/<Answer Record ID>`
+        #     The answer record associated with the tool call.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Parameters to be used for the tool call.  If not provided, the
+        #     tool will be called without any parameters.
+        # @!attribute [rw] action
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionInput::Action]
+        #     Optional. The type of action to take with the tool.
+        # @!attribute [rw] send_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Time when the current suggest input is sent. For tool calls, this
+        #     timestamp (along with the answer record) will be included in the
+        #     corresponding tool call result so that it can be identified.
         class SuggestionInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicate what type of action to take with the tool call.
+          module Action
+            # Action not specified.
+            ACTION_UNSPECIFIED = 0
+
+            # Indicates the user chooses to not make the tool call. It
+            # is only applicable to tool calls that are waiting for user
+            # confirmation.
+            CANCEL = 1
+
+            # Makes the tool call with provided parameters. This action is intended
+            # for tool calls that only read but not write data.
+            REVISE = 2
+
+            # Makes the tool call with provided parameters. This action is intended
+            # for tool calls that may write data.
+            CONFIRM = 3
+          end
         end
 
         # Represents the parameters of human assist query.
@@ -1169,9 +1245,264 @@ module Google
         #     to compile the suggestion. It may be smaller than the
         #     {::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistRequest#context_size SuggestKnowledgeAssistRequest.context_size}
         #     field in the request if there are fewer messages in the conversation.
+        # @!attribute [rw] additional_suggested_query_results
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::AdditionalSuggestedQueryResult>]
+        #     Optional. The list of additional suggested queries based on the context.
+        #     This is used for the cases when we want to generate multiple queries
+        #     for a single request.
         class SuggestKnowledgeAssistResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Debug information related to ingested context reference.
+        # @!attribute [rw] project_not_allowlisted
+        #   @return [::Boolean]
+        #     Indicates if the project is allowlisted to use ingested context
+        #     reference.
+        # @!attribute [rw] context_reference_retrieved
+        #   @return [::Boolean]
+        #     The status of context_reference retrieval from database.
+        # @!attribute [rw] ingested_parameters_debug_info
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo::IngestedParameterDebugInfo>]
+        #     Parameters ingested from the context reference.
+        class IngestedContextReferenceDebugInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Debug information related to ingested parameters from context reference.
+          # @!attribute [rw] parameter
+          #   @return [::String]
+          #     The name of the parameter in the context reference.
+          # @!attribute [rw] ingestion_status
+          #   @return [::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo::IngestedParameterDebugInfo::IngestionStatus]
+          #     The ingestion status for this specific parameter.
+          class IngestedParameterDebugInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum representing the various states of parameter ingestion.
+            module IngestionStatus
+              # Default value, indicates that the ingestion status is not specified.
+              INGESTION_STATUS_UNSPECIFIED = 0
+
+              # Indicates that the parameter was successfully ingested.
+              INGESTION_STATUS_SUCCEEDED = 1
+
+              # Indicates that the parameter was not available for ingestion.
+              INGESTION_STATUS_CONTEXT_NOT_AVAILABLE = 2
+
+              # Indicates that there was a failure parsing the parameter content.
+              INGESTION_STATUS_PARSE_FAILED = 3
+
+              # Indicates that the context reference had an unexpected number of
+              # content entries as Context reference should only have one entry.
+              INGESTION_STATUS_INVALID_ENTRY = 4
+
+              # Indicates that the context reference content was not in the expected
+              # format (e.g., JSON).
+              INGESTION_STATUS_INVALID_FORMAT = 5
+
+              # Indicates that the context reference language does not match the
+              # conversation language.
+              INGESTION_STATUS_LANGUAGE_MISMATCH = 6
+            end
+          end
+        end
+
+        # Message to represent the latency of the service.
+        # @!attribute [rw] internal_service_latencies
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ServiceLatency::InternalServiceLatency>]
+        #     A list of internal service latencies.
+        class ServiceLatency
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message to represent the latency of an internal service.
+          # @!attribute [rw] step
+          #   @return [::String]
+          #     The name of the internal service.
+          # @!attribute [rw] latency_ms
+          #   @return [::Float]
+          #     The latency of the internal service in milliseconds.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The start time of the internal service.
+          # @!attribute [rw] complete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The completion time of the internal service.
+          class InternalServiceLatency
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Debug information related to Knowledge Assist feature.
+        # @!attribute [rw] query_generation_failure_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryGenerationFailureReason]
+        #     Reason for query generation.
+        # @!attribute [rw] query_categorization_failure_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryCategorizationFailureReason]
+        #     Reason for query categorization.
+        # @!attribute [rw] datastore_response_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::DatastoreResponseReason]
+        #     Response reason from datastore which indicates data serving status or
+        #     answer quality degradation.
+        # @!attribute [rw] knowledge_assist_behavior
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::KnowledgeAssistBehavior]
+        #     Configured behaviors for Knowedge Assist.
+        # @!attribute [rw] ingested_context_reference_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo]
+        #     Information about parameters ingested for search knowledge.
+        # @!attribute [rw] service_latency
+        #   @return [::Google::Cloud::Dialogflow::V2::ServiceLatency]
+        #     The latency of the service.
+        # @!attribute [rw] query_generation_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryGenerationDebugInfo]
+        #     Token usage metadata for query generation.
+        # @!attribute [rw] ces_debug_info
+        #   @return [::Google::Protobuf::Struct]
+        #     Debug information from CES runtime API.
+        class KnowledgeAssistDebugInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configured behaviors for Knowedge Assist.
+          # @!attribute [rw] answer_generation_rewriter_on
+          #   @return [::Boolean]
+          #     Whether data store agent rewriter was turned off for the request.
+          # @!attribute [rw] end_user_metadata_included
+          #   @return [::Boolean]
+          #     Whether end_user_metadata is included in the data store agent call.
+          # @!attribute [rw] return_query_only
+          #   @return [::Boolean]
+          #     Whether customers configured to return query only in the
+          #     conversation profile.
+          # @!attribute [rw] use_pubsub_delivery
+          #   @return [::Boolean]
+          #     Whether customers configured to use pubsub to deliver.
+          # @!attribute [rw] disable_sync_delivery
+          #   @return [::Boolean]
+          #     Whether customers configured to disable the synchronous delivery of
+          #     Knowedge Assist response.
+          # @!attribute [rw] previous_queries_included
+          #   @return [::Boolean]
+          #     Whether previously suggested queries are included in the query generation
+          #     process.
+          # @!attribute [rw] use_translated_message
+          #   @return [::Boolean]
+          #     Translated message is included in query generation process.
+          # @!attribute [rw] use_custom_safety_filter_level
+          #   @return [::Boolean]
+          #     Safety filter is adjusted by user.
+          # @!attribute [rw] conversation_transcript_has_mixed_languages
+          #   @return [::Boolean]
+          #     Conversation transcript has mixed languages.
+          # @!attribute [rw] query_generation_agent_language_mismatch
+          #   @return [::Boolean]
+          #     Whether the agent language from the translation generator mismatches the
+          #     end-user language.
+          # @!attribute [rw] query_generation_end_user_language_mismatch
+          #   @return [::Boolean]
+          #     Whether the end-user language from the translation generator mismatches
+          #     the end-user language.
+          # @!attribute [rw] third_party_connector_allowed
+          #   @return [::Boolean]
+          #     This field indicates whether third party connectors are enabled for the
+          #     project
+          # @!attribute [rw] multiple_queries_generated
+          #   @return [::Boolean]
+          #     Indicates that the query generation model generated multiple queries.
+          # @!attribute [rw] query_contained_search_context
+          #   @return [::Boolean]
+          #     Indicates that the generated query contains search context.
+          # @!attribute [rw] invalid_items_query_suggestion_skipped
+          #   @return [::Boolean]
+          #     Indicates that invalid items were skipped when parsing the LLM response.
+          # @!attribute [rw] primary_query_redacted_and_replaced
+          #   @return [::Boolean]
+          #     True if the primary suggested query was redacted and replaced by an
+          #     additional query.
+          # @!attribute [rw] appended_search_context_count
+          #   @return [::Integer]
+          #     The number of search contexts appended to the query.
+          class KnowledgeAssistBehavior
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Token usage metadata for query generation.
+          # @!attribute [rw] prompt_token_count
+          #   @return [::Integer]
+          #     The total number of tokens in the prompt.
+          # @!attribute [rw] candidates_token_count
+          #   @return [::Integer]
+          #     The total number of tokens in the generated candidates.
+          # @!attribute [rw] total_token_count
+          #   @return [::Integer]
+          #     The total number of tokens for the entire request.
+          class QueryGenerationDebugInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Reason for query generation failure.
+          module QueryGenerationFailureReason
+            # Default value.
+            QUERY_GENERATION_FAILURE_REASON_UNSPECIFIED = 0
+
+            # Query generation is blocked due to out of quota.
+            QUERY_GENERATION_OUT_OF_QUOTA = 1
+
+            # Call to Knowedge Assist query generation model fails.
+            QUERY_GENERATION_FAILED = 2
+
+            # Query generation model decides that there is no new topic change or
+            # there has been similar queries generated in the previous turns.
+            QUERY_GENERATION_NO_QUERY_GENERATED = 3
+
+            # Knowedge Assist generated query is blocked by RAI (Responsible AI).
+            QUERY_GENERATION_RAI_FAILED = 4
+
+            # Query generation is blocked by Knowledge Assist conversation profile
+            # level / agent id level filtering.
+            NOT_IN_ALLOWLIST = 5
+
+            # The generated query is blocked due to redaction.
+            QUERY_GENERATION_QUERY_REDACTED = 6
+
+            # Query generation failed due to LLM response parse failure.
+            QUERY_GENERATION_LLM_RESPONSE_PARSE_FAILED = 10
+
+            # The conversation has no messages.
+            QUERY_GENERATION_EMPTY_CONVERSATION = 11
+
+            # The last message in the conversation is empty.
+            QUERY_GENERATION_EMPTY_LAST_MESSAGE = 12
+
+            # The trigger event condition is not met.
+            # This occurs in the following scenarios:
+            # 1. The trigger_event is CUSTOMER_MESSAGE or UNSPECIFIED, but the last
+            #    message is not from the customer.
+            # 2. The trigger_event is AGENT_MESSAGE, but the last message is not from
+            #    the agent.
+            QUERY_GENERATION_TRIGGERING_EVENT_CONDITION_NOT_MET = 13
+          end
+
+          # Reason for query categorization failure.
+          module QueryCategorizationFailureReason
+            # Default value.
+            QUERY_CATEGORIZATION_FAILURE_REASON_UNSPECIFIED = 0
+
+            # Vertex AI Search config supplied for query categorization is invalid.
+            QUERY_CATEGORIZATION_INVALID_CONFIG = 1
+
+            # Vertex AI Search result does not contain a query categorization result.
+            QUERY_CATEGORIZATION_RESULT_NOT_FOUND = 2
+
+            # Vertex AI Search call fails.
+            QUERY_CATEGORIZATION_FAILED = 3
+          end
         end
 
         # Represents a Knowledge Assist answer.
@@ -1188,6 +1519,9 @@ module Google
         #     The name of the answer record.
         #     Format: `projects/<Project ID>/locations/<location ID>/answer
         #     Records/<Answer Record ID>`.
+        # @!attribute [rw] knowledge_assist_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo]
+        #     Debug information related to Knowledge Assist feature.
         class KnowledgeAssistAnswer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1196,7 +1530,42 @@ module Google
           # @!attribute [rw] query_text
           #   @return [::String]
           #     Suggested query text.
+          # @!attribute [rw] search_contexts
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery::SearchContext>]
+          #     Optional. The search contexts for the query.
           class SuggestedQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Search context is information useful for knowledge search that helps
+            # enrich the query.
+            # Example:
+            # search_context {
+            #   key: "application name"
+            #   value: "DesignApp"
+            # }
+            # @!attribute [rw] key
+            #   @return [::String]
+            #     Optional. The key of the search context, e.g. "application name".
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Optional. The value of the search context, e.g. "DesignApp".
+            class SearchContext
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Represents a single suggested query result.
+          # @!attribute [r] suggested_query
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery]
+          #     Output only. The suggested query based on the context.
+          # @!attribute [r] answer_record
+          #   @return [::String]
+          #     Output only. The name of the answer record.
+          #     Format: `projects/<Project ID>/locations/<Location
+          #     ID>/answerRecords/<Answer Record ID>`
+          class AdditionalSuggestedQueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1210,12 +1579,22 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::FaqSource]
           #     Populated if the prediction came from FAQ.
           #
-          #     Note: The following fields are mutually exclusive: `faq_source`, `generative_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `faq_source`, `generative_source`, `playbook_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] generative_source
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
           #     Populated if the prediction was Generative.
           #
-          #     Note: The following fields are mutually exclusive: `generative_source`, `faq_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `generative_source`, `faq_source`, `playbook_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] playbook_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
+          #     Populated if the prediction was from Playbook.
+          #
+          #     Note: The following fields are mutually exclusive: `playbook_source`, `faq_source`, `generative_source`, `event_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] event_source
+          #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::EventSource]
+          #     Populated if the prediction was from an event.
+          #
+          #     Note: The following fields are mutually exclusive: `event_source`, `faq_source`, `generative_source`, `playbook_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class KnowledgeAnswer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1256,7 +1635,53 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
+
+            # Details about source of Event answer.
+            # @!attribute [rw] event
+            #   @return [::String]
+            #     Name of the triggered event.
+            # @!attribute [rw] snippets
+            #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
+            #     Sources used in event fulfillment.
+            class EventSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
+        end
+
+        # Response reason from datastore which indicates data serving status or
+        # answer quality degradation.
+        module DatastoreResponseReason
+          # Default value.
+          DATASTORE_RESPONSE_REASON_UNSPECIFIED = 0
+
+          # No specific response reason from datastore.
+          NONE = 1
+
+          # Search is blocked due to out of quota.
+          SEARCH_OUT_OF_QUOTA = 2
+
+          # Search returns empty results.
+          SEARCH_EMPTY_RESULTS = 3
+
+          # Generative AI is disabled.
+          ANSWER_GENERATION_GEN_AI_DISABLED = 4
+
+          # Answer generation is blocked due to out of quota.
+          ANSWER_GENERATION_OUT_OF_QUOTA = 5
+
+          # Answer generation encounters an error.
+          ANSWER_GENERATION_ERROR = 6
+
+          # Answer generation does not have enough information to generate answer.
+          ANSWER_GENERATION_NOT_ENOUGH_INFO = 7
+
+          # Answer generation is blocked by RAI (Responsible AI) failure.
+          ANSWER_GENERATION_RAI_FAILED = 8
+
+          # Answer generation is not grounded on reliable sources.
+          ANSWER_GENERATION_NOT_GROUNDED = 9
         end
       end
     end

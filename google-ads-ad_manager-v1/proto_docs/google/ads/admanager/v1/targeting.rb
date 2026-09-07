@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,6 +47,15 @@ module Google
         # @!attribute [rw] data_segment_targeting
         #   @return [::Google::Ads::AdManager::V1::DataSegmentTargeting]
         #     Optional. Used to target data segments.
+        # @!attribute [rw] request_format_targeting
+        #   @return [::Google::Ads::AdManager::V1::RequestFormatTargeting]
+        #     Optional. Used to target inventory formats.
+        # @!attribute [rw] content_targeting
+        #   @return [::Google::Ads::AdManager::V1::ContentTargeting]
+        #     Optional. Used to target content.
+        # @!attribute [rw] mobile_application_targeting
+        #   @return [::Google::Ads::AdManager::V1::MobileApplicationTargeting]
+        #     Optional. Used to target mobile applications.
         class Targeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,9 +78,24 @@ module Google
         # @!attribute [rw] bandwidth_targeting
         #   @return [::Google::Ads::AdManager::V1::BandwidthTargeting]
         #     Optional. Bandwidth targeting dimension.
+        # @!attribute [rw] browser_targeting
+        #   @return [::Google::Ads::AdManager::V1::BrowserTargeting]
+        #     Optional. Browser targeting dimension.
+        # @!attribute [rw] browser_language_targeting
+        #   @return [::Google::Ads::AdManager::V1::BrowserLanguageTargeting]
+        #     Optional. Browser language targeting dimension.
+        # @!attribute [rw] device_capability_targeting
+        #   @return [::Google::Ads::AdManager::V1::DeviceCapabilityTargeting]
+        #     Optional. Device capability targeting dimension.
         # @!attribute [rw] device_category_targeting
         #   @return [::Google::Ads::AdManager::V1::DeviceCategoryTargeting]
         #     Optional. Device category targeting dimension.
+        # @!attribute [rw] device_manufacturer_targeting
+        #   @return [::Google::Ads::AdManager::V1::DeviceManufacturerTargeting]
+        #     Optional. Device manufacturer targeting dimension.
+        # @!attribute [rw] mobile_carrier_targeting
+        #   @return [::Google::Ads::AdManager::V1::MobileCarrierTargeting]
+        #     Optional. Mobile carrier targeting dimension.
         # @!attribute [rw] operating_system_targeting
         #   @return [::Google::Ads::AdManager::V1::OperatingSystemTargeting]
         #     Optional. Operating system targeting dimension.
@@ -82,8 +106,8 @@ module Google
 
         # Bandwidth Targeting.
         #
-        # Reach users accessing the internet via various means of connection, such as
-        # cable, DSL, or dial-up. Can be useful to target campaigns using
+        # Reach users accessing the internet through various means of connection, such
+        # as cable, DSL, or dial-up. Can be useful to target campaigns using
         # low-resolution creatives or text ads for users with low bandwidth.
         # @!attribute [rw] targeted_bandwidth_groups
         #   @return [::Array<::String>]
@@ -98,6 +122,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Browser Targeting.
+        #
+        # Allows publishers to target/exclude a browser type (e.g. Chrome, Firefox,
+        # Safari). For more information, see
+        # https://support.google.com/admanager/answer/2884033 (Targeting types >
+        # Browser).
+        # @!attribute [rw] targeted_browsers
+        #   @return [::Array<::String>]
+        #     Optional. A list of browser resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_browsers
+        #   @return [::Array<::String>]
+        #     Optional. A list of browser resource names that should be excluded.
+        class BrowserTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Browser Language Targeting.
+        #
+        # For ads targeting mobile apps and their associated WebViews, the language
+        # used is based on the language specified by the user in their mobile device
+        # settings. If a browser has more than one language assigned to it, each
+        # language generates an impression.
+        # @!attribute [rw] targeted_browser_languages
+        #   @return [::Array<::String>]
+        #     Optional. A list of browser language resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_browser_languages
+        #   @return [::Array<::String>]
+        #     Optional. A list of browser language resource names that should be
+        #     excluded.
+        class BrowserLanguageTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a list of targeted and excluded device categories.
         # @!attribute [rw] targeted_categories
         #   @return [::Array<::String>]
@@ -107,6 +168,74 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. A list of device category resource names that should be excluded.
         class DeviceCategoryTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Device Capability Targeting.
+        #
+        # Can be used to target/exclude users using mobile apps, ad requests resulting
+        # from apps built on the MRAID standard, or users on devices that are able to
+        # make phone calls versus devices that aren't able to make phone calls, such as
+        # tablets.
+        # @!attribute [rw] targeted_capabilities
+        #   @return [::Array<::String>]
+        #     Optional. A list of device capability resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_capabilities
+        #   @return [::Array<::String>]
+        #     Optional. A list of device capability resource names that should be
+        #     excluded.
+        class DeviceCapabilityTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Device Manufacturer Targeting.
+        #
+        # Can be used to target/exclude users on devices made by specific brands or
+        # companies, such as Apple, Google, Samsung and others. For more information,
+        # see https://support.google.com/admanager/answer/2884033 ("Targeting types >
+        # Device manufacturer").
+        # @!attribute [rw] targeted_device_manufacturers
+        #   @return [::Array<::String>]
+        #     Optional. A list of device manufacturer resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_device_manufacturers
+        #   @return [::Array<::String>]
+        #     Optional. A list of device manufacturer resource names that should be
+        #     excluded.
+        # @!attribute [rw] targeted_mobile_devices
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile device resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_mobile_devices
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile device resource names that should be excluded.
+        # @!attribute [rw] targeted_mobile_device_submodels
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile device submodel resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_mobile_device_submodels
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile device submodel resource names that should be
+        #     excluded.
+        class DeviceManufacturerTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Mobile Carrier Targeting.
+        #
+        # Used to target or exclude mobile carriers.
+        # @!attribute [rw] targeted_mobile_carriers
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile carrier resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_mobile_carriers
+        #   @return [::Array<::String>]
+        #     Optional. A list of mobile carrier resource names that should be excluded.
+        class MobileCarrierTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -146,7 +275,7 @@ module Google
         #
         #     Excluded AUs take precedence over targeted AUs. In fact an AU can be
         #     excluded only if one of its ancestors is targeted. Subsequently child
-        #     AUs of an excluded AU can not be targeted (except via a placement).
+        #     AUs of an excluded AU can not be targeted (except through a Placement).
         # @!attribute [rw] targeted_placements
         #   @return [::Array<::String>]
         #     Optional. The resource names of the placements that should be
@@ -191,6 +320,12 @@ module Google
         # @!attribute [rw] custom_targeting_literals
         #   @return [::Array<::Google::Ads::AdManager::V1::CustomTargetingLiteral>]
         #     Optional. Leaf targeting expressions for custom key/values.
+        # @!attribute [rw] audience_segment_targetings
+        #   @return [::Array<::Google::Ads::AdManager::V1::AudienceSegmentTargeting>]
+        #     Optional. Leaf targeting expressions for audience segments.
+        # @!attribute [rw] cms_metadata_targetings
+        #   @return [::Array<::Google::Ads::AdManager::V1::CmsMetadataTargeting>]
+        #     Optional. Leaf targeting expressions for cms metadata.
         class CustomTargetingClause
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -208,6 +343,39 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The resource names of the targeted CustomValues.
         class CustomTargetingLiteral
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents targeting for audience segments. The values are combined in a
+        # logical `OR`.
+        # @!attribute [rw] negative
+        #   @return [::Boolean]
+        #     Whether this expression is negatively targeted, meaning it matches
+        #     ad requests that exclude the below values.
+        # @!attribute [rw] audience_segments
+        #   @return [::Array<::String>]
+        #     Optional. The targeted audience segments.
+        #
+        #     This is either the resource name of a first-party audience segment or an
+        #     alias to the effective third-party audience segment. Third-party audience
+        #     segment resource names containing `~direct` or `~global` will be normalized
+        #     by the server. For example, `networks/1234/audienceSegments/4567~direct`
+        #     will be normalized to `networks/1234/audienceSegments/4567`.
+        class AudienceSegmentTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents targeting for CMS metadata. The values are ORed together.
+        # @!attribute [rw] negative
+        #   @return [::Boolean]
+        #     Whether this expression is negatively targeted, meaning it matches
+        #     ad requests that exclude the below values.
+        # @!attribute [rw] cms_metadata_values
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the targeted CMS metadata values.
+        class CmsMetadataTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -270,6 +438,107 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether any data segments are currently targeted.
         class DataSegmentTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request Format Targeting
+        #
+        # This message specifies inclusion or exclusion of various request formats for
+        # targeting. Each optional boolean field controls the targeting of a specific
+        # request format:
+        #
+        # - If set to `true`, the corresponding format is **included** in targeting.
+        # - If set to `false`, the corresponding format is **excluded** from targeting.
+        # - If unset, the format is neither explicitly included nor excluded.
+        # @!attribute [rw] app_open_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls app open format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] rewarded_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls rewarded format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] rewarded_interstitial_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls rewarded interstitial format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] interstitial_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls interstitial format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] anchor_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls anchor format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] banner_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls banner format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] instream_video_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls instream video format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] instream_audio_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls instream audio format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] native_advanced_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls native advanced format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        class RequestFormatTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Content Targeting
+        #
+        # Targeted/excluded content entities and bundles.
+        # @!attribute [rw] targeted_content
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the
+        #     {::Google::Ads::AdManager::V1::Content Content} that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_content
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the
+        #     {::Google::Ads::AdManager::V1::Content Content} that should be
+        #     excluded.
+        # @!attribute [rw] targeted_content_bundles
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the
+        #     {::Google::Ads::AdManager::V1::ContentBundle ContentBundles} that
+        #     should be targeted/included.
+        # @!attribute [rw] excluded_content_bundles
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the
+        #     {::Google::Ads::AdManager::V1::ContentBundle ContentBundles} that
+        #     should be excluded.
+        class ContentTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Mobile Application Targeting
+        # @!attribute [rw] first_party_targeting
+        #   @return [::Google::Ads::AdManager::V1::FirstPartyMobileApplicationTargeting]
+        #     Optional. The targeted/excluded first-party mobile applications.
+        class MobileApplicationTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # First-party mobile application targeting.
+        # @!attribute [rw] targeted_applications
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the first-party applications that should be
+        #     targeted.
+        # @!attribute [rw] excluded_applications
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the first-party applications that should be
+        #     excluded.
+        class FirstPartyMobileApplicationTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

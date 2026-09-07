@@ -1,5 +1,49 @@
 # Release History
 
+### 1.19.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 1.18.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 1.18.0 (2026-06-11)
+
+#### Features
+
+* Supporting SDP Batch Content ([#33991](https://github.com/googleapis/google-cloud-ruby/issues/33991)) 
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 1.17.0 (2026-04-09)
+
+#### Features
+
+* added support for detecting key-value pairs in client provided metadata ([#33807](https://github.com/googleapis/google-cloud-ruby/issues/33807)) 
+
+### 1.16.1 (2026-04-02)
+
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 1.16.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.15.2 (2025-12-16)
+
+#### Documentation
+
+* add example resource name to VertexDatasetResourceReference 
+* add messages stating that Data Catalog actions are deprecated ([#32257](https://github.com/googleapis/google-cloud-ruby/issues/32257)) 
+
 ### 1.15.1 (2025-10-27)
 
 #### Documentation

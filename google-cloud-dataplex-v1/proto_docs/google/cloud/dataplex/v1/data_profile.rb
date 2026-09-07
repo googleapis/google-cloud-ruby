@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,6 +52,13 @@ module Google
         #
         #     If specified, the fields will be excluded from data profile, regardless of
         #     `include_fields` value.
+        # @!attribute [rw] catalog_publishing_enabled
+        #   @return [::Boolean]
+        #     Optional. If set, the latest DataScan job result will be published as
+        #     Dataplex Universal Catalog metadata.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::Mode]
+        #     Optional. The execution mode for the profile scan.
         class DataProfileSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,6 +98,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Defines the execution mode for the profile scan.
+          module Mode
+            # Default value. This value is unused.
+            MODE_UNSPECIFIED = 0
+
+            # Performs standard profiling. The behavior is controlled by other fields
+            # such as `sampling_percent`, `row_filter`, and column filters.
+            # This mode allows for full scans or custom sampling.
+            STANDARD = 1
+
+            # Specifies lightweight profiling mode. This mode is optimized for
+            # low-latency, low-fidelity profiling.
+            #
+            # When this mode is selected, the following fields must not be set:
+            # `sampling_percent`, `row_filter`, `include_fields`, and `exclude_fields`.
+            LIGHTWEIGHT = 2
+          end
         end
 
         # DataProfileResult defines the output of DataProfileScan. Each field of the
@@ -107,6 +132,10 @@ module Google
         # @!attribute [r] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult]
         #     Output only. The result of post scan actions.
+        # @!attribute [r] catalog_publishing_status
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanCatalogPublishingStatus]
+        #     Output only. The status of publishing the data scan as Dataplex Universal
+        #     Catalog metadata.
         class DataProfileResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

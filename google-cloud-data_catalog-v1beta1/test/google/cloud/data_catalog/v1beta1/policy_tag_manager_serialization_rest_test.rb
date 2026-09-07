@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,32 +98,32 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest
     ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::ServiceStub.stub :transcode_import_taxonomies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_taxonomies_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_taxonomies({ parent: parent, inline_source: inline_source }) do |_result, response|
+        c.import_taxonomies({ parent: parent, inline_source: inline_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_taxonomies parent: parent, inline_source: inline_source do |_result, response|
+        c.import_taxonomies parent: parent, inline_source: inline_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_taxonomies ::Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source) do |_result, response|
+        c.import_taxonomies ::Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_taxonomies({ parent: parent, inline_source: inline_source }, call_options) do |_result, response|
+        c.import_taxonomies({ parent: parent, inline_source: inline_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_taxonomies(::Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source), call_options) do |_result, response|
+        c.import_taxonomies(::Google::Cloud::DataCatalog::V1beta1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest
     ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::ServiceStub.stub :transcode_export_taxonomies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_taxonomies_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }) do |_result, response|
+        c.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_taxonomies parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies do |_result, response|
+        c.export_taxonomies parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_taxonomies ::Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies) do |_result, response|
+        c.export_taxonomies ::Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }, call_options) do |_result, response|
+        c.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_taxonomies(::Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies), call_options) do |_result, response|
+        c.export_taxonomies(::Google::Cloud::DataCatalog::V1beta1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

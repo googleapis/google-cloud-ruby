@@ -1,5 +1,35 @@
 # Release History
 
+### 1.8.2 (2026-08-31)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35050](https://github.com/googleapis/google-cloud-ruby/issues/35050)) 
+
+### 1.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.7.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 1.5.1 (2025-10-27)
 
 #### Documentation

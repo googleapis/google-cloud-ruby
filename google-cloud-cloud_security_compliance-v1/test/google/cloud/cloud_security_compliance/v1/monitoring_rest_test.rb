@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,6 +90,7 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    view = :FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED
 
     list_framework_compliance_summaries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -100,32 +101,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ServiceStub.stub :transcode_list_framework_compliance_summaries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_framework_compliance_summaries_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_framework_compliance_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_framework_compliance_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_framework_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_framework_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_framework_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_framework_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +159,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ServiceStub.stub :transcode_list_finding_summaries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_finding_summaries_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }) do |_result, response|
+        c.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_finding_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time do |_result, response|
+        c.list_finding_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_finding_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time) do |_result, response|
+        c.list_finding_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }, call_options) do |_result, response|
+        c.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_finding_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time), call_options) do |_result, response|
+        c.list_finding_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -203,6 +204,7 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     # Create request parameters for a unary method.
     name = "hello world"
     end_time = {}
+    filter = "hello world"
 
     fetch_framework_compliance_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -213,32 +215,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ServiceStub.stub :transcode_fetch_framework_compliance_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_framework_compliance_report_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_framework_compliance_report({ name: name, end_time: end_time }) do |_result, response|
+        c.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_framework_compliance_report name: name, end_time: end_time do |_result, response|
+        c.fetch_framework_compliance_report name: name, end_time: end_time, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time) do |_result, response|
+        c.fetch_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_framework_compliance_report({ name: name, end_time: end_time }, call_options) do |_result, response|
+        c.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time), call_options) do |_result, response|
+        c.fetch_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -271,32 +273,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ServiceStub.stub :transcode_list_control_compliance_summaries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_control_compliance_summaries_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_control_compliance_summaries parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_control_compliance_summaries parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_control_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_control_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_control_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_control_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -327,32 +329,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::ServiceStub.stub :transcode_aggregate_framework_compliance_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_framework_compliance_report_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }) do |_result, response|
+        c.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_framework_compliance_report name: name, interval: interval, filter: filter do |_result, response|
+        c.aggregate_framework_compliance_report name: name, interval: interval, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter) do |_result, response|
+        c.aggregate_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }, call_options) do |_result, response|
+        c.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter), call_options) do |_result, response|
+        c.aggregate_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

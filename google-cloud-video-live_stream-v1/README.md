@@ -1,8 +1,7 @@
 # Ruby Client for the Live Stream V1 API
 
-API Client library for the Live Stream V1 API
-
 The Live Stream API transcodes mezzanine live signals into direct-to-consumer streaming formats, including Dynamic Adaptive Streaming over HTTP (DASH/MPEG-DASH), and HTTP Live Streaming (HLS), for multiple device platforms.
+
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_channel request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video-live_stream-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/livestream/)
-for general usage information.
 
 ## Debug Logging
 
@@ -86,7 +82,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

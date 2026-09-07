@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -159,12 +159,15 @@ module Google
         # @!attribute [r] compute_model
         #   @return [::Google::Cloud::OracleDatabase::V1::ComputeModel]
         #     Output only. The compute model of the Exadata Infrastructure.
-        # @!attribute [r] database_server_type
+        # @!attribute [rw] database_server_type
         #   @return [::String]
-        #     Output only. The database server type of the Exadata Infrastructure.
-        # @!attribute [r] storage_server_type
+        #     Optional. The database server type of the Exadata Infrastructure.
+        # @!attribute [rw] storage_server_type
         #   @return [::String]
-        #     Output only. The storage server type of the Exadata Infrastructure.
+        #     Optional. The storage server type of the Exadata Infrastructure.
+        # @!attribute [r] exascale_config
+        #   @return [::Google::Cloud::OracleDatabase::V1::ExascaleConfig]
+        #     Output only. The Exascale configuration for the Exadata Infrastructure.
         class CloudExadataInfrastructureProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,6 +198,24 @@ module Google
             # The Exadata Infrastructure is in maintenance.
             MAINTENANCE_IN_PROGRESS = 7
           end
+        end
+
+        # Details of the Exascale configuration for the Exadata Infrastructure.
+        # @!attribute [r] total_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Total storage size needed for Exascale in GBs.
+        # @!attribute [r] available_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Available storage size for Exascale in GBs.
+        # @!attribute [r] total_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Storage size needed for VM storage on Exascale in GBs.
+        # @!attribute [r] available_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Available storage size for VM storage on Exascale in GBs.
+        class ExascaleConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Maintenance window as defined by Oracle.
@@ -269,6 +290,26 @@ module Google
             # the same time, then your database servers at the same time.
             NON_ROLLING = 2
           end
+        end
+
+        # The request for `CloudExadataInfrastructure.ConfigureExascale`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Cloud Exadata Infrastructure in the following
+        #     format:
+        #     projects/\\{project}/locations/\\{location}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}.
+        # @!attribute [rw] total_storage_size_gb
+        #   @return [::Integer]
+        #     Required. The total storage to be allocated to Exascale in GBs.
+        # @!attribute [rw] total_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Optional. Storage size needed for VM storage on Exascale in GBs.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request.
+        class ConfigureExascaleCloudExadataInfrastructureRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

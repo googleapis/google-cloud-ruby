@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,32 +101,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_management_servers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_management_servers_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_management_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_management_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_management_servers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_management_servers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_management_servers ::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_management_servers ::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_management_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_management_servers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_management_servers(::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_management_servers(::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_management_server_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_management_server_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_management_server({ name: name }) do |_result, response|
+        c.get_management_server({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_management_server name: name do |_result, response|
+        c.get_management_server name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_management_server ::Google::Cloud::BackupDR::V1::GetManagementServerRequest.new(name: name) do |_result, response|
+        c.get_management_server ::Google::Cloud::BackupDR::V1::GetManagementServerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_management_server({ name: name }, call_options) do |_result, response|
+        c.get_management_server({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_management_server(::Google::Cloud::BackupDR::V1::GetManagementServerRequest.new(name: name), call_options) do |_result, response|
+        c.get_management_server(::Google::Cloud::BackupDR::V1::GetManagementServerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_management_server_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_management_server_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_management_server({ parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id }) do |_result, response|
+        c.create_management_server({ parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_management_server parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id do |_result, response|
+        c.create_management_server parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_management_server ::Google::Cloud::BackupDR::V1::CreateManagementServerRequest.new(parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id) do |_result, response|
+        c.create_management_server ::Google::Cloud::BackupDR::V1::CreateManagementServerRequest.new(parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_management_server({ parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id }, call_options) do |_result, response|
+        c.create_management_server({ parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_management_server(::Google::Cloud::BackupDR::V1::CreateManagementServerRequest.new(parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id), call_options) do |_result, response|
+        c.create_management_server(::Google::Cloud::BackupDR::V1::CreateManagementServerRequest.new(parent: parent, management_server_id: management_server_id, management_server: management_server, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_management_server_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_management_server_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_management_server({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_management_server({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_management_server name: name, request_id: request_id do |_result, response|
+        c.delete_management_server name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_management_server ::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_management_server ::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_management_server({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_management_server({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_management_server(::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_management_server(::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_backup_vault parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_vault ::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_backup_vault ::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_backup_vault({ parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_vault(::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_backup_vault(::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest.new(parent: parent, backup_vault_id: backup_vault_id, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_backup_vaults_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_vaults_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_backup_vaults parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_vaults ::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_backup_vaults ::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_vaults(::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_backup_vaults(::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -442,32 +442,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_fetch_usable_backup_vaults_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_usable_backup_vaults_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_usable_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.fetch_usable_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_usable_backup_vaults parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.fetch_usable_backup_vaults parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_usable_backup_vaults ::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.fetch_usable_backup_vaults ::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_usable_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.fetch_usable_backup_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_usable_backup_vaults(::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.fetch_usable_backup_vaults(::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -497,32 +497,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_vault({ name: name, view: view }) do |_result, response|
+        c.get_backup_vault({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_vault name: name, view: view do |_result, response|
+        c.get_backup_vault name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_vault ::Google::Cloud::BackupDR::V1::GetBackupVaultRequest.new(name: name, view: view) do |_result, response|
+        c.get_backup_vault ::Google::Cloud::BackupDR::V1::GetBackupVaultRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_vault({ name: name, view: view }, call_options) do |_result, response|
+        c.get_backup_vault({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_vault(::Google::Cloud::BackupDR::V1::GetBackupVaultRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_backup_vault(::Google::Cloud::BackupDR::V1::GetBackupVaultRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -556,32 +556,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction }) do |_result, response|
+        c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_vault update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction do |_result, response|
+        c.update_backup_vault update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_vault ::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction) do |_result, response|
+        c.update_backup_vault ::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction }, call_options) do |_result, response|
+        c.update_backup_vault({ update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_vault(::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction), call_options) do |_result, response|
+        c.update_backup_vault(::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest.new(update_mask: update_mask, backup_vault: backup_vault, request_id: request_id, validate_only: validate_only, force: force, force_update_access_restriction: force_update_access_restriction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -616,32 +616,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_backup_vault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_vault_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }) do |_result, response|
+        c.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_vault name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references do |_result, response|
+        c.delete_backup_vault name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_vault ::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references) do |_result, response|
+        c.delete_backup_vault ::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }, call_options) do |_result, response|
+        c.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_vault(::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references), call_options) do |_result, response|
+        c.delete_backup_vault(::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -674,32 +674,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_data_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_data_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_sources ::Google::Cloud::BackupDR::V1::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_data_sources ::Google::Cloud::BackupDR::V1::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_sources(::Google::Cloud::BackupDR::V1::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_data_sources(::Google::Cloud::BackupDR::V1::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -728,32 +728,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_data_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_source_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_source({ name: name }) do |_result, response|
+        c.get_data_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_source name: name do |_result, response|
+        c.get_data_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_source ::Google::Cloud::BackupDR::V1::GetDataSourceRequest.new(name: name) do |_result, response|
+        c.get_data_source ::Google::Cloud::BackupDR::V1::GetDataSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_source({ name: name }, call_options) do |_result, response|
+        c.get_data_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_source(::Google::Cloud::BackupDR::V1::GetDataSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_source(::Google::Cloud::BackupDR::V1::GetDataSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -785,32 +785,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_data_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_source_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_source({ update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing }) do |_result, response|
+        c.update_data_source({ update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_source update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing do |_result, response|
+        c.update_data_source update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_source ::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest.new(update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing) do |_result, response|
+        c.update_data_source ::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest.new(update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_source({ update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_data_source({ update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_source(::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest.new(update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_data_source(::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest.new(update_mask: update_mask, data_source: data_source, request_id: request_id, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -844,37 +844,97 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::BackupDR::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_backups ::Google::Cloud::BackupDR::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::BackupDR::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::BackupDR::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, list_backups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_backups_for_resource_type
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource_type = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+    view = :BACKUP_VIEW_UNSPECIFIED
+
+    fetch_backups_for_resource_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_fetch_backups_for_resource_type_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_backups_for_resource_type_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_backups_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_backups_for_resource_type ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_backups_for_resource_type(::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_backups_for_resource_type_client_stub.call_count
       end
     end
   end
@@ -899,32 +959,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name, view: view }) do |_result, response|
+        c.get_backup({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name, view: view do |_result, response|
+        c.get_backup name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::BackupDR::V1::GetBackupRequest.new(name: name, view: view) do |_result, response|
+        c.get_backup ::Google::Cloud::BackupDR::V1::GetBackupRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name, view: view }, call_options) do |_result, response|
+        c.get_backup({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::BackupDR::V1::GetBackupRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::BackupDR::V1::GetBackupRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -955,32 +1015,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id }) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup update_mask: update_mask, backup: backup, request_id: request_id do |_result, response|
+        c.update_backup update_mask: update_mask, backup: backup, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup ::Google::Cloud::BackupDR::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id) do |_result, response|
+        c.update_backup ::Google::Cloud::BackupDR::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id }, call_options) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup(::Google::Cloud::BackupDR::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id), call_options) do |_result, response|
+        c.update_backup(::Google::Cloud::BackupDR::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1010,32 +1070,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name, request_id: request_id do |_result, response|
+        c.delete_backup name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::BackupDR::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backup ::Google::Cloud::BackupDR::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::BackupDR::V1::DeleteBackupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::BackupDR::V1::DeleteBackupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1057,6 +1117,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     compute_instance_target_environment = {}
     compute_instance_restore_properties = {}
+    clear_overrides_field_mask = {}
 
     restore_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1067,32 +1128,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_restore_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }) do |_result, response|
+        c.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties do |_result, response|
+        c.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties) do |_result, response|
+        c.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }, call_options) do |_result, response|
+        c.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties), call_options) do |_result, response|
+        c.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1124,32 +1185,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_backup_plan_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_plan_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_plan({ parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id }) do |_result, response|
+        c.create_backup_plan({ parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_plan parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id do |_result, response|
+        c.create_backup_plan parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_plan ::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest.new(parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id) do |_result, response|
+        c.create_backup_plan ::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest.new(parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_plan({ parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id }, call_options) do |_result, response|
+        c.create_backup_plan({ parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_plan(::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest.new(parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id), call_options) do |_result, response|
+        c.create_backup_plan(::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest.new(parent: parent, backup_plan_id: backup_plan_id, backup_plan: backup_plan, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1180,32 +1241,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_backup_plan_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_plan_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_plan({ backup_plan: backup_plan, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_backup_plan({ backup_plan: backup_plan, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_plan backup_plan: backup_plan, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_backup_plan backup_plan: backup_plan, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_plan ::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest.new(backup_plan: backup_plan, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_backup_plan ::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest.new(backup_plan: backup_plan, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_plan({ backup_plan: backup_plan, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_backup_plan({ backup_plan: backup_plan, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_plan(::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest.new(backup_plan: backup_plan, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_backup_plan(::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest.new(backup_plan: backup_plan, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1234,32 +1295,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_backup_plan_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_plan_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_plan({ name: name }) do |_result, response|
+        c.get_backup_plan({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_plan name: name do |_result, response|
+        c.get_backup_plan name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_plan ::Google::Cloud::BackupDR::V1::GetBackupPlanRequest.new(name: name) do |_result, response|
+        c.get_backup_plan ::Google::Cloud::BackupDR::V1::GetBackupPlanRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_plan({ name: name }, call_options) do |_result, response|
+        c.get_backup_plan({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_plan(::Google::Cloud::BackupDR::V1::GetBackupPlanRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_plan(::Google::Cloud::BackupDR::V1::GetBackupPlanRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1292,32 +1353,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_backup_plans_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_plans_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_backup_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_plans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_backup_plans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_plans ::Google::Cloud::BackupDR::V1::ListBackupPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_backup_plans ::Google::Cloud::BackupDR::V1::ListBackupPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_backup_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_plans(::Google::Cloud::BackupDR::V1::ListBackupPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_backup_plans(::Google::Cloud::BackupDR::V1::ListBackupPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1347,32 +1408,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_backup_plan_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_plan_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_plan({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backup_plan({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_plan name: name, request_id: request_id do |_result, response|
+        c.delete_backup_plan name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_plan ::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backup_plan ::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_plan({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backup_plan({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_plan(::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backup_plan(::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1401,32 +1462,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_backup_plan_revision_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_plan_revision_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_plan_revision({ name: name }) do |_result, response|
+        c.get_backup_plan_revision({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_plan_revision name: name do |_result, response|
+        c.get_backup_plan_revision name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_plan_revision ::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest.new(name: name) do |_result, response|
+        c.get_backup_plan_revision ::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_plan_revision({ name: name }, call_options) do |_result, response|
+        c.get_backup_plan_revision({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_plan_revision(::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_plan_revision(::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1457,32 +1518,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_backup_plan_revisions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_plan_revisions_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_plan_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_backup_plan_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_plan_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_backup_plan_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_plan_revisions ::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_backup_plan_revisions ::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_plan_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_backup_plan_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_plan_revisions(::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_backup_plan_revisions(::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1514,32 +1575,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_backup_plan_association_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_plan_association_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_plan_association({ parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id }) do |_result, response|
+        c.create_backup_plan_association({ parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_plan_association parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id do |_result, response|
+        c.create_backup_plan_association parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_plan_association ::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest.new(parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id) do |_result, response|
+        c.create_backup_plan_association ::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest.new(parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_plan_association({ parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id }, call_options) do |_result, response|
+        c.create_backup_plan_association({ parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_plan_association(::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest.new(parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id), call_options) do |_result, response|
+        c.create_backup_plan_association(::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest.new(parent: parent, backup_plan_association_id: backup_plan_association_id, backup_plan_association: backup_plan_association, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1570,32 +1631,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_backup_plan_association_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_plan_association_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_plan_association({ backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_backup_plan_association({ backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_plan_association backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_backup_plan_association backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_plan_association ::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest.new(backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_backup_plan_association ::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest.new(backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_plan_association({ backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_backup_plan_association({ backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_plan_association(::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest.new(backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_backup_plan_association(::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest.new(backup_plan_association: backup_plan_association, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1624,32 +1685,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_backup_plan_association_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_plan_association_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_plan_association({ name: name }) do |_result, response|
+        c.get_backup_plan_association({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_plan_association name: name do |_result, response|
+        c.get_backup_plan_association name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_plan_association ::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest.new(name: name) do |_result, response|
+        c.get_backup_plan_association ::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_plan_association({ name: name }, call_options) do |_result, response|
+        c.get_backup_plan_association({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_plan_association(::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_plan_association(::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1681,32 +1742,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_backup_plan_associations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_plan_associations_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_backup_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_plan_associations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_backup_plan_associations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_plan_associations ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_backup_plan_associations ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_backup_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_plan_associations(::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_backup_plan_associations(::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1740,32 +1801,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_fetch_backup_plan_associations_for_resource_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_backup_plan_associations_for_resource_type_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_backup_plan_associations_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.fetch_backup_plan_associations_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_backup_plan_associations_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.fetch_backup_plan_associations_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_backup_plan_associations_for_resource_type ::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.fetch_backup_plan_associations_for_resource_type ::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_backup_plan_associations_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.fetch_backup_plan_associations_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_backup_plan_associations_for_resource_type(::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.fetch_backup_plan_associations_for_resource_type(::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1795,32 +1856,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_backup_plan_association_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_plan_association_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_plan_association({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backup_plan_association({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_plan_association name: name, request_id: request_id do |_result, response|
+        c.delete_backup_plan_association name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_plan_association({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backup_plan_association({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1851,32 +1912,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_trigger_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, trigger_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.trigger_backup({ name: name, rule_id: rule_id, request_id: request_id }) do |_result, response|
+        c.trigger_backup({ name: name, rule_id: rule_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.trigger_backup name: name, rule_id: rule_id, request_id: request_id do |_result, response|
+        c.trigger_backup name: name, rule_id: rule_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.trigger_backup ::Google::Cloud::BackupDR::V1::TriggerBackupRequest.new(name: name, rule_id: rule_id, request_id: request_id) do |_result, response|
+        c.trigger_backup ::Google::Cloud::BackupDR::V1::TriggerBackupRequest.new(name: name, rule_id: rule_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.trigger_backup({ name: name, rule_id: rule_id, request_id: request_id }, call_options) do |_result, response|
+        c.trigger_backup({ name: name, rule_id: rule_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.trigger_backup(::Google::Cloud::BackupDR::V1::TriggerBackupRequest.new(name: name, rule_id: rule_id, request_id: request_id), call_options) do |_result, response|
+        c.trigger_backup(::Google::Cloud::BackupDR::V1::TriggerBackupRequest.new(name: name, rule_id: rule_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1905,37 +1966,95 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_data_source_reference_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_source_reference_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_source_reference({ name: name }) do |_result, response|
+        c.get_data_source_reference({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_source_reference name: name do |_result, response|
+        c.get_data_source_reference name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_source_reference ::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest.new(name: name) do |_result, response|
+        c.get_data_source_reference ::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_source_reference({ name: name }, call_options) do |_result, response|
+        c.get_data_source_reference({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_source_reference(::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_source_reference(::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, get_data_source_reference_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_data_source_references
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_data_source_references_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_data_source_references_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_data_source_references_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_data_source_references parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_data_source_references ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_data_source_references(::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_data_source_references_client_stub.call_count
       end
     end
   end
@@ -1964,32 +2083,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_fetch_data_source_references_for_resource_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_data_source_references_for_resource_type_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_data_source_references_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.fetch_data_source_references_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_data_source_references_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.fetch_data_source_references_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_data_source_references_for_resource_type ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.fetch_data_source_references_for_resource_type ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_data_source_references_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.fetch_data_source_references_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_data_source_references_for_resource_type(::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.fetch_data_source_references_for_resource_type(::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2021,32 +2140,32 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_initialize_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, initialize_service_client_stub do
         # Create client
-        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.initialize_service({ name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config }) do |_result, response|
+        c.initialize_service({ name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.initialize_service name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config do |_result, response|
+        c.initialize_service name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.initialize_service ::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config) do |_result, response|
+        c.initialize_service ::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.initialize_service({ name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config }, call_options) do |_result, response|
+        c.initialize_service({ name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.initialize_service(::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config), call_options) do |_result, response|
+        c.initialize_service(::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id, cloud_sql_instance_initialization_config: cloud_sql_instance_initialization_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

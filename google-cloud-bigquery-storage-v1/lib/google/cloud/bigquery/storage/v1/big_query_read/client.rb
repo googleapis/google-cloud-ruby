@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -329,9 +329,9 @@ module Google
 
               ##
               # Reads rows from the stream in the format prescribed by the ReadSession.
-              # Each response contains one or more table rows, up to a maximum of 100 MiB
+              # Each response contains one or more table rows, up to a maximum of 128 MB
               # per response; read requests which attempt to read individual rows larger
-              # than 100 MiB will fail.
+              # than 128 MB will fail.
               #
               # Each request also returns a set of stream statistics reflecting the current
               # state of the stream.
@@ -346,7 +346,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload read_rows(read_stream: nil, offset: nil)
+              # @overload read_rows(read_stream: nil, offset: nil, arrow_serialization_options: nil)
               #   Pass arguments to `read_rows` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -357,6 +357,10 @@ module Google
               #     The offset requested must be less than the last row read from Read.
               #     Requesting a larger offset is undefined. If not specified, start reading
               #     from offset zero.
+              #   @param arrow_serialization_options [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions, ::Hash]
+              #     Optional. Options specific to the Apache Arrow output format.
+              #
+              #     This feature is not yet available.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Enumerable<::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
@@ -625,6 +629,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -708,6 +713,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

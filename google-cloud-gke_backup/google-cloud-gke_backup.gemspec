@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters."
-  gem.summary       = "API Client library for the Backup for GKE API"
+  gem.description   = "Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters."
+  gem.summary       = "Backup for GKE is a managed Kubernetes workload backup and restore service for GKE clusters."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-gke_backup-v1", "~> 1.0"

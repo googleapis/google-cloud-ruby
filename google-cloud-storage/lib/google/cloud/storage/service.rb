@@ -64,7 +64,6 @@ module Google
           @service.request_options.header ||= {}
           @service.request_options.header["x-goog-api-client"] =
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
-          @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.request_options.quota_project = quota_project if quota_project
           @service.request_options.max_elapsed_time = max_elapsed_time if max_elapsed_time
           @service.request_options.base_interval = base_interval if base_interval
@@ -96,12 +95,14 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, options: {}
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
                         user_project: user_project(user_project),
-                        soft_deleted: soft_deleted, options: options
+                        soft_deleted: soft_deleted,
+                        return_partial_success: return_partial_success,
+                        options: options
           end
         end
 
@@ -370,7 +371,7 @@ module Google
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
                        match_glob: nil, include_folders_as_prefixes: nil,
-                       soft_deleted: nil, options: {}
+                       soft_deleted: nil, filter: nil, options: {}
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
@@ -380,6 +381,7 @@ module Google
                            match_glob: match_glob,
                            include_folders_as_prefixes: include_folders_as_prefixes,
                            soft_deleted: soft_deleted,
+                           filter: filter,
                            options: options
           end
         end
@@ -546,10 +548,12 @@ module Google
                          if_generation_match: nil,
                          if_metageneration_match: nil,
                          user_project: nil,
+                         delete_source_objects: nil,
                          options: {}
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
-                                                                    destination: destination_gapi
+                                                                    destination: destination_gapi,
+                                                                    delete_source_objects: delete_source_objects
 
           if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ module Google
       #
       # ## About QuotaController
       #
-      # [Google Quota Control API](/service-control/overview)
+      # [Google Quota Control API](https://cloud.google.com/service-control/overview)
       #
       # Allows clients to allocate and release quota against a [managed
       # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -138,7 +138,8 @@ module Google
       #
       # ## About ServiceController
       #
-      # [Google Service Control API](/service-control/overview)
+      # [Google Service Control
+      # API](https://cloud.google.com/service-control/overview)
       #
       # Lets clients check and report operations against a [managed
       # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -214,6 +215,7 @@ module Google
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
       #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
       #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
       #     * `:retry_codes` (*type:* `Array<String>`) -
       #       The error codes that should trigger a retry.
       #

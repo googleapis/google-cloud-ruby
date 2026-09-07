@@ -21,7 +21,7 @@ module Google
   module Cloud
     module RecommendationEngine
       module V1beta1
-        VERSION = "0.15.1"
+        VERSION = "0.18.1"
       end
     end
   end

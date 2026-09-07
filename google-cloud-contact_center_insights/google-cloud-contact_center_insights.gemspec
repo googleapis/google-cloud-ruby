@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Contact Center AI Insights helps users detect and visualize patterns in their contact center data. Understanding conversational data drives business value, improves operational efficiency, and provides a voice for customer feedback."
-  gem.summary       = "API Client library for the Contact Center AI Insights API"
+  gem.description   = "Contact Center Insights provides out-of-the-box and custom modeling techniques to make it easier for contact center teams to better understand customer interaction data."
+  gem.summary       = "Contact Center Insights provides out-of-the-box and custom modeling techniques to make it easier for contact center teams to better understand customer interaction data."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-contact_center_insights-v1", ">= 0.20", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"

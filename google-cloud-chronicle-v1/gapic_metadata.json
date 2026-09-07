@@ -5,6 +5,68 @@
   "protoPackage": "google.cloud.chronicle.v1",
   "libraryPackage": "::Google::Cloud::Chronicle::V1",
   "services": {
+    "BigQueryExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client",
+          "rpcs": {
+            "GetBigQueryExport": {
+              "methods": [
+                "get_big_query_export"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "update_big_query_export"
+              ]
+            },
+            "ProvisionBigQueryExport": {
+              "methods": [
+                "provision_big_query_export"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DashboardQueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client",
+          "rpcs": {
+            "GetDashboardQuery": {
+              "methods": [
+                "get_dashboard_query"
+              ]
+            },
+            "ExecuteDashboardQuery": {
+              "methods": [
+                "execute_dashboard_query"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DashboardChartService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client",
+          "rpcs": {
+            "GetDashboardChart": {
+              "methods": [
+                "get_dashboard_chart"
+              ]
+            },
+            "BatchGetDashboardCharts": {
+              "methods": [
+                "batch_get_dashboard_charts"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataAccessControlService": {
       "clients": {
         "grpc": {
@@ -64,6 +126,90 @@
         }
       }
     },
+    "DataTableService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DataTableService::Client",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "create_data_table"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "list_data_tables"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "get_data_table"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "update_data_table"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "delete_data_table"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "create_data_table_row"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "update_data_table_row"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "list_data_table_rows"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "get_data_table_row"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "delete_data_table_row"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulk_create_data_table_rows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulk_get_data_table_rows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulk_replace_data_table_rows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulk_update_data_table_rows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "get_data_table_operation_errors"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityService": {
       "clients": {
         "grpc": {
@@ -92,6 +238,153 @@
             "DeleteWatchlist": {
               "methods": [
                 "delete_watchlist"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client",
+          "rpcs": {
+            "CreateNativeDashboard": {
+              "methods": [
+                "create_native_dashboard"
+              ]
+            },
+            "GetNativeDashboard": {
+              "methods": [
+                "get_native_dashboard"
+              ]
+            },
+            "ListNativeDashboards": {
+              "methods": [
+                "list_native_dashboards"
+              ]
+            },
+            "UpdateNativeDashboard": {
+              "methods": [
+                "update_native_dashboard"
+              ]
+            },
+            "DuplicateNativeDashboard": {
+              "methods": [
+                "duplicate_native_dashboard"
+              ]
+            },
+            "DeleteNativeDashboard": {
+              "methods": [
+                "delete_native_dashboard"
+              ]
+            },
+            "AddChart": {
+              "methods": [
+                "add_chart"
+              ]
+            },
+            "RemoveChart": {
+              "methods": [
+                "remove_chart"
+              ]
+            },
+            "EditChart": {
+              "methods": [
+                "edit_chart"
+              ]
+            },
+            "DuplicateChart": {
+              "methods": [
+                "duplicate_chart"
+              ]
+            },
+            "ExportNativeDashboards": {
+              "methods": [
+                "export_native_dashboards"
+              ]
+            },
+            "ImportNativeDashboards": {
+              "methods": [
+                "import_native_dashboards"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeaturedContentNativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client",
+          "rpcs": {
+            "GetFeaturedContentNativeDashboard": {
+              "methods": [
+                "get_featured_content_native_dashboard"
+              ]
+            },
+            "ListFeaturedContentNativeDashboards": {
+              "methods": [
+                "list_featured_content_native_dashboards"
+              ]
+            },
+            "InstallFeaturedContentNativeDashboard": {
+              "methods": [
+                "install_featured_content_native_dashboard"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FindingsRefinementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client",
+          "rpcs": {
+            "GetFindingsRefinement": {
+              "methods": [
+                "get_findings_refinement"
+              ]
+            },
+            "ListFindingsRefinements": {
+              "methods": [
+                "list_findings_refinements"
+              ]
+            },
+            "CreateFindingsRefinement": {
+              "methods": [
+                "create_findings_refinement"
+              ]
+            },
+            "UpdateFindingsRefinement": {
+              "methods": [
+                "update_findings_refinement"
+              ]
+            },
+            "GetFindingsRefinementDeployment": {
+              "methods": [
+                "get_findings_refinement_deployment"
+              ]
+            },
+            "UpdateFindingsRefinementDeployment": {
+              "methods": [
+                "update_findings_refinement_deployment"
+              ]
+            },
+            "ListAllFindingsRefinementDeployments": {
+              "methods": [
+                "list_all_findings_refinement_deployments"
+              ]
+            },
+            "ComputeFindingsRefinementActivity": {
+              "methods": [
+                "compute_findings_refinement_activity"
+              ]
+            },
+            "ComputeAllFindingsRefinementActivities": {
+              "methods": [
+                "compute_all_findings_refinement_activities"
               ]
             }
           }
@@ -136,6 +429,11 @@
               "methods": [
                 "update_reference_list"
               ]
+            },
+            "VerifyReferenceList": {
+              "methods": [
+                "verify_reference_list"
+              ]
             }
           }
         }
@@ -171,6 +469,11 @@
                 "delete_rule"
               ]
             },
+            "VerifyRuleText": {
+              "methods": [
+                "verify_rule_text"
+              ]
+            },
             "ListRuleRevisions": {
               "methods": [
                 "list_rule_revisions"
@@ -204,6 +507,20 @@
             "UpdateRuleDeployment": {
               "methods": [
                 "update_rule_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "list_rule_execution_errors"
               ]
             }
           }

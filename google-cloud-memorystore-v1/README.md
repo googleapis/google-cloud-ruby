@@ -1,8 +1,7 @@
 # Ruby Client for the Memorystore V1 API
 
-API Client library for the Memorystore V1 API
+Memorystore for Valkey is a fully managed Valkey service for Google Cloud which supports both Cluster Mode Enabled and Cluster Mode Disabled instances.
 
-google-cloud-memorystore-v1 is the official client library for the Memorystore V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,7 +31,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/memorystore/v1"
 
-client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new
 request = ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new # (request fields as keyword arguments...)
 response = client.list_instances request
 ```
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/memorystore/v1"
 require "logger"
 
-client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -86,7 +85,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

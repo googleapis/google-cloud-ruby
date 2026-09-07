@@ -5,6 +5,40 @@
   "protoPackage": "google.cloud.networksecurity.v1beta1",
   "libraryPackage": "::Google::Cloud::NetworkSecurity::V1beta1",
   "services": {
+    "DnsThreatDetectorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client",
+          "rpcs": {
+            "ListDnsThreatDetectors": {
+              "methods": [
+                "list_dns_threat_detectors"
+              ]
+            },
+            "GetDnsThreatDetector": {
+              "methods": [
+                "get_dns_threat_detector"
+              ]
+            },
+            "CreateDnsThreatDetector": {
+              "methods": [
+                "create_dns_threat_detector"
+              ]
+            },
+            "UpdateDnsThreatDetector": {
+              "methods": [
+                "update_dns_threat_detector"
+              ]
+            },
+            "DeleteDnsThreatDetector": {
+              "methods": [
+                "delete_dns_threat_detector"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkSecurity": {
       "clients": {
         "grpc": {

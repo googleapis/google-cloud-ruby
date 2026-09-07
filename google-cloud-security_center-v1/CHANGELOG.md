@@ -1,5 +1,42 @@
 # Release History
 
+### 1.11.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35061](https://github.com/googleapis/google-cloud-ruby/issues/35061)) 
+
+### 1.11.0 (2026-07-16)
+
+#### Features
+
+* add agent, agent_sessions, and agent_anomaly fields to Finding ([#34760](https://github.com/googleapis/google-cloud-ruby/issues/34760)) 
+
+### 1.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34055](https://github.com/googleapis/google-cloud-ruby/issues/34055)) 
+
+### 1.9.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33481](https://github.com/googleapis/google-cloud-ruby/issues/33481)) 
+
+### 1.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33438](https://github.com/googleapis/google-cloud-ruby/issues/33438)) 
+
+### 1.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Support Chokepoint and external exposure in findings Proto 
+
 ### 1.7.1 (2025-10-27)
 
 #### Documentation

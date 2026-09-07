@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ require "google/cloud/support/v2beta/case_attachment_service/rest"
 require "google/cloud/support/v2beta/case_service/rest"
 require "google/cloud/support/v2beta/comment_service/rest"
 require "google/cloud/support/v2beta/feed_service/rest"
+require "google/cloud/support/v2beta/support_event_subscription_service/rest"
 require "google/cloud/support/v2beta/version"
 
 module Google

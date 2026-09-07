@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module AccessApproval
-      VERSION = "1.6.2"
+      VERSION = "1.8.1"
     end
   end
 end

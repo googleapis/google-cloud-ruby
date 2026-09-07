@@ -371,6 +371,45 @@ module Google
         end
 
         ##
+        # User-defined object contexts. Each object context is a key-
+        # payload pair, where the key provides the identification and the payload holds
+        # the associated value and additional metadata.
+        # Object contexts are used to provide additional information about an object
+        # @return [Google::Apis::StorageV1::Object::Contexts, nil] The object contexts, or `nil` if there are none.
+        
+        def contexts
+          @gapi.contexts
+        end
+
+        ##
+        # Sets the object context.
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        # @param [Google::Apis::StorageV1::Object::Contexts] contexts The object contexts to set.
+        # @see https://docs.cloud.google.com/storage/docs/use-object-contexts#attach-modify-contexts Object Contexts documentation
+        # @example
+        #   require "google/cloud/storage"
+        #  storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #   payload = Google::Apis::StorageV1::ObjectCustomContextPayload.new(
+        #     value: "your-custom-context-value"
+        #   )
+        #   custom_hash = {
+        #     "your-custom-context-key" => payload
+        #   }
+        #   contexts = Google::Apis::StorageV1::Object::Contexts.new(
+        #     custom: custom_hash
+        #   )
+        #   file.update do |file|
+        #     file.contexts = contexts
+        #   end
+        def contexts= contexts
+          @gapi.contexts = contexts
+          update_gapi! :contexts
+        end
+
+        ##
         # A custom time specified by the user for the file, or `nil`.
         #
         # @return [DateTime, nil]
@@ -924,7 +963,7 @@ module Google
         #   omitted, a new StringIO instance will be written to and returned.
         #   Optional.
         # @param [Symbol] verify The verification algorithm used to ensure the
-        #   downloaded file contents are correct. Default is `:md5`.
+        #   downloaded file contents are correct. Default is `:crc32c`.
         #
         #   Acceptable values are:
         #
@@ -1059,7 +1098,7 @@ module Google
         #   downloaded.rewind
         #   downloaded.read #=> "world"
         #
-        def download path = nil, verify: :md5, encryption_key: nil, range: nil,
+        def download path = nil, verify: :crc32c, encryption_key: nil, range: nil,
                      skip_decompress: nil
           ensure_service!
           if path.nil?
@@ -2240,7 +2279,7 @@ module Google
           [dest_bucket, dest_path]
         end
 
-        def verify_file! file, verify = :md5
+        def verify_file! file, verify = :crc32c
           verify_md5    = verify == :md5 || verify == :all
           verify_crc32c = verify == :crc32c || verify == :all
           Verifier.verify_md5! self, file    if verify_md5    && md5

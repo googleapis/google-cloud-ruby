@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `ProgrammaticBuyer` object.
+              # Retrieves a `ProgrammaticBuyer` object.
               #
               # @overload get_programmatic_buyer(request, options = nil)
               #   Pass arguments to `get_programmatic_buyer` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `ProgrammaticBuyer` objects.
+              # Lists `ProgrammaticBuyer` objects.
               #
               # @overload list_programmatic_buyers(request, options = nil)
               #   Pass arguments to `list_programmatic_buyers` via a request object, either of type
@@ -290,8 +290,19 @@ module Google
               #     must match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     **Filterable fields:**
+              #
+              #     * `agency`
+              #     * `buyerAccountId`
+              #     * `displayName`
+              #     * `name`
+              #     * `parentAccountId`
+              #     * `partnerClientId`
+              #     * `preferredDealsEnabled`
+              #     * `programmaticGuaranteedEnabled`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -432,6 +443,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -504,6 +516,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

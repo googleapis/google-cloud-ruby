@@ -1,5 +1,61 @@
 # Release History
 
+### 1.17.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+
+### 1.17.0 (2026-07-07)
+
+#### Features
+
+* Add `DiskConfig` to instance selection to support disk config overrides for flexible VMs ([#34704](https://github.com/googleapis/google-cloud-ruby/issues/34704)) 
+
+### 1.16.0 (2026-06-22)
+
+#### Features
+
+* Add `ConfidentialInstanceType` field to support selection of confidential compute technology ([#34642](https://github.com/googleapis/google-cloud-ruby/issues/34642)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34044](https://github.com/googleapis/google-cloud-ruby/issues/34044)) 
+
+### 1.14.0 (2026-06-03)
+
+#### Features
+
+* Add vcore_seconds and memory_mb_seconds to YarnApplication in Dataproc v1 ([#34001](https://github.com/googleapis/google-cloud-ruby/issues/34001)) 
+
+### 1.13.0 (2026-05-08)
+
+#### Features
+
+* add support for Cloud Resource Manager tags for Dataproc Serverless workloads ([#33915](https://github.com/googleapis/google-cloud-ruby/issues/33915)) 
+
+### 1.12.0 (2026-05-06)
+
+#### Features
+
+* add PySparkNotebookBatch message ([#33903](https://github.com/googleapis/google-cloud-ruby/issues/33903)) 
+
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* Add `Engine` field to support LightningEngine in clusters and add support for stop ttl ([#33821](https://github.com/googleapis/google-cloud-ruby/issues/33821)) 
+
+### 1.10.0 (2026-03-19)
+
+#### Features
+
+* Add `ClusterType` to support creating Zero-Scale clusters 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

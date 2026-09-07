@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.address_path project: "value0", region: "value1", address: "value2"
       assert_equal "projects/value0/regions/value1/addresses/value2", path
+    end
+  end
+
+  def test_agent_gateway_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.agent_gateway_path project: "value0", location: "value1", agent_gateway: "value2"
+      assert_equal "projects/value0/locations/value1/agentGateways/value2", path
     end
   end
 
@@ -278,6 +290,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.subnetwork_path project: "value0", region: "value1", subnetwork: "value2"
       assert_equal "projects/value0/regions/value1/subnetworks/value2", path
+    end
+  end
+
+  def test_target_tcp_proxy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.target_tcp_proxy_path project: "value0", location: "value1", target_tcp_proxy: "value2"
+      assert_equal "projects/value0/locations/value1/targetTcpProxies/value2", path
     end
   end
 

@@ -75,9 +75,37 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data[2][:duration]).must_be :nil?
     _(data[2][:target_end]).must_be :nil?
     _(data[2][:birthday]).must_be :nil?
-    end
+  end
+
+  it "can retrieve query results for cross-project queries" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    cross_project = "cross-project-id"
+    job_hash = JSON.parse(query_job_resp_json("SELECT name FROM `users`"))
+    job_hash["configuration"]["query"]["destinationTable"] = {
+      "projectId" => cross_project,
+      "datasetId" => dataset_id,
+      "tableId" => table_id
+    }
+    cross_job = Google::Cloud::Bigquery::Job.from_gapi Google::Apis::BigqueryV2::Job.from_json(job_hash.to_json), bigquery.service
+
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, cross_job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil, format_options_use_int64_timestamp: nil
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [cross_project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}, format_options_use_int64_timestamp: true
+
+    _(cross_job).must_be :done?
+    data = cross_job.data
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+  end
 
   it "can retrieve query results when it already has destination_schema" do
+
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,

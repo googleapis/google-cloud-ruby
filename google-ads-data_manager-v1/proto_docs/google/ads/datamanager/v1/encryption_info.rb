@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,25 @@ module Google
         # @!attribute [rw] gcp_wrapped_key_info
         #   @return [::Google::Ads::DataManager::V1::GcpWrappedKeyInfo]
         #     Google Cloud Platform wrapped key information.
+        #
+        #     Note: The following fields are mutually exclusive: `gcp_wrapped_key_info`, `aws_wrapped_key_info`, `coordinator_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aws_wrapped_key_info
+        #   @return [::Google::Ads::DataManager::V1::AwsWrappedKeyInfo]
+        #     Amazon Web Services wrapped key information.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_wrapped_key_info`, `gcp_wrapped_key_info`, `coordinator_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] coordinator_key_info
+        #   @return [::Google::Ads::DataManager::V1::CoordinatorKeyInfo]
+        #     Key information for the chosen coordinator key.
+        #
+        #     This is not supported for the
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#ingest_events IngestEvents},
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#ingest_audience_members IngestAudienceMembers},
+        #     and
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#remove_audience_members RemoveAudienceMembers}
+        #     methods.
+        #
+        #     Note: The following fields are mutually exclusive: `coordinator_key_info`, `gcp_wrapped_key_info`, `aws_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EncryptionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -45,7 +64,9 @@ module Google
         #     Required. Google Cloud Platform [Cloud Key Management Service resource
         #     ID](//cloud.google.com/kms/docs/getting-resource-ids).  Should be in the
         #     format of
-        #     "projects/\\{project}/locations/\\{location}/keyRings/\\{key_ring}/cryptoKeys/\\{key}".
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{key}`
+        #     or
+        #     `gcp-kms://projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{key}`
         # @!attribute [rw] encrypted_dek
         #   @return [::String]
         #     Required. The base64 encoded encrypted data encryption key.
@@ -61,6 +82,46 @@ module Google
             # Algorithm XChaCha20-Poly1305
             XCHACHA20_POLY1305 = 1
           end
+        end
+
+        # A data encryption key wrapped by an AWS KMS key.
+        # @!attribute [rw] key_type
+        #   @return [::Google::Ads::DataManager::V1::AwsWrappedKeyInfo::KeyType]
+        #     Required. The type of algorithm used to encrypt the data.
+        # @!attribute [rw] role_arn
+        #   @return [::String]
+        #     Required. The Amazon Resource Name of the IAM Role to assume for KMS
+        #     decryption access. Should be in the format of
+        #     `arn:{partition}:iam::{account_id}:role/{role_name}`
+        # @!attribute [rw] kek_uri
+        #   @return [::String]
+        #     Required. The URI of the AWS KMS key used to decrypt the DEK. Should be in
+        #     the format of `arn:{partition}:kms:{region}:{account_id}:key/{key_id}` or
+        #     `aws-kms://arn:{partition}:kms:{region}:{account_id}:key/{key_id}`
+        # @!attribute [rw] encrypted_dek
+        #   @return [::String]
+        #     Required. The base64 encoded encrypted data encryption key.
+        class AwsWrappedKeyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of algorithm used to encrypt the data.
+          module KeyType
+            # Unspecified key type. Should never be used.
+            KEY_TYPE_UNSPECIFIED = 0
+
+            # Algorithm XChaCha20-Poly1305
+            XCHACHA20_POLY1305 = 1
+          end
+        end
+
+        # Information about the coordinator key.
+        # @!attribute [rw] key_id
+        #   @return [::String]
+        #     Required. The ID of the chosen coordinator key.
+        class CoordinatorKeyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

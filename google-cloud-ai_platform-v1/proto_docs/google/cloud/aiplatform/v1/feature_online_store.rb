@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -93,10 +93,16 @@ module Google
           #     Required. Autoscaling config applied to Bigtable Instance.
           # @!attribute [rw] enable_direct_bigtable_access
           #   @return [::Boolean]
-          #     Optional. Whether direct access to the Bigtable instance is enabled or not.
+          #     Optional. Whether direct access to the Bigtable instance is enabled or
+          #     not.
           # @!attribute [r] bigtable_metadata
           #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Bigtable::BigtableMetadata]
           #     Output only. Metadata of the Bigtable instance. Output only.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Optional. The zone where the underlying Bigtable cluster for the primary
+          #     Bigtable instance will be provisioned. Only the zone must be provided.
+          #     For example, only "us-central1-a" should be provided.
           class Bigtable
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,6 +86,18 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
 
       path = client.backup_vault_path project: "value0", location: "value1", backup_vault: "value2"
       assert_equal "projects/value0/locations/value1/backupVaults/value2", path
+    end
+  end
+
+  def test_host_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.host_group_path project: "value0", location: "value1", host_group: "value2"
+      assert_equal "projects/value0/locations/value1/hostGroups/value2", path
     end
   end
 

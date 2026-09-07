@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ module Google
         #     Optional. The maximum number of `PrivateAuctions` to return. The service
         #     may return fewer than this value. If unspecified, at most 50
         #     `PrivateAuctions` will be returned. The maximum value is 1000;
-        #     values above 1000 will be coerced to 1000.
+        #     values greater than 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListPrivateAuctions`
@@ -84,7 +84,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -118,7 +118,7 @@ module Google
         #     `PrivateAuction` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to update.
+        #     Optional. The list of fields to update.
         class UpdatePrivateAuctionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ module Google
         #     This field should be filled in for the operations initiated by a
         #     consumer, but not for service-initiated operations that are
         #     not related to a specific consumer.
+        #
         #
         #     - This can be in one of the following formats:
         #         - project:PROJECT_ID,
@@ -96,6 +97,12 @@ module Google
         # @!attribute [rw] importance
         #   @return [::Google::Cloud::ServiceControl::V1::Operation::Importance]
         #     DO NOT USE. This is an experimental field.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Private Preview. This feature is only available for approved services.
+        #
+        #     User defined labels for the resource that this operation is associated
+        #     with.
         # @!attribute [rw] extensions
         #   @return [::Array<::Google::Protobuf::Any>]
         #     Unimplemented.
@@ -108,6 +115,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
