@@ -344,10 +344,10 @@ describe "Files Snippets" do
   end
 
   describe "list_object_contexts" do
-    let(:custom_context_key1) { "my-custom-key" }
-    let(:custom_context_value1) { "my-custom-value" }
-    let(:custom_context_key2) { "my-custom-key-2" }
-    let(:custom_context_value2) { "my-custom-value-2" }
+    let(:custom_context_key1) { "my-custom-key-#{SecureRandom.hex(4)}" }
+    let(:custom_context_key2) { "my-custom-key2-#{SecureRandom.hex(4)}" }
+    let(:custom_context_value1) { "my-custom-value-#{SecureRandom.hex(4)}" }
+    let(:custom_context_value2) { "my-custom-value2-#{SecureRandom.hex(4)}" }
     let(:remote_file_name2) { "path/file_name_#{SecureRandom.hex}.txt" }
 
     before(:each) do
