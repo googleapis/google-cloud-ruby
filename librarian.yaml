@@ -4285,7 +4285,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM_CREDENTIALS
   - name: google-iam-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/iam/v1
     keep:
