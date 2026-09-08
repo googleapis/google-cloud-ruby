@@ -161,7 +161,7 @@ module Google
         #
         #     Language codes must be in BCP-47 format, such as "en-US" or "sr-Latn".
         #     For more information, see
-        #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
+        #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47)\\{:
         #     class="external" target="_blank" }.
         #
         #     If this field is unspecified and

@@ -1677,7 +1677,7 @@ module Google
               #     Optional. An expression for filtering the results of the request. Only the
               #     `shape_family` and `gcp_oracle_zone_id` fields are supported in the
               #     following format: `shape_family="{shape_family}" AND
-              #     gcp_oracle_zone_id="\\{gcp_oracle_zone_id}"`.
+              #     gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::MinorVersion>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1774,7 +1774,7 @@ module Google
               #     `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
               #     are supported in the following format:
               #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
-              #     shape_family="\\{shape_family}" AND database_edition="\\{database_edition}"`.
+              #     shape_family="{shape_family}" AND database_edition="{database_edition}"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbSystemShape>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -7299,7 +7299,7 @@ module Google
               #   @param filter [::String]
               #     Optional. Filter expression that matches a subset of the DbVersions to
               #     show. The supported filter for dbSystem creation is `db_system_shape =
-              #     \\{db_system_shape} AND storage_management = \\{storage_management}`. If no
+              #     {db_system_shape} AND storage_management = {storage_management}`. If no
               #     filter is provided, all DbVersions will be returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbVersion>]

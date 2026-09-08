@@ -42,16 +42,16 @@ module Google
             # Reserved.
             NOTIFICATION_SETTING_UNSPECIFIED = 0
 
-            # Notifications are triggered by @mentions, followed threads, first
+            # Notifications are triggered by `@mentions`, followed threads, first
             # message of new threads. All new threads are automatically followed,
             # unless manually unfollowed by the user.
             ALL = 1
 
-            # The notification is triggered by @mentions, followed threads, first
+            # The notification is triggered by `@mentions`, followed threads, first
             # message of new threads. Not available for 1:1 direct messages.
             MAIN_CONVERSATIONS = 2
 
-            # The notification is triggered by @mentions, followed threads. Not
+            # The notification is triggered by `@mentions`, followed threads. Not
             # available for 1:1 direct messages.
             FOR_YOU = 3
 

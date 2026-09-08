@@ -374,7 +374,7 @@ module Google
         #     `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
         #     are supported in the following format:
         #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
-        #     shape_family="\\{shape_family}" AND database_edition="\\{database_edition}"`.
+        #     shape_family="{shape_family}" AND database_edition="{database_edition}"`.
         class ListDbSystemShapesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -142,9 +142,9 @@ module Google
       #         "google.subject":"assertion.arn",
       #         "attribute.aws_role":
       #             "assertion.arn.contains('assumed-role')"
-      #             " ? assertion.arn.extract('\\{account_arn}assumed-role/')"
+      #             " ? assertion.arn.extract('{account_arn}assumed-role/')"
       #             "   + 'assumed-role/'"
-      #             "   + assertion.arn.extract('assumed-role/\\{role_name}/')"
+      #             "   + assertion.arn.extract('assumed-role/{role_name}/')"
       #             " : assertion.arn",
       #       }
       #       ```
@@ -161,7 +161,7 @@ module Google
       #       a Google token.
       #
       #       ```
-      #       \\{"google.subject": "assertion.sub"}
+      #       {"google.subject": "assertion.sub"}
       #       ```
       # @!attribute [rw] attribute_condition
       #   @return [::String]

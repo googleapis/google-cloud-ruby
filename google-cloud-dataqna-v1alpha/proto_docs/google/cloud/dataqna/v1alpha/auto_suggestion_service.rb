@@ -92,8 +92,8 @@ module Google
           #  text_formatted = "top product_group"
           #  html_formatted = "top <b>product_group</b>"
           #  markups {
-          #   \\{type: TEXT, start_char_index: 0, length: 3}
-          #   \\{type: DIMENSION, start_char_index: 4, length: 13}
+          #   {type: TEXT, start_char_index: 0, length: 3}
+          #   {type: DIMENSION, start_char_index: 4, length: 13}
           #  }
           # }
           #

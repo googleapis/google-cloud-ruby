@@ -43,9 +43,9 @@ module Google
         #
         # ```
         # markups = [
-        #   \\{DIMENSION, 4, 12}, // 'countries'
-        #   \\{METRIC, 17, 26}, // 'population'
-        #   \\{FILTER, 31, 36}  // 'Africa'
+        #   {DIMENSION, 4, 12}, // 'countries'
+        #   {METRIC, 17, 26}, // 'population'
+        #   {FILTER, 31, 36}  // 'Africa'
         # ]
         # ```
         #

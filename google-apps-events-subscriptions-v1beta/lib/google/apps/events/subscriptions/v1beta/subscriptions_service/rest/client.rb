@@ -539,11 +539,11 @@ module Google
                 #       event_types:"google.workspace.chat.message.v1.created"
                 #
                 #     event_types:"google.workspace.chat.message.v1.created" AND
-                #       target_resource="//chat.googleapis.com/spaces/\\{space}"
+                #       target_resource="//chat.googleapis.com/spaces/{space}"
                 #
                 #     ( event_types:"google.workspace.chat.membership.v1.updated" OR
                 #       event_types:"google.workspace.chat.message.v1.created" ) AND
-                #       target_resource="//chat.googleapis.com/spaces/\\{space}"
+                #       target_resource="//chat.googleapis.com/spaces/{space}"
                 #     ```
                 #
                 #     The server rejects invalid queries with an `INVALID_ARGUMENT`

@@ -249,7 +249,7 @@ module Google
         #     height/weight of a product, or age of a customer.
         #
         #     For example: `{ "vendor": {"text": ["vendor123", "vendor456"]},
-        #     "lengths_cm": \\{"numbers":[2.3, 15.4]}, "heights_cm": \\{"numbers":[8.1, 6.4]}
+        #     "lengths_cm": {"numbers":[2.3, 15.4]}, "heights_cm": {"numbers":[8.1, 6.4]}
         #     }`.
         #
         #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT

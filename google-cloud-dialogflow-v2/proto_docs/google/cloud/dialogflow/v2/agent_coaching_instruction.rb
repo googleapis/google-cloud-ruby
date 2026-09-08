@@ -41,7 +41,7 @@ module Google
         # @!attribute [rw] system_action
         #   @return [::String]
         #     Optional. The action that system should take. For example,
-        #     "call GetOrderTime with order_number={order number provided by the
+        #     "call GetOrderTime with order_number=\\{order number provided by the
         #     customer}". If the users don't have plugins or don't want to trigger
         #     plugins, the system_action can be empty
         # @!attribute [r] duplicate_check_result

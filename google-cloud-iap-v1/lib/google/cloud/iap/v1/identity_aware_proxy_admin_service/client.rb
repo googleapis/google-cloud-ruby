@@ -676,7 +676,7 @@ module Google
             #   @param expression [::String]
             #     Required. User input string expression. Should be of the form
             #     `attributes.saml_attributes.filter(attribute, attribute.name in
-            #     ['\\{attribute_name}', '\\{attribute_name}'])`
+            #     ['{attribute_name}', '{attribute_name}'])`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse]

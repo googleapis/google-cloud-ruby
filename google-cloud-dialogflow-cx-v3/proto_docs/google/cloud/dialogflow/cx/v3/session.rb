@@ -626,8 +626,8 @@ module Google
           #     {
           #       "subscription plan": "Business Premium Plus",
           #       "devices owned": [
-          #         \\{"model": "Google Pixel 7"},
-          #         \\{"model": "Google Pixel Tablet"}
+          #         {"model": "Google Pixel 7"},
+          #         {"model": "Google Pixel Tablet"}
           #       ]
           #     }
           #     ```

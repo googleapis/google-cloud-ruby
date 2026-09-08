@@ -926,7 +926,7 @@ module Google
         #     `@` character followed by the parameter name (for example, `@firstName`) in
         #     the query string.
         #
-        #     For example, if param_types["firstName"] = Bytes then @firstName will be a
+        #     For example, if param_types["firstName"] = Bytes then `@firstName` will be a
         #     query parameter of type Bytes. The specific `Value` to be used for the
         #     query execution must be sent in `ExecuteQueryRequest` in the `params` map.
         class PrepareQueryRequest

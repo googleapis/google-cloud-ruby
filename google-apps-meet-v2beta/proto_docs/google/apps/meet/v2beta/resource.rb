@@ -478,7 +478,7 @@ module Google
         #   @return [::String]
         #     Output only. The `fileId` for the underlying MP4 file. For example,
         #     "1kuceFZohVoCh6FulBHxwy6I15Ogpc4hP". Use `$ GET
-        #     https://www.googleapis.com/drive/v3/files/\\{$fileId}?alt=media` to download
+        #     https://www.googleapis.com/drive/v3/files/{$fileId}?alt=media` to download
         #     the blob. For more information, see
         #     https://developers.google.com/drive/api/v3/reference/files/get.
         # @!attribute [r] export_uri

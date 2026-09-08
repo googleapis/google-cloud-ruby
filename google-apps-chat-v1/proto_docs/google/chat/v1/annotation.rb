@@ -40,7 +40,7 @@ module Google
         #   "length":7,
         #   "userMention": {
         #     "user": {
-        #       "name":"users/\\{user}",
+        #       "name":"users/{user}",
         #       "displayName":"FooBot",
         #       "avatarUrl":"https://goo.gl/aeDtrS",
         #       "type":"BOT"

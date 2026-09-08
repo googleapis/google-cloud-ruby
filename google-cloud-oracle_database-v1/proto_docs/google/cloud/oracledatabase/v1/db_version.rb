@@ -78,7 +78,7 @@ module Google
         #   @return [::String]
         #     Optional. Filter expression that matches a subset of the DbVersions to
         #     show. The supported filter for dbSystem creation is `db_system_shape =
-        #     \\{db_system_shape} AND storage_management = \\{storage_management}`. If no
+        #     {db_system_shape} AND storage_management = {storage_management}`. If no
         #     filter is provided, all DbVersions will be returned.
         class ListDbVersionsRequest
           include ::Google::Protobuf::MessageExts

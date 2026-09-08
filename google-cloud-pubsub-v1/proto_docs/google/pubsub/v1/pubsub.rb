@@ -755,24 +755,24 @@ module Google
         #       /**
         #       * Transforms a Pub/Sub message.
         #
-        #       * @return \\{(Object<string, (string | Object<string, string>)>|null)} - To
+        #       * @return {(Object<string, (string | Object<string, string>)>|null)} - To
         #       * filter a message, return `null`. To transform a message return a map
         #       * with the following keys:
-        #       *   - (required) 'data' : \\{string}
-        #       *   - (optional) 'attributes' : \\{Object<string, string>}
+        #       *   - (required) 'data' : {string}
+        #       *   - (optional) 'attributes' : {Object<string, string>}
         #       * Returning empty `attributes` will remove all attributes from the
         #       * message.
         #       *
-        #       * @param  \\{(Object<string, (string | Object<string, string>)>} Pub/Sub
+        #       * @param  {(Object<string, (string | Object<string, string>)>} Pub/Sub
         #       * message. Keys:
-        #       *   - (required) 'data' : \\{string}
-        #       *   - (required) 'attributes' : \\{Object<string, string>}
+        #       *   - (required) 'data' : {string}
+        #       *   - (required) 'attributes' : {Object<string, string>}
         #       *
-        #       * @param  \\{Object<string, any>} metadata - Pub/Sub message metadata.
+        #       * @param  {Object<string, any>} metadata - Pub/Sub message metadata.
         #       * Keys:
-        #       *   - (optional) 'message_id'  : \\{string}
-        #       *   - (optional) 'publish_time': \\{string} YYYY-MM-DDTHH:MM:SSZ format
-        #       *   - (optional) 'ordering_key': \\{string}
+        #       *   - (optional) 'message_id'  : {string}
+        #       *   - (optional) 'publish_time': {string} YYYY-MM-DDTHH:MM:SSZ format
+        #       *   - (optional) 'ordering_key': {string}
         #       */
         #
         #       function <function_name>(message, metadata) {

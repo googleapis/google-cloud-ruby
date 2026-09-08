@@ -556,7 +556,7 @@ module Google
         #     Required. The type of the computation based metric.
         # @!attribute [rw] parameters
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A map of parameters for the metric, e.g. {"rouge_type":
+        #     Optional. A map of parameters for the metric, e.g. \\{"rouge_type":
         #     "rougeL"}.
         class ComputationBasedMetricSpec
           include ::Google::Protobuf::MessageExts

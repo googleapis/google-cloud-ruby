@@ -56,7 +56,7 @@ module Google
         #     Required. Destination is the message bus that the GoogleApiSource is
         #     delivering to. It must be point to the full resource name of a MessageBus.
         #     Format:
-        #     "projects/\\{PROJECT_ID}/locations/\\{region}/messagesBuses/{MESSAGE_BUS_ID)
+        #     "projects/\\{PROJECT_ID}/locations/\\{region}/messagesBuses/\\{MESSAGE_BUS_ID)
         # @!attribute [rw] crypto_key_name
         #   @return [::String]
         #     Optional. Resource name of a KMS crypto key (managed by the user) used to

@@ -338,7 +338,7 @@ module Google
           #     Optional. Setting for toggling space history on and off.
           # @!attribute [rw] use_at_mention_all
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Optional. Setting for using @all in a space.
+          #     Optional. Setting for using `@all` in a space.
           # @!attribute [rw] manage_apps
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
           #     Optional. Setting for managing apps in a space.

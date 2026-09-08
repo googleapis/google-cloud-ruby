@@ -798,7 +798,7 @@ module Google
           # aliases](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#explicit_alias_syntax).
           #
           # Example: `SELECT MIN(col1) AS min_col1, MAX(col1) AS max_col1 FROM
-          # $\\{data()}`
+          # ${data()}`
           # @!attribute [rw] description
           #   @return [::String]
           #     Optional. Specifies the description of the debug query.

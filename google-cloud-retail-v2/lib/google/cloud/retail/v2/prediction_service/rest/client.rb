@@ -314,12 +314,12 @@ module Google
               #        will return generic (unfiltered) popular products instead of empty if
               #        your filter blocks all prediction results.
               #     * `priceRerankLevel`: String. Default empty. If set to be non-empty, then
-              #        it needs to be one of {'no-price-reranking', 'low-price-reranking',
+              #        it needs to be one of \\{'no-price-reranking', 'low-price-reranking',
               #        'medium-price-reranking', 'high-price-reranking'}. This gives
               #        request-level control and adjusts prediction results based on product
               #        price.
               #     * `diversityLevel`: String. Default empty. If set to be non-empty, then
-              #        it needs to be one of {'no-diversity', 'low-diversity',
+              #        it needs to be one of \\{'no-diversity', 'low-diversity',
               #        'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
               #        request-level control and adjusts prediction results based on product
               #        category.
