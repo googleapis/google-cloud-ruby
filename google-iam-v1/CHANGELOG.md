@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2026-09-08)
+
+#### Features
+
+* onboarding google-iam-v1 to Librarian ([#36530](https://github.com/googleapis/google-cloud-ruby/issues/36530)) 
+
 ### 1.7.1 (2026-08-05)
 
 #### Bug Fixes
