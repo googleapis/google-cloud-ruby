@@ -2,7 +2,6 @@
 
 Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
 
-Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_product_set request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vision-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/vision)
-for general usage information.
 
 ## Debug Logging
 
