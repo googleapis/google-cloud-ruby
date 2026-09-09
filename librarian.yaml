@@ -4227,6 +4227,17 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
+  - name: google-cloud-workload_identity
+    version: 0.0.1
+    apis:
+      - path: google/cloud/workloadidentity/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-workload_identity-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/workloadidentity/v1
   - name: google-cloud-workload_manager
     version: 0.2.1
     apis:
