@@ -1,8 +1,7 @@
 # Ruby Client for the Vision AI V1 API
 
-API Client library for the Vision AI V1 API
+Vertex AI Vision is an AI-powered platform to ingest, analyze and store video data.
 
-google-cloud-vision_ai-v1 is the official client library for the Vision AI V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/vision_ai/v1"
 
-client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Client.new
-request = ::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new # (request fields as keyword arguments...)
-response = client.list_public_operators request
+client = ::Google::Cloud::VisionAI::V1::HealthCheckService::Client.new
+request = ::Google::Cloud::VisionAI::V1::HealthCheckRequest.new # (request fields as keyword arguments...)
+response = client.health_check request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vision_ai-v1/latest)
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/vision_ai/v1"
 require "logger"
 
-client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Client.new do |config|
+client = ::Google::Cloud::VisionAI::V1::HealthCheckService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
