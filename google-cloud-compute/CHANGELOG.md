@@ -1,0 +1,212 @@
+# Changelog
+
+### 1.20.0 (2026-08-10)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
+### 1.19.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+#### Documentation
+
+* Update copyright year ([#35090](https://github.com/googleapis/google-cloud-ruby/issues/35090)) 
+
+### 1.19.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.19.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 1.18.0 (2026-05-18)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260422 ([#1193](https://github.com/googleapis/google-cloud-ruby/issues/1193)) ([#33963](https://github.com/googleapis/google-cloud-ruby/issues/33963)) 
+
+### 1.17.0 (2026-05-06)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260331 ([#33891](https://github.com/googleapis/google-cloud-ruby/issues/33891)) 
+
+### 1.16.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.15.0 (2026-03-05)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260213 ([#32784](https://github.com/googleapis/google-cloud-ruby/issues/32784)) 
+
+### 1.14.0 (2025-12-16)
+
+#### Features
+
+* [DIREGAPIC] Update v1 API definitions to revision 20251202 ([#32270](https://github.com/googleapis/google-cloud-ruby/issues/32270)) 
+
+### 1.13.0 (2025-12-11)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20251031 ([#32244](https://github.com/googleapis/google-cloud-ruby/issues/32244)) 
+
+### 1.12.0 (2025-10-16)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20250916 ([#1107](https://github.com/googleapis/google-cloud-ruby/issues/1107)) ([#31762](https://github.com/googleapis/google-cloud-ruby/issues/31762)) 
+
+### 1.11.2 (2025-09-12)
+
+#### Documentation
+
+* Update README in wrapper libraries ([#31309](https://github.com/googleapis/google-cloud-ruby/issues/31309)) 
+
+### 1.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.11.0 (2025-04-21)
+
+#### Features
+
+* Update Compute Engine API to revision 20250415 ([#29478](https://github.com/googleapis/google-cloud-ruby/issues/29478)) 
+
+### 1.10.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28528](https://github.com/googleapis/google-cloud-ruby/issues/28528)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.9.0 (2024-12-12)
+
+#### Features
+
+* Support for the NetworkProfiles service ([#27798](https://github.com/googleapis/google-cloud-ruby/issues/27798)) 
+
+### 1.8.1 (2024-08-09)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26625](https://github.com/googleapis/google-cloud-ruby/issues/26625)) 
+
+### 1.8.0 (2024-05-16)
+
+#### Features
+
+* Support for the InstanceGroupManagerResizeRequests service 
+* Support for the InstanceSettingsService 
+* Support for the StoragePools service 
+* Support for the StoragePoolTypes service 
+
+### 1.7.0 (2024-03-06)
+
+#### Features
+
+* Updated dependency on google-cloud-compute-v1 to the latest version ([#25277](https://github.com/googleapis/google-cloud-ruby/issues/25277)) 
+
+### 1.6.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24867](https://github.com/googleapis/google-cloud-ruby/issues/24867)) 
+
+### 1.5.0 (2024-02-08)
+
+#### Features
+
+* Support RegionZones API ([#24780](https://github.com/googleapis/google-cloud-ruby/issues/24780)) 
+
+### 1.4.0 (2024-01-15)
+
+#### Features
+
+* support for universe_domain ([#24273](https://github.com/googleapis/google-cloud-ruby/issues/24273)) 
+
+### 1.3.0 (2023-12-13)
+
+#### Features
+
+* add support to SnapshotSettingsService from revision 20231110 ([#23638](https://github.com/googleapis/google-cloud-ruby/issues/23638)) 
+* update google-cloud-compute-v1 dependency to version 2.6 
+
+### 1.2.0 (2023-07-11)
+
+#### Features
+
+* Support for the InterconnectRemoteLocations service ([#22467](https://github.com/googleapis/google-cloud-ruby/issues/22467)) 
+
+### 1.1.0 (2023-03-23)
+
+#### Features
+
+* Added support for the RegionInstanceTemplates client ([#20916](https://github.com/googleapis/google-cloud-ruby/issues/20916)) 
+
+### 1.0.0 (2023-02-15)
+
+### ⚠ BREAKING CHANGES
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object
+
+#### Features
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object 
+
+### 0.6.0 (2023-01-12)
+
+#### Features
+
+* Support for the NetworkAttachments service ([#19832](https://github.com/googleapis/google-cloud-ruby/issues/19832)) 
+* Support for the retry policy and quota project configuration fields 
+
+### 0.5.0 (2022-09-20)
+
+#### Features
+
+* Added support for region_ssl_policies and region_target_tcp_policies services ([#19163](https://github.com/googleapis/google-cloud-ruby/issues/19163)) 
+
+### 0.4.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.3.0 (2022-04-18)
+
+#### Features
+
+* Support for NetworkEdgeSecurityServices
+* Support for NetworkFirewallPolicies
+* Support for RegionNetworkFirewallPolicies
+* Support for RegionSecurityPolicies
+
+### 0.2.0 / 2022-02-17
+
+#### Features
+
+* Support for the MachineImages service
+
+### 0.1.0 / 2022-02-07
+
+#### Features
+
+* Initial generation of google-cloud-compute

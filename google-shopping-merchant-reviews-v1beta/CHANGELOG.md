@@ -1,0 +1,83 @@
+# Changelog
+
+### 0.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34062](https://github.com/googleapis/google-cloud-ruby/issues/34062)) 
+
+### 0.8.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
+### 0.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+
+### 0.7.0 (2026-03-18)
+
+#### Features
+
+* upgrade protobuf from v25.7 to v31.0 ([#32822](https://github.com/googleapis/google-cloud-ruby/issues/32822)) 
+
+### 0.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.6.0 (2025-09-10)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#30989](https://github.com/googleapis/google-cloud-ruby/issues/30989)) 
+
+### 0.5.0 (2025-08-11)
+
+### ⚠ BREAKING CHANGES
+
+* Renamed MerchantReview#attributes field to MerchantReview#merchant_review_attributes
+
+#### Bug Fixes
+
+* Renamed MerchantReview#attributes field to MerchantReview#merchant_review_attributes 
+
+### 0.4.0 (2025-07-15)
+
+#### Features
+
+* Added is_verified_purchase and is_incentivized_review to product review attributes ([#30621](https://github.com/googleapis/google-cloud-ruby/issues/30621)) 
+
+### 0.3.0 (2025-05-11)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.2.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 0.1.0 (2025-01-08)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-reviews-v1beta ([#28139](https://github.com/googleapis/google-cloud-ruby/issues/28139)) 
+
+## Release History

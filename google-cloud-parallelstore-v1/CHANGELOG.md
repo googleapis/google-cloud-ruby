@@ -1,0 +1,130 @@
+# Changelog
+
+### 1.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35058](https://github.com/googleapis/google-cloud-ruby/issues/35058)) 
+
+### 1.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34052](https://github.com/googleapis/google-cloud-ruby/issues/34052)) 
+
+### 1.7.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
+### 1.7.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33437](https://github.com/googleapis/google-cloud-ruby/issues/33437)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.5.0 (2025-12-03)
+
+#### Features
+
+* add transfer metadata options proto definition ([#32234](https://github.com/googleapis/google-cloud-ruby/issues/32234)) 
+
+### 1.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.4.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31580](https://github.com/googleapis/google-cloud-ruby/issues/31580)) 
+* add ListOperations unreachable resources 
+
+### 1.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.1.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.1.1 (2025-04-21)
+
+#### Documentation
+
+* Minor updates ([#29473](https://github.com/googleapis/google-cloud-ruby/issues/29473)) 
+
+### 1.1.0 (2025-02-14)
+
+#### Features
+
+* Added instance deployment type field 
+* Added REPAIRING instance state 
+* TransferCounters includes number of objects that failed to write and bytes that failed 
+* TransferOperationMetadata reports a list of files that failed to transfer 
+#### Documentation
+
+* Deprecated Instance#daos_version 
+
+### 1.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825))
+
+#### Features
+
+* Bump version to 1.0.0 ([#28941](https://github.com/googleapis/google-cloud-ruby/issues/28941)) 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825)) 
+
+### 0.3.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.2.1 (2025-01-09)
+
+#### Documentation
+
+* Fixed a few cross-reference links ([#28202](https://github.com/googleapis/google-cloud-ruby/issues/28202)) 
+
+### 0.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.1.0 (2024-10-28)
+
+#### Features
+
+* Initial generation of google-cloud-parallelstore-v1 ([#27491](https://github.com/googleapis/google-cloud-ruby/issues/27491)) 
+
+## Release History

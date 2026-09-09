@@ -1,0 +1,34 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "**/acceptance/**/*"
+    - "support/**/*"
+    - "test/**/*"
+    - "samples/utilities/**/*"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 35
+Metrics/BlockLength:
+  Exclude:
+    - "google-cloud-pubsub.gemspec"
+    - "Rakefile"
+    - ".toys.rb"
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/MethodLength:
+  Max: 35
+Metrics/PerceivedComplexity:
+  Max: 20
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-pubsub.rb"
+Style/ReturnNilInPredicateMethodDefinition:
+  Exclude:
+    - "lib/google/cloud/pubsub/subscriber/stream.rb"

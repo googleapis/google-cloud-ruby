@@ -1,0 +1,127 @@
+# Changelog
+
+### 0.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.10.1 (2026-04-09)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.10.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.9.0 (2025-11-19)
+
+#### Features
+
+* Added the `product_id_base64_url_encoded`. This allows for product IDs containing special characters to be correctly handled when base64url-encoded ([#32172](https://github.com/googleapis/google-cloud-ruby/issues/32172)) 
+#### Bug Fixes
+
+* removing parameters before stable release ([#32197](https://github.com/googleapis/google-cloud-ruby/issues/32197)) 
+#### Documentation
+
+* Updated the API summary and overview in the service configuration 
+
+### 0.8.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.8.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31009](https://github.com/googleapis/google-cloud-ruby/issues/31009)) 
+
+### 0.7.0 (2025-05-11)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.6.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.6.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 0.5.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.4.3 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.4.2 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26635](https://github.com/googleapis/google-cloud-ruby/issues/26635)) 
+
+### 0.4.1 (2024-05-23)
+
+#### Documentation
+
+* Fix the terminology around inventory data specification ([#25925](https://github.com/googleapis/google-cloud-ruby/issues/25925)) 
+
+### 0.4.0 (2024-04-19)
+
+#### Features
+
+* Fix inventories sub-API path for LocalInventory and RegionalInventory ([#25447](https://github.com/googleapis/google-cloud-ruby/issues/25447)) 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24881](https://github.com/googleapis/google-cloud-ruby/issues/24881)) 
+
+### 0.2.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.2.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.2.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23789](https://github.com/googleapis/google-cloud-ruby/issues/23789)) 
+
+### 0.1.0 (2023-10-23)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-inventories-v1beta ([#23453](https://github.com/googleapis/google-cloud-ruby/issues/23453)) 
+
+## Release History

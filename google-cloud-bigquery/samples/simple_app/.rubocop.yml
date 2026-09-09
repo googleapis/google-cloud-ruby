@@ -1,0 +1,2 @@
+inherit_gem:
+    google-style: google-style.yml

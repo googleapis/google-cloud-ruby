@@ -1,0 +1,19 @@
+coverage/*
+doc/*
+pkg/*
+html/*
+jsondoc/*
+
+# Ignore YARD stuffs
+.yardoc
+
+# IDE settings
+.idea
+*.iml
+
+# Dev and tmp files
+*keyfile.json
+tmp/*
+.byebug_history
+.DS_Store
+rubocop_yard_examples/*

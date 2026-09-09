@@ -1,0 +1,74 @@
+# Changelog
+
+### 0.5.1 (2026-08-05)
+
+#### Documentation
+
+* Update copyright year 
+
+### 0.5.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34062](https://github.com/googleapis/google-cloud-ruby/issues/34062)) 
+
+### 0.4.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.3.0 (2025-11-21)
+
+#### Features
+
+* Added `handling_cutoff_time` and `handling_cutoff_timezone` fields to the `Shipping` message within `Attributes` 
+* Added the `product_id_base64_url_encoded` field to `InsertProductInputRequest`, `DeleteProductInputRequest`, and `GetProductRequest`. This allows for product IDs containing special characters to be correctly handled when unpadded base64url-encoded ([#32175](https://github.com/googleapis/google-cloud-ruby/issues/32175)) 
+#### Bug Fixes
+
+* removing parameters before stable release 
+
+### 0.2.3 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 0.2.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.2.1 (2025-04-21)
+
+#### Documentation
+
+* Minor updates ([#29455](https://github.com/googleapis/google-cloud-ruby/issues/29455)) 
+
+### 0.2.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28534](https://github.com/googleapis/google-cloud-ruby/issues/28534)) 
+* Update Ruby version requirement to 3.0 
+
+### 0.1.2 (2024-12-10)
+
+#### Documentation
+
+* Updated the gem description ([#27763](https://github.com/googleapis/google-cloud-ruby/issues/27763)) 
+
+### 0.1.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26635](https://github.com/googleapis/google-cloud-ruby/issues/26635)) 
+
+### 0.1.0 (2024-06-06)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-products ([#26062](https://github.com/googleapis/google-cloud-ruby/issues/26062)) 
+
+## Release History

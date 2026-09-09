@@ -1,0 +1,117 @@
+# Changelog
+
+### 1.5.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35065](https://github.com/googleapis/google-cloud-ruby/issues/35065)) 
+
+### 1.5.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34058](https://github.com/googleapis/google-cloud-ruby/issues/34058)) 
+
+### 1.4.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33483](https://github.com/googleapis/google-cloud-ruby/issues/33483)) 
+
+### 1.4.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
+### 1.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.3.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31582](https://github.com/googleapis/google-cloud-ruby/issues/31582)) 
+* add ListOperations unreachable resources 
+
+### 1.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.1.1 (2025-07-15)
+
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30625](https://github.com/googleapis/google-cloud-ruby/issues/30625)) 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826))
+
+#### Features
+
+* Bump version to 1.0.0 ([#28941](https://github.com/googleapis/google-cloud-ruby/issues/28941)) 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826)) 
+
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.3.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.2.0 (2024-08-30)
+
+#### Features
+
+* add BatchOperationStatus to import metadata 
+* request client libraries for new languages ([#27016](https://github.com/googleapis/google-cloud-ruby/issues/27016)) 
+#### Documentation
+
+* A comment for enum value `FAILED` in enum `State` is changed 
+* A comment for enum value `IN_PROGRESS` in enum `State` is changed 
+* A comment for enum value `SUCCEEDED` in enum `State` is changed 
+* A comment for field `relevance` in message `.google.cloud.visionai.v1.SearchResultItem` is changed 
+* A comment for method `ClipAsset` in service `Warehouse` is changed 
+* Add field `experimental_features` to message `PythonSettings` 
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.1.0 (2024-07-22)
+
+#### Features
+
+* Initial generation of google-cloud-vision_ai-v1 ([#26486](https://github.com/googleapis/google-cloud-ruby/issues/26486)) 
+
+## Release History

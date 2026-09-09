@@ -1,0 +1,33 @@
+# This build file includes a target for the Ruby wrapper library for
+# <%= gem_name %>.
+
+# This is an API workspace, having public visibility by default makes perfect sense.
+package(default_visibility = ["//visibility:public"])
+
+# Export yaml configs.
+exports_files(glob(["*.yaml"]))
+
+load(
+    "@com_google_googleapis_imports//:imports.bzl",
+    "ruby_cloud_gapic_library",
+    "ruby_gapic_assembly_pkg",
+)
+
+# Generates a Ruby wrapper client for <%= api_shortname %>.
+# Ruby wrapper clients are versionless, but are generated from source protos
+# for a particular service version, <%= service_version %> in this case.
+ruby_cloud_gapic_library(
+    name = "<%= api_shortname %>_ruby_wrapper",
+    srcs = ["//<%= versioned_proto_path %>:<%= proto_with_info_target %>"],
+    extra_protoc_parameters = <%= render_protoc_parameters 4, 8 %>,
+    ruby_cloud_description = "<%= description %>",
+    ruby_cloud_title = "<%= title %>",
+)
+
+# Open Source package.
+ruby_gapic_assembly_pkg(
+    name = "<%= assembly_package_name %>-ruby",
+    deps = [
+        ":<%= api_shortname %>_ruby_wrapper",
+    ],
+)

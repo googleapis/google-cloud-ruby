@@ -1,0 +1,9 @@
+--no-private
+--title="Obsolete Gem stackdriver"
+--markup markdown
+--markup-provider redcarpet
+
+./lib/**/*.rb
+-
+README.md
+LICENSE.md

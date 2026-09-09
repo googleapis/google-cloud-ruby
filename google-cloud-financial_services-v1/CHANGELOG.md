@@ -1,0 +1,80 @@
+# Changelog
+
+### 1.0.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34046](https://github.com/googleapis/google-cloud-ruby/issues/34046)) 
+
+### 0.6.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33478](https://github.com/googleapis/google-cloud-ruby/issues/33478)) 
+
+### 0.6.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.5.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.4.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31578](https://github.com/googleapis/google-cloud-ruby/issues/31578)) 
+* add ListOperations unreachable resources 
+
+### 0.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 0.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.1.0 (2025-04-24)
+
+#### Features
+
+* Initial generation of google-cloud-financial_services-v1 ([#29530](https://github.com/googleapis/google-cloud-ruby/issues/29530)) 
+
+## Release History

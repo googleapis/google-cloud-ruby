@@ -1,0 +1,130 @@
+# Changelog
+
+### 2.6.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35056](https://github.com/googleapis/google-cloud-ruby/issues/35056)) 
+
+### 2.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 2.5.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 2.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 2.3.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31579](https://github.com/googleapis/google-cloud-ruby/issues/31579)) 
+* add ListOperations unreachable resources 
+
+### 2.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 2.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825)) 
+
+### 1.2.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.1.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.0.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24872](https://github.com/googleapis/google-cloud-ruby/issues/24872)) 
+
+### 0.2.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.2.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.2.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23781](https://github.com/googleapis/google-cloud-ruby/issues/23781)) 
+
+### 0.1.0 (2023-09-27)
+
+#### Features
+
+* Initial generation of google-cloud-migration_center-v1 ([#23392](https://github.com/googleapis/google-cloud-ruby/issues/23392)) 
+
+## Release History

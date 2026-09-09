@@ -1,0 +1,85 @@
+# Changelog
+
+### 0.8.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36254](https://github.com/googleapis/google-cloud-ruby/issues/36254)) 
+
+### 0.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 0.8.0 (2026-07-27)
+
+#### Features
+
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching ([#35019](https://github.com/googleapis/google-cloud-ruby/issues/35019)) 
+
+### 0.7.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34681](https://github.com/googleapis/google-cloud-ruby/issues/34681)) 
+
+### 0.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
+### 0.5.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 0.5.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 0.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 0.2.0 (2025-08-12)
+
+#### Features
+
+* A new message `GetAttachmentRequest` and `GetComment` is added ([#30806](https://github.com/googleapis/google-cloud-ruby/issues/30806)) 
+
+### 0.1.1 (2025-05-27)
+
+#### Documentation
+
+* Minor updates 
+* Remove unnecessary curl and Python documentation ([#30430](https://github.com/googleapis/google-cloud-ruby/issues/30430)) 
+
+### 0.1.0 (2025-05-16)
+
+#### Features
+
+* Initial generation of google-cloud-support-v2beta ([#30387](https://github.com/googleapis/google-cloud-ruby/issues/30387)) 
+
+## Release History

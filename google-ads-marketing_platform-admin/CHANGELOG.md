@@ -1,0 +1,36 @@
+# Changelog
+
+### 0.3.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+#### Documentation
+
+* Update copyright year ([#35088](https://github.com/googleapis/google-cloud-ruby/issues/35088)) 
+
+### 0.3.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34037](https://github.com/googleapis/google-cloud-ruby/issues/34037)) 
+
+### 0.2.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.1.1 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 0.1.0 (2025-05-21)
+
+#### Features
+
+* Initial generation of google-ads-marketing_platform-admin ([#30414](https://github.com/googleapis/google-cloud-ruby/issues/30414)) 
+
+## Release History

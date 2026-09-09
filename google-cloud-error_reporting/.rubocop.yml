@@ -1,0 +1,29 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "integration/**/*"
+    - "google-cloud-error_reporting.gemspec"
+    - "Rakefile"
+    - "support/**/*"
+    - "test/**/*"
+
+Documentation:
+  Enabled: false
+
+Lint/RescueException:
+  Exclude:
+    - "lib/google/cloud/error_reporting/middleware.rb"
+Lint/AmbiguousOperator:
+  Exclude:
+    - "lib/google/cloud/error_reporting/project.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-error_reporting.rb"
+Metrics/ClassLength:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-error_reporting.rb"

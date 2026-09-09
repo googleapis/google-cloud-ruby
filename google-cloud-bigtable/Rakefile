@@ -1,0 +1,253 @@
+# Copyright 2018 Google LLC
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+require "rake/testtask"
+desc "Run tests."
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigtable"
+      track_files "lib/**/*.rb"
+      add_filter "lib/google/cloud/bigtable/admin/v2/doc"
+      add_filter "lib/google/cloud/bigtable/v2/doc"
+      add_filter "test/"
+    end
+
+    Rake::Task[:test].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the google-cloud-bigtable acceptance tests."
+task :acceptance, :project, :keyfile do |_t, args|
+  project = args[:project]
+  project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+
+  keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"] unless keyfile
+
+  if project.nil? || keyfile.nil?
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+
+  # clear any env var already set
+  require "google/cloud/bigtable/credentials"
+  Google::Cloud::Bigtable::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+
+  # always overwrite when running tests
+  ENV["BIGTABLE_PROJECT"] = project
+  ENV["BIGTABLE_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.warning = false
+  end
+
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |_t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigtable"
+      track_files "lib/**/*.rb"
+      add_filter "lib/google/cloud/bigtable/admin/v2/doc"
+      add_filter "lib/google/cloud/bigtable/v2/doc"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task[:acceptance].invoke args[:project], args[:keyfile]
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup do |_t, args|
+    project = args[:project]
+    project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+
+    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"] unless keyfile
+
+    if project.nil? || keyfile.nil?
+      raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+            "BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    end
+
+    # clear any env var already set
+    require "google/cloud/bigtable/credentials"
+    Google::Cloud::Bigtable::Credentials.env_vars.each do |path|
+      ENV[path] = nil
+    end
+
+    # always overwrite when running tests
+    ENV["BIGTABLE_PROJECT"] = project
+    ENV["BIGTABLE_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/bigtable"
+    puts "Cleaning up Bigtable instances and databases."
+
+    gcloud = Google::Cloud.new
+    bigtable = gcloud.bigtable
+    bigtable.instances.each do |instance|
+      instance.delete
+    rescue StandardError => e
+      puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
+    end
+  end
+end
+
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_unbundled_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-bigtable gem has no samples to test."
+    end
+  end
+
+  task :master do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_unbundled_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-bigtable gem has no samples to test."
+    end
+  end
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
+end
+
+desc "Run rubocop on yard examples."
+task :rubocop_yard_examples do
+  YARD.parse "lib/**/*.rb"
+  registry = YARD::Registry.load_all
+  examples = registry.all.map { |object| object.tags :example }.flatten
+
+  dir_name = "rubocop_yard_examples"
+  rm_rf dir_name
+  mkdir_p dir_name
+  hsh = examples.each_with_object({}) do |e, h|
+    obj = e.object
+    name = "#{obj.file.gsub(/\W/, '_')}_#{obj.line}"
+    h[name] ||= []
+    h[name] << e.text
+  end
+  hsh.each_pair do |k, v|
+    v.each_with_index do |text, i|
+      file_name = i.positive? ? "#{k}_#{i + 1}" : k # "foo", "foo_2", "foo_3", ...
+      File.write "#{dir_name}/#{file_name}.rb", text
+    end
+  end
+  sh "bundle exec rubocop #{dir_name} --config .rubocop_yard_examples.yml"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-bigtable"
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
+
+  ARGV.clear
+  IRB.start
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-bigtable"
+  header "google-cloud-bigtable rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-bigtable yard", "*"
+  header "bigtable yard still had warnings", "!"
+  Rake::Task[:yard].invoke
+  header "google-cloud-bigtable doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "google-cloud-bigtable test", "*"
+  Rake::Task[:test].invoke
+end
+
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task[:ci].invoke
+    header "google-cloud-bigtable acceptance", "*"
+    Rake::Task[:acceptance].invoke
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task default: :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

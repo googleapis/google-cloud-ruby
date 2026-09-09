@@ -1,0 +1,192 @@
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+require "rake/testtask"
+desc "Run tests."
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
+end
+
+namespace :test do
+  desc "Run tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-datastore"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+      add_filter "lib/google/datastore/"
+      add_filter "lib/google/cloud/datastore/v1/"
+    end
+
+    Rake::Task[:test].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the datastore acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  set_env_vars project: args[:project], keyfile: args[:keyfile]
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-datastore"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task[:acceptance].invoke
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup, :project, :keyfile do |t, args|
+    set_env_vars project: args[:project], keyfile: args[:keyfile]
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/datastore"
+
+    kinds = %w(Character Company NeverUsedBeforeTask Person Post)
+    puts "cleanup: start"
+    datastore = Google::Cloud::Datastore.new
+
+    kinds.each do |kind|
+      query = Google::Cloud::Datastore::Query.new.kind(kind).select("__key__")
+      loop do
+        keys = datastore.run(query).map(&:key)
+        puts "deleting #{kind} entities: #{keys.count}"
+        break if keys.empty?
+        datastore.delete keys
+      end
+    end
+    puts "cleanup: done"
+  end
+
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.warning = false
+  end
+
+  # TODO: Add a setup task to create indexes for the datastore
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-datastore"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-datastore"
+  header "google-cloud-datastore rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-datastore yard", "*"
+  header "datastore yard still had warnings", "!"
+  Rake::Task[:yard].invoke
+  header "google-cloud-datastore doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "google-cloud-datastore test", "*"
+  Rake::Task[:test].invoke
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task[:ci].invoke
+    header "google-cloud-datastore acceptance", "*"
+    Rake::Task[:acceptance].invoke
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    Dir.chdir "samples" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+
+  task :master do
+    Dir.chdir "samples" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
+
+def set_env_vars project: nil, keyfile: nil
+  project ||= ENV["DATASTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile ||= ENV["DATASTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["DATASTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/datastore/credentials"
+  Google::Cloud::Datastore::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["DATASTORE_PROJECT"] = project
+  ENV["DATASTORE_KEYFILE_JSON"] = keyfile
+end

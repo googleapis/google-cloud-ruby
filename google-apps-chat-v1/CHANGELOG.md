@@ -1,0 +1,262 @@
+# Changelog
+
+### 0.29.0 (2026-08-10)
+
+#### Features
+
+* Allow users to search for spaces without requiring admin privileges- [#36200](https://github.com/googleapis/google-cloud-ruby/issues/36200) 
+
+### 0.28.0 (2026-08-05)
+
+#### Features
+
+* Addition of the Search Messages API ([#35039](https://github.com/googleapis/google-cloud-ruby/issues/35039)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
+### 0.27.0 (2026-07-23)
+
+#### Features
+
+* Addition of Membership Affiliation information ([#34989](https://github.com/googleapis/google-cloud-ruby/issues/34989)) 
+
+### 0.26.0 (2026-07-13)
+
+#### Features
+
+* Add access permission settings to Space resource for configuring space discovery and join permissions ([#34741](https://github.com/googleapis/google-cloud-ruby/issues/34741)) 
+
+### 0.25.0 (2026-07-09)
+
+#### Features
+
+* Add Availability Api's ([#34718](https://github.com/googleapis/google-cloud-ruby/issues/34718)) 
+
+### 0.24.0 (2026-06-18)
+
+#### Features
+
+* add new FORWARD QuoteType enum in the QuotedMessageMetadata proto ([#34630](https://github.com/googleapis/google-cloud-ruby/issues/34630)) 
+
+### 0.23.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#33876](https://github.com/googleapis/google-cloud-ruby/issues/33876)) 
+
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
+### 0.21.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.20.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.19.0 (2026-02-08)
+
+#### Features
+
+* Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto 
+#### Documentation
+
+* update reference documentation for `SelectionInput.DROPDOWN` to include dynamic data sources and autosuggestion ([#32413](https://github.com/googleapis/google-cloud-ruby/issues/32413)) 
+
+### 0.18.0 (2025-12-16)
+
+#### Features
+
+* Addition of GMAIL_MESSAGE value for RichLinkType enum in the RichLinkMetadata proto ([#32271](https://github.com/googleapis/google-cloud-ruby/issues/32271)) 
+
+### 0.17.0 (2025-11-21)
+
+#### Features
+
+* Add `Carousel` widget 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#31779](https://github.com/googleapis/google-cloud-ruby/issues/31779)) 
+
+### 0.16.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
+### 0.15.0 (2025-08-27)
+
+### ⚠ BREAKING CHANGES
+
+* Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#30899](https://github.com/googleapis/google-cloud-ruby/issues/30899))
+
+#### Bug Fixes
+
+* Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#30899](https://github.com/googleapis/google-cloud-ruby/issues/30899)) 
+
+### 0.14.0 (2025-08-12)
+
+#### Features
+
+* Addition of app auth support for chat api ([#30748](https://github.com/googleapis/google-cloud-ruby/issues/30748)) 
+#### Documentation
+
+* Update reference documentation 
+
+### 0.13.0 (2025-07-24)
+
+#### Features
+
+* Exposing 1p integration message content (drive, calendar, huddle, meet chips) ([#30712](https://github.com/googleapis/google-cloud-ruby/issues/30712)) 
+#### Documentation
+
+* Update reference documentation for annotations. Introduce new richlink metadata types 
+
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* A new method `customEmojis.create` is added ([#30050](https://github.com/googleapis/google-cloud-ruby/issues/30050)) 
+* A new method `customEmojis.delete` is added 
+* A new method `customEmojis.get` is added 
+* A new method `customEmojis.list` is added 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* A comment for field `filter` in message `.google.chat.v1.ListReactionsRequest` is changed 
+* A comment for message `CustomEmoji` is changed 
+
+### 0.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.11.0 (2025-03-11)
+
+#### Features
+
+* Addition of space notification setting Chat API ([#29308](https://github.com/googleapis/google-cloud-ruby/issues/29308)) 
+
+### 0.10.0 (2025-02-25)
+
+#### Features
+
+* Added DeletionType::SPACE_MEMBER ([#29171](https://github.com/googleapis/google-cloud-ruby/issues/29171)) 
+
+### 0.9.1 (2025-02-12)
+
+#### Documentation
+
+* Fixed a link ([#28981](https://github.com/googleapis/google-cloud-ruby/issues/28981)) 
+
+### 0.9.0 (2025-01-30)
+
+#### Features
+
+* Support for custom emoji annotations ([#28788](https://github.com/googleapis/google-cloud-ruby/issues/28788)) 
+
+### 0.8.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.7.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+#### Documentation
+
+* Various updates to the reference documentation ([#27762](https://github.com/googleapis/google-cloud-ruby/issues/27762)) 
+
+### 0.6.0 (2024-12-04)
+
+#### Features
+
+* Chat Apps can now retrieve import mode expire time ([#27692](https://github.com/googleapis/google-cloud-ruby/issues/27692)) 
+
+### 0.5.1 (2024-10-08)
+
+#### Documentation
+
+* Various updates and clarifications to reference documentation ([#27397](https://github.com/googleapis/google-cloud-ruby/issues/27397)) 
+
+### 0.5.0 (2024-09-19)
+
+#### Features
+
+* Add `last_active_time` and `membership_count` to the `Space` resource. 
+* Support `useAdminAccess` for managing chat spaces and organization memberships ([#27325](https://github.com/googleapis/google-cloud-ruby/issues/27325)) 
+
+### 0.4.0 (2024-09-11)
+
+#### Features
+
+* Support for chat space links ([#27299](https://github.com/googleapis/google-cloud-ruby/issues/27299)) 
+
+### 0.3.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27002](https://github.com/googleapis/google-cloud-ruby/issues/27002)) 
+
+### 0.3.0 (2024-07-22)
+
+#### Features
+
+* Support for getting and listing SpaceEvent resources ([#26453](https://github.com/googleapis/google-cloud-ruby/issues/26453)) 
+
+### 0.2.0 (2024-07-08)
+
+#### Features
+
+* Add doc for Discoverable Space support for GA launch ([#26275](https://github.com/googleapis/google-cloud-ruby/issues/26275)) 
+#### Documentation
+
+* Update resource naming formats 
+
+### 0.1.2 (2024-06-26)
+
+#### Documentation
+
+* Update doc for `CreateMembership` in service `ChatService` to support group members 
+* Update doc for `SetUpSpace` in service `ChatService` to support group members ([#26184](https://github.com/googleapis/google-cloud-ruby/issues/26184)) 
+* Update doc for field `group_member` in message `google.chat.v1.Membership` 
+
+### 0.1.1 (2024-05-14)
+
+#### Documentation
+
+* Various documentation updates ([#25881](https://github.com/googleapis/google-cloud-ruby/issues/25881)) 
+
+### 0.1.0 (2024-04-29)
+
+#### Features
+
+* Initial generation of google-apps-chat-v1 ([#25815](https://github.com/googleapis/google-cloud-ruby/issues/25815)) 
+
+## Release History

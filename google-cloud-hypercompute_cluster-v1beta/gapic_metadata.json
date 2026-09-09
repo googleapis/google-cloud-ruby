@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.hypercomputecluster.v1beta",
+  "libraryPackage": "::Google::Cloud::HypercomputeCluster::V1beta",
+  "services": {
+    "HypercomputeCluster": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client",
+          "rpcs": {
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

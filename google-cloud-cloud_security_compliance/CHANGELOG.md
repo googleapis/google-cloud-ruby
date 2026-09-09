@@ -1,0 +1,46 @@
+# Changelog
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+#### Documentation
+
+* Update copyright year ([#35090](https://github.com/googleapis/google-cloud-ruby/issues/35090)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
+### 0.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.2.0 (2025-11-03)
+
+#### Features
+
+* add Audit API surface 
+* Adding client libraries for Monitoring API Compliance Manager Service 
+#### Documentation
+
+* Updated docs for the APIs ([#32119](https://github.com/googleapis/google-cloud-ruby/issues/32119)) 
+
+### 0.1.0 (2025-09-25)
+
+#### Features
+
+* Initial generation of google-cloud-cloud_security_compliance ([#31548](https://github.com/googleapis/google-cloud-ruby/issues/31548)) 
+
+## Release History

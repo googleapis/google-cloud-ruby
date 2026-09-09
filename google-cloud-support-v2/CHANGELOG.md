@@ -1,0 +1,173 @@
+# Changelog
+
+### 1.11.3 (2026-08-26)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.11.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36253](https://github.com/googleapis/google-cloud-ruby/issues/36253)) 
+
+### 1.11.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 1.11.0 (2026-07-27)
+
+#### Features
+
+* A new message `ExpungeSupportEventSubscriptionRequest` is added 
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching 
+#### Documentation
+
+* A comment for method `ListSupportEventSubscriptions` in service `SupportEventSubscriptionService` is changed 
+
+### 1.10.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34680](https://github.com/googleapis/google-cloud-ruby/issues/34680)) 
+
+### 1.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
+### 1.8.0 (2026-05-18)
+
+#### Features
+
+* v2 version for `GetComment` and `GetAttachment` ([#33946](https://github.com/googleapis/google-cloud-ruby/issues/33946)) 
+
+### 1.7.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33482](https://github.com/googleapis/google-cloud-ruby/issues/33482)) 
+
+### 1.7.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33439](https://github.com/googleapis/google-cloud-ruby/issues/33439)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.5.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.5.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.4.1 (2025-05-27)
+
+#### Documentation
+
+* Minor updates 
+* Update Cloud Support RPC comments to no longer include cURL and Python examples ([#30428](https://github.com/googleapis/google-cloud-ruby/issues/30428)) 
+
+### 1.4.0 (2025-05-16)
+
+#### Features
+
+* Deprecated the Actor email field and replaced with username 
+#### Documentation
+
+* Deprecated the Comment plain_text_body field 
+* Numerous additional edits and clarifications to the reference documentation 
+
+### 1.3.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.2.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 1.1.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.0.1 (2024-09-30)
+
+#### Documentation
+
+* Add field experimental_features to message PythonSettings ([#27358](https://github.com/googleapis/google-cloud-ruby/issues/27358)) 
+
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.4.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24878](https://github.com/googleapis/google-cloud-ruby/issues/24878)) 
+
+### 0.3.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.3.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.3.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23786](https://github.com/googleapis/google-cloud-ruby/issues/23786)) 
+
+### 0.2.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22924](https://github.com/googleapis/google-cloud-ruby/issues/22924)) 
+
+### 0.1.0 (2023-06-12)
+
+#### Features
+
+* Initial release of generated google-cloud-support-v2 client ([#21668](https://github.com/googleapis/google-cloud-ruby/issues/21668))

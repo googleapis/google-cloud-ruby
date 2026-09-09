@@ -1,0 +1,161 @@
+# Changelog
+
+### 1.1.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale CMEK, VM Storage options ([#36228](https://github.com/googleapis/google-cloud-ruby/issues/36228)) 
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35058](https://github.com/googleapis/google-cloud-ruby/issues/35058)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.16.0 (2026-06-25)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale on Dedicated Infrastructure ([#34649](https://github.com/googleapis/google-cloud-ruby/issues/34649)) 
+
+### 0.15.0 (2026-06-17)
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618))
+
+#### Bug Fixes
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618)) 
+
+### 0.14.0 (2026-06-11)
+
+#### Features
+
+* add v1 client libraries for Oracle Database Goldengate ([#34029](https://github.com/googleapis/google-cloud-ruby/issues/34029)) 
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
+### 0.13.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.11.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.11.0 (2025-10-22)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). ([#31792](https://github.com/googleapis/google-cloud-ruby/issues/31792)) 
+#### Documentation
+
+* Updated comments for clarity and fixed typos 
+
+### 0.10.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31580](https://github.com/googleapis/google-cloud-ruby/issues/31580)) 
+* add ListOperations unreachable resources 
+
+### 0.9.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 0.8.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.7.0 (2025-04-29)
+
+#### Features
+
+* Added support for gRPC transport ([#30029](https://github.com/googleapis/google-cloud-ruby/issues/30029)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.6.0 (2025-04-18)
+
+#### Features
+
+* add new AutonomousDatabase RPCs ([#29464](https://github.com/googleapis/google-cloud-ruby/issues/29464)) 
+
+### 0.5.1 (2025-03-25)
+
+#### Documentation
+
+* The network and cidr fields of AutonomousDatabase are now marked optional ([#29396](https://github.com/googleapis/google-cloud-ruby/issues/29396)) 
+
+### 0.5.0 (2025-03-18)
+
+#### Features
+
+* Added entitlement state for not approved in private marketplace ([#29359](https://github.com/googleapis/google-cloud-ruby/issues/29359)) 
+
+### 0.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.3.0 (2025-01-09)
+
+#### Features
+
+* Support new ACCOUNT_SUSPENDED state in Entitlement ([#28208](https://github.com/googleapis/google-cloud-ruby/issues/28208)) 
+
+### 0.2.1 (2025-01-08)
+
+#### Documentation
+
+* the CloudVmClusterProperties#system_version field is no longer labeled as output only ([#28178](https://github.com/googleapis/google-cloud-ruby/issues/28178)) 
+
+### 0.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.1.0 (2024-10-03)
+
+#### Features
+
+* Initial general of google-cloud-oracle_database-v1 ([#27396](https://github.com/googleapis/google-cloud-ruby/issues/27396)) 
+
+## Release History

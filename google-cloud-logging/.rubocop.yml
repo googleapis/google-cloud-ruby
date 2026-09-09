@@ -1,0 +1,37 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "integration/**/*"
+    - "google-cloud-logging.gemspec"
+    - "Rakefile"
+    - "support/**/*"
+    - "test/**/*"
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/logging/async_writer.rb"
+    - "lib/google/cloud/logging/entry.rb"
+    - "lib/google/cloud/logging/rails.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-logging.rb"
+    - "samples/acceptance/sample_test.rb"
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 15
+  Exclude:
+    - "lib/google/cloud/logging/rails.rb"
+Metrics/PerceivedComplexity:
+  Max: 15
+  Exclude:
+    - "lib/google/cloud/logging/rails.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-logging.rb"

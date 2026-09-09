@@ -1,0 +1,79 @@
+# Changelog
+
+### 1.3.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35054](https://github.com/googleapis/google-cloud-ruby/issues/35054)) 
+#### Documentation
+
+* Update copyright year ([#35094](https://github.com/googleapis/google-cloud-ruby/issues/35094)) 
+
+### 1.3.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34048](https://github.com/googleapis/google-cloud-ruby/issues/34048)) 
+
+### 1.2.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.1.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.1.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28530](https://github.com/googleapis/google-cloud-ruby/issues/28530)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26628](https://github.com/googleapis/google-cloud-ruby/issues/26628)) 
+
+### 1.0.0 (2024-06-26)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.4.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24871](https://github.com/googleapis/google-cloud-ruby/issues/24871)) 
+
+### 0.3.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24261](https://github.com/googleapis/google-cloud-ruby/issues/24261)) 
+
+### 0.2.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20767](https://github.com/googleapis/google-cloud-ruby/issues/20767)) 
+
+### 0.1.0 (2023-01-05)
+
+#### Features
+
+* Initial generation of google-cloud-gsuite_add_ons ([#19958](https://github.com/googleapis/google-cloud-ruby/issues/19958)) 
+
+## Release History

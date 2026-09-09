@@ -1,0 +1,76 @@
+# Changelog
+
+### 0.7.1 (2026-08-05)
+
+#### Documentation
+
+* Update copyright year 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.6.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.5.0 (2025-11-19)
+
+#### Features
+
+* Added the `product_id_base64_url_encoded`. This allows for product IDs containing special characters to be correctly handled when base64url-encoded ([#32171](https://github.com/googleapis/google-cloud-ruby/issues/32171)) 
+#### Bug Fixes
+
+* removing parameters before stable release ([#32196](https://github.com/googleapis/google-cloud-ruby/issues/32196)) 
+#### Documentation
+
+* Updated the API summary and overview in the service configuration 
+
+### 0.4.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 0.4.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28534](https://github.com/googleapis/google-cloud-ruby/issues/28534)) 
+* Update Ruby version requirement to 3.0 
+
+### 0.3.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26635](https://github.com/googleapis/google-cloud-ruby/issues/26635)) 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24881](https://github.com/googleapis/google-cloud-ruby/issues/24881)) 
+
+### 0.2.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24271](https://github.com/googleapis/google-cloud-ruby/issues/24271)) 
+
+### 0.1.0 (2023-10-23)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-inventories ([#23454](https://github.com/googleapis/google-cloud-ruby/issues/23454)) 
+
+## Release History

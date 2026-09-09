@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.privilegedaccessmanager.v1",
+  "libraryPackage": "::Google::Cloud::PrivilegedAccessManager::V1",
+  "services": {
+    "PrivilegedAccessManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client",
+          "rpcs": {
+            "CheckOnboardingStatus": {
+              "methods": [
+                "check_onboarding_status"
+              ]
+            },
+            "ListEntitlements": {
+              "methods": [
+                "list_entitlements"
+              ]
+            },
+            "SearchEntitlements": {
+              "methods": [
+                "search_entitlements"
+              ]
+            },
+            "GetEntitlement": {
+              "methods": [
+                "get_entitlement"
+              ]
+            },
+            "CreateEntitlement": {
+              "methods": [
+                "create_entitlement"
+              ]
+            },
+            "DeleteEntitlement": {
+              "methods": [
+                "delete_entitlement"
+              ]
+            },
+            "UpdateEntitlement": {
+              "methods": [
+                "update_entitlement"
+              ]
+            },
+            "ListGrants": {
+              "methods": [
+                "list_grants"
+              ]
+            },
+            "SearchGrants": {
+              "methods": [
+                "search_grants"
+              ]
+            },
+            "GetGrant": {
+              "methods": [
+                "get_grant"
+              ]
+            },
+            "CreateGrant": {
+              "methods": [
+                "create_grant"
+              ]
+            },
+            "ApproveGrant": {
+              "methods": [
+                "approve_grant"
+              ]
+            },
+            "DenyGrant": {
+              "methods": [
+                "deny_grant"
+              ]
+            },
+            "RevokeGrant": {
+              "methods": [
+                "revoke_grant"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

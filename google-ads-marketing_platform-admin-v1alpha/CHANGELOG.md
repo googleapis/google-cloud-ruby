@@ -1,0 +1,52 @@
+# Changelog
+
+### 0.6.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
+### 0.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34037](https://github.com/googleapis/google-cloud-ruby/issues/34037)) 
+
+### 0.5.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
+### 0.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.3.0 (2025-11-03)
+
+#### Features
+
+* add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods ([#32135](https://github.com/googleapis/google-cloud-ruby/issues/32135)) 
+* define AnalyticsServiceLevel and AnalyticsPropertyType enums in resources.proto 
+
+### 0.2.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
+### 0.1.0 (2025-05-21)
+
+#### Features
+
+* Initial generation of google-ads-marketing_platform-admin-v1alpha ([#30409](https://github.com/googleapis/google-cloud-ruby/issues/30409)) 
+
+## Release History

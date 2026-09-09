@@ -1,0 +1,72 @@
+# Changelog
+
+### 1.2.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding google-cloud-privileged_access_manager to Librarian ([#36485](https://github.com/googleapis/google-cloud-ruby/issues/36485)) 
+
+### 1.2.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35059](https://github.com/googleapis/google-cloud-ruby/issues/35059)) 
+#### Documentation
+
+* Update copyright year ([#35096](https://github.com/googleapis/google-cloud-ruby/issues/35096)) 
+
+### 1.2.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34053](https://github.com/googleapis/google-cloud-ruby/issues/34053)) 
+
+### 1.1.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.0.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-privileged_access_manager-v1 dependency to version 1.x ([#29024](https://github.com/googleapis/google-cloud-ruby/issues/29024))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29159](https://github.com/googleapis/google-cloud-ruby/issues/29159)) 
+* Updated google-cloud-privileged_access_manager-v1 dependency to version 1.x ([#29024](https://github.com/googleapis/google-cloud-ruby/issues/29024)) 
+
+### 0.2.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28531](https://github.com/googleapis/google-cloud-ruby/issues/28531)) 
+* Update Ruby version requirement to 3.0 
+
+### 0.1.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26630](https://github.com/googleapis/google-cloud-ruby/issues/26630)) 
+
+### 0.1.0 (2024-07-25)
+
+#### Features
+
+* Initial generation of google-cloud-privileged_access_manager ([#26518](https://github.com/googleapis/google-cloud-ruby/issues/26518)) 
+
+## Release History

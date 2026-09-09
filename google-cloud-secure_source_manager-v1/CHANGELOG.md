@@ -1,0 +1,174 @@
+# Changelog
+
+### 2.8.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35061](https://github.com/googleapis/google-cloud-ruby/issues/35061)) 
+
+### 2.8.0 (2026-07-07)
+
+#### Features
+
+* Support per-repository identity for repositories ([#34710](https://github.com/googleapis/google-cloud-ruby/issues/34710)) 
+
+### 2.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34054](https://github.com/googleapis/google-cloud-ruby/issues/34054)) 
+
+### 2.6.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33481](https://github.com/googleapis/google-cloud-ruby/issues/33481)) 
+
+### 2.6.0 (2026-04-02)
+
+#### Features
+
+* Add CustomHostConfig to configure custom hostnames for private instances ([#33445](https://github.com/googleapis/google-cloud-ruby/issues/33445)) 
+* publish client batch config schema ([#33438](https://github.com/googleapis/google-cloud-ruby/issues/33438)) 
+
+### 2.5.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 2.4.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31581](https://github.com/googleapis/google-cloud-ruby/issues/31581)) 
+* add ListOperations unreachable resources 
+
+### 2.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 2.2.1 (2025-08-12)
+
+#### Documentation
+
+* Provided additional details on methods related to pull request comments ([#30746](https://github.com/googleapis/google-cloud-ruby/issues/30746)) 
+
+### 2.2.0 (2025-07-28)
+
+#### Features
+
+* add new UpdateRepository API 
+* add support for new API resources: Issues, IssueComments, PullRequests, PullRequestComments, Blobs ([#30724](https://github.com/googleapis/google-cloud-ruby/issues/30724)) 
+
+### 2.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826)) 
+
+### 1.3.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.1.0 (2024-10-28)
+
+#### Features
+
+* Add branch rule APIs ([#27453](https://github.com/googleapis/google-cloud-ruby/issues/27453)) 
+* Add field `instance` to message `.google.cloud.securesourcemanager.v1.ListRepositoriesRequest` 
+* Add field `psc_allowed_projects` to message `.google.cloud.securesourcemanager.v1.Instance` 
+#### Documentation
+
+* A comment for field `instance` in message `.google.cloud.securesourcemanager.v1.Repository` is changed 
+
+### 1.0.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27012](https://github.com/googleapis/google-cloud-ruby/issues/27012)) 
+
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.4.0 (2024-07-10)
+
+#### Features
+
+* add constant `UNKNOWN` to field `State` in message `.google.cloud.securesourcemanager.v1.Instance` 
+* add field `private_config` to message `.google.cloud.securesourcemanager.v1.Instance` ([#26374](https://github.com/googleapis/google-cloud-ruby/issues/26374)) 
+#### Documentation
+
+* A comment for field `instance` in message `.google.cloud.securesourcemanager.v1.Repository` is updated to include data plane vs control plane behavior. 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24876](https://github.com/googleapis/google-cloud-ruby/issues/24876)) 
+
+### 0.2.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.2.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.2.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23785](https://github.com/googleapis/google-cloud-ruby/issues/23785)) 
+
+### 0.1.0 (2024-01-08)
+
+#### Features
+
+* Initial generation of google-cloud-secure_source_manager-v1 ([#23734](https://github.com/googleapis/google-cloud-ruby/issues/23734)) 
+
+## Release History

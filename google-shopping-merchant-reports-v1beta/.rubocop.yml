@@ -1,0 +1,33 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-shopping-merchant-reports-v1beta.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+    - "acceptance/**/*"
+    - "samples/acceptance/**/*"
+    - "Rakefile"
+
+Layout/LineLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Naming/AccessorMethodName:
+  Exclude:
+    - "snippets/**/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-shopping-merchant-reports-v1beta.rb"

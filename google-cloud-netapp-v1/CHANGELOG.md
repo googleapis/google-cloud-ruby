@@ -1,0 +1,267 @@
+# Changelog
+
+### 2.12.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 2.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 2.11.0 (2026-05-07)
+
+#### Features
+
+* add ScaleType for Storage Pools and LargeCapacityConfig for Volumes ([#33881](https://github.com/googleapis/google-cloud-ruby/issues/33881)) 
+#### Documentation
+
+* A comment for field `large_capacity` in message `.google.cloud.netapp.v1.Volume` is changed 
+
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* Add ONTAP passthrough APIs ([#33444](https://github.com/googleapis/google-cloud-ruby/issues/33444)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
+### 2.9.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.8.0 (2026-01-23)
+
+#### Features
+
+* Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#32365](https://github.com/googleapis/google-cloud-ruby/issues/32365)) 
+#### Documentation
+
+* A comment for field `backup_retention_policy` in message `.google.cloud.netapp.v1.BackupVault` is changed 
+
+### 2.7.0 (2025-11-21)
+
+#### Features
+
+* Add Squash Mode to Export Policy ([#32216](https://github.com/googleapis/google-cloud-ruby/issues/32216)) 
+
+### 2.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 2.6.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31579](https://github.com/googleapis/google-cloud-ruby/issues/31579)) 
+* add ListOperations unreachable resources 
+
+### 2.5.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 2.4.0 (2025-09-05)
+
+#### Features
+
+* add new fields for flex auto tiering ([#30946](https://github.com/googleapis/google-cloud-ruby/issues/30946)) 
+
+### 2.3.0 (2025-05-16)
+
+#### Features
+
+* Support for backup retention policies 
+* Support for independent scaling of StoragePool capacity and performance 
+
+### 2.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.1.0 (2025-04-30)
+
+#### Features
+
+* Support for backup regions ([#30037](https://github.com/googleapis/google-cloud-ruby/issues/30037)) 
+
+### 2.0.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.1 (2025-04-21)
+
+#### Documentation
+
+* A comment for field `cooling_threshold_days` in message `.google.cloud.netapp.v1.TieringPolicy` is changed ([#29476](https://github.com/googleapis/google-cloud-ruby/issues/29476)) 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28821](https://github.com/googleapis/google-cloud-ruby/issues/28821))
+
+#### Features
+
+* MountOption reports the IP address 
+* Support CRUD operations on QuotaRules 
+* Support for local source volume, cluster, and svm names in hybrid peering 
+* Support for LocationMetadata#supported_flex_performance 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28821](https://github.com/googleapis/google-cloud-ruby/issues/28821)) 
+
+### 1.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.5.0 (2025-01-15)
+
+#### Features
+
+* Add ValidateDirectoryService API for testing AD connection of a storage pool ([#28206](https://github.com/googleapis/google-cloud-ruby/issues/28206)) 
+#### Documentation
+
+* Removed comments from HybridReplicationParameters 
+
+### 1.4.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.3.0 (2024-12-04)
+
+#### Features
+
+* Add EstablishPeering API for Onprem Migration 
+* Add new Active Directory state for AD Diagnostics support 
+* Add Sync API for Replications 
+* Enable creation of Onprem Migration in CreateVolume ([#27656](https://github.com/googleapis/google-cloud-ruby/issues/27656)) 
+
+### 1.2.0 (2024-09-19)
+
+#### Features
+
+* A new field 'allow_auto_tiering' in message 'google.cloud.netapp.v1.StoragePool' is added 
+* A new field 'cold_tier_size_gib' in message 'google.cloud.netapp.v1.Volume' is added 
+* A new message 'google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest' is added 
+* A new rpc 'SwitchActiveReplicaZone' is added to service 'google.cloud.netapp.v1.NetApp' ([#27329](https://github.com/googleapis/google-cloud-ruby/issues/27329)) 
+
+### 1.1.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 1.1.0 (2024-08-02)
+
+#### Features
+
+* Support for ActiveDirectory administrators group 
+* Support for replica zone and active zone in StoragePool and Volume 
+* Support for Volume large_capacity and multiple_endpoints flags 
+#### Documentation
+
+* Various updates and clarifications in the reference documentation 
+
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.6.0 (2024-05-23)
+
+#### Features
+
+* BackupConfig reports the total byte size of a backup chain 
+* Support for the Flex service level 
+* Support for volume tiering policy 
+
+### 0.5.2 (2024-04-15)
+
+#### Documentation
+
+* minor comment updates ([#25410](https://github.com/googleapis/google-cloud-ruby/issues/25410)) 
+
+### 0.5.1 (2024-03-10)
+
+#### Documentation
+
+* mark optional fields explicitly in Storage Pool ([#25330](https://github.com/googleapis/google-cloud-ruby/issues/25330)) 
+
+### 0.5.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24873](https://github.com/googleapis/google-cloud-ruby/issues/24873)) 
+
+### 0.4.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.4.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.4.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23782](https://github.com/googleapis/google-cloud-ruby/issues/23782)) 
+
+### 0.3.0 (2024-01-03)
+
+#### Features
+
+* Add support for Backup, Backup Vault, and Backup Policy ([#23687](https://github.com/googleapis/google-cloud-ruby/issues/23687)) 
+* Set field_behavior to IDENTIFIER on the "name" fields 
+#### Documentation
+
+* Comments are updated for several fields/enums 
+
+### 0.2.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration 
+* Support for restricting actions on a volume ([#23087](https://github.com/googleapis/google-cloud-ruby/issues/23087)) 
+#### Bug Fixes
+
+* Fixes for long running operations paths in the rest client 
+
+### 0.1.0 (2023-09-05)
+
+#### Features
+
+* Initial generation of google-cloud-netapp-v1 ([#22689](https://github.com/googleapis/google-cloud-ruby/issues/22689)) 
+
+## Release History

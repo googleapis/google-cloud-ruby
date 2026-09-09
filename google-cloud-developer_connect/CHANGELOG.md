@@ -1,0 +1,83 @@
+# Changelog
+
+### 2.4.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+#### Documentation
+
+* Update copyright year ([#35091](https://github.com/googleapis/google-cloud-ruby/issues/35091)) 
+
+### 2.4.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 2.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.2.0 (2026-03-05)
+
+#### Features
+
+* Add Secure Source Manager and Generic HTTP Endpoint connection types ([#32772](https://github.com/googleapis/google-cloud-ruby/issues/32772)) 
+
+### 2.1.1 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 2.1.0 (2025-06-24)
+
+#### Features
+
+* Support for the InsightsConfigService ([#30537](https://github.com/googleapis/google-cloud-ruby/issues/30537)) 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-developer_connect-v1 dependency to version 1.x ([#29005](https://github.com/googleapis/google-cloud-ruby/issues/29005))
+
+#### Features
+
+* Updated google-cloud-developer_connect-v1 dependency to version 1.x ([#29005](https://github.com/googleapis/google-cloud-ruby/issues/29005)) 
+
+### 1.1.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28529](https://github.com/googleapis/google-cloud-ruby/issues/28529)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26627](https://github.com/googleapis/google-cloud-ruby/issues/26627)) 
+
+### 1.0.0 (2024-08-06)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26595](https://github.com/googleapis/google-cloud-ruby/issues/26595)) 
+
+### 0.1.0 (2024-06-17)
+
+#### Features
+
+* Initial generation of google-cloud-developer_connect ([#26115](https://github.com/googleapis/google-cloud-ruby/issues/26115)) 
+
+## Release History

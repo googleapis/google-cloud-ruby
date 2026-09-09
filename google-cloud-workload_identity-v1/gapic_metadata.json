@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.workloadidentity.v1",
+  "libraryPackage": "::Google::Cloud::WorkloadIdentity::V1",
+  "services": {
+    "WorkloadIdentity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::WorkloadIdentity::V1::WorkloadIdentity::Client",
+          "rpcs": {
+            "GenerateServiceAgents": {
+              "methods": [
+                "generate_service_agents"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

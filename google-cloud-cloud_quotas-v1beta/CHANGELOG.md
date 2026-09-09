@@ -1,0 +1,106 @@
+# Changelog
+
+### 0.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35048](https://github.com/googleapis/google-cloud-ruby/issues/35048)) 
+
+### 0.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34042](https://github.com/googleapis/google-cloud-ruby/issues/34042)) 
+
+### 0.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
+### 0.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* Hierarchical Quota Adjuster ([#32406](https://github.com/googleapis/google-cloud-ruby/issues/32406)) 
+
+### 0.6.2 (2026-01-23)
+
+#### Documentation
+
+* Correct typo in comment for field `quota_id` ([#32374](https://github.com/googleapis/google-cloud-ruby/issues/32374)) 
+
+### 0.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.6.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 0.5.0 (2025-06-16)
+
+#### Features
+
+* Added support for hierarchical enrollment in Quota Adjuster consumer API ([#30506](https://github.com/googleapis/google-cloud-ruby/issues/30506)) 
+#### Documentation
+
+* Added 2 new fields in `.google.api.cloudquotas.v1beta.QuotaAdjusterSettings` 
+* Added inherited and inherited_from in `.google.api.cloudquotas.v1beta.QuotaAdjusterSettings` 
+* Added support for folder and organization level enrollment 
+
+### 0.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.3.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.3.1 (2025-03-13)
+
+#### Documentation
+
+* Various clarifications in the reference documentation ([#29329](https://github.com/googleapis/google-cloud-ruby/issues/29329)) 
+
+### 0.3.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823)) 
+
+### 0.2.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 0.1.0 (2025-01-14)
+
+#### Features
+
+* Initial generation of google-cloud-cloud_quotas-v1beta ([#28222](https://github.com/googleapis/google-cloud-ruby/issues/28222)) 
+
+## Release History

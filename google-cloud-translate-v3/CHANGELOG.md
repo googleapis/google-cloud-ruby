@@ -1,0 +1,301 @@
+# Release History
+
+### 1.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35064](https://github.com/googleapis/google-cloud-ruby/issues/35064)) 
+
+### 1.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34057](https://github.com/googleapis/google-cloud-ruby/issues/34057)) 
+
+### 1.9.0 (2026-04-09)
+
+#### Features
+
+* A new field `mime_type` is added to message `.google.cloud.translation.v3.AdaptiveMtTranslateRequest` ([#33808](https://github.com/googleapis/google-cloud-ruby/issues/33808)) 
+
+### 1.8.0 (2026-03-31)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32866](https://github.com/googleapis/google-cloud-ruby/issues/32866)) 
+
+### 1.7.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.7.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31582](https://github.com/googleapis/google-cloud-ruby/issues/31582)) 
+* add ListOperations unreachable resources 
+
+### 1.6.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.5.2 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 1.5.1 (2025-06-24)
+
+#### Documentation
+
+* Provide links to the language support page from the reference docs ([#30534](https://github.com/googleapis/google-cloud-ruby/issues/30534)) 
+
+### 1.5.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.4.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.3.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.2.0 (2024-11-11)
+
+#### Features
+
+* Adds Contextual Glossary support for Translation and AdaptiveMt ([#27582](https://github.com/googleapis/google-cloud-ruby/issues/27582)) 
+
+### 1.1.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27031](https://github.com/googleapis/google-cloud-ruby/issues/27031)) 
+
+### 1.1.0 (2024-08-16)
+
+#### Features
+
+* Add BigQuery Metastore Partition Service API version v1alpha ([#26606](https://github.com/googleapis/google-cloud-ruby/issues/26606)) 
+
+### 1.0.0 (2024-07-08)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.12.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24879](https://github.com/googleapis/google-cloud-ruby/issues/24879)) 
+
+### 0.11.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.11.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.11.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23787](https://github.com/googleapis/google-cloud-ruby/issues/23787)) 
+
+### 0.10.0 (2024-01-03)
+
+#### Features
+
+* Add Adaptive MT API ([#23668](https://github.com/googleapis/google-cloud-ruby/issues/23668)) 
+
+### 0.9.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22925](https://github.com/googleapis/google-cloud-ruby/issues/22925)) 
+
+### 0.8.0 (2023-08-15)
+
+#### Features
+
+* Added shadow removal and rotation correction options to Document Translation and Batch Document Translation API ([#22748](https://github.com/googleapis/google-cloud-ruby/issues/22748)) 
+
+### 0.7.3 (2023-08-03)
+
+#### Documentation
+
+* Format documentation ([#22667](https://github.com/googleapis/google-cloud-ruby/issues/22667)) 
+
+### 0.7.2 (2023-07-28)
+
+#### Documentation
+
+* Minor formatting ([#22635](https://github.com/googleapis/google-cloud-ruby/issues/22635)) 
+
+### 0.7.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.7.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21679](https://github.com/googleapis/google-cloud-ruby/issues/21679)) 
+
+### 0.6.0 (2023-02-22)
+
+#### Features
+
+* Added display_name field to Glossary 
+* Support for removing the shadow text for native PDF translation 
+* Support translating only native PDF pages 
+* Support user-customized attribution flag ([#20490](https://github.com/googleapis/google-cloud-ruby/issues/20490)) 
+
+### 0.5.2 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20453](https://github.com/googleapis/google-cloud-ruby/issues/20453)) 
+
+### 0.5.1 (2022-12-09)
+
+#### Documentation
+
+* Minor fix to reference documentation formatting ([#19831](https://github.com/googleapis/google-cloud-ruby/issues/19831)) 
+
+### 0.5.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.4.2 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.4.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.0 / 2021-08-31
+
+#### Features
+
+* Support translate_document and batch_translate_document RPCs
+
+### 0.3.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.3.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.3.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
+### 0.3.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+### 0.2.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.1.5 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
+### 0.1.4 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
+### 0.1.3 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
+#### Documentation
+
+* Fix some field documentation formatting.
+
+### 0.1.2 / 2020-06-18
+
+#### Documentation
+
+* Add documentation and API enablement links to the readme
+
+### 0.1.1 / 2020-06-05
+
+#### Bug Fixes
+
+* Eliminate a Ruby warning that appeared in some cases when accessing rpc-scoped configs
+
+### 0.1.0 / 2020-05-25
+
+Initial release

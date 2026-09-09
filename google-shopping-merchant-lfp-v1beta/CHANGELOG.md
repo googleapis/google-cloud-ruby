@@ -1,0 +1,91 @@
+# Changelog
+
+### 0.8.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.7.1 (2026-04-09)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.7.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.6.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31009](https://github.com/googleapis/google-cloud-ruby/issues/31009)) 
+
+### 0.5.0 (2025-05-11)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.4.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.4.0 (2025-04-21)
+
+#### Features
+
+* Add GetLfpMerchantState method ([#29471](https://github.com/googleapis/google-cloud-ruby/issues/29471)) 
+
+### 0.3.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 0.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.1.3 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.1.2 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26635](https://github.com/googleapis/google-cloud-ruby/issues/26635)) 
+
+### 0.1.1 (2024-05-23)
+
+#### Documentation
+
+* Fix the terminology around inventory data specification ([#25926](https://github.com/googleapis/google-cloud-ruby/issues/25926)) 
+
+### 0.1.0 (2024-04-25)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-lfp-v1beta ([#25767](https://github.com/googleapis/google-cloud-ruby/issues/25767)) 
+
+## Release History

@@ -1,0 +1,40 @@
+name: Update Pull Request
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "Pull request number"
+        required: true
+      options:
+        description: "Options"
+        required: false
+
+jobs:
+  UpdatePR:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: read
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      with:
+        persist-credentials: false
+    - name: Install Ruby 3.3
+      uses: ruby/setup-ruby@d45b1a4e94b71acab930e56e79c6aa188764e7f9 # v1.316.0
+      with:
+        ruby-version: "3.3"
+    - name: Install tools
+      run: |
+        gem install --no-document toys
+    - name: Update PR
+      run: |
+        toys update-pr -v ${GITHUB_EVENT_INPUTS_OPTIONS} ${GITHUB_EVENT_INPUTS_PR}
+      env:
+        GITHUB_EVENT_INPUTS_OPTIONS: ${{ github.event.inputs.options }}
+        GITHUB_EVENT_INPUTS_PR: ${{ github.event.inputs.pr }}

@@ -1,0 +1,13 @@
+--no-private
+--title=Stackdriver Core
+--markup markdown
+--markup-provider redcarpet
+--main OVERVIEW.md
+
+./lib/**/*.rb
+-
+OVERVIEW.md
+CONTRIBUTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

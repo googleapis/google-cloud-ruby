@@ -1,0 +1,90 @@
+# Changelog
+
+### 2.3.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+#### Documentation
+
+* Update copyright year ([#35089](https://github.com/googleapis/google-cloud-ruby/issues/35089)) 
+
+### 2.3.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34040](https://github.com/googleapis/google-cloud-ruby/issues/34040)) 
+
+### 2.3.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34040](https://github.com/googleapis/google-cloud-ruby/issues/34040)) 
+
+### 2.2.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.1.0 (2026-01-13)
+
+#### Features
+
+* A new message `ListResourceBackupConfigsRequest` is added 
+* A new service `BackupDrProtectionSummary` is added ([#32339](https://github.com/googleapis/google-cloud-ruby/issues/32339)) 
+
+### 2.0.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-backupdr-v1 dependency to version 1.x ([#28991](https://github.com/googleapis/google-cloud-ruby/issues/28991))
+
+#### Features
+
+* Updated google-cloud-backupdr-v1 dependency to version 1.x ([#28991](https://github.com/googleapis/google-cloud-ruby/issues/28991)) 
+
+### 1.1.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28527](https://github.com/googleapis/google-cloud-ruby/issues/28527)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26624](https://github.com/googleapis/google-cloud-ruby/issues/26624)) 
+
+### 1.0.0 (2024-06-26)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.2.0 (2024-06-25)
+
+#### Features
+
+* Updated documentation URI ([#26145](https://github.com/googleapis/google-cloud-ruby/issues/26145)) 
+
+### 0.1.0 (2024-04-18)
+
+#### Features
+
+* Initial generation of google-cloud-backupdr ([#25703](https://github.com/googleapis/google-cloud-ruby/issues/25703)) 
+
+## Release History

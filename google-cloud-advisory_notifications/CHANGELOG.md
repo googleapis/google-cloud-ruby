@@ -1,0 +1,73 @@
+# Changelog
+
+### 1.5.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+#### Documentation
+
+* Update copyright year ([#35088](https://github.com/googleapis/google-cloud-ruby/issues/35088)) 
+
+### 1.5.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34038](https://github.com/googleapis/google-cloud-ruby/issues/34038)) 
+
+### 1.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.3.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.3.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28526](https://github.com/googleapis/google-cloud-ruby/issues/28526)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.2.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates ([#26623](https://github.com/googleapis/google-cloud-ruby/issues/26623)) 
+
+### 1.2.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24862](https://github.com/googleapis/google-cloud-ruby/issues/24862)) 
+
+### 1.1.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24253](https://github.com/googleapis/google-cloud-ruby/issues/24253)) 
+
+### 1.0.0 (2023-07-28)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.1.0 (2023-03-01)
+
+#### Features
+
+* Initial generation of google-cloud-advisory_notifications ([#20575](https://github.com/googleapis/google-cloud-ruby/issues/20575)) 
+
+## Release History

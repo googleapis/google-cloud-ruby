@@ -1,0 +1,66 @@
+# Changelog
+
+### 1.2.0 (2026-08-19)
+
+#### Features
+
+* Add output-only field `lineage_enabled` to message `.google.cloud.dataform.v1.WorkflowInvocation` ([#36281](https://github.com/googleapis/google-cloud-ruby/issues/36281)) 
+
+### 1.1.0 (2026-08-05)
+
+#### Features
+
+* add PipelineConfig to support different pipeline types and paths ([#35074](https://github.com/googleapis/google-cloud-ruby/issues/35074)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35050](https://github.com/googleapis/google-cloud-ruby/issues/35050)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.5.0 (2026-06-30)
+
+#### Features
+
+* Add Developer Connect integration for Git repository authentication ([#34672](https://github.com/googleapis/google-cloud-ruby/issues/34672)) 
+* Add effective default branch field for repositories 
+#### Documentation
+
+* Clarify field usage guidelines and default values in API reference documentation 
+
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* add folders and teamFolders related changes to v1 
+* publish client batch config schema 
+* update gapic-common dependency to 1.3 and document retry jitter ([#33330](https://github.com/googleapis/google-cloud-ruby/issues/33330)) 
+
+### 0.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.2.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 0.1.0 (2025-05-16)
+
+#### Features
+
+* Initial generation of google-cloud-dataform-v1 ([#30396](https://github.com/googleapis/google-cloud-ruby/issues/30396)) 
+
+## Release History

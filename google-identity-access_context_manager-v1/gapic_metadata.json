@@ -1,0 +1,148 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.identity.accesscontextmanager.v1",
+  "libraryPackage": "::Google::Identity::AccessContextManager::V1",
+  "services": {
+    "AccessContextManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client",
+          "rpcs": {
+            "ListAccessPolicies": {
+              "methods": [
+                "list_access_policies"
+              ]
+            },
+            "GetAccessPolicy": {
+              "methods": [
+                "get_access_policy"
+              ]
+            },
+            "CreateAccessPolicy": {
+              "methods": [
+                "create_access_policy"
+              ]
+            },
+            "UpdateAccessPolicy": {
+              "methods": [
+                "update_access_policy"
+              ]
+            },
+            "DeleteAccessPolicy": {
+              "methods": [
+                "delete_access_policy"
+              ]
+            },
+            "ListAccessLevels": {
+              "methods": [
+                "list_access_levels"
+              ]
+            },
+            "GetAccessLevel": {
+              "methods": [
+                "get_access_level"
+              ]
+            },
+            "CreateAccessLevel": {
+              "methods": [
+                "create_access_level"
+              ]
+            },
+            "UpdateAccessLevel": {
+              "methods": [
+                "update_access_level"
+              ]
+            },
+            "DeleteAccessLevel": {
+              "methods": [
+                "delete_access_level"
+              ]
+            },
+            "ReplaceAccessLevels": {
+              "methods": [
+                "replace_access_levels"
+              ]
+            },
+            "ListServicePerimeters": {
+              "methods": [
+                "list_service_perimeters"
+              ]
+            },
+            "GetServicePerimeter": {
+              "methods": [
+                "get_service_perimeter"
+              ]
+            },
+            "CreateServicePerimeter": {
+              "methods": [
+                "create_service_perimeter"
+              ]
+            },
+            "UpdateServicePerimeter": {
+              "methods": [
+                "update_service_perimeter"
+              ]
+            },
+            "DeleteServicePerimeter": {
+              "methods": [
+                "delete_service_perimeter"
+              ]
+            },
+            "ReplaceServicePerimeters": {
+              "methods": [
+                "replace_service_perimeters"
+              ]
+            },
+            "CommitServicePerimeters": {
+              "methods": [
+                "commit_service_perimeters"
+              ]
+            },
+            "ListGcpUserAccessBindings": {
+              "methods": [
+                "list_gcp_user_access_bindings"
+              ]
+            },
+            "GetGcpUserAccessBinding": {
+              "methods": [
+                "get_gcp_user_access_binding"
+              ]
+            },
+            "CreateGcpUserAccessBinding": {
+              "methods": [
+                "create_gcp_user_access_binding"
+              ]
+            },
+            "UpdateGcpUserAccessBinding": {
+              "methods": [
+                "update_gcp_user_access_binding"
+              ]
+            },
+            "DeleteGcpUserAccessBinding": {
+              "methods": [
+                "delete_gcp_user_access_binding"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

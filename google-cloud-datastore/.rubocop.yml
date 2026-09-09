@@ -1,0 +1,28 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "google-cloud-datastore.gemspec"
+    - "Rakefile"
+    - "support/**/*"
+    - "test/**/*"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-datastore.rb"
+Style/BisectedAttrAccessor:
+  Exclude:
+    - "lib/google/cloud/datastore/dataset/query_results.rb"
+    - "lib/google/cloud/datastore/dataset/lookup_results.rb"
+    - "lib/google/cloud/datastore/dataset/aggregate_query_results.rb"

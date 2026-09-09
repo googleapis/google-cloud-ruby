@@ -1,0 +1,153 @@
+# Changelog
+
+### 0.15.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 0.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34047](https://github.com/googleapis/google-cloud-ruby/issues/34047)) 
+
+### 0.14.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33478](https://github.com/googleapis/google-cloud-ruby/issues/33478)) 
+
+### 0.14.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 0.13.0 (2026-03-19)
+
+#### Features
+
+* Add `OFFLINE` state to Zone resources ([#32804](https://github.com/googleapis/google-cloud-ruby/issues/32804)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.12.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.12.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31578](https://github.com/googleapis/google-cloud-ruby/issues/31578)) 
+* add ListOperations unreachable resources 
+
+### 0.11.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 0.10.0 (2025-08-29)
+
+#### Features
+
+* Added RequestOrderDateChange RPC - allows Customers to request date changes ([#30918](https://github.com/googleapis/google-cloud-ruby/issues/30918)) 
+
+### 0.9.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.8.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.8.0 (2025-04-25)
+
+#### Features
+
+* Support deployment type and installation date for an Order 
+* Support hardware count ranges for a SKU 
+* Support step and details parameters to the signal_zone_state RPC 
+
+### 0.7.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824)) 
+
+### 0.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.5.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.4.0 (2024-11-14)
+
+#### Features
+
+* add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource ([#27605](https://github.com/googleapis/google-cloud-ruby/issues/27605)) 
+* add MAC address-associated IP address to the Hardware resource 
+* add provisioning_state_signal field in SignalZoneState method request 
+#### Documentation
+
+* change state_signal field in SignalZoneState method request as optional 
+
+### 0.3.0 (2024-10-29)
+
+#### Features
+
+* add a DeleteSite method ([#27494](https://github.com/googleapis/google-cloud-ruby/issues/27494)) 
+* add MAC address and disk info to the Hardware resource 
+#### Documentation
+
+* annotate rack_location field as required; this was always enforced 
+
+### 0.2.0 (2024-09-19)
+
+#### Features
+
+* add an order type field to distinguish a fulfillment request from a sales inquiry ([#27333](https://github.com/googleapis/google-cloud-ruby/issues/27333)) 
+* add support to mark comments as read or unread 
+* rename zone state signal READY_FOR_SITE_TURNUP to FACTORY_TURNUP_CHECKS_PASSED 
+#### Documentation
+
+* clarify how access_times are used 
+
+### 0.1.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.1.0 (2024-07-09)
+
+#### Features
+
+* Initial generation of google-cloud-gdc_hardware_management-v1alpha ([#26269](https://github.com/googleapis/google-cloud-ruby/issues/26269)) 
+
+## Release History

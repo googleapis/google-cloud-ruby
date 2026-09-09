@@ -1,0 +1,15 @@
+keyfile.json
+coverage/*
+doc/*
+pkg/*
+html/*
+jsondoc/*
+
+# Ignore vagrant directory
+.vagrant
+
+# Ignore YARD stuffs
+.yardoc
+
+# directories left by gh-pages
+_site/*

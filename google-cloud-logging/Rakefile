@@ -1,0 +1,231 @@
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+require "rake/testtask"
+desc "Run tests."
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
+end
+
+namespace :test do
+  desc "Run tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-logging"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+      add_filter "lib/google/logging/"
+      add_filter "lib/google/cloud/logging/v2/"
+    end
+
+    Rake::Task[:test].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the logging acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["LOGGING_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["LOGGING_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["LOGGING_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/logging/credentials"
+  Google::Cloud::Logging::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["LOGGING_PROJECT"] = project
+  ENV["LOGGING_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-logging"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task[:acceptance].invoke
+  end
+
+  desc "Removes *ALL* Logging logs, sinks, and metrics. Use with caution."
+  task :cleanup do |t, args|
+    project = args[:project]
+    project ||= ENV["LOGGING_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["LOGGING_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["LOGGING_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    end
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
+    end
+    # clear any env var already set
+    require "google/cloud/logging/credentials"
+    Google::Cloud::Logging::Credentials.env_vars.each do |path|
+      ENV[path] = nil
+    end
+    # always overwrite when running tests
+    ENV["LOGGING_PROJECT"] = project
+    ENV["LOGGING_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/logging"
+    puts "Cleaning up LOGGING logs, sinks, and metrics"
+    begin
+      logging = Google::Cloud.logging
+      # only delete acceptance logs, not the other logs needed for project.
+      logging.logs.select { |l| l.include? "gcloud_ruby_acceptance" }.each { |l| logging.delete_log l }
+      # logging.sinks.all &:delete
+      logging.metrics.all &:delete
+    rescue Google::Cloud::Error => e
+      puts e.message
+    end
+  end
+
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.warning = false
+  end
+end
+
+namespace :samples do
+  task :latest do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-logging gem has no samples to test."
+    end
+  end
+
+  task :master do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-logging gem has no samples to test."
+    end
+  end
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
+end
+
+namespace :integration do
+  desc "Run integration tests against GAE"
+  task :gae, :project_uri do |t, args|
+    raise "You must provide a project_uri. e.g. rake " \
+      "integration:gae[http://my-project.appspot-preview.com]" if args[:project_uri].nil?
+
+    ENV["TEST_GOOGLE_CLOUD_PROJECT_URI"] = args[:project_uri]
+
+    $LOAD_PATH.unshift "lib", "integration"
+    Dir.glob("integration/*_test.rb").each { |file| require_relative file }
+    Dir.glob("integration/gae/**/*_test.rb").each { |file| require_relative file }
+  end
+
+  desc "Run integration tests against GKE"
+  task :gke, :pod_name do |t, args|
+    fail "You must provide the GKE pod name. e.g. " \
+      "rake integration:gke[google-cloud-ruby-test]" if args[:pod_name].nil?
+
+    ENV["TEST_GKE_POD_NAME"] = args[:pod_name]
+
+    $LOAD_PATH.unshift "lib", "integration"
+    Dir.glob("integration/*_test.rb").each { |file| require_relative file }
+    Dir.glob("integration/gke/**/*_test.rb").each { |file| require_relative file }
+  end
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-logging"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-logging"
+  header "google-cloud-logging rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-logging yard", "*"
+  Rake::Task[:yard].invoke
+  header "google-cloud-logging doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "google-cloud-logging test", "*"
+  Rake::Task[:test].invoke
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task[:ci].invoke
+    header "google-cloud-logging acceptance", "*"
+    Rake::Task[:acceptance].invoke
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

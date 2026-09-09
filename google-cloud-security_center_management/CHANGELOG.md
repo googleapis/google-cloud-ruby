@@ -1,0 +1,82 @@
+# Changelog
+
+### 1.4.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35062](https://github.com/googleapis/google-cloud-ruby/issues/35062)) 
+#### Documentation
+
+* Update copyright year ([#35097](https://github.com/googleapis/google-cloud-ruby/issues/35097)) 
+
+### 1.4.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34055](https://github.com/googleapis/google-cloud-ruby/issues/34055)) 
+
+### 1.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.2.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.2.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28532](https://github.com/googleapis/google-cloud-ruby/issues/28532)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.1.0 (2024-11-07)
+
+#### Features
+
+* Add AdvancedCompleteQuery API 
+* Add BillingEstimation in data store 
+* Add GroundedGenerationService API ([#27537](https://github.com/googleapis/google-cloud-ruby/issues/27537)) 
+* Add lite search API to allow public website search with API key 
+* Add one_box_page_size on search 
+* Add Sitemap APIs to preview channel 
+* Support advanced boost search 
+* Support Google Workspace search 
+* Support natural language understanding search 
+* support query regex in control match rules 
+* Support search personalization to preview channel 
+#### Documentation
+
+* deprecate asynchronous mode in answer generation 
+* deprecate extractive_answers in answer generation 
+* keep the API doc up-to-date with recent changes 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26659](https://github.com/googleapis/google-cloud-ruby/issues/26659)) 
+
+### 1.0.0 (2024-08-06)
+
+#### Features
+
+* Bump version to 1.0.0 ([#26595](https://github.com/googleapis/google-cloud-ruby/issues/26595)) 
+
+### 0.1.0 (2024-04-25)
+
+#### Features
+
+* Initial generation of google-cloud-security_center_management ([#25773](https://github.com/googleapis/google-cloud-ruby/issues/25773)) 
+
+## Release History

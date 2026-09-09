@@ -1,0 +1,164 @@
+# Changelog
+
+### 1.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35060](https://github.com/googleapis/google-cloud-ruby/issues/35060)) 
+
+### 1.8.0 (2026-07-21)
+
+#### Features
+
+* [Memorystore for Redis Cluster] add Cluster.AsyncClusterEndpointsDeletionEnabled ([#34961](https://github.com/googleapis/google-cloud-ruby/issues/34961)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34053](https://github.com/googleapis/google-cloud-ruby/issues/34053)) 
+
+### 1.6.0 (2026-05-07)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Updating new node types added ([#33888](https://github.com/googleapis/google-cloud-ruby/issues/33888)) 
+
+### 1.5.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
+### 1.5.0 (2026-04-02)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33457](https://github.com/googleapis/google-cloud-ruby/issues/33457)) 
+* publish client batch config schema ([#33437](https://github.com/googleapis/google-cloud-ruby/issues/33437)) 
+#### Documentation
+
+* update API common type documentation ([#33449](https://github.com/googleapis/google-cloud-ruby/issues/33449)) 
+
+### 1.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.3.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31580](https://github.com/googleapis/google-cloud-ruby/issues/31580)) 
+* add ListOperations unreachable resources 
+
+### 1.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825))
+
+#### Features
+
+* Bump version to 1.0.0 ([#28941](https://github.com/googleapis/google-cloud-ruby/issues/28941)) 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825)) 
+
+### 0.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+* Support for new Cluster fields: gccs_source, managed_backup_source, cross_cluster_replication_config, maintenance_policy, maintenance_schedule, psc_service_attachments, cluster_endpoints, backup_collection, kms_key, automated_backup_config, and encryption_info 
+* Support for the backup_cluster RPC 
+* Support for the get_backup_collection and list_backup_collections RPCs 
+* Support for the get_backup, list_backups, delete_backup, and export_backup RPCs 
+* Support for the reschedule_cluster_maintenance RPC 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.5.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.4.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27011](https://github.com/googleapis/google-cloud-ruby/issues/27011)) 
+
+### 0.4.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26630](https://github.com/googleapis/google-cloud-ruby/issues/26630)) 
+
+### 0.4.0 (2024-06-05)
+
+#### Features
+
+* Support for additional cluster configuration 
+* Support for the get_cluster_certificate_authority RPC 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24875](https://github.com/googleapis/google-cloud-ruby/issues/24875)) 
+
+### 0.2.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.2.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.2.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23784](https://github.com/googleapis/google-cloud-ruby/issues/23784)) 
+
+### 0.1.0 (2023-11-14)
+
+#### Features
+
+* Initial generation of google-cloud-redis-cluster-v1 ([#23531](https://github.com/googleapis/google-cloud-ruby/issues/23531)) 
+
+## Release History

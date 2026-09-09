@@ -1,0 +1,124 @@
+# Changelog
+
+### 1.7.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding google-cloud-privileged_access_manager to Librarian ([#36485](https://github.com/googleapis/google-cloud-ruby/issues/36485)) 
+
+### 1.7.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35059](https://github.com/googleapis/google-cloud-ruby/issues/35059)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34052](https://github.com/googleapis/google-cloud-ruby/issues/34052)) 
+
+### 1.6.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
+### 1.6.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33437](https://github.com/googleapis/google-cloud-ruby/issues/33437)) 
+
+### 1.5.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.4.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31580](https://github.com/googleapis/google-cloud-ruby/issues/31580)) 
+* add ListOperations unreachable resources 
+
+### 1.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.2.0 (2025-08-15)
+
+#### Features
+
+* Introducing new Grant states for Withdrawal operation ([#30750](https://github.com/googleapis/google-cloud-ruby/issues/30750)) 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825))
+
+#### Features
+
+* Bump version to 1.0.0 ([#28941](https://github.com/googleapis/google-cloud-ruby/issues/28941)) 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28825](https://github.com/googleapis/google-cloud-ruby/issues/28825)) 
+
+### 0.3.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.1.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27010](https://github.com/googleapis/google-cloud-ruby/issues/27010)) 
+
+### 0.1.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26630](https://github.com/googleapis/google-cloud-ruby/issues/26630)) 
+
+### 0.1.0 (2024-07-23)
+
+#### Features
+
+* Manual generation of google-cloud-privileged_access_manager-v1 ([#26485](https://github.com/googleapis/google-cloud-ruby/issues/26485)) 
+
+## Release History

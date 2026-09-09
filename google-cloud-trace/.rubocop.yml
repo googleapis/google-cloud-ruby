@@ -1,0 +1,38 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "integration/**/*"
+    - "google-cloud-trace.gemspec"
+    - "Rakefile"
+    - "support/**/*"
+    - "test/**/*"
+
+Documentation:
+  Enabled: false
+
+Lint/RescueException:
+  Exclude:
+    - "lib/google/cloud/trace/rails.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-trace.rb"
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/trace.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/trace.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-trace.rb"
+Style/ClassVars:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false

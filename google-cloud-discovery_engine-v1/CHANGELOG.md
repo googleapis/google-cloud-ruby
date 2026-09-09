@@ -1,0 +1,297 @@
+# Changelog
+
+### 2.11.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 2.11.0 (2026-08-24)
+
+#### Features
+
+* expose StreamAssistRequest agents_spec and agent_id ([#36313](https://github.com/googleapis/google-cloud-ruby/issues/36313)) 
+
+### 2.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 2.10.0 (2026-07-10)
+
+#### Features
+
+* Add RelevanceFilterSpec to SearchRequest in v1 ([#34739](https://github.com/googleapis/google-cloud-ruby/issues/34739)) 
+
+### 2.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
+### 2.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.7.0 (2026-03-04)
+
+#### Features
+
+* add Natural Language Query Understanding fields and messages to DiscoveryEngine request, response, and datastore messages ([#32444](https://github.com/googleapis/google-cloud-ruby/issues/32444)) 
+
+### 2.6.2 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 2.6.1 (2025-10-22)
+
+#### Bug Fixes
+
+* Add labels for additional Sessions identification 
+* Include AssistAnswer as a part of the Session ([#31789](https://github.com/googleapis/google-cloud-ruby/issues/31789)) 
+
+### 2.6.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31577](https://github.com/googleapis/google-cloud-ruby/issues/31577)) 
+* add ListOperations unreachable resources 
+
+### 2.5.0 (2025-09-11)
+
+#### Features
+
+* Added `ranking_expression_backed` and `rank_signals` fields related to the Custom Ranking feature ([#31004](https://github.com/googleapis/google-cloud-ruby/issues/31004)) 
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
+### 2.4.0 (2025-07-25)
+
+#### Features
+
+* add AssistantService 
+* add SessionService ([#30717](https://github.com/googleapis/google-cloud-ruby/issues/30717)) 
+
+### 2.3.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 2.3.0 (2025-06-13)
+
+#### Features
+
+* add CMEK config service ([#30498](https://github.com/googleapis/google-cloud-ruby/issues/30498)) 
+* add ConnectorRunErrorContext to error log 
+* add custom search operators for Workspace search 
+* add HealthcareFhirConfig to FHIR data store 
+* add identity mapping service 
+* add more indexing state for site search engine 
+* add more options for layout parser config 
+* add user license config service 
+* enable claim level score for grounding 
+* support ACL data store and document 
+* support media recommendation engine 
+* support structured content for chunk 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 2.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.1.0 (2025-03-28)
+
+#### Features
+
+* Support for RPCs for managing sitemaps 
+* Support for the ServingConfigService 
+* Support for the stream_answer_query RPC 
+* The answer_query RPC takes new parameters for grounding specification and end user specification 
+* The get_session RPC can now return the full session including all answer details 
+* The import_documents RPC can now force refresh of unstructured content 
+* The search and search_lite RPCs takes new parameters for configuring display, setting relevance threshold, and returning relevance score 
+* Various additional updates 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824)) 
+
+### 1.5.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.4.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.3.0 (2024-10-28)
+
+#### Features
+
+* add lite search API to allow public website search with API key ([#27495](https://github.com/googleapis/google-cloud-ruby/issues/27495)) 
+* add LOW_GROUNDED_ANSWER in answer skip reasons 
+* support query regex in control match rules 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 1.2.0 (2024-10-15)
+
+#### Features
+
+* Support for generate_grounded_content and stream_generate_grounded_content RPCs 
+* Support for setting a site credential in the recrawl_uris RPC 
+* Support for setting the maximum number of OneBox results when searching 
+#### Bug Fixes
+
+* Fixed identityMappingStores resource URLs 
+
+### 1.1.0 (2024-09-11)
+
+#### Features
+
+* Support for Document index status 
+* Support for jail-breaking queries 
+* Support for Reference#structured_document_info 
+* Support for the batch_get_documents_metadata RPC 
+* Support for the gcs_source, inline_source, and error_config parameters to the purge_documents RPC 
+* Support for the purge_user_events RPC 
+* Support for the SearchTuningService 
+* Support for the skip_default_schema_creation parameter to the create_data_store RPC 
+* Support for UnstructuredDocumentInfo::ChunkContent#relevance_score 
+
+### 1.0.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26627](https://github.com/googleapis/google-cloud-ruby/issues/26627)) 
+
+### 1.0.0 (2024-07-10)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.9.0 (2024-07-08)
+
+#### Features
+
+* add Chunk resource in the search response ([#26276](https://github.com/googleapis/google-cloud-ruby/issues/26276)) 
+* add NO_RELEVANT_CONTENT to Answer API 
+* support AlloyDB Connector 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 0.8.0 (2024-05-29)
+
+#### Features
+
+* add control service APIs 
+* promote answer APIs to v1 GA 
+* promote grounding check APIs to v1 GA 
+* promote grounding check APIs to v1 GA ([#25966](https://github.com/googleapis/google-cloud-ruby/issues/25966)) 
+* promote ranking APIs to v1 GA 
+* support cancelling import operations 
+* Support multiple parent patterns for controls ([#25973](https://github.com/googleapis/google-cloud-ruby/issues/25973)) 
+* support writing user events for blended engines 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 0.7.0 (2024-04-19)
+
+#### Features
+
+* Promote various services to v1 (e.g. recommendation, blending & healthcare search) ([#25673](https://github.com/googleapis/google-cloud-ruby/issues/25673)) 
+* Support boosting on multi-turn searches 
+* Support data import from Cloud Spanner, BigTable, SQL and Firestore 
+
+### 0.6.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24869](https://github.com/googleapis/google-cloud-ruby/issues/24869)) 
+
+### 0.5.0 (2024-02-12)
+
+#### Features
+
+* add engine support for multi-turn search and search APIs ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+* add suggestion deny list import/purge APIs ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+* support search summarization with citations and references ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes ([#24790](https://github.com/googleapis/google-cloud-ruby/issues/24790)) 
+
+### 0.4.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.4.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.4.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23778](https://github.com/googleapis/google-cloud-ruby/issues/23778)) 
+
+### 0.3.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22919](https://github.com/googleapis/google-cloud-ruby/issues/22919)) 
+
+### 0.2.0 (2023-09-05)
+
+#### Features
+
+* Support conversational / multi-turn search ([#22873](https://github.com/googleapis/google-cloud-ruby/issues/22873)) 
+
+### 0.1.0 (2023-06-12)
+
+#### Features
+
+* Initial release of generated google-cloud-discovery_engine-v1 client ([#22239](https://github.com/googleapis/google-cloud-ruby/issues/22239))

@@ -1,0 +1,261 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "helper"
+
+describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
+  let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
+  let(:bucket_json) { bucket_hash.to_json }
+  let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
+  let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
+  let(:kms_key) { "path/to/encryption_key_name" }
+
+  describe "customer-supplied encryption key (CSEK)" do
+    let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
+    let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
+    let(:key_options) do { header: {
+        "x-goog-encryption-algorithm"  => "AES256",
+        "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
+        "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
+    } }
+    end
+
+    it "creates a file with customer-supplied encryption key" do
+      new_file_name = random_file_path
+
+      Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+        tmpfile.write "Hello world"
+        tmpfile.rewind
+
+        mock = Minitest::Mock.new
+        mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: key_options.merge(retries: 0))
+
+        bucket.service.mocked_service = mock
+
+        bucket.create_file tmpfile, new_file_name, encryption_key: encryption_key
+
+        mock.verify
+      end
+    end
+
+    it "finds a file with customer-supplied encryption key" do
+      file_name = "file.ext"
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+        [bucket.name, file_name], **get_object_args(options: key_options)
+
+      bucket.service.mocked_service = mock
+
+      file = bucket.file file_name, encryption_key: encryption_key
+
+      mock.verify
+
+      _(file.name).must_equal file_name
+      _(file.user_project).must_be :nil?
+      _(file).wont_be :lazy?
+    end
+  end
+
+  describe "KMS customer-managed encryption key (CMEK)" do
+    it "gets and sets its encryption config" do
+      mock = Minitest::Mock.new
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(key_name: kms_key)
+      mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
+
+      bucket.service.mocked_service = mock
+
+      _(bucket.default_kms_key).must_be :nil?
+      bucket.default_kms_key = kms_key
+      _(bucket.default_kms_key).wont_be :nil?
+      _(bucket.default_kms_key).must_be_kind_of String
+      _(bucket.default_kms_key).must_equal kms_key
+    end
+
+    it "sets its encryption config to nil" do
+      bucket_gapi_with_key = bucket_gapi.dup
+      bucket_gapi_with_key.encryption = encryption_gapi(key_name: kms_key)
+      bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(
+        encryption: Google::Apis::StorageV1::Bucket::Encryption.new(
+          default_kms_key_name: nil 
+        )
+      )
+      mock = Minitest::Mock.new
+      mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
+
+      bucket_with_key.service.mocked_service = mock
+
+      _(bucket_with_key.default_kms_key).wont_be :nil?
+
+      bucket_with_key.default_kms_key = nil
+      _(bucket_with_key.default_kms_key).must_be :nil?
+    end
+
+    it "creates a file with the kms_key option" do
+      new_file_name = random_file_path
+
+      Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+        tmpfile.write "Hello world"
+        tmpfile.rewind
+
+        mock = Minitest::Mock.new
+        mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, kms_key_name: kms_key, options: {retries: 0})
+
+        bucket.service.mocked_service = mock
+
+        bucket.create_file tmpfile, new_file_name, kms_key: kms_key
+
+        mock.verify
+      end
+    end
+  end
+
+  describe "encryption enforcement config" do
+    let(:bucket_encryption) do
+      Google::Apis::StorageV1::Bucket::Encryption.new(
+        customer_managed_encryption_enforcement_config: customer_managed_encryption,
+        customer_supplied_encryption_enforcement_config: customer_supplied_encryption,
+        google_managed_encryption_enforcement_config: google_managed_encryption
+      )
+    end
+
+    let(:bucket_gapi) do
+      b = Google::Apis::StorageV1::Bucket.from_json bucket_json
+      b.encryption = bucket_encryption
+      b.encryption.default_kms_key_name = kms_key
+      b
+    end
+
+    it "knows its encryption enforcement config" do
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+    end
+
+    it "updates encryption_enforcement_config using update_bucket_encryption_enforcement_config" do
+      mock = Minitest::Mock.new
+      incoming_config = { restriction_mode: "FullyRestricted" }
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(
+        encryption: Google::Apis::StorageV1::Bucket::Encryption.new(
+          google_managed_encryption_enforcement_config: Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+            restriction_mode: "FullyRestricted"
+          )
+        )
+      )
+
+      returned_bucket_gapi = bucket_gapi.dup
+      returned_bucket_gapi.encryption = bucket_gapi.encryption.dup
+      returned_bucket_gapi.encryption.google_managed_encryption_enforcement_config = patch_bucket_gapi.encryption.google_managed_encryption_enforcement_config
+
+      mock.expect(:update_bucket, returned_bucket_gapi) { |name,**| name == bucket_name}
+
+      bucket.service.mocked_service = mock
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+
+      bucket.update do |b|
+        b.google_managed_encryption_enforcement_config = incoming_config
+      end
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+
+      mock.verify
+    end
+
+
+    it "raises error when a Hash is not provided for encryption enforcement config" do
+      invalid_config = "test"
+
+      err = assert_raises(ArgumentError) do
+        bucket.update do |b|
+          b.google_managed_encryption_enforcement_config = invalid_config
+        end
+      end
+
+      # Update the regex to match the error message in your validation method
+      assert_match(/must be a Hash or valid Config object/, err.message)
+    end
+
+    it "deletes all encryption enforcement configs together and preserves default_kms_key" do
+      mock = Minitest::Mock.new
+
+      initial_bucket_gapi = bucket_gapi.dup
+      initial_bucket_gapi.encryption = bucket_encryption.dup
+      initial_bucket_gapi.encryption.default_kms_key_name = kms_key
+      bucket_with_configs_and_key = Google::Cloud::Storage::Bucket.from_gapi initial_bucket_gapi, storage.service
+
+      returned_bucket_gapi = bucket_gapi.dup
+      returned_bucket_gapi.encryption = Google::Apis::StorageV1::Bucket::Encryption.new default_kms_key_name: kms_key
+
+      mock.expect(:update_bucket, returned_bucket_gapi) { |name, patch_obj, **| name == bucket_name && patch_obj.encryption.default_kms_key_name == kms_key }
+
+      bucket_with_configs_and_key.service.mocked_service = mock
+
+      _(bucket_with_configs_and_key.customer_managed_encryption_enforcement_config).wont_be :nil?
+      _(bucket_with_configs_and_key.customer_supplied_encryption_enforcement_config).wont_be :nil?
+      _(bucket_with_configs_and_key.google_managed_encryption_enforcement_config).wont_be :nil?
+      _(bucket_with_configs_and_key.default_kms_key).must_equal kms_key
+
+      bucket_with_configs_and_key.update do |b|
+        b.customer_managed_encryption_enforcement_config = nil
+        b.customer_supplied_encryption_enforcement_config = nil
+        b.google_managed_encryption_enforcement_config = nil
+      end
+
+      _(bucket_with_configs_and_key.customer_managed_encryption_enforcement_config).must_be :nil?
+      _(bucket_with_configs_and_key.customer_supplied_encryption_enforcement_config).must_be :nil?
+      _(bucket_with_configs_and_key.google_managed_encryption_enforcement_config).must_be :nil?
+      _(bucket_with_configs_and_key.default_kms_key).must_equal kms_key
+
+      mock.verify
+    end
+  end
+
+  def create_file_gapi bucket=nil, name = nil
+    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
+  end
+
+  def empty_file_gapi cache_control: nil, content_disposition: nil,
+                      content_encoding: nil, content_language: nil,
+                      content_type: nil, crc32c: nil, md5: nil, metadata: nil,
+                      storage_class: nil, checksum: nil, content: nil
+
+    # If no checksum type or specific value is provided, the default will be set to crc32c. 
+    # If the checksum is set to false, it will be disabled.
+    crc32c ||= set_crc32c_as_default md5, crc32c, checksum, content
+
+    params = {
+      cache_control: cache_control, content_type: content_type,
+      content_disposition: content_disposition, md5_hash: md5,
+      content_encoding: content_encoding, crc32c: crc32c,
+      content_language: content_language, metadata: metadata,
+      storage_class: storage_class }.delete_if { |_k, v| v.nil? }
+    Google::Apis::StorageV1::Object.new(**params)
+  end
+
+  def find_file_gapi bucket=nil, name = nil
+    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
+  end
+
+  def list_files_gapi count = 2, token = nil, prefixes = nil
+    files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash.to_json }
+    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes
+  end
+end

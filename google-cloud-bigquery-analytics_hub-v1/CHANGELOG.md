@@ -1,0 +1,191 @@
+# Changelog
+
+### 0.20.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+
+### 0.20.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34040](https://github.com/googleapis/google-cloud-ruby/issues/34040)) 
+
+### 0.19.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33430](https://github.com/googleapis/google-cloud-ruby/issues/33430)) 
+
+### 0.18.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.17.0 (2025-11-06)
+
+#### Features
+
+* add Stored Procedure Sharing support for analyticshub listings ([#32155](https://github.com/googleapis/google-cloud-ruby/issues/32155)) 
+* add tags support for Pub/Sub subscriptions 
+
+### 0.16.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.16.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31576](https://github.com/googleapis/google-cloud-ruby/issues/31576)) 
+* add ListOperations unreachable resources 
+
+### 0.15.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 0.14.0 (2025-09-03)
+
+#### Features
+
+* You can now configure listings for multiple regions for shared datasets and linked dataset replicas in BigQuery sharing ([#30933](https://github.com/googleapis/google-cloud-ruby/issues/30933)) 
+
+### 0.13.1 (2025-07-15)
+
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Provide a safety guard against accidentally deleting or revoking commercial subscriptions 
+* Support commercial data products associated with a listing 
+* Support for destination dataset to create for a subscriber 
+* Support for routine shared resources 
+* Support listings that are provided for metadata but are not subscribable 
+
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.11.0 (2025-03-28)
+
+#### Features
+
+* Support for sharing Cloud PubSub streams 
+* Support for Subscriber Email logging 
+
+### 0.10.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.9.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.8.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.8.0 (2024-07-08)
+
+#### Features
+
+* support Direct Table Access Toggle (Egress GA) 
+* support public directory self service for Listings/Exchanges ([#26270](https://github.com/googleapis/google-cloud-ruby/issues/26270)) 
+#### Documentation
+
+* A comment for message `DataExchange` is changed 
+* A comment for message `Listing` is changed 
+
+### 0.7.0 (2024-03-18)
+
+#### Features
+
+* support selective sharing on Data Clean Room Listings API ([#25394](https://github.com/googleapis/google-cloud-ruby/issues/25394)) 
+
+### 0.6.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24864](https://github.com/googleapis/google-cloud-ruby/issues/24864)) 
+
+### 0.5.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.5.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.5.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23774](https://github.com/googleapis/google-cloud-ruby/issues/23774)) 
+
+### 0.4.0 (2023-09-28)
+
+#### Features
+
+* support subscription services 
+
+### 0.3.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22917](https://github.com/googleapis/google-cloud-ruby/issues/22917)) 
+
+### 0.2.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.2.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.1.0 (2022-10-03)
+
+#### Features
+
+* Initial generation of google-cloud-bigquery-analytics_hub-v1 ([#19249](https://github.com/googleapis/google-cloud-ruby/issues/19249)) 
+
+## Release History

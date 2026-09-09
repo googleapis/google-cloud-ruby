@@ -1,0 +1,37 @@
+source "https://rubygems.org"
+
+gemspec
+
+local_dependencies = ["google-cloud-datastore-v1", "google-cloud-core", "google-cloud-errors"]
+
+main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-datastore.gemspec"))
+local_dependencies.each do |name|
+  spec_path = File.expand_path "../#{name}/#{name}.gemspec", __dir__
+  unless File.file? spec_path
+    warn "WARNING: Disabled local dependency for #{name} because gemspec not found."
+    next
+  end
+  version = Bundler.load_gemspec(spec_path).version
+  if main_spec.dependencies.any? { |dep| dep.name == name && !dep.requirement.satisfied_by?(version) }
+    warn "WARNING: Disabled local dependency for #{name} because the gemspec disallows version #{version}."
+    next
+  end
+  gem name, path: "../#{name}"
+end
+
+gem "autotest-suffix", "~> 1.1"
+gem "google-style", "~> 1.32.0"
+gem "irb", "~> 1.17"
+gem "minitest", "~> 6.0.2"
+gem "minitest-autotest", "~> 1.0"
+gem "minitest-focus", "~> 1.4"
+gem "minitest-hooks", "~> 1.5"
+gem "minitest-mock", "~> 5.27"
+gem "minitest-rg", "~> 5.3"
+gem "minitest-reporters", "~> 1.8.0", require: false
+gem "ostruct", "~> 0.5.5"
+gem "rake"
+gem "redcarpet", "~> 3.6"
+gem "simplecov", "~> 0.22"
+gem "yard", "~> 0.9"
+gem "yard-doctest", "~> 0.1.13"

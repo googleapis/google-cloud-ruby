@@ -1,0 +1,241 @@
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+require "rake/testtask"
+desc "Run tests."
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
+end
+
+namespace :test do
+  desc "Run tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigquery"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task[:test].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the bigquery acceptance tests."
+task :acceptance, :project, :keyfile do |_t, args|
+  project = args[:project]
+  project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["BIGQUERY_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
+          "BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/bigquery/credentials"
+  (Google::Cloud::Bigquery::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Bigquery::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  require "google/cloud/storage/credentials"
+  (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["BIGQUERY_PROJECT"] = project
+  ENV["BIGQUERY_KEYFILE_JSON"] = keyfile
+  ENV["STORAGE_PROJECT"] = project
+  ENV["STORAGE_KEYFILE_JSON"] = keyfile
+  ENV["DATA_CATALOG_CREDENTIALS"] = project
+  ENV["DATA_CATALOG_KEYFILE"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |_t, _args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigquery"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task[:acceptance].invoke
+  end
+
+  desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
+  task :cleanup, :project, :keyfile do |_t, args|
+    project = args[:project]
+    project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["BIGQUERY_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    end
+    if project.nil? || keyfile.nil?
+      raise "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or " \
+            "BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
+    end
+    # clear any env var already set
+    require "google/cloud/bigquery/credentials"
+    (Google::Cloud::Bigquery::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Bigquery::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
+    # always overwrite when running tests
+    ENV["BIGQUERY_PROJECT"] = project
+    ENV["BIGQUERY_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/bigquery"
+    puts "Cleaning up BigQuery datasets and tables"
+    Google::Cloud.bigquery.datasets.all do |ds|
+      ds.tables.all(&:delete)
+      ds.delete force: true
+    rescue Google::Cloud::Error => e
+      puts e.message
+    end
+  end
+
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.warning = false
+  end
+end
+
+namespace :benchmark do
+  desc "Run queries benchmark script."
+  task :queries, :query_file do |_t, args|
+    query_file = args[:query_file]
+    query_file ||= "benchmark/queries.json"
+
+    sh "bundle exec ruby benchmark/benchmark.rb #{query_file}"
+  end
+
+  desc "Run inserts benchmark script."
+  task :inserts, :insert_count do |_t, args|
+    insert_count = args[:insert_count]
+
+    sh "bundle exec ruby benchmark/inserts.rb #{insert_count}"
+  end
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-bigquery"
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-bigquery"
+  header "google-cloud-bigquery rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-bigquery yard", "*"
+  Rake::Task[:yard].invoke
+  header "google-cloud-bigquery doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "google-cloud-bigquery test", "*"
+  Rake::Task[:test].invoke
+end
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task[:ci].invoke
+    header "google-cloud-bigquery acceptance", "*"
+    Rake::Task[:acceptance].invoke
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    Dir.chdir "samples/simple_app" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+    Dir.chdir "samples/snippets" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+
+  task :master do
+    Dir.chdir "samples/simple_app" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+    Dir.chdir "samples/snippets" do
+      Bundler.with_unbundled_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+end
+
+task default: :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end

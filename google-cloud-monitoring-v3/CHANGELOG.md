@@ -1,0 +1,322 @@
+# Release History
+
+### 1.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 1.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34050](https://github.com/googleapis/google-cloud-ruby/issues/34050)) 
+
+### 1.9.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
+### 1.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.7.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.7.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 1.6.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 1.6.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-02-07)
+
+#### Features
+
+* Support a filter string to match on Alert fields when silencing the alerts ([#28822](https://github.com/googleapis/google-cloud-ruby/issues/28822)) 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* The list_metric_descriptors RPC supports the active_only parameter ([#28223](https://github.com/googleapis/google-cloud-ruby/issues/28223)) 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.3.0 (2025-01-08)
+
+#### Features
+
+* added PrometheusQueryLanguageCondition.disable_metric_validation 
+* added SqlCondition in AlertPolicy 
+* added TimeSeries.description for input only 
+#### Documentation
+
+* deprecated QueryTimeSeries (MQL query endpoint) 
+* ServiceAgentAuthentication supports generating an OAuth token 
+* ServiceLevelObjective.goal must be &lt;= 0.9999 
+* TimeSeries.unit allows limited updating by CreateTimeSeries 
+
+### 1.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.1.0 (2024-12-05)
+
+#### Features
+
+* Added support for notification prompts in AlertPolicy ([#27693](https://github.com/googleapis/google-cloud-ruby/issues/27693)) 
+
+### 1.0.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 1.0.0 (2024-07-08)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.18.0 (2024-06-25)
+
+#### Features
+
+* Support links in AlertPolicy ([#26141](https://github.com/googleapis/google-cloud-ruby/issues/26141)) 
+
+### 0.17.0 (2024-04-25)
+
+#### Features
+
+* Expand Service type to include Cloud Run, Kubernetes Engine, and other services 
+* Support for service agent authentication in HTTP checks 
+* Support for synthetic monitors in uptime checks 
+
+### 0.16.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24873](https://github.com/googleapis/google-cloud-ruby/issues/24873)) 
+
+### 0.15.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.15.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.15.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23782](https://github.com/googleapis/google-cloud-ruby/issues/23782)) 
+
+### 0.14.0 (2023-12-13)
+
+#### Features
+
+* Added support for severity in AlertPolicy ([#23647](https://github.com/googleapis/google-cloud-ruby/issues/23647)) 
+
+### 0.13.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22921](https://github.com/googleapis/google-cloud-ruby/issues/22921)) 
+#### Documentation
+
+* Minor updates to reference documentation ([#23297](https://github.com/googleapis/google-cloud-ruby/issues/23297)) 
+
+### 0.12.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.12.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21676](https://github.com/googleapis/google-cloud-ruby/issues/21676)) 
+
+### 0.11.0 (2023-05-04)
+
+#### Features
+
+* Support adding ICMP pings to HttpCheck and TcpCheck 
+* Support checker type and user labels in UptimeCheckConfig 
+* Support filtering in list_uptime_check_configs 
+* Support for JSON_PATH content matchers 
+* Support for providing the passing http response codes in HttpCheck 
+* Support Oregon, Iowa, and Virginia regional checks 
+* Support user provided content-type headers in HttpCheck 
+
+### 0.10.0 (2023-01-11)
+
+#### Features
+
+* Added support for the snooze API ([#19976](https://github.com/googleapis/google-cloud-ruby/issues/19976)) 
+
+### 0.9.0 (2022-08-09)
+
+#### Features
+
+* Added support for evaluating missing data in AlertPolicy ([#18990](https://github.com/googleapis/google-cloud-ruby/issues/18990)) 
+
+### 0.8.0 (2022-07-05)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.7.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support for auto-closing incidents
+
+### 0.6.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.0 / 2021-10-18
+
+#### Features
+
+* Support create_service_time_series RPC
+
+#### Documentation
+
+* Fix several broken links
+
+### 0.5.0 / 2021-08-30
+
+#### Features
+
+* Support for controlling how notification channels are notified when an alert fires
+* Support for log match conditions
+* Support for user label annotations on a service
+* Removed obsolete service tier field
+* Updated RPC retry and timeout settings
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Bug Fixes
+
+* Add project_path helper
+
+### 0.4.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
+### 0.4.0 / 2021-04-05
+
+#### Features
+
+* Support for querying time series using the Monitoring Query Language
+
+### 0.3.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+### 0.2.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.1.5 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
+### 0.1.4 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
+### 0.1.3 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
+### 0.1.2 / 2020-06-18
+
+#### Documentation
+
+* Add documentation and API enablement links to the readme
+
+### 0.1.1 / 2020-06-08
+
+#### Bug Fixes
+
+* Eliminate a Ruby warning that appeared in some cases when accessing rpc-scoped configs
+
+#### Documentation
+
+* Fixed broken links in the reference documentation
+
+### 0.1.0 / 2020-05-25
+
+Initial release

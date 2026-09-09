@@ -1,0 +1,121 @@
+# Changelog
+
+### 0.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35067](https://github.com/googleapis/google-cloud-ruby/issues/35067)) 
+
+### 0.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34060](https://github.com/googleapis/google-cloud-ruby/issues/34060)) 
+
+### 0.9.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.9.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.8.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.8.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31009](https://github.com/googleapis/google-cloud-ruby/issues/31009)) 
+
+### 0.7.0 (2025-07-15)
+
+#### Features
+
+* add ability to specify trip attributes to Trip and deprecate Trip.remaining_waypoints_version ([#30620](https://github.com/googleapis/google-cloud-ruby/issues/30620)) 
+
+### 0.6.0 (2025-05-11)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.5.0 (2025-03-04)
+
+#### Features
+
+* Support for recording vehicle locations that previously could not be sent to the server 
+* Support for the delete_delivery_vehicle and delete_task RPCs 
+
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.3.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.2.4 (2024-09-11)
+
+#### Documentation
+
+* Updated comment link for ListTasks filter ([#27300](https://github.com/googleapis/google-cloud-ruby/issues/27300)) 
+
+### 0.2.3 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.2.2 (2024-08-02)
+
+#### Documentation
+
+* document that DeliveryVehicle#type can be set when calling create_delivery_vehicle 
+
+### 0.2.1 (2024-07-22)
+
+#### Documentation
+
+* clarify behavior of UpdateDeliveryVehicle ([#26446](https://github.com/googleapis/google-cloud-ruby/issues/26446)) 
+
+### 0.2.0 (2024-05-16)
+
+### ⚠ BREAKING CHANGES
+
+* Removed deprecated search_tasks RPC ([#25879](https://github.com/googleapis/google-cloud-ruby/issues/25879))
+
+#### Bug Fixes
+
+* Removed deprecated search_tasks RPC ([#25879](https://github.com/googleapis/google-cloud-ruby/issues/25879)) 
+
+### 0.1.0 (2024-05-03)
+
+#### Features
+
+* Initial generation of google-maps-fleet_engine-delivery-v1 ([#25840](https://github.com/googleapis/google-cloud-ruby/issues/25840)) 
+
+## Release History

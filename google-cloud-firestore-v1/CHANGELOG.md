@@ -1,0 +1,296 @@
+# Release History
+
+### 2.5.0 (2026-08-05)
+
+#### Features
+
+* add RequestOptions and request_options to Firestore v1 protos ([#35073](https://github.com/googleapis/google-cloud-ruby/issues/35073)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
+### 2.4.0 (2026-06-11)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* expose the variable definition in the Cloud Firestore API 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32783](https://github.com/googleapis/google-cloud-ruby/issues/32783)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* fix documentation formatting 
+* update API common type documentation 
+* update license year 
+* update various comments 
+
+### 2.3.0 (2025-12-11)
+
+#### Features
+
+* publish the pipelines API to the stable branch ([#32250](https://github.com/googleapis/google-cloud-ruby/issues/32250)) 
+#### Documentation
+
+* minor api documentation changes 
+
+### 2.2.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 2.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 2.1.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 2.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824)) 
+
+### 1.3.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.1.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 1.1.0 (2024-08-08)
+
+#### Features
+
+* Expose the `FindNearest.distance_result_field` parameter ([#26619](https://github.com/googleapis/google-cloud-ruby/issues/26619)) 
+* Expose the `FindNearest.distance_threshold` parameter 
+
+### 1.0.0 (2024-07-09)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.14.0 (2024-04-29)
+
+#### Features
+
+* add VectorSearch API ([#25424](https://github.com/googleapis/google-cloud-ruby/issues/25424)) 
+
+### 0.13.0 (2024-03-22)
+
+#### Features
+
+* Add new types ExplainOptions, ExplainMetrics, PlanSummary, ExecutionStats ([#25373](https://github.com/googleapis/google-cloud-ruby/issues/25373)) 
+
+### 0.12.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24870](https://github.com/googleapis/google-cloud-ruby/issues/24870)) 
+
+### 0.11.1 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.11.0 (2024-01-29)
+
+#### Features
+
+* Added a bloom filter of unchanged document names (#21547)
+* Uses binary protobuf definitions for better forward compatibility (#21675)
+* Support SUM/AVG aggregations in Firestore (#22673)
+* Support for universe_domain (#23779)
+* Support for channel pool configuration (#22920)
+
+#### Bug Fixes
+
+* Set request params header using resource prefix
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified
+
+### 0.10.0 (2023-02-17)
+
+#### Features
+
+* Added support for REST transport ([#20444](https://github.com/googleapis/google-cloud-ruby/issues/20444)) 
+
+### 0.9.0 (2023-02-15)
+
+#### Features
+
+* Added OR query support ([#20428](https://github.com/googleapis/google-cloud-ruby/issues/20428)) 
+
+### 0.8.0 (2022-09-16)
+
+#### Features
+
+* Support for run_aggregation_query call ([#19140](https://github.com/googleapis/google-cloud-ruby/issues/19140)) 
+* Support for the location client 
+
+### 0.7.1 (2022-08-24)
+
+#### Documentation
+
+* Clarifications in the order_by field of a query ([#19056](https://github.com/googleapis/google-cloud-ruby/issues/19056)) 
+
+### 0.7.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.6.0 (2022-06-14)
+
+#### Features
+
+* Support read_time arguments to the partition_query and list_collection_ids calls
+
+### 0.5.0 (2022-04-28)
+
+#### Features
+
+* run_query reports whether the request is complete and no more documents will be returned
+
+### 0.4.8 (2022-04-19)
+
+#### Documentation
+
+* Minor clarifications to filter documentation
+
+### 0.4.7 / 2022-03-07
+
+#### Bug Fixes
+
+* remove requiring unused annotations_pb
+
+### 0.4.6 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.4.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.4 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.3 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.4.2 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
+### 0.4.1 / 2021-04-16
+
+#### Bug Fixes
+
+* Retry on RESOURCE_EXHAUSTED errors
+
+### 0.4.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+### 0.3.0 / 2021-02-03
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.2.3 / 2021-01-20
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
+### 0.2.2 / 2020-10-26
+
+#### Bug Fixes
+
+* Retry partition_query calls on INTERNAL and DEADLINE_EXCEEDED errors
+
+### 0.2.1 / 2020-10-14
+
+#### Bug Fixes
+
+* Set retry/timeout for PartitionQuery
+
+### 0.2.0 / 2020-09-03
+
+#### Features
+
+* Support inequality operators in structured queries
+
+### 0.1.2 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
+### 0.1.1 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retries by converting error names to integer codes
+
+### 0.1.0 / 2020-07-27
+
+Initial release.

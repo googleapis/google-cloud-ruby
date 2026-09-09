@@ -1,0 +1,91 @@
+# Changelog
+
+### 1.4.2 (2026-08-26)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.4.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+#### Documentation
+
+* Update copyright year ([#35098](https://github.com/googleapis/google-cloud-ruby/issues/35098)) 
+
+### 1.4.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34679](https://github.com/googleapis/google-cloud-ruby/issues/34679)) 
+
+### 1.3.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
+### 1.2.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.1.3 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.1.2 (2025-05-16)
+
+#### Documentation
+
+* Minor typo fix ([#30367](https://github.com/googleapis/google-cloud-ruby/issues/30367)) 
+
+### 1.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.1.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28533](https://github.com/googleapis/google-cloud-ruby/issues/28533)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.0.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26636](https://github.com/googleapis/google-cloud-ruby/issues/26636)) 
+
+### 1.0.0 (2024-06-26)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.3.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24878](https://github.com/googleapis/google-cloud-ruby/issues/24878)) 
+
+### 0.2.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24267](https://github.com/googleapis/google-cloud-ruby/issues/24267)) 
+
+### 0.1.0 (2023-06-16)
+
+#### Features
+
+* Initial generation of google-cloud-support ([#22395](https://github.com/googleapis/google-cloud-ruby/issues/22395)) 
+
+## Release History

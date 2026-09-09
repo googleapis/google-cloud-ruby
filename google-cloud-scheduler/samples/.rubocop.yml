@@ -1,0 +1,8 @@
+inherit_gem:
+    google-style: google-style.yml
+
+Metrics/BlockLength:
+    Enabled: false
+Layout/LineLength:
+    Exclude:
+        - "acceptance/*.rb"

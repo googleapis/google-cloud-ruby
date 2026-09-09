@@ -1,0 +1,371 @@
+# Release History
+
+### 1.17.0 (2026-08-24)
+
+#### Features
+
+* add microsecond_timestamp feature flag ([#36258](https://github.com/googleapis/google-cloud-ruby/issues/36258)) 
+
+### 1.16.0 (2026-08-13)
+
+#### Features
+
+* add microsecond timestamp precision support ([#36203](https://github.com/googleapis/google-cloud-ruby/issues/36203)) 
+
+### 1.15.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35047](https://github.com/googleapis/google-cloud-ruby/issues/35047)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
+### 1.14.0 (2026-06-08)
+
+#### Features
+
+* add support for filtering SampleRowKeys to a specific row_range ([#34020](https://github.com/googleapis/google-cloud-ruby/issues/34020)) 
+
+### 1.13.0 (2026-06-03)
+
+#### Features
+
+* add session based protocol 
+* add value_bitmask_filter to the read API 
+* Add view parameters to ExecuteQueryRequest ([#33815](https://github.com/googleapis/google-cloud-ruby/issues/33815)) 
+#### Bug Fixes
+
+* Existing value `SESSION_TYPE_TEST = -1` is changed to `SESSION_TYPE_TEST = 9999` in enum `SessionType` 
+#### Documentation
+
+* update various comments 
+
+### 1.12.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.11.0 (2025-11-18)
+
+#### Features
+
+* add PeerInfo proto in Bigtable API ([#32167](https://github.com/googleapis/google-cloud-ruby/issues/32167)) 
+
+### 1.10.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.10.0 (2025-09-11)
+
+#### Features
+
+* Add encodings for STRUCT and the Timestamp type 
+* Add Type API updates needed to support structured keys in materialized views ([#30990](https://github.com/googleapis/google-cloud-ruby/issues/30990)) 
+
+### 1.9.0 (2025-08-18)
+
+#### Features
+
+* add Idempotency to Cloud Bigtable MutateRowsRequest API ([#30709](https://github.com/googleapis/google-cloud-ruby/issues/30709)) 
+* Publish Proto and Enum types to CBT data API ([#30726](https://github.com/googleapis/google-cloud-ruby/issues/30726)) 
+#### Bug Fixes
+
+* Fixed routing headers when there is an authorized view ([#30741](https://github.com/googleapis/google-cloud-ruby/issues/30741)) 
+#### Documentation
+
+* Minor comment update for field `idempotency` in message `.google.bigtable.v2.MutateRowRequest` 
+* Sync generated comments from the API Protos 
+
+### 1.8.0 (2025-07-15)
+
+#### Features
+
+* Support idempotency parameter to the mutate_row RPC ([#30581](https://github.com/googleapis/google-cloud-ruby/issues/30581)) 
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 1.7.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.6.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.6.0 (2025-03-11)
+
+#### Features
+
+* add MaterializedViewName to ReadRows and SampleRowKeys ([#29309](https://github.com/googleapis/google-cloud-ruby/issues/29309)) 
+#### Bug Fixes
+
+* Configure timeout and retry for execute_query ([#29290](https://github.com/googleapis/google-cloud-ruby/issues/29290)) 
+
+### 1.5.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.4.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 1.3.0 (2024-11-07)
+
+#### Features
+
+* Add feature flags proto for Direct Access ([#27523](https://github.com/googleapis/google-cloud-ruby/issues/27523)) 
+
+### 1.2.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27004](https://github.com/googleapis/google-cloud-ruby/issues/27004)) 
+
+### 1.2.0 (2024-07-24)
+
+#### Features
+
+* Include ProtoRows message class, needed to parse ExecuteQuery responses 
+* Support merging accumulated state to an `Aggregate` cell ([#26491](https://github.com/googleapis/google-cloud-ruby/issues/26491)) 
+#### Documentation
+
+* Minor updates to reference documentation 
+
+### 1.1.0 (2024-07-10)
+
+#### Features
+
+* publish the Cloud Bigtable ExecuteQuery API ([#26362](https://github.com/googleapis/google-cloud-ruby/issues/26362)) 
+
+### 1.0.0 (2024-07-09)
+
+#### Features
+
+* Bump version to 1.0.0 
+
+### 0.21.0 (2024-04-19)
+
+#### Features
+
+* Support client side metrics feature flag ([#25448](https://github.com/googleapis/google-cloud-ruby/issues/25448)) 
+
+### 0.20.0 (2024-03-10)
+
+#### Features
+
+* Support for Bigtable Aggregates ([#25338](https://github.com/googleapis/google-cloud-ruby/issues/25338)) 
+
+### 0.19.0 (2024-03-06)
+
+#### Features
+
+* support authorized_view_name for apis 
+
+### 0.18.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24865](https://github.com/googleapis/google-cloud-ruby/issues/24865)) 
+
+### 0.17.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.17.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.17.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23775](https://github.com/googleapis/google-cloud-ruby/issues/23775)) 
+
+### 0.16.0 (2024-01-03)
+
+#### Features
+
+* Add fields routing cookie and retry info ([#23681](https://github.com/googleapis/google-cloud-ruby/issues/23681)) 
+
+### 0.15.0 (2023-09-14)
+
+#### Features
+
+* Added feature flag for improved mutate rows throttling ([#23326](https://github.com/googleapis/google-cloud-ruby/issues/23326)) 
+
+### 0.14.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22917](https://github.com/googleapis/google-cloud-ruby/issues/22917)) 
+
+### 0.13.0 (2023-07-28)
+
+#### Features
+
+* add last_scanned_row_key feature 
+
+### 0.12.0 (2023-07-18)
+
+#### Features
+
+* Experimental support for reverse scans ([#22453](https://github.com/googleapis/google-cloud-ruby/issues/22453)) 
+
+### 0.11.0 (2023-06-06)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.10.0 (2023-05-04)
+
+#### Features
+
+* The mutate_rows call now returns rate limit information 
+
+### 0.9.0 (2023-03-01)
+
+#### Features
+
+* Support for CloseStream#new_partitions ([#20571](https://github.com/googleapis/google-cloud-ruby/issues/20571)) 
+
+### 0.8.0 (2023-02-23)
+
+#### Features
+
+* Support for the generate_initial_change_stream_partitions RPC ([#20352](https://github.com/googleapis/google-cloud-ruby/issues/20352)) 
+* Support for the read_change_stream RPC 
+
+### 0.7.1 (2022-10-18)
+
+#### Bug Fixes
+
+This release fixes the RequestStats interfaces. The wrong version of those interfaces were released in 0.7.0.
+
+* BREAKING CHANGE: Removed RequestStats#read_efficiency_stats 
+* BREAKING CHANGE: Removed the REQUEST_STATS_EFFICIENCY RequestStatsView, and adjusted the ID of REQUEST_STATS_FULL accordingly. 
+* BREAKING CHANGE: Renamed AllReadStats to FullReadStatsView, and updated the field names in RequestStats. ([#19270](https://github.com/googleapis/google-cloud-ruby/issues/19270)) 
+* BREAKING CHANGE: Renamed ReadIteratorStats to ReadIterationStats and removed the deletes_seen_count field. 
+
+### 0.7.0 (2022-09-28)
+
+#### Features
+
+* Return RequestStats when reading rows ([#19214](https://github.com/googleapis/google-cloud-ruby/issues/19214)) 
+
+### 0.6.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.5.0 / 2022-02-15
+
+#### Features
+
+* Added support for the ping_and_warm call
+
+### 0.4.0 / 2022-02-08
+
+#### Features
+
+* Update routing headers in API calls -- add `app_profile_id`
+
+### 0.3.5 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.3.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.3.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.3.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.3.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
+### 0.3.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+### 0.2.0 / 2021-02-03
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.1.4 / 2021-01-26
+
+#### Bug Fixes
+
+* Update default timeout and retry configuration
+
+### 0.1.3 / 2021-01-13
+
+#### Bug Fixes
+
+* Update keepalive configuration
+
+### 0.1.2 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
+### 0.1.1 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retries by converting error names to integer codes
+
+### 0.1.0 / 2020-07-27
+
+Initial release.

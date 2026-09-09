@@ -1,0 +1,12 @@
+--no-private
+--title=Cloud Translation V2 API
+--markup markdown
+--markup-provider redcarpet
+--main README.md
+
+./lib/**/*.rb
+-
+README.md
+AUTHENTICATION.md
+CHANGELOG.md
+LICENSE.md

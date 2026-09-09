@@ -1,0 +1,34 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "benchmark/**/*"
+    - "google-cloud-firestore.gemspec"
+    - "support/**/*"
+    - "Rakefile"
+    - "acceptance/**/*"
+    - "conformance/**/*"
+    - "test/**/*"
+    - "samples/acceptance/helper.rb"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/firestore/query.rb"
+Metrics/BlockLength:
+  Exclude:
+    - ".toys.rb"
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 17
+Metrics/MethodLength:
+  Max: 32
+Metrics/PerceivedComplexity:
+  Max: 17
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-firestore.rb"

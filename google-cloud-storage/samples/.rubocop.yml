@@ -1,0 +1,34 @@
+inherit_gem:
+    google-style: google-style.yml
+
+Lint/EmptyBlock:
+    Enabled: false
+Lint/UselessAssignment:
+    Exclude:
+        - "storage_remove_bucket_conditional_iam_binding.rb"
+Lint/ShadowingOuterLocalVariable:
+    Enabled: false
+Metrics/AbcSize:
+    Enabled: false
+Metrics/BlockLength:
+    Enabled: false
+Metrics/CyclomaticComplexity:
+    Max: 12
+Metrics/MethodLength:
+    Enabled: false
+Naming/AccessorMethodName:
+    Enabled: false
+Style/GlobalVars:
+    Exclude:
+        - "acceptance/helper.rb"
+Style/KeywordParametersOrder:
+    Exclude:
+        - "storage_upload_encrypted_file.rb"
+        - "storage_upload_with_kms_key.rb"
+Style/NegatedIfElseCondition:
+    Exclude:
+        - "storage_remove_retention_policy.rb"
+Style/Next:
+    Enabled: false
+Style/SymbolProc:
+    Enabled: false

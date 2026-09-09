@@ -1,0 +1,305 @@
+# Changelog
+
+### 0.29.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35060](https://github.com/googleapis/google-cloud-ruby/issues/35060)) 
+
+### 0.29.0 (2026-06-11)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add instances client library 
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* add SourceCode proto to Run container config 
+* publish client batch config schema 
+* publish new error reasons 
+* update gapic-common dependency to 1.3 and document retry jitter ([#32252](https://github.com/googleapis/google-cloud-ruby/issues/32252)) 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* add instances description 
+* An existing repeated string field custom_audiences is marked deprecated for WorkerPools API 
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* fix documentation formatting 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+* update license year 
+* update various comments 
+
+### 0.28.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.28.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31580](https://github.com/googleapis/google-cloud-ruby/issues/31580)) 
+* add ListOperations unreachable resources 
+
+### 0.27.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 0.26.0 (2025-08-15)
+
+#### Features
+
+* Support for worker pools ([#30802](https://github.com/googleapis/google-cloud-ruby/issues/30802)) 
+
+### 0.25.0 (2025-07-17)
+
+#### Features
+
+* Support for disabling GPU zonal redundancy 
+* Task attempt results include the container termination signal 
+
+### 0.24.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 0.24.0 (2025-05-16)
+
+#### Features
+
+* Support GPU zonal redundancy setting 
+* Support node selector in Cloud Run jobs for GPU setting 
+
+### 0.23.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.22.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.22.0 (2025-02-05)
+
+#### Features
+
+* Added the build_config field to the Service resource 
+* Added the creator field to the Execution resource 
+* Support for Container base image URI and build info 
+* Support for project descriptor files ([#28918](https://github.com/googleapis/google-cloud-ruby/issues/28918)) 
+
+### 0.21.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.20.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.19.0 (2024-12-04)
+
+#### Features
+
+* Support for manual instance count ([#27649](https://github.com/googleapis/google-cloud-ruby/issues/27649)) 
+
+### 0.18.0 (2024-11-13)
+
+#### Features
+
+* Add EncryptionKeyRevocationAction and shutdown duration configuration to Services ([#27604](https://github.com/googleapis/google-cloud-ruby/issues/27604)) 
+* support advanced configurations options for cloud storage volumes by setting `mount_options` in the GCSVolumeSource configuration ([#27583](https://github.com/googleapis/google-cloud-ruby/issues/27583)) 
+#### Documentation
+
+* A comment for field `max_instance_request_concurrency` in message `.google.cloud.run.v2.RevisionTemplate` is changed 
+* For field `invoker_iam_disabled` in message `.google.cloud.run.v2.Service`, clarify that feature is available by invitation only 
+* formatting updates 
+* Update docs for field `value` in message `.google.cloud.run.v2.EnvVar` to reflect Cloud Run product capabilities 
+
+### 0.17.0 (2024-10-15)
+
+#### Features
+
+* Services now report all URLs serving traffic 
+* Support for disabling IAM permission check for invokers 
+* Support for revision node selector 
+* Support for service mesh connectivity 
+* Support for service scaling modes 
+* Support for the Builds service and submit_build RPC 
+
+### 0.16.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27011](https://github.com/googleapis/google-cloud-ruby/issues/27011)) 
+
+### 0.16.0 (2024-07-10)
+
+#### Features
+
+* add Job ExecutionReference.completion_status to show status of the most recent execution 
+* add Job start_execution_token and run_execution_token to execute jobs immediately on creation 
+* support update_mask in Cloud Run UpdateService ([#26373](https://github.com/googleapis/google-cloud-ruby/issues/26373)) 
+#### Documentation
+
+* clarify optional fields in Cloud Run requests 
+
+### 0.15.0 (2024-03-06)
+
+#### Features
+
+* allow disabling the default URL (run.app) for Cloud Run Services 
+* support disabling waiting for health checks during Service deployment 
+* support mounting NFS and GCS volumes in Cloud Run Jobs and Services 
+* support specifying a per-Service min-instance-count and service scaling 
+
+### 0.14.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24876](https://github.com/googleapis/google-cloud-ruby/issues/24876)) 
+
+### 0.13.2 (2024-02-01)
+
+#### Bug Fixes
+
+* Eliminated a harmless but annoying warning in the protobuf class files 
+
+### 0.13.1 (2024-01-12)
+
+#### Bug Fixes
+
+* Ensure endpoints are correct for mixin clients ([#24032](https://github.com/googleapis/google-cloud-ruby/issues/24032)) 
+
+### 0.13.0 (2024-01-11)
+
+#### Features
+
+* Support for universe_domain ([#23784](https://github.com/googleapis/google-cloud-ruby/issues/23784)) 
+
+### 0.12.0 (2023-09-29)
+
+#### Features
+
+* support cancel execution 
+* support container overrides 
+* support for Direct VPC egress setting 
+
+### 0.11.0 (2023-09-12)
+
+#### Features
+
+* Support for channel pool configuration ([#22923](https://github.com/googleapis/google-cloud-ruby/issues/22923)) 
+
+### 0.10.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22684](https://github.com/googleapis/google-cloud-ruby/issues/22684)) 
+
+### 0.10.0 (2023-07-10)
+
+#### Features
+
+* Adds support for custom audiences ([#22488](https://github.com/googleapis/google-cloud-ruby/issues/22488)) 
+
+### 0.9.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.9.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21677](https://github.com/googleapis/google-cloud-ruby/issues/21677)) 
+
+### 0.8.0 (2023-05-04)
+
+#### Features
+
+* Adds support for Session affinity in Service 
+* Adds support for Startup CPU Boost 
+* New 'port' field for HttpGetAction probe type 
+* New fields/enum values 
+#### Documentation
+
+* General documentation fixes. 
+
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.6.0 (2023-01-26)
+
+#### Features
+
+* Execution resource includes the cancelled and retried task counts 
+* Execution resource provides the log URL 
+* Revision resource includes the action to take when an encryption key is revoked ([#20055](https://github.com/googleapis/google-cloud-ruby/issues/20055)) 
+#### Bug Fixes
+
+* Set the request path params header correctly 
+
+### 0.5.0 (2022-11-08)
+
+#### Features
+
+* support jobs and executions 
+* support new IAM policy 
+
+### 0.4.0 (2022-10-19)
+
+#### Features
+
+* Adds Startup and Liveness probes to Cloud Run v2 API client libraries ([#19288](https://github.com/googleapis/google-cloud-ruby/issues/19288)) 
+
+### 0.3.1 (2022-09-15)
+
+#### Documentation
+
+* Fix the main client gem name listed in the readme ([#19166](https://github.com/googleapis/google-cloud-ruby/issues/19166)) 
+
+### 0.3.0 (2022-07-07)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.2.0 (2022-05-10)
+
+### ⚠ BREAKING CHANGES
+
+* The previous version was mistakenly released using old interfaces; re-releasing using the correct interfaces
+
+#### Bug Fixes
+
+* The previous version was mistakenly released using old interfaces; re-releasing using the correct interfaces
+
+### 0.1.0 (2022-05-05)
+
+#### Features
+
+* Initial generation of google-cloud-run-v2

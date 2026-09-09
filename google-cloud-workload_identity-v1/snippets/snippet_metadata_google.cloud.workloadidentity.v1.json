@@ -1,0 +1,55 @@
+{
+  "client_library": {
+    "name": "google-cloud-workload_identity-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.workloadidentity.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "workloadidentity_v1_generated_WorkloadIdentity_GenerateServiceAgents_sync",
+      "title": "Snippet for the generate_service_agents call in the WorkloadIdentity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WorkloadIdentity::V1::WorkloadIdentity::Client#generate_service_agents.",
+      "file": "workload_identity/generate_service_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_service_agents",
+        "full_name": "::Google::Cloud::WorkloadIdentity::V1::WorkloadIdentity::Client#generate_service_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WorkloadIdentity::V1::GenerateServiceAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkloadIdentity::Client",
+          "full_name": "::Google::Cloud::WorkloadIdentity::V1::WorkloadIdentity::Client"
+        },
+        "method": {
+          "short_name": "GenerateServiceAgents",
+          "full_name": "google.cloud.workloadidentity.v1.WorkloadIdentity.GenerateServiceAgents",
+          "service": {
+            "short_name": "WorkloadIdentity",
+            "full_name": "google.cloud.workloadidentity.v1.WorkloadIdentity"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+# Release History
+
+### 2.2.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+#### Documentation
+
+* Update copyright year ([#35089](https://github.com/googleapis/google-cloud-ruby/issues/35089)) 
+
+### 2.2.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34039](https://github.com/googleapis/google-cloud-ruby/issues/34039)) 
+
+### 2.2.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34039](https://github.com/googleapis/google-cloud-ruby/issues/34039)) 
+
+### 2.1.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 2.0.3 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 2.0.2 (2025-05-27)
+
+#### Documentation
+
+* Add h1 heading to migration docs ([#30436](https://github.com/googleapis/google-cloud-ruby/issues/30436)) 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-automl-v1beta1 prerelease service
+
+#### Features
+
+* Removed dependency on google-cloud-automl-v1beta1 prerelease service 
+* Updated google-cloud-automl-v1 dependency to version 1.x ([#29023](https://github.com/googleapis/google-cloud-ruby/issues/29023)) 
+
+### 1.6.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28527](https://github.com/googleapis/google-cloud-ruby/issues/28527)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.5.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26624](https://github.com/googleapis/google-cloud-ruby/issues/26624)) 
+
+### 1.5.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24863](https://github.com/googleapis/google-cloud-ruby/issues/24863)) 
+
+### 1.4.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24254](https://github.com/googleapis/google-cloud-ruby/issues/24254)) 
+
+### 1.3.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20765](https://github.com/googleapis/google-cloud-ruby/issues/20765)) 
+
+### 1.2.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 1.1.4 / 2022-01-13
+
+#### Documentation
+
+* Minor updates to the reference documentation
+
+### 1.1.3 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 1.1.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.1.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
+### 1.1.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+### 1.0.2 / 2021-02-02
+
+#### Documentation
+
+* Clarify the role of main vs versioned clients in the readme
+
+### 1.0.1 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds
+
+### 1.0.0 / 2020-06-30
+
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
+
+Among the highlights:
+
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Helper methods for generating resource paths are more accessible.
+
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
+
+### 0.7.1 / 2020-04-01
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+
+### 0.7.0 / 2020-03-11
+
+#### Features
+
+* Support separate project setting for quota/billing
+
+### 0.6.0 / 2020-03-04
+
+#### Features
+
+* Add TablesAnnotation#baseline_score
+
+### 0.5.1 / 2020-01-22
+
+#### Documentation
+
+* Update copyright year
+* Update product documentation
+
+### 0.5.0 / 2019-12-18
+
+#### Features
+
+* Add Long Running Operation methods
+  * Add AutoMLClient#get_operation
+  * Add AutoMLClient#list_operations
+
+#### Documentation
+
+* Update TablesModelColumnInfo documentation
+
+### 0.4.0 / 2019-11-05
+
+#### Features
+
+* Add new metadata fields
+  * Add ImageClassificationModelMetadata#node_qps
+  * Add ImageClassificationModelMetadata#node_count
+  * Add TablesModelMetadata#optimization_objective_recall_value
+  * Add TablesModelMetadata#optimization_objective_precision_value
+  * Add TextClassificationModelMetadata#classification_type
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+
+#### Other
+
+* Update Ruby dependency to minimum of 2.4
+
+### 0.3.0 / 2019-10-01
+
+#### Features
+
+* Support model deployment metadata for image classification
+  * Add image_classification_model_deployment_metadata argument to AutoMLClient#deploy_model
+  * Add ImageClassificationModelDeploymentMetadata class
+
+### 0.2.0 / 2019-08-23
+
+#### Features
+
+* Update Document
+  * Add Document#document_text (TextSnippet)
+  * Add Document#layout (Document::Layout)
+  * Add Document#document_dimensions (DocumentDimensions)
+  * Add Document#page_count
+  * Add Document::Layout
+  * Add DocumentDimensions
+* Update PredictionServiceClient#predict response
+  * Add PredictResponse#preprocessed_input (ExamplePayload)
+* Add BatchPredictResult#metadata.
+* Add ConfusionMatrix#display_name
+* Add TableSpec#valid_row_count
+* Deprecate ColumnSpec#top_correlated_columns
+
+#### Documentation
+
+* Update documentation
+
+### 0.1.0 / 2019-07-15
+
+* Initial release.

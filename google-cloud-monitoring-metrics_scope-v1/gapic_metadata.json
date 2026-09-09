@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.monitoring.metricsscope.v1",
+  "libraryPackage": "::Google::Cloud::Monitoring::MetricsScope::V1",
+  "services": {
+    "MetricsScopes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client",
+          "rpcs": {
+            "GetMetricsScope": {
+              "methods": [
+                "get_metrics_scope"
+              ]
+            },
+            "ListMetricsScopesByMonitoredProject": {
+              "methods": [
+                "list_metrics_scopes_by_monitored_project"
+              ]
+            },
+            "CreateMonitoredProject": {
+              "methods": [
+                "create_monitored_project"
+              ]
+            },
+            "DeleteMonitoredProject": {
+              "methods": [
+                "delete_monitored_project"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+# Changelog
+
+### 1.0.2 (2026-08-24)
+
+#### Bug Fixes
+
+* onboarding library batch 4 ([#36312](https://github.com/googleapis/google-cloud-ruby/issues/36312)) 
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+#### Documentation
+
+* Update copyright year ([#35088](https://github.com/googleapis/google-cloud-ruby/issues/35088)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34038](https://github.com/googleapis/google-cloud-ruby/issues/34038)) 
+
+### 0.5.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.4.0 (2025-09-12)
+
+#### Features
+
+* Introduce new services for data collection (ApiHubCollect) and curation (ApiHubCurate) 
+#### Documentation
+
+* Update README in wrapper libraries ([#31016](https://github.com/googleapis/google-cloud-ruby/issues/31016)) 
+
+### 0.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.3.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28526](https://github.com/googleapis/google-cloud-ruby/issues/28526)) 
+* Update Ruby version requirement to 3.0 
+
+### 0.2.0 (2024-09-18)
+
+### ⚠ BREAKING CHANGES
+
+* Drop support for gRPC transport which is not yet supported ([#27324](https://github.com/googleapis/google-cloud-ruby/issues/27324))
+
+#### Bug Fixes
+
+* Drop support for gRPC transport which is not yet supported ([#27324](https://github.com/googleapis/google-cloud-ruby/issues/27324)) 
+
+### 0.1.0 (2024-08-12)
+
+#### Features
+
+* Initial generation of google-cloud-api_hub ([#26953](https://github.com/googleapis/google-cloud-ruby/issues/26953)) 
+
+## Release History

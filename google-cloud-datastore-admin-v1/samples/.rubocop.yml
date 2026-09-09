@@ -1,0 +1,14 @@
+inherit_gem:
+  google-style: google-style.yml
+
+
+Lint/UselessAssignment:
+  Exclude:
+    - "snippets.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "acceptance/*.rb"
+    - "Rakefile"
+Style/GlobalVars:
+  Exclude:
+    - "Rakefile"

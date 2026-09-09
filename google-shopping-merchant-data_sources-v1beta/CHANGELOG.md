@@ -1,0 +1,103 @@
+# Changelog
+
+### 0.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34061](https://github.com/googleapis/google-cloud-ruby/issues/34061)) 
+
+### 0.8.1 (2026-04-09)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.8.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 0.7.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.7.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31009](https://github.com/googleapis/google-cloud-ruby/issues/31009)) 
+
+### 0.6.0 (2025-05-11)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.5.0 (2025-03-18)
+
+#### Features
+
+* Support for data source product destinations ([#29348](https://github.com/googleapis/google-cloud-ruby/issues/29348)) 
+
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Support product review and merchant review data sources 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Fixed some cross-reference links 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.3.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
+### 0.2.1 (2024-10-15)
+
+#### Documentation
+
+* Added more information about supplemental data sources ([#27404](https://github.com/googleapis/google-cloud-ruby/issues/27404)) 
+
+### 0.2.0 (2024-09-30)
+
+#### Features
+
+* Add FileUploads service ([#27360](https://github.com/googleapis/google-cloud-ruby/issues/27360)) 
+#### Documentation
+
+* A comment for enum value `PRODUCTS` in enum `Channel` is changed 
+
+### 0.1.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
+### 0.1.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26634](https://github.com/googleapis/google-cloud-ruby/issues/26634)) 
+
+### 0.1.0 (2024-06-06)
+
+#### Features
+
+* Initial generation of google-shopping-merchant-data_sources-v1beta ([#26056](https://github.com/googleapis/google-cloud-ruby/issues/26056)) 
+
+## Release History

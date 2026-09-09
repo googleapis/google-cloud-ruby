@@ -1,0 +1,88 @@
+# Changelog
+
+### 1.7.1 (2026-08-06)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35058](https://github.com/googleapis/google-cloud-ruby/issues/35058)) 
+#### Documentation
+
+* Update copyright year ([#35096](https://github.com/googleapis/google-cloud-ruby/issues/35096)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
+### 1.6.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
+### 1.5.2 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28531](https://github.com/googleapis/google-cloud-ruby/issues/28531)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.4.1 (2024-08-08)
+
+#### Documentation
+
+* Formatting updates to README.md ([#26684](https://github.com/googleapis/google-cloud-ruby/issues/26684)) 
+
+### 1.4.0 (2024-02-26)
+
+#### Features
+
+* Updated minimum Ruby version to 2.7 ([#24874](https://github.com/googleapis/google-cloud-ruby/issues/24874)) 
+
+### 1.3.0 (2024-01-15)
+
+#### Features
+
+* Support for universe_domain ([#24263](https://github.com/googleapis/google-cloud-ruby/issues/24263)) 
+
+### 1.2.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20768](https://github.com/googleapis/google-cloud-ruby/issues/20768)) 
+
+### 1.1.0 (2022-07-06)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 1.0.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 1.0.0 / 2021-12-09
+
+#### Features
+
+* GA release of google-cloud-orchestration-airflow-service
+
+### 0.1.0 / 2021-09-27
+
+* Initial generation of google-cloud-orchestration-airflow-service

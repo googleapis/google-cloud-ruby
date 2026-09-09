@@ -1,0 +1,28 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.datacatalog.lineage.configmanagement.v1",
+  "libraryPackage": "::Google::Cloud::DataCatalog::Lineage::ConfigManagement::V1",
+  "services": {
+    "ConfigManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::Lineage::ConfigManagement::V1::ConfigManagementService::Client",
+          "rpcs": {
+            "GetConfig": {
+              "methods": [
+                "get_config"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "update_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+--no-private
+--title=Stackdriver Trace
+--exclude _pb\.rb$
+--markup markdown
+--markup-provider redcarpet
+--main OVERVIEW.md
+
+./lib/**/*.rb
+-
+OVERVIEW.md
+AUTHENTICATION.md
+INSTRUMENTATION.md
+LOGGING.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE
