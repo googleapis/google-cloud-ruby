@@ -1,0 +1,17 @@
+{
+    "api_id": "workloadidentity.googleapis.com",
+    "api_shortname": "workloadidentity",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-workload_identity-v1/latest",
+    "distribution_name": "google-cloud-workload_identity-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "workloadidentity",
+    "name_pretty": "Workload Identity V1 API",
+    "product_documentation": "https://cloud.google.com/iam/docs/service-agents",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-workload_identity-v1 is the official client library for the Workload Identity V1 API. Note that google-cloud-workload_identity-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-workload_identity instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/service-agents",
+    "library_type": "GAPIC_AUTO"
+}
