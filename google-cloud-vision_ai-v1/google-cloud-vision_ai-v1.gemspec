@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-vision_ai-v1 is the official client library for the Vision AI V1 API. Note that google-cloud-vision_ai-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vision_ai instead. See the readme for more details."
-  gem.summary       = "API Client library for the Vision AI V1 API"
+  gem.description   = "Vertex AI Vision is an AI-powered platform to ingest, analyze and store video data. Note that google-cloud-vision_ai-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vision_ai instead. See the readme for more details."
+  gem.summary       = "Vertex AI Vision is an AI-powered platform to ingest, analyze and store video data."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
