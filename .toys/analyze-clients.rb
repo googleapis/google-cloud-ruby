@@ -67,7 +67,7 @@ def all_gems
 end
 
 def all_handwritten_gems
-  @all_handwritten_gems ||= all_gems.find_all { |name| !File.file? "#{name}/.OwlBot.yaml" }
+  @all_handwritten_gems ||= all_gems - all_generated_gems
 end
 
 def all_normal_gems
@@ -75,7 +75,11 @@ def all_normal_gems
 end
 
 def all_generated_gems
-  @all_generated_gems ||= Dir.glob("*/.OwlBot.yaml").map { |path| File.dirname path }.sort
+  @all_generated_gems ||= begin
+    require "psych"
+    librarian_config = Psych.load_file "librarian.yaml"
+    (librarian_config["libraries"] || []).map { |lib| lib["name"] }.sort
+  end
 end
 
 def all_versioned_gems
