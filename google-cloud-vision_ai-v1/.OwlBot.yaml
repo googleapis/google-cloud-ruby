@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/visionai/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-vision_ai-v1/$1
