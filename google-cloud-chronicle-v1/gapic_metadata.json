@@ -337,6 +337,85 @@
         }
       }
     },
+    "FeedsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FeedsService::Client",
+          "rpcs": {
+            "FetchServiceAccountForCustomer": {
+              "methods": [
+                "fetch_service_account_for_customer"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "create_feed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "get_feed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "delete_feed"
+              ]
+            },
+            "EnableFeed": {
+              "methods": [
+                "enable_feed"
+              ]
+            },
+            "DisableFeed": {
+              "methods": [
+                "disable_feed"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "list_feeds"
+              ]
+            },
+            "ListFeedPacks": {
+              "methods": [
+                "list_feed_packs"
+              ]
+            },
+            "GetFeedPack": {
+              "methods": [
+                "get_feed_pack"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "update_feed"
+              ]
+            },
+            "ListFeedSourceTypeSchemas": {
+              "methods": [
+                "list_feed_source_type_schemas"
+              ]
+            },
+            "ListLogTypeSchemas": {
+              "methods": [
+                "list_log_type_schemas"
+              ]
+            },
+            "ImportPushLogs": {
+              "methods": [
+                "import_push_logs"
+              ]
+            },
+            "GenerateSecret": {
+              "methods": [
+                "generate_secret"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FindingsRefinementService": {
       "clients": {
         "grpc": {

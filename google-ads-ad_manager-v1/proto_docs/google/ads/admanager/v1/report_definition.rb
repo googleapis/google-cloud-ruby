@@ -5551,6 +5551,28 @@ module Google
             # Data format: `STRING`
             PARTNER_MANAGEMENT_PARTNER_NAME = 656
 
+            # The ID of the payment profile.
+            #
+            #
+            #
+            # Corresponds to "Payment profile ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            PAYMENT_PROFILE_ID = 858
+
+            # The name of the payment profile.
+            #
+            #
+            #
+            # Corresponds to "Payment profile" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            PAYMENT_PROFILE_NAME = 857
+
             # Placement ID
             #
             #
@@ -9180,6 +9202,17 @@ module Google
             #
             # Data format: `MONEY`
             AD_EXCHANGE_PLUS_YIELD_GROUP_REVENUE = 254
+
+            # The ratio of impressions to responses served in Ad Exchange.
+            #
+            #
+            #
+            # Corresponds to "Ad Exchange render rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            AD_EXCHANGE_RENDER_RATE = 759
 
             # The total number of times that an Ad Exchange ad is delivered.
             #

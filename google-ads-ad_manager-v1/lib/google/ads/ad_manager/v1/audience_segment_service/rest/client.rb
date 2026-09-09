@@ -380,6 +380,172 @@ module Google
               end
 
               ##
+              # Creates an `AudienceSegment` object.
+              #
+              # @overload create_audience_segment(request, options = nil)
+              #   Pass arguments to `create_audience_segment` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateAudienceSegmentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateAudienceSegmentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_audience_segment(parent: nil, audience_segment: nil)
+              #   Pass arguments to `create_audience_segment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `AudienceSegment` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param audience_segment [::Google::Ads::AdManager::V1::AudienceSegment, ::Hash]
+              #     Required. The `AudienceSegment` to create. Only first-party segments can be
+              #     created.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::AudienceSegment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::AudienceSegment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateAudienceSegmentRequest.new
+              #
+              #   # Call the create_audience_segment method.
+              #   result = client.create_audience_segment request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::AudienceSegment.
+              #   p result
+              #
+              def create_audience_segment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateAudienceSegmentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_audience_segment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_audience_segment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_audience_segment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @audience_segment_service_stub.create_audience_segment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `AudienceSegment` objects.
+              #
+              # @overload batch_create_audience_segments(request, options = nil)
+              #   Pass arguments to `batch_create_audience_segments` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_audience_segments(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_audience_segments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `AudienceSegments` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateAudienceSegmentRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateAudienceSegmentRequest, ::Hash>]
+              #     Required. The `AudienceSegment` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsRequest.new
+              #
+              #   # Call the batch_create_audience_segments method.
+              #   result = client.batch_create_audience_segments request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsResponse.
+              #   p result
+              #
+              def batch_create_audience_segments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateAudienceSegmentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_audience_segments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_audience_segments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_audience_segments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @audience_segment_service_stub.batch_create_audience_segments request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Activates `AudienceSegment` objects.
               #
               # @overload batch_activate_audience_segments(request, options = nil)
@@ -943,6 +1109,16 @@ module Google
                   #
                   attr_reader :list_audience_segments
                   ##
+                  # RPC-specific configuration for `create_audience_segment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_audience_segment
+                  ##
+                  # RPC-specific configuration for `batch_create_audience_segments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_audience_segments
+                  ##
                   # RPC-specific configuration for `batch_activate_audience_segments`
                   # @return [::Gapic::Config::Method]
                   #
@@ -974,6 +1150,10 @@ module Google
                     @get_audience_segment = ::Gapic::Config::Method.new get_audience_segment_config
                     list_audience_segments_config = parent_rpcs.list_audience_segments if parent_rpcs.respond_to? :list_audience_segments
                     @list_audience_segments = ::Gapic::Config::Method.new list_audience_segments_config
+                    create_audience_segment_config = parent_rpcs.create_audience_segment if parent_rpcs.respond_to? :create_audience_segment
+                    @create_audience_segment = ::Gapic::Config::Method.new create_audience_segment_config
+                    batch_create_audience_segments_config = parent_rpcs.batch_create_audience_segments if parent_rpcs.respond_to? :batch_create_audience_segments
+                    @batch_create_audience_segments = ::Gapic::Config::Method.new batch_create_audience_segments_config
                     batch_activate_audience_segments_config = parent_rpcs.batch_activate_audience_segments if parent_rpcs.respond_to? :batch_activate_audience_segments
                     @batch_activate_audience_segments = ::Gapic::Config::Method.new batch_activate_audience_segments_config
                     batch_deactivate_audience_segments_config = parent_rpcs.batch_deactivate_audience_segments if parent_rpcs.respond_to? :batch_deactivate_audience_segments

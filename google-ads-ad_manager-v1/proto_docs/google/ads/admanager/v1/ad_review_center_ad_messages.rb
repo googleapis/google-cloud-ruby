@@ -48,8 +48,8 @@ module Google
         # @!attribute [r] preview_url
         #   @return [::String]
         #     Output only. The preview URL that can be embedded or accessed directly
-        #     which will present the rendered contents of the ad. (This URL expires 72
-        #     hours after being retrieved.).
+        #     which will present the rendered contents of the ad. This URL expires 72
+        #     hours after being retrieved.
         class AdReviewCenterAd
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

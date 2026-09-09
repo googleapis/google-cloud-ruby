@@ -532,6 +532,69 @@ module Google
       end
 
       ##
+      # Create a new client object for BreakTemplateService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::BreakTemplateService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/BreakTemplateService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the BreakTemplateService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the BreakTemplateService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.break_template_service_available?}.
+      #
+      # ## About BreakTemplateService
+      #
+      # Provides methods for handling `BreakTemplate` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.break_template_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:BreakTemplateService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the BreakTemplateService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.break_template_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the BreakTemplateService service,
+      # or if the versioned client gem needs an update to support the BreakTemplateService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.break_template_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :BreakTemplateService
+        service_module = service_module.const_get :BreakTemplateService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for BrowserLanguageService.
       #
       # By default, this returns an instance of

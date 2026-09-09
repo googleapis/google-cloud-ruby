@@ -279,6 +279,16 @@
                 "list_audience_segments"
               ]
             },
+            "CreateAudienceSegment": {
+              "methods": [
+                "create_audience_segment"
+              ]
+            },
+            "BatchCreateAudienceSegments": {
+              "methods": [
+                "batch_create_audience_segments"
+              ]
+            },
             "BatchActivateAudienceSegments": {
               "methods": [
                 "batch_activate_audience_segments"
@@ -321,6 +331,45 @@
             "ListBandwidthGroups": {
               "methods": [
                 "list_bandwidth_groups"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BreakTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::BreakTemplateService::Client",
+          "rpcs": {
+            "GetBreakTemplate": {
+              "methods": [
+                "get_break_template"
+              ]
+            },
+            "ListBreakTemplates": {
+              "methods": [
+                "list_break_templates"
+              ]
+            },
+            "CreateBreakTemplate": {
+              "methods": [
+                "create_break_template"
+              ]
+            },
+            "BatchCreateBreakTemplates": {
+              "methods": [
+                "batch_create_break_templates"
+              ]
+            },
+            "UpdateBreakTemplate": {
+              "methods": [
+                "update_break_template"
+              ]
+            },
+            "BatchUpdateBreakTemplates": {
+              "methods": [
+                "batch_update_break_templates"
               ]
             }
           }
