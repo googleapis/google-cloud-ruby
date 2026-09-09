@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the AudienceSegmentService API.
           module Paths
             ##
+            # Create a fully-qualified AdUnit resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adUnits/{ad_unit}`
+            #
+            # @param network_code [String]
+            # @param ad_unit [String]
+            #
+            # @return [::String]
+            def ad_unit_path network_code:, ad_unit:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adUnits/#{ad_unit}"
+            end
+
+            ##
             # Create a fully-qualified AudienceSegment resource string.
             #
             # The resource will be in the following format:
@@ -42,6 +59,57 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CmsMetadataValue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/cmsMetadataValues/{cms_metadata_value}`
+            #
+            # @param network_code [String]
+            # @param cms_metadata_value [String]
+            #
+            # @return [::String]
+            def cms_metadata_value_path network_code:, cms_metadata_value:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/cmsMetadataValues/#{cms_metadata_value}"
+            end
+
+            ##
+            # Create a fully-qualified CustomTargetingKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customTargetingKeys/{custom_targeting_key}`
+            #
+            # @param network_code [String]
+            # @param custom_targeting_key [String]
+            #
+            # @return [::String]
+            def custom_targeting_key_path network_code:, custom_targeting_key:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customTargetingKeys/#{custom_targeting_key}"
+            end
+
+            ##
+            # Create a fully-qualified CustomTargetingValue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customTargetingValues/{custom_targeting_value}`
+            #
+            # @param network_code [String]
+            # @param custom_targeting_value [String]
+            #
+            # @return [::String]
+            def custom_targeting_value_path network_code:, custom_targeting_value:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customTargetingValues/#{custom_targeting_value}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -53,6 +121,23 @@ module Google
             # @return [::String]
             def network_path network_code:
               "networks/#{network_code}"
+            end
+
+            ##
+            # Create a fully-qualified Placement resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/placements/{placement}`
+            #
+            # @param network_code [String]
+            # @param placement [String]
+            #
+            # @return [::String]
+            def placement_path network_code:, placement:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/placements/#{placement}"
             end
 
             extend self

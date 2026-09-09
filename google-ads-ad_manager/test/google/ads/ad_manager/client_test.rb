@@ -120,6 +120,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_break_template_service_rest
+    skip unless Google::Ads::AdManager.break_template_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.break_template_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::BreakTemplateService::Rest::Client, client
+    end
+  end
+
   def test_browser_language_service_rest
     skip unless Google::Ads::AdManager.browser_language_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do

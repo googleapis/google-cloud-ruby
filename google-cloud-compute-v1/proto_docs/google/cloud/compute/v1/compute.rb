@@ -14617,6 +14617,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_INSTANCE_TYPE = 0
 
+            # Bare Metal Secure AI.
+            BMSAI = 63_328_144
+
             # Arm Confidential Compute Architecture.
             CCA = 66_529
 
@@ -22029,6 +22032,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
 
+            # Bare Metal Secure AI.
+            CONFIDENTIAL_COMPUTE_TYPE_BMSAI = 103_738_250
+
             # Intel Trust Domain Extensions.
             CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
 
@@ -23503,6 +23509,115 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata for GetHealth operations.
+        # @!attribute [rw] health_info
+        #   @return [::Google::Cloud::Compute::V1::GetHealthOperationMetadataHealthInfo]
+        #     Output only. The health information.
+        class GetHealthOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Health information.
+        # @!attribute [rw] availability_slo_status
+        #   @return [::String]
+        #     Output only. The availability SLO status.
+        #     Check the AvailabilitySloStatus enum for the list of possible values.
+        # @!attribute [rw] health_status
+        #   @return [::String]
+        #     Output only. The health status.
+        #     Check the HealthStatus enum for the list of possible values.
+        # @!attribute [rw] repair_category
+        #   @return [::String]
+        #     Output only. The repair category.
+        #     Check the RepairCategory enum for the list of possible values.
+        # @!attribute [rw] unhealthy_reason
+        #   @return [::String]
+        #     Output only. The reason for unhealthy status.
+        #     Check the UnhealthyReason enum for the list of possible values.
+        # @!attribute [rw] update_time
+        #   @return [::String]
+        #     Output only. The time when health info was updated.
+        class GetHealthOperationMetadataHealthInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Output only. The availability SLO status.
+          module AvailabilitySloStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_AVAILABILITY_SLO_STATUS = 0
+
+            # The slot availability is in SLO.
+            AVAILABILITY_SLO_STATUS_IN_SLO = 142_966_428
+
+            # The slot availability is out of SLO.
+            AVAILABILITY_SLO_STATUS_OUT_OF_SLO = 112_099_455
+
+            # The slot availability is unknown.
+            AVAILABILITY_SLO_STATUS_SLO_UNKNOWN = 280_579_681
+
+            # Unspecified availability SLO status.
+            AVAILABILITY_SLO_STATUS_UNSPECIFIED = 481_084_279
+          end
+
+          # Output only. The health status.
+          module HealthStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATUS = 0
+
+            # The reservation slot is healthy.
+            HEALTH_STATUS_HEALTHY = 281_715_315
+
+            # The reservation slot is unhealthy.
+            HEALTH_STATUS_UNHEALTHY = 476_038_202
+
+            # Unspecified health status.
+            HEALTH_STATUS_UNSPECIFIED = 482_246_925
+          end
+
+          # Output only. The repair category.
+          module RepairCategory
+            # A value indicating that the enum field is not set.
+            UNDEFINED_REPAIR_CATEGORY = 0
+
+            # The repair is because of critical failures, that are scoped outside
+            # emergent maintenance
+            REPAIR_CATEGORY_CRITICAL_FAILURE = 58_241_977
+
+            # The repair is because of an emergent maintenance
+            REPAIR_CATEGORY_EMERGENT_MAINTENANCE = 400_869_148
+
+            # The repair is because of a planned maintenance
+            REPAIR_CATEGORY_PLANNED_MAINTENANCE = 489_286_537
+
+            # Unspecified repair category.
+            REPAIR_CATEGORY_UNSPECIFIED = 287_264_456
+
+            # The repair is because of a user reported fault
+            REPAIR_CATEGORY_USER_REPORTED_FAULT = 227_760_443
+          end
+
+          # Output only. The reason for unhealthy status.
+          module UnhealthyReason
+            # A value indicating that the enum field is not set.
+            UNDEFINED_UNHEALTHY_REASON = 0
+
+            # The slot is unhealthy because there is a pending repair, waiting for
+            # customer approval
+            UNHEALTHY_REASON_PENDING_USER_APPROVAL = 315_397_455
+
+            # The slot is unhealthy because repair is in progress
+            UNHEALTHY_REASON_REPAIRING = 199_320_309
+
+            # The slot is unhealthy because a vm cannot be scheduled on it, and no
+            # repairs are running on the slot
+            UNHEALTHY_REASON_UNSCHEDULABLE = 118_083_439
+
+            # Unspecified unhealthy reason.
+            UNHEALTHY_REASON_UNSPECIFIED = 337_725_687
+          end
+        end
+
         # A request message for RegionBackendServices.GetHealth. See the method description for details.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -23546,6 +23661,30 @@ module Google
         #   @return [::String]
         #     Name of the region scoping this request.
         class GetHealthRegionHealthSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ReservationSlots.GetHealth. See the method description for details.
+        # @!attribute [rw] parent_name
+        #   @return [::String]
+        #     The name of the parent reservation, parent block and parent sub-block. In
+        #     the format of
+        #     reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}/reservationSubBlocks/\\{reservation_sub_block_name}
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests.
+        # @!attribute [rw] reservation_slot
+        #   @return [::String]
+        #     The name of the reservation slot.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request. Zone name should conform to RFC1035.
+        class GetHealthReservationSlotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -26861,6 +27000,7 @@ module Google
         #        - IDPF
         #        - SNP_SVSM_CAPABLE
         #        - CCA_CAPABLE
+        #        - SUSPEND_SAFE_FPR
         #
         #
         #     For more information, see
@@ -26886,6 +27026,7 @@ module Google
           #    - IDPF
           #    - SNP_SVSM_CAPABLE
           #    - CCA_CAPABLE
+          #    - SUSPEND_SAFE_FPR
           #
           #
           # For more information, see
@@ -26917,6 +27058,10 @@ module Google
             SEV_SNP_CAPABLE = 426_919
 
             SNP_SVSM_CAPABLE = 52_921_460
+
+            # Indicates the guest OS is safe for free page reporting (FPR) during
+            # suspend.
+            SUSPEND_SAFE_FPR = 223_956_441
 
             TDX_CAPABLE = 240_446_133
 
@@ -36161,6 +36306,9 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     Output only. [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. Server-defined URL for this resource with the resource id.
         # @!attribute [rw] state
         #   @return [::String]
         #     Output only. [Output Only] The current state of Interconnect functionality, which can
@@ -38735,6 +38883,14 @@ module Google
         #     Output only. The remote location for Cross-Site Interconnect wires. This specifies an
         #     InterconnectLocation city (metropolitan area designator), which itself
         #     may match multiple InterconnectLocations.
+        # @!attribute [rw] max_dynamic_path_bandwidth_gbps
+        #   @return [::Integer]
+        #     Output only. The maximum unmetered bandwidth for dynamic paths allowable per
+        #     WireGroup for this metro.
+        # @!attribute [rw] max_fixed_path_bandwidth_gbps
+        #   @return [::Integer]
+        #     Output only. The maximum unmetered bandwidth for fixed paths allowable per WireGroup
+        #     for this metro.
         class InterconnectLocationCrossSiteInterconnectInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -55552,6 +55708,12 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceShutdownDetails]
         #     Output only. Specifies the graceful shutdown details if the instance is in
         #     `PENDING_STOP` state or there is a programmed stop scheduled.
+        # @!attribute [rw] target_status
+        #   @return [::String]
+        #     Output only. The eventual status of the instance. The instance group
+        #     manager will not be identified as stable till each managed instance reaches
+        #     its targetStatus.
+        #     Check the TargetStatus enum for the list of possible values.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceVersion]
         #     Output only. [Output Only] Intended version of this instance.
@@ -55688,6 +55850,28 @@ module Google
             # The instance has stopped (either by explicit action or underlying
             # failure).
             TERMINATED = 250_018_339
+          end
+
+          # Output only. The eventual status of the instance. The instance group
+          # manager will not be identified as stable till each managed instance reaches
+          # its targetStatus.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # RUNNING
+          # STOPPED
+          # SUSPENDED
+          module TargetStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TARGET_STATUS = 0
+
+            # The managed instance will eventually be ABANDONED, i.e. dissociated
+            # from the managed instance group.
+            ABANDONED = 81_797_556
+
+            # The managed instance will eventually be DELETED.
+            DELETED = 120_962_041
+
+            # Only present to map the STATUS_INVALID value.
+            INVALID = 530_283_991
           end
         end
 
@@ -56840,6 +57024,11 @@ module Google
 
             # The network endpoint is represented by an IP address.
             GCE_VM_IP = 401_880_793
+
+            # The network endpoint for targeting a specific network interface of a
+            # VM instance in configurations with multiple network interfaces on the
+            # same network.
+            GCE_VM_IP_DEDICATED_BACKEND = 321_618_974
 
             # The network endpoint is represented by IP address and port pair.
             GCE_VM_IP_PORT = 501_838_375
@@ -59753,6 +59942,9 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Error]
         #     [Output Only] If errors are generated during processing of the operation,
         #     this field will be populated.
+        # @!attribute [rw] get_health_operation_metadata
+        #   @return [::Google::Cloud::Compute::V1::GetHealthOperationMetadata]
+        #     Output only. Metadata for GetHealth operations.
         # @!attribute [rw] get_version_operation_metadata
         #   @return [::Google::Cloud::Compute::V1::GetVersionOperationMetadata]
         # @!attribute [rw] http_error_message
@@ -66790,6 +66982,9 @@ module Google
           module ConfidentialComputeType
             # A value indicating that the enum field is not set.
             UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
+
+            # Bare Metal Secure AI.
+            CONFIDENTIAL_COMPUTE_TYPE_BMSAI = 103_738_250
 
             # Intel Trust Domain Extensions.
             CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
@@ -79292,6 +79487,17 @@ module Google
 
             # All ranges assigned to the VM NIC will respond to ARP.
             ARP_ALL_RANGES = 445_655_380
+
+            # VMs will receive an ARP response from a VM instance owning the target IP
+            # address within the subnetwork's primary CIDR range, if such a VM instance
+            # exists and is running.
+            ARP_BROADCAST_PRIMARY_RANGE = 123_887_458
+
+            # Combines ARP_BROADCAST_PRIMARY_RANGE with MAC learning. Enables cache
+            # mapping between IP addresses and custom MAC addresses of instances and
+            # use of it to set the correct destination MAC address. If this option is
+            # chosen, the subnetwork must have /24 or a smaller CIDR range.
+            ARP_BROADCAST_PRIMARY_RANGE_WITH_LEARNING = 425_592_922
 
             # Only the primary range of the VM NIC will respond to ARP.
             ARP_PRIMARY_RANGE = 120_210_048

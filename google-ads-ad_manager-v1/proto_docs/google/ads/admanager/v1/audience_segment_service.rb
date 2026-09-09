@@ -112,6 +112,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request object for `CreateAudienceSegment` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `AudienceSegment` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment]
+        #     Required. The `AudienceSegment` to create. Only first-party segments can be
+        #     created.
+        class CreateAudienceSegmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AudienceSegments` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateAudienceSegmentRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateAudienceSegmentRequest>]
+        #     Required. The `AudienceSegment` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateAudienceSegments` method.
+        # @!attribute [rw] audience_segments
+        #   @return [::Array<::Google::Ads::AdManager::V1::AudienceSegment>]
+        #     The `AudienceSegment` objects created.
+        class BatchCreateAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for `BatchActivateAudienceSegments` method.
         # @!attribute [rw] parent
         #   @return [::String]
