@@ -153,6 +153,7 @@ module Google
               return if ack_ids.empty?
 
               @subscriber.buffer.modify_ack_deadline 0, ack_ids
+              @subscriber.buffer.flush!
               @inventory.remove ack_ids
             end
           end

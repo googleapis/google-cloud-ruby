@@ -50,7 +50,7 @@ module Google
           end
 
           def ack_ids
-            @inventory.keys
+            synchronize { @inventory.keys }
           end
 
           def add *rec_msgs

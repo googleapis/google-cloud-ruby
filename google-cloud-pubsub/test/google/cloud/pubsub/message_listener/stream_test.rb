@@ -236,11 +236,11 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     message_received.wait
 
     listener.stream_pool.first.stop
+    # Verifies that exactly one 0-second ModifyAckDeadline (NACK) was dispatched immediately on stream.stop.
+    assert_equal 1, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
+
     block_callback.set
     listener.buffer.stop
-
-    # Verifies that exactly one 0-second ModifyAckDeadline (NACK) was dispatched.
-    assert_equal 1, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
   end
 
   it "waits for processing when stopped with wait_for_processing" do
@@ -336,6 +336,9 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     # Wait with a short timeout of 0.2s while callback is blocked
     stream.wait! 0.2
     elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
+
+    # Verifies that remaining unprocessed messages are immediately nacked on timeout.
+    assert_equal 1, stub.modify_ack_deadline_requests.count { |req| req[2] == 0 }
 
     block_callback.set
     listener.buffer.stop
