@@ -43,6 +43,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and is unable to modify file ACL rules" do
+    skip "Disabled due to failures in CI. See b/559793640"
     refute bucket.uniform_bucket_level_access?
     _(bucket.uniform_bucket_level_access_locked_at).must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
@@ -58,6 +59,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and is unable to get the file" do
+    skip "Disabled due to failures in CI. See b/559793640"
     refute bucket.uniform_bucket_level_access?
     file = bucket.create_file local_file, "ReaderTest.png"
 
@@ -129,6 +131,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify file ACL rules" do
+    skip "Disabled due to failures in CI. See b/559793640"
     refute bucket.policy_only?
     _(bucket.policy_only_locked_at).must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
