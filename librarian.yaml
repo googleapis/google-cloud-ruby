@@ -330,14 +330,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APIGEE_CONNECT
-  - name: google-cloud-apigee_registry
-    version: 2.0.0
-    skip_generate: true
-  - name: google-cloud-apigee_registry-v1
-    version: 0.17.0
-    apis:
-      - path: google/cloud/apigeeregistry/v1
-    skip_generate: true
   - name: google-cloud-app_engine
     version: 1.7.2
     apis:

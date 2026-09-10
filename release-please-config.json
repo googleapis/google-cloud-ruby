@@ -173,14 +173,6 @@
       "component": "google-cloud-apigee_connect-v1",
       "version_file": "lib/google/cloud/apigee_connect/v1/version.rb"
     },
-    "google-cloud-apigee_registry": {
-      "component": "google-cloud-apigee_registry",
-      "version_file": "lib/google/cloud/apigee_registry/version.rb"
-    },
-    "google-cloud-apigee_registry-v1": {
-      "component": "google-cloud-apigee_registry-v1",
-      "version_file": "lib/google/cloud/apigee_registry/v1/version.rb"
-    },
     "google-cloud-app_engine": {
       "component": "google-cloud-app_engine",
       "version_file": "lib/google/cloud/app_engine/version.rb"
