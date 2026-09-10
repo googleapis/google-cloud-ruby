@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.20.1 (2026-09-10)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / compute ([#36535](https://github.com/googleapis/google-cloud-ruby/issues/36535)) 
+
 ### 1.20.0 (2026-08-10)
 
 #### Features
