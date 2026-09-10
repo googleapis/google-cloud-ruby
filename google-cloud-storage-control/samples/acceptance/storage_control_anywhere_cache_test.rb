@@ -27,16 +27,19 @@ describe "Storage Control Anywhere Cache" do
   # Set project to "_" to signify global bucket
   let(:anywhere_cache_name) { "projects/_/buckets/#{bucket_name}/anywhereCaches/#{zone}" }
 
+  # TODO: Re-enable bucket creation and deletion when resolving b/559793640
   before :all do
-    create_bucket_helper bucket_name
+    # create_bucket_helper bucket_name
   end
 
   after :all do
-    count_anywhere_caches bucket_name # Ensure all caches are deleted before deleting bucket
-    delete_bucket_helper bucket_name
+    # count_anywhere_caches bucket_name
+    # delete_bucket_helper bucket_name
   end
 
   it "handles Anywhere cache lifecycle in sequence" do
+    skip "Disabled due to Anywhere Cache deletion timeouts. See b/559793640"
+
     out_create, _err = capture_io do
       create_anywhere_cache bucket_name: bucket_name, zone: zone
     end
