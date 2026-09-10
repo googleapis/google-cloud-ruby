@@ -71,6 +71,7 @@ module Google
         attr_reader :message_ordering
         attr_reader :callback_threads
         attr_reader :push_threads
+        attr_reader :shutdown_behavior
 
         ##
         # @private Implementation attributes.
@@ -91,6 +92,7 @@ module Google
           @subscription_name = subscription_name
           @deadline = deadline || 60
           @streams = streams || 1
+          @shutdown_behavior = :wait_for_processing
           coerce_inventory inventory
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
