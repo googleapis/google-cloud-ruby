@@ -4234,7 +4234,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-workload_identity-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/workloadidentity/v1
   - name: google-cloud-workload_manager
