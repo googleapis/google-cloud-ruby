@@ -69,6 +69,26 @@ listener.start
 sleep
 ```
 
+### Subscriber Shutdown Options
+
+You can configure how the subscriber handles unprocessed messages when stopping via the `shutdown_behavior` and `shutdown_timeout` options:
+
+* `:wait_for_processing` (default) – Waits for all received messages to be processed and acknowledged by your callback before completing shutdown.
+* `:nack_immediately` – Immediately nacks all unprocessed messages back to Pub/Sub so other subscribers can pick them up quickly.
+
+```ruby
+# Immediately nack unprocessed messages on shutdown:
+listener = subscriber.listen shutdown_behavior: :nack_immediately do |msg|
+  process_message msg.data
+  msg.ack!
+end
+
+# Gracefully shut down with a 30-second timeout:
+listener = subscriber.listen shutdown_behavior: :wait_for_processing, shutdown_timeout: 30 do |msg|
+  process_message msg.data
+  msg.ack!
+end
+```
 
 ## Enabling Logging
 
