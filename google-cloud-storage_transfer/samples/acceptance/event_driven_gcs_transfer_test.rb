@@ -21,16 +21,23 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
   let :pubsub do
-    Google::Cloud::Pubsub.new
+    Google::Cloud::PubSub.new
   end
+  let(:topic_admin) { pubsub.topic_admin }
+  let(:subscription_admin) { pubsub.subscription_admin }
   let :topic do
-    pubsub.create_topic "ruby_storagetransfer_topic_#{SecureRandom.hex}"
+    topic_admin.create_topic name: pubsub.topic_path("ruby_storagetransfer_topic_#{SecureRandom.hex}")
   end
-  let(:subscription) { topic.subscribe "ruby_storagetransfer_subscription_#{SecureRandom.hex}" }
+  let(:subscription) do
+    subscription_admin.create_subscription(
+      name: pubsub.subscription_path("ruby_storagetransfer_subscription_#{SecureRandom.hex}"),
+      topic: topic.name
+    )
+  end
   let :destroy_topic do
-    topic.subscriptions.each(&:delete)
-    topic.delete
-    puts "Destroy topic #{topic.name}"
+    subscription_admin.delete_subscription subscription: subscription.name rescue nil
+    topic_admin.delete_topic topic: topic.name rescue nil
+    puts "Destroy topic #{topic.name}" rescue nil
   end
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:create_dummy_file) {
