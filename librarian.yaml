@@ -998,7 +998,7 @@ libraries:
       wrapper_of:
         - v1:2.15
   - name: google-cloud-compute-v1
-    version: 3.10.0
+    version: 3.11.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
