@@ -1,9 +1,0 @@
---no-private
---title="Obsolete Gem google-cloud-apigee_registry"
---markup markdown
---markup-provider redcarpet
-
-./lib/**/*.rb
--
-README.md
-LICENSE.md
