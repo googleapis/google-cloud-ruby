@@ -195,7 +195,7 @@ module Google
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
             issuer = issuer || client_email || @service.credentials.issuer
-            if issuer.nil? && Google::Cloud.env.compute_engine?
+            if issuer.nil? && Google::Cloud.env.metadata?
               issuer = Google::Cloud.env.lookup_metadata "instance", "service-accounts/default/email"
             end
             raise SignedUrlUnavailable, error_msg("issuer (client_email)") unless issuer
@@ -379,7 +379,7 @@ module Google
           def iam_signer_instance
             @iam_signer_instance ||= begin
               require "google/cloud/storage/iam_signer"
-              Google::Cloud::Storage::IAMSigner.new
+              Google::Cloud::Storage::IAMSigner.new(@service.credentials)
             end
           end
         end

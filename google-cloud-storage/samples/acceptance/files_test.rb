@@ -618,7 +618,7 @@ describe "Files Snippets" do
     # Temporarily remove private key to trigger keyless environment logic
     bucket.service.credentials.stub :signing_key, nil do
       bucket.service.credentials.stub :issuer, nil do
-        Google::Cloud.env.stub :compute_engine?, true do
+        Google::Cloud.env.stub :metadata?, true do
           Google::Cloud.env.stub :lookup_metadata, issuer do
             out, _err = capture_io do
               generate_signed_url_v4_workload_identity bucket_name: bucket.name,

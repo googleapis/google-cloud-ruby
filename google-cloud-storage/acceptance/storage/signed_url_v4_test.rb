@@ -93,7 +93,7 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
 
       bucket.service.credentials.stub :signing_key, nil do
         bucket.service.credentials.stub :issuer, nil do
-          Google::Cloud.env.stub :compute_engine?, true do
+          Google::Cloud.env.stub :metadata?, true do
             Google::Cloud.env.stub :lookup_metadata, issuer do
               five_min_from_now = 5 * 60
               url = bucket.signed_url file.name,

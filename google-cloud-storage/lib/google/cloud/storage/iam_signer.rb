@@ -23,13 +23,11 @@ module Google
       # @private
       # Helper class for signing blobs via the IAM Credentials API.
       class IAMSigner
-        def initialize
+        def initialize credentials
           require "google/apis/iamcredentials_v1"
 
           @client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
-          @client.authorization = Google::Auth.get_application_default(
-            ["https://www.googleapis.com/auth/iam"]
-          )
+          @client.authorization = credentials.client
         end
 
         def sign issuer, string_to_sign
@@ -38,9 +36,12 @@ module Google
           )
           resource = "projects/-/serviceAccounts/#{issuer}"
 
-          response = @client.sign_service_account_blob resource, request
-
-          response.signed_blob
+          begin
+            response = @client.sign_service_account_blob resource, request
+            response.signed_blob
+          rescue Google::Apis::Error => e
+            raise Google::Cloud::Storage::SignedUrlUnavailable, "Failed to sign URL via IAM Credentials API. Ensure the Workload Identity service account has the 'Service Account Token Creator' role. Underlying error: #{e.message}"
+          end
         end
       end
     end

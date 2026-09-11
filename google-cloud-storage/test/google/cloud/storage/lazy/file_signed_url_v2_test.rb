@@ -135,7 +135,7 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
   
 
 
-    Google::Cloud.env.stub :compute_engine?, false do
+    Google::Cloud.env.stub :metadata?, false do
 
 
       expect {

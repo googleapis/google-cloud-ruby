@@ -155,7 +155,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do
   
 
 
-    Google::Cloud.env.stub :compute_engine?, false do
+    Google::Cloud.env.stub :metadata?, false do
 
 
       expect {

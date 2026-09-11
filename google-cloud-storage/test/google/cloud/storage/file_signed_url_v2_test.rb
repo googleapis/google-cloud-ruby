@@ -149,7 +149,7 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     credentials.issuer = nil
     credentials.signing_key = nil
 
-    Google::Cloud.env.stub :compute_engine?, false do
+    Google::Cloud.env.stub :metadata?, false do
       expect {
         file.signed_url
       }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
@@ -164,7 +164,7 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
       iam_signer_mock = Minitest::Mock.new
       iam_signer_mock.expect :sign, "iam-signature", ["native_issuer@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
 
-      Google::Cloud.env.stub :compute_engine?, false do
+      Google::Cloud.env.stub :metadata?, false do
         Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
           signed_url = file.signed_url
 
@@ -178,7 +178,7 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
   end
 
-  it "uses IAMSigner and auto-detects issuer if compute_engine? is true" do
+  it "uses IAMSigner and auto-detects issuer if metadata? is true" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       credentials.issuer = nil
       credentials.signing_key = nil
@@ -186,7 +186,7 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
       iam_signer_mock = Minitest::Mock.new
       iam_signer_mock.expect :sign, "iam-signature", ["metadata_issuer@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
 
-      Google::Cloud.env.stub :compute_engine?, true do
+      Google::Cloud.env.stub :metadata?, true do
         Google::Cloud.env.stub :lookup_metadata, "metadata_issuer@email.com" do
           Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
             signed_url = file.signed_url

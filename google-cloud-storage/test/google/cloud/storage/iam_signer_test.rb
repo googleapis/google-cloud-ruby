@@ -34,13 +34,14 @@ describe Google::Cloud::Storage::IAMSigner do
       resource == expected_resource && request.payload == payload
     end
 
-    Google::Auth.stub :get_application_default, mock_auth do
-      Google::Apis::IamcredentialsV1::IAMCredentialsService.stub :new, mock_service do
-        signer = Google::Cloud::Storage::IAMSigner.new
-        signature = signer.sign issuer, payload
+    mock_credentials = Minitest::Mock.new
+    mock_credentials.expect :client, mock_auth
 
-        _(signature).must_equal expected_signature
-      end
+    Google::Apis::IamcredentialsV1::IAMCredentialsService.stub :new, mock_service do
+      signer = Google::Cloud::Storage::IAMSigner.new mock_credentials
+      signature = signer.sign issuer, payload
+
+      _(signature).must_equal expected_signature
     end
 
     mock_service.verify
