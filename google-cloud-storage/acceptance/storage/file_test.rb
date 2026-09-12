@@ -476,6 +476,28 @@ describe Google::Cloud::Storage::File, :storage do
     end
   end
 
+  it "should upload and download an unlinked tempfile" do
+    begin
+      data = "hello world"
+      tmpfile = Tempfile.new "unlinked_test"
+      tmpfile.write data
+      tmpfile.rewind
+      tmpfile.unlink
+
+      uploaded = bucket.create_file tmpfile, "uploaded/unlinked-file.txt"
+      _(uploaded.name).must_equal "uploaded/unlinked-file.txt"
+
+      downloadio = StringIO.new
+      downloaded = uploaded.download downloadio
+      _(downloaded).must_be_kind_of StringIO
+
+      downloaded_data = downloaded.string
+      _(downloaded_data).must_equal data
+    ensure
+      uploaded.delete if uploaded
+    end
+  end
+
   it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
     bucket = bucket_public
     file = bucket.file bucket_public_file_gzip
