@@ -18,24 +18,23 @@
 require "bigtable_helper"
 
 describe Google::Cloud::Bigtable::Project, :bigtable do
-  let(:instance_id_development) { "google-cloud-ruby-tests-dev" }
-  let(:cluster_id_development) { "ruby-clstr-dev" }
+  let(:instance_id) { "ruby-test-#{random_str}" }
+  let(:cluster_id) { "ruby-clstr-#{random_str}" }
   let(:cluster_location) { "us-east1-b" }
 
   after do
-    instance = bigtable.instance(instance_id_development)
-    instance.delete if instance
+    instance = bigtable.instance instance_id
+    instance&.delete
   end
 
-  it "creates an instance with type development" do
+  it "creates an instance with type production" do
     job = bigtable.create_instance(
-      instance_id_development,
+      instance_id,
       display_name: "Ruby Acceptance Test",
-      type: :DEVELOPMENT,
+      type: :PRODUCTION,
       labels: { env: "test" }
     ) do |clusters|
-      # "Need to have at least one cluster map element in CreateInstanceRequest."
-      clusters.add(cluster_id_development, cluster_location) # nodes not allowed
+      clusters.add cluster_id, cluster_location, nodes: 1
     end
 
     job.wait_until_done!
@@ -44,7 +43,7 @@ describe Google::Cloud::Bigtable::Project, :bigtable do
 
     instance = job.instance
     _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
-    _(instance.development?).must_equal true
+    _(instance.production?).must_equal true
     _(instance.clusters.count).must_equal 1
     cluster = instance.clusters.first
 
