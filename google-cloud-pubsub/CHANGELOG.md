@@ -1,5 +1,14 @@
 # Release History
 
+### 3.5.0 (2026-09-14)
+
+#### Features
+
+* Support subscriber shutdown options ([#36480](https://github.com/googleapis/google-cloud-ruby/issues/36480)) 
+#### Documentation
+
+* Add subscriber shutdown documentation and examples ([#36482](https://github.com/googleapis/google-cloud-ruby/issues/36482)) 
+
 ### 3.4.1 (2026-08-24)
 
 #### Bug Fixes
