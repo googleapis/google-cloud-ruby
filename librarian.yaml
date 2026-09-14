@@ -4536,7 +4536,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-shopping-merchant-loyalty_customers-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
   - name: google-shopping-merchant-notifications
