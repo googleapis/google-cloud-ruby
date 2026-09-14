@@ -2129,6 +2129,14 @@
       "component": "google-shopping-merchant-lfp-v1beta",
       "version_file": "lib/google/shopping/merchant/lfp/v1beta/version.rb"
     },
+    "google-shopping-merchant-loyalty_customers": {
+      "component": "google-shopping-merchant-loyalty_customers",
+      "version_file": "lib/google/shopping/merchant/loyalty_customers/version.rb"
+    },
+    "google-shopping-merchant-loyalty_customers-v1": {
+      "component": "google-shopping-merchant-loyalty_customers-v1",
+      "version_file": "lib/google/shopping/merchant/loyalty_customers/v1/version.rb"
+    },
     "google-shopping-merchant-notifications": {
       "component": "google-shopping-merchant-notifications",
       "version_file": "lib/google/shopping/merchant/notifications/version.rb"

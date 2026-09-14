@@ -4528,6 +4528,17 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+  - name: google-shopping-merchant-loyalty_customers
+    version: 0.0.1
+    apis:
+      - path: google/shopping/merchant/loyaltycustomers/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-shopping-merchant-loyalty_customers-v1
+    version: 0.0.1
+    apis:
+      - path: google/shopping/merchant/loyaltycustomers/v1
   - name: google-shopping-merchant-notifications
     version: 0.4.1
     apis:
