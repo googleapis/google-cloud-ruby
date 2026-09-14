@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.loyaltycustomers.v1",
+  "libraryPackage": "::Google::Shopping::Merchant::LoyaltyCustomers::V1",
+  "services": {
+    "LoyaltyCustomerMatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::LoyaltyCustomers::V1::LoyaltyCustomerMatchService::Client",
+          "rpcs": {
+            "ManageLoyaltyCustomerMatch": {
+              "methods": [
+                "manage_loyalty_customer_match"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
