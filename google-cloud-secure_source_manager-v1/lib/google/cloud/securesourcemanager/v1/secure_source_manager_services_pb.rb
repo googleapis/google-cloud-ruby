@@ -106,6 +106,8 @@ module Google
             rpc :FetchTree, ::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest, ::Google::Cloud::SecureSourceManager::V1::FetchTreeResponse
             # Fetches a blob from a repository.
             rpc :FetchBlob, ::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest, ::Google::Cloud::SecureSourceManager::V1::FetchBlobResponse
+            # Fetches git references from a repository.
+            rpc :FetchRefs, ::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest, ::Google::Cloud::SecureSourceManager::V1::FetchRefsResponse
             # Creates an issue.
             rpc :CreateIssue, ::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest, ::Google::Longrunning::Operation
             # Gets an issue.

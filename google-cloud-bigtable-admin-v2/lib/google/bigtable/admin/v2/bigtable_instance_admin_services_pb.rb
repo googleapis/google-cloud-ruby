@@ -90,6 +90,15 @@ module Google
               rpc :PartialUpdateCluster, ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest, ::Google::Longrunning::Operation
               # Deletes a cluster from an instance.
               rpc :DeleteCluster, ::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest, ::Google::Protobuf::Empty
+              # Updates the memory layer of a cluster.
+              #
+              # To enable the memory layer, set the memory_config.
+              # To disable the memory layer, unset the memory_config.
+              rpc :UpdateMemoryLayer, ::Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest, ::Google::Longrunning::Operation
+              # Lists information about memory layers.
+              rpc :ListMemoryLayers, ::Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersRequest, ::Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersResponse
+              # Gets information about the memory layer of a cluster.
+              rpc :GetMemoryLayer, ::Google::Cloud::Bigtable::Admin::V2::GetMemoryLayerRequest, ::Google::Cloud::Bigtable::Admin::V2::MemoryLayer
               # Creates an app profile within an instance.
               rpc :CreateAppProfile, ::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest, ::Google::Cloud::Bigtable::Admin::V2::AppProfile
               # Gets information about an app profile.

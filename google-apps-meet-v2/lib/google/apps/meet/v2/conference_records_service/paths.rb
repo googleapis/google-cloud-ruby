@@ -92,6 +92,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SmartNote resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `conferenceRecords/{conference_record}/smartNotes/{smart_note}`
+            #
+            # @param conference_record [String]
+            # @param smart_note [String]
+            #
+            # @return [::String]
+            def smart_note_path conference_record:, smart_note:
+              raise ::ArgumentError, "conference_record cannot contain /" if conference_record.to_s.include? "/"
+
+              "conferenceRecords/#{conference_record}/smartNotes/#{smart_note}"
+            end
+
+            ##
             # Create a fully-qualified Transcript resource string.
             #
             # The resource will be in the following format:

@@ -33,6 +33,14 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.auditmanager.v1.AuditManager'
 
+            # Creates a new audit schedule in a given project and location.
+            rpc :CreateAuditSchedule, ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest, ::Google::Cloud::AuditManager::V1::AuditSchedule
+            # Updates an existing audit schedule.
+            rpc :UpdateAuditSchedule, ::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest, ::Google::Cloud::AuditManager::V1::AuditSchedule
+            # Gets details of a single audit schedule.
+            rpc :GetAuditSchedule, ::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest, ::Google::Cloud::AuditManager::V1::AuditSchedule
+            # Lists audit schedules in a given project and location.
+            rpc :ListAuditSchedules, ::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest, ::Google::Cloud::AuditManager::V1::ListAuditSchedulesResponse
             # Adds your project, folder, or organization to Audit
             # Manager. This method creates the Audit Manager service agent in your
             # workload and grants required permissions to the service agent.

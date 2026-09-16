@@ -59,6 +59,24 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientPathsTest < Minites
     end
   end
 
+  def test_audit_schedule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.audit_schedule_path project: "value0", location: "value1", audit_schedule: "value2"
+      assert_equal "projects/value0/locations/value1/auditSchedules/value2", path
+
+      path = client.audit_schedule_path folder: "value0", location: "value1", audit_schedule: "value2"
+      assert_equal "folders/value0/locations/value1/auditSchedules/value2", path
+
+      path = client.audit_schedule_path organization: "value0", location: "value1", audit_schedule: "value2"
+      assert_equal "organizations/value0/locations/value1/auditSchedules/value2", path
+    end
+  end
+
   def test_enrollment_status_scope_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

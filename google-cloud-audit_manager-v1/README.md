@@ -32,8 +32,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/audit_manager/v1"
 
 client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new
-request = ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new # (request fields as keyword arguments...)
-response = client.enroll_resource request
+request = ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest.new # (request fields as keyword arguments...)
+response = client.create_audit_schedule request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-audit_manager-v1/latest)

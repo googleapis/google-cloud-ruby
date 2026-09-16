@@ -2430,6 +2430,35 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Client-side telemetry about Pub/Sub requests, useful for debugging purposes.
+        # If the client opts to provide this information, it will be passed as a
+        # serialized proto in the `x-goog-pubsub-client-telemetry` header.
+        # @!attribute [rw] publish_operation
+        #   @return [::Google::Cloud::PubSub::V1::PubsubClientTelemetry::PublishOperation]
+        #     Optional. Telemetry about a `Publish` operation.
+        class PubsubClientTelemetry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Telemetry about a `Publish` operation which may or may not be common across
+          # individual RPCs.
+          # @!attribute [rw] hedged_attempt_count
+          #   @return [::Integer]
+          #     Optional. If the publisher client is using publish hedging, provides the
+          #     attempt count for the hedge (starting at 1). A value of 0 indicates that
+          #     the request was not hedged.
+          # @!attribute [rw] publish_start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. Time at which the `publish()` call was initiated in the client
+          #     library, meaning across all RPC retry attempts, see [grpc
+          #     retries](https://grpc.io/docs/guides/retry/). Provides a sense of the
+          #     end-to-end publish duration from the client perspective, across retries.
+          class PublishOperation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
       end
     end
   end

@@ -70,6 +70,12 @@ module Google
         #   @return [::Google::Cloud::SecureSourceManager::V1::Instance::WorkforceIdentityFederationConfig]
         #     Optional. Configuration for Workforce Identity Federation to support
         #     third party identity provider. If unset, defaults to the Google OIDC IdP.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -481,6 +487,10 @@ module Google
             # Pull request events are triggered when a pull request is opened, closed,
             # reopened, or edited.
             PULL_REQUEST = 2
+
+            # Triggers when a general comment is added, edited, or deleted on a pull
+            # request.
+            PULL_REQUEST_COMMENT = 3
           end
         end
 
@@ -844,6 +854,34 @@ module Google
           class Position
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Ref represents a git reference within a repository.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Name of the git reference (e.g., 'refs/heads/foo' or
+        #     'refs/tags/v1.0').
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. The target of the reference, which is a commit SHA.
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Ref::RefType]
+        #     Output only. The type of the reference.
+        class Ref
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The derived type of the reference (e.g., branch or tag) from the name.
+          module RefType
+            # Unspecified ref type.
+            REF_TYPE_UNSPECIFIED = 0
+
+            # Represents a branch.
+            REF_TYPE_BRANCH = 1
+
+            # Represents a tag.
+            REF_TYPE_TAG = 2
           end
         end
 
@@ -1601,6 +1639,40 @@ module Google
         #   @return [::String]
         #     The content of the blob, encoded as base64.
         class FetchBlobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for fetching git references from a repository.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     Required. The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+        #     Specifies the repository to fetch the references from.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Ref::RefType]
+        #     Optional. The type of reference to fetch (eg. branch, tag). By default, all
+        #     references are returned.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. If unspecified, a default size of 30 will be
+        #     used. The maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class FetchRefsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message containing a list of git references.
+        # @!attribute [rw] refs
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::Ref>]
+        #     The list of git references.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class FetchRefsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

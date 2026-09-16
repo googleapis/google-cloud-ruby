@@ -41,6 +41,20 @@ module Google
         #     at the project level using the service agent at the organization or folder
         #     level, all the buckets that are associated with the service agent are
         #     available.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, only validates the request and does not enroll the
+        #     resource. This executes standard request validation (such as schema, IAM,
+        #     and destination checks) and skips the apply phase.
+        #
+        #     Use this field for the following purposes:
+        #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+        #       dry-run mutations (e.g., `terraform plan`) without creating real
+        #       resources or incurring costs.
+        #     * **User Interface Validation**: Enable real-time form and permission
+        #       validation in custom UIs before submitting requests.
+        #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+        #       safely without consuming resource quotas.
         class EnrollResourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,6 +96,21 @@ module Google
         #   @return [::String]
         #     Required. Framework (set of controls) that the audit scope report is
         #     generated against. For example, `NIST_800_53`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, only validates the request and does not generate the
+        #     audit scope report. This executes standard request validation (such as
+        #     schema, framework existence, scope, and IAM checks) and skips the apply
+        #     phase.
+        #
+        #     Use this field for the following purposes:
+        #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+        #       dry-run mutations (e.g., `terraform plan`) without creating real
+        #       resources or incurring costs.
+        #     * **User Interface Validation**: Enable real-time form and permission
+        #       validation in custom UIs before submitting requests.
+        #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+        #       safely without consuming resource quotas.
         class GenerateAuditScopeReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -684,6 +713,235 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AuditManager::V1::AuditManager::Client#create_audit_schedule CreateAuditSchedule}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Project or folder that this audit schedule is for, in one of the
+        #     following formats:
+        #
+        #     * `projects/{project}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        # @!attribute [rw] audit_schedule
+        #   @return [::Google::Cloud::AuditManager::V1::AuditSchedule]
+        #     Required. Audit schedule to create.
+        # @!attribute [rw] audit_schedule_id
+        #   @return [::String]
+        #     Required. ID to use for the audit schedule, which becomes the final
+        #     component of the audit schedule's resource name.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, only validates the request and does not create the
+        #     audit schedule. This executes standard request validation (such as schema,
+        #     framework existence, scope, and IAM checks) and skips the apply phase.
+        #
+        #     Use this field for the following purposes:
+        #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+        #       dry-run mutations (e.g., `terraform plan`) without creating real
+        #       resources or incurring costs.
+        #     * **User Interface Validation**: Enable real-time form and permission
+        #       validation in custom UIs before submitting requests.
+        #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+        #       safely without consuming resource quotas.
+        class CreateAuditScheduleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AuditManager::V1::AuditManager::Client#update_audit_schedule UpdateAuditSchedule}.
+        # @!attribute [rw] audit_schedule
+        #   @return [::Google::Cloud::AuditManager::V1::AuditSchedule]
+        #     Required. Audit schedule to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. List of fields to update.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, only validates the request and does not update the
+        #     audit schedule. This executes standard request validation (such as
+        #     schema, framework existence, scope, and IAM checks) and skips the apply
+        #     phase.
+        #
+        #     Use this field for the following purposes:
+        #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+        #       dry-run mutations (e.g., `terraform plan`) without creating real
+        #       resources or incurring costs.
+        #     * **User Interface Validation**: Enable real-time form and permission
+        #       validation in custom UIs before submitting requests.
+        #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+        #       safely without consuming resource quotas.
+        class UpdateAuditScheduleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AuditManager::V1::AuditManager::Client#get_audit_schedule GetAuditSchedule}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the audit schedule to retrieve, in one of the following
+        #     formats:
+        #
+        #     * `projects/{project}/locations/{location}/auditSchedules/{audit_schedule}`
+        #     * `folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}`
+        #     * `organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}`
+        class GetAuditScheduleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AuditManager::V1::AuditManager::Client#list_audit_schedules ListAuditSchedules}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent for the audit schedule, in one of the following formats:
+        #
+        #     * `projects/{project}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `organizations/{organization}/locations/{location}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of items to return in a single page. The service
+        #     might return fewer items than this value. If unspecified, the service picks
+        #     an appropriate default. The maximum value is 100; values above 100 are
+        #     reduced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous call, to retrieve the next
+        #     page of results.
+        class ListAuditSchedulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AuditManager::V1::AuditManager::Client#list_audit_schedules ListAuditSchedules}.
+        # @!attribute [rw] audit_schedules
+        #   @return [::Array<::Google::Cloud::AuditManager::V1::AuditSchedule>]
+        #     List of audit schedules.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that you can send as the `page_token` in a subsequent request to
+        #     retrieve the next page of results. If this field is empty, there are no
+        #     subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that can't be reached.
+        class ListAuditSchedulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An audit schedule, in one of the following formats:
+        #
+        # * `projects/{project}/locations/{location}/auditSchedules/{audit_schedule}`
+        # * `folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}`
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Unique identifier for the audit schedule.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/auditSchedules/\\{audit_schedule}
+        #     folders/\\{folder}/locations/\\{location}/auditSchedules/\\{audit_schedule}
+        #     organizations/\\{organization}/locations/\\{location}/auditSchedules/\\{audit_schedule}
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name for the audit schedule.
+        # @!attribute [rw] gcs_uri
+        #   @return [::String]
+        #     Required. Cloud Storage bucket where Audit Manager can upload the audit
+        #     report and evidence. The format is `gs://{bucket_name}`.
+        # @!attribute [rw] compliance_framework
+        #   @return [::String]
+        #     Required. Framework (set of controls) that the audit scope report is
+        #     generated against. For example, `NIST_800_53`.
+        # @!attribute [rw] report_format
+        #   @return [::Google::Cloud::AuditManager::V1::AuditSchedule::AuditReportFormat]
+        #     Required. Format for the audit report.
+        # @!attribute [rw] schedule_config
+        #   @return [::Google::Cloud::AuditManager::V1::ScheduleConfig]
+        #     Required. Configuration that defines when and how often audit runs are
+        #     automatically triggered for this schedule.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::AuditManager::V1::ScheduleState]
+        #     Optional. State of the audit schedule. While most states are managed by the
+        #     system, you can use
+        #     {::Google::Cloud::AuditManager::V1::AuditManager::Client#update_audit_schedule UpdateAuditSchedule}
+        #     to start, pause, or delete the schedule.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the schedule was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the schedule was last updated.
+        # @!attribute [r] next_run_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Calculated timestamp for the next scheduled run.
+        # @!attribute [r] last_trigger_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the audit run was last triggered.
+        # @!attribute [r] error_message
+        #   @return [::String]
+        #     Output only. Describes the error if the schedule is in an error state.
+        class AuditSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Format for the audit report.
+          module AuditReportFormat
+            # Default value. This value is unused.
+            AUDIT_REPORT_FORMAT_UNSPECIFIED = 0
+
+            # Open Document Format (ODF).
+            AUDIT_REPORT_FORMAT_ODF = 1
+          end
+        end
+
+        # Timing and frequency parameters for recurring audit runs.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Required. Date and time when the first audit run is triggered.
+        #     Subsequent runs are based on this time and the chosen frequency.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Date that the schedule stops.
+        #     If not specified, the schedule runs indefinitely.
+        # @!attribute [rw] frequency
+        #   @return [::Google::Cloud::AuditManager::V1::ScheduleConfig::Frequency]
+        #     Required. Frequency of audit runs.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Optional. Time zone for the audit schedule in IANA format (for example,
+        #     `America/New_York`). The time zone is used to interpret the `start_time`
+        #     and the `end_time`, and to calculate subsequent run dates.
+        #     If not specified, the time zone default is UTC.
+        class ScheduleConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Frequency of audit runs.
+          module Frequency
+            # Default value. This value is unused.
+            FREQUENCY_UNSPECIFIED = 0
+
+            # The audit runs every day.
+            DAILY = 1
+
+            # The audit runs weekly on the same day of the week as `start_time`.
+            WEEKLY = 2
+
+            # The audit runs monthly on the same day of the month as `start_time`.
+            MONTHLY = 3
+
+            # The audit runs quarterly (every 3 months) on the same
+            # day of the month as `start_time`.
+            QUARTERLY = 4
+
+            # The audit runs annually on the same month and day as `start_time`.
+            ANNUALLY = 5
+          end
+        end
+
         # Different execution states of the Audit Manager service.
         module OperationState
           # Default value. This value is unused.
@@ -734,6 +992,31 @@ module Google
 
           # The resource can't be audited.
           AUDIT_NOT_SUPPORTED = 5
+        end
+
+        # State of an audit schedule.
+        module ScheduleState
+          # Default value. This value is unused.
+          SCHEDULE_STATE_UNSPECIFIED = 0
+
+          # Schedule is active and will trigger runs.
+          SCHEDULE_STATE_ACTIVE = 1
+
+          # Schedule is paused and will not trigger runs.
+          SCHEDULE_STATE_PAUSED = 2
+
+          # Schedule end time has passed.
+          SCHEDULE_STATE_COMPLETED = 3
+
+          # Schedule setup failed during creation or update.
+          SCHEDULE_STATE_FAILED_SETUP = 4
+
+          # Schedule is in an error state due to persistent failure to trigger an
+          # audit. Manual intervention is required.
+          SCHEDULE_STATE_ERROR = 5
+
+          # Schedule has been marked for deletion by the user.
+          SCHEDULE_STATE_DELETED = 6
         end
       end
     end

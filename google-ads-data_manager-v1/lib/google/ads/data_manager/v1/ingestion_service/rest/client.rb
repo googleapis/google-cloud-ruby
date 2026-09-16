@@ -70,6 +70,26 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.ingest_audience_members.timeout = 120.0
+                  default_config.rpcs.ingest_audience_members.retry_policy = {
+                    initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.remove_audience_members.timeout = 120.0
+                  default_config.rpcs.remove_audience_members.retry_policy = {
+                    initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.ingest_events.timeout = 120.0
+                  default_config.rpcs.ingest_events.retry_policy = {
+                    initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.retrieve_request_status.timeout = 60.0
+                  default_config.rpcs.retrieve_request_status.retry_policy = {
+                    initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -208,13 +228,14 @@ module Google
               #     Optional. For testing purposes. If `true`, the request is validated but not
               #     executed. Only errors are returned, not results.
               #   @param encoding [::Google::Ads::DataManager::V1::Encoding]
-              #     Optional. Required for {::Google::Ads::DataManager::V1::UserData UserData}
-              #     uploads. The encoding type of the user identifiers. For hashed user
-              #     identifiers, this is the encoding type of the hashed string. For encrypted
-              #     hashed user identifiers, this is the encoding type of the outer encrypted
-              #     string, but not necessarily the inner hashed string, meaning the inner
-              #     hashed string could be encoded in a different way than the outer encrypted
-              #     string. For non `UserData` uploads, this field is ignored.
+              #     Optional. Must be provided for
+              #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. The encoding type
+              #     of the user identifiers. For hashed user identifiers, this is the encoding
+              #     type of the hashed string. For encrypted hashed user identifiers, this is
+              #     the encoding type of the outer encrypted string, but not necessarily the
+              #     inner hashed string, meaning the inner hashed string could be encoded in a
+              #     different way than the outer encrypted string. For non `UserData` uploads,
+              #     this field is ignored.
               #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
               #     Optional. Encryption information for
               #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. If not set, it's
@@ -308,10 +329,10 @@ module Google
               #     Optional. For testing purposes. If `true`, the request is validated but not
               #     executed. Only errors are returned, not results.
               #   @param encoding [::Google::Ads::DataManager::V1::Encoding]
-              #     Optional. Required for {::Google::Ads::DataManager::V1::UserData UserData}
-              #     uploads. The encoding type of the user identifiers. Applies to only the
-              #     outer encoding for encrypted user identifiers. For non `UserData` uploads,
-              #     this field is ignored.
+              #     Optional. Must be provided for
+              #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. The encoding type
+              #     of the user identifiers. Applies to only the outer encoding for encrypted
+              #     user identifiers. For non `UserData` uploads, this field is ignored.
               #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
               #     Optional. Encryption information for
               #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. If not set, it's
@@ -494,13 +515,14 @@ module Google
               #     Optional. For testing purposes. If `true`, the request is validated but not
               #     executed. Only errors are returned, not results.
               #   @param encoding [::Google::Ads::DataManager::V1::Encoding]
-              #     Optional. Required for {::Google::Ads::DataManager::V1::UserData UserData}
-              #     uploads. The encoding type of the user identifiers. For hashed user
-              #     identifiers, this is the encoding type of the hashed string. For encrypted
-              #     hashed user identifiers, this is the encoding type of the outer encrypted
-              #     string, but not necessarily the inner hashed string, meaning the inner
-              #     hashed string could be encoded in a different way than the outer encrypted
-              #     string. For non `UserData` uploads, this field is ignored.
+              #     Optional. Must be provided for
+              #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. The encoding type
+              #     of the user identifiers. For hashed user identifiers, this is the encoding
+              #     type of the hashed string. For encrypted hashed user identifiers, this is
+              #     the encoding type of the outer encrypted string, but not necessarily the
+              #     inner hashed string, meaning the inner hashed string could be encoded in a
+              #     different way than the outer encrypted string. For non `UserData` uploads,
+              #     this field is ignored.
               #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
               #     Optional. Encryption information for
               #     {::Google::Ads::DataManager::V1::UserData UserData} uploads. If not set, it's
@@ -589,8 +611,9 @@ module Google
               #   @param ad_events [::Array<::Google::Ads::DataManager::V1::AdEvent, ::Hash>]
               #     Required. Required (at least 1). A list of ad events.
               #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
-              #     Required. Information about encryption keys which are used to encrypt the
-              #     data.
+              #     Optional. Information about encryption keys which are used to encrypt the
+              #     data. This field must be provided when ad events contain
+              #     {::Google::Ads::DataManager::V1::UserData UserData}.
               #   @param validate_only [::Boolean]
               #     Optional. If true, the request is validated, but not executed.
               # @yield [result, operation] Access the result along with the TransportOperation object

@@ -62,6 +62,11 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::DeviceInfo]
         #     Required. Information gathered about the device being used when the ad
         #     event happened.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     Optional. IP address used for measurement. This must be same value as
+        #     {::Google::Ads::DataManager::V1::DeviceInfo#ip_address DeviceInfo.ip_address}.
+        #     Keep it blank if you do not want to share IP for measurement.
         # @!attribute [rw] mobile_device_id
         #   @return [::String]
         #     Optional. The device ID of the device that the ad was served to.

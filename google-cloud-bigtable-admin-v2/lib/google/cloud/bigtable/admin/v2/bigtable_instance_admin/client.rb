@@ -1466,6 +1466,299 @@ module Google
               end
 
               ##
+              # Updates the memory layer of a cluster.
+              #
+              # To enable the memory layer, set the memory_config.
+              # To disable the memory layer, unset the memory_config.
+              #
+              # @overload update_memory_layer(request, options = nil)
+              #   Pass arguments to `update_memory_layer` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_memory_layer(memory_layer: nil, update_mask: nil)
+              #   Pass arguments to `update_memory_layer` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param memory_layer [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer, ::Hash]
+              #     Required. The memory layer to update.
+              #
+              #     The memory layer's `name` format is as follows:
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest.new
+              #
+              #   # Call the update_memory_layer method.
+              #   result = client.update_memory_layer request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_memory_layer request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_memory_layer.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.memory_layer&.name
+                  header_params["memory_layer.name"] = request.memory_layer.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_memory_layer.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_memory_layer.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :update_memory_layer, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists information about memory layers.
+              #
+              # @overload list_memory_layers(request, options = nil)
+              #   Pass arguments to `list_memory_layers` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_memory_layers(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_memory_layers` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The unique name of the cluster for which a list of memory layers
+              #     is requested. Values are of the form
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+              #     Use `{cluster} = '-'` to list MemoryLayers for all Clusters in an instance,
+              #     e.g., `projects/myproject/instances/myinstance/clusters/-`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of memory layers to return. The service may
+              #     return fewer than this value.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListMemoryLayers` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListMemoryLayers`
+              #     must match the call that provided the page token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::MemoryLayer>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::MemoryLayer>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersRequest.new
+              #
+              #   # Call the list_memory_layers method.
+              #   result = client.list_memory_layers request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::MemoryLayer.
+              #     p item
+              #   end
+              #
+              def list_memory_layers request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListMemoryLayersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_memory_layers.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_memory_layers.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_memory_layers.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :list_memory_layers, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_memory_layers, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets information about the memory layer of a cluster.
+              #
+              # @overload get_memory_layer(request, options = nil)
+              #   Pass arguments to `get_memory_layer` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::GetMemoryLayerRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::GetMemoryLayerRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_memory_layer(name: nil)
+              #   Pass arguments to `get_memory_layer` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the requested cluster's memory layer. Values
+              #     are of the form
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetMemoryLayerRequest.new
+              #
+              #   # Call the get_memory_layer method.
+              #   result = client.get_memory_layer request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::MemoryLayer.
+              #   p result
+              #
+              def get_memory_layer request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::GetMemoryLayerRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_memory_layer.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_memory_layer.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_memory_layer.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :get_memory_layer, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates an app profile within an instance.
               #
               # @overload create_app_profile(request, options = nil)
@@ -3542,6 +3835,21 @@ module Google
                   #
                   attr_reader :delete_cluster
                   ##
+                  # RPC-specific configuration for `update_memory_layer`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_memory_layer
+                  ##
+                  # RPC-specific configuration for `list_memory_layers`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_memory_layers
+                  ##
+                  # RPC-specific configuration for `get_memory_layer`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_memory_layer
+                  ##
                   # RPC-specific configuration for `create_app_profile`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3663,6 +3971,12 @@ module Google
                     @partial_update_cluster = ::Gapic::Config::Method.new partial_update_cluster_config
                     delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                     @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
+                    update_memory_layer_config = parent_rpcs.update_memory_layer if parent_rpcs.respond_to? :update_memory_layer
+                    @update_memory_layer = ::Gapic::Config::Method.new update_memory_layer_config
+                    list_memory_layers_config = parent_rpcs.list_memory_layers if parent_rpcs.respond_to? :list_memory_layers
+                    @list_memory_layers = ::Gapic::Config::Method.new list_memory_layers_config
+                    get_memory_layer_config = parent_rpcs.get_memory_layer if parent_rpcs.respond_to? :get_memory_layer
+                    @get_memory_layer = ::Gapic::Config::Method.new get_memory_layer_config
                     create_app_profile_config = parent_rpcs.create_app_profile if parent_rpcs.respond_to? :create_app_profile
                     @create_app_profile = ::Gapic::Config::Method.new create_app_profile_config
                     get_app_profile_config = parent_rpcs.get_app_profile if parent_rpcs.respond_to? :get_app_profile

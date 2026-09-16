@@ -48,6 +48,12 @@ module Google
         # @!attribute [rw] targeting
         #   @return [::Google::Ads::AdManager::V1::Targeting]
         #     Optional. The targeting of the `PrivateAuctionDeal`.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Non-empty default. The start time of the `PrivateAuctionDeal`.
+        #     If unset, the `startTime` will default as follows:
+        #     On create: To the deal's `create_time`.
+        #     On update: To the deal's existing `start_time`, which can be null.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The end time of the `PrivateAuctionDeal`.
@@ -66,6 +72,9 @@ module Google
         # @!attribute [rw] block_override_enabled
         #   @return [::Boolean]
         #     Optional. Whether the deal has block override enabled.
+        # @!attribute [rw] publisher_floor_exempt
+        #   @return [::Boolean]
+        #     Optional. Whether the deal is exempt from publisher floor price.
         # @!attribute [rw] buyer_permission_type
         #   @return [::Google::Ads::AdManager::V1::DealBuyerPermissionTypeEnum::DealBuyerPermissionType]
         #     Optional. The buyer permission model defining how the deal would transact
@@ -76,6 +85,9 @@ module Google
         # @!attribute [rw] deal_priority
         #   @return [::Google::Ads::AdManager::V1::NonGuaranteedDealPriority]
         #     Optional. The priority of the deal across all non-guaranteed deals.
+        # @!attribute [r] archived
+        #   @return [::Boolean]
+        #     Output only. Whether the deal is archived.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The instant at which the `PrivateAuctionDeal` was created.

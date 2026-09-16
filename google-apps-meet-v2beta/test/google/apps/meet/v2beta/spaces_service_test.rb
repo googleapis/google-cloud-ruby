@@ -249,12 +249,14 @@ class ::Google::Apps::Meet::V2beta::SpacesService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     offer = "hello world"
+    config = {}
 
     connect_active_conference_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :connect_active_conference, name
       assert_kind_of ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["offer"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest::ConnectionConfig), request["config"]
       refute_nil options
     end
 
@@ -265,31 +267,31 @@ class ::Google::Apps::Meet::V2beta::SpacesService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.connect_active_conference({ name: name, offer: offer }) do |response, operation|
+      c.connect_active_conference({ name: name, offer: offer, config: config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.connect_active_conference name: name, offer: offer do |response, operation|
+      c.connect_active_conference name: name, offer: offer, config: config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.connect_active_conference ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer) do |response, operation|
+      c.connect_active_conference ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer, config: config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.connect_active_conference({ name: name, offer: offer }, grpc_options) do |response, operation|
+      c.connect_active_conference({ name: name, offer: offer, config: config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.connect_active_conference(::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer), grpc_options) do |response, operation|
+      c.connect_active_conference(::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer, config: config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,6 +599,128 @@ class ::Google::Apps::Meet::V2beta::SpacesService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_member
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Meet::V2beta::Member.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    member = {}
+    update_mask = {}
+
+    update_member_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_member, name
+      assert_kind_of ::Google::Apps::Meet::V2beta::UpdateMemberRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Meet::V2beta::Member), request["member"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_member_client_stub do
+      # Create client
+      c = ::Google::Apps::Meet::V2beta::SpacesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_member({ member: member, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_member member: member, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_member ::Google::Apps::Meet::V2beta::UpdateMemberRequest.new(member: member, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_member({ member: member, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_member(::Google::Apps::Meet::V2beta::UpdateMemberRequest.new(member: member, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_update_members
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Meet::V2beta::BatchUpdateMembersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+    update_mask = {}
+
+    batch_update_members_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_update_members, name
+      assert_kind_of ::Google::Apps::Meet::V2beta::BatchUpdateMembersRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Apps::Meet::V2beta::UpdateMemberRequest, request["requests"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_update_members_client_stub do
+      # Create client
+      c = ::Google::Apps::Meet::V2beta::SpacesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.batch_update_members({ parent: parent, requests: requests, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.batch_update_members parent: parent, requests: requests, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.batch_update_members ::Google::Apps::Meet::V2beta::BatchUpdateMembersRequest.new(parent: parent, requests: requests, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.batch_update_members({ parent: parent, requests: requests, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.batch_update_members(::Google::Apps::Meet::V2beta::BatchUpdateMembersRequest.new(parent: parent, requests: requests, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_update_members_client_stub.call_rpc_count
     end
   end
 

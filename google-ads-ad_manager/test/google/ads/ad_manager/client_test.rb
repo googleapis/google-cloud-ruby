@@ -320,6 +320,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_dai_session_service_rest
+    skip unless Google::Ads::AdManager.dai_session_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.dai_session_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::DaiSessionService::Rest::Client, client
+    end
+  end
+
   def test_device_capability_service_rest
     skip unless Google::Ads::AdManager.device_capability_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do

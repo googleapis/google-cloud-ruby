@@ -1851,6 +1851,63 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Clien
     end
   end
 
+  def test_fetch_refs
+    # Create test objects.
+    client_result = ::Google::Cloud::SecureSourceManager::V1::FetchRefsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    repository = "hello world"
+    type = :REF_TYPE_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_refs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::ServiceStub.stub :transcode_fetch_refs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_refs_client_stub do
+        # Create client
+        c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_refs({ repository: repository, type: type, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_refs repository: repository, type: type, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_refs ::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest.new(repository: repository, type: type, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_refs({ repository: repository, type: type, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_refs(::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest.new(repository: repository, type: type, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_refs_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_issue
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

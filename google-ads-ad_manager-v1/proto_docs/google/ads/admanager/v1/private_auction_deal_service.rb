@@ -60,6 +60,7 @@ module Google
         #
         #     **Filterable fields:**
         #
+        #     * `archived`
         #     * `auctionPriorityEnabled`
         #     * `blockOverrideEnabled`
         #     * `buyerAccountId`
@@ -71,6 +72,7 @@ module Google
         #     * `privateAuctionDealId`
         #     * `privateAuctionDisplayName`
         #     * `privateAuctionId`
+        #     * `publisherFloorExempt`
         #     * `status`
         #     * `updateTime`
         # @!attribute [rw] order_by

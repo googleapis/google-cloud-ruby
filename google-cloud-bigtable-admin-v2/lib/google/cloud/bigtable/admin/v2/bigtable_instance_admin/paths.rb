@@ -157,6 +157,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified MemoryLayer resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`
+              #
+              # @param project [String]
+              # @param instance [String]
+              # @param cluster [String]
+              #
+              # @return [::String]
+              def memory_layer_path project:, instance:, cluster:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+                "projects/#{project}/instances/#{instance}/clusters/#{cluster}/memoryLayer"
+              end
+
+              ##
               # Create a fully-qualified Project resource string.
               #
               # The resource will be in the following format:

@@ -29,6 +29,36 @@
               "methods": [
                 "end_active_conference"
               ]
+            },
+            "CreateMember": {
+              "methods": [
+                "create_member"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "get_member"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "list_members"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "delete_member"
+              ]
+            },
+            "UpdateMember": {
+              "methods": [
+                "update_member"
+              ]
+            },
+            "BatchUpdateMembers": {
+              "methods": [
+                "batch_update_members"
+              ]
             }
           }
         }
@@ -97,6 +127,16 @@
             "ListTranscriptEntries": {
               "methods": [
                 "list_transcript_entries"
+              ]
+            },
+            "GetSmartNote": {
+              "methods": [
+                "get_smart_note"
+              ]
+            },
+            "ListSmartNotes": {
+              "methods": [
+                "list_smart_notes"
               ]
             }
           }

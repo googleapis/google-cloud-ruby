@@ -52,7 +52,7 @@ module Google
         #     Meet](https://support.google.com/meet/answer/10710509).
         #
         #     For more information, see [How Meet identifies a meeting
-        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+        #     space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
         class GetSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,8 +86,126 @@ module Google
         #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
         #
         #     For more information, see [How Meet identifies a meeting
-        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+        #     space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
         class EndActiveConferenceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a member for a space.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: spaces/\\{space}
+        # @!attribute [rw] member
+        #   @return [::Google::Apps::Meet::V2::Member]
+        #     Required. The member to be created.
+        class CreateMemberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get a member from a space.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format: “spaces/\\{space}/members/\\{member}”
+        class GetMemberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to list all members of a space.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: spaces/\\{space}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of members to return. The service might return
+        #     fewer than this value. If unspecified or set to 0, at most 250 members are
+        #     returned. The maximum value is 500; values above 500 are coerced to 500.
+        #     Maximum might change in the future.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token returned from previous List Call.
+        class ListMembersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of list members.
+        # @!attribute [rw] members
+        #   @return [::Array<::Google::Apps::Meet::V2::Member>]
+        #     The list of members for the current page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be circulated back for further list call if current list doesn't
+        #     include all the members. Unset if all members are returned.
+        class ListMembersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to delete a member from a space.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format: “spaces/\\{space}/members/\\{member}”
+        class DeleteMemberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update a member.
+        # @!attribute [rw] member
+        #   @return [::Google::Apps::Meet::V2::Member]
+        #     Required. The Member to update.
+        #     Format: spaces/\\{space}/members/\\{member}
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask used to specify the fields to be updated in the
+        #     member. If update_mask isn't provided(not set, set with empty paths, or
+        #     only has "" as paths), it defaults to update all fields provided with
+        #     values in the request. Using "*" as update_mask will update all fields,
+        #     including deleting fields not set in the request. In case of BatchUpdate,
+        #     it must be absent or the same as the update_mask in
+        #     BatchUpdateMembersRequest when UpdateMemberRequest is built as a child
+        #     request of BatchUpdateMembersRequest.
+        class UpdateMemberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to update members of one space within a batch.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource shared by all Members being updated.
+        #     Format: spaces/\\{space}
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Apps::Meet::V2::UpdateMemberRequest>]
+        #     Required. The request message specifying the resources to update.
+        #     A maximum of 500 members can be modified in a batch.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Top-level field mask used to specify the fields to be updated in
+        #     the member for all UpdateMemberRequests. There are 4 possible scenarios for
+        #     top-level and child field mask:
+        #     1. top-level and child field mask is absent:
+        #        All fields provided in the requests are updated, including deleting
+        #        fields not set in the requests.
+        #     2. top-level field mask is present but child field mask is absent:
+        #        The fields specified in the top-level field mask are updated.
+        #     3. top-level and child field mask is present:
+        #        The child field mask must be the same as the top-level field mask.
+        #     4. top-level field mask is absent but child field mask is present:
+        #        It isn't supported and will return an error.
+        class BatchUpdateMembersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of batch update members.
+        # @!attribute [rw] members
+        #   @return [::Array<::Google::Apps::Meet::V2::Member>]
+        #     Members updated.
+        class BatchUpdateMembersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -378,6 +496,47 @@ module Google
         #     Token to be circulated back for further List call if current List doesn't
         #     include all the transcript entries. Unset if all entries are returned.
         class ListTranscriptEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for GetSmartNote method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the smart note.
+        #     Format: conferenceRecords/\\{conference_record}/smartNotes/\\{smart_note}
+        class GetSmartNoteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for ListSmartNotes method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `conferenceRecords/{conference_record}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of smart notes to return. The service might return
+        #     fewer than this value. If unspecified, at most 10 smart notes are returned.
+        #     The maximum value is 100; values above 100 are coerced to 100.
+        #     Maximum might change in the future.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token returned from previous List Call.
+        class ListSmartNotesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ListSmartNotes method.
+        # @!attribute [rw] smart_notes
+        #   @return [::Array<::Google::Apps::Meet::V2::SmartNote>]
+        #     List of smart notes in one page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be circulated back for further List call if current List doesn't
+        #     include all the smart notes. Unset if all smart notes are returned.
+        class ListSmartNotesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

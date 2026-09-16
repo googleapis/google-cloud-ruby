@@ -1088,14 +1088,23 @@ module Google
         # levels.
         # @!attribute [rw] external_key_uri
         #   @return [::String]
-        #     The URI for an external resource that this
+        #     Optional. The URI for an external resource that this
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} represents.
         # @!attribute [rw] ekm_connection_key_path
         #   @return [::String]
-        #     The path to the external key material on the EKM when using
+        #     Optional. The path to the external key material on the EKM when using
         #     [EkmConnection][google.cloud.kms.v1.EkmConnection] e.g., "v0/my/key". Set
         #     this field instead of external_key_uri when using an
         #     [EkmConnection][google.cloud.kms.v1.EkmConnection].
+        # @!attribute [rw] ekm_connection_backend_override
+        #   @return [::String]
+        #     Optional. The resource name of the backend environment where the key
+        #     material of {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} is
+        #     associated with. Setting this field overrides the [CryptoKeyBackend][].
+        #     This field may be set when
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} is set to
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}. Format:
+        #     `projects/*/locations/*/ekmConnections/*`.
         class ExternalProtectionLevelOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

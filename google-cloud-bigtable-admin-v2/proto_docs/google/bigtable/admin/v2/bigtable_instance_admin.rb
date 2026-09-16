@@ -337,6 +337,92 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for BigtableInstanceAdmin.UpdateMemoryLayer.
+          # @!attribute [rw] memory_layer
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer]
+          #     Required. The memory layer to update.
+          #
+          #     The memory layer's `name` format is as follows:
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of fields to update.
+          class UpdateMemoryLayerRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by UpdateMemoryLayer.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::UpdateMemoryLayerRequest]
+          #     The request that prompted the initiation of this UpdateMemoryLayer
+          #     operation.
+          # @!attribute [rw] request_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the original request was received.
+          # @!attribute [rw] finish_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the operation failed or was completed successfully.
+          class UpdateMemoryLayerMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.ListMemoryLayers.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The unique name of the cluster for which a list of memory layers
+          #     is requested. Values are of the form
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+          #     Use `{cluster} = '-'` to list MemoryLayers for all Clusters in an instance,
+          #     e.g., `projects/myproject/instances/myinstance/clusters/-`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of memory layers to return. The service may
+          #     return fewer than this value.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous `ListMemoryLayers` call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to `ListMemoryLayers`
+          #     must match the call that provided the page token.
+          class ListMemoryLayersRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for BigtableInstanceAdmin.ListMemoryLayers.
+          # @!attribute [rw] memory_layers
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::MemoryLayer>]
+          #     The list of requested memory layers.
+          # @!attribute [rw] failed_locations
+          #   @return [::Array<::String>]
+          #     Locations from which MemoryLayer information could not be retrieved,
+          #     due to an outage or some other transient condition.
+          #     MemoryLayers from these locations may be missing from `memory_layers`,
+          #     or may only have partial information returned.
+          #     Values are of the form `projects/<project>/locations/<zone_id>`
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListMemoryLayersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.GetMemoryLayer.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the requested cluster's memory layer. Values
+          #     are of the form
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`.
+          class GetMemoryLayerRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for BigtableInstanceAdmin.CreateAppProfile.
           # @!attribute [rw] parent
           #   @return [::String]

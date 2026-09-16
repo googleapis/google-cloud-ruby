@@ -251,6 +251,7 @@ class ::Google::Apps::Meet::V2beta::SpacesService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
     offer = "hello world"
+    config = {}
 
     connect_active_conference_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -266,27 +267,27 @@ class ::Google::Apps::Meet::V2beta::SpacesService::Rest::ClientTest < Minitest::
         end
 
         # Use hash object
-        c.connect_active_conference({ name: name, offer: offer }) do |_result, response|
+        c.connect_active_conference({ name: name, offer: offer, config: config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.connect_active_conference name: name, offer: offer do |_result, response|
+        c.connect_active_conference name: name, offer: offer, config: config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.connect_active_conference ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer) do |_result, response|
+        c.connect_active_conference ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer, config: config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.connect_active_conference({ name: name, offer: offer }, call_options) do |_result, response|
+        c.connect_active_conference({ name: name, offer: offer, config: config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.connect_active_conference(::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer), call_options) do |_result, response|
+        c.connect_active_conference(::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer, config: config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -565,6 +566,117 @@ class ::Google::Apps::Meet::V2beta::SpacesService::Rest::ClientTest < Minitest::
 
         # Verify method calls
         assert_equal 5, delete_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_member
+    # Create test objects.
+    client_result = ::Google::Apps::Meet::V2beta::Member.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    member = {}
+    update_mask = {}
+
+    update_member_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Meet::V2beta::SpacesService::Rest::ServiceStub.stub :transcode_update_member_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_member_client_stub do
+        # Create client
+        c = ::Google::Apps::Meet::V2beta::SpacesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_member({ member: member, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_member member: member, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_member ::Google::Apps::Meet::V2beta::UpdateMemberRequest.new(member: member, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_member({ member: member, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_member(::Google::Apps::Meet::V2beta::UpdateMemberRequest.new(member: member, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_members
+    # Create test objects.
+    client_result = ::Google::Apps::Meet::V2beta::BatchUpdateMembersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+    update_mask = {}
+
+    batch_update_members_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Meet::V2beta::SpacesService::Rest::ServiceStub.stub :transcode_batch_update_members_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_members_client_stub do
+        # Create client
+        c = ::Google::Apps::Meet::V2beta::SpacesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_members({ parent: parent, requests: requests, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_members parent: parent, requests: requests, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_members ::Google::Apps::Meet::V2beta::BatchUpdateMembersRequest.new(parent: parent, requests: requests, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_members({ parent: parent, requests: requests, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_members(::Google::Apps::Meet::V2beta::BatchUpdateMembersRequest.new(parent: parent, requests: requests, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_members_client_stub.call_count
       end
     end
   end
