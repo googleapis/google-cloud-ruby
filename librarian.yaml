@@ -369,6 +369,17 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/appoptimize/v1beta
+  - name: google-cloud-app_topology
+    version: 0.1.0
+    apis:
+      - path: google/cloud/apptopology/v1
+    ruby:
+      wrapper_of:
+        - v1:0.1
+  - name: google-cloud-app_topology-v1
+    version: 0.1.0
+    apis:
+      - path: google/cloud/apptopology/v1
   - name: google-cloud-artifact_registry
     version: 2.2.1
     apis:
