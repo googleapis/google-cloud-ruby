@@ -33,7 +33,7 @@ module Google
         #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
         #
         #     For more information, see [How Meet identifies a meeting
-        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+        #     space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
         # @!attribute [r] meeting_uri
         #   @return [::String]
         #     Output only. URI used to join meetings consisting of
@@ -54,9 +54,65 @@ module Google
         # @!attribute [rw] active_conference
         #   @return [::Google::Apps::Meet::V2beta::ActiveConference]
         #     Active conference, if it exists.
+        # @!attribute [r] phone_access
+        #   @return [::Array<::Google::Apps::Meet::V2beta::Space::PhoneAccess>]
+        #     Output only. All regional phone access methods for this meeting space. Can
+        #     be empty.
+        # @!attribute [r] gateway_sip_access
+        #   @return [::Array<::Google::Apps::Meet::V2beta::Space::GatewaySipAccess>]
+        #     Output only. The SIP-based access methods that can be used to join the
+        #     conference. Can be empty.
         class Space
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Phone access contains information required to dial into a conference using
+          # a regional phone number and a PIN that is specific to that phone number.
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     The phone number to dial for this meeting space in E.164 format.
+          #     Full phone number with a leading '+' character.
+          # @!attribute [rw] pin
+          #   @return [::String]
+          #     The PIN that users must enter after dialing the given number. The PIN
+          #     consists of only decimal digits and the length may vary.
+          # @!attribute [rw] region_code
+          #   @return [::String]
+          #     The CLDR/ISO 3166 region code for the country associated with this phone
+          #     access. To be parsed by the i18n RegionCode utility. Example: "SE" for
+          #     Sweden.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     The BCP 47/LDML language code for the language associated with this phone
+          #     access. To be parsed by the i18n LanguageCode utility. Examples: "es-419"
+          #     for Latin American Spanish, "fr-CA" for Canadian French.
+          class PhoneAccess
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details how to join the conference through a SIP gateway.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     The Session Initiation Protocol (SIP) URI the conference can be reached
+          #     through.
+          #
+          #     The string is in one of these formats:
+          #
+          #     * "sip:USER_ID@GATEWAY_ADDRESS"
+          #     * "sips:USER_ID@GATEWAY_ADDRESS"
+          #
+          #     where USER_ID is the 13-digit universal pin (with the future option to
+          #     support using a Meet meeting code as well), and GATEWAY_ADDRESS is a
+          #     valid address to be resolved using a DNS SRV lookup, or a dotted quad.
+          # @!attribute [rw] sip_access_code
+          #   @return [::String]
+          #     The permanent numeric code for manual entry on specially configured
+          #     devices.
+          class GatewaySipAccess
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Active conference.
@@ -65,6 +121,10 @@ module Google
         #     Output only. Reference to 'ConferenceRecord' resource.
         #     Format: `conferenceRecords/{conference_record}` where `{conference_record}`
         #     is a unique ID for each instance of a call within a space.
+        # @!attribute [r] media_api_consenter_present
+        #   @return [::Boolean]
+        #     Output only. Indicates whether a media api consenter is present in the
+        #     conference.
         class ActiveConference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,21 +143,17 @@ module Google
         #     Default: EntryPointAccess.ALL
         # @!attribute [rw] moderation
         #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::Moderation]
-        #     [Developer Preview](https://developers.google.com/workspace/preview):
         #     The pre-configured moderation mode for the Meeting.
         #     Default: Controlled by the user's policies.
         # @!attribute [rw] moderation_restrictions
         #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions]
-        #     [Developer Preview](https://developers.google.com/workspace/preview):
         #     When moderation.ON, these restrictions go into effect for the meeting.
         #     When moderation.OFF, will be reset to default ModerationRestrictions.
         # @!attribute [rw] attendance_report_generation_type
         #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::AttendanceReportGenerationType]
-        #     [Developer Preview](https://developers.google.com/workspace/preview):
         #     Whether attendance report is enabled for the meeting space.
         # @!attribute [rw] artifact_config
         #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig]
-        #     [Developer Preview](https://developers.google.com/workspace/preview):
         #     Configuration pertaining to the auto-generated artifacts that the meeting
         #     supports.
         class SpaceConfig
@@ -186,9 +242,9 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Configuration related to smart notes in a meeting space. More
-            # details about smart notes
-            # https://support.google.com/meet/answer/14754931?hl=en.
+            # Configuration related to smart notes in a meeting space. For
+            # more information about smart notes, see ["Take notes for me" in Google
+            # Meet](https://support.google.com/meet/answer/14754931).
             # @!attribute [rw] auto_smart_notes_generation
             #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::AutoGenerationType]
             #     Defines whether to automatically generate a summary and recap of the
@@ -306,9 +362,9 @@ module Google
           module Role
             # This is used to indicate the user hasn't specified any value and the
             # user’s role will be determined upon joining the meetings between
-            # 'contributor' and 'viewer' role depending on meeting configuration. More
-            # details about viewer role
-            # https://support.google.com/meet/answer/13658394?hl=en.
+            # 'contributor' and 'viewer' role depending on meeting configuration. For
+            # more information about the viewer role, see [Assign View only roles in
+            # Google Meet](https://support.google.com/meet/answer/13658394).
             ROLE_UNSPECIFIED = 0
 
             # Co-host role.
@@ -574,6 +630,47 @@ module Google
         class TranscriptEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for a smart note generated from a conference. It refers to the notes
+        # generated from Take Notes with Gemini during the conference.
+        # @!attribute [r] docs_destination
+        #   @return [::Google::Apps::Meet::V2beta::DocsDestination]
+        #     Output only. The Google Doc destination where the smart notes are saved.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. Resource name of the smart notes.
+        #     Format: `conferenceRecords/{conference_record}/smartNotes/{smart_note}`,
+        #     where `{smart_note}` is a 1:1 mapping to each unique smart notes session
+        #     of the conference.
+        # @!attribute [r] state
+        #   @return [::Google::Apps::Meet::V2beta::SmartNote::State]
+        #     Output only. Current state.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the smart notes started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the smart notes stopped.
+        class SmartNote
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Current state of the smart notes session.
+          module State
+            # Default, never used.
+            STATE_UNSPECIFIED = 0
+
+            # An active smart notes session has started.
+            STARTED = 1
+
+            # This smart notes session has ended, but the smart notes file hasn't been
+            # generated yet.
+            ENDED = 2
+
+            # Smart notes file is generated and ready to download.
+            FILE_GENERATED = 3
+          end
         end
       end
     end

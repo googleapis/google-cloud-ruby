@@ -83,6 +83,18 @@ module Google
 
                   default_config.rpcs.end_active_conference.timeout = 60.0
 
+                  default_config.rpcs.create_member.timeout = 80.0
+
+                  default_config.rpcs.get_member.timeout = 60.0
+
+                  default_config.rpcs.list_members.timeout = 60.0
+
+                  default_config.rpcs.delete_member.timeout = 60.0
+
+                  default_config.rpcs.update_member.timeout = 60.0
+
+                  default_config.rpcs.batch_update_members.timeout = 60.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -270,7 +282,7 @@ module Google
               # Gets details about a meeting space.
               #
               # For an example, see [Get a meeting
-              # space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).
+              # space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#get-meeting-space).
               #
               # @overload get_space(request, options = nil)
               #   Pass arguments to `get_space` via a request object, either of type
@@ -306,7 +318,7 @@ module Google
               #     Meet](https://support.google.com/meet/answer/10710509).
               #
               #     For more information, see [How Meet identifies a meeting
-              #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+              #     space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Meet::V2::Space]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -369,7 +381,7 @@ module Google
               # Updates details about a meeting space.
               #
               # For an example, see [Update a meeting
-              # space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
+              # space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#update-meeting-space).
               #
               # @overload update_space(request, options = nil)
               #   Pass arguments to `update_space` via a request object, either of type
@@ -457,7 +469,7 @@ module Google
               # Ends an active conference (if there's one).
               #
               # For an example, see [End active
-              # conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).
+              # conference](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#end-active-conference).
               #
               # @overload end_active_conference(request, options = nil)
               #   Pass arguments to `end_active_conference` via a request object, either of type
@@ -483,7 +495,7 @@ module Google
               #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
               #
               #     For more information, see [How Meet identifies a meeting
-              #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
+              #     space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -536,6 +548,531 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @spaces_service_stub.end_active_conference request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a member.
+              #
+              # This API supports the `fields` parameter in
+              # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+              # When the `fields` parameter is omitted, this API response will default to
+              # "name,email,role".
+              #
+              # @overload create_member(request, options = nil)
+              #   Pass arguments to `create_member` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::CreateMemberRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::CreateMemberRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_member(parent: nil, member: nil)
+              #   Pass arguments to `create_member` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: spaces/\\{space}
+              #   @param member [::Google::Apps::Meet::V2::Member, ::Hash]
+              #     Required. The member to be created.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Meet::V2::Member]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Meet::V2::Member]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::CreateMemberRequest.new
+              #
+              #   # Call the create_member method.
+              #   result = client.create_member request
+              #
+              #   # The returned object is of type Google::Apps::Meet::V2::Member.
+              #   p result
+              #
+              def create_member request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::CreateMemberRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_member.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_member.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_member.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.create_member request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a member.
+              #
+              # This API supports the `fields` parameter in
+              # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+              # When the `fields` parameter is omitted, this API response will default to
+              # "name,email,role".
+              #
+              # @overload get_member(request, options = nil)
+              #   Pass arguments to `get_member` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::GetMemberRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::GetMemberRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_member(name: nil)
+              #   Pass arguments to `get_member` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Format: “spaces/\\{space}/members/\\{member}”
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Meet::V2::Member]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Meet::V2::Member]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::GetMemberRequest.new
+              #
+              #   # Call the get_member method.
+              #   result = client.get_member request
+              #
+              #   # The returned object is of type Google::Apps::Meet::V2::Member.
+              #   p result
+              #
+              def get_member request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::GetMemberRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_member.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_member.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_member.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.get_member request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists members.
+              #
+              # This API supports the `fields` parameter in
+              # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+              # When the `fields` parameter is omitted this API response will default to
+              # "name,email,role".
+              #
+              # @overload list_members(request, options = nil)
+              #   Pass arguments to `list_members` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::ListMembersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::ListMembersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_members(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_members` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: spaces/\\{space}
+              #   @param page_size [::Integer]
+              #     Optional. Maximum number of members to return. The service might return
+              #     fewer than this value. If unspecified or set to 0, at most 250 members are
+              #     returned. The maximum value is 500; values above 500 are coerced to 500.
+              #     Maximum might change in the future.
+              #   @param page_token [::String]
+              #     Optional. Page token returned from previous List Call.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Meet::V2::Member>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Meet::V2::Member>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::ListMembersRequest.new
+              #
+              #   # Call the list_members method.
+              #   result = client.list_members request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Meet::V2::Member.
+              #     p item
+              #   end
+              #
+              def list_members request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::ListMembersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_members.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_members.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_members.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.list_members request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @spaces_service_stub, :list_members, "members", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the member who was previously assigned roles in the space.
+              #
+              # @overload delete_member(request, options = nil)
+              #   Pass arguments to `delete_member` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::DeleteMemberRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::DeleteMemberRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_member(name: nil)
+              #   Pass arguments to `delete_member` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Format: “spaces/\\{space}/members/\\{member}”
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::DeleteMemberRequest.new
+              #
+              #   # Call the delete_member method.
+              #   result = client.delete_member request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_member request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::DeleteMemberRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_member.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_member.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_member.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.delete_member request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a member.
+              #
+              # @overload update_member(request, options = nil)
+              #   Pass arguments to `update_member` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::UpdateMemberRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::UpdateMemberRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_member(member: nil, update_mask: nil)
+              #   Pass arguments to `update_member` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param member [::Google::Apps::Meet::V2::Member, ::Hash]
+              #     Required. The Member to update.
+              #     Format: spaces/\\{space}/members/\\{member}
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask used to specify the fields to be updated in the
+              #     member. If update_mask isn't provided(not set, set with empty paths, or
+              #     only has "" as paths), it defaults to update all fields provided with
+              #     values in the request. Using "*" as update_mask will update all fields,
+              #     including deleting fields not set in the request. In case of BatchUpdate,
+              #     it must be absent or the same as the update_mask in
+              #     BatchUpdateMembersRequest when UpdateMemberRequest is built as a child
+              #     request of BatchUpdateMembersRequest.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Meet::V2::Member]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Meet::V2::Member]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::UpdateMemberRequest.new
+              #
+              #   # Call the update_member method.
+              #   result = client.update_member request
+              #
+              #   # The returned object is of type Google::Apps::Meet::V2::Member.
+              #   p result
+              #
+              def update_member request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::UpdateMemberRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_member.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_member.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_member.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.update_member request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates members of one space within a batch.
+              #
+              # @overload batch_update_members(request, options = nil)
+              #   Pass arguments to `batch_update_members` via a request object, either of type
+              #   {::Google::Apps::Meet::V2::BatchUpdateMembersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Meet::V2::BatchUpdateMembersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_members(parent: nil, requests: nil, update_mask: nil)
+              #   Pass arguments to `batch_update_members` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource shared by all Members being updated.
+              #     Format: spaces/\\{space}
+              #   @param requests [::Array<::Google::Apps::Meet::V2::UpdateMemberRequest, ::Hash>]
+              #     Required. The request message specifying the resources to update.
+              #     A maximum of 500 members can be modified in a batch.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Top-level field mask used to specify the fields to be updated in
+              #     the member for all UpdateMemberRequests. There are 4 possible scenarios for
+              #     top-level and child field mask:
+              #     1. top-level and child field mask is absent:
+              #        All fields provided in the requests are updated, including deleting
+              #        fields not set in the requests.
+              #     2. top-level field mask is present but child field mask is absent:
+              #        The fields specified in the top-level field mask are updated.
+              #     3. top-level and child field mask is present:
+              #        The child field mask must be the same as the top-level field mask.
+              #     4. top-level field mask is absent but child field mask is present:
+              #        It isn't supported and will return an error.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Meet::V2::BatchUpdateMembersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Meet::V2::BatchUpdateMembersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/meet/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Meet::V2::SpacesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Meet::V2::BatchUpdateMembersRequest.new
+              #
+              #   # Call the batch_update_members method.
+              #   result = client.batch_update_members request
+              #
+              #   # The returned object is of type Google::Apps::Meet::V2::BatchUpdateMembersResponse.
+              #   p result
+              #
+              def batch_update_members request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2::BatchUpdateMembersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_members.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Meet::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_members.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_members.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @spaces_service_stub.batch_update_members request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -710,6 +1247,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :end_active_conference
+                  ##
+                  # RPC-specific configuration for `create_member`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_member
+                  ##
+                  # RPC-specific configuration for `get_member`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_member
+                  ##
+                  # RPC-specific configuration for `list_members`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_members
+                  ##
+                  # RPC-specific configuration for `delete_member`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_member
+                  ##
+                  # RPC-specific configuration for `update_member`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_member
+                  ##
+                  # RPC-specific configuration for `batch_update_members`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_members
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -721,6 +1288,18 @@ module Google
                     @update_space = ::Gapic::Config::Method.new update_space_config
                     end_active_conference_config = parent_rpcs.end_active_conference if parent_rpcs.respond_to? :end_active_conference
                     @end_active_conference = ::Gapic::Config::Method.new end_active_conference_config
+                    create_member_config = parent_rpcs.create_member if parent_rpcs.respond_to? :create_member
+                    @create_member = ::Gapic::Config::Method.new create_member_config
+                    get_member_config = parent_rpcs.get_member if parent_rpcs.respond_to? :get_member
+                    @get_member = ::Gapic::Config::Method.new get_member_config
+                    list_members_config = parent_rpcs.list_members if parent_rpcs.respond_to? :list_members
+                    @list_members = ::Gapic::Config::Method.new list_members_config
+                    delete_member_config = parent_rpcs.delete_member if parent_rpcs.respond_to? :delete_member
+                    @delete_member = ::Gapic::Config::Method.new delete_member_config
+                    update_member_config = parent_rpcs.update_member if parent_rpcs.respond_to? :update_member
+                    @update_member = ::Gapic::Config::Method.new update_member_config
+                    batch_update_members_config = parent_rpcs.batch_update_members if parent_rpcs.respond_to? :batch_update_members
+                    @batch_update_members = ::Gapic::Config::Method.new batch_update_members_config
 
                     yield self if block_given?
                   end

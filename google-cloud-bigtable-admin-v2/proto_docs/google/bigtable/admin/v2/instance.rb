@@ -306,6 +306,65 @@ module Google
             end
           end
 
+          # The memory layer of a cluster. A memory layer serves reads from
+          # memory without hitting the backing persistent data store.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Name of the memory layer. This is always:
+          #     "projects/\\{project}/instances/\\{instance}/clusters/\\{cluster}/memoryLayer".
+          # @!attribute [rw] memory_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer::MemoryConfig]
+          #     The configuration of this memory layer. Set an empty `memory_config` to
+          #     enable the memory layer. Unset this to disable the memory layer.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The etag for this memory layer.
+          #     This may be sent on update requests to ensure that the client has an
+          #     up-to-date value before proceeding. The server returns an ABORTED error on
+          #     a mismatched etag.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::MemoryLayer::State]
+          #     Output only. The current state of the memory layer.
+          class MemoryLayer
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration of a memory layer.
+            # @!attribute [r] storage_size_gib
+            #   @return [::Integer]
+            #     Output only. Reporting the current size of the memory layer in GiB.
+            class MemoryConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Possible states of a memory layer.
+            module State
+              # The state of the memory layer could not be determined.
+              STATE_NOT_KNOWN = 0
+
+              # The memory layer has been successfully enabled and is ready to serve
+              # requests.
+              READY = 1
+
+              # The memory layer is currently being enabled, and may be disabled
+              # if the enablement process encounters an error. A cluster may not be able
+              # to serve requests from the memory layer while being enabled.
+              ENABLING = 2
+
+              # The memory layer is currently being resized, and may revert to its
+              # previous storage size if the process encounters an error. The memory
+              # layer is still capable of serving requests while being resized, but may
+              # exhibit performance as if its number of allocated nodes is between the
+              # starting and requested states.
+              RESIZING = 3
+
+              # The memory layer is disabled. The default state for a cluster without a
+              # memory layer.
+              DISABLED = 4
+            end
+          end
+
           # A configuration object describing how Cloud Bigtable should treat traffic
           # from a particular end user application.
           # @!attribute [rw] name
@@ -413,9 +472,23 @@ module Google
             # @!attribute [rw] priority
             #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::Priority]
             #     The priority of requests sent using this app profile.
+            # @!attribute [rw] memory_config
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::StandardIsolation::MemoryConfig]
+            #     Optional. The memory config to use for requests sent using this app
+            #     profile.
             class StandardIsolation
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # If set, eligible single-row requests (currently limited to ReadRows)
+              # using this app profile will be routed to the memory layer. All eligible
+              # writes populate the memory layer. MemoryConfig can only be set if the
+              # AppProfile uses single cluster routing and the configured cluster has a
+              # memory layer enabled.
+              class MemoryConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Data Boost is a serverless compute capability that lets you run

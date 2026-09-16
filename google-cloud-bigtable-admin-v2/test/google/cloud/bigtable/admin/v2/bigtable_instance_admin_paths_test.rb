@@ -125,6 +125,18 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientPathsTe
     end
   end
 
+  def test_memory_layer_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.memory_layer_path project: "value0", instance: "value1", cluster: "value2"
+      assert_equal "projects/value0/instances/value1/clusters/value2/memoryLayer", path
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

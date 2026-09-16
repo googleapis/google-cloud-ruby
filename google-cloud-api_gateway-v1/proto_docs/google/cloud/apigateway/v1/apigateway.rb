@@ -106,8 +106,8 @@ module Google
         #     Optional. Display name.
         # @!attribute [rw] gateway_service_account
         #   @return [::String]
-        #     Immutable. The Google Cloud IAM Service Account that Gateways serving this config
-        #     should use to authenticate to other services. This may either be the
+        #     Immutable. The Google Cloud IAM Service Account that Gateways serving this
+        #     config should use to authenticate to other services. This may either be the
         #     Service Account's email
         #     (`{ACCOUNT_ID}@{PROJECT}.iam.gserviceaccount.com`) or its full resource
         #     name (`projects/{PROJECT}/accounts/{UNIQUE_ID}`). This is most often used
@@ -126,12 +126,12 @@ module Google
         #     managed_service_configs must not be included.
         # @!attribute [rw] grpc_services
         #   @return [::Array<::Google::Cloud::ApiGateway::V1::ApiConfig::GrpcServiceDefinition>]
-        #     Optional. gRPC service definition files. If specified, openapi_documents must
-        #     not be included.
+        #     Optional. gRPC service definition files. If specified, openapi_documents
+        #     must not be included.
         # @!attribute [rw] managed_service_configs
         #   @return [::Array<::Google::Cloud::ApiGateway::V1::ApiConfig::File>]
-        #     Optional. Service Configuration files. At least one must be included when using gRPC
-        #     service definitions. See
+        #     Optional. Service Configuration files. At least one must be included when
+        #     using gRPC service definitions. See
         #     https://cloud.google.com/endpoints/docs/grpc/grpc-service-config#service_configuration_overview
         #     for the expected file contents.
         #
@@ -180,8 +180,8 @@ module Google
           #     $ protoc --include_imports --include_source_info test.proto -o out.pb
           # @!attribute [rw] source
           #   @return [::Array<::Google::Cloud::ApiGateway::V1::ApiConfig::File>]
-          #     Optional. Uncompiled proto files associated with the descriptor set, used for
-          #     display purposes (server-side compilation is not supported). These
+          #     Optional. Uncompiled proto files associated with the descriptor set, used
+          #     for display purposes (server-side compilation is not supported). These
           #     should match the inputs to 'protoc' command used to generate
           #     file_descriptor_set.
           class GrpcServiceDefinition
@@ -254,8 +254,20 @@ module Google
         #     Output only. The current state of the Gateway.
         # @!attribute [r] default_hostname
         #   @return [::String]
-        #     Output only. The default API Gateway host name of the form
-        #     `{gateway_id}-{hash}.{region_code}.gateway.dev`.
+        #     Output only. The default hostname that serves traffic for this Gateway.
+        # @!attribute [rw] streaming_mode
+        #   @return [::Google::Cloud::ApiGateway::V1::Gateway::StreamingMode]
+        #     Optional. Immutable. Requests streaming for a new gateway. An attempt to
+        #     change it on update is rejected. If unset, the service selects the mode.
+        #     This field records only what was requested and is never modified by the
+        #     service; read `effective_streaming_mode` for the mode the gateway is served
+        #     with.
+        # @!attribute [r] effective_streaming_mode
+        #   @return [::Google::Cloud::ApiGateway::V1::Gateway::EffectiveStreamingMode]
+        #     Output only. The streaming mode this gateway is actually served with, which
+        #     the service resolves at creation from `streaming_mode`, the referenced API
+        #     Config, and the platform default at the time. Read this rather than
+        #     `streaming_mode` to determine whether a gateway supports streaming.
         class Gateway
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -288,6 +300,33 @@ module Google
 
             # Gateway is being updated.
             UPDATING = 5
+          end
+
+          # Streaming mode for a Gateway.
+          # This enum is frozen. No values are expected to be added in the future.
+          module StreamingMode
+            # Lets the service select the streaming mode.
+            STREAMING_MODE_UNSPECIFIED = 0
+
+            # Enables streaming. The gateway supports Server-Sent Events (SSE), HTTP/2
+            # streaming, HTTP chunked transfer, WebSockets, and gRPC bidirectional
+            # streaming.
+            STREAMING_MODE_ENABLED = 1
+          end
+
+          # The streaming mode a Gateway is served with.
+          # This enum is frozen. No values are expected to be added in the future.
+          module EffectiveStreamingMode
+            # Indicates that the service has not resolved a mode. Every gateway
+            # returned by `GetGateway` and `ListGateways` carries a resolved mode, so
+            # this value should not be returned under normal circumstances.
+            EFFECTIVE_STREAMING_MODE_UNSPECIFIED = 0
+
+            # Indicates that the gateway does not support streaming.
+            EFFECTIVE_STREAMING_MODE_DISABLED = 1
+
+            # Indicates that the gateway supports streaming.
+            EFFECTIVE_STREAMING_MODE_ENABLED = 2
           end
         end
 
@@ -345,8 +384,8 @@ module Google
         #     `projects/*/locations/*`
         # @!attribute [rw] gateway_id
         #   @return [::String]
-        #     Required. Identifier to assign to the Gateway. Must be unique within scope of
-        #     the parent resource.
+        #     Required. Identifier to assign to the Gateway. Must be unique within scope
+        #     of the parent resource.
         # @!attribute [rw] gateway
         #   @return [::Google::Cloud::ApiGateway::V1::Gateway]
         #     Required. Gateway resource.
@@ -540,8 +579,8 @@ module Google
         #     `projects/*/locations/global/apis/*`
         # @!attribute [rw] api_config_id
         #   @return [::String]
-        #     Required. Identifier to assign to the API Config. Must be unique within scope of
-        #     the parent resource.
+        #     Required. Identifier to assign to the API Config. Must be unique within
+        #     scope of the parent resource.
         # @!attribute [rw] api_config
         #   @return [::Google::Cloud::ApiGateway::V1::ApiConfig]
         #     Required. API resource.
@@ -596,14 +635,17 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
         #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
         # @!attribute [r] diagnostics
         #   @return [::Array<::Google::Cloud::ApiGateway::V1::OperationMetadata::Diagnostic>]
-        #     Output only. Diagnostics generated during processing of configuration source files.
+        #     Output only. Diagnostics generated during processing of configuration
+        #     source files.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

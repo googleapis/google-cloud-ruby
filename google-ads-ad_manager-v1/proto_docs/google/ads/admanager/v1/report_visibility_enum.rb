@@ -21,7 +21,8 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Wrapper message for ReportVisibility enum.
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::ReportVisibilityEnum::ReportVisibility ReportVisibility}.
         class ReportVisibilityEnum
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

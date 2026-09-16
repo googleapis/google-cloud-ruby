@@ -2124,6 +2124,75 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
     end
   end
 
+  def test_fetch_refs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecureSourceManager::V1::FetchRefsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    repository = "hello world"
+    type = :REF_TYPE_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_refs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_refs, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest, request
+      assert_equal "hello world", request["repository"]
+      assert_equal :REF_TYPE_UNSPECIFIED, request["type"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_refs_client_stub do
+      # Create client
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_refs({ repository: repository, type: type, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_refs repository: repository, type: type, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_refs ::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest.new(repository: repository, type: type, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_refs({ repository: repository, type: type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_refs(::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest.new(repository: repository, type: type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_refs_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_issue
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

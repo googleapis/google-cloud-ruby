@@ -758,6 +758,9 @@ module Google
         #     were specified in the request.
         #
         #     However if the results are not sampled, this field will not be defined.
+        # @!attribute [rw] data_truncation_reasons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::ResponseMetaData::DataTruncationReason>]
+        #     If set, indicate there is data truncation in the report.
         class ResponseMetaData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -785,6 +788,79 @@ module Google
             class ActiveMetricRestriction
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Describes a reason for data truncation in the report.
+          # @!attribute [rw] data_truncation_type
+          #   @return [::Google::Analytics::Data::V1beta::ResponseMetaData::DataTruncationReason::DataTruncationType]
+          #     The type of data truncation.
+          # @!attribute [rw] data_truncation_message
+          #   @return [::String]
+          #     A descriptive message explaining the data truncation.
+          # @!attribute [rw] data_truncation_date
+          #   @return [::String]
+          #     The data truncation date in the format YYYY-MM-DD.
+          #     Indicates data before this date is truncated.
+          # @!attribute [rw] data_truncation_date_ranges
+          #   @return [::Array<::Google::Analytics::Data::V1beta::ResponseMetaData::DataTruncationReason::DataTruncationDateRange>]
+          #     The truncated date ranges.
+          class DataTruncationReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Define the truncated date range from start_date to end_date.
+            # @!attribute [rw] start_date
+            #   @return [::String]
+            #     The start date in the format YYYY-MM-DD (inclusive).
+            # @!attribute [rw] end_date
+            #   @return [::String]
+            #     The end date in the format YYYY-MM-DD (inclusive).
+            class DataTruncationDateRange
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The type of data truncation.
+            module DataTruncationType
+              # Unspecified type.
+              DATA_TRUNCATION_TYPE_UNSPECIFIED = 0
+
+              # Data is truncated in attribution report for rules-based models golden
+              # date.
+              DATA_TRUNCATION_TYPE_RULES_BASED_MODELS = 1
+
+              # Data is truncated in attribution report for data driven attribution
+              # golden date.
+              DATA_TRUNCATION_TYPE_DATA_DRIVEN_ATTRIBUTION = 2
+
+              # Data is truncated because DV360 policy does not permit data older than
+              # 2 years from being returned.
+              DATA_TRUNCATION_TYPE_DV360 = 3
+
+              # Data is truncated because CM360 policy does not permit data older than
+              # 2 years from being returned.
+              DATA_TRUNCATION_TYPE_CM360 = 4
+
+              # New item-scoped ecommerce metrics only have data after a specific date.
+              DATA_TRUNCATION_TYPE_ITEM_SCOPED_ECOMMERCE_METRICS = 5
+
+              # New event-scoped ecommerce metrics only have data after a specific
+              # date.
+              DATA_TRUNCATION_TYPE_EVENT_SCOPED_ECOMMERCE_METRICS = 6
+
+              # Query date range may not be fully served.
+              DATA_TRUNCATION_TYPE_DATE_RANGE = 7
+
+              # Data truncated because the query attempts to read event data prior
+              # to its retention date.
+              DATA_TRUNCATION_TYPE_PROPERTY = 8
+
+              # Data is truncated in conversions report.
+              DATA_TRUNCATION_TYPE_CONVERSIONS = 9
+
+              # Data is truncated due to Google Ads 36 month retention policy.
+              DATA_TRUNCATION_TYPE_GOOGLE_ADS = 10
             end
           end
         end

@@ -511,8 +511,8 @@ module Google
 
           # A flag for a report. Flags are used show if certain thresholds are met.
           # Result rows that match the filter will have the corresponding
-          # [MetricValueGroup.flagValues][MetricValueGroup] index set to true.
-          # For more information about flags see:
+          # {::Google::Ads::AdManager::V1::ReportDataTable::MetricValueGroup#flag_values ReportDataTable.MetricValueGroup.flagValues}
+          # index set to true. For more information about flags see:
           # https://support.google.com/admanager/answer/15079975
           # @!attribute [rw] filters
           #   @return [::Array<::Google::Ads::AdManager::V1::ReportDefinition::Filter>]

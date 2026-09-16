@@ -155,6 +155,14 @@ module Google
         # @!attribute [rw] encrypted_user_ids
         #   @return [::Array<::Google::Ads::DataManager::V1::EncryptedUserId>]
         #     Optional. Any number of encrypted user IDs.
+        # @!attribute [rw] ppid
+        #   @return [::String]
+        #     Optional. A unique identifier for an authenticated user (signed-in), as
+        #     defined by the publisher.
+        # @!attribute [rw] visitor_ppid
+        #   @return [::String]
+        #     Optional. A unique identifier for an unauthenticated user (user who is not
+        #     signed-in), as defined by the publisher.
         class AdIdentifiers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

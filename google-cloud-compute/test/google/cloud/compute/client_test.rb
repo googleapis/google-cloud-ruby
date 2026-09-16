@@ -590,6 +590,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_project_views_rest
+    skip unless Google::Cloud::Compute.project_views_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.project_views do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ProjectViews::Rest::Client, client
+    end
+  end
+
   def test_projects_rest
     skip unless Google::Cloud::Compute.projects_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do

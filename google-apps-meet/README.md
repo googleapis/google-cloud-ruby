@@ -17,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-apps-meet-v2](https://cloud.google.com/ruby/docs/reference/google-apps-meet-v2/latest).
 
-See also the [Product Documentation](https://developers.google.com/meet/api/guides/overview)
+See also the [Product Documentation](https://developers.google.com/workspace/meet/api/guides/overview)
 for more usage information.
 
 ## Quick Start

@@ -3360,6 +3360,107 @@ module Google
             end
 
             ##
+            # Fetches git references from a repository.
+            #
+            # @overload fetch_refs(request, options = nil)
+            #   Pass arguments to `fetch_refs` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_refs(repository: nil, type: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `fetch_refs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param repository [::String]
+            #     Required. The format is
+            #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+            #     Specifies the repository to fetch the references from.
+            #   @param type [::Google::Cloud::SecureSourceManager::V1::Ref::RefType]
+            #     Optional. The type of reference to fetch (eg. branch, tag). By default, all
+            #     references are returned.
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Ref>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Ref>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::FetchRefsRequest.new
+            #
+            #   # Call the fetch_refs method.
+            #   result = client.fetch_refs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::Ref.
+            #     p item
+            #   end
+            #
+            def fetch_refs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::FetchRefsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_refs.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.repository
+                header_params["repository"] = request.repository
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_refs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_refs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :fetch_refs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @secure_source_manager_stub, :fetch_refs, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates an issue.
             #
             # @overload create_issue(request, options = nil)
@@ -5664,6 +5765,11 @@ module Google
                 #
                 attr_reader :fetch_blob
                 ##
+                # RPC-specific configuration for `fetch_refs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_refs
+                ##
                 # RPC-specific configuration for `create_issue`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5830,6 +5936,8 @@ module Google
                   @fetch_tree = ::Gapic::Config::Method.new fetch_tree_config
                   fetch_blob_config = parent_rpcs.fetch_blob if parent_rpcs.respond_to? :fetch_blob
                   @fetch_blob = ::Gapic::Config::Method.new fetch_blob_config
+                  fetch_refs_config = parent_rpcs.fetch_refs if parent_rpcs.respond_to? :fetch_refs
+                  @fetch_refs = ::Gapic::Config::Method.new fetch_refs_config
                   create_issue_config = parent_rpcs.create_issue if parent_rpcs.respond_to? :create_issue
                   @create_issue = ::Gapic::Config::Method.new create_issue_config
                   get_issue_config = parent_rpcs.get_issue if parent_rpcs.respond_to? :get_issue

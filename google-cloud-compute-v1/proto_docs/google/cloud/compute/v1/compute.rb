@@ -12019,7 +12019,8 @@ module Google
         #     instance must already be attached to the NEG specified in the
         #     haPolicy.leader.backendGroup.
         #
-        #     The name must be 1-63 characters long, and comply with RFC1035.
+        #     The value must be a valid RFC1035 name (1-63 characters) or a valid
+        #     instance URL.
         #     Authorization requires the following IAM permission on the
         #     specified resource instance: compute.instances.use
         class BackendServiceHAPolicyLeaderNetworkEndpoint
@@ -13836,6 +13837,426 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request to provide Assistant Scores. These scores determine VM
+        # obtainability and preemption likelihood.
+        # @!attribute [rw] distribution_policy
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequestDistributionPolicy]
+        #     Policy specifying the distribution of instances across
+        #     zones within the requested region.
+        # @!attribute [rw] instance_flexibility_policy
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequestInstanceFlexibilityPolicy]
+        #     Policy for instance selectors.
+        # @!attribute [rw] instance_properties
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequestInstanceProperties]
+        #     Instance properties for this request.
+        # @!attribute [rw] size
+        #   @return [::Integer]
+        #     The number of VM instances to request.
+        class CapacityAdviceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Distribution policy.
+        # @!attribute [rw] target_shape
+        #   @return [::String]
+        #     Target distribution shape. You can specify the following values:ANY, ANY_SINGLE_ZONE, or BALANCED.
+        #     Check the TargetShape enum for the list of possible values.
+        # @!attribute [rw] zones
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityAdviceRequestDistributionPolicyZoneConfiguration>]
+        #     Zones where Capacity Advisor looks for capacity.
+        class CapacityAdviceRequestDistributionPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Target distribution shape. You can specify the following values:ANY, ANY_SINGLE_ZONE, or BALANCED.
+          module TargetShape
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TARGET_SHAPE = 0
+
+            # Picks zones for creating VM instances to fulfill the requested number
+            # of VMs within present resource constraints.
+            ANY = 64_972
+
+            # Creates all VM instances within a single zone. The zone is selected
+            # based on the present resource constraints.
+            ANY_SINGLE_ZONE = 61_100_880
+
+            # Prioritizes acquisition of resources, scheduling VMs in zones where
+            # resources are available while distributing VMs as evenly as possible
+            # across selected zones to minimize the impact of zonal failure.
+            BALANCED = 468_409_608
+
+            # Default value, unused.
+            TARGET_SHAPE_UNSPECIFIED = 449_316_907
+          end
+        end
+
+        # Zone configuration for the distribution policy.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The URL of the zone. It can be a
+        #     partial or full URL. For example, the following are valid values:
+        #
+        #
+        #          - https://www.googleapis.com/compute/v1/projects/project/zones/zone
+        #        - projects/project/zones/zone
+        #        - zones/zone
+        class CapacityAdviceRequestDistributionPolicyZoneConfiguration
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification of alternative, flexible instance configurations.
+        # @!attribute [rw] instance_selections
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection}]
+        #     Named instance selections to configure properties.
+        #     The key is an arbitrary, unique RFC1035 string that identifies the
+        #     instance selection.
+        class CapacityAdviceRequestInstanceFlexibilityPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection]
+          class InstanceSelectionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Machine specification.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelectionAttachedDisk>]
+        #     Local SSDs.
+        # @!attribute [rw] guest_accelerators
+        #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
+        #     Accelerators configuration.
+        # @!attribute [rw] machine_types
+        #   @return [::Array<::String>]
+        #     Full machine-type names, e.g. "n1-standard-16".
+        class CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Attached disk configuration.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Specifies the type of the disk.
+        #     Check the Type enum for the list of possible values.
+        class CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelectionAttachedDisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the type of the disk.
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            # Default value, unspecified disk type.
+            DISK_TYPE_UNSPECIFIED = 333_621_236
+
+            # Scratch disk (Local SSD).
+            SCRATCH = 496_778_970
+          end
+        end
+
+        # Instance provisioning properties.
+        # @!attribute [rw] scheduling
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequestInstancePropertiesScheduling]
+        #     Specifies the scheduling options.
+        class CapacityAdviceRequestInstanceProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the instance scheduling options.
+        # @!attribute [rw] provisioning_model
+        #   @return [::String]
+        #     Specifies the provisioning model.
+        #     Check the ProvisioningModel enum for the list of possible values.
+        class CapacityAdviceRequestInstancePropertiesScheduling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the provisioning model.
+          module ProvisioningModel
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PROVISIONING_MODEL = 0
+
+            # Instance is provisioned using the Flex Start provisioning model and
+            # has a limited runtime.
+            FLEX_START = 101_746_812
+
+            # Bound to the lifecycle of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 293_538_571
+
+            # Heavily discounted, no guaranteed runtime.
+            SPOT = 2_552_066
+
+            # Standard provisioning with user controlled runtime, no discounts.
+            STANDARD = 484_642_493
+          end
+        end
+
+        # A response contains scoring recommendations.
+        # @!attribute [rw] recommendations
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityAdviceResponseRecommendation>]
+        #     Initially the API will provide one recommendation which balances the
+        #     individual scores according to the service provider's preference.
+        class CapacityAdviceResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Recommendation.
+        # @!attribute [rw] scores
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceResponseRecommendationScores]
+        #     Scores for the recommendation.
+        # @!attribute [rw] shards
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityAdviceResponseRecommendationShard>]
+        #     Shards represent blocks of uniform capacity in recommendations.
+        class CapacityAdviceResponseRecommendation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Groups information about a shard of capacity.
+        # @!attribute [rw] estimated_uptime
+        #   @return [::String]
+        #     The estimated run time of the majority of Spot VMs in the request
+        #     before preemption. The estimate is best-effort only. It is based on
+        #     historical data and current conditions.
+        # @!attribute [rw] obtainability
+        #   @return [::Float]
+        #     The obtainability score indicates the likelihood of successfully
+        #     obtaining (provisioning) the requested number of VMs.
+        #     The score range is 0.0 through 1.0. Higher is better.
+        class CapacityAdviceResponseRecommendationScores
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Shards represent blocks of uniform capacity in recommendations.
+        # Each shard is for a single zone and a single machine shape. Each shard
+        # defines a size expressed as the number of VMs.
+        # @!attribute [rw] instance_count
+        #   @return [::Integer]
+        #     The number of instances.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     The machine type corresponds to the instance selection in the request.
+        # @!attribute [rw] provisioning_model
+        #   @return [::String]
+        #     The provisioning model that you want to view recommendations for.
+        #     Check the ProvisioningModel enum for the list of possible values.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Output only. The zone name for this shard.
+        class CapacityAdviceResponseRecommendationShard
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The provisioning model that you want to view recommendations for.
+          module ProvisioningModel
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PROVISIONING_MODEL = 0
+
+            # Instance is provisioned using the Flex Start provisioning model and
+            # has a limited runtime.
+            FLEX_START = 101_746_812
+
+            # Bound to the lifecycle of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 293_538_571
+
+            # Heavily discounted, no guaranteed runtime.
+            SPOT = 2_552_066
+
+            # Standard provisioning with user controlled runtime, no discounts.
+            STANDARD = 484_642_493
+          end
+        end
+
+        # A request message for Advice.Capacity. See the method description for details.
+        # @!attribute [rw] capacity_advice_request_resource
+        #   @return [::Google::Cloud::Compute::V1::CapacityAdviceRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        class CapacityAdviceRpcRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Advice.CapacityHistory. See the method description for details.
+        # @!attribute [rw] capacity_history_request_resource
+        #   @return [::Google::Cloud::Compute::V1::CapacityHistoryRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        class CapacityHistoryAdviceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to get the capacity history.
+        # @!attribute [rw] instance_properties
+        #   @return [::Google::Cloud::Compute::V1::CapacityHistoryRequestInstanceProperties]
+        #     Instance properties for this request.
+        # @!attribute [rw] location_policy
+        #   @return [::Google::Cloud::Compute::V1::CapacityHistoryRequestLocationPolicy]
+        #     Location policy for this request.
+        # @!attribute [rw] types
+        #   @return [::Array<::String>]
+        #     List of history types to get capacity history for.
+        #     Check the Types enum for the list of possible values.
+        class CapacityHistoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module Types
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPES = 0
+
+            # Default value, unused.
+            HISTORY_TYPE_UNSPECIFIED = 58_549_757
+
+            # Preemption history.
+            PREEMPTION = 512_869_337
+
+            # Price history.
+            PRICE = 76_396_841
+          end
+        end
+
+        # Instance properties for this request.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     The machine type for the VM, such as `n2-standard-4`.
+        # @!attribute [rw] scheduling
+        #   @return [::Google::Cloud::Compute::V1::CapacityHistoryRequestInstancePropertiesScheduling]
+        #     Specifies the scheduling options.
+        class CapacityHistoryRequestInstanceProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Scheduling options.
+        # @!attribute [rw] provisioning_model
+        #   @return [::String]
+        #     The provisioning model to get capacity history for.
+        #     This field must be set to SPOT.
+        #
+        #     For more information, see
+        #     Compute Engine instances provisioning models.
+        #     Check the ProvisioningModel enum for the list of possible values.
+        class CapacityHistoryRequestInstancePropertiesScheduling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The provisioning model to get capacity history for.
+          # This field must be set to SPOT.
+          #
+          # For more information, see
+          # Compute Engine instances provisioning models.
+          module ProvisioningModel
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PROVISIONING_MODEL = 0
+
+            # Instance is provisioned using the Flex Start provisioning model and
+            # has a limited runtime.
+            FLEX_START = 101_746_812
+
+            # Bound to the lifecycle of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 293_538_571
+
+            # Heavily discounted, no guaranteed runtime.
+            SPOT = 2_552_066
+
+            # Standard provisioning with user controlled runtime, no discounts.
+            STANDARD = 484_642_493
+          end
+        end
+
+        # Location policy for this request.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     The region or zone to get capacity history for.
+        #
+        #     It can be a partial or full URL. For example, the following are valid
+        #     values:
+        #
+        #
+        #          - https://www.googleapis.com/compute/v1/projects/project/zones/zone
+        #        - projects/project/zones/zone
+        #        - zones/zone
+        #
+        #
+        #
+        #     This field is optional.
+        class CapacityHistoryRequestLocationPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains the capacity history.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Output only. The location (region or zone) for which the capacity history is returned.
+        #     It is returned as a URL - For example,https://www.googleapis.com/compute/v1/projects/project/zones/zone.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     The machine type for which the capacity history is returned.
+        # @!attribute [rw] preemption_history
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityHistoryResponsePreemptionRecord>]
+        #     The preemption history for the requested machine type and location.
+        # @!attribute [rw] price_history
+        #   @return [::Array<::Google::Cloud::Compute::V1::CapacityHistoryResponsePriceRecord>]
+        #     The price history for the requested machine type and location.
+        class CapacityHistoryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A record of Spot VM preemption history.
+        # @!attribute [rw] interval
+        #   @return [::Google::Cloud::Compute::V1::Interval]
+        #     The time interval for this preemption record.
+        # @!attribute [rw] preemption_rate
+        #   @return [::Float]
+        #     The preemption rate during the interval, representing the fraction of
+        #     Spot VMs that were preempted. Range: 0.0 to 1.0. Preemption rate is
+        #     calculated as (total preempted Spots) / (total Spots that stopped
+        #     running).
+        class CapacityHistoryResponsePreemptionRecord
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A record of price history.
+        # @!attribute [rw] interval
+        #   @return [::Google::Cloud::Compute::V1::Interval]
+        #     The time interval for this price record.
+        # @!attribute [rw] list_price
+        #   @return [::Google::Cloud::Compute::V1::Money]
+        #     The Spot VM list price during the interval.
+        class CapacityHistoryResponsePriceRecord
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Settings controlling the volume of requests, connections and retries to this
         # backend service.
         # @!attribute [rw] max_connections
@@ -14102,7 +14523,7 @@ module Google
         #     resource types.
         #
         #      The type must be one of the following:ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3,ACCELERATOR_OPTIMIZED_A3_MEGA,COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D,
-        #      COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,GRAPHICS_OPTIMIZED_G4_VGPU,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For
+        #      COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,GRAPHICS_OPTIMIZED_G4_VGPU,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3,STORAGE_OPTIMIZED_Z4DS, STORAGE_OPTIMIZED_Z4DH,STORAGE_OPTIMIZED_Z4D4T. For
         #     example, type MEMORY_OPTIMIZED specifies a commitment that
         #     applies only to eligible resources of memory optimized M1 and M2 machine
         #     series. Type GENERAL_PURPOSE specifies a commitment that
@@ -14174,7 +14595,7 @@ module Google
           # resource types.
           #
           #  The type must be one of the following:ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3,ACCELERATOR_OPTIMIZED_A3_MEGA,COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D,
-          #  COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,GRAPHICS_OPTIMIZED_G4_VGPU,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For
+          #  COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,GRAPHICS_OPTIMIZED_G4_VGPU,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3,STORAGE_OPTIMIZED_Z4DS, STORAGE_OPTIMIZED_Z4DH,STORAGE_OPTIMIZED_Z4D4T. For
           # example, type MEMORY_OPTIMIZED specifies a commitment that
           # applies only to eligible resources of memory optimized M1 and M2 machine
           # series. Type GENERAL_PURPOSE specifies a commitment that
@@ -14278,6 +14699,15 @@ module Google
             NETWORK_OPTIMIZED_U4S = 147_044_875
 
             STORAGE_OPTIMIZED_Z3 = 316_796_085
+
+            # CUD bucket for Z4D-4T machines.
+            STORAGE_OPTIMIZED_Z4D4T = 18_503_022
+
+            # CUD bucket for Z4DH machines.
+            STORAGE_OPTIMIZED_Z4DH = 35_233_722
+
+            # CUD bucket for Z4DS machines.
+            STORAGE_OPTIMIZED_Z4DS = 35_233_733
 
             # Note for internal users: When adding a new enum Type for v1, make sure
             # to also add it in the comment for the `optional Type type` definition.
@@ -24943,6 +25373,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ProjectViews.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID for this request. This is part of the URL path.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Required. Name of the region for this request. This is part of the URL path.
+        class GetProjectViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for PublicAdvertisedPrefixes.Get. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -27036,6 +27478,10 @@ module Google
             UNDEFINED_TYPE = 0
 
             BARE_METAL_LINUX_COMPATIBLE = 354_232_740
+
+            # Indicates the guest OS is capable of Bare Metal Secure AI (BMSAI)
+            # confidential computing.
+            BMSAI_CAPABLE = 449_302_109
 
             CCA_CAPABLE = 79_012_270
 
@@ -35127,6 +35573,9 @@ module Google
         end
 
         # Represents the change that you want to make to the instance properties.
+        # @!attribute [rw] expose_host_topology
+        #   @return [::Boolean]
+        #     This optional flag exposes the hashed physical host ID.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The label key-value pairs that you want to patch onto the instance.
@@ -39552,6 +40001,29 @@ module Google
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::InterconnectMacsecConfig]
         class InterconnectsGetMacsecConfigResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a time interval, encoded as a Timestamp start (inclusive) and a
+        # Timestamp end (exclusive).
+        #
+        # The start must be less than or equal to the end.
+        # When the start equals the end, the interval is empty (matches no time).
+        # When both start and end are unspecified, the interval matches any time.
+        # @!attribute [rw] end_time
+        #   @return [::String]
+        #     Optional. Exclusive end of the interval.
+        #
+        #     If specified, a Timestamp matching this interval will have to be before the
+        #     end.
+        # @!attribute [rw] start_time
+        #   @return [::String]
+        #     Optional. Inclusive start of the interval.
+        #
+        #     If specified, a Timestamp matching this interval will have to be the same
+        #     or after the start.
+        class Interval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -56091,6 +56563,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents an amount of money with its currency type.
+        # @!attribute [rw] currency_code
+        #   @return [::String]
+        #     The three-letter currency code defined in ISO 4217.
+        # @!attribute [rw] nanos
+        #   @return [::Integer]
+        #     Number of nano (10^-9) units of the amount.
+        #     The value must be between -999,999,999 and +999,999,999 inclusive.
+        #     If `units` is positive, `nanos` must be positive or zero.
+        #     If `units` is zero, `nanos` can be positive, zero, or negative.
+        #     If `units` is negative, `nanos` must be negative or zero.
+        #     For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+        # @!attribute [rw] units
+        #   @return [::Integer]
+        #     The whole units of the amount.
+        #     For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+        class Money
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Addresses.Move. See the method description for details.
         # @!attribute [rw] address
         #   @return [::String]
@@ -63804,6 +64297,23 @@ module Google
 
             UNSPECIFIED_XPN_PROJECT_STATUS = 340_393_257
           end
+        end
+
+        # Represents a ProjectView resource.
+        #
+        # A ProjectView resource contains read-only project data which is available
+        # globally.
+        # @!attribute [rw] project
+        #   @return [::Google::Cloud::Compute::V1::Project]
+        #     The project data.
+        #     The returned Project data does not contain regional or zonal quota
+        #     usage data. Global quota limits are present. For accurate, real-time quota
+        #     usage numbers, query the global
+        #     [projects.get](https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
+        #     endpoint.
+        class ProjectView
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] xpn_resource
@@ -71945,6 +72455,10 @@ module Google
         #     Specifies the availability domain to place the instance in. The value
         #     must be a number between 1 and the number of availability domains
         #     specified in the spread placement policy attached to the instance.
+        # @!attribute [rw] expose_host_topology
+        #   @return [::Boolean]
+        #     This optional flag exposes the hashed physical host ID in the
+        #     ResourceStatus resource of the VM.
         # @!attribute [rw] graceful_shutdown
         #   @return [::Google::Cloud::Compute::V1::SchedulingGracefulShutdown]
         # @!attribute [rw] host_error_timeout_seconds

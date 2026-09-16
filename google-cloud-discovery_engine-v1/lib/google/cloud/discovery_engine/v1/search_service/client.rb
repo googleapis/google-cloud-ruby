@@ -217,7 +217,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, num_results_per_data_store: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil, search_addon_spec: nil, custom_ranking_params: nil, entity: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -299,6 +299,11 @@ module Google
             #     stores. For engines with a single data store, the specs directly under
             #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
             #     used.
+            #   @param num_results_per_data_store [::Integer]
+            #     Optional. The maximum number of results to retrieve from each data store.
+            #     If not specified, it will use the
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec#num_results SearchRequest.DataStoreSpec.num_results}
+            #     if provided, otherwise there is no limit.
             #   @param filter [::String]
             #     The filter syntax consists of an expression language for constructing a
             #     predicate from one or more fields of the documents being filtered. Filter
@@ -491,6 +496,15 @@ module Google
             #       Google model to determine the keyword-based overlap between the query and
             #       the document.
             #       * `base_rank`: the default rank of the result
+            #       * `media_actor_match`: whether the media actor matches the query
+            #       * `media_director_match`: whether the media director matches the query
+            #       * `media_genre_match`: whether the media genre matches the query
+            #       * `media_language_match`: whether the media language matches the query
+            #       * `media_title_match`: whether the media title matches the query
+            #       * `media_prefix_similarity_rank`: prefix similarity rank for media
+            #       results
+            #       * `media_semantic_similarity_rank`: semantic similarity rank for media
+            #       results
             #   @param ranking_expression_backend [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RankingExpressionBackend]
             #     Optional. The backend to use for the ranking expression evaluation.
             #   @param safe_search [::Boolean]
@@ -555,10 +569,6 @@ module Google
             #       Call /answer API with the session ID generated in the first call.
             #       Here, the answer generation happens in the context of the search
             #       results from the first search call.
-            #
-            #     Multi-turn Search feature is currently at private GA stage. Please use
-            #     v1alpha or v1beta version instead before we launch this feature to public
-            #     GA. Or ask for allowlisting through Google Support team.
             #   @param session_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec, ::Hash]
             #     Session specification.
             #
@@ -584,6 +594,19 @@ module Google
             #     This feature is currently supported only for custom and site search.
             #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
             #     Optional. The specification for returning the relevance score.
+            #   @param search_addon_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAddonSpec, ::Hash]
+            #     Optional. SearchAddonSpec is used to disable add-ons for search as per new
+            #     repricing model.
+            #     This field is only supported for search requests.
+            #   @param custom_ranking_params [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::CustomRankingParams, ::Hash]
+            #     Optional. Optional configuration for the Custom Ranking feature.
+            #   @param entity [::String]
+            #     Optional. The entity for customers that may run multiple different
+            #     entities, domains, sites or regions, for example, "Google US", "Google
+            #     Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+            #     be exactly matched with
+            #     [UserEvent.entity][google.cloud.discoveryengine.v1.UserEvent.entity] to get
+            #     search results boosted by entity.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
@@ -680,7 +703,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_lite(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil)
+            # @overload search_lite(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, num_results_per_data_store: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil, search_addon_spec: nil, custom_ranking_params: nil, entity: nil)
             #   Pass arguments to `search_lite` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -762,6 +785,11 @@ module Google
             #     stores. For engines with a single data store, the specs directly under
             #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
             #     used.
+            #   @param num_results_per_data_store [::Integer]
+            #     Optional. The maximum number of results to retrieve from each data store.
+            #     If not specified, it will use the
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec#num_results SearchRequest.DataStoreSpec.num_results}
+            #     if provided, otherwise there is no limit.
             #   @param filter [::String]
             #     The filter syntax consists of an expression language for constructing a
             #     predicate from one or more fields of the documents being filtered. Filter
@@ -954,6 +982,15 @@ module Google
             #       Google model to determine the keyword-based overlap between the query and
             #       the document.
             #       * `base_rank`: the default rank of the result
+            #       * `media_actor_match`: whether the media actor matches the query
+            #       * `media_director_match`: whether the media director matches the query
+            #       * `media_genre_match`: whether the media genre matches the query
+            #       * `media_language_match`: whether the media language matches the query
+            #       * `media_title_match`: whether the media title matches the query
+            #       * `media_prefix_similarity_rank`: prefix similarity rank for media
+            #       results
+            #       * `media_semantic_similarity_rank`: semantic similarity rank for media
+            #       results
             #   @param ranking_expression_backend [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RankingExpressionBackend]
             #     Optional. The backend to use for the ranking expression evaluation.
             #   @param safe_search [::Boolean]
@@ -1018,10 +1055,6 @@ module Google
             #       Call /answer API with the session ID generated in the first call.
             #       Here, the answer generation happens in the context of the search
             #       results from the first search call.
-            #
-            #     Multi-turn Search feature is currently at private GA stage. Please use
-            #     v1alpha or v1beta version instead before we launch this feature to public
-            #     GA. Or ask for allowlisting through Google Support team.
             #   @param session_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SessionSpec, ::Hash]
             #     Session specification.
             #
@@ -1047,6 +1080,19 @@ module Google
             #     This feature is currently supported only for custom and site search.
             #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
             #     Optional. The specification for returning the relevance score.
+            #   @param search_addon_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::SearchAddonSpec, ::Hash]
+            #     Optional. SearchAddonSpec is used to disable add-ons for search as per new
+            #     repricing model.
+            #     This field is only supported for search requests.
+            #   @param custom_ranking_params [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::CustomRankingParams, ::Hash]
+            #     Optional. Optional configuration for the Custom Ranking feature.
+            #   @param entity [::String]
+            #     Optional. The entity for customers that may run multiple different
+            #     entities, domains, sites or regions, for example, "Google US", "Google
+            #     Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+            #     be exactly matched with
+            #     [UserEvent.entity][google.cloud.discoveryengine.v1.UserEvent.entity] to get
+            #     search results boosted by entity.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]

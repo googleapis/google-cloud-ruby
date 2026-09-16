@@ -297,6 +297,7 @@ module Google
               #
               #     **Filterable fields:**
               #
+              #     * `archived`
               #     * `auctionPriorityEnabled`
               #     * `blockOverrideEnabled`
               #     * `buyerAccountId`
@@ -308,6 +309,7 @@ module Google
               #     * `privateAuctionDealId`
               #     * `privateAuctionDisplayName`
               #     * `privateAuctionId`
+              #     * `publisherFloorExempt`
               #     * `status`
               #     * `updateTime`
               #   @param order_by [::String]

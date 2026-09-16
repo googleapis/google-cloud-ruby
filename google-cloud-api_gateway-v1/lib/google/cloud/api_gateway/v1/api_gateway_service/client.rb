@@ -450,8 +450,8 @@ module Google
             #     Required. Parent resource of the Gateway, of the form:
             #     `projects/*/locations/*`
             #   @param gateway_id [::String]
-            #     Required. Identifier to assign to the Gateway. Must be unique within scope of
-            #     the parent resource.
+            #     Required. Identifier to assign to the Gateway. Must be unique within scope
+            #     of the parent resource.
             #   @param gateway [::Google::Cloud::ApiGateway::V1::Gateway, ::Hash]
             #     Required. Gateway resource.
             #
@@ -1415,8 +1415,8 @@ module Google
             #     Required. Parent resource of the API Config, of the form:
             #     `projects/*/locations/global/apis/*`
             #   @param api_config_id [::String]
-            #     Required. Identifier to assign to the API Config. Must be unique within scope of
-            #     the parent resource.
+            #     Required. Identifier to assign to the API Config. Must be unique within
+            #     scope of the parent resource.
             #   @param api_config [::Google::Cloud::ApiGateway::V1::ApiConfig, ::Hash]
             #     Required. API resource.
             #

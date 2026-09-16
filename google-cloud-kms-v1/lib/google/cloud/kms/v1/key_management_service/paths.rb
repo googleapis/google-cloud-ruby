@@ -69,6 +69,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EkmConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/ekmConnections/{ekm_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ekm_connection [String]
+            #
+            # @return [::String]
+            def ekm_connection_path project:, location:, ekm_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/ekmConnections/#{ekm_connection}"
+            end
+
+            ##
             # Create a fully-qualified ImportJob resource string.
             #
             # The resource will be in the following format:

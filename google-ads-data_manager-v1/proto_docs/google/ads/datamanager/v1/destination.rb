@@ -51,9 +51,12 @@ module Google
         #     Required. The account to send the data to or remove the data from.
         # @!attribute [rw] product_destination_id
         #   @return [::String]
-        #     Required. The object within the product account to ingest into. For
+        #     Optional. The object within the product account to ingest into. For
         #     example, a Google Ads audience ID, a Display & Video 360 audience ID or a
         #     Google Ads conversion action ID.
+        #
+        #     This field is optional for Google Ad Manager event ingestion and User
+        #     ingestion. Required for all other use cases.
         class Destination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +107,9 @@ module Google
 
             # Floodlight configuration.
             FLOODLIGHT_CONFIG = 7
+
+            # Google Ad Manager.
+            GOOGLE_AD_MANAGER = 8
           end
         end
 

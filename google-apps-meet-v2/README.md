@@ -39,7 +39,7 @@ response = client.create_space request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-apps-meet-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://developers.google.com/meet/api/guides/overview)
+See also the [Product Documentation](https://developers.google.com/workspace/meet/api/guides/overview)
 for general usage information.
 
 ## Debug Logging

@@ -63,6 +63,257 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
     end
   end
 
+  def test_create_audit_schedule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AuditManager::V1::AuditSchedule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    audit_schedule = {}
+    audit_schedule_id = "hello world"
+    validate_only = true
+
+    create_audit_schedule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_audit_schedule, name
+      assert_kind_of ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AuditManager::V1::AuditSchedule), request["audit_schedule"]
+      assert_equal "hello world", request["audit_schedule_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_audit_schedule_client_stub do
+      # Create client
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_audit_schedule({ parent: parent, audit_schedule: audit_schedule, audit_schedule_id: audit_schedule_id, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_audit_schedule parent: parent, audit_schedule: audit_schedule, audit_schedule_id: audit_schedule_id, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_audit_schedule ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest.new(parent: parent, audit_schedule: audit_schedule, audit_schedule_id: audit_schedule_id, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_audit_schedule({ parent: parent, audit_schedule: audit_schedule, audit_schedule_id: audit_schedule_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_audit_schedule(::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest.new(parent: parent, audit_schedule: audit_schedule, audit_schedule_id: audit_schedule_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_audit_schedule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_audit_schedule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AuditManager::V1::AuditSchedule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    audit_schedule = {}
+    update_mask = {}
+    validate_only = true
+
+    update_audit_schedule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_audit_schedule, name
+      assert_kind_of ::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AuditManager::V1::AuditSchedule), request["audit_schedule"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_audit_schedule_client_stub do
+      # Create client
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_audit_schedule({ audit_schedule: audit_schedule, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_audit_schedule audit_schedule: audit_schedule, update_mask: update_mask, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_audit_schedule ::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest.new(audit_schedule: audit_schedule, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_audit_schedule({ audit_schedule: audit_schedule, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_audit_schedule(::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest.new(audit_schedule: audit_schedule, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_audit_schedule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_audit_schedule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AuditManager::V1::AuditSchedule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_audit_schedule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_audit_schedule, name
+      assert_kind_of ::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_audit_schedule_client_stub do
+      # Create client
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_audit_schedule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_audit_schedule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_audit_schedule ::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_audit_schedule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_audit_schedule(::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_audit_schedule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_audit_schedules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AuditManager::V1::ListAuditSchedulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_audit_schedules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_audit_schedules, name
+      assert_kind_of ::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_audit_schedules_client_stub do
+      # Create client
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_audit_schedules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_audit_schedules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_audit_schedules ::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_audit_schedules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_audit_schedules(::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_audit_schedules_client_stub.call_rpc_count
+    end
+  end
+
   def test_enroll_resource
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AuditManager::V1::Enrollment.new
@@ -73,12 +324,14 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     scope = "hello world"
     destinations = [{}]
+    validate_only = true
 
     enroll_resource_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :enroll_resource, name
       assert_kind_of ::Google::Cloud::AuditManager::V1::EnrollResourceRequest, request
       assert_equal "hello world", request["scope"]
       assert_kind_of ::Google::Cloud::AuditManager::V1::EnrollResourceRequest::EligibleDestination, request["destinations"].first
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -89,31 +342,31 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      c.enroll_resource({ scope: scope, destinations: destinations }) do |response, operation|
+      c.enroll_resource({ scope: scope, destinations: destinations, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.enroll_resource scope: scope, destinations: destinations do |response, operation|
+      c.enroll_resource scope: scope, destinations: destinations, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations) do |response, operation|
+      c.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.enroll_resource({ scope: scope, destinations: destinations }, grpc_options) do |response, operation|
+      c.enroll_resource({ scope: scope, destinations: destinations, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations), grpc_options) do |response, operation|
+      c.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -135,6 +388,7 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
     compliance_standard = "hello world"
     report_format = :AUDIT_SCOPE_REPORT_FORMAT_UNSPECIFIED
     compliance_framework = "hello world"
+    validate_only = true
 
     generate_audit_scope_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_audit_scope_report, name
@@ -143,6 +397,7 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
       assert_equal "hello world", request["compliance_standard"]
       assert_equal :AUDIT_SCOPE_REPORT_FORMAT_UNSPECIFIED, request["report_format"]
       assert_equal "hello world", request["compliance_framework"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -153,31 +408,31 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
+      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
+      c.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
+      c.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
+      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
+      c.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

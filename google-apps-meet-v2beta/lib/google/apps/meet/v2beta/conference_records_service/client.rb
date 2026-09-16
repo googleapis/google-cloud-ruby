@@ -130,6 +130,16 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.get_smart_note.timeout = 60.0
+                default_config.rpcs.get_smart_note.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_smart_notes.timeout = 60.0
+                default_config.rpcs.list_smart_notes.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -1205,7 +1215,8 @@ module Google
             #
             # Note: The transcript entries returned by the Google Meet API might not
             # match the transcription found in the Google Docs transcript file. This can
-            # occur when the Google Docs transcript file is modified after generation.
+            # occur when 1) we have interleaved speakers within milliseconds, or
+            # 2) the Google Docs transcript file is modified after generation.
             #
             # @overload get_transcript_entry(request, options = nil)
             #   Pass arguments to `get_transcript_entry` via a request object, either of type
@@ -1295,7 +1306,8 @@ module Google
             #
             # Note: The transcript entries returned by the Google Meet API might not
             # match the transcription found in the Google Docs transcript file. This can
-            # occur when the Google Docs transcript file is modified after generation.
+            # occur when 1) we have interleaved speakers within milliseconds, or
+            # 2) the Google Docs transcript file is modified after generation.
             #
             # @overload list_transcript_entries(request, options = nil)
             #   Pass arguments to `list_transcript_entries` via a request object, either of type
@@ -1387,6 +1399,191 @@ module Google
 
               @conference_records_service_stub.call_rpc :list_transcript_entries, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @conference_records_service_stub, :list_transcript_entries, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets smart notes by smart note ID.
+            #
+            # @overload get_smart_note(request, options = nil)
+            #   Pass arguments to `get_smart_note` via a request object, either of type
+            #   {::Google::Apps::Meet::V2beta::GetSmartNoteRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Meet::V2beta::GetSmartNoteRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_smart_note(name: nil)
+            #   Pass arguments to `get_smart_note` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of the smart note.
+            #     Format: conferenceRecords/\\{conference_record}/smartNotes/\\{smart_note}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Meet::V2beta::SmartNote]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Meet::V2beta::SmartNote]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/meet/v2beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Meet::V2beta::GetSmartNoteRequest.new
+            #
+            #   # Call the get_smart_note method.
+            #   result = client.get_smart_note request
+            #
+            #   # The returned object is of type Google::Apps::Meet::V2beta::SmartNote.
+            #   p result
+            #
+            def get_smart_note request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2beta::GetSmartNoteRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_smart_note.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Meet::V2beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_smart_note.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_smart_note.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conference_records_service_stub.call_rpc :get_smart_note, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists the set of smart notes from the conference record. By default,
+            # ordered by start time and in ascending order.
+            #
+            # @overload list_smart_notes(request, options = nil)
+            #   Pass arguments to `list_smart_notes` via a request object, either of type
+            #   {::Google::Apps::Meet::V2beta::ListSmartNotesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Meet::V2beta::ListSmartNotesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_smart_notes(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_smart_notes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Format: `conferenceRecords/{conference_record}`
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of smart notes to return. The service might return
+            #     fewer than this value. If unspecified, at most 10 smart notes are returned.
+            #     The maximum value is 100; values above 100 are coerced to 100.
+            #     Maximum might change in the future.
+            #   @param page_token [::String]
+            #     Optional. Page token returned from previous List Call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Meet::V2beta::SmartNote>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Apps::Meet::V2beta::SmartNote>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/meet/v2beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Meet::V2beta::ConferenceRecordsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Meet::V2beta::ListSmartNotesRequest.new
+            #
+            #   # Call the list_smart_notes method.
+            #   result = client.list_smart_notes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Apps::Meet::V2beta::SmartNote.
+            #     p item
+            #   end
+            #
+            def list_smart_notes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Meet::V2beta::ListSmartNotesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_smart_notes.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Meet::V2beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_smart_notes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_smart_notes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conference_records_service_stub.call_rpc :list_smart_notes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @conference_records_service_stub, :list_smart_notes, request, response, operation, options
                 yield response, operation if block_given?
                 throw :response, response
               end
@@ -1639,6 +1836,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_transcript_entries
+                ##
+                # RPC-specific configuration for `get_smart_note`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_smart_note
+                ##
+                # RPC-specific configuration for `list_smart_notes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_smart_notes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1666,6 +1873,10 @@ module Google
                   @get_transcript_entry = ::Gapic::Config::Method.new get_transcript_entry_config
                   list_transcript_entries_config = parent_rpcs.list_transcript_entries if parent_rpcs.respond_to? :list_transcript_entries
                   @list_transcript_entries = ::Gapic::Config::Method.new list_transcript_entries_config
+                  get_smart_note_config = parent_rpcs.get_smart_note if parent_rpcs.respond_to? :get_smart_note
+                  @get_smart_note = ::Gapic::Config::Method.new get_smart_note_config
+                  list_smart_notes_config = parent_rpcs.list_smart_notes if parent_rpcs.respond_to? :list_smart_notes
+                  @list_smart_notes = ::Gapic::Config::Method.new list_smart_notes_config
 
                   yield self if block_given?
                 end

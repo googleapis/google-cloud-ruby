@@ -83,6 +83,64 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AuditSchedule resource string.
+            #
+            # @overload audit_schedule_path(project:, location:, audit_schedule:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/auditSchedules/{audit_schedule}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param audit_schedule [String]
+            #
+            # @overload audit_schedule_path(folder:, location:, audit_schedule:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}`
+            #
+            #   @param folder [String]
+            #   @param location [String]
+            #   @param audit_schedule [String]
+            #
+            # @overload audit_schedule_path(organization:, location:, audit_schedule:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param audit_schedule [String]
+            #
+            # @return [::String]
+            def audit_schedule_path **args
+              resources = {
+                "audit_schedule:location:project" => (proc do |project:, location:, audit_schedule:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/auditSchedules/#{audit_schedule}"
+                end),
+                "audit_schedule:folder:location" => (proc do |folder:, location:, audit_schedule:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/auditSchedules/#{audit_schedule}"
+                end),
+                "audit_schedule:location:organization" => (proc do |organization:, location:, audit_schedule:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/auditSchedules/#{audit_schedule}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified EnrollmentStatusScope resource string.
             #
             # @overload enrollment_status_scope_path(folder:, location:)

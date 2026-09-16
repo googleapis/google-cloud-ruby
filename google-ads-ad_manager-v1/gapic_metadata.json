@@ -1067,6 +1067,20 @@
         }
       }
     },
+    "DaiSessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DaiSessionService::Client",
+          "rpcs": {
+            "GetDaiSession": {
+              "methods": [
+                "get_dai_session"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DeviceCapabilityService": {
       "clients": {
         "grpc": {
