@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "google-cloud-app_topology-v1", ">= 0.1", "< 2.a"
+  gem.add_dependency "google-cloud-app_topology-v1", ">= 0.0", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end

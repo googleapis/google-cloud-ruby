@@ -375,7 +375,7 @@ libraries:
       - path: google/cloud/apptopology/v1
     ruby:
       wrapper_of:
-        - v1:0.1
+        - v1:0.0
   - name: google-cloud-app_topology-v1
     version: 0.1.0
     apis:
