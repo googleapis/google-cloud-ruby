@@ -1,0 +1,17 @@
+{
+    "api_id": "backupdr.googleapis.com",
+    "api_shortname": "backupdr",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-backup_dr/latest",
+    "distribution_name": "google-cloud-backup_dr",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "backupdr",
+    "name_pretty": "Backup and DR Service API",
+    "product_documentation": "https://cloud.google.com/backup-disaster-recovery/docs/reference/rpc",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-backup_dr is the official client library for the Backup and DR Service API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/backup-disaster-recovery/docs/reference/rpc",
+    "library_type": "GAPIC_AUTO"
+}
