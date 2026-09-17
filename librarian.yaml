@@ -3173,7 +3173,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-secure_source_manager-v1
-    version: 2.8.1
+    version: 2.9.0
     apis:
       - path: google/cloud/securesourcemanager/v1
   - name: google-cloud-security-private_ca
