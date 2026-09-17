@@ -1577,6 +1577,80 @@ module Google
         end
 
         ##
+        # The bucket's IP filter configuration.
+        # This value can be modified by calling {#ip_filter=}.
+        #
+        # @note The IP filter metadata is not returned by the API by default.
+        #   You must retrieve the bucket with the `projection: :full` (or `"full"`)
+        #   option to access this configuration. See {Project#bucket}.
+        #
+        # @return [Google::Apis::StorageV1::Bucket::IpFilter, nil] The bucket's IP filter configuration,
+        #   or `nil` if not configured.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket", projection: "full"
+        #   ip_filter = bucket.ip_filter
+        #   if ip_filter
+        #     puts "Mode: #{ip_filter.mode}"
+        #     puts "Public CIDR: #{ip_filter.public_network_source&.allowed_ip_cidr_ranges}"
+        #   end
+        #
+        def ip_filter
+          @gapi.ip_filter
+        end
+
+        ##
+        # Sets the value for IP filter in the bucket. This value can
+        # be queried by calling {#ip_filter}.
+        #
+        # @param [Google::Apis::StorageV1::Bucket::IpFilter, Hash] new_ip_filter The bucket's new IP filter.
+        #   Acceptable Hash structure:
+        #   * `:mode` (String) - The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
+        #   * `:public_network_source` (Hash) - The public network source configuration:
+        #     * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for public access.
+        #   * `:vpc_network_sources` (Array<Hash>) - The VPC network sources configuration:
+        #     * `:network` (String) - The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
+        #     * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for VPC access.
+        #   * `:allow_cross_org_vpcs` (Boolean) - Whether to allow cross-org VPC access.
+        #   * `:allow_all_service_agent_access` (Boolean) - Whether to allow all service agent access.
+        #
+        # @example Enable IP filter with Hash:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket", projection: "full"
+        #   bucket.ip_filter = {
+        #     mode: "Enabled",
+        #     allow_all_service_agent_access: true,
+        #     public_network_source: {
+        #       allowed_ip_cidr_ranges: ["0.0.0.0/0", "::/0"]
+        #     }
+        #   }
+        #
+        # @example Clear/delete IP filter:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket", projection: "full"
+        #   bucket.ip_filter = {
+        #     mode: "Disabled",
+        #     public_network_source: {
+        #       allowed_ip_cidr_ranges: []
+        #     }
+        #   }
+        #
+        def ip_filter= new_ip_filter
+          @gapi.ip_filter = new_ip_filter || {}
+          patch_gapi! :ip_filter
+        end
+
+        ##
         # Retrieves a list of files matching the criteria.
         #
         # @param [String] prefix Filter results to files whose names begin with
@@ -3337,9 +3411,14 @@ module Google
         ##
         # Reloads the bucket with current data from the Storage service.
         #
-        def reload!
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
+        #
+        def reload! projection: nil
           ensure_service!
-          @gapi = service.get_bucket name, user_project: user_project
+          @gapi = service.get_bucket name, user_project: user_project, projection: projection
           # If NotFound then lazy will never be unset
           @lazy = nil
           self
