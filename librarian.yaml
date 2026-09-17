@@ -91,7 +91,7 @@ libraries:
       wrapper_of:
         - v1beta:0.11
   - name: google-analytics-data-v1beta
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/analytics/data/v1beta
         ruby:
