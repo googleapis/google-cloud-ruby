@@ -135,7 +135,7 @@ libraries:
       wrapper_of:
         - v2:0.0
   - name: google-apps-meet-v2
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/apps/meet/v2
   - name: google-apps-meet-v2beta
