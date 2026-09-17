@@ -1990,7 +1990,7 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-kms-inventory-v1
-    version: 0.23.1
+    version: 0.24.0
     apis:
       - path: google/cloud/kms/inventory/v1
         ruby:
