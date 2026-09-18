@@ -470,18 +470,6 @@ libraries:
     ruby:
       wrapper_of:
         - v1:1.2
-  - name: google-cloud-automl-v1
-    version: 1.8.1
-    apis:
-      - path: google/cloud/automl/v1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-env-prefix: AUTOML
-            ruby-cloud-namespace-override: AutoMl=AutoML;Automl=AutoML
-            ruby-cloud-path-override: auto_ml=automl
-            ruby-cloud-yard-strict: "false"
-    keep:
-      - lib/google/cloud/automl/v1/_helpers.rb
   - name: google-cloud-automl-v1beta1
     version: 0.19.1
     apis:
