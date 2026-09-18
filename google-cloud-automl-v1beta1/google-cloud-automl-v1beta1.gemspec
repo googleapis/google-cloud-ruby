@@ -1,28 +1,27 @@
-# -*- ruby -*-
-# encoding: utf-8
-
 require File.expand_path("lib/google/cloud/automl/v1beta1/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-automl-v1beta1"
-  gem.version       = Google::Cloud::AutoML::V1beta1::VERSION
+  gem.name = "google-cloud-automl-v1beta1"
+  gem.version = Google::Cloud::AutoML::V1beta1::VERSION
+  gem.authors = ["Google LLC"]
+  gem.email = "googleapis-packages@google.com"
+  gem.description =
+    "This gem is obsolete because the related Google backend is turned down. " \
+    "For more information, see https://cloud.google.com/terms/deprecation."
+  gem.summary = "This gem is obsolete because the related backend is turned down."
+  gem.post_install_message = <<~MESSAGE
 
-  gem.authors       = ["Google LLC"]
-  gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Train high-quality custom machine learning models with minimum effort and machine learning expertise. Note that google-cloud-automl-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-automl instead. See the readme for more details."
-  gem.summary       = "Train high-quality custom machine learning models with minimum effort and machine learning expertise."
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
-  gem.license       = "Apache-2.0"
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    The google-cloud-automl-v1beta1 gem is OBSOLETE.
+    For more information, see:
+    https://cloud.google.com/terms/deprecation
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  gem.platform      = Gem::Platform::RUBY
-
-  gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      `git ls-files -- proto_docs/*`.split("\n") +
-                      ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
+  MESSAGE
+  gem.homepage = "https://github.com/googleapis/google-cloud-ruby"
+  gem.license = "Apache-2.0"
+  gem.platform = Gem::Platform::RUBY
+  gem.files = ["README.md", "LICENSE.md", ".yardopts", "lib/google/cloud/automl/v1beta1/version.rb"]
   gem.require_paths = ["lib"]
-
-  gem.required_ruby_version = ">= 3.2"
-
-  gem.add_dependency "gapic-common", "~> 1.3"
-  gem.add_dependency "google-cloud-errors", "~> 1.0"
+  gem.required_ruby_version = ">= 3.0"
 end
