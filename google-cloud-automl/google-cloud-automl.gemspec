@@ -2,7 +2,7 @@ require File.expand_path("lib/google/cloud/automl/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name = "google-cloud-automl"
-  gem.version = Google::Cloud::Automl::VERSION
+  gem.version = Google::Cloud::AutoML::VERSION
   gem.authors = ["Google LLC"]
   gem.email = "googleapis-packages@google.com"
   gem.description =
