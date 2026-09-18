@@ -20,7 +20,7 @@ def get_requester_pays_status bucket_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name, user_project: true
 
   if bucket.requester_pays
     puts "Requester pays status is enabled for #{bucket_name}"
