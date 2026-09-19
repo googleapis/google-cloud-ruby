@@ -18,6 +18,10 @@ require "minitest/focus"
 require "minitest/hooks/default"
 require "google/cloud/storage/control"
 
+Google::Cloud::Storage::Control.configure do |config|
+  config.quota_project = ""
+end
+
 def random_bucket_name
   t = Time.now.utc.iso8601.gsub ":", "-"
   "ruby-storage-control-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
