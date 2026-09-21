@@ -197,6 +197,14 @@
       "component": "google-cloud-app_optimize-v1beta",
       "version_file": "lib/google/cloud/app_optimize/v1beta/version.rb"
     },
+    "google-cloud-app_topology": {
+      "component": "google-cloud-app_topology",
+      "version_file": "lib/google/cloud/app_topology/version.rb"
+    },
+    "google-cloud-app_topology-v1": {
+      "component": "google-cloud-app_topology-v1",
+      "version_file": "lib/google/cloud/app_topology/v1/version.rb"
+    },
     "google-cloud-artifact_registry": {
       "component": "google-cloud-artifact_registry",
       "version_file": "lib/google/cloud/artifact_registry/version.rb"
