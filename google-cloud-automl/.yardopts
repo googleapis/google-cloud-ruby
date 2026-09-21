@@ -1,12 +1,9 @@
 --no-private
---title="Cloud AutoML API"
---exclude _pb\.rb$
+--title="Obsolete Gem google-cloud-automl"
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
 -
 README.md
-AUTHENTICATION.md
-MIGRATING.md
 LICENSE.md

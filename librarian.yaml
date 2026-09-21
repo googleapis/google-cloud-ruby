@@ -274,7 +274,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-api_gateway-v1
-    version: 2.6.2
+    version: 2.7.0
     apis:
       - path: google/cloud/apigateway/v1
         ruby:
@@ -369,6 +369,17 @@ libraries:
     version: 1.0.1
     apis:
       - path: google/cloud/appoptimize/v1beta
+  - name: google-cloud-app_topology
+    version: 0.1.0
+    apis:
+      - path: google/cloud/apptopology/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-app_topology-v1
+    version: 0.1.0
+    apis:
+      - path: google/cloud/apptopology/v1
   - name: google-cloud-artifact_registry
     version: 2.2.1
     apis:
@@ -452,36 +463,6 @@ libraries:
     version: 1.2.0
     apis:
       - path: google/cloud/auditmanager/v1
-  - name: google-cloud-automl
-    version: 2.2.1
-    apis:
-      - path: google/cloud/automl/v1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-env-prefix: AUTOML
-            ruby-cloud-gem-namespace: Google::Cloud::AutoML
-            ruby-cloud-migration-version: "1.0"
-            ruby-cloud-namespace-override: AutoMl=AutoML
-            ruby-cloud-path-override: auto_ml=automl
-    keep:
-      - MIGRATING.md
-      - acceptance/google/cloud/automl/v1beta1/automl_service_smoke_test.rb
-      - lib/google/cloud/automl/helpers.rb
-    ruby:
-      wrapper_of:
-        - v1:1.2
-  - name: google-cloud-automl-v1
-    version: 1.8.1
-    apis:
-      - path: google/cloud/automl/v1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-env-prefix: AUTOML
-            ruby-cloud-namespace-override: AutoMl=AutoML;Automl=AutoML
-            ruby-cloud-path-override: auto_ml=automl
-            ruby-cloud-yard-strict: "false"
-    keep:
-      - lib/google/cloud/automl/v1/_helpers.rb
   - name: google-cloud-backupdr
     version: 2.3.1
     apis:
@@ -1986,7 +1967,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
   - name: google-cloud-kms-v1
-    version: 1.15.2
+    version: 1.16.0
     apis:
       - path: google/cloud/kms/v1
         ruby:
