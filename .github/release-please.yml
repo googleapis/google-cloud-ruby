@@ -5,3 +5,4 @@ monorepoTags: true
 onDemand: true
 primaryBranch: main
 releaseType: ruby-librarian
+tagPullRequestNumber: true
