@@ -97,7 +97,7 @@
   "google-cloud-app_optimize-v1beta+FILLER": "0.0.0",
   "google-cloud-app_topology": "0.0.1",
   "google-cloud-app_topology+FILLER": "0.0.0",
-  "google-cloud-app_topology-v1": "0.0.1",
+  "google-cloud-app_topology-v1": "0.1.0",
   "google-cloud-app_topology-v1+FILLER": "0.0.0",
   "google-cloud-artifact_registry": "2.2.1",
   "google-cloud-artifact_registry+FILLER": "0.0.0",
