@@ -129,6 +129,8 @@
   "google-cloud-backupdr+FILLER": "0.0.0",
   "google-cloud-backupdr-v1": "1.11.2",
   "google-cloud-backupdr-v1+FILLER": "0.0.0",
+  "google-cloud-backupdr-v1beta": "0.0.1",
+  "google-cloud-backupdr-v1beta+FILLER": "0.0.0",
   "google-cloud-bare_metal_solution": "2.2.1",
   "google-cloud-bare_metal_solution+FILLER": "0.0.0",
   "google-cloud-bare_metal_solution-v2": "1.6.1",

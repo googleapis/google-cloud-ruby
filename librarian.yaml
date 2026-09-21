@@ -482,6 +482,14 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-namespace-override: Backupdr=BackupDR
             ruby-cloud-path-override: backup_dr=backupdr
+  - name: google-cloud-backupdr-v1beta
+    version: 0.0.1
+    apis:
+      - path: google/cloud/backupdr/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Backupdr=BackupDR
+            ruby-cloud-path-override: backup_dr=backupdr
   - name: google-cloud-bare_metal_solution
     version: 2.2.1
     apis:
