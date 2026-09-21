@@ -370,7 +370,7 @@ libraries:
     apis:
       - path: google/cloud/appoptimize/v1beta
   - name: google-cloud-app_topology
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/apptopology/v1
     ruby:
