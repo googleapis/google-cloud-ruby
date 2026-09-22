@@ -30,6 +30,9 @@ module Google
         #     Why: Business jargon (e.g., YTD revenue is calculated as…, Retirement Age
         #     is 65 in the USA, etc) and system instructions (e.g., answer like a Pirate)
         #     can help the model understand the business context around a user question.
+        #
+        #     Must be at most 250,000 bytes (approx. 250,000 characters for English
+        #     text).
         # @!attribute [rw] datasource_references
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1::DatasourceReferences]
         #     Required. Data sources that are available for answering the question.
@@ -164,10 +167,14 @@ module Google
         #     Optional. The SQL query that should be generated to answer the natural
         #     language question. For example: "SELECT COUNT(*) FROM orders WHERE
         #     order_date BETWEEN '2024-01-01' AND '2024-01-31'"
+        #
+        #     Must be at most 50,000 bytes (approx. 50,000 characters).
         # @!attribute [rw] natural_language_question
         #   @return [::String]
         #     Optional. A natural language question that a user might ask.
         #     For example: "How many orders were placed last month?"
+        #
+        #     Must be at most 2,000 bytes (approx. 2,000 characters).
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1::QueryParameter>]
         #     Optional. The list of query parameters.
@@ -234,10 +241,77 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Natural language questions that a user might ask.
         #     For example: "How many orders were placed last month?"
+        #
+        #     Must be at most 2,000 bytes per question (approx. 2,000 characters).
         # @!attribute [rw] looker_query
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1::LookerQuery]
         #     Optional. The Looker Query corresponding to the natural language questions.
         class LookerGoldenQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A dynamic field in Looker (Custom Dimension, Custom Measure, or Table
+        # Calculation).
+        # @!attribute [rw] category
+        #   @return [::String]
+        #     Optional. The type of dynamic field: dimension, measure, table_calculation.
+        #     Looker can use the category type to specify the name of the dynamic field.
+        #     However, Looker Conversational Analytics keeps the category separate from
+        #     the name of the dynamic field. For more details, see
+        #     https://docs.cloud.google.com/looker/docs/reference/param-lookml-dashboard-table-chart#dynamic_fields.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. The name of the dynamic field in LookML.
+        # @!attribute [rw] label
+        #   @return [::String]
+        #     Optional. The label defines the display name of the dynamic field.
+        # @!attribute [rw] based_on
+        #   @return [::String]
+        #     Optional. For custom measures, this identifies the measure the field is
+        #     based on.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Optional. For custom measures, this identifies the type of aggregation
+        #     (e.g. sum).
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the dynamic field.
+        # @!attribute [rw] expression
+        #   @return [::String]
+        #     Optional. Looker expression to create a table calculation.
+        # @!attribute [rw] filter_expression
+        #   @return [::String]
+        #     Optional. Looker expression to filter a base measure.
+        # @!attribute [rw] value_format
+        #   @return [::String]
+        #     Optional. Value format for the dynamic field.
+        # @!attribute [rw] value_format_name
+        #   @return [::String]
+        #     Optional. Value format name for the dynamic field if using a default named
+        #     format.
+        # @!attribute [rw] calculation_type
+        #   @return [::String]
+        #     Optional. Calculation type for table calculations. Refer to
+        #     https://docs.cloud.google.com/looker/docs/reference/param-lookml-dashboard-table-chart#calculation_type
+        #     for all possible values depending on the `category` of dynamic field.
+        # @!attribute [rw] args
+        #   @return [::Array<::String>]
+        #     Optional. Arguments for custom groups, custom bins, or shortcut
+        #     calculations. For more details, refer to
+        #     https://docs.cloud.google.com/looker/docs/reference/param-lookml-dashboard-table-chart#args_for_custom_groups
+        # @!attribute [rw] kind_hint
+        #   @return [::String]
+        #     Optional. Identifies whether the dynamic field returns a dimension or
+        #     measure.
+        # @!attribute [rw] type_hint
+        #   @return [::String]
+        #     Optional. Identifies the data type the dynamic field's expression should
+        #     produce.
+        # @!attribute [rw] is_disabled
+        #   @return [::Boolean]
+        #     Optional. Whether the dynamic field is disabled.
+        class DynamicField
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -263,6 +337,9 @@ module Google
         # @!attribute [rw] limit
         #   @return [::String]
         #     Optional. Limit in the query.
+        # @!attribute [rw] dynamic_fields
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1::DynamicField>]
+        #     Optional. The dynamic fields used in the query.
         # @!attribute [rw] query_id
         #   @return [::String]
         #     Optional. The primary identifier for the query resource in Looker, used for
@@ -297,11 +374,15 @@ module Google
         #   @return [::String]
         #     Required. User friendly display name of the glossary term being defined.
         #     For example: "CTR", "conversion rate", "pending"
+        #
+        #     Must be at most 256 bytes.
         # @!attribute [rw] description
         #   @return [::String]
         #     Required. The description or meaning of the term.
         #     For example: "Click-through rate", "The percentage of users who complete a
         #     desired action", "An order that is waiting to be processed."
+        #
+        #     Must be at most 5,000 bytes (approx. 5,000 characters).
         # @!attribute [rw] labels
         #   @return [::Array<::String>]
         #     Optional. A list of general purpose labels associated to this term.
@@ -328,14 +409,11 @@ module Google
           # Allowed models for the agent/conversation.
           module Model
             # No model specified. The model may be set on the chat request, or the
-            # default model will be used. Currently, this is
-            # `gemini-3.0-flash-preview`.
+            # default model will be used.
             MODEL_UNSPECIFIED = 0
 
-            # Use the most up-to-date non-preview model. Currently, this is
-            # `gemini-2.5-flash`. This constrains the request level settings. The
-            # default will change to `gemini-2.5-flash`, and setting `thinking_mode`
-            # will not be supported.
+            # Use the most up-to-date non-preview model. This may constrain certain
+            # request level settings.
             LATEST_GA_MODEL = 1
           end
         end

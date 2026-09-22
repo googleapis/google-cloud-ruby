@@ -92,6 +92,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     filter = "hello world"
     order_by = "hello world"
     show_deleted = true
+    creator_filter = :CREATOR_FILTER_UNSPECIFIED
 
     list_data_agents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -107,27 +108,27 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
         end
 
         # Use hash object
-        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |_result, response|
+        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |_result, response|
+        c.list_data_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |_result, response|
+        c.list_data_agents ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_data_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_data_agents(::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, creator_filter: creator_filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -694,6 +695,119 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
 
         # Verify method calls
         assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_agent_ops_observability
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    telemetry_enabled = true
+    data_source_type = "hello world"
+    bqaa_enabled = true
+    update_mask = {}
+
+    set_agent_ops_observability_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_set_agent_ops_observability_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_agent_ops_observability_client_stub do
+        # Create client
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.set_agent_ops_observability({ parent: parent, telemetry_enabled: telemetry_enabled, data_source_type: data_source_type, bqaa_enabled: bqaa_enabled, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.set_agent_ops_observability parent: parent, telemetry_enabled: telemetry_enabled, data_source_type: data_source_type, bqaa_enabled: bqaa_enabled, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.set_agent_ops_observability ::Google::Cloud::GeminiDataAnalytics::V1beta::SetAgentOpsObservabilityRequest.new(parent: parent, telemetry_enabled: telemetry_enabled, data_source_type: data_source_type, bqaa_enabled: bqaa_enabled, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.set_agent_ops_observability({ parent: parent, telemetry_enabled: telemetry_enabled, data_source_type: data_source_type, bqaa_enabled: bqaa_enabled, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.set_agent_ops_observability(::Google::Cloud::GeminiDataAnalytics::V1beta::SetAgentOpsObservabilityRequest.new(parent: parent, telemetry_enabled: telemetry_enabled, data_source_type: data_source_type, bqaa_enabled: bqaa_enabled, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_agent_ops_observability_client_stub.call_count
+      end
+    end
+  end
+
+  def test_retrieve_agent_ops_observability
+    # Create test objects.
+    client_result = ::Google::Cloud::GeminiDataAnalytics::V1beta::RetrieveAgentOpsObservabilityResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    data_source_type = "hello world"
+
+    retrieve_agent_ops_observability_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_retrieve_agent_ops_observability_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, retrieve_agent_ops_observability_client_stub do
+        # Create client
+        c = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.retrieve_agent_ops_observability({ parent: parent, data_source_type: data_source_type }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.retrieve_agent_ops_observability parent: parent, data_source_type: data_source_type do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.retrieve_agent_ops_observability ::Google::Cloud::GeminiDataAnalytics::V1beta::RetrieveAgentOpsObservabilityRequest.new(parent: parent, data_source_type: data_source_type) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.retrieve_agent_ops_observability({ parent: parent, data_source_type: data_source_type }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.retrieve_agent_ops_observability(::Google::Cloud::GeminiDataAnalytics::V1beta::RetrieveAgentOpsObservabilityRequest.new(parent: parent, data_source_type: data_source_type), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, retrieve_agent_ops_observability_client_stub.call_count
       end
     end
   end

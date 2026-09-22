@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/gemini_data_analytics/v1beta/rest"
-      #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new
+      #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Rest::Client.new
       #
       module V1beta
         ##

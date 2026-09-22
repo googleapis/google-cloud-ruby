@@ -104,6 +104,10 @@ module Google
         #       information see
         #       [Timeouts](https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts).
         #
+        #     The value must be given as a string that indicates the length of time
+        #     (in seconds) followed by `s` (for "seconds"). For more information on the
+        #     format, see the documentation for
+        #     [Duration](https://protobuf.dev/reference/protobuf/google.protobuf/#duration).
         #     `dispatch_deadline` will be truncated to the nearest millisecond. The
         #     deadline is an approximate deadline.
         # @!attribute [rw] dispatch_count
@@ -129,6 +133,14 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2::Task::View]
         #     Output only. The view specifies which subset of the
         #     {::Google::Cloud::Tasks::V2::Task Task} has been returned.
+        # @!attribute [rw] retry_config
+        #   @return [::Google::Cloud::Tasks::V2::RetryConfig]
+        #     Optional. Specifies the task-level
+        #     {::Google::Cloud::Tasks::V2::RetryConfig RetryConfig}.
+        #
+        #     If present, this overrides the
+        #     {::Google::Cloud::Tasks::V2::Queue#retry_config Queue.retry_config} for this
+        #     task.
         class Task
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

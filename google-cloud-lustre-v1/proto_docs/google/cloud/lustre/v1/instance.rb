@@ -33,7 +33,9 @@ module Google
         # @!attribute [rw] capacity_gib
         #   @return [::Integer]
         #     Required. The storage capacity of the instance in gibibytes (GiB). Allowed
-        #     values are from `18000` to `954000`, in increments of 9000.
+        #     values depend on the `perUnitStorageThroughput`. See [Performance
+        #     tiers](https://docs.cloud.google.com/managed-lustre/docs/performance-tiers)
+        #     for specific minimums, maximums, and step sizes for each performance tier.
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. Immutable. The full name of the VPC network to which the instance
@@ -60,14 +62,70 @@ module Google
         #     Optional. Labels as key value pairs.
         # @!attribute [rw] per_unit_storage_throughput
         #   @return [::Integer]
-        #     Required. The throughput of the instance in MB/s/TiB.
-        #     Valid values are 125, 250, 500, 1000.
+        #     Optional. The throughput of the instance in MBps per TiB. Valid values are
+        #     0, 125, 250, 500, 1000. See [Performance
+        #     tiers](https://docs.cloud.google.com/managed-lustre/docs/performance-tiers)
+        #     for more information.
+        #
+        #     If the instance is using the Dynamic tier, this field must not be set or
+        #     must be set to zero.
         # @!attribute [rw] gke_support_enabled
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Indicates whether you want to enable support for GKE clients. By
-        #     default, GKE clients are not supported. Deprecated. No longer required for
-        #     GKE instance creation.
+        #     Optional. Deprecated: No longer required for GKE instance creation.
+        #     Indicates whether you want to enable support for GKE clients. By default,
+        #     GKE clients are not supported.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. Immutable. The Cloud KMS key name to use for data encryption.
+        #     If not set, the instance will use Google-managed encryption keys.
+        #     If set, the instance will use customer-managed encryption keys.
+        #     The key must be in the same region as the instance.
+        #     The key format is:
+        #     projects/\\{project}/locations/\\{location}/keyRings/\\{key_ring}/cryptoKeys/\\{key}
+        # @!attribute [r] state_reason
+        #   @return [::String]
+        #     Output only. The reason why the instance is in a certain state (e.g.
+        #     SUSPENDED).
+        # @!attribute [rw] placement_policy
+        #   @return [::String]
+        #     Optional. The placement policy name for the instance in the format of
+        #     projects/\\{project}/locations/\\{location}/resourcePolicies/\\{resource_policy}
+        # @!attribute [rw] access_rules_options
+        #   @return [::Google::Cloud::Lustre::V1::AccessRulesOptions]
+        #     Optional. The access rules options for the instance.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique ID of the resource.
+        #     This is unrelated to the access rules which allow specifying the root
+        #     squash uid.
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Lustre::V1::MaintenancePolicy]
+        #     Optional. The maintenance policy for the instance to determine when to
+        #     allow or exclude the instance from maintenance updates.
+        # @!attribute [r] upcoming_maintenance_schedule
+        #   @return [::Google::Cloud::Lustre::V1::MaintenanceSchedule]
+        #     Output only. Date and time of upcoming maintenance for the instance, if a
+        #     maintenance policy is set.
+        # @!attribute [rw] dynamic_tier_options
+        #   @return [::Google::Cloud::Lustre::V1::DynamicTierOptions]
+        #     Optional. Immutable. Specifies whether the instance is on the Dynamic tier.
+        #     See [Performance
+        #     tiers](https://docs.cloud.google.com/managed-lustre/docs/performance-tiers)
+        #     for more information.
+        # @!attribute [r] available_version
+        #   @return [::String]
+        #     Output only. The available version that this instance can be upgraded to.
+        #     Format: `Lustre_YYYYMMDD.NN_pXX`
+        # @!attribute [rw] target_version
+        #   @return [::String]
+        #     Optional. The target version of the instance. Setting this field triggers a
+        #     self-service update to the specified version.
+        #     Format: `Lustre_YYYYMMDD.NN_pXX` or `latest`
+        # @!attribute [r] effective_version
+        #   @return [::String]
+        #     Output only. The effective version of the instance.
+        #     Format: `Lustre_YYYYMMDD.NN_pXX`
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -106,6 +164,118 @@ module Google
 
             # The instance is being updated.
             UPDATING = 7
+
+            # The instance is suspended due to an issue related to Cloud KMS. The
+            # details are available in
+            # {::Google::Cloud::Lustre::V1::Instance#state_reason state_reason}.
+            SUSPENDED = 8
+          end
+        end
+
+        # Dynamic tier options for a Managed Lustre instance.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Lustre::V1::DynamicTierOptions::Mode]
+        #     Required. Immutable. The dynamic tier mode of the instance.
+        class DynamicTierOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the Dynamic performance tier for the instance.
+          #
+          # If this field is set to `DEFAULT_CACHE`, `per_unit_storage_throughput`
+          # must not be set or must be set to zero.
+          module Mode
+            # Unspecified dynamic tier mode.
+            MODE_UNSPECIFIED = 0
+
+            # The dynamic tier is explicitly disabled.
+            DISABLED = 1
+
+            # The dynamic tier is enabled.
+            DEFAULT_CACHE = 2
+          end
+        end
+
+        # IP-based access rules for the Managed Lustre instance. These options
+        # define the root user squash configuration.
+        # @!attribute [rw] access_rules
+        #   @return [::Array<::Google::Cloud::Lustre::V1::AccessRulesOptions::AccessRule>]
+        #     Optional. The access rules for the instance.
+        # @!attribute [rw] default_squash_mode
+        #   @return [::Google::Cloud::Lustre::V1::AccessRulesOptions::SquashMode]
+        #     Required. The squash mode for the default access rule.
+        # @!attribute [rw] default_squash_uid
+        #   @return [::Integer]
+        #     Optional. The user squash UID for the default access rule.
+        #     This user squash UID applies to all root users connecting from clients
+        #     that are not matched by any of the access rules. If not set, the default
+        #     is 0 (no UID squash).
+        # @!attribute [rw] default_squash_gid
+        #   @return [::Integer]
+        #     Optional. The user squash GID for the default access rule.
+        #     This user squash GID applies to all root users connecting from clients
+        #     that are not matched by any of the access rules. If not set, the default
+        #     is 0 (no GID squash).
+        class AccessRulesOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single policy group with IP-based access rules for the Managed
+          # Lustre instance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the access rule policy group.
+          #     Must be 16 characters or less and include only alphanumeric characters
+          #     or '_'.
+          # @!attribute [rw] ip_address_ranges
+          #   @return [::Array<::String>]
+          #     Required. The IP address ranges to which to apply this access rule.
+          #     Accepts non-overlapping CIDR ranges (e.g., `192.168.1.0/24`) and IP
+          #     addresses (e.g., `192.168.1.0`).
+          # @!attribute [rw] squash_mode
+          #   @return [::Google::Cloud::Lustre::V1::AccessRulesOptions::SquashMode]
+          #     Required. Squash mode for the access rule.
+          class AccessRule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Squash mode for an access rule.
+          module SquashMode
+            # Unspecified squash mode.
+            SQUASH_MODE_UNSPECIFIED = 0
+
+            # Squash is disabled.
+            #
+            # If set inside an
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions::AccessRule AccessRule}, root
+            # users matching the [ip_ranges][AccessRule.ip_ranges] are not squashed.
+            #
+            # If set as the
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_mode default_squash_mode},
+            # root squash is disabled for this instance.
+            #
+            # If the default squash mode is `NO_SQUASH`, do not set the
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_uid default_squash_uid}
+            # or
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_gid default_squash_gid},
+            # or an `invalid argument` error is returned.
+            NO_SQUASH = 1
+
+            # Root user squash is enabled.
+            #
+            # Not supported inside an
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions::AccessRule AccessRule}.
+            #
+            # If set as the
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_mode default_squash_mode},
+            # root users not matching any of the
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#access_rules access_rules}
+            # are squashed to the
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_uid default_squash_uid}
+            # and
+            # {::Google::Cloud::Lustre::V1::AccessRulesOptions#default_squash_gid default_squash_gid}.
+            ROOT_SQUASH = 2
           end
         end
 
@@ -251,6 +421,11 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any sub-resources from this instance will also be
+        #     deleted. Otherwise, the request will only work if the instance has no
+        #     sub-resources.
         class DeleteInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,6 +460,118 @@ module Google
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a maintenance policy for a resource.
+        # @!attribute [rw] weekly_maintenance_windows
+        #   @return [::Array<::Google::Cloud::Lustre::V1::MaintenancePolicy::WeeklyMaintenanceWindow>]
+        #     Required. The weekly maintenance windows for the instance. Currently
+        #     limited to 1 window.
+        # @!attribute [rw] maintenance_exclusion_window
+        #   @return [::Array<::Google::Cloud::Lustre::V1::MaintenancePolicy::MaintenanceExclusionWindow>]
+        #     Optional. The exclusion windows for the instance. Currently limited to 1
+        #     window.
+        class MaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Weekly time window in which maintenance updates may occur.
+          # Duration of the window is currently fixed at 1 hour.
+          # Time zone is UTC.
+          # @!attribute [rw] day_of_week
+          #   @return [::Google::Type::DayOfWeek]
+          #     Required. Day of the week for the maintenance window.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Required. Start time of the maintenance window in UTC time zone.
+          class WeeklyMaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Exclusion period when maintenance updates should not occur.
+          # An exclusion window can be in either of the following two formats:
+          # * Non-recurring : A full date, with non-zero year, month and day values.
+          # * Recurring : A month and day value, with a zero year.
+          # Time zone is UTC.
+          # @!attribute [rw] start_date
+          #   @return [::Google::Type::Date]
+          #     Required. Start date of the exclusion period in UTC time zone. This date
+          #     is inclusive.
+          # @!attribute [rw] end_date
+          #   @return [::Google::Type::Date]
+          #     Required. End date of the exclusion period in UTC time zone. This date is
+          #     inclusive.
+          # @!attribute [rw] time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Required. Time in UTC when the exclusion window starts on start_date and
+          #     ends on end_date. This can be:
+          #     * Full time OR
+          #     * All zeros for 00:00:00 UTC
+          class MaintenanceExclusionWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Represents a scheduled maintenance event.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The scheduled start time for the maintenance.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The scheduled end time for the maintenance.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for requesting to reschedule a maintenance event for a specific
+        # instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] reschedule
+        #   @return [::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest::Reschedule]
+        #     Required. The desired reschedule settings.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A unique identifier for this request. A random UUID is
+        #     recommended. This request is only idempotent if a `request_id` is provided.
+        class RescheduleMaintenanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The desired reschedule settings.
+          # @!attribute [rw] reschedule_type
+          #   @return [::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest::RescheduleType]
+          #     Required. The type of rescheduling.
+          # @!attribute [rw] schedule_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. Required if reschedule_type is BY_TIME. Timestamp when the
+          #     maintenance shall be rescheduled to. This time must be within
+          #     28 days of the original scheduled maintenance start time.
+          class Reschedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of rescheduling event. More reschedule types may be added in the
+          # future.
+          module RescheduleType
+            # Unspecified schedule type.
+            RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+            # Apply update immediately
+            IMMEDIATE = 1
+
+            # Reschedule to the next available window.
+            NEXT_AVAILABLE_WINDOW = 2
+
+            # Reschedule to a specific time.
+            BY_TIME = 3
+          end
         end
       end
     end

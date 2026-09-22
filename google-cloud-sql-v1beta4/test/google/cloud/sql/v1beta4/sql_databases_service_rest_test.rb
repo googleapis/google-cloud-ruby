@@ -89,6 +89,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     database = "hello world"
     instance = "hello world"
     project = "hello world"
+    location = "hello world"
 
     delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.delete({ database: database, instance: instance, project: project }) do |_result, response|
+        c.delete({ database: database, instance: instance, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete database: database, instance: instance, project: project do |_result, response|
+        c.delete database: database, instance: instance, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete ::Google::Cloud::Sql::V1beta4::SqlDatabasesDeleteRequest.new(database: database, instance: instance, project: project) do |_result, response|
+        c.delete ::Google::Cloud::Sql::V1beta4::SqlDatabasesDeleteRequest.new(database: database, instance: instance, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete({ database: database, instance: instance, project: project }, call_options) do |_result, response|
+        c.delete({ database: database, instance: instance, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete(::Google::Cloud::Sql::V1beta4::SqlDatabasesDeleteRequest.new(database: database, instance: instance, project: project), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Sql::V1beta4::SqlDatabasesDeleteRequest.new(database: database, instance: instance, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -145,6 +146,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     database = "hello world"
     instance = "hello world"
     project = "hello world"
+    location = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -160,27 +162,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.get({ database: database, instance: instance, project: project }) do |_result, response|
+        c.get({ database: database, instance: instance, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get database: database, instance: instance, project: project do |_result, response|
+        c.get database: database, instance: instance, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get ::Google::Cloud::Sql::V1beta4::SqlDatabasesGetRequest.new(database: database, instance: instance, project: project) do |_result, response|
+        c.get ::Google::Cloud::Sql::V1beta4::SqlDatabasesGetRequest.new(database: database, instance: instance, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get({ database: database, instance: instance, project: project }, call_options) do |_result, response|
+        c.get({ database: database, instance: instance, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get(::Google::Cloud::Sql::V1beta4::SqlDatabasesGetRequest.new(database: database, instance: instance, project: project), call_options) do |_result, response|
+        c.get(::Google::Cloud::Sql::V1beta4::SqlDatabasesGetRequest.new(database: database, instance: instance, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -201,6 +203,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     instance = "hello world"
     project = "hello world"
     body = {}
+    location = "hello world"
 
     insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -216,27 +219,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.insert({ instance: instance, project: project, body: body }) do |_result, response|
+        c.insert({ instance: instance, project: project, body: body, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.insert instance: instance, project: project, body: body do |_result, response|
+        c.insert instance: instance, project: project, body: body, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.insert ::Google::Cloud::Sql::V1beta4::SqlDatabasesInsertRequest.new(instance: instance, project: project, body: body) do |_result, response|
+        c.insert ::Google::Cloud::Sql::V1beta4::SqlDatabasesInsertRequest.new(instance: instance, project: project, body: body, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.insert({ instance: instance, project: project, body: body }, call_options) do |_result, response|
+        c.insert({ instance: instance, project: project, body: body, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.insert(::Google::Cloud::Sql::V1beta4::SqlDatabasesInsertRequest.new(instance: instance, project: project, body: body), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Sql::V1beta4::SqlDatabasesInsertRequest.new(instance: instance, project: project, body: body, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -256,6 +259,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     instance = "hello world"
     project = "hello world"
+    location = "hello world"
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -271,27 +275,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.list({ instance: instance, project: project }) do |_result, response|
+        c.list({ instance: instance, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list instance: instance, project: project do |_result, response|
+        c.list instance: instance, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Sql::V1beta4::SqlDatabasesListRequest.new(instance: instance, project: project) do |_result, response|
+        c.list ::Google::Cloud::Sql::V1beta4::SqlDatabasesListRequest.new(instance: instance, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ instance: instance, project: project }, call_options) do |_result, response|
+        c.list({ instance: instance, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Sql::V1beta4::SqlDatabasesListRequest.new(instance: instance, project: project), call_options) do |_result, response|
+        c.list(::Google::Cloud::Sql::V1beta4::SqlDatabasesListRequest.new(instance: instance, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -313,6 +317,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     instance = "hello world"
     project = "hello world"
     body = {}
+    location = "hello world"
 
     patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -328,27 +333,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.patch({ database: database, instance: instance, project: project, body: body }) do |_result, response|
+        c.patch({ database: database, instance: instance, project: project, body: body, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.patch database: database, instance: instance, project: project, body: body do |_result, response|
+        c.patch database: database, instance: instance, project: project, body: body, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.patch ::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body) do |_result, response|
+        c.patch ::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.patch({ database: database, instance: instance, project: project, body: body }, call_options) do |_result, response|
+        c.patch({ database: database, instance: instance, project: project, body: body, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.patch(::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -370,6 +375,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
     instance = "hello world"
     project = "hello world"
     body = {}
+    location = "hello world"
 
     update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -385,27 +391,27 @@ class ::Google::Cloud::Sql::V1beta4::SqlDatabasesService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.update({ database: database, instance: instance, project: project, body: body }) do |_result, response|
+        c.update({ database: database, instance: instance, project: project, body: body, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.update database: database, instance: instance, project: project, body: body do |_result, response|
+        c.update database: database, instance: instance, project: project, body: body, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.update ::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body) do |_result, response|
+        c.update ::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.update({ database: database, instance: instance, project: project, body: body }, call_options) do |_result, response|
+        c.update({ database: database, instance: instance, project: project, body: body, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.update(::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body), call_options) do |_result, response|
+        c.update(::Google::Cloud::Sql::V1beta4::SqlDatabasesUpdateRequest.new(database: database, instance: instance, project: project, body: body, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

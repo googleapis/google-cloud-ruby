@@ -36,9 +36,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/gemini_data_analytics"
 
-client = Google::Cloud::GeminiDataAnalytics.data_agent_service
-request = ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new # (request fields as keyword arguments...)
-response = client.list_data_agents request
+client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service
+request = ::Google::Cloud::GeminiDataAnalytics::V1beta::SendMessageRequest.new # (request fields as keyword arguments...)
+response = client.send_message request
 ```
 
 ## Debug Logging

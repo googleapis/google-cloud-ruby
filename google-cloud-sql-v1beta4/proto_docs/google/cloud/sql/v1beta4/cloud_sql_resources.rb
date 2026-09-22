@@ -834,6 +834,10 @@ module Google
         #   @return [::Google::Protobuf::BoolValue]
         #     Optional. If true, instance metadata is sent to the Database Center. If
         #     false, instance metadata is not sent to the Database Center.
+        # @!attribute [rw] database_center_integration
+        #   @return [::Google::Cloud::Sql::V1beta4::DatabaseInstance::DatabaseCenterIntegration]
+        #     Optional. State of the Database Center integration for this instance.
+        #     When unspecified, Database Center integration is enabled by default.
         class DatabaseInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -990,6 +994,19 @@ module Google
 
             # The instance uses the old network architecture.
             OLD_NETWORK_ARCHITECTURE = 2
+          end
+
+          # State of the integration with Database Center.
+          module DatabaseCenterIntegration
+            # Default value. The integration state is unspecified. When unspecified,
+            # Database Center integration is enabled by default.
+            DATABASE_CENTER_INTEGRATION_UNSPECIFIED = 0
+
+            # Database Center integration is enabled.
+            ENABLED = 1
+
+            # Database Center integration is disabled.
+            DISABLED = 2
           end
         end
 

@@ -64,6 +64,94 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A resource message representing a user group in a GMP organization.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Resource name of this UserGroup.
+          #
+          #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+          #     Example: "organizations/123abc/userGroups/456def"
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Optional. The human-readable name for the user group.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Optional. The description of the user group.
+          class UserGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A resource message representing a member of a user group.
+          # @!attribute [rw] user_email
+          #   @return [::String]
+          #     Email address of the user member.
+          #
+          #     Note: The following fields are mutually exclusive: `user_email`, `user_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] user_group
+          #   @return [::String]
+          #     User group resource name of the group member.
+          #
+          #     Note: The following fields are mutually exclusive: `user_group`, `user_email`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of this UserGroupMember.
+          #
+          #     Format:
+          #     organizations/\\{org_id}/userGroups/\\{user_group_id}/members/\\{member_id}
+          #     Example:
+          #     "organizations/123abc/userGroups/456def/members/789ghi"
+          # @!attribute [rw] membership_role
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember::MembershipRole]
+          #     Optional. The role of the member in the user group.
+          class UserGroupMember
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The role of the member in the user group.
+            module MembershipRole
+              # Unspecified membership role.
+              MEMBERSHIP_ROLE_UNSPECIFIED = 0
+
+              # Owner role that can add and remove group members.
+              MEMBERSHIP_ROLE_OWNER = 1
+
+              # Member role that receives all permissions assigned to the group.
+              MEMBERSHIP_ROLE_MEMBER = 2
+            end
+          end
+
+          # A resource message representing a binding to a set of roles.
+          # @!attribute [rw] user_email
+          #   @return [::String]
+          #     Email address of the user.
+          #
+          #     Note: The following fields are mutually exclusive: `user_email`, `user_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] user_group
+          #   @return [::String]
+          #     Resource name of the user group.
+          #
+          #     Note: The following fields are mutually exclusive: `user_group`, `user_email`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of this AdminAccessBinding.
+          #
+          #     Format:
+          #     organizations/\\{org_id}/adminAccessBindings/\\{admin_access_binding_id}
+          #     Example: "organizations/123abc/adminAccessBindings/456def"
+          # @!attribute [rw] organization_roles
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::OrganizationRole>]
+          #     Optional. A list of roles granted to the parent organization.
+          #
+          #     USER_ADMIN_ROLE and BILLING_ADMIN_ROLE will be automatically added if
+          #     ORG_ADMIN_ROLE is assigned.
+          #
+          #     No roles will be assigned if no roles are specified.
+          class AdminAccessBinding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The verification state of the link between a product account and a GMP
           # organization.
           module LinkVerificationState
@@ -103,6 +191,23 @@ module Google
 
             # Google Analytics rollup property
             ANALYTICS_PROPERTY_TYPE_ROLLUP = 3
+          end
+
+          # Roles that can be assigned to a user or user group in a GMP organization.
+          module OrganizationRole
+            # Unknown or unspecified organization role.
+            ORGANIZATION_ROLE_UNSPECIFIED = 0
+
+            # Organization admin role that grants all administrative privileges.
+            ORG_ADMIN_ROLE = 1
+
+            # User admin role that grants access to the Users section to perform various
+            # user management functions.
+            USER_ADMIN_ROLE = 2
+
+            # Billing admin role that grants access to the Billing section to perform
+            # various billing-related functions.
+            BILLING_ADMIN_ROLE = 3
           end
         end
       end

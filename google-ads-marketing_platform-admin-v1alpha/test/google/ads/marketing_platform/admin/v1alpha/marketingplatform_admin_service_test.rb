@@ -553,6 +553,857 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     end
   end
 
+  def test_get_user_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_user_group, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_user_group_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_user_group({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_user_group name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_user_group({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_user_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_user_groups
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_user_groups, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_user_groups_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_user_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_user_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_user_groups ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_user_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_user_groups(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_user_groups_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_user_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_group = {}
+
+    create_user_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_user_group, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup), request["user_group"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_user_group_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_user_group({ parent: parent, user_group: user_group }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_user_group parent: parent, user_group: user_group do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest.new(parent: parent, user_group: user_group) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_user_group({ parent: parent, user_group: user_group }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest.new(parent: parent, user_group: user_group), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_user_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_user_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    user_group = {}
+    update_mask = {}
+
+    update_user_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_user_group, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup), request["user_group"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_user_group_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_user_group({ user_group: user_group, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_user_group user_group: user_group, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest.new(user_group: user_group, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_user_group({ user_group: user_group, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest.new(user_group: user_group, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_user_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_user_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_user_group, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_user_group_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_user_group({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_user_group name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_user_group({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_user_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_user_group_member
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_group_member_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_user_group_member, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_user_group_member_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_user_group_member({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_user_group_member name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_user_group_member({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_user_group_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_user_group_members
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_group_members_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_user_group_members, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_user_group_members_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_user_group_members({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_user_group_members parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_user_group_members ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_user_group_members({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_user_group_members(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_user_group_members_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_user_group_member
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_group_member = {}
+
+    create_user_group_member_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_user_group_member, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember), request["user_group_member"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_user_group_member_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_user_group_member({ parent: parent, user_group_member: user_group_member }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_user_group_member parent: parent, user_group_member: user_group_member do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest.new(parent: parent, user_group_member: user_group_member) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_user_group_member({ parent: parent, user_group_member: user_group_member }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest.new(parent: parent, user_group_member: user_group_member), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_user_group_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_user_group_member
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    user_group_member = {}
+    update_mask = {}
+
+    update_user_group_member_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_user_group_member, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember), request["user_group_member"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_user_group_member_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_user_group_member({ user_group_member: user_group_member, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_user_group_member user_group_member: user_group_member, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest.new(user_group_member: user_group_member, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_user_group_member({ user_group_member: user_group_member, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest.new(user_group_member: user_group_member, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_user_group_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_user_group_member
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_group_member_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_user_group_member, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_user_group_member_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_user_group_member({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_user_group_member name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_user_group_member({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_user_group_member_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_admin_access_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_admin_access_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_admin_access_binding, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_admin_access_binding_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_admin_access_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_admin_access_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_admin_access_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_admin_access_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_admin_access_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_admin_access_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_admin_access_bindings, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_admin_access_bindings_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_admin_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_admin_access_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_admin_access_bindings ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_admin_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_admin_access_bindings(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_admin_access_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_admin_access_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    admin_access_binding = {}
+
+    create_admin_access_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_admin_access_binding, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding), request["admin_access_binding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_admin_access_binding_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_admin_access_binding({ parent: parent, admin_access_binding: admin_access_binding }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_admin_access_binding parent: parent, admin_access_binding: admin_access_binding do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest.new(parent: parent, admin_access_binding: admin_access_binding) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_admin_access_binding({ parent: parent, admin_access_binding: admin_access_binding }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest.new(parent: parent, admin_access_binding: admin_access_binding), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_admin_access_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_admin_access_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    admin_access_binding = {}
+    update_mask = {}
+
+    update_admin_access_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_admin_access_binding, name
+      assert_kind_of ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding), request["admin_access_binding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_admin_access_binding_client_stub do
+      # Create client
+      c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_admin_access_binding({ admin_access_binding: admin_access_binding, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_admin_access_binding admin_access_binding: admin_access_binding, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest.new(admin_access_binding: admin_access_binding, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_admin_access_binding({ admin_access_binding: admin_access_binding, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest.new(admin_access_binding: admin_access_binding, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_admin_access_binding_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -80,14 +80,34 @@
                 "create_task"
               ]
             },
+            "BatchCreateTasks": {
+              "methods": [
+                "batch_create_tasks"
+              ]
+            },
             "DeleteTask": {
               "methods": [
                 "delete_task"
               ]
             },
+            "BatchDeleteTasks": {
+              "methods": [
+                "batch_delete_tasks"
+              ]
+            },
             "RunTask": {
               "methods": [
                 "run_task"
+              ]
+            },
+            "UpdateCmekConfig": {
+              "methods": [
+                "update_cmek_config"
+              ]
+            },
+            "GetCmekConfig": {
+              "methods": [
+                "get_cmek_config"
               ]
             }
           }

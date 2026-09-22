@@ -25,6 +25,48 @@ module Google
           # Path helper methods for the Lustre API.
           module Paths
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
+            # Create a fully-qualified DirectoryPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{directory_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param directory_policy [String]
+            #
+            # @return [::String]
+            def directory_policy_path project:, location:, instance:, directory_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/directoryPolicies/#{directory_policy}"
+            end
+
+            ##
             # Create a fully-qualified Instance resource string.
             #
             # The resource will be in the following format:
@@ -61,6 +103,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Mirror resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param mirror [String]
+            #
+            # @return [::String]
+            def mirror_path project:, location:, instance:, mirror:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/mirrors/#{mirror}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -75,6 +138,49 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
+            # Create a fully-qualified ResourcePolicy resource string.
+            #
+            # @overload resource_policy_path(project:, region:, resource_policy:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/regions/{region}/resourcePolicies/{resource_policy}`
+            #
+            #   @param project [String]
+            #   @param region [String]
+            #   @param resource_policy [String]
+            #
+            # @overload resource_policy_path(project:, location:, resource_policy:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/resourcePolicies/{resource_policy}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param resource_policy [String]
+            #
+            # @return [::String]
+            def resource_policy_path **args
+              resources = {
+                "project:region:resource_policy" => (proc do |project:, region:, resource_policy:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+                  "projects/#{project}/regions/#{region}/resourcePolicies/#{resource_policy}"
+                end),
+                "location:project:resource_policy" => (proc do |project:, location:, resource_policy:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/resourcePolicies/#{resource_policy}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
