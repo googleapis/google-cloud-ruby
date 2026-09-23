@@ -21,6 +21,220 @@ module Google
   module Cloud
     module Tasks
       module V2
+        # PathOverride.
+        #
+        # Path message defines path override for HTTP targets.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     The URI path (e.g., /users/1234). Default is an empty string.
+        class PathOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryOverride.
+        #
+        # Query message defines query override for HTTP targets.
+        # @!attribute [rw] query_params
+        #   @return [::String]
+        #     The query parameters (e.g., qparam1=123&qparam2=456). Default is an empty
+        #     string.
+        class QueryOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # URI Override.
+        #
+        # When specified, all the HTTP tasks inside the queue will be partially or
+        # fully overridden depending on the configured values.
+        # @!attribute [rw] scheme
+        #   @return [::Google::Cloud::Tasks::V2::UriOverride::Scheme]
+        #     Scheme override.
+        #
+        #     When specified, the task URI scheme is replaced by the provided value (HTTP
+        #     or HTTPS).
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Host override.
+        #
+        #     When specified, replaces the host part of the task URL. For example,
+        #     if the task URL is "https://www.google.com," and host value is set to
+        #     "example.net", the overridden URI will be changed to "https://example.net."
+        #     Host value cannot be an empty string (INVALID_ARGUMENT).
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port override.
+        #
+        #     When specified, replaces the port part of the task URI. For instance,
+        #     for a URI "https://www.example.com/example" and port=123, the overridden
+        #     URI becomes "https://www.example.com:123/example". Note that the port value
+        #     must be a positive integer. Setting the port to 0 (Zero) clears the URI
+        #     port.
+        # @!attribute [rw] path_override
+        #   @return [::Google::Cloud::Tasks::V2::PathOverride]
+        #     URI path.
+        #
+        #     When specified, replaces the existing path of the task URL. Setting the
+        #     path value to an empty string clears the URI path segment.
+        # @!attribute [rw] query_override
+        #   @return [::Google::Cloud::Tasks::V2::QueryOverride]
+        #     URI query.
+        #
+        #     When specified, replaces the query part of the task URI. Setting the
+        #     query value to an empty string clears the URI query segment.
+        # @!attribute [rw] uri_override_enforce_mode
+        #   @return [::Google::Cloud::Tasks::V2::UriOverride::UriOverrideEnforceMode]
+        #     URI Override Enforce Mode
+        #
+        #     When specified, determines the Target UriOverride mode. If not specified,
+        #     it defaults to ALWAYS.
+        class UriOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Scheme for an HTTP request. By default, it is HTTPS.
+          module Scheme
+            # Scheme unspecified. Defaults to HTTPS.
+            SCHEME_UNSPECIFIED = 0
+
+            # Convert the scheme to HTTP, e.g., "https://www.example.com" will change
+            # to "http://www.example.com".
+            HTTP = 1
+
+            # Convert the scheme to HTTPS, e.g., "http://www.example.com" will change
+            # to "https://www.example.com".
+            HTTPS = 2
+          end
+
+          # UriOverrideEnforceMode defines when the URI override is enforced.
+          module UriOverrideEnforceMode
+            # UriOverrideEnforceMode Unspecified. Defaults to ALWAYS.
+            URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED = 0
+
+            # In the IF_NOT_EXISTS mode, queue-level configuration is only
+            # applied where task-level configuration does not exist.
+            IF_NOT_EXISTS = 1
+
+            # In the ALWAYS mode, queue-level configuration overrides all
+            # task-level configuration
+            ALWAYS = 2
+          end
+        end
+
+        # HTTP target.
+        #
+        # When specified at the {::Google::Cloud::Tasks::V2::Queue Queue} level, all tasks
+        # with {::Google::Cloud::Tasks::V2::HttpRequest HttpRequest} are overridden
+        # according to the target.
+        # @!attribute [rw] uri_override
+        #   @return [::Google::Cloud::Tasks::V2::UriOverride]
+        #     URI override.
+        #
+        #     When specified, overrides the execution URI for all the tasks in the queue.
+        # @!attribute [rw] http_method
+        #   @return [::Google::Cloud::Tasks::V2::HttpMethod]
+        #     The HTTP method to use for the request.
+        #
+        #     When specified, it overrides
+        #     {::Google::Cloud::Tasks::V2::HttpTarget#http_method HttpRequest} for the task.
+        #     Note that if the value is set to [HttpMethod][GET] the [HttpRequest][body]
+        #     of the task will be ignored at execution time.
+        # @!attribute [rw] header_overrides
+        #   @return [::Array<::Google::Cloud::Tasks::V2::HttpTarget::HeaderOverride>]
+        #     HTTP target headers.
+        #
+        #     This map contains the header field names and values.
+        #     Headers will be set when running the
+        #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask} and/or
+        #     [BufferTask][google.cloud.tasks.v2.CloudTasks.BufferTask].
+        #
+        #     These headers represent a subset of the headers that will be configured for
+        #     the task's HTTP request. Some HTTP request headers will be ignored or
+        #     replaced.
+        #
+        #     A partial list of headers that will be ignored or replaced is:
+        #     * Several predefined headers, prefixed with "X-CloudTasks-", can
+        #     be used to define properties of the task.
+        #     * Host: This will be computed by Cloud Tasks and derived from
+        #     [HttpRequest.url][google.cloud.tasks.v2.Target.HttpRequest.url].
+        #     * Content-Length: This will be computed by Cloud Tasks.
+        #
+        #     `Content-Type` won't be set by Cloud Tasks. You can explicitly set
+        #     `Content-Type` to a media type when the
+        #      {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
+        #      For example, `Content-Type` can be set to `"application/octet-stream"` or
+        #      `"application/json"`. The default value is set to `"application/json"`.
+        #
+        #     * User-Agent: This will be set to `"Google-Cloud-Tasks"`.
+        #
+        #     Headers which can have multiple values (according to RFC2616) can be
+        #     specified using comma-separated values.
+        #
+        #     The size of the headers must be less than 80KB.
+        #     Queue-level headers to override headers of all the tasks in the queue.
+        #
+        #     Do not put business sensitive or personally identifying data in the HTTP
+        #     Header Override Configuration or other similar fields in accordance with
+        #     Section 12 (Resource Fields) of the
+        #     [Service Specific Terms](https://cloud.google.com/terms/service-terms).
+        # @!attribute [rw] oauth_token
+        #   @return [::Google::Cloud::Tasks::V2::OAuthToken]
+        #     If specified, an
+        #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+        #     is generated and attached as the `Authorization` header in the HTTP
+        #     request.
+        #
+        #     This type of authorization should generally be used only when calling
+        #     Google APIs hosted on *.googleapis.com. Note that both the service
+        #     account email and the scope MUST be specified when using the queue-level
+        #     authorization override.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth_token`, `oidc_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] oidc_token
+        #   @return [::Google::Cloud::Tasks::V2::OidcToken]
+        #     If specified, an
+        #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+        #     token is generated and attached as an `Authorization` header in the
+        #     HTTP request.
+        #
+        #     This type of authorization can be used for many scenarios, including
+        #     calling Cloud Run, or endpoints where you intend to validate the token
+        #     yourself. Note that both the service account email and the audience MUST
+        #     be specified when using the queue-level authorization override.
+        #
+        #     Note: The following fields are mutually exclusive: `oidc_token`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class HttpTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a header message. A header can have a key and a value.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     The Key of the header.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The Value of the header.
+          class Header
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wraps the Header object.
+          # @!attribute [rw] header
+          #   @return [::Google::Cloud::Tasks::V2::HttpTarget::Header]
+          #     Header embodying a key and a value.
+          #
+          #     Do not put business sensitive or personally identifying data in the HTTP
+          #     Header Override Configuration or other similar fields in accordance with
+          #     Section 12 (Resource Fields) of the
+          #     [Service Specific Terms](https://cloud.google.com/terms/service-terms).
+          class HeaderOverride
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # HTTP request.
         #
         # The task will be pushed to the worker as an HTTP request. If the worker
@@ -72,7 +286,7 @@ module Google
         #
         #     This map contains the header field names and values.
         #     Headers can be set when the
-        #     [task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+        #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #
         #     These headers represent a subset of the headers that will accompany the
         #     task's HTTP request. Some HTTP request headers will be ignored or replaced.
@@ -88,7 +302,7 @@ module Google
         #
         #     `Content-Type` won't be set by Cloud Tasks. You can explicitly set
         #     `Content-Type` to a media type when the
-        #      [task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+        #      {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #      For example, `Content-Type` can be set to `"application/octet-stream"` or
         #      `"application/json"`.
         #

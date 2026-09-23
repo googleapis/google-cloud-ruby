@@ -498,9 +498,24 @@ module Google
               #     reply to a message
               #     thread](https://developers.google.com/workspace/chat/create-messages#create-message-thread).
               #   @param request_id [::String]
-              #     Optional. A unique request ID for this message. Specifying an existing
-              #     request ID returns the message created with that ID instead of creating a
-              #     new message.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single message being created. Subsequent requests with the same request
+              #     ID return the existing message and do not update the message, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a message was already created with the provided request ID, the
+              #     request returns that message. Note that the returned message might not be
+              #     fully populated; the API echoes the message in your request with the
+              #     system-assigned resource names populated. To retrieve the latest metadata
+              #     for the message, call `GetMessage`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               #   @param message_reply_option [::Google::Apps::Chat::V1::CreateMessageRequest::MessageReplyOption]
               #     Optional. Specifies whether a message starts a thread or replies to one.
               #     Only supported in named spaces.
@@ -1532,6 +1547,10 @@ module Google
               #       the top five space matches. For example, `space.display_name:Project`
               #       searches for messages in the top five spaces that contain the word
               #       "Project" in their display names.
+              #     - `space.space_type`: The type of the space. Only supports `=`. For
+              #       example, `space.space_type="DIRECT_MESSAGE"` returns only messages from
+              #       direct messages. The possible values are `DIRECT_MESSAGE`, `GROUP_CHAT`,
+              #       and `SPACE`.
               #     - `attachment`: Supports the operator `:*` (has any) to check for the
               #       presence of attachments. If `attachment:*` is specified, only messages
               #       that have at least one attachment are returned.
@@ -1551,8 +1570,8 @@ module Google
               #     - `is_unread()`: Filters out messages that have been read by the calling
               #       user.
               #
-              #     Using the `space.display_name` filter requires that the calling credentials
-              #     include one of the following [authorization
+              #     Using the `space.display_name` or the `space.space_type` filters requires
+              #     that the calling credentials include one of the following [authorization
               #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
               #
               #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
@@ -1590,6 +1609,8 @@ module Google
               #       `space.display_name:Project OR space.display_name:Tasks` returns messages
               #       that are in spaces with display names containing either `Project` or
               #       `Tasks` or both.
+              #     - `space.space_type` supports only the `OR` operator, for example:
+              #       `space.space_type = "DIRECT_MESSAGE" OR space.space_type = "GROUP_CHAT"`.
               #     - `annotations.user_mentions.user.name` supports the operators `AND` and
               #       `OR`, but not a mix of both. For example:
               #       `annotations.user_mentions.user.name:"users/1234567890" AND
@@ -2115,8 +2136,9 @@ module Google
               #
               #     If unspecified, at most 100 spaces are returned.
               #
-              #     The maximum value is 1000. If you use a value more than 1000, it's
-              #     automatically changed to 1000.
+              #     The maximum value is 1000 when `useAdminAccess` is set to `true`.
+              #     Otherwise, the maximum value is 100. If you use a value more than the
+              #     maximum value, it's automatically changed to the maximum value.
               #   @param page_token [::String]
               #     A token, received from the previous search spaces call. Provide this
               #     parameter to retrieve the subsequent page.
@@ -2219,6 +2241,11 @@ module Google
               #     (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
               #     "SPACE")
               #     ```
+              #
+              #     The maximum query length is 1,000 characters.
+              #
+              #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+              #     error.
               #   @param order_by [::String]
               #     Optional. How the list of spaces is ordered.
               #
@@ -2511,12 +2538,24 @@ module Google
               #     The space `name` is assigned on the server so anything specified in this
               #     field will be ignored.
               #   @param request_id [::String]
-              #     Optional. A unique identifier for this request.
-              #     A random UUID is recommended.
-              #     Specifying an existing request ID returns the space created with that ID
-              #     instead of creating a new space.
-              #     Specifying an existing request ID from the same Chat app with a different
-              #     authenticated user returns an error.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single space being created. Subsequent requests with the same request ID
+              #     return the existing space and do not update the space, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a space was already created with the provided request ID, the request
+              #     returns that space. Note that the returned space might not be fully
+              #     populated; the API echoes the space in your request with the
+              #     system-assigned resource name populated. To retrieve the latest metadata
+              #     for the space, call `GetSpace`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Space]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2674,12 +2713,24 @@ module Google
               #     If a `DIRECT_MESSAGE` space already exists, that space is returned instead
               #     of creating a new space.
               #   @param request_id [::String]
-              #     Optional. A unique identifier for this request.
-              #     A random UUID is recommended.
-              #     Specifying an existing request ID returns the space created with that ID
-              #     instead of creating a new space.
-              #     Specifying an existing request ID from the same Chat app with a different
-              #     authenticated user returns an error.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single space being created. Subsequent requests with the same request ID
+              #     return the existing space and do not update the space, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a space was already created with the provided request ID, the request
+              #     returns that space. Note that the returned space might not be fully
+              #     populated; the API echoes the space in your request with the
+              #     system-assigned resource name populated. To retrieve the latest metadata
+              #     for the space, call `GetSpace`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               #   @param memberships [::Array<::Google::Apps::Chat::V1::Membership, ::Hash>]
               #     Optional. The Google Chat users or groups to invite to join the space. Omit
               #     the calling user, as they are added automatically.
@@ -2888,6 +2939,7 @@ module Google
               #
               #     - `access_settings.access_permission_settings.discoverSpaceSetting`
               #     - `access_settings.access_permission_settings.joinSpaceSetting`
+              #     - `access_settings.access_permission_settings.viewSpaceMembershipSetting`
               #
               #     `permission_settings`: Supports changing the
               #     [permission settings](https://support.google.com/chat/answer/13340792)
@@ -2904,6 +2956,7 @@ module Google
               #     - `permission_settings.manageApps`
               #     - `permission_settings.manageWebhooks`
               #     - `permission_settings.replyMessages`
+              #     - `permission_settings.viewSpaceMembership`
               #   @param use_admin_access [::Boolean]
               #     Optional. When `true`, the method runs using the user's Google Workspace
               #     administrator privileges.
@@ -4210,6 +4263,292 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @chat_service_stub.delete_reaction request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists message pins in a space. Users can pin important messages in spaces
+              # for easy access. For more information, see [Pin or unpin a conversation in
+              # Google Chat](https://support.google.com/chat/answer/15622437).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins.readonly`
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload list_message_pins(request, options = nil)
+              #   Pass arguments to `list_message_pins` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::ListMessagePinsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::ListMessagePinsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_message_pins(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_message_pins` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent space which owns the collection of pinned items
+              #     Format: `spaces/{space}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of message pins returned. The service might
+              #     return fewer messages than this value. The maximum value is 100. If you use
+              #     a value more than 100, it's automatically changed to 100. If unspecified,
+              #     at most 100 message pins will be returned. Negative values return an
+              #     `INVALID_ARGUMENT` error.
+              #   @param page_token [::String]
+              #     Optional. A page token received from a previous list message pins call.
+              #     Provide this parameter to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::MessagePin>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::MessagePin>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::ListMessagePinsRequest.new
+              #
+              #   # Call the list_message_pins method.
+              #   result = client.list_message_pins request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::MessagePin.
+              #     p item
+              #   end
+              #
+              def list_message_pins request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListMessagePinsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_message_pins.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_message_pins.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_message_pins.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.list_message_pins request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_message_pins, "message_pins", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a message pin.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload create_message_pin(request, options = nil)
+              #   Pass arguments to `create_message_pin` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::CreateMessagePinRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::CreateMessagePinRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_message_pin(parent: nil, message_pin: nil)
+              #   Pass arguments to `create_message_pin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent space in which to create the message pin.
+              #     Format: spaces/\\{space}
+              #   @param message_pin [::Google::Apps::Chat::V1::MessagePin, ::Hash]
+              #     Required. The MessagePin to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::MessagePin]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::MessagePin]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::CreateMessagePinRequest.new
+              #
+              #   # Call the create_message_pin method.
+              #   result = client.create_message_pin request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::MessagePin.
+              #   p result
+              #
+              def create_message_pin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::CreateMessagePinRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_message_pin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_message_pin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_message_pin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.create_message_pin request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a message pin.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload delete_message_pin(request, options = nil)
+              #   Pass arguments to `delete_message_pin` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::DeleteMessagePinRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::DeleteMessagePinRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_message_pin(name: nil)
+              #   Pass arguments to `delete_message_pin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the message pin to remove.
+              #     Format: spaces/\\{space}/messagePins/\\{message_pin}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::DeleteMessagePinRequest.new
+              #
+              #   # Call the delete_message_pin method.
+              #   result = client.delete_message_pin request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_message_pin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::DeleteMessagePinRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_message_pin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_message_pin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_message_pin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.delete_message_pin request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -6965,6 +7304,21 @@ module Google
                   #
                   attr_reader :delete_reaction
                   ##
+                  # RPC-specific configuration for `list_message_pins`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_message_pins
+                  ##
+                  # RPC-specific configuration for `create_message_pin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_message_pin
+                  ##
+                  # RPC-specific configuration for `delete_message_pin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_message_pin
+                  ##
                   # RPC-specific configuration for `create_custom_emoji`
                   # @return [::Gapic::Config::Method]
                   #
@@ -7134,6 +7488,12 @@ module Google
                     @list_reactions = ::Gapic::Config::Method.new list_reactions_config
                     delete_reaction_config = parent_rpcs.delete_reaction if parent_rpcs.respond_to? :delete_reaction
                     @delete_reaction = ::Gapic::Config::Method.new delete_reaction_config
+                    list_message_pins_config = parent_rpcs.list_message_pins if parent_rpcs.respond_to? :list_message_pins
+                    @list_message_pins = ::Gapic::Config::Method.new list_message_pins_config
+                    create_message_pin_config = parent_rpcs.create_message_pin if parent_rpcs.respond_to? :create_message_pin
+                    @create_message_pin = ::Gapic::Config::Method.new create_message_pin_config
+                    delete_message_pin_config = parent_rpcs.delete_message_pin if parent_rpcs.respond_to? :delete_message_pin
+                    @delete_message_pin = ::Gapic::Config::Method.new delete_message_pin_config
                     create_custom_emoji_config = parent_rpcs.create_custom_emoji if parent_rpcs.respond_to? :create_custom_emoji
                     @create_custom_emoji = ::Gapic::Config::Method.new create_custom_emoji_config
                     get_custom_emoji_config = parent_rpcs.get_custom_emoji if parent_rpcs.respond_to? :get_custom_emoji

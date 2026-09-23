@@ -272,6 +272,257 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+
+          # Request message for GetUserGroup RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the UserGroup to retrieve.
+          #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+          class GetUserGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListUserGroups RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent org where this UserGroup will be listed.
+          #     Format: organizations/\\{org_id}
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of user groups to return in one call. The
+          #     service may return fewer than this value.
+          #
+          #     If unspecified, at most 50 user groups will be returned. The maximum value
+          #     is 1000; values above 1000 will be coerced to 1000.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous ListUserGroups call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to `ListUserGroups` must
+          #     match the call that provided the page token.
+          class ListUserGroupsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListUserGroups RPC.
+          # @!attribute [rw] user_groups
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup>]
+          #     User groups in the organization.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListUserGroupsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateUserGroup RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource where this UserGroup will be created.
+          #     Format: organizations/\\{org_id}
+          # @!attribute [rw] user_group
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+          #     Required. The user group to create.
+          class CreateUserGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateUserGroup RPC.
+          # @!attribute [rw] user_group
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+          #     Required. The user group to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The list of fields to update. Field names must be in snake case
+          #     (for example, "field_to_update"). Omitted fields will not be updated. To
+          #     replace the entire entity, use one path with the string "*" to match all
+          #     fields.
+          class UpdateUserGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DeleteUserGroup RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the user group to delete.
+          #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+          class DeleteUserGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for GetUserGroupMember RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the user group member to retrieve.
+          #     Format:
+          #     organizations/\\{org_id}/userGroups/\\{user_group_id}/members/\\{member_id}
+          class GetUserGroupMemberRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListUserGroupMembers RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent user group where this UserGroupMember will be listed.
+          #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of user group members to return in one call.
+          #     The service may return fewer than this value.
+          #
+          #     If unspecified, at most 50 user group members will be returned. The
+          #     maximum value is 1000; values above 1000 will be coerced to 1000.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous ListUserGroupMembers call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `ListUserGroupMembers` must match the call that provided the page token.
+          class ListUserGroupMembersRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListUserGroupMembers RPC.
+          # @!attribute [rw] user_group_members
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember>]
+          #     User group members in the user group.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListUserGroupMembersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateUserGroupMember RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource where this UserGroupMember will be created.
+          #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+          # @!attribute [rw] user_group_member
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+          #     Required. The user group member to create.
+          class CreateUserGroupMemberRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateUserGroupMember RPC.
+          # @!attribute [rw] user_group_member
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+          #     Required. The user group member to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The list of fields to update. Field names must be in snake case
+          #     (for example, "field_to_update"). Omitted fields will not be updated. To
+          #     replace the entire entity, use one path with the string "*" to match all
+          #     fields.
+          class UpdateUserGroupMemberRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DeleteUserGroupMember RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the user group member to delete.
+          #     Format:
+          #     organizations/\\{org_id}/userGroups/\\{user_group_id}/members/\\{member_id}
+          class DeleteUserGroupMemberRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for GetAdminAccessBinding RPC.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the AdminAccessBinding to retrieve.
+          #     Format:
+          #     organizations/\\{org_id}/adminAccessBindings/\\{admin_access_binding_id}
+          class GetAdminAccessBindingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListAdminAccessBindings RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent organization, which owns this collection of Admin
+          #     Access Bindings. Format: organizations/\\{org_id}
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of Admin Access Bindings to return in one
+          #     call. The service may return fewer than this value.
+          #
+          #     If unspecified, at most 50 Admin Access Bindings will be returned. The
+          #     maximum value is 1000; values above 1000 will be coerced to 1000.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous ListAdminAccessBindings
+          #     call. Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `ListAdminAccessBindings` must match the call that provided the page
+          #     token.
+          class ListAdminAccessBindingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListAdminAccessBindings RPC.
+          # @!attribute [rw] admin_access_bindings
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding>]
+          #     Admin Access Bindings in the organization.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListAdminAccessBindingsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateAdminAccessBinding RPC.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent organization, which owns this Admin Access Binding.
+          #     Format: organizations/\\{org_id}
+          # @!attribute [rw] admin_access_binding
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+          #     Required. The Admin Access Binding to create.
+          #
+          #     Only 'user_email' input is allowed.
+          class CreateAdminAccessBindingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateAdminAccessBinding RPC.
+          # @!attribute [rw] admin_access_binding
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+          #     Required. The AdminAccessBinding to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The list of fields to update. Field names must be in snake case
+          #     (for example, "field_to_update"). Omitted fields will not be updated. To
+          #     replace the entire entity, use one path with the string "*" to match all
+          #     fields.
+          class UpdateAdminAccessBindingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

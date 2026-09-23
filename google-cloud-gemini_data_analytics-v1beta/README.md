@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/gemini_data_analytics/v1beta"
 
-client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new
-request = ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new # (request fields as keyword arguments...)
-response = client.list_data_agents request
+client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client.new
+request = ::Google::Cloud::GeminiDataAnalytics::V1beta::SendMessageRequest.new # (request fields as keyword arguments...)
+response = client.send_message request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gemini_data_analytics-v1beta/latest)
@@ -74,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/gemini_data_analytics/v1beta"
 require "logger"
 
-client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new do |config|
+client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

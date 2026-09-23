@@ -203,7 +203,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(host: nil, instance: nil, name: nil, project: nil)
+              # @overload delete(host: nil, instance: nil, name: nil, project: nil, location: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -216,6 +216,8 @@ module Google
               #     Name of the user in the instance.
               #   @param project [::String]
               #     Project ID of the project that contains the instance.
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -287,7 +289,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(instance: nil, name: nil, project: nil, host: nil)
+              # @overload get(instance: nil, name: nil, project: nil, host: nil, location: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -300,6 +302,8 @@ module Google
               #     Project ID of the project that contains the instance.
               #   @param host [::String]
               #     Host of a user of the instance.
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1beta4::User]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -371,7 +375,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload insert(instance: nil, project: nil, body: nil)
+              # @overload insert(instance: nil, project: nil, body: nil, location: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -381,6 +385,8 @@ module Google
               #   @param project [::String]
               #     Project ID of the project that contains the instance.
               #   @param body [::Google::Cloud::Sql::V1beta4::User, ::Hash]
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -452,7 +458,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(instance: nil, project: nil)
+              # @overload list(instance: nil, project: nil, location: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -461,6 +467,8 @@ module Google
               #     Database instance ID. This does not include the project ID.
               #   @param project [::String]
               #     Project ID of the project that contains the instance.
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1beta4::UsersListResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -532,7 +540,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update(host: nil, instance: nil, name: nil, project: nil, database_roles: nil, revoke_existing_roles: nil, server_roles: nil, revoke_existing_server_roles: nil, body: nil)
+              # @overload update(host: nil, instance: nil, name: nil, project: nil, database_roles: nil, revoke_existing_roles: nil, server_roles: nil, revoke_existing_server_roles: nil, body: nil, location: nil)
               #   Pass arguments to `update` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -561,6 +569,8 @@ module Google
               #     in the `server_roles` field. If `false` or unset, the server roles
               #     specified in `server_roles` are added to the user's existing server roles.
               #   @param body [::Google::Cloud::Sql::V1beta4::User, ::Hash]
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

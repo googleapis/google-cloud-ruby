@@ -43,6 +43,8 @@ module Google
             rpc :CreateConversation, ::Google::Cloud::GeminiDataAnalytics::V1::CreateConversationRequest, ::Google::Cloud::GeminiDataAnalytics::V1::Conversation
             # Deletes a conversation.
             rpc :DeleteConversation, ::Google::Cloud::GeminiDataAnalytics::V1::DeleteConversationRequest, ::Google::Protobuf::Empty
+            # Updates a conversation.
+            rpc :UpdateConversation, ::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest, ::Google::Cloud::GeminiDataAnalytics::V1::Conversation
             # Gets details of a single conversation by using conversation id and parent.
             rpc :GetConversation, ::Google::Cloud::GeminiDataAnalytics::V1::GetConversationRequest, ::Google::Cloud::GeminiDataAnalytics::V1::Conversation
             # Lists all conversations for a given parent.

@@ -140,6 +140,21 @@
                 "delete_reaction"
               ]
             },
+            "ListMessagePins": {
+              "methods": [
+                "list_message_pins"
+              ]
+            },
+            "CreateMessagePin": {
+              "methods": [
+                "create_message_pin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "delete_message_pin"
+              ]
+            },
             "CreateCustomEmoji": {
               "methods": [
                 "create_custom_emoji"

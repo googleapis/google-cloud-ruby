@@ -70,7 +70,7 @@ module Google
           #     Note: The following fields are mutually exclusive: `logs_panel`, `xy_chart`, `scorecard`, `text`, `blank`, `alert_chart`, `time_series_table`, `collapsible_group`, `incident_list`, `pie_chart`, `error_reporting_panel`, `section_header`, `single_view_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] incident_list
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::IncidentList]
-          #     A widget that shows list of incidents.
+          #     A widget that shows list of alerts.
           #
           #     Note: The following fields are mutually exclusive: `incident_list`, `xy_chart`, `scorecard`, `text`, `blank`, `alert_chart`, `time_series_table`, `collapsible_group`, `logs_panel`, `pie_chart`, `error_reporting_panel`, `section_header`, `single_view_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pie_chart

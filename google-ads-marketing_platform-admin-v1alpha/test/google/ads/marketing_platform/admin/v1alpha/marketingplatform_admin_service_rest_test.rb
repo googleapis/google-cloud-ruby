@@ -518,6 +518,774 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     end
   end
 
+  def test_get_user_group
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_get_user_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_user_group_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_user_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_user_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_user_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_user_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_user_groups
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_user_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_user_groups_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_user_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_user_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_user_groups ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_user_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_user_groups(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_user_groups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_user_group
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_group = {}
+
+    create_user_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_create_user_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_user_group_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_user_group({ parent: parent, user_group: user_group }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_user_group parent: parent, user_group: user_group do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest.new(parent: parent, user_group: user_group) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_user_group({ parent: parent, user_group: user_group }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest.new(parent: parent, user_group: user_group), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_user_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_user_group
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    user_group = {}
+    update_mask = {}
+
+    update_user_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_update_user_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_user_group_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_user_group({ user_group: user_group, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_user_group user_group: user_group, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest.new(user_group: user_group, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_user_group({ user_group: user_group, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest.new(user_group: user_group, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_user_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_user_group
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_delete_user_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_user_group_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_user_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_user_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_user_group ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_user_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_user_group(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_user_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_user_group_member
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_group_member_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_get_user_group_member_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_user_group_member_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_user_group_member({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_user_group_member name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_user_group_member({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_user_group_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_user_group_members
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_user_group_members_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_user_group_members_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_user_group_members_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_user_group_members({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_user_group_members parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_user_group_members ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_user_group_members({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_user_group_members(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_user_group_members_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_user_group_member
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_group_member = {}
+
+    create_user_group_member_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_create_user_group_member_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_user_group_member_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_user_group_member({ parent: parent, user_group_member: user_group_member }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_user_group_member parent: parent, user_group_member: user_group_member do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest.new(parent: parent, user_group_member: user_group_member) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_user_group_member({ parent: parent, user_group_member: user_group_member }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest.new(parent: parent, user_group_member: user_group_member), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_user_group_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_user_group_member
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    user_group_member = {}
+    update_mask = {}
+
+    update_user_group_member_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_update_user_group_member_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_user_group_member_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_user_group_member({ user_group_member: user_group_member, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_user_group_member user_group_member: user_group_member, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest.new(user_group_member: user_group_member, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_user_group_member({ user_group_member: user_group_member, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest.new(user_group_member: user_group_member, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_user_group_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_user_group_member
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_group_member_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_delete_user_group_member_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_user_group_member_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_user_group_member({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_user_group_member name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_user_group_member ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_user_group_member({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_user_group_member(::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_user_group_member_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_admin_access_binding
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_admin_access_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_get_admin_access_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_admin_access_binding_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_admin_access_binding({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_admin_access_binding name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_admin_access_binding({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_admin_access_binding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_admin_access_bindings
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_admin_access_bindings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_admin_access_bindings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_admin_access_bindings_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_admin_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_admin_access_bindings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_admin_access_bindings ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_admin_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_admin_access_bindings(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_admin_access_bindings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_admin_access_binding
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    admin_access_binding = {}
+
+    create_admin_access_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_create_admin_access_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_admin_access_binding_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_admin_access_binding({ parent: parent, admin_access_binding: admin_access_binding }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_admin_access_binding parent: parent, admin_access_binding: admin_access_binding do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest.new(parent: parent, admin_access_binding: admin_access_binding) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_admin_access_binding({ parent: parent, admin_access_binding: admin_access_binding }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest.new(parent: parent, admin_access_binding: admin_access_binding), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_admin_access_binding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_admin_access_binding
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    admin_access_binding = {}
+    update_mask = {}
+
+    update_admin_access_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_update_admin_access_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_admin_access_binding_client_stub do
+        # Create client
+        c = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_admin_access_binding({ admin_access_binding: admin_access_binding, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_admin_access_binding admin_access_binding: admin_access_binding, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_admin_access_binding ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest.new(admin_access_binding: admin_access_binding, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_admin_access_binding({ admin_access_binding: admin_access_binding, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_admin_access_binding(::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest.new(admin_access_binding: admin_access_binding, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_admin_access_binding_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

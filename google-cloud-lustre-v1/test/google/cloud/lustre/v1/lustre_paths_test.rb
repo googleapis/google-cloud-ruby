@@ -41,6 +41,30 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
+  def test_directory_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.directory_policy_path project: "value0", location: "value1", instance: "value2", directory_policy: "value3"
+      assert_equal "projects/value0/locations/value1/instances/value2/directoryPolicies/value3", path
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -65,6 +89,18 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_mirror_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.mirror_path project: "value0", location: "value1", instance: "value2", mirror: "value3"
+      assert_equal "projects/value0/locations/value1/instances/value2/mirrors/value3", path
+    end
+  end
+
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -74,6 +110,21 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientPathsTest < Minitest::Test
 
       path = client.network_path project: "value0", network: "value1"
       assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
+  def test_resource_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.resource_policy_path project: "value0", region: "value1", resource_policy: "value2"
+      assert_equal "projects/value0/regions/value1/resourcePolicies/value2", path
+
+      path = client.resource_policy_path project: "value0", location: "value1", resource_policy: "value2"
+      assert_equal "projects/value0/locations/value1/resourcePolicies/value2", path
     end
   end
 

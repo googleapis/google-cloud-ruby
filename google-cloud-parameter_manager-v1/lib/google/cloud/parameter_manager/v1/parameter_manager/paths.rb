@@ -102,6 +102,46 @@ module Google
               "projects/#{project}/locations/#{location}/parameters/#{parameter}/versions/#{parameter_version}"
             end
 
+            ##
+            # Create a fully-qualified Template resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/templates/{template}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param template [String]
+            #
+            # @return [::String]
+            def template_path project:, location:, template:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/templates/#{template}"
+            end
+
+            ##
+            # Create a fully-qualified TemplateVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/templates/{template}/versions/{template_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param template [String]
+            # @param template_version [String]
+            #
+            # @return [::String]
+            def template_version_path project:, location:, template:, template_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "template cannot contain /" if template.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/templates/#{template}/versions/#{template_version}"
+            end
+
             extend self
           end
         end

@@ -20,6 +20,7 @@ require "google/cloud/errors"
 require "google/cloud/lustre/v1/lustre_pb"
 require "google/cloud/lustre/v1/lustre/rest/service_stub"
 require "google/cloud/location/rest"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -180,6 +181,15 @@ module Google
                   config.bindings_override = @config.bindings_override
                   config.logger = @lustre_stub.logger if config.respond_to? :logger=
                 end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @lustre_stub.endpoint
+                  config.universe_domain = @lustre_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                  config.logger = @lustre_stub.logger if config.respond_to? :logger=
+                end
               end
 
               ##
@@ -195,6 +205,13 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               ##
               # The logger used for request/response debug logging.
@@ -618,7 +635,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_instance(name: nil, request_id: nil)
+              # @overload delete_instance(name: nil, request_id: nil, force: nil)
               #   Pass arguments to `delete_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -640,6 +657,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any sub-resources from this instance will also be
+              #     deleted. Otherwise, the request will only work if the instance has no
+              #     sub-resources.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -708,6 +729,99 @@ module Google
               end
 
               ##
+              # Reschedules a planned maintenance event for a specific instance.
+              #
+              # @overload reschedule_maintenance(request, options = nil)
+              #   Pass arguments to `reschedule_maintenance` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload reschedule_maintenance(name: nil, reschedule: nil, request_id: nil)
+              #   Pass arguments to `reschedule_maintenance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param reschedule [::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest::Reschedule, ::Hash]
+              #     Required. The desired reschedule settings.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. A random UUID is
+              #     recommended. This request is only idempotent if a `request_id` is provided.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest.new
+              #
+              #   # Call the reschedule_maintenance method.
+              #   result = client.reschedule_maintenance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def reschedule_maintenance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.reschedule_maintenance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.reschedule_maintenance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reschedule_maintenance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.reschedule_maintenance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Imports data from Cloud Storage to a Managed Lustre instance.
               #
               # @overload import_data(request, options = nil)
@@ -739,6 +853,12 @@ module Google
               #   @param service_account [::String]
               #     Optional. User-specified service account used to perform the transfer.
               #     If unspecified, the default Managed Lustre service agent will be used.
+              #
+              #     Use one of the following formats:
+              #
+              #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -840,6 +960,12 @@ module Google
               #   @param service_account [::String]
               #     Optional. User-specified service account used to perform the transfer.
               #     If unspecified, the Managed Lustre service agent is used.
+              #
+              #     Use one of the following formats:
+              #
+              #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -900,6 +1026,866 @@ module Google
 
                 @lustre_stub.export_data request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new mirror in a given instance.
+              #
+              # @overload create_mirror(request, options = nil)
+              #   Pass arguments to `create_mirror` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::CreateMirrorRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::CreateMirrorRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_mirror(parent: nil, mirror_id: nil, mirror: nil, request_id: nil)
+              #   Pass arguments to `create_mirror` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent instance resource where the mirror will be created, in the
+              #     format: `projects/{project}/locations/{location}/instances/{instance}`
+              #   @param mirror_id [::String]
+              #     Required. The ID to use for the mirror.
+              #
+              #     * Must contain only lowercase letters, numbers, and hyphens.
+              #     * Must start with a letter.
+              #     * Must be between 1-63 characters.
+              #     * Must end with a number or a letter.
+              #
+              #     The ID cannot be changed after the mirror is created.
+              #   @param mirror [::Google::Cloud::Lustre::V1::Mirror, ::Hash]
+              #     Required. The mirror to create.
+              #   @param request_id [::String]
+              #     Optional. The unique ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in creation of duplicate mirrors for at least 60
+              #     minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate mirrors.
+              #
+              #     The request ID must be a valid UUID version 4 with the exception that zero
+              #     UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+              #     This request is only idempotent if a `request_id` is provided.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::CreateMirrorRequest.new
+              #
+              #   # Call the create_mirror method.
+              #   result = client.create_mirror request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_mirror request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::CreateMirrorRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_mirror.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_mirror.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_mirror.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.create_mirror request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single mirror.
+              #
+              # @overload update_mirror(request, options = nil)
+              #   Pass arguments to `update_mirror` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::UpdateMirrorRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::UpdateMirrorRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_mirror(mirror: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_mirror` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param mirror [::Google::Cloud::Lustre::V1::Mirror, ::Hash]
+              #     Required. Mirror to update. The mirror's `name` field is used to identify
+              #     the mirror to update, in the format:
+              #     `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Fields specified in the update_mask are relative to the resource,
+              #     not the full request. A field will be overwritten if it is in the mask. If
+              #     no mask is provided then all fields present in the request are overwritten.
+              #   @param request_id [::String]
+              #     Optional. The unique ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in the same update request being executed for at
+              #     least 60 minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request.
+              #
+              #     The request ID must be a valid UUID version 4 with the exception that zero
+              #     UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+              #     This request is only idempotent if a `request_id` is provided.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::UpdateMirrorRequest.new
+              #
+              #   # Call the update_mirror method.
+              #   result = client.update_mirror request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_mirror request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::UpdateMirrorRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_mirror.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_mirror.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_mirror.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.update_mirror request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single mirror.
+              #
+              # @overload delete_mirror(request, options = nil)
+              #   Pass arguments to `delete_mirror` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::DeleteMirrorRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::DeleteMirrorRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_mirror(name: nil, request_id: nil)
+              #   Pass arguments to `delete_mirror` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the mirror to delete, in the format:
+              #     `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+              #   @param request_id [::String]
+              #     Optional. The unique ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server guarantees that a
+              #     request doesn't result in the same delete request being executed for at
+              #     least 60 minutes.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request.
+              #
+              #     The request ID must be a valid UUID version 4 with the exception that zero
+              #     UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+              #     This request is only idempotent if a `request_id` is provided.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::DeleteMirrorRequest.new
+              #
+              #   # Call the delete_mirror method.
+              #   result = client.delete_mirror request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_mirror request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::DeleteMirrorRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_mirror.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_mirror.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_mirror.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.delete_mirror request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single mirror.
+              #
+              # @overload get_mirror(request, options = nil)
+              #   Pass arguments to `get_mirror` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::GetMirrorRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::GetMirrorRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_mirror(name: nil)
+              #   Pass arguments to `get_mirror` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the mirror to retrieve, in the format:
+              #     `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Lustre::V1::Mirror]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Lustre::V1::Mirror]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::GetMirrorRequest.new
+              #
+              #   # Call the get_mirror method.
+              #   result = client.get_mirror request
+              #
+              #   # The returned object is of type Google::Cloud::Lustre::V1::Mirror.
+              #   p result
+              #
+              def get_mirror request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::GetMirrorRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_mirror.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_mirror.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_mirror.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.get_mirror request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of multiple mirrors under a given instance.
+              #
+              # @overload list_mirrors(request, options = nil)
+              #   Pass arguments to `list_mirrors` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::ListMirrorsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::ListMirrorsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_mirrors(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+              #   Pass arguments to `list_mirrors` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent instance resource where the mirrors will be listed, in the
+              #     format: `projects/{project}/locations/{location}/instances/{instance}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. The server might return fewer items than
+              #     requested. If unspecified, the default page size is 10. The maximum value
+              #     is 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListMirrors` call.
+              #     Provide this to retrieve the subsequent page.
+              #     When paginating, all other parameters provided to `ListMirrors` must match
+              #     the call that provided the page token.
+              #   @param order_by [::String]
+              #     Optional. Desired order of results.
+              #   @param filter [::String]
+              #     Optional. Filtering results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Lustre::V1::Mirror>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Lustre::V1::Mirror>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::ListMirrorsRequest.new
+              #
+              #   # Call the list_mirrors method.
+              #   result = client.list_mirrors request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Lustre::V1::Mirror.
+              #     p item
+              #   end
+              #
+              def list_mirrors request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::ListMirrorsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_mirrors.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_mirrors.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_mirrors.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.list_mirrors request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @lustre_stub, :list_mirrors, "mirrors", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a directory policy resource.
+              #
+              # @overload create_directory_policy(request, options = nil)
+              #   Pass arguments to `create_directory_policy` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_directory_policy(parent: nil, directory_policy_id: nil, directory_policy: nil)
+              #   Pass arguments to `create_directory_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent instance.
+              #     It must be in the format of
+              #     `projects/{project}/locations/{location}/instances/{instance}`.
+              #   @param directory_policy_id [::String]
+              #     Required. The ID for the DirectoryPolicy to create.
+              #   @param directory_policy [::Google::Cloud::Lustre::V1::DirectoryPolicy, ::Hash]
+              #     Required. The directory policy to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest.new
+              #
+              #   # Call the create_directory_policy method.
+              #   result = client.create_directory_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_directory_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_directory_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_directory_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_directory_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.create_directory_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a directory policy resource.
+              #
+              # @overload delete_directory_policy(request, options = nil)
+              #   Pass arguments to `delete_directory_policy` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_directory_policy(name: nil)
+              #   Pass arguments to `delete_directory_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the directory policy.
+              #     DirectoryPolicy names have the form
+              #     `projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest.new
+              #
+              #   # Call the delete_directory_policy method.
+              #   result = client.delete_directory_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_directory_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_directory_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_directory_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_directory_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.delete_directory_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single directory policy.
+              #
+              # @overload get_directory_policy(request, options = nil)
+              #   Pass arguments to `get_directory_policy` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_directory_policy(name: nil)
+              #   Pass arguments to `get_directory_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the directory policy.
+              #     DirectoryPolicy names have the form
+              #     `projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Lustre::V1::DirectoryPolicy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Lustre::V1::DirectoryPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest.new
+              #
+              #   # Call the get_directory_policy method.
+              #   result = client.get_directory_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Lustre::V1::DirectoryPolicy.
+              #   p result
+              #
+              def get_directory_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_directory_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_directory_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_directory_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.get_directory_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of multiple directory policies under a given instance.
+              #
+              # @overload list_directory_policies(request, options = nil)
+              #   Pass arguments to `list_directory_policies` via a request object, either of type
+              #   {::Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_directory_policies(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_directory_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent instance.
+              #     It must be in the format of
+              #     `projects/{project}/locations/{location}/instances/{instance}`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server might return fewer items than
+              #     requested. If unspecified, the server will pick an appropriate default. The
+              #     maximum value is 1000; values above 1000 will be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListDirectoryPolicies`
+              #     call. Provide this to retrieve the subsequent page. When paginating, all
+              #     other parameters provided to `ListDirectoryPolicies` must match the call
+              #     that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Lustre::V1::DirectoryPolicy>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Lustre::V1::DirectoryPolicy>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/lustre/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Lustre::V1::Lustre::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest.new
+              #
+              #   # Call the list_directory_policies method.
+              #   result = client.list_directory_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Lustre::V1::DirectoryPolicy.
+              #     p item
+              #   end
+              #
+              def list_directory_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_directory_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Lustre::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_directory_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_directory_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @lustre_stub.list_directory_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @lustre_stub, :list_directory_policies, "directory_policies", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -1088,6 +2074,11 @@ module Google
                   #
                   attr_reader :delete_instance
                   ##
+                  # RPC-specific configuration for `reschedule_maintenance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :reschedule_maintenance
+                  ##
                   # RPC-specific configuration for `import_data`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1097,6 +2088,51 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :export_data
+                  ##
+                  # RPC-specific configuration for `create_mirror`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_mirror
+                  ##
+                  # RPC-specific configuration for `update_mirror`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_mirror
+                  ##
+                  # RPC-specific configuration for `delete_mirror`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_mirror
+                  ##
+                  # RPC-specific configuration for `get_mirror`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_mirror
+                  ##
+                  # RPC-specific configuration for `list_mirrors`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_mirrors
+                  ##
+                  # RPC-specific configuration for `create_directory_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_directory_policy
+                  ##
+                  # RPC-specific configuration for `delete_directory_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_directory_policy
+                  ##
+                  # RPC-specific configuration for `get_directory_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_directory_policy
+                  ##
+                  # RPC-specific configuration for `list_directory_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_directory_policies
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1110,10 +2146,30 @@ module Google
                     @update_instance = ::Gapic::Config::Method.new update_instance_config
                     delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
+                    reschedule_maintenance_config = parent_rpcs.reschedule_maintenance if parent_rpcs.respond_to? :reschedule_maintenance
+                    @reschedule_maintenance = ::Gapic::Config::Method.new reschedule_maintenance_config
                     import_data_config = parent_rpcs.import_data if parent_rpcs.respond_to? :import_data
                     @import_data = ::Gapic::Config::Method.new import_data_config
                     export_data_config = parent_rpcs.export_data if parent_rpcs.respond_to? :export_data
                     @export_data = ::Gapic::Config::Method.new export_data_config
+                    create_mirror_config = parent_rpcs.create_mirror if parent_rpcs.respond_to? :create_mirror
+                    @create_mirror = ::Gapic::Config::Method.new create_mirror_config
+                    update_mirror_config = parent_rpcs.update_mirror if parent_rpcs.respond_to? :update_mirror
+                    @update_mirror = ::Gapic::Config::Method.new update_mirror_config
+                    delete_mirror_config = parent_rpcs.delete_mirror if parent_rpcs.respond_to? :delete_mirror
+                    @delete_mirror = ::Gapic::Config::Method.new delete_mirror_config
+                    get_mirror_config = parent_rpcs.get_mirror if parent_rpcs.respond_to? :get_mirror
+                    @get_mirror = ::Gapic::Config::Method.new get_mirror_config
+                    list_mirrors_config = parent_rpcs.list_mirrors if parent_rpcs.respond_to? :list_mirrors
+                    @list_mirrors = ::Gapic::Config::Method.new list_mirrors_config
+                    create_directory_policy_config = parent_rpcs.create_directory_policy if parent_rpcs.respond_to? :create_directory_policy
+                    @create_directory_policy = ::Gapic::Config::Method.new create_directory_policy_config
+                    delete_directory_policy_config = parent_rpcs.delete_directory_policy if parent_rpcs.respond_to? :delete_directory_policy
+                    @delete_directory_policy = ::Gapic::Config::Method.new delete_directory_policy_config
+                    get_directory_policy_config = parent_rpcs.get_directory_policy if parent_rpcs.respond_to? :get_directory_policy
+                    @get_directory_policy = ::Gapic::Config::Method.new get_directory_policy_config
+                    list_directory_policies_config = parent_rpcs.list_directory_policies if parent_rpcs.respond_to? :list_directory_policies
+                    @list_directory_policies = ::Gapic::Config::Method.new list_directory_policies_config
 
                     yield self if block_given?
                   end

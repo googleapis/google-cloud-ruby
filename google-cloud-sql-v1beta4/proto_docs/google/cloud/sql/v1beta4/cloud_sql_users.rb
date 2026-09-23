@@ -33,6 +33,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlUsersDeleteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51,6 +54,9 @@ module Google
         # @!attribute [rw] host
         #   @return [::String]
         #     Host of a user of the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlUsersGetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -64,6 +70,9 @@ module Google
         #     Project ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1beta4::User]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlUsersInsertRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,6 +84,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlUsersListRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,6 +125,9 @@ module Google
         #     specified in `server_roles` are added to the user's existing server roles.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1beta4::User]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlUsersUpdateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

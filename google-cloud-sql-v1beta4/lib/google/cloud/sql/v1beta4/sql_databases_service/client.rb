@@ -210,7 +210,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete(database: nil, instance: nil, project: nil)
+            # @overload delete(database: nil, instance: nil, project: nil, location: nil)
             #   Pass arguments to `delete` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -221,6 +221,8 @@ module Google
             #     Database instance ID. This does not include the project ID.
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::Operation]
@@ -306,7 +308,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get(database: nil, instance: nil, project: nil)
+            # @overload get(database: nil, instance: nil, project: nil, location: nil)
             #   Pass arguments to `get` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -317,6 +319,8 @@ module Google
             #     Database instance ID. This does not include the project ID.
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::Database]
@@ -404,7 +408,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload insert(instance: nil, project: nil, body: nil)
+            # @overload insert(instance: nil, project: nil, body: nil, location: nil)
             #   Pass arguments to `insert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -414,6 +418,8 @@ module Google
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
             #   @param body [::Google::Cloud::Sql::V1beta4::Database, ::Hash]
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::Operation]
@@ -495,7 +501,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list(instance: nil, project: nil)
+            # @overload list(instance: nil, project: nil, location: nil)
             #   Pass arguments to `list` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -504,6 +510,8 @@ module Google
             #     Cloud SQL instance ID. This does not include the project ID.
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::DatabasesListResponse]
@@ -586,7 +594,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload patch(database: nil, instance: nil, project: nil, body: nil)
+            # @overload patch(database: nil, instance: nil, project: nil, body: nil, location: nil)
             #   Pass arguments to `patch` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -598,6 +606,8 @@ module Google
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
             #   @param body [::Google::Cloud::Sql::V1beta4::Database, ::Hash]
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::Operation]
@@ -683,7 +693,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update(database: nil, instance: nil, project: nil, body: nil)
+            # @overload update(database: nil, instance: nil, project: nil, body: nil, location: nil)
             #   Pass arguments to `update` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -695,6 +705,8 @@ module Google
             #   @param project [::String]
             #     Project ID of the project that contains the instance.
             #   @param body [::Google::Cloud::Sql::V1beta4::Database, ::Hash]
+            #   @param location [::String]
+            #     Optional. Region of the Cloud SQL instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Sql::V1beta4::Operation]

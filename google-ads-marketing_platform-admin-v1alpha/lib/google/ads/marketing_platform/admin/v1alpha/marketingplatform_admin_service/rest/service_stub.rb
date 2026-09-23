@@ -395,6 +395,566 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the get_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #   A result object deserialized from the server's reply
+                def get_user_group request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_user_group_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_user_group",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_user_groups REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsResponse]
+                #   A result object deserialized from the server's reply
+                def list_user_groups request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_user_groups_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_user_groups",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the create_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #   A result object deserialized from the server's reply
+                def create_user_group request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_create_user_group_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_user_group",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the update_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #   A result object deserialized from the server's reply
+                def update_user_group request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_update_user_group_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_user_group",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the delete_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #   A result object deserialized from the server's reply
+                def delete_user_group request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_delete_user_group_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_user_group",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #   A result object deserialized from the server's reply
+                def get_user_group_member request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_user_group_member_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_user_group_member",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_user_group_members REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersResponse]
+                #   A result object deserialized from the server's reply
+                def list_user_group_members request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_user_group_members_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_user_group_members",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the create_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #   A result object deserialized from the server's reply
+                def create_user_group_member request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_create_user_group_member_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_user_group_member",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the update_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #   A result object deserialized from the server's reply
+                def update_user_group_member request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_update_user_group_member_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_user_group_member",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the delete_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #   A result object deserialized from the server's reply
+                def delete_user_group_member request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_delete_user_group_member_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_user_group_member",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #   A result object deserialized from the server's reply
+                def get_admin_access_binding request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_admin_access_binding_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_admin_access_binding",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_admin_access_bindings REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsResponse]
+                #   A result object deserialized from the server's reply
+                def list_admin_access_bindings request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_admin_access_bindings_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_admin_access_bindings",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the create_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #   A result object deserialized from the server's reply
+                def create_admin_access_binding request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_create_admin_access_binding_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_admin_access_binding",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the update_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #   A result object deserialized from the server's reply
+                def update_admin_access_binding request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_update_admin_access_binding_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_admin_access_binding",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the get_organization REST call
@@ -559,6 +1119,306 @@ module Google
                                                             body: "*",
                                                             matches: [
                                                               ["organization", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_user_group_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{name}",
+                                                            matches: [
+                                                              ["name", %r{^organizations/[^/]+/userGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_user_groups REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_user_groups_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{parent}/userGroups",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the create_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_create_user_group_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1alpha/{parent}/userGroups",
+                                                            body: "user_group",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the update_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_update_user_group_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :patch,
+                                                            uri_template: "/v1alpha/{user_group.name}",
+                                                            body: "user_group",
+                                                            matches: [
+                                                              ["user_group.name", %r{^organizations/[^/]+/userGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the delete_user_group REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_delete_user_group_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :delete,
+                                                            uri_template: "/v1alpha/{name}",
+                                                            matches: [
+                                                              ["name", %r{^organizations/[^/]+/userGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_user_group_member_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{name}",
+                                                            matches: [
+                                                              ["name", %r{^organizations/[^/]+/userGroups/[^/]+/members/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_user_group_members REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_user_group_members_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{parent}/members",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/userGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the create_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_create_user_group_member_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1alpha/{parent}/members",
+                                                            body: "user_group_member",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/userGroups/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the update_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_update_user_group_member_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :patch,
+                                                            uri_template: "/v1alpha/{user_group_member.name}",
+                                                            body: "user_group_member",
+                                                            matches: [
+                                                              ["user_group_member.name", %r{^organizations/[^/]+/userGroups/[^/]+/members/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the delete_user_group_member REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_delete_user_group_member_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :delete,
+                                                            uri_template: "/v1alpha/{name}",
+                                                            matches: [
+                                                              ["name", %r{^organizations/[^/]+/userGroups/[^/]+/members/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_admin_access_binding_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{name}",
+                                                            matches: [
+                                                              ["name", %r{^organizations/[^/]+/adminAccessBindings/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_admin_access_bindings REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_admin_access_bindings_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/{parent}/adminAccessBindings",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the create_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_create_admin_access_binding_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1alpha/{parent}/adminAccessBindings",
+                                                            body: "admin_access_binding",
+                                                            matches: [
+                                                              ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the update_admin_access_binding REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_update_admin_access_binding_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :patch,
+                                                            uri_template: "/v1alpha/{admin_access_binding.name}",
+                                                            body: "admin_access_binding",
+                                                            matches: [
+                                                              ["admin_access_binding.name", %r{^organizations/[^/]+/adminAccessBindings/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

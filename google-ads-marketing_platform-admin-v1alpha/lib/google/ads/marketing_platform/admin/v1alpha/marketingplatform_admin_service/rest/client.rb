@@ -183,7 +183,7 @@ module Google
                 # Service calls
 
                 ##
-                # Lookup for a single organization.
+                # Looks up a single organization.
                 #
                 # @overload get_organization(request, options = nil)
                 #   Pass arguments to `get_organization` via a request object, either of type
@@ -797,7 +797,7 @@ module Google
                 end
 
                 ##
-                # Get the usage and billing data for properties within the organization for
+                # Gets the usage and billing data for properties within the organization for
                 # the specified month.
                 #
                 # Per direct client org, user needs to be OrgAdmin/BillingAdmin on the
@@ -883,6 +883,1190 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @marketingplatform_admin_service_stub.report_property_usage request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Looks up a single user group.
+                #
+                # @overload get_user_group(request, options = nil)
+                #   Pass arguments to `get_user_group` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_user_group(name: nil)
+                #   Pass arguments to `get_user_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the UserGroup to retrieve.
+                #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest.new
+                #
+                #   # Call the get_user_group method.
+                #   result = client.get_user_group request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.
+                #   p result
+                #
+                def get_user_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_user_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_user_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_user_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.get_user_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns a list of user groups in the specified GMP organization.
+                #
+                # @overload list_user_groups(request, options = nil)
+                #   Pass arguments to `list_user_groups` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_user_groups(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_user_groups` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent org where this UserGroup will be listed.
+                #     Format: organizations/\\{org_id}
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of user groups to return in one call. The
+                #     service may return fewer than this value.
+                #
+                #     If unspecified, at most 50 user groups will be returned. The maximum value
+                #     is 1000; values above 1000 will be coerced to 1000.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous ListUserGroups call.
+                #     Provide this to retrieve the subsequent page.
+                #
+                #     When paginating, all other parameters provided to `ListUserGroups` must
+                #     match the call that provided the page token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest.new
+                #
+                #   # Call the list_user_groups method.
+                #   result = client.list_user_groups request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.
+                #     p item
+                #   end
+                #
+                def list_user_groups request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_user_groups.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_user_groups.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_user_groups.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.list_user_groups request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @marketingplatform_admin_service_stub, :list_user_groups, "user_groups", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates a user group in the specified GMP organization.
+                #
+                # @overload create_user_group(request, options = nil)
+                #   Pass arguments to `create_user_group` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_user_group(parent: nil, user_group: nil)
+                #   Pass arguments to `create_user_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent resource where this UserGroup will be created.
+                #     Format: organizations/\\{org_id}
+                #   @param user_group [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup, ::Hash]
+                #     Required. The user group to create.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest.new
+                #
+                #   # Call the create_user_group method.
+                #   result = client.create_user_group request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.
+                #   p result
+                #
+                def create_user_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_user_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_user_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_user_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.create_user_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates a user group in the specified GMP organization.
+                #
+                # @overload update_user_group(request, options = nil)
+                #   Pass arguments to `update_user_group` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload update_user_group(user_group: nil, update_mask: nil)
+                #   Pass arguments to `update_user_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param user_group [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup, ::Hash]
+                #     Required. The user group to update.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Required. The list of fields to update. Field names must be in snake case
+                #     (for example, "field_to_update"). Omitted fields will not be updated. To
+                #     replace the entire entity, use one path with the string "*" to match all
+                #     fields.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest.new
+                #
+                #   # Call the update_user_group method.
+                #   result = client.update_user_group request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroup.
+                #   p result
+                #
+                def update_user_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.update_user_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.update_user_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.update_user_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.update_user_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a user group in the specified GMP organization.
+                #
+                # @overload delete_user_group(request, options = nil)
+                #   Pass arguments to `delete_user_group` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_user_group(name: nil)
+                #   Pass arguments to `delete_user_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the user group to delete.
+                #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest.new
+                #
+                #   # Call the delete_user_group method.
+                #   result = client.delete_user_group request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_user_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_user_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_user_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_user_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.delete_user_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Looks up a single user group member.
+                #
+                # @overload get_user_group_member(request, options = nil)
+                #   Pass arguments to `get_user_group_member` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_user_group_member(name: nil)
+                #   Pass arguments to `get_user_group_member` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the user group member to retrieve.
+                #     Format:
+                #     organizations/\\{org_id}/userGroups/\\{user_group_id}/members/\\{member_id}
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest.new
+                #
+                #   # Call the get_user_group_member method.
+                #   result = client.get_user_group_member request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.
+                #   p result
+                #
+                def get_user_group_member request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetUserGroupMemberRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_user_group_member.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_user_group_member.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_user_group_member.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.get_user_group_member request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns a list of members in the specified user group.
+                #
+                # @overload list_user_group_members(request, options = nil)
+                #   Pass arguments to `list_user_group_members` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_user_group_members(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_user_group_members` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent user group where this UserGroupMember will be listed.
+                #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of user group members to return in one call.
+                #     The service may return fewer than this value.
+                #
+                #     If unspecified, at most 50 user group members will be returned. The
+                #     maximum value is 1000; values above 1000 will be coerced to 1000.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous ListUserGroupMembers call.
+                #     Provide this to retrieve the subsequent page.
+                #
+                #     When paginating, all other parameters provided to
+                #     `ListUserGroupMembers` must match the call that provided the page token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest.new
+                #
+                #   # Call the list_user_group_members method.
+                #   result = client.list_user_group_members request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.
+                #     p item
+                #   end
+                #
+                def list_user_group_members request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListUserGroupMembersRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_user_group_members.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_user_group_members.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_user_group_members.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.list_user_group_members request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @marketingplatform_admin_service_stub, :list_user_group_members, "user_group_members", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Adds a member to the specified GMP user group.
+                #
+                # @overload create_user_group_member(request, options = nil)
+                #   Pass arguments to `create_user_group_member` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_user_group_member(parent: nil, user_group_member: nil)
+                #   Pass arguments to `create_user_group_member` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent resource where this UserGroupMember will be created.
+                #     Format: organizations/\\{org_id}/userGroups/\\{user_group_id}
+                #   @param user_group_member [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember, ::Hash]
+                #     Required. The user group member to create.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest.new
+                #
+                #   # Call the create_user_group_member method.
+                #   result = client.create_user_group_member request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.
+                #   p result
+                #
+                def create_user_group_member request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateUserGroupMemberRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_user_group_member.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_user_group_member.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_user_group_member.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.create_user_group_member request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates a member in the specified GMP user group.
+                #
+                # @overload update_user_group_member(request, options = nil)
+                #   Pass arguments to `update_user_group_member` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload update_user_group_member(user_group_member: nil, update_mask: nil)
+                #   Pass arguments to `update_user_group_member` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param user_group_member [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember, ::Hash]
+                #     Required. The user group member to update.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Required. The list of fields to update. Field names must be in snake case
+                #     (for example, "field_to_update"). Omitted fields will not be updated. To
+                #     replace the entire entity, use one path with the string "*" to match all
+                #     fields.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest.new
+                #
+                #   # Call the update_user_group_member method.
+                #   result = client.update_user_group_member request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::UserGroupMember.
+                #   p result
+                #
+                def update_user_group_member request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateUserGroupMemberRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.update_user_group_member.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.update_user_group_member.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.update_user_group_member.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.update_user_group_member request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a member in the specified GMP user group.
+                #
+                # @overload delete_user_group_member(request, options = nil)
+                #   Pass arguments to `delete_user_group_member` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_user_group_member(name: nil)
+                #   Pass arguments to `delete_user_group_member` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the user group member to delete.
+                #     Format:
+                #     organizations/\\{org_id}/userGroups/\\{user_group_id}/members/\\{member_id}
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest.new
+                #
+                #   # Call the delete_user_group_member method.
+                #   result = client.delete_user_group_member request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_user_group_member request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteUserGroupMemberRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_user_group_member.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_user_group_member.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_user_group_member.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.delete_user_group_member request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Looks up a single admin access binding.
+                #
+                # @overload get_admin_access_binding(request, options = nil)
+                #   Pass arguments to `get_admin_access_binding` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_admin_access_binding(name: nil)
+                #   Pass arguments to `get_admin_access_binding` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the AdminAccessBinding to retrieve.
+                #     Format:
+                #     organizations/\\{org_id}/adminAccessBindings/\\{admin_access_binding_id}
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest.new
+                #
+                #   # Call the get_admin_access_binding method.
+                #   result = client.get_admin_access_binding request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.
+                #   p result
+                #
+                def get_admin_access_binding request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetAdminAccessBindingRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_admin_access_binding.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_admin_access_binding.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_admin_access_binding.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.get_admin_access_binding request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns a list of admin access bindings in the specified GMP organization.
+                #
+                # @overload list_admin_access_bindings(request, options = nil)
+                #   Pass arguments to `list_admin_access_bindings` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_admin_access_bindings(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_admin_access_bindings` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent organization, which owns this collection of Admin
+                #     Access Bindings. Format: organizations/\\{org_id}
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of Admin Access Bindings to return in one
+                #     call. The service may return fewer than this value.
+                #
+                #     If unspecified, at most 50 Admin Access Bindings will be returned. The
+                #     maximum value is 1000; values above 1000 will be coerced to 1000.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous ListAdminAccessBindings
+                #     call. Provide this to retrieve the subsequent page.
+                #
+                #     When paginating, all other parameters provided to
+                #     `ListAdminAccessBindings` must match the call that provided the page
+                #     token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest.new
+                #
+                #   # Call the list_admin_access_bindings method.
+                #   result = client.list_admin_access_bindings request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.
+                #     p item
+                #   end
+                #
+                def list_admin_access_bindings request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAdminAccessBindingsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_admin_access_bindings.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_admin_access_bindings.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_admin_access_bindings.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.list_admin_access_bindings request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @marketingplatform_admin_service_stub, :list_admin_access_bindings, "admin_access_bindings", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates an admin access binding in the specified GMP organization.
+                #
+                # @overload create_admin_access_binding(request, options = nil)
+                #   Pass arguments to `create_admin_access_binding` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_admin_access_binding(parent: nil, admin_access_binding: nil)
+                #   Pass arguments to `create_admin_access_binding` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent organization, which owns this Admin Access Binding.
+                #     Format: organizations/\\{org_id}
+                #   @param admin_access_binding [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding, ::Hash]
+                #     Required. The Admin Access Binding to create.
+                #
+                #     Only 'user_email' input is allowed.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest.new
+                #
+                #   # Call the create_admin_access_binding method.
+                #   result = client.create_admin_access_binding request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.
+                #   p result
+                #
+                def create_admin_access_binding request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAdminAccessBindingRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_admin_access_binding.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_admin_access_binding.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_admin_access_binding.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.create_admin_access_binding request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Updates an admin access binding in the specified GMP organization.
+                #
+                # @overload update_admin_access_binding(request, options = nil)
+                #   Pass arguments to `update_admin_access_binding` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload update_admin_access_binding(admin_access_binding: nil, update_mask: nil)
+                #   Pass arguments to `update_admin_access_binding` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param admin_access_binding [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding, ::Hash]
+                #     Required. The AdminAccessBinding to update.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Required. The list of fields to update. Field names must be in snake case
+                #     (for example, "field_to_update"). Omitted fields will not be updated. To
+                #     replace the entire entity, use one path with the string "*" to match all
+                #     fields.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest.new
+                #
+                #   # Call the update_admin_access_binding method.
+                #   result = client.update_admin_access_binding request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::AdminAccessBinding.
+                #   p result
+                #
+                def update_admin_access_binding request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::UpdateAdminAccessBindingRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.update_admin_access_binding.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.update_admin_access_binding.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.update_admin_access_binding.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.update_admin_access_binding request, options do |result, operation|
                     yield result, operation if block_given?
                   end
                 rescue ::Gapic::Rest::Error => e
@@ -1077,6 +2261,76 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :report_property_usage
+                    ##
+                    # RPC-specific configuration for `get_user_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_user_group
+                    ##
+                    # RPC-specific configuration for `list_user_groups`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_user_groups
+                    ##
+                    # RPC-specific configuration for `create_user_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_user_group
+                    ##
+                    # RPC-specific configuration for `update_user_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_user_group
+                    ##
+                    # RPC-specific configuration for `delete_user_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_user_group
+                    ##
+                    # RPC-specific configuration for `get_user_group_member`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_user_group_member
+                    ##
+                    # RPC-specific configuration for `list_user_group_members`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_user_group_members
+                    ##
+                    # RPC-specific configuration for `create_user_group_member`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_user_group_member
+                    ##
+                    # RPC-specific configuration for `update_user_group_member`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_user_group_member
+                    ##
+                    # RPC-specific configuration for `delete_user_group_member`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_user_group_member
+                    ##
+                    # RPC-specific configuration for `get_admin_access_binding`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_admin_access_binding
+                    ##
+                    # RPC-specific configuration for `list_admin_access_bindings`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_admin_access_bindings
+                    ##
+                    # RPC-specific configuration for `create_admin_access_binding`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_admin_access_binding
+                    ##
+                    # RPC-specific configuration for `update_admin_access_binding`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :update_admin_access_binding
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -1096,6 +2350,34 @@ module Google
                       @set_property_service_level = ::Gapic::Config::Method.new set_property_service_level_config
                       report_property_usage_config = parent_rpcs.report_property_usage if parent_rpcs.respond_to? :report_property_usage
                       @report_property_usage = ::Gapic::Config::Method.new report_property_usage_config
+                      get_user_group_config = parent_rpcs.get_user_group if parent_rpcs.respond_to? :get_user_group
+                      @get_user_group = ::Gapic::Config::Method.new get_user_group_config
+                      list_user_groups_config = parent_rpcs.list_user_groups if parent_rpcs.respond_to? :list_user_groups
+                      @list_user_groups = ::Gapic::Config::Method.new list_user_groups_config
+                      create_user_group_config = parent_rpcs.create_user_group if parent_rpcs.respond_to? :create_user_group
+                      @create_user_group = ::Gapic::Config::Method.new create_user_group_config
+                      update_user_group_config = parent_rpcs.update_user_group if parent_rpcs.respond_to? :update_user_group
+                      @update_user_group = ::Gapic::Config::Method.new update_user_group_config
+                      delete_user_group_config = parent_rpcs.delete_user_group if parent_rpcs.respond_to? :delete_user_group
+                      @delete_user_group = ::Gapic::Config::Method.new delete_user_group_config
+                      get_user_group_member_config = parent_rpcs.get_user_group_member if parent_rpcs.respond_to? :get_user_group_member
+                      @get_user_group_member = ::Gapic::Config::Method.new get_user_group_member_config
+                      list_user_group_members_config = parent_rpcs.list_user_group_members if parent_rpcs.respond_to? :list_user_group_members
+                      @list_user_group_members = ::Gapic::Config::Method.new list_user_group_members_config
+                      create_user_group_member_config = parent_rpcs.create_user_group_member if parent_rpcs.respond_to? :create_user_group_member
+                      @create_user_group_member = ::Gapic::Config::Method.new create_user_group_member_config
+                      update_user_group_member_config = parent_rpcs.update_user_group_member if parent_rpcs.respond_to? :update_user_group_member
+                      @update_user_group_member = ::Gapic::Config::Method.new update_user_group_member_config
+                      delete_user_group_member_config = parent_rpcs.delete_user_group_member if parent_rpcs.respond_to? :delete_user_group_member
+                      @delete_user_group_member = ::Gapic::Config::Method.new delete_user_group_member_config
+                      get_admin_access_binding_config = parent_rpcs.get_admin_access_binding if parent_rpcs.respond_to? :get_admin_access_binding
+                      @get_admin_access_binding = ::Gapic::Config::Method.new get_admin_access_binding_config
+                      list_admin_access_bindings_config = parent_rpcs.list_admin_access_bindings if parent_rpcs.respond_to? :list_admin_access_bindings
+                      @list_admin_access_bindings = ::Gapic::Config::Method.new list_admin_access_bindings_config
+                      create_admin_access_binding_config = parent_rpcs.create_admin_access_binding if parent_rpcs.respond_to? :create_admin_access_binding
+                      @create_admin_access_binding = ::Gapic::Config::Method.new create_admin_access_binding_config
+                      update_admin_access_binding_config = parent_rpcs.update_admin_access_binding if parent_rpcs.respond_to? :update_admin_access_binding
+                      @update_admin_access_binding = ::Gapic::Config::Method.new update_admin_access_binding_config
 
                       yield self if block_given?
                     end

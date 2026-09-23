@@ -101,6 +101,18 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_message_pin_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.message_pin_path space: "value0", message_pin: "value1"
+      assert_equal "spaces/value0/messagePins/value1", path
+    end
+  end
+
   def test_quoted_message_metadata_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

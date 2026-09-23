@@ -137,6 +137,9 @@ module Google
         #     The structure and content of this object is not guaranteed and may
         #     change at any time without notice. Do not write production code or
         #     business logic depending on the fields in this object.
+        # @!attribute [rw] token_usage
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TokenUsage]
+        #     Overall token usage for the request.
         class QueryDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,7 +156,6 @@ module Google
         #   @return [::Integer]
         #     The total number of rows in the full result set, if known.
         #     This may be an estimate or an exact count.
-        #
         #     Note: if an internal limit (such as LIMIT 1000) was applied during query
         #     execution to guard against excessive data transfer, this count reflects the
         #     truncated result size rather than the unrestricted table result size.
@@ -324,7 +326,8 @@ module Google
 
           # Mode of thinking for the agent.
           module ThinkingMode
-            # Unspecified thinking mode, agent will use THINKING mode by default.
+            # Unspecified thinking mode, agent will use THINKING mode by default except
+            # for BigQuery user defaulting to FAST mode by default.
             THINKING_MODE_UNSPECIFIED = 0
 
             # Fast mode, answers quickly.
@@ -334,9 +337,9 @@ module Google
             THINKING = 2
           end
 
-          # Model selection for the agent.
+          # Model selection for the agent for BigQuery users.
           module Model
-            # No model specified. The default model will be used.
+            # No model specified. Either preview or non preview model can be used.
             MODEL_UNSPECIFIED = 0
 
             # Use the most up-to-date non-preview model. This may constrain certain
