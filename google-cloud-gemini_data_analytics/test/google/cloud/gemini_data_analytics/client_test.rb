@@ -41,6 +41,27 @@ class Google::Cloud::GeminiDataAnalytics::ClientConstructionMinitest < Minitest:
     end
   end
 
+  def test_data_a2_a_service_grpc
+    skip unless Google::Cloud::GeminiDataAnalytics.data_a2_a_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client, client
+    end
+  end
+
+  def test_data_a2_a_service_rest
+    skip unless Google::Cloud::GeminiDataAnalytics.data_a2_a_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Rest::Client, client
+    end
+  end
+
   def test_data_agent_service_grpc
     skip unless Google::Cloud::GeminiDataAnalytics.data_agent_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do

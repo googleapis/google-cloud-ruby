@@ -255,7 +255,11 @@ module Google
               #     Optional. Requested page size. Server may return fewer items than
               #     requested. If unspecified, server will pick an appropriate default.
               #   @param page_token [::String]
-              #     Optional. A token identifying a page of results the server should return.
+              #     Optional. A page token, received from a previous `ListParameters` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListParameters` must
+              #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Filtering results
               #   @param order_by [::String]
@@ -717,7 +721,11 @@ module Google
               #     Optional. Requested page size. Server may return fewer items than
               #     requested. If unspecified, server will pick an appropriate default.
               #   @param page_token [::String]
-              #     Optional. A token identifying a page of results the server should return.
+              #     Optional. A page token, received from a previous `ListParameterVersions`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListParameterVersions`
+              #     must match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Filtering results
               #   @param order_by [::String]
@@ -1237,6 +1245,1022 @@ module Google
               end
 
               ##
+              # Lists Templates in a given project and location.
+              #
+              # @overload list_templates(request, options = nil)
+              #   Pass arguments to `list_templates` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::ListTemplatesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::ListTemplatesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_templates(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_templates` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ListTemplatesRequest in the format
+              #     `projects/*/locations/*`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListTemplates` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListTemplates` must
+              #     match the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Filtering results
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ParameterManager::V1::Template>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ParameterManager::V1::Template>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::ListTemplatesRequest.new
+              #
+              #   # Call the list_templates method.
+              #   result = client.list_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ParameterManager::V1::Template.
+              #     p item
+              #   end
+              #
+              def list_templates request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::ListTemplatesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_templates.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_templates.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_templates.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.list_templates request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @parameter_manager_stub, :list_templates, "templates", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single Template.
+              #
+              # @overload get_template(request, options = nil)
+              #   Pass arguments to `get_template` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::GetTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::GetTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_template(name: nil)
+              #   Pass arguments to `get_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource in the format
+              #     `projects/*/locations/*/templates/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::Template]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::Template]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::GetTemplateRequest.new
+              #
+              #   # Call the get_template method.
+              #   result = client.get_template request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::Template.
+              #   p result
+              #
+              def get_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::GetTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.get_template request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new Template in a given project and location.
+              #
+              # @overload create_template(request, options = nil)
+              #   Pass arguments to `create_template` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::CreateTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::CreateTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_template(parent: nil, template_id: nil, template: nil, request_id: nil)
+              #   Pass arguments to `create_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Value for parent in the format
+              #     `projects/*/locations/*`.
+              #   @param template_id [::String]
+              #     Required. Id of the Template resource
+              #   @param template [::Google::Cloud::ParameterManager::V1::Template, ::Hash]
+              #     Required. The Template resource being created
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::Template]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::Template]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::CreateTemplateRequest.new
+              #
+              #   # Call the create_template method.
+              #   result = client.create_template request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::Template.
+              #   p result
+              #
+              def create_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::CreateTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.create_template request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a single Template.
+              #
+              # @overload update_template(request, options = nil)
+              #   Pass arguments to `update_template` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_template(update_mask: nil, template: nil, request_id: nil)
+              #   Pass arguments to `update_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     Template resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A mutable field will be overwritten if it is in the
+              #     mask. If the user does not provide a mask then all mutable fields present
+              #     in the request will be overwritten.
+              #   @param template [::Google::Cloud::ParameterManager::V1::Template, ::Hash]
+              #     Required. The Template resource being updated
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::Template]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::Template]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::UpdateTemplateRequest.new
+              #
+              #   # Call the update_template method.
+              #   result = client.update_template request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::Template.
+              #   p result
+              #
+              def update_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.update_template request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single Template.
+              #
+              # @overload delete_template(request, options = nil)
+              #   Pass arguments to `delete_template` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_template(name: nil, request_id: nil)
+              #   Pass arguments to `delete_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource in the format
+              #     `projects/*/locations/*/templates/*`.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::DeleteTemplateRequest.new
+              #
+              #   # Call the delete_template method.
+              #   result = client.delete_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.delete_template request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists TemplateVersions in a given project, location, and template.
+              #
+              # @overload list_template_versions(request, options = nil)
+              #   Pass arguments to `list_template_versions` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_template_versions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_template_versions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ListTemplateVersionsRequest in the format
+              #     `projects/*/locations/*/templates/*`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListTemplateVersions`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListTemplateVersions`
+              #     must match the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Filtering results
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ParameterManager::V1::TemplateVersion>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ParameterManager::V1::TemplateVersion>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest.new
+              #
+              #   # Call the list_template_versions method.
+              #   result = client.list_template_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ParameterManager::V1::TemplateVersion.
+              #     p item
+              #   end
+              #
+              def list_template_versions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_template_versions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_template_versions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_template_versions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.list_template_versions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @parameter_manager_stub, :list_template_versions, "template_versions", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single TemplateVersion.
+              #
+              # @overload get_template_version(request, options = nil)
+              #   Pass arguments to `get_template_version` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_template_version(name: nil, view: nil)
+              #   Pass arguments to `get_template_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource in the format
+              #     `projects/*/locations/*/templates/*/versions/*`.
+              #   @param view [::Google::Cloud::ParameterManager::V1::View]
+              #     Optional. Specifies the view of the TemplateVersion to return.
+              #     In the default FULL view, all metadata & payload associated with the
+              #     TemplateVersion will be returned.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest.new
+              #
+              #   # Call the get_template_version method.
+              #   result = client.get_template_version request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::TemplateVersion.
+              #   p result
+              #
+              def get_template_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_template_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_template_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_template_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.get_template_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new TemplateVersion in a given project, location, and template.
+              #
+              # @overload create_template_version(request, options = nil)
+              #   Pass arguments to `create_template_version` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_template_version(parent: nil, template_version_id: nil, template_version: nil, request_id: nil)
+              #   Pass arguments to `create_template_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Value for parent in the format
+              #     `projects/*/locations/*/templates/*`.
+              #   @param template_version_id [::String]
+              #     Required. Id of the TemplateVersion resource
+              #   @param template_version [::Google::Cloud::ParameterManager::V1::TemplateVersion, ::Hash]
+              #     Required. The TemplateVersion resource being created
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest.new
+              #
+              #   # Call the create_template_version method.
+              #   result = client.create_template_version request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::TemplateVersion.
+              #   p result
+              #
+              def create_template_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_template_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_template_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_template_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.create_template_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a single TemplateVersion.
+              #
+              # @overload update_template_version(request, options = nil)
+              #   Pass arguments to `update_template_version` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_template_version(update_mask: nil, template_version: nil, request_id: nil)
+              #   Pass arguments to `update_template_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     TemplateVersion resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A mutable field will be overwritten if it is in the
+              #     mask. If the user does not provide a mask then all mutable fields present
+              #     in the request will be overwritten.
+              #   @param template_version [::Google::Cloud::ParameterManager::V1::TemplateVersion, ::Hash]
+              #     Required. The TemplateVersion resource being updated
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::TemplateVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest.new
+              #
+              #   # Call the update_template_version method.
+              #   result = client.update_template_version request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::TemplateVersion.
+              #   p result
+              #
+              def update_template_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_template_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_template_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_template_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.update_template_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single TemplateVersion.
+              #
+              # @overload delete_template_version(request, options = nil)
+              #   Pass arguments to `delete_template_version` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_template_version(name: nil, request_id: nil)
+              #   Pass arguments to `delete_template_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource in the format
+              #     `projects/*/locations/*/templates/*/versions/*`.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest.new
+              #
+              #   # Call the delete_template_version method.
+              #   result = client.delete_template_version request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_template_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_template_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_template_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_template_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.delete_template_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets rendered version of a TemplateVersion.
+              #
+              # @overload render_template_version(request, options = nil)
+              #   Pass arguments to `render_template_version` via a request object, either of type
+              #   {::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload render_template_version(name: nil, parameter_version: nil)
+              #   Pass arguments to `render_template_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource
+              #   @param parameter_version [::String]
+              #     Required. Parameter version used to render the template version.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ParameterManager::V1::RenderTemplateVersionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ParameterManager::V1::RenderTemplateVersionResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/parameter_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest.new
+              #
+              #   # Call the render_template_version method.
+              #   result = client.render_template_version request
+              #
+              #   # The returned object is of type Google::Cloud::ParameterManager::V1::RenderTemplateVersionResponse.
+              #   p result
+              #
+              def render_template_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.render_template_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ParameterManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.render_template_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.render_template_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @parameter_manager_stub.render_template_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ParameterManager REST API.
               #
               # This class represents the configuration for ParameterManager REST,
@@ -1446,6 +2470,61 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_parameter_version
+                  ##
+                  # RPC-specific configuration for `list_templates`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_templates
+                  ##
+                  # RPC-specific configuration for `get_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_template
+                  ##
+                  # RPC-specific configuration for `create_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_template
+                  ##
+                  # RPC-specific configuration for `update_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_template
+                  ##
+                  # RPC-specific configuration for `delete_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_template
+                  ##
+                  # RPC-specific configuration for `list_template_versions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_template_versions
+                  ##
+                  # RPC-specific configuration for `get_template_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_template_version
+                  ##
+                  # RPC-specific configuration for `create_template_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_template_version
+                  ##
+                  # RPC-specific configuration for `update_template_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_template_version
+                  ##
+                  # RPC-specific configuration for `delete_template_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_template_version
+                  ##
+                  # RPC-specific configuration for `render_template_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :render_template_version
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1471,6 +2550,28 @@ module Google
                     @update_parameter_version = ::Gapic::Config::Method.new update_parameter_version_config
                     delete_parameter_version_config = parent_rpcs.delete_parameter_version if parent_rpcs.respond_to? :delete_parameter_version
                     @delete_parameter_version = ::Gapic::Config::Method.new delete_parameter_version_config
+                    list_templates_config = parent_rpcs.list_templates if parent_rpcs.respond_to? :list_templates
+                    @list_templates = ::Gapic::Config::Method.new list_templates_config
+                    get_template_config = parent_rpcs.get_template if parent_rpcs.respond_to? :get_template
+                    @get_template = ::Gapic::Config::Method.new get_template_config
+                    create_template_config = parent_rpcs.create_template if parent_rpcs.respond_to? :create_template
+                    @create_template = ::Gapic::Config::Method.new create_template_config
+                    update_template_config = parent_rpcs.update_template if parent_rpcs.respond_to? :update_template
+                    @update_template = ::Gapic::Config::Method.new update_template_config
+                    delete_template_config = parent_rpcs.delete_template if parent_rpcs.respond_to? :delete_template
+                    @delete_template = ::Gapic::Config::Method.new delete_template_config
+                    list_template_versions_config = parent_rpcs.list_template_versions if parent_rpcs.respond_to? :list_template_versions
+                    @list_template_versions = ::Gapic::Config::Method.new list_template_versions_config
+                    get_template_version_config = parent_rpcs.get_template_version if parent_rpcs.respond_to? :get_template_version
+                    @get_template_version = ::Gapic::Config::Method.new get_template_version_config
+                    create_template_version_config = parent_rpcs.create_template_version if parent_rpcs.respond_to? :create_template_version
+                    @create_template_version = ::Gapic::Config::Method.new create_template_version_config
+                    update_template_version_config = parent_rpcs.update_template_version if parent_rpcs.respond_to? :update_template_version
+                    @update_template_version = ::Gapic::Config::Method.new update_template_version_config
+                    delete_template_version_config = parent_rpcs.delete_template_version if parent_rpcs.respond_to? :delete_template_version
+                    @delete_template_version = ::Gapic::Config::Method.new delete_template_version_config
+                    render_template_version_config = parent_rpcs.render_template_version if parent_rpcs.respond_to? :render_template_version
+                    @render_template_version = ::Gapic::Config::Method.new render_template_version_config
 
                     yield self if block_given?
                   end

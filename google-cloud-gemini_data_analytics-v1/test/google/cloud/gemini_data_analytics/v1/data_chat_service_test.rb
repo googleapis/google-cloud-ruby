@@ -272,6 +272,68 @@ class ::Google::Cloud::GeminiDataAnalytics::V1::DataChatService::ClientTest < Mi
     end
   end
 
+  def test_update_conversation
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1::Conversation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversation = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_conversation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_conversation, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1::Conversation), request["conversation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_conversation_client_stub do
+      # Create client
+      c = ::Google::Cloud::GeminiDataAnalytics::V1::DataChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_conversation({ conversation: conversation, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_conversation conversation: conversation, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_conversation ::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_conversation({ conversation: conversation, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_conversation(::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_conversation_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_conversation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1::Conversation.new

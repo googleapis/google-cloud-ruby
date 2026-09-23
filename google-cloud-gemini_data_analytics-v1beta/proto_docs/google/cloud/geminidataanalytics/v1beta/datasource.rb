@@ -78,10 +78,11 @@ module Google
         #     Optional. References to BigQuery tables.
         # @!attribute [rw] property_graph_references
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryPropertyGraphReference>]
-        #     Optional. Preview feature. References to BigQuery property graphs.
-        #     Note: Data sources must exclusively use either tables or property graphs,
-        #     not both. When using property graphs, a maximum of one graph reference is
-        #     supported.
+        #     Optional. References to BigQuery graphs.
+        #
+        #     Note: "property graph" is the former name for BigQuery Graph. The field and
+        #     message names retain the original term for backward compatibility; both
+        #     refer to the same resource.
         # @!attribute [rw] agent_context_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AgentContextReference]
         #     Optional. Parameters for retrieving data from Agent Context.

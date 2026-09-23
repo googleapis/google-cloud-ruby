@@ -760,6 +760,40 @@ module Google
             #   - `https://www.googleapis.com/auth/chat.messages`
             #   - `https://www.googleapis.com/auth/chat.import` (import mode spaces only)
             rpc :DeleteReaction, ::Google::Apps::Chat::V1::DeleteReactionRequest, ::Google::Protobuf::Empty
+            # Lists message pins in a space. Users can pin important messages in spaces
+            # for easy access. For more information, see [Pin or unpin a conversation in
+            # Google Chat](https://support.google.com/chat/answer/15622437).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.spaces.pins.readonly`
+            #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+            #   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+            #   - `https://www.googleapis.com/auth/chat.spaces`
+            rpc :ListMessagePins, ::Google::Apps::Chat::V1::ListMessagePinsRequest, ::Google::Apps::Chat::V1::ListMessagePinsResponse
+            # Creates a message pin.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+            #   - `https://www.googleapis.com/auth/chat.spaces`
+            rpc :CreateMessagePin, ::Google::Apps::Chat::V1::CreateMessagePinRequest, ::Google::Apps::Chat::V1::MessagePin
+            # Deletes a message pin.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+            #   - `https://www.googleapis.com/auth/chat.spaces`
+            rpc :DeleteMessagePin, ::Google::Apps::Chat::V1::DeleteMessagePinRequest, ::Google::Protobuf::Empty
             # Creates a custom emoji.
             #
             # Custom emojis are only available for Google Workspace accounts, and the

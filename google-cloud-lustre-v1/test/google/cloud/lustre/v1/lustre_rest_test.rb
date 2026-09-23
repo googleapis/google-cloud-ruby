@@ -313,6 +313,7 @@ class ::Google::Cloud::Lustre::V1::Lustre::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    force = true
 
     delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -328,32 +329,88 @@ class ::Google::Cloud::Lustre::V1::Lustre::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.delete_instance({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete_instance name: name, request_id: request_id do |_result, response|
+        c.delete_instance name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete_instance ::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_instance ::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete_instance({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete_instance(::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_reschedule_maintenance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    reschedule = {}
+    request_id = "hello world"
+
+    reschedule_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_reschedule_maintenance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, reschedule_maintenance_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.reschedule_maintenance({ name: name, reschedule: reschedule, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.reschedule_maintenance name: name, reschedule: reschedule, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.reschedule_maintenance ::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest.new(name: name, reschedule: reschedule, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.reschedule_maintenance({ name: name, reschedule: reschedule, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.reschedule_maintenance(::Google::Cloud::Lustre::V1::RescheduleMaintenanceRequest.new(name: name, reschedule: reschedule, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, reschedule_maintenance_client_stub.call_count
       end
     end
   end
@@ -470,6 +527,506 @@ class ::Google::Cloud::Lustre::V1::Lustre::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, export_data_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_mirror
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    mirror_id = "hello world"
+    mirror = {}
+    request_id = "hello world"
+
+    create_mirror_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_create_mirror_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_mirror_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_mirror({ parent: parent, mirror_id: mirror_id, mirror: mirror, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_mirror parent: parent, mirror_id: mirror_id, mirror: mirror, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_mirror ::Google::Cloud::Lustre::V1::CreateMirrorRequest.new(parent: parent, mirror_id: mirror_id, mirror: mirror, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_mirror({ parent: parent, mirror_id: mirror_id, mirror: mirror, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_mirror(::Google::Cloud::Lustre::V1::CreateMirrorRequest.new(parent: parent, mirror_id: mirror_id, mirror: mirror, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_mirror_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_mirror
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    mirror = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_mirror_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_update_mirror_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_mirror_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_mirror({ mirror: mirror, update_mask: update_mask, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_mirror mirror: mirror, update_mask: update_mask, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_mirror ::Google::Cloud::Lustre::V1::UpdateMirrorRequest.new(mirror: mirror, update_mask: update_mask, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_mirror({ mirror: mirror, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_mirror(::Google::Cloud::Lustre::V1::UpdateMirrorRequest.new(mirror: mirror, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_mirror_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_mirror
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_mirror_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_delete_mirror_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_mirror_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_mirror({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_mirror name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_mirror ::Google::Cloud::Lustre::V1::DeleteMirrorRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_mirror({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_mirror(::Google::Cloud::Lustre::V1::DeleteMirrorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_mirror_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_mirror
+    # Create test objects.
+    client_result = ::Google::Cloud::Lustre::V1::Mirror.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_mirror_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_get_mirror_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_mirror_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_mirror({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_mirror name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_mirror ::Google::Cloud::Lustre::V1::GetMirrorRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_mirror({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_mirror(::Google::Cloud::Lustre::V1::GetMirrorRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_mirror_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_mirrors
+    # Create test objects.
+    client_result = ::Google::Cloud::Lustre::V1::ListMirrorsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_mirrors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_list_mirrors_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_mirrors_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_mirrors({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_mirrors parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_mirrors ::Google::Cloud::Lustre::V1::ListMirrorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_mirrors({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_mirrors(::Google::Cloud::Lustre::V1::ListMirrorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_mirrors_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_directory_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    directory_policy_id = "hello world"
+    directory_policy = {}
+
+    create_directory_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_create_directory_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_directory_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_directory_policy({ parent: parent, directory_policy_id: directory_policy_id, directory_policy: directory_policy }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_directory_policy parent: parent, directory_policy_id: directory_policy_id, directory_policy: directory_policy do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_directory_policy ::Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest.new(parent: parent, directory_policy_id: directory_policy_id, directory_policy: directory_policy) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_directory_policy({ parent: parent, directory_policy_id: directory_policy_id, directory_policy: directory_policy }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_directory_policy(::Google::Cloud::Lustre::V1::CreateDirectoryPolicyRequest.new(parent: parent, directory_policy_id: directory_policy_id, directory_policy: directory_policy), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_directory_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_directory_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_directory_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_delete_directory_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_directory_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_directory_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_directory_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_directory_policy ::Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_directory_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_directory_policy(::Google::Cloud::Lustre::V1::DeleteDirectoryPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_directory_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_directory_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Lustre::V1::DirectoryPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_directory_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_get_directory_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_directory_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_directory_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_directory_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_directory_policy ::Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_directory_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_directory_policy(::Google::Cloud::Lustre::V1::GetDirectoryPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_directory_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_directory_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::Lustre::V1::ListDirectoryPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_directory_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Lustre::V1::Lustre::Rest::ServiceStub.stub :transcode_list_directory_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_directory_policies_client_stub do
+        # Create client
+        c = ::Google::Cloud::Lustre::V1::Lustre::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_directory_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_directory_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_directory_policies ::Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_directory_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_directory_policies(::Google::Cloud::Lustre::V1::ListDirectoryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_directory_policies_client_stub.call_count
       end
     end
   end

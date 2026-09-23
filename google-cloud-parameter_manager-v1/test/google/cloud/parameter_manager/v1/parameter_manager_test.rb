@@ -753,6 +753,698 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
     end
   end
 
+  def test_list_templates
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::ListTemplatesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_templates, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::ListTemplatesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_templates_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_templates ::Google::Cloud::ParameterManager::V1::ListTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_templates(::Google::Cloud::ParameterManager::V1::ListTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_templates_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::Template.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_template, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::GetTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_template ::Google::Cloud::ParameterManager::V1::GetTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_template(::Google::Cloud::ParameterManager::V1::GetTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::Template.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    template_id = "hello world"
+    template = {}
+    request_id = "hello world"
+
+    create_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_template, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::CreateTemplateRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["template_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ParameterManager::V1::Template), request["template"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_template({ parent: parent, template_id: template_id, template: template, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_template parent: parent, template_id: template_id, template: template, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_template ::Google::Cloud::ParameterManager::V1::CreateTemplateRequest.new(parent: parent, template_id: template_id, template: template, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_template({ parent: parent, template_id: template_id, template: template, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_template(::Google::Cloud::ParameterManager::V1::CreateTemplateRequest.new(parent: parent, template_id: template_id, template: template, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::Template.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    template = {}
+    request_id = "hello world"
+
+    update_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_template, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ParameterManager::V1::Template), request["template"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_template({ update_mask: update_mask, template: template, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_template update_mask: update_mask, template: template, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_template ::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest.new(update_mask: update_mask, template: template, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_template({ update_mask: update_mask, template: template, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_template(::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest.new(update_mask: update_mask, template: template, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_template, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_template({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_template name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_template ::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_template({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_template(::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_template_versions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_template_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_template_versions, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_template_versions_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_template_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_template_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_template_versions ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_template_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_template_versions(::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_template_versions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_template_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = :VIEW_UNSPECIFIED
+
+    get_template_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_template_version, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :VIEW_UNSPECIFIED, request["view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_template_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_template_version({ name: name, view: view }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_template_version name: name, view: view do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_template_version ::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest.new(name: name, view: view) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_template_version({ name: name, view: view }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_template_version(::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_template_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_template_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    template_version_id = "hello world"
+    template_version = {}
+    request_id = "hello world"
+
+    create_template_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_template_version, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["template_version_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ParameterManager::V1::TemplateVersion), request["template_version"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_template_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_template_version({ parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_template_version parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_template_version ::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest.new(parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_template_version({ parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_template_version(::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest.new(parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_template_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_template_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    template_version = {}
+    request_id = "hello world"
+
+    update_template_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_template_version, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ParameterManager::V1::TemplateVersion), request["template_version"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_template_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_template_version({ update_mask: update_mask, template_version: template_version, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_template_version update_mask: update_mask, template_version: template_version, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_template_version ::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest.new(update_mask: update_mask, template_version: template_version, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_template_version({ update_mask: update_mask, template_version: template_version, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_template_version(::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest.new(update_mask: update_mask, template_version: template_version, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_template_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_template_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_template_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_template_version, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_template_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_template_version({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_template_version name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_template_version ::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_template_version({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_template_version(::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_template_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_render_template_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    parameter_version = "hello world"
+
+    render_template_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :render_template_version, name
+      assert_kind_of ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["parameter_version"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, render_template_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.render_template_version({ name: name, parameter_version: parameter_version }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.render_template_version name: name, parameter_version: parameter_version do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.render_template_version ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest.new(name: name, parameter_version: parameter_version) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.render_template_version({ name: name, parameter_version: parameter_version }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.render_template_version(::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest.new(name: name, parameter_version: parameter_version), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, render_template_version_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

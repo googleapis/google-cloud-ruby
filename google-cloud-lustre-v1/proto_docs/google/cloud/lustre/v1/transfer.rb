@@ -41,6 +41,12 @@ module Google
         #   @return [::String]
         #     Optional. User-specified service account used to perform the transfer.
         #     If unspecified, the default Managed Lustre service agent will be used.
+        #
+        #     Use one of the following formats:
+        #
+        #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68,6 +74,12 @@ module Google
         #   @return [::String]
         #     Optional. User-specified service account used to perform the transfer.
         #     If unspecified, the Managed Lustre service agent is used.
+        #
+        #     Use one of the following formats:
+        #
+        #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
         class ExportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

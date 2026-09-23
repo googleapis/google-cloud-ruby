@@ -106,6 +106,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MessagePin resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `spaces/{space}/messagePins/{message_pin}`
+            #
+            # @param space [String]
+            # @param message_pin [String]
+            #
+            # @return [::String]
+            def message_pin_path space:, message_pin:
+              raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+
+              "spaces/#{space}/messagePins/#{message_pin}"
+            end
+
+            ##
             # Create a fully-qualified QuotedMessageMetadata resource string.
             #
             # The resource will be in the following format:

@@ -693,6 +693,622 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ClientTest 
     end
   end
 
+  def test_list_templates
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::ListTemplatesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_templates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_list_templates_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_templates_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_templates ::Google::Cloud::ParameterManager::V1::ListTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_templates(::Google::Cloud::ParameterManager::V1::ListTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_templates_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_template
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::Template.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_get_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_template ::Google::Cloud::ParameterManager::V1::GetTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_template(::Google::Cloud::ParameterManager::V1::GetTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_template
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::Template.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    template_id = "hello world"
+    template = {}
+    request_id = "hello world"
+
+    create_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_create_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_template({ parent: parent, template_id: template_id, template: template, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_template parent: parent, template_id: template_id, template: template, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_template ::Google::Cloud::ParameterManager::V1::CreateTemplateRequest.new(parent: parent, template_id: template_id, template: template, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_template({ parent: parent, template_id: template_id, template: template, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_template(::Google::Cloud::ParameterManager::V1::CreateTemplateRequest.new(parent: parent, template_id: template_id, template: template, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_template
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::Template.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    template = {}
+    request_id = "hello world"
+
+    update_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_update_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_template({ update_mask: update_mask, template: template, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_template update_mask: update_mask, template: template, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_template ::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest.new(update_mask: update_mask, template: template, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_template({ update_mask: update_mask, template: template, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_template(::Google::Cloud::ParameterManager::V1::UpdateTemplateRequest.new(update_mask: update_mask, template: template, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_template
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_delete_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_template({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_template name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_template ::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_template({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_template(::Google::Cloud::ParameterManager::V1::DeleteTemplateRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_template_versions
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_template_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_list_template_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_template_versions_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_template_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_template_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_template_versions ::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_template_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_template_versions(::Google::Cloud::ParameterManager::V1::ListTemplateVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_template_versions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_template_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = :VIEW_UNSPECIFIED
+
+    get_template_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_get_template_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_template_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_template_version({ name: name, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_template_version name: name, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_template_version ::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest.new(name: name, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_template_version({ name: name, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_template_version(::Google::Cloud::ParameterManager::V1::GetTemplateVersionRequest.new(name: name, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_template_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_template_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    template_version_id = "hello world"
+    template_version = {}
+    request_id = "hello world"
+
+    create_template_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_create_template_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_template_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_template_version({ parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_template_version parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_template_version ::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest.new(parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_template_version({ parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_template_version(::Google::Cloud::ParameterManager::V1::CreateTemplateVersionRequest.new(parent: parent, template_version_id: template_version_id, template_version: template_version, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_template_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_template_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::TemplateVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    template_version = {}
+    request_id = "hello world"
+
+    update_template_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_update_template_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_template_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_template_version({ update_mask: update_mask, template_version: template_version, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_template_version update_mask: update_mask, template_version: template_version, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_template_version ::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest.new(update_mask: update_mask, template_version: template_version, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_template_version({ update_mask: update_mask, template_version: template_version, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_template_version(::Google::Cloud::ParameterManager::V1::UpdateTemplateVersionRequest.new(update_mask: update_mask, template_version: template_version, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_template_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_template_version
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_template_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_delete_template_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_template_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_template_version({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_template_version name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_template_version ::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_template_version({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_template_version(::Google::Cloud::ParameterManager::V1::DeleteTemplateVersionRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_template_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_render_template_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    parameter_version = "hello world"
+
+    render_template_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::ServiceStub.stub :transcode_render_template_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, render_template_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.render_template_version({ name: name, parameter_version: parameter_version }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.render_template_version name: name, parameter_version: parameter_version do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.render_template_version ::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest.new(name: name, parameter_version: parameter_version) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.render_template_version({ name: name, parameter_version: parameter_version }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.render_template_version(::Google::Cloud::ParameterManager::V1::RenderTemplateVersionRequest.new(name: name, parameter_version: parameter_version), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, render_template_version_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
