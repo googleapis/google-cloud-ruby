@@ -4,7 +4,9 @@
     // Use pre-determined best practices, including monorepo groupings & GitHub Action digest pinning
     "config:best-practices",
     // Create version bump PRs globally on a monthly basis (first day of the month)
-    "schedule:monthly"
+    "schedule:monthly",
+    // Remove dependency dashboard
+    ":disableDependencyDashboard"
   ],
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
