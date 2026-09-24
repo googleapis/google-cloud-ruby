@@ -59,7 +59,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.0
   - name: google-ads-marketing_platform-admin-v1alpha
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
   - name: google-analytics-admin
@@ -106,7 +106,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-apps-chat-v1
-    version: 0.29.0
+    version: 0.30.0
     apis:
       - path: google/chat/v1
         ruby:
@@ -195,7 +195,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-agent_registry-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/agentregistry/v1
   - name: google-cloud-ai_platform
@@ -693,7 +693,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_STORAGE
   - name: google-cloud-bigtable-admin-v2
-    version: 1.21.0
+    version: 1.22.0
     apis:
       - path: google/bigtable/admin/v2
         ruby:
@@ -1773,18 +1773,18 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement::V1alpha
             ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
   - name: google-cloud-gemini_data_analytics
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
     ruby:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-gemini_data_analytics-v1
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
   - name: google-cloud-gke_backup
@@ -2084,7 +2084,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-lustre-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/lustre/v1
   - name: google-cloud-maintenance-api
@@ -2267,7 +2267,7 @@ libraries:
       - samples/quickstart.rb
       - samples/uptime_check.rb
   - name: google-cloud-monitoring-dashboard-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/monitoring/dashboard/v1
         ruby:
@@ -2607,7 +2607,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-parameter_manager-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/parametermanager/v1
   - name: google-cloud-phishing_protection
@@ -3434,11 +3434,11 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPEECH
   - name: google-cloud-sql-v1
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/sql/v1
   - name: google-cloud-sql-v1beta4
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/sql/v1beta4
   - name: google-cloud-storage-control
@@ -3603,7 +3603,7 @@ libraries:
       wrapper_of:
         - v2:1.2
   - name: google-cloud-tasks-v2
-    version: 1.6.2
+    version: 1.7.0
     apis:
       - path: google/cloud/tasks/v2
         ruby:
@@ -3729,7 +3729,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-vector_search-v1
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/vectorsearch/v1
   - name: google-cloud-video-live_stream

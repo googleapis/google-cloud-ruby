@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2026-09-24)
+
+#### Features
+
+* update API sources and regenerate ([#36605](https://github.com/googleapis/google-cloud-ruby/issues/36605)) 
+
 ### 1.6.2 (2026-09-08)
 
 #### Bug Fixes
