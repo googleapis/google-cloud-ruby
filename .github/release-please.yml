@@ -6,3 +6,17 @@ onDemand: true
 primaryBranch: main
 releaseType: ruby-librarian
 tagPullRequestNumber: true
+
+branches:
+  - branch: main
+    handleGHRelease: true
+    tagPullRequestNumber: true
+    manifest: true
+    manifestFile: .release-please-manifest.json
+    manifestConfig: release-please-config.json
+  - branch: main
+    handleGHRelease: true
+    tagPullRequestNumber: true
+    manifest: true
+    manifestFile: .release-please-manifest.json
+    manifestConfig: release-please-submodules.json

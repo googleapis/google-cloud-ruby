@@ -1,0 +1,71 @@
+{
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "draft": false,
+  "include-component-in-tag": true,
+  "include-v-in-tag": true,
+  "packages": {
+    "google-cloud-bigquery": {
+      "component": "google-cloud-bigquery",
+      "version_file": "lib/google/cloud/bigquery/version.rb"
+    },
+    "google-cloud-bigtable": {
+      "component": "google-cloud-bigtable",
+      "version_file": "lib/google/cloud/bigtable/version.rb"
+    },
+    "google-cloud-core": {
+      "component": "google-cloud-core",
+      "version_file": "lib/google/cloud/core/version.rb"
+    },
+    "google-cloud-datastore": {
+      "component": "google-cloud-datastore",
+      "version_file": "lib/google/cloud/datastore/version.rb"
+    },
+    "google-cloud-dns": {
+      "component": "google-cloud-dns",
+      "version_file": "lib/google/cloud/dns/version.rb"
+    },
+    "google-cloud-error_reporting": {
+      "component": "google-cloud-error_reporting",
+      "version_file": "lib/google/cloud/error_reporting/version.rb"
+    },
+    "google-cloud-errors": {
+      "component": "google-cloud-errors",
+      "version_file": "lib/google/cloud/errors/version.rb"
+    },
+    "google-cloud-firestore": {
+      "component": "google-cloud-firestore",
+      "version_file": "lib/google/cloud/firestore/version.rb"
+    },
+    "google-cloud-logging": {
+      "component": "google-cloud-logging",
+      "version_file": "lib/google/cloud/logging/version.rb"
+    },
+    "google-cloud-pubsub": {
+      "component": "google-cloud-pubsub",
+      "version_file": "lib/google/cloud/pubsub/version.rb"
+    },
+    "google-cloud-storage": {
+      "component": "google-cloud-storage",
+      "version_file": "lib/google/cloud/storage/version.rb"
+    },
+    "google-cloud-trace": {
+      "component": "google-cloud-trace",
+      "version_file": "lib/google/cloud/trace/version.rb"
+    },
+    "google-cloud-translate-v2": {
+      "component": "google-cloud-translate-v2",
+      "version_file": "lib/google/cloud/translate/v2/version.rb"
+    },
+    "stackdriver-core": {
+      "component": "stackdriver-core",
+      "version_file": "lib/stackdriver/core/version.rb"
+    }
+  },
+  "prerelease": false,
+  "release-type": "ruby-librarian",
+  "separate-pull-requests": true,
+  "sequential-calls": true,
+  "skip-github-release": false,
+  "tag-separator": "/"
+}
