@@ -159,8 +159,12 @@ module Google
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         # @param [Boolean] return_partial_success
-        # If true, the response will contain a list of unreachable buckets.
-        # If false, ListBuckets will throw an error if there are any unreachable buckets.
+        #   If true, the response will contain a list of unreachable buckets.
+        #   If false, ListBuckets will throw an error if there are any unreachable buckets.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -214,11 +218,11 @@ module Google
         #     puts unreachable_bucket_name
         #   end
         #  
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil, projection: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
+            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success, projection: projection
           Bucket::List.from_gapi \
-            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
+            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success, projection: projection
           
         end
         alias find_buckets buckets
@@ -249,6 +253,10 @@ module Google
         #   on whether the bucket's current metageneration matches the given value.
         # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket.
         #   This parameter is required if generation is specified.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instance and its files.
@@ -298,7 +306,8 @@ module Google
                    soft_deleted: nil,
                    if_metageneration_match: nil,
                    if_metageneration_not_match: nil,
-                   user_project: nil
+                   user_project: nil,
+                   projection: nil
           if skip_lookup
             return Bucket.new_lazy bucket_name, service,
                                    user_project: user_project
@@ -308,7 +317,8 @@ module Google
                                     if_metageneration_not_match: if_metageneration_not_match,
                                     user_project: user_project,
                                     soft_deleted: soft_deleted,
-                                    generation: generation
+                                    generation: generation,
+                                    projection: projection
 
           Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
@@ -423,7 +433,23 @@ module Google
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         # @param [Boolean] enable_object_retention
         #   When set to true, object retention is enabled for this bucket.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
+        # @param [Hash] ip_filter The bucket's IP filter configuration.
+        #   Acceptable values are:
+        #   * A {Google::Apis::StorageV1::Bucket::IpFilter} object.
+        #   * A Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object:
+        #     * `:mode` (String) - The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
+        #     * `:public_network_source` (Hash) - The public network source configuration:
+        #       * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for public access.
+        #     * `:vpc_network_sources` (Array<Hash>) - The VPC network sources configuration:
+        #       * `:network` (String) - The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
+        #       * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for VPC access.
+        #     * `:allow_cross_org_vpcs` (Boolean) - Whether to allow cross-org VPC access.
+        #     * `:allow_all_service_agent_access` (Boolean) - Whether to allow all service agent access.
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
         # @yieldparam [Bucket] bucket the bucket object to be configured
@@ -477,12 +503,16 @@ module Google
                           user_project: nil,
                           autoclass_enabled: false,
                           enable_object_retention: nil,
-                          hierarchical_namespace: nil
+                          hierarchical_namespace: nil,
+                          ip_filter: nil,
+                          projection: nil
+
           params = {
             name: bucket_name,
             location: location,
             custom_placement_config: custom_placement_config,
-            hierarchical_namespace: hierarchical_namespace
+            hierarchical_namespace: hierarchical_namespace,
+            ip_filter: ip_filter
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
@@ -496,6 +526,7 @@ module Google
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
             b.hierarchical_namespace = hierarchical_namespace unless hierarchical_namespace.nil?
+            b.ip_filter = ip_filter unless ip_filter.nil?
           end
           yield updater if block_given?
           updater.check_for_changed_labels!
@@ -504,7 +535,8 @@ module Google
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
                         user_project: user_project,
-                        enable_object_retention: enable_object_retention
+                        enable_object_retention: enable_object_retention,
+                        projection: projection
           Bucket.from_gapi gapi, service, user_project: user_project
         end
         # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
