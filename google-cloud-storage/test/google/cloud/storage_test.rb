@@ -19,7 +19,7 @@ describe Google::Cloud do
   describe "#storage" do
     it "calls out to Google::Cloud.storage" do
       gcloud = Google::Cloud.new
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_be :nil?
         _(keyfile).must_be :nil?
         _(scope).must_be :nil?
@@ -44,7 +44,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.storage" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_be :nil?
@@ -69,7 +69,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.storage" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
@@ -387,6 +387,103 @@ describe Google::Cloud do
     end
   end
 
+  describe "Storage.emulator" do
+    let(:emulator_host) { "http://localhost:9000" }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
+
+    it "uses STORAGE_EMULATOR_HOST environment variable" do
+      emulator_check = ->(name) { (name == "STORAGE_EMULATOR_HOST") ? emulator_host : nil }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_be :nil?
+        _(host).must_equal emulator_host
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables, except STORAGE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Storage::Service.stub :new, stubbed_service do
+            storage = Google::Cloud::Storage.new
+            _(storage).must_be_kind_of Google::Cloud::Storage::Project
+            _(storage.project).must_equal "project-id"
+          end
+        end
+      end
+    end
+
+    it "allows emulator_host to be set" do
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_be :nil?
+        _(host).must_equal emulator_host
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Storage::Service.stub :new, stubbed_service do
+            storage = Google::Cloud::Storage.new emulator_host: emulator_host
+            _(storage).must_be_kind_of Google::Cloud::Storage::Project
+            _(storage.project).must_equal "project-id"
+          end
+        end
+      end
+    end
+
+    it "does not require a project_id when using an emulator" do
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
+        _(project).must_equal ""
+        _(credentials).must_be :nil?
+        _(host).must_equal emulator_host
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables, and provide no project_id from any source
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: nil) do
+          Google::Cloud::Storage::Service.stub :new, stubbed_service do
+            storage = Google::Cloud::Storage.new emulator_host: emulator_host
+            _(storage).must_be_kind_of Google::Cloud::Storage::Project
+            _(storage.project).must_equal ""
+          end
+        end
+      end
+    end
+
+    it "honors provided credentials when using an emulator" do
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(host).must_equal emulator_host
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Storage::Service.stub :new, stubbed_service do
+            storage = Google::Cloud::Storage.new credentials: default_credentials, emulator_host: emulator_host
+            _(storage).must_be_kind_of Google::Cloud::Storage::Project
+            _(storage.project).must_equal "project-id"
+          end
+        end
+      end
+    end
+  end
+
   describe "Storage.configure" do
     let(:found_credentials) { "{}" }
 
@@ -656,6 +753,31 @@ describe Google::Cloud do
               end
             end
           end
+        end
+      end
+    end
+
+    it "uses storage config for emulator_host" do
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_be :nil?
+        _(host).must_equal "http://localhost:9000"
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Storage.configure do |config|
+          config.project_id = "project-id"
+          config.emulator_host = "http://localhost:9000"
+        end
+
+        Google::Cloud::Storage::Service.stub :new, stubbed_service do
+          storage = Google::Cloud::Storage.new
+          _(storage).must_be_kind_of Google::Cloud::Storage::Project
+          _(storage.project).must_equal "project-id"
         end
       end
     end
