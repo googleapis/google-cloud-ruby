@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "google/cloud/storage/iam_signer"
 
 describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
   let(:bucket_name) { "bucket" }
@@ -144,22 +145,61 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
   end
 
-  it "raises when missing issuer" do
+  it "raises SignedUrlUnavailable when missing both signing_key and issuer" do
     credentials.issuer = nil
-    credentials.signing_key = PoisonSigningKey.new
-
-    expect {
-      file.signed_url
-    }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
-  end
-
-  it "raises when missing signing_key" do
-    credentials.issuer = "native_issuer"
     credentials.signing_key = nil
 
-    expect {
-      file.signed_url
-    }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
+    Google::Cloud.env.stub :metadata?, false do
+      expect {
+        file.signed_url
+      }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
+    end
+  end
+
+  it "falls back to IAMSigner when missing signing_key" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      credentials.issuer = "native_issuer@email.com"
+      credentials.signing_key = nil
+
+      iam_signer_mock = Minitest::Mock.new
+      iam_signer_mock.expect :sign, "iam-signature", ["native_issuer@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+      Google::Cloud.env.stub :metadata?, false do
+        Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
+          signed_url = file.signed_url
+
+          signed_url_params = CGI::parse(URI(signed_url).query)
+          _(signed_url_params["GoogleAccessId"]).must_equal ["native_issuer@email.com"]
+          _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("iam-signature").delete("\n")]
+        end
+      end
+
+      iam_signer_mock.verify
+    end
+  end
+
+  it "uses IAMSigner and auto-detects issuer if metadata? is true" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      credentials.issuer = nil
+      credentials.signing_key = nil
+
+      iam_signer_mock = Minitest::Mock.new
+      iam_signer_mock.expect :sign, "iam-signature", ["metadata_issuer@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+      Google::Cloud.env.stub :metadata?, true do
+        Google::Cloud.env.stub :lookup_metadata, "metadata_issuer@email.com" do
+          Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
+            signed_url = file.signed_url
+
+            signed_url_params = CGI::parse(URI(signed_url).query)
+            _(signed_url_params["GoogleAccessId"]).must_equal ["metadata_issuer@email.com"]
+            _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("iam-signature").delete("\n")]
+          end
+        end
+      end
+
+      iam_signer_mock.verify
+    end
   end
 
   it "raises with issuer and lambda with incorrect argument count" do
