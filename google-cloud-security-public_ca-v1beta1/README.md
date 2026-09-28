@@ -1,13 +1,12 @@
-# Ruby Client for the Public Certificate Authority V1beta1 API
+# Ruby Client for the Public Certificate Authority V1BETA1 API
 
 The Public Certificate Authority API may be used to create and manage ACME external account binding keys associated with Google Trust Services' publicly trusted certificate authority.
 
-Certificate Manager's Public Certificate Authority (CA) functionality allows you to provision and deploy widely trusted X.509 certificates after validating that the certificate requester controls the domains. Certificate Manager lets you directly and programmatically request publicly trusted TLS certificates that are already in the root of trust stores used by major browsers, operating systems, and applications. You can use these TLS certificates to authenticate and encrypt internet traffic.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Public Certificate Authority V1beta1 API. Most users should consider using
+specific version of the Public Certificate Authority V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-security-public_ca](https://rubygems.org/gems/google-cloud-security-public_ca).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.create_external_account_key request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security-public_ca-v1beta1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/certificate-manager/docs/public-ca/)
+See also the [Product Documentation](https://cloud.google.com/certificate-manager/docs/public-ca)
 for general usage information.
 
 ## Debug Logging

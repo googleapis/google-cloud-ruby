@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/tasks/v2beta3/bindings_override"
 
 require "google/cloud/tasks/v2beta3/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta3/cloud_tasks/paths"
+require "google/cloud/tasks/v2beta3/cloud_tasks/rest/operations"
 require "google/cloud/tasks/v2beta3/cloud_tasks/rest/client"
 
 module Google

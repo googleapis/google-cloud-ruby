@@ -1,8 +1,7 @@
 # Ruby Client for the Contact Center AI Insights API
 
-API Client library for the Contact Center AI Insights API
+Contact Center Insights provides out-of-the-box and custom modeling techniques to make it easier for contact center teams to better understand customer interaction data.
 
-Contact Center AI Insights helps users detect and visualize patterns in their contact center data. Understanding conversational data drives business value, improves operational efficiency, and provides a voice for customer feedback.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-contact_center_insights-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-contact_center_insights-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-contact_center_insights-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/contact-center/insights/docs)
-for more usage information.
 
 ## Quick Start
 

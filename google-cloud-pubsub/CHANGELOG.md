@@ -1,5 +1,26 @@
 # Release History
 
+### 3.5.0 (2026-09-14)
+
+#### Features
+
+* Support subscriber shutdown options ([#36480](https://github.com/googleapis/google-cloud-ruby/issues/36480)) 
+#### Documentation
+
+* Add subscriber shutdown documentation and examples ([#36482](https://github.com/googleapis/google-cloud-ruby/issues/36482)) 
+
+### 3.4.1 (2026-08-24)
+
+#### Bug Fixes
+
+* Propagate logger to v1 admin and schema clients ([#32440](https://github.com/googleapis/google-cloud-ruby/issues/32440)) ([#36298](https://github.com/googleapis/google-cloud-ruby/issues/36298)) 
+
+### 3.4.0 (2026-07-29)
+
+#### Features
+
+* implement streaming keep-alive logic ([#34653](https://github.com/googleapis/google-cloud-ruby/issues/34653)) 
+
 ### 3.3.0 (2026-06-11)
 
 #### Features

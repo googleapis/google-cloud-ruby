@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -350,7 +350,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1beta1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -393,7 +393,7 @@ module Google
                                                           uri_template: "/v1beta1/{name}",
                                                           body: "catalog_item",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -414,7 +414,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1beta1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/catalogItems(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

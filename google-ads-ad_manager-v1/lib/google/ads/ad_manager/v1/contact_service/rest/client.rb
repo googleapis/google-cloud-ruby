@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Contact` object.
+              # Retrieves a `Contact` object.
               #
               # @overload get_contact(request, options = nil)
               #   Pass arguments to `get_contact` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Contact` objects.
+              # Lists `Contact` objects.
               #
               # @overload list_contacts(request, options = nil)
               #   Pass arguments to `list_contacts` via a request object, either of type
@@ -292,20 +292,19 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>address</code></li>
-              #       <li><code>cellPhone</code></li>
-              #       <li><code>comment</code></li>
-              #       <li><code>company</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>email</code></li>
-              #       <li><code>fax</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>status</code></li>
-              #       <li><code>title</code></li>
-              #       <li><code>workPhone</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `address`
+              #     * `cellPhone`
+              #     * `comment`
+              #     * `company`
+              #     * `displayName`
+              #     * `email`
+              #     * `fax`
+              #     * `name`
+              #     * `status`
+              #     * `title`
+              #     * `workPhone`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -377,7 +376,7 @@ module Google
               end
 
               ##
-              # API to create a `Contact` object.
+              # Creates a `Contact` object.
               #
               # @overload create_contact(request, options = nil)
               #   Pass arguments to `create_contact` via a request object, either of type
@@ -458,7 +457,7 @@ module Google
               end
 
               ##
-              # API to batch create `Contact` objects.
+              # Creates `Contact` objects.
               #
               # @overload batch_create_contacts(request, options = nil)
               #   Pass arguments to `batch_create_contacts` via a request object, either of type
@@ -542,7 +541,7 @@ module Google
               end
 
               ##
-              # API to update a `Contact` object.
+              # Updates a `Contact` object.
               #
               # @overload update_contact(request, options = nil)
               #   Pass arguments to `update_contact` via a request object, either of type
@@ -624,7 +623,7 @@ module Google
               end
 
               ##
-              # API to batch update `Contact` objects.
+              # Batch updates `Contact` objects.
               #
               # @overload batch_update_contacts(request, options = nil)
               #   Pass arguments to `batch_update_contacts` via a request object, either of type

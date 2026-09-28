@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-policy_troubleshooter-iam-v3 is the official client library for the Policy Troubleshooter V3 API. Note that google-cloud-policy_troubleshooter-iam-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter-iam instead. See the readme for more details."
-  gem.summary       = "API Client library for the Policy Troubleshooter V3 API"
+  gem.description   = "Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access. Note that google-cloud-policy_troubleshooter-iam-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter-iam instead. See the readme for more details."
+  gem.summary       = "Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

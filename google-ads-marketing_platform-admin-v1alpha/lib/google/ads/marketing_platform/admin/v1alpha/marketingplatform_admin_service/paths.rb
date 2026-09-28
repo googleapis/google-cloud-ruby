@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,23 @@ module Google
               # @return [::String]
               def account_path account:
                 "accounts/#{account}"
+              end
+
+              ##
+              # Create a fully-qualified AdminAccessBinding resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `organizations/{organization}/adminAccessBindings/{admin_access_binding}`
+              #
+              # @param organization [String]
+              # @param admin_access_binding [String]
+              #
+              # @return [::String]
+              def admin_access_binding_path organization:, admin_access_binding:
+                raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                "organizations/#{organization}/adminAccessBindings/#{admin_access_binding}"
               end
 
               ##
@@ -82,6 +99,42 @@ module Google
               # @return [::String]
               def property_path property:
                 "properties/#{property}"
+              end
+
+              ##
+              # Create a fully-qualified UserGroup resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `organizations/{organization}/userGroups/{user_group}`
+              #
+              # @param organization [String]
+              # @param user_group [String]
+              #
+              # @return [::String]
+              def user_group_path organization:, user_group:
+                raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                "organizations/#{organization}/userGroups/#{user_group}"
+              end
+
+              ##
+              # Create a fully-qualified UserGroupMember resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `organizations/{organization}/userGroups/{user_group}/members/{member}`
+              #
+              # @param organization [String]
+              # @param user_group [String]
+              # @param member [String]
+              #
+              # @return [::String]
+              def user_group_member_path organization:, user_group:, member:
+                raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                raise ::ArgumentError, "user_group cannot contain /" if user_group.to_s.include? "/"
+
+                "organizations/#{organization}/userGroups/#{user_group}/members/#{member}"
               end
 
               extend self

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,6 +66,25 @@ module Google
               raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
+            end
+
+            ##
+            # Create a fully-qualified EkmConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/ekmConnections/{ekm_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ekm_connection [String]
+            #
+            # @return [::String]
+            def ekm_connection_path project:, location:, ekm_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/ekmConnections/#{ekm_connection}"
             end
 
             ##

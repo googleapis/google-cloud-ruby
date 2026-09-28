@@ -1,5 +1,5 @@
 --no-private
---title="IAM API"
+--title="Identity and Access Management (IAM) API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

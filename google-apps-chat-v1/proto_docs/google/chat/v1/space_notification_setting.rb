@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,16 +42,16 @@ module Google
             # Reserved.
             NOTIFICATION_SETTING_UNSPECIFIED = 0
 
-            # Notifications are triggered by @mentions, followed threads, first
+            # Notifications are triggered by `@mentions`, followed threads, first
             # message of new threads. All new threads are automatically followed,
             # unless manually unfollowed by the user.
             ALL = 1
 
-            # The notification is triggered by @mentions, followed threads, first
+            # The notification is triggered by `@mentions`, followed threads, first
             # message of new threads. Not available for 1:1 direct messages.
             MAIN_CONVERSATIONS = 2
 
-            # The notification is triggered by @mentions, followed threads. Not
+            # The notification is triggered by `@mentions`, followed threads. Not
             # available for 1:1 direct messages.
             FOR_YOU = 3
 

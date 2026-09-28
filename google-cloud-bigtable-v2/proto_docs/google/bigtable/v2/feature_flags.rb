@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -73,6 +73,10 @@ module Google
         # @!attribute [rw] sessions_required
         #   @return [::Boolean]
         #     Internal flag to force sessions for internal projects.
+        # @!attribute [rw] microsecond_timestamp
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the client supports microsecond precision
+        #     timestamps.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

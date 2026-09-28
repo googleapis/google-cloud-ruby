@@ -2,7 +2,6 @@
 
 Administer your Cloud Bigtable tables and instances.
 
-Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.create_instance request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-admin-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/bigtable)
+See also the [Product Documentation](https://cloud.google.com/bigtable/docs/overview)
 for general usage information.
 
 ## Debug Logging

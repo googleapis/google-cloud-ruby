@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,18 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientPathsTest < Minitest::Test
 
       path = client.conference_record_path conference_record: "value0"
       assert_equal "conferenceRecords/value0", path
+    end
+  end
+
+  def test_member_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Meet::V2::SpacesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.member_path space: "value0", member: "value1"
+      assert_equal "spaces/value0/members/value1", path
     end
   end
 

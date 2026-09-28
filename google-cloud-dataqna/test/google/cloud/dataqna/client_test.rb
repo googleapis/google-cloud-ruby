@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ require "helper"
 require "google/cloud/dataqna"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::DataQnA::ClientConstructionMinitest < Minitest::Test
   class DummyStub
@@ -41,24 +42,44 @@ class Google::Cloud::DataQnA::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_auto_suggestion_service_grpc
-    skip unless Google::Cloud::DataQnA.auto_suggestion_service_available?
+    skip unless Google::Cloud::DataQnA.auto_suggestion_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DataQnA.auto_suggestion_service do |config|
+      client = Google::Cloud::DataQnA.auto_suggestion_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client, client
     end
   end
 
+  def test_auto_suggestion_service_rest
+    skip unless Google::Cloud::DataQnA.auto_suggestion_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::DataQnA.auto_suggestion_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Rest::Client, client
+    end
+  end
+
   def test_question_service_grpc
-    skip unless Google::Cloud::DataQnA.question_service_available?
+    skip unless Google::Cloud::DataQnA.question_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DataQnA.question_service do |config|
+      client = Google::Cloud::DataQnA.question_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::DataQnA::V1alpha::QuestionService::Client, client
+    end
+  end
+
+  def test_question_service_rest
+    skip unless Google::Cloud::DataQnA.question_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::DataQnA.question_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DataQnA::V1alpha::QuestionService::Rest::Client, client
     end
   end
 end

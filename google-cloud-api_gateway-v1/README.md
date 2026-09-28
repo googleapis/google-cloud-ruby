@@ -1,8 +1,7 @@
 # Ruby Client for the API Gateway V1 API
 
-API Client library for the API Gateway V1 API
+API Gateway enables you to provide secure access to your backend services through a well-defined REST API that is consistent across all of your services, regardless of the service implementation.
 
-API Gateway enables you to provide secure access to your backend services through a well-defined REST API that is consistent across all of your services, regardless of the service implementation. Clients consume your REST APIS to implement standalone apps for a mobile device or tablet, through apps running in a browser, or through any other type of app that can make a request to an HTTP endpoint.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_gateways request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-api_gateway-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/api-gateway/)
-for general usage information.
 
 ## Debug Logging
 

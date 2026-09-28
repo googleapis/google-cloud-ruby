@@ -2,7 +2,6 @@
 
 The management interface for Binary Authorization, a service that provides policy-based deployment validation and control for images deployed to Google Kubernetes Engine (GKE), Anthos Service Mesh, Anthos Clusters, and Cloud Run.
 
-Binary Authorization is a service on Google Cloud that provides centralized software supply-chain security for applications that run on Google Kubernetes Engine (GKE) and GKE on-prem.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.get_policy request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/binary-authorization/)
-for general usage information.
 
 ## Debug Logging
 

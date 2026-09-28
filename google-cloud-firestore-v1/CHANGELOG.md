@@ -1,5 +1,14 @@
 # Release History
 
+### 2.5.0 (2026-08-05)
+
+#### Features
+
+* add RequestOptions and request_options to Firestore v1 protos ([#35073](https://github.com/googleapis/google-cloud-ruby/issues/35073)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35053](https://github.com/googleapis/google-cloud-ruby/issues/35053)) 
+
 ### 2.4.0 (2026-06-11)
 
 #### Features

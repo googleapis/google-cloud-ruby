@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-cloud-app_topology-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.apptopology.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "apptopology_v1_generated_AppTopology_GenerateDiscoveredResourcesTopology_sync",
+      "title": "Snippet for the generate_discovered_resources_topology call in the AppTopology service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppTopology::V1::AppTopology::Client#generate_discovered_resources_topology.",
+      "file": "app_topology/generate_discovered_resources_topology.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_discovered_resources_topology",
+        "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client#generate_discovered_resources_topology",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppTopology::V1::GenerateDiscoveredResourcesTopologyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppTopology::V1::GenerateDiscoveredResourcesTopologyResponse",
+        "client": {
+          "short_name": "AppTopology::Client",
+          "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client"
+        },
+        "method": {
+          "short_name": "GenerateDiscoveredResourcesTopology",
+          "full_name": "google.cloud.apptopology.v1.AppTopology.GenerateDiscoveredResourcesTopology",
+          "service": {
+            "short_name": "AppTopology",
+            "full_name": "google.cloud.apptopology.v1.AppTopology"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apptopology_v1_generated_AppTopology_GetSchema_sync",
+      "title": "Snippet for the get_schema call in the AppTopology service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppTopology::V1::AppTopology::Client#get_schema.",
+      "file": "app_topology/get_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema",
+        "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client#get_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppTopology::V1::GetSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppTopology::V1::Schema",
+        "client": {
+          "short_name": "AppTopology::Client",
+          "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client"
+        },
+        "method": {
+          "short_name": "GetSchema",
+          "full_name": "google.cloud.apptopology.v1.AppTopology.GetSchema",
+          "service": {
+            "short_name": "AppTopology",
+            "full_name": "google.cloud.apptopology.v1.AppTopology"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apptopology_v1_generated_AppTopology_GetDomain_sync",
+      "title": "Snippet for the get_domain call in the AppTopology service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppTopology::V1::AppTopology::Client#get_domain.",
+      "file": "app_topology/get_domain.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_domain",
+        "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client#get_domain",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppTopology::V1::GetDomainRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppTopology::V1::Domain",
+        "client": {
+          "short_name": "AppTopology::Client",
+          "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client"
+        },
+        "method": {
+          "short_name": "GetDomain",
+          "full_name": "google.cloud.apptopology.v1.AppTopology.GetDomain",
+          "service": {
+            "short_name": "AppTopology",
+            "full_name": "google.cloud.apptopology.v1.AppTopology"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apptopology_v1_generated_AppTopology_ListDomains_sync",
+      "title": "Snippet for the list_domains call in the AppTopology service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppTopology::V1::AppTopology::Client#list_domains.",
+      "file": "app_topology/list_domains.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_domains",
+        "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client#list_domains",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppTopology::V1::ListDomainsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppTopology::V1::ListDomainsResponse",
+        "client": {
+          "short_name": "AppTopology::Client",
+          "full_name": "::Google::Cloud::AppTopology::V1::AppTopology::Client"
+        },
+        "method": {
+          "short_name": "ListDomains",
+          "full_name": "google.cloud.apptopology.v1.AppTopology.ListDomains",
+          "service": {
+            "short_name": "AppTopology",
+            "full_name": "google.cloud.apptopology.v1.AppTopology"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

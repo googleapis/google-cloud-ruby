@@ -65,6 +65,11 @@
                 "list_managed_folders"
               ]
             },
+            "UpdateManagedFolder": {
+              "methods": [
+                "update_managed_folder"
+              ]
+            },
             "CreateAnywhereCache": {
               "methods": [
                 "create_anywhere_cache"
@@ -98,6 +103,31 @@
             "ListAnywhereCaches": {
               "methods": [
                 "list_anywhere_caches"
+              ]
+            },
+            "CreateRapidCache": {
+              "methods": [
+                "create_rapid_cache"
+              ]
+            },
+            "UpdateRapidCache": {
+              "methods": [
+                "update_rapid_cache"
+              ]
+            },
+            "DisableRapidCache": {
+              "methods": [
+                "disable_rapid_cache"
+              ]
+            },
+            "GetRapidCache": {
+              "methods": [
+                "get_rapid_cache"
+              ]
+            },
+            "ListRapidCaches": {
+              "methods": [
+                "list_rapid_caches"
               ]
             },
             "GetProjectIntelligenceConfig": {
@@ -168,6 +198,11 @@
             "ListIntelligenceFindingRevisions": {
               "methods": [
                 "list_intelligence_finding_revisions"
+              ]
+            },
+            "ViewObjectFullContext": {
+              "methods": [
+                "view_object_full_context"
               ]
             }
           }

@@ -1,13 +1,12 @@
-# Ruby Client for the Storage Transfer Service V1 API
+# Ruby Client for the Storage Transfer V1 API
 
 Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
 
-Storage Transfer Service allows you to quickly import online data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Storage Transfer Service V1 API. Most users should consider using
+specific version of the Storage Transfer V1 API. Most users should consider using
 the main client gem,
 [google-cloud-storage_transfer](https://rubygems.org/gems/google-cloud-storage_transfer).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.get_google_service_account request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-storage_transfer-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/storage-transfer-service/)
-for general usage information.
 
 ## Debug Logging
 

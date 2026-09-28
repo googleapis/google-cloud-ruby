@@ -2,7 +2,6 @@
 
 Provisions and manages developers' App Engine applications.
 
-The App Engine Admin API provisions and manages your App Engine applications.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.get_application request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/appengine/docs/admin-api/)
-for general usage information.
 
 ## Debug Logging
 

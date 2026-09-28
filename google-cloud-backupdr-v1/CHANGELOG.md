@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.11.2 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35046](https://github.com/googleapis/google-cloud-ruby/issues/35046)) 
+
+### 1.11.1 (2026-07-20)
+
+#### Documentation
+
+* update documentation comment for access_restriction in BackupVault proto ([#34957](https://github.com/googleapis/google-cloud-ruby/issues/34957)) 
+
 ### 1.11.0 (2026-06-11)
 
 #### Features

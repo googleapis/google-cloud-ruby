@@ -1,8 +1,7 @@
 # Ruby Client for the Transcoder V1 API
 
-This API converts video files into formats suitable for consumer distribution. For more information, see the Transcoder API overview.
+This API converts video files into formats suitable for consumer distribution. For more information, see the <a href="https://cloud.google.com/transcoder/docs/concepts/overview">Transcoder API overview</a>.
 
-The Transcoder API allows you to convert video files and package them for optimized delivery to web, mobile and connected TVs.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_job request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/transcoder/)
-for general usage information.
 
 ## Debug Logging
 

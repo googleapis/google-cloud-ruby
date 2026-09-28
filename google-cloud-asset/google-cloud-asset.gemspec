@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services."
-  gem.summary       = "API Client library for the Cloud Asset API"
+  gem.description   = "The Cloud Asset API manages the history and inventory of Google Cloud resources."
+  gem.summary       = "The Cloud Asset API manages the history and inventory of Google Cloud resources."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

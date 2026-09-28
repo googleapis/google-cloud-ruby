@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ require "google/iam/v1beta/workload_identity_pools/credentials"
 require "google/iam/v1beta/workload_identity_pools/paths"
 require "google/iam/v1beta/workload_identity_pools/operations"
 require "google/iam/v1beta/workload_identity_pools/client"
+require "google/iam/v1beta/workload_identity_pools/rest"
 
 module Google
   module Iam
@@ -37,6 +38,11 @@ module Google
       #
       #     require "google/iam/v1beta/workload_identity_pools"
       #     client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+      #
+      # @example Load this service and instantiate a REST client
+      #
+      #     require "google/iam/v1beta/workload_identity_pools/rest"
+      #     client = ::Google::Iam::V1beta::WorkloadIdentityPools::Rest::Client.new
       #
       module WorkloadIdentityPools
       end

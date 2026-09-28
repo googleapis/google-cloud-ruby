@@ -39,7 +39,7 @@ module Google
         #     Can have a maximum length of `2048` characters.
         # @!attribute [rw] source
         #   @return [::Google::Cloud::AgentRegistry::V1::Binding::Source]
-        #     Required. The target Agent of the Binding.
+        #     Optional. The source Agent of the Binding.
         # @!attribute [rw] target
         #   @return [::Google::Cloud::AgentRegistry::V1::Binding::Target]
         #     Required. The target Agent Registry Resource of the Binding.

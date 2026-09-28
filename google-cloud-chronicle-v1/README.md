@@ -2,7 +2,6 @@
 
 The Google Cloud Security Operations API (Chronicle API) provides endpoints that help analysts investigate and mitigate security threats throughout their lifecycle.
 
-The Google Cloud Security Operations API (Chronicle API) provides endpoints that help analysts investigate and mitigate security threats throughout their lifecycle.
 
 https://github.com/googleapis/google-cloud-ruby
 

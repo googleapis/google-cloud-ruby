@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -429,8 +429,8 @@ module Google
               #     Required. Parent resource of the Gateway, of the form:
               #     `projects/*/locations/*`
               #   @param gateway_id [::String]
-              #     Required. Identifier to assign to the Gateway. Must be unique within scope of
-              #     the parent resource.
+              #     Required. Identifier to assign to the Gateway. Must be unique within scope
+              #     of the parent resource.
               #   @param gateway [::Google::Cloud::ApiGateway::V1::Gateway, ::Hash]
               #     Required. Gateway resource.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1324,8 +1324,8 @@ module Google
               #     Required. Parent resource of the API Config, of the form:
               #     `projects/*/locations/global/apis/*`
               #   @param api_config_id [::String]
-              #     Required. Identifier to assign to the API Config. Must be unique within scope of
-              #     the parent resource.
+              #     Required. Identifier to assign to the API Config. Must be unique within
+              #     scope of the parent resource.
               #   @param api_config [::Google::Cloud::ApiGateway::V1::ApiConfig, ::Hash]
               #     Required. API resource.
               # @yield [result, operation] Access the result along with the TransportOperation object

@@ -1,8 +1,7 @@
 # Ruby Client for the Data Analytics API with Gemini V1BETA API
 
-The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
+Developers can use the Conversational Analytics API, accessed through geminidataanalytics.googleapis.com, to build an artificial intelligence (AI)-powered chat interface, or data agent, that answers questions about structured data in BigQuery, Looker, and Looker Studio using natural language.
 
-The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -32,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/gemini_data_analytics/v1beta"
 
-client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new
-request = ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new # (request fields as keyword arguments...)
-response = client.list_data_agents request
+client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client.new
+request = ::Google::Cloud::GeminiDataAnalytics::V1beta::SendMessageRequest.new # (request fields as keyword arguments...)
+response = client.send_message request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gemini_data_analytics-v1beta/latest)
@@ -75,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/gemini_data_analytics/v1beta"
 require "logger"
 
-client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client.new do |config|
+client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

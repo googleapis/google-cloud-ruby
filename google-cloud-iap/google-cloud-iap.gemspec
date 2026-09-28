@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "IAP lets you establish a central authorization layer for applications accessed by HTTPS, so you can use an application-level access control model instead of relying on network-level firewalls."
-  gem.summary       = "API Client library for the Identity-Aware Proxy API"
+  gem.description   = "Controls access to cloud applications running on Google Cloud Platform."
+  gem.summary       = "Controls access to cloud applications running on Google Cloud Platform."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.2.2 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding google-cloud-privileged_access_manager to Librarian ([#36485](https://github.com/googleapis/google-cloud-ruby/issues/36485)) 
+
+### 1.2.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35059](https://github.com/googleapis/google-cloud-ruby/issues/35059)) 
+#### Documentation
+
+* Update copyright year ([#35096](https://github.com/googleapis/google-cloud-ruby/issues/35096)) 
+
 ### 1.2.0 (2026-06-11)
 
 #### Features

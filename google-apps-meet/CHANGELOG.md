@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.4.0 (2026-09-17)
+
+#### Features
+
+* update API sources and regenerate ([#36568](https://github.com/googleapis/google-cloud-ruby/issues/36568)) 
+
+### 1.3.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+#### Documentation
+
+* Update copyright year ([#35088](https://github.com/googleapis/google-cloud-ruby/issues/35088)) 
+
 ### 1.3.0 (2026-06-11)
 
 #### Features

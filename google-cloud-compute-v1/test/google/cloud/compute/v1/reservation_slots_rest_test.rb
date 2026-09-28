@@ -135,6 +135,64 @@ class ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ClientTest < Minites
     end
   end
 
+  def test_get_health
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent_name = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    reservation_slot = "hello world"
+    zone = "hello world"
+
+    get_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ServiceStub.stub :transcode_get_health_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_health_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_health({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_health parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_health ::Google::Cloud::Compute::V1::GetHealthReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_health({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_health(::Google::Cloud::Compute::V1::GetHealthReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_health_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_version
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

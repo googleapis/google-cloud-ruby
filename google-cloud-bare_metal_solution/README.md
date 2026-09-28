@@ -1,8 +1,7 @@
 # Ruby Client for the Bare Metal Solution API
 
-API Client library for the Bare Metal Solution API
+Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center.
 
-Bare Metal Solution is a managed solution that provides purpose-built HPE or Atos bare-metal servers in regional extensions that are connected to Google Cloud by a managed, high-performance connection with a low-latency network fabric.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bare_metal_solution-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bare_metal_solution-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-bare_metal_solution-v2/latest).
-
-See also the [Product Documentation](https://cloud.google.com/bare-metal/)
-for more usage information.
 
 ## Quick Start
 

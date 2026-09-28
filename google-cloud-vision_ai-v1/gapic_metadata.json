@@ -5,6 +5,20 @@
   "protoPackage": "google.cloud.visionai.v1",
   "libraryPackage": "::Google::Cloud::VisionAI::V1",
   "services": {
+    "HealthCheckService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::VisionAI::V1::HealthCheckService::Client",
+          "rpcs": {
+            "HealthCheck": {
+              "methods": [
+                "health_check"
+              ]
+            }
+          }
+        }
+      }
+    },
     "LiveVideoAnalytics": {
       "clients": {
         "grpc": {
@@ -724,20 +738,6 @@
             "ViewCollectionItems": {
               "methods": [
                 "view_collection_items"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "HealthCheckService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::VisionAI::V1::HealthCheckService::Client",
-          "rpcs": {
-            "HealthCheck": {
-              "methods": [
-                "health_check"
               ]
             }
           }

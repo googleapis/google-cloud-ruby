@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,15 +59,14 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>adTagName</code></li>
-        #       <li><code>customTargetingKey</code></li>
-        #       <li><code>displayName</code></li>
-        #       <li><code>matchType</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>status</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `adTagName`
+        #     * `customTargetingKey`
+        #     * `displayName`
+        #     * `matchType`
+        #     * `name`
+        #     * `status`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.
@@ -104,6 +103,146 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCustomTargetingValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateCustomTargetingValue` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of CustomTargetingValues.
+        #     Format:
+        #     `networks/{network_code}`
+        # @!attribute [rw] custom_targeting_value
+        #   @return [::Google::Ads::AdManager::V1::CustomTargetingValue]
+        #     Required. The `CustomTargetingValue` to create.
+        class CreateCustomTargetingValueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateCustomTargetingValues` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of CustomTargetingValues.
+        #     Format:
+        #     `networks/{network_code}`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateCustomTargetingValueRequest>]
+        #     Required. The `CustomTargetingValue` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateCustomTargetingValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateCustomTargetingValues` method.
+        # @!attribute [rw] custom_targeting_values
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomTargetingValue>]
+        #     The `CustomTargetingValue` objects created.
+        class BatchCreateCustomTargetingValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateCustomTargetingValue` method.
+        # @!attribute [rw] custom_targeting_value
+        #   @return [::Google::Ads::AdManager::V1::CustomTargetingValue]
+        #     Required. The `CustomTargetingValue` to update.
+        #
+        #     The `CustomTargetingValue`'s `name` is used to identify the
+        #     `CustomTargetingValue` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateCustomTargetingValueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateCustomTargetingValues` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of CustomTargetingValues.
+        #     Format:
+        #     `networks/{network_code}`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateCustomTargetingValueRequest>]
+        #     Required. The `CustomTargetingValue` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateCustomTargetingValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateCustomTargetingValues` method.
+        # @!attribute [rw] custom_targeting_values
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomTargetingValue>]
+        #     The `CustomTargetingValue` objects updated.
+        class BatchUpdateCustomTargetingValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to activate a CustomTargetingValue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the CustomTargetingValue.
+        #     Format:
+        #     `networks/{network_code}/customTargetingValues/{custom_targeting_value_id}`
+        class ActivateCustomTargetingValueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateCustomTargetingValues` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of CustomTargetingValues.
+        #     Format:
+        #     `networks/{network_code}`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::ActivateCustomTargetingValueRequest>]
+        #     Required. The `CustomTargetingValue` objects to activate.
+        #     A maximum of 100 objects can be activated in a batch.
+        class BatchActivateCustomTargetingValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateCustomTargetingValues` method.
+        class BatchActivateCustomTargetingValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to deactivate a CustomTargetingValue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the CustomTargetingValue.
+        #     Format:
+        #     `networks/{network_code}/customTargetingValues/{custom_targeting_value_id}`
+        class DeactivateCustomTargetingValueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateCustomTargetingValues` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of CustomTargetingValues.
+        #     Format:
+        #     `networks/{network_code}/`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::DeactivateCustomTargetingValueRequest>]
+        #     Required. The `CustomTargetingValue` objects to deactivate.
+        class BatchDeactivateCustomTargetingValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateCustomTargetingValues` method.
+        class BatchDeactivateCustomTargetingValuesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

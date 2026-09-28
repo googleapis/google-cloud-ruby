@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module ServiceManagement
-      VERSION = "1.7.0"
+      VERSION = "1.7.1"
     end
   end
 end

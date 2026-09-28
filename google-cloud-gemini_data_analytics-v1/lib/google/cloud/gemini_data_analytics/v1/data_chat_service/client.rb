@@ -525,6 +525,104 @@ module Google
             end
 
             ##
+            # Updates a conversation.
+            #
+            # @overload update_conversation(request, options = nil)
+            #   Pass arguments to `update_conversation` via a request object, either of type
+            #   {::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_conversation(conversation: nil, update_mask: nil, request_id: nil)
+            #   Pass arguments to `update_conversation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversation [::Google::Cloud::GeminiDataAnalytics::V1::Conversation, ::Hash]
+            #     Required. The resource being updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     Conversation resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields with non-default values
+            #     present in the request will be overwritten. If a wildcard mask is provided,
+            #     all fields will be overwritten.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GeminiDataAnalytics::V1::Conversation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GeminiDataAnalytics::V1::Conversation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gemini_data_analytics/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GeminiDataAnalytics::V1::DataChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest.new
+            #
+            #   # Call the update_conversation method.
+            #   result = client.update_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::GeminiDataAnalytics::V1::Conversation.
+            #   p result
+            #
+            def update_conversation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1::UpdateConversationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_conversation.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversation&.name
+                header_params["conversation.name"] = request.conversation.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_conversation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_conversation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_chat_service_stub.call_rpc :update_conversation, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets details of a single conversation by using conversation id and parent.
             #
             # @overload get_conversation(request, options = nil)
@@ -1023,6 +1121,11 @@ module Google
                 #
                 attr_reader :delete_conversation
                 ##
+                # RPC-specific configuration for `update_conversation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_conversation
+                ##
                 # RPC-specific configuration for `get_conversation`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1046,6 +1149,8 @@ module Google
                   @create_conversation = ::Gapic::Config::Method.new create_conversation_config
                   delete_conversation_config = parent_rpcs.delete_conversation if parent_rpcs.respond_to? :delete_conversation
                   @delete_conversation = ::Gapic::Config::Method.new delete_conversation_config
+                  update_conversation_config = parent_rpcs.update_conversation if parent_rpcs.respond_to? :update_conversation
+                  @update_conversation = ::Gapic::Config::Method.new update_conversation_config
                   get_conversation_config = parent_rpcs.get_conversation if parent_rpcs.respond_to? :get_conversation
                   @get_conversation = ::Gapic::Config::Method.new get_conversation_config
                   list_conversations_config = parent_rpcs.list_conversations if parent_rpcs.respond_to? :list_conversations

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -605,7 +605,7 @@ module Google
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::Message>]
           #     Required. The messages that the Summary will be generated from. It is
           #     expected that this message content is already redacted and does not
-          #     contain any PII. Required fields: {content, language_code, participant,
+          #     contain any PII. Required fields: \\{content, language_code, participant,
           #     participant_role} Optional fields: \\{send_time} If send_time is not
           #     provided, then the messages must be provided in chronological order.
           # @!attribute [rw] parent
@@ -785,8 +785,8 @@ module Google
         #     {
         #       "subscription plan": "Business Premium Plus",
         #       "devices owned": [
-        #         \\{"model": "Google Pixel 7"},
-        #         \\{"model": "Google Pixel Tablet"}
+        #         {"model": "Google Pixel 7"},
+        #         {"model": "Google Pixel Tablet"}
         #       ]
         #     }
         #     ```

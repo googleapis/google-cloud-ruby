@@ -51,7 +51,7 @@ module Google
             # Searches for developer knowledge across Google's developer documentation.
             # Returns [DocumentChunk][google.developers.knowledge.v1.DocumentChunk]s
             # based on the user's query. There may be many chunks from the same
-            # [Document][google.developers.knowledge.v1.Document].  To retrieve full
+            # [Document][google.developers.knowledge.v1.Document]. To retrieve full
             # documents, use
             # [DeveloperKnowledge.GetDocument][google.developers.knowledge.v1.DeveloperKnowledge.GetDocument]
             # or
@@ -65,6 +65,8 @@ module Google
             rpc :GetDocument, ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest, ::Google::Developers::DeveloperKnowledge::V1::Document
             # Retrieves multiple documents, each with its full Markdown content.
             rpc :BatchGetDocuments, ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest, ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsResponse
+            # Answers a query using grounded generation.
+            rpc :AnswerQuery, ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest, ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse
           end
 
           Stub = Service.rpc_stub_class

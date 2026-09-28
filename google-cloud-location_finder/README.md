@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Location Finder API
 
-API Client library for the Cloud Location Finder API
+Cloud Location Finder is a public API that offers a repository of all Google Cloud and Google Distributed Cloud locations, as well as cloud locations for other cloud providers.
 
-google-cloud-location_finder is the official client library for the Cloud Location Finder API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-location_finder-v*`.

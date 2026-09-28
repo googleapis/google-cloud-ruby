@@ -13,6 +13,8 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 
 require "google/cloud/firestore"
 
@@ -64,8 +66,40 @@ module Google
         def last_error
         end
       end
-      DocumentListener = StubbedListener
-      QueryListener = StubbedListener
+
+      class DocumentReference
+        def listen &callback
+          StubbedListener.new.start
+        end
+        alias on_snapshot listen
+      end
+
+      class Query
+        def listen &callback
+          StubbedListener.new.start
+        end
+        alias on_snapshot listen
+      end
+
+      # StubbedBulkWriter stubs out ThreadPoolExecutor and batch scheduler loops
+      # on Client#bulk_writer to prevent worker thread pools from hanging CI.
+      class StubbedBulkWriter
+        def create *args; OpenStruct.new; end
+        def set *args; OpenStruct.new; end
+        def update *args; OpenStruct.new; end
+        def delete *args; OpenStruct.new; end
+        def flush; nil; end
+        def close; nil; end
+        def on_batch_success &block; end
+        def on_batch_error &block; end
+      end
+
+      class Client
+        def bulk_writer *args
+          StubbedBulkWriter.new
+        end
+      end
+
     end
   end
 end

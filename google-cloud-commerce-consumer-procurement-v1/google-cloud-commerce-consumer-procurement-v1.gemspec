@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Enables consumers to procure products served by Cloud Marketplace platform. Note that google-cloud-commerce-consumer-procurement-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce-consumer-procurement instead. See the readme for more details."
-  gem.summary       = "Enables consumers to procure products served by Cloud Marketplace platform."
+  gem.description   = "Enables consumers to procure products served by Cloud Marketplace platform Note that google-cloud-commerce-consumer-procurement-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce-consumer-procurement instead. See the readme for more details."
+  gem.summary       = "Enables consumers to procure products served by Cloud Marketplace platform"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

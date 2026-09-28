@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.4.0 (2026-09-24)
+
+#### Features
+
+* update API sources and regenerate ([#36605](https://github.com/googleapis/google-cloud-ruby/issues/36605)) 
+
+### 0.3.0 (2026-08-06)
+
+#### Features
+
+* add client library publishing configuration for SQL Admin ([#34995](https://github.com/googleapis/google-cloud-ruby/issues/34995)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
 ### 0.2.0 (2026-06-30)
 
 #### Features

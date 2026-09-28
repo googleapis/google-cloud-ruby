@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically."
-  gem.summary       = "API Client library for the Area 120 Tables API"
+  gem.description   = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
+  gem.summary       = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

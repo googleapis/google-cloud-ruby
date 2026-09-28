@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -148,7 +148,10 @@ module Google
         #     Output only. The timestamp that the session first became ACTIVE.
         # @!attribute [rw] android_device
         #   @return [::Google::Cloud::DeviceStreaming::V1::AndroidDevice]
-        #     Required. The requested device
+        #     Required. The requested device.
+        # @!attribute [rw] client_info
+        #   @return [::Google::Cloud::DeviceStreaming::V1::ClientInfo]
+        #     Optional. Information about the client which invoked the device session.
         class DeviceSession
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -205,6 +208,18 @@ module Google
             # infrastructure failure.
             ERROR = 7
           end
+        end
+
+        # Information about the client which invoked the device session.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Required. Client name, such as gcloud. The maximum length is 64 characters.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. Client version. The maximum length is 64 characters.
+        class ClientInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A single Android device.

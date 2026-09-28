@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,9 +78,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Indicates the type of unit used for defining a reservation. The
-          # [LineItem.cost_type][] can differ from the UnitType - an
-          # ad can have an impression goal, but be billed by its click. Usually
-          # CostType and UnitType will refer to the same unit.
+          # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} can differ
+          # from the UnitType - an ad can have an impression goal, but be billed by its
+          # click. Usually CostType and UnitType will refer to the same unit.
           module UnitType
             # Default value. This value is unused.
             UNIT_TYPE_UNSPECIFIED = 0
@@ -100,13 +100,15 @@ module Google
 
             # The number of click-through Cost-Per-Action (CPA) conversions from
             # creatives associated with the line item. This is only supported as
-            # secondary goal and the [LineItem.cost_type][] must be
+            # secondary goal and the
+            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} must be
             # [CostTypeEnum.CostType.CPA][].
             CLICK_THROUGH_CPA_CONVERSIONS = 3
 
             # The number of view-through Cost-Per-Action (CPA) conversions from
             # creatives associated with the line item. This is only supported as
-            # secondary goal and the [LineItem.cost_type][] must be
+            # secondary goal and the
+            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} must be
             # [CostTypeEnum.CostType.CPA}.
             VIEW_THROUGH_CPA_CONVERSIONS = 4
 

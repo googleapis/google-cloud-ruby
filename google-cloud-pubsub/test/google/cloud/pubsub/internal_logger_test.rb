@@ -48,4 +48,13 @@ describe Google::Cloud::PubSub::InternalLogger do
 
     _(output.string).must_be_empty
   end
+
+  it "does not raise an error when a custom logger without progname is passed" do
+    custom_mock = Object.new
+    logging = Google::Cloud::PubSub::InternalLogger.new custom_mock
+
+    logging.log :info, "test-tag" do
+      "test message"
+    end
+  end
 end

@@ -1,4 +1,4 @@
-# Ruby Client for the Kubernetes Engine V1beta1 API
+# Ruby Client for the Kubernetes Engine V1BETA1 API
 
 Builds and manages container-based applications, powered by the open source Kubernetes technology.
 
@@ -6,7 +6,7 @@ Builds and manages container-based applications, powered by the open source Kube
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Kubernetes Engine V1beta1 API. Most users should consider using
+specific version of the Kubernetes Engine V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-container](https://rubygems.org/gems/google-cloud-container).
 See the section below titled *Which client should I use?* for more information.
@@ -38,9 +38,6 @@ response = client.list_clusters request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-container-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/kubernetes-engine)
-for general usage information.
 
 ## Debug Logging
 

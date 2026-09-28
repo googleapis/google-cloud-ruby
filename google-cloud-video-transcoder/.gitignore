@@ -1,5 +1,3 @@
-# Ignore bundler lockfiles
-Gemfile.lock
 gems.locked
 
 # Ignore documentation output

@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The client library for the Google Network Security V1beta1 API."
+  gem.description   = "google-cloud-network_security is the official client library for the Network Security API."
   gem.summary       = "API Client library for the Network Security API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

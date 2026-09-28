@@ -71,6 +71,15 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.rpcs.create_audit_schedule.timeout = 60.0
+
+                default_config.rpcs.update_audit_schedule.timeout = 60.0
+
+                default_config.rpcs.list_audit_schedules.timeout = 60.0
+                default_config.rpcs.list_audit_schedules.retry_policy = {
+                  initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.enroll_resource.timeout = 60.0
 
                 default_config.rpcs.generate_audit_scope_report.timeout = 60.0
@@ -245,11 +254,412 @@ module Google
             # Service calls
 
             ##
-            # Enrolls the customer resource(folder/project/organization) to the audit
-            # manager service by creating the audit managers Service Agent in customers
-            # workload and granting required permissions to the Service Agent. Please
-            # note that if enrollment request is made on the already enrolled workload
-            # then enrollment is executed overriding the existing set of destinations.
+            # Creates a new audit schedule in a given project and location.
+            #
+            # @overload create_audit_schedule(request, options = nil)
+            #   Pass arguments to `create_audit_schedule` via a request object, either of type
+            #   {::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_audit_schedule(parent: nil, audit_schedule: nil, audit_schedule_id: nil, validate_only: nil)
+            #   Pass arguments to `create_audit_schedule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Project or folder that this audit schedule is for, in one of the
+            #     following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #   @param audit_schedule [::Google::Cloud::AuditManager::V1::AuditSchedule, ::Hash]
+            #     Required. Audit schedule to create.
+            #   @param audit_schedule_id [::String]
+            #     Required. ID to use for the audit schedule, which becomes the final
+            #     component of the audit schedule's resource name.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validates the request and does not create the
+            #     audit schedule. This executes standard request validation (such as schema,
+            #     framework existence, scope, and IAM checks) and skips the apply phase.
+            #
+            #     Use this field for the following purposes:
+            #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+            #       dry-run mutations (e.g., `terraform plan`) without creating real
+            #       resources or incurring costs.
+            #     * **User Interface Validation**: Enable real-time form and permission
+            #       validation in custom UIs before submitting requests.
+            #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+            #       safely without consuming resource quotas.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/audit_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AuditManager::V1::AuditManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest.new
+            #
+            #   # Call the create_audit_schedule method.
+            #   result = client.create_audit_schedule request
+            #
+            #   # The returned object is of type Google::Cloud::AuditManager::V1::AuditSchedule.
+            #   p result
+            #
+            def create_audit_schedule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_audit_schedule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AuditManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_audit_schedule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_audit_schedule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @audit_manager_stub.call_rpc :create_audit_schedule, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an existing audit schedule.
+            #
+            # @overload update_audit_schedule(request, options = nil)
+            #   Pass arguments to `update_audit_schedule` via a request object, either of type
+            #   {::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_audit_schedule(audit_schedule: nil, update_mask: nil, validate_only: nil)
+            #   Pass arguments to `update_audit_schedule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param audit_schedule [::Google::Cloud::AuditManager::V1::AuditSchedule, ::Hash]
+            #     Required. Audit schedule to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. List of fields to update.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validates the request and does not update the
+            #     audit schedule. This executes standard request validation (such as
+            #     schema, framework existence, scope, and IAM checks) and skips the apply
+            #     phase.
+            #
+            #     Use this field for the following purposes:
+            #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+            #       dry-run mutations (e.g., `terraform plan`) without creating real
+            #       resources or incurring costs.
+            #     * **User Interface Validation**: Enable real-time form and permission
+            #       validation in custom UIs before submitting requests.
+            #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+            #       safely without consuming resource quotas.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/audit_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AuditManager::V1::AuditManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest.new
+            #
+            #   # Call the update_audit_schedule method.
+            #   result = client.update_audit_schedule request
+            #
+            #   # The returned object is of type Google::Cloud::AuditManager::V1::AuditSchedule.
+            #   p result
+            #
+            def update_audit_schedule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AuditManager::V1::UpdateAuditScheduleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_audit_schedule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AuditManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.audit_schedule&.name
+                header_params["audit_schedule.name"] = request.audit_schedule.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_audit_schedule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_audit_schedule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @audit_manager_stub.call_rpc :update_audit_schedule, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single audit schedule.
+            #
+            # @overload get_audit_schedule(request, options = nil)
+            #   Pass arguments to `get_audit_schedule` via a request object, either of type
+            #   {::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_audit_schedule(name: nil)
+            #   Pass arguments to `get_audit_schedule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the audit schedule to retrieve, in one of the following
+            #     formats:
+            #
+            #     * `projects/{project}/locations/{location}/auditSchedules/{audit_schedule}`
+            #     * `folders/{folder}/locations/{location}/auditSchedules/{audit_schedule}`
+            #     * `organizations/{organization}/locations/{location}/auditSchedules/{audit_schedule}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AuditManager::V1::AuditSchedule]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/audit_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AuditManager::V1::AuditManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AuditManager::V1::GetAuditScheduleRequest.new
+            #
+            #   # Call the get_audit_schedule method.
+            #   result = client.get_audit_schedule request
+            #
+            #   # The returned object is of type Google::Cloud::AuditManager::V1::AuditSchedule.
+            #   p result
+            #
+            def get_audit_schedule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AuditManager::V1::GetAuditScheduleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_audit_schedule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AuditManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_audit_schedule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_audit_schedule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @audit_manager_stub.call_rpc :get_audit_schedule, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists audit schedules in a given project and location.
+            #
+            # @overload list_audit_schedules(request, options = nil)
+            #   Pass arguments to `list_audit_schedules` via a request object, either of type
+            #   {::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_audit_schedules(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_audit_schedules` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent for the audit schedule, in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::AuditSchedule>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::AuditSchedule>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/audit_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AuditManager::V1::AuditManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest.new
+            #
+            #   # Call the list_audit_schedules method.
+            #   result = client.list_audit_schedules request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AuditManager::V1::AuditSchedule.
+            #     p item
+            #   end
+            #
+            def list_audit_schedules request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AuditManager::V1::ListAuditSchedulesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_audit_schedules.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AuditManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_audit_schedules.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_audit_schedules.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @audit_manager_stub.call_rpc :list_audit_schedules, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @audit_manager_stub, :list_audit_schedules, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Adds your project, folder, or organization to Audit
+            # Manager. This method creates the Audit Manager service agent in your
+            # workload and grants required permissions to the service agent.
+            # If you make this request on a workload that's already enrolled,
+            # then this method overrides the existing set of destinations.
             #
             # @overload enroll_resource(request, options = nil)
             #   Pass arguments to `enroll_resource` via a request object, either of type
@@ -261,25 +671,40 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload enroll_resource(scope: nil, destinations: nil)
+            # @overload enroll_resource(scope: nil, destinations: nil, validate_only: nil)
             #   Pass arguments to `enroll_resource` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. The resource to be enrolled to the audit manager. Scope format
-            #     should be resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
-            #     organizations/\\{organization}/locations/\\{location}
+            #     Required. Organization, folder, or project to enroll in Audit Manager, in
+            #     one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param destinations [::Array<::Google::Cloud::AuditManager::V1::EnrollResourceRequest::EligibleDestination, ::Hash>]
-            #     Required. List of destination among which customer can choose to upload
-            #     their reports during the audit process. While enrolling at a
-            #     organization/folder level, customer can choose Cloud storage bucket in any
-            #     project. If the audit is triggered at project level using the service agent
-            #     at organization/folder level, all the destination options associated with
-            #     respective organization/folder level service agent will be available to
-            #     auditing projects.
+            #     Required. Cloud Storage buckets that you can upload your audit reports to
+            #     during the audit process.
+            #
+            #     When you enroll an organization or folder, you can choose a Cloud Storage
+            #     bucket from any project in the organization or folder. If you run an audit
+            #     at the project level using the service agent at the organization or folder
+            #     level, all the buckets that are associated with the service agent are
+            #     available.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validates the request and does not enroll the
+            #     resource. This executes standard request validation (such as schema, IAM,
+            #     and destination checks) and skips the apply phase.
+            #
+            #     Use this field for the following purposes:
+            #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+            #       dry-run mutations (e.g., `terraform plan`) without creating real
+            #       resources or incurring costs.
+            #     * **User Interface Validation**: Enable real-time form and permission
+            #       validation in custom UIs before submitting requests.
+            #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+            #       safely without consuming resource quotas.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::Enrollment]
@@ -346,9 +771,14 @@ module Google
             end
 
             ##
-            # Generates a demo report highlighting different responsibilities
-            # (Google/Customer/ shared) required to be fulfilled for the customer's
-            # workload to be compliant with the given standard.
+            # Generates an audit scope report for the given standard.
+            #
+            # The report includes the following:
+            #
+            # * The technical attributes and constraints that Audit Manager uses to
+            #   verify your compliance with a framework.
+            # * A list of Google Cloud services and resources that are within the
+            #   scope of the framework.
             #
             # @overload generate_audit_scope_report(request, options = nil)
             #   Pass arguments to `generate_audit_scope_report` via a request object, either of type
@@ -360,24 +790,42 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_audit_scope_report(scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil)
+            # @overload generate_audit_scope_report(scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil)
             #   Pass arguments to `generate_audit_scope_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. Scope for which the AuditScopeReport is required. Must be of
-            #     format resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
+            #     Required. Project or folder that the audit scope report is generated for,
+            #     in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param compliance_standard [::String]
-            #     Required. Compliance Standard against which the Scope Report must be
-            #     generated. Eg: FEDRAMP_MODERATE
+            #     Optional. Deprecated. The standard (industry or regulatory requirements)
+            #     that the audit scope report is run against.
+            #
+            #     Use the `compliance_framework` field instead.
             #   @param report_format [::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest::AuditScopeReportFormat]
-            #     Required. The format in which the Scope report bytes should be returned.
+            #     Required. Format for the audit scope report.
             #   @param compliance_framework [::String]
-            #     Required. Compliance framework against which the Scope Report must be
-            #     generated.
+            #     Required. Framework (set of controls) that the audit scope report is
+            #     generated against. For example, `NIST_800_53`.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validates the request and does not generate the
+            #     audit scope report. This executes standard request validation (such as
+            #     schema, framework existence, scope, and IAM checks) and skips the apply
+            #     phase.
+            #
+            #     Use this field for the following purposes:
+            #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+            #       dry-run mutations (e.g., `terraform plan`) without creating real
+            #       resources or incurring costs.
+            #     * **User Interface Validation**: Enable real-time form and permission
+            #       validation in custom UIs before submitting requests.
+            #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+            #       safely without consuming resource quotas.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditScopeReport]
@@ -444,8 +892,9 @@ module Google
             end
 
             ##
-            # Register the Audit Report generation requests and returns the OperationId
-            # using which the customer can track the report generation progress.
+            # Registers audit report generation requests. This method returns the
+            # operation identifier that you can use to track the report generation
+            # progress.
             #
             # @overload generate_audit_report(request, options = nil)
             #   Pass arguments to `generate_audit_report` via a request object, either of type
@@ -457,27 +906,45 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil)
+            # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil)
             #   Pass arguments to `generate_audit_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param gcs_uri [::String]
-            #     Destination Cloud storage bucket where report and evidence must be
-            #     uploaded. The Cloud storage bucket provided here must be selected among
-            #     the buckets entered during the enrollment process.
+            #     URL for the Cloud Storage bucket where the report and evidence is
+            #     uploaded. You must select a bucket that was provided during the
+            #     enrollment process.
             #   @param scope [::String]
-            #     Required. Scope for which the AuditScopeReport is required. Must be of
-            #     format resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
+            #     Required. Organization, folder, or project that the audit applies to, in
+            #     one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param compliance_standard [::String]
-            #     Required. Compliance Standard against which the Scope Report must be
-            #     generated. Eg: FEDRAMP_MODERATE
+            #     Optional. Deprecated. Compliance standard for the audit report.
+            #
+            #     Use the `compliance_framework` field instead.
             #   @param report_format [::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest::AuditReportFormat]
-            #     Required. The format in which the audit report should be created.
+            #     Required. Format for the audit report.
             #   @param compliance_framework [::String]
-            #     Required. Compliance framework against which the Report must be generated.
+            #     Required. The framework that's used for the audit report. For example,
+            #     `NIST_800_53`.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validates the request and does not generate the
+            #     audit report. This executes standard request validation (such as schema,
+            #     framework existence, scope, and IAM checks) and skips the apply phase.
+            #
+            #     Use this field for the following purposes:
+            #     * **Infrastructure as Code (IaC)**: Allow tools like Terraform to run
+            #       dry-run mutations (e.g., `terraform plan`) without creating real
+            #       resources or incurring costs.
+            #     * **User Interface Validation**: Enable real-time form and permission
+            #       validation in custom UIs before submitting requests.
+            #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
+            #       safely without triggering expensive Long-Running Operations (LROs) or
+            #       consuming resource quotas.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -553,7 +1020,8 @@ module Google
             end
 
             ##
-            # Lists audit reports in the selected parent scope
+            # Lists the audit reports for the organization, folder, or project that you
+            # specify as the parent scope.
             #
             # @overload list_audit_reports(request, options = nil)
             #   Pass arguments to `list_audit_reports` via a request object, either of type
@@ -571,12 +1039,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent scope for which to list the reports.
+            #     Required. Parent organization, folder, or project to list reports for,
+            #     in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::AuditReport>]
@@ -649,7 +1125,7 @@ module Google
             end
 
             ##
-            # Get the overall audit report
+            # Gets the full metadata and findings for an audit report.
             #
             # @overload get_audit_report(request, options = nil)
             #   Pass arguments to `get_audit_report` via a request object, either of type
@@ -667,9 +1143,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Format
-            #     projects/\\{project}/locations/\\{location}/auditReports/\\{audit_report},
-            #     folders/\\{folder}/locations/\\{location}/auditReports/\\{audit_report}
+            #     Required. Name of the audit report, in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}/auditReports/{audit_report}`
+            #     * `folders/{folder}/locations/{location}/auditReports/{audit_report}`
+            #     * `organizations/{organization}/locations/{location}/auditReports/{audit_report}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditReport]
@@ -736,7 +1214,7 @@ module Google
             end
 
             ##
-            # Get a resource along with its enrollment status.
+            # Gets a resource and its enrollment status.
             #
             # @overload get_resource_enrollment_status(request, options = nil)
             #   Pass arguments to `get_resource_enrollment_status` via a request object, either of type
@@ -754,10 +1232,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Format
-            #     folders/\\{folder}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status},
-            #     projects/\\{project}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status},
-            #     organizations/\\{organization}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status}
+            #     Required. Name of the resource enrollment status, in one of the following
+            #     formats:
+            #
+            #     * `folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+            #     * `projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+            #     * `organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus]
@@ -824,7 +1304,8 @@ module Google
             end
 
             ##
-            # Fetches all resources under the parent along with their enrollment.
+            # Lists all the folders and projects in an organization or folder, along with
+            # their enrollments.
             #
             # @overload list_resource_enrollment_statuses(request, options = nil)
             #   Pass arguments to `list_resource_enrollment_statuses` via a request object, either of type
@@ -842,13 +1323,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent scope for which the list of resources with enrollments
-            #     are required.
+            #     Required. Parent organization or folder to list enrollment statuses for,
+            #     in one of the following formats:
+            #
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus>]
@@ -921,7 +1408,8 @@ module Google
             end
 
             ##
-            # Gets controls needed to be implemented to be compliant to a standard.
+            # Lists the controls that you must implement to become compliant to a
+            # regulatory standard.
             #
             # @overload list_controls(request, options = nil)
             #   Pass arguments to `list_controls` via a request object, either of type
@@ -939,14 +1427,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Format
-            #     projects/\\{project}/locations/\\{location}/standards/\\{standard},
-            #     folders/\\{folder}/locations/\\{location}/standards/\\{standard}
+            #     Required. Standard to list controls for, in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}/standards/{standard}`
+            #     * `folders/{folder}/locations/{location}/standards/{standard}`
+            #     * `organizations/{organization}/locations/{location}/standards/{standard}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::Control>]
@@ -1034,17 +1527,17 @@ module Google
             # @example
             #
             #   # Modify the global config, setting the timeout for
-            #   # enroll_resource to 20 seconds,
+            #   # create_audit_schedule to 20 seconds,
             #   # and all remaining timeouts to 10 seconds.
             #   ::Google::Cloud::AuditManager::V1::AuditManager::Client.configure do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.enroll_resource.timeout = 20.0
+            #     config.rpcs.create_audit_schedule.timeout = 20.0
             #   end
             #
             #   # Apply the above configuration only to a new client.
             #   client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.enroll_resource.timeout = 20.0
+            #     config.rpcs.create_audit_schedule.timeout = 20.0
             #   end
             #
             # @!attribute [rw] endpoint
@@ -1204,6 +1697,26 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `create_audit_schedule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_audit_schedule
+                ##
+                # RPC-specific configuration for `update_audit_schedule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_audit_schedule
+                ##
+                # RPC-specific configuration for `get_audit_schedule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_audit_schedule
+                ##
+                # RPC-specific configuration for `list_audit_schedules`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_audit_schedules
+                ##
                 # RPC-specific configuration for `enroll_resource`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1246,6 +1759,14 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  create_audit_schedule_config = parent_rpcs.create_audit_schedule if parent_rpcs.respond_to? :create_audit_schedule
+                  @create_audit_schedule = ::Gapic::Config::Method.new create_audit_schedule_config
+                  update_audit_schedule_config = parent_rpcs.update_audit_schedule if parent_rpcs.respond_to? :update_audit_schedule
+                  @update_audit_schedule = ::Gapic::Config::Method.new update_audit_schedule_config
+                  get_audit_schedule_config = parent_rpcs.get_audit_schedule if parent_rpcs.respond_to? :get_audit_schedule
+                  @get_audit_schedule = ::Gapic::Config::Method.new get_audit_schedule_config
+                  list_audit_schedules_config = parent_rpcs.list_audit_schedules if parent_rpcs.respond_to? :list_audit_schedules
+                  @list_audit_schedules = ::Gapic::Config::Method.new list_audit_schedules_config
                   enroll_resource_config = parent_rpcs.enroll_resource if parent_rpcs.respond_to? :enroll_resource
                   @enroll_resource = ::Gapic::Config::Method.new enroll_resource_config
                   generate_audit_scope_report_config = parent_rpcs.generate_audit_scope_report if parent_rpcs.respond_to? :generate_audit_scope_report

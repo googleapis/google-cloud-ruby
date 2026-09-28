@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,23 @@ module Google
         module CustomTargetingValueService
           # Path helper methods for the CustomTargetingValueService API.
           module Paths
+            ##
+            # Create a fully-qualified CustomTargetingKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customTargetingKeys/{custom_targeting_key}`
+            #
+            # @param network_code [String]
+            # @param custom_targeting_key [String]
+            #
+            # @return [::String]
+            def custom_targeting_key_path network_code:, custom_targeting_key:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customTargetingKeys/#{custom_targeting_key}"
+            end
+
             ##
             # Create a fully-qualified CustomTargetingValue resource string.
             #

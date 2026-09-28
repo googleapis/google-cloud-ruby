@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ require "google/cloud/dataplex/v1/dataplex_service"
 require "google/cloud/dataplex/v1/business_glossary_service"
 require "google/cloud/dataplex/v1/catalog_service"
 require "google/cloud/dataplex/v1/cmek_service"
-require "google/cloud/dataplex/v1/content_service"
 require "google/cloud/dataplex/v1/data_product_service"
 require "google/cloud/dataplex/v1/data_taxonomy_service"
 require "google/cloud/dataplex/v1/data_scan_service"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -196,7 +196,7 @@ module Google
             # https://en.wikipedia.org/wiki/International_Phonetic_Alphabet
             PHONETIC_ENCODING_IPA = 1
 
-            # X-SAMPA, such as apple -> "{p@l".
+            # X-SAMPA, such as apple -> "\\{p@l".
             # https://en.wikipedia.org/wiki/X-SAMPA
             PHONETIC_ENCODING_X_SAMPA = 2
 

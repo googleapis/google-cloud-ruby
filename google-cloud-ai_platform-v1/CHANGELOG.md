@@ -1,5 +1,41 @@
 # Changelog
 
+### 1.49.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 1.48.0 (2026-08-11)
+
+#### Features
+
+* add Tool.ExaAiSearch to Vertex AI v1 ([#36201](https://github.com/googleapis/google-cloud-ruby/issues/36201)) 
+#### Bug Fixes
+
+* onboard google-cloud-ai_platform and google-cloud-ai_platform-v1 ([#36204](https://github.com/googleapis/google-cloud-ruby/issues/36204)) 
+
+### 1.47.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35044](https://github.com/googleapis/google-cloud-ruby/issues/35044)) 
+
+### 1.47.0 (2026-07-21)
+
+#### Features
+
+* add Route to GroundingChunk.Maps in Vertex AI v1 ([#34981](https://github.com/googleapis/google-cloud-ruby/issues/34981)) 
+#### Documentation
+
+* expand GroundingChunk.Maps documentation to describe route support 
+
+### 1.46.0 (2026-07-13)
+
+#### Features
+
+* expose retrieval_queries in GroundingMetadata for the v1 API ([#34743](https://github.com/googleapis/google-cloud-ruby/issues/34743)) 
+
 ### 1.45.0 (2026-07-09)
 
 #### Features

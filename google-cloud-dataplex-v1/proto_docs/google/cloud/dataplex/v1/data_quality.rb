@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -798,7 +798,7 @@ module Google
           # aliases](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#explicit_alias_syntax).
           #
           # Example: `SELECT MIN(col1) AS min_col1, MAX(col1) AS max_col1 FROM
-          # $\\{data()}`
+          # ${data()}`
           # @!attribute [rw] description
           #   @return [::String]
           #     Optional. Specifies the description of the debug query.

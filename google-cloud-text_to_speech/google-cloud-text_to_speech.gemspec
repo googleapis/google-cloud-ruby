@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech."
-  gem.summary       = "API Client library for the Cloud Text-to-Speech API"
+  gem.description   = "Synthesizes natural-sounding speech by applying powerful neural network models."
+  gem.summary       = "Synthesizes natural-sounding speech by applying powerful neural network models."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

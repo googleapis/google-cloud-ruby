@@ -72,6 +72,10 @@ module Google
 
                   default_config.rpcs.calendar_mode.timeout = 600.0
 
+                  default_config.rpcs.capacity.timeout = 600.0
+
+                  default_config.rpcs.capacity_history.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -262,6 +266,172 @@ module Google
               end
 
               ##
+              # Advice on making real-time decisions (such as choosing zone or
+              # machine types) during deployment to maximize your chances of obtaining
+              # capacity.
+              #
+              # @overload capacity(request, options = nil)
+              #   Pass arguments to `capacity` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CapacityAdviceRpcRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::CapacityAdviceRpcRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload capacity(capacity_advice_request_resource: nil, project: nil, region: nil)
+              #   Pass arguments to `capacity` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param capacity_advice_request_resource [::Google::Cloud::Compute::V1::CapacityAdviceRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::CapacityAdviceResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::CapacityAdviceResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Advice::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::CapacityAdviceRpcRequest.new
+              #
+              #   # Call the capacity method.
+              #   result = client.capacity request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::CapacityAdviceResponse.
+              #   p result
+              #
+              def capacity request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CapacityAdviceRpcRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.capacity.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.capacity.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.capacity.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @advice_stub.capacity request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the capacity history.
+              #
+              # @overload capacity_history(request, options = nil)
+              #   Pass arguments to `capacity_history` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CapacityHistoryAdviceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::CapacityHistoryAdviceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload capacity_history(capacity_history_request_resource: nil, project: nil, region: nil)
+              #   Pass arguments to `capacity_history` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param capacity_history_request_resource [::Google::Cloud::Compute::V1::CapacityHistoryRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::CapacityHistoryResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::CapacityHistoryResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Advice::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::CapacityHistoryAdviceRequest.new
+              #
+              #   # Call the capacity_history method.
+              #   result = client.capacity_history request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::CapacityHistoryResponse.
+              #   p result
+              #
+              def capacity_history request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CapacityHistoryAdviceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.capacity_history.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.capacity_history.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.capacity_history.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @advice_stub.capacity_history request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Advice REST API.
               #
               # This class represents the configuration for Advice REST,
@@ -414,11 +584,25 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :calendar_mode
+                  ##
+                  # RPC-specific configuration for `capacity`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :capacity
+                  ##
+                  # RPC-specific configuration for `capacity_history`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :capacity_history
 
                   # @private
                   def initialize parent_rpcs = nil
                     calendar_mode_config = parent_rpcs.calendar_mode if parent_rpcs.respond_to? :calendar_mode
                     @calendar_mode = ::Gapic::Config::Method.new calendar_mode_config
+                    capacity_config = parent_rpcs.capacity if parent_rpcs.respond_to? :capacity
+                    @capacity = ::Gapic::Config::Method.new capacity_config
+                    capacity_history_config = parent_rpcs.capacity_history if parent_rpcs.respond_to? :capacity_history
+                    @capacity_history = ::Gapic::Config::Method.new capacity_history_config
 
                     yield self if block_given?
                   end

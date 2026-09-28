@@ -1,5 +1,5 @@
 --no-private
---title="Firestore in Datastore mode Admin API"
+--title="Cloud Datastore API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/gemini_data_analytics/v1beta/rest"
-      #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new
+      #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Rest::Client.new
       #
       module V1beta
         ##

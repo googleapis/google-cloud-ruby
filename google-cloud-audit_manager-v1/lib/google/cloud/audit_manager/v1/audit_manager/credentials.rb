@@ -26,6 +26,7 @@ module Google
           # Credentials for the AuditManager API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/cloud-auditmanager",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [

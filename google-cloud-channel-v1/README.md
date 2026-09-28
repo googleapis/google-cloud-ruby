@@ -2,7 +2,6 @@
 
 The Cloud Channel API enables Google Cloud partners to have a single unified resale platform and APIs across all of Google Cloud including GCP, Workspace, Maps and Chrome.
 
-You can use Channel Services to manage your relationships with your partners and your customers. Channel Services include a console and APIs to view and provision links between distributors and resellers, customers and entitlements.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.run_report_job request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/channel)
-for general usage information.
 
 ## Debug Logging
 

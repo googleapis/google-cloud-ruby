@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Builds and manages container-based applications, powered by the open source Kubernetes technology."
-  gem.summary       = "API Client library for the Kubernetes Engine API"
+  gem.summary       = "Builds and manages container-based applications, powered by the open source Kubernetes technology."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

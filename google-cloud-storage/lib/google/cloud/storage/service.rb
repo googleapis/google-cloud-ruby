@@ -64,7 +64,6 @@ module Google
           @service.request_options.header ||= {}
           @service.request_options.header["x-goog-api-client"] =
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
-          @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.request_options.quota_project = quota_project if quota_project
           @service.request_options.max_elapsed_time = max_elapsed_time if max_elapsed_time
           @service.request_options.base_interval = base_interval if base_interval

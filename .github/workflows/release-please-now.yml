@@ -1,7 +1,7 @@
 name: Release-Please Now
 on:
   schedule:
-    - cron: '21 10 * * *'
+    - cron: '21 10 * * 1-4'
   workflow_dispatch:
     inputs:
       args:

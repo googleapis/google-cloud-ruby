@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,11 +85,9 @@ module Google
         #     Stores small amounts of arbitrary data.
         # @!attribute [rw] access_restriction
         #   @return [::Google::Cloud::BackupDR::V1::BackupVault::AccessRestriction]
-        #     Optional. Note: This field is added for future use case and will not be
-        #     supported in the current release.
-        #
-        #     Access restriction for the backup vault.
-        #     Default value is WITHIN_ORGANIZATION if not provided during creation.
+        #     Optional. Restricts access to certain sources and destinations for data
+        #     being sent into, or restored from, the backup vault.
+        #     Defaults to WITHIN_ORGANIZATION if not provided during creation.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::BackupDR::V1::BackupVault::EncryptionConfig]
         #     Optional. The encryption config of the backup vault.

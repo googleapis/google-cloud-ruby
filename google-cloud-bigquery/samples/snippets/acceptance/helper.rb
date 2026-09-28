@@ -12,6 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
+  end
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "securerandom"

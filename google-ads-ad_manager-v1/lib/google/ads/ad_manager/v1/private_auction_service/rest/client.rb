@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `PrivateAuction` object.
+              # Retrieves a `PrivateAuction` object.
               #
               # @overload get_private_auction(request, options = nil)
               #   Pass arguments to `get_private_auction` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `PrivateAuction` objects.
+              # Lists `PrivateAuction` objects.
               #
               # @overload list_private_auctions(request, options = nil)
               #   Pass arguments to `list_private_auctions` via a request object, either of type
@@ -364,7 +364,7 @@ module Google
               end
 
               ##
-              # API to create a `PrivateAuction` object.
+              # Creates a `PrivateAuction` object.
               #
               # @overload create_private_auction(request, options = nil)
               #   Pass arguments to `create_private_auction` via a request object, either of type
@@ -445,7 +445,7 @@ module Google
               end
 
               ##
-              # API to update a `PrivateAuction` object.
+              # Updates a `PrivateAuction` object.
               #
               # @overload update_private_auction(request, options = nil)
               #   Pass arguments to `update_private_auction` via a request object, either of type

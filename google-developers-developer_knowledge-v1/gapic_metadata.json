@@ -24,6 +24,11 @@
               "methods": [
                 "batch_get_documents"
               ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answer_query"
+              ]
             }
           }
         }

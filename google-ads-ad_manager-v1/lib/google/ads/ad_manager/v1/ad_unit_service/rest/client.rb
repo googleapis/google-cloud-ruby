@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an AdUnit object.
+              # Retrieves an `AdUnit` object.
               #
               # @overload get_ad_unit(request, options = nil)
               #   Pass arguments to `get_ad_unit` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of AdUnit objects.
+              # Lists `AdUnit` objects.
               #
               # @overload list_ad_units(request, options = nil)
               #   Pass arguments to `list_ad_units` via a request object, either of type
@@ -292,21 +292,20 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>adUnitCode</code></li>
-              #       <li><code>adUnitSizes.canonicalName</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>effectiveAdsenseEnabled</code></li>
-              #       <li><code>explicitlyTargeted</code></li>
-              #       <li><code>externalSetTopBoxChannelId</code></li>
-              #       <li><code>hasChildren</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>parentAdUnit</code></li>
-              #       <li><code>status</code></li>
-              #       <li><code>teams</code></li>
-              #       <li><code>updateTime</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `adUnitCode`
+              #     * `adUnitSizes.canonicalName`
+              #     * `displayName`
+              #     * `effectiveAdsenseEnabled`
+              #     * `explicitlyTargeted`
+              #     * `externalSetTopBoxChannelId`
+              #     * `hasChildren`
+              #     * `name`
+              #     * `parentAdUnit`
+              #     * `status`
+              #     * `teams`
+              #     * `updateTime`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -378,7 +377,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of AdUnitSize objects.
+              # Lists `AdUnitSize` objects.
               #
               # @overload list_ad_unit_sizes(request, options = nil)
               #   Pass arguments to `list_ad_unit_sizes` via a request object, either of type
@@ -484,7 +483,7 @@ module Google
               end
 
               ##
-              # API to create an `AdUnit` object.
+              # Creates an `AdUnit` object.
               #
               # @overload create_ad_unit(request, options = nil)
               #   Pass arguments to `create_ad_unit` via a request object, either of type
@@ -565,7 +564,7 @@ module Google
               end
 
               ##
-              # API to update an `AdUnit` object.
+              # Updates an `AdUnit` object.
               #
               # @overload update_ad_unit(request, options = nil)
               #   Pass arguments to `update_ad_unit` via a request object, either of type
@@ -648,7 +647,7 @@ module Google
               end
 
               ##
-              # API to batch create `AdUnit` objects.
+              # Creates `AdUnit` objects.
               #
               # @overload batch_create_ad_units(request, options = nil)
               #   Pass arguments to `batch_create_ad_units` via a request object, either of type
@@ -732,7 +731,7 @@ module Google
               end
 
               ##
-              # API to batch update `AdUnit` objects.
+              # Batch updates `AdUnit` objects.
               #
               # @overload batch_update_ad_units(request, options = nil)
               #   Pass arguments to `batch_update_ad_units` via a request object, either of type
@@ -816,7 +815,7 @@ module Google
               end
 
               ##
-              # API to batch activate `AdUnit` objects.
+              # Batch activates `AdUnit` objects.
               #
               # @overload batch_activate_ad_units(request, options = nil)
               #   Pass arguments to `batch_activate_ad_units` via a request object, either of type

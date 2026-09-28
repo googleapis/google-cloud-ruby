@@ -2,7 +2,6 @@
 
 Manages continuous profiling information.
 
-Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code.
 
 https://github.com/googleapis/google-cloud-ruby
 

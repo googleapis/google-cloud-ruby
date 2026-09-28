@@ -60,8 +60,13 @@ module Google
         #     found.
         # @!attribute [rw] device_info
         #   @return [::Google::Ads::DataManager::V1::DeviceInfo]
-        #     Optional. Information gathered about the device being used when the ad
+        #     Required. Information gathered about the device being used when the ad
         #     event happened.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     Optional. IP address used for measurement. This must be same value as
+        #     {::Google::Ads::DataManager::V1::DeviceInfo#ip_address DeviceInfo.ip_address}.
+        #     Keep it blank if you do not want to share IP for measurement.
         # @!attribute [rw] mobile_device_id
         #   @return [::String]
         #     Optional. The device ID of the device that the ad was served to.
@@ -115,7 +120,7 @@ module Google
         #     Optional. The width of the ad in pixels.
         # @!attribute [rw] region_code
         #   @return [::String]
-        #     Required. The ISO 3166-2 country plus subdivision.
+        #     Optional. The ISO 3166-2 country plus subdivision.
         # @!attribute [rw] source
         #   @return [::String]
         #     Required. The platform source of the ad, akin to the Google Analytics

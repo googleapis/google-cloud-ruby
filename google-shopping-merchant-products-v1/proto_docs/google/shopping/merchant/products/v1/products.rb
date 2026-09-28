@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -121,6 +121,14 @@ module Google
           # @!attribute [r] automated_discounts
           #   @return [::Google::Shopping::Merchant::Products::V1::AutomatedDiscounts]
           #     Output only. The automated discounts information for the product.
+          # @!attribute [r] archived
+          #   @return [::Boolean]
+          #     Output only. Determines whether the product is
+          #     [archived](https://support.google.com/merchants/answer/11909930).
+          #
+          #     To archive or restore your product, visit Merchant Center products page.
+          #     Learn also more about [offer
+          #     visibility](https://support.google.com/merchants/answer/12488713).
           class Product
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -2,7 +2,6 @@
 
 Service Directory is a platform for discovering, publishing, and connecting services.
 
-Service Directory is the single place to register, browse, and resolve application services.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.resolve_service request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-service_directory-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/service-directory)
-for general usage information.
 
 ## Debug Logging
 

@@ -330,4 +330,53 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
     _(flow_controller.outstanding_messages).must_equal 0
   end
+
+  it "stops with nack_immediately and releases unprocessed messages" do
+    publisher = pubsub.publisher topic.name
+    subscriber = pubsub.subscriber sub.name
+
+    publisher.publish "nack on shutdown"
+
+    message_received = Concurrent::Event.new
+    listener = subscriber.listen shutdown_behavior: :nack_immediately do |_msg|
+      message_received.set
+    end
+    listener.start
+    assert message_received.wait(10), "Message was not received"
+
+    listener.stop!
+
+    # Verify that the message was nacked on shutdown and is available for re-pulling
+    pulled_msgs = subscriber.pull immediate: false
+    _(pulled_msgs).wont_be :empty?
+    _(pulled_msgs.first.data).must_equal "nack on shutdown"
+    pulled_msgs.first.ack!
+
+    # Remove the subscription
+    $subscription_admin.delete_subscription subscription: pubsub.subscription_path(sub.name)
+  end
+
+  it "stops with wait_for_processing and completes processing messages" do
+    publisher = pubsub.publisher topic.name
+    subscriber = pubsub.subscriber sub.name
+
+    publisher.publish "wait on shutdown"
+
+    message_processed = Concurrent::Event.new
+    listener = subscriber.listen shutdown_behavior: :wait_for_processing do |msg|
+      msg.ack!
+      message_processed.set
+    end
+    listener.start
+    assert message_processed.wait(10), "Message was not processed"
+
+    listener.stop!
+
+    # Verify that the message was acknowledged and nothing remains
+    msgs = subscriber.pull immediate: false
+    _(msgs).must_be :empty?
+
+    # Remove the subscription
+    $subscription_admin.delete_subscription subscription: pubsub.subscription_path(sub.name)
+  end
 end

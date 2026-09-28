@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -259,6 +259,12 @@ module Google
           #
           #     Setting the target audience requires [user
           #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+          # @!attribute [rw] access_permission_settings
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSettings]
+          #     Optional. Access permission settings for the space.
+          #
+          #     To set the target audience when creating a space, specify the
+          #     `accessSettings.audience` field in your request.
           class AccessSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,6 +291,47 @@ module Google
             end
           end
 
+          # Access permission settings for a space.
+          # @!attribute [rw] discover_space_setting
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSetting]
+          #     Optional. Access permission setting for discovering the space.
+          # @!attribute [rw] join_space_setting
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSetting]
+          #     Optional. Access permission setting for joining the space.
+          # @!attribute [rw] view_space_membership_setting
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSetting]
+          #     Optional. Access permission setting for viewing space membership.
+          #     Must be specified together with
+          #     `PermissionSettings.view_space_membership` in the update mask and request
+          #     body when updating who can view space membership. When granting view
+          #     access to a target audience, you must also grant
+          #     `PermissionSettings.view_space_membership` to all members in the same
+          #     request. To remove an existing target audience (for example, to restrict
+          #     view access to space managers or assistant managers only), specify an
+          #     empty `AccessPermissionSetting` (with no `principals`).
+          class AccessPermissionSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An access permission setting.
+          # @!attribute [rw] principals
+          #   @return [::Array<::Google::Apps::Chat::V1::Space::Principal>]
+          #     Optional. Unordered list. Allowed principals for this permission.
+          class AccessPermissionSetting
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A principal representing an entity granted access.
+          # @!attribute [rw] audience
+          #   @return [::Google::Apps::Chat::V1::Audience]
+          #     An audience.
+          class Principal
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # [Permission settings](https://support.google.com/chat/answer/13340792)
           # that you can specify when updating an existing named space.
           #
@@ -302,7 +349,7 @@ module Google
           #     Optional. Setting for toggling space history on and off.
           # @!attribute [rw] use_at_mention_all
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Optional. Setting for using @all in a space.
+          #     Optional. Setting for using `@all` in a space.
           # @!attribute [rw] manage_apps
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
           #     Optional. Setting for managing apps in a space.
@@ -315,6 +362,19 @@ module Google
           # @!attribute [rw] reply_messages
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
           #     Optional. Setting for replying to messages in a space.
+          # @!attribute [rw] view_space_membership
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Optional. Setting for viewing space membership.
+          #     Must be specified together with
+          #     `AccessPermissionSettings.view_space_membership_setting` in the update
+          #     mask and request body when updating who can view space membership.
+          #     When restricting view access to specific roles (for example, space
+          #     managers or assistant managers only), specify the desired role
+          #     permissions here and provide an empty
+          #     `AccessPermissionSettings.view_space_membership_setting` in the same
+          #     request. If a target audience is configured in
+          #     `AccessPermissionSettings.view_space_membership_setting`, this setting
+          #     must be granted to all members.
           class PermissionSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -377,17 +437,20 @@ module Google
             # Reserved.
             SPACE_THREADING_STATE_UNSPECIFIED = 0
 
-            # Named spaces that support message threads. When users respond to a
-            # message, they can reply in-thread, which keeps their response in the
-            # context of the original message.
+            # Spaces that support message threads. When users respond to a message,
+            # they can reply in-thread, which keeps their response in the context of
+            # the original message.
             THREADED_MESSAGES = 2
 
             # Named spaces where the conversation is organized by topic. Topics and
             # their replies are grouped together.
             GROUPED_MESSAGES = 3
 
-            # Direct messages (DMs) between two people and group conversations between
-            # 3 or more people.
+            # Spaces that don't support message threading. This space threading state
+            # is only used for special cases including:
+            #
+            # * Continuous meeting chat where threading is intentionally turned off.
+            # * Legacy group conversations that were created prior to 2022.
             UNTHREADED_MESSAGES = 4
           end
 
@@ -425,12 +488,24 @@ module Google
         #     field will be ignored.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique identifier for this request.
-        #     A random UUID is recommended.
-        #     Specifying an existing request ID returns the space created with that ID
-        #     instead of creating a new space.
-        #     Specifying an existing request ID from the same Chat app with a different
-        #     authenticated user returns an error.
+        #     Optional. A unique ID for this request. A random UUID is recommended.
+        #     Specifying a request ID makes the request idempotent, which ensures that
+        #     multiple identical requests with the same request ID result in only a
+        #     single space being created. Subsequent requests with the same request ID
+        #     return the existing space and do not update the space, even if the
+        #     requested details differ from the current state.
+        #
+        #     To use this field effectively:
+        #
+        #     - Ensure that subsequent requests are identical and use the same
+        #     authentication credentials as the original request.
+        #     - If a space was already created with the provided request ID, the request
+        #     returns that space. Note that the returned space might not be fully
+        #     populated; the API echoes the space in your request with the
+        #     system-assigned resource name populated. To retrieve the latest metadata
+        #     for the space, call `GetSpace`.
+        #     - Reusing an existing request ID with a different authenticated user
+        #     results in an error.
         class CreateSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -659,6 +734,25 @@ module Google
         #     users](https://developers.google.com/workspace/chat/space-target-audience).
         #     `access_settings.audience` is not supported with `useAdminAccess`.
         #
+        #     `access_settings.access_permission_settings`: Updates the [access
+        #     permission
+        #     settings](https://support.google.com/chat/answer/11971020) of who can
+        #     discover and join the space where `spaceType` field is `SPACE`. Principals
+        #     allowed to join the space must also be allowed to discover it. To update
+        #     access permission settings for a space, the authenticating user must be a
+        #     space manager or assistant manager and omit all other field masks in the
+        #     request. You can't update this field if the space is in [import
+        #     mode](https://developers.google.com/workspace/chat/import-data-overview).
+        #     To learn more, see [Make a space discoverable to specific
+        #     users](https://developers.google.com/workspace/chat/space-target-audience).
+        #     `access_settings.access_permission_settings` is not supported with
+        #     `useAdminAccess`.
+        #     The supported field masks include:
+        #
+        #     - `access_settings.access_permission_settings.discoverSpaceSetting`
+        #     - `access_settings.access_permission_settings.joinSpaceSetting`
+        #     - `access_settings.access_permission_settings.viewSpaceMembershipSetting`
+        #
         #     `permission_settings`: Supports changing the
         #     [permission settings](https://support.google.com/chat/answer/13340792)
         #     of a space.
@@ -674,6 +768,7 @@ module Google
         #     - `permission_settings.manageApps`
         #     - `permission_settings.manageWebhooks`
         #     - `permission_settings.replyMessages`
+        #     - `permission_settings.viewSpaceMembership`
         # @!attribute [rw] use_admin_access
         #   @return [::Boolean]
         #     Optional. When `true`, the method runs using the user's Google Workspace
@@ -706,9 +801,6 @@ module Google
         #     Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
         #     [OAuth 2.0
         #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-        #
-        #     This method currently only supports admin access, thus only `true` is
-        #     accepted for this field.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of spaces to return. The service may return fewer than
@@ -716,8 +808,9 @@ module Google
         #
         #     If unspecified, at most 100 spaces are returned.
         #
-        #     The maximum value is 1000. If you use a value more than 1000, it's
-        #     automatically changed to 1000.
+        #     The maximum value is 1000 when `useAdminAccess` is set to `true`.
+        #     Otherwise, the maximum value is 100. If you use a value more than the
+        #     maximum value, it's automatically changed to the maximum value.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A token, received from the previous search spaces call. Provide this
@@ -730,7 +823,8 @@ module Google
         #   @return [::String]
         #     Required. A search query.
         #
-        #     You can search by using the following parameters:
+        #     You can search by using the following parameters when `useAdminAccess`
+        #     is set to `true`:
         #
         #     - `create_time`
         #     - `customer`
@@ -740,18 +834,27 @@ module Google
         #     - `space_history_state`
         #     - `space_type`
         #
+        #     When `useAdminAccess` is set to `false`:
+        #
+        #     - `display_name`
+        #     - `external_user_allowed`
+        #     - `space_type`
+        #
         #     `create_time` and `last_active_time` accept a timestamp in
         #     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
         #     comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
         #
-        #     `customer` is required and is used to indicate which customer
-        #     to fetch spaces from. `customers/my_customer` is the only supported value.
+        #     `customer` is required when `useAdminAccess` is set to `true`, and is
+        #     used to indicate which customer to fetch spaces from.
+        #     `customers/my_customer` is the only supported value.
         #
         #     `display_name` only accepts the `HAS` (`:`) operator. The text to
         #     match is first tokenized into tokens and each token is prefix-matched
         #     case-insensitively and independently as a substring anywhere in the space's
         #     `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-        #     evening was fun`, but not `notFun event` or `even`.
+        #     evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+        #     is set to `false`, `display_name` is required to retrieve meaningful
+        #     results. Otherwise, the default behavior is to return an empty response.
         #
         #     `external_user_allowed` accepts either `true` or `false`.
         #
@@ -774,7 +877,8 @@ module Google
         #     < "2022-01-01T00:00:00+00:00" AND last_active_time >
         #     "2023-01-01T00:00:00+00:00"`.
         #
-        #     The following example queries are valid:
+        #     The following example queries are valid when `useAdminAccess` is set to
+        #     `true`:
         #
         #     ```
         #     customer = "customers/my_customer" AND space_type = "SPACE"
@@ -796,6 +900,26 @@ module Google
         #     "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
         #     (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
         #     ```
+        #
+        #     The following example queries are valid when `useAdminAccess` is set to
+        #     `false`:
+        #
+        #     ```
+        #     display_name:"Hello World" AND space_type = "SPACE"
+        #
+        #     (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+        #
+        #     (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+        #     empty response.
+        #
+        #     (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+        #     "SPACE")
+        #     ```
+        #
+        #     The maximum query length is 1,000 characters.
+        #
+        #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+        #     error.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. How the list of spaces is ordered.
@@ -808,13 +932,17 @@ module Google
         #     any topic of this space.
         #     - `create_time` — Denotes the time of the space creation.
         #
+        #     When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+        #     supported for ordering. Only `DESC` is supported for these fields in
+        #     non-admin searches.
+        #
         #     Valid ordering operation values are:
         #
         #     - `ASC` for ascending. Default value.
         #
         #     - `DESC` for descending.
         #
-        #     The supported syntax are:
+        #     The supported syntax are when `useAdminAccess` is set to `true`:
         #
         #     - `membership_count.joined_direct_human_user_count DESC`
         #     - `membership_count.joined_direct_human_user_count ASC`
@@ -822,6 +950,12 @@ module Google
         #     - `last_active_time ASC`
         #     - `create_time DESC`
         #     - `create_time ASC`
+        #
+        #     When `useAdminAccess` is set to `false`:
+        #
+        #     - `create_time DESC`
+        #     - `relevance DESC`
+        #        [Developer Preview](https://developers.google.com/workspace/preview).
         class SearchSpacesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -829,19 +963,39 @@ module Google
 
         # Response with a list of spaces corresponding to the search spaces request.
         # @!attribute [rw] spaces
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Apps::Chat::V1::Space>]
-        #     A page of the requested spaces.
+        #     Deprecated: Please use the new `results` field instead.
+        #     A page of the requested spaces. This field will be populated only when
+        #     `useAdminAccess` is set to `true` and deprecated in favor of the new
+        #     `results` field.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token that can be used to retrieve the next page. If this field is empty,
         #     there are no subsequent pages.
+        #
+        #     Only populated when `useAdminAccess` is set to `true`.
         # @!attribute [rw] total_size
         #   @return [::Integer]
         #     The total number of spaces that match the query, across all pages. If the
         #     result is over 10,000 spaces, this value is an estimate.
+        #
+        #     Only populated when `useAdminAccess` is set to `true`.
+        # @!attribute [r] results
+        #   @return [::Array<::Google::Apps::Chat::V1::SearchSpacesResponse::SearchSpaceResult>]
+        #     Output only. The list of search results that matched the query.
         class SearchSpacesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single result item from a space search.
+          # @!attribute [r] space
+          #   @return [::Google::Apps::Chat::V1::Space]
+          #     Output only. The matched space.
+          class SearchSpaceResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request for deleting a space.

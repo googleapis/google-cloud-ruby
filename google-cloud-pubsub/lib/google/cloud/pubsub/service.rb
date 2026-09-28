@@ -43,7 +43,7 @@ module Google
 
         ##
         # @private The InternalLogger object.
-        attr_reader :logger
+        attr_reader :internal_logger
 
         ##
         # Creates a new Service instance.
@@ -55,6 +55,7 @@ module Google
           @client_id = SecureRandom.uuid.freeze
           @universe_domain = universe_domain || ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] || "googleapis.com"
           @logger = logger
+          @internal_logger = InternalLogger.new logger
         end
 
         def subscription_admin
@@ -67,6 +68,7 @@ module Google
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.logger = @logger if @logger
           end
         end
         attr_accessor :mocked_subscription_admin
@@ -81,6 +83,7 @@ module Google
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.logger = @logger if @logger
           end
         end
         attr_accessor :mocked_topic_admin
@@ -94,6 +97,7 @@ module Google
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::PubSub::VERSION
               config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+              config.logger = @logger if @logger
             end
             iam
           end
@@ -110,6 +114,7 @@ module Google
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.logger = @logger if @logger
           end
         end
         attr_accessor :mocked_schemas
@@ -147,7 +152,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          logger.log_ack_nack ack_ids, "ack"
+          internal_logger.log_ack_nack ack_ids, "ack"
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -156,7 +161,7 @@ module Google
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
           if deadline.zero?
-            logger.log_ack_nack Array(ids), "nack"
+            internal_logger.log_ack_nack Array(ids), "nack"
           end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
@@ -203,7 +208,6 @@ module Google
             rpc.timeout = timeout if rpc.respond_to? :timeout=
           end
         end
-
       end
     end
     Pubsub = PubSub unless const_defined? :Pubsub

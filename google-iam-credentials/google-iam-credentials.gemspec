@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens."
-  gem.summary       = "API Client library for the IAM Service Account Credentials API"
+  gem.description   = "Creates short-lived, limited-privilege credentials for IAM service accounts."
+  gem.summary       = "Creates short-lived, limited-privilege credentials for IAM service accounts."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

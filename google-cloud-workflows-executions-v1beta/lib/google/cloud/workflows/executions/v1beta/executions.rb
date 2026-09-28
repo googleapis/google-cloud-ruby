@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/workflows/executions/v1beta/version"
 require "google/cloud/workflows/executions/v1beta/executions/credentials"
 require "google/cloud/workflows/executions/v1beta/executions/paths"
 require "google/cloud/workflows/executions/v1beta/executions/client"
+require "google/cloud/workflows/executions/v1beta/executions/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/workflows/executions/v1beta/executions"
           #     client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/workflows/executions/v1beta/executions/rest"
+          #     client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Rest::Client.new
           #
           module Executions
           end

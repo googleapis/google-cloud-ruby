@@ -1,5 +1,23 @@
 # Changelog
 
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35048](https://github.com/googleapis/google-cloud-ruby/issues/35048)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.3.0 (2026-07-10)
+
+#### Features
+
+* update public libraries for CES v1 ([#34719](https://github.com/googleapis/google-cloud-ruby/issues/34719)) 
+
 ### 0.2.1 (2026-07-01)
 
 #### Bug Fixes

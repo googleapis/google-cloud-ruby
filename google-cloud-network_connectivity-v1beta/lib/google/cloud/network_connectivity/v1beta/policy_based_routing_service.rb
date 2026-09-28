@@ -26,6 +26,7 @@ require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/c
 require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/paths"
 require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/operations"
 require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/client"
+require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/network_connectivity/v1beta/policy_based_routing_service"
         #     client = ::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_connectivity/v1beta/policy_based_routing_service/rest"
+        #     client = ::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Rest::Client.new
         #
         module PolicyBasedRoutingService
         end

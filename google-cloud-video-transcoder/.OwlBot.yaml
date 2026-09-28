@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/video/transcoder/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-video-transcoder/$1

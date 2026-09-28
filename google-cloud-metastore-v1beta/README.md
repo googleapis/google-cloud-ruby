@@ -1,13 +1,12 @@
-# Ruby Client for the Dataproc Metastore V1beta API
+# Ruby Client for the Dataproc Metastore V1BETA API
 
 The Dataproc Metastore API is used to manage the lifecycle and configuration of metastore services.
 
-Dataproc Metastore is a fully managed, highly available within a region, autohealing serverless Apache Hive metastore (HMS) on Google Cloud for data analytics products. It supports HMS and serves as a critical component for managing the metadata of relational entities and provides interoperability between data processing applications in the open source data ecosystem.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Dataproc Metastore V1beta API. Most users should consider using
+specific version of the Dataproc Metastore V1BETA API. Most users should consider using
 the main client gem,
 [google-cloud-metastore](https://rubygems.org/gems/google-cloud-metastore).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_services request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1beta/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/dataproc-metastore/)
-for general usage information.
 
 ## Debug Logging
 

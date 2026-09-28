@@ -1,8 +1,7 @@
 # Ruby Client for the Dataflow API
 
-API Client library for the Dataflow API
+Manages Google Cloud Dataflow projects on Google Cloud Platform.
 
-Dataflow is a managed service for executing a wide variety of data processing patterns.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-dataflow-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-dataflow-v1beta3](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest).
-
-See also the [Product Documentation](https://cloud.google.com/dataflow)
-for more usage information.
 
 ## Quick Start
 

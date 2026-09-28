@@ -2,7 +2,6 @@
 
 TPU API provides customers with access to Google TPU technology.
 
-Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_nodes request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-tpu-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/tpu/)
-for general usage information.
 
 ## Debug Logging
 

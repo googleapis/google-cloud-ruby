@@ -105,6 +105,11 @@ module Google
           #   @return [::String]
           #     Optional. A supported Google Cloud networking proxy in the Project and
           #     Location
+          # @!attribute [rw] resource_uris
+          #   @return [::Array<::String>]
+          #     Optional. List of supported Google Cloud networking proxies in the Project and
+          #     Location.
+          #     resource_uris is mutually exclusive with resource_uri.
           class SelfManaged
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

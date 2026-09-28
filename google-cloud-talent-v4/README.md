@@ -2,7 +2,6 @@
 
 Cloud Talent Solution provides the capability to create, read, update, and delete job postings, as well as search jobs based on keywords and filters.
 
-Transform your job search and candidate matching capabilities with Cloud Talent Solution, designed to support enterprise talent acquisition technology and evolve with your growing needs. This AI solution includes features such as Job Search and Profile Search to provide candidates and employers with an enhanced talent acquisition experience.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_company request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/solutions/talent-solution)
-for general usage information.
 
 ## Debug Logging
 

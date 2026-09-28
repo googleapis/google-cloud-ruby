@@ -1,13 +1,12 @@
-# Ruby Client for the Dataplex V1 API
+# Ruby Client for the Cloud Dataplex V1 API
 
 A unified, intelligent governance solution for data and AI assets.
 
-Dataplex is an intelligent data fabric that provides a way to centrally manage, monitor, and govern your data across data lakes, data warehouses and data marts, and make this data securely accessible to a variety of analytics and data science tools.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Dataplex V1 API. Most users should consider using
+specific version of the Cloud Dataplex V1 API. Most users should consider using
 the main client gem,
 [google-cloud-dataplex](https://rubygems.org/gems/google-cloud-dataplex).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.create_lake request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/dataplex/)
+See also the [Product Documentation](https://cloud.google.com/dataplex/docs/overview)
 for general usage information.
 
 ## Debug Logging

@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apptopology.v1",
+  "libraryPackage": "::Google::Cloud::AppTopology::V1",
+  "services": {
+    "AppTopology": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppTopology::V1::AppTopology::Client",
+          "rpcs": {
+            "GenerateDiscoveredResourcesTopology": {
+              "methods": [
+                "generate_discovered_resources_topology"
+              ]
+            },
+            "GetSchema": {
+              "methods": [
+                "get_schema"
+              ]
+            },
+            "GetDomain": {
+              "methods": [
+                "get_domain"
+              ]
+            },
+            "ListDomains": {
+              "methods": [
+                "list_domains"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

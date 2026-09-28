@@ -1,5 +1,38 @@
 # Changelog
 
+### 0.30.0 (2026-09-24)
+
+#### Features
+
+* update API sources and regenerate ([#36605](https://github.com/googleapis/google-cloud-ruby/issues/36605)) 
+
+### 0.29.0 (2026-08-10)
+
+#### Features
+
+* Allow users to search for spaces without requiring admin privileges- [#36200](https://github.com/googleapis/google-cloud-ruby/issues/36200) 
+
+### 0.28.0 (2026-08-05)
+
+#### Features
+
+* Addition of the Search Messages API ([#35039](https://github.com/googleapis/google-cloud-ruby/issues/35039)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
+### 0.27.0 (2026-07-23)
+
+#### Features
+
+* Addition of Membership Affiliation information ([#34989](https://github.com/googleapis/google-cloud-ruby/issues/34989)) 
+
+### 0.26.0 (2026-07-13)
+
+#### Features
+
+* Add access permission settings to Space resource for configuring space discovery and join permissions ([#34741](https://github.com/googleapis/google-cloud-ruby/issues/34741)) 
+
 ### 0.25.0 (2026-07-09)
 
 #### Features

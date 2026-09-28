@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35060](https://github.com/googleapis/google-cloud-ruby/issues/35060)) 
+
+### 1.8.0 (2026-07-21)
+
+#### Features
+
+* [Memorystore for Redis Cluster] add Cluster.AsyncClusterEndpointsDeletionEnabled ([#34961](https://github.com/googleapis/google-cloud-ruby/issues/34961)) 
+
 ### 1.7.0 (2026-06-11)
 
 #### Features

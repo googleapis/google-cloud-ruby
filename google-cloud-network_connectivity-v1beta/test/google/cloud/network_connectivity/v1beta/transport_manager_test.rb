@@ -192,6 +192,66 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
     end
   end
 
+  def test_parse_from_activation_key
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    activation_key = "hello world"
+
+    parse_from_activation_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :parse_from_activation_key, name
+      assert_kind_of ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["activation_key"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, parse_from_activation_key_client_stub do
+      # Create client
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.parse_from_activation_key({ parent: parent, activation_key: activation_key }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.parse_from_activation_key parent: parent, activation_key: activation_key do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.parse_from_activation_key ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest.new(parent: parent, activation_key: activation_key) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.parse_from_activation_key({ parent: parent, activation_key: activation_key }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.parse_from_activation_key(::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest.new(parent: parent, activation_key: activation_key), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, parse_from_activation_key_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_transports
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsResponse.new
@@ -330,11 +390,13 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     # Create request parameters for a unary method.
     name = "hello world"
+    skip_cache = true
 
     get_status_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_status, name
       assert_kind_of ::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["skip_cache"]
       refute_nil options
     end
 
@@ -345,31 +407,31 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
       end
 
       # Use hash object
-      c.get_status({ name: name }) do |response, operation|
+      c.get_status({ name: name, skip_cache: skip_cache }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get_status name: name do |response, operation|
+      c.get_status name: name, skip_cache: skip_cache do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get_status ::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name) do |response, operation|
+      c.get_status ::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name, skip_cache: skip_cache) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get_status({ name: name }, grpc_options) do |response, operation|
+      c.get_status({ name: name, skip_cache: skip_cache }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get_status(::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_status(::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name, skip_cache: skip_cache), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

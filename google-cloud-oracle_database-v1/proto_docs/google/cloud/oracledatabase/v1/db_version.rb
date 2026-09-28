@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ module Google
         #   @return [::String]
         #     Optional. Filter expression that matches a subset of the DbVersions to
         #     show. The supported filter for dbSystem creation is `db_system_shape =
-        #     \\{db_system_shape} AND storage_management = \\{storage_management}`. If no
+        #     {db_system_shape} AND storage_management = {storage_management}`. If no
         #     filter is provided, all DbVersions will be returned.
         class ListDbVersionsRequest
           include ::Google::Protobuf::MessageExts

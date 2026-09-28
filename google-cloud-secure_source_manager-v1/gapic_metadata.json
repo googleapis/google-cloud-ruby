@@ -170,6 +170,11 @@
                 "fetch_blob"
               ]
             },
+            "FetchRefs": {
+              "methods": [
+                "fetch_refs"
+              ]
+            },
             "CreateIssue": {
               "methods": [
                 "create_issue"

@@ -180,6 +180,31 @@
                 "pull_git_commits"
               ]
             },
+            "SyncWorkspaceRefs": {
+              "methods": [
+                "sync_workspace_refs"
+              ]
+            },
+            "FetchWorkspaceBranches": {
+              "methods": [
+                "fetch_workspace_branches"
+              ]
+            },
+            "DeleteBranch": {
+              "methods": [
+                "delete_branch"
+              ]
+            },
+            "CheckoutWorkspaceBranch": {
+              "methods": [
+                "checkout_workspace_branch"
+              ]
+            },
+            "FetchCurrentWorkspaceBranch": {
+              "methods": [
+                "fetch_current_workspace_branch"
+              ]
+            },
             "PushGitCommits": {
               "methods": [
                 "push_git_commits"

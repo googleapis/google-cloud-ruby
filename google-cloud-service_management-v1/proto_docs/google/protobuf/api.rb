@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +28,11 @@ module Google
     # sometimes simply referred to as "APIs" in other contexts, such as the name of
     # this message itself. See https://cloud.google.com/apis/design/glossary for
     # detailed terminology.
+    #
+    # New usages of this message as an alternative to ServiceDescriptorProto are
+    # strongly discouraged. This message does not reliability preserve all
+    # information necessary to model the schema and preserve semantics. Instead
+    # make use of FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] name
     #   @return [::String]
     #     The fully qualified name of this interface, including package name
@@ -69,12 +74,20 @@ module Google
     # @!attribute [rw] syntax
     #   @return [::Google::Protobuf::Syntax]
     #     The source syntax of the service.
+    # @!attribute [rw] edition
+    #   @return [::String]
+    #     The source edition string, only valid when syntax is SYNTAX_EDITIONS.
     class Api
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # Method represents a method of an API interface.
+    #
+    # New usages of this message as an alternative to MethodDescriptorProto are
+    # strongly discouraged. This message does not reliability preserve all
+    # information necessary to model the schema and preserve semantics. Instead
+    # make use of FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] name
     #   @return [::String]
     #     The simple name of this method.
@@ -94,8 +107,19 @@ module Google
     #   @return [::Array<::Google::Protobuf::Option>]
     #     Any metadata attached to the method.
     # @!attribute [rw] syntax
+    #   @deprecated This field is deprecated and may be removed in the next major version update.
     #   @return [::Google::Protobuf::Syntax]
     #     The source syntax of this method.
+    #
+    #     This field should be ignored, instead the syntax should be inherited from
+    #     Api. This is similar to Field and EnumValue.
+    # @!attribute [rw] edition
+    #   @deprecated This field is deprecated and may be removed in the next major version update.
+    #   @return [::String]
+    #     The source edition string, only valid when syntax is SYNTAX_EDITIONS.
+    #
+    #     This field should be ignored, instead the edition should be inherited from
+    #     Api. This is similar to Field and EnumValue.
     class Method
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

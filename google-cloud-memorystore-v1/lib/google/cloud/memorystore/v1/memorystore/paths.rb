@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,29 @@ module Google
         module Memorystore
           # Path helper methods for the Memorystore API.
           module Paths
+            ##
+            # Create a fully-qualified AuthToken resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param token_auth_user [String]
+            # @param auth_token [String]
+            #
+            # @return [::String]
+            def auth_token_path project:, location:, instance:, token_auth_user:, auth_token:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+              raise ::ArgumentError, "token_auth_user cannot contain /" if token_auth_user.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/tokenAuthUsers/#{token_auth_user}/authTokens/#{auth_token}"
+            end
+
             ##
             # Create a fully-qualified Backup resource string.
             #
@@ -252,6 +275,27 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/sharedRegionalCertificateAuthority"
+            end
+
+            ##
+            # Create a fully-qualified TokenAuthUser resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/tokenAuthUsers/{token_auth_user}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param token_auth_user [String]
+            #
+            # @return [::String]
+            def token_auth_user_path project:, location:, instance:, token_auth_user:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/tokenAuthUsers/#{token_auth_user}"
             end
 
             extend self

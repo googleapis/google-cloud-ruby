@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,11 +86,11 @@ module Google
         #     {
         #      cloud_control_deployment_reference: {
         #        cloud_control_deployment:
-        #        "organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/cc-deployment-1"
+        #        "organizations/{organization}/locations/{location}/cloudControlDeployments/cc-deployment-1"
         #      },
         #      cloud_control_deployment_reference: {
         #       cloud_control_deployment:
-        #       "organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/cc-deployment-2"
+        #       "organizations/{organization}/locations/{location}/cloudControlDeployments/cc-deployment-2"
         #      }
         #     ```
         class FrameworkDeployment
@@ -436,7 +436,7 @@ module Google
         #     ```
         #     {
         #       framework:
-        #       "organizations/\\{organization}/locations/\\{location}/frameworks/\\{framework}",
+        #       "organizations/{organization}/locations/{location}/frameworks/{framework}",
         #       major_revision_id: 1
         #     }
         #     ```

@@ -49,6 +49,76 @@
               "methods": [
                 "report_property_usage"
               ]
+            },
+            "GetUserGroup": {
+              "methods": [
+                "get_user_group"
+              ]
+            },
+            "ListUserGroups": {
+              "methods": [
+                "list_user_groups"
+              ]
+            },
+            "CreateUserGroup": {
+              "methods": [
+                "create_user_group"
+              ]
+            },
+            "UpdateUserGroup": {
+              "methods": [
+                "update_user_group"
+              ]
+            },
+            "DeleteUserGroup": {
+              "methods": [
+                "delete_user_group"
+              ]
+            },
+            "GetUserGroupMember": {
+              "methods": [
+                "get_user_group_member"
+              ]
+            },
+            "ListUserGroupMembers": {
+              "methods": [
+                "list_user_group_members"
+              ]
+            },
+            "CreateUserGroupMember": {
+              "methods": [
+                "create_user_group_member"
+              ]
+            },
+            "UpdateUserGroupMember": {
+              "methods": [
+                "update_user_group_member"
+              ]
+            },
+            "DeleteUserGroupMember": {
+              "methods": [
+                "delete_user_group_member"
+              ]
+            },
+            "GetAdminAccessBinding": {
+              "methods": [
+                "get_admin_access_binding"
+              ]
+            },
+            "ListAdminAccessBindings": {
+              "methods": [
+                "list_admin_access_bindings"
+              ]
+            },
+            "CreateAdminAccessBinding": {
+              "methods": [
+                "create_admin_access_binding"
+              ]
+            },
+            "UpdateAdminAccessBinding": {
+              "methods": [
+                "update_admin_access_binding"
+              ]
             }
           }
         }

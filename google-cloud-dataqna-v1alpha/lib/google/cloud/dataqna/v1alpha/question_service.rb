@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/dataqna/v1alpha/version"
 require "google/cloud/dataqna/v1alpha/question_service/credentials"
 require "google/cloud/dataqna/v1alpha/question_service/paths"
 require "google/cloud/dataqna/v1alpha/question_service/client"
+require "google/cloud/dataqna/v1alpha/question_service/rest"
 
 module Google
   module Cloud
@@ -51,6 +52,11 @@ module Google
         #
         #     require "google/cloud/dataqna/v1alpha/question_service"
         #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataqna/v1alpha/question_service/rest"
+        #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Rest::Client.new
         #
         module QuestionService
         end

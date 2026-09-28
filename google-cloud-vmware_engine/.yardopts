@@ -1,5 +1,5 @@
 --no-private
---title="Google Cloud VMware Engine API"
+--title="VMware Engine API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

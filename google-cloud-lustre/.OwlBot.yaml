@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/lustre/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-lustre/$1

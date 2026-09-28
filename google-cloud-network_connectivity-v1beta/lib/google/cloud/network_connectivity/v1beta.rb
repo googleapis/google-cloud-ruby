@@ -33,6 +33,11 @@ module Google
       #     require "google/cloud/network_connectivity/v1beta"
       #     client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/network_connectivity/v1beta"
+      #     client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Rest::Client.new
+      #
       module V1beta
       end
     end

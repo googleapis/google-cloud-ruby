@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -213,6 +213,10 @@ module Google
             # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey]
             # and [Decapsulate][google.cloud.kms.v1.KeyManagementService.Decapsulate].
             KEY_ENCAPSULATION = 10
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # for AES key
+            AES_WRAPPING = 11
           end
         end
 
@@ -397,6 +401,24 @@ module Google
         #     Output only. Whether or not this key version is eligible for reimport, by
         #     being specified as a target in
         #     [ImportCryptoKeyVersionRequest.crypto_key_version][google.cloud.kms.v1.ImportCryptoKeyVersionRequest.crypto_key_version].
+        # @!attribute [rw] trusted_wrapping_enabled
+        #   @return [::Boolean]
+        #     Immutable. Field indicating that the key may be wrapped by a trusted key.
+        #     This field can be set for all key purposes except
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT},
+        #     and is only valid for keys with protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+        #     This field can only be set at creation or import time via
+        #     [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion],
+        #     or
+        #     [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+        # @!attribute [r] hsm_trusted
+        #   @return [::Boolean]
+        #     Output only. Field indicating that the key wrapping key is trusted.
+        #     This field is only valid for key purpose
+        #     [AES_256_WRAPPING][CryptoKey.CryptoKeyPurpose.AES_256_WRAPPING], and
+        #     protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
         class CryptoKeyVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -608,6 +630,10 @@ module Google
             # security level 5. Randomized version supporting externally-computed
             # message representatives.
             PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
+
+            # AES key wrap with zero padding algorithm (RFC 5649). Can only be used
+            # by keys with purpose AES_WRAPPING.
+            AES_256_KWP = 73
           end
 
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
@@ -1062,14 +1088,23 @@ module Google
         # levels.
         # @!attribute [rw] external_key_uri
         #   @return [::String]
-        #     The URI for an external resource that this
+        #     Optional. The URI for an external resource that this
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} represents.
         # @!attribute [rw] ekm_connection_key_path
         #   @return [::String]
-        #     The path to the external key material on the EKM when using
+        #     Optional. The path to the external key material on the EKM when using
         #     [EkmConnection][google.cloud.kms.v1.EkmConnection] e.g., "v0/my/key". Set
         #     this field instead of external_key_uri when using an
         #     [EkmConnection][google.cloud.kms.v1.EkmConnection].
+        # @!attribute [rw] ekm_connection_backend_override
+        #   @return [::String]
+        #     Optional. The resource name of the backend environment where the key
+        #     material of {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} is
+        #     associated with. Setting this field overrides the [CryptoKeyBackend][].
+        #     This field may be set when
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} is set to
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}. Format:
+        #     `projects/*/locations/*/ekmConnections/*`.
         class ExternalProtectionLevelOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -139,6 +139,19 @@ module Google
         # @!attribute [rw] custom_field_values
         #   @return [::Array<::Google::Ads::AdManager::V1::CustomFieldValue>]
         #     Optional. The set of custom field values to this order.
+        # @!attribute [r] impressions_delivered
+        #   @return [::Integer]
+        #     Output only. The total number of impressions delivered for Line items in
+        #     this order.
+        # @!attribute [r] total_clicks_delivered
+        #   @return [::Integer]
+        #     Output only. Total clicks delivered for all Line items of this `Order`.
+        #     This value is calculated from the associated `LineItem` values.
+        # @!attribute [r] total_viewable_impressions_delivered
+        #   @return [::Integer]
+        #     Output only. Total viewable impressions delivered for all Line items of
+        #     this `Order`. This value is calculated from the associated `LineItem`
+        #     values.
         class Order
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

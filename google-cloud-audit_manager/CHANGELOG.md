@@ -1,5 +1,32 @@
 # Changelog
 
+### 1.2.0 (2026-09-17)
+
+#### Features
+
+* update API sources and regenerate ([#36568](https://github.com/googleapis/google-cloud-ruby/issues/36568)) 
+
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Add organizations level support for GenerateAuditScopeReport, GenerateAuditReport and GetAuditReport ([#36219](https://github.com/googleapis/google-cloud-ruby/issues/36219)) 
+
+### 1.0.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35045](https://github.com/googleapis/google-cloud-ruby/issues/35045)) 
+#### Documentation
+
+* Update copyright year ([#35089](https://github.com/googleapis/google-cloud-ruby/issues/35089)) 
+
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
 ### 0.2.0 (2026-06-11)
 
 #### Features

@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/policysimulator/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-policy_simulator/$1

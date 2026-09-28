@@ -1,4 +1,4 @@
-# Ruby Client for the Cloud Video Intelligence V1p1beta1 API
+# Ruby Client for the Cloud Video Intelligence V1P1BETA1 API
 
 Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
 
@@ -6,7 +6,7 @@ Detects objects, explicit content, and scene changes in videos. It also specifie
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Video Intelligence V1p1beta1 API. Most users should consider using
+specific version of the Cloud Video Intelligence V1P1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-video_intelligence](https://rubygems.org/gems/google-cloud-video_intelligence).
 See the section below titled *Which client should I use?* for more information.
@@ -38,9 +38,6 @@ response = client.annotate_video request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1p1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/video-intelligence)
-for general usage information.
 
 ## Debug Logging
 

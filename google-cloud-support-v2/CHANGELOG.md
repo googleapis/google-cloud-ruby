@@ -1,5 +1,36 @@
 # Changelog
 
+### 1.11.3 (2026-08-26)
+
+#### Bug Fixes
+
+* migrate libraries gaining REST client transports to Librarian ([#7368](https://github.com/googleapis/google-cloud-ruby/issues/7368)) ([#36347](https://github.com/googleapis/google-cloud-ruby/issues/36347)) 
+
+### 1.11.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36253](https://github.com/googleapis/google-cloud-ruby/issues/36253)) 
+
+### 1.11.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 1.11.0 (2026-07-27)
+
+#### Features
+
+* A new message `ExpungeSupportEventSubscriptionRequest` is added 
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching 
+#### Documentation
+
+* A comment for method `ListSupportEventSubscriptions` in service `SupportEventSubscriptionService` is changed 
+
 ### 1.10.0 (2026-06-30)
 
 #### Features

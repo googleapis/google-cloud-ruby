@@ -17,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-redis-cluster-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-redis-cluster-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/memorystore/docs/cluster)
+See also the [Product Documentation](https://cloud.google.com/memorystore/docs/redis)
 for more usage information.
 
 ## Quick Start

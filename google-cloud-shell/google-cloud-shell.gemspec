@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser."
-  gem.summary       = "API Client library for the Cloud Shell API"
+  gem.description   = "Allows users to start, configure, and connect to interactive shell sessions running in the cloud."
+  gem.summary       = "Allows users to start, configure, and connect to interactive shell sessions running in the cloud."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

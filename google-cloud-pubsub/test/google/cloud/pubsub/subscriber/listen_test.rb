@@ -189,4 +189,22 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.max_duration_per_lease_extension).must_equal 0
     _(listener.min_duration_per_lease_extension).must_equal 10
   end
+
+  it "will set default shutdown_behavior and shutdown_timeout while creating a MessageListener" do
+    listener = subscriber.listen do |msg|
+      puts msg.msg_id
+    end
+    _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
+    _(listener.shutdown_behavior).must_equal :wait_for_processing
+    _(listener.shutdown_timeout).must_be_nil
+  end
+
+  it "will set custom shutdown_behavior and shutdown_timeout while creating a MessageListener" do
+    listener = subscriber.listen shutdown_behavior: :nack_immediately, shutdown_timeout: 30 do |msg|
+      puts msg.msg_id
+    end
+    _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
+    _(listener.shutdown_behavior).must_equal :nack_immediately
+    _(listener.shutdown_timeout).must_equal 30
+  end
 end

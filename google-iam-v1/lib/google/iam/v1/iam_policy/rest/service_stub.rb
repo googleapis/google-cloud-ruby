@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -217,7 +217,7 @@ module Google
                                                           uri_template: "/v1/{resource}:setIamPolicy",
                                                           body: "*",
                                                           matches: [
-                                                            ["resource", %r{^.*$}, true]
+                                                            ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                           ]
                                                         )
               transcoder.transcode request_pb
@@ -242,7 +242,7 @@ module Google
                                                           uri_template: "/v1/{resource}:getIamPolicy",
                                                           body: "*",
                                                           matches: [
-                                                            ["resource", %r{^.*$}, true]
+                                                            ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                           ]
                                                         )
               transcoder.transcode request_pb
@@ -267,7 +267,7 @@ module Google
                                                           uri_template: "/v1/{resource}:testIamPermissions",
                                                           body: "*",
                                                           matches: [
-                                                            ["resource", %r{^.*$}, true]
+                                                            ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                           ]
                                                         )
               transcoder.transcode request_pb

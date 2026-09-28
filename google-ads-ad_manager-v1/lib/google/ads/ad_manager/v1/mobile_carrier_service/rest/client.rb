@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `MobileCarrier` object.
+              # Retrieves a `MobileCarrier` object.
               #
               # @overload get_mobile_carrier(request, options = nil)
               #   Pass arguments to `get_mobile_carrier` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `MobileCarrier` objects.
+              # Lists `MobileCarrier` objects.
               #
               # @overload list_mobile_carriers(request, options = nil)
               #   Pass arguments to `list_mobile_carriers` via a request object, either of type
@@ -292,12 +292,11 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>displayName</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>regionCode</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `displayName`
+              #     * `name`
+              #     * `regionCode`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

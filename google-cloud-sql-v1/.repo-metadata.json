@@ -7,9 +7,11 @@
     "language": "ruby",
     "name": "sqladmin",
     "name_pretty": "Cloud SQL Admin V1 API",
+    "product_documentation": "https://cloud.google.com/sql/docs/",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Cloud SQL Admin API. Note that google-cloud-sql-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-sql instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/sql/docs/",
     "library_type": "GAPIC_AUTO"
 }

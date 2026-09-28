@@ -1,8 +1,7 @@
 # Ruby Client for the Analytics Hub API
 
-API Client library for the Analytics Hub API
+Exchange data and analytics assets securely and efficiently.
 
-Analytics Hub is a data exchange that allows you to efficiently and securely exchange data assets across organizations to address challenges of data reliability and cost. Curate a library of internal and external assets, including unique datasets like Google Trends, backed by the power of BigQuery.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-data_exchange-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-data_exchange-v1beta1](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_exchange-v1beta1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/analytics-hub/)
-for more usage information.
 
 ## Quick Start
 

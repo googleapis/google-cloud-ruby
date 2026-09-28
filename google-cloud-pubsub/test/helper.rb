@@ -15,6 +15,16 @@
 require "simplecov"
 
 gem "minitest"
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
+  end
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
@@ -326,6 +336,16 @@ class MockPubsub < Minitest::Spec
       seconds: duration.seconds,
       nanos: duration.nanos
     }
+  end
+
+  def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block
+    attempts = 0
+    while !block.call
+      fail msg if attempts >= max
+      attempts += 1
+      puts "Retrying #{attempts} out of #{max}." if output
+      sleep delay
+    end
   end
 
   # Register this spec type for when :storage is used.

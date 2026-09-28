@@ -1,8 +1,7 @@
-# Ruby Client for the Migrate for Compute Engine API
+# Ruby Client for the VM Migration API
 
-API Client library for the Migrate for Compute Engine API
+Use the Migrate to Virtual Machines API to programmatically migrate workloads.
 
-Migrate for Compute Engine enables you to migrate (Lift and Shift) your virtual machines (VMs), with minor automatic modifications, from your source environment to Google Compute Engine.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-vm_migration-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-vm_migration-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-vm_migration-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/migrate/compute-engine/)
-for more usage information.
 
 ## Quick Start
 

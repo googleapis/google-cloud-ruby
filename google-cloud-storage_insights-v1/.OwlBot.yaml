@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/storageinsights/v1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-storage_insights-v1/$1

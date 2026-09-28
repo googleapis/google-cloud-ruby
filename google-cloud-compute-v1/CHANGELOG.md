@@ -1,5 +1,41 @@
 # Release History
 
+### 3.12.0 (2026-09-22)
+
+#### Features
+
+* update API sources and regenerate ([#36568](https://github.com/googleapis/google-cloud-ruby/issues/36568)) 
+
+### 3.11.0 (2026-09-10)
+
+#### Features
+
+* update API sources and regenerate ([#36542](https://github.com/googleapis/google-cloud-ruby/issues/36542)) 
+#### Bug Fixes
+
+* onboarding libraries to Librarian / compute ([#36535](https://github.com/googleapis/google-cloud-ruby/issues/36535)) 
+
+### 3.10.0 (2026-08-12)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
+### 3.9.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+
+### 3.9.0 (2026-07-20)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260629 ([#1213](https://github.com/googleapis/google-cloud-ruby/issues/1213)) ([#34847](https://github.com/googleapis/google-cloud-ruby/issues/34847)) 
+
 ### 3.8.0 (2026-06-11)
 
 #### Features

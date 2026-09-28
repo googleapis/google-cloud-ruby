@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The BigQuery Storage API provides fast access to BigQuery managed storage."
+  gem.description   = "google-cloud-bigquery-storage is the official client library for the BigQuery Storage API."
   gem.summary       = "API Client library for the BigQuery Storage API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

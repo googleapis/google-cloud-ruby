@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -103,6 +103,23 @@ module Google
               raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
 
               "spaces/#{space}/messages/#{message}"
+            end
+
+            ##
+            # Create a fully-qualified MessagePin resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `spaces/{space}/messagePins/{message_pin}`
+            #
+            # @param space [String]
+            # @param message_pin [String]
+            #
+            # @return [::String]
+            def message_pin_path space:, message_pin:
+              raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+
+              "spaces/#{space}/messagePins/#{message_pin}"
             end
 
             ##

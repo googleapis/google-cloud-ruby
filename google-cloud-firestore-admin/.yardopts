@@ -1,5 +1,5 @@
 --no-private
---title="Cloud Firestore Admin API"
+--title="Cloud Firestore API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

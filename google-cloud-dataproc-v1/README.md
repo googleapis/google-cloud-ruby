@@ -39,9 +39,6 @@ response = client.create_autoscaling_policy request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/dataproc)
-for general usage information.
-
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

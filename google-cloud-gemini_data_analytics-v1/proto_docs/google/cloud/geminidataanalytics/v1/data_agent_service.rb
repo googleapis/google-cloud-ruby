@@ -48,6 +48,9 @@ module Google
         #   @return [::Boolean]
         #     Optional. If true, the list results will include soft-deleted DataAgents.
         #     Defaults to false.
+        # @!attribute [rw] creator_filter
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1::ListAccessibleDataAgentsRequest::CreatorFilter]
+        #     Optional. Filter for the creator of the agent.
         class ListDataAgentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +261,103 @@ module Google
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for SetAgentOpsObservability.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for SetAgentOpsObservabilityRequest.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] telemetry_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether to enable or disable AgentOps observability.
+        #     When update_mask is provided, this field is ignored unless specified in the
+        #     mask.
+        # @!attribute [rw] data_source_type
+        #   @return [::String]
+        #     Required. The data source type for which to set observability settings.
+        #     Examples: "bigquery", "looker"
+        # @!attribute [rw] bqaa_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether BigQuery Agent Analytics is enabled.
+        #     Note: An explicit `update_mask` containing "bqaa_enabled" is required to
+        #     modify this field. If `update_mask` is omitted, this field is ignored and
+        #     an existing enabled setting cannot be disabled.
+        #
+        #     This is a project-level setting and does not by itself enable trace
+        #     logging for any individual agent. Per-agent trace logging is controlled
+        #     by `DataAgent.bigquery_agent_analytics_enabled` together with
+        #     `DataAgent.bigquery_agent_analytics_table`; an agent does not inherit
+        #     this setting.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten by the
+        #     update. The fields specified in the update_mask are relative to the
+        #     resource. A field will be overwritten if it is in the mask.
+        #
+        #     If the user does not provide a mask, only `telemetry_enabled` will be
+        #     updated (for backward compatibility with legacy callers). Note that
+        #     disabling BigQuery Agent Analytics (`bqaa_enabled = false`) requires
+        #     providing an explicit `update_mask` containing "bqaa_enabled".
+        #
+        #     Per AIP-161:
+        #     - The special wildcard value '*' is supported to update all fields.
+        #     - Field paths should use snake_case, though camelCase equivalents
+        #       (`telemetryEnabled`, `bqaaEnabled`) are accepted for REST/JSON
+        #       transcoding compatibility.
+        class SetAgentOpsObservabilityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for SetAgentOpsObservability.
+        class SetAgentOpsObservabilityResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for SetAgentOpsObservability.
+        class SetAgentOpsObservabilityMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for RetrieveAgentOpsObservability.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for RetrieveAgentOpsObservabilityRequest.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] data_source_type
+        #   @return [::String]
+        #     Required. The data source type for which to retrieve observability
+        #     settings. Examples: "bigquery", "looker"
+        class RetrieveAgentOpsObservabilityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for RetrieveAgentOpsObservability.
+        # @!attribute [r] telemetry_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether AgentOps observability telemetry is enabled.
+        # @!attribute [r] bigquery_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether BigQuery API is enabled.
+        # @!attribute [r] cloud_trace_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether Cloud Trace API is enabled.
+        # @!attribute [r] cloud_monitoring_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether Cloud Monitoring API is enabled.
+        # @!attribute [r] cloud_logging_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether Cloud Logging API is enabled.
+        # @!attribute [r] bqaa_enabled
+        #   @return [::Boolean]
+        #     Output only. Whether BigQuery Agent Analytics is enabled.
+        class RetrieveAgentOpsObservabilityResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

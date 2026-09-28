@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,20 @@ module Google
   module Ads
     module AdManager
       module V1
+        # Request for the `UpdateNetwork` method.
+        # @!attribute [rw] network
+        #   @return [::Google::Ads::AdManager::V1::Network]
+        #     Required. The `Network` to update.
+        #
+        #     The `Network`'s `name` is used to identify the `Network` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to get Network
         # @!attribute [rw] name
         #   @return [::String]
@@ -73,6 +87,22 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListNetworksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `ProvisionTestNetwork` method.
+        class ProvisionTestNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `GetDefaultThirdPartyDataDeclaration` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of DefaultThirdPartyDataDeclaration.
+        #     Format: networks/\\{network_code}/defaultThirdPartyDataDeclaration
+        class GetDefaultThirdPartyDataDeclarationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

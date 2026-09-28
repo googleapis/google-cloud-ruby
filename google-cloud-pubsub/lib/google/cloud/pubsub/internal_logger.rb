@@ -31,7 +31,7 @@ module Google
         def log level, subtag, &message_block
           return unless VALID_LOG_LEVELS.include?(level) && block_given?
           # Only log if the logger is explicitly tagged for 'pubsub'.
-          return unless @logger && @logger.progname == LOG_NAME
+          return unless @logger.respond_to?(:progname) && @logger.progname == LOG_NAME
 
           @logger.public_send(level, "#{LOG_NAME}:#{subtag}", &message_block)
         end

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `RichMediaAdsCompany` object.
+              # Retrieves a `RichMediaAdsCompany` object.
               #
               # @overload get_rich_media_ads_company(request, options = nil)
               #   Pass arguments to `get_rich_media_ads_company` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `RichMediaAdsCompany` objects.
+              # Lists `RichMediaAdsCompany` objects.
               #
               # @overload list_rich_media_ads_companies(request, options = nil)
               #   Pass arguments to `list_rich_media_ads_companies` via a request object, either of type
@@ -295,14 +295,13 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>companyGvlId</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>gdprStatus</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>policyUrl</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `companyGvlId`
+              #     * `displayName`
+              #     * `gdprStatus`
+              #     * `name`
+              #     * `policyUrl`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

@@ -1,8 +1,7 @@
 # Ruby Client for the API Keys API
 
-API Client library for the API Keys API
+Manages the API keys associated with developer projects.
 
-An API key is a simple encrypted string that you can use when calling Google Cloud APIs. The API Keys service manages the API keys associated with developer projects.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-api_keys-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-api_keys-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-api_keys-v2/latest).
-
-See also the [Product Documentation](https://cloud.google.com/api-keys/)
-for more usage information.
 
 ## Quick Start
 

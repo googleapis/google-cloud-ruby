@@ -1,13 +1,12 @@
-# Ruby Client for the reCAPTCHA Enterprise V1beta1 API
+# Ruby Client for the reCAPTCHA Enterprise V1BETA1 API
 
 Help protect your website from fraudulent activity, spam, and abuse without creating friction.
 
-reCAPTCHA Enterprise is a service that protects your site from spam and abuse.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the reCAPTCHA Enterprise V1beta1 API. Most users should consider using
+specific version of the reCAPTCHA Enterprise V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-recaptcha_enterprise](https://rubygems.org/gems/google-cloud-recaptcha_enterprise).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_assessment request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recaptcha_enterprise-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/recaptcha-enterprise)
-for general usage information.
 
 ## Debug Logging
 

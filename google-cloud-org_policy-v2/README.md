@@ -2,7 +2,6 @@
 
 The Organization Policy API allows users to configure governance rules on their Google Cloud resources across the resource hierarchy.
 
-The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_constraints request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/organization-policy/overview)
-for general usage information.
 
 ## Debug Logging
 

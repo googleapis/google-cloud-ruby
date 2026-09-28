@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `PrivateAuctionDeal` object.
+              # Retrieves a `PrivateAuctionDeal` object.
               #
               # @overload get_private_auction_deal(request, options = nil)
               #   Pass arguments to `get_private_auction_deal` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `PrivateAuctionDeal` objects.
+              # Lists `PrivateAuctionDeal` objects.
               #
               # @overload list_private_auction_deals(request, options = nil)
               #   Pass arguments to `list_private_auction_deals` via a request object, either of type
@@ -295,22 +295,23 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>auctionPriorityEnabled</code></li>
-              #       <li><code>blockOverrideEnabled</code></li>
-              #       <li><code>buyerAccountId</code></li>
-              #       <li><code>buyerPermissionType</code></li>
-              #       <li><code>endTime</code></li>
-              #       <li><code>externalDealId</code></li>
-              #       <li><code>floorPrice</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>privateAuctionDealId</code></li>
-              #       <li><code>privateAuctionDisplayName</code></li>
-              #       <li><code>privateAuctionId</code></li>
-              #       <li><code>status</code></li>
-              #       <li><code>updateTime</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `archived`
+              #     * `auctionPriorityEnabled`
+              #     * `blockOverrideEnabled`
+              #     * `buyerAccountId`
+              #     * `buyerPermissionType`
+              #     * `endTime`
+              #     * `externalDealId`
+              #     * `floorPrice`
+              #     * `name`
+              #     * `privateAuctionDealId`
+              #     * `privateAuctionDisplayName`
+              #     * `privateAuctionId`
+              #     * `publisherFloorExempt`
+              #     * `status`
+              #     * `updateTime`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -382,7 +383,7 @@ module Google
               end
 
               ##
-              # API to create a `PrivateAuctionDeal` object.
+              # Creates a `PrivateAuctionDeal` object.
               #
               # @overload create_private_auction_deal(request, options = nil)
               #   Pass arguments to `create_private_auction_deal` via a request object, either of type
@@ -463,7 +464,7 @@ module Google
               end
 
               ##
-              # API to update a `PrivateAuctionDeal` object.
+              # Updates a `PrivateAuctionDeal` object.
               #
               # @overload update_private_auction_deal(request, options = nil)
               #   Pass arguments to `update_private_auction_deal` via a request object, either of type

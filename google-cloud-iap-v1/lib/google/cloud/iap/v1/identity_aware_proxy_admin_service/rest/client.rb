@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -634,7 +634,7 @@ module Google
               #   @param expression [::String]
               #     Required. User input string expression. Should be of the form
               #     `attributes.saml_attributes.filter(attribute, attribute.name in
-              #     ['\\{attribute_name}', '\\{attribute_name}'])`
+              #     ['{attribute_name}', '{attribute_name}'])`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

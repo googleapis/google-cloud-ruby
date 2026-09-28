@@ -2,7 +2,6 @@
 
 Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
-Programmatically manage your Comparison Shopping Service (CSS) account data at scale.
 
 https://github.com/googleapis/google-cloud-ruby
 

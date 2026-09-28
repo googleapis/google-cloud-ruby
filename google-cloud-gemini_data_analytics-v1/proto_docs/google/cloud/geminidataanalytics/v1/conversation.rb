@@ -53,6 +53,9 @@ module Google
         #     Optional. Open-ended and user-defined labels that can be set by the client
         #     to tag a conversation (e.g. to filter conversations for specific
         #     surfaces/products).
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Optional. The display name for the conversation (max 63 chars).
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     Optional. Customer managed encryption key (CMEK) to use for encrypting the
@@ -61,9 +64,6 @@ module Google
         #
         #     Format:
         #     projects/\\{project_id}/locations/\\{location}/keyRings/\\{key_ring_name}/cryptoKeys/\\{key_name}.
-        # @!attribute [rw] memory_paused
-        #   @return [::Boolean]
-        #     Optional. Whether memory is paused for this conversation.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +99,30 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes since the first request.
         class CreateConversationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for updating a conversation.
+        # @!attribute [rw] conversation
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1::Conversation]
+        #     Required. The resource being updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     Conversation resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields with non-default values
+        #     present in the request will be overwritten. If a wildcard mask is provided,
+        #     all fields will be overwritten.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        class UpdateConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

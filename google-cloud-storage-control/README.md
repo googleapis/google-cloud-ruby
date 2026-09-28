@@ -2,7 +2,6 @@
 
 The Storage Control API lets you perform metadata-specific, control plane, and long-running operations. The Storage Control API creates one space to perform metadata-specific, control plane, and long-running operations apart from the Storage API. Separating these operations from the Storage API improves API standardization and lets you run faster releases.
 
-The Google Cloud Storage API allows applications to read and write data through the abstractions of buckets and objects, which are similar to directories and files except that buckets cannot contain other buckets, and directory-level operations (like directory rename) are not supported. Buckets share a single global namespace, and each bucket belongs to a specific project that has an associated owner that pays for the data stored in the bucket. This API is accessed using standard gRPC requests.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-storage-control-v*`.

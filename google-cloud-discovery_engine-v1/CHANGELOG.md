@@ -1,5 +1,35 @@
 # Changelog
 
+### 2.12.0 (2026-09-17)
+
+#### Features
+
+* update API sources and regenerate ([#36568](https://github.com/googleapis/google-cloud-ruby/issues/36568)) 
+
+### 2.11.1 (2026-09-01)
+
+#### Bug Fixes
+
+* onboarding libraries to Librarian / location mixin workarounds ([#36484](https://github.com/googleapis/google-cloud-ruby/issues/36484)) 
+
+### 2.11.0 (2026-08-24)
+
+#### Features
+
+* expose StreamAssistRequest agents_spec and agent_id ([#36313](https://github.com/googleapis/google-cloud-ruby/issues/36313)) 
+
+### 2.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
+### 2.10.0 (2026-07-10)
+
+#### Features
+
+* Add RelevanceFilterSpec to SearchRequest in v1 ([#34739](https://github.com/googleapis/google-cloud-ruby/issues/34739)) 
+
 ### 2.9.0 (2026-06-11)
 
 #### Features

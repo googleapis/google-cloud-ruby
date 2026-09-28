@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.geminidataanalytics.v1beta",
   "libraryPackage": "::Google::Cloud::GeminiDataAnalytics::V1beta",
   "services": {
+    "DataA2AService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client",
+          "rpcs": {
+            "SendMessage": {
+              "methods": [
+                "send_message"
+              ]
+            },
+            "SendStreamingMessage": {
+              "methods": [
+                "send_streaming_message"
+              ]
+            },
+            "GetAgentCard": {
+              "methods": [
+                "get_agent_card"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataAgentService": {
       "clients": {
         "grpc": {
@@ -64,6 +88,16 @@
               "methods": [
                 "set_iam_policy"
               ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "set_agent_ops_observability"
+              ]
+            },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieve_agent_ops_observability"
+              ]
             }
           }
         }
@@ -87,6 +121,11 @@
             "DeleteConversation": {
               "methods": [
                 "delete_conversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "update_conversation"
               ]
             },
             "GetConversation": {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,16 +55,42 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>displayName</code></li>
-        #       <li><code>endTime</code></li>
-        #       <li><code>goal.units</code></li>
-        #       <li><code>lineItemType</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>order</code></li>
-        #       <li><code>startTime</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `archived`
+        #     * `contractedUnitsBought`
+        #     * `costType`
+        #     * `createTime`
+        #     * `creativePlaceholders.size.canonicalName`
+        #     * `dealInfo.externalDealId`
+        #     * `deliveryRateType`
+        #     * `displayName`
+        #     * `endTime`
+        #     * `environmentType`
+        #     * `externalLineItemId`
+        #     * `goal.units`
+        #     * `grpSettings.growbirdNielsenEnabled`
+        #     * `grpSettings.inTargetRatioEstimateMilliPercent`
+        #     * `lineItemType`
+        #     * `missingCreatives`
+        #     * `name`
+        #     * `notes`
+        #     * `order`
+        #     * `orderDisplayName`
+        #     * `priority`
+        #     * `roadblockingType`
+        #     * `startTime`
+        #     * `stats.clickThroughRate`
+        #     * `stats.clicksDelivered`
+        #     * `stats.impressionsDelivered`
+        #     * `stats.viewableImpressionsDelivered`
+        #     * `status`
+        #     * `targeting.inventoryTargeting.targetedAdUnits.adUnit`
+        #     * `targeting.inventoryTargeting.targetedPlacements`
+        #     * `targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications`
+        #     * `updateSource`
+        #     * `updateTime`
+        #     * `webPropertyCode`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

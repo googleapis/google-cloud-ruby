@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1952,7 +1952,7 @@ module Google
                                                           uri_template: "/v1/{entry.name}",
                                                           body: "entry",
                                                           matches: [
-                                                            ["entry.name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/.*)?$}, true]
+                                                            ["entry.name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1973,7 +1973,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2015,7 +2015,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entries(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2209,7 +2209,7 @@ module Google
                                                           uri_template: "/v1/{entry_link.name}",
                                                           body: "entry_link",
                                                           matches: [
-                                                            ["entry_link.name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entryLinks(?:/.*)?$}, true]
+                                                            ["entry_link.name", %r{^projects/[^/]+/locations/[^/]+/entryGroups/[^/]+/entryLinks(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

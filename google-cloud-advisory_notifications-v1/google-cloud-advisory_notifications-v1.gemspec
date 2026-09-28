@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "An API for accessing Advisory Notifications in Google Cloud. Note that google-cloud-advisory_notifications-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-advisory_notifications instead. See the readme for more details."
-  gem.summary       = "An API for accessing Advisory Notifications in Google Cloud."
+  gem.description   = "An API for accessing Advisory Notifications in Google Cloud Note that google-cloud-advisory_notifications-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-advisory_notifications instead. See the readme for more details."
+  gem.summary       = "An API for accessing Advisory Notifications in Google Cloud"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

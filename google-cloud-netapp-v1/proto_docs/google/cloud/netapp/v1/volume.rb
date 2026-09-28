@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -850,7 +850,7 @@ module Google
         #     backend. The name must meet the following requirements:
         #     *   Be between 1 and 255 characters long.
         #     *   Contain only uppercase or lowercase letters (A-Z, a-z), numbers (0-9),
-        #         and the following special characters: "-", "_", "}", "{", ".".
+        #         and the following special characters: "-", "_", "}", "\\{", ".".
         #     *   Spaces are not allowed.
         # @!attribute [rw] host_groups
         #   @return [::Array<::String>]

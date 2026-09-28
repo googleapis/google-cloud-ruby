@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -122,6 +122,18 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientPathsTe
 
       path = client.materialized_view_path project: "value0", instance: "value1", materialized_view: "value2"
       assert_equal "projects/value0/instances/value1/materializedViews/value2", path
+    end
+  end
+
+  def test_memory_layer_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.memory_layer_path project: "value0", instance: "value1", cluster: "value2"
+      assert_equal "projects/value0/instances/value1/clusters/value2/memoryLayer", path
     end
   end
 

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/pubsub"
 require "google/cloud/storage"
 require "google/cloud/storage_transfer"
 require "minitest/autorun"
@@ -58,22 +59,33 @@ def grant_sts_permissions project_id:, bucket_name:
 end
 
 def grant_pubsub_permissions project_id:, topic:, subscription:
+  pubsub = Google::Cloud::PubSub.new
   storage_client = Google::Cloud::Storage.new
   storage_transfer_client = Google::Cloud::StorageTransfer.storage_transfer_service
   request = { project_id: project_id }
   response = storage_transfer_client.get_google_service_account request
   email = response.account_email
   member = "serviceAccount:#{email}"
-  topic.policy do |p|
-    p.add "roles/pubsub.publisher",
-          "serviceAccount:#{storage_client.service_account_email}"
-  end
-  subscription.policy do |p|
-    p.add "roles/pubsub.subscriber", member
-  end
 
-  topic.update_policy topic.policy
-  subscription.update_policy subscription.policy
+  topic_policy = {
+    bindings: [
+      {
+        role: "roles/pubsub.publisher",
+        members: ["serviceAccount:#{storage_client.service_account_email}"]
+      }
+    ]
+  }
+  pubsub.iam.set_iam_policy resource: topic.name, policy: topic_policy
+
+  subscription_policy = {
+    bindings: [
+      {
+        role: "roles/pubsub.subscriber",
+        members: [member]
+      }
+    ]
+  }
+  pubsub.iam.set_iam_policy resource: subscription.name, policy: subscription_policy
 end
 
 def delete_transfer_job project_id:, job_name:

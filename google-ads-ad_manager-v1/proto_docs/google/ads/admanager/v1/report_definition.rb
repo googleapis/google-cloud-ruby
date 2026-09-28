@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -281,7 +281,7 @@ module Google
               # report is run.
               LAST_6_MONTHS = 19
 
-              # The entire previous 6 calendar months preceding the calendar month the
+              # The entire previous 12 calendar months preceding the calendar month the
               # report is run.
               LAST_12_MONTHS = 20
 
@@ -511,8 +511,8 @@ module Google
 
           # A flag for a report. Flags are used show if certain thresholds are met.
           # Result rows that match the filter will have the corresponding
-          # [MetricValueGroup.flagValues][MetricValueGroup] index set to true.
-          # For more information about flags see:
+          # {::Google::Ads::AdManager::V1::ReportDataTable::MetricValueGroup#flag_values ReportDataTable.MetricValueGroup.flagValues}
+          # index set to true. For more information about flags see:
           # https://support.google.com/admanager/answer/15079975
           # @!attribute [rw] filters
           #   @return [::Array<::Google::Ads::AdManager::V1::ReportDefinition::Filter>]
@@ -627,9 +627,9 @@ module Google
             #
             #
             #
-            # Corresponds to "Advertiser domain" in the Ad Manager UI.
+            # Corresponds to "Landing page domain" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `STRING`
             ADVERTISER_DOMAIN_NAME = 242
@@ -2327,7 +2327,8 @@ module Google
             #
             # Corresponds to "City ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             CITY_ID = 459
@@ -2350,7 +2351,8 @@ module Google
             #
             # Corresponds to "Advertiser ID (classified)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REACH`
             #
             # Data format: `IDENTIFIER`
             CLASSIFIED_ADVERTISER_ID = 133
@@ -2362,7 +2364,8 @@ module Google
             #
             # Corresponds to "Advertiser (classified)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REACH`
             #
             # Data format: `STRING`
             CLASSIFIED_ADVERTISER_NAME = 134
@@ -2639,7 +2642,8 @@ module Google
             # Corresponds to "Creative or creative set value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
             CREATIVE_OR_CREATIVE_SET = 682
@@ -2651,7 +2655,8 @@ module Google
             #
             # Corresponds to "Creative or creative set" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             CREATIVE_OR_CREATIVE_SET_NAME = 683
@@ -3056,6 +3061,17 @@ module Google
             # Data format: `STRING`
             DEAL_NAME = 437
 
+            # The declared domain of the advertiser.
+            #
+            #
+            #
+            # Corresponds to "Declared advertiser domain" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            DECLARED_ADVERTISER_DOMAIN = 796
+
             # The ID of the secure signals that were sent to the bidder who won the
             #  impression.
             #
@@ -3088,7 +3104,7 @@ module Google
             # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `REVENUE_VERIFICATION`, `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             DEMAND_CHANNEL = 9
@@ -3100,7 +3116,7 @@ module Google
             # Corresponds to "Demand channel" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `REVENUE_VERIFICATION`, `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             DEMAND_CHANNEL_NAME = 10
@@ -3146,7 +3162,8 @@ module Google
             # Corresponds to "Demand subchannel value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             DEMAND_SUBCHANNEL = 22
@@ -3157,7 +3174,8 @@ module Google
             #
             # Corresponds to "Demand subchannel" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             DEMAND_SUBCHANNEL_NAME = 23
@@ -3537,6 +3555,17 @@ module Google
             # Data format: `STRING`
             HEADER_BIDDER_INTEGRATION_TYPE_NAME = 719
 
+            # High engagement ads allowed.
+            #
+            #
+            #
+            # Corresponds to "High engagement ads allowed" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `BOOLEAN`
+            HIGH_ENGAGEMENT_ADS_ALLOWED = 838
+
             # Breaks down reporting data by hour in one day.
             #
             #
@@ -3811,7 +3840,8 @@ module Google
             #
             # Corresponds to "Key-values ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `IDENTIFIER`
             KEY_VALUES_ID = 214
@@ -3822,7 +3852,8 @@ module Google
             #
             # Corresponds to "Key-values" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING`
             KEY_VALUES_NAME = 215
@@ -3833,10 +3864,14 @@ module Google
             #
             # Corresponds to "Key-values" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
+            # Compatible with the following report types:
             #
             # Data format: `STRING_LIST`
             KEY_VALUES_SET = 713
+
+            # The landing page domain name of the advertiser.
+            # This will eventually replace ADVERTISER_DOMAIN_NAME.
+            LANDING_PAGE_DOMAIN = 242
 
             # The agency of the order associated with the line item.
             #
@@ -3911,7 +3946,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemComputedStatus][google.ads.admanager.v1.LineItemComputedStatusEnum.LineItemComputedStatus]
+            # {::Google::Ads::AdManager::V1::LineItemComputedStatusEnum::LineItemComputedStatus LineItemComputedStatus}
             LINE_ITEM_COMPUTED_STATUS = 250
 
             # The localized name of the computed status of the LineItem.
@@ -3962,7 +3997,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemCostType][google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType]
+            # {::Google::Ads::AdManager::V1::LineItemCostTypeEnum::LineItemCostType LineItemCostType}
             LINE_ITEM_COST_TYPE = 212
 
             # Localized line item cost type name.
@@ -4000,7 +4035,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [CreativeRotationType][google.ads.admanager.v1.CreativeRotationTypeEnum.CreativeRotationType]
+            # {::Google::Ads::AdManager::V1::CreativeRotationTypeEnum::CreativeRotationType CreativeRotationType}
             LINE_ITEM_CREATIVE_ROTATION_TYPE = 189
 
             # The localized name of the creative rotation type of the LineItem.
@@ -4062,7 +4097,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemDeliveryRateType][google.ads.admanager.v1.LineItemDeliveryRateTypeEnum.LineItemDeliveryRateType]
+            # {::Google::Ads::AdManager::V1::LineItemDeliveryRateTypeEnum::LineItemDeliveryRateType LineItemDeliveryRateType}
             LINE_ITEM_DELIVERY_RATE_TYPE = 191
 
             # The localized name of the delivery rate type of the LineItem.
@@ -4441,7 +4476,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemReservationStatus][google.ads.admanager.v1.LineItemReservationStatusEnum.LineItemReservationStatus]
+            # {::Google::Ads::AdManager::V1::LineItemReservationStatusEnum::LineItemReservationStatus LineItemReservationStatus}
             LINE_ITEM_RESERVATION_STATUS = 304
 
             # Localized string describing the state of inventory reservation for the
@@ -4665,7 +4700,8 @@ module Google
             #
             # Corresponds to "Metro ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             METRO_ID = 453
@@ -5026,6 +5062,17 @@ module Google
             #
             # Data format: `STRING`
             NO_FILL_REASON_CATEGORY_NAME = 587
+
+            # Number of ads served in a pod response.
+            #
+            #
+            #
+            # Corresponds to "Number of ads in pod" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            NUM_ADS_IN_POD = 804
 
             # Operating system category.
             #
@@ -5503,6 +5550,28 @@ module Google
             #
             # Data format: `STRING`
             PARTNER_MANAGEMENT_PARTNER_NAME = 656
+
+            # The ID of the payment profile.
+            #
+            #
+            #
+            # Corresponds to "Payment profile ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            PAYMENT_PROFILE_ID = 858
+
+            # The name of the payment profile.
+            #
+            #
+            #
+            # Corresponds to "Payment profile" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            PAYMENT_PROFILE_NAME = 857
 
             # Placement ID
             #
@@ -6022,6 +6091,29 @@ module Google
             # Data format: `STRING`
             REQUESTED_AD_SIZES = 352
 
+            # The orientation of the creative requested.
+            #
+            #
+            #
+            # Corresponds to "Requested creative orientation value" in the Ad Manager
+            # UI (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM_LIST`
+            REQUESTED_CREATIVE_ORIENTATION = 828
+
+            # Localized name of the requested creative orientation.
+            #
+            #
+            #
+            # Corresponds to "Requested creative orientation" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING_LIST`
+            REQUESTED_CREATIVE_ORIENTATION_NAME = 829
+
             # Request type ENUM
             #
             #
@@ -6534,7 +6626,7 @@ module Google
             # Data format: `STRING`
             VIDEO_FALLBACK_POSITION = 530
 
-            # The duration of the ad break in seconds for a live stream event.
+            # The expected duration of the ad break in seconds for a live stream event.
             #
             #
             #
@@ -6670,7 +6762,7 @@ module Google
             # Corresponds to "Position of pod" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `REAL_TIME_VIDEO`
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             VIDEO_POSITION_OF_POD = 539
@@ -6722,6 +6814,29 @@ module Google
             #
             # Data format: `STRING`
             VIDEO_STITCHER_TYPE_NAME = 753
+
+            # Web interstitial trigger type.
+            #
+            #
+            #
+            # Corresponds to "Web interstitial trigger type value" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            WEB_INTERSTITIAL_TRIGGER_TYPE = 826
+
+            # Localized name of the web interstitial trigger type.
+            #
+            #
+            #
+            # Corresponds to "Web interstitial trigger type" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            WEB_INTERSTITIAL_TRIGGER_TYPE_NAME = 827
 
             # Web property code
             #
@@ -9088,6 +9203,17 @@ module Google
             # Data format: `MONEY`
             AD_EXCHANGE_PLUS_YIELD_GROUP_REVENUE = 254
 
+            # The ratio of impressions to responses served in Ad Exchange.
+            #
+            #
+            #
+            # Corresponds to "Ad Exchange render rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            AD_EXCHANGE_RENDER_RATE = 759
+
             # The total number of times that an Ad Exchange ad is delivered.
             #
             #
@@ -10687,6 +10813,21 @@ module Google
             # Data format: `PERCENT`
             CTR = 3
 
+            # For standard ads, your ad clickthrough rate (CTR) is the number of ad
+            #  clicks divided by the number of individual ad impressions expressed as a
+            #  fraction. Ad CTR = Clicks / Ad impressions. Counts companion impressions
+            #  in the number of ad impressions.
+            #
+            #
+            #
+            # Corresponds to "Total CTR with companion" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
+            #
+            # Data format: `PERCENT`
+            CTR_WITH_COMPANION = 742
+
             # Number of bids received for a deal.
             #
             #
@@ -11151,6 +11292,19 @@ module Google
             #
             # Data format: `INTEGER`
             IMPRESSIONS = 1
+
+            # Total impressions from the Google Ad Manager server, AdSense,
+            #  Ad Exchange, and yield group partners, including companion ads.
+            #
+            #
+            #
+            # Corresponds to "Total impressions with companion" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
+            #
+            # Data format: `INTEGER`
+            IMPRESSIONS_WITH_COMPANION = 741
 
             # The number of impressions (via begin to render methodology) considered
             #  inactive, as defined by served to a device receiving ad or bid requests
@@ -11841,6 +11995,39 @@ module Google
             #
             # Data format: `INTEGER`
             PARTNER_SOLD_IMPRESSIONS = 123
+
+            # Total pod eCPM.
+            #
+            #
+            #
+            # Corresponds to "Total pod eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            POD_ECPM = 738
+
+            # Total pod eCPM without CPD.
+            #
+            #
+            #
+            # Corresponds to "Total pod eCPM without CPD" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            POD_ECPM_WITHOUT_CPD = 739
+
+            # Total pod views.
+            #
+            #
+            #
+            # Corresponds to "Total pod views" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            POD_VIEWS = 740
 
             # The total number of ad requests eligible for programmatic inventory,
             #  including Programmatic Guaranteed, Preferred Deals, backfill, and open

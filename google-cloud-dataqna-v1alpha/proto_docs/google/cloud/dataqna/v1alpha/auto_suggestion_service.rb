@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,8 +92,8 @@ module Google
           #  text_formatted = "top product_group"
           #  html_formatted = "top <b>product_group</b>"
           #  markups {
-          #   \\{type: TEXT, start_char_index: 0, length: 3}
-          #   \\{type: DIMENSION, start_char_index: 4, length: 13}
+          #   {type: TEXT, start_char_index: 0, length: 3}
+          #   {type: DIMENSION, start_char_index: 4, length: 13}
           #  }
           # }
           #

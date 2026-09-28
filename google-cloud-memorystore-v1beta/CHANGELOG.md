@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.14.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35056](https://github.com/googleapis/google-cloud-ruby/issues/35056)) 
+
+### 0.14.0 (2026-07-20)
+
+#### Features
+
+* A new resource_definition `cloudkms.googleapis.com/CryptoKey` is added ([#34790](https://github.com/googleapis/google-cloud-ruby/issues/34790)) 
+
 ### 0.13.0 (2026-06-11)
 
 #### Features

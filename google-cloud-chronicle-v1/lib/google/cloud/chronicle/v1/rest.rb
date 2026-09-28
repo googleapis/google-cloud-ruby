@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ require "google/cloud/chronicle/v1/data_table_service/rest"
 require "google/cloud/chronicle/v1/entity_service/rest"
 require "google/cloud/chronicle/v1/native_dashboard_service/rest"
 require "google/cloud/chronicle/v1/featured_content_native_dashboard_service/rest"
+require "google/cloud/chronicle/v1/feeds_service/rest"
 require "google/cloud/chronicle/v1/findings_refinement_service/rest"
 require "google/cloud/chronicle/v1/instance_service/rest"
 require "google/cloud/chronicle/v1/reference_list_service/rest"

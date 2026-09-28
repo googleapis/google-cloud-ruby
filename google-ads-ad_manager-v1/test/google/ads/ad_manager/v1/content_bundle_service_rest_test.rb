@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -187,6 +187,116 @@ class ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ClientTest < Min
 
         # Verify method calls
         assert_equal 5, list_content_bundles_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_content_bundles
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_content_bundles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ServiceStub.stub :transcode_batch_activate_content_bundles_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_content_bundles_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_content_bundles({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_content_bundles parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_content_bundles ::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_content_bundles({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_content_bundles(::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_content_bundles_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_content_bundles
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_content_bundles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::ContentBundleService::Rest::ServiceStub.stub :transcode_batch_deactivate_content_bundles_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_content_bundles_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_deactivate_content_bundles({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_deactivate_content_bundles parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_deactivate_content_bundles ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_deactivate_content_bundles({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_deactivate_content_bundles(::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_content_bundles_client_stub.call_count
       end
     end
   end

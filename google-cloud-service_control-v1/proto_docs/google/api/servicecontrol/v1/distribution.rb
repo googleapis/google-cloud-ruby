@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ module Google
         #     The buckets are defined below in `bucket_option`. There are N buckets.
         #     `bucket_counts[0]` is the number of samples in the underflow bucket.
         #     `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
-        #     in each of the finite buckets. And `bucket_counts[N] is the number
+        #     in each of the finite buckets. And `bucket_counts[N]` is the number
         #     of samples in the overflow bucket. See the comments of `bucket_option`
         #     below for more details.
         #

@@ -8,7 +8,7 @@
     "name": "geminidataanalytics",
     "name_pretty": "Data Analytics API with Gemini API",
     "product_documentation": "https://cloud.google.com/gemini/docs/conversational-analytics-api/overview",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.",
