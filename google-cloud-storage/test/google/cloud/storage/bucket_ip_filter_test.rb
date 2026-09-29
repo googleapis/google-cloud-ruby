@@ -136,6 +136,27 @@ describe Google::Cloud::Storage::Bucket, :ip_filter, :mock_storage do
     mock.verify
   end
 
+  it "updates its ip_filter with a hash outside of a block" do
+    mock = Minitest::Mock.new
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, ip_filter: ip_filter_gapi),
+                [bucket_name, patch_bucket_gapi(ip_filter: ip_filter_gapi)], **patch_bucket_args(options: {retries: 0})
+
+    bucket.service.mocked_service = mock
+
+    bucket.ip_filter = {
+      mode: "Disabled",
+      public_network_source: {
+        allowed_ip_cidr_ranges: ["0.0.0.0/0", "::/0"]
+      }
+    }
+
+    _(bucket.ip_filter).wont_be_nil
+    _(bucket.ip_filter.mode).must_equal "Disabled"
+    _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_equal ["0.0.0.0/0", "::/0"]
+
+    mock.verify
+  end
+
   def patch_bucket_gapi ip_filter: nil
     Google::Apis::StorageV1::Bucket.new(
       ip_filter: ip_filter

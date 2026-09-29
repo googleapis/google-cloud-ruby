@@ -23,12 +23,7 @@ def disable_ip_filtering bucket_name:
   bucket = storage.bucket bucket_name
 
   ip_filter = {
-    mode: "Disabled",
-    public_network_source: {
-      allowed_ip_cidr_ranges: [
-        "8.8.8.8/32"
-      ]
-    }
+    mode: "Disabled"
   }
 
   bucket.update do |b|

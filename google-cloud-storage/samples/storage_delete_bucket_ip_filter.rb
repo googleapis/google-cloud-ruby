@@ -22,17 +22,20 @@ def delete_bucket_ip_filter bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  # Clear IP filter configuration by setting it to empty/disabled
-  bucket.update do |b|
-    b.ip_filter = {
-      mode: "Disabled",
-      public_network_source: {
-        allowed_ip_cidr_ranges: []
-      }
-    }
+  ip_filter = bucket.ip_filter
+  if ip_filter&.public_network_source
+    ranges = ip_filter.public_network_source.allowed_ip_cidr_ranges || []
+    
+    # Remove a specific CIDR range
+    ranges.delete "0.0.0.0/0"
+    ip_filter.public_network_source.allowed_ip_cidr_ranges = ranges
+
+    bucket.update do |b|
+      b.ip_filter = ip_filter
+    end
   end
 
-  puts "Deleted IP filter for bucket #{bucket_name}."
+  puts "Deleted IP filter rule for bucket #{bucket_name}."
 end
 # [END storage_delete_ip_filtering_rules]
 

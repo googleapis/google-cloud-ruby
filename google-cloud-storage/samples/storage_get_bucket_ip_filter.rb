@@ -26,7 +26,8 @@ def get_bucket_ip_filter bucket_name:
   if ip_filter
     puts "Bucket #{bucket.name} has IP filter mode: #{ip_filter.mode}."
     if ip_filter.public_network_source
-      puts "Allowed public network CIDR ranges: #{ip_filter.public_network_source.allowed_ip_cidr_ranges.join(', ')}."
+      ranges = ip_filter.public_network_source.allowed_ip_cidr_ranges
+      puts "Allowed public network CIDR ranges: #{ranges ? ranges.join(', ') : 'None'}."
     end
   else
     puts "Bucket #{bucket.name} does not have an IP filter configuration."

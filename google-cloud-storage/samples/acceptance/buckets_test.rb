@@ -206,8 +206,7 @@ describe "Buckets Snippets" do
       end
 
       # Gets IP filter of an existing bucket
-      expected = "Bucket #{bucket_name} has IP filter mode: Disabled.\n" \
-                 "Allowed public network CIDR ranges: 8.8.8.8/32.\n"
+      expected = "Bucket #{bucket_name} has IP filter mode: Disabled.\n"
       retry_resource_exhaustion do
         assert_output expected do
           get_bucket_ip_filter bucket_name: bucket_name
@@ -225,7 +224,7 @@ describe "Buckets Snippets" do
       end
 
       # Deletes IP filter of an existing bucket
-      expected = "Deleted IP filter for bucket #{bucket_name}.\n"
+      expected = "Deleted IP filter rule for bucket #{bucket_name}.\n"
       retry_resource_exhaustion do
         assert_output expected do
           delete_bucket_ip_filter bucket_name: bucket_name
@@ -235,7 +234,7 @@ describe "Buckets Snippets" do
       # Enables IP filter of an existing bucket
       # We are intentionally setting the mode to "Disabled" to test the update functionality
       # In real use-case, user would be setting it to "Enabled"
-      expected = "Enabled IP filter for bucket #{bucket_name}.\n"
+      expected = "Configured IP filter for bucket #{bucket_name} (mode: Disabled).\n"
       retry_resource_exhaustion do
         assert_output expected do
           enable_bucket_ip_filter bucket_name: bucket_name, mode: "Disabled"

@@ -15,7 +15,6 @@
 # [START storage_list_bucket_ip_filters]
 def list_bucket_ip_filters
   # The ID of your GCP project
-  # project_id = "your-project-id"
 
   require "google/cloud/storage"
 

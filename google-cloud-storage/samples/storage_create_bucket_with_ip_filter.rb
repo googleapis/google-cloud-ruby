@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_create_bucket_with_ip_filter]
+# [START storage_create_bucket_ip_filtering]
 def create_bucket_with_ip_filter bucket_name:
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -35,7 +35,7 @@ def create_bucket_with_ip_filter bucket_name:
   end
   puts "Created bucket #{bucket.name} with IP filter."
 end
-# [END storage_create_bucket_with_ip_filter]
+# [END storage_create_bucket_ip_filtering]
 
 if $PROGRAM_NAME == __FILE__
   create_bucket_with_ip_filter bucket_name: ARGV.shift

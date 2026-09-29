@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "../storage_helper"
+require "storage_helper"
 describe Google::Cloud::Storage::Bucket, :storage do
-  let(:ip_filter_disabled) do
+  let :ip_filter_disabled do
     {
       mode: "Disabled",
       public_network_source: {
@@ -23,7 +23,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     }
   end
 
-  let(:ip_filter_disabled_update) do
+  let :ip_filter_disabled_update do
     {
       mode: "Disabled",
       public_network_source: {
@@ -40,10 +40,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
   let(:bucket_name) { "#{$bucket_names.first}-ip-filter" }
   let :bucket do
     storage.bucket(bucket_name, projection: "full") ||
-    storage.create_bucket(bucket_name, ip_filter: ip_filter_disabled) 
+      storage.create_bucket(bucket_name, ip_filter: ip_filter_disabled)
   end
 
-  after(:all) do
+  after :all do
     safe_gcs_execute { bucket.delete }
   end
 
@@ -56,16 +56,14 @@ describe Google::Cloud::Storage::Bucket, :storage do
     }
 
     # Verify that creating a bucket with an invalid CIDR raises an error
-    err = expect {
+    err = expect do
       storage.create_bucket "#{bucket_name}-invalid", ip_filter: invalid_ip_filter
-    }.must_raise Google::Cloud::InvalidArgumentError
+    end.must_raise Google::Cloud::InvalidArgumentError
 
-    _(err.message).must_match /invalid/i
+    _(err.message).must_match(/invalid/i)
   end
 
   it "creates, gets, updates, and deletes a bucket with ip_filter" do
-
-
     _(bucket.ip_filter).wont_be_nil
     _(bucket.ip_filter.mode).must_equal "Disabled"
     _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_equal ["0.0.0.0/0", "::/0"]
@@ -108,7 +106,6 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_be_nil
     _(bucket.ip_filter.vpc_network_sources).must_be_nil
-
   end
 
   it "configures ip_filter with multiple allowed_ip_cidr_ranges" do
