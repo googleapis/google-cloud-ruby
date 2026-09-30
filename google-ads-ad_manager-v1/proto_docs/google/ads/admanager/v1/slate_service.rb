@@ -54,12 +54,11 @@ module Google
         #     Optional. Expression to filter the response.
         #      See syntax details at https://google.aip.dev/160
         #
-        #     <b>Filterable fields:</b>
-        #     <ul style="list-style-type:none">
-        #       <li><code>displayName</code></li>
-        #       <li><code>name</code></li>
-        #       <li><code>status</code></li>
-        #     </ul>
+        #     **Filterable fields:**
+        #
+        #     * `displayName`
+        #     * `name`
+        #     * `status`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Expression to specify sorting order.

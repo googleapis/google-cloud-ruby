@@ -1,5 +1,23 @@
 # Changelog
 
+### 2.12.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 2.11.0 (2026-08-24)
+
+#### Features
+
+* add indicator if early apply results are available ([#36314](https://github.com/googleapis/google-cloud-ruby/issues/36314)) 
+
+### 2.10.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35049](https://github.com/googleapis/google-cloud-ruby/issues/35049)) 
+
 ### 2.10.0 (2026-06-11)
 
 #### Features

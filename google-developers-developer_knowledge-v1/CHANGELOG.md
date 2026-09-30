@@ -1,5 +1,30 @@
 # Changelog
 
+### 0.5.0 (2026-09-03)
+
+#### Features
+
+* update API sources and regenerate ([#36517](https://github.com/googleapis/google-cloud-ruby/issues/36517)) 
+
+### 0.4.0 (2026-08-27)
+
+#### Features
+
+* publish public v1 proto for DocumentChunk.relevance_score ([#36320](https://github.com/googleapis/google-cloud-ruby/issues/36320)) 
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 0.3.0 (2026-08-20)
+
+#### Features
+
+* You can now filter by `content_length_bytes` ([#36301](https://github.com/googleapis/google-cloud-ruby/issues/36301)) 
+
+### 0.2.2 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35066](https://github.com/googleapis/google-cloud-ruby/issues/35066)) 
+
 ### 0.2.1 (2026-07-20)
 
 #### Documentation

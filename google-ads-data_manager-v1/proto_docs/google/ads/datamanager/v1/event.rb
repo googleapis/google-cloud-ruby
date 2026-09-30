@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -155,6 +155,14 @@ module Google
         # @!attribute [rw] encrypted_user_ids
         #   @return [::Array<::Google::Ads::DataManager::V1::EncryptedUserId>]
         #     Optional. Any number of encrypted user IDs.
+        # @!attribute [rw] ppid
+        #   @return [::String]
+        #     Optional. A unique identifier for an authenticated user (signed-in), as
+        #     defined by the publisher.
+        # @!attribute [rw] visitor_ppid
+        #   @return [::String]
+        #     Optional. A unique identifier for an unauthenticated user (user who is not
+        #     signed-in), as defined by the publisher.
         class AdIdentifiers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,8 +1,7 @@
-# Ruby Client for the IAM Policy Troubleshooter API
+# Ruby Client for the Policy Troubleshooter API
 
-API Client library for the IAM Policy Troubleshooter API
+Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access.
 
-Policy Troubleshooter makes it easier to understand why a user has access to a resource or doesn't have permission to call an API. Given an email, resource, and permission, Policy Troubleshooter will examine all IAM policies that apply to the resource. It then reveals whether the member's roles include the permission on that resource and, if so, which policies bind the member to those roles.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-policy_troubleshooter-v*`.
@@ -19,7 +18,7 @@ client gems:
 [google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest),
 [google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest).
 
-See also the [Product Documentation](https://cloud.google.com/iam/docs/troubleshooting-access)
+See also the [Product Documentation](https://cloud.google.com/policy-intelligence/docs/troubleshoot-access)
 for more usage information.
 
 ## Quick Start

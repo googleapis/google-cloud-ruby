@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/resourcemanager/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-resource_manager/$1

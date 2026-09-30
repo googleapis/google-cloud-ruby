@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/container_analysis/v1/version"
 require "google/cloud/container_analysis/v1/container_analysis/credentials"
 require "google/cloud/container_analysis/v1/container_analysis/paths"
 require "google/cloud/container_analysis/v1/container_analysis/client"
+require "google/cloud/container_analysis/v1/container_analysis/rest"
 
 module Google
   module Cloud
@@ -49,6 +50,11 @@ module Google
         #
         #     require "google/cloud/container_analysis/v1/container_analysis"
         #     client = ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/container_analysis/v1/container_analysis/rest"
+        #     client = ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Rest::Client.new
         #
         module ContainerAnalysis
         end

@@ -1,8 +1,7 @@
 # Ruby Client for the Policy Troubleshooter V3 API
 
-API Client library for the Policy Troubleshooter V3 API
+Policy Troubleshooter helps you understand whether a principal can access a resource. Given a principal, a resource, and a permission, Policy Troubleshooter examines the allow policies, deny policies, and principal access boundary (PAB) policies that impact the principal's access.
 
-google-cloud-policy_troubleshooter-iam-v3 is the official client library for the Policy Troubleshooter V3 API.
 
 https://github.com/googleapis/google-cloud-ruby
 

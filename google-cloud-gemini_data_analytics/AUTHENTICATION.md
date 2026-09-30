@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/gemini_data_analytics"
 
-client = Google::Cloud::GeminiDataAnalytics.data_agent_service do |config|
+client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::GeminiDataAnalytics.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::GeminiDataAnalytics.data_agent_service
+client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/gemini_data_analytics"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::GeminiDataAnalytics.data_agent_service
+client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service
 ```
 
 ### Local ADC file

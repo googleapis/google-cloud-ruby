@@ -64,6 +64,16 @@
               "methods": [
                 "set_iam_policy"
               ]
+            },
+            "SetAgentOpsObservability": {
+              "methods": [
+                "set_agent_ops_observability"
+              ]
+            },
+            "RetrieveAgentOpsObservability": {
+              "methods": [
+                "retrieve_agent_ops_observability"
+              ]
             }
           }
         }
@@ -87,6 +97,11 @@
             "DeleteConversation": {
               "methods": [
                 "delete_conversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "update_conversation"
               ]
             },
             "GetConversation": {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -249,7 +249,7 @@ module Google
         #     height/weight of a product, or age of a customer.
         #
         #     For example: `{ "vendor": {"text": ["vendor123", "vendor456"]},
-        #     "lengths_cm": \\{"numbers":[2.3, 15.4]}, "heights_cm": \\{"numbers":[8.1, 6.4]}
+        #     "lengths_cm": {"numbers":[2.3, 15.4]}, "heights_cm": {"numbers":[8.1, 6.4]}
         #     }`.
         #
         #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT

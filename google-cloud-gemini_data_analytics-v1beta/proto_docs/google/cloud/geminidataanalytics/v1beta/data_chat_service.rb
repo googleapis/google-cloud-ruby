@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If true (default to false), the service may return a
         #     clarifying_question if the input query is ambiguous.
+        # @!attribute [rw] generate_debug_info
+        #   @return [::Boolean]
+        #     Optional. If true (default to false), returns internal debugging
+        #     information.
         class GenerationOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +129,17 @@ module Google
         #     options.generate_disambiguation_question was true, this field contains a
         #     question to the user for clarification. The returned represents the
         #     service's best effort based on the ambiguous input.
+        # @!attribute [rw] pipeline_debug_info
+        #   @return [::Google::Protobuf::Struct]
+        #     Detailed step-by-step pipeline execution information.
+        #     Populated only if generation_options.generate_debug_info was true.
+        #     Provided for debugging and transparency purposes only.
+        #     The structure and content of this object is not guaranteed and may
+        #     change at any time without notice. Do not write production code or
+        #     business logic depending on the fields in this object.
+        # @!attribute [rw] token_usage
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TokenUsage]
+        #     Overall token usage for the request.
         class QueryDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -141,6 +156,9 @@ module Google
         #   @return [::Integer]
         #     The total number of rows in the full result set, if known.
         #     This may be an estimate or an exact count.
+        #     Note: if an internal limit (such as LIMIT 1000) was applied during query
+        #     execution to guard against excessive data transfer, this count reflects the
+        #     truncated result size rather than the unrestricted table result size.
         # @!attribute [rw] partial_result
         #   @return [::Boolean]
         #     Set to true if the returned rows in `query_result` are a subset of the
@@ -308,7 +326,8 @@ module Google
 
           # Mode of thinking for the agent.
           module ThinkingMode
-            # Unspecified thinking mode, agent will use THINKING mode by default.
+            # Unspecified thinking mode, agent will use THINKING mode by default except
+            # for BigQuery user defaulting to FAST mode by default.
             THINKING_MODE_UNSPECIFIED = 0
 
             # Fast mode, answers quickly.
@@ -318,9 +337,9 @@ module Google
             THINKING = 2
           end
 
-          # Model selection for the agent.
+          # Model selection for the agent for BigQuery users.
           module Model
-            # No model specified. The default model will be used.
+            # No model specified. Either preview or non preview model can be used.
             MODEL_UNSPECIFIED = 0
 
             # Use the most up-to-date non-preview model. This may constrain certain

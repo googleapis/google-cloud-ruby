@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigquery
       module Connection
-        VERSION = "1.8.0"
+        VERSION = "1.8.1"
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 require "helper"
 require "google/cloud/memorystore"
 require "gapic/common"
+require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::Memorystore::ClientConstructionMinitest < Minitest::Test
@@ -40,10 +41,21 @@ class Google::Cloud::Memorystore::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_memorystore_grpc
+    skip unless Google::Cloud::Memorystore.memorystore_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Memorystore.memorystore transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Memorystore::V1::Memorystore::Client, client
+    end
+  end
+
   def test_memorystore_rest
-    skip unless Google::Cloud::Memorystore.memorystore_available?
+    skip unless Google::Cloud::Memorystore.memorystore_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::Memorystore.memorystore do |config|
+      client = Google::Cloud::Memorystore.memorystore transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client, client

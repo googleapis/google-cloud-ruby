@@ -2,7 +2,6 @@
 
 A service to modify your BigQuery reservations.
 
-The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.create_reservation request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/reservations)
-for general usage information.
 
 ## Debug Logging
 

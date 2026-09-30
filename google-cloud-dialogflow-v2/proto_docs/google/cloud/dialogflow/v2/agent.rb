@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ module Google
             MATCH_MODE_HYBRID = 1
 
             # Can be used for agents with a large number of examples in intents,
-            # especially the ones using @sys.any or very large custom entities.
+            # especially the ones using `@sys`.any or very large custom entities.
             MATCH_MODE_ML_ONLY = 2
           end
 

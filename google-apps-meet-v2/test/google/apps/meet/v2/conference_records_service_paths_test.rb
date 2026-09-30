@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,6 +86,18 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientPathsTest < Mini
 
       path = client.recording_path conference_record: "value0", recording: "value1"
       assert_equal "conferenceRecords/value0/recordings/value1", path
+    end
+  end
+
+  def test_smart_note_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Meet::V2::ConferenceRecordsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.smart_note_path conference_record: "value0", smart_note: "value1"
+      assert_equal "conferenceRecords/value0/smartNotes/value1", path
     end
   end
 

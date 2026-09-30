@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/storagetransfer/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-storage_transfer/$1

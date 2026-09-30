@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -169,7 +169,7 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}/protectedResourcesSummary",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

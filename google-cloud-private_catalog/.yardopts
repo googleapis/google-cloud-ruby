@@ -1,5 +1,5 @@
 --no-private
---title="Private Catalog API"
+--title="Cloud Private Catalog API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

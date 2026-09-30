@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -154,6 +154,25 @@ module Google
                 raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
 
                 "projects/#{project}/instances/#{instance}/materializedViews/#{materialized_view}"
+              end
+
+              ##
+              # Create a fully-qualified MemoryLayer resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/instances/{instance}/clusters/{cluster}/memoryLayer`
+              #
+              # @param project [String]
+              # @param instance [String]
+              # @param cluster [String]
+              #
+              # @return [::String]
+              def memory_layer_path project:, instance:, cluster:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+                "projects/#{project}/instances/#{instance}/clusters/#{cluster}/memoryLayer"
               end
 
               ##

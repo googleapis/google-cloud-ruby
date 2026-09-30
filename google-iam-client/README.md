@@ -1,8 +1,7 @@
-# Ruby Client for the IAM API
+# Ruby Client for the Identity and Access Management (IAM) API
 
-API Client library for the IAM API
+Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
 
-Manages identity and access control policies for Google Cloud Platform resources.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-iam-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-iam-v2](https://rubydoc.info/gems/google-iam-v2).
-
-See also the [Product Documentation](https://cloud.google.com/iam)
-for more usage information.
 
 ## Quick Start
 

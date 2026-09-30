@@ -1,4 +1,4 @@
-# Workflows Executions V1beta Protocol Buffer Documentation
+# Workflow Executions V1BETA Protocol Buffer Documentation
 
 These files are for the YARD documentation of the generated protobuf files.
 They are not intended to be required or loaded at runtime.

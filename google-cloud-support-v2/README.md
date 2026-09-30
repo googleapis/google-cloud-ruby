@@ -2,7 +2,6 @@
 
 Manages Google Cloud technical support cases for Customer Care support offerings.
 
-Manages Google Cloud technical support cases for Customer Care support offerings.
 
 https://github.com/googleapis/google-cloud-ruby
 

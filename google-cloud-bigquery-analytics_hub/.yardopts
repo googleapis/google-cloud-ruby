@@ -1,5 +1,5 @@
 --no-private
---title="Analytics Hub V1 API"
+--title="Analytics Hub API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

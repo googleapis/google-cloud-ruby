@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Data Catalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage."
-  gem.summary       = "API Client library for the Data Catalog API"
+  gem.description   = "A fully managed and highly scalable data discovery and metadata management service."
+  gem.summary       = "A fully managed and highly scalable data discovery and metadata management service."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

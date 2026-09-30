@@ -1,8 +1,7 @@
 # Ruby Client for the Google Cloud Managed Lustre V1 API
 
-API Client library for the Google Cloud Managed Lustre V1 API
+Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications.
 
-google-cloud-lustre-v1 is the official client library for the Google Cloud Managed Lustre V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 

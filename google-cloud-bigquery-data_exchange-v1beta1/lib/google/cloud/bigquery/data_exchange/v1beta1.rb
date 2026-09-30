@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,6 +30,11 @@ module Google
         #
         #     require "google/cloud/bigquery/data_exchange/v1beta1"
         #     client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new
+        #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/data_exchange/v1beta1"
+        #     client = ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Rest::Client.new
         #
         module V1beta1
         end

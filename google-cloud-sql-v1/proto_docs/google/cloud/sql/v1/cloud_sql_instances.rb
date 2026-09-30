@@ -28,6 +28,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesAddServerCaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -40,6 +43,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesAddServerCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,6 +58,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesAddEntraIdCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,6 +76,9 @@ module Google
         #     Required. Project ID of the source Cloud SQL instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesCloneRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesCloneRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,6 +108,9 @@ module Google
         # @!attribute [rw] final_backup_description
         #   @return [::String]
         #     Optional. The description of the final backup.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesDeleteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,6 +125,9 @@ module Google
         #     ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesDemoteMasterRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesDemoteMasterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +143,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesDemoteRequest]
         #     Required. The request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesDemoteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -139,6 +160,9 @@ module Google
         #     Project ID of the project that contains the instance to be exported.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesExportRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesExportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +177,9 @@ module Google
         #     ID of the project that contains the read replica.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesFailoverRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesFailoverRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -165,6 +192,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesGetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,6 +209,9 @@ module Google
         #     Project ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesImportRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesImportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -191,6 +224,9 @@ module Google
         #     should belong.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::DatabaseInstance]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesInsertRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,6 +257,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project for which to list Cloud SQL instances.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesListRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -233,6 +272,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesListServerCasRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,6 +287,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesListServerCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -257,6 +302,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesListEntraIdCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -279,6 +327,9 @@ module Google
         #     reconcile the PSC networking.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::DatabaseInstance]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesPatchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -299,6 +350,9 @@ module Google
         #     DR replica when the original primary instance comes back online.
         #     If set to false or not specified, then the original primary
         #     instance becomes an independent Cloud SQL primary instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesPromoteReplicaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -316,6 +370,9 @@ module Google
         #     Optional. (MySQL and PostgreSQL only) Cloud SQL instance operations
         #     timeout, which is a sum of all database operations. Default value is 10
         #     minutes and can be modified to a maximum value of 24 hours.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesSwitchoverRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -331,6 +388,9 @@ module Google
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Sql::V1::SqlInstancesResetSslConfigRequest::ResetSslMode]
         #     Optional. Reset SSL mode to use.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesResetSslConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -357,6 +417,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance to be restarted.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRestartRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -371,6 +434,9 @@ module Google
         #     Project ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesRestoreBackupRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRestoreBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -385,6 +451,9 @@ module Google
         #     Project ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesRotateServerCaRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRotateServerCaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -400,6 +469,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesRotateServerCertificateRequest]
         #     Optional. Rotate server certificate request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRotateServerCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -415,6 +487,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesRotateEntraIdCertificateRequest]
         #     Optional. Rotate Entra ID certificate request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRotateEntraIdCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -427,6 +502,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     ID of the project that contains the read replica.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesStartReplicaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -439,6 +517,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     ID of the project that contains the read replica.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesStopReplicaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -453,6 +534,9 @@ module Google
         #     Project ID of the Cloud SQL project.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesTruncateLogRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesTruncateLogRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -468,6 +552,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::PerformDiskShrinkContext]
         #     Perform disk shrink context.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesPerformDiskShrinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -482,6 +569,9 @@ module Google
         #     Project ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::DatabaseInstance]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesUpdateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -496,6 +586,9 @@ module Google
         #     ID of the project that contains the instance.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::SqlInstancesRescheduleMaintenanceRequestBody]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRescheduleMaintenanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -511,6 +604,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesReencryptRequest]
         #     Reencrypt body that users request
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesReencryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -565,6 +661,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesGetDiskShrinkConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -602,6 +701,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Sql::V1::ExternalSyncSelectedObject>]
         #     Optional. Migrate only the specified objects from the source instance. If
         #     this field is empty, then migrate all objects.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesVerifyExternalSyncSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -664,6 +766,9 @@ module Google
         #     will wipe replica databases overlapping with the proposed selected_objects.
         #     If this field is not set and there are both overlapping and additional
         #     databases proposed, an error will be returned.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesStartExternalSyncRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -676,6 +781,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     ID of the project that contains the read replica.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesResetReplicaSizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -690,6 +798,9 @@ module Google
         #     Project ID of the Cloud SQL project.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::SslCertsCreateEphemeralRequest]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesCreateEphemeralCertRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -928,6 +1039,9 @@ module Google
         #   @return [::Google::Cloud::Sql::V1::InstancesPreCheckMajorVersionUpgradeRequest]
         #     Required. The context for request to perform the pre-check major version
         #     upgrade operation.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesPreCheckMajorVersionUpgradeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -974,6 +1088,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp used to identify the time when the source instance is
         #     deleted. If this instance is deleted, then you must set the timestamp.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesGetLatestRecoveryTimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1350,6 +1467,10 @@ module Google
         #   @return [::Google::Protobuf::BoolValue]
         #     Optional. If true, instance metadata is sent to the Database Center. If
         #     false, instance metadata is not sent to the Database Center.
+        # @!attribute [rw] database_center_integration
+        #   @return [::Google::Cloud::Sql::V1::DatabaseInstance::DatabaseCenterIntegration]
+        #     Optional. State of the Database Center integration for this instance.
+        #     When unspecified, Database Center integration is enabled by default.
         class DatabaseInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1506,6 +1627,19 @@ module Google
 
             # The instance uses the old network architecture.
             OLD_NETWORK_ARCHITECTURE = 2
+          end
+
+          # State of the integration with Database Center.
+          module DatabaseCenterIntegration
+            # Default value. The integration state is unspecified. When unspecified,
+            # Database Center integration is enabled by default.
+            DATABASE_CENTER_INTEGRATION_UNSPECIFIED = 0
+
+            # Database Center integration is enabled.
+            ENABLED = 1
+
+            # Database Center integration is disabled.
+            DISABLED = 2
           end
         end
 
@@ -2081,6 +2215,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::ExecuteSqlPayload]
         #     The request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2271,6 +2408,9 @@ module Google
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::InstancesAcquireSsrsLeaseRequest]
         #     Required. The request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesAcquireSsrsLeaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2295,6 +2435,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. The project ID that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesReleaseSsrsLeaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

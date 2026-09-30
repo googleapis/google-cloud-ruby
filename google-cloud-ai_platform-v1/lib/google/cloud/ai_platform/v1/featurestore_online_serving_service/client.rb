@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -440,7 +440,7 @@ module Google
             #     Required. The resource name of the EntityType for the entities being
             #     written. Value format:
             #     `projects/{project}/locations/{location}/featurestores/
-            #     \\{featurestore}/entityTypes/\\{entityType}`. For example,
+            #     {featurestore}/entityTypes/{entityType}`. For example,
             #     for a machine learning model predicting user clicks on a website, an
             #     EntityType ID could be `user`.
             #   @param payloads [::Array<::Google::Cloud::AIPlatform::V1::WriteFeatureValuesPayload, ::Hash>]

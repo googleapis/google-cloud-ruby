@@ -53,6 +53,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Message to specify the index to use for the search.
+          # @!attribute [rw] dense_scann_params
+          #   @return [::Google::Cloud::VectorSearch::V1::SearchHint::IndexHint::DenseScannParams]
+          #     Optional. Dense ScaNN parameters.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The resource name of the index to use for the search.
@@ -62,6 +65,17 @@ module Google
           class IndexHint
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Parameters for dense ScaNN.
+            # @!attribute [rw] target_recall
+            #   @return [::Float]
+            #     Optional. The target recall for the search. Must be a double in the
+            #     range [0, 1]. While the search aims to achieve this level of recall, it
+            #     is not guaranteed.
+            class DenseScannParams
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # KnnHint will be used if search should be explicitly done on system's
@@ -134,14 +148,20 @@ module Google
         # Defines a semantic search operation.
         # @!attribute [rw] search_text
         #   @return [::String]
-        #     Required. The query text, which is used to generate an embedding according
+        #     Optional. The query text, which is used to generate an embedding according
         #     to the embedding model specified in the collection config.
+        #
+        #     Required when using the text search mode.
         # @!attribute [rw] search_field
         #   @return [::String]
         #     Required. The vector field to search.
         # @!attribute [rw] task_type
         #   @return [::Google::Cloud::VectorSearch::V1::EmbeddingTaskType]
-        #     Required. The task type of the query embedding.
+        #     Optional. The task type of the query embedding. Must be specified for
+        #     text-only embedding models, see
+        #     <https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/task-types>
+        #     Not needed for multi modal embedding models, see
+        #     <https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/get-multimodal-embeddings#specify-task-instructions>
         # @!attribute [rw] output_fields
         #   @return [::Google::Cloud::VectorSearch::V1::OutputFields]
         #     Optional. The fields to return in the search results.
@@ -359,6 +379,9 @@ module Google
         # @!attribute [rw] rrf
         #   @return [::Google::Cloud::VectorSearch::V1::ReciprocalRankFusion]
         #     Reciprocal Rank Fusion ranking.
+        # @!attribute [rw] vertex_ranker
+        #   @return [::Google::Cloud::VectorSearch::V1::VertexRanker]
+        #     Optional. Vertex AI ranking.
         class Ranker
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -371,6 +394,41 @@ module Google
         class ReciprocalRankFusion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a ranker using the Vertex AI ranking service.
+        # See <https://cloud.google.com/generative-ai-app-builder/docs/ranking> for
+        # details.
+        # @!attribute [rw] text_record_spec
+        #   @return [::Google::Cloud::VectorSearch::V1::VertexRanker::TextRecordSpec]
+        #     The record spec for text search.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The model used for ranking documents. The list of available
+        #     models is described in
+        #     <https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking#models>.
+        #     Currently, only `semantic-ranker-fast@latest` is supported.
+        # @!attribute [rw] top_n
+        #   @return [::Integer]
+        #     Required. The number of documents to be processed for ranking.
+        class VertexRanker
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The record spec for text search.
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Required. The query against which the records are ranked and scored.
+          # @!attribute [rw] title_template
+          #   @return [::String]
+          #     Optional. The template used to generate the record's title.
+          # @!attribute [rw] content_template
+          #   @return [::String]
+          #     Optional. The template used to generate the record's content.
+          class TextRecordSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A response from a batch search operation.

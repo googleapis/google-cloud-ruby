@@ -30,12 +30,18 @@ module Google
         #     for the list of supported models.
         # @!attribute [rw] text_template
         #   @return [::String]
-        #     Required. Required: Text template for the input to the model. The template
-        #     must contain one or more references to fields in the DataObject, e.g.:
-        #     "Movie Title: \\{title} ---- Movie Plot: \\{plot}".
+        #     Optional. Text template for the input to the model. The template must
+        #     contain one or more references to fields in the DataObject, e.g.: "Movie
+        #     Title: \\{title} ---- Movie Plot: \\{plot}".
+        #
+        #     Required when using the text-only path.
         # @!attribute [rw] task_type
         #   @return [::Google::Cloud::VectorSearch::V1::EmbeddingTaskType]
-        #     Required. Required: Task type for the embeddings.
+        #     Optional. Optional: Task type for the embeddings. Required for text-only
+        #     embedding models, see
+        #     https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/task-types
+        #     Not needed for multi modal embedding models, see
+        #     https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/get-multimodal-embeddings#specify-task-instructions
         class VertexEmbeddingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

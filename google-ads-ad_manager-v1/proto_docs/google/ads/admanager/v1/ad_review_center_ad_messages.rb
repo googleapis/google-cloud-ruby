@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ module Google
         # @!attribute [r] preview_url
         #   @return [::String]
         #     Output only. The preview URL that can be embedded or accessed directly
-        #     which will present the rendered contents of the ad. (This URL expires 72
-        #     hours after being retrieved.).
+        #     which will present the rendered contents of the ad. This URL expires 72
+        #     hours after being retrieved.
         class AdReviewCenterAd
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

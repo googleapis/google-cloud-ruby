@@ -1,13 +1,12 @@
-# Ruby Client for the Phishing Protection V1beta1 API
+# Ruby Client for the Phishing Protection V1BETA1 API
 
-API Client library for the Phishing Protection V1beta1 API
+Phishing Protection helps prevent users from accessing phishing sites by identifying various signals associated with malicious content, including the use of your brand assets, classifying malicious content that uses your brand and reporting the unsafe URLs to Google Safe Browsing. Once a site is propagated to Safe Browsing, users will see warnings across more than 4 billion devices.
 
-Phishing Protection helps prevent users from accessing phishing sites by identifying various signals associated with malicious content, including the use of your brand assets, classifying malicious content that uses your brand and reporting the unsafe URLs to Google Safe Browsing.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Phishing Protection V1beta1 API. Most users should consider using
+specific version of the Phishing Protection V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-phishing_protection](https://rubygems.org/gems/google-cloud-phishing_protection).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.report_phishing request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection)
-for general usage information.
 
 ## Debug Logging
 

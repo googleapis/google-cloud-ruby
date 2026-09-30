@@ -1,13 +1,12 @@
-# Ruby Client for the Cloud Monitoring Dashboards V1 API
+# Ruby Client for the Cloud Monitoring V1 API
 
 Manages your Cloud Monitoring data and configurations.
 
-Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Monitoring Dashboards V1 API. Most users should consider using
+specific version of the Cloud Monitoring V1 API. Most users should consider using
 the main client gem,
 [google-cloud-monitoring](https://rubygems.org/gems/google-cloud-monitoring).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.create_dashboard request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/monitoring)
-for general usage information.
 
 ## Debug Logging
 

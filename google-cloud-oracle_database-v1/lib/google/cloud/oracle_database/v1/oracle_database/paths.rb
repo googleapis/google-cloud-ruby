@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/autonomousDatabases/#{autonomous_database}"
+            end
+
+            ##
+            # Create a fully-qualified AutonomousDatabaseBackup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autonomousDatabaseBackups/{autonomous_database_backup}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param autonomous_database_backup [String]
+            #
+            # @return [::String]
+            def autonomous_database_backup_path project:, location:, autonomous_database_backup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autonomousDatabaseBackups/#{autonomous_database_backup}"
             end
 
             ##

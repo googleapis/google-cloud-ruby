@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy."
-  gem.summary       = "API Client library for the Organization Policy API"
+  gem.description   = "The Organization Policy API allows users to configure governance rules on their Google Cloud resources across the resource hierarchy."
+  gem.summary       = "The Organization Policy API allows users to configure governance rules on their Google Cloud resources across the resource hierarchy."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

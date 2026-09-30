@@ -1,5 +1,5 @@
 --no-private
---title="Cloud Run API"
+--title="Cloud Run Admin API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Domains API
 
-API Client library for the Cloud Domains API
+Enables management and configuration of domain names.
 
-The Cloud Domains API provides registration, management and configuration of domain names.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-domains-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-domains-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-domains-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/domains)
-for more usage information.
 
 ## Quick Start
 

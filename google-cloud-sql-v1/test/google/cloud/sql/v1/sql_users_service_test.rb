@@ -75,6 +75,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     instance = "hello world"
     name = "hello world"
     project = "hello world"
+    location = "hello world"
 
     delete_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete, name
@@ -83,6 +84,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       assert_equal "hello world", request["instance"]
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -93,31 +95,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.delete({ host: host, instance: instance, name: name, project: project }) do |response, operation|
+      c.delete({ host: host, instance: instance, name: name, project: project, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.delete host: host, instance: instance, name: name, project: project do |response, operation|
+      c.delete host: host, instance: instance, name: name, project: project, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.delete ::Google::Cloud::Sql::V1::SqlUsersDeleteRequest.new(host: host, instance: instance, name: name, project: project) do |response, operation|
+      c.delete ::Google::Cloud::Sql::V1::SqlUsersDeleteRequest.new(host: host, instance: instance, name: name, project: project, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.delete({ host: host, instance: instance, name: name, project: project }, grpc_options) do |response, operation|
+      c.delete({ host: host, instance: instance, name: name, project: project, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.delete(::Google::Cloud::Sql::V1::SqlUsersDeleteRequest.new(host: host, instance: instance, name: name, project: project), grpc_options) do |response, operation|
+      c.delete(::Google::Cloud::Sql::V1::SqlUsersDeleteRequest.new(host: host, instance: instance, name: name, project: project, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -139,6 +141,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     name = "hello world"
     project = "hello world"
     host = "hello world"
+    location = "hello world"
 
     get_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get, name
@@ -147,6 +150,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["host"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -157,31 +161,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.get({ instance: instance, name: name, project: project, host: host }) do |response, operation|
+      c.get({ instance: instance, name: name, project: project, host: host, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get instance: instance, name: name, project: project, host: host do |response, operation|
+      c.get instance: instance, name: name, project: project, host: host, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get ::Google::Cloud::Sql::V1::SqlUsersGetRequest.new(instance: instance, name: name, project: project, host: host) do |response, operation|
+      c.get ::Google::Cloud::Sql::V1::SqlUsersGetRequest.new(instance: instance, name: name, project: project, host: host, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get({ instance: instance, name: name, project: project, host: host }, grpc_options) do |response, operation|
+      c.get({ instance: instance, name: name, project: project, host: host, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get(::Google::Cloud::Sql::V1::SqlUsersGetRequest.new(instance: instance, name: name, project: project, host: host), grpc_options) do |response, operation|
+      c.get(::Google::Cloud::Sql::V1::SqlUsersGetRequest.new(instance: instance, name: name, project: project, host: host, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,6 +206,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     instance = "hello world"
     project = "hello world"
     body = {}
+    location = "hello world"
 
     insert_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :insert, name
@@ -209,6 +214,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       assert_equal "hello world", request["instance"]
       assert_equal "hello world", request["project"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1::User), request["body"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -219,31 +225,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.insert({ instance: instance, project: project, body: body }) do |response, operation|
+      c.insert({ instance: instance, project: project, body: body, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.insert instance: instance, project: project, body: body do |response, operation|
+      c.insert instance: instance, project: project, body: body, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.insert ::Google::Cloud::Sql::V1::SqlUsersInsertRequest.new(instance: instance, project: project, body: body) do |response, operation|
+      c.insert ::Google::Cloud::Sql::V1::SqlUsersInsertRequest.new(instance: instance, project: project, body: body, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.insert({ instance: instance, project: project, body: body }, grpc_options) do |response, operation|
+      c.insert({ instance: instance, project: project, body: body, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.insert(::Google::Cloud::Sql::V1::SqlUsersInsertRequest.new(instance: instance, project: project, body: body), grpc_options) do |response, operation|
+      c.insert(::Google::Cloud::Sql::V1::SqlUsersInsertRequest.new(instance: instance, project: project, body: body, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -263,12 +269,14 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     instance = "hello world"
     project = "hello world"
+    location = "hello world"
 
     list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list, name
       assert_kind_of ::Google::Cloud::Sql::V1::SqlUsersListRequest, request
       assert_equal "hello world", request["instance"]
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -279,31 +287,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.list({ instance: instance, project: project }) do |response, operation|
+      c.list({ instance: instance, project: project, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list instance: instance, project: project do |response, operation|
+      c.list instance: instance, project: project, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list ::Google::Cloud::Sql::V1::SqlUsersListRequest.new(instance: instance, project: project) do |response, operation|
+      c.list ::Google::Cloud::Sql::V1::SqlUsersListRequest.new(instance: instance, project: project, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list({ instance: instance, project: project }, grpc_options) do |response, operation|
+      c.list({ instance: instance, project: project, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list(::Google::Cloud::Sql::V1::SqlUsersListRequest.new(instance: instance, project: project), grpc_options) do |response, operation|
+      c.list(::Google::Cloud::Sql::V1::SqlUsersListRequest.new(instance: instance, project: project, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -330,6 +338,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     server_roles = ["hello world"]
     revoke_existing_server_roles = true
     body = {}
+    location = "hello world"
 
     update_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update, name
@@ -345,6 +354,7 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       assert_equal true, request["revoke_existing_server_roles"]
       assert request.has_revoke_existing_server_roles?
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1::User), request["body"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -355,31 +365,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }) do |response, operation|
+      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body do |response, operation|
+      c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body) do |response, operation|
+      c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }, grpc_options) do |response, operation|
+      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body), grpc_options) do |response, operation|
+      c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

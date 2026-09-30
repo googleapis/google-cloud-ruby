@@ -2,7 +2,6 @@
 
 An API for setting attribute based access control to requests to GCP services.
 
-Access Context Manager allows enterprises to configure access levels which map to a policy defined on request attributes.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_access_policies request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-identity-access_context_manager-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/access-context-manager/)
-for general usage information.
 
 ## Debug Logging
 

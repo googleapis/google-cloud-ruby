@@ -64,6 +64,61 @@
               "methods": [
                 "delete_parameter_version"
               ]
+            },
+            "ListTemplates": {
+              "methods": [
+                "list_templates"
+              ]
+            },
+            "GetTemplate": {
+              "methods": [
+                "get_template"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "create_template"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "update_template"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "delete_template"
+              ]
+            },
+            "ListTemplateVersions": {
+              "methods": [
+                "list_template_versions"
+              ]
+            },
+            "GetTemplateVersion": {
+              "methods": [
+                "get_template_version"
+              ]
+            },
+            "CreateTemplateVersion": {
+              "methods": [
+                "create_template_version"
+              ]
+            },
+            "UpdateTemplateVersion": {
+              "methods": [
+                "update_template_version"
+              ]
+            },
+            "DeleteTemplateVersion": {
+              "methods": [
+                "delete_template_version"
+              ]
+            },
+            "RenderTemplateVersion": {
+              "methods": [
+                "render_template_version"
+              ]
             }
           }
         }

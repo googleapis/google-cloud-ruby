@@ -21,7 +21,7 @@ module Google
   module Cloud
     module GDCHardwareManagement
       module V1alpha
-        VERSION = "0.15.0"
+        VERSION = "0.15.1"
       end
     end
   end

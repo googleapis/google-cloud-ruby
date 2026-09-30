@@ -23,7 +23,7 @@ module Google
       module Admin
         module Instance
           module V1
-            VERSION = "2.8.0"
+            VERSION = "2.8.1"
           end
         end
       end

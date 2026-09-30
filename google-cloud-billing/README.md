@@ -1,8 +1,7 @@
-# Ruby Client for the Billing API
-
-API Client library for the Billing API
+# Ruby Client for the Cloud Billing API
 
 Allows developers to manage billing for their Google Cloud Platform projects programmatically.
+
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-billing-v*`.
@@ -17,9 +16,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-billing-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-billing-v1/latest).
-
-See also the [Product Documentation](https://cloud.google.com/billing)
-for more usage information.
 
 ## Quick Start
 

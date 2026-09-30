@@ -1,5 +1,11 @@
 # Release History
 
+### 1.17.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+
 ### 1.17.0 (2026-07-07)
 
 #### Features

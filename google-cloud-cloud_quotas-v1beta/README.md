@@ -2,7 +2,6 @@
 
 Cloud Quotas API provides Google Cloud service consumers with management and observability for resource usage, quotas, and restrictions of the services they consume.
 
-Cloud Quotas API provides Google Cloud service consumers with management and observability for resource usage, quotas, and restrictions of the services they consume.
 
 https://github.com/googleapis/google-cloud-ruby
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -386,7 +386,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -591,7 +591,7 @@ module Google
 
               header_params = {}
               if request.job&.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.job.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.job.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -696,7 +696,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -804,7 +804,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end

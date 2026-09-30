@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform. Note that google-cloud-tpu-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-tpu instead. See the readme for more details."
+  gem.description   = "TPU API provides customers with access to Google TPU technology. Note that google-cloud-tpu-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-tpu instead. See the readme for more details."
   gem.summary       = "TPU API provides customers with access to Google TPU technology."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

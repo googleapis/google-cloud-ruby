@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-storage_batch_operations-v1 is the official client library for the Storage Batch Operations V1 API. Note that google-cloud-storage_batch_operations-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-storage_batch_operations instead. See the readme for more details."
-  gem.summary       = "API Client library for the Storage Batch Operations V1 API"
+  gem.description   = "Cloud Storage Batch Operations is a Cloud Storage capability that lets you perform operations on billions of objects in a serverless manner. Note that google-cloud-storage_batch_operations-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-storage_batch_operations instead. See the readme for more details."
+  gem.summary       = "Cloud Storage Batch Operations is a Cloud Storage capability that lets you perform operations on billions of objects in a serverless manner."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

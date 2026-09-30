@@ -50,7 +50,7 @@ module Google
           end
 
           def ack_ids
-            @inventory.keys
+            synchronize { @inventory.keys }
           end
 
           def add *rec_msgs
@@ -86,7 +86,7 @@ module Google
               extension_time = Time.new - extension
               expired, keep = @inventory.partition { |_ack_id, item| item.pulled_at < extension_time }
               @inventory = keep.to_h
-              stream.subscriber.service.logger.log_expiry expired
+              stream.subscriber.service.internal_logger.log_expiry expired
               @wait_cond.broadcast
             end
           end
@@ -105,6 +105,31 @@ module Google
 
           def empty?
             synchronize do
+              @inventory.empty?
+            end
+          end
+
+          ##
+          # @private
+          # Blocks until the inventory is empty or until timeout expires.
+          #
+          # @param [Numeric, nil] timeout Maximum time in seconds to wait, or nil to wait indefinitely.
+          # @return [Boolean] true if inventory became empty, false if timed out.
+          def wait_until_empty timeout = nil
+            synchronize do
+              return true if @inventory.empty?
+
+              if timeout
+                target_time = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
+                while !@inventory.empty? && !@stopped
+                  remaining = target_time - Process.clock_gettime(Process::CLOCK_MONOTONIC)
+                  break if remaining <= 0
+
+                  @wait_cond.wait remaining
+                end
+              else
+                @wait_cond.wait_while { !@inventory.empty? && !@stopped }
+              end
               @inventory.empty?
             end
           end

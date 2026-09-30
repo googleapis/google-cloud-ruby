@@ -1,13 +1,12 @@
-# Ruby Client for the AI Platform Notebooks V1 API
+# Ruby Client for the Notebooks V1 API
 
 Notebooks API is used to manage notebook resources in Google Cloud.
 
-AI Platform Notebooks makes it easy to manage JupyterLab instances through a protected, publicly available notebook instance URL. A JupyterLab instance is a Deep Learning virtual machine instance with the latest machine learning and data science libraries pre-installed.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the AI Platform Notebooks V1 API. Most users should consider using
+specific version of the Notebooks V1 API. Most users should consider using
 the main client gem,
 [google-cloud-notebooks](https://rubygems.org/gems/google-cloud-notebooks).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +38,6 @@ response = client.list_runtimes request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-notebooks-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/ai-platform-notebooks)
-for general usage information.
 
 ## Debug Logging
 

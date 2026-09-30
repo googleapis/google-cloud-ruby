@@ -51,14 +51,6 @@ batch_reviewer.define_preset "releases-wrappers", based_on: "releases" do |prese
   preset.pull_request_filter.only_titles(/^chore\(main\): release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/)
 end
 
-batch_reviewer.define_preset "owlbot" do |preset|
-  preset.desc = "Selects all OwlBot pull requests"
-  preset.pull_request_filter.only_users Array "gcf-owl-bot[bot]"
-  preset.diff_expectations.expect name: "protobuf descriptor files" do |expect|
-    expect.path_pattern(/_pb\.rb$/)
-  end
-end
-
 expand Yoshi::BatchReviewer::Template, batch_reviewer
 
 long_desc \
@@ -66,7 +58,4 @@ long_desc \
   "Some useful patterns:",
   "",
   ["toys batch-review --config=releases --automerge"],
-  ["  ", "Merges all open release pull requests that do not have the \"do not merge\" label"],
-  "",
-  ["toys batch-review --config=owlbot"],
-  ["  ", "Interactively reviews all owlbot pull requests"]
+  ["  ", "Merges all open release pull requests that do not have the \"do not merge\" label"]

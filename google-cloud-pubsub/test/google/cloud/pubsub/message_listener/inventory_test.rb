@@ -76,7 +76,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
@@ -141,7 +142,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
@@ -219,7 +221,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
   it "removes expired items" do
     logging_mock = Minitest::Mock.new
     logging_mock.expect :log_expiry, nil, [Array]
-    service_mock = OpenStruct.new logger: logging_mock
+    service_mock = OpenStruct.new internal_logger: logging_mock
     listener_mock = OpenStruct.new service: service_mock
     stream_mock = OpenStruct.new subscriber: listener_mock
 
@@ -268,5 +270,67 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  min_duration_per_lease_extension: 10
 
     _(inventory.min_duration_per_lease_extension).must_equal 10
+  end
+
+  it "waits until inventory is empty" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    assert inventory.wait_until_empty(0.01)
+
+    inventory.add rec_msg1_grpc
+    refute inventory.empty?
+
+    thread = Thread.new do
+      inventory.remove "ack-id-1111"
+    end
+
+    result = inventory.wait_until_empty 1.0
+    thread.join
+    assert result
+    assert inventory.empty?
+  end
+
+  it "returns false when wait_until_empty times out" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    inventory.add rec_msg1_grpc
+    result = inventory.wait_until_empty 0.01
+    refute result
+    refute inventory.empty?
+  end
+
+  it "returns when stopped even if inventory is not empty" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+                                                                 limit: 1000,
+                                                                 bytesize: 100_000,
+                                                                 extension: 3600,
+                                                                 max_duration_per_lease_extension: 0,
+                                                                 min_duration_per_lease_extension: 0
+
+    inventory.add rec_msg1_grpc
+    refute inventory.empty?
+
+    thread = Thread.new do
+      sleep 0.05
+      inventory.stop
+    end
+
+    result = inventory.wait_until_empty
+    thread.join
+    refute result
+    refute inventory.empty?
   end
 end

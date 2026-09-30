@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ module Google
         # inspection, classification, and de-identification platform that works
         # on text, images, and Google Cloud storage repositories.
         # To learn more about concepts and find how-to guides see
-        # https://cloud.google.com/sensitive-data-protection/docs/.
+        # https://docs.cloud.google.com/sensitive-data-protection/docs/.
         #
         # @example Load this service and instantiate a gRPC client
         #

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-lustre-v1 is the official client library for the Google Cloud Managed Lustre V1 API. Note that google-cloud-lustre-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-lustre instead. See the readme for more details."
-  gem.summary       = "API Client library for the Google Cloud Managed Lustre V1 API"
+  gem.description   = "Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications. Note that google-cloud-lustre-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-lustre instead. See the readme for more details."
+  gem.summary       = "Google Cloud Managed Lustre delivers a high-performance, fully managed parallel file system optimized for AI and HPC applications."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -26,4 +26,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "gapic-common", "~> 1.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-cloud-location", "~> 1.0"
+  gem.add_dependency "google-iam-v1", "~> 1.3"
 end

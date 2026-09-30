@@ -1,8 +1,7 @@
 # Ruby Client for the Audit Manager V1 API
 
-API Client library for the Audit Manager V1 API
+The Audit Manager API allows customers to manage compliance audits.
 
-google-cloud-audit_manager-v1 is the official client library for the Audit Manager V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -33,8 +32,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/audit_manager/v1"
 
 client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new
-request = ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new # (request fields as keyword arguments...)
-response = client.enroll_resource request
+request = ::Google::Cloud::AuditManager::V1::CreateAuditScheduleRequest.new # (request fields as keyword arguments...)
+response = client.create_audit_schedule request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-audit_manager-v1/latest)

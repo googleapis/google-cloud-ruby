@@ -45,6 +45,11 @@
                 "delete_message"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "search_messages"
+              ]
+            },
             "GetAttachment": {
               "methods": [
                 "get_attachment"
@@ -133,6 +138,21 @@
             "DeleteReaction": {
               "methods": [
                 "delete_reaction"
+              ]
+            },
+            "ListMessagePins": {
+              "methods": [
+                "list_message_pins"
+              ]
+            },
+            "CreateMessagePin": {
+              "methods": [
+                "create_message_pin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "delete_message_pin"
               ]
             },
             "CreateCustomEmoji": {

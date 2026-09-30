@@ -2,7 +2,6 @@
 
 This API enables connectivity with and between Google Cloud resources.
 
-Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_service_connection_maps request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/network-connectivity/docs)
-for general usage information.
 
 ## Debug Logging
 

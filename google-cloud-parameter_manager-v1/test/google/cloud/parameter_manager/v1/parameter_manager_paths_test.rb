@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,6 +86,30 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientPathsTest <
 
       path = client.parameter_version_path project: "value0", location: "value1", parameter: "value2", parameter_version: "value3"
       assert_equal "projects/value0/locations/value1/parameters/value2/versions/value3", path
+    end
+  end
+
+  def test_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.template_path project: "value0", location: "value1", template: "value2"
+      assert_equal "projects/value0/locations/value1/templates/value2", path
+    end
+  end
+
+  def test_template_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.template_version_path project: "value0", location: "value1", template: "value2", template_version: "value3"
+      assert_equal "projects/value0/locations/value1/templates/value2/versions/value3", path
     end
   end
 end

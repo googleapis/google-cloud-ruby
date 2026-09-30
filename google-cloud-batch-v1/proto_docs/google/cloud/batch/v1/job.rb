@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -637,9 +637,27 @@ module Google
           #     https://cloud.google.com/vpc/docs/configure-private-google-access and
           #     https://cloud.google.com/nat/docs/gce-example#create-nat for more
           #     information.
+          # @!attribute [rw] nic_type
+          #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::NetworkInterface::NicType]
+          #     Optional. The NIC type of the network interface.
           class NetworkInterface
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Compute Engine VM instance NIC type.
+            module NicType
+              # No type specified.
+              NIC_TYPE_UNSPECIFIED = 0
+
+              # GVNIC
+              GVNIC = 1
+
+              # IRDMA
+              IRDMA = 2
+
+              # MRDMA
+              MRDMA = 3
+            end
           end
 
           # NetworkPolicy describes VM instance network configurations.

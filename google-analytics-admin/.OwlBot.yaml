@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/analytics/admin/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-analytics-admin/$1

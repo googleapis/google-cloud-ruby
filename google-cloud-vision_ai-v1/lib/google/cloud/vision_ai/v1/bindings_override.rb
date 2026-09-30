@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/vision_ai/v1/rest"
-      #     client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new
+      #     client = ::Google::Cloud::VisionAI::V1::HealthCheckService::Rest::Client.new
       #
       module V1
         ##

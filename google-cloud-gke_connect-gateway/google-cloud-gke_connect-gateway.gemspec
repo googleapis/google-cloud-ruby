@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters."
-  gem.summary       = "API Client library for the Connect Gateway API"
+  gem.description   = "The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters."
+  gem.summary       = "The Connect Gateway service allows connectivity from external parties to connected Kubernetes clusters."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

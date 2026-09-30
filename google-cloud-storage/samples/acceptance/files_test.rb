@@ -52,6 +52,9 @@ require_relative "../storage_upload_encrypted_file"
 require_relative "../storage_upload_file"
 require_relative "../storage_upload_from_memory"
 require_relative "../storage_upload_with_kms_key"
+require_relative "../storage_list_soft_deleted_objects"
+require_relative "../storage_list_soft_deleted_object_versions"
+require_relative "../storage_restore_object"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -331,7 +334,6 @@ describe "Files Snippets" do
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
@@ -345,29 +347,44 @@ describe "Files Snippets" do
   end
 
   describe "list_object_contexts" do
-    let(:custom_context_key1) { "my-custom-key" }
-    let(:custom_context_value1) { "my-custom-value" }
-    let(:custom_context_key2) { "my-custom-key-2" }
-    let(:custom_context_value2) { "my-custom-value-2" }
+    let(:custom_context_key1) { "my-custom-key-#{SecureRandom.hex(4)}" }
+    let(:custom_context_key2) { "my-custom-key2-#{SecureRandom.hex(4)}" }
+    let(:custom_context_value1) { "my-custom-value-#{SecureRandom.hex(4)}" }
+    let(:custom_context_value2) { "my-custom-value2-#{SecureRandom.hex(4)}" }
+    let(:remote_file_name2) { "path/file_name_#{SecureRandom.hex}.txt" }
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
+      bucket.create_file local_file, remote_file_name2
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name+"2", custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
 
+    
     it "filters out files on the basis of custom context key" do
-      assert_output "File: #{remote_file_name} has context key: #{custom_context_key1}\n" do
-        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
+      out = nil
+      10.times do
+        out, _err = capture_io do
+          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
+        end
+        break unless out.empty?
+        sleep 0.2
       end
+      assert_equal "File: #{remote_file_name} has context key: #{custom_context_key1}\n", out
     end
+
 
     it "filters out files on the basis of custom context key and value" do
-      assert_output "File: #{remote_file_name+"2"} has context key: #{custom_context_key2}\n" do
-        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      out = nil
+      10.times do
+        out, _err = capture_io do
+          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+        end
+        break unless out.empty?
+        sleep 0.2
       end
+      assert_equal "File: #{remote_file_name2} has context key: #{custom_context_key2}\n", out
     end
   end
 
@@ -764,6 +781,27 @@ describe "Files Snippets" do
       StorageStreamFileDownload.new.storage_stream_file_download bucket_name: bucket.name,
                                                                  file_name: remote_file_name,
                                                                  local_file_obj: StringIO.new
+    end
+  end
+
+  describe "soft_deleted objects" do
+    it "list_soft_deleted_objects, list_soft_deleted_object_versions, restore_object" do
+      file = bucket.create_file StringIO.new(file_content), remote_file_name
+      generation = file.generation
+      file.delete
+
+      out, _err = capture_io do
+        list_soft_deleted_objects bucket_name: bucket.name
+      end
+      assert_match remote_file_name, out
+      out, _err = capture_io do
+        list_soft_deleted_object_versions bucket_name: bucket.name
+      end
+      assert_match remote_file_name, out
+
+      assert_output(/Restored file #{Regexp.escape remote_file_name} with generation \d+ in bucket #{Regexp.escape bucket.name}\./) do
+        restore_object bucket_name: bucket.name, file_name: remote_file_name, generation: generation
+      end
     end
   end
 end

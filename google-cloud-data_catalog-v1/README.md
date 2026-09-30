@@ -1,13 +1,12 @@
-# Ruby Client for the Data Catalog V1 API
+# Ruby Client for the Google Cloud Data Catalog V1 API
 
 A fully managed and highly scalable data discovery and metadata management service.
 
-DataCatalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Data Catalog V1 API. Most users should consider using
+specific version of the Google Cloud Data Catalog V1 API. Most users should consider using
 the main client gem,
 [google-cloud-data_catalog](https://rubygems.org/gems/google-cloud-data_catalog).
 See the section below titled *Which client should I use?* for more information.
@@ -40,7 +39,7 @@ response = client.search_catalog request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/data-catalog)
+See also the [Product Documentation](https://cloud.google.com/data-catalog/docs)
 for general usage information.
 
 ## Debug Logging

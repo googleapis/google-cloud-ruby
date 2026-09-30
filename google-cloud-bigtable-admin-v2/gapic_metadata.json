@@ -70,6 +70,21 @@
                 "delete_cluster"
               ]
             },
+            "UpdateMemoryLayer": {
+              "methods": [
+                "update_memory_layer"
+              ]
+            },
+            "ListMemoryLayers": {
+              "methods": [
+                "list_memory_layers"
+              ]
+            },
+            "GetMemoryLayer": {
+              "methods": [
+                "get_memory_layer"
+              ]
+            },
             "CreateAppProfile": {
               "methods": [
                 "create_app_profile"

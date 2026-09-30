@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2026-08-05)
+
+#### Documentation
+
+* Update copyright year 
+
 ### 0.4.0 (2026-06-11)
 
 #### Features

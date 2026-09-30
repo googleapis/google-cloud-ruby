@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/vectorsearch/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-vector_search/$1

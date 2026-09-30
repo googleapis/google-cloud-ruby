@@ -73,5 +73,69 @@ describe Google::Cloud::PubSub::MessageListener, :mock_pubsub do
 
     _(listener.to_s).must_equal "(subscription: subscription-name-goes-here, streams: [(inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started)])"
     _(listener.stream_pool.first.to_s).must_equal "(inventory: 0, status: running, thread: not started)"
+    _(listener.shutdown_behavior).must_equal :wait_for_processing
+    _(listener.shutdown_timeout).must_be_nil
+  end
+
+  it "accepts custom shutdown_behavior and shutdown_timeout" do
+    custom_listener = Google::Cloud::PubSub::MessageListener.new(
+      subscription_name,
+      callback,
+      shutdown_behavior: :nack_immediately,
+      shutdown_timeout: 45,
+      service: pubsub.service
+    )
+    _(custom_listener.shutdown_behavior).must_equal :nack_immediately
+    _(custom_listener.shutdown_timeout).must_equal 45
+  end
+
+  it "raises ArgumentError when given an invalid shutdown_behavior" do
+    expect do
+      Google::Cloud::PubSub::MessageListener.new(
+        subscription_name,
+        callback,
+        shutdown_behavior: :invalid_behavior,
+        service: pubsub.service
+      )
+    end.must_raise ArgumentError
+  end
+
+  it "raises ArgumentError when given an invalid shutdown_timeout" do
+    expect do
+      Google::Cloud::PubSub::MessageListener.new(
+        subscription_name,
+        callback,
+        shutdown_timeout: -5,
+        service: pubsub.service
+      )
+    end.must_raise ArgumentError
+
+    expect do
+      Google::Cloud::PubSub::MessageListener.new(
+        subscription_name,
+        callback,
+        shutdown_timeout: "thirty",
+        service: pubsub.service
+      )
+    end.must_raise ArgumentError
+  end
+
+  it "coordinates stop! across all streams" do
+    listener = Google::Cloud::PubSub::MessageListener.new(
+      subscription_name,
+      callback,
+      streams: 4,
+      shutdown_behavior: :nack_immediately,
+      shutdown_timeout: 10,
+      service: pubsub.service
+    )
+    listener.stream_pool.each do |stream|
+      assert stream.running?
+    end
+
+    listener.stop!
+    listener.stream_pool.each do |stream|
+      assert stream.stopped?
+    end
   end
 end

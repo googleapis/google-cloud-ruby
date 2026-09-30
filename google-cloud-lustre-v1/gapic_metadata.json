@@ -35,6 +35,11 @@
                 "delete_instance"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "reschedule_maintenance"
+              ]
+            },
             "ImportData": {
               "methods": [
                 "import_data"
@@ -43,6 +48,51 @@
             "ExportData": {
               "methods": [
                 "export_data"
+              ]
+            },
+            "CreateMirror": {
+              "methods": [
+                "create_mirror"
+              ]
+            },
+            "UpdateMirror": {
+              "methods": [
+                "update_mirror"
+              ]
+            },
+            "DeleteMirror": {
+              "methods": [
+                "delete_mirror"
+              ]
+            },
+            "GetMirror": {
+              "methods": [
+                "get_mirror"
+              ]
+            },
+            "ListMirrors": {
+              "methods": [
+                "list_mirrors"
+              ]
+            },
+            "CreateDirectoryPolicy": {
+              "methods": [
+                "create_directory_policy"
+              ]
+            },
+            "DeleteDirectoryPolicy": {
+              "methods": [
+                "delete_directory_policy"
+              ]
+            },
+            "GetDirectoryPolicy": {
+              "methods": [
+                "get_directory_policy"
+              ]
+            },
+            "ListDirectoryPolicies": {
+              "methods": [
+                "list_directory_policies"
               ]
             }
           }

@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.30.0 (2026-08-27)
+
+#### Features
+
+* update API sources and regenerate ([#36469](https://github.com/googleapis/google-cloud-ruby/issues/36469)) 
+
+### 0.29.0 (2026-08-24)
+
+#### Features
+
+* expose StreamAssistRequest agents_spec and agent_id ([#36315](https://github.com/googleapis/google-cloud-ruby/issues/36315)) 
+
+### 0.28.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35052](https://github.com/googleapis/google-cloud-ruby/issues/35052)) 
+
 ### 0.28.0 (2026-06-17)
 
 #### Features

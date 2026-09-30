@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.12.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35057](https://github.com/googleapis/google-cloud-ruby/issues/35057)) 
+
+### 2.12.0 (2026-07-27)
+
+#### Features
+
+* deprecate client_tls_policy field from Endpoint Policy proto ([#35025](https://github.com/googleapis/google-cloud-ruby/issues/35025)) 
+
 ### 2.11.0 (2026-07-21)
 
 #### Features

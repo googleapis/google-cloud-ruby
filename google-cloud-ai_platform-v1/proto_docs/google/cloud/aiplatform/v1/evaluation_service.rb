@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -556,7 +556,7 @@ module Google
         #     Required. The type of the computation based metric.
         # @!attribute [rw] parameters
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A map of parameters for the metric, e.g. {"rouge_type":
+        #     Optional. A map of parameters for the metric, e.g. \\{"rouge_type":
         #     "rougeL"}.
         class ComputationBasedMetricSpec
           include ::Google::Protobuf::MessageExts

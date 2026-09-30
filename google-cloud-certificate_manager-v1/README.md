@@ -1,8 +1,7 @@
 # Ruby Client for the Certificate Manager V1 API
 
-API Client library for the Certificate Manager V1 API
+Certificate Manager simplifies the acquisition, deployment, and management of Transport Layer Security (TLS) certificates.
 
-Certificate Manager lets you acquire and manage Transport Layer Security (TLS) (SSL) certificates for use with classic external HTTP(S) load balancers in Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_certificates request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-certificate_manager-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/certificate-manager)
-for general usage information.
 
 ## Debug Logging
 

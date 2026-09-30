@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/cloud/iap/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-iap/$1

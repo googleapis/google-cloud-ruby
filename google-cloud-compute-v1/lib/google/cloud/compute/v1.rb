@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ require "google/cloud/compute/v1/global_organization_operations"
 require "google/cloud/compute/v1/global_public_delegated_prefixes"
 require "google/cloud/compute/v1/global_vm_extension_policies"
 require "google/cloud/compute/v1/health_checks"
+require "google/cloud/compute/v1/hosts"
 require "google/cloud/compute/v1/image_family_views"
 require "google/cloud/compute/v1/images"
 require "google/cloud/compute/v1/instance_group_manager_resize_requests"
@@ -70,6 +71,7 @@ require "google/cloud/compute/v1/node_types"
 require "google/cloud/compute/v1/organization_security_policies"
 require "google/cloud/compute/v1/packet_mirrorings"
 require "google/cloud/compute/v1/preview_features"
+require "google/cloud/compute/v1/project_views"
 require "google/cloud/compute/v1/projects"
 require "google/cloud/compute/v1/public_advertised_prefixes"
 require "google/cloud/compute/v1/public_delegated_prefixes"
@@ -106,6 +108,7 @@ require "google/cloud/compute/v1/region_target_tcp_proxies"
 require "google/cloud/compute/v1/region_url_maps"
 require "google/cloud/compute/v1/region_zones"
 require "google/cloud/compute/v1/regions"
+require "google/cloud/compute/v1/reliability_risks"
 require "google/cloud/compute/v1/reservation_blocks"
 require "google/cloud/compute/v1/reservation_slots"
 require "google/cloud/compute/v1/reservation_sub_blocks"

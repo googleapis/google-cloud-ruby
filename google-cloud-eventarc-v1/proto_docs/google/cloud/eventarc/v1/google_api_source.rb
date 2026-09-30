@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ module Google
         #     Required. Destination is the message bus that the GoogleApiSource is
         #     delivering to. It must be point to the full resource name of a MessageBus.
         #     Format:
-        #     "projects/\\{PROJECT_ID}/locations/\\{region}/messagesBuses/{MESSAGE_BUS_ID)
+        #     "projects/\\{PROJECT_ID}/locations/\\{region}/messagesBuses/\\{MESSAGE_BUS_ID)
         # @!attribute [rw] crypto_key_name
         #   @return [::String]
         #     Optional. Resource name of a KMS crypto key (managed by the user) used to

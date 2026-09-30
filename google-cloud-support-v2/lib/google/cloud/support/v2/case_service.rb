@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/support/v2/version"
 require "google/cloud/support/v2/case_service/credentials"
 require "google/cloud/support/v2/case_service/paths"
 require "google/cloud/support/v2/case_service/client"
+require "google/cloud/support/v2/case_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/support/v2/case_service"
         #     client = ::Google::Cloud::Support::V2::CaseService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/support/v2/case_service/rest"
+        #     client = ::Google::Cloud::Support::V2::CaseService::Rest::Client.new
         #
         module CaseService
         end

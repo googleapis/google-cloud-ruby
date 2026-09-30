@@ -10,6 +10,26 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::AuditManager::V1::AuditManager::Client",
           "rpcs": {
+            "CreateAuditSchedule": {
+              "methods": [
+                "create_audit_schedule"
+              ]
+            },
+            "UpdateAuditSchedule": {
+              "methods": [
+                "update_audit_schedule"
+              ]
+            },
+            "GetAuditSchedule": {
+              "methods": [
+                "get_audit_schedule"
+              ]
+            },
+            "ListAuditSchedules": {
+              "methods": [
+                "list_audit_schedules"
+              ]
+            },
             "EnrollResource": {
               "methods": [
                 "enroll_resource"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1751,7 +1751,7 @@ module Google
         #     settings under **Customize**.
         # @!attribute [rw] weight
         #   @return [::Integer]
-        #     The stroke weight of the icon. Choose from {100, 200, 300, 400,
+        #     The stroke weight of the icon. Choose from \\{100, 200, 300, 400,
         #     500, 600, 700}. If absent, default value is 400. If any other value is
         #     specified, the default value is used.
         #

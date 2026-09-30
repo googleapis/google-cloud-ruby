@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.1 (2026-08-04)
+
+#### Documentation
+
+* Update copyright year 
+
 ### 1.8.0 (2026-06-11)
 
 #### Features

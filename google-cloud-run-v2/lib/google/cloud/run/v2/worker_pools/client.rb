@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -390,7 +390,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -607,7 +607,7 @@ module Google
 
               header_params = {}
               if request.worker_pool&.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.worker_pool.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.worker_pool.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -713,7 +713,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end

@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.8.2 (2026-08-17)
+
+#### Documentation
+
+* Added Terraform and gcloud links for support event subscription service ([#36254](https://github.com/googleapis/google-cloud-ruby/issues/36254)) 
+
+### 0.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
+### 0.8.0 (2026-07-27)
+
+#### Features
+
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching ([#35019](https://github.com/googleapis/google-cloud-ruby/issues/35019)) 
+
 ### 0.7.0 (2026-06-30)
 
 #### Features

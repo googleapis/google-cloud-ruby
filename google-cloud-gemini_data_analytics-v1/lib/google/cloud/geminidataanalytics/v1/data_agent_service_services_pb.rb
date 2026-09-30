@@ -56,6 +56,12 @@ module Google
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM policy for a DataAgent.
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Enables/Disables required GCP services and configures AgentOps
+            # observability settings calling the Admin Settings executable node to
+            # update the AgentOps Observability feature.
+            rpc :SetAgentOpsObservability, ::Google::Cloud::GeminiDataAnalytics::V1::SetAgentOpsObservabilityRequest, ::Google::Longrunning::Operation
+            # Gets AgentOps observability settings and status of required services.
+            rpc :RetrieveAgentOpsObservability, ::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityRequest, ::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityResponse
           end
 
           Stub = Service.rpc_stub_class

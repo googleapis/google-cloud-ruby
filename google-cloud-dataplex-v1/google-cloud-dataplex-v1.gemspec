@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dataplex is an intelligent data fabric that provides a way to centrally manage, monitor, and govern your data across data lakes, data warehouses and data marts, and make this data securely accessible to a variety of analytics and data science tools. Note that google-cloud-dataplex-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataplex instead. See the readme for more details."
+  gem.description   = "A unified, intelligent governance solution for data and AI assets. Note that google-cloud-dataplex-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataplex instead. See the readme for more details."
   gem.summary       = "A unified, intelligent governance solution for data and AI assets."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

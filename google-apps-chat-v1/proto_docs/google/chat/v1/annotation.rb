@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,10 +21,10 @@ module Google
   module Apps
     module Chat
       module V1
-        # Output only. Annotations can be associated with the plain-text body of the
-        # message or with chips that link to Google Workspace resources like Google
-        # Docs or Sheets with `start_index` and `length` of 0. To add basic formatting
-        # to a text message, see [Format text
+        # Annotations can be associated with the plain-text body of the message or
+        # with chips that link to Google Workspace resources like Google Docs or Sheets
+        # with `start_index` and `length` of 0. To add basic formatting to a text
+        # message, see [Format text
         # messages](https://developers.google.com/workspace/chat/format-messages).
         #
         # Example plain-text message body:
@@ -40,7 +40,7 @@ module Google
         #   "length":7,
         #   "userMention": {
         #     "user": {
-        #       "name":"users/\\{user}",
+        #       "name":"users/{user}",
         #       "displayName":"FooBot",
         #       "avatarUrl":"https://goo.gl/aeDtrS",
         #       "type":"BOT"

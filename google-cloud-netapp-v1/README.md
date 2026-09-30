@@ -2,7 +2,6 @@
 
 Google Cloud NetApp Volumes is a fully-managed, cloud-based data storage service that provides advanced data management capabilities and highly scalable performance with global availability.
 
-Google Cloud NetApp Volumes is a fully-managed, cloud-based data storage service that provides advanced data management capabilities and highly scalable performance with global availability.
 
 https://github.com/googleapis/google-cloud-ruby
 

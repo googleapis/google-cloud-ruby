@@ -1,13 +1,13 @@
-# Ruby Client for the Network Security V1beta1 API
+# Ruby Client for the Network Security V1BETA1 API
 
-API Client library for the Network Security V1beta1 API
+API Client library for the Network Security V1BETA1 API
 
-The client library for the Google Network Security V1beta1 API.
+google-cloud-network_security-v1beta1 is the official client library for the Network Security V1BETA1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Network Security V1beta1 API. Most users should consider using
+specific version of the Network Security V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-network_security](https://rubygems.org/gems/google-cloud-network_security).
 See the section below titled *Which client should I use?* for more information.
@@ -39,9 +39,6 @@ response = client.list_dns_threat_detectors request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/traffic-director/docs/reference/network-security/rest/)
-for general usage information.
 
 ## Debug Logging
 

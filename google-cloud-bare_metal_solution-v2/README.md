@@ -2,7 +2,6 @@
 
 Provides ways to manage Bare Metal Solution hardware installed in a regional extension located near a Google Cloud data center.
 
-Bare Metal Solution is a managed solution that provides purpose-built HPE or Atos bare-metal servers in regional extensions that are connected to Google Cloud by a managed, high-performance connection with a low-latency network fabric.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.list_instances request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bare_metal_solution-v2/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/bare-metal/)
-for general usage information.
 
 ## Debug Logging
 

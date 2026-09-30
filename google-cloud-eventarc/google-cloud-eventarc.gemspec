@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Eventarc lets you asynchronously deliver events from Google services, SaaS, and your own apps using loosely coupled services that react to state changes. Eventarc requires no infrastructure management ??? you can optimize productivity and costs while building a modern, event-driven solution."
-  gem.summary       = "API Client library for the Eventarc API"
+  gem.description   = "Build event-driven applications on Google Cloud Platform."
+  gem.summary       = "Build event-driven applications on Google Cloud Platform."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

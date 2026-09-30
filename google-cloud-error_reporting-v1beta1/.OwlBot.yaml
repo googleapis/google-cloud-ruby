@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/devtools/clouderrorreporting/v1beta1/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-cloud-error_reporting-v1beta1/$1

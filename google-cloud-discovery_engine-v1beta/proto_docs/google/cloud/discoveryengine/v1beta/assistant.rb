@@ -64,7 +64,7 @@ module Google
         #     The values consist of admin enabled tools towards the connector
         #     instance. Admin can selectively enable multiple tools on any of the
         #     connector instances that they created in the project. For example
-        #     {"jira1ConnectorName": [(toolId1, "createTicket"), (toolId2,
+        #     \\{"jira1ConnectorName": [(toolId1, "createTicket"), (toolId2,
         #     "transferTicket")],
         #      "gmail1ConnectorName": [(toolId3, "sendEmail"),..] }
         # @!attribute [rw] customer_policy

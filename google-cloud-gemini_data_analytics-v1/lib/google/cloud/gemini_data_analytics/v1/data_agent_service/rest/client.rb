@@ -225,7 +225,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_data_agents(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil)
+              # @overload list_data_agents(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil, creator_filter: nil)
               #   Pass arguments to `list_data_agents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -250,6 +250,8 @@ module Google
               #   @param show_deleted [::Boolean]
               #     Optional. If true, the list results will include soft-deleted DataAgents.
               #     Defaults to false.
+              #   @param creator_filter [::Google::Cloud::GeminiDataAnalytics::V1::ListAccessibleDataAgentsRequest::CreatorFilter]
+              #     Optional. Filter for the creator of the agent.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GeminiDataAnalytics::V1::DataAgent>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1277,6 +1279,211 @@ module Google
               end
 
               ##
+              # Enables/Disables required GCP services and configures AgentOps
+              # observability settings calling the Admin Settings executable node to
+              # update the AgentOps Observability feature.
+              #
+              # @overload set_agent_ops_observability(request, options = nil)
+              #   Pass arguments to `set_agent_ops_observability` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1::SetAgentOpsObservabilityRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1::SetAgentOpsObservabilityRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_agent_ops_observability(parent: nil, telemetry_enabled: nil, data_source_type: nil, bqaa_enabled: nil, update_mask: nil)
+              #   Pass arguments to `set_agent_ops_observability` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for SetAgentOpsObservabilityRequest.
+              #     Format: projects/\\{project}/locations/\\{location}
+              #   @param telemetry_enabled [::Boolean]
+              #     Optional. Whether to enable or disable AgentOps observability.
+              #     When update_mask is provided, this field is ignored unless specified in the
+              #     mask.
+              #   @param data_source_type [::String]
+              #     Required. The data source type for which to set observability settings.
+              #     Examples: "bigquery", "looker"
+              #   @param bqaa_enabled [::Boolean]
+              #     Optional. Whether BigQuery Agent Analytics is enabled.
+              #     Note: An explicit `update_mask` containing "bqaa_enabled" is required to
+              #     modify this field. If `update_mask` is omitted, this field is ignored and
+              #     an existing enabled setting cannot be disabled.
+              #
+              #     This is a project-level setting and does not by itself enable trace
+              #     logging for any individual agent. Per-agent trace logging is controlled
+              #     by `DataAgent.bigquery_agent_analytics_enabled` together with
+              #     `DataAgent.bigquery_agent_analytics_table`; an agent does not inherit
+              #     this setting.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten by the
+              #     update. The fields specified in the update_mask are relative to the
+              #     resource. A field will be overwritten if it is in the mask.
+              #
+              #     If the user does not provide a mask, only `telemetry_enabled` will be
+              #     updated (for backward compatibility with legacy callers). Note that
+              #     disabling BigQuery Agent Analytics (`bqaa_enabled = false`) requires
+              #     providing an explicit `update_mask` containing "bqaa_enabled".
+              #
+              #     Per AIP-161:
+              #     - The special wildcard value '*' is supported to update all fields.
+              #     - Field paths should use snake_case, though camelCase equivalents
+              #       (`telemetryEnabled`, `bqaaEnabled`) are accepted for REST/JSON
+              #       transcoding compatibility.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1::DataAgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1::SetAgentOpsObservabilityRequest.new
+              #
+              #   # Call the set_agent_ops_observability method.
+              #   result = client.set_agent_ops_observability request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def set_agent_ops_observability request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1::SetAgentOpsObservabilityRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_agent_ops_observability.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_agent_ops_observability.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_agent_ops_observability.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_agent_service_stub.set_agent_ops_observability request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets AgentOps observability settings and status of required services.
+              #
+              # @overload retrieve_agent_ops_observability(request, options = nil)
+              #   Pass arguments to `retrieve_agent_ops_observability` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload retrieve_agent_ops_observability(parent: nil, data_source_type: nil)
+              #   Pass arguments to `retrieve_agent_ops_observability` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for RetrieveAgentOpsObservabilityRequest.
+              #     Format: projects/\\{project}/locations/\\{location}
+              #   @param data_source_type [::String]
+              #     Required. The data source type for which to retrieve observability
+              #     settings. Examples: "bigquery", "looker"
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1::DataAgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityRequest.new
+              #
+              #   # Call the retrieve_agent_ops_observability method.
+              #   result = client.retrieve_agent_ops_observability request
+              #
+              #   # The returned object is of type Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityResponse.
+              #   p result
+              #
+              def retrieve_agent_ops_observability request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1::RetrieveAgentOpsObservabilityRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.retrieve_agent_ops_observability.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.retrieve_agent_ops_observability.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.retrieve_agent_ops_observability.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_agent_service_stub.retrieve_agent_ops_observability request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the DataAgentService REST API.
               #
               # This class represents the configuration for DataAgentService REST,
@@ -1486,6 +1693,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `set_agent_ops_observability`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_agent_ops_observability
+                  ##
+                  # RPC-specific configuration for `retrieve_agent_ops_observability`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :retrieve_agent_ops_observability
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1511,6 +1728,10 @@ module Google
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    set_agent_ops_observability_config = parent_rpcs.set_agent_ops_observability if parent_rpcs.respond_to? :set_agent_ops_observability
+                    @set_agent_ops_observability = ::Gapic::Config::Method.new set_agent_ops_observability_config
+                    retrieve_agent_ops_observability_config = parent_rpcs.retrieve_agent_ops_observability if parent_rpcs.respond_to? :retrieve_agent_ops_observability
+                    @retrieve_agent_ops_observability = ::Gapic::Config::Method.new retrieve_agent_ops_observability_config
 
                     yield self if block_given?
                   end

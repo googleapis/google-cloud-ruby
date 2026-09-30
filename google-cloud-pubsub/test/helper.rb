@@ -338,6 +338,16 @@ class MockPubsub < Minitest::Spec
     }
   end
 
+  def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block
+    attempts = 0
+    while !block.call
+      fail msg if attempts >= max
+      attempts += 1
+      puts "Retrying #{attempts} out of #{max}." if output
+      sleep delay
+    end
+  end
+
   # Register this spec type for when :storage is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_pubsub

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ require "google/cloud/bigquery/storage/v1/version"
 require "google/cloud/bigquery/storage/v1/big_query_read/credentials"
 require "google/cloud/bigquery/storage/v1/big_query_read/paths"
 require "google/cloud/bigquery/storage/v1/big_query_read/client"
+require "google/cloud/bigquery/storage/v1/big_query_read/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
           #
           #     require "google/cloud/bigquery/storage/v1/big_query_read"
           #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/storage/v1/big_query_read/rest"
+          #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Rest::Client.new
           #
           module BigQueryRead
           end

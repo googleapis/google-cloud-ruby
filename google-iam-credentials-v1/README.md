@@ -2,7 +2,6 @@
 
 Creates short-lived, limited-privilege credentials for IAM service accounts.
 
-The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +38,6 @@ response = client.generate_access_token request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/iam)
-for general usage information.
 
 ## Debug Logging
 

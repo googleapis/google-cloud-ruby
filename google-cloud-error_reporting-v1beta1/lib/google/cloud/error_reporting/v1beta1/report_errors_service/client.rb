@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -194,7 +194,7 @@ module Google
             # a `key` parameter. For example:
             #
             # `POST
-            # https://clouderrorreporting.googleapis.com/v1beta1/\\{projectName}/events:report?key=123ABC456`
+            # https://clouderrorreporting.googleapis.com/v1beta1/{projectName}/events:report?key=123ABC456`
             #
             # **Note:** [Error Reporting] (https://cloud.google.com/error-reporting)
             # is a service built on Cloud Logging and can analyze log entries when all of

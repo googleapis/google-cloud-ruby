@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,6 +105,11 @@ module Google
 
                   default_config.rpcs.delete_message.timeout = 30.0
                   default_config.rpcs.delete_message.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.search_messages.timeout = 30.0
+                  default_config.rpcs.search_messages.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
@@ -493,9 +498,24 @@ module Google
               #     reply to a message
               #     thread](https://developers.google.com/workspace/chat/create-messages#create-message-thread).
               #   @param request_id [::String]
-              #     Optional. A unique request ID for this message. Specifying an existing
-              #     request ID returns the message created with that ID instead of creating a
-              #     new message.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single message being created. Subsequent requests with the same request
+              #     ID return the existing message and do not update the message, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a message was already created with the provided request ID, the
+              #     request returns that message. Note that the returned message might not be
+              #     fully populated; the API echoes the message in your request with the
+              #     system-assigned resource names populated. To retrieve the latest metadata
+              #     for the message, call `GetMessage`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               #   @param message_reply_option [::Google::Apps::Chat::V1::CreateMessageRequest::MessageReplyOption]
               #     Optional. Specifies whether a message starts a thread or replies to one.
               #     Only supported in named spaces.
@@ -623,7 +643,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil)
+              # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, show_deleted: nil, markup_syntax: nil)
               #   Pass arguments to `list_messages` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -700,6 +720,9 @@ module Google
               #     Optional. Whether to include deleted messages. Deleted messages include
               #     deleted time and metadata about their deletion, but message content is
               #     unavailable.
+              #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
+              #     Optional. Specifies the desired output syntax for the Chat message
+              #     `formatted_text` field.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Message>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1133,7 +1156,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_message(name: nil)
+              # @overload get_message(name: nil, markup_syntax: nil)
               #   Pass arguments to `get_message` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1147,6 +1170,9 @@ module Google
               #     `clientAssignedMessageId` field for `{message}`. For details, see [Name a
               #     message]
               #     (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+              #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
+              #     Optional. Specifies the desired output syntax for the Chat message
+              #     `formatted_text` field.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Message]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1439,6 +1465,288 @@ module Google
 
                 @chat_service_stub.delete_message request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Searches for messages in Google Chat that the calling user has access to.
+              # Returns a list of messages matching the search criteria.
+              #
+              # To search across all spaces the user has access to, set `parent` to
+              # `spaces/-`. Using any other value for `parent` results in an
+              # `INVALID_ARGUMENT` error. The returned messages have their `name` field
+              # populated with the full resource name, which includes the specific `space`
+              # in which the message resides.
+              #
+              # This API doesn't return all message types. The types of messages listed
+              # below aren't included in the response. Use
+              # {::Google::Apps::Chat::V1::ChatService::Rest::Client#list_messages ListMessages} to list all
+              # messages.
+              #
+              # - Private Messages that are visible to the authenticated user.
+              # - Messages posted by Chat apps in spaces or group chats.
+              # - Messages in a Chat app DM.
+              # - Messages from blocked users.
+              # - Messages in spaces that the caller has muted.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.messages.readonly`
+              #   - `https://www.googleapis.com/auth/chat.messages`
+              #
+              # @overload search_messages(request, options = nil)
+              #   Pass arguments to `search_messages` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::SearchMessagesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::SearchMessagesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_messages(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, markup_syntax: nil, view: nil)
+              #   Pass arguments to `search_messages` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the space to search within.
+              #
+              #     To search across all spaces the user has access to, set this field to
+              #     `spaces/-`. Using any other value for `parent` results in an
+              #     `INVALID_ARGUMENT` error.
+              #
+              #     To limit the search to one or more spaces, use `space.name` or
+              #     `space.display_name` in the `filter`.
+              #   @param filter [::String]
+              #     Required. A search query.
+              #
+              #     The query can specify one or more search keywords, which are used to filter
+              #     the results,
+              #
+              #     You can also filter the results using the following message fields:
+              #
+              #     - `create_time`: Accepts a timestamp in
+              #       [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+              #       supported comparison operators are: `<` and `>=`.
+              #     - `sender.name`: The resource name of the sender (`users/{user}`). Only
+              #       supports `=`. You can use the e-mail as an alias for `{user}`. For
+              #       example, `users/example@gmail.com`, where `example@gmail.com` is the
+              #       e-mail of the Google Chat user.
+              #     - `space.name`: The resource name of the space where the message is posted.
+              #       (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+              #       search is performed across all direct messages and spaces the user has
+              #       access to as a space member.
+              #     - `space.display_name`: Supports the operator `:` (has) and filters spaces
+              #       based on a partial match of their display name. Results are limited to
+              #       the top five space matches. For example, `space.display_name:Project`
+              #       searches for messages in the top five spaces that contain the word
+              #       "Project" in their display names.
+              #     - `space.space_type`: The type of the space. Only supports `=`. For
+              #       example, `space.space_type="DIRECT_MESSAGE"` returns only messages from
+              #       direct messages. The possible values are `DIRECT_MESSAGE`, `GROUP_CHAT`,
+              #       and `SPACE`.
+              #     - `attachment`: Supports the operator `:*` (has any) to check for the
+              #       presence of attachments. If `attachment:*` is specified, only messages
+              #       that have at least one attachment are returned.
+              #     - `annotations.user_mentions.user.name`: The resource name of the mentioned
+              #       user (`users/{user}`). Only supports `:` (has). For example:
+              #       `annotations.user_mentions.user.name:"users/1234567890"` returns only
+              #       messages that contain a mention to the specified user. Alternatively, the
+              #       alias `me` can be used to filter for messages that mention the caller
+              #       user, for example: `annotations.user_mentions.user.name:users/me`. You
+              #       can also use the e-mail as an alias for `{user}`, for example,
+              #       `users/example@gmail.com`.
+              #
+              #     For advanced filtering, the following functions are also available:
+              #
+              #     - `has_link()`: Returns only messages that have at least one hyperlink in
+              #       the message text.
+              #     - `is_unread()`: Filters out messages that have been read by the calling
+              #       user.
+              #
+              #     Using the `space.display_name` or the `space.space_type` filters requires
+              #     that the calling credentials include one of the following [authorization
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+              #     - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              #     Using the `is_unread()` filter requires that the calling credentials
+              #     include one of the following [authorization
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #     - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+              #     - `https://www.googleapis.com/auth/chat.users.readstate`
+              #
+              #
+              #     Across different fields, only `AND` operators are supported. A valid
+              #     example is `sender.name = "users/1234567890" AND is_unread()`. The word
+              #     `AND` is optional and is implied if omitted. For example, `sender.name =
+              #     "users/1234567890" is_unread()` is valid and is equivalent to the previous
+              #     example. An invalid example is `sender.name = "users/1234567890" OR
+              #     is_unread()` because `OR` is not supported between different fields.
+              #
+              #     Among the same field:
+              #
+              #     - `create_time` supports only `AND`, and can only be used to represent
+              #        an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+              #        create_time < "2023-01-01T00:00:00+00:00"`.
+              #     - `sender.name` supports only the `OR` operator, for example:
+              #       `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+              #     - `space.name` supports only the `OR` operator, for example:
+              #       `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+              #     - `space.display_name` supports the operators `AND` and `OR`, but not a
+              #       mix of both. For example:
+              #       `space.display_name:Project AND space.display_name:Tasks` returns
+              #       messages that are in spaces with display names containing both `Project`
+              #       and `Tasks`, whereas
+              #       `space.display_name:Project OR space.display_name:Tasks` returns messages
+              #       that are in spaces with display names containing either `Project` or
+              #       `Tasks` or both.
+              #     - `space.space_type` supports only the `OR` operator, for example:
+              #       `space.space_type = "DIRECT_MESSAGE" OR space.space_type = "GROUP_CHAT"`.
+              #     - `annotations.user_mentions.user.name` supports the operators `AND` and
+              #       `OR`, but not a mix of both. For example:
+              #       `annotations.user_mentions.user.name:"users/1234567890" AND
+              #       annotations.user_mentions.user.name:"users/0987654321"` returns only
+              #       messages that mentions both users, whereas
+              #       `annotations.user_mentions.user.name:"users/1234567890" OR
+              #       annotations.user_mentions.user.name:"users/0987654321"` returns messages
+              #       that mention either user or both.
+              #
+              #     Parentheses are required to disambiguate operator precedence when combining
+              #     `AND` and `OR` operators in the same query. For example:
+              #     `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+              #     Otherwise, parentheses are optional.
+              #
+              #     The following example queries are valid:
+              #
+              #     ```
+              #     "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+              #
+              #     sender.name = "users/example@gmail.com"
+              #
+              #     annotations.user_mentions.user.name:"users/0987654321"
+              #
+              #     attachment:* AND space.name = "spaces/ABCDEFGH"
+              #
+              #     tasks AND is_unread() AND sender.name = "users/1234567890"
+              #
+              #     "things to do" "urgent"
+              #
+              #     (sender.name = "users/1234567890")
+              #     AND (create_time < "2023-05-01T00:00:00Z")
+              #
+              #     tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+              #
+              #     "project one" is_unread()
+              #
+              #     space.display_name:Project tasks
+              #     ```
+              #
+              #     The maximum query length is 1,000 characters.
+              #
+              #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+              #     error.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of results to return. The service may return
+              #     fewer than this value.
+              #
+              #     If unspecified, at most 25 are returned.
+              #
+              #     The maximum value is 100. If you use a value more than 100, it's
+              #     automatically changed to 100.
+              #   @param page_token [::String]
+              #     Optional. A token, received from the previous search messages call. Provide
+              #     this parameter to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              #   @param order_by [::String]
+              #     Optional. How the results list is ordered.
+              #
+              #     Supported attributes to order by are:
+              #
+              #     - `create_time`: Sorts the results by the time of the message creation.
+              #       Default value.
+              #     - `relevance`: Sorts the results by relevance.
+              #       [Developer Preview](https://developers.google.com/workspace/preview).
+              #
+              #     The default ordering is `create_time desc`. Only a single order per query
+              #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+              #     is supported, and it must be specified after the order attribute.
+              #   @param markup_syntax [::Google::Apps::Chat::V1::MarkupSyntax]
+              #     Optional. Specifies the desired output syntax for the Chat message
+              #     `formatted_text` field.
+              #   @param view [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
+              #     Optional. Specifies what kind of search results view to return. The default
+              #     is `SEARCH_MESSAGES_VIEW_BASIC`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::SearchMessagesRequest.new
+              #
+              #   # Call the search_messages method.
+              #   result = client.search_messages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::SearchMessageResult.
+              #     p item
+              #   end
+              #
+              def search_messages request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::SearchMessagesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_messages.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_messages.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_messages.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.search_messages request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :search_messages, "results", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1771,19 +2079,30 @@ module Google
               end
 
               ##
-              # Returns a list of spaces in a Google Workspace organization based on an
-              # administrator's search. In the request, set `use_admin_access` to `true`.
-              # For an example, see [Search for and manage
+              # Returns a list of spaces in a Google Workspace organization. For an
+              # example, see [Search for and manage
               # spaces](https://developers.google.com/workspace/chat/search-manage-admin).
               #
-              # Requires [user
+              # When `use_admin_access` is set to `false`, the results are limited to
+              # spaces where the calling user is a joined member. To search with
+              # administrator privileges, set `use_admin_access` to `true`.
+              #
+              # Supports the following types of
+              # [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+              #
+              # - [User
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following authorization scopes:
+              #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+              #     - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # - [User
               # authentication with administrator
               # privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges)
               # and one of the following [authorization
               # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
-              #
-              #   - `https://www.googleapis.com/auth/chat.admin.spaces.readonly`
-              #   - `https://www.googleapis.com/auth/chat.admin.spaces`
+              #     - `https://www.googleapis.com/auth/chat.admin.spaces.readonly`
+              #     - `https://www.googleapis.com/auth/chat.admin.spaces`
               #
               # @overload search_spaces(request, options = nil)
               #   Pass arguments to `search_spaces` via a request object, either of type
@@ -1811,17 +2130,15 @@ module Google
               #     Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
               #     [OAuth 2.0
               #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-              #
-              #     This method currently only supports admin access, thus only `true` is
-              #     accepted for this field.
               #   @param page_size [::Integer]
               #     The maximum number of spaces to return. The service may return fewer than
               #     this value.
               #
               #     If unspecified, at most 100 spaces are returned.
               #
-              #     The maximum value is 1000. If you use a value more than 1000, it's
-              #     automatically changed to 1000.
+              #     The maximum value is 1000 when `useAdminAccess` is set to `true`.
+              #     Otherwise, the maximum value is 100. If you use a value more than the
+              #     maximum value, it's automatically changed to the maximum value.
               #   @param page_token [::String]
               #     A token, received from the previous search spaces call. Provide this
               #     parameter to retrieve the subsequent page.
@@ -1832,7 +2149,8 @@ module Google
               #   @param query [::String]
               #     Required. A search query.
               #
-              #     You can search by using the following parameters:
+              #     You can search by using the following parameters when `useAdminAccess`
+              #     is set to `true`:
               #
               #     - `create_time`
               #     - `customer`
@@ -1842,18 +2160,27 @@ module Google
               #     - `space_history_state`
               #     - `space_type`
               #
+              #     When `useAdminAccess` is set to `false`:
+              #
+              #     - `display_name`
+              #     - `external_user_allowed`
+              #     - `space_type`
+              #
               #     `create_time` and `last_active_time` accept a timestamp in
               #     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
               #     comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
               #
-              #     `customer` is required and is used to indicate which customer
-              #     to fetch spaces from. `customers/my_customer` is the only supported value.
+              #     `customer` is required when `useAdminAccess` is set to `true`, and is
+              #     used to indicate which customer to fetch spaces from.
+              #     `customers/my_customer` is the only supported value.
               #
               #     `display_name` only accepts the `HAS` (`:`) operator. The text to
               #     match is first tokenized into tokens and each token is prefix-matched
               #     case-insensitively and independently as a substring anywhere in the space's
               #     `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-              #     evening was fun`, but not `notFun event` or `even`.
+              #     evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+              #     is set to `false`, `display_name` is required to retrieve meaningful
+              #     results. Otherwise, the default behavior is to return an empty response.
               #
               #     `external_user_allowed` accepts either `true` or `false`.
               #
@@ -1876,7 +2203,8 @@ module Google
               #     < "2022-01-01T00:00:00+00:00" AND last_active_time >
               #     "2023-01-01T00:00:00+00:00"`.
               #
-              #     The following example queries are valid:
+              #     The following example queries are valid when `useAdminAccess` is set to
+              #     `true`:
               #
               #     ```
               #     customer = "customers/my_customer" AND space_type = "SPACE"
@@ -1898,6 +2226,26 @@ module Google
               #     "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
               #     (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
               #     ```
+              #
+              #     The following example queries are valid when `useAdminAccess` is set to
+              #     `false`:
+              #
+              #     ```
+              #     display_name:"Hello World" AND space_type = "SPACE"
+              #
+              #     (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+              #
+              #     (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+              #     empty response.
+              #
+              #     (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+              #     "SPACE")
+              #     ```
+              #
+              #     The maximum query length is 1,000 characters.
+              #
+              #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+              #     error.
               #   @param order_by [::String]
               #     Optional. How the list of spaces is ordered.
               #
@@ -1909,13 +2257,17 @@ module Google
               #     any topic of this space.
               #     - `create_time` — Denotes the time of the space creation.
               #
+              #     When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+              #     supported for ordering. Only `DESC` is supported for these fields in
+              #     non-admin searches.
+              #
               #     Valid ordering operation values are:
               #
               #     - `ASC` for ascending. Default value.
               #
               #     - `DESC` for descending.
               #
-              #     The supported syntax are:
+              #     The supported syntax are when `useAdminAccess` is set to `true`:
               #
               #     - `membership_count.joined_direct_human_user_count DESC`
               #     - `membership_count.joined_direct_human_user_count ASC`
@@ -1923,6 +2275,12 @@ module Google
               #     - `last_active_time ASC`
               #     - `create_time DESC`
               #     - `create_time ASC`
+              #
+              #     When `useAdminAccess` is set to `false`:
+              #
+              #     - `create_time DESC`
+              #     - `relevance DESC`
+              #        [Developer Preview](https://developers.google.com/workspace/preview).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Space>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2180,12 +2538,24 @@ module Google
               #     The space `name` is assigned on the server so anything specified in this
               #     field will be ignored.
               #   @param request_id [::String]
-              #     Optional. A unique identifier for this request.
-              #     A random UUID is recommended.
-              #     Specifying an existing request ID returns the space created with that ID
-              #     instead of creating a new space.
-              #     Specifying an existing request ID from the same Chat app with a different
-              #     authenticated user returns an error.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single space being created. Subsequent requests with the same request ID
+              #     return the existing space and do not update the space, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a space was already created with the provided request ID, the request
+              #     returns that space. Note that the returned space might not be fully
+              #     populated; the API echoes the space in your request with the
+              #     system-assigned resource name populated. To retrieve the latest metadata
+              #     for the space, call `GetSpace`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Space]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2343,12 +2713,24 @@ module Google
               #     If a `DIRECT_MESSAGE` space already exists, that space is returned instead
               #     of creating a new space.
               #   @param request_id [::String]
-              #     Optional. A unique identifier for this request.
-              #     A random UUID is recommended.
-              #     Specifying an existing request ID returns the space created with that ID
-              #     instead of creating a new space.
-              #     Specifying an existing request ID from the same Chat app with a different
-              #     authenticated user returns an error.
+              #     Optional. A unique ID for this request. A random UUID is recommended.
+              #     Specifying a request ID makes the request idempotent, which ensures that
+              #     multiple identical requests with the same request ID result in only a
+              #     single space being created. Subsequent requests with the same request ID
+              #     return the existing space and do not update the space, even if the
+              #     requested details differ from the current state.
+              #
+              #     To use this field effectively:
+              #
+              #     - Ensure that subsequent requests are identical and use the same
+              #     authentication credentials as the original request.
+              #     - If a space was already created with the provided request ID, the request
+              #     returns that space. Note that the returned space might not be fully
+              #     populated; the API echoes the space in your request with the
+              #     system-assigned resource name populated. To retrieve the latest metadata
+              #     for the space, call `GetSpace`.
+              #     - Reusing an existing request ID with a different authenticated user
+              #     results in an error.
               #   @param memberships [::Array<::Google::Apps::Chat::V1::Membership, ::Hash>]
               #     Optional. The Google Chat users or groups to invite to join the space. Omit
               #     the calling user, as they are added automatically.
@@ -2557,6 +2939,7 @@ module Google
               #
               #     - `access_settings.access_permission_settings.discoverSpaceSetting`
               #     - `access_settings.access_permission_settings.joinSpaceSetting`
+              #     - `access_settings.access_permission_settings.viewSpaceMembershipSetting`
               #
               #     `permission_settings`: Supports changing the
               #     [permission settings](https://support.google.com/chat/answer/13340792)
@@ -2573,6 +2956,7 @@ module Google
               #     - `permission_settings.manageApps`
               #     - `permission_settings.manageWebhooks`
               #     - `permission_settings.replyMessages`
+              #     - `permission_settings.viewSpaceMembership`
               #   @param use_admin_access [::Boolean]
               #     Optional. When `true`, the method runs using the user's Google Workspace
               #     administrator privileges.
@@ -3707,26 +4091,26 @@ module Google
               #     For example, the following queries are valid:
               #
               #     ```
-              #     user.name = "users/\\{user}"
+              #     user.name = "users/{user}"
               #     emoji.unicode = "🙂"
-              #     emoji.custom_emoji.uid = "\\{uid}"
+              #     emoji.custom_emoji.uid = "{uid}"
               #     emoji.unicode = "🙂" OR emoji.unicode = "👍"
-              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "\\{uid}"
-              #     emoji.unicode = "🙂" AND user.name = "users/\\{user}"
-              #     (emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "\\{uid}")
-              #     AND user.name = "users/\\{user}"
+              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}"
+              #     emoji.unicode = "🙂" AND user.name = "users/{user}"
+              #     (emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}")
+              #     AND user.name = "users/{user}"
               #     ```
               #
               #     The following queries are invalid:
               #
               #     ```
               #     emoji.unicode = "🙂" AND emoji.unicode = "👍"
-              #     emoji.unicode = "🙂" AND emoji.custom_emoji.uid = "\\{uid}"
-              #     emoji.unicode = "🙂" OR user.name = "users/\\{user}"
-              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "\\{uid}" OR
-              #     user.name = "users/\\{user}"
-              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "\\{uid}"
-              #     AND user.name = "users/\\{user}"
+              #     emoji.unicode = "🙂" AND emoji.custom_emoji.uid = "{uid}"
+              #     emoji.unicode = "🙂" OR user.name = "users/{user}"
+              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}" OR
+              #     user.name = "users/{user}"
+              #     emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}"
+              #     AND user.name = "users/{user}"
               #     ```
               #
               #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
@@ -3879,6 +4263,292 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @chat_service_stub.delete_reaction request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists message pins in a space. Users can pin important messages in spaces
+              # for easy access. For more information, see [Pin or unpin a conversation in
+              # Google Chat](https://support.google.com/chat/answer/15622437).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins.readonly`
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload list_message_pins(request, options = nil)
+              #   Pass arguments to `list_message_pins` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::ListMessagePinsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::ListMessagePinsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_message_pins(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_message_pins` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent space which owns the collection of pinned items
+              #     Format: `spaces/{space}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of message pins returned. The service might
+              #     return fewer messages than this value. The maximum value is 100. If you use
+              #     a value more than 100, it's automatically changed to 100. If unspecified,
+              #     at most 100 message pins will be returned. Negative values return an
+              #     `INVALID_ARGUMENT` error.
+              #   @param page_token [::String]
+              #     Optional. A page token received from a previous list message pins call.
+              #     Provide this parameter to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::MessagePin>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::MessagePin>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::ListMessagePinsRequest.new
+              #
+              #   # Call the list_message_pins method.
+              #   result = client.list_message_pins request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::MessagePin.
+              #     p item
+              #   end
+              #
+              def list_message_pins request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListMessagePinsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_message_pins.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_message_pins.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_message_pins.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.list_message_pins request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_message_pins, "message_pins", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a message pin.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload create_message_pin(request, options = nil)
+              #   Pass arguments to `create_message_pin` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::CreateMessagePinRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::CreateMessagePinRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_message_pin(parent: nil, message_pin: nil)
+              #   Pass arguments to `create_message_pin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent space in which to create the message pin.
+              #     Format: spaces/\\{space}
+              #   @param message_pin [::Google::Apps::Chat::V1::MessagePin, ::Hash]
+              #     Required. The MessagePin to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::MessagePin]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::MessagePin]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::CreateMessagePinRequest.new
+              #
+              #   # Call the create_message_pin method.
+              #   result = client.create_message_pin request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::MessagePin.
+              #   p result
+              #
+              def create_message_pin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::CreateMessagePinRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_message_pin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_message_pin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_message_pin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.create_message_pin request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a message pin.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.spaces.pins`
+              #   - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              # @overload delete_message_pin(request, options = nil)
+              #   Pass arguments to `delete_message_pin` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::DeleteMessagePinRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::DeleteMessagePinRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_message_pin(name: nil)
+              #   Pass arguments to `delete_message_pin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the message pin to remove.
+              #     Format: spaces/\\{space}/messagePins/\\{message_pin}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::DeleteMessagePinRequest.new
+              #
+              #   # Call the delete_message_pin method.
+              #   result = client.delete_message_pin request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_message_pin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::DeleteMessagePinRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_message_pin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_message_pin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_message_pin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.delete_message_pin request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -6539,6 +7209,11 @@ module Google
                   #
                   attr_reader :delete_message
                   ##
+                  # RPC-specific configuration for `search_messages`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_messages
+                  ##
                   # RPC-specific configuration for `get_attachment`
                   # @return [::Gapic::Config::Method]
                   #
@@ -6628,6 +7303,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_reaction
+                  ##
+                  # RPC-specific configuration for `list_message_pins`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_message_pins
+                  ##
+                  # RPC-specific configuration for `create_message_pin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_message_pin
+                  ##
+                  # RPC-specific configuration for `delete_message_pin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_message_pin
                   ##
                   # RPC-specific configuration for `create_custom_emoji`
                   # @return [::Gapic::Config::Method]
@@ -6760,6 +7450,8 @@ module Google
                     @update_message = ::Gapic::Config::Method.new update_message_config
                     delete_message_config = parent_rpcs.delete_message if parent_rpcs.respond_to? :delete_message
                     @delete_message = ::Gapic::Config::Method.new delete_message_config
+                    search_messages_config = parent_rpcs.search_messages if parent_rpcs.respond_to? :search_messages
+                    @search_messages = ::Gapic::Config::Method.new search_messages_config
                     get_attachment_config = parent_rpcs.get_attachment if parent_rpcs.respond_to? :get_attachment
                     @get_attachment = ::Gapic::Config::Method.new get_attachment_config
                     upload_attachment_config = parent_rpcs.upload_attachment if parent_rpcs.respond_to? :upload_attachment
@@ -6796,6 +7488,12 @@ module Google
                     @list_reactions = ::Gapic::Config::Method.new list_reactions_config
                     delete_reaction_config = parent_rpcs.delete_reaction if parent_rpcs.respond_to? :delete_reaction
                     @delete_reaction = ::Gapic::Config::Method.new delete_reaction_config
+                    list_message_pins_config = parent_rpcs.list_message_pins if parent_rpcs.respond_to? :list_message_pins
+                    @list_message_pins = ::Gapic::Config::Method.new list_message_pins_config
+                    create_message_pin_config = parent_rpcs.create_message_pin if parent_rpcs.respond_to? :create_message_pin
+                    @create_message_pin = ::Gapic::Config::Method.new create_message_pin_config
+                    delete_message_pin_config = parent_rpcs.delete_message_pin if parent_rpcs.respond_to? :delete_message_pin
+                    @delete_message_pin = ::Gapic::Config::Method.new delete_message_pin_config
                     create_custom_emoji_config = parent_rpcs.create_custom_emoji if parent_rpcs.respond_to? :create_custom_emoji
                     @create_custom_emoji = ::Gapic::Config::Method.new create_custom_emoji_config
                     get_custom_emoji_config = parent_rpcs.get_custom_emoji if parent_rpcs.respond_to? :get_custom_emoji

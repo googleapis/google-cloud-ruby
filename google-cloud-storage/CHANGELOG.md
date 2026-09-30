@@ -1,5 +1,11 @@
 # Release History
 
+### 1.62.1 (2026-08-24)
+
+#### Bug Fixes
+
+* Remove accept encoding gzip for metadata ([#33896](https://github.com/googleapis/google-cloud-ruby/issues/33896)) 
+
 ### 1.62.0 (2026-07-02)
 
 #### Features

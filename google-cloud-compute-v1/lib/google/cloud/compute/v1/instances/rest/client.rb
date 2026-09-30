@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1073,13 +1073,15 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(instance: nil, project: nil, request_id: nil, zone: nil)
+              # @overload delete(instance: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance [::String]
               #     Name of the instance resource to delete.
+              #   @param no_graceful_shutdown [::Boolean]
+              #     If set to true, Graceful Shutdown is skipped.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
@@ -5053,7 +5055,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload stop(discard_local_ssd: nil, instance: nil, project: nil, request_id: nil, zone: nil)
+              # @overload stop(discard_local_ssd: nil, instance: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `stop` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -5064,6 +5066,8 @@ module Google
               #     If true, the contents of any attached Local SSD disks will be discarded.
               #   @param instance [::String]
               #     Name of the instance resource to stop.
+              #   @param no_graceful_shutdown [::Boolean]
+              #     If set to true, Graceful Shutdown is skipped.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]

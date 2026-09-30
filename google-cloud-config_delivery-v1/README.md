@@ -2,7 +2,6 @@
 
 ConfigDelivery service manages the deployment of kubernetes configuration to a fleet of kubernetes clusters.
 
-ConfigDelivery service manages the deployment of kubernetes configuration to a fleet of kubernetes clusters.
 
 https://github.com/googleapis/google-cloud-ruby
 

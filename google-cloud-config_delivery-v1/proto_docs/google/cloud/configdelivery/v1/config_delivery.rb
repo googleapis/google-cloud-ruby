@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ module Google
         #   @return [::String]
         #     Identifier. Name of the `ResourceBundle`. Format is
         #     `projects/{project}/locations/{location}/resourceBundle
-        #     /[a-z][a-z0-9\-]\\{0,62}`.
+        #     /[a-z][a-z0-9\-]{0,62}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time `ResourceBundle` was created.

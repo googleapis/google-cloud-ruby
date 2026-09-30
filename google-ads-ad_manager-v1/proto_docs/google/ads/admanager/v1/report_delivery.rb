@@ -58,9 +58,10 @@ module Google
           #     Frequency to run report.
           # @!attribute [rw] start_time
           #   @return [::Google::Type::TimeOfDay]
-          #     Indicates start time for schedule to run
-          #     Will use the time_zone from `ReportDefinition`. Defaults
-          #     to the publisher's time zone if not specified.
+          #     Indicates start time for schedule to run.
+          #     Will use the time_zone from
+          #     {::Google::Ads::AdManager::V1::ReportDefinition ReportDefinition}. Defaults to
+          #     the publisher's time zone if not specified.
           #
           #     For HOURLY, TWO_TIMES_DAILY, THREE_TIMES_DAILY, or FOUR_TIMES_DAILY, this
           #     will be the time of day that the first report will run on the first day.

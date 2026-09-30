@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,6 +58,21 @@ module Google
         #   @return [::Integer]
         #     Output only. Network ID.
         class Network
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The `DefaultThirdPartyDataDeclaration` singleton resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the `DefaultThirdPartyDataDeclaration`.
+        #     Format: `networks/{network_code}/defaultThirdPartyDataDeclaration`
+        # @!attribute [rw] third_party_data_declaration
+        #   @return [::Google::Ads::AdManager::V1::ThirdPartyDataDeclaration]
+        #     Optional. Returns the default [ThirdPartyDataDeclaration] for this network.
+        #     If this setting has never been updated on your network, then this API
+        #     response will be unset.
+        class DefaultThirdPartyDataDeclaration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

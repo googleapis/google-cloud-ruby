@@ -58,6 +58,9 @@ require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 require_relative "../storage_move_object"
+require_relative "../storage_disable_soft_delete"
+require_relative "../storage_get_soft_delete_policy"
+require_relative "../storage_set_soft_delete_policy"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -628,32 +631,25 @@ describe "Buckets Snippets" do
   describe "storage move file" do
     let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
-    let :hns_bucket do
-      hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
-      storage_client.create_bucket random_bucket_name do |b|
-        b.uniform_bucket_level_access = true
-        b.hierarchical_namespace = hierarchical_namespace
-      end
-    end
     let :create_source_file do
       file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
       file = StringIO.new file_content
-      hns_bucket.create_file file, source_file
+      bucket.create_file file, source_file
     end
     it "file is moved and old file is deleted" do
       create_source_file
       out, _err = capture_io do
-        move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: destination_file
+        move_object bucket_name: bucket.name, source_file_name: source_file, destination_file_name: destination_file
       end
       assert_includes out, "New File #{destination_file} created\n"
-      refute_nil(hns_bucket.file(destination_file))
-      assert_nil(hns_bucket.file(source_file))
+      refute_nil(bucket.file(destination_file))
+      assert_nil(bucket.file(source_file))
     end
 
     it "raises error if source and destination are having same filename" do
       create_source_file
       exception = assert_raises Google::Cloud::InvalidArgumentError do
-        move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: source_file
+        move_object bucket_name: bucket.name, source_file_name: source_file, destination_file_name: source_file
       end
       assert_equal "invalid: Source and destination object names must be different.", exception.message
     end
@@ -674,6 +670,28 @@ describe "Buckets Snippets" do
     it 'returns nil for unreachable if return_partial_success_flag is not passed' do
       result = list_buckets_with_partial_success return_partial_success_flag: nil
       assert_nil result
+    end
+  end
+
+  describe "soft_delete_policy" do
+    it "get_soft_delete_policy, set_soft_delete_policy, disable_soft_delete" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+      storage_client.create_bucket bucket_name
+
+      assert_output(/Soft delete policy for #{bucket_name}:/) do
+        get_soft_delete_policy bucket_name: bucket_name
+      end
+
+      assert_output(/Soft delete retention duration for #{bucket_name} is now 604800 seconds\./) do
+        set_soft_delete_policy bucket_name: bucket_name, retention_duration_seconds: 604800
+      end
+
+      assert_output(/Soft delete retention duration for #{bucket_name} is now 0 seconds\./) do
+        disable_soft_delete bucket_name: bucket_name
+      end
+
+      delete_bucket_helper bucket_name
     end
   end
 end

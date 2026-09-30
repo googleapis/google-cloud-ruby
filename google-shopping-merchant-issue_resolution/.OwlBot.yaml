@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/shopping/merchant/issueresolution/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-shopping-merchant-issue_resolution/$1
