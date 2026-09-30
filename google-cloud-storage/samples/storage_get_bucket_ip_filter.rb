@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_get_bucket_ip_filter]
+# [START storage_get_ip_filtering]
 def get_bucket_ip_filter bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -33,7 +33,7 @@ def get_bucket_ip_filter bucket_name:
     puts "Bucket #{bucket.name} does not have an IP filter configuration."
   end
 end
-# [END storage_get_bucket_ip_filter]
+# [END storage_get_ip_filtering]
 
 if $PROGRAM_NAME == __FILE__
   get_bucket_ip_filter bucket_name: ARGV.shift

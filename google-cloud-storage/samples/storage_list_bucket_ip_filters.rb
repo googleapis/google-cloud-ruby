@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_list_bucket_ip_filters]
+# [START storage_list_buckets_ip_filtering]
 def list_bucket_ip_filters
   # The ID of your GCP project
 
@@ -29,7 +29,7 @@ def list_bucket_ip_filters
     puts "Bucket Name: #{bucket.name}, IP Filtering Mode: #{mode}"
   end
 end
-# [END storage_list_bucket_ip_filters]
+# [END storage_list_buckets_ip_filtering]
 
 if $PROGRAM_NAME == __FILE__
   list_bucket_ip_filters
