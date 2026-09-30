@@ -31,6 +31,8 @@ module Google
         ##
         # The TargetGrpcProxies API.
         #
+        # This client uses TargetGrpcProxies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/target_grpc_proxies/rest"

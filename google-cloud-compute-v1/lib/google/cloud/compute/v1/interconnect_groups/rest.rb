@@ -32,6 +32,8 @@ module Google
         ##
         # The InterconnectGroups API.
         #
+        # This client uses InterconnectGroups version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/interconnect_groups/rest"

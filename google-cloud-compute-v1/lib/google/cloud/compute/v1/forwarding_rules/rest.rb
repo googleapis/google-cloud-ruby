@@ -32,6 +32,8 @@ module Google
         ##
         # The ForwardingRules API.
         #
+        # This client uses ForwardingRules version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/forwarding_rules/rest"

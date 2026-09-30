@@ -31,6 +31,8 @@ module Google
         ##
         # The ReservationSlots API.
         #
+        # This client uses ReservationSlots version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/reservation_slots/rest"

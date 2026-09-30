@@ -151,6 +151,47 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Intent resource string.
+            #
+            # @overload intent_path(project:, intent:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/intents/{intent}`
+            #
+            #   @param project [String]
+            #   @param intent [String]
+            #
+            # @overload intent_path(project:, location:, intent:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent/intents/{intent}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param intent [String]
+            #
+            # @return [::String]
+            def intent_path **args
+              resources = {
+                "intent:project" => (proc do |project:, intent:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/agent/intents/#{intent}"
+                end),
+                "intent:location:project" => (proc do |project:, location:, intent:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/intents/#{intent}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Message resource string.
             #
             # @overload message_path(project:, conversation:, message:)

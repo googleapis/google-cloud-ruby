@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionInstanceTemplates API.
         #
+        # This client uses RegionInstanceTemplates version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_instance_templates/rest"

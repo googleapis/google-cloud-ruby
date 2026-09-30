@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionHealthAggregationPolicies API.
         #
+        # This client uses RegionHealthAggregationPolicies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_health_aggregation_policies/rest"

@@ -47,6 +47,19 @@ module Google
             # [Event][google.ads.datamanager.v1.Event] resources from
             # the provided [Destination][google.ads.datamanager.v1.Destination].
             rpc :IngestEvents, ::Google::Ads::DataManager::V1::IngestEventsRequest, ::Google::Ads::DataManager::V1::IngestEventsResponse
+            # Uploads a list of users to the provided destinations. Unlike
+            # [IngestAudienceMembers][google.ads.datamanager.v1.IngestionService.IngestAudienceMembers]
+            # (which adds users to specific advertiser audience lists for targeting),
+            # `IngestUsers` ingests account level identity linkage data (for example,
+            # user identifiers linked to mobile IDs) independent of specific audience
+            # segments.
+            #
+            # This feature is only available to accounts on an allowlist.
+            rpc :IngestUsers, ::Google::Ads::DataManager::V1::IngestUsersRequest, ::Google::Ads::DataManager::V1::IngestUsersResponse
+            # Removes a list of users from the provided destinations.
+            #
+            # This feature is only available to accounts on an allowlist.
+            rpc :RemoveUsers, ::Google::Ads::DataManager::V1::RemoveUsersRequest, ::Google::Ads::DataManager::V1::RemoveUsersResponse
             # Uploads a list of
             # [AdEvent][google.ads.datamanager.v1.AdEvent] resources to Google
             # Analytics.

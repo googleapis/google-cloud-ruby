@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionUrlMaps API.
         #
+        # This client uses RegionUrlMaps version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_url_maps/rest"

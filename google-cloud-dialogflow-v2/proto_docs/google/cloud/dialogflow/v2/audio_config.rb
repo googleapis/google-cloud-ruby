@@ -175,6 +175,15 @@ module Google
         #     This field will be deprecated once force migration takes place in June
         #     2024. Please refer to [Dialogflow ES Speech model
         #     migration](https://cloud.google.com/dialogflow/es/docs/speech-model-migration).
+        # @!attribute [rw] gemini_asr_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig::GeminiAsrConfig]
+        #     Optional. Configuration for using Gemini ASR models served via Vertex AI.
+        #     This field is only used when `use_gemini_asr` is true.
+        # @!attribute [rw] use_gemini_asr
+        #   @return [::Boolean]
+        #     Optional. If true, Gemini ASR will be used for transcription instead of
+        #     Cloud Speech-to-Text. If false, Cloud Speech-to-Text will be used.
+        #     If unset, this setting is inherited from the ConversationProfile.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -372,9 +381,69 @@ module Google
         #   @return [::Boolean]
         #     Use timeout based endpointing, interpreting endpointer sensitivity as
         #     seconds of timeout value.
+        # @!attribute [rw] gemini_asr_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig::GeminiAsrConfig]
+        #     Optional. Configuration for using Gemini ASR models served via Vertex AI,
+        #     overriding the default Gemini ASR model or providing additional advanced
+        #     parameters. This field is only used when `use_gemini_asr` is true.
+        # @!attribute [rw] use_gemini_asr
+        #   @return [::Boolean]
+        #     Optional. If true, Gemini ASR will be used for transcription instead of
+        #     Cloud Speech-to-Text.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for using Gemini ASR models served via Vertex AI. This
+          # message is used to override the default Gemini ASR model or provide
+          # additional advanced parameters.
+          # @!attribute [rw] model_id
+          #   @return [::String]
+          #     Optional. The Gemini ASR model ID used for transcription.
+          #     This value overrides the default model ID configured on the server.
+          #     Example: "gemini-3-flash-lite-asr-preview"
+          # @!attribute [rw] silence_duration_ms
+          #   @return [::Integer]
+          #     Optional. The required duration of detected silence (or non-speech)
+          #     before end-of-speech is committed.
+          # @!attribute [rw] prefix_padding_ms
+          #   @return [::Integer]
+          #     Optional. The required duration of detected speech before start-of-speech
+          #     is committed.
+          # @!attribute [rw] start_of_speech_sensitivity
+          #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig::GeminiAsrConfig::StartSensitivity]
+          #     Optional. Start of speech sensitivity.
+          # @!attribute [rw] end_of_speech_sensitivity
+          #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig::GeminiAsrConfig::EndSensitivity]
+          #     Optional. End of speech sensitivity.
+          class GeminiAsrConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Start of speech sensitivity.
+            module StartSensitivity
+              # The default is START_SENSITIVITY_LOW.
+              START_SENSITIVITY_UNSPECIFIED = 0
+
+              # Automatic detection will detect the start of speech more often.
+              START_SENSITIVITY_HIGH = 1
+
+              # Automatic detection will detect the start of speech less often.
+              START_SENSITIVITY_LOW = 2
+            end
+
+            # End of speech sensitivity.
+            module EndSensitivity
+              # The default is END_SENSITIVITY_LOW.
+              END_SENSITIVITY_UNSPECIFIED = 0
+
+              # Automatic detection ends speech more often.
+              END_SENSITIVITY_HIGH = 1
+
+              # Automatic detection ends speech less often.
+              END_SENSITIVITY_LOW = 2
+            end
+          end
         end
 
         # [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling)

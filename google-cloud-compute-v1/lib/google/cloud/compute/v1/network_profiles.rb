@@ -31,6 +31,8 @@ module Google
         ##
         # The NetworkProfiles API.
         #
+        # This client uses NetworkProfiles version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/network_profiles/rest"

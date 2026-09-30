@@ -31,6 +31,8 @@ module Google
         ##
         # The FirewallPolicies API.
         #
+        # This client uses FirewallPolicies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/firewall_policies/rest"

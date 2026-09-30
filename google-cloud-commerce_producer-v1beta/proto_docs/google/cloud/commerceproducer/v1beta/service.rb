@@ -30,9 +30,92 @@ module Google
         #     Output only. Title of the service.
         #
         #     Not included for `SERVICE_VIEW_BASIC`.
+        # @!attribute [r] document_requirement
+        #   @return [::Google::Cloud::CommerceProducer::V1beta::Service::DocumentRequirement]
+        #     Output only. Document requirement for private offers on this service.
+        #
+        #     Constraints that apply to every service, such as the restriction against
+        #     attaching both a standard and a custom EULA, are documented on
+        #     `PrivateOfferDocument` and are not represented here.
+        # @!attribute [r] product_type
+        #   @return [::Google::Cloud::CommerceProducer::V1beta::Service::ProductType]
+        #     Output only. Type of the product this service commercializes.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Requirements and constraints for documents attached to private offers.
+          # @!attribute [rw] document_type_requirements
+          #   @return [::Array<::Google::Cloud::CommerceProducer::V1beta::Service::DocumentRequirement::DocumentTypeRequirement>]
+          #     Document requirements for private offers on this service.
+          #
+          #     Each document type appears at most once. The order of entries is not
+          #     significant. A document type that is not present in this list is not
+          #     permitted for private offers on this service.
+          class DocumentRequirement
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Requirement specification for a specific document type.
+            # @!attribute [rw] document_type
+            #   @return [::Google::Cloud::CommerceProducer::V1beta::PrivateOfferDocument::DocumentType]
+            #     The document type.
+            # @!attribute [rw] requirement_level
+            #   @return [::Google::Cloud::CommerceProducer::V1beta::Service::DocumentRequirement::DocumentTypeRequirement::RequirementLevel]
+            #     The requirement level for this document type.
+            class DocumentTypeRequirement
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Requirement level for the document type.
+              module RequirementLevel
+                # Unspecified requirement level. Do not use.
+                REQUIREMENT_LEVEL_UNSPECIFIED = 0
+
+                # The document type is mandatory for private offers on this service.
+                # Exactly one document of this type must be attached.
+                REQUIRED = 1
+
+                # The document type is optional for private offers on this service.
+                # At most one document of this type may be attached.
+                OPTIONAL = 2
+
+                # The document type is not permitted for private offers on this
+                # service. No document of this type may be attached.
+                #
+                # A document type omitted from `document_type_requirements` is also
+                # not permitted. This value is used to state the restriction
+                # explicitly.
+                NOT_ALLOWED = 3
+              end
+            end
+          end
+
+          # The type of the product this service commercializes.
+          #
+          # Every service has a type, but only the types listed below are exposed. A
+          # service whose type is not one of the listed values reports
+          # `PRODUCT_TYPE_UNSPECIFIED`.
+          #
+          # Values may be added over time. Clients must handle unrecognized values.
+          # When new values are added, the ProductType for an existing service may
+          # change. Clients must also be able to handle a change in ProductType.
+          module ProductType
+            # The service has a type, but it is not one of the types exposed below.
+            PRODUCT_TYPE_UNSPECIFIED = 0
+
+            # Represents a software-as-a-service product. See
+            # https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas
+            SOFTWARE_AS_A_SERVICE = 1
+
+            # Represents a data product on BigQuery sharing (formerly Analytics Hub).
+            # See https://docs.cloud.google.com/marketplace/docs/partners/data
+            ANALYTICS_HUB_LISTING = 2
+
+            # Represents a professional services product. See
+            # https://docs.cloud.google.com/marketplace/docs/partners/professional-services
+            PROFESSIONAL_SERVICES = 3
+          end
         end
       end
     end

@@ -95,6 +95,9 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [rw] end_user_auth_config
+        #   @return [::Google::Cloud::Dataform::V1::Repository::EndUserAuthConfig]
+        #     Optional. Includes configuration options for end user authentication.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -182,6 +185,15 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Includes configuration options for repository end user authentication.
+          # @!attribute [rw] oauth_config
+          #   @return [::Google::Cloud::Dataform::V1::OAuthConfig]
+          #     Optional. OAuth configuration for repository end user authentication.
+          class EndUserAuthConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -190,6 +202,17 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # OAuth configuration for end user authentication.
+        # @!attribute [rw] additional_oauth_scopes
+        #   @return [::Array<::String>]
+        #     Optional. Additional OAuth scopes to use for BigQuery executions.
+        #     Scopes always in use:
+        #     `https://www.googleapis.com/auth/bigquery`
+        class OAuthConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata used to identify if a resource is user scoped.
@@ -2234,6 +2257,10 @@ module Google
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account to run workflow invocations under.
+        # @!attribute [rw] end_user_auth_config
+        #   @return [::Google::Cloud::Dataform::V1::InvocationConfig::EndUserAuthenticationConfig]
+        #     Optional. Configuration for end user authentication.
+        #     Note that this should not be set when `service_account` is used.
         # @!attribute [rw] query_priority
         #   @return [::Google::Cloud::Dataform::V1::InvocationConfig::QueryPriority]
         #     Optional. Specifies the priority for query execution in BigQuery.
@@ -2242,6 +2269,18 @@ module Google
         class InvocationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Includes configuration options for end user authentication.
+          # @!attribute [r] user_email
+          #   @return [::String]
+          #     Output only. Email address of the user to run workflow invocations under.
+          # @!attribute [rw] oauth_config
+          #   @return [::Google::Cloud::Dataform::V1::OAuthConfig]
+          #     Optional. OAuth configuration for end user authentication.
+          class EndUserAuthenticationConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Types of priority for query execution in BigQuery.
           module QueryPriority

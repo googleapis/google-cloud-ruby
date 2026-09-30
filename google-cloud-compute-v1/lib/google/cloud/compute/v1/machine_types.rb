@@ -31,6 +31,8 @@ module Google
         ##
         # The MachineTypes API.
         #
+        # This client uses MachineTypes version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/machine_types/rest"

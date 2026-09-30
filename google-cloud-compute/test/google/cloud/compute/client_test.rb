@@ -200,6 +200,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_global_frontend_settings_service_rest
+    skip unless Google::Cloud::Compute.global_frontend_settings_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.global_frontend_settings_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::GlobalFrontendSettingsService::Rest::Client, client
+    end
+  end
+
   def test_global_network_endpoint_groups_rest
     skip unless Google::Cloud::Compute.global_network_endpoint_groups_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -277,6 +287,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ImageFamilyViews::Rest::Client, client
+    end
+  end
+
+  def test_image_views_rest
+    skip unless Google::Cloud::Compute.image_views_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.image_views do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ImageViews::Rest::Client, client
     end
   end
 
@@ -467,6 +487,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::MachineTypes::Rest::Client, client
+    end
+  end
+
+  def test_managed_rulesets_rest
+    skip unless Google::Cloud::Compute.managed_rulesets_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.managed_rulesets do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ManagedRulesets::Rest::Client, client
     end
   end
 

@@ -311,6 +311,122 @@ class ::Google::Ads::DataManager::V1::IngestionService::Rest::ClientTest < Minit
     end
   end
 
+  def test_ingest_users
+    # Create test objects.
+    client_result = ::Google::Ads::DataManager::V1::IngestUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    destinations = [{}]
+    users = [{}]
+    encryption_info = {}
+    validate_only = true
+    encoding = :ENCODING_UNSPECIFIED
+
+    ingest_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::DataManager::V1::IngestionService::Rest::ServiceStub.stub :transcode_ingest_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, ingest_users_client_stub do
+        # Create client
+        c = ::Google::Ads::DataManager::V1::IngestionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.ingest_users({ destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.ingest_users destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.ingest_users ::Google::Ads::DataManager::V1::IngestUsersRequest.new(destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.ingest_users({ destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.ingest_users(::Google::Ads::DataManager::V1::IngestUsersRequest.new(destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, ingest_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_remove_users
+    # Create test objects.
+    client_result = ::Google::Ads::DataManager::V1::RemoveUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    destinations = [{}]
+    user_data = [{}]
+    encryption_info = {}
+    validate_only = true
+    encoding = :ENCODING_UNSPECIFIED
+
+    remove_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::DataManager::V1::IngestionService::Rest::ServiceStub.stub :transcode_remove_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, remove_users_client_stub do
+        # Create client
+        c = ::Google::Ads::DataManager::V1::IngestionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.remove_users({ destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.remove_users destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.remove_users ::Google::Ads::DataManager::V1::RemoveUsersRequest.new(destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.remove_users({ destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.remove_users(::Google::Ads::DataManager::V1::RemoveUsersRequest.new(destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, remove_users_client_stub.call_count
+      end
+    end
+  end
+
   def test_ingest_ad_events
     # Create test objects.
     client_result = ::Google::Ads::DataManager::V1::IngestAdEventsResponse.new

@@ -32,6 +32,8 @@ module Google
         ##
         # The VpnTunnels API.
         #
+        # This client uses VpnTunnels version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/vpn_tunnels/rest"

@@ -83,6 +83,16 @@ module Google
                   initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.ingest_users.timeout = 120.0
+                default_config.rpcs.ingest_users.retry_policy = {
+                  initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.remove_users.timeout = 120.0
+                default_config.rpcs.remove_users.retry_policy = {
+                  initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.retrieve_request_status.timeout = 60.0
                 default_config.rpcs.retrieve_request_status.retry_policy = {
                   initial_delay: 5.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -590,6 +600,190 @@ module Google
             end
 
             ##
+            # Uploads a list of users to the provided destinations. Unlike
+            # {::Google::Ads::DataManager::V1::IngestionService::Client#ingest_audience_members IngestAudienceMembers}
+            # (which adds users to specific advertiser audience lists for targeting),
+            # `IngestUsers` ingests account level identity linkage data (for example,
+            # user identifiers linked to mobile IDs) independent of specific audience
+            # segments.
+            #
+            # This feature is only available to accounts on an allowlist.
+            #
+            # @overload ingest_users(request, options = nil)
+            #   Pass arguments to `ingest_users` via a request object, either of type
+            #   {::Google::Ads::DataManager::V1::IngestUsersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Ads::DataManager::V1::IngestUsersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload ingest_users(destinations: nil, users: nil, encryption_info: nil, validate_only: nil, encoding: nil)
+            #   Pass arguments to `ingest_users` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param destinations [::Array<::Google::Ads::DataManager::V1::Destination, ::Hash>]
+            #     Required. The list of possible ingestion destinations.
+            #   @param users [::Array<::Google::Ads::DataManager::V1::User, ::Hash>]
+            #     Required. The list of users to ingest.
+            #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
+            #     Optional. Encryption information about encryption keys which are used to
+            #     encrypt the data.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, the request is validated but not executed.
+            #   @param encoding [::Google::Ads::DataManager::V1::Encoding]
+            #     Required. The encoding type of the user identifiers. For encrypted user
+            #     identifiers, this only applies to the outer encoding.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Ads::DataManager::V1::IngestUsersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Ads::DataManager::V1::IngestUsersResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/ads/data_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Ads::DataManager::V1::IngestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Ads::DataManager::V1::IngestUsersRequest.new
+            #
+            #   # Call the ingest_users method.
+            #   result = client.ingest_users request
+            #
+            #   # The returned object is of type Google::Ads::DataManager::V1::IngestUsersResponse.
+            #   p result
+            #
+            def ingest_users request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::DataManager::V1::IngestUsersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.ingest_users.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Ads::DataManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.ingest_users.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.ingest_users.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @ingestion_service_stub.call_rpc :ingest_users, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Removes a list of users from the provided destinations.
+            #
+            # This feature is only available to accounts on an allowlist.
+            #
+            # @overload remove_users(request, options = nil)
+            #   Pass arguments to `remove_users` via a request object, either of type
+            #   {::Google::Ads::DataManager::V1::RemoveUsersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Ads::DataManager::V1::RemoveUsersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_users(destinations: nil, user_data: nil, encryption_info: nil, validate_only: nil, encoding: nil)
+            #   Pass arguments to `remove_users` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param destinations [::Array<::Google::Ads::DataManager::V1::Destination, ::Hash>]
+            #     Required. The list of possible ingestion destinations.
+            #   @param user_data [::Array<::Google::Ads::DataManager::V1::UserData, ::Hash>]
+            #     Required. The individual bits of UserData that act as keys for the users to
+            #     remove.
+            #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
+            #     Optional. Encryption information about encryption keys which are used to
+            #     encrypt the data.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, the request is validated but not executed.
+            #   @param encoding [::Google::Ads::DataManager::V1::Encoding]
+            #     Required. The encoding type of the user identifiers. For encrypted user
+            #     identifiers, this only applies to the outer encoding.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Ads::DataManager::V1::RemoveUsersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Ads::DataManager::V1::RemoveUsersResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/ads/data_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Ads::DataManager::V1::IngestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Ads::DataManager::V1::RemoveUsersRequest.new
+            #
+            #   # Call the remove_users method.
+            #   result = client.remove_users request
+            #
+            #   # The returned object is of type Google::Ads::DataManager::V1::RemoveUsersResponse.
+            #   p result
+            #
+            def remove_users request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::DataManager::V1::RemoveUsersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_users.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Ads::DataManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.remove_users.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_users.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @ingestion_service_stub.call_rpc :remove_users, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Uploads a list of
             # {::Google::Ads::DataManager::V1::AdEvent AdEvent} resources to Google
             # Analytics.
@@ -959,6 +1153,16 @@ module Google
                 #
                 attr_reader :ingest_events
                 ##
+                # RPC-specific configuration for `ingest_users`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :ingest_users
+                ##
+                # RPC-specific configuration for `remove_users`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_users
+                ##
                 # RPC-specific configuration for `ingest_ad_events`
                 # @return [::Gapic::Config::Method]
                 #
@@ -979,6 +1183,10 @@ module Google
                   @remove_all_audience_members = ::Gapic::Config::Method.new remove_all_audience_members_config
                   ingest_events_config = parent_rpcs.ingest_events if parent_rpcs.respond_to? :ingest_events
                   @ingest_events = ::Gapic::Config::Method.new ingest_events_config
+                  ingest_users_config = parent_rpcs.ingest_users if parent_rpcs.respond_to? :ingest_users
+                  @ingest_users = ::Gapic::Config::Method.new ingest_users_config
+                  remove_users_config = parent_rpcs.remove_users if parent_rpcs.respond_to? :remove_users
+                  @remove_users = ::Gapic::Config::Method.new remove_users_config
                   ingest_ad_events_config = parent_rpcs.ingest_ad_events if parent_rpcs.respond_to? :ingest_ad_events
                   @ingest_ad_events = ::Gapic::Config::Method.new ingest_ad_events_config
                   retrieve_request_status_config = parent_rpcs.retrieve_request_status if parent_rpcs.respond_to? :retrieve_request_status

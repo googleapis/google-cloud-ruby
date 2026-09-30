@@ -32,9 +32,11 @@ module Google
             #
             # The Interconnects API.
             #
+            # This client uses Interconnects version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -98,6 +100,8 @@ module Google
                   default_config.rpcs.patch.timeout = 600.0
 
                   default_config.rpcs.set_labels.timeout = 600.0
+
+                  default_config.rpcs.set_name.timeout = 600.0
 
                   default_config
                 end
@@ -688,7 +692,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -776,13 +780,6 @@ module Google
               #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Interconnect>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1045,6 +1042,111 @@ module Google
               end
 
               ##
+              # Sets name of an interconnect.
+              #
+              # @overload set_name(request, options = nil)
+              #   Pass arguments to `set_name` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetNameInterconnectRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetNameInterconnectRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_name(interconnect: nil, interconnects_set_name_request_resource: nil, project: nil, request_id: nil)
+              #   Pass arguments to `set_name` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param interconnect [::String]
+              #     Name of the interconnect to update.
+              #   @param interconnects_set_name_request_resource [::Google::Cloud::Compute::V1::InterconnectsSetNameRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Interconnects::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetNameInterconnectRequest.new
+              #
+              #   # Call the set_name method.
+              #   result = client.set_name request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def set_name request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetNameInterconnectRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_name.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_name.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_name.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @interconnects_stub.set_name request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Interconnects REST API.
               #
               # This class represents the configuration for Interconnects REST,
@@ -1232,6 +1334,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :set_labels
+                  ##
+                  # RPC-specific configuration for `set_name`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_name
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1251,6 +1358,8 @@ module Google
                     @patch = ::Gapic::Config::Method.new patch_config
                     set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
                     @set_labels = ::Gapic::Config::Method.new set_labels_config
+                    set_name_config = parent_rpcs.set_name if parent_rpcs.respond_to? :set_name
+                    @set_name = ::Gapic::Config::Method.new set_name_config
 
                     yield self if block_given?
                   end

@@ -31,6 +31,8 @@ module Google
         ##
         # The TargetHttpsProxies API.
         #
+        # This client uses TargetHttpsProxies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/target_https_proxies/rest"

@@ -31,6 +31,8 @@ module Google
         ##
         # The Licenses API.
         #
+        # This client uses Licenses version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/licenses/rest"

@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionSslCertificates API.
         #
+        # This client uses RegionSslCertificates version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_ssl_certificates/rest"

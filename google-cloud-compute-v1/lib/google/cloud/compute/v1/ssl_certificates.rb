@@ -31,6 +31,8 @@ module Google
         ##
         # The SslCertificates API.
         #
+        # This client uses SslCertificates version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/ssl_certificates/rest"

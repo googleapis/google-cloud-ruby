@@ -31,6 +31,8 @@ module Google
         ##
         # The NodeGroups API.
         #
+        # This client uses NodeGroups version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/node_groups/rest"

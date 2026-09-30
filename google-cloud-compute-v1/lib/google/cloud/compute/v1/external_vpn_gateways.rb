@@ -31,6 +31,8 @@ module Google
         ##
         # The ExternalVpnGateways API.
         #
+        # This client uses ExternalVpnGateways version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/external_vpn_gateways/rest"

@@ -86,6 +86,7 @@ class ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ClientT
     call_options = {}
 
     # Create request parameters for a unary method.
+    associated_policy_to_be_replaced = "hello world"
     firewall_policy = "hello world"
     firewall_policy_association_resource = {}
     project = "hello world"
@@ -107,27 +108,27 @@ class ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ClientT
         end
 
         # Use hash object
-        c.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id }) do |_result, response|
+        c.add_association({ associated_policy_to_be_replaced: associated_policy_to_be_replaced, firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.add_association firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id do |_result, response|
+        c.add_association associated_policy_to_be_replaced: associated_policy_to_be_replaced, firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.add_association ::Google::Cloud::Compute::V1::AddAssociationRegionNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id) do |_result, response|
+        c.add_association ::Google::Cloud::Compute::V1::AddAssociationRegionNetworkFirewallPolicyRequest.new(associated_policy_to_be_replaced: associated_policy_to_be_replaced, firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id }, call_options) do |_result, response|
+        c.add_association({ associated_policy_to_be_replaced: associated_policy_to_be_replaced, firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.add_association(::Google::Cloud::Compute::V1::AddAssociationRegionNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id), call_options) do |_result, response|
+        c.add_association(::Google::Cloud::Compute::V1::AddAssociationRegionNetworkFirewallPolicyRequest.new(associated_policy_to_be_replaced: associated_policy_to_be_replaced, firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, replace_existing_association: replace_existing_association, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -666,7 +667,6 @@ class ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ClientT
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -682,27 +682,27 @@ class ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ClientT
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListRegionNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListRegionNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -766,6 +766,64 @@ class ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ClientT
 
         # Verify method calls
         assert_equal 5, patch_client_stub.call_count
+      end
+    end
+  end
+
+  def test_patch_association
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    firewall_policy = "hello world"
+    firewall_policy_association_resource = {}
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+
+    patch_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::ServiceStub.stub :transcode_patch_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_association_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.patch_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.patch_association firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.patch_association ::Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.patch_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.patch_association(::Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, patch_association_client_stub.call_count
       end
     end
   end

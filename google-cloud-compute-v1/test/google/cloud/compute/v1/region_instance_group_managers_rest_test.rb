@@ -552,7 +552,6 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -568,27 +567,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -613,7 +612,6 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_errors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -629,27 +627,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_errors filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list_errors filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_errors ::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list_errors ::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_errors(::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_errors(::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -674,7 +672,6 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_managed_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -690,27 +687,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_managed_instances filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list_managed_instances filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_managed_instances ::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list_managed_instances ::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_managed_instances(::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_managed_instances(::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -735,7 +732,6 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -751,27 +747,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_per_instance_configs filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list_per_instance_configs filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_per_instance_configs ::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list_per_instance_configs ::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_per_instance_configs(::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_per_instance_configs(::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

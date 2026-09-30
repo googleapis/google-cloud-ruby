@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionSslPolicies API.
         #
+        # This client uses RegionSslPolicies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_ssl_policies/rest"

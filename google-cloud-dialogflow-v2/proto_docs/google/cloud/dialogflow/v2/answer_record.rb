@@ -223,6 +223,9 @@ module Google
         # @!attribute [rw] knowledge_assist_feedback
         #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::KnowledgeAssistFeedback]
         #     Optional. Feedback for knowledge assist.
+        # @!attribute [rw] companion_feedback
+        #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::CompanionFeedback]
+        #     Optional. Feedback for companion agent.
         class AgentAssistantFeedback
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -292,6 +295,12 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Feedback for companion agent.
+          class CompanionFeedback
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Relevance of an answer.
           module AnswerRelevance
             # Answer relevance unspecified.
@@ -334,22 +343,32 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::ArticleAnswer]
         #     Output only. The article suggestion answer.
         #
-        #     Note: The following fields are mutually exclusive: `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`, `generator_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`, `generator_suggestion`, `companion_suggestion`, `reactive_companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] faq_answer
         #   @return [::Google::Cloud::Dialogflow::V2::FaqAnswer]
         #     Output only. The FAQ answer.
         #
-        #     Note: The following fields are mutually exclusive: `faq_answer`, `article_suggestion_answer`, `dialogflow_assist_answer`, `generator_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `faq_answer`, `article_suggestion_answer`, `dialogflow_assist_answer`, `generator_suggestion`, `companion_suggestion`, `reactive_companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] dialogflow_assist_answer
         #   @return [::Google::Cloud::Dialogflow::V2::DialogflowAssistAnswer]
         #     Output only. Dialogflow assist answer.
         #
-        #     Note: The following fields are mutually exclusive: `dialogflow_assist_answer`, `article_suggestion_answer`, `faq_answer`, `generator_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dialogflow_assist_answer`, `article_suggestion_answer`, `faq_answer`, `generator_suggestion`, `companion_suggestion`, `reactive_companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] generator_suggestion
         #   @return [::Google::Cloud::Dialogflow::V2::GeneratorSuggestion]
         #     Output only. The generator suggestion.
         #
-        #     Note: The following fields are mutually exclusive: `generator_suggestion`, `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `generator_suggestion`, `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`, `companion_suggestion`, `reactive_companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] companion_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::CompanionSuggestion]
+        #     Output only. The companion suggestion.
+        #
+        #     Note: The following fields are mutually exclusive: `companion_suggestion`, `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`, `generator_suggestion`, `reactive_companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] reactive_companion_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse::ReactiveModeResponse]
+        #     Output only. The reactive companion suggestion.
+        #
+        #     Note: The following fields are mutually exclusive: `reactive_companion_suggestion`, `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`, `generator_suggestion`, `companion_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AgentAssistantRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

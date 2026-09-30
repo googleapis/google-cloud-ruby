@@ -398,8 +398,10 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesToolSpec>]
         #     Optional. List of CES tool specs that the generator can choose from.
         # @!attribute [rw] ces_app_specs
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesAppSpec>]
-        #     Optional. List of CES app specs that the generator can choose from.
+        #     Optional. Deprecated: Use `ces_tool_specs` instead.
+        #     List of CES app specs that the generator can choose from.
         class Generator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

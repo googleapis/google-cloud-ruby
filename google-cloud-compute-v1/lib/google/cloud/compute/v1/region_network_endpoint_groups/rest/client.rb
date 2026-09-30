@@ -32,9 +32,11 @@ module Google
             #
             # The RegionNetworkEndpointGroups API.
             #
+            # This client uses RegionNetworkEndpointGroups version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -761,7 +763,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -852,13 +854,6 @@ module Google
               #   @param region [::String]
               #     The name of theregion
               #     where the network endpoint group is located. It should comply with RFC1035.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NetworkEndpointGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -932,7 +927,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_network_endpoints(filter: nil, max_results: nil, network_endpoint_group: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              # @overload list_network_endpoints(filter: nil, max_results: nil, network_endpoint_group: nil, order_by: nil, page_token: nil, project: nil, region: nil)
               #   Pass arguments to `list_network_endpoints` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1026,13 +1021,6 @@ module Google
               #   @param region [::String]
               #     The name of theregion
               #     where the network endpoint group is located. It should comply with RFC1035.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NetworkEndpointWithHealthStatus>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

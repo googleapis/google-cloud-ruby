@@ -64,6 +64,11 @@ module Google
             # sent to virtual agents. See [Versions and
             # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             rpc :StreamingAnalyzeContent, stream(::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest), stream(::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse)
+            # Bidirectional endless streaming version of
+            # [StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent].
+            rpc :BidiStreamingAnalyzeContent, stream(::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest), stream(::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse)
+            # External streaming API for direct human-agent-to-bot chats.
+            rpc :StreamingReactiveCompanionSuggestions, stream(::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest), stream(::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse)
             # Gets suggested articles for a participant based on specific historical
             # messages.
             rpc :SuggestArticles, ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest, ::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse

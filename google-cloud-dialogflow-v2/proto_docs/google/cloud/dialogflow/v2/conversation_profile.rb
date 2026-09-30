@@ -376,8 +376,20 @@ module Google
           #     use unredacted ingested context (Supported features: All Agent Assist
           #     features)
           # @!attribute [rw] enable_async_tool_call
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
-          #     Optional. If true, enable asynchronous execution of tools.
+          #     Optional. Deprecated: This field is not consulted for tool execution.
+          #     Configure asynchronous execution per tool using
+          #     [CesToolSpec.async_execution][google.cloud.dialogflow.v2.CesToolSpec.async_execution]
+          #     or
+          #     [ToolsetTool.async_execution][google.cloud.dialogflow.v2.ToolsetTool.async_execution]
+          #     instead.
+          # @!attribute [rw] companion_agent
+          #   @return [::String]
+          #     Optional. The resource name of the companion agent to link.
+          #     This is only supported for `human_agent_suggestion_config`.
+          #     Format:
+          #     `projects/{project}/locations/{location}/companionAgents/{companion_agent}`
           class SuggestionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

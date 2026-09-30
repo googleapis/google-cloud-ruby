@@ -31,6 +31,8 @@ module Google
         ##
         # The StoragePoolTypes API.
         #
+        # This client uses StoragePoolTypes version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/storage_pool_types/rest"

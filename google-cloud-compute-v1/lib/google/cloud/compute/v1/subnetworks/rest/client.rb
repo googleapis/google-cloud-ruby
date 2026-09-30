@@ -32,9 +32,11 @@ module Google
             #
             # The Subnetworks API.
             #
+            # This client uses Subnetworks version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -244,7 +246,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, service_project_number: nil, views: nil)
+              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, service_project_number: nil, views: nil)
               #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -340,13 +342,6 @@ module Google
               #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               #   @param service_project_number [::Integer]
               #     The Shared VPC service project id or service project number for which
               #     aggregated list request is invoked for subnetworks list-usable api.
@@ -926,7 +921,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil, views: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, views: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1016,13 +1011,6 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               #   @param views [::String]
               #     Defines the extra views returned back in the subnetwork resource.
               #     Supported values:
@@ -1103,7 +1091,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_usable(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, service_project: nil)
+              # @overload list_usable(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, service_project: nil)
               #   Pass arguments to `list_usable` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1191,13 +1179,6 @@ module Google
               #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               #   @param service_project [::String]
               #     The project id or project number in which the subnetwork is intended to be
               #     used. Only applied for Shared VPC. See [Shared VPC

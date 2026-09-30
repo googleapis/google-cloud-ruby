@@ -32,6 +32,8 @@ module Google
         ##
         # The CrossSiteNetworks API.
         #
+        # This client uses CrossSiteNetworks version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/cross_site_networks/rest"

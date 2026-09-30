@@ -32,6 +32,8 @@ module Google
         ##
         # The GlobalPublicDelegatedPrefixes API.
         #
+        # This client uses GlobalPublicDelegatedPrefixes version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/global_public_delegated_prefixes/rest"
