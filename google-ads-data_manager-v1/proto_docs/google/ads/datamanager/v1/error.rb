@@ -405,6 +405,9 @@ module Google
           # the specified `variable`.
           CUSTOM_VARIABLE_NOT_FOUND = 120
 
+          # Maximum number of users allowed per request is 10,000.
+          TOO_MANY_USERS = 121
+
           # The
           # {::Google::Ads::DataManager::V1::Baseline#location_auto_detection_enabled location_auto_detection_enabled}
           # field of the request was set to `true`, but auto detection of baseline
@@ -428,6 +431,16 @@ module Google
 
           # The conversion action was created too recently.
           CONVERSION_ACTION_TOO_RECENTLY_CREATED = 127
+
+          # The ad identifier does not belong to the account.
+          #
+          # For example, the {::Google::Ads::DataManager::V1::AdIdentifiers#gclid `gclid`}
+          # isn't associated with the
+          # {::Google::Ads::DataManager::V1::Destination#operating_account `operating_account`}
+          # and
+          # {::Google::Ads::DataManager::V1::Destination#product_destination_id `product_destination_id`}
+          # of the destination.
+          INVALID_AD_IDENTIFIER_FOR_ACCOUNT = 128
         end
       end
     end

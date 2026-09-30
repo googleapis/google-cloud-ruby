@@ -421,7 +421,6 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
-    return_partial_success = true
 
     get_xpn_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -437,27 +436,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_xpn_resources filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.get_xpn_resources filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_xpn_resources ::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.get_xpn_resources ::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_xpn_resources(::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.get_xpn_resources(::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -481,7 +480,6 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     projects_list_xpn_hosts_request_resource = {}
-    return_partial_success = true
 
     list_xpn_hosts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -497,27 +495,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success }) do |_result, response|
+        c.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_xpn_hosts filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success do |_result, response|
+        c.list_xpn_hosts filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_xpn_hosts ::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success) do |_result, response|
+        c.list_xpn_hosts ::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_xpn_hosts(::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list_xpn_hosts(::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

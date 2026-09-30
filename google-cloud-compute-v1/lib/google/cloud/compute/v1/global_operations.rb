@@ -31,6 +31,8 @@ module Google
         ##
         # The GlobalOperations API.
         #
+        # This client uses GlobalOperations version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/global_operations/rest"

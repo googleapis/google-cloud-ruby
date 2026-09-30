@@ -31,6 +31,8 @@ module Google
         ##
         # The ZoneOperations API.
         #
+        # This client uses ZoneOperations version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/zone_operations/rest"

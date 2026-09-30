@@ -32,9 +32,11 @@ module Google
             #
             # The RegionInstanceGroups API.
             #
+            # This client uses RegionInstanceGroups version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -301,7 +303,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -391,13 +393,6 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InstanceGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -474,7 +469,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_instances(filter: nil, instance_group: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, region_instance_groups_list_instances_request_resource: nil, return_partial_success: nil)
+              # @overload list_instances(filter: nil, instance_group: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, region_instance_groups_list_instances_request_resource: nil)
               #   Pass arguments to `list_instances` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -569,13 +564,6 @@ module Google
               #     Name of the region scoping this request.
               #   @param region_instance_groups_list_instances_request_resource [::Google::Cloud::Compute::V1::RegionInstanceGroupsListInstancesRequest, ::Hash]
               #     The body resource for this request
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InstanceWithNamedPorts>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

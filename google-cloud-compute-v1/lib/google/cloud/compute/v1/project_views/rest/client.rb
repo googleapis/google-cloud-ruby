@@ -31,9 +31,11 @@ module Google
             #
             # The ProjectViews API.
             #
+            # This client uses ProjectViews version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"

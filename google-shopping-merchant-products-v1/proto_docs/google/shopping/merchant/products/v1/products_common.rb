@@ -418,9 +418,8 @@ module Google
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductCertification>]
           #     Product Certifications, for example for energy efficiency labeling of
           #     products recorded in the [EU EPREL](https://eprel.ec.europa.eu/screen/home)
-          #     database. See the [Help
-          #     Center](https://support.google.com/merchants/answer/13528839)
-          #     article for more information.
+          #     database. For more information, see
+          #     [Certification](https://support.google.com/merchants/answer/13528839).
           # @!attribute [rw] structured_title
           #   @return [::Google::Shopping::Merchant::Products::V1::StructuredTitle]
           #     Structured title, for algorithmically (AI)-generated titles.
@@ -450,6 +449,10 @@ module Google
           #     in the cart before a customer can initiate checkout. Supports multiple
           #     minimum order values. Different minimum order values can be specified per
           #     country, service and surface. Maximum entries: 100.
+          # @!attribute [rw] warranty
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Warranty]
+          #     The [warranty](https://support.google.com/merchants/answer/15957626) of
+          #     the product.
           # @!attribute [rw] vin
           #   @return [::String]
           #     The [Vehicle Identification Number
@@ -552,10 +555,11 @@ module Google
           #     vehicle. See the [Vehicle
           #     expenses](https://support.google.com/google-ads/answer/15957154) for more
           #     information.
-          # @!attribute [rw] warranty
-          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Warranty]
-          #     The [warranty](https://support.google.com/google-ads/answer/15957626) of
-          #     the vehicle.
+          # @!attribute [rw] returns
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns>]
+          #     Optional. [Return
+          #     rules](https://support.google.com/merchants/answer/17081382) for the
+          #     product.
           # @!attribute [rw] display_address
           #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::DisplayAddress]
           #     The display address of the property.
@@ -610,6 +614,9 @@ module Google
           # @!attribute [rw] short_title
           #   @return [::String]
           #     The short title of the item.
+          # @!attribute [rw] lease_term
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::LeaseTerm]
+          #     The lease term of the property.
           # @!attribute [rw] questions_and_answers
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::QuestionAndAnswer>]
           #     Optional. Contains user-, merchant-, and manufacturer-authored [questions
@@ -883,13 +890,30 @@ module Google
             # The warranty of the vehicle.
             # @!attribute [rw] duration
             #   @return [::Integer]
-            #     The warranty duration in months.
+            #     The warranty duration in units. Default is in months, can be overridden
+            #     by the `duration_unit` field.
             # @!attribute [rw] mileage
             #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage]
-            #     The warranty mileage.
+            #     The warranty mileage (only applies to vehicles).
+            # @!attribute [rw] duration_unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Warranty::WarrantyDurationUnit]
+            #     The unit for the warranty duration. Assumed to be `MONTH` if
+            #     equal to `WARRANTY_DURATION_UNIT_UNSPECIFIED`.
             class Warranty
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The warranty duration unit of the product.
+              module WarrantyDurationUnit
+                # Indicates that the warranty duration unit is unspecified.
+                WARRANTY_DURATION_UNIT_UNSPECIFIED = 0
+
+                # Indicates that the warranty duration unit is month.
+                MONTH = 1
+
+                # Indicates that the warranty duration unit is year.
+                YEAR = 2
+              end
             end
 
             # The product fee attribute containing type and amount.
@@ -988,6 +1012,166 @@ module Google
 
                 # Small dogs.
                 SMALL_DOGS = 3
+              end
+            end
+
+            # The lease term of the property.
+            # @!attribute [rw] type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::LeaseTerm::LeaseTermType]
+            #     The type of lease term.
+            # @!attribute [rw] duration_value
+            #   @return [::Integer]
+            #     The duration value of the lease term.
+            # @!attribute [rw] duration_unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::LeaseTerm::DurationUnit]
+            #     The duration unit of the lease term.
+            class LeaseTerm
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The type of lease term.
+              module LeaseTermType
+                # Unspecified lease term type.
+                LEASE_TERM_TYPE_UNSPECIFIED = 0
+
+                # Fixed term.
+                FIXED_TERM = 1
+              end
+
+              # The unit of duration.
+              module DurationUnit
+                # Unspecified duration unit.
+                DURATION_UNIT_UNSPECIFIED = 0
+
+                # Month.
+                MONTHS = 1
+
+                # Week.
+                WEEKS = 2
+              end
+            end
+
+            # The returns of the product.
+            # @!attribute [rw] restocking_fee
+            #   @return [::Google::Shopping::Type::Price]
+            #     A flat restocking fee penalty.
+            #
+            #     Note: The following fields are mutually exclusive: `restocking_fee`, `restocking_percentage_fee`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] restocking_percentage_fee
+            #   @return [::Float]
+            #     A percentage restocking fee penalty.
+            #
+            #     Note: The following fields are mutually exclusive: `restocking_percentage_fee`, `restocking_fee`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] countries
+            #   @return [::Array<::String>]
+            #     The [CLDR territory
+            #     code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml)
+            #     of the countries to which an item can be returned.
+            # @!attribute [rw] window_days
+            #   @return [::Integer]
+            #     The duration of the return window in days.
+            # @!attribute [rw] window_type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns::ReturnWindowType]
+            #     Special return window behavior.
+            # @!attribute [rw] item_conditions
+            #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns::ItemCondition>]
+            #     The condition the item must be in to be accepted.
+            # @!attribute [rw] methods
+            #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns::ReturnMethod>]
+            #     The physical methods by which the item can be returned.
+            # @!attribute [rw] outcomes
+            #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns::ReturnOutcome>]
+            #     The financial outcomes available for a return.
+            # @!attribute [rw] shipping_fee
+            #   @return [::Google::Shopping::Type::Price]
+            #     The fixed cost out-of-pocket for a customer to return an item.
+            # @!attribute [rw] shipping_fee_type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Returns::ReturnShippingFeeType]
+            #     The type of return shipping fee.
+            # @!attribute [rw] policy_url
+            #   @return [::String]
+            #     The URL of the return policy.
+            class Returns
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Type of return window for the return policy.
+              module ReturnWindowType
+                # The return window type is unspecified.
+                RETURN_WINDOW_TYPE_UNSPECIFIED = 0
+
+                # Window with a fixed number of days. If this is set, the `window_days`
+                # field must be set.
+                FINITE_RETURN_WINDOW = 1
+
+                # No returns accepted.
+                NO_RETURNS = 2
+
+                # Lifetime returns accepted.
+                LIFETIME = 3
+              end
+
+              # The physical method by which the item can be returned.
+              module ReturnMethod
+                # The return method is unspecified.
+                RETURN_METHOD_UNSPECIFIED = 0
+
+                # Customer returns the item by mail.
+                BY_MAIL = 1
+
+                # Customer returns the item in a store.
+                IN_STORE = 2
+
+                # Customer drops off the item at a kiosk.
+                AT_A_KIOSK = 3
+
+                # Customer drops off the item at a 3rd party partner location.
+                DROP_OFF_LOCATION = 4
+              end
+
+              # The acceptable item condition for a return.
+              module ItemCondition
+                # The item condition is unspecified.
+                ITEM_CONDITION_UNSPECIFIED = 0
+
+                # New condition.
+                NEW = 1
+
+                # Like new condition.
+                LIKE_NEW = 2
+
+                # Used condition.
+                USED = 3
+
+                # Only defective items are accepted.
+                DEFECTIVE_ONLY = 4
+              end
+
+              # The financial outcome of a return.
+              module ReturnOutcome
+                # The return outcome is unspecified.
+                RETURN_OUTCOME_UNSPECIFIED = 0
+
+                # Customer receives a refund.
+                REFUND = 1
+
+                # Customer receives an exchange.
+                EXCHANGE = 2
+
+                # Customer receives store credit.
+                STORE_CREDIT = 3
+              end
+
+              # The type of the return shipping fee.
+              module ReturnShippingFeeType
+                # The return shipping fee type is unspecified.
+                RETURN_SHIPPING_FEE_TYPE_UNSPECIFIED = 0
+
+                # The customer is responsible for shipping costs.
+                CUSTOMER_RESPONSIBILITY = 1
+
+                # The shipping cost is deducted from the refund.
+                DEDUCTED_FROM_REFUND = 2
               end
             end
 
@@ -1738,6 +1922,10 @@ module Google
           # @!attribute [rw] total_amount
           #   @return [::Google::Shopping::Type::Price]
           #     Optional. Total amount the buyer has to pay, including interest.
+          # @!attribute [rw] mileage_allowance
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage]
+          #     Optional. The mileage allowance for the lease of the vehicle. Only
+          #     applicable to vehicle products.
           class ProductInstallment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1762,6 +1950,10 @@ module Google
           end
 
           # A message that represents loyalty program.
+          #
+          # For more information on loyalty programs, see
+          # [Overview of loyalty
+          # programs](/merchant/api/guides/loyalty/loyalty-programs).
           # @!attribute [rw] program_label
           #   @return [::String]
           #     The label of the loyalty program. This is an internal label that uniquely
@@ -1965,6 +2157,20 @@ module Google
           #   @return [::String]
           #     The certification value (also known as class, level or grade), for
           #     example "A+", "C", "gold". Maximum length is 2000 characters.
+          # @!attribute [rw] certification_document_link
+          #   @return [::String]
+          #     Optional. URL to the certification document (eg.
+          #     `https://www.example.com/document`), for example, the product data sheet or
+          #     fiche required by UK's DESNZ or EU's EPREL. Maximum length is 2000
+          #     characters. For more information, see
+          #     [Certification](https://support.google.com/merchants/answer/13528839).
+          # @!attribute [rw] certification_label_link
+          #   @return [::String]
+          #     Optional. URL to the certification label (eg.
+          #     `https://www.example.com/label`), for example, the energy efficiency label
+          #     required by UK's DESNZ or EU's EPREL. Maximum length is 2000 characters.
+          #     For more information, see
+          #     [Certification](https://support.google.com/merchants/answer/13528839).
           class ProductCertification
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

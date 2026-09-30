@@ -267,7 +267,6 @@ class ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ClientTest < Min
     page_token = "hello world"
     parent_name = "hello world"
     project = "hello world"
-    return_partial_success = true
     zone = "hello world"
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -284,27 +283,27 @@ class ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ClientTest < Min
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

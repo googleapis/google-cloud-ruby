@@ -32,6 +32,8 @@ module Google
         ##
         # The RegionInstantSnapshots API.
         #
+        # This client uses RegionInstantSnapshots version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/region_instant_snapshots/rest"

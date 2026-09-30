@@ -19,6 +19,7 @@
 require "google/cloud/dialogflow/v2/agents/rest"
 require "google/cloud/dialogflow/v2/tools/rest"
 require "google/cloud/dialogflow/v2/generators/rest"
+require "google/cloud/dialogflow/v2/companion_agents/rest"
 require "google/cloud/dialogflow/v2/contexts/rest"
 require "google/cloud/dialogflow/v2/intents/rest"
 require "google/cloud/dialogflow/v2/entity_types/rest"

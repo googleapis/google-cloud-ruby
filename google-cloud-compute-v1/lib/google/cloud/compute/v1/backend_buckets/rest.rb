@@ -32,6 +32,8 @@ module Google
         ##
         # The BackendBuckets API.
         #
+        # This client uses BackendBuckets version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/backend_buckets/rest"

@@ -6,9 +6,10 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/commerceproducer/v1beta/private_offer_pb'
 
 
-descriptor_data = "\n2google/cloud/commerceproducer/v1beta/service.proto\x12$google.cloud.commerceproducer.v1beta\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xad\x01\n\x07Service\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x12\n\x05title\x18\x02 \x01(\tB\x03\xe0\x41\x03:{\xea\x41x\n\'commerceproducer.googleapis.com/Service\x12:projects/{project}/locations/{location}/services/{service}*\x08services2\x07serviceB\x88\x02\n(com.google.cloud.commerceproducer.v1betaB\x0cServiceProtoP\x01ZTcloud.google.com/go/commerceproducer/apiv1beta/commerceproducerpb;commerceproducerpb\xaa\x02$Google.Cloud.CommerceProducer.V1Beta\xca\x02$Google\\Cloud\\CommerceProducer\\V1beta\xea\x02\'Google::Cloud::CommerceProducer::V1betab\x06proto3"
+descriptor_data = "\n2google/cloud/commerceproducer/v1beta/service.proto\x12$google.cloud.commerceproducer.v1beta\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x38google/cloud/commerceproducer/v1beta/private_offer.proto\"\xe6\x07\n\x07Service\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x12\n\x05title\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x64\n\x14\x64ocument_requirement\x18\x03 \x01(\x0b\x32\x41.google.cloud.commerceproducer.v1beta.Service.DocumentRequirementB\x03\xe0\x41\x03\x12T\n\x0cproduct_type\x18\x04 \x01(\x0e\x32\x39.google.cloud.commerceproducer.v1beta.Service.ProductTypeB\x03\xe0\x41\x03\x1a\xfc\x03\n\x13\x44ocumentRequirement\x12}\n\x1a\x64ocument_type_requirements\x18\x01 \x03(\x0b\x32Y.google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement\x1a\xe5\x02\n\x17\x44ocumentTypeRequirement\x12^\n\rdocument_type\x18\x01 \x01(\x0e\x32G.google.cloud.commerceproducer.v1beta.PrivateOfferDocument.DocumentType\x12\x85\x01\n\x11requirement_level\x18\x02 \x01(\x0e\x32j.google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel\"b\n\x10RequirementLevel\x12!\n\x1dREQUIREMENT_LEVEL_UNSPECIFIED\x10\x00\x12\x0c\n\x08REQUIRED\x10\x01\x12\x0c\n\x08OPTIONAL\x10\x02\x12\x0f\n\x0bNOT_ALLOWED\x10\x03\"|\n\x0bProductType\x12\x1c\n\x18PRODUCT_TYPE_UNSPECIFIED\x10\x00\x12\x19\n\x15SOFTWARE_AS_A_SERVICE\x10\x01\x12\x19\n\x15\x41NALYTICS_HUB_LISTING\x10\x02\x12\x19\n\x15PROFESSIONAL_SERVICES\x10\x03:{\xea\x41x\n\'commerceproducer.googleapis.com/Service\x12:projects/{project}/locations/{location}/services/{service}*\x08services2\x07serviceB\x88\x02\n(com.google.cloud.commerceproducer.v1betaB\x0cServiceProtoP\x01ZTcloud.google.com/go/commerceproducer/apiv1beta/commerceproducerpb;commerceproducerpb\xaa\x02$Google.Cloud.CommerceProducer.V1Beta\xca\x02$Google\\Cloud\\CommerceProducer\\V1beta\xea\x02\'Google::Cloud::CommerceProducer::V1betab\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -18,6 +19,10 @@ module Google
     module CommerceProducer
       module V1beta
         Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.commerceproducer.v1beta.Service").msgclass
+        Service::DocumentRequirement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.commerceproducer.v1beta.Service.DocumentRequirement").msgclass
+        Service::DocumentRequirement::DocumentTypeRequirement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement").msgclass
+        Service::DocumentRequirement::DocumentTypeRequirement::RequirementLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.commerceproducer.v1beta.Service.DocumentRequirement.DocumentTypeRequirement.RequirementLevel").enummodule
+        Service::ProductType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.commerceproducer.v1beta.Service.ProductType").enummodule
       end
     end
   end

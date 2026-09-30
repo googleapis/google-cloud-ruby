@@ -31,6 +31,8 @@ module Google
         ##
         # The InterconnectAttachmentGroups API.
         #
+        # This client uses InterconnectAttachmentGroups version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/interconnect_attachment_groups/rest"

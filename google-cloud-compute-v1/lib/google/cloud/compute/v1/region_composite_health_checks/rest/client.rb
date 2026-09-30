@@ -32,9 +32,11 @@ module Google
             #
             # The RegionCompositeHealthChecks API.
             #
+            # This client uses RegionCompositeHealthChecks version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -234,7 +236,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, service_project_number: nil)
+              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, service_project_number: nil)
               #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -330,13 +332,6 @@ module Google
               #     the next page of results.
               #   @param project [::String]
               #     Name of the project scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               #   @param service_project_number [::Integer]
               #     The Shared VPC service project id or service project number for which
               #     aggregated list request is invoked for subnetworks list-usable api.
@@ -791,7 +786,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -881,13 +876,6 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::CompositeHealthCheck>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

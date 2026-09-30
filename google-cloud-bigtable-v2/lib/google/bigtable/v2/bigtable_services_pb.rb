@@ -79,6 +79,7 @@ module Google
             rpc :PrepareQuery, ::Google::Cloud::Bigtable::V2::PrepareQueryRequest, ::Google::Cloud::Bigtable::V2::PrepareQueryResponse
             # Executes a SQL query against a particular Bigtable instance.
             rpc :ExecuteQuery, ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest, stream(::Google::Cloud::Bigtable::V2::ExecuteQueryResponse)
+            #
             # This RPC is only intended to be used by the official Cloud Bigtable client
             # libraries to implement the Bigtable Session based protocol. It is subject
             # to change without notice.

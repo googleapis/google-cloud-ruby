@@ -32,6 +32,8 @@ module Google
         ##
         # The ReservationBlocks API.
         #
+        # This client uses ReservationBlocks version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/reservation_blocks/rest"

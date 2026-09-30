@@ -34,6 +34,8 @@ module Google
         #
         # The AcceleratorTypes API.
         #
+        # This client uses AcceleratorTypes version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/accelerator_types/rest"

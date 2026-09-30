@@ -32,6 +32,8 @@ module Google
         ##
         # The Projects API.
         #
+        # This client uses Projects version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/projects/rest"

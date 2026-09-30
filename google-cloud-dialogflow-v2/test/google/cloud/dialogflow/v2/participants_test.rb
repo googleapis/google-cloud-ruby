@@ -489,6 +489,186 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     end
   end
 
+  def test_bidi_streaming_analyze_content
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    config = {}
+
+    bidi_streaming_analyze_content_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :bidi_streaming_analyze_content, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, bidi_streaming_analyze_content_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dialogflow::V2::Participants::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { config: config }
+      request_proto = ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new config: config
+      enum_input = [request_hash, request_proto].to_enum
+      c.bidi_streaming_analyze_content enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { config: config }
+      request_proto = ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new config: config
+      stream_input = Gapic::StreamInput.new
+      c.bidi_streaming_analyze_content stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { config: config }
+      request_proto = ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new config: config
+      enum_input = [request_hash, request_proto].to_enum
+      c.bidi_streaming_analyze_content enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { config: config }
+      request_proto = ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new config: config
+      stream_input = Gapic::StreamInput.new
+      c.bidi_streaming_analyze_content stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, bidi_streaming_analyze_content_client_stub.call_rpc_count
+      bidi_streaming_analyze_content_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest, r
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest::Config), r["config"]
+          assert_equal :config, r.request
+        end
+      end
+    end
+  end
+
+  def test_streaming_reactive_companion_suggestions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    participant = "hello world"
+    text_input = "hello world"
+
+    streaming_reactive_companion_suggestions_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :streaming_reactive_companion_suggestions, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, streaming_reactive_companion_suggestions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dialogflow::V2::Participants::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { participant: participant, text_input: text_input }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new participant: participant, text_input: text_input
+      enum_input = [request_hash, request_proto].to_enum
+      c.streaming_reactive_companion_suggestions enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { participant: participant, text_input: text_input }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new participant: participant, text_input: text_input
+      stream_input = Gapic::StreamInput.new
+      c.streaming_reactive_companion_suggestions stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { participant: participant, text_input: text_input }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new participant: participant, text_input: text_input
+      enum_input = [request_hash, request_proto].to_enum
+      c.streaming_reactive_companion_suggestions enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { participant: participant, text_input: text_input }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new participant: participant, text_input: text_input
+      stream_input = Gapic::StreamInput.new
+      c.streaming_reactive_companion_suggestions stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, streaming_reactive_companion_suggestions_client_stub.call_rpc_count
+      streaming_reactive_companion_suggestions_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest, r
+          assert_equal "hello world", r["participant"]
+          assert_equal "hello world", r["text_input"]
+          assert_equal :text_input, r.input
+        end
+      end
+    end
+  end
+
   def test_suggest_articles
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse.new

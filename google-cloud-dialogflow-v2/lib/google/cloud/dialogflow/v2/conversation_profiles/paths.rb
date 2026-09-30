@@ -80,6 +80,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CompanionAgent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/companionAgents/{companion_agent}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param companion_agent [String]
+            #
+            # @return [::String]
+            def companion_agent_path project:, location:, companion_agent:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/companionAgents/#{companion_agent}"
+            end
+
+            ##
             # Create a fully-qualified ConversationModel resource string.
             #
             # @overload conversation_model_path(project:, location:, conversation_model:)

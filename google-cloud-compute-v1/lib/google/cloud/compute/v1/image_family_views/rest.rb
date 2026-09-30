@@ -32,6 +32,8 @@ module Google
         ##
         # The ImageFamilyViews API.
         #
+        # This client uses ImageFamilyViews version 2026-09-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/image_family_views/rest"

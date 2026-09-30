@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionTargetHttpsProxies API.
         #
+        # This client uses RegionTargetHttpsProxies version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_target_https_proxies/rest"

@@ -673,8 +673,9 @@ module Google
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
         #   @return [::String]
-        #     Required. The UTF-8 encoded natural language text to be processed.
+        #     Optional. The UTF-8 encoded natural language text to be processed.
         #     Text length must not exceed 256 characters for virtual agent interactions.
+        #     Only one of `text` and `companion_query` should be set - not both.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this conversational query. See [Language

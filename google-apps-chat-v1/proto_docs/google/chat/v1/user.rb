@@ -21,11 +21,12 @@ module Google
   module Apps
     module Chat
       module V1
-        # A user in Google Chat.
-        # When returned as an output from a request, if your Chat app [authenticates as
-        # a
+        # If your Chat app [authenticates as a
         # user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-        # the output for a `User` resource only populates the user's `name` and `type`.
+        # the output for a `User` resource (such as in the Messages and Memberships
+        # APIs) only populates the `name` and `type` fields for both internal and
+        # external users, unless they are members of the space or have prior affinity
+        # with the calling user.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name for a Google Chat {::Google::Apps::Chat::V1::User user}.
@@ -53,6 +54,36 @@ module Google
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. The user's display name.
+        #
+        #     Populated for both app authentication and user authentication.
+        #     This field is always populated for requests made with [app
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+        #     When calling the Messages and Memberships APIs with [user
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+        #     this field is populated for both internal and external users for the
+        #     `sender` of a message, users within `annotations` (such as user
+        #     mentions), and within `Membership` resources, provided the user is a
+        #     member of the space or has prior affinity with the calling user.
+        # @!attribute [r] avatar_url
+        #   @return [::String]
+        #     Output only. The user's avatar image URL.
+        #
+        #     When calling the Messages and Memberships APIs with [user
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+        #     this field is populated for both internal and external users for the
+        #     `sender` of a message, users within `annotations` (such as user
+        #     mentions), and within `Membership` resources, provided the user is a
+        #     member of the space or has prior affinity with the calling user.
+        # @!attribute [r] email
+        #   @return [::String]
+        #     Output only. The user's email address.
+        #
+        #     When calling the Messages and Memberships APIs with [user
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+        #     this field is populated for both internal and external users for the
+        #     `sender` of a message, users within `annotations` (such as user
+        #     mentions), and within `Membership` resources, provided the user is a
+        #     member of the space or has prior affinity with the calling user.
         # @!attribute [rw] domain_id
         #   @return [::String]
         #     Unique identifier of the user's Google Workspace domain.
@@ -62,7 +93,8 @@ module Google
         # @!attribute [r] is_anonymous
         #   @return [::Boolean]
         #     Output only. When `true`, the user is deleted or their profile is not
-        #     visible.
+        #     visible, such as when a user is mentioned in a space without being a member
+        #     and without prior affinity with the calling user.
         class User
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

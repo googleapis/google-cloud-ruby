@@ -31,6 +31,8 @@ module Google
         ##
         # The PublicDelegatedPrefixes API.
         #
+        # This client uses PublicDelegatedPrefixes version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/public_delegated_prefixes/rest"

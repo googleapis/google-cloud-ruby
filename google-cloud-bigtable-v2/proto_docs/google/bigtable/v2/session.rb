@@ -612,10 +612,13 @@ module Google
         # Internal usage only.
         # @!attribute [rw] read_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionReadRowRequest]
-        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutate_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionMutateRowRequest]
-        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] check_and_mutate_row
+        #   @return [::Google::Cloud::Bigtable::V2::SessionCheckAndMutateRowRequest]
+        #     Note: The following fields are mutually exclusive: `check_and_mutate_row`, `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TableRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -624,10 +627,13 @@ module Google
         # Internal usage only.
         # @!attribute [rw] read_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionReadRowResponse]
-        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutate_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionMutateRowResponse]
-        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] check_and_mutate_row
+        #   @return [::Google::Cloud::Bigtable::V2::SessionCheckAndMutateRowResponse]
+        #     Note: The following fields are mutually exclusive: `check_and_mutate_row`, `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TableResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -636,10 +642,13 @@ module Google
         # A request wrapper for operations on an authorized view. Internal usage only.
         # @!attribute [rw] read_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionReadRowRequest]
-        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutate_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionMutateRowRequest]
-        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] check_and_mutate_row
+        #   @return [::Google::Cloud::Bigtable::V2::SessionCheckAndMutateRowRequest]
+        #     Note: The following fields are mutually exclusive: `check_and_mutate_row`, `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AuthorizedViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -648,10 +657,13 @@ module Google
         # A response wrapper for operations on an authorized view. Internal usage only.
         # @!attribute [rw] read_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionReadRowResponse]
-        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `read_row`, `mutate_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutate_row
         #   @return [::Google::Cloud::Bigtable::V2::SessionMutateRowResponse]
-        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mutate_row`, `read_row`, `check_and_mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] check_and_mutate_row
+        #   @return [::Google::Cloud::Bigtable::V2::SessionCheckAndMutateRowResponse]
+        #     Note: The following fields are mutually exclusive: `check_and_mutate_row`, `read_row`, `mutate_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AuthorizedViewResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -706,6 +718,28 @@ module Google
 
         # Internal usage only.
         class SessionMutateRowResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Internal usage only.
+        # @!attribute [rw] key
+        #   @return [::String]
+        # @!attribute [rw] predicate_filter
+        #   @return [::Google::Cloud::Bigtable::V2::RowFilter]
+        # @!attribute [rw] true_mutations
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::Mutation>]
+        # @!attribute [rw] false_mutations
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::Mutation>]
+        class SessionCheckAndMutateRowRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Internal usage only.
+        # @!attribute [rw] predicate_matched
+        #   @return [::Boolean]
+        class SessionCheckAndMutateRowResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

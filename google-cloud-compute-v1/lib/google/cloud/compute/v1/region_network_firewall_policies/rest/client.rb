@@ -32,9 +32,11 @@ module Google
             #
             # The RegionNetworkFirewallPolicies API.
             #
+            # This client uses RegionNetworkFirewallPolicies version 2026-09-01.
+            #
             class Client
               # @private
-              API_VERSION = ""
+              API_VERSION = "2026-09-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -112,6 +114,8 @@ module Google
                   }
 
                   default_config.rpcs.patch.timeout = 600.0
+
+                  default_config.rpcs.patch_association.timeout = 600.0
 
                   default_config.rpcs.patch_rule.timeout = 600.0
 
@@ -254,11 +258,15 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload add_association(firewall_policy: nil, firewall_policy_association_resource: nil, project: nil, region: nil, replace_existing_association: nil, request_id: nil)
+              # @overload add_association(associated_policy_to_be_replaced: nil, firewall_policy: nil, firewall_policy_association_resource: nil, project: nil, region: nil, replace_existing_association: nil, request_id: nil)
               #   Pass arguments to `add_association` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param associated_policy_to_be_replaced [::String]
+              #     Name of the firewall policy associated with the target network to swap
+              #     association with. This field is mutually exclusive with
+              #     'replace_existing_association'.
               #   @param firewall_policy [::String]
               #     Name of the firewall policy to update.
               #   @param firewall_policy_association_resource [::Google::Cloud::Compute::V1::FirewallPolicyAssociation, ::Hash]
@@ -1218,7 +1226,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1308,13 +1316,6 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case
-              #     of failure. The default value is false.
-              #
-              #     For example, when partial success behavior is enabled, aggregatedList for a
-              #     single zone scope either returns all resources in the zone or no resources,
-              #     with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1467,6 +1468,114 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @region_network_firewall_policies_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an association for the specified network firewall policy.
+              #
+              # @overload patch_association(request, options = nil)
+              #   Pass arguments to `patch_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload patch_association(firewall_policy: nil, firewall_policy_association_resource: nil, project: nil, region: nil, request_id: nil)
+              #   Pass arguments to `patch_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param firewall_policy_association_resource [::Google::Cloud::Compute::V1::FirewallPolicyAssociation, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest.new
+              #
+              #   # Call the patch_association method.
+              #   result = client.patch_association request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def patch_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchAssociationRegionNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.patch_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.patch_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.patch_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_network_firewall_policies_stub.patch_association request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -2187,6 +2296,11 @@ module Google
                   #
                   attr_reader :patch
                   ##
+                  # RPC-specific configuration for `patch_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :patch_association
+                  ##
                   # RPC-specific configuration for `patch_rule`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2238,6 +2352,8 @@ module Google
                     @list = ::Gapic::Config::Method.new list_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
+                    patch_association_config = parent_rpcs.patch_association if parent_rpcs.respond_to? :patch_association
+                    @patch_association = ::Gapic::Config::Method.new patch_association_config
                     patch_rule_config = parent_rpcs.patch_rule if parent_rpcs.respond_to? :patch_rule
                     @patch_rule = ::Gapic::Config::Method.new patch_rule_config
                     remove_association_config = parent_rpcs.remove_association if parent_rpcs.respond_to? :remove_association

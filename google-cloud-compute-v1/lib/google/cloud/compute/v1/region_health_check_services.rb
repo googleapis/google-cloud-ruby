@@ -31,6 +31,8 @@ module Google
         ##
         # The RegionHealthCheckServices API.
         #
+        # This client uses RegionHealthCheckServices version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/region_health_check_services/rest"

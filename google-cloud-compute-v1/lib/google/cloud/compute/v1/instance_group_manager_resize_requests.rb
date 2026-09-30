@@ -31,6 +31,8 @@ module Google
         ##
         # The InstanceGroupManagerResizeRequests API.
         #
+        # This client uses InstanceGroupManagerResizeRequests version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/instance_group_manager_resize_requests/rest"

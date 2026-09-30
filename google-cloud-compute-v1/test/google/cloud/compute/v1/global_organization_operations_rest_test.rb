@@ -201,7 +201,6 @@ class ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::ClientTe
     order_by = "hello world"
     page_token = "hello world"
     parent_id = "hello world"
-    return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -217,27 +216,27 @@ class ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::ClientTe
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_id: parent_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

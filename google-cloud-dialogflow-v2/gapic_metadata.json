@@ -127,6 +127,40 @@
         }
       }
     },
+    "CompanionAgents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::CompanionAgents::Client",
+          "rpcs": {
+            "CreateCompanionAgent": {
+              "methods": [
+                "create_companion_agent"
+              ]
+            },
+            "GetCompanionAgent": {
+              "methods": [
+                "get_companion_agent"
+              ]
+            },
+            "UpdateCompanionAgent": {
+              "methods": [
+                "update_companion_agent"
+              ]
+            },
+            "DeleteCompanionAgent": {
+              "methods": [
+                "delete_companion_agent"
+              ]
+            },
+            "ListCompanionAgents": {
+              "methods": [
+                "list_companion_agents"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Contexts": {
       "clients": {
         "grpc": {
@@ -355,6 +389,16 @@
             "StreamingAnalyzeContent": {
               "methods": [
                 "streaming_analyze_content"
+              ]
+            },
+            "BidiStreamingAnalyzeContent": {
+              "methods": [
+                "bidi_streaming_analyze_content"
+              ]
+            },
+            "StreamingReactiveCompanionSuggestions": {
+              "methods": [
+                "streaming_reactive_companion_suggestions"
               ]
             },
             "SuggestArticles": {

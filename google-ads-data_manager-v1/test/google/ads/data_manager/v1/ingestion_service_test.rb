@@ -329,6 +329,138 @@ class ::Google::Ads::DataManager::V1::IngestionService::ClientTest < Minitest::T
     end
   end
 
+  def test_ingest_users
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::DataManager::V1::IngestUsersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    destinations = [{}]
+    users = [{}]
+    encryption_info = {}
+    validate_only = true
+    encoding = :ENCODING_UNSPECIFIED
+
+    ingest_users_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :ingest_users, name
+      assert_kind_of ::Google::Ads::DataManager::V1::IngestUsersRequest, request
+      assert_kind_of ::Google::Ads::DataManager::V1::Destination, request["destinations"].first
+      assert_kind_of ::Google::Ads::DataManager::V1::User, request["users"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::DataManager::V1::EncryptionInfo), request["encryption_info"]
+      assert_equal true, request["validate_only"]
+      assert_equal :ENCODING_UNSPECIFIED, request["encoding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, ingest_users_client_stub do
+      # Create client
+      c = ::Google::Ads::DataManager::V1::IngestionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.ingest_users({ destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.ingest_users destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.ingest_users ::Google::Ads::DataManager::V1::IngestUsersRequest.new(destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.ingest_users({ destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.ingest_users(::Google::Ads::DataManager::V1::IngestUsersRequest.new(destinations: destinations, users: users, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, ingest_users_client_stub.call_rpc_count
+    end
+  end
+
+  def test_remove_users
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::DataManager::V1::RemoveUsersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    destinations = [{}]
+    user_data = [{}]
+    encryption_info = {}
+    validate_only = true
+    encoding = :ENCODING_UNSPECIFIED
+
+    remove_users_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_users, name
+      assert_kind_of ::Google::Ads::DataManager::V1::RemoveUsersRequest, request
+      assert_kind_of ::Google::Ads::DataManager::V1::Destination, request["destinations"].first
+      assert_kind_of ::Google::Ads::DataManager::V1::UserData, request["user_data"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Ads::DataManager::V1::EncryptionInfo), request["encryption_info"]
+      assert_equal true, request["validate_only"]
+      assert_equal :ENCODING_UNSPECIFIED, request["encoding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_users_client_stub do
+      # Create client
+      c = ::Google::Ads::DataManager::V1::IngestionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.remove_users({ destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.remove_users destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.remove_users ::Google::Ads::DataManager::V1::RemoveUsersRequest.new(destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.remove_users({ destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.remove_users(::Google::Ads::DataManager::V1::RemoveUsersRequest.new(destinations: destinations, user_data: user_data, encryption_info: encryption_info, validate_only: validate_only, encoding: encoding), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_users_client_stub.call_rpc_count
+    end
+  end
+
   def test_ingest_ad_events
     # Create GRPC objects.
     grpc_response = ::Google::Ads::DataManager::V1::IngestAdEventsResponse.new

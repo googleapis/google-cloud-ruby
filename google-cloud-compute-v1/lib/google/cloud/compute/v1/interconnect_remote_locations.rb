@@ -31,6 +31,8 @@ module Google
         ##
         # The InterconnectRemoteLocations API.
         #
+        # This client uses InterconnectRemoteLocations version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/interconnect_remote_locations/rest"

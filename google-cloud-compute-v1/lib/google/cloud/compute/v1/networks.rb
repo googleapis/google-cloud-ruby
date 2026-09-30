@@ -31,6 +31,8 @@ module Google
         ##
         # The Networks API.
         #
+        # This client uses Networks version 2026-09-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/networks/rest"
