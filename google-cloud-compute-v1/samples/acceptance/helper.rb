@@ -36,5 +36,5 @@ def project
 end
 
 def zone
-  ENV["GOOGLE_CLOUD_ZONE"] || "us-central1-c"
+  ENV["GOOGLE_CLOUD_ZONE"] || "us-central1-a"
 end
