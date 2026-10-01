@@ -31,7 +31,12 @@ def delete_folder_recursive bucket_name:, folder_name:
   request = Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new name: folder_path
 
   result = storage_control.delete_folder_recursive request
-  result.wait_until_done! timeout: 60
+  if result.instance_variable_defined? :@options
+    opts = result.instance_variable_get :@options
+    opts.metadata&.delete "x-goog-request-params"
+    opts.metadata&.delete :"x-goog-request-params"
+  end
+  result.wait_until_done!
 
   puts "Deleted folder recursively: #{folder_name}"
 end
