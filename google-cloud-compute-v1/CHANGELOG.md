@@ -1,5 +1,27 @@
 # Release History
 
+### 4.0.0 (2026-10-01)
+
+### ⚠ BREAKING CHANGES
+
+* all AggregatedList RPCs return_partial_success fields removed
+* all AggregatedList RPCs behavior is now return_partial_success=true
+* remove various legacy fields and enums removed from the API
+* update Compute v1 API to version 2026-09-01 ([#36616](https://github.com/googleapis/google-cloud-ruby/issues/36616))
+
+#### Features
+
+* update API sources and regenerate ([#36613](https://github.com/googleapis/google-cloud-ruby/issues/36613)) 
+* update Compute v1 API to version 2026-09-01 ([#36616](https://github.com/googleapis/google-cloud-ruby/issues/36616)) 
+#### Bug Fixes
+
+* all AggregatedList RPCs behavior is now return_partial_success=true 
+* all AggregatedList RPCs return_partial_success fields removed 
+* remove various legacy fields and enums removed from the API 
+#### Documentation
+
+* see https://docs.cloud.google.com/compute/docs/release-notes 
+
 ### 3.12.0 (2026-09-22)
 
 #### Features
@@ -454,4 +476,3 @@
 ### 0.1.0 / 2021-05-10
 
 * Initial alpha release
-
