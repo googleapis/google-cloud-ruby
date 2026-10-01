@@ -438,7 +438,7 @@ module Google
         #   the bucket will include additional metadata, such as ACL policies and
         #   IP filter settings.
         #
-        # @param [Hash] ip_filter The bucket's IP filter configuration.
+        # @param [Google::Apis::StorageV1::Bucket::IpFilter, Hash] ip_filter The bucket's IP filter configuration.
         #   Acceptable values are:
         #   * A {Google::Apis::StorageV1::Bucket::IpFilter} object.
         #   * A Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object:

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_create_bucket_ip_filtering]
-def create_bucket_with_ip_filter bucket_name:
+def create_bucket_with_ip_filter bucket_name:, mode: "Enabled"
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -21,7 +21,7 @@ def create_bucket_with_ip_filter bucket_name:
 
   storage = Google::Cloud::Storage.new
   ip_filter = {
-    mode: "Disabled",
+    mode: mode,
     public_network_source: {
       allowed_ip_cidr_ranges: [
         "0.0.0.0/0", "::/0"
