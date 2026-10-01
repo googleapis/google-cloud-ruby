@@ -49,6 +49,77 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   let(:secret_name) { "projects/#{project_id}/locations/#{location_id}/secrets/#{secret_id}" }
   let(:iam_user) { "user:sarafy@google.com" }
 
+  # Role granted to a Cloud SQL DB credentials secret's built-in identity so
+  # that managed rotation can update the Cloud SQL user's password. This
+  # grant is per-secret (the member is the secret's own generated
+  # principal), so it has to be made fresh for every secret managed
+  # rotation tests create.
+  CLOUD_SQL_ROLE = "roles/cloudsql.admin".freeze
+
+  let(:cloud_sql_instance_id) { ENV["CLOUD_SQL_INSTANCE"] || raise("missing CLOUD_SQL_INSTANCE") }
+  let(:cloud_sql_username) { ENV["CLOUD_SQL_USER"] || raise("missing CLOUD_SQL_USER") }
+  let(:projects_client) { Google::Cloud::ResourceManager::V3::Projects::Client.new }
+
+  # A Cloud SQL DB credentials secret, created at the shared secret_name so
+  # the existing `after` teardown below deletes it like any other secret.
+  let :cloud_sql_credentials_secret do
+    client.create_secret(
+      parent:    "projects/#{project_id}/locations/#{location_id}",
+      secret_id: secret_id,
+      secret:    {
+        secret_type: :CLOUD_SQL_DB_CREDENTIALS
+      }
+    )
+  end
+
+  # Grants CLOUD_SQL_ROLE to member on the project. set_iam_policy replaces
+  # the whole policy, so this reads the current policy, adds the member to
+  # the existing (or a new) binding for the role, and writes it back --
+  # retrying the whole read-modify-write if another writer raced us
+  # (AbortedError, from an etag mismatch).
+  def grant_cloud_sql_role member
+    resource = "projects/#{project_id}"
+    retry_on_aborted do
+      policy = projects_client.get_iam_policy resource: resource
+      binding = policy.bindings.find { |b| b.role == CLOUD_SQL_ROLE }
+      if binding
+        binding.members << member unless binding.members.include? member
+      else
+        policy.bindings << Google::Iam::V1::Binding.new(role: CLOUD_SQL_ROLE, members: [member])
+      end
+      projects_client.set_iam_policy resource: resource, policy: policy
+    end
+    # IAM grants are eventually consistent; give it a moment before a
+    # caller tries to use it for managed rotation.
+    sleep 10
+  end
+
+  # Removes member from CLOUD_SQL_ROLE on the project, added by grant_cloud_sql_role.
+  def revoke_cloud_sql_role member
+    resource = "projects/#{project_id}"
+    retry_on_aborted do
+      policy = projects_client.get_iam_policy resource: resource
+      changed = false
+      policy.bindings.each do |binding|
+        next unless binding.role == CLOUD_SQL_ROLE && binding.members.include?(member)
+        binding.members.delete member
+        changed = true
+      end
+      projects_client.set_iam_policy resource: resource, policy: policy if changed
+    end
+  end
+
+  def retry_on_aborted max_attempts: 5
+    attempts = 0
+    begin
+      yield
+    rescue Google::Cloud::AbortedError
+      attempts += 1
+      raise if attempts >= max_attempts
+      retry
+    end
+  end
+
   let :secret do
     client.create_secret(
       parent:    "projects/#{project_id}/locations/#{location_id}",
