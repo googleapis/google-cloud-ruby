@@ -2261,6 +2261,10 @@ module Google
         # steps in [Service Account Authentication](
         # https://cloud.google.com/iam/docs/service-accounts).
         #
+        # When running in Google Cloud environments (like Compute Engine, Cloud Run, or
+        # Kubernetes Engine), the library automatically detects the environment and uses
+        # the IAM Credentials API to sign the URL. A local private key is not required.
+        #
         # @see https://cloud.google.com/storage/docs/access-control/signed-urls
         #   Signed URLs guide
         # @see https://cloud.google.com/storage/docs/access-control/signed-urls#signing-resumable
@@ -2284,7 +2288,12 @@ module Google
         # @param [Hash] headers Google extension headers (custom HTTP headers
         #   that begin with `x-goog-`) that must be included in requests that
         #   use the signed URL.
-        # @param [String] issuer Service Account's Client Email.
+        # @param [String] issuer Service Account's Client Email. If not provided, the
+        #   library will attempt to extract it from the standard credentials. If running
+        #   in a Google Cloud environment (like GCE or GKE), the library will automatically
+        #   fetch the default service account email from the metadata server. For external
+        #   Workload Identity Federation (e.g., GitHub Actions or AWS), you must provide this
+        #   value explicitly to use keyless signing.
         # @param [String] client_email Service Account's Client Email.
         # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
         #   Private Key or a Proc that accepts a single String parameter and returns a
@@ -2296,12 +2305,9 @@ module Google
         #   Private Key or a Proc that accepts a single String parameter and returns a
         #   RSA SHA256 signature using a valid Google Service Account Private Key.
         #
-        #   When using this method in environments such as GAE Flexible Environment,
-        #   GKE, or Cloud Functions where the private key is unavailable, it may be
-        #   necessary to provide a Proc (or lambda) via the signer parameter. This
-        #   Proc should return a signature created using a RPC call to the
-        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
-        #   method as shown in the example below.
+        #   A custom proc used to sign the URL. This is no longer required for Workload
+        #   Identity or keyless environments, as the library will automatically fallback to
+        #   the IAM Credentials API if a private key is missing but an `issuer` is available.
         # @param [Hash] query Query string parameters to include in the signed
         #   URL. The given parameters are not verified by the signature.
         #
