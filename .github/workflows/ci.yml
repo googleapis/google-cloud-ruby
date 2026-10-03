@@ -74,8 +74,11 @@ jobs:
         GITHUB_EVENT_NAME: ${{ github.event_name }}
         GITHUB_EVENT_PATH: ${{ github.event_path }}
         GITHUB_EVENT_INPUTS_FLAGS: ${{ github.event.inputs.flags }}
+      # Force bash: windows-latest defaults to pwsh, where "${VAR}" reads an
+      # (unset) PowerShell variable instead of the env var above.
+      shell: bash
       run: |
-        toys ci -v ${{ matrix.task }} --github-event-name=${GITHUB_EVENT_NAME} --github-event-payload=${GITHUB_EVENT_PATH} ${GITHUB_EVENT_INPUTS_FLAGS}
+        toys ci -v ${{ matrix.task }} --github-event-name="${GITHUB_EVENT_NAME}" --github-event-payload="${GITHUB_EVENT_PATH}" ${GITHUB_EVENT_INPUTS_FLAGS}
     - name: Open Issues
       if: ${{ failure() }}
       env:
