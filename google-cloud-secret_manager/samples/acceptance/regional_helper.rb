@@ -75,11 +75,12 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   # Grants CLOUD_SQL_ROLE to member on the project. set_iam_policy replaces
   # the whole policy, so this reads the current policy, adds the member to
   # the existing (or a new) binding for the role, and writes it back --
-  # retrying the whole read-modify-write if another writer raced us
-  # (AbortedError, from an etag mismatch).
+  # retrying the whole read-modify-write if another writer raced us, or if
+  # a transient error (e.g. an etag conflict or a momentary Unavailable)
+  # got in the way.
   def grant_cloud_sql_role member
     resource = "projects/#{project_id}"
-    retry_on_aborted do
+    retry_cloud_sql_iam_call do
       policy = projects_client.get_iam_policy resource: resource
       binding = policy.bindings.find { |b| b.role == CLOUD_SQL_ROLE }
       if binding
@@ -97,7 +98,7 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   # Removes member from CLOUD_SQL_ROLE on the project, added by grant_cloud_sql_role.
   def revoke_cloud_sql_role member
     resource = "projects/#{project_id}"
-    retry_on_aborted do
+    retry_cloud_sql_iam_call do
       policy = projects_client.get_iam_policy resource: resource
       changed = false
       policy.bindings.each do |binding|
@@ -109,13 +110,23 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
     end
   end
 
-  def retry_on_aborted max_attempts: 5
-    attempts = 0
+  CLOUD_SQL_IAM_RETRY_INTERVAL = 15
+  CLOUD_SQL_IAM_RETRY_MAX_DURATION = 60
+
+  # Retries a project IAM policy read-modify-write for up to
+  # CLOUD_SQL_IAM_RETRY_MAX_DURATION seconds, logging each attempt. Mirrors
+  # the time-boxed, broad-rescue pattern already used by
+  # cleanup_tag_value/cleanup_tag_key in create_secret_with_tags_test.rb --
+  # a plain attempt-count retry limited to AbortedError missed a transient
+  # Google::Cloud::UnavailableError observed live against a real project.
+  def retry_cloud_sql_iam_call
+    end_time = Time.now + CLOUD_SQL_IAM_RETRY_MAX_DURATION
     begin
       yield
-    rescue Google::Cloud::AbortedError
-      attempts += 1
-      raise if attempts >= max_attempts
+    rescue StandardError => e
+      raise if Time.now >= end_time
+      puts "An error occurred updating the Cloud SQL IAM policy: #{e.message}. Retrying."
+      sleep CLOUD_SQL_IAM_RETRY_INTERVAL
       retry
     end
   end
