@@ -43,7 +43,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
       storage.create_bucket(bucket_name, ip_filter: ip_filter_disabled)
   end
 
-  after :all do
+  after do
     safe_gcs_execute { bucket.delete }
   end
 
@@ -75,10 +75,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_equal ["0.0.0.0/0", "::/0"]
 
     # list_bucket_ip_filters
-    found = false
-    storage.buckets(projection: "full").all do |b|
-      found = true if b.name == bucket_name
-    end
+    found = storage.buckets(projection: "full").all.any? { |b| b.name == bucket_name }
     _(found).must_equal true
 
     # Update the ip_filter

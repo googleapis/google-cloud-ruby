@@ -23,7 +23,6 @@ def list_bucket_ip_filters
   storage.buckets(projection: "full").all do |bucket|
     ip_filter = bucket.ip_filter
     mode = ip_filter ? ip_filter.mode : "Not Configured"
-    
     puts "Bucket Name: #{bucket.name}, IP Filtering Mode: #{mode}"
   end
 end

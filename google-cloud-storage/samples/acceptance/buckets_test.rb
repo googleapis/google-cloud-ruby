@@ -200,7 +200,8 @@ describe "Buckets Snippets" do
       end
 
       # Gets IP filter of an existing bucket
-      expected = "Allowed public network CIDR ranges: 0.0.0.0/0, ::/0\n"
+      expected = "Bucket #{bucket_name} has IP filter mode: Disabled.\n" \
+                 "Allowed public network CIDR ranges: 0.0.0.0/0, ::/0\n"
       retry_resource_exhaustion do
         assert_output expected do
           get_bucket_ip_filter bucket_name: bucket_name
