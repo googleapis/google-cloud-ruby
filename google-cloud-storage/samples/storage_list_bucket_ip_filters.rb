@@ -14,7 +14,6 @@
 
 # [START storage_list_buckets_ip_filtering]
 def list_bucket_ip_filters
-  
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
