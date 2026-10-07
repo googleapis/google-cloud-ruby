@@ -191,6 +191,776 @@ class ::Google::Ads::AdManager::V1::LineItemService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_create_line_item
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::LineItem.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    line_item = {}
+
+    create_line_item_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_create_line_item_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_line_item_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_line_item({ parent: parent, line_item: line_item }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_line_item parent: parent, line_item: line_item do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_line_item ::Google::Ads::AdManager::V1::CreateLineItemRequest.new(parent: parent, line_item: line_item) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_line_item({ parent: parent, line_item: line_item }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_line_item(::Google::Ads::AdManager::V1::CreateLineItemRequest.new(parent: parent, line_item: line_item), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_line_item_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_create_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_line_items({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_line_items parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_line_items ::Google::Ads::AdManager::V1::BatchCreateLineItemsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_line_items({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_line_items(::Google::Ads::AdManager::V1::BatchCreateLineItemsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_line_item
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::LineItem.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    line_item = {}
+    update_mask = {}
+
+    update_line_item_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_update_line_item_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_line_item_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_line_item({ line_item: line_item, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_line_item line_item: line_item, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_line_item ::Google::Ads::AdManager::V1::UpdateLineItemRequest.new(line_item: line_item, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_line_item({ line_item: line_item, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_line_item(::Google::Ads::AdManager::V1::UpdateLineItemRequest.new(line_item: line_item, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_line_item_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_update_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_line_items({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_line_items parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_line_items ::Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_line_items({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_line_items(::Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_activate_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_line_items ::Google::Ads::AdManager::V1::BatchActivateLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_line_items(::Google::Ads::AdManager::V1::BatchActivateLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_pause_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchPauseLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_pause_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_pause_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_pause_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_pause_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_pause_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_pause_line_items ::Google::Ads::AdManager::V1::BatchPauseLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_pause_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_pause_line_items(::Google::Ads::AdManager::V1::BatchPauseLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_pause_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_resume_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchResumeLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_resume_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_resume_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_resume_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_resume_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_resume_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_resume_line_items ::Google::Ads::AdManager::V1::BatchResumeLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_resume_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_resume_line_items(::Google::Ads::AdManager::V1::BatchResumeLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_resume_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_resume_and_overbook_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_resume_and_overbook_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_resume_and_overbook_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_resume_and_overbook_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_resume_and_overbook_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_resume_and_overbook_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_resume_and_overbook_line_items ::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_resume_and_overbook_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_resume_and_overbook_line_items(::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_resume_and_overbook_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_delete_line_items
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_delete_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_delete_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_delete_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_delete_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_delete_line_items ::Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_delete_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_delete_line_items(::Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_reserve_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchReserveLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_reserve_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_reserve_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_reserve_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_reserve_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_reserve_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_reserve_line_items ::Google::Ads::AdManager::V1::BatchReserveLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_reserve_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_reserve_line_items(::Google::Ads::AdManager::V1::BatchReserveLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_reserve_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_reserve_and_overbook_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_reserve_and_overbook_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_reserve_and_overbook_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_reserve_and_overbook_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_reserve_and_overbook_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_reserve_and_overbook_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_reserve_and_overbook_line_items ::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_reserve_and_overbook_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_reserve_and_overbook_line_items(::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_reserve_and_overbook_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_release_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchReleaseLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_release_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_release_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_release_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_release_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_release_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_release_line_items ::Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_release_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_release_line_items(::Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_release_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_archive_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchArchiveLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_archive_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_archive_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_archive_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_archive_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_archive_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_archive_line_items ::Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_archive_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_archive_line_items(::Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_archive_line_items_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_unarchive_line_items
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_unarchive_line_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemService::Rest::ServiceStub.stub :transcode_batch_unarchive_line_items_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_unarchive_line_items_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_unarchive_line_items({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_unarchive_line_items parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_unarchive_line_items ::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_unarchive_line_items({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_unarchive_line_items(::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_unarchive_line_items_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

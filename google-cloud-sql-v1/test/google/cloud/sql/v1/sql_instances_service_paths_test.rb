@@ -56,6 +56,30 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientPathsTest < Minitest:
     end
   end
 
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Sql::V1::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
+  def test_crypto_key_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Sql::V1::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_version_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3", crypto_key_version: "value4"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3/cryptoKeyVersions/value4", path
+    end
+  end
+
   def test_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -65,6 +89,18 @@ class ::Google::Cloud::Sql::V1::SqlInstancesService::ClientPathsTest < Minitest:
 
       path = client.network_path project: "value0", network: "value1"
       assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
+  def test_network_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Sql::V1::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_attachment_path project: "value0", region: "value1", network_attachment: "value2"
+      assert_equal "projects/value0/regions/value1/networkAttachments/value2", path
     end
   end
 

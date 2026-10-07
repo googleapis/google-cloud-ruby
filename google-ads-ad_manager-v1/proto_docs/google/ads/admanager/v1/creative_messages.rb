@@ -22,6 +22,142 @@ module Google
     module AdManager
       module V1
         # The Creative resource.
+        # @!attribute [rw] ad_exchange_creative
+        #   @return [::Google::Ads::AdManager::V1::AdExchangeCreativeDetails]
+        #     Optional. An Ad Exchange dynamic allocation creative.
+        #
+        #     Note: The following fields are mutually exclusive: `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ad_sense_creative
+        #   @return [::Google::Ads::AdManager::V1::AdSenseCreativeDetails]
+        #     Optional. An AdSense dynamic allocation creative.
+        #
+        #     Note: The following fields are mutually exclusive: `ad_sense_creative`, `ad_exchange_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aspect_ratio_image_creative
+        #   @return [::Google::Ads::AdManager::V1::AspectRatioImageCreativeDetails]
+        #     Optional. A Creative intended for mobile platforms that displays an
+        #     image, whose size is defined as an aspect ratio. It can have multiple
+        #     images whose dimensions conform to that aspect ratio.
+        #
+        #     Note: The following fields are mutually exclusive: `aspect_ratio_image_creative`, `ad_exchange_creative`, `ad_sense_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] audio_creative
+        #   @return [::Google::Ads::AdManager::V1::AudioCreativeDetails]
+        #     Optional. A Creative that contains Ad Manager hosted audio ads and is
+        #     served via VAST XML.
+        #
+        #     Note: The following fields are mutually exclusive: `audio_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] audio_redirect_creative
+        #   @return [::Google::Ads::AdManager::V1::AudioRedirectCreativeDetails]
+        #     Optional. A Creative that contains externally hosted audio ads and is
+        #     served via VAST XML.
+        #
+        #     Note: The following fields are mutually exclusive: `audio_redirect_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] click_tracking_creative
+        #   @return [::Google::Ads::AdManager::V1::ClickTrackingCreativeDetails]
+        #     Optional. A creative that is used for tracking clicks on ads that are
+        #     served directly from the customers' web servers or media servers. NOTE:
+        #     The size attribute is not used for click tracking creative and it will
+        #     not be persisted upon save.
+        #
+        #     Note: The following fields are mutually exclusive: `click_tracking_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] custom_creative
+        #   @return [::Google::Ads::AdManager::V1::CustomCreativeDetails]
+        #     Optional. A Creative that contains a custom HTML snippet and file assets.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] html5_creative
+        #   @return [::Google::Ads::AdManager::V1::Html5CreativeDetails]
+        #     Optional. A Creative that contains a zipped HTML5 bundle asset, a list of
+        #     third party impression trackers, and a third party click tracker.
+        #
+        #     Note: The following fields are mutually exclusive: `html5_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image_creative
+        #   @return [::Google::Ads::AdManager::V1::ImageCreativeDetails]
+        #     Optional. A Creative that displays an image.
+        #
+        #     Note: The following fields are mutually exclusive: `image_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image_overlay_creative
+        #   @return [::Google::Ads::AdManager::V1::ImageOverlayCreativeDetails]
+        #     Optional. An overlay Creative that displays an image and is served via
+        #     VAST 2.0 XML. Overlays cover part of the video content they are displayed
+        #     on top of.
+        #
+        #     Note: The following fields are mutually exclusive: `image_overlay_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image_redirect_creative
+        #   @return [::Google::Ads::AdManager::V1::ImageRedirectCreativeDetails]
+        #     Optional. A Creative that loads an image asset from a specified URL.
+        #
+        #     Note: The following fields are mutually exclusive: `image_redirect_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image_redirect_overlay_creative
+        #   @return [::Google::Ads::AdManager::V1::ImageRedirectOverlayCreativeDetails]
+        #     Optional. An overlay Creative that loads an image asset from a specified
+        #     URL and is served via VAST XML. Overlays cover part of the video content
+        #     they are displayed on top of. This creative is read only.
+        #
+        #     Note: The following fields are mutually exclusive: `image_redirect_overlay_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] internal_redirect_creative
+        #   @return [::Google::Ads::AdManager::V1::InternalRedirectCreativeDetails]
+        #     Optional. A Creative hosted by Campaign Manager 360.
+        #
+        #     Similar to third-party creatives, a Campaign Manager 360 tag is used to
+        #     retrieve a creative asset. However, Campaign Manager 360 tags are not
+        #     sent to the user's browser. Instead, they are processed internally within
+        #     the Google Marketing Platform system.
+        #
+        #     Note: The following fields are mutually exclusive: `internal_redirect_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] legacy_dfp_creative
+        #   @return [::Google::Ads::AdManager::V1::LegacyDfpCreativeDetails]
+        #     Optional. A Creative that isn't supported by Google DFP, but was migrated
+        #     from DART. Creatives of this type cannot be created or modified.
+        #
+        #     Note: The following fields are mutually exclusive: `legacy_dfp_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] programmatic_creative
+        #   @return [::Google::Ads::AdManager::V1::ProgrammaticCreativeDetails]
+        #     Optional. A Creative used for programmatic trafficking. This creative
+        #     will be auto-created with the right approval from the buyer. This
+        #     creative cannot be created through the API. This creative can be updated.
+        #
+        #     Note: The following fields are mutually exclusive: `programmatic_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rich_media_studio_creative
+        #   @return [::Google::Ads::AdManager::V1::RichMediaStudioCreativeDetails]
+        #     Optional. A Creative that is created by a Rich Media Studio. You cannot
+        #     create this creative, but you can update some fields of this creative.
+        #
+        #     Note: The following fields are mutually exclusive: `rich_media_studio_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] set_top_box_creative
+        #   @return [::Google::Ads::AdManager::V1::SetTopBoxCreativeDetails]
+        #     Optional. A Creative that will be served into cable set-top boxes. There
+        #     are no assets for this creative type, as they are hosted by external
+        #     cable systems.
+        #
+        #     Note: The following fields are mutually exclusive: `set_top_box_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] template_creative
+        #   @return [::Google::Ads::AdManager::V1::TemplateCreativeDetails]
+        #     Optional. A Creative that is created by the specified creative template.
+        #
+        #     Note: The following fields are mutually exclusive: `template_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] third_party_creative
+        #   @return [::Google::Ads::AdManager::V1::ThirdPartyCreativeDetails]
+        #     Optional. A Creative that is served by a 3rd-party vendor.
+        #
+        #     Note: The following fields are mutually exclusive: `third_party_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `vast_redirect_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vast_redirect_creative
+        #   @return [::Google::Ads::AdManager::V1::VastRedirectCreativeDetails]
+        #     Optional. A Creative that points to an externally hosted VAST ad and is
+        #     served via VAST XML as a VAST Wrapper.
+        #
+        #     Note: The following fields are mutually exclusive: `vast_redirect_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `video_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] video_creative
+        #   @return [::Google::Ads::AdManager::V1::VideoCreativeDetails]
+        #     Optional. A Creative that contains Ad Manager hosted video ads and is
+        #     served via VAST XML.
+        #
+        #     Note: The following fields are mutually exclusive: `video_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_redirect_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] video_redirect_creative
+        #   @return [::Google::Ads::AdManager::V1::VideoRedirectCreativeDetails]
+        #     Optional. A Creative that contains externally hosted video ads and is
+        #     served via VAST XML.
+        #
+        #     Note: The following fields are mutually exclusive: `video_redirect_creative`, `ad_exchange_creative`, `ad_sense_creative`, `aspect_ratio_image_creative`, `audio_creative`, `audio_redirect_creative`, `click_tracking_creative`, `custom_creative`, `html5_creative`, `image_creative`, `image_overlay_creative`, `image_redirect_creative`, `image_redirect_overlay_creative`, `internal_redirect_creative`, `legacy_dfp_creative`, `programmatic_creative`, `rich_media_studio_creative`, `set_top_box_creative`, `template_creative`, `third_party_creative`, `vast_redirect_creative`, `video_creative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the Creative.
@@ -30,7 +166,754 @@ module Google
         #   @return [::String]
         #     Required. Display name of the `Creative`. This attribute has a maximum
         #     length of 255 characters.
+        # @!attribute [rw] advertiser
+        #   @return [::String]
+        #     Required. The resource name of the Company, which is of type
+        #     Company.Type.ADVERTISER, to which this Creative belongs. Format:
+        #     "networks/\\{network_code}/companies/\\{company_id}"
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The instant this Creative was last modified.
+        # @!attribute [rw] custom_field_values
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomFieldValue>]
+        #     Optional. The values of the custom fields associated with this creative.
+        # @!attribute [r] preview_url
+        #   @return [::String]
+        #     Output only. The URL of the creative for previewing the media.
+        # @!attribute [rw] size
+        #   @return [::Google::Ads::AdManager::V1::Size]
+        #     Required. Immutable. The Size of the creative.
+        # @!attribute [rw] third_party_data_declaration
+        #   @return [::Google::Ads::AdManager::V1::ThirdPartyDataDeclaration]
+        #     Optional. The third party companies associated with this creative.
+        #     This is distinct from any associated companies that Google may detect
+        #     programmatically.
+        # @!attribute [r] third_party_data_declaration_status
+        #   @return [::Google::Ads::AdManager::V1::CreativeThirdPartyDataDeclarationStatusEnum::CreativeThirdPartyDataDeclarationStatus]
+        #     Output only. The status of the publisher's `ThirdPartyDataDeclaration`,
+        #     when compared with the set of third party companies detected via automated
+        #     scanning.
+        #
+        #     For example, if automated scanning detects more companies than have been
+        #     declared, this status will be
+        #     {::Google::Ads::AdManager::V1::CreativeThirdPartyDataDeclarationStatusEnum::CreativeThirdPartyDataDeclarationStatus::INCOMPLETE CreativeThirdPartyDataDeclarationStatus.INCOMPLETE}.
+        # @!attribute [rw] self_declared_european_union_political_content
+        #   @return [::Boolean]
+        #     Optional. Whether this creative contains self-declared European Union
+        #     political content.
+        # @!attribute [rw] ad_badging_enabled
+        #   @return [::Boolean]
+        #     Optional. Non-empty default. Whether the creative has ad badging enabled.
+        #
+        #     Defaults to false for VastRedirectCreative, ThirdPartyCreative,
+        #     AudioRedirectCreative, ProgrammaticCreative, LegacyDfpMobileCreative,
+        #     FlashOverlayCreative, GraphicalInterstitialCreative,
+        #     LegacyDfpCreative, MobileAdNetworkCreative,
+        #     MobileVideoInterstitialCreative, SdkMediationCreative, and
+        #     FlashCreative types.
+        #
+        #     Defaults to true for all other creative types.
+        # @!attribute [rw] applied_labels
+        #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
+        #     Optional. The set of labels applied directly to this creative.
+        # @!attribute [rw] buyer_placement_config
+        #   @return [::Google::Ads::AdManager::V1::BuyerPlacementConfig]
+        #     Optional. The buyer placement configuration for this creative.
         class Creative
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An Ad Exchange dynamic allocation creative.
+        # @!attribute [rw] native_eligible
+        #   @return [::Boolean]
+        #     Optional. Whether this creative is eligible for native ad-serving. This
+        #     value is optional and defaults to false.
+        # @!attribute [rw] interstitial
+        #   @return [::Boolean]
+        #     Optional. True if this creative is interstitial. An interstitial creative
+        #     will not consider an impression served until it is fully rendered in the
+        #     browser.
+        # @!attribute [rw] allows_all_requested_sizes
+        #   @return [::Boolean]
+        #     Optional. True if this creative is eligible for all requested sizes.
+        # @!attribute [r] slot_id
+        #   @return [::String]
+        #     Output only. The ID of ad slot (inventory) that an advertiser might want to
+        #     target.
+        # @!attribute [rw] backfill_snippet
+        #   @return [::String]
+        #     Optional. The code snippet (ad tag) from Ad Exchange or AdSense to traffic
+        #     the dynamic allocation creative. Only valid Ad Exchange or AdSense
+        #     parameters will be considered. Any extraneous HTML or JavaScript will be
+        #     ignored.
+        class AdExchangeCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An AdSense dynamic allocation creative.
+        # @!attribute [r] slot_id
+        #   @return [::String]
+        #     Output only. The ID of ad slot (inventory) that an advertiser might want to
+        #     target.
+        # @!attribute [rw] backfill_snippet
+        #   @return [::String]
+        #     Optional. The code snippet (ad tag) from Ad Exchange or AdSense to traffic
+        #     the dynamic allocation creative. Only valid Ad Exchange or AdSense
+        #     parameters will be considered. Any extraneous HTML or JavaScript will be
+        #     ignored.
+        class AdSenseCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative intended for mobile platforms that displays an image, whose size
+        # is defined as an aspect ratio. It can have multiple images whose dimensions
+        # conform to that aspect ratio.
+        # @!attribute [rw] alt_text
+        #   @return [::String]
+        #     Optional. The text that is served along with the image creative, primarily
+        #     for accessibility. If no suitable image size is available for the device,
+        #     this text replaces the image completely. This field is optional and has a
+        #     maximum length of 500 characters.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] image_assets
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativeAsset>]
+        #     Required. The images associated with this creative. The ad server will
+        #     choose one based on the capabilities of the device. Each asset should have
+        #     a size which is of the same aspect ratio as the Creative.size. This
+        #     attribute is required and must have at least one asset.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Third party impression tracking URLs to ping when this creative
+        #     is displayed.
+        class AspectRatioImageCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains Ad Manager hosted audio ads and is served via VAST
+        # XML.
+        # @!attribute [rw] vast_info
+        #   @return [::Google::Ads::AdManager::V1::VastInfo]
+        #     Optional. Fields common to Video Ad Serving Template (VAST) creatives
+        class AudioCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains externally hosted audio ads and is served via VAST
+        # XML.
+        # @!attribute [rw] vast_info
+        #   @return [::Google::Ads::AdManager::V1::VastInfo]
+        #     Optional. Fields common to Video Ad Serving Template (VAST) creatives
+        class AudioRedirectCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A creative that is used for tracking clicks on ads that are served directly
+        # from the customers' web servers or media servers. NOTE: The size attribute
+        # is not used for click tracking creative and it will not be persisted upon
+        # save.
+        # @!attribute [rw] click_tracking_url
+        #   @return [::String]
+        #     Optional. The click tracking URL.
+        class ClickTrackingCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains a custom HTML snippet and file assets.
+        # @!attribute [rw] html_snippet
+        #   @return [::String]
+        #     Required. The HTML snippet that this creative delivers.
+        # @!attribute [rw] amp_html_snippet
+        #   @return [::String]
+        #     The AMP HTML snippet that this creative delivers.
+        # @!attribute [rw] interstitial
+        #   @return [::Boolean]
+        #     Whether this custom creative is an interstitial. An interstitial creative
+        #     will not consider an impression served until it is fully rendered in the
+        #     browser.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] safe_frame_compatible
+        #   @return [::Boolean]
+        #     Input only. Whether the creative is compatible for SafeFrame rendering.
+        # @!attribute [r] effective_safe_frame_compatible
+        #   @return [::Boolean]
+        #     Output only. The effective value of whether the creative is compatible for
+        #     SafeFrame rendering, as decided by the service.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Impression tracking URLs to ping when this creative is displayed.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [rw] custom_creative_assets
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomCreativeAsset>]
+        #     Optional. File assets that are associated with this creative, and can be
+        #     referenced in the snippet.
+        class CustomCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains a zipped HTML5 bundle asset, a list of third party
+        # impression trackers, and a third party click tracker.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [rw] override_size
+        #   @return [::Boolean]
+        #     Optional. Allows the creative size to differ from the actual HTML5 asset
+        #     size.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Impression tracking URLs to ping when this creative is displayed.
+        # @!attribute [rw] third_party_click_tracking_url
+        #   @return [::String]
+        #     Optional. A click tracking URL to ping when this creative is clicked.
+        # @!attribute [rw] safe_frame_compatible
+        #   @return [::Boolean]
+        #     Optional. Whether the creative is compatible for SafeFrame rendering.
+        # @!attribute [rw] html5_asset
+        #   @return [::Google::Ads::AdManager::V1::CreativeAsset]
+        #     Required. The HTML5 asset. To preview the HTML5 asset, use the
+        #     `CreativeAsset.asset_url`. In this field, the
+        #     `CreativeAsset.asset_byte_array` must be a zip bundle and the
+        #     `CreativeAsset.file_name` must have a zip extension.
+        class Html5CreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that displays an image.
+        # @!attribute [rw] alt_text
+        #   @return [::String]
+        #     Alternative text to be rendered along with the creative used mainly for
+        #     accessibility. This field has a maximum length of 500
+        #     characters.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Impression tracking URLs to ping when this creative is displayed.
+        # @!attribute [rw] amp_destination_url
+        #   @return [::String]
+        #     Optional. The AMP destination URL for this creative. This must be a valid
+        #     URL, including the `http://` or `https://` scheme.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [rw] primary_image_asset
+        #   @return [::Google::Ads::AdManager::V1::CreativeAsset]
+        #     The primary image asset associated with this creative. This attribute is
+        #     required.
+        # @!attribute [rw] secondary_image_assets
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativeAsset>]
+        #     Secondary image assets associated with this creative. This
+        #     attribute is optional.
+        #
+        #     Secondary image assets can be used to store different resolution versions
+        #     of the primary asset for use on non-standard density screens.
+        # @!attribute [rw] override_size
+        #   @return [::Boolean]
+        #     Optional. Allows the creative size to differ from the actual image asset
+        #     size.
+        class ImageCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An overlay Creative that displays an image and is served via VAST 2.0 XML.
+        # Overlays cover part of the video content they are displayed on top of.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] override_size
+        #   @return [::Boolean]
+        #     Optional. Allows the creative size to differ from the actual image asset
+        #     size.
+        # @!attribute [rw] primary_image_asset
+        #   @return [::Google::Ads::AdManager::V1::CreativeAsset]
+        #     Required. The primary image asset associated with this creative.
+        # @!attribute [r] creative_set_display_name
+        #   @return [::String]
+        #     Output only. The display name of the creative set.
+        # @!attribute [r] creative_set
+        #   @return [::String]
+        #     Output only. The resource name of the creative set.
+        #     Format: "networks/\\{network_code}/creativeSets/\\{creative_set_id}"
+        # @!attribute [r] companion_creatives
+        #   @return [::Array<::String>]
+        #     Output only. The resource names of the companion creatives that are
+        #     associated with this creative. Format:
+        #     "networks/\\{network_code}/creatives/\\{creative_id}"
+        # @!attribute [rw] tracking_urls
+        #   @return [::Array<::Google::Ads::AdManager::V1::VideoTrackingUrl>]
+        #     Optional. URLs that will be pinged when conversion events happen.
+        # @!attribute [rw] custom_parameters
+        #   @return [::String]
+        #     Optional. A comma separated key=value list of parameters that will be
+        #     supplied to the creative, written into the VAST `AdParameters` node.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Minimum suggested duration.
+        # @!attribute [rw] expected_companions
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativePlaceholder>]
+        #     Optional. `CreativePlaceholder` objects a creative set should fulfill.
+        # @!attribute [r] expected_companion_delivery_option
+        #   @return [::Google::Ads::AdManager::V1::CompanionDeliveryOptionEnum::CompanionDeliveryOption]
+        #     Output only. The companion delivery option this set will be served with.
+        # @!attribute [r] vast_preview_url
+        #   @return [::String]
+        #     Output only. An ad tag URL that will return a preview of the VAST XML
+        #     response specific to this creative.
+        class ImageOverlayCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that loads an image asset from a specified URL.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] alt_text
+        #   @return [::String]
+        #     Optional. Alternative text to be rendered along with the creative used
+        #     mainly for accessibility. This field has a maximum length of 500
+        #     characters.
+        # @!attribute [rw] image_url
+        #   @return [::String]
+        #     Required. The URL where the actual asset resides. This field has a maximum
+        #     length of 1024 characters.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Impression tracking URLs to ping when this creative is displayed.
+        #     Each string has a maximum length of 1024 characters.
+        class ImageRedirectCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An overlay Creative that loads an image asset from a specified URL and is
+        # served via VAST XML. Overlays cover part of the video content they are
+        # displayed on top of. This creative is read only.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] image_url
+        #   @return [::String]
+        #     Required. The URL where the actual image asset resides. This attribute is
+        #     required and has a maximum length of 1024 characters.
+        # @!attribute [rw] asset_size
+        #   @return [::Google::Ads::AdManager::V1::Size]
+        #     Optional. The size of the image asset. Note that this may differ from the
+        #     creative size if the asset is not expected to fill the entire video player.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Minimum suggested duration.
+        # @!attribute [rw] tracking_urls
+        #   @return [::Array<::Google::Ads::AdManager::V1::VideoTrackingUrl>]
+        #     Optional. URLs that will be pinged when conversion events happen.
+        # @!attribute [rw] custom_parameters
+        #   @return [::String]
+        #     Optional. A comma separated key=value list of parameters that will be
+        #     supplied to the creative, written into the VAST `AdParameters` node.
+        # @!attribute [rw] expected_companions
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativePlaceholder>]
+        #     Optional. `CreativePlaceholder` objects a creative set should fulfill.
+        # @!attribute [r] expected_companion_delivery_option
+        #   @return [::Google::Ads::AdManager::V1::CompanionDeliveryOptionEnum::CompanionDeliveryOption]
+        #     Output only. The companion delivery option this set will be served with.
+        # @!attribute [r] vast_preview_url
+        #   @return [::String]
+        #     Output only. An ad tag URL that will return a preview of the VAST XML
+        #     response specific to this creative.
+        # @!attribute [r] creative_set_display_name
+        #   @return [::String]
+        #     Output only. The display name of the creative set.
+        # @!attribute [r] creative_set
+        #   @return [::String]
+        #     Output only. The resource name of the creative set.
+        #     Format: "networks/\\{network_code}/creativeSets/\\{creative_set_id}"
+        # @!attribute [rw] companion_creatives
+        #   @return [::Array<::String>]
+        #     Optional. The companion creatives that are associated with this creative.
+        #     Format: "networks/\\{network_code}/creatives/\\{creative_id}"
+        class ImageRedirectOverlayCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative hosted by Campaign Manager 360.
+        #
+        # Similar to third-party creatives, a Campaign Manager 360 tag is used to
+        # retrieve a creative asset. However, Campaign Manager 360 tags are not sent
+        # to the user's browser. Instead, they are processed internally within the
+        # Google Marketing Platform system.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [r] asset_size
+        #   @return [::Google::Ads::AdManager::V1::Size]
+        #     Output only. The asset size of an internal redirect creative. Note that
+        #     this may differ from `size` if users set `override_size` to true.
+        # @!attribute [rw] internal_redirect_url
+        #   @return [::String]
+        #     Required. The internal redirect URL of the Campaign Manager 360 hosted
+        #     creative. This attribute has a maximum length of 1024 characters.
+        # @!attribute [rw] override_size
+        #   @return [::Boolean]
+        #     Optional. Allows the creative size to differ from the actual size specified
+        #     in the internal redirect's url.
+        # @!attribute [rw] interstitial
+        #   @return [::Boolean]
+        #     Optional. Whether this creative is interstitial.
+        # @!attribute [r] ssl_scan_result
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslScanResultEnum::CreativeSslScanResult]
+        #     Output only. The SSL compatibility scan result of this creative.
+        # @!attribute [rw] ssl_manual_override
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslOverrideEnum::CreativeSslOverride]
+        #     Optional. The manual override for the SSL compatibility of this creative.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. Impression tracking URLs to ping when this creative is displayed.
+        class InternalRedirectCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that isn't supported by Google DFP, but was migrated from DART.
+        # Creatives of this type cannot be created or modified.
+        class LegacyDfpCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative used for programmatic trafficking. This creative will be
+        # auto-created with the right approval from the buyer. This creative cannot be
+        # created through the API. This creative can be updated.
+        class ProgrammaticCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that is created by a Rich Media Studio. You cannot create this
+        # creative, but you can update some fields of this creative.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [r] studio_creative_id
+        #   @return [::Integer]
+        #     Output only. The creative ID as known by Rich Media Studio creative.
+        # @!attribute [rw] creative_format
+        #   @return [::Google::Ads::AdManager::V1::RichMediaStudioCreativeFormatEnum::RichMediaStudioCreativeFormat]
+        #     Optional. The creative format of the Rich Media Studio creative.
+        # @!attribute [r] total_file_size
+        #   @return [::Integer]
+        #     Output only. The total size of all assets in bytes.
+        # @!attribute [rw] ad_tag_keys
+        #   @return [::Array<::String>]
+        #     Optional. Ad tag keys.
+        # @!attribute [rw] custom_key_values
+        #   @return [::Array<::String>]
+        #     Optional. Custom key values.
+        # @!attribute [rw] survey_url
+        #   @return [::String]
+        #     Optional. The survey URL for this creative.
+        # @!attribute [rw] all_impressions_url
+        #   @return [::String]
+        #     Optional. The tracking URL to be triggered when an ad starts to play,
+        #     whether Rich Media or backup content is displayed. Behaves like the /imp
+        #     URL that DART used to track impressions. This URL can't exceed 1024
+        #     characters and must start with http:// or https://.
+        # @!attribute [rw] rich_media_impressions_url
+        #   @return [::String]
+        #     Optional. The tracking URL to be triggered when any rich media artwork is
+        #     displayed in an ad. Behaves like the /imp URL that DART used to track
+        #     impressions. This URL can't exceed 1024 characters and must start with
+        #     http:// or https://.
+        # @!attribute [rw] backup_image_impressions_url
+        #   @return [::String]
+        #     Optional. The tracking URL to be triggered when the Rich Media backup image
+        #     is served.
+        # @!attribute [rw] override_css
+        #   @return [::String]
+        #     Optional. The override CSS. You can put custom CSS code here to repair
+        #     creative styling; e.g. `tr td { background-color:#FBB; }`.
+        # @!attribute [r] required_flash_plugin_version
+        #   @return [::String]
+        #     Output only. The Flash plugin version required to view this creative; e.g.
+        #     `Flash 10.2/AS 3`.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The duration of the creative.
+        # @!attribute [rw] billing_attribute
+        #   @return [::Google::Ads::AdManager::V1::RichMediaStudioCreativeBillingAttributeEnum::RichMediaStudioCreativeBillingAttribute]
+        #     Optional. The billing attribute associated with this creative.
+        # @!attribute [r] rich_media_studio_child_asset_properties
+        #   @return [::Array<::Google::Ads::AdManager::V1::RichMediaStudioChildAssetProperty>]
+        #     Output only. Child assets associated with this creative.
+        # @!attribute [r] ssl_scan_result
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslScanResultEnum::CreativeSslScanResult]
+        #     Output only. The SSL compatibility scan result of this creative.
+        # @!attribute [rw] ssl_manual_override
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslOverrideEnum::CreativeSslOverride]
+        #     Optional. The manual override for the SSL compatibility of this creative.
+        class RichMediaStudioCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that will be served into cable set-top boxes. There are no assets
+        # for this creative type, as they are hosted by external cable systems.
+        # @!attribute [rw] vast_info
+        #   @return [::Google::Ads::AdManager::V1::VastInfo]
+        #     Optional. Fields common to Video Ad Serving Template (VAST) creatives
+        class SetTopBoxCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that is created by the specified creative template.
+        # @!attribute [rw] amp_destination_url
+        #   @return [::String]
+        #     Optional. The AMP destination URL for this creative. This must be a valid
+        #     URL, including the `http://` or `https://` scheme.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        class TemplateCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that is served by a 3rd-party vendor.
+        # @!attribute [rw] snippet
+        #   @return [::String]
+        #     The HTML snippet that this creative delivers.
+        # @!attribute [r] expanded_snippet
+        #   @return [::String]
+        #     Output only. The HTML snippet that this creative delivers with macros
+        #     expanded.
+        # @!attribute [rw] locked_orientation
+        #   @return [::Google::Ads::AdManager::V1::CreativeLockedOrientationEnum::CreativeLockedOrientation]
+        #     Optional. A locked orientation for this creative to be displayed in.
+        # @!attribute [r] ssl_scan_result
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslScanResultEnum::CreativeSslScanResult]
+        #     Output only. The SSL compatibility scan result of this creative.
+        # @!attribute [rw] ssl_manual_override
+        #   @return [::Google::Ads::AdManager::V1::CreativeSslOverrideEnum::CreativeSslOverride]
+        #     Optional. The manual override for the SSL compatibility of this creative.
+        # @!attribute [rw] safe_frame_compatible
+        #   @return [::Boolean]
+        #     Optional. Whether the Creative is compatible for SafeFrame rendering.
+        # @!attribute [rw] third_party_impression_tracking_urls
+        #   @return [::Array<::String>]
+        #     Optional. A list of impression tracking URLs to ping when this creative is
+        #     displayed.
+        # @!attribute [rw] amp_redirect_url
+        #   @return [::String]
+        #     Optional. The URL of the AMP creative.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        class ThirdPartyCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that points to an externally hosted VAST ad and is served via
+        # VAST XML as a VAST Wrapper.
+        # @!attribute [rw] vast_xml_url
+        #   @return [::String]
+        #     Required. The URL where the 3rd party VAST XML is hosted.
+        # @!attribute [rw] vast_redirect_type
+        #   @return [::Google::Ads::AdManager::V1::VastRedirectTypeEnum::VastRedirectType]
+        #     Required. The type of VAST ad that this redirects to.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. The duration of the VAST ad.
+        # @!attribute [rw] vast_pricing_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether pricing information from the VAST response will be used
+        #     during ad selection.
+        # @!attribute [rw] programmatic_demand_source
+        #   @return [::Boolean]
+        #     Optional. Whether this is a redirect to a programmatic demand source.
+        # @!attribute [rw] server_side_unwrapping_disabled
+        #   @return [::Boolean]
+        #     Optional. Whether server-side unwrapping is disabled.
+        # @!attribute [rw] tracking_urls
+        #   @return [::Array<::Google::Ads::AdManager::V1::VideoTrackingUrl>]
+        #     Optional. URLs that will be pinged when conversion events happen.
+        # @!attribute [r] vast_preview_url
+        #   @return [::String]
+        #     Output only. An ad tag URL that will return a preview of the VAST XML
+        #     response specific to this creative.
+        # @!attribute [rw] audio
+        #   @return [::Boolean]
+        #     Optional. Whether the 3rd party VAST XML points to an audio ad. When true,
+        #     `size` will always be 1x1.
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        class VastRedirectCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains Ad Manager hosted video ads and is served via VAST
+        # XML.
+        # @!attribute [rw] vast_info
+        #   @return [::Google::Ads::AdManager::V1::VastInfo]
+        #     Optional. Fields common to Video Ad Serving Template (VAST) creatives
+        class VideoCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Creative that contains externally hosted video ads and is served via VAST
+        # XML.
+        # @!attribute [rw] vast_info
+        #   @return [::Google::Ads::AdManager::V1::VastInfo]
+        #     Optional. Fields common to Video Ad Serving Template (VAST) creatives
+        class VideoRedirectCreativeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Fields common to Video Ad Serving Template (VAST) creatives.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The expected duration of this creative.
+        # @!attribute [rw] allow_duration_override
+        #   @return [::Boolean]
+        #     Optional. Allows the creative duration to differ from the actual asset
+        #     durations.
+        # @!attribute [rw] tracking_urls
+        #   @return [::Array<::Google::Ads::AdManager::V1::VideoTrackingUrl>]
+        #     Optional. URLs that will be pinged when conversion events happen.
+        # @!attribute [rw] custom_parameters
+        #   @return [::String]
+        #     Optional. A comma separated key=value list of parameters that will be
+        #     supplied to the creative, written into the VAST `AdParameters` node.
+        # @!attribute [rw] ad_id
+        #   @return [::String]
+        #     Optional. The ad id associated with the video as defined by the `adIdType`
+        #     registry. This field is required if `adIdType` is not `NONE`.
+        # @!attribute [rw] ad_id_type
+        #   @return [::Google::Ads::AdManager::V1::VastAdIdTypeEnum::VastAdIdType]
+        #     Optional. The registry which the ad id of this creative belongs to. This
+        #     field defaults to `NONE`.
+        # @!attribute [rw] skippable_ad_type
+        #   @return [::Google::Ads::AdManager::V1::SkippableAdTypeEnum::SkippableAdType]
+        #     Optional. The type of skippable ad.
+        # @!attribute [r] vast_preview_url
+        #   @return [::String]
+        #     Output only. An ad tag URL that will return a preview of the VAST XML
+        #     response specific to this creative.
+        # @!attribute [r] creative_set_display_name
+        #   @return [::String]
+        #     Output only. The display name of the creative set.
+        # @!attribute [r] creative_set
+        #   @return [::String]
+        #     Output only. The resource name of the creative set.
+        #     Format: "networks/\\{network_code}/creativeSets/\\{creative_set_id}"
+        # @!attribute [rw] destination_url
+        #   @return [::String]
+        #     Optional. The URL that the user is directed to if they click on the
+        #     creative. This attribute is required unless the `destinationUrlType` is
+        #     `NONE`, and has a maximum length of 1024 characters.
+        # @!attribute [rw] destination_url_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeDestinationUrlTypeEnum::CreativeDestinationUrlType]
+        #     Optional. The action that should be performed if the user clicks on the
+        #     creative. This attribute defaults to `CLICK_TO_WEB`.
+        # @!attribute [rw] companion_creatives
+        #   @return [::Array<::String>]
+        #     Optional. The companion creatives that are associated with this creative.
+        #     Format: "networks/\\{network_code}/creatives/\\{creative_id}"
+        class VastInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the buyer placement configuration for a creative.
+        # @!attribute [rw] placement_id
+        #   @return [::String]
+        #     Optional. The ID of the buyer placement.
+        # @!attribute [rw] placement_display_name
+        #   @return [::String]
+        #     Optional. The name of the buyer placement.
+        class BuyerPlacementConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -65,6 +65,11 @@ module Google
           #     The tag is typically used by the webhook service to identify which
           #     fulfillment is being called, but it could be used for other purposes.
           #     This field is required if `webhook` is specified.
+          # @!attribute [rw] code_block_function
+          #   @return [::String]
+          #     Optional. The name of the code block function to execute, if this is a code
+          #     block fulfillment. The code block itself is implied by the fulfillment's
+          #     parent, e.g. a playbook.
           # @!attribute [rw] set_parameter_actions
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Fulfillment::SetParameterAction>]
           #     Set parameter values before executing the webhook.

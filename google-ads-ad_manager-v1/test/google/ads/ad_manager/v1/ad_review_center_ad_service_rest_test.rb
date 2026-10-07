@@ -94,6 +94,15 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
     date_time_range = {}
     search_text = ["hello world"]
     buyer_account_id = [42]
+    ad_response_id = ["hello world"]
+    advertiser_display_names = ["hello world"]
+    language_codes = ["hello world"]
+    region_codes = ["hello world"]
+    ad_types = [:ARC_CREATIVE_FORMAT_UNSPECIFIED]
+    advertiser_apps = ["hello world"]
+    publisher_domains = ["hello world"]
+    new_in_last_days = 42
+    label_ids = ["hello world"]
 
     search_ad_review_center_ads_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -109,27 +118,27 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
         end
 
         # Use hash object
-        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }) do |_result, response|
+        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id, ad_response_id: ad_response_id, advertiser_display_names: advertiser_display_names, language_codes: language_codes, region_codes: region_codes, ad_types: ad_types, advertiser_apps: advertiser_apps, publisher_domains: publisher_domains, new_in_last_days: new_in_last_days, label_ids: label_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.search_ad_review_center_ads status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id do |_result, response|
+        c.search_ad_review_center_ads status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id, ad_response_id: ad_response_id, advertiser_display_names: advertiser_display_names, language_codes: language_codes, region_codes: region_codes, ad_types: ad_types, advertiser_apps: advertiser_apps, publisher_domains: publisher_domains, new_in_last_days: new_in_last_days, label_ids: label_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id) do |_result, response|
+        c.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id, ad_response_id: ad_response_id, advertiser_display_names: advertiser_display_names, language_codes: language_codes, region_codes: region_codes, ad_types: ad_types, advertiser_apps: advertiser_apps, publisher_domains: publisher_domains, new_in_last_days: new_in_last_days, label_ids: label_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }, call_options) do |_result, response|
+        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id, ad_response_id: ad_response_id, advertiser_display_names: advertiser_display_names, language_codes: language_codes, region_codes: region_codes, ad_types: ad_types, advertiser_apps: advertiser_apps, publisher_domains: publisher_domains, new_in_last_days: new_in_last_days, label_ids: label_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id), call_options) do |_result, response|
+        c.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id, ad_response_id: ad_response_id, advertiser_display_names: advertiser_display_names, language_codes: language_codes, region_codes: region_codes, ad_types: ad_types, advertiser_apps: advertiser_apps, publisher_domains: publisher_domains, new_in_last_days: new_in_last_days, label_ids: label_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -245,6 +254,116 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
 
         # Verify method calls
         assert_equal 5, batch_block_ad_review_center_ads_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_ad_review_center_custom_labels
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    fetch_ad_review_center_custom_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ServiceStub.stub :transcode_fetch_ad_review_center_custom_labels_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_ad_review_center_custom_labels_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_ad_review_center_custom_labels({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_ad_review_center_custom_labels parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_ad_review_center_custom_labels ::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_ad_review_center_custom_labels({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_ad_review_center_custom_labels(::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_ad_review_center_custom_labels_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_apply_ad_review_center_custom_labels
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    add_labels = {}
+    remove_labels = {}
+
+    batch_apply_ad_review_center_custom_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ServiceStub.stub :transcode_batch_apply_ad_review_center_custom_labels_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_apply_ad_review_center_custom_labels_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_apply_ad_review_center_custom_labels({ parent: parent, add_labels: add_labels, remove_labels: remove_labels }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_apply_ad_review_center_custom_labels parent: parent, add_labels: add_labels, remove_labels: remove_labels do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_apply_ad_review_center_custom_labels ::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest.new(parent: parent, add_labels: add_labels, remove_labels: remove_labels) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_apply_ad_review_center_custom_labels({ parent: parent, add_labels: add_labels, remove_labels: remove_labels }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_apply_ad_review_center_custom_labels(::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest.new(parent: parent, add_labels: add_labels, remove_labels: remove_labels), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_apply_ad_review_center_custom_labels_client_stub.call_count
       end
     end
   end

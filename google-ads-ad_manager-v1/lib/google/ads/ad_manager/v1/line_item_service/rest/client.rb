@@ -399,6 +399,1157 @@ module Google
               end
 
               ##
+              # Creates a `LineItem` object.
+              #
+              # @overload create_line_item(request, options = nil)
+              #   Pass arguments to `create_line_item` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateLineItemRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateLineItemRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_line_item(parent: nil, line_item: nil)
+              #   Pass arguments to `create_line_item` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `LineItem` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param line_item [::Google::Ads::AdManager::V1::LineItem, ::Hash]
+              #     Required. The `LineItem` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItem]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItem]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateLineItemRequest.new
+              #
+              #   # Call the create_line_item method.
+              #   result = client.create_line_item request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::LineItem.
+              #   p result
+              #
+              def create_line_item request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateLineItemRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_line_item.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_line_item.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_line_item.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.create_line_item request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `LineItem` objects.
+              #
+              # @overload batch_create_line_items(request, options = nil)
+              #   Pass arguments to `batch_create_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_line_items(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateLineItemRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateLineItemRequest, ::Hash>]
+              #     Required. The `LineItem` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateLineItemsRequest.new
+              #
+              #   # Call the batch_create_line_items method.
+              #   result = client.batch_create_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateLineItemsResponse.
+              #   p result
+              #
+              def batch_create_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_create_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `LineItem` object.
+              #
+              # @overload update_line_item(request, options = nil)
+              #   Pass arguments to `update_line_item` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateLineItemRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateLineItemRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_line_item(line_item: nil, update_mask: nil)
+              #   Pass arguments to `update_line_item` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param line_item [::Google::Ads::AdManager::V1::LineItem, ::Hash]
+              #     Required. The `LineItem` to update.
+              #
+              #     The `LineItem`'s `name` is used to identify the `LineItem` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItem]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItem]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateLineItemRequest.new
+              #
+              #   # Call the update_line_item method.
+              #   result = client.update_line_item request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::LineItem.
+              #   p result
+              #
+              def update_line_item request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateLineItemRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_line_item.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_line_item.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_line_item.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.update_line_item request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `LineItem` objects.
+              #
+              # @overload batch_update_line_items(request, options = nil)
+              #   Pass arguments to `batch_update_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_line_items(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent segment of the `line_item.name` in each `UpdateLineItemRequest`
+              #     must match this field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateLineItemRequest, ::Hash>]
+              #     Required. The `LineItem` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest.new
+              #
+              #   # Call the batch_update_line_items method.
+              #   result = client.batch_update_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateLineItemsResponse.
+              #   p result
+              #
+              def batch_update_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_update_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch activates `LineItem` objects.
+              #
+              # @overload batch_activate_line_items(request, options = nil)
+              #   Pass arguments to `batch_activate_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to activate.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateLineItemsRequest.new
+              #
+              #   # Call the batch_activate_line_items method.
+              #   result = client.batch_activate_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateLineItemsResponse.
+              #   p result
+              #
+              def batch_activate_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_activate_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch pauses `LineItem` objects.
+              #
+              # @overload batch_pause_line_items(request, options = nil)
+              #   Pass arguments to `batch_pause_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchPauseLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchPauseLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_pause_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_pause_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to pause.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchPauseLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchPauseLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchPauseLineItemsRequest.new
+              #
+              #   # Call the batch_pause_line_items method.
+              #   result = client.batch_pause_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchPauseLineItemsResponse.
+              #   p result
+              #
+              def batch_pause_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchPauseLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_pause_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_pause_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_pause_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_pause_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch resumes `LineItem` objects.
+              #
+              # @overload batch_resume_line_items(request, options = nil)
+              #   Pass arguments to `batch_resume_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchResumeLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchResumeLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_resume_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_resume_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to resume.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchResumeLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchResumeLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchResumeLineItemsRequest.new
+              #
+              #   # Call the batch_resume_line_items method.
+              #   result = client.batch_resume_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchResumeLineItemsResponse.
+              #   p result
+              #
+              def batch_resume_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchResumeLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_resume_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_resume_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_resume_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_resume_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch resumes and overbooks `LineItem` objects.
+              #
+              # @overload batch_resume_and_overbook_line_items(request, options = nil)
+              #   Pass arguments to `batch_resume_and_overbook_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_resume_and_overbook_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_resume_and_overbook_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to resume and overbook.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest.new
+              #
+              #   # Call the batch_resume_and_overbook_line_items method.
+              #   result = client.batch_resume_and_overbook_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsResponse.
+              #   p result
+              #
+              def batch_resume_and_overbook_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchResumeAndOverbookLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_resume_and_overbook_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_resume_and_overbook_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_resume_and_overbook_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_resume_and_overbook_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch deletes `LineItem` objects.
+              #
+              # @overload batch_delete_line_items(request, options = nil)
+              #   Pass arguments to `batch_delete_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_delete_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to delete.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest.new
+              #
+              #   # Call the batch_delete_line_items method.
+              #   result = client.batch_delete_line_items request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def batch_delete_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeleteLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_delete_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch reserves `LineItem` objects.
+              #
+              # @overload batch_reserve_line_items(request, options = nil)
+              #   Pass arguments to `batch_reserve_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchReserveLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchReserveLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_reserve_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_reserve_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to reserve.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchReserveLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchReserveLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchReserveLineItemsRequest.new
+              #
+              #   # Call the batch_reserve_line_items method.
+              #   result = client.batch_reserve_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchReserveLineItemsResponse.
+              #   p result
+              #
+              def batch_reserve_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchReserveLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_reserve_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_reserve_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_reserve_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_reserve_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch reserves and overbooks `LineItem` objects.
+              #
+              # @overload batch_reserve_and_overbook_line_items(request, options = nil)
+              #   Pass arguments to `batch_reserve_and_overbook_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_reserve_and_overbook_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_reserve_and_overbook_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to reserve and overbook.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest.new
+              #
+              #   # Call the batch_reserve_and_overbook_line_items method.
+              #   result = client.batch_reserve_and_overbook_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsResponse.
+              #   p result
+              #
+              def batch_reserve_and_overbook_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchReserveAndOverbookLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_reserve_and_overbook_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_reserve_and_overbook_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_reserve_and_overbook_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_reserve_and_overbook_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch releases `LineItem` objects.
+              #
+              # @overload batch_release_line_items(request, options = nil)
+              #   Pass arguments to `batch_release_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_release_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_release_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to release.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchReleaseLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchReleaseLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest.new
+              #
+              #   # Call the batch_release_line_items method.
+              #   result = client.batch_release_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchReleaseLineItemsResponse.
+              #   p result
+              #
+              def batch_release_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchReleaseLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_release_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_release_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_release_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_release_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch archives `LineItem` objects.
+              #
+              # @overload batch_archive_line_items(request, options = nil)
+              #   Pass arguments to `batch_archive_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_archive_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_archive_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be updated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to archive.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchArchiveLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchArchiveLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest.new
+              #
+              #   # Call the batch_archive_line_items method.
+              #   result = client.batch_archive_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchArchiveLineItemsResponse.
+              #   p result
+              #
+              def batch_archive_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchArchiveLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_archive_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_archive_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_archive_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_archive_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch unarchives `LineItem` objects.
+              #
+              # @overload batch_unarchive_line_items(request, options = nil)
+              #   Pass arguments to `batch_unarchive_line_items` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_unarchive_line_items(parent: nil, names: nil)
+              #   Pass arguments to `batch_unarchive_line_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItems` will be unarchived.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItem` objects to extract.
+              #     Format: `networks/{network_code}/lineItems/{line_item}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest.new
+              #
+              #   # Call the batch_unarchive_line_items method.
+              #   result = client.batch_unarchive_line_items request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUnarchiveLineItemsResponse.
+              #   p result
+              #
+              def batch_unarchive_line_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUnarchiveLineItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_unarchive_line_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_unarchive_line_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_unarchive_line_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_service_stub.batch_unarchive_line_items request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the LineItemService REST API.
               #
               # This class represents the configuration for LineItemService REST,
@@ -556,6 +1707,76 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_line_items
+                  ##
+                  # RPC-specific configuration for `create_line_item`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_line_item
+                  ##
+                  # RPC-specific configuration for `batch_create_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_line_items
+                  ##
+                  # RPC-specific configuration for `update_line_item`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_line_item
+                  ##
+                  # RPC-specific configuration for `batch_update_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_line_items
+                  ##
+                  # RPC-specific configuration for `batch_activate_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_line_items
+                  ##
+                  # RPC-specific configuration for `batch_pause_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_pause_line_items
+                  ##
+                  # RPC-specific configuration for `batch_resume_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_resume_line_items
+                  ##
+                  # RPC-specific configuration for `batch_resume_and_overbook_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_resume_and_overbook_line_items
+                  ##
+                  # RPC-specific configuration for `batch_delete_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_line_items
+                  ##
+                  # RPC-specific configuration for `batch_reserve_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_reserve_line_items
+                  ##
+                  # RPC-specific configuration for `batch_reserve_and_overbook_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_reserve_and_overbook_line_items
+                  ##
+                  # RPC-specific configuration for `batch_release_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_release_line_items
+                  ##
+                  # RPC-specific configuration for `batch_archive_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_archive_line_items
+                  ##
+                  # RPC-specific configuration for `batch_unarchive_line_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_unarchive_line_items
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -563,6 +1784,34 @@ module Google
                     @get_line_item = ::Gapic::Config::Method.new get_line_item_config
                     list_line_items_config = parent_rpcs.list_line_items if parent_rpcs.respond_to? :list_line_items
                     @list_line_items = ::Gapic::Config::Method.new list_line_items_config
+                    create_line_item_config = parent_rpcs.create_line_item if parent_rpcs.respond_to? :create_line_item
+                    @create_line_item = ::Gapic::Config::Method.new create_line_item_config
+                    batch_create_line_items_config = parent_rpcs.batch_create_line_items if parent_rpcs.respond_to? :batch_create_line_items
+                    @batch_create_line_items = ::Gapic::Config::Method.new batch_create_line_items_config
+                    update_line_item_config = parent_rpcs.update_line_item if parent_rpcs.respond_to? :update_line_item
+                    @update_line_item = ::Gapic::Config::Method.new update_line_item_config
+                    batch_update_line_items_config = parent_rpcs.batch_update_line_items if parent_rpcs.respond_to? :batch_update_line_items
+                    @batch_update_line_items = ::Gapic::Config::Method.new batch_update_line_items_config
+                    batch_activate_line_items_config = parent_rpcs.batch_activate_line_items if parent_rpcs.respond_to? :batch_activate_line_items
+                    @batch_activate_line_items = ::Gapic::Config::Method.new batch_activate_line_items_config
+                    batch_pause_line_items_config = parent_rpcs.batch_pause_line_items if parent_rpcs.respond_to? :batch_pause_line_items
+                    @batch_pause_line_items = ::Gapic::Config::Method.new batch_pause_line_items_config
+                    batch_resume_line_items_config = parent_rpcs.batch_resume_line_items if parent_rpcs.respond_to? :batch_resume_line_items
+                    @batch_resume_line_items = ::Gapic::Config::Method.new batch_resume_line_items_config
+                    batch_resume_and_overbook_line_items_config = parent_rpcs.batch_resume_and_overbook_line_items if parent_rpcs.respond_to? :batch_resume_and_overbook_line_items
+                    @batch_resume_and_overbook_line_items = ::Gapic::Config::Method.new batch_resume_and_overbook_line_items_config
+                    batch_delete_line_items_config = parent_rpcs.batch_delete_line_items if parent_rpcs.respond_to? :batch_delete_line_items
+                    @batch_delete_line_items = ::Gapic::Config::Method.new batch_delete_line_items_config
+                    batch_reserve_line_items_config = parent_rpcs.batch_reserve_line_items if parent_rpcs.respond_to? :batch_reserve_line_items
+                    @batch_reserve_line_items = ::Gapic::Config::Method.new batch_reserve_line_items_config
+                    batch_reserve_and_overbook_line_items_config = parent_rpcs.batch_reserve_and_overbook_line_items if parent_rpcs.respond_to? :batch_reserve_and_overbook_line_items
+                    @batch_reserve_and_overbook_line_items = ::Gapic::Config::Method.new batch_reserve_and_overbook_line_items_config
+                    batch_release_line_items_config = parent_rpcs.batch_release_line_items if parent_rpcs.respond_to? :batch_release_line_items
+                    @batch_release_line_items = ::Gapic::Config::Method.new batch_release_line_items_config
+                    batch_archive_line_items_config = parent_rpcs.batch_archive_line_items if parent_rpcs.respond_to? :batch_archive_line_items
+                    @batch_archive_line_items = ::Gapic::Config::Method.new batch_archive_line_items_config
+                    batch_unarchive_line_items_config = parent_rpcs.batch_unarchive_line_items if parent_rpcs.respond_to? :batch_unarchive_line_items
+                    @batch_unarchive_line_items = ::Gapic::Config::Method.new batch_unarchive_line_items_config
 
                     yield self if block_given?
                   end

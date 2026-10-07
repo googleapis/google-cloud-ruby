@@ -399,6 +399,64 @@ class ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Clie
     end
   end
 
+  def test_resolve_instance_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    app_connector = "hello world"
+
+    resolve_instance_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resolve_instance_config, name
+      assert_kind_of ::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest, request
+      assert_equal "hello world", request["app_connector"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resolve_instance_config_client_stub do
+      # Create client
+      c = ::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.resolve_instance_config({ app_connector: app_connector }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.resolve_instance_config app_connector: app_connector do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.resolve_instance_config ::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest.new(app_connector: app_connector) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.resolve_instance_config({ app_connector: app_connector }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.resolve_instance_config(::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest.new(app_connector: app_connector), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resolve_instance_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_report_status
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

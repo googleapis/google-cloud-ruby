@@ -41,6 +41,30 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientPathsTe
     end
   end
 
+  def test_acl_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.acl_policy_path project: "value0", location: "value1", acl_policy: "value2"
+      assert_equal "projects/value0/locations/value1/aclPolicies/value2", path
+    end
+  end
+
+  def test_acl_policy_revision_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.acl_policy_revision_path project: "value0", location: "value1", acl_policy: "value2", revision: "value3"
+      assert_equal "projects/value0/locations/value1/aclPolicies/value2/revisions/value3", path
+    end
+  end
+
   def test_backup_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

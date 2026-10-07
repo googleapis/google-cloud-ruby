@@ -24,8 +24,10 @@ module Google
         # Contains third party auto-pixeling settings for cross-sell Partners.
         # @!attribute [rw] viewability_partner
         #   @return [::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner]
-        #     Optional. A field to determine the type of ViewabilityPartner. This field
-        #     default is NONE.
+        #     Optional. A field to determine the type of
+        #     {::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner ViewabilityPartner}.
+        #     This field default is
+        #     {::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner::NONE NONE}.
         # @!attribute [rw] viewability_client_id
         #   @return [::String]
         #     Optional. The third party partner ID for YouTube viewability verification.
@@ -35,8 +37,10 @@ module Google
         #     campaign (or a group of related campaigns) specific data.
         # @!attribute [rw] publisher_viewability_partner
         #   @return [::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner]
-        #     Optional. A field to determine the type of publisher's viewability partner.
-        #     This field default is NONE.
+        #     Optional. A field to determine the type of publisher's
+        #     {::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner ViewabilityPartner}.
+        #     This field default is
+        #     {::Google::Ads::AdManager::V1::ViewabilityPartnerEnum::ViewabilityPartner::NONE NONE}.
         # @!attribute [rw] publisher_viewability_client_id
         #   @return [::String]
         #     Optional. The third party partner ID for YouTube viewability verification
@@ -47,8 +51,10 @@ module Google
         #     campaign (or a group of related campaigns) specific data for publisher.
         # @!attribute [rw] brand_lift_partner
         #   @return [::Google::Ads::AdManager::V1::BrandLiftPartnerEnum::BrandLiftPartner]
-        #     Optional. A field to determine the type of BrandLiftPartner. This field
-        #     default is NONE.
+        #     Optional. A field to determine the type of
+        #     {::Google::Ads::AdManager::V1::BrandLiftPartnerEnum::BrandLiftPartner BrandLiftPartner}.
+        #     This field default is
+        #     {::Google::Ads::AdManager::V1::BrandLiftPartnerEnum::BrandLiftPartner::NONE NONE}.
         # @!attribute [rw] brand_lift_client_id
         #   @return [::String]
         #     Optional. The third party partner ID for YouTube brand lift verification.
@@ -58,8 +64,9 @@ module Google
         #     campaign (or a group of related campaigns) specific data.
         # @!attribute [rw] reach_partner
         #   @return [::Google::Ads::AdManager::V1::ReachPartnerEnum::ReachPartner]
-        #     Optional. A field to determine the type of advertiser's ReachPartner. This
-        #     field default is UNKNOWN.
+        #     Optional. A field to determine the type of advertiser's
+        #     {::Google::Ads::AdManager::V1::ReachPartnerEnum::ReachPartner ReachPartner}. This
+        #     field default is [UNKNOWN][ReachPartnerEnum.ReachPartner.UNKNOWN].
         # @!attribute [rw] reach_client_id
         #   @return [::String]
         #     Optional. The third party partner ID for YouTube reach verification for
@@ -70,8 +77,9 @@ module Google
         #     a group of related campaigns) specific data for advertiser.
         # @!attribute [rw] publisher_reach_partner
         #   @return [::Google::Ads::AdManager::V1::ReachPartnerEnum::ReachPartner]
-        #     Optional. A field to determine the type of publisher's ReachPartner. This
-        #     field default is UNKNOWN.
+        #     Optional. A field to determine the type of publisher's
+        #     {::Google::Ads::AdManager::V1::ReachPartnerEnum::ReachPartner ReachPartner}. This
+        #     field default is [UNKNOWN][ReachPartnerEnum.ReachPartner.UNKNOWN].
         # @!attribute [rw] publisher_reach_client_id
         #   @return [::String]
         #     Optional. The third party partner ID for YouTube reach verification for

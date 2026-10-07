@@ -43,9 +43,9 @@ module Google
         #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupVaultType]
         #     Optional. Type of backup vault to be created.
         #     Default is IN_REGION.
-        # @!attribute [r] source_region
+        # @!attribute [rw] source_region
         #   @return [::String]
-        #     Output only. Region in which the backup vault is created.
+        #     Optional. Region in which the backup vault is created.
         #     Format: `projects/{project_id}/locations/{location}`
         # @!attribute [rw] backup_region
         #   @return [::String]

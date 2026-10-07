@@ -329,7 +329,7 @@ module Google
         # Request for UpdateService.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
         #     Service resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request.
@@ -473,7 +473,7 @@ module Google
         # Request for UpdateApplication.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
         #     Application resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request.
@@ -692,7 +692,7 @@ module Google
         # Request for UpdateWorkload.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
         #     Workload resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request.
@@ -750,6 +750,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for AppHub.GetBoundary.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the boundary to retrieve.
+        #     Format: `projects/{project}/locations/{location}/boundary`.
+        class GetBoundaryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for AppHub.UpdateBoundary.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     Boundary resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] boundary
+        #   @return [::Google::Cloud::AppHub::V1::Boundary]
+        #     Required. The boundary to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateBoundaryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -778,6 +819,49 @@ module Google
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for GetExtendedMetadataSchema.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Schema resource name.
+        #     Format:
+        #     `projects/{project}/locations/{location}/extendedMetadataSchemas/{extended_metadata_schema}`.
+        #
+        #     `{extended_metadata_schema}` has the format
+        #     `"apphub.googleapis.com/{SchemaName}"`.
+        class GetExtendedMetadataSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for ListExtendedMetadataSchemas.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Project and location to list Extended Metadata Schemas on.
+        #     Expected format: `projects/{project}/locations/{location}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListExtendedMetadataSchemasRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ListExtendedMetadataSchemas.
+        # @!attribute [rw] extended_metadata_schemas
+        #   @return [::Array<::Google::Cloud::AppHub::V1::ExtendedMetadataSchema>]
+        #     List of Extended Metadata Schemas.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListExtendedMetadataSchemasResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

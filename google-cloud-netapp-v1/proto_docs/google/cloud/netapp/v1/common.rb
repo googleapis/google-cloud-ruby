@@ -35,9 +35,21 @@ module Google
         # @!attribute [r] has_ontap_proxy
         #   @return [::Boolean]
         #     Output only. Indicates if the location has ONTAP Proxy support.
+        # @!attribute [r] flex_performance_tier
+        #   @return [::Google::Cloud::NetApp::V1::LocationMetadata::FlexPerformanceTier]
+        #     Output only. Indicates the flex performance tier of this location.
         class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The flex performance tier of this location.
+          module FlexPerformanceTier
+            # Unspecified flex performance tier.
+            FLEX_PERFORMANCE_TIER_UNSPECIFIED = 0
+
+            # Flex performance tier is limited.
+            LIMITED = 1
+          end
         end
 
         # UserCommands contains the commands to be executed by the customer.

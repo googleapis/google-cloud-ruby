@@ -109,9 +109,33 @@ module Google
         #   @return [::String]
         #     Output only. The location that the underlying resource resides in if it is
         #     zonal, for example, us-west1-a).
+        # @!attribute [r] functional_type
+        #   @return [::Google::Cloud::AppHub::V1::FunctionalType]
+        #     Output only. The type of the service.
+        # @!attribute [r] registration_type
+        #   @return [::Google::Cloud::AppHub::V1::RegistrationType]
+        #     Output only. The registration type of the service.
+        # @!attribute [r] extended_metadata
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AppHub::V1::ExtendedMetadata}]
+        #     Output only. Additional metadata specific to the resource type.
+        #     The key is a string that identifies the type of metadata and the value is
+        #     the metadata contents specific to that type.
+        #     Key format: `apphub.googleapis.com/{metadataType}`
+        # @!attribute [r] identity
+        #   @return [::Google::Cloud::AppHub::V1::Identity]
+        #     Output only. The identity associated with the service.
         class ServiceProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AppHub::V1::ExtendedMetadata]
+          class ExtendedMetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # DiscoveredService is a network or API interface that exposes some

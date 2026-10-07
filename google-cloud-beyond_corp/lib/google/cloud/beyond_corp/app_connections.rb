@@ -79,6 +79,10 @@ module Google
         # The AppConnectionsService service provides methods to manage
         # (create/read/update/delete) BeyondCorp AppConnections.
         #
+        #
+        # Deprecated: App Connector is deprecated and creation of new App Connector
+        # resources is no longer permitted. Use Security Gateway instead.
+        #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
         # @return [::Object] A client object for the specified version.

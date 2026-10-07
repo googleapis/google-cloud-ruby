@@ -151,6 +151,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request object for `UpdateAudienceSegment` method.
+        # @!attribute [rw] audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment]
+        #     Required. The `AudienceSegment` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateAudienceSegmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AudienceSegments` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateAudienceSegmentRequest.audienceSegment must
+        #     match this field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest>]
+        #     Required. The `AudienceSegment` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateAudienceSegments` method.
+        # @!attribute [rw] audience_segments
+        #   @return [::Array<::Google::Ads::AdManager::V1::AudienceSegment>]
+        #     The `AudienceSegment` objects updated.
+        class BatchUpdateAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for `BatchActivateAudienceSegments` method.
         # @!attribute [rw] parent
         #   @return [::String]

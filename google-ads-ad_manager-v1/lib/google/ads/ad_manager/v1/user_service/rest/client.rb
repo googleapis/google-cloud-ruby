@@ -259,6 +259,612 @@ module Google
               end
 
               ##
+              # Lists `User` objects.
+              #
+              # @overload list_users(request, options = nil)
+              #   Pass arguments to `list_users` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::ListUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::ListUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, skip: nil)
+              #   Pass arguments to `list_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Users.
+              #     Format: `networks/{network_code}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of Users to return. The service may return
+              #     fewer than this value. If unspecified, at most 50 users will be returned.
+              #     The maximum value is 1000; values greater than 1000 will be coerced to
+              #     1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListUsers` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListUsers` must match
+              #     the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Expression to filter the response.
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     **Filterable fields:**
+              #
+              #     * `active`
+              #     * `displayName`
+              #     * `email`
+              #     * `externalId`
+              #     * `name`
+              #     * `role`
+              #     * `serviceAccount`
+              #     * `userId`
+              #   @param order_by [::String]
+              #     Optional. Expression to specify sorting order.
+              #     See syntax details at
+              #     https://developers.google.com/ad-manager/api/beta/filters#order
+              #   @param skip [::Integer]
+              #     Optional. Number of individual resources to skip while paginating.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::User>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::User>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::ListUsersRequest.new
+              #
+              #   # Call the list_users method.
+              #   result = client.list_users request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Ads::AdManager::V1::User.
+              #     p item
+              #   end
+              #
+              def list_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::ListUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.list_users request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @user_service_stub, :list_users, "users", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a `User` object.
+              #
+              # @overload create_user(request, options = nil)
+              #   Pass arguments to `create_user` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_user(parent: nil, user: nil)
+              #   Pass arguments to `create_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `User` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param user [::Google::Ads::AdManager::V1::User, ::Hash]
+              #     Required. The `User` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::User]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::User]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateUserRequest.new
+              #
+              #   # Call the create_user method.
+              #   result = client.create_user request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::User.
+              #   p result
+              #
+              def create_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.create_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `User` objects.
+              #
+              # @overload batch_create_users(request, options = nil)
+              #   Pass arguments to `batch_create_users` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_users(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Users` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateUserRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateUserRequest, ::Hash>]
+              #     Required. The `User` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateUsersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateUsersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateUsersRequest.new
+              #
+              #   # Call the batch_create_users method.
+              #   result = client.batch_create_users request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateUsersResponse.
+              #   p result
+              #
+              def batch_create_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.batch_create_users request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Activates a list of `User` objects.
+              #
+              # @overload batch_activate_users(request, options = nil)
+              #   Pass arguments to `batch_activate_users` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_users(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `User` objects to activate.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateUsersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateUsersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateUsersRequest.new
+              #
+              #   # Call the batch_activate_users method.
+              #   result = client.batch_activate_users request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateUsersResponse.
+              #   p result
+              #
+              def batch_activate_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.batch_activate_users request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `User` objects.
+              #
+              # @overload batch_deactivate_users(request, options = nil)
+              #   Pass arguments to `batch_deactivate_users` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_users(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `User` objects to deactivate.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateUsersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateUsersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateUsersRequest.new
+              #
+              #   # Call the batch_deactivate_users method.
+              #   result = client.batch_deactivate_users request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateUsersResponse.
+              #   p result
+              #
+              def batch_deactivate_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.batch_deactivate_users request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `User` object.
+              #
+              # @overload update_user(request, options = nil)
+              #   Pass arguments to `update_user` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_user(user: nil, update_mask: nil)
+              #   Pass arguments to `update_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param user [::Google::Ads::AdManager::V1::User, ::Hash]
+              #     Required. The `User` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::User]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::User]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateUserRequest.new
+              #
+              #   # Call the update_user method.
+              #   result = client.update_user request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::User.
+              #   p result
+              #
+              def update_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.update_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `User` objects.
+              #
+              # @overload batch_update_users(request, options = nil)
+              #   Pass arguments to `batch_update_users` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_users(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Users` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateUserRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateUserRequest, ::Hash>]
+              #     Required. The `User` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateUsersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateUsersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::UserService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateUsersRequest.new
+              #
+              #   # Call the batch_update_users method.
+              #   result = client.batch_update_users request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateUsersResponse.
+              #   p result
+              #
+              def batch_update_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_service_stub.batch_update_users request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the UserService REST API.
               #
               # This class represents the configuration for UserService REST,
@@ -411,11 +1017,60 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_user
+                  ##
+                  # RPC-specific configuration for `list_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_users
+                  ##
+                  # RPC-specific configuration for `create_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_user
+                  ##
+                  # RPC-specific configuration for `batch_create_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_users
+                  ##
+                  # RPC-specific configuration for `batch_activate_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_users
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_users
+                  ##
+                  # RPC-specific configuration for `update_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_user
+                  ##
+                  # RPC-specific configuration for `batch_update_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_users
 
                   # @private
                   def initialize parent_rpcs = nil
                     get_user_config = parent_rpcs.get_user if parent_rpcs.respond_to? :get_user
                     @get_user = ::Gapic::Config::Method.new get_user_config
+                    list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
+                    @list_users = ::Gapic::Config::Method.new list_users_config
+                    create_user_config = parent_rpcs.create_user if parent_rpcs.respond_to? :create_user
+                    @create_user = ::Gapic::Config::Method.new create_user_config
+                    batch_create_users_config = parent_rpcs.batch_create_users if parent_rpcs.respond_to? :batch_create_users
+                    @batch_create_users = ::Gapic::Config::Method.new batch_create_users_config
+                    batch_activate_users_config = parent_rpcs.batch_activate_users if parent_rpcs.respond_to? :batch_activate_users
+                    @batch_activate_users = ::Gapic::Config::Method.new batch_activate_users_config
+                    batch_deactivate_users_config = parent_rpcs.batch_deactivate_users if parent_rpcs.respond_to? :batch_deactivate_users
+                    @batch_deactivate_users = ::Gapic::Config::Method.new batch_deactivate_users_config
+                    update_user_config = parent_rpcs.update_user if parent_rpcs.respond_to? :update_user
+                    @update_user = ::Gapic::Config::Method.new update_user_config
+                    batch_update_users_config = parent_rpcs.batch_update_users if parent_rpcs.respond_to? :batch_update_users
+                    @batch_update_users = ::Gapic::Config::Method.new batch_update_users_config
 
                     yield self if block_given?
                   end

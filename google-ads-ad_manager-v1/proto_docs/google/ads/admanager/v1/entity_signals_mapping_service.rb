@@ -70,7 +70,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for 'CreateEntitySignalsMapping' method.
+        # Request object for `CreateEntitySignalsMapping` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where this EntitySignalsMapping will be
@@ -83,7 +83,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for 'UpdateEntitySignalsMapping' method.
+        # Request object for `UpdateEntitySignalsMapping` method.
         # @!attribute [rw] entity_signals_mapping
         #   @return [::Google::Ads::AdManager::V1::EntitySignalsMapping]
         #     Required. The `EntitySignalsMapping` to update.

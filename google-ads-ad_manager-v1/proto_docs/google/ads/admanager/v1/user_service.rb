@@ -30,6 +30,190 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request object for ListUsers method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Users.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of Users to return. The service may return
+        #     fewer than this value. If unspecified, at most 50 users will be returned.
+        #     The maximum value is 1000; values greater than 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListUsers` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListUsers` must match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Expression to filter the response.
+        #      See syntax details at
+        #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     **Filterable fields:**
+        #
+        #     * `active`
+        #     * `displayName`
+        #     * `email`
+        #     * `externalId`
+        #     * `name`
+        #     * `role`
+        #     * `serviceAccount`
+        #     * `userId`
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Expression to specify sorting order.
+        #     See syntax details at
+        #     https://developers.google.com/ad-manager/api/beta/filters#order
+        # @!attribute [rw] skip
+        #   @return [::Integer]
+        #     Optional. Number of individual resources to skip while paginating.
+        class ListUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for ListUsersRequest containing matching User resources.
+        # @!attribute [rw] users
+        #   @return [::Array<::Google::Ads::AdManager::V1::User>]
+        #     The User from the specified network.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] total_size
+        #   @return [::Integer]
+        #     Total number of Users.
+        #     If a filter was included in the request, this reflects the total number
+        #     after the filtering is applied.
+        #
+        #     `total_size` won't be calculated in the response unless it has been
+        #     included in a response field mask. The response field mask can be provided
+        #     to the method by using the URL parameter `$fields` or `fields`, or by using
+        #     the HTTP/gRPC header `X-Goog-FieldMask`.
+        #
+        #     For more information, see
+        #     https://developers.google.com/ad-manager/api/beta/field-masks
+        class ListUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateUser` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `User` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] user
+        #   @return [::Google::Ads::AdManager::V1::User]
+        #     Required. The `User` to create.
+        class CreateUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateUsers` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Users` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateUserRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateUserRequest>]
+        #     Required. The `User` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateUsers` method.
+        # @!attribute [rw] users
+        #   @return [::Array<::Google::Ads::AdManager::V1::User>]
+        #     The `User` objects created.
+        class BatchCreateUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateUser` method.
+        # @!attribute [rw] user
+        #   @return [::Google::Ads::AdManager::V1::User]
+        #     Required. The `User` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateUsers` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Users` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateUserRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateUserRequest>]
+        #     Required. The `User` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateUsers` method.
+        # @!attribute [rw] users
+        #   @return [::Array<::Google::Ads::AdManager::V1::User>]
+        #     The `User` objects updated.
+        class BatchUpdateUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivateUsers` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `User` objects to activate.
+        class BatchActivateUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateUsers` method.
+        class BatchActivateUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateUsers` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `User` objects to deactivate.
+        class BatchDeactivateUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateUsers` method.
+        class BatchDeactivateUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

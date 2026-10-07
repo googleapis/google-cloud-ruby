@@ -35,7 +35,8 @@ module Google
         # @!attribute [r] status
         #   @return [::Google::Ads::AdManager::V1::SlateStatusEnum::SlateStatus]
         #     Output only. The status of this Slate. Slates are created in the
-        #     [SlateStatus.ACTIVE][] state.
+        #     {::Google::Ads::AdManager::V1::SlateStatusEnum::SlateStatus::ACTIVE SlateStatusEnum.SlateStatus.ACTIVE}
+        #     state.
         # @!attribute [r] transcode_status
         #   @return [::Google::Ads::AdManager::V1::VideoTranscodeStatusEnum::VideoTranscodeStatus]
         #     Output only. Server side transcoding status of the current slate.

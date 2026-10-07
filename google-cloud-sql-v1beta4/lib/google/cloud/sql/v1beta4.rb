@@ -23,10 +23,12 @@ require "google/cloud/sql/v1beta4/sql_instances_service"
 require "google/cloud/sql/v1beta4/sql_operations_service"
 require "google/cloud/sql/v1beta4/sql_ssl_certs_service"
 require "google/cloud/sql/v1beta4/sql_backups_service"
+require "google/cloud/sql/v1beta4/blue_green_deployments_service"
 require "google/cloud/sql/v1beta4/sql_connect_service"
 require "google/cloud/sql/v1beta4/sql_data_service"
 require "google/cloud/sql/v1beta4/sql_tiers_service"
 require "google/cloud/sql/v1beta4/sql_users_service"
+require "google/cloud/sql/v1beta4/sql_workload_captures_service"
 require "google/cloud/sql/v1beta4/version"
 
 module Google

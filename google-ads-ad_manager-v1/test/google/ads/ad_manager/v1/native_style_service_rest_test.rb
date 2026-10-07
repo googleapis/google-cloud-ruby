@@ -191,6 +191,61 @@ class ::Google::Ads::AdManager::V1::NativeStyleService::Rest::ClientTest < Minit
     end
   end
 
+  def test_create_native_style
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::NativeStyle.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    native_style = {}
+
+    create_native_style_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::NativeStyleService::Rest::ServiceStub.stub :transcode_create_native_style_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_native_style_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::NativeStyleService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_native_style({ parent: parent, native_style: native_style }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_native_style parent: parent, native_style: native_style do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_native_style ::Google::Ads::AdManager::V1::CreateNativeStyleRequest.new(parent: parent, native_style: native_style) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_native_style({ parent: parent, native_style: native_style }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_native_style(::Google::Ads::AdManager::V1::CreateNativeStyleRequest.new(parent: parent, native_style: native_style), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_native_style_client_stub.call_count
+      end
+    end
+  end
+
   def test_batch_create_native_styles
     # Create test objects.
     client_result = ::Google::Ads::AdManager::V1::BatchCreateNativeStylesResponse.new
@@ -242,6 +297,61 @@ class ::Google::Ads::AdManager::V1::NativeStyleService::Rest::ClientTest < Minit
 
         # Verify method calls
         assert_equal 5, batch_create_native_styles_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_native_style
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::NativeStyle.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    native_style = {}
+    update_mask = {}
+
+    update_native_style_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::NativeStyleService::Rest::ServiceStub.stub :transcode_update_native_style_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_native_style_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::NativeStyleService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_native_style({ native_style: native_style, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_native_style native_style: native_style, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_native_style ::Google::Ads::AdManager::V1::UpdateNativeStyleRequest.new(native_style: native_style, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_native_style({ native_style: native_style, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_native_style(::Google::Ads::AdManager::V1::UpdateNativeStyleRequest.new(native_style: native_style, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_native_style_client_stub.call_count
       end
     end
   end

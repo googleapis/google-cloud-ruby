@@ -28,7 +28,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Defines the fill order direction of ad breaks with
-          # AdBreakOptimizationType.POSITION.
+          # {::Google::Ads::AdManager::V1::AdBreakOptimizationTypeEnum::AdBreakOptimizationType::POSITION AdBreakOptimizationTypeEnum.AdBreakOptimizationType.POSITION}.
           module AdRuleFillOrderDirection
             # Default value. This value is unused.
             AD_RULE_FILL_ORDER_DIRECTION_UNSPECIFIED = 0

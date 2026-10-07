@@ -21,17 +21,22 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Discount information for a LineItem.
+        # Discount information for a {::Google::Ads::AdManager::V1::LineItem LineItem}.
         # @!attribute [rw] discount_type
         #   @return [::Google::Ads::AdManager::V1::DiscountTypeEnum::DiscountType]
-        #     Optional. The type of discount being applied to a LineItem, either
-        #     percentage based or absolute. This attribute is optional and defaults to
-        #     PERCENTAGE.
+        #     Optional. The type of discount being applied to a
+        #     {::Google::Ads::AdManager::V1::LineItem LineItem}, either percentage based or
+        #     absolute. This attribute is optional and defaults to
+        #     {::Google::Ads::AdManager::V1::DiscountTypeEnum::DiscountType::PERCENTAGE PERCENTAGE}.
         # @!attribute [rw] discount
         #   @return [::Float]
         #     Optional. The number here is either a percentage or an absolute value
-        #     depending on the DiscountType. If the DiscountType is PERCENTAGE, then only
-        #     non-fractional values are supported.
+        #     depending on the
+        #     {::Google::Ads::AdManager::V1::DiscountTypeEnum::DiscountType DiscountType}. If
+        #     the {::Google::Ads::AdManager::V1::DiscountTypeEnum::DiscountType DiscountType}
+        #     is
+        #     {::Google::Ads::AdManager::V1::DiscountTypeEnum::DiscountType::PERCENTAGE PERCENTAGE},
+        #     then only non-fractional values are supported.
         class LineItemDiscount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

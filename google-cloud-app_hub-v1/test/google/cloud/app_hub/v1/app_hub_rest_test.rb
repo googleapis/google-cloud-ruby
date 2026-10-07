@@ -1584,6 +1584,226 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_boundary
+    # Create test objects.
+    client_result = ::Google::Cloud::AppHub::V1::Boundary.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_boundary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_boundary_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_boundary_client_stub do
+        # Create client
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_boundary({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_boundary name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_boundary ::Google::Cloud::AppHub::V1::GetBoundaryRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_boundary({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_boundary(::Google::Cloud::AppHub::V1::GetBoundaryRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_boundary_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_boundary
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    boundary = {}
+    request_id = "hello world"
+
+    update_boundary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_update_boundary_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_boundary_client_stub do
+        # Create client
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_boundary({ update_mask: update_mask, boundary: boundary, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_boundary update_mask: update_mask, boundary: boundary, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_boundary ::Google::Cloud::AppHub::V1::UpdateBoundaryRequest.new(update_mask: update_mask, boundary: boundary, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_boundary({ update_mask: update_mask, boundary: boundary, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_boundary(::Google::Cloud::AppHub::V1::UpdateBoundaryRequest.new(update_mask: update_mask, boundary: boundary, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_boundary_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_extended_metadata_schema
+    # Create test objects.
+    client_result = ::Google::Cloud::AppHub::V1::ExtendedMetadataSchema.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_extended_metadata_schema_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_extended_metadata_schema_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_extended_metadata_schema_client_stub do
+        # Create client
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_extended_metadata_schema({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_extended_metadata_schema name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_extended_metadata_schema ::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_extended_metadata_schema({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_extended_metadata_schema(::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_extended_metadata_schema_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_extended_metadata_schemas
+    # Create test objects.
+    client_result = ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_extended_metadata_schemas_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_extended_metadata_schemas_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_extended_metadata_schemas_client_stub do
+        # Create client
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_extended_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_extended_metadata_schemas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_extended_metadata_schemas ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_extended_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_extended_metadata_schemas(::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_extended_metadata_schemas_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

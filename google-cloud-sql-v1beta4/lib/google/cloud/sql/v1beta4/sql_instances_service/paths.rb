@@ -70,6 +70,50 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKeyVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            # @param crypto_key_version [String]
+            #
+            # @return [::String]
+            def crypto_key_version_path project:, location:, key_ring:, crypto_key:, crypto_key_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -84,6 +128,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
+            # Create a fully-qualified NetworkAttachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/networkAttachments/{network_attachment}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param network_attachment [String]
+            #
+            # @return [::String]
+            def network_attachment_path project:, region:, network_attachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/networkAttachments/#{network_attachment}"
             end
 
             ##

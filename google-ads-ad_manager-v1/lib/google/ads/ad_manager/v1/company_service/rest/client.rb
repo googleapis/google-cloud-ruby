@@ -275,18 +275,20 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent, which owns this collection of [Companies][].
-              #     Format: `networks/{network_code}`
+              #     Required. The parent, which owns this collection of
+              #     {::Google::Ads::AdManager::V1::Company Companies}. Format:
+              #     `networks/{network_code}`
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of [Companies][] to return. The service may
-              #     return fewer than this value. If unspecified, at most 50 [Companies][] will
-              #     be returned. The maximum value is 1000; values greater than 1000 will be
-              #     coerced to 1000.
+              #     Optional. The maximum number of
+              #     {::Google::Ads::AdManager::V1::Company Companies} to return. The service may
+              #     return fewer than this value. If unspecified, at most 50
+              #     {::Google::Ads::AdManager::V1::Company Companies} will be returned. The maximum
+              #     value is 1000; values greater than 1000 will be coerced to 1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous [ListCompanies][] call.
+              #     Optional. A page token, received from a previous `ListCompanies` call.
               #     Provide this to retrieve the subsequent page.
               #
-              #     When paginating, all other parameters provided to [ListCompanies][] must
+              #     When paginating, all other parameters provided to `ListCompanies` must
               #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
@@ -479,10 +481,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent resource where [Companies][] will be created.
-              #     Format: `networks/{network_code}`
-              #     The parent field in the CreateCompanyRequest must match this
-              #     field.
+              #     Required. The parent resource where
+              #     {::Google::Ads::AdManager::V1::Company Companies} will be created. Format:
+              #     `networks/{network_code}` The parent field in the CreateCompanyRequest must
+              #     match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateCompanyRequest, ::Hash>]
               #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to create.
               #     A maximum of 100 objects can be created in a batch.
@@ -646,10 +648,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent resource where [Companies][] will be updated.
-              #     Format: `networks/{network_code}`
-              #     The parent field in the UpdateCompanyRequest must match this
-              #     field.
+              #     Required. The parent resource where
+              #     {::Google::Ads::AdManager::V1::Company Companies} will be updated. Format:
+              #     `networks/{network_code}` The parent field in the UpdateCompanyRequest must
+              #     match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateCompanyRequest, ::Hash>]
               #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to update.
               #     A maximum of 100 objects can be updated in a batch.

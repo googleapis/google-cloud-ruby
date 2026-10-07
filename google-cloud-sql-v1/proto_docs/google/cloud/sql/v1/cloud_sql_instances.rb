@@ -978,6 +978,11 @@ module Google
         #     Optional. This field has the same purpose as restore_instance_settings,
         #     changes any instance settings stored in the backup you are restoring from.
         #     With the difference that these fields are cleared in the settings.
+        # @!attribute [rw] ignore_maintenance_version
+        #   @return [::Boolean]
+        #     Optional. If true, the restore operation proceeds even if the target
+        #     instance's maintenance version is older than the source instance's
+        #     maintenance version.
         class InstancesRestoreBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1439,6 +1444,10 @@ module Google
         #     Input only. Determines whether an in-place major version upgrade of
         #     replicas happens when an in-place major version upgrade of a primary
         #     instance is initiated.
+        # @!attribute [rw] skip_precheck
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Optional. Input only. Determines whether the precheck step is skipped
+        #     during a major version upgrade.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Input only. Immutable. Tag keys and tag values that are bound to
@@ -1463,6 +1472,10 @@ module Google
         # @!attribute [r] dns_names
         #   @return [::Array<::Google::Cloud::Sql::V1::DnsNameMapping>]
         #     Output only. The list of DNS names used by this instance.
+        # @!attribute [r] deployment_info
+        #   @return [::Google::Cloud::Sql::V1::BlueGreenDeploymentInfo]
+        #     Output only. Deployment info for the instance. This is set if the instance
+        #     is currently part of any blue-green setup.
         # @!attribute [rw] database_center_integration_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Optional. If true, instance metadata is sent to the Database Center. If
@@ -1640,6 +1653,62 @@ module Google
 
             # Database Center integration is disabled.
             DISABLED = 2
+          end
+        end
+
+        # Blue-green deployment metadata for a database instance. In a blue-green
+        # deployment, we maintain two environments, one of which is live.
+        # This message contains details about the blue-green deployment.
+        # @!attribute [r] deployment_id
+        #   @return [::String]
+        #     Output only. The resource ID of the blue-green deployment.
+        # @!attribute [r] source
+        #   @return [::Google::Cloud::Sql::V1::BlueGreenDeploymentInfo::SourceRole]
+        #     Output only. The source instance for the Blue-Green deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `source`, `target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] target
+        #   @return [::Google::Cloud::Sql::V1::BlueGreenDeploymentInfo::TargetRole]
+        #     Output only. The target instance for the Blue-Green deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `target`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1::BlueGreenDeploymentInfo::State]
+        #     Output only. The current state of blue-green-deployment for UI tags
+        class BlueGreenDeploymentInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The source instance for the Blue-Green deployment.
+          # @!attribute [r] target_id
+          #   @return [::Google::Cloud::Sql::V1::InstanceReference]
+          #     Output only. The target instance paired with this source instance in a
+          #     blue-green deployment.
+          class SourceRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The target instance for the Blue-Green deployment.
+          # @!attribute [r] source_id
+          #   @return [::Google::Cloud::Sql::V1::InstanceReference]
+          #     Output only. The source instance paired with this target instance in a
+          #     blue-green deployment.
+          class TargetRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of blue-green-deployment for UI tags
+          module State
+            # The state of the deployment is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The deployment is pre-switchover.
+            PRE_SWITCHOVER = 1
+
+            # The deployment is post-switchover.
+            POST_SWITCHOVER = 2
           end
         end
 
@@ -2102,6 +2171,15 @@ module Google
             # The replication user is missing specific privileges to setup DDL
             # replication. (e.g. CREATE EVENT TRIGGER, CREATE SCHEMA) for PostgreSQL.
             PG_DDL_REPLICATION_INSUFFICIENT_PRIVILEGE = 58
+
+            # Read replicas of the Writable Destination instance will be recreated
+            # after external synchronization is complete, causing downtime on read
+            # replicas.
+            WRITABLE_DESTINATION_REPLICA_RECREATION_DOWNTIME = 59
+
+            # A warning that disk storage auto increase is disabled on the destination
+            # instance for a Writable Destination migration.
+            WRITABLE_DESTINATION_STORAGE_AUTO_INCREASE_DISABLED = 60
           end
         end
 
@@ -2205,7 +2283,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Execute SQL statements request.
         # @!attribute [rw] instance
         #   @return [::String]
         #     Required. Database instance ID. This does not include the project ID.
@@ -2236,6 +2313,7 @@ module Google
         # @!attribute [rw] database
         #   @return [::String]
         #     Optional. Name of the database on which the statement will be executed.
+        #     For Postgres and SQL Server it's required, for MySQL it's optional.
         # @!attribute [rw] password_secret_version
         #   @return [::String]
         #     Optional. The resource name of the Secret Manager secret holding the
@@ -2289,7 +2367,6 @@ module Google
           end
         end
 
-        # Execute SQL statements response.
         # @!attribute [rw] messages
         #   @return [::Array<::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlResponse::Message>]
         #     A list of notices and warnings generated during query execution.
@@ -2499,6 +2576,10 @@ module Google
 
           # A Cloud SQL read pool.
           READ_POOL_INSTANCE = 5
+
+          # A Cloud SQL instance acting as a Blue-Green deployment target primary.
+          # (MySQL only)
+          GREEN_INSTANCE = 7
         end
 
         # The suspension reason of the database instance if the state is SUSPENDED.

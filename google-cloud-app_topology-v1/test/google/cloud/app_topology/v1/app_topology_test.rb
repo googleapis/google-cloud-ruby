@@ -184,6 +184,77 @@ class ::Google::Cloud::AppTopology::V1::AppTopology::ClientTest < Minitest::Test
     end
   end
 
+  def test_explore_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AppTopology::V1::ExploreSchemaResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    start_labels = ["hello world"]
+    depth = 42
+    page_size = 42
+    page_token = "hello world"
+
+    explore_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :explore_schema, name
+      assert_kind_of ::Google::Cloud::AppTopology::V1::ExploreSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["start_labels"]
+      assert_equal 42, request["depth"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, explore_schema_client_stub do
+      # Create client
+      c = ::Google::Cloud::AppTopology::V1::AppTopology::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.explore_schema({ name: name, start_labels: start_labels, depth: depth, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.explore_schema name: name, start_labels: start_labels, depth: depth, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.explore_schema ::Google::Cloud::AppTopology::V1::ExploreSchemaRequest.new(name: name, start_labels: start_labels, depth: depth, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.explore_schema({ name: name, start_labels: start_labels, depth: depth, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.explore_schema(::Google::Cloud::AppTopology::V1::ExploreSchemaRequest.new(name: name, start_labels: start_labels, depth: depth, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, explore_schema_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_domain
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AppTopology::V1::Domain.new

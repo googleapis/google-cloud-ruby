@@ -300,6 +300,40 @@
         }
       }
     },
+    "BlueGreenDeploymentsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Sql::V1::BlueGreenDeploymentsService::Client",
+          "rpcs": {
+            "CreateBlueGreenDeployment": {
+              "methods": [
+                "create_blue_green_deployment"
+              ]
+            },
+            "GetBlueGreenDeployment": {
+              "methods": [
+                "get_blue_green_deployment"
+              ]
+            },
+            "SwitchoverBlueGreenDeployment": {
+              "methods": [
+                "switchover_blue_green_deployment"
+              ]
+            },
+            "ListBlueGreenDeployments": {
+              "methods": [
+                "list_blue_green_deployments"
+              ]
+            },
+            "DeleteBlueGreenDeployment": {
+              "methods": [
+                "delete_blue_green_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SqlConnectService": {
       "clients": {
         "grpc": {
@@ -512,6 +546,40 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SqlWorkloadCapturesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Sql::V1::SqlWorkloadCapturesService::Client",
+          "rpcs": {
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "StartReplay": {
+              "methods": [
+                "start_replay"
+              ]
+            },
+            "StopReplay": {
+              "methods": [
+                "stop_replay"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
               ]
             }
           }

@@ -257,7 +257,7 @@ module Google
             #     response. This value is only populated for VMAP ad requests when video
             #     playlist internal redirects are enabled. For details, see [Internal
             #     redirect to Google Campaign Manager
-            #     360](https://support.google.com/admanager/answer/9580500?hl=en&sjid=487826991051851731-NA).
+            #     360](https://support.google.com/admanager/answer/9580500).
             class AdRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

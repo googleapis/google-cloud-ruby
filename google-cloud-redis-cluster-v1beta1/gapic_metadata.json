@@ -15,9 +15,19 @@
                 "list_clusters"
               ]
             },
+            "ListAclPolicies": {
+              "methods": [
+                "list_acl_policies"
+              ]
+            },
             "GetCluster": {
               "methods": [
                 "get_cluster"
+              ]
+            },
+            "GetAclPolicy": {
+              "methods": [
+                "get_acl_policy"
               ]
             },
             "UpdateCluster": {
@@ -25,14 +35,39 @@
                 "update_cluster"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "update_acl_policy"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "delete_cluster"
               ]
             },
+            "DeleteAclPolicy": {
+              "methods": [
+                "delete_acl_policy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "get_acl_policy_revision"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "list_acl_policy_revisions"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "create_cluster"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "create_acl_policy"
               ]
             },
             "GetClusterCertificateAuthority": {

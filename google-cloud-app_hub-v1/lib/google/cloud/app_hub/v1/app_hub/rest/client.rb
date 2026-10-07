@@ -1436,7 +1436,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
               #     Service resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request.
@@ -2194,7 +2194,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
               #     Workload resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request.
@@ -2691,7 +2691,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
               #     Application resource by the update.
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request.
@@ -2879,6 +2879,365 @@ module Google
 
                 @app_hub_stub.delete_application request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a Boundary.
+              #
+              # @overload get_boundary(request, options = nil)
+              #   Pass arguments to `get_boundary` via a request object, either of type
+              #   {::Google::Cloud::AppHub::V1::GetBoundaryRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AppHub::V1::GetBoundaryRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_boundary(name: nil)
+              #   Pass arguments to `get_boundary` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the boundary to retrieve.
+              #     Format: `projects/{project}/locations/{location}/boundary`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AppHub::V1::Boundary]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AppHub::V1::Boundary]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppHub::V1::AppHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppHub::V1::GetBoundaryRequest.new
+              #
+              #   # Call the get_boundary method.
+              #   result = client.get_boundary request
+              #
+              #   # The returned object is of type Google::Cloud::AppHub::V1::Boundary.
+              #   p result
+              #
+              def get_boundary request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AppHub::V1::GetBoundaryRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_boundary.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AppHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_boundary.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_boundary.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @app_hub_stub.get_boundary request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Boundary.
+              #
+              # @overload update_boundary(request, options = nil)
+              #   Pass arguments to `update_boundary` via a request object, either of type
+              #   {::Google::Cloud::AppHub::V1::UpdateBoundaryRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AppHub::V1::UpdateBoundaryRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_boundary(update_mask: nil, boundary: nil, request_id: nil)
+              #   Pass arguments to `update_boundary` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     Boundary resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param boundary [::Google::Cloud::AppHub::V1::Boundary, ::Hash]
+              #     Required. The boundary to update.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppHub::V1::AppHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppHub::V1::UpdateBoundaryRequest.new
+              #
+              #   # Call the update_boundary method.
+              #   result = client.update_boundary request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_boundary request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AppHub::V1::UpdateBoundaryRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_boundary.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AppHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_boundary.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_boundary.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @app_hub_stub.update_boundary request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets an Extended Metadata Schema.
+              #
+              # @overload get_extended_metadata_schema(request, options = nil)
+              #   Pass arguments to `get_extended_metadata_schema` via a request object, either of type
+              #   {::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_extended_metadata_schema(name: nil)
+              #   Pass arguments to `get_extended_metadata_schema` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Schema resource name.
+              #     Format:
+              #     `projects/{project}/locations/{location}/extendedMetadataSchemas/{extended_metadata_schema}`.
+              #
+              #     `{extended_metadata_schema}` has the format
+              #     `"apphub.googleapis.com/{SchemaName}"`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AppHub::V1::ExtendedMetadataSchema]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AppHub::V1::ExtendedMetadataSchema]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppHub::V1::AppHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest.new
+              #
+              #   # Call the get_extended_metadata_schema method.
+              #   result = client.get_extended_metadata_schema request
+              #
+              #   # The returned object is of type Google::Cloud::AppHub::V1::ExtendedMetadataSchema.
+              #   p result
+              #
+              def get_extended_metadata_schema request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_extended_metadata_schema.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AppHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_extended_metadata_schema.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_extended_metadata_schema.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @app_hub_stub.get_extended_metadata_schema request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Extended Metadata Schemas available in a host project and location.
+              #
+              # @overload list_extended_metadata_schemas(request, options = nil)
+              #   Pass arguments to `list_extended_metadata_schemas` via a request object, either of type
+              #   {::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_extended_metadata_schemas(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_extended_metadata_schemas` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Project and location to list Extended Metadata Schemas on.
+              #     Expected format: `projects/{project}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::ExtendedMetadataSchema>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::ExtendedMetadataSchema>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/app_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AppHub::V1::AppHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest.new
+              #
+              #   # Call the list_extended_metadata_schemas method.
+              #   result = client.list_extended_metadata_schemas request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::AppHub::V1::ExtendedMetadataSchema.
+              #     p item
+              #   end
+              #
+              def list_extended_metadata_schemas request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_extended_metadata_schemas.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AppHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_extended_metadata_schemas.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_extended_metadata_schemas.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @app_hub_stub.list_extended_metadata_schemas request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_extended_metadata_schemas, "extended_metadata_schemas", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -3176,6 +3535,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_application
+                  ##
+                  # RPC-specific configuration for `get_boundary`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_boundary
+                  ##
+                  # RPC-specific configuration for `update_boundary`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_boundary
+                  ##
+                  # RPC-specific configuration for `get_extended_metadata_schema`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_extended_metadata_schema
+                  ##
+                  # RPC-specific configuration for `list_extended_metadata_schemas`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_extended_metadata_schemas
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3233,6 +3612,14 @@ module Google
                     @update_application = ::Gapic::Config::Method.new update_application_config
                     delete_application_config = parent_rpcs.delete_application if parent_rpcs.respond_to? :delete_application
                     @delete_application = ::Gapic::Config::Method.new delete_application_config
+                    get_boundary_config = parent_rpcs.get_boundary if parent_rpcs.respond_to? :get_boundary
+                    @get_boundary = ::Gapic::Config::Method.new get_boundary_config
+                    update_boundary_config = parent_rpcs.update_boundary if parent_rpcs.respond_to? :update_boundary
+                    @update_boundary = ::Gapic::Config::Method.new update_boundary_config
+                    get_extended_metadata_schema_config = parent_rpcs.get_extended_metadata_schema if parent_rpcs.respond_to? :get_extended_metadata_schema
+                    @get_extended_metadata_schema = ::Gapic::Config::Method.new get_extended_metadata_schema_config
+                    list_extended_metadata_schemas_config = parent_rpcs.list_extended_metadata_schemas if parent_rpcs.respond_to? :list_extended_metadata_schemas
+                    @list_extended_metadata_schemas = ::Gapic::Config::Method.new list_extended_metadata_schemas_config
 
                     yield self if block_given?
                   end

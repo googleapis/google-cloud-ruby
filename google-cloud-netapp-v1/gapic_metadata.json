@@ -75,6 +75,16 @@
                 "revert_volume"
               ]
             },
+            "StartSplit": {
+              "methods": [
+                "start_split"
+              ]
+            },
+            "GetSplitStatus": {
+              "methods": [
+                "get_split_status"
+              ]
+            },
             "EstablishVolumePeering": {
               "methods": [
                 "establish_volume_peering"
@@ -363,6 +373,21 @@
             "ExecuteOntapPatch": {
               "methods": [
                 "execute_ontap_patch"
+              ]
+            },
+            "RestoreVolume": {
+              "methods": [
+                "restore_volume"
+              ]
+            },
+            "ListBackupConfigs": {
+              "methods": [
+                "list_backup_configs"
+              ]
+            },
+            "UpdateBackupConfig": {
+              "methods": [
+                "update_backup_config"
               ]
             }
           }

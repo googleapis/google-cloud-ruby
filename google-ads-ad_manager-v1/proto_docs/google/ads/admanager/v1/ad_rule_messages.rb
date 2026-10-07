@@ -49,9 +49,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. This end time of the AdRule. This attribute is required
         #     unless
-        #     {::Google::Ads::AdManager::V1::AdRule#end_time_unlimited end_time_unlimited} is
+        #     {::Google::Ads::AdManager::V1::AdRule#end_time_unlimited endTimeUnlimited} is
         #     set to true. If specified, it must be after the
-        #     {::Google::Ads::AdManager::V1::AdRule#start_time start_time}.
+        #     {::Google::Ads::AdManager::V1::AdRule#start_time startTime}.
         # @!attribute [rw] end_time_unlimited
         #   @return [::Boolean]
         #     Optional. Specifies whether or not the AdRule has an end time. This
@@ -59,11 +59,13 @@ module Google
         # @!attribute [r] status
         #   @return [::Google::Ads::AdManager::V1::AdRuleStatusEnum::AdRuleStatus]
         #     Output only. The AdRuleStatus of the AdRule. This attribute is read-only
-        #     and defaults to [AdRuleStatus.INACTIVE][].
+        #     and defaults to
+        #     {::Google::Ads::AdManager::V1::AdRuleStatusEnum::AdRuleStatus::INACTIVE AdRuleStatusEnum.AdRuleStatus.INACTIVE}.
         # @!attribute [rw] frequency_cap_behavior
         #   @return [::Google::Ads::AdManager::V1::AdRuleFrequencyCapBehaviorEnum::AdRuleFrequencyCapBehavior]
         #     Optional. The FrequencyCapBehavior of the AdRule. This attribute is
-        #     optional and defaults to [FrequencyCapBehavior.DEFER][].
+        #     optional and defaults to
+        #     {::Google::Ads::AdManager::V1::AdRuleFrequencyCapBehaviorEnum::AdRuleFrequencyCapBehavior::DEFER AdRuleFrequencyCapBehaviorEnum.AdRuleFrequencyCapBehavior.DEFER}.
         # @!attribute [rw] max_impressions_per_line_item_per_stream
         #   @return [::Integer]
         #     Optional. This AdRule object's frequency cap for the maximum impressions
@@ -96,7 +98,8 @@ module Google
         # @!attribute [rw] slot_behavior
         #   @return [::Google::Ads::AdManager::V1::AdRuleSlotBehaviorEnum::AdRuleSlotBehavior]
         #     Optional. The AdRuleSlotBehavior for video ads for this slot. This
-        #     attribute is optional and defaults to [AdRuleSlotBehavior.DEFER][].
+        #     attribute is optional and defaults to
+        #     {::Google::Ads::AdManager::V1::AdRuleSlotBehaviorEnum::AdRuleSlotBehavior::DEFER AdRuleSlotBehaviorEnum.AdRuleSlotBehavior.DEFER}.
         #     Indicates whether video ads are allowed for this slot, or if the decision
         #     is deferred to alower-priority ad rule.
         # @!attribute [rw] max_video_ad_duration
@@ -107,21 +110,23 @@ module Google
         #   @return [::Google::Ads::AdManager::V1::AdRuleSlotMidrollFrequencyTypeEnum::AdRuleSlotMidrollFrequencyType]
         #     Optional. The frequency type for video ads in this ad rule slot. This
         #     attribute is required for mid-rolls, but if this is not a mid-roll, the
-        #     value is set to [AdRuleSlotMidrollFrequencyType.NONE][].
+        #     value is set to
+        #     {::Google::Ads::AdManager::V1::AdRuleSlotMidrollFrequencyTypeEnum::AdRuleSlotMidrollFrequencyType::NONE AdRuleSlotMidrollFrequencyTypeEnum.AdRuleSlotMidrollFrequencyType.NONE}.
         # @!attribute [rw] video_midroll_frequency
         #   @return [::String]
         #     Optional. The mid-roll frequency of this ad rule slot for video ads. This
         #     attribute is required for mid-rolls, but if MidrollFrequencyType is set to
-        #     [AdRuleSlotMidrollFrequencyType.NONE][], this value should be ignored. For
-        #     example, if this slot has a frequency type of
-        #     [AdRuleSlotMidrollFrequencyType.EVERY_N_SECONDS][] and
-        #     # videoMidrollFrequency = "60", this would mean "play a mid-roll every 60
-        #
-        #     seconds."
+        #     {::Google::Ads::AdManager::V1::AdRuleSlotMidrollFrequencyTypeEnum::AdRuleSlotMidrollFrequencyType::NONE AdRuleSlotMidrollFrequencyTypeEnum.AdRuleSlotMidrollFrequencyType.NONE},
+        #     this value should be ignored. For example, if this slot has a frequency
+        #     type of
+        #     {::Google::Ads::AdManager::V1::AdRuleSlotMidrollFrequencyTypeEnum::AdRuleSlotMidrollFrequencyType::EVERY_N_SECONDS AdRuleSlotMidrollFrequencyTypeEnum.AdRuleSlotMidrollFrequencyType.EVERY_N_SECONDS}
+        #     and #videoMidrollFrequency = "60", this would mean "play a mid-roll every
+        #     60 seconds."
         # @!attribute [rw] bumper
         #   @return [::Google::Ads::AdManager::V1::AdRuleSlotBumperEnum::AdRuleSlotBumper]
         #     Optional. The AdRuleSlotBumper for this slot. This attribute is optional
-        #     and defaults to [AdRuleSlotBumper.NONE][].
+        #     and defaults to
+        #     {::Google::Ads::AdManager::V1::AdRuleSlotBumperEnum::AdRuleSlotBumper::NONE AdRuleSlotBumperEnum.AdRuleSlotBumper.NONE}.
         # @!attribute [rw] max_bumper_duration
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The maximum duration of bumper ads within this slot. This

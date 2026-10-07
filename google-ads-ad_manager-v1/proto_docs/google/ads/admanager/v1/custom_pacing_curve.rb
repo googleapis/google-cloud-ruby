@@ -43,14 +43,16 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The start date and time of the goal. This field is required
         #     unless
-        #     {::Google::Ads::AdManager::V1::CustomPacingGoal#use_line_item_start_time use_line_item_start_time}
+        #     {::Google::Ads::AdManager::V1::CustomPacingGoal#use_line_item_start_time useLineItemStartTime}
         #     is true.
         # @!attribute [rw] use_line_item_start_time
         #   @return [::Boolean]
-        #     Optional. Input only. Whether the [LineItem.start_time] should be used for
-        #     the start date and time of this goal. This field is not persisted and if it
-        #     is set to true, the [start_time] field will be populated by the line item's
-        #     start time.
+        #     Optional. Input only. Whether the
+        #     {::Google::Ads::AdManager::V1::LineItem#start_time LineItem.startTime} should be
+        #     used for the start date and time of this goal. This field is not persisted
+        #     and if it is set to true, the
+        #     {::Google::Ads::AdManager::V1::CustomPacingGoal#start_time startTime} field will
+        #     be populated by the line item's start time.
         # @!attribute [rw] amount
         #   @return [::Integer]
         #     Optional. The amount associated with the goal. This field is required.

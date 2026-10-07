@@ -130,6 +130,73 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
     end
   end
 
+  def test_list_acl_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acl_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_acl_policies, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPoliciesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_acl_policies_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_acl_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_acl_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_acl_policies ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_acl_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_acl_policies(::Google::Cloud::Redis::Cluster::V1beta1::ListAclPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_acl_policies_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::Cluster.new
@@ -185,6 +252,64 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
       # Verify method calls
       assert_equal 5, get_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_acl_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_acl_policy, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_acl_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_acl_policy({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_acl_policy name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_acl_policy ::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_acl_policy({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_acl_policy(::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_acl_policy_client_stub.call_rpc_count
     end
   end
 
@@ -255,6 +380,73 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
     end
   end
 
+  def test_update_acl_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    acl_policy = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_acl_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_acl_policy, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::UpdateAclPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy), request["acl_policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_acl_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_acl_policy({ acl_policy: acl_policy, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_acl_policy acl_policy: acl_policy, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_acl_policy ::Google::Cloud::Redis::Cluster::V1beta1::UpdateAclPolicyRequest.new(acl_policy: acl_policy, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_acl_policy({ acl_policy: acl_policy, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_acl_policy(::Google::Cloud::Redis::Cluster::V1beta1::UpdateAclPolicyRequest.new(acl_policy: acl_policy, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_acl_policy_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -317,6 +509,198 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
       # Verify method calls
       assert_equal 5, delete_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_acl_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    etag = "hello world"
+
+    delete_acl_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_acl_policy, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::DeleteAclPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_acl_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_acl_policy({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_acl_policy name: name, request_id: request_id, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_acl_policy ::Google::Cloud::Redis::Cluster::V1beta1::DeleteAclPolicyRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_acl_policy({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_acl_policy(::Google::Cloud::Redis::Cluster::V1beta1::DeleteAclPolicyRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_acl_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_acl_policy_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_policy_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_acl_policy_revision, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_acl_policy_revision_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_acl_policy_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_acl_policy_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_acl_policy_revision ::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_acl_policy_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_acl_policy_revision(::Google::Cloud::Redis::Cluster::V1beta1::GetAclPolicyRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_acl_policy_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_acl_policy_revisions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPolicyRevisionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acl_policy_revisions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_acl_policy_revisions, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPolicyRevisionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_acl_policy_revisions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_acl_policy_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_acl_policy_revisions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_acl_policy_revisions ::Google::Cloud::Redis::Cluster::V1beta1::ListAclPolicyRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_acl_policy_revisions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_acl_policy_revisions(::Google::Cloud::Redis::Cluster::V1beta1::ListAclPolicyRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_acl_policy_revisions_client_stub.call_rpc_count
     end
   end
 
@@ -386,6 +770,70 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
       # Verify method calls
       assert_equal 5, create_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_acl_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    acl_policy_id = "hello world"
+    acl_policy = {}
+    request_id = "hello world"
+
+    create_acl_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_acl_policy, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::CreateAclPolicyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["acl_policy_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy), request["acl_policy"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_acl_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_acl_policy({ parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_acl_policy parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_acl_policy ::Google::Cloud::Redis::Cluster::V1beta1::CreateAclPolicyRequest.new(parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_acl_policy({ parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_acl_policy(::Google::Cloud::Redis::Cluster::V1beta1::CreateAclPolicyRequest.new(parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_acl_policy_client_stub.call_rpc_count
     end
   end
 

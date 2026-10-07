@@ -279,7 +279,9 @@ module Google
         #        For example a LineItem specifies 750x350, 400x200 but only a 750x350 was
         #        uploaded. Or LineItem specifies 750x350 with an expected count of 2, but
         #        only one was uploaded.
-        #      - The [Creative.applied_labels][] of an associated Creative don't match
+        #      - The
+        #      {::Google::Ads::AdManager::V1::Creative#applied_labels Creative.applied_labels}
+        #      of an associated Creative don't match
         #        the
         #        {::Google::Ads::AdManager::V1::CreativePlaceholder#applied_labels CreativePlaceholder.applied_labels}
         #        of the LineItem. For example LineItem specifies 750x350 with a Foo
@@ -350,8 +352,9 @@ module Google
         #     {::Google::Ads::AdManager::V1::CreativePlaceholder#creative_targeting_display_name CreativePlaceholder.creative_targeting_display_name}
         #     field by referencing the [CreativeTargeting.display_name][] field. It also
         #     needs to be re-specified in the
-        #     [LineItemCreativeAssociation.targeting_display_name][] field when
-        #     associating a line item with a creative that fits into that placeholder.
+        #     {::Google::Ads::AdManager::V1::LineItemCreativeAssociation#targeting_display_name LineItemCreativeAssociation.targeting_display_name}
+        #     field when associating a line item with a creative that fits into that
+        #     placeholder.
         # @!attribute [rw] allowed_formats
         #   @return [::Array<::Google::Ads::AdManager::V1::LineItemAllowedFormatEnum::LineItemAllowedFormat>]
         #     Optional. The set of allowed formats for this line item.

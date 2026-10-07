@@ -48,6 +48,12 @@ module Google
           # The AppConnectorsService provides methods to manage
           # (create/read/update/delete) BeyondCorp AppConnectors.
           #
+          #
+          # Deprecated: App Connector is deprecated and creation of new App Connector
+          # resources is no longer permitted. Use Security Gateway instead.
+          #
+          # @deprecated This service is deprecated and may be removed in the next major version update.
+          #
           # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/beyond_corp/app_connectors/v1/app_connectors_service"

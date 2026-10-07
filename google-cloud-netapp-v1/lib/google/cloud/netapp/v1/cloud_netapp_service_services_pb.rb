@@ -63,6 +63,15 @@ module Google
             # Warning! This operation will permanently revert all changes made after the
             # snapshot was created.
             rpc :RevertVolume, ::Google::Cloud::NetApp::V1::RevertVolumeRequest, ::Google::Longrunning::Operation
+            # Splits a clone volume from its source volume.
+            # This operation will only work for volumes which have clone_details
+            # set(clones).
+            # For volumes that are not clones, this operation will return an error.
+            rpc :StartSplit, ::Google::Cloud::NetApp::V1::StartSplitRequest, ::Google::Longrunning::Operation
+            # Retrieves the current state, progress, and details of a split operation for
+            # a volume. This method is relevant when the volume is a clone. For volumes
+            # that are not clones, this method will return an error.
+            rpc :GetSplitStatus, ::Google::Cloud::NetApp::V1::GetSplitStatusRequest, ::Google::Cloud::NetApp::V1::SplitStatus
             # Establish volume peering. This is used to establish cluster and svm
             # peerings between the GCNV and OnPrem clusters.
             rpc :EstablishVolumePeering, ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest, ::Google::Longrunning::Operation
@@ -180,18 +189,24 @@ module Google
             rpc :UpdateHostGroup, ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest, ::Google::Longrunning::Operation
             # Deletes a host group.
             rpc :DeleteHostGroup, ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest, ::Google::Longrunning::Operation
-            # `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+            # `ExecuteOntapPost` sends the ONTAP `POST` request to the
             # `StoragePool` cluster.
             rpc :ExecuteOntapPost, ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse
-            # `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+            # `ExecuteOntapGet` sends the ONTAP `GET` request to the
             # `StoragePool` cluster.
             rpc :ExecuteOntapGet, ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse
-            # `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+            # `ExecuteOntapDelete` sends the ONTAP `DELETE` request to the
             # `StoragePool` cluster.
             rpc :ExecuteOntapDelete, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse
-            # `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+            # `ExecuteOntapPatch` sends the ONTAP `PATCH` request to the
             # `StoragePool` cluster.
             rpc :ExecuteOntapPatch, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse
+            # Restores a backup to an ONTAP-mode volume.
+            rpc :RestoreVolume, ::Google::Cloud::NetApp::V1::RestoreVolumeRequest, ::Google::Longrunning::Operation
+            # Lists backup configurations for all volumes in an ONTAP-mode Storage Pool.
+            rpc :ListBackupConfigs, ::Google::Cloud::NetApp::V1::ListBackupConfigsRequest, ::Google::Cloud::NetApp::V1::ListBackupConfigsResponse
+            # Updates the backup configuration for an ONTAP-mode volume.
+            rpc :UpdateBackupConfig, ::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
