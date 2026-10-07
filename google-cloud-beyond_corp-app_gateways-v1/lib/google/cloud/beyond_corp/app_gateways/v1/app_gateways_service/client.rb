@@ -45,6 +45,10 @@ module Google
             # The AppGatewaysService service provides methods to manage
             # (create/read/update/delete) BeyondCorp AppGateways.
             #
+            #
+            # Deprecated: App Connector is deprecated and creation of new App Connector
+            # resources is no longer permitted. Use Security Gateway instead.
+            #
             class Client
               # @private
               API_VERSION = ""
@@ -62,6 +66,8 @@ module Google
               #
               # See {::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client::Configuration}
               # for a description of the configuration fields.
+              #
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #
@@ -246,6 +252,8 @@ module Google
               ##
               # Lists AppGateways in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload list_app_gateways(request, options = nil)
               #   Pass arguments to `list_app_gateways` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysRequest} or an equivalent Hash.
@@ -269,8 +277,8 @@ module Google
               #     If not specified, a default value of 50 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     [next_page_token][BeyondCorp.ListAppGatewaysResponse.next_page_token] to
-              #     determine if there are more instances left to be queried.
+              #     {::Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous
               #     ListAppGatewaysRequest, if any.
@@ -354,6 +362,8 @@ module Google
 
               ##
               # Gets details of a single AppGateway.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload get_app_gateway(request, options = nil)
               #   Pass arguments to `get_app_gateway` via a request object, either of type
@@ -441,6 +451,8 @@ module Google
               ##
               # Creates a new AppGateway in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload create_app_gateway(request, options = nil)
               #   Pass arguments to `create_app_gateway` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppGateways::V1::CreateAppGatewayRequest} or an equivalent Hash.
@@ -472,8 +484,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -560,6 +572,8 @@ module Google
               ##
               # Deletes a single AppGateway.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload delete_app_gateway(request, options = nil)
               #   Pass arguments to `delete_app_gateway` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppGateways::V1::DeleteAppGatewayRequest} or an equivalent Hash.
@@ -584,8 +598,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes after the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.

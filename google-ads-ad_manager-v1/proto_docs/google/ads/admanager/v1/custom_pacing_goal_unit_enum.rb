@@ -33,7 +33,8 @@ module Google
             CUSTOM_PACING_GOAL_UNIT_UNSPECIFIED = 0
 
             # The custom pacing goal amounts represent absolute numbers corresponding
-            # to the line item's [Goal.unitType][].
+            # to the line item's
+            # {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}.
             ABSOLUTE = 1
 
             # The custom pacing goal amounts represent a millipercent. For example,

@@ -32,9 +32,11 @@ module Google
         #     Optional. The companions that the creative is expected to have. This
         #     attribute can only be set if the line item it belongs to has an
         #     {::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType EnvironmentType}
-        #     of VIDEO_PLAYER or
-        #     {::Google::Ads::AdManager::V1::LineItem#roadblocking_type roadblocking_type} of
-        #     CREATIVE_SET.
+        #     of
+        #     {::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType::VIDEO_PLAYER VIDEO_PLAYER}
+        #     or {::Google::Ads::AdManager::V1::LineItem#roadblocking_type roadblockingType}
+        #     of
+        #     {::Google::Ads::AdManager::V1::RoadblockingTypeEnum::RoadblockingType::CREATIVE_SET CREATIVE_SET}.
         # @!attribute [rw] expected_creative_count
         #   @return [::Integer]
         #     Optional. Non-empty default. Expected number of creatives that will be

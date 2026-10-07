@@ -44,6 +44,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Boundary resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/boundary`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def boundary_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/boundary"
+            end
+
+            ##
             # Create a fully-qualified DiscoveredService resource string.
             #
             # The resource will be in the following format:
@@ -79,6 +96,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/discoveredWorkloads/#{discovered_workload}"
+            end
+
+            ##
+            # Create a fully-qualified ExtendedMetadataSchema resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/extendedMetadataSchemas/{extended_metadata_schema}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param extended_metadata_schema [String]
+            #
+            # @return [::String]
+            def extended_metadata_schema_path project:, location:, extended_metadata_schema:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/extendedMetadataSchemas/#{extended_metadata_schema}"
             end
 
             ##

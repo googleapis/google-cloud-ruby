@@ -30,7 +30,7 @@ module Google
     module AdManager
       module V1
         ##
-        # Provides methods for handling AdReviewCenterAd objects.
+        # Provides methods for handling `AdReviewCenterAd` objects.
         #
         # @example Load this service and instantiate a REST client
         #

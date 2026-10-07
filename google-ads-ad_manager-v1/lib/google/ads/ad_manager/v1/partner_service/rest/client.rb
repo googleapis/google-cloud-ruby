@@ -277,18 +277,18 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of
-              #     {::Google::Ads::AdManager::V1::Partner Partner}s. Format:
+              #     {::Google::Ads::AdManager::V1::Partner Partners}. Format:
               #     `networks/{network_code}`
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of {::Google::Ads::AdManager::V1::Partner Partner}s
+              #     Optional. The maximum number of {::Google::Ads::AdManager::V1::Partner Partners}
               #     to return. The service may return fewer than this value. If unspecified, at
-              #     most 50 {::Google::Ads::AdManager::V1::Partner Partner}s will be returned. The
+              #     most 50 {::Google::Ads::AdManager::V1::Partner Partners} will be returned. The
               #     maximum value is 1000; values greater than 1000 will be coerced to 1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous [ListPartners][] call.
+              #     Optional. A page token, received from a previous `ListPartners` call.
               #     Provide this to retrieve the subsequent page.
               #
-              #     When paginating, all other parameters provided to [ListPartners][] must
+              #     When paginating, all other parameters provided to `ListPartners` must
               #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
@@ -479,10 +479,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource where
-              #     {::Google::Ads::AdManager::V1::Partner Partner}s will be updated. Format:
-              #     `networks/{network_code}` The parent field in the
-              #     {::Google::Ads::AdManager::V1::UpdatePartnerRequest UpdatePartnerRequest} must
-              #     match this field.
+              #     {::Google::Ads::AdManager::V1::Partner Partners} will be updated. Format:
+              #     `networks/{network_code}` The parent field in the `UpdatePartnerRequest`
+              #     must match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdatePartnerRequest, ::Hash>]
               #     Required. The {::Google::Ads::AdManager::V1::Partner Partner} objects to update.
               #     A maximum of 100 objects can be updated in a batch.

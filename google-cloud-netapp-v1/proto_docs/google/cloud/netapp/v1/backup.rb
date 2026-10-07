@@ -45,10 +45,9 @@ module Google
         #     policy.
         # @!attribute [rw] source_volume
         #   @return [::String]
-        #     Volume full name of this backup belongs to.
-        #     Either source_volume or ontap_source should be provided.
-        #     Format:
-        #     `projects/{projects_id}/locations/{location}/volumes/{volume_id}`
+        #     The resource name of the volume that this backup belongs to. You must
+        #     provide either `source_volume` or `ontap_source`. Format:
+        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}`
         # @!attribute [rw] source_snapshot
         #   @return [::String]
         #     If specified, backup will be created from the given snapshot.
@@ -82,6 +81,10 @@ module Google
         # @!attribute [r] enforced_retention_end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time until which the backup is not deletable.
+        # @!attribute [rw] ontap_source
+        #   @return [::Google::Cloud::NetApp::V1::OntapSource]
+        #     Optional. Represents source details for ONTAP backups.
+        #     Either source_volume or ontap_source should be provided.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -239,6 +242,23 @@ module Google
         #   @return [::Google::Cloud::NetApp::V1::Backup]
         #     Required. The backup being updated
         class UpdateBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents ONTAP source details.
+        # @!attribute [rw] storage_pool
+        #   @return [::String]
+        #     Required. Name of the storage pool. This must be specified for creating
+        #     backups for ONTAP mode volumes. Format:
+        #     `projects/{projects_id}/locations/{location}/storagePools/{storage_pool_id}`
+        # @!attribute [rw] volume_uuid
+        #   @return [::String]
+        #     Required. The UUID of the ONTAP source volume.
+        # @!attribute [rw] snapshot_uuid
+        #   @return [::String]
+        #     Optional. The UUID of the ONTAP source snapshot.
+        class OntapSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

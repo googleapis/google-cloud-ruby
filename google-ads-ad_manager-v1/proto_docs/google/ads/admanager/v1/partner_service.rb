@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Request object for [GetPartner][] method.
+        # Request object for `GetPartner` method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the
@@ -32,24 +32,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [ListPartners][] method.
+        # Request object for `ListPartners` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of
-        #     {::Google::Ads::AdManager::V1::Partner Partner}s. Format:
+        #     {::Google::Ads::AdManager::V1::Partner Partners}. Format:
         #     `networks/{network_code}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of {::Google::Ads::AdManager::V1::Partner Partner}s
+        #     Optional. The maximum number of {::Google::Ads::AdManager::V1::Partner Partners}
         #     to return. The service may return fewer than this value. If unspecified, at
-        #     most 50 {::Google::Ads::AdManager::V1::Partner Partner}s will be returned. The
+        #     most 50 {::Google::Ads::AdManager::V1::Partner Partners} will be returned. The
         #     maximum value is 1000; values greater than 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous [ListPartners][] call.
+        #     Optional. A page token, received from a previous `ListPartners` call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to [ListPartners][] must
+        #     When paginating, all other parameters provided to `ListPartners` must
         #     match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -81,9 +81,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for
-        # {::Google::Ads::AdManager::V1::ListPartnersRequest ListPartnersRequest} containing
-        # matching {::Google::Ads::AdManager::V1::Partner Partner} objects.
+        # Response object for `ListPartnersRequest` containing matching
+        # {::Google::Ads::AdManager::V1::Partner Partner} objects.
         # @!attribute [rw] partners
         #   @return [::Array<::Google::Ads::AdManager::V1::Partner>]
         #     The {::Google::Ads::AdManager::V1::Partner Partner} objects from the specified
@@ -110,7 +109,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [UpdatePartner][] method.
+        # Request object for `UpdatePartner` method.
         # @!attribute [rw] partner
         #   @return [::Google::Ads::AdManager::V1::Partner]
         #     Required. The {::Google::Ads::AdManager::V1::Partner Partner} to update.
@@ -125,14 +124,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [BatchUpdatePartners][] method.
+        # Request object for `BatchUpdatePartners` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where
-        #     {::Google::Ads::AdManager::V1::Partner Partner}s will be updated. Format:
-        #     `networks/{network_code}` The parent field in the
-        #     {::Google::Ads::AdManager::V1::UpdatePartnerRequest UpdatePartnerRequest} must
-        #     match this field.
+        #     {::Google::Ads::AdManager::V1::Partner Partners} will be updated. Format:
+        #     `networks/{network_code}` The parent field in the `UpdatePartnerRequest`
+        #     must match this field.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Ads::AdManager::V1::UpdatePartnerRequest>]
         #     Required. The {::Google::Ads::AdManager::V1::Partner Partner} objects to update.
@@ -142,7 +140,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [BatchUpdatePartners][] method.
+        # Response object for `BatchUpdatePartners` method.
         # @!attribute [rw] partners
         #   @return [::Array<::Google::Ads::AdManager::V1::Partner>]
         #     The {::Google::Ads::AdManager::V1::Partner Partner} objects updated.

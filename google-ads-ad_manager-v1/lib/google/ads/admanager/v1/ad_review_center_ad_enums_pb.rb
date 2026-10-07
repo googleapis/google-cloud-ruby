@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n7google/ads/admanager/v1/ad_review_center_ad_enums.proto\x12\x17google.ads.admanager.v1\"\x8c\x01\n\x1a\x41\x64ReviewCenterAdStatusEnum\"n\n\x16\x41\x64ReviewCenterAdStatus\x12*\n&AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\x0b\n\x07\x42LOCKED\x10\x02\x12\x0e\n\nUNREVIEWED\x10\x03\"\xb8\x01\n ManualAdReviewCenterAdStatusEnum\"\x93\x01\n\x1cManualAdReviewCenterAdStatus\x12\x31\n-MANUAL_AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\x0b\n\x07\x42LOCKED\x10\x02\x12\x0c\n\x08\x41RCHIVED\x10\x03\x12\x0b\n\x07PENDING\x10\x04\x12\x0b\n\x07SERVING\x10\x05\x42\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x41\x64ReviewCenterAdEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n7google/ads/admanager/v1/ad_review_center_ad_enums.proto\x12\x17google.ads.admanager.v1\"\x8c\x01\n\x1a\x41\x64ReviewCenterAdStatusEnum\"n\n\x16\x41\x64ReviewCenterAdStatus\x12*\n&AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\x0b\n\x07\x42LOCKED\x10\x02\x12\x0e\n\nUNREVIEWED\x10\x03\"\xb8\x01\n ManualAdReviewCenterAdStatusEnum\"\x93\x01\n\x1cManualAdReviewCenterAdStatus\x12\x31\n-MANUAL_AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\x0b\n\x07\x42LOCKED\x10\x02\x12\x0c\n\x08\x41RCHIVED\x10\x03\x12\x0b\n\x07PENDING\x10\x04\x12\x0b\n\x07SERVING\x10\x05\"\x9f\x01\n\x15\x41rcCreativeFormatEnum\"\x85\x01\n\x11\x41rcCreativeFormat\x12#\n\x1f\x41RC_CREATIVE_FORMAT_UNSPECIFIED\x10\x00\x12\x08\n\x04TEXT\x10\x01\x12\t\n\x05IMAGE\x10\x02\x12\t\n\x05VIDEO\x10\x03\x12\t\n\x05\x41UDIO\x10\x04\x12\x10\n\x0c\x41PP_INSTALLS\x10\x05\x12\x0e\n\nRICH_MEDIA\x10\x06\x42\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x41\x64ReviewCenterAdEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -18,6 +18,8 @@ module Google
         AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus").enummodule
         ManualAdReviewCenterAdStatusEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum").msgclass
         ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus").enummodule
+        ArcCreativeFormatEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ArcCreativeFormatEnum").msgclass
+        ArcCreativeFormatEnum::ArcCreativeFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.ArcCreativeFormatEnum.ArcCreativeFormat").enummodule
       end
     end
   end

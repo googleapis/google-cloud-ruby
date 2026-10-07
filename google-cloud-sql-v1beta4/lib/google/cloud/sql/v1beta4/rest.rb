@@ -23,9 +23,11 @@ require "google/cloud/sql/v1beta4/sql_instances_service/rest"
 require "google/cloud/sql/v1beta4/sql_operations_service/rest"
 require "google/cloud/sql/v1beta4/sql_ssl_certs_service/rest"
 require "google/cloud/sql/v1beta4/sql_backups_service/rest"
+require "google/cloud/sql/v1beta4/blue_green_deployments_service/rest"
 require "google/cloud/sql/v1beta4/sql_connect_service/rest"
 require "google/cloud/sql/v1beta4/sql_tiers_service/rest"
 require "google/cloud/sql/v1beta4/sql_users_service/rest"
+require "google/cloud/sql/v1beta4/sql_workload_captures_service/rest"
 require "google/cloud/sql/v1beta4/version"
 
 module Google

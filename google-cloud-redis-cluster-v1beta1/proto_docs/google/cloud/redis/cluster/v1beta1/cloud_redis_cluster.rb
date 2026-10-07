@@ -49,6 +49,34 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request for `CreateAclPolicy`.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The resource name of the cluster location using the form:
+          #         `projects/{project_id}/locations/{location_id}`
+          #     where `location_id` refers to a Google Cloud region.
+          # @!attribute [rw] acl_policy_id
+          #   @return [::String]
+          #     Required. The logical name of the ACL policy in the customer project
+          #     with the following restrictions:
+          #
+          #     * Must contain only lowercase letters, numbers, and hyphens.
+          #     * Must start with a letter.
+          #     * Must be between 1-63 characters.
+          #     * Must end with a number or a letter.
+          #     * Must be unique within the customer project / location
+          # @!attribute [rw] acl_policy
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy]
+          #     Required. The ACL policy that is to be created.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. Idempotent request UUID.
+          #     .
+          class CreateAclPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request for [ListClusters][CloudRedis.ListClusters].
           # @!attribute [rw] parent
           #   @return [::String]
@@ -99,6 +127,86 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request for `ListAclPolicies`.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The resource name of the ACL policy location using the form:
+          #         `projects/{project_id}/locations/{location_id}`
+          #     where `location_id` refers to a Google Cloud region.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          #
+          #     If not specified, a default value of 1000 will be used by the service.
+          #     Regardless of the page_size value, the response may include a partial list
+          #     and a caller should only rely on response's
+          #     {::Google::Cloud::Redis::Cluster::V1beta1::ListAclPoliciesResponse#next_page_token `next_page_token`}
+          #     to determine if there are more ACL policies left to be queried.
+          #
+          #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     `ListAclPolicies` request, if any.
+          class ListAclPoliciesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response for `ListAclPolicies`.
+          # @!attribute [rw] acl_policies
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy>]
+          #     A list of ACL policies in the project in the specified location,
+          #     or across all locations.
+          #
+          #     If the `location_id` in the parent field of the request is "-", all regions
+          #     available to the project are queried, and the results aggregated.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Unordered list. Locations that could not be reached.
+          class ListAclPoliciesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for `ListAclPolicyRevisions`.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The name of the ACL policy to list revisions for.
+          #     Format:
+          #     "projects/\\{project_id}/locations/\\{location_id}/aclPolicies/\\{acl_policy_id}"
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     `ListAclPolicyRevisions` request, if any.
+          class ListAclPolicyRevisionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response for `ListAclPolicyRevisions`.
+          # @!attribute [rw] acl_policy_revisions
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyRevision>]
+          #     A list of ACL policy revisions.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Unordered list. Locations that could not be reached.
+          class ListAclPolicyRevisionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request for [UpdateCluster][CloudRedis.UpdateCluster].
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
@@ -120,6 +228,25 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request for `UpdateAclPolicy`.
+          # @!attribute [rw] acl_policy
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy]
+          #     Required. The ACL policy to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. Mask of fields to be updated. At least one path must be supplied
+          #     in this field. The elements of the repeated paths field may only include
+          #     these fields from `AclPolicy`:
+          #
+          #      *   `rules`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. Idempotent request UUID.
+          class UpdateAclPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request for [GetCluster][CloudRedis.GetCluster].
           # @!attribute [rw] name
           #   @return [::String]
@@ -127,6 +254,28 @@ module Google
           #         `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
           #     where `location_id` refers to a GCP region.
           class GetClusterRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for `GetAclPolicy`.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis ACL policy resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+          #     where `location_id` refers to a Google Cloud region.
+          class GetAclPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for `GetAclPolicyRevision`.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis ACL policy revision resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}/revisions/{revision_id}`
+          #     where `location_id` refers to a Google Cloud region.
+          class GetAclPolicyRevisionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -141,6 +290,24 @@ module Google
           #   @return [::String]
           #     Idempotent request UUID.
           class DeleteClusterRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for `DeleteAclPolicy`.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis ACL policy resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+          #     where `location_id` refers to a Google Cloud region.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. Idempotent request UUID.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. Etag of the ACL policy. If this is different from the server's
+          #     etag, the request will fail with an ABORTED error.
+          class DeleteAclPolicyRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -443,6 +610,12 @@ module Google
           # @!attribute [rw] rotate_server_certificate
           #   @return [::Boolean]
           #     Optional. Input only. Rotate the server certificates.
+          # @!attribute [rw] acl_policy
+          #   @return [::String]
+          #     Optional. The ACL policy to be applied to the cluster.
+          # @!attribute [r] acl_policy_info
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyInfo]
+          #     Output only. Details of the applied ACL policy.
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -519,6 +692,165 @@ module Google
               # Redis cluster is being deleted.
               DELETING = 4
             end
+          end
+
+          # Details of the applied ACL policy.
+          # @!attribute [r] applied_acl_policy
+          #   @return [::String]
+          #     Output only. The resource name of the applied ACL policy.
+          #     Format: "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}"
+          # @!attribute [r] applied_acl_policy_revision
+          #   @return [::String]
+          #     Output only. The resource name of the applied ACL policy revision.
+          #     Format:
+          #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+          # @!attribute [r] applied_acl_policy_revision_number
+          #   @return [::Integer]
+          #     Output only. The revision number of the applied ACL policy revision.
+          # @!attribute [r] acl_policy_revision_statuses
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyRevisionStatus>]
+          #     Output only. A list of status for various revisions of this ACL policy on
+          #     the cluster.
+          class AclPolicyInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The ACL policy resource.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Full resource path of the ACL policy.
+          # @!attribute [rw] rules
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AclRule>]
+          #     Required. The ACL rules within the ACL policy.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy::State]
+          #     Output only. The state of the ACL policy.
+          # @!attribute [r] etag
+          #   @return [::String]
+          #     Output only. Etag for the ACL policy.
+          # @!attribute [r] cluster_acl_policy_attachments
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::ClusterAclPolicyAttachment>]
+          #     Output only. The ACL policy attachment status for each attached cluster.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp that the ACL policy was created.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp that the ACL policy was last updated.
+          class AclPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the different states of an ACL policy.
+            module State
+              # Not set.
+              STATE_UNSPECIFIED = 0
+
+              # ACL policy has been created and is fully usable. Since ACL policy
+              # creation is synchronous and not an LRO, there is no CREATING state.
+              ACTIVE = 1
+
+              # ACL policy is being updated.
+              UPDATING = 2
+
+              # ACL policy is being deleted.
+              DELETING = 3
+            end
+          end
+
+          # AclPolicyRevisionStatus stores the per-revision status for an attached
+          # cluster.
+          # @!attribute [r] acl_policy_revision
+          #   @return [::String]
+          #     Output only. The resource name of the ACL policy revision this status
+          #     refers to. Format:
+          #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+          # @!attribute [r] acl_policy_revision_number
+          #   @return [::Integer]
+          #     Output only. The revision number of the ACL policy revision this status
+          #     refers to.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyRevisionStatus::State]
+          #     Output only. AclPolicyRevision state.
+          # @!attribute [r] error_message
+          #   @return [::String]
+          #     Output only. Human-readable error message providing more details for FAILED
+          #     states.
+          class AclPolicyRevisionStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum indicating the status of this ACL policy revision on the cluster.
+            module State
+              # Not set.
+              STATE_UNSPECIFIED = 0
+
+              # The cluster is attempting to apply this revision.
+              APPLYING = 1
+
+              # The cluster has successfully applied this revision.
+              APPLIED = 2
+
+              # The cluster failed to apply this revision.
+              FAILED = 3
+            end
+          end
+
+          # ClusterAclPolicyAttachment stores the ACL policy status for an attached
+          # cluster for the revisions successfully applied, under application or failed.
+          # @!attribute [r] cluster
+          #   @return [::String]
+          #     Output only. The resource name of the attached Cluster.
+          #     Format:
+          #     "projects/\\{project}/locations/\\{location}/clusters/\\{cluster}"
+          # @!attribute [r] acl_policy_revision_statuses
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AclPolicyRevisionStatus>]
+          #     Output only. A list of status for various revisions of this ACL policy on
+          #     the cluster.
+          class ClusterAclPolicyAttachment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The ACL policy revision resource.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The name of the ACL policy revision.
+          #     Format:
+          #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+          # @!attribute [r] revision_number
+          #   @return [::Integer]
+          #     Output only. The revision number of the ACL policy revision.
+          # @!attribute [r] snapshot
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AclPolicy]
+          #     Output only. The snapshot of the ACL policy at the time of revision
+          #     creation.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp that the revision was created.
+          # @!attribute [r] attached_clusters
+          #   @return [::Array<::String>]
+          #     Output only. A list of clusters that are attached to this ACL policy
+          #     revision.
+          class AclPolicyRevision
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A single ACL rule which defines the policy for a user.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     Required. Specifies the IAM user or service account to be added to the ACL
+          #     policy. This username will be directly set on the Redis OSS.
+          # @!attribute [rw] rule
+          #   @return [::String]
+          #     Required. The rule to be applied to the username. Ex: "on >password123 ~*
+          #     +@all" The format of the rule is defined by Redis OSS:
+          #     https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/
+          class AclRule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The automated backup config for a cluster.

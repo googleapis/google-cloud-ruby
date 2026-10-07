@@ -54,12 +54,15 @@ module Google
         # @!attribute [rw] ad_break_optimization_type
         #   @return [::Google::Ads::AdManager::V1::AdBreakOptimizationTypeEnum::AdBreakOptimizationType]
         #     Optional. The optimization type of the pod. This field is optional and
-        #     defaults to [AdBreakOptimizationType.REVENUE][].
+        #     defaults to
+        #     {::Google::Ads::AdManager::V1::AdBreakOptimizationTypeEnum::AdBreakOptimizationType::REVENUE AdBreakOptimizationTypeEnum.AdBreakOptimizationType.REVENUE}.
         # @!attribute [rw] fill_order_direction_type
         #   @return [::Google::Ads::AdManager::V1::AdRuleFillOrderDirectionEnum::AdRuleFillOrderDirection]
         #     Optional. The fill order direction of the pod. This value is required if
-        #     `adBreakOptimizationType` is equal to
-        #     [AdBreakOptimizationType.POSITION][] and should otherwise be unset.
+        #     {::Google::Ads::AdManager::V1::BreakTemplate#ad_break_optimization_type adBreakOptimizationType}
+        #     is equal to
+        #     {::Google::Ads::AdManager::V1::AdBreakOptimizationTypeEnum::AdBreakOptimizationType::POSITION AdBreakOptimizationTypeEnum.AdBreakOptimizationType.POSITION}
+        #     and should otherwise be unset.
         class BreakTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

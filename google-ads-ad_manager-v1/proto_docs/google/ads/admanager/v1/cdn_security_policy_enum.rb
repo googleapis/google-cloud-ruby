@@ -22,7 +22,7 @@ module Google
     module AdManager
       module V1
         # Wrapper message for
-        # {::Google::Ads::AdManager::V1::CdnSecurityPolicy CdnSecurityPolicy}
+        # {::Google::Ads::AdManager::V1::CdnSecurityPolicyTypeEnum::CdnSecurityPolicyType CdnSecurityPolicyType}
         class CdnSecurityPolicyTypeEnum
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

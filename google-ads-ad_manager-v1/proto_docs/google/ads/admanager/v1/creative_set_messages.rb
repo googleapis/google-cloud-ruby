@@ -34,7 +34,7 @@ module Google
         # @!attribute [rw] master_creative
         #   @return [::String]
         #     Required. Immutable. The master
-        #     [Creative](google.ads.admanager.v1.Creative) to which the `CreativeSet` is
+        #     {::Google::Ads::AdManager::V1::Creative Creative} to which the `CreativeSet` is
         #     associated.
         # @!attribute [rw] companion_creatives
         #   @return [::Array<::String>]

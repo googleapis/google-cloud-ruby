@@ -546,6 +546,170 @@ module Google
               end
 
               ##
+              # Updates an `AudienceSegment` object.
+              #
+              # @overload update_audience_segment(request, options = nil)
+              #   Pass arguments to `update_audience_segment` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_audience_segment(audience_segment: nil, update_mask: nil)
+              #   Pass arguments to `update_audience_segment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param audience_segment [::Google::Ads::AdManager::V1::AudienceSegment, ::Hash]
+              #     Required. The `AudienceSegment` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::AudienceSegment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::AudienceSegment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest.new
+              #
+              #   # Call the update_audience_segment method.
+              #   result = client.update_audience_segment request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::AudienceSegment.
+              #   p result
+              #
+              def update_audience_segment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_audience_segment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_audience_segment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_audience_segment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @audience_segment_service_stub.update_audience_segment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `AudienceSegment` objects.
+              #
+              # @overload batch_update_audience_segments(request, options = nil)
+              #   Pass arguments to `batch_update_audience_segments` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_audience_segments(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_audience_segments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `AudienceSegments` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateAudienceSegmentRequest.audienceSegment must
+              #     match this field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest, ::Hash>]
+              #     Required. The `AudienceSegment` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest.new
+              #
+              #   # Call the batch_update_audience_segments method.
+              #   result = client.batch_update_audience_segments request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsResponse.
+              #   p result
+              #
+              def batch_update_audience_segments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_audience_segments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_audience_segments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_audience_segments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @audience_segment_service_stub.batch_update_audience_segments request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Activates `AudienceSegment` objects.
               #
               # @overload batch_activate_audience_segments(request, options = nil)
@@ -1119,6 +1283,16 @@ module Google
                   #
                   attr_reader :batch_create_audience_segments
                   ##
+                  # RPC-specific configuration for `update_audience_segment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_audience_segment
+                  ##
+                  # RPC-specific configuration for `batch_update_audience_segments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_audience_segments
+                  ##
                   # RPC-specific configuration for `batch_activate_audience_segments`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1154,6 +1328,10 @@ module Google
                     @create_audience_segment = ::Gapic::Config::Method.new create_audience_segment_config
                     batch_create_audience_segments_config = parent_rpcs.batch_create_audience_segments if parent_rpcs.respond_to? :batch_create_audience_segments
                     @batch_create_audience_segments = ::Gapic::Config::Method.new batch_create_audience_segments_config
+                    update_audience_segment_config = parent_rpcs.update_audience_segment if parent_rpcs.respond_to? :update_audience_segment
+                    @update_audience_segment = ::Gapic::Config::Method.new update_audience_segment_config
+                    batch_update_audience_segments_config = parent_rpcs.batch_update_audience_segments if parent_rpcs.respond_to? :batch_update_audience_segments
+                    @batch_update_audience_segments = ::Gapic::Config::Method.new batch_update_audience_segments_config
                     batch_activate_audience_segments_config = parent_rpcs.batch_activate_audience_segments if parent_rpcs.respond_to? :batch_activate_audience_segments
                     @batch_activate_audience_segments = ::Gapic::Config::Method.new batch_activate_audience_segments_config
                     batch_deactivate_audience_segments_config = parent_rpcs.batch_deactivate_audience_segments if parent_rpcs.respond_to? :batch_deactivate_audience_segments

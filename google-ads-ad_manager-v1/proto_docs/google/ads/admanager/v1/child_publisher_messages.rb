@@ -95,7 +95,8 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::ChildPublisherOnboardingTaskEnum::ChildPublisherOnboardingTask>]
         #     Output only. The pending onboarding tasks that must be completed by the
         #     child publisher before Google's policy compliance (i.e.
-        #     [DelegationApprovalStatus.PENDING_GOOGLE_APPROVAL][]) can be verified.
+        #     {::Google::Ads::AdManager::V1::DelegationApprovalStatusEnum::DelegationApprovalStatus::PENDING_GOOGLE_APPROVAL DelegationApprovalStatusEnum.DelegationApprovalStatus.PENDING_GOOGLE_APPROVAL})
+        #     can be verified.
         # @!attribute [r] account_status
         #   @return [::Google::Ads::AdManager::V1::DelegationAccountStatusEnum::DelegationAccountStatus]
         #     Output only. The account status of the

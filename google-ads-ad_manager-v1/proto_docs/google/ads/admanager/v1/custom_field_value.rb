@@ -36,22 +36,33 @@ module Google
           # Represent custom field value type.
           # @!attribute [rw] dropdown_value
           #   @return [::Integer]
-          #     The custom_field_option_id, if the CustomFieldDataType is DROPDOWN.
+          #     The custom_field_option_id, if the
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType CustomFieldDataType}
+          #     is [DROPDOWN][CustomFieldDataTypeEnum.CustomFieldDataType.DROPDOWN].
           #
           #     Note: The following fields are mutually exclusive: `dropdown_value`, `string_value`, `number_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_value
           #   @return [::String]
-          #     The value, if the CustomFieldDataType is STRING.
+          #     The value, if the
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType CustomFieldDataType}
+          #     is
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType::STRING STRING}.
           #
           #     Note: The following fields are mutually exclusive: `string_value`, `dropdown_value`, `number_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] number_value
           #   @return [::Float]
-          #     The value, if the CustomFieldDataType is NUMBER.
+          #     The value, if the
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType CustomFieldDataType}
+          #     is
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType::NUMBER NUMBER}.
           #
           #     Note: The following fields are mutually exclusive: `number_value`, `dropdown_value`, `string_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] toggle_value
           #   @return [::Boolean]
-          #     The value, if the CustomFieldDataType is TOGGLE.
+          #     The value, if the
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType CustomFieldDataType}
+          #     is
+          #     {::Google::Ads::AdManager::V1::CustomFieldDataTypeEnum::CustomFieldDataType::TOGGLE TOGGLE}.
           #
           #     Note: The following fields are mutually exclusive: `toggle_value`, `dropdown_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Value

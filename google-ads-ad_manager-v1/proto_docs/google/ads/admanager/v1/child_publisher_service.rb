@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Request object for [GetChildPublisher][] method.
+        # Request object for `GetChildPublisher` method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the
@@ -32,26 +32,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [ListChildPublishers][] method.
+        # Request object for `ListChildPublishers` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s. Format:
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers}. Format:
         #     `networks/{network_code}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to return. The
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to return. The
         #     service may return fewer than this value. If unspecified, at most 50
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be returned.
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be returned.
         #     The maximum value is 1000; values greater than 1000 will be coerced to
         #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous [ListChildPublishers][]
+        #     Optional. A page token, received from a previous `ListChildPublishers`
         #     call. Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to [ListChildPublishers][]
+        #     When paginating, all other parameters provided to `ListChildPublishers`
         #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -89,7 +89,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [ListChildPublishers][] containing matching
+        # Response object for `ListChildPublishers` containing matching
         # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} objects.
         # @!attribute [rw] child_publishers
         #   @return [::Array<::Google::Ads::AdManager::V1::ChildPublisher>]
@@ -117,7 +117,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [CreateChildPublisher][] method.
+        # Request object for `CreateChildPublisher` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where this
@@ -132,14 +132,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [BatchCreateChildPublishers][] method.
+        # Request object for `BatchCreateChildPublishers` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be created.
-        #     Format: `networks/{network_code}`
-        #     The parent field in the CreateChildPublisherRequest must match this
-        #     field.
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be created.
+        #     Format: `networks/{network_code}` The parent field in the
+        #     CreateChildPublisherRequest must match this field.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Ads::AdManager::V1::CreateChildPublisherRequest>]
         #     Required. The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}
@@ -149,7 +148,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [BatchCreateChildPublishers][] method.
+        # Response object for `BatchCreateChildPublishers` method.
         # @!attribute [rw] child_publishers
         #   @return [::Array<::Google::Ads::AdManager::V1::ChildPublisher>]
         #     The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} objects
@@ -159,7 +158,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [UpdateChildPublisher][] method.
+        # Request object for `UpdateChildPublisher` method.
         # @!attribute [rw] child_publisher
         #   @return [::Google::Ads::AdManager::V1::ChildPublisher]
         #     Required. The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} to
@@ -176,14 +175,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [BatchUpdateChildPublishers][] method.
+        # Request object for `BatchUpdateChildPublishers` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be updated.
-        #     Format: `networks/{network_code}`
-        #     The parent field in the UpdateChildPublisherRequest must match this
-        #     field.
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be updated.
+        #     Format: `networks/{network_code}` The parent field in the
+        #     UpdateChildPublisherRequest must match this field.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Ads::AdManager::V1::UpdateChildPublisherRequest>]
         #     Required. The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}
@@ -193,7 +191,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [BatchUpdateChildPublishers][] method.
+        # Response object for `BatchUpdateChildPublishers` method.
         # @!attribute [rw] child_publishers
         #   @return [::Array<::Google::Ads::AdManager::V1::ChildPublisher>]
         #     The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher} objects
@@ -261,7 +259,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BatchRenegotiateChildPublisherAgreements][] method.
+        # Request message for `BatchRenegotiateChildPublisherAgreements` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
@@ -274,20 +272,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [BatchRenegotiateChildPublisherAgreements][] method.
+        # Response message for `BatchRenegotiateChildPublisherAgreements` method.
         class BatchRenegotiateChildPublisherAgreementsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BatchResendChildPublisherInvitationEmails][] method.
+        # Request message for `BatchResendChildPublisherInvitationEmails` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
         # @!attribute [rw] names
         #   @return [::Array<::String>]
         #     Required. Resource names of the
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s that should be
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} that should be
         #     resent invitation emails. Format:
         #     `networks/{network_code}/childPublisher/{child_publisher_id}`
         class BatchResendChildPublisherInvitationEmailsRequest
@@ -295,47 +293,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [BatchResendChildPublisherInvitationEmails][] method.
+        # Response message for `BatchResendChildPublisherInvitationEmails` method.
         class BatchResendChildPublisherInvitationEmailsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BatchWithdrawChildPublishers][] method.
+        # Request message for `BatchWithdrawChildPublishers` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
         # @!attribute [rw] names
         #   @return [::Array<::String>]
         #     Required. Resource names of the
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to withdraw.
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to withdraw.
         #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
         class BatchWithdrawChildPublishersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [BatchWithdrawChildPublishers][] method.
+        # Response message for `BatchWithdrawChildPublishers` method.
         class BatchWithdrawChildPublishersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BatchRejectChildPublishers][] method.
+        # Request message for `BatchRejectChildPublishers` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
         # @!attribute [rw] names
         #   @return [::Array<::String>]
         #     Required. Resource names of the
-        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to reject.
+        #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to reject.
         #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
         class BatchRejectChildPublishersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [BatchRejectChildPublishers][] method.
+        # Response message for `BatchRejectChildPublishers` method.
         class BatchRejectChildPublishersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

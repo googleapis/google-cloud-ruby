@@ -87,6 +87,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.search_document_chunks.timeout = 60.0
+                  default_config.rpcs.search_document_chunks.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.get_document.timeout = 60.0
                   default_config.rpcs.get_document.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]

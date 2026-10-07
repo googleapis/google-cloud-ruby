@@ -1227,6 +1227,7 @@ module Google
         # @!attribute [rw] database
         #   @return [::String]
         #     Optional. Name of the database on which the statement will be executed.
+        #     For Postgres and SQL Server it's required, for MySQL it's optional.
         # @!attribute [rw] password_secret_version
         #   @return [::String]
         #     Optional. The resource name of the Secret Manager secret holding the
@@ -1280,7 +1281,6 @@ module Google
           end
         end
 
-        # Execute SQL statements response.
         # @!attribute [rw] messages
         #   @return [::Array<::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlResponse::Message>]
         #     A list of notices and warnings generated during query execution.

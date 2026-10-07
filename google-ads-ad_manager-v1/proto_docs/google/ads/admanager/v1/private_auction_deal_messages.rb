@@ -34,11 +34,11 @@ module Google
         # @!attribute [rw] private_auction_id
         #   @return [::Integer]
         #     Immutable. The ID of the
-        #     [PrivateAuction](google.ads.admanager.v1.PrivateAuction).
+        #     {::Google::Ads::AdManager::V1::PrivateAuction PrivateAuction}.
         # @!attribute [r] private_auction_display_name
         #   @return [::String]
         #     Output only. The display name of the
-        #     [PrivateAuction](google.ads.admanager.v1.PrivateAuction).
+        #     {::Google::Ads::AdManager::V1::PrivateAuction PrivateAuction}.
         # @!attribute [rw] buyer_account_id
         #   @return [::Integer]
         #     Immutable. The account ID of the buyer of the `PrivateAuctionDeal`.

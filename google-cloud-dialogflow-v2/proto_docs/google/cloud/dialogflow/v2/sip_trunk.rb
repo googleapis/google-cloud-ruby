@@ -122,9 +122,24 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Human readable alias for this trunk.
+        # @!attribute [rw] peer_hostnames
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SipHostname>]
+        #     Required. Peer hostnames of the SIP trunk.
+        # @!attribute [rw] google_root_cert_file
+        #   @return [::Google::Cloud::Dialogflow::V2::SipTrunk::GoogleRootCertFile]
+        #     Optional. The root certificate file to use for this SIP trunk.
         class SipTrunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of Google root certificate file used for mTLS.
+          module GoogleRootCertFile
+            # Unspecified root certificate file.
+            CERT_FILE_UNSPECIFIED = 0
+
+            # Use external private CA.
+            EXTERNAL_PRIVATE_CA = 5
+          end
         end
 
         # Represents a connection for SIP Trunk.
@@ -203,6 +218,121 @@ module Google
 
             # Certificate has exhausted its quota.
             CERTIFICATE_QUOTA_EXCEEDED = 8
+          end
+        end
+
+        # Represents a peer hostname for SIP Trunk.
+        # @!attribute [rw] peer_hostname
+        #   @return [::String]
+        #     Required. Peer hostname name.
+        # @!attribute [r] enabled_sip_ping
+        #   @return [::Boolean]
+        #     Output only. Peer hostname enabled for SIP ping.
+        # @!attribute [r] ping_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. How often the sip ping should occur.
+        # @!attribute [r] peer_socket_address
+        #   @return [::String]
+        #     Output only. The peer_socket address of the partner SBC pinged.
+        # @!attribute [r] probe_details
+        #   @return [::Google::Cloud::Dialogflow::V2::ProbeDetails]
+        #     Output only. The details from the options probe.
+        # @!attribute [r] connection_state
+        #   @return [::Google::Cloud::Dialogflow::V2::SipHostname::ConnectionState]
+        #     Output only. State of the connection.
+        # @!attribute [r] error_details
+        #   @return [::Google::Cloud::Dialogflow::V2::SipHostname::HostnameErrorDetails]
+        #     Output only. The error details for the connection. Only populated when
+        #     authentication errors occur.
+        class SipHostname
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The error details of Sip Trunk hostnameconnection authentication.
+          # @!attribute [r] certificate_state
+          #   @return [::Google::Cloud::Dialogflow::V2::SipHostname::HostnameCertificateState]
+          #     Output only. The status of the certificate authentication.
+          # @!attribute [r] error_message
+          #   @return [::String]
+          #     Output only. The error message provided from SIP trunking auth service
+          class HostnameErrorDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of SBC hostname connection.
+          module ConnectionState
+            # SBC hostname connection state is Not specified.
+            CONNECTION_STATE_UNSPECIFIED = 0
+
+            # SBC hostname connection is connected.
+            CONNECTED = 1
+
+            # SBC hostname connection is disconnected.
+            DISCONNECTED = 2
+
+            # SBC hostname connection has authentication error.
+            AUTHENTICATION_FAILED = 3
+
+            # SBC hostname connection is keepalive.
+            KEEPALIVE = 4
+          end
+
+          # The state of Sip Trunk certificate authentication.
+          module HostnameCertificateState
+            # Certificate state is not specified.
+            HOSTNAME_CERTIFICATE_STATE_UNSPECIFIED = 0
+
+            # Certificate is valid.
+            VALID = 1
+
+            # Catch all for any error not specified.
+            INVALID = 2
+
+            # Certificate leaf node has expired.
+            EXPIRED = 3
+
+            # There is no hostname defined to authenticate in SipTrunkingServer.
+            HOSTNAME_NOT_FOUND = 4
+
+            # No path found from the leaf certificate to any root.
+            UNAUTHENTICATED = 5
+
+            # Trust store does not exist.
+            TRUST_STORE_NOT_FOUND = 6
+
+            # Hostname has invalid format.
+            HOSTNAME_INVALID_FORMAT = 7
+
+            # Certificate has exhausted its quota.
+            QUOTA_EXCEEDED = 8
+          end
+        end
+
+        # The probe details of Sip Trunk peer hostname.
+        # @!attribute [r] options_latency
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Duration between OPTIONS send and OPTIONS 200 received.
+        # @!attribute [r] probe_status
+        #   @return [::Google::Cloud::Dialogflow::V2::ProbeDetails::ProbeStatus]
+        #     Output only. Result of the probe.
+        # @!attribute [r] init_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the options probe was started.
+        class ProbeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of InitiateSipOptionsPing to peer hostname.
+          module ProbeStatus
+            # Peer hostname ping state is not specified.
+            PROBE_STATUS_UNSPECIFIED = 0
+
+            # Peer hostname ping succeeded.
+            PROBE_STATUS_SUCCESS = 1
+
+            # Peer hostname ping failed.
+            PROBE_STATUS_FAILED = 2
           end
         end
       end

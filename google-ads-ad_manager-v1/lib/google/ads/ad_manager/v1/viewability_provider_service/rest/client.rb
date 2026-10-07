@@ -279,22 +279,21 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of
-              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s.
+              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders}.
               #     Format: `networks/{network_code}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of
-              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s to
+              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} to
               #     return. The service may return fewer than this value. If unspecified, at
-              #     most 50 {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s
+              #     most 50 {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders}
               #     will be returned. The maximum value is 1000; values above 1000 will be
               #     coerced to 1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous
-              #     [ListViewabilityProviders][] call. Provide this to retrieve the subsequent
-              #     page.
+              #     Optional. A page token, received from a previous `ListViewabilityProviders`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to
-              #     [ListViewabilityProviders][] must match the call that provided the page
+              #     `ListViewabilityProviders` must match the call that provided the page
               #     token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
@@ -492,7 +491,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource where
-              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s will be
+              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} will be
               #     created. Format: `networks/{network_code}` The parent field in the
               #     CreateViewabilityProviderRequest must match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateViewabilityProviderRequest, ::Hash>]
@@ -666,7 +665,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource where
-              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s will be
+              #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} will be
               #     updated. Format: `networks/{network_code}` The parent field in the
               #     UpdateViewabilityProviderRequest must match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateViewabilityProviderRequest, ::Hash>]

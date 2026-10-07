@@ -623,17 +623,6 @@ module Google
             # Data format: `STRING`
             ADVERTISER_CREDIT_STATUS_NAME = 476
 
-            # The domain name of the advertiser.
-            #
-            #
-            #
-            # Corresponds to "Landing page domain" in the Ad Manager UI.
-            #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
-            #
-            # Data format: `STRING`
-            ADVERTISER_DOMAIN_NAME = 242
-
             # The ID used in an external system for advertiser identification
             #
             #
@@ -2102,6 +2091,20 @@ module Google
             # Data format: `STRING`
             BIDDER_ENCRYPTED_ID = 493
 
+            # Represents a single Bidder integration, like Open Bidding, SDK
+            #  Bidding, or Authorized Buying.
+            #
+            #
+            #
+            # Corresponds to "Bidder ID" in the Ad Manager UI (when showing API
+            # fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`, `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `IDENTIFIER`
+            BIDDER_ID = 445
+
             # The name of the bidder.
             #
             #
@@ -2743,6 +2746,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::CreativeSslOverrideEnum::CreativeSslOverride CreativeSslOverride}
             CREATIVE_SSL_COMPLIANCE_OVERRIDE = 784
 
             # Localized name of the creative SSL compliance override.
@@ -2766,6 +2772,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::CreativeSslScanResultEnum::CreativeSslScanResult CreativeSslScanResult}
             CREATIVE_SSL_SCAN_RESULT = 785
 
             # Localized name of the creative SSL scan result.
@@ -3180,7 +3189,8 @@ module Google
             # Data format: `STRING`
             DEMAND_SUBCHANNEL_NAME = 23
 
-            # The device on which an ad was served.
+            # Deprecated: Use `DEVICE_MANUFACTURER_ID` and `DEVICE_MODEL_ID` instead.
+            #   The device on which an ad was served.
             #
             #
             #
@@ -3266,7 +3276,9 @@ module Google
             # Data format: `STRING`
             DEVICE_MODEL_NAME = 528
 
-            # The localized name of the device on which an ad was served.
+            # Deprecated: Use `DEVICE_MANUFACTURER_NAME` and `DEVICE_MODEL_NAME`
+            #  instead.
+            #   The localized name of the device on which an ad was served.
             #
             #
             #
@@ -3870,7 +3882,14 @@ module Google
             KEY_VALUES_SET = 713
 
             # The landing page domain name of the advertiser.
-            # This will eventually replace ADVERTISER_DOMAIN_NAME.
+            #
+            #
+            #
+            # Corresponds to "Landing page domain" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            #
+            # Data format: `STRING`
             LANDING_PAGE_DOMAIN = 242
 
             # The agency of the order associated with the line item.
@@ -5051,6 +5070,33 @@ module Google
             #
             # Data format: `STRING`
             NIELSEN_SITE_URL = 700
+
+            # Deal priority tier for non-guaranteed deals.
+            #
+            #
+            #
+            # Corresponds to "Non-guaranteed deal priority tier" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::DealPriorityTierEnum::DealPriorityTier DealPriorityTier}
+            NON_GUARANTEED_DEAL_PRIORITY_TIER = 859
+
+            # The localized name of the deal priority tier for non-guaranteed deals.
+            #
+            #
+            #
+            # Corresponds to "Non-guaranteed deal priority tier (Name)" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            NON_GUARANTEED_DEAL_PRIORITY_TIER_NAME = 860
 
             # No fill reason category name in the Ads traffic navigator report.
             #
@@ -6279,7 +6325,8 @@ module Google
             # Data format: `STRING`
             THIRD_PARTY_ID_STATUS_NAME = 403
 
-            # Reports the status of Topics in the ad request.
+            # Deprecated: No longer supported.
+            #   Reports the status of Topics in the ad request.
             #
             #
             #
@@ -6291,7 +6338,8 @@ module Google
             # Data format: `ENUM`
             TOPICS_STATUS = 504
 
-            # The localized name of the status of Topics in the ad request.
+            # Deprecated: No longer supported.
+            #   The localized name of the status of Topics in the ad request.
             #
             #
             #
@@ -6953,6 +7001,10 @@ module Google
             #
             # Data format: `STRING`
             YOUTUBE_AD_TYPE_NAME = 400
+
+            # Deprecated: Use `LANDING_PAGE_DOMAIN` instead.
+            # The domain name of the advertiser.
+            ADVERTISER_DOMAIN_NAME = 242
 
             # Custom field option ID for Line Item with custom field ID equal to the ID
             # in index 0 of `ReportDefinition.line_item_custom_field_ids`.
@@ -8804,6 +8856,18 @@ module Google
             # Data format: `MONEY`
             ADSENSE_REVENUE = 25
 
+            # The cost per item purchased.
+            #
+            #
+            #
+            # Corresponds to "Advertiser cost per attributed item purchased" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            ADVERTISER_COST_PER_ATTRIBUTED_ITEM_PURCHASED = 747
+
             # Active View AdExchange average time in seconds that specific impressions
             #  are reported as being viewable.
             #
@@ -9845,7 +9909,7 @@ module Google
             # Data format: `INTEGER`
             AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS = 260
 
-            # Deprecated. This metric has been renamed to
+            # Deprecated: This metric has been renamed to
             # `AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS`.
             # The server will normalize any requests using this value to
             # `AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS`.
@@ -10550,6 +10614,31 @@ module Google
             #
             # Data format: `INTEGER`
             ATN_YIELD_GROUP_MEDIATION_PASSBACKS = 390
+
+            # The number of purchased items that were attributed to a view or click as
+            #  defined by the sponsored product ad's line item settings.
+            #
+            #
+            #
+            # Corresponds to "Attributed items purchased" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            ATTRIBUTED_ITEMS_PURCHASED = 745
+
+            # The percent of revenue the retailer made on attributed items purchased
+            #  compared to the advertiser's ad spend for those items. Return on Ad
+            #  Spend
+            #
+            #
+            #
+            # Corresponds to "Attributed items purchased ROAS" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            ATTRIBUTED_ITEMS_PURCHASED_ROAS = 748
 
             # Cost of the audience segment.
             #
@@ -11662,6 +11751,78 @@ module Google
             # Data format: `MONEY`
             OFF_PROPERTY_SPEND_ECPM = 403
 
+            # The number of times the video played to completion for off-property
+            #  campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property completes" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_COMPLETES = 754
+
+            # The number of engaged views for off-property campaigns: ad is viewed
+            #  to completion or for 30s, whichever comes first.
+            #
+            #
+            #
+            # Corresponds to "Off-property engaged views" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_ENGAGED_VIEWS = 755
+
+            # The number of times the video played to 25% of its length for
+            #  off-property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property first quartiles" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_FIRST_QUARTILES = 756
+
+            # The number of times the video reached its midpoint during play for off-
+            #  property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property midpoints" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_MIDPOINTS = 757
+
+            # The number of impressions where the video was played for off-property
+            #  campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property starts" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_STARTS = 753
+
+            # The number of times the video played to 75% of its length for
+            #  off-property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property third quartiles" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_THIRD_QUARTILES = 758
+
             # Average effective cost-per-thousand-impressions earned from the mediation
             #  on-platform multiple call, excluding CPD value.
             #
@@ -12116,6 +12277,20 @@ module Google
             #
             # Data format: `MONEY`
             REVENUE = 36
+
+            # The total amount users paid for items that were attributed to a view or
+            #  click as defined by the sponsored product ad's line item settings. This
+            #  value is revenue for the retailer.
+            #
+            #
+            #
+            # Corresponds to "Revenue on attributed items purchased" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            REVENUE_ON_ATTRIBUTED_ITEMS_PURCHASED = 746
 
             # The total revenue accrued in the child network's own account but paid to
             #  their parent network through auto-payment. This metric is only relevant

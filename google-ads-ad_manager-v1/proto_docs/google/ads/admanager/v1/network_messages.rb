@@ -69,9 +69,10 @@ module Google
         #     Format: `networks/{network_code}/defaultThirdPartyDataDeclaration`
         # @!attribute [rw] third_party_data_declaration
         #   @return [::Google::Ads::AdManager::V1::ThirdPartyDataDeclaration]
-        #     Optional. Returns the default [ThirdPartyDataDeclaration] for this network.
-        #     If this setting has never been updated on your network, then this API
-        #     response will be unset.
+        #     Optional. Returns the default
+        #     {::Google::Ads::AdManager::V1::ThirdPartyDataDeclaration ThirdPartyDataDeclaration}
+        #     for this network. If this setting has never been updated on your network,
+        #     then this API response will be unset.
         class DefaultThirdPartyDataDeclaration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

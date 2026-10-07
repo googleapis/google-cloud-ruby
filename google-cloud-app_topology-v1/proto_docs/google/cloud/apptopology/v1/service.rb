@@ -94,6 +94,71 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for ExploreSchema.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the singleton domain schema resource.
+        #     Format: `projects/{project}/locations/{location}/domains/{domain}/schema`
+        # @!attribute [rw] start_labels
+        #   @return [::Array<::String>]
+        #     Optional. Starting label names to begin traversal.
+        #     Substring, case-insensitive matches are performed against allowed label
+        #     names in the schema. A maximum of 10 `start_labels` can be specified;
+        #     providing more will result in an `INVALID_ARGUMENT` error.
+        #     If `start_labels` is unset or empty, all authorized node types will be used
+        #     as the starting set.
+        # @!attribute [rw] depth
+        #   @return [::Integer]
+        #     Optional. The maximum depth of BFS traversal hops to perform from the
+        #     starting node types or label names. Defaults to 0 if unspecified.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of schema elements to return in a single page.
+        #
+        #     - The service might return fewer elements than this value if adding another
+        #       edge and its required endpoint nodes exceeds `page_size`.
+        #     - If omitted or set to 0, default (100) will be used.
+        #     - Minimum page_size is 3 to ensure at least one edge and its endpoint
+        #       nodes fit on a page; values below 3 (e.g. 1 or 2) are changed to 3.
+        #     - Maximum value is 500.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token received from a previous `ExploreSchema` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters (except page_size) provided to
+        #     `ExploreSchema` must match the call that provided the page token.
+        class ExploreSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ExploreSchema.
+        # @!attribute [rw] node_types
+        #   @return [::Array<::Google::Cloud::AppTopology::V1::NodeType>]
+        #     A list of `NodeType`s defined within this schema.
+        #     Refer to the documentation of `NodeType` for more details.
+        # @!attribute [rw] edge_types
+        #   @return [::Array<::Google::Cloud::AppTopology::V1::EdgeType>]
+        #     A list of `EdgeType`s defined within this schema.
+        #     Refer to the documentation of `EdgeType` for more details.
+        # @!attribute [rw] label_properties
+        #   @return [::Array<::Google::Cloud::AppTopology::V1::LabelProperties>]
+        #     A list of supported labels and corresponding properties.
+        # @!attribute [rw] edge_rules
+        #   @return [::Array<::Google::Cloud::AppTopology::V1::EdgeRule>]
+        #     Edge rules. These will indicate which node types can be connected and
+        #     through what edge type. This is a list of (source_node_type, edge_type,
+        #     destination_node_type) tuples.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results, or empty if there are no
+        #     more results in the traversal set.
+        class ExploreSchemaResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for GetDomain.
         # @!attribute [rw] name
         #   @return [::String]

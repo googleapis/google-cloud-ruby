@@ -370,6 +370,87 @@ module Google
               end
 
               ##
+              # Creates a `NativeStyle` object.
+              #
+              # @overload create_native_style(request, options = nil)
+              #   Pass arguments to `create_native_style` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateNativeStyleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateNativeStyleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_native_style(parent: nil, native_style: nil)
+              #   Pass arguments to `create_native_style` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `NativeStyle` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param native_style [::Google::Ads::AdManager::V1::NativeStyle, ::Hash]
+              #     Required. The `NativeStyle` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::NativeStyle]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::NativeStyle]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::NativeStyleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateNativeStyleRequest.new
+              #
+              #   # Call the create_native_style method.
+              #   result = client.create_native_style request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::NativeStyle.
+              #   p result
+              #
+              def create_native_style request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateNativeStyleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_native_style.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_native_style.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_native_style.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @native_style_service_stub.create_native_style request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates `NativeStyle` objects.
               #
               # @overload batch_create_native_styles(request, options = nil)
@@ -447,6 +528,88 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @native_style_service_stub.batch_create_native_styles request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `NativeStyle` object.
+              #
+              # @overload update_native_style(request, options = nil)
+              #   Pass arguments to `update_native_style` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateNativeStyleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateNativeStyleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_native_style(native_style: nil, update_mask: nil)
+              #   Pass arguments to `update_native_style` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param native_style [::Google::Ads::AdManager::V1::NativeStyle, ::Hash]
+              #     Required. The `NativeStyle` to update.
+              #
+              #     The `NativeStyle`'s `name` is used to identify the `NativeStyle` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::NativeStyle]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::NativeStyle]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::NativeStyleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateNativeStyleRequest.new
+              #
+              #   # Call the update_native_style method.
+              #   result = client.update_native_style request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::NativeStyle.
+              #   p result
+              #
+              def update_native_style request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateNativeStyleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_native_style.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_native_style.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_native_style.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @native_style_service_stub.update_native_style request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -940,10 +1103,20 @@ module Google
                   #
                   attr_reader :list_native_styles
                   ##
+                  # RPC-specific configuration for `create_native_style`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_native_style
+                  ##
                   # RPC-specific configuration for `batch_create_native_styles`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :batch_create_native_styles
+                  ##
+                  # RPC-specific configuration for `update_native_style`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_native_style
                   ##
                   # RPC-specific configuration for `batch_update_native_styles`
                   # @return [::Gapic::Config::Method]
@@ -971,8 +1144,12 @@ module Google
                     @get_native_style = ::Gapic::Config::Method.new get_native_style_config
                     list_native_styles_config = parent_rpcs.list_native_styles if parent_rpcs.respond_to? :list_native_styles
                     @list_native_styles = ::Gapic::Config::Method.new list_native_styles_config
+                    create_native_style_config = parent_rpcs.create_native_style if parent_rpcs.respond_to? :create_native_style
+                    @create_native_style = ::Gapic::Config::Method.new create_native_style_config
                     batch_create_native_styles_config = parent_rpcs.batch_create_native_styles if parent_rpcs.respond_to? :batch_create_native_styles
                     @batch_create_native_styles = ::Gapic::Config::Method.new batch_create_native_styles_config
+                    update_native_style_config = parent_rpcs.update_native_style if parent_rpcs.respond_to? :update_native_style
+                    @update_native_style = ::Gapic::Config::Method.new update_native_style_config
                     batch_update_native_styles_config = parent_rpcs.batch_update_native_styles if parent_rpcs.respond_to? :batch_update_native_styles
                     @batch_update_native_styles = ::Gapic::Config::Method.new batch_update_native_styles_config
                     batch_activate_native_styles_config = parent_rpcs.batch_activate_native_styles if parent_rpcs.respond_to? :batch_activate_native_styles

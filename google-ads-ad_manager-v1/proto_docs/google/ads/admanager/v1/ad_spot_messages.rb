@@ -61,7 +61,7 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Required. The maximum allowed duration for ads in the `AdSpot`. This field
         #     is required and must be greater than
-        #     {::Google::Ads::AdManager::V1::AdSpot#min_ad_duration min_ad_duration}.
+        #     {::Google::Ads::AdManager::V1::AdSpot#min_ad_duration minAdDuration}.
         # @!attribute [rw] max_ads
         #   @return [::Integer]
         #     Optional. The maximum number of ads allowed in the AdSpot. This field is

@@ -240,6 +240,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_creative_service_rest
+    skip unless Google::Ads::AdManager.creative_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.creative_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::CreativeService::Rest::Client, client
+    end
+  end
+
   def test_creative_set_service_rest
     skip unless Google::Ads::AdManager.creative_set_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -370,6 +380,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_forecast_service_rest
+    skip unless Google::Ads::AdManager.forecast_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.forecast_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ForecastService::Rest::Client, client
+    end
+  end
+
   def test_geo_target_service_rest
     skip unless Google::Ads::AdManager.geo_target_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -390,6 +410,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_line_item_creative_association_service_rest
+    skip unless Google::Ads::AdManager.line_item_creative_association_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.line_item_creative_association_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client, client
+    end
+  end
+
   def test_line_item_service_rest
     skip unless Google::Ads::AdManager.line_item_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -397,6 +427,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::LineItemService::Rest::Client, client
+    end
+  end
+
+  def test_line_item_template_service_rest
+    skip unless Google::Ads::AdManager.line_item_template_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.line_item_template_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::LineItemTemplateService::Rest::Client, client
     end
   end
 

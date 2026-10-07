@@ -50,6 +50,35 @@ module Google
         #     Output only. The preview URL that can be embedded or accessed directly
         #     which will present the rendered contents of the ad. This URL expires 72
         #     hours after being retrieved.
+        # @!attribute [r] asset_preview_urls
+        #   @return [::Array<::String>]
+        #     Output only. The preview URLs that can be embedded or accessed directly
+        #     which will present the rendered contents of the ad, each with a different
+        #     asset. These URLs expire 72 hours after being retrieved.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The advertiser name of the Ad Review Center ad. Specifies the
+        #     detected advertiser for Google Display Network (GDN) ads, and individual
+        #     network name for real-time bidding (RTB) ads.
+        # @!attribute [r] language_codes
+        #   @return [::Array<::String>]
+        #     Output only. The language codes of the Ad Review Center ad. Languages
+        #     detected are represented by their BCP 47 code. For example, 'en', 'fr',
+        #     'es-419', or 'zh-cn'.
+        # @!attribute [r] region_codes
+        #   @return [::Array<::String>]
+        #     Output only. The region codes of the Ad Review Center ad.
+        # @!attribute [r] ad_types
+        #   @return [::Array<::Google::Ads::AdManager::V1::ArcCreativeFormatEnum::ArcCreativeFormat>]
+        #     Output only. The ad types of the Ad Review Center ad.
+        # @!attribute [r] destination_urls
+        #   @return [::Array<::String>]
+        #     Output only. The destination URLs of the Ad Review Center ad.
+        # @!attribute [r] label_ids
+        #   @return [::Array<::String>]
+        #     Output only. The
+        #     {::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse::CustomLabel#label_id labelIds}
+        #     associated with this Ad Review Center ad.
         class AdReviewCenterAd
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -35,6 +35,8 @@ module Google
             # @private
             DEFAULT_ENDPOINT_TEMPLATE = "sqladmin.$UNIVERSE_DOMAIN$"
 
+            include Paths
+
             # @private
             attr_reader :sql_backup_runs_service_stub
 
