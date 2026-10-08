@@ -526,7 +526,6 @@ module Google
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
             b.hierarchical_namespace = hierarchical_namespace unless hierarchical_namespace.nil?
-            b.ip_filter = ip_filter unless ip_filter.nil?
           end
           yield updater if block_given?
           updater.check_for_changed_labels!
