@@ -30,14 +30,14 @@ tools:
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 libraries:
   - name: google-ads-ad_manager
-    version: 5.3.0
+    version: 5.4.0
     apis:
       - path: google/ads/admanager/v1
     ruby:
       wrapper_of:
         - v1:2.0
   - name: google-ads-ad_manager-v1
-    version: 5.3.0
+    version: 5.4.0
     apis:
       - path: google/ads/admanager/v1
   - name: google-ads-data_manager
@@ -355,7 +355,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-app_hub-v1
-    version: 1.7.2
+    version: 1.8.0
     apis:
       - path: google/cloud/apphub/v1
   - name: google-cloud-app_optimize
@@ -377,7 +377,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-app_topology-v1
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/apptopology/v1
   - name: google-cloud-artifact_registry
@@ -513,7 +513,7 @@ libraries:
     apis:
       - path: google/cloud/batch/v1
   - name: google-cloud-beyond_corp
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
         ruby:
@@ -537,21 +537,21 @@ libraries:
             ruby-cloud-wrapper-of: v1:0.4
     title_override: BeyondCorp API
   - name: google-cloud-beyond_corp-app_connections-v1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
   - name: google-cloud-beyond_corp-app_connectors-v1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
   - name: google-cloud-beyond_corp-app_gateways-v1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
         ruby:
@@ -705,7 +705,7 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
   - name: google-cloud-bigtable-v2
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/bigtable/v2
         ruby:
@@ -1297,11 +1297,11 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-dataform-v1
-    version: 1.3.0
+    version: 1.4.0
     apis:
       - path: google/cloud/dataform/v1
   - name: google-cloud-dataform-v1beta1
-    version: 1.3.0
+    version: 1.4.0
     apis:
       - path: google/cloud/dataform/v1beta1
         ruby:
@@ -1471,7 +1471,7 @@ libraries:
       wrapper_of:
         - v3:0.24
   - name: google-cloud-dialogflow-cx-v3
-    version: 1.12.2
+    version: 1.13.0
     apis:
       - path: google/cloud/dialogflow/cx/v3
         ruby:
@@ -1479,7 +1479,7 @@ libraries:
             ruby-cloud-env-prefix: DIALOGFLOW
             ruby-cloud-namespace-override: Cx=CX
   - name: google-cloud-dialogflow-v2
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/cloud/dialogflow/v2
         ruby:
@@ -2300,7 +2300,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-netapp-v1
-    version: 2.12.2
+    version: 2.13.0
     apis:
       - path: google/cloud/netapp/v1
         ruby:
@@ -2867,7 +2867,7 @@ libraries:
     apis:
       - path: google/cloud/redis/cluster/v1
   - name: google-cloud-redis-cluster-v1beta1
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/cloud/redis/cluster/v1beta1
   - name: google-cloud-redis-v1
@@ -3434,11 +3434,11 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPEECH
   - name: google-cloud-sql-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/sql/v1
   - name: google-cloud-sql-v1beta4
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/sql/v1beta4
   - name: google-cloud-storage-control
@@ -4241,7 +4241,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-developers-developer_knowledge-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/developers/knowledge/v1
   - name: google-iam-client
