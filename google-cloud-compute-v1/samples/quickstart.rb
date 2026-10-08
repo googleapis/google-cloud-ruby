@@ -81,10 +81,10 @@ def create_instance project:, zone:, instance_name:,
     # Wait for the create operation to complete.
     operation = wait_until_done operation: operation
 
+    compute_operation = operation.operation
     if operation.error?
-      warn "Error during creation:", operation.error
+      warn "Error during creation:", compute_operation.error.errors.map { |e| "#{e.code}: #{e.message}" }
     else
-      compute_operation = operation.operation
       warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
       puts "Instance #{instance_name} created."
     end
@@ -165,11 +165,11 @@ def delete_instance project:, zone:, instance_name:
     # Wait for the delete operation to complete.
     operation = wait_until_done operation: operation
 
+    compute_operation = operation.operation
     if operation.error?
-      warn "Error during deletion:", operation.error
+      warn "Error during deletion:", compute_operation.error.errors.map { |e| "#{e.code}: #{e.message}" }
     else
-      compute_operation = operation.operation
-      warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
+      warn "Warning during deletion:", compute_operation.warnings unless compute_operation.warnings.empty?
       puts "Instance #{instance_name} deleted."
     end
   rescue ::Google::Cloud::Error => e
