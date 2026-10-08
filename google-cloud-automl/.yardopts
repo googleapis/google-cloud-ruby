@@ -1,9 +1,0 @@
---no-private
---title="Obsolete Gem google-cloud-automl"
---markup markdown
---markup-provider redcarpet
-
-./lib/**/*.rb
--
-README.md
-LICENSE.md

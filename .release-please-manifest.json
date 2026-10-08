@@ -119,8 +119,6 @@
   "google-cloud-audit_manager+FILLER": "0.0.0",
   "google-cloud-audit_manager-v1": "1.2.0",
   "google-cloud-audit_manager-v1+FILLER": "0.0.0",
-  "google-cloud-automl": "3.0.0",
-  "google-cloud-automl+FILLER": "0.0.0",
   "google-cloud-automl-v1": "2.0.0",
   "google-cloud-automl-v1+FILLER": "0.0.0",
   "google-cloud-automl-v1beta1": "0.20.0",
