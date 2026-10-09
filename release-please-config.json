@@ -245,17 +245,6 @@
       "component": "google-cloud-audit_manager-v1",
       "version_file": "lib/google/cloud/audit_manager/v1/version.rb"
     },
-    "google-cloud-automl": {
-      "component": "google-cloud-automl",
-      "version_file": "lib/google/cloud/automl/version.rb"
-    },
-    "google-cloud-automl-v1beta1": {
-      "component": "google-cloud-automl-v1beta1",
-      "version_file": "lib/google/cloud/automl/v1beta1/version.rb"
-    "google-cloud-automl-v1": {
-      "component": "google-cloud-automl-v1",
-      "version_file": "lib/google/cloud/automl/v1/version.rb"
-    },
     "google-cloud-backupdr": {
       "component": "google-cloud-backupdr",
       "version_file": "lib/google/cloud/backupdr/version.rb"
