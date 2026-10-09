@@ -116,8 +116,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
       # Stub the crc32c to match.
       def file.crc32c
-        "AAAAAA=="
+        "ltgT7g=="
       end
+
 
       downloaded = file.download tmpfile
       _(downloaded).must_be_kind_of Tempfile
@@ -144,7 +145,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
       # Stub the crc32c to match.
       def file.crc32c
-        "AAAAAA=="
+        "ltgT7g=="
       end
 
       downloaded = file.download tmpfile
@@ -153,7 +154,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
       local_data = downloaded.read
       local_crc32c = Digest::CRC32c.base64digest local_data
-      _(local_crc32c).must_equal "AAAAAA=="
+      _(local_crc32c).must_equal "ltgT7g=="
 
       mock.verify
     end
