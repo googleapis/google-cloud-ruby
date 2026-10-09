@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2026-10-08)
+
+#### Features
+
+* update API sources and regenerate ([#36621](https://github.com/googleapis/google-cloud-ruby/issues/36621)) 
+
 ### 0.13.1 (2026-08-06)
 
 #### Bug Fixes
