@@ -16,13 +16,8 @@
 require "google/cloud/secret_manager"
 
 ##
-# Create a new secret with the given secret type restriction (e.g.
-# ACCESS_KEY, CERTIFICATE, OTHER_DB_CREDENTIALS, or OTHER -- use
-# CLOUD_SQL_DB_CREDENTIALS only for a regional secret that will go through
-# enable_regional_secret_managed_rotation). Unlike
-# CLOUD_SQL_DB_CREDENTIALS, these other secret types are plain metadata
-# tags: they don't require any additional credentials payload at creation
-# time.
+# Creates a new secret with the given secret type.
+# Note: CLOUD_SQL_DB_CREDENTIALS is only supported in the regional secret.
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param secret_id [String] Your secret name (e.g. "my-secret")
@@ -35,7 +30,7 @@ def create_secret_with_type project_id:, secret_id:, secret_type:
   # Build the resource name of the parent project.
   parent = client.project_path project: project_id
 
-  # Create the secret, with the given secret type restriction.
+  # Create the secret.
   secret = client.create_secret(
     parent:    parent,
     secret_id: secret_id,

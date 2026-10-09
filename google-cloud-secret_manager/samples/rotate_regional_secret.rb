@@ -16,15 +16,11 @@
 require "google/cloud/secret_manager"
 
 ##
-# Trigger a managed rotation for a Cloud SQL DB credentials secret.
-# Managed rotation must already be enabled on the secret (see
-# enable_regional_secret_managed_rotation). Each call generates a new
-# password, updates the Cloud SQL user, and adds the result as a new
-# secret version.
+# Triggers an adhoc rotation for the managed CLOUD_SQL_DB_CREDENTIALS typed secret.
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location_id [String] Your Google Cloud location (e.g. "us-west1")
-# @param secret_id [String] Your Cloud SQL DB credentials secret name (e.g. "my-secret")
+# @param secret_id [String] Your secret name (e.g. "my-secret")
 #
 def rotate_regional_secret project_id:, location_id:, secret_id:
   # Endpoint for the regional secret manager service.
@@ -35,9 +31,7 @@ def rotate_regional_secret project_id:, location_id:, secret_id:
     config.endpoint = api_endpoint
   end
 
-  # Build the resource name of the secret. Despite its name, `parent` here
-  # is the full secret resource name, not a collection parent -- the
-  # generated request message only defines a `parent` field.
+  # Build the resource name of the secret.
   parent = client.secret_path project: project_id, location: location_id, secret: secret_id
 
   # Rotate the secret.

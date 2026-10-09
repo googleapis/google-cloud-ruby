@@ -16,9 +16,7 @@
 require "google/cloud/secret_manager"
 
 ##
-# Get and print the secret type (e.g. CLOUD_SQL_DB_CREDENTIALS, ACCESS_KEY,
-# CERTIFICATE, OTHER_DB_CREDENTIALS, OTHER, or SECRET_TYPE_UNSPECIFIED for
-# a secret with no type restriction) of the given secret.
+# Gets the secret type of the given secret.
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param secret_id [String] Your secret name (e.g. "my-secret")

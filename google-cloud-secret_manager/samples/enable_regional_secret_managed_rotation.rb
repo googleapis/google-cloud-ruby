@@ -16,24 +16,17 @@
 require "google/cloud/secret_manager"
 
 ##
-# Enable managed rotation for a Cloud SQL DB credentials secret. This
-# links the secret to a Cloud SQL instance and database user, and can only
-# be called once per secret. It adds the secret's first version and sets
-# the matching password on the Cloud SQL user, taking the place of a
-# manually added secret version, which this secret type doesn't support.
-# Afterwards, use rotate_regional_secret to trigger further rotations.
-#
-# instance_id is the bare Cloud SQL instance ID (e.g. "my-instance") --
-# not a connection name. Neither the project nor the region should be
-# included: passing "PROJECT_ID:INSTANCE_ID" or the full
-# "PROJECT_ID:LOCATION_ID:INSTANCE_ID" connection name both fail -- the
-# service already knows the project from the secret's own path, and
-# prepends it internally, so a qualified value ends up double-prefixed.
+# Enables managed rotation of a CLOUD_SQL_DB_CREDENTIALS typed secret.
+# It validates and enables the rotation, adding a version and sets the
+# passed password (optional).
+# Note: AddSecretVersion is disabled on the CLOUD_SQL_DB_CREDENTIALS
+# currently and for any necessary manual rotations please trigger
+# rotate_secret.
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location_id [String] Your Google Cloud location (e.g. "us-west1")
-# @param secret_id [String] Your Cloud SQL DB credentials secret name (e.g. "my-secret")
-# @param instance_id [String] Your bare Cloud SQL instance id (e.g. "my-instance")
+# @param secret_id [String] Your secret name (e.g. "my-secret")
+# @param instance_id [String] Your Cloud SQL instance id (e.g. "my-instance")
 # @param username [String] Your Cloud SQL database username (e.g. "my-user")
 #
 def enable_regional_secret_managed_rotation project_id:, location_id:, secret_id:, instance_id:, username:
@@ -45,13 +38,10 @@ def enable_regional_secret_managed_rotation project_id:, location_id:, secret_id
     config.endpoint = api_endpoint
   end
 
-  # Build the resource name of the secret. Despite its name, `parent` here
-  # is the full secret resource name, not a collection parent -- the
-  # generated request message only defines a `parent` field.
+  # Build the resource name of the secret.
   parent = client.secret_path project: project_id, location: location_id, secret: secret_id
 
-  # Enable managed rotation. Leaving password unset lets Secret Manager
-  # generate a secure password itself.
+  # Enable managed rotation.
   version = client.enable_managed_rotation(
     parent:                            parent,
     cloud_sql_single_user_credentials: {

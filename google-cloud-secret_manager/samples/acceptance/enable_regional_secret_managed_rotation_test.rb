@@ -20,10 +20,7 @@ describe "#enable_regional_secret_managed_rotation", :regional_secret_manager_sn
   it "enables managed rotation and creates the first secret version" do
     sample = SampleLoader.load "enable_regional_secret_managed_rotation.rb"
 
-    # enable_managed_rotation needs the secret's own built-in identity
-    # granted Cloud SQL IAM permissions first -- there's no broader grant
-    # that covers a secret before it exists, so every secret used here
-    # needs its own grant/revoke around the test that uses it.
+    # Grant the secret's identity Cloud SQL IAM permissions.
     member = cloud_sql_credentials_secret.policy_member.iam_policy_uid_principal
     grant_cloud_sql_role member
 
