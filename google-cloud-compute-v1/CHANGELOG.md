@@ -1,5 +1,11 @@
 # Release History
 
+### 4.0.1 (2026-10-12)
+
+#### Bug Fixes
+
+* surface GCE operation errors in quickstart sample and test ([#36620](https://github.com/googleapis/google-cloud-ruby/issues/36620)) 
+
 ### 4.0.0 (2026-10-01)
 
 ### ⚠ BREAKING CHANGES
