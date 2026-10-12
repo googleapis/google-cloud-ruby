@@ -119,7 +119,6 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
         "ltgT7g=="
       end
 
-
       downloaded = file.download tmpfile
       _(downloaded).must_be_kind_of Tempfile
 
