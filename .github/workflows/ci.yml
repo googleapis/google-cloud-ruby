@@ -68,7 +68,7 @@ jobs:
         node-version: "18.x || 24.x"
     - name: Install tools
       # zizmor: ignore[template-injection]
-      run: "gem install --no-document toys && npm install linkinator"
+      run: "gem install --no-document toys -v '~> 0.22.0' && npm install linkinator"
     - name: Test ${{ matrix.task }}
       env:
         GITHUB_EVENT_NAME: ${{ github.event_name }}

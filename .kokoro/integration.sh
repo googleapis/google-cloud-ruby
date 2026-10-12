@@ -30,7 +30,7 @@ for ruby_version in "${ruby_versions[@]}"; do
   export GEM_HOME=$HOME/.gem
   export PATH=$GEM_HOME/bin:$PATH
 
-  gem install --no-document toys
+  gem install --no-document toys -v '~> 0.22.0'
 
   toys ci -v --load-kokoro-context $EXTRA_CI_ARGS < /dev/null
 done
