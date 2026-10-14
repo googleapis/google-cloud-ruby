@@ -21,7 +21,8 @@ describe "#regional_template_quickstart", :regional_parameter_manager_snippet do
     sample = SampleLoader.load "regional_template_quickstart.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, parameter_id: parameter_id, version_id: version_id
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 parameter_id: parameter_id, version_id: version_id
     end
 
     assert_includes out, "Created regional template #{template_name}\n"

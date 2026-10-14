@@ -19,7 +19,7 @@ describe "#render_regional_param_template_version", :regional_parameter_manager_
     client.create_template parent: location_name, template_id: template_id,
                            template: { format: :TEMPLATE_FORMAT_JSON }
     client.create_template_version parent: template_name, template_version_id: template_version_id,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
     client.create_parameter parent: location_name, parameter_id: parameter_id, parameter: { format: format }
     client.create_parameter_version parent: parameter_name, parameter_version_id: version_id,
                                     parameter_version: { payload: { data: json_payload } }
@@ -29,8 +29,8 @@ describe "#render_regional_param_template_version", :regional_parameter_manager_
     sample = SampleLoader.load "render_regional_param_template_version.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, version_id: template_version_id,
-                 parameter_id: parameter_id, parameter_version_id: version_id
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 version_id: template_version_id, parameter_id: parameter_id, parameter_version_id: version_id
     end
 
     assert_includes out, "Template payload: #{template_payload}\n"

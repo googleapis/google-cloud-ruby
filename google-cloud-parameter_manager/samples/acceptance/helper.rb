@@ -108,26 +108,7 @@ class ParameterManagerSnippetSpec < Minitest::Spec
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
-    begin
-      client.delete_template_version name: template_version_name
-    rescue Google::Cloud::NotFoundError
-      # Do nothing for this specific error
-    end
-    begin
-      client.delete_template_version name: template_version_name_1
-    rescue Google::Cloud::NotFoundError
-      # Do nothing for this specific error
-    end
-    begin
-      client.delete_template name: template_name
-    rescue Google::Cloud::NotFoundError
-      # Do nothing for this specific error
-    end
-    begin
-      client.delete_template name: template_name_1
-    rescue Google::Cloud::NotFoundError
-      # Do nothing for this specific error
-    end
+    destroy_templates
     destroy_key_versions
   end
 
@@ -142,6 +123,29 @@ def destroy_key_versions
   end
   begin
     kms_client.destroy_crypto_key_version name: "#{crypt_key_id2_name}/cryptoKeyVersions/1"
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+end
+
+def destroy_templates
+  begin
+    client.delete_template_version name: template_version_name
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template_version name: template_version_name_1
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template name: template_name
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template name: template_name_1
   rescue Google::Cloud::NotFoundError
     # Do nothing for this specific error
   end

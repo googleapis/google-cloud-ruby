@@ -19,9 +19,9 @@ describe "#list_regional_param_template_versions", :regional_parameter_manager_s
     client.create_template parent: location_name, template_id: template_id,
                            template: { format: :TEMPLATE_FORMAT_JSON }
     client.create_template_version parent: template_name, template_version_id: template_version_id,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
     client.create_template_version parent: template_name, template_version_id: template_version_id_1,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
   end
 
   it "lists regional template versions" do

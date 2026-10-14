@@ -24,7 +24,8 @@ describe "#update_regional_param_template_labels", :regional_parameter_manager_s
     sample = SampleLoader.load "update_regional_param_template_labels.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, label_key: "env", label_value: "test"
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id, label_key: "env",
+                 label_value: "test"
     end
 
     assert_includes out, "Updated regional template #{template_name} with labels"

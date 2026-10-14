@@ -19,7 +19,8 @@ describe "#create_regional_param_template", :regional_parameter_manager_snippet 
     sample = SampleLoader.load "create_regional_param_template.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, format: :TEMPLATE_FORMAT_JSON
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 format: :TEMPLATE_FORMAT_JSON
     end
 
     assert_equal "Created regional template #{template_name} with format TEMPLATE_FORMAT_JSON\n", out

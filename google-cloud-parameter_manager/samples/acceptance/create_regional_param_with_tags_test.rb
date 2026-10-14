@@ -19,7 +19,8 @@ describe "#create_regional_param_with_tags", :regional_parameter_manager_snippet
     sample = SampleLoader.load "create_regional_param_with_tags.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, parameter_id: parameter_id, tag_key: tag_key, tag_value: tag_value
+      sample.run project_id: project_id, location_id: location_id, parameter_id: parameter_id, tag_key: tag_key,
+                 tag_value: tag_value
     end
 
     assert_equal "Created regional parameter #{parameter_name} with tag #{tag_key}: #{tag_value}\n", out

@@ -19,14 +19,15 @@ describe "#get_regional_param_template_version", :regional_parameter_manager_sni
     client.create_template parent: location_name, template_id: template_id,
                            template: { format: :TEMPLATE_FORMAT_JSON }
     client.create_template_version parent: template_name, template_version_id: template_version_id,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
   end
 
   it "gets a regional template version" do
     sample = SampleLoader.load "get_regional_param_template_version.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, version_id: template_version_id
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 version_id: template_version_id
     end
 
     assert_equal "Got regional template version #{template_version_name}\nPayload: #{template_payload}\n", out

@@ -19,16 +19,17 @@ describe "#enable_regional_param_template_version", :regional_parameter_manager_
     client.create_template parent: location_name, template_id: template_id,
                            template: { format: :TEMPLATE_FORMAT_JSON }
     client.create_template_version parent: template_name, template_version_id: template_version_id,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
     client.update_template_version template_version: { name: template_version_name, disabled: true },
-                                    update_mask: { paths: ["disabled"] }
+                                   update_mask: { paths: ["disabled"] }
   end
 
   it "enables a regional template version" do
     sample = SampleLoader.load "enable_regional_param_template_version.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, version_id: template_version_id
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 version_id: template_version_id
     end
 
     assert_equal "Enabled regional template version #{template_version_name}\n", out

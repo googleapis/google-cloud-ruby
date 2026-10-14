@@ -24,7 +24,8 @@ describe "#create_regional_param_template_version", :regional_parameter_manager_
     sample = SampleLoader.load "create_regional_param_template_version.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, template_id: template_id, version_id: template_version_id
+      sample.run project_id: project_id, location_id: location_id, template_id: template_id,
+                 version_id: template_version_id
     end
 
     assert_equal "Created regional template version #{template_version_name}\n", out

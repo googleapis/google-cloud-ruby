@@ -19,9 +19,9 @@ describe "#enable_param_template_version", :parameter_manager_snippet do
     client.create_template parent: location_name, template_id: template_id,
                            template: { format: :TEMPLATE_FORMAT_JSON }
     client.create_template_version parent: template_name, template_version_id: template_version_id,
-                                    template_version: { payload: { data: template_payload } }
+                                   template_version: { payload: { data: template_payload } }
     client.update_template_version template_version: { name: template_version_name, disabled: true },
-                                    update_mask: { paths: ["disabled"] }
+                                   update_mask: { paths: ["disabled"] }
   end
 
   it "enables a template version" do

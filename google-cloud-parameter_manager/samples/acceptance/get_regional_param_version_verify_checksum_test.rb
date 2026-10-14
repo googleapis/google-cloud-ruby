@@ -30,6 +30,8 @@ describe "#get_regional_param_version_verify_checksum", :regional_parameter_mana
       sample.run project_id: project_id, location_id: location_id, parameter_id: parameter_id, version_id: version_id
     end
 
-    assert_equal "Verified checksum for regional parameter version #{parameter_version_name}\nChecksum source: USER_SPECIFIED\n", out
+    assert_equal "Verified checksum for regional parameter version #{parameter_version_name}\n" \
+                 "Checksum source: USER_SPECIFIED\n",
+                 out
   end
 end
