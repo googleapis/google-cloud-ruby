@@ -58,7 +58,12 @@ authentication:
     ```text
     $ export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
     $ export GOOGLE_CLOUD_LOCATION="YOUR_LOCATION_ID"
+    $ export GOOGLE_CLOUD_TAG_KEY="YOUR_TAG_KEY_ID"
+    $ export GOOGLE_CLOUD_TAG_VALUE="YOUR_TAG_VALUE_ID"
     ```
+
+    `GOOGLE_CLOUD_TAG_KEY` and `GOOGLE_CLOUD_TAG_VALUE` (for example `tagKeys/123456789` and `tagValues/123456789`)
+    must refer to an existing tag key and tag value. They are only used by the tag samples and their tests.
 
 ## Run Tests
 
@@ -107,6 +112,24 @@ authentication:
 | update_param_kms_key.rb             | `parameter_id`, `kms_key`                    | Updates a global parameter kms_key.                                           |
 | remove_param_kms_key.rb             | `parameter_id`                               | Removes a kms_key for global parameter.                                       |
 | quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a global parameter, parameter version and retrieves the parameter version. |
+| create_param_template.rb | `template_id` | Creates a global template with JSON format. |
+| create_param_template_version.rb | `template_id`, `version_id` | Creates a global template version with placeholders. |
+| get_param_template.rb | `template_id` | Retrieves a global template. |
+| get_param_template_version.rb | `template_id`, `version_id` | Retrieves a global template version. |
+| list_param_templates.rb |  | Lists all global templates. |
+| list_param_template_versions.rb | `template_id` | Lists all global template versions. |
+| update_param_template_labels.rb | `template_id`, `label_key`, `label_value` | Updates the labels of a global template. |
+| delete_param_template.rb | `template_id` | Deletes a global template. |
+| disable_param_template_version.rb | `template_id`, `version_id` | Disables a global template version. |
+| enable_param_template_version.rb | `template_id`, `version_id` | Enables a global template version. |
+| delete_param_template_version.rb | `template_id`, `version_id` | Deletes a global template version. |
+| render_param_template_version.rb | `template_id`, `version_id`, `parameter_id`, `parameter_version_id` | Renders a global template version. |
+| create_param_with_tags.rb | `parameter_id`, `tag_key`, `tag_value` | Creates a global parameter with tags. |
+| bind_tags_to_param.rb | `parameter_id`, `tag_value` | Creates a global parameter and binds a tag to it. |
+| get_param_tags.rb | `parameter_id` | Lists the tags bound to a global parameter. |
+| create_param_version_with_checksum.rb | `parameter_id`, `version_id` | Creates a global parameter version with a checksum. |
+| get_param_version_verify_checksum.rb | `parameter_id`, `version_id` | Retrieves a global parameter version and verifies its checksum. |
+| template_quickstart.rb | `template_id`, `parameter_id`, `version_id` | Creates a global template, a global parameter and renders the template. |
 
 ### Run regional samples
 
@@ -132,3 +155,21 @@ authentication:
 | update_regional_param_kms_key.rb             | `parameter_id`, `kms_key`                    | Updates a regional parameter kms_key.                                           |
 | remove_regional_param_kms_key.rb             | `parameter_id`                               | Removes a kms_key for regional parameter.                                       |
 | regional_quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a regional parameter, parameter version and retrieves the parameter version. |
+| create_regional_param_template.rb | `template_id` | Creates a regional template with JSON format. |
+| create_regional_param_template_version.rb | `template_id`, `version_id` | Creates a regional template version with placeholders. |
+| get_regional_param_template.rb | `template_id` | Retrieves a regional template. |
+| get_regional_param_template_version.rb | `template_id`, `version_id` | Retrieves a regional template version. |
+| list_regional_param_templates.rb |  | Lists all regional templates. |
+| list_regional_param_template_versions.rb | `template_id` | Lists all regional template versions. |
+| update_regional_param_template_labels.rb | `template_id`, `label_key`, `label_value` | Updates the labels of a regional template. |
+| delete_regional_param_template.rb | `template_id` | Deletes a regional template. |
+| disable_regional_param_template_version.rb | `template_id`, `version_id` | Disables a regional template version. |
+| enable_regional_param_template_version.rb | `template_id`, `version_id` | Enables a regional template version. |
+| delete_regional_param_template_version.rb | `template_id`, `version_id` | Deletes a regional template version. |
+| render_regional_param_template_version.rb | `template_id`, `version_id`, `parameter_id`, `parameter_version_id` | Renders a regional template version. |
+| create_regional_param_with_tags.rb | `parameter_id`, `tag_key`, `tag_value` | Creates a regional parameter with tags. |
+| bind_tags_to_regional_param.rb | `parameter_id`, `tag_value` | Creates a regional parameter and binds a tag to it. |
+| get_regional_param_tags.rb | `parameter_id` | Lists the tags bound to a regional parameter. |
+| create_regional_param_version_with_checksum.rb | `parameter_id`, `version_id` | Creates a regional parameter version with a checksum. |
+| get_regional_param_version_verify_checksum.rb | `parameter_id`, `version_id` | Retrieves a regional parameter version and verifies its checksum. |
+| regional_template_quickstart.rb | `template_id`, `parameter_id`, `version_id` | Creates a regional template, a regional parameter and renders the template. |
