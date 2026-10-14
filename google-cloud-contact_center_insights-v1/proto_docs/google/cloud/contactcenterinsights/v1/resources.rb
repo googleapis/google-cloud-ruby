@@ -145,8 +145,13 @@ module Google
             #   @return [::String]
             #     The agent's name.
             # @!attribute [rw] team
+            #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::String]
-            #     A user-specified string representing the agent's team.
+            #     A user-specified string representing the agent's team. Deprecated in
+            #     favor of the `teams` field.
+            # @!attribute [rw] teams
+            #   @return [::Array<::String>]
+            #     User-specified strings representing the agent's teams.
             # @!attribute [rw] disposition_code
             #   @return [::String]
             #     A user-provided string indicating the outcome of the agent's segment of
@@ -154,6 +159,28 @@ module Google
             # @!attribute [rw] agent_type
             #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant::Role]
             #     The agent type, e.g. HUMAN_AGENT.
+            # @!attribute [rw] location
+            #   @return [::String]
+            #     The agent's location.
+            # @!attribute [rw] deployment_id
+            #   @return [::String]
+            #     The agent's deployment ID. Only applicable to automated agents.
+            # @!attribute [rw] deployment_display_name
+            #   @return [::String]
+            #     The agent's deployment display name. Only applicable to automated
+            #     agents.
+            # @!attribute [rw] version_id
+            #   @return [::String]
+            #     The agent's version ID. Only applicable to automated agents.
+            # @!attribute [rw] version_display_name
+            #   @return [::String]
+            #     The agent's version display name. Only applicable to automated agents.
+            # @!attribute [rw] entry_subagent_display_name
+            #   @return [::String]
+            #     The entry subagent's display name.
+            # @!attribute [rw] entry_subagent_id
+            #   @return [::String]
+            #     The entry subagent's ID.
             class AgentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

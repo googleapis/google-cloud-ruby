@@ -2168,6 +2168,13 @@ module Google
         #     Optional. Option to specify whether structured logging is enabled.
         #
         #     If true, JSON-formatted logs are parsed as structured logs.
+        # @!attribute [rw] worker_release
+        #   @return [::String]
+        #     Optional. Option to specify which release or release channel
+        #     (rapid|regular|stable) to use to run this build.
+        # @!attribute [r] resolved_worker_release
+        #   @return [::String]
+        #     Output only. Worker release resolved from the release channel.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2184,6 +2191,16 @@ module Google
           #     WorkerPool.
           #
           #     Format projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId}
+          # @!attribute [r] worker_release
+          #   @return [::String]
+          #     Output only. OUTPUT_ONLY. The release or release channel used to run the
+          #     Build. This is set to the same value as
+          #     `PrivatePoolV1Config.WorkerConfig.worker_release` for the UI to easily
+          #     access.
+          # @!attribute [r] resolved_worker_release
+          #   @return [::String]
+          #     Output only. OUTPUT_ONLY. Worker release resolved from the release
+          #     channel.
           class PoolOption
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2514,6 +2531,10 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enable nested virtualization on the worker, if supported by the
           #     machine type. By default, nested virtualization is disabled.
+          # @!attribute [rw] worker_release
+          #   @return [::String]
+          #     Optional. Option to specify which release or release channel
+          #     (rapid|regular|stable) to use to run this build.
           class WorkerConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

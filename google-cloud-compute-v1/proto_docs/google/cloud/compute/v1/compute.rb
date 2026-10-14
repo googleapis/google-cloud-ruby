@@ -14234,6 +14234,9 @@ module Google
 
             COMPUTE_OPTIMIZED_H4D = 383_251_320
 
+            # CUD bucket for COMPUTE_OPTIMIZED_H4D_3TB machines.
+            COMPUTE_OPTIMIZED_H4D_3TB = 443_379_866
+
             GENERAL_PURPOSE = 299_793_543
 
             GENERAL_PURPOSE_C4 = 301_911_817

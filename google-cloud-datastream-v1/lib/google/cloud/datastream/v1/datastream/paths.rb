@@ -44,6 +44,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Database resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/instances/{instance}/databases/{database}`
+            #
+            # @param project [String]
+            # @param instance [String]
+            # @param database [String]
+            #
+            # @return [::String]
+            def database_path project:, instance:, database:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/instances/#{instance}/databases/#{database}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

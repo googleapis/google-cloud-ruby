@@ -270,19 +270,19 @@ module Google
               #   @param parent [::String]
               #     Required. The parent that owns the collection of connection profiles.
               #   @param page_size [::Integer]
-              #     Maximum number of connection profiles to return.
+              #     Optional. Maximum number of connection profiles to return.
               #     If unspecified, at most 50 connection profiles will be returned.
               #     The maximum value is 1000; values above 1000 will be coerced to 1000.
               #   @param page_token [::String]
-              #     Page token received from a previous `ListConnectionProfiles` call.
-              #     Provide this to retrieve the subsequent page.
+              #     Optional. Page token received from a previous `ListConnectionProfiles`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to `ListConnectionProfiles`
               #     must match the call that provided the page token.
               #   @param filter [::String]
-              #     Filter request.
+              #     Optional. Filter request.
               #   @param order_by [::String]
-              #     Order by fields for the result.
+              #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::ConnectionProfile>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -764,7 +764,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil, sql_server_rdbms: nil, salesforce_org: nil, mongodb_cluster: nil)
+              # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil, sql_server_rdbms: nil, salesforce_org: nil, mongodb_cluster: nil, spanner_database: nil, source_catalog: nil)
               #   Pass arguments to `discover_connection_profile` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -773,46 +773,59 @@ module Google
               #     Required. The parent resource of the connection profile type. Must be in
               #     the format `projects/*/locations/*`.
               #   @param connection_profile [::Google::Cloud::Datastream::V1::ConnectionProfile, ::Hash]
-              #     An ad-hoc connection profile configuration.
+              #     Optional. An ad-hoc connection profile configuration.
               #
               #     Note: The following parameters are mutually exclusive: `connection_profile`, `connection_profile_name`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param connection_profile_name [::String]
-              #     A reference to an existing connection profile.
+              #     Optional. A reference to an existing connection profile.
               #
               #     Note: The following parameters are mutually exclusive: `connection_profile_name`, `connection_profile`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param full_hierarchy [::Boolean]
-              #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-              #     current level (FALSE).
+              #     Optional. Whether to retrieve the full hierarchy of data objects (TRUE)
+              #     or only the current level (FALSE).
               #
               #     Note: The following parameters are mutually exclusive: `full_hierarchy`, `hierarchy_depth`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param hierarchy_depth [::Integer]
-              #     The number of hierarchy levels below the current level to be retrieved.
+              #     Optional. The number of hierarchy levels below the current level to be
+              #     retrieved.
               #
               #     Note: The following parameters are mutually exclusive: `hierarchy_depth`, `full_hierarchy`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param oracle_rdbms [::Google::Cloud::Datastream::V1::OracleRdbms, ::Hash]
-              #     Oracle RDBMS to enrich with child data objects and metadata.
+              #     Optional. Oracle RDBMS to enrich with child data objects and metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param mysql_rdbms [::Google::Cloud::Datastream::V1::MysqlRdbms, ::Hash]
-              #     MySQL RDBMS to enrich with child data objects and metadata.
+              #     Optional. MySQL RDBMS to enrich with child data objects and metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param postgresql_rdbms [::Google::Cloud::Datastream::V1::PostgresqlRdbms, ::Hash]
-              #     PostgreSQL RDBMS to enrich with child data objects and metadata.
+              #     Optional. PostgreSQL RDBMS to enrich with child data objects and
+              #     metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param sql_server_rdbms [::Google::Cloud::Datastream::V1::SqlServerRdbms, ::Hash]
-              #     SQLServer RDBMS to enrich with child data objects and metadata.
+              #     Optional. SQLServer RDBMS to enrich with child data objects and metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param salesforce_org [::Google::Cloud::Datastream::V1::SalesforceOrg, ::Hash]
-              #     Salesforce organization to enrich with child data objects and metadata.
+              #     Optional. Salesforce organization to enrich with child data objects and
+              #     metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param mongodb_cluster [::Google::Cloud::Datastream::V1::MongodbCluster, ::Hash]
-              #     MongoDB cluster to enrich with child data objects and metadata.
+              #     Optional. MongoDB cluster to enrich with child data objects and metadata.
               #
-              #     Note: The following parameters are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `spanner_database`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param spanner_database [::Google::Cloud::Datastream::V1::SpannerDatabase, ::Hash]
+              #     Optional. Spanner database to enrich with child data objects and
+              #     metadata.
+              #
+              #     Note: The following parameters are mutually exclusive: `spanner_database`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `source_catalog`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param source_catalog [::Google::Cloud::Datastream::V1::SourceCatalog, ::Hash]
+              #     Optional. Source catalog to enrich with child data objects and metadata.
+              #     This is mainly used to represent SaaS sources databases.
+              #
+              #     Note: The following parameters are mutually exclusive: `source_catalog`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -892,19 +905,19 @@ module Google
               #   @param parent [::String]
               #     Required. The parent that owns the collection of streams.
               #   @param page_size [::Integer]
-              #     Maximum number of streams to return.
+              #     Optional. Maximum number of streams to return.
               #     If unspecified, at most 50 streams will  be returned. The maximum
               #     value is 1000; values above 1000 will be coerced to 1000.
               #   @param page_token [::String]
-              #     Page token received from a previous `ListStreams` call.
+              #     Optional. Page token received from a previous `ListStreams` call.
               #     Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to `ListStreams`
               #     must match the call that provided the page token.
               #   @param filter [::String]
-              #     Filter request.
+              #     Optional. Filter request.
               #   @param order_by [::String]
-              #     Order by fields for the result.
+              #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Stream>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1643,11 +1656,11 @@ module Google
               #   @param parent [::String]
               #     Required. The parent stream that owns the collection of objects.
               #   @param page_size [::Integer]
-              #     Maximum number of objects to return. Default is 50.
+              #     Optional. Maximum number of objects to return. Default is 50.
               #     The maximum value is 1000; values above 1000 will be coerced to 1000.
               #   @param page_token [::String]
-              #     Page token received from a previous `ListStreamObjectsRequest` call.
-              #     Provide this to retrieve the subsequent page.
+              #     Optional. Page token received from a previous `ListStreamObjectsRequest`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to
               #     `ListStreamObjectsRequest` must match the call that provided the page
@@ -1729,7 +1742,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload start_backfill_job(object: nil)
+              # @overload start_backfill_job(object: nil, event_filter: nil)
               #   Pass arguments to `start_backfill_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1737,6 +1750,10 @@ module Google
               #   @param object [::String]
               #     Required. The name of the stream object resource to start a backfill job
               #     for.
+              #   @param event_filter [::Google::Cloud::Datastream::V1::EventFilter, ::Hash]
+              #     Optional. Optional event filter. If not set, or empty, the backfill will be
+              #     performed on the entire object. This is currently used for partial backfill
+              #     and only supported for SQL sources.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::StartBackfillJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1897,9 +1914,9 @@ module Google
               #     Required. The resource name for the location for which static IPs should be
               #     returned. Must be in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of Ips to return, will likely not be specified.
+              #     Optional. Maximum number of Ips to return, will likely not be specified.
               #   @param page_token [::String]
-              #     A page token, received from a previous `ListStaticIps` call.
+              #     Optional. A page token, received from a previous `ListStaticIps` call.
               #     will likely not be specified.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::FetchStaticIpsResponse]
@@ -2176,16 +2193,16 @@ module Google
               #     returned. The maximum value is 1000; values above 1000 will be coerced to
               #     1000.
               #   @param page_token [::String]
-              #     Page token received from a previous `ListPrivateConnections` call.
-              #     Provide this to retrieve the subsequent page.
+              #     Optional. Page token received from a previous `ListPrivateConnections`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to
               #     `ListPrivateConnections` must match the call that provided the page
               #     token.
               #   @param filter [::String]
-              #     Filter request.
+              #     Optional. Filter request.
               #   @param order_by [::String]
-              #     Order by fields for the result.
+              #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::PrivateConnection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2560,21 +2577,21 @@ module Google
               #   @param parent [::String]
               #     Required. The parent that owns the collection of Routess.
               #   @param page_size [::Integer]
-              #     Maximum number of Routes to return. The service may return
+              #     Optional. Maximum number of Routes to return. The service may return
               #     fewer than this value. If unspecified, at most 50 Routes
               #     will be returned. The maximum value is 1000; values above 1000 will be
               #     coerced to 1000.
               #   @param page_token [::String]
-              #     Page token received from a previous `ListRoutes` call.
+              #     Optional. Page token received from a previous `ListRoutes` call.
               #     Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to
               #     `ListRoutes` must match the call that provided the page
               #     token.
               #   @param filter [::String]
-              #     Filter request.
+              #     Optional. Filter request.
               #   @param order_by [::String]
-              #     Order by fields for the result.
+              #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Route>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
