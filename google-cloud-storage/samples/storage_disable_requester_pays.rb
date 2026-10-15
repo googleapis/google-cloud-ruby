@@ -20,7 +20,7 @@ def disable_requester_pays bucket_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name, user_project: true
 
   bucket.requester_pays = false
 

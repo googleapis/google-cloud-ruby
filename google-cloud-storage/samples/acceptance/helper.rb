@@ -55,7 +55,7 @@ end
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
-    bucket = storage_client.bucket bucket_name
+    bucket = storage_client.bucket bucket_name, user_project: true
     return unless bucket
 
     bucket.files.each(&:delete)
@@ -126,7 +126,7 @@ $fixture_bucket_name = random_bucket_name
 
 def clean_up_fixture_bucket
   storage_client = Google::Cloud::Storage.new
-  if (b = storage_client.bucket $fixture_bucket_name)
+  if (b = storage_client.bucket $fixture_bucket_name, user_project: true)
     puts "Deleting fixture bucket #{$fixture_bucket_name} for #{storage_client.project_id}"
     b.files(versions: true).all do |file|
       file.delete generation: true
