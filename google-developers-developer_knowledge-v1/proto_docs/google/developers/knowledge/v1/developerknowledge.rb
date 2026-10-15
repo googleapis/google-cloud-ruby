@@ -32,7 +32,7 @@ module Google
         # @!attribute [r] uri
         #   @return [::String]
         #     Output only. Provides the URI of the content, such as
-        #     `docs.cloud.google.com/storage/docs/creating-buckets`.
+        #     `https://docs.cloud.google.com/storage/docs/creating-buckets`.
         # @!attribute [r] content
         #   @return [::String]
         #     Output only. Contains the full content of the document in Markdown format.

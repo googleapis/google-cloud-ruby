@@ -808,9 +808,21 @@ module Google
         # @!attribute [rw] query_insights_config
         #   @return [::Google::Cloud::AlloyDB::V1::Instance::QueryInsightsInstanceConfig]
         #     Configuration for query insights.
+        # @!attribute [r] query_insights_info
+        #   @return [::Google::Cloud::AlloyDB::V1::Instance::QueryInsightsInstanceInfo]
+        #     Output only. Instance level Query Insights information, which is read-only
+        #     and available in the output only. Contains the effective query insights
+        #     settings for this instance, by merging customer's provided
+        #     `QueryInsightsInstanceConfig` with the Query Insights defaults.
         # @!attribute [rw] observability_config
         #   @return [::Google::Cloud::AlloyDB::V1::Instance::ObservabilityInstanceConfig]
         #     Configuration for observability.
+        # @!attribute [r] observability_instance_info
+        #   @return [::Google::Cloud::AlloyDB::V1::Instance::ObservabilityInstanceInfo]
+        #     Output only. Instance level observability information, contains the
+        #     effective values of observability settings for this instance, by merging
+        #     customer's provided `ObservabilityInstanceConfig` with the
+        #     Observability defaults.
         # @!attribute [rw] read_pool_config
         #   @return [::Google::Cloud::AlloyDB::V1::Instance::ReadPoolConfig]
         #     Read pool instance configuration.
@@ -932,6 +944,28 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Instance level Query Insights information, which is read-only and available
+          # in the output only.
+          # @!attribute [r] enabled
+          #   @return [::Boolean]
+          #     Output only. Whether Query Insights is enabled.
+          # @!attribute [r] record_application_tags
+          #   @return [::Boolean]
+          #     Output only. Whether to record application tags.
+          # @!attribute [r] record_client_address
+          #   @return [::Boolean]
+          #     Output only. Whether to record client address.
+          # @!attribute [r] query_string_length
+          #   @return [::Integer]
+          #     Output only. Maximum query string length.
+          # @!attribute [r] query_plans_per_minute
+          #   @return [::Integer]
+          #     Output only. Number of query execution plans captured per minute.
+          class QueryInsightsInstanceInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Observability Instance specific configuration.
           # @!attribute [rw] enabled
           #   @return [::Boolean]
@@ -969,6 +1003,37 @@ module Google
           #     Track actively running queries on the instance.
           #     If not set, this flag is "off" by default.
           class ObservabilityInstanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [r] enabled
+          #   @return [::Boolean]
+          #     Output only. Observability feature status for an instance.
+          # @!attribute [r] preserve_comments
+          #   @return [::Boolean]
+          #     Output only. Preserve comments in query string for an instance.
+          # @!attribute [r] track_wait_events
+          #   @return [::Boolean]
+          #     Output only. Track wait events during query execution for an instance.
+          # @!attribute [r] track_wait_event_types
+          #   @return [::Boolean]
+          #     Output only. Track wait event types during query execution for an
+          #     instance.
+          # @!attribute [r] max_query_string_length
+          #   @return [::Integer]
+          #     Output only. Query string length. The default value is 10k.
+          # @!attribute [r] record_application_tags
+          #   @return [::Boolean]
+          #     Output only. Record application tags for an instance.
+          # @!attribute [r] query_plans_per_minute
+          #   @return [::Integer]
+          #     Output only. Number of query execution plans captured by Insights per
+          #     minute for all queries combined.
+          # @!attribute [r] track_active_queries
+          #   @return [::Boolean]
+          #     Output only. Track actively running queries on the instance.
+          class ObservabilityInstanceInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

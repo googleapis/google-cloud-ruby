@@ -933,6 +933,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
 
     # Create request parameters for a unary method.
     object = "hello world"
+    event_filter = {}
 
     start_backfill_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -948,27 +949,27 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
         end
 
         # Use hash object
-        c.start_backfill_job({ object: object }) do |_result, response|
+        c.start_backfill_job({ object: object, event_filter: event_filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.start_backfill_job object: object do |_result, response|
+        c.start_backfill_job object: object, event_filter: event_filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object) do |_result, response|
+        c.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object, event_filter: event_filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.start_backfill_job({ object: object }, call_options) do |_result, response|
+        c.start_backfill_job({ object: object, event_filter: event_filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object), call_options) do |_result, response|
+        c.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object, event_filter: event_filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

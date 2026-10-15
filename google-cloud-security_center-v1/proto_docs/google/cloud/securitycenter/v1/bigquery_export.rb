@@ -82,6 +82,11 @@ module Google
         #   @return [::String]
         #     Output only. The service account that needs permission to create table and
         #     upload data to the BigQuery dataset.
+        # @!attribute [rw] deletion_notifications_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the notifications will be sent for deleted
+        #     findings. When enabled, the filter is still respected when sending deletion
+        #     notifications.
         class BigQueryExport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
