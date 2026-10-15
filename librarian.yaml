@@ -240,7 +240,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-alloy_db-v1
-    version: 1.10.2
+    version: 1.11.0
     apis:
       - path: google/cloud/alloydb/v1
         ruby:
@@ -248,7 +248,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
   - name: google-cloud-alloy_db-v1alpha
-    version: 0.24.0
+    version: 0.25.0
     apis:
       - path: google/cloud/alloydb/v1alpha
         ruby:
@@ -256,7 +256,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
   - name: google-cloud-alloy_db-v1beta
-    version: 0.25.0
+    version: 0.26.0
     apis:
       - path: google/cloud/alloydb/v1beta
         ruby:
@@ -796,7 +796,7 @@ libraries:
       wrapper_of:
         - v1:0.26
   - name: google-cloud-build-v1
-    version: 1.14.0
+    version: 1.15.0
     apis:
       - path: google/devtools/cloudbuild/v1
         ruby:
@@ -968,7 +968,7 @@ libraries:
       wrapper_of:
         - v1:2.15
   - name: google-cloud-compute-v1
-    version: 4.0.1
+    version: 4.1.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -1127,7 +1127,7 @@ libraries:
       wrapper_of:
         - v1:0.20
   - name: google-cloud-contact_center_insights-v1
-    version: 1.11.1
+    version: 1.12.0
     apis:
       - path: google/cloud/contactcenterinsights/v1
   - name: google-cloud-container
@@ -1333,7 +1333,7 @@ libraries:
       wrapper_of:
         - v1:0.24
   - name: google-cloud-dataproc-v1
-    version: 1.17.1
+    version: 1.18.0
     apis:
       - path: google/cloud/dataproc/v1
         ruby:
@@ -1401,7 +1401,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-datastream-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/datastream/v1
   - name: google-cloud-datastream-v1alpha1
@@ -2194,7 +2194,7 @@ libraries:
     apis:
       - path: google/cloud/memorystore/v1
   - name: google-cloud-memorystore-v1beta
-    version: 0.14.1
+    version: 0.15.0
     apis:
       - path: google/cloud/memorystore/v1beta
   - name: google-cloud-metastore
@@ -2731,7 +2731,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: PROFILER
   - name: google-cloud-pubsub-v1
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/pubsub/v1
         ruby:
@@ -2863,7 +2863,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-redis-cluster-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/redis/cluster/v1
   - name: google-cloud-redis-cluster-v1beta1
@@ -3224,7 +3224,7 @@ libraries:
         - v2:1.0
         - v1:1.0
   - name: google-cloud-security_center-v1
-    version: 1.11.1
+    version: 1.12.0
     apis:
       - path: google/cloud/securitycenter/v1
         ruby:
@@ -3238,7 +3238,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
   - name: google-cloud-security_center-v2
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/securitycenter/v2
         ruby:
@@ -4234,14 +4234,14 @@ libraries:
     apis:
       - path: google/cloud/workstations/v1beta
   - name: google-developers-developer_knowledge
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/developers/knowledge/v1
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-developers-developer_knowledge-v1
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/developers/knowledge/v1
   - name: google-iam-client
