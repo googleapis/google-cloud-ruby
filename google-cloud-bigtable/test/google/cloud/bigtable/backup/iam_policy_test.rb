@@ -77,7 +77,7 @@ describe Google::Cloud::Bigtable::Backup, :iam_policy, :mock_bigtable do
     updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
 
     set_req = Google::Iam::V1::Policy.decode_json(updated_policy_hash.to_json)
-    set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge(etag: "eHl6").to_json)
+    set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge("etag" => "eHl6").to_json)
     mock.expect :set_iam_policy, set_res, resource: backup.path, policy: set_req
     backup.service.mocked_tables = mock
 
@@ -111,7 +111,7 @@ describe Google::Cloud::Bigtable::Backup, :iam_policy, :mock_bigtable do
     updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
 
     set_req = Google::Iam::V1::Policy.decode_json(updated_policy_hash.to_json)
-    set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge(etag: "eHl6").to_json)
+    set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge("etag" => "eHl6").to_json)
     mock.expect :set_iam_policy, set_res, resource: backup.path, policy: set_req
     backup.service.mocked_tables = mock
 
