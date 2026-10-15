@@ -33,7 +33,7 @@ jobs:
         with:
           ruby-version: '3.3'
       - run: ruby --version
-      - run: gem install toys
+      - run: gem install --no-document toys -v '~> 0.22.0'
       - run: bundle install
       - run: toys conformance
         env:
