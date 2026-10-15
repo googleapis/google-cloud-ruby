@@ -6,6 +6,8 @@ GEM
     ast (2.4.3)
     base64 (0.3.0)
     bigdecimal (4.1.2)
+    digest-crc (0.7.0)
+      rake (>= 12.0.0, < 14.0.0)
     faraday (2.14.3)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -45,10 +47,14 @@ GEM
     google-cloud-parameter_manager (1.0.0)
       google-cloud-core (~> 1.6)
       google-cloud-parameter_manager-v1 (>= 0.0, < 2.a)
-    google-cloud-parameter_manager-v1 (1.0.0)
+    google-cloud-parameter_manager-v1 (1.1.0)
       gapic-common (~> 1.3)
       google-cloud-errors (~> 1.0)
       google-cloud-location (~> 1.0)
+      grpc-google-iam-v1 (~> 1.11)
+    google-cloud-resource_manager-v3 (1.8.0)
+      gapic-common (~> 1.3)
+      google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.11)
     google-cloud-secret_manager (2.2.0)
       google-cloud-core (~> 1.6)
@@ -198,8 +204,10 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  digest-crc (~> 0.7)
   google-cloud-kms
   google-cloud-parameter_manager
+  google-cloud-resource_manager-v3 (~> 1.3)
   google-cloud-secret_manager
   google-style (~> 1.30.1)
   minitest (~> 5.14)
@@ -213,6 +221,7 @@ CHECKSUMS
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bundler (4.0.14) sha256=d09a0a965cf772266a7e49e83610be7c2f4e49e61134c42a56804bb383cc24b8
+  digest-crc (0.7.0) sha256=64adc23a26a241044cbe6732477ca1b3c281d79e2240bcff275a37a5a0d78c07
   faraday (2.14.3) sha256=1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
   faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   faraday-retry (2.4.0) sha256=7b79c48fb7e56526faf247b12d94a680071ff40c9fda7cf1ec1549439ad11ebe
@@ -224,7 +233,8 @@ CHECKSUMS
   google-cloud-kms-v1 (1.15.0) sha256=25942a07b11809bc535263bb4ce7e0d9ccef5e863463374defd7487dcd07ef97
   google-cloud-location (1.5.0) sha256=336f94609b1fb18fce1929048fac964f4d5a87d27c1e5444bfed3605469c7532
   google-cloud-parameter_manager (1.0.0) sha256=77330ff224a44fd0ebb525b62b1ae048e48f70a65bca0ceafe99767d24a796e5
-  google-cloud-parameter_manager-v1 (1.0.0) sha256=671faff78b7ab2e1a6928d528feef9a282d98747ecc6f3d40b876b866a7dc5d7
+  google-cloud-parameter_manager-v1 (1.1.0) sha256=a7217d9070bc4c9dab83f098975f50a1de5809d7d779ec7d1e3174f0641bd5d9
+  google-cloud-resource_manager-v3 (1.8.0) sha256=a288663a557b72e2701cbe147a64cb2e675be5f6d872bab590a288d51e7e5c41
   google-cloud-secret_manager (2.2.0) sha256=71a61a1427c0b9c5876ae99b4a61a92e62af8b6f0c0c9f0639dbeff8f27c3cea
   google-cloud-secret_manager-v1 (1.9.0) sha256=f24397f11fcf6e3e17c6a8add1370f1f1ea679a2134876a35990a549ec346bc9
   google-iam-v1 (1.7.0) sha256=9e3ea9dcc59cbd5f8d2f62b00da41ec57a2e427b33c0e798207fa06c8fbb8b87
