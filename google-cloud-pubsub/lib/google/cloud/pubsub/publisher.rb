@@ -81,6 +81,12 @@ module Google
         end
 
         ##
+        # @private HedgingTokenBucket instance when publish hedging is enabled on the AsyncPublisher.
+        def token_bucket
+          @async_publisher&.token_bucket
+        end
+
+        ##
         # The name of the publisher.
         #
         # @return [String] A fully-qualified topic name in the form
@@ -112,7 +118,6 @@ module Google
         def resource?
           !@grpc.nil?
         end
-
 
         ##
         # Reloads the publisher with current data from the Pub/Sub service.
@@ -391,6 +396,15 @@ module Google
         ##
         # @private New Publisher from a Google::Cloud::PubSub::V1::Topic object.
         def self.from_grpc grpc, service, async: nil
+          if async.is_a?(Hash) && (async.key?(:hedging) || async.key?("hedging"))
+            raw_hedging = async.key?(:hedging) ? async[:hedging] : async["hedging"]
+            ordering = async.key?(:message_ordering) ? async[:message_ordering] : async["message_ordering"]
+            AsyncPublisher::HedgingOptions.from(
+              raw_hedging,
+              message_ordering: !(!ordering),
+              timeout: service&.publish_timeout
+            )
+          end
           new.tap do |t|
             t.grpc = grpc
             t.service = service
