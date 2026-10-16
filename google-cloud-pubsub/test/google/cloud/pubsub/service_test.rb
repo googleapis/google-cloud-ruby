@@ -291,6 +291,35 @@ describe Google::Cloud::PubSub::Service do
     mocked_topic_admin.verify
   end
 
+  it "passes CancellableRetryPolicy and binds thread attempt handle when attempt_handle is provided" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    handle = Google::Cloud::PubSub::AsyncPublisher::AttemptHandle.new
+    captured_option = nil
+    captured_thread_handle = nil
+
+    stub_admin = Object.new
+    stub_admin.define_singleton_method :publish_internal do |_req, option = nil|
+      captured_option = option
+      captured_thread_handle = Thread.current[Google::Cloud::PubSub::TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY]
+      nil
+    end
+    service.mocked_topic_admin = stub_admin
+
+    service.publish "test", "data",
+                    compress: true,
+                    call_options: { timeout: 4.5, retry_policy: { retry_codes: [] } },
+                    attempt_handle: handle
+
+    _(captured_thread_handle).must_equal handle
+    _(Thread.current[Google::Cloud::PubSub::TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY]).must_be_nil
+    _(captured_option).must_be_kind_of ::Gapic::CallOptions
+    _(captured_option.timeout).must_equal 4.5
+    _(captured_option.metadata).must_equal({ "grpc-internal-encoding-request": "gzip" })
+    _(captured_option.retry_policy).must_be_kind_of Google::Cloud::PubSub::TopicAdmin::CancellableRetryPolicy
+    _(captured_option.retry_policy.attempt_handle).must_equal handle
+    _(captured_option.retry_policy.retry_codes).must_equal []
+  end
+
   # @param [Numeric, nil] timeout Expected non-default timeout.
   def assert_config_rpcs_equals expected_rpcs, expected_rpcs_count, actual_rpcs, timeout: nil
     expected_rpc_names = expected_rpcs.methods - Object.methods
@@ -332,6 +361,82 @@ describe Google::Cloud::PubSub::TopicAdmin::Client do
     assert_raises NotImplementedError do
       client.publish
     end
+  end
+
+  it "cancels in-flight gRPC operation without retrying GRPC::Cancelled when attempt_handle is cancelled" do
+    client = Google::Cloud::PubSub::TopicAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+    grpc_stub = client.instance_variable_get(:@topic_admin_stub).grpc_stub
+    handle = Google::Cloud::PubSub::AsyncPublisher::AttemptHandle.new
+    call_count = 0
+
+    fake_op = Object.new
+    fake_op.define_singleton_method :cancel do
+      @cancelled = true
+    end
+    fake_op.define_singleton_method :cancelled? do
+      @cancelled == true
+    end
+    fake_op.define_singleton_method :execute do
+      handle.cancel!
+      raise GRPC::Cancelled, "cancelled by sibling attempt"
+    end
+
+    grpc_stub.stub :request_response, ->(*_args, **_kwargs) { call_count += 1; fake_op } do
+      service = Google::Cloud::PubSub::Service.new "test", :this_channel_is_insecure
+      service.instance_variable_set :@topic_admin, client
+
+      assert_raises Google::Cloud::CanceledError do
+        service.publish "my-topic", [], attempt_handle: handle
+      end
+    end
+
+    _(call_count).must_equal 1
+    _(fake_op).must_be :cancelled?
+    _(handle).must_be :cancelled?
+  end
+
+  it "interrupts retry backoff sleep immediately when attempt_handle is cancelled" do
+    client = Google::Cloud::PubSub::TopicAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+    grpc_stub = client.instance_variable_get(:@topic_admin_stub).grpc_stub
+    handle = Google::Cloud::PubSub::AsyncPublisher::AttemptHandle.new
+    call_count = 0
+
+    fake_op = Object.new
+    fake_op.define_singleton_method(:cancel) { nil }
+    fake_op.define_singleton_method :execute do
+      Thread.new do
+        sleep 0.02
+        handle.cancel!
+      end
+      raise GRPC::Unavailable, "transient unavailable"
+    end
+
+    started = Process.clock_gettime Process::CLOCK_MONOTONIC
+    grpc_stub.stub :request_response, ->(*_args, **_kwargs) { call_count += 1; fake_op } do
+      service = Google::Cloud::PubSub::Service.new "test", :this_channel_is_insecure
+      service.instance_variable_set :@topic_admin, client
+
+      assert_raises Google::Cloud::PubSub::AsyncPublisher::AttemptCancelledError do
+        service.publish "my-topic", [],
+                        call_options: {
+                          retry_policy: {
+                            initial_delay: 5.0,
+                            max_delay: 10.0,
+                            multiplier: 2.0,
+                            retry_codes: [GRPC::Core::StatusCodes::UNAVAILABLE]
+                          }
+                        },
+                        attempt_handle: handle
+      end
+    end
+    elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+
+    _(call_count).must_equal 1
+    _(elapsed).must_be :<, 1.0
   end
 end
 
