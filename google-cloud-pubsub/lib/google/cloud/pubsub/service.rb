@@ -124,14 +124,39 @@ module Google
         # Raises GRPC status code 5 if the topic does not exist.
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
-        def publish topic, messages, compress: false
+        def publish topic, messages, compress: false, call_options: nil, attempt_handle: nil
           request = { topic: topic_path(topic), messages: messages }
-          compress_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
-          if compress
-            (topic_admin.publish_internal request, compress_options)
-          else
-            (topic_admin.publish_internal request)
+          options = build_publish_call_options compress: compress,
+                                               call_options: call_options,
+                                               attempt_handle: attempt_handle
+          prev_handle = Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY]
+          Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY] = attempt_handle
+          begin
+            if options
+              topic_admin.publish_internal request, options
+            else
+              topic_admin.publish_internal request
+            end
+          ensure
+            attempt_handle&.clear_operation
+            Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY] = prev_handle
           end
+        end
+
+        ##
+        # @private Returns the effective publish RPC timeout in seconds.
+        def publish_timeout
+          return @timeout if @timeout
+          if @topic_admin.respond_to? :configure
+            cfg = @topic_admin.configure
+            if cfg.respond_to?(:rpcs) && cfg.rpcs.respond_to?(:publish) && cfg.rpcs.publish.timeout
+              return cfg.rpcs.publish.timeout
+            end
+            return cfg.timeout if cfg.respond_to?(:timeout) && cfg.timeout
+          end
+          V1::TopicAdmin::Client.configure.rpcs.publish.timeout ||
+            V1::TopicAdmin::Client.configure.timeout ||
+            60.0
         end
 
         ##
@@ -206,6 +231,35 @@ module Google
           rpc_names.each do |rpc_name|
             rpc = config.rpcs.send rpc_name
             rpc.timeout = timeout if rpc.respond_to? :timeout=
+          end
+        end
+
+        def build_publish_call_options compress: false, call_options: nil, attempt_handle: nil
+          return nil if !compress && call_options.nil? && attempt_handle.nil?
+
+          opts_hash = call_options.respond_to?(:to_h) ? call_options.to_h : {}
+          metadata = (opts_hash[:metadata] || {}).dup
+          metadata[:"grpc-internal-encoding-request"] = "gzip" if compress
+
+          retry_policy = resolve_retry_policy opts_hash[:retry_policy], attempt_handle
+
+          ::Gapic::CallOptions.new(
+            timeout: opts_hash[:timeout],
+            metadata: metadata.empty? ? nil : metadata,
+            retry_policy: retry_policy
+          )
+        end
+
+        def resolve_retry_policy raw_retry_policy, attempt_handle
+          return raw_retry_policy if attempt_handle.nil?
+          return raw_retry_policy if raw_retry_policy.is_a? TopicAdmin::CancellableRetryPolicy
+
+          if raw_retry_policy.is_a? Hash
+            TopicAdmin::CancellableRetryPolicy.new attempt_handle: attempt_handle, **raw_retry_policy
+          elsif raw_retry_policy.nil?
+            TopicAdmin::CancellableRetryPolicy.new attempt_handle: attempt_handle
+          else
+            raw_retry_policy
           end
         end
       end
