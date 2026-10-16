@@ -18,6 +18,10 @@ require "concurrent"
 require "google/cloud/pubsub/errors"
 require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"
+require "google/cloud/pubsub/async_publisher/hedging_options"
+require "google/cloud/pubsub/async_publisher/hedging_token_bucket"
+require "google/cloud/pubsub/async_publisher/cancellation_sharer"
+require "google/cloud/pubsub/async_publisher/hedging_scheduler"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/convert"
@@ -67,11 +71,16 @@ module Google
         attr_reader :publish_threads
         attr_reader :callback_threads
         attr_reader :flow_control
+        attr_reader :hedging_options
+        attr_reader :token_bucket
+        attr_reader :hedging_scheduler
+        alias hedging hedging_options
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
                     :callback_thread_pool, :flow_controller,
-                    :compress, :compression_bytes_threshold
+                    :compress, :compression_bytes_threshold,
+                    :hedging_thread_pool
 
         ##
         # @private Create a new instance of the object.
@@ -83,7 +92,9 @@ module Google
                        threads: {},
                        flow_control: {},
                        compress: nil,
-                       compression_bytes_threshold: nil
+                       compression_bytes_threshold: nil,
+                       hedging: nil,
+                       message_ordering: false
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -99,11 +110,13 @@ module Google
             byte_limit: 10 * @max_bytes
           }.merge(flow_control).freeze
 
+          @ordered = !(!message_ordering)
+          init_hedging! hedging
+
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
           @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @callback_threads
 
-          @ordered = false
           @batches = {}
           @cond = new_cond
           @flow_controller = FlowController.new(**@flow_control)
@@ -204,6 +217,12 @@ module Google
           synchronize do
             @publish_thread_pool.wait_for_termination timeout
 
+            @hedging_scheduler&.stop!
+            if @hedging_thread_pool
+              @hedging_thread_pool.shutdown
+              @hedging_thread_pool.kill unless @hedging_thread_pool.wait_for_termination 0.1
+            end
+
             @callback_thread_pool.shutdown
             @callback_thread_pool.wait_for_termination timeout
           end
@@ -266,7 +285,10 @@ module Google
         # {Subscriber#listen}, and {Message#ordering_key}.
         #
         def enable_message_ordering!
-          synchronize { @ordered = true }
+          synchronize do
+            @hedging_options&.validate_message_ordering! true
+            @ordered = true
+          end
         end
 
         ##
@@ -376,9 +398,7 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
-              grpc = @service.publish topic_name,
-                                      items.map(&:msg),
-                                      compress: compress && batch.total_message_bytes >= compression_bytes_threshold
+              grpc = publish_items topic_name, batch, items
               service.internal_logger.log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
@@ -420,6 +440,112 @@ module Google
         end
 
         # rubocop:enable Metrics/AbcSize
+
+        def init_hedging! hedging
+          @hedging_options = HedgingOptions.from hedging,
+                                                 message_ordering: @ordered,
+                                                 timeout: @service&.publish_timeout
+          return unless @hedging_options
+
+          @token_bucket = HedgingTokenBucket.new @hedging_options
+          @hedging_thread_pool = Concurrent::CachedThreadPool.new
+          @hedging_scheduler = HedgingScheduler.new(
+            hedge_delay: @hedging_options.hedge_delay,
+            token_bucket: @token_bucket,
+            logger: @service&.internal_logger
+          ) do |coordinator, batch_context, attempt_number, attempt_timeout|
+            dispatch_hedged_attempt coordinator, batch_context, attempt_number, attempt_timeout
+          end
+        end
+
+        def publish_items topic_name, batch, items
+          if hedge_batch? batch
+            publish_items_hedged topic_name, batch, items
+          else
+            @service.publish topic_name,
+                             items.map(&:msg),
+                             compress: compress_batch?(batch)
+          end
+        end
+
+        def compress_batch? batch
+          !(!(compress && batch.total_message_bytes >= compression_bytes_threshold))
+        end
+
+        def hedge_batch? batch
+          return false unless @hedging_options && !@ordered
+
+          ordering_key = batch.ordering_key
+          ordering_key.nil? || ordering_key.empty?
+        end
+
+        def publish_items_hedged topic_name, batch, items
+          timeout = @service.publish_timeout || 60.0
+          deadline = @hedging_scheduler.now + timeout
+          batch_context = {
+            topic_name: topic_name,
+            messages: items.map(&:msg),
+            compress: compress_batch?(batch)
+          }
+          coordinator = CancellationSharer.new(
+            batch: batch_context,
+            token_bucket: @token_bucket,
+            deadline: deadline
+          )
+          attempt0_handle = coordinator.add_attempt 0
+          @hedging_scheduler.schedule coordinator, attempt_number: 1
+
+          dispatch_attempt_task coordinator, batch_context, 0, attempt0_handle
+          coordinator.wait
+        end
+
+        def dispatch_hedged_attempt coordinator, batch_context, attempt_number, attempt_timeout
+          handle = coordinator.add_attempt attempt_number
+          return unless handle
+
+          call_options = {
+            timeout: attempt_timeout,
+            retry_policy: { retry_codes: [] }
+          }
+          dispatch_attempt_task coordinator, batch_context, attempt_number, handle,
+                                call_options: call_options
+        end
+
+        def dispatch_attempt_task coordinator, batch_context, attempt_number, attempt_handle, call_options: nil
+          if @hedging_thread_pool&.running?
+            Concurrent::Promises.future_on(
+              @hedging_thread_pool,
+              coordinator,
+              batch_context,
+              attempt_number,
+              attempt_handle,
+              call_options
+            ) do |coord, ctx, num, hdl, opts|
+              execute_publish_attempt coord, ctx, num, hdl, call_options: opts
+            end
+          else
+            execute_publish_attempt coordinator, batch_context, attempt_number, attempt_handle,
+                                    call_options: call_options
+          end
+        end
+
+        def execute_publish_attempt coordinator, batch_context, attempt_number, attempt_handle, call_options: nil
+          return if attempt_handle.nil? || attempt_handle.cancelled? || coordinator.done?
+
+          response = @service.publish batch_context[:topic_name],
+                                      batch_context[:messages],
+                                      compress: batch_context[:compress],
+                                      call_options: call_options,
+                                      attempt_handle: attempt_handle
+          if attempt_handle.cancelled?
+            coordinator.handle_attempt_failure attempt_number,
+                                               AttemptCancelledError.new("Publish attempt cancelled")
+          else
+            coordinator.handle_attempt_success attempt_number, response
+          end
+        rescue StandardError => e
+          coordinator.handle_attempt_failure attempt_number, e
+        end
 
         PUBLISH_RETRY_ERRORS = [
           GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
