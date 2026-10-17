@@ -194,6 +194,91 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     end
   end
 
+  it "runs an aggregate query" do
+    expected_query = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: documents_path,
+      structured_aggregation_query: Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+        structured_query: Google::Cloud::Firestore::V1::StructuredQuery.new(
+          from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+        ),
+        aggregations: [
+          Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+            count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+            alias: "count"
+          )
+        ]
+      ),
+      new_transaction: transaction_opt
+    )
+    agg_response = [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        transaction: transaction_id,
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: {
+            "count": Google::Cloud::Firestore::V1::Value.new(integer_value: 2)
+          }
+        )
+      )
+    ].to_enum
+    firestore_mock.expect :run_aggregation_query, agg_response, [expected_query, transaction_options]
+    firestore_mock.expect :commit, empty_commit_resp, commit_args(transaction: transaction_id)
+
+    firestore.transaction do |tx|
+      aq = firestore.col(:users).aggregate_query.add_count
+      results = tx.get_aggregate(aq).to_a
+      _(results.count).must_equal 1
+      _(results.first.get("count")).must_equal 2
+    end
+  end
+
+  it "runs multiple aggregate queries" do
+    structured_agg_query = Google::Cloud::Firestore::V1::StructuredAggregationQuery.new(
+      structured_query: Google::Cloud::Firestore::V1::StructuredQuery.new(
+        from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+      ),
+      aggregations: [
+        Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation.new(
+          count: Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count.new,
+          alias: "count"
+        )
+      ]
+    )
+    first_query = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: documents_path,
+      structured_aggregation_query: structured_agg_query,
+      new_transaction: transaction_opt
+    )
+    second_query = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
+      parent: documents_path,
+      structured_aggregation_query: structured_agg_query,
+      transaction: transaction_id
+    )
+    agg_response = [
+      Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new(
+        transaction: transaction_id,
+        result: Google::Cloud::Firestore::V1::AggregationResult.new(
+          aggregate_fields: {
+            "count": Google::Cloud::Firestore::V1::Value.new(integer_value: 2)
+          }
+        )
+      )
+    ].to_enum
+    firestore_mock.expect :run_aggregation_query, agg_response, [first_query, transaction_options]
+    firestore_mock.expect :run_aggregation_query, agg_response, [second_query, transaction_options]
+    firestore_mock.expect :commit, empty_commit_resp, commit_args(transaction: transaction_id)
+
+    firestore.transaction do |tx|
+      aq = firestore.col(:users).aggregate_query.add_count
+      results = tx.get_aggregate(aq).to_a
+      _(results.count).must_equal 1
+      _(results.first.get("count")).must_equal 2
+
+      results = tx.get_aggregate(aq).to_a
+      _(results.count).must_equal 1
+      _(results.first.get("count")).must_equal 2
+    end
+  end
+
   it "that does nothing makes no calls" do
     firestore.transaction do |tx|
       # no op
@@ -201,7 +286,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "creates a new document using string path" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: create_writes)
 
     resp = firestore.transaction commit_response: true do |tx|
@@ -213,7 +298,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "creates a new document using doc ref" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: create_writes)
 
     doc = firestore.doc document_path
@@ -235,7 +320,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "sets a new document using string path" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: set_writes)
 
     resp = firestore.transaction commit_response: true do |tx|
@@ -247,7 +332,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "sets a new document using doc ref" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: set_writes)
 
     doc = firestore.doc document_path
@@ -269,7 +354,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "updates a new document using string path" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: update_writes)
 
     resp = firestore.transaction commit_response: true do |tx|
@@ -281,7 +366,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "updates a new document using doc ref" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: update_writes)
 
     doc = firestore.doc document_path
@@ -303,7 +388,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "deletes a document using string path" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: delete_writes)
 
     resp = firestore.transaction commit_response: true do |tx|
@@ -315,7 +400,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   it "deletes a document using doc ref" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: delete_writes)
 
     doc = firestore.doc document_path
@@ -355,7 +440,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
 
   it "performs multiple writes in the same commit (string)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: all_writes)
 
     resp = firestore.transaction commit_response: true do |tx|
@@ -371,7 +456,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
 
   it "performs multiple writes in the same commit (doc ref)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
+    firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
     firestore_mock.expect :commit, write_commit_resp, commit_args(transaction: transaction_id, writes: all_writes)
 
     doc_ref = firestore.doc document_path
@@ -500,8 +585,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     end
 
     it "does not retry when an unsupported error is raised" do
-      firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, default_options]
-      firestore_mock.expect :rollback, nil, [{ database: database_path, transaction: transaction_id }, default_options]
+      firestore_mock.expect :begin_transaction, begin_tx_resp, [{ database: database_path, options: transaction_opt }, transaction_options]
+      firestore_mock.expect :rollback, nil, [{ database: database_path, transaction: transaction_id }, transaction_options]
 
       # Unable to use mocks to raise an error, so stub the method instead
       def firestore_mock.commit req, options
