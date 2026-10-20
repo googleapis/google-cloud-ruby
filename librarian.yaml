@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.48.0
+version: v0.49.0
 sources:
   googleapis:
     commit: b6efa15f5537f053786e5d8875d75bc3a6246455
