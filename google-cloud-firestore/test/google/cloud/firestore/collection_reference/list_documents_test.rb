@@ -159,22 +159,6 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     _(documents.token).must_equal "next_page_token"
   end
 
-  it "lists documents with transaction" do
-    num_documents = 3
-
-    list_res = paged_enum_struct list_documents_gapi(num_documents)
-
-    firestore_mock.expect :list_documents, list_res, list_documents_args(transaction: transaction_id)
-
-    response = firestore.service.list_documents "projects/#{project}/databases/(default)/documents/users/alice",
-                                                collection_id,
-                                                transaction: transaction_id
-
-    firestore_mock.verify
-
-    _(response.documents.size).must_equal num_documents
-  end
-
   def document_gapi
     Google::Cloud::Firestore::V1::Document.new(
       name: "projects/#{project}/databases/(default)/documents/my-document",
@@ -191,17 +175,18 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     )
   end
 
-  def list_documents_args page_size: nil, page_token: nil, read_time: nil, transaction: nil
-    req = {
-      parent: "projects/projectID/databases/(default)/documents/users/alice",
-      collection_id: "messages",
-      page_size: page_size,
-      page_token: page_token,
-      mask: {field_paths: []},
-      show_missing: true,
-      read_time: firestore.service.read_time_to_timestamp(read_time)
-    }
-    req[:transaction] = transaction if transaction
-    [req, transaction ? transaction_options : default_options]
+  def list_documents_args page_size: nil, page_token: nil, read_time: nil
+    [
+      {
+        parent: "projects/projectID/databases/(default)/documents/users/alice",
+        collection_id: "messages",
+        page_size: page_size,
+        page_token: page_token,
+        mask: {field_paths: []},
+        show_missing: true,
+        read_time: firestore.service.read_time_to_timestamp(read_time)
+      },
+      default_options
+    ]
   end
 end

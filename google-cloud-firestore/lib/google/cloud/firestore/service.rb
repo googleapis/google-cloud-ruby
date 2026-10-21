@@ -73,7 +73,10 @@ module Google
           if read_time
             batch_get_req[:read_time] = read_time_to_timestamp(read_time)
           end
-          firestore.batch_get_documents batch_get_req, call_options(parent: database_path, is_transaction: !transaction.nil?)
+          firestore.batch_get_documents(
+            batch_get_req,
+            call_options(parent: database_path, is_transaction: !transaction.nil?)
+          )
         end
 
         ##
@@ -83,7 +86,7 @@ module Google
         # the showMissing flag to true to support full document traversal. If
         # there are too many documents, recommendation will be not to call this
         # method.
-        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil, transaction: nil
+        def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           mask = { field_paths: [] }
           list_docs_req = {
             parent:        parent,
@@ -94,9 +97,7 @@ module Google
             show_missing:  true,
             read_time:     read_time_to_timestamp(read_time)
           }
-          list_docs_req[:transaction] = transaction if transaction
-          paged_enum = firestore.list_documents list_docs_req,
-                                                call_options(parent: database_path, is_transaction: !transaction.nil?)
+          paged_enum = firestore.list_documents list_docs_req, call_options(parent: database_path)
           paged_enum.response
         end
 
@@ -165,7 +166,10 @@ module Google
           if explain_options
             request.explain_options = explain_options
           end
-          firestore.run_aggregation_query request, call_options(parent: database_path, is_transaction: !transaction.nil?)
+          firestore.run_aggregation_query(
+            request,
+            call_options(parent: database_path, is_transaction: !transaction.nil?)
+          )
         end
 
         def listen enum
