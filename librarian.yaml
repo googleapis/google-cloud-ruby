@@ -4641,6 +4641,13 @@ libraries:
     ruby:
       wrapper_of:
         - v1beta:0.0
+  - name: google-shopping-merchant-reviews-v1
+    version: 0.0.1
+    apis:
+      - path: google/shopping/merchant/reviews/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-reviews-v1beta
     version: 0.9.0
     apis:
