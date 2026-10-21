@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n,google/cloud/alloydb/v1/csql_resources.proto\x12\x17google.cloud.alloydb.v1\x1a\x1fgoogle/api/field_behavior.proto\"`\n\x17\x43loudSQLBackupRunSource\x12\x0f\n\x07project\x18\x01 \x01(\t\x12\x18\n\x0binstance_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x1a\n\rbackup_run_id\x18\x03 \x01(\x03\x42\x03\xe0\x41\x02\x42\xbb\x01\n\x1b\x63om.google.cloud.alloydb.v1B\x12\x43sqlResourcesProtoP\x01Z5cloud.google.com/go/alloydb/apiv1/alloydbpb;alloydbpb\xaa\x02\x17Google.Cloud.AlloyDb.V1\xca\x02\x17Google\\Cloud\\AlloyDb\\V1\xea\x02\x1aGoogle::Cloud::AlloyDB::V1b\x06proto3"
+descriptor_data = "\n,google/cloud/alloydb/v1/csql_resources.proto\x12\x17google.cloud.alloydb.v1\x1a\x1fgoogle/api/field_behavior.proto\"b\n\x17\x43loudSQLBackupRunSource\x12\x0f\n\x07project\x18\x01 \x01(\t\x12\x19\n\x0binstance_id\x18\x02 \x01(\tB\x04\xe2\x41\x01\x02\x12\x1b\n\rbackup_run_id\x18\x03 \x01(\x03\x42\x04\xe2\x41\x01\x02\x42\xbb\x01\n\x1b\x63om.google.cloud.alloydb.v1B\x12\x43sqlResourcesProtoP\x01Z5cloud.google.com/go/alloydb/apiv1/alloydbpb;alloydbpb\xaa\x02\x17Google.Cloud.AlloyDb.V1\xca\x02\x17Google\\Cloud\\AlloyDb\\V1\xea\x02\x1aGoogle::Cloud::AlloyDB::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n;google/cloud/geminidataanalytics/v1beta/agent_context.proto\x12\'google.cloud.geminidataanalytics.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"4\n\x15\x41gentContextReference\x12\x1b\n\x0e\x63ontext_set_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\xa2\x02\n+com.google.cloud.geminidataanalytics.v1betaB\x11\x41gentContextProtoP\x01Z]cloud.google.com/go/geminidataanalytics/apiv1beta/geminidataanalyticspb;geminidataanalyticspb\xaa\x02\'Google.Cloud.GeminiDataAnalytics.V1Beta\xca\x02\'Google\\Cloud\\GeminiDataAnalytics\\V1beta\xea\x02*Google::Cloud::GeminiDataAnalytics::V1betab\x06proto3"
+descriptor_data = "\n;google/cloud/geminidataanalytics/v1beta/agent_context.proto\x12\'google.cloud.geminidataanalytics.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"5\n\x15\x41gentContextReference\x12\x1c\n\x0e\x63ontext_set_id\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x42\xa2\x02\n+com.google.cloud.geminidataanalytics.v1betaB\x11\x41gentContextProtoP\x01Z]cloud.google.com/go/geminidataanalytics/apiv1beta/geminidataanalyticspb;geminidataanalyticspb\xaa\x02\'Google.Cloud.GeminiDataAnalytics.V1Beta\xca\x02\'Google\\Cloud\\GeminiDataAnalytics\\V1beta\xea\x02*Google::Cloud::GeminiDataAnalytics::V1betab\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

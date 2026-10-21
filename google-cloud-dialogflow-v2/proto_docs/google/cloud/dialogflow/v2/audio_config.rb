@@ -184,6 +184,10 @@ module Google
         #     Optional. If true, Gemini ASR will be used for transcription instead of
         #     Cloud Speech-to-Text. If false, Cloud Speech-to-Text will be used.
         #     If unset, this setting is inherited from the ConversationProfile.
+        # @!attribute [rw] disable_interim_input_transcripts
+        #   @return [::Boolean]
+        #     Optional. Disables emission of interim input transcriptions when set to
+        #     `true`.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -390,6 +394,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If true, Gemini ASR will be used for transcription instead of
         #     Cloud Speech-to-Text.
+        # @!attribute [rw] disable_interim_input_transcripts
+        #   @return [::Boolean]
+        #     Optional. Disables emission of interim input transcriptions when set to
+        #     `true`.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -397,11 +405,6 @@ module Google
           # Configuration for using Gemini ASR models served via Vertex AI. This
           # message is used to override the default Gemini ASR model or provide
           # additional advanced parameters.
-          # @!attribute [rw] model_id
-          #   @return [::String]
-          #     Optional. The Gemini ASR model ID used for transcription.
-          #     This value overrides the default model ID configured on the server.
-          #     Example: "gemini-3-flash-lite-asr-preview"
           # @!attribute [rw] silence_duration_ms
           #   @return [::Integer]
           #     Optional. The required duration of detected silence (or non-speech)

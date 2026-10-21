@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\nFgoogle/cloud/networksecurity/v1/security_profile_group_mirroring.proto\x12\x1fgoogle.cloud.networksecurity.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"|\n\x16\x43ustomMirroringProfile\x12\x62\n\x18mirroring_endpoint_group\x18\x01 \x01(\tB@\xe0\x41\x02\xe0\x41\x05\xfa\x41\x37\n5networksecurity.googleapis.com/MirroringEndpointGroupB\x83\x02\n#com.google.cloud.networksecurity.v1B\"SecurityProfileGroupMirroringProtoP\x01ZMcloud.google.com/go/networksecurity/apiv1/networksecuritypb;networksecuritypb\xaa\x02\x1fGoogle.Cloud.NetworkSecurity.V1\xca\x02\x1fGoogle\\Cloud\\NetworkSecurity\\V1\xea\x02\"Google::Cloud::NetworkSecurity::V1b\x06proto3"
+descriptor_data = "\nFgoogle/cloud/networksecurity/v1/security_profile_group_mirroring.proto\x12\x1fgoogle.cloud.networksecurity.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"{\n\x16\x43ustomMirroringProfile\x12\x61\n\x18mirroring_endpoint_group\x18\x01 \x01(\tB?\xe2\x41\x02\x02\x05\xfa\x41\x37\n5networksecurity.googleapis.com/MirroringEndpointGroupB\x83\x02\n#com.google.cloud.networksecurity.v1B\"SecurityProfileGroupMirroringProtoP\x01ZMcloud.google.com/go/networksecurity/apiv1/networksecuritypb;networksecuritypb\xaa\x02\x1fGoogle.Cloud.NetworkSecurity.V1\xca\x02\x1fGoogle\\Cloud\\NetworkSecurity\\V1\xea\x02\"Google::Cloud::NetworkSecurity::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

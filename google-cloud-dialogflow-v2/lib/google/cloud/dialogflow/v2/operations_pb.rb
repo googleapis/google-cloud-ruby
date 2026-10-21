@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n+google/cloud/dialogflow/v2/operations.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"I\n$GeneratorEvaluationOperationMetadata\x12!\n\x14generator_evaluation\x18\x01 \x01(\tB\x03\xe0\x41\x03\x42\x95\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0fOperationsProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
+descriptor_data = "\n+google/cloud/dialogflow/v2/operations.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"J\n$GeneratorEvaluationOperationMetadata\x12\"\n\x14generator_evaluation\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x42\x95\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0fOperationsProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

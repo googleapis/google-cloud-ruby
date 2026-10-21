@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n)google/cloud/ces/v1/bigquery_export.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\"Z\n\x16\x42igQueryExportSettings\x12\x14\n\x07\x65nabled\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12\x14\n\x07project\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x14\n\x07\x64\x61taset\x18\x03 \x01(\tB\x03\xe0\x41\x01\x42[\n\x17\x63om.google.cloud.ces.v1B\x13\x42igQueryExportProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
+descriptor_data = "\n)google/cloud/ces/v1/bigquery_export.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\"]\n\x16\x42igQueryExportSettings\x12\x15\n\x07\x65nabled\x18\x01 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12\x15\n\x07project\x18\x02 \x01(\tB\x04\xe2\x41\x01\x01\x12\x15\n\x07\x64\x61taset\x18\x03 \x01(\tB\x04\xe2\x41\x01\x01\x42[\n\x17\x63om.google.cloud.ces.v1B\x13\x42igQueryExportProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

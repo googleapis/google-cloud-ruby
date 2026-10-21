@@ -1737,6 +1737,10 @@ module Google
         #     caused the event.
         #     This field is currently only used by Webhook, Pub/Sub, Manual, and Cron
         #     triggers.
+        # @!attribute [rw] approval_config
+        #   @return [::Google::Cloud::Build::V1::ApprovalConfig]
+        #     Configuration for manual approval to start a build invocation of this
+        #     BuildTrigger.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account used for all user-controlled operations including

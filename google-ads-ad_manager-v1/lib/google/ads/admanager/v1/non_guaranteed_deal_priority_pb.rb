@@ -8,7 +8,7 @@ require 'google/ads/admanager/v1/deal_priority_tier_enum_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n:google/ads/admanager/v1/non_guaranteed_deal_priority.proto\x12\x17google.ads.admanager.v1\x1a\x35google/ads/admanager/v1/deal_priority_tier_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\x8e\x01\n\x19NonGuaranteedDealPriority\x12_\n\rpriority_tier\x18\x01 \x01(\x0e\x32>.google.ads.admanager.v1.DealPriorityTierEnum.DealPriorityTierB\x03\xe0\x41\x02H\x00\x88\x01\x01\x42\x10\n\x0e_priority_tierB\xd2\x01\n\x1b\x63om.google.ads.admanager.v1B\x1eNonGuaranteedDealPriorityProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n:google/ads/admanager/v1/non_guaranteed_deal_priority.proto\x12\x17google.ads.admanager.v1\x1a\x35google/ads/admanager/v1/deal_priority_tier_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\x8f\x01\n\x19NonGuaranteedDealPriority\x12`\n\rpriority_tier\x18\x01 \x01(\x0e\x32>.google.ads.admanager.v1.DealPriorityTierEnum.DealPriorityTierB\x04\xe2\x41\x01\x02H\x00\x88\x01\x01\x42\x10\n\x0e_priority_tierB\xd2\x01\n\x1b\x63om.google.ads.admanager.v1B\x1eNonGuaranteedDealPriorityProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

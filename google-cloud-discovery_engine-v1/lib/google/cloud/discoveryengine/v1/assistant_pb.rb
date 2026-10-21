@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n/google/cloud/discoveryengine/v1/assistant.proto\x12\x1fgoogle.cloud.discoveryengine.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xb9\x01\n\tAssistant\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x05:\x98\x01\xea\x41\x94\x01\n(discoveryengine.googleapis.com/Assistant\x12hprojects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}B\x81\x02\n#com.google.cloud.discoveryengine.v1B\x0e\x41ssistantProtoP\x01ZMcloud.google.com/go/discoveryengine/apiv1/discoveryenginepb;discoveryenginepb\xa2\x02\x0f\x44ISCOVERYENGINE\xaa\x02\x1fGoogle.Cloud.DiscoveryEngine.V1\xca\x02\x1fGoogle\\Cloud\\DiscoveryEngine\\V1\xea\x02\"Google::Cloud::DiscoveryEngine::V1b\x06proto3"
+descriptor_data = "\n/google/cloud/discoveryengine/v1/assistant.proto\x12\x1fgoogle.cloud.discoveryengine.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xba\x01\n\tAssistant\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x05:\x98\x01\xea\x41\x94\x01\n(discoveryengine.googleapis.com/Assistant\x12hprojects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}B\x81\x02\n#com.google.cloud.discoveryengine.v1B\x0e\x41ssistantProtoP\x01ZMcloud.google.com/go/discoveryengine/apiv1/discoveryenginepb;discoveryenginepb\xa2\x02\x0f\x44ISCOVERYENGINE\xaa\x02\x1fGoogle.Cloud.DiscoveryEngine.V1\xca\x02\x1fGoogle\\Cloud\\DiscoveryEngine\\V1\xea\x02\"Google::Cloud::DiscoveryEngine::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

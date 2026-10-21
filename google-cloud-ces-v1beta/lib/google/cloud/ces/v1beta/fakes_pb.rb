@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n#google/cloud/ces/v1beta/fakes.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"%\n\tCodeBlock\x12\x18\n\x0bpython_code\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x7f\n\x0eToolFakeConfig\x12=\n\ncode_block\x18\x01 \x01(\x0b\x32\".google.cloud.ces.v1beta.CodeBlockB\x03\xe0\x41\x01H\x00\x12\x1d\n\x10\x65nable_fake_mode\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x42\x0f\n\rtool_response*a\n\x1b\x45valuationToolCallBehaviour\x12.\n*EVALUATION_TOOL_CALL_BEHAVIOUR_UNSPECIFIED\x10\x00\x12\x08\n\x04REAL\x10\x01\x12\x08\n\x04\x46\x41KE\x10\x02\x42Z\n\x1b\x63om.google.cloud.ces.v1betaB\nFakesProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
+descriptor_data = "\n#google/cloud/ces/v1beta/fakes.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"&\n\tCodeBlock\x12\x19\n\x0bpython_code\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\"\x81\x01\n\x0eToolFakeConfig\x12>\n\ncode_block\x18\x01 \x01(\x0b\x32\".google.cloud.ces.v1beta.CodeBlockB\x04\xe2\x41\x01\x01H\x00\x12\x1e\n\x10\x65nable_fake_mode\x18\x02 \x01(\x08\x42\x04\xe2\x41\x01\x01\x42\x0f\n\rtool_response*a\n\x1b\x45valuationToolCallBehaviour\x12.\n*EVALUATION_TOOL_CALL_BEHAVIOUR_UNSPECIFIED\x10\x00\x12\x08\n\x04REAL\x10\x01\x12\x08\n\x04\x46\x41KE\x10\x02\x42Z\n\x1b\x63om.google.cloud.ces.v1betaB\nFakesProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

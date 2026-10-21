@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/monitored_resource_pb'
 
 
-descriptor_data = "\n2google/monitoring/dashboard/v1/incident_list.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/api/monitored_resource.proto\"j\n\x0cIncidentList\x12?\n\x13monitored_resources\x18\x01 \x03(\x0b\x32\x1d.google.api.MonitoredResourceB\x03\xe0\x41\x01\x12\x19\n\x0cpolicy_names\x18\x02 \x03(\tB\x03\xe0\x41\x01\x42\xfa\x01\n\"com.google.monitoring.dashboard.v1B\x11IncidentListProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
+descriptor_data = "\n2google/monitoring/dashboard/v1/incident_list.proto\x12\x1egoogle.monitoring.dashboard.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/api/monitored_resource.proto\"l\n\x0cIncidentList\x12@\n\x13monitored_resources\x18\x01 \x03(\x0b\x32\x1d.google.api.MonitoredResourceB\x04\xe2\x41\x01\x01\x12\x1a\n\x0cpolicy_names\x18\x02 \x03(\tB\x04\xe2\x41\x01\x01\x42\xfa\x01\n\"com.google.monitoring.dashboard.v1B\x11IncidentListProtoP\x01ZFcloud.google.com/go/monitoring/dashboard/apiv1/dashboardpb;dashboardpb\xaa\x02$Google.Cloud.Monitoring.Dashboard.V1\xca\x02$Google\\Cloud\\Monitoring\\Dashboard\\V1\xea\x02(Google::Cloud::Monitoring::Dashboard::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

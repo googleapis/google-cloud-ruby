@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n-google/cloud/eventarc/v1/network_config.proto\x12\x18google.cloud.eventarc.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"]\n\rNetworkConfig\x12L\n\x12network_attachment\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(compute.googleapis.com/NetworkAttachmentB\xc2\x01\n\x1c\x63om.google.cloud.eventarc.v1B\x12NetworkConfigProtoP\x01Z8cloud.google.com/go/eventarc/apiv1/eventarcpb;eventarcpb\xaa\x02\x18Google.Cloud.Eventarc.V1\xca\x02\x18Google\\Cloud\\Eventarc\\V1\xea\x02\x1bGoogle::Cloud::Eventarc::V1b\x06proto3"
+descriptor_data = "\n-google/cloud/eventarc/v1/network_config.proto\x12\x18google.cloud.eventarc.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"^\n\rNetworkConfig\x12M\n\x12network_attachment\x18\x01 \x01(\tB1\xe2\x41\x01\x02\xfa\x41*\n(compute.googleapis.com/NetworkAttachmentB\xc2\x01\n\x1c\x63om.google.cloud.eventarc.v1B\x12NetworkConfigProtoP\x01Z8cloud.google.com/go/eventarc/apiv1/eventarcpb;eventarcpb\xaa\x02\x18Google.Cloud.Eventarc.V1\xca\x02\x18Google\\Cloud\\Eventarc\\V1\xea\x02\x1bGoogle::Cloud::Eventarc::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

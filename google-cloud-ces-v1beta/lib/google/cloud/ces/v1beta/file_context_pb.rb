@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n*google/cloud/ces/v1beta/file_context.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"\xb0\x01\n\x0b\x46ileContext\x12I\n\nfile_bytes\x18\x01 \x01(\x0b\x32..google.cloud.ces.v1beta.FileContext.FileBytesB\x03\xe0\x41\x01H\x00\x1aN\n\tFileBytes\x12\x16\n\tfile_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x16\n\tmime_type\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x42\x03\xe0\x41\x02\x42\x06\n\x04\x66ileB`\n\x1b\x63om.google.cloud.ces.v1betaB\x10\x46ileContextProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
+descriptor_data = "\n*google/cloud/ces/v1beta/file_context.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"\xb4\x01\n\x0b\x46ileContext\x12J\n\nfile_bytes\x18\x01 \x01(\x0b\x32..google.cloud.ces.v1beta.FileContext.FileBytesB\x04\xe2\x41\x01\x01H\x00\x1aQ\n\tFileBytes\x12\x17\n\tfile_name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x17\n\tmime_type\x18\x02 \x01(\tB\x04\xe2\x41\x01\x02\x12\x12\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x42\x04\xe2\x41\x01\x02\x42\x06\n\x04\x66ileB`\n\x1b\x63om.google.cloud.ces.v1betaB\x10\x46ileContextProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
