@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n&google/cloud/ces/v1/toolset_tool.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"X\n\x0bToolsetTool\x12\x33\n\x07toolset\x18\x01 \x01(\tB\"\xe0\x41\x02\xfa\x41\x1c\n\x1a\x63\x65s.googleapis.com/Toolset\x12\x14\n\x07tool_id\x18\x03 \x01(\tB\x03\xe0\x41\x01\x42X\n\x17\x63om.google.cloud.ces.v1B\x10ToolsetToolProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
+descriptor_data = "\n&google/cloud/ces/v1/toolset_tool.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"Z\n\x0bToolsetTool\x12\x34\n\x07toolset\x18\x01 \x01(\tB#\xe2\x41\x01\x02\xfa\x41\x1c\n\x1a\x63\x65s.googleapis.com/Toolset\x12\x15\n\x07tool_id\x18\x03 \x01(\tB\x04\xe2\x41\x01\x01\x42X\n\x17\x63om.google.cloud.ces.v1B\x10ToolsetToolProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

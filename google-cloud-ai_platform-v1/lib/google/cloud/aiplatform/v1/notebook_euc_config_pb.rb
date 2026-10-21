@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n4google/cloud/aiplatform/v1/notebook_euc_config.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"O\n\x11NotebookEucConfig\x12\x19\n\x0c\x65uc_disabled\x18\x01 \x01(\x08\x42\x03\xe0\x41\x04\x12\x1f\n\x12\x62ypass_actas_check\x18\x02 \x01(\x08\x42\x03\xe0\x41\x03\x42\xd4\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x16NotebookEucConfigProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n4google/cloud/aiplatform/v1/notebook_euc_config.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"Q\n\x11NotebookEucConfig\x12\x1a\n\x0c\x65uc_disabled\x18\x01 \x01(\x08\x42\x04\xe2\x41\x01\x04\x12 \n\x12\x62ypass_actas_check\x18\x02 \x01(\x08\x42\x04\xe2\x41\x01\x03\x42\xd4\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x16NotebookEucConfigProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

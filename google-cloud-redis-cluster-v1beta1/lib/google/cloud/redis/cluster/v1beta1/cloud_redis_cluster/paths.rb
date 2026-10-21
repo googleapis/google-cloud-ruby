@@ -66,6 +66,29 @@ module Google
               end
 
               ##
+              # Create a fully-qualified AuthToken resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param cluster [String]
+              # @param token_auth_user [String]
+              # @param auth_token [String]
+              #
+              # @return [::String]
+              def auth_token_path project:, location:, cluster:, token_auth_user:, auth_token:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+                raise ::ArgumentError, "token_auth_user cannot contain /" if token_auth_user.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/clusters/#{cluster}/tokenAuthUsers/#{token_auth_user}/authTokens/#{auth_token}"
+              end
+
+              ##
               # Create a fully-qualified Backup resource string.
               #
               # The resource will be in the following format:
@@ -293,6 +316,27 @@ module Google
                 raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/sharedRegionalCertificateAuthority"
+              end
+
+              ##
+              # Create a fully-qualified TokenAuthUser resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param cluster [String]
+              # @param token_auth_user [String]
+              #
+              # @return [::String]
+              def token_auth_user_path project:, location:, cluster:, token_auth_user:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/clusters/#{cluster}/tokenAuthUsers/#{token_auth_user}"
               end
 
               extend self

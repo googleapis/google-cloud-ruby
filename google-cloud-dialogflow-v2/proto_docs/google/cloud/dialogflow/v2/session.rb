@@ -754,6 +754,11 @@ module Google
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
         #     The sentiment analysis result for `query_text`.
+        # @!attribute [r] status
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The status of the sentiment analysis operation.
+        #     If the operation failed, this field will contain the error details.
+        #     For example, it might indicate a quota issue (RESOURCE_EXHAUSTED).
         class SentimentAnalysisResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

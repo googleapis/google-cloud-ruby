@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n*google/iam/v1/resource_policy_member.proto\x12\rgoogle.iam.v1\x1a\x1fgoogle/api/field_behavior.proto\"e\n\x14ResourcePolicyMember\x12&\n\x19iam_policy_name_principal\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12%\n\x18iam_policy_uid_principal\x18\x02 \x01(\tB\x03\xe0\x41\x03\x42\x87\x01\n\x11\x63om.google.iam.v1B\x19ResourcePolicyMemberProtoP\x01Z)cloud.google.com/go/iam/apiv1/iampb;iampb\xaa\x02\x13Google.Cloud.Iam.V1\xca\x02\x13Google\\Cloud\\Iam\\V1b\x06proto3"
+descriptor_data = "\n*google/iam/v1/resource_policy_member.proto\x12\rgoogle.iam.v1\x1a\x1fgoogle/api/field_behavior.proto\"g\n\x14ResourcePolicyMember\x12\'\n\x19iam_policy_name_principal\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12&\n\x18iam_policy_uid_principal\x18\x02 \x01(\tB\x04\xe2\x41\x01\x03\x42\x87\x01\n\x11\x63om.google.iam.v1B\x19ResourcePolicyMemberProtoP\x01Z)cloud.google.com/go/iam/apiv1/iampb;iampb\xaa\x02\x13Google.Cloud.Iam.V1\xca\x02\x13Google\\Cloud\\Iam\\V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

@@ -479,6 +479,190 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for [ListTokenAuthUsers][].
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource that this token based auth user will be
+          #     listed for. Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          #
+          #     If not specified, a default value of 1000 will be used by the service.
+          #     Regardless of the page_size value, the response may include a partial list
+          #     and a caller should only rely on response's
+          #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+          #     {::Google::Cloud::Redis::Cluster::V1beta1::ListTokenAuthUsersResponse#next_page_token `next_page_token`}
+          #     to determine if there are more clusters left to be queried.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     [ListTokenAuthUsers] request, if any.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Expression for filtering results.
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Optional. Sort results by a defined order.
+          class ListTokenAuthUsersRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for [ListTokenAuthUsers][].
+          # @!attribute [rw] token_auth_users
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::TokenAuthUser>]
+          #     A list of token auth users in the project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Unordered list. Token auth users that could not be reached.
+          class ListTokenAuthUsersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [GetTokenAuthUser][].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of token auth user for a token based auth enabled
+          #     cluster. Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+          class GetTokenAuthUserRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [ListAuthTokens][].
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource that this auth token will be listed for.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return. The maximum value is 1000;
+          #     values above 1000 will be coerced to 1000. If not specified, a default
+          #     value of 1000 will be used by the service. Regardless of the page_size
+          #     value, the response may include a partial list and a caller should only
+          #     rely on response's
+          #     {::Google::Cloud::Redis::Cluster::V1beta1::ListTokenAuthUsersResponse#next_page_token `next_page_token`}
+          #     to determine if there are more clusters left to be queried.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     [ListTokenAuthUsers] request, if any.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Expression for filtering results.
+          # @!attribute [rw] order_by
+          #   @return [::String]
+          #     Optional. Sort results by a defined order.
+          class ListAuthTokensRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for [ListAuthTokens][].
+          # @!attribute [rw] auth_tokens
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1beta1::AuthToken>]
+          #     A list of auth tokens in the project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Unordered list. Auth tokens that could not be reached.
+          class ListAuthTokensResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [GetAuthToken][].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of auth token for a token based auth enabled cluster.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+          class GetAuthTokenRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [AddTokenAuthUser][].
+          # @!attribute [rw] cluster
+          #   @return [::String]
+          #     Required. The cluster resource that this token auth user will be added for.
+          #     Format: projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+          # @!attribute [rw] token_auth_user
+          #   @return [::String]
+          #     Required. The id of the token auth user to add.
+          class AddTokenAuthUserRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [DeleteTokenAuthUser][].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the token auth user to delete.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. An optional request ID to identify requests. Specify a unique
+          #     request ID so that if you must retry your request, the server will know to
+          #     ignore the request if it has already been completed. The server will
+          #     guarantee that for at least 60 minutes after the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request
+          #     ID, the server can check if original operation with the same request ID
+          #     was received, and if so, will ignore the second request. This prevents
+          #     clients from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported (00000000-0000-0000-0000-000000000000).
+          # @!attribute [rw] force
+          #   @return [::Boolean]
+          #     Optional. If set to true, any child auth tokens of this user will also be
+          #     deleted. Otherwise, the request will only work if the user has no auth
+          #     tokens.
+          class DeleteTokenAuthUserRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [AddAuthToken][].
+          # @!attribute [rw] token_auth_user
+          #   @return [::String]
+          #     Required. The name of the token auth user resource that this auth token
+          #     will be added for. Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+          # @!attribute [rw] auth_token
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AuthToken]
+          #     Required. The auth token to add.
+          class AddAuthTokenRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for [DeleteAuthToken][].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the token auth user resource that this auth token
+          #     will be deleted from. Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+          class DeleteAuthTokenRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A cluster instance.
           # @!attribute [rw] gcs_source
           #   @return [::Google::Cloud::Redis::Cluster::V1beta1::Cluster::GcsBackupSource]
@@ -1375,6 +1559,76 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Represents a token based auth user for the cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of the token based auth user.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::TokenAuthUser::State]
+          #     Output only. The state of the token based auth user.
+          class TokenAuthUser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the different states of a token based auth user.
+            # New values may be added in the future.
+            module State
+              # Not set.
+              STATE_UNSPECIFIED = 0
+
+              # The auth user is active.
+              ACTIVE = 1
+
+              # The auth user is being created.
+              CREATING = 2
+
+              # The auth user is being updated.
+              UPDATING = 3
+
+              # The auth user is being deleted.
+              DELETING = 4
+            end
+          end
+
+          # Auth token for the cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Name of the auth token.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+          # @!attribute [r] token
+          #   @return [::String]
+          #     Output only. The service generated authentication token used to connect to
+          #     the Redis cluster.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Create time of the auth token.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Redis::Cluster::V1beta1::AuthToken::State]
+          #     Output only. State of the auth token.
+          class AuthToken
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the different states of an auth token.
+            # New values may be added in the future.
+            module State
+              # Not set.
+              STATE_UNSPECIFIED = 0
+
+              # The auth token is active.
+              ACTIVE = 1
+
+              # The auth token is being created.
+              CREATING = 2
+
+              # The auth token is being deleted.
+              DELETING = 3
+            end
+          end
+
           # Redis cluster certificate authority
           # @!attribute [rw] managed_server_ca
           #   @return [::Google::Cloud::Redis::Cluster::V1beta1::CertificateAuthority::ManagedCertificateAuthority]
@@ -1642,6 +1896,9 @@ module Google
 
             # Authorization disabled mode
             AUTH_MODE_DISABLED = 2
+
+            # Token based authorization mode
+            AUTH_MODE_TOKEN_AUTH = 3
           end
 
           # NodeType of a redis cluster node,

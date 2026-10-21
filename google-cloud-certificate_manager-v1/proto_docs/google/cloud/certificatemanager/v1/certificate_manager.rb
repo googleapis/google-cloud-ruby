@@ -28,20 +28,20 @@ module Google
         #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of certificates to return per call.
+        #     Optional. Maximum number of certificates to return per call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListCertificatesResponse`. Indicates that
-        #     this is a continuation of a prior `ListCertificates` call, and that the
-        #     system should return the next page of data.
+        #     Optional. The value returned by the last `ListCertificatesResponse`.
+        #     Indicates that this is a continuation of a prior `ListCertificates` call,
+        #     and that the system should return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the Certificates returned.
+        #     Optional. Filter expression to restrict the Certificates returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of Certificate field names used to specify the order of the returned
-        #     results. The default sorting order is ascending. To specify descending
-        #     order for a field, add a suffix `" desc"`.
+        #     Optional. A list of Certificate field names used to specify the order of
+        #     the returned results. The default sorting order is ascending. To specify
+        #     descending order for a field, add a suffix `" desc"`.
         class ListCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,19 +121,19 @@ module Google
         #     be listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of certificate maps to return per call.
+        #     Optional. Maximum number of certificate maps to return per call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListCertificateMapsResponse`. Indicates
-        #     that this is a continuation of a prior `ListCertificateMaps` call, and that
-        #     the system should return the next page of data.
+        #     Optional. The value returned by the last `ListCertificateMapsResponse`.
+        #     Indicates that this is a continuation of a prior `ListCertificateMaps`
+        #     call, and that the system should return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the Certificates Maps returned.
+        #     Optional. Filter expression to restrict the Certificates Maps returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of Certificate Map field names used to specify the order of the
-        #     returned results. The default sorting order is ascending. To specify
+        #     Optional. A list of Certificate Map field names used to specify the order
+        #     of the returned results. The default sorting order is ascending. To specify
         #     descending order for a field, add a suffix `" desc"`.
         class ListCertificateMapsRequest
           include ::Google::Protobuf::MessageExts
@@ -215,22 +215,23 @@ module Google
         #     `projects/*/locations/*/certificateMaps/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of certificate map entries to return. The service may return
-        #     fewer than this value.
-        #     If unspecified, at most 50 certificate map entries will be returned.
-        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. Maximum number of certificate map entries to return. The service
+        #     may return fewer than this value. If unspecified, at most 50 certificate
+        #     map entries will be returned. The maximum value is 1000; values above 1000
+        #     will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListCertificateMapEntriesResponse`.
-        #     Indicates that this is a continuation of a prior
-        #     `ListCertificateMapEntries` call, and that the system should return the
-        #     next page of data.
+        #     Optional. The value returned by the last
+        #     `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+        #     of a prior `ListCertificateMapEntries` call, and that the system should
+        #     return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the returned Certificate Map Entries.
+        #     Optional. Filter expression to restrict the returned Certificate Map
+        #     Entries.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of Certificate Map Entry field names used to specify
+        #     Optional. A list of Certificate Map Entry field names used to specify
         #     the order of the returned results. The default sorting order is ascending.
         #     To specify descending order for a field, add a suffix `" desc"`.
         class ListCertificateMapEntriesRequest
@@ -312,19 +313,19 @@ module Google
         #     be listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of dns authorizations to return per call.
+        #     Optional. Maximum number of dns authorizations to return per call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-        #     that this is a continuation of a prior `ListDnsAuthorizations` call, and
-        #     that the system should return the next page of data.
+        #     Optional. The value returned by the last `ListDnsAuthorizationsResponse`.
+        #     Indicates that this is a continuation of a prior `ListDnsAuthorizations`
+        #     call, and that the system should return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the Dns Authorizations returned.
+        #     Optional. Filter expression to restrict the Dns Authorizations returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of Dns Authorization field names used to specify the order of the
-        #     returned results. The default sorting order is ascending. To specify
+        #     Optional. A list of Dns Authorization field names used to specify the order
+        #     of the returned results. The default sorting order is ascending. To specify
         #     descending order for a field, add a suffix `" desc"`.
         class ListDnsAuthorizationsRequest
           include ::Google::Protobuf::MessageExts
@@ -418,9 +419,10 @@ module Google
         #   @return [::Boolean]
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of `1`,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
@@ -432,11 +434,12 @@ module Google
         # Defines TLS certificate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the certificate. Certificate names must be unique
-        #     globally and match pattern `projects/*/locations/*/certificates/*`.
+        #     Identifier. A user-defined name of the certificate. Certificate names must
+        #     be unique globally and match pattern
+        #     `projects/*/locations/*/certificates/*`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a certificate.
+        #     Optional. One or more paragraphs of text description of a certificate.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of a Certificate.
@@ -445,17 +448,23 @@ module Google
         #     Output only. The last update timestamp of a Certificate.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a Certificate.
+        #     Optional. Set of labels associated with a Certificate.
         # @!attribute [rw] self_managed
         #   @return [::Google::Cloud::CertificateManager::V1::Certificate::SelfManagedCertificate]
         #     If set, defines data of a self-managed certificate.
         #
-        #     Note: The following fields are mutually exclusive: `self_managed`, `managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `self_managed`, `managed`, `managed_identity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] managed
         #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate]
         #     If set, contains configuration and state of a managed certificate.
         #
-        #     Note: The following fields are mutually exclusive: `managed`, `self_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `managed`, `self_managed`, `managed_identity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] managed_identity
+        #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedIdentityCertificate]
+        #     If set, contains configuration and state of a managed identity
+        #     certificate.
+        #
+        #     Note: The following fields are mutually exclusive: `managed_identity`, `self_managed`, `managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] san_dnsnames
         #   @return [::Array<::String>]
         #     Output only. The list of Subject Alternative Names of dnsName type defined
@@ -470,7 +479,16 @@ module Google
         #     Output only. The expiry timestamp of a Certificate.
         # @!attribute [rw] scope
         #   @return [::Google::Cloud::CertificateManager::V1::Certificate::Scope]
-        #     Immutable. The scope of the certificate.
+        #     Optional. Immutable. The scope of the certificate.
+        # @!attribute [r] used_by
+        #   @return [::Array<::Google::Cloud::CertificateManager::V1::Certificate::UsedBy>]
+        #     Output only. The list of resources that use this Certificate.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class Certificate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -480,11 +498,12 @@ module Google
           # certificates before they expire remains the user's responsibility.
           # @!attribute [rw] pem_certificate
           #   @return [::String]
-          #     Input only. The PEM-encoded certificate chain.
+          #     Optional. Input only. The PEM-encoded certificate chain.
           #     Leaf certificate comes first, followed by intermediate ones if any.
           # @!attribute [rw] pem_private_key
           #   @return [::String]
-          #     Input only. The PEM-encoded private key of the leaf certificate.
+          #     Optional. Input only. The PEM-encoded private key of the leaf
+          #     certificate.
           class SelfManagedCertificate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -495,16 +514,16 @@ module Google
           # automatically, for as long as it's authorized to do so.
           # @!attribute [rw] domains
           #   @return [::Array<::String>]
-          #     Immutable. The domains for which a managed SSL certificate will be
-          #     generated. Wildcard domains are only supported with DNS challenge
+          #     Optional. Immutable. The domains for which a managed SSL certificate will
+          #     be generated. Wildcard domains are only supported with DNS challenge
           #     resolution.
           # @!attribute [rw] dns_authorizations
           #   @return [::Array<::String>]
-          #     Immutable. Authorizations that will be used for performing domain
-          #     authorization.
+          #     Optional. Immutable. Authorizations that will be used for performing
+          #     domain authorization.
           # @!attribute [rw] issuance_config
           #   @return [::String]
-          #     Immutable. The resource name for a
+          #     Optional. Immutable. The resource name for a
           #     {::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig CertificateIssuanceConfig}
           #     used to configure private PKI certificates in the format
           #     `projects/*/locations/*/certificateIssuanceConfigs/*`.
@@ -558,9 +577,9 @@ module Google
 
             # State of the latest attempt to authorize a domain for certificate
             # issuance.
-            # @!attribute [rw] domain
+            # @!attribute [r] domain
             #   @return [::String]
-            #     Domain name of the authorization attempt.
+            #     Output only. Domain name of the authorization attempt.
             # @!attribute [r] state
             #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::State]
             #     Output only. State of the domain for managed certificate issuance.
@@ -573,9 +592,97 @@ module Google
             #     Output only. Human readable explanation for reaching the state.
             #     Provided to help address the configuration issues. Not guaranteed to be
             #     stable. For programmatic access use FailureReason enum.
+            # @!attribute [r] attempt_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The timestamp, when the authorization attempt was made.
+            # @!attribute [r] troubleshooting
+            #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::Troubleshooting]
+            #     Output only. Troubleshooting information for the authorization attempt.
+            #     This field is only populated if the authorization attempt failed.
             class AuthorizationAttemptInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Troubleshooting information for the authorization attempt.
+              # @!attribute [r] issues
+              #   @return [::Array<::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::Troubleshooting::Issue>]
+              #     Output only. The list of issues discovered during the authorization
+              #     attempt.
+              # @!attribute [r] cname
+              #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::Troubleshooting::CNAME]
+              #     Output only. CNAME troubleshooting information.
+              # @!attribute [r] ips
+              #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::Troubleshooting::IPs]
+              #     Output only. IPs troubleshooting information.
+              class Troubleshooting
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # CNAME troubleshooting information.
+                # @!attribute [r] name
+                #   @return [::String]
+                #     Output only. The name of the CNAME record for the domain, equals to
+                #     `dns_resource_record.name` in the corresponding `DnsAuthorization`.
+                # @!attribute [r] expected_data
+                #   @return [::String]
+                #     Output only. The expected value of the CNAME record for the domain,
+                #     equals to `dns_resource_record.data` in the corresponding
+                #     `DnsAuthorization`.
+                # @!attribute [r] resolved_data
+                #   @return [::Array<::String>]
+                #     Output only. The resolved CNAME chain.
+                #     Empty list if the CNAME record for `CNAME.name` is not found.
+                #     Otherwise the first item is the value of the CNAME record for
+                #     `CNAME.name`.
+                #     If the CNAME chain is longer, the second item is the value of the
+                #     CNAME record for the first item, and so on.
+                class CNAME
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # IPs troubleshooting information.
+                # @!attribute [r] serving
+                #   @return [::Array<::String>]
+                #     Output only. The list of IP addresses, where the certificate is
+                #     attached and port 443 is open.
+                # @!attribute [r] serving_on_alt_ports
+                #   @return [::Array<::String>]
+                #     Output only. The list of IP addresses, where the certificate is
+                #     attached, but port 443 is not open.
+                # @!attribute [r] resolved
+                #   @return [::Array<::String>]
+                #     Output only. The list of IP addresses resolved from the domain's
+                #     A/AAAA records. Can contain both ipv4 and ipv6 addresses.
+                class IPs
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # The issue discovered during the authorization attempt.
+                module Issue
+                  # Issue is unspecified.
+                  ISSUE_UNSPECIFIED = 0
+
+                  # The resolved CNAME value doesn't match the expected CNAME.
+                  CNAME_MISMATCH = 1
+
+                  # Domain has A/AAAA records that point to IPs, where the certificate
+                  # is not attached.
+                  RESOLVED_TO_NOT_SERVING = 2
+
+                  # Domain has A/AAAA records that point to IPs, where the certificate
+                  # is attached, but port 443 is not open.
+                  RESOLVED_TO_SERVING_ON_ALT_PORTS = 3
+
+                  # Domain doesn't have any A/AAAA records.
+                  NO_RESOLVED_IPS = 4
+
+                  # Certificate is not configured to be served from any IPs (e.g.
+                  # Certificate is not attached to any load balancer).
+                  CERTIFICATE_NOT_ATTACHED = 5
+                end
+              end
 
               # State of the domain for managed certificate issuance.
               module State
@@ -636,6 +743,38 @@ module Google
             end
           end
 
+          # Configuration and state of a Managed Identity Certificate.
+          # Certificate Manager provisions and renews Managed Identity Certificates
+          # automatically, for as long as it's authorized to do so.
+          # @!attribute [rw] identity
+          #   @return [::String]
+          #     Required. Immutable. SPIFFE ID of the Managed Identity used for this
+          #     certificate.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::State]
+          #     Output only. State of the managed certificate resource.
+          # @!attribute [r] provisioning_issue
+          #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::ProvisioningIssue]
+          #     Output only. Information about issues with provisioning a managed
+          #     certificate.
+          class ManagedIdentityCertificate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Defines a resource that uses the certificate.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. Full name of the resource
+          #     https://google.aip.dev/122#full-resource-names, e.g.
+          #     `//certificatemanager.googleapis.com/projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`
+          #     or
+          #     `//compute.googleapis.com/projects/*/locations/*/targetHttpsProxies/*`.
+          class UsedBy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -645,32 +784,48 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Certificate scope.
           module Scope
-            # Certificates with default scope are served from core Google data centers.
-            # If unsure, choose this option.
+            # Use the DEFAULT scope if you plan to use the certificate with global
+            # external Application Load Balancer, global external proxy Network
+            # Load Balancer, or any of the regional Google Cloud services.
             DEFAULT = 0
 
-            # Certificates with scope EDGE_CACHE are special-purposed certificates,
-            # served from Edge Points of Presence.
+            # Use the EDGE_CACHE scope if you plan to use the certificate with Media
+            # CDN.
+            # The certificates are served from Edge Points of Presence.
             # See https://cloud.google.com/vpc/docs/edge-locations.
             EDGE_CACHE = 1
 
-            # Certificates with ALL_REGIONS scope are served from all Google Cloud
+            # Use the ALL_REGIONS scope if you plan to use the certificate with
+            # cross-region internal Application Load Balancer.
+            # The certificates are served from all Google Cloud
             # regions. See https://cloud.google.com/compute/docs/regions-zones.
             ALL_REGIONS = 2
+
+            # Associated with certificates used as client certificates in Backend mTLS.
+            CLIENT_AUTH = 3
           end
         end
 
         # Defines a collection of certificate configurations.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the Certificate Map. Certificate Map names must be
-        #     unique globally and match pattern
+        #     Identifier. A user-defined name of the Certificate Map. Certificate Map
+        #     names must be unique globally and match pattern
         #     `projects/*/locations/*/certificateMaps/*`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a certificate map.
+        #     Optional. One or more paragraphs of text description of a certificate map.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of a Certificate Map.
@@ -679,12 +834,18 @@ module Google
         #     Output only. The update timestamp of a Certificate Map.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a Certificate Map.
+        #     Optional. Set of labels associated with a Certificate Map.
         # @!attribute [r] gclb_targets
         #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget>]
         #     Output only. A list of GCLB targets that use this Certificate Map.
         #     A Target Proxy is only present on this list if it's attached to a
         #     Forwarding Rule.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class CertificateMap
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,17 +894,27 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Defines a certificate map entry.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the Certificate Map Entry. Certificate Map Entry
-        #     names must be unique globally and match pattern
+        #     Identifier. A user-defined name of the Certificate Map Entry. Certificate
+        #     Map Entry names must be unique globally and match pattern
         #     `projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a certificate map entry.
+        #     Optional. One or more paragraphs of text description of a certificate map
+        #     entry.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of a Certificate Map Entry.
@@ -752,7 +923,7 @@ module Google
         #     Output only. The update timestamp of a Certificate Map Entry.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a Certificate Map Entry.
+        #     Optional. Set of labels associated with a Certificate Map Entry.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     A Hostname (FQDN, e.g. `example.com`) or a wildcard hostname expression
@@ -767,8 +938,8 @@ module Google
         #     Note: The following fields are mutually exclusive: `matcher`, `hostname`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] certificates
         #   @return [::Array<::String>]
-        #     A set of Certificates defines for the given `hostname`. There can be
-        #     defined up to four certificates in each Certificate Map Entry. Each
+        #     Optional. A set of Certificates defines for the given `hostname`. There can
+        #     be defined up to four certificates in each Certificate Map Entry. Each
         #     certificate must match pattern `projects/*/locations/*/certificates/*`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::CertificateManager::V1::ServingState]
@@ -802,8 +973,8 @@ module Google
         # for certificate issuance.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the dns authorization. DnsAuthorization names must
-        #     be unique globally and match pattern
+        #     Identifier. A user-defined name of the dns authorization. DnsAuthorization
+        #     names must be unique globally and match pattern
         #     `projects/*/locations/*/dnsAuthorizations/*`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -813,10 +984,10 @@ module Google
         #     Output only. The last update timestamp of a DnsAuthorization.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a DnsAuthorization.
+        #     Optional. Set of labels associated with a DnsAuthorization.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a DnsAuthorization.
+        #     Optional. One or more paragraphs of text description of a DnsAuthorization.
         # @!attribute [rw] domain
         #   @return [::String]
         #     Required. Immutable. A domain that is being authorized. A DnsAuthorization
@@ -829,9 +1000,16 @@ module Google
         #     configuration.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::CertificateManager::V1::DnsAuthorization::Type]
-        #     Immutable. Type of DnsAuthorization. If unset during resource creation the
-        #     following default will be used:
-        #     - in location global: FIXED_RECORD.
+        #     Optional. Immutable. Type of DnsAuthorization. If unset during resource
+        #     creation the following default will be used:
+        #     - in location `global`: FIXED_RECORD,
+        #     - in other locations: PER_PROJECT_RECORD.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class DnsAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -860,6 +1038,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

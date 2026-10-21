@@ -162,6 +162,19 @@ module Google
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig::FreeInstanceAvailability]
             #     Output only. Describes whether free instances are available to be created
             #     in this instance configuration.
+            # @!attribute [r] allowed_processing_units
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig::AllowedProcessingUnits>]
+            #     Output only. Defines the ranges of allowed processing units supported by
+            #     this instance configuration. If multiple ranges are specified, an instance
+            #     using this configuration may use a valid increment in any of the given
+            #     ranges. For example, an allowed_processing_units specification of
+            #     `[{min_processing_units:100, max_processing_units:900,
+            #     processing_unit_increment:100}, {min_processing_units:1000,
+            #     processing_unit_increment:1000}]` specifies that the instance configuration
+            #     supports instances with quantities of processing units in multiples of 100
+            #     processing units (100, 200, 300 and so on) up to and including 900
+            #     processing units and quantities that are at least 1000 processing units and
+            #     multiples of 1000 processing units (1000, 2000, 3000 and so on).
             # @!attribute [r] quorum_type
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig::QuorumType]
             #     Output only. The `QuorumType` of the instance configuration.
@@ -171,6 +184,24 @@ module Google
             class InstanceConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Defines a range of processing units supported by an instance configuration.
+              # @!attribute [rw] min_processing_units
+              #   @return [::Integer]
+              #     The minimum value of processing units applicable to this interval,
+              #     inclusive.
+              # @!attribute [rw] max_processing_units
+              #   @return [::Integer]
+              #     The maximum value of processing units applicable to this interval,
+              #     inclusive. If unset, there is no predefined limit to the supported
+              #     number of processing units, although project quota limits still apply.
+              # @!attribute [rw] processing_unit_increment
+              #   @return [::Integer]
+              #     Allowed increments of processing units between “min” and “max”.
+              class AllowedProcessingUnits
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
 
               # @!attribute [rw] key
               #   @return [::String]
