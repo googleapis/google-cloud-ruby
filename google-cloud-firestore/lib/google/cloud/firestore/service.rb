@@ -73,10 +73,7 @@ module Google
           if read_time
             batch_get_req[:read_time] = read_time_to_timestamp(read_time)
           end
-          firestore.batch_get_documents(
-            batch_get_req,
-            call_options(parent: database_path, is_transaction: !transaction.nil?)
-          )
+          firestore.batch_get_documents batch_get_req, call_options(parent: database_path, transaction: transaction)
         end
 
         ##
@@ -148,7 +145,7 @@ module Google
             run_query_req[:explain_options] = explain_options
           end
 
-          firestore.run_query run_query_req, call_options(parent: database_path, is_transaction: !transaction.nil?)
+          firestore.run_query run_query_req, call_options(parent: database_path, transaction: transaction)
         end
 
         ##
@@ -166,10 +163,7 @@ module Google
           if explain_options
             request.explain_options = explain_options
           end
-          firestore.run_aggregation_query(
-            request,
-            call_options(parent: database_path, is_transaction: !transaction.nil?)
-          )
+          firestore.run_aggregation_query request, call_options(parent: database_path, transaction: transaction)
         end
 
         def listen enum
@@ -182,7 +176,7 @@ module Google
               database: database_path,
               options:  transaction_opt
             },
-            call_options(parent: database_path, is_transaction: true)
+            call_options(parent: database_path, transaction: transaction_opt)
           )
         end
 
@@ -193,7 +187,7 @@ module Google
           }
           commit_req[:transaction] = transaction if transaction
 
-          firestore.commit commit_req, call_options(parent: database_path, is_transaction: !transaction.nil?)
+          firestore.commit commit_req, call_options(parent: database_path, transaction: transaction)
         end
 
         def rollback transaction
@@ -202,7 +196,7 @@ module Google
               database:    database_path,
               transaction: transaction
             },
-            call_options(parent: database_path, is_transaction: true)
+            call_options(parent: database_path, transaction: transaction)
           )
         end
 
@@ -245,18 +239,18 @@ module Google
 
         protected
 
-        def default_headers parent = nil, is_transaction: false
+        def default_headers parent = nil, transaction: nil
           parent ||= database_path
           routing_val = CGI.escapeURIComponent parent
           {
             "x-goog-request-params" => "database=#{routing_val}",
-            "x-goog-is-transaction" => (is_transaction ? "true" : "false")
+            "x-goog-is-transaction" => (!transaction.nil?).to_s
           }
         end
 
-        def call_options parent: nil, token: nil, is_transaction: false
+        def call_options parent: nil, token: nil, transaction: nil
           Gapic::CallOptions.new(**{
-            metadata:   default_headers(parent, is_transaction: is_transaction),
+            metadata:   default_headers(parent, transaction: transaction),
             page_token: token
           }.compact)
         end
