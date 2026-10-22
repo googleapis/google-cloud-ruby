@@ -84,8 +84,9 @@ module Google
               local_file.rewind if local_file.respond_to?(:rewind)
               
               digest = digest_class.new
-              local_file.each(16_384) do |chunk|
-                digest.update(chunk)
+              buf = +""
+              while local_file.read(16_384, buf)
+                digest.update buf
               end
               
               local_file.rewind if local_file.respond_to?(:rewind)

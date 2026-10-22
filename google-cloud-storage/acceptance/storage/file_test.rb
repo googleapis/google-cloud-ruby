@@ -494,6 +494,7 @@ describe Google::Cloud::Storage::File, :storage do
       downloaded_data = downloaded.string
       _(downloaded_data).must_equal data
     ensure
+      tmpfile&.close
       uploaded.delete if uploaded
     end
   end
