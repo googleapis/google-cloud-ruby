@@ -2161,6 +2161,10 @@
       "component": "google-shopping-merchant-reviews",
       "version_file": "lib/google/shopping/merchant/reviews/version.rb"
     },
+    "google-shopping-merchant-reviews-v1": {
+      "component": "google-shopping-merchant-reviews-v1",
+      "version_file": "lib/google/shopping/merchant/reviews/v1/version.rb"
+    },
     "google-shopping-merchant-reviews-v1beta": {
       "component": "google-shopping-merchant-reviews-v1beta",
       "version_file": "lib/google/shopping/merchant/reviews/v1beta/version.rb"
