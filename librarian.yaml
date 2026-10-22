@@ -2372,6 +2372,10 @@ libraries:
     version: 2.12.1
     apis:
       - path: google/cloud/networkservices/v1
+  - name: google-cloud-network_services-v1beta1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/networkservices/v1beta1
   - name: google-cloud-notebooks
     version: 3.2.1
     apis:

@@ -1205,6 +1205,10 @@
       "component": "google-cloud-network_services-v1",
       "version_file": "lib/google/cloud/network_services/v1/version.rb"
     },
+    "google-cloud-network_services-v1beta1": {
+      "component": "google-cloud-network_services-v1beta1",
+      "version_file": "lib/google/cloud/network_services/v1beta1/version.rb"
+    },
     "google-cloud-notebooks": {
       "component": "google-cloud-notebooks",
       "version_file": "lib/google/cloud/notebooks/version.rb"
