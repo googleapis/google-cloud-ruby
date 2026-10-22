@@ -1221,6 +1221,14 @@
       "component": "google-cloud-notebooks-v2",
       "version_file": "lib/google/cloud/notebooks/v2/version.rb"
     },
+    "google-cloud-observability": {
+      "component": "google-cloud-observability",
+      "version_file": "lib/google/cloud/observability/version.rb"
+    },
+    "google-cloud-observability-v1": {
+      "component": "google-cloud-observability-v1",
+      "version_file": "lib/google/cloud/observability/v1/version.rb"
+    },
     "google-cloud-optimization": {
       "component": "google-cloud-optimization",
       "version_file": "lib/google/cloud/optimization/version.rb"

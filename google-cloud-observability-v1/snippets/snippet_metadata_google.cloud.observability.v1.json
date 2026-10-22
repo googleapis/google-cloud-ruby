@@ -1,0 +1,895 @@
+{
+  "client_library": {
+    "name": "google-cloud-observability-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.observability.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "observability_v1_generated_Observability_GetScope_sync",
+      "title": "Snippet for the get_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_scope.",
+      "file": "observability/get_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Scope",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetScope",
+          "full_name": "google.cloud.observability.v1.Observability.GetScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_UpdateScope_sync",
+      "title": "Snippet for the update_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#update_scope.",
+      "file": "observability/update_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#update_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::UpdateScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Scope",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "UpdateScope",
+          "full_name": "google.cloud.observability.v1.Observability.UpdateScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetBucket_sync",
+      "title": "Snippet for the get_bucket call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_bucket.",
+      "file": "observability/get_bucket.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_bucket",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_bucket",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetBucketRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Bucket",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetBucket",
+          "full_name": "google.cloud.observability.v1.Observability.GetBucket",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_ListBuckets_sync",
+      "title": "Snippet for the list_buckets call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#list_buckets.",
+      "file": "observability/list_buckets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_buckets",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#list_buckets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::ListBucketsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::ListBucketsResponse",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "ListBuckets",
+          "full_name": "google.cloud.observability.v1.Observability.ListBuckets",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_CreateBucket_sync",
+      "title": "Snippet for the create_bucket call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#create_bucket.",
+      "file": "observability/create_bucket.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_bucket",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#create_bucket",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::CreateBucketRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "CreateBucket",
+          "full_name": "google.cloud.observability.v1.Observability.CreateBucket",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_UpdateBucket_sync",
+      "title": "Snippet for the update_bucket call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#update_bucket.",
+      "file": "observability/update_bucket.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_bucket",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#update_bucket",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::UpdateBucketRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "UpdateBucket",
+          "full_name": "google.cloud.observability.v1.Observability.UpdateBucket",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetDataset_sync",
+      "title": "Snippet for the get_dataset call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_dataset.",
+      "file": "observability/get_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dataset",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Dataset",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetDataset",
+          "full_name": "google.cloud.observability.v1.Observability.GetDataset",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_ListDatasets_sync",
+      "title": "Snippet for the list_datasets call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#list_datasets.",
+      "file": "observability/list_datasets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_datasets",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#list_datasets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::ListDatasetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::ListDatasetsResponse",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "ListDatasets",
+          "full_name": "google.cloud.observability.v1.Observability.ListDatasets",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetView_sync",
+      "title": "Snippet for the get_view call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_view.",
+      "file": "observability/get_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_view",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::View",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetView",
+          "full_name": "google.cloud.observability.v1.Observability.GetView",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_ListViews_sync",
+      "title": "Snippet for the list_views call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#list_views.",
+      "file": "observability/list_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_views",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#list_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::ListViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::ListViewsResponse",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "ListViews",
+          "full_name": "google.cloud.observability.v1.Observability.ListViews",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetLink_sync",
+      "title": "Snippet for the get_link call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_link.",
+      "file": "observability/get_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_link",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Link",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetLink",
+          "full_name": "google.cloud.observability.v1.Observability.GetLink",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_ListLinks_sync",
+      "title": "Snippet for the list_links call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#list_links.",
+      "file": "observability/list_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_links",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#list_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::ListLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::ListLinksResponse",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "ListLinks",
+          "full_name": "google.cloud.observability.v1.Observability.ListLinks",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_CreateLink_sync",
+      "title": "Snippet for the create_link call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#create_link.",
+      "file": "observability/create_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_link",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#create_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::CreateLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "CreateLink",
+          "full_name": "google.cloud.observability.v1.Observability.CreateLink",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_UpdateLink_sync",
+      "title": "Snippet for the update_link call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#update_link.",
+      "file": "observability/update_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_link",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#update_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::UpdateLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "UpdateLink",
+          "full_name": "google.cloud.observability.v1.Observability.UpdateLink",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_DeleteLink_sync",
+      "title": "Snippet for the delete_link call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#delete_link.",
+      "file": "observability/delete_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_link",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#delete_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::DeleteLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "DeleteLink",
+          "full_name": "google.cloud.observability.v1.Observability.DeleteLink",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetTraceScope_sync",
+      "title": "Snippet for the get_trace_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_trace_scope.",
+      "file": "observability/get_trace_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_trace_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_trace_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetTraceScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::TraceScope",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetTraceScope",
+          "full_name": "google.cloud.observability.v1.Observability.GetTraceScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_ListTraceScopes_sync",
+      "title": "Snippet for the list_trace_scopes call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#list_trace_scopes.",
+      "file": "observability/list_trace_scopes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_trace_scopes",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#list_trace_scopes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::ListTraceScopesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::ListTraceScopesResponse",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "ListTraceScopes",
+          "full_name": "google.cloud.observability.v1.Observability.ListTraceScopes",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_CreateTraceScope_sync",
+      "title": "Snippet for the create_trace_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#create_trace_scope.",
+      "file": "observability/create_trace_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_trace_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#create_trace_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::CreateTraceScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::TraceScope",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "CreateTraceScope",
+          "full_name": "google.cloud.observability.v1.Observability.CreateTraceScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_UpdateTraceScope_sync",
+      "title": "Snippet for the update_trace_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#update_trace_scope.",
+      "file": "observability/update_trace_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_trace_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#update_trace_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::UpdateTraceScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::TraceScope",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "UpdateTraceScope",
+          "full_name": "google.cloud.observability.v1.Observability.UpdateTraceScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_DeleteTraceScope_sync",
+      "title": "Snippet for the delete_trace_scope call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#delete_trace_scope.",
+      "file": "observability/delete_trace_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_trace_scope",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#delete_trace_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::DeleteTraceScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "DeleteTraceScope",
+          "full_name": "google.cloud.observability.v1.Observability.DeleteTraceScope",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_GetSettings_sync",
+      "title": "Snippet for the get_settings call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#get_settings.",
+      "file": "observability/get_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_settings",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#get_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::GetSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Observability::V1::Settings",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "GetSettings",
+          "full_name": "google.cloud.observability.v1.Observability.GetSettings",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "observability_v1_generated_Observability_UpdateSettings_sync",
+      "title": "Snippet for the update_settings call in the Observability service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Observability::V1::Observability::Client#update_settings.",
+      "file": "observability/update_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_settings",
+        "full_name": "::Google::Cloud::Observability::V1::Observability::Client#update_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Observability::V1::UpdateSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Observability::Client",
+          "full_name": "::Google::Cloud::Observability::V1::Observability::Client"
+        },
+        "method": {
+          "short_name": "UpdateSettings",
+          "full_name": "google.cloud.observability.v1.Observability.UpdateSettings",
+          "service": {
+            "short_name": "Observability",
+            "full_name": "google.cloud.observability.v1.Observability"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

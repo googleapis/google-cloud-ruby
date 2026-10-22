@@ -2401,6 +2401,17 @@ libraries:
     version: 1.6.1
     apis:
       - path: google/cloud/notebooks/v2
+  - name: google-cloud-observability
+    version: 0.0.1
+    apis:
+      - path: google/cloud/observability/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-observability-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/observability/v1
   - name: google-cloud-optimization
     version: 1.5.1
     apis:
