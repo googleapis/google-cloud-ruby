@@ -21,7 +21,7 @@ module Google
   module Ads
     module DataManager
       module V1
-        VERSION = "0.10.0"
+        VERSION = "0.11.0"
       end
     end
   end
