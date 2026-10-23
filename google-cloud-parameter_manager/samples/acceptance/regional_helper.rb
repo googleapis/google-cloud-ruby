@@ -19,6 +19,7 @@ require "minitest/rg"
 require "google/cloud/parameter_manager"
 require "google/cloud/secret_manager"
 require "google/cloud/kms"
+require "google/cloud/resource_manager/v3"
 
 require_relative "../../../.toys/.lib/sample_loader"
 
@@ -41,6 +42,12 @@ class RegionalParameterManagerSnippetSpec < Minitest::Spec
   let(:version_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
   let(:version_id_1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
   let(:render_secret_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:template_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:template_id_1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:template_version_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:template_version_id_1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:tag_key) { ENV["GOOGLE_CLOUD_TAG_KEY"] || raise("missing GOOGLE_CLOUD_TAG_KEY") }
+  let(:tag_value) { ENV["GOOGLE_CLOUD_TAG_VALUE"] || raise("missing GOOGLE_CLOUD_TAG_VALUE") }
 
   let(:key_ring_id) { "ruby-parameter-manager-key" }
   let(:crypt_key_id1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
@@ -60,6 +67,15 @@ class RegionalParameterManagerSnippetSpec < Minitest::Spec
   let :parameter_version_name_1 do
     "projects/#{project_id}/locations/#{location_id}/parameters/#{parameter_id}/versions/#{version_id_1}"
   end
+  let(:template_name) { "projects/#{project_id}/locations/#{location_id}/templates/#{template_id}" }
+  let(:template_name_1) { "projects/#{project_id}/locations/#{location_id}/templates/#{template_id_1}" }
+  let :template_version_name do
+    "projects/#{project_id}/locations/#{location_id}/templates/#{template_id}/versions/#{template_version_id}"
+  end
+  let :template_version_name_1 do
+    "projects/#{project_id}/locations/#{location_id}/templates/#{template_id}/versions/#{template_version_id_1}"
+  end
+  let(:template_payload) { '{"username": "{{.username}}", "host": "{{.host}}"}' }
   let(:secret_name) { "projects/#{project_id}/locations/#{location_id}/secrets/#{render_secret_id}" }
 
   let(:key_ring_name) { "projects/#{project_id}/locations/#{location_id}/keyRings/#{key_ring_id}" }
@@ -75,6 +91,12 @@ class RegionalParameterManagerSnippetSpec < Minitest::Spec
   let :secret_client do
     Google::Cloud::SecretManager.secret_manager_service do |config|
       config.endpoint = secret_api_endpoint
+    end
+  end
+
+  let :tag_bindings_client do
+    Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
+      config.endpoint = "#{location_id}-cloudresourcemanager.googleapis.com"
     end
   end
 
@@ -104,6 +126,7 @@ class RegionalParameterManagerSnippetSpec < Minitest::Spec
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
+    destroy_templates
     destroy_regional_key_versions
   end
 
@@ -119,6 +142,29 @@ def destroy_regional_key_versions
 
   begin
     kms_client.destroy_crypto_key_version name: "#{crypt_key_id2_name}/cryptoKeyVersions/1"
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+end
+
+def destroy_templates
+  begin
+    client.delete_template_version name: template_version_name
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template_version name: template_version_name_1
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template name: template_name
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    client.delete_template name: template_name_1
   rescue Google::Cloud::NotFoundError
     # Do nothing for this specific error
   end
