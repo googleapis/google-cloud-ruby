@@ -37,7 +37,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-ads-ad_manager-v1
-    version: 5.4.0
+    version: 5.5.0
     apis:
       - path: google/ads/admanager/v1
   - name: google-ads-data_manager
@@ -48,7 +48,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-ads-data_manager-v1
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/ads/datamanager/v1
   - name: google-ads-marketing_platform-admin
@@ -59,7 +59,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.0
   - name: google-ads-marketing_platform-admin-v1alpha
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
   - name: google-analytics-admin
@@ -73,7 +73,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.27
   - name: google-analytics-admin-v1alpha
-    version: 0.43.1
+    version: 0.44.0
     apis:
       - path: google/analytics/admin/v1alpha
         ruby:
@@ -91,7 +91,7 @@ libraries:
       wrapper_of:
         - v1beta:0.11
   - name: google-analytics-data-v1beta
-    version: 0.23.0
+    version: 0.24.0
     apis:
       - path: google/analytics/data/v1beta
         ruby:
@@ -106,7 +106,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-apps-chat-v1
-    version: 0.31.0
+    version: 0.32.0
     apis:
       - path: google/chat/v1
         ruby:
@@ -120,11 +120,11 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-apps-events-subscriptions-v1
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/apps/events/subscriptions/v1
   - name: google-apps-events-subscriptions-v1beta
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/apps/events/subscriptions/v1beta
   - name: google-apps-meet
@@ -135,11 +135,11 @@ libraries:
       wrapper_of:
         - v2:0.0
   - name: google-apps-meet-v2
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/apps/meet/v2
   - name: google-apps-meet-v2beta
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/apps/meet/v2beta
   - name: google-area120-tables
@@ -153,7 +153,7 @@ libraries:
       wrapper_of:
         - v1alpha1:0.7
   - name: google-area120-tables-v1alpha1
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/area120/tables/v1alpha1
         ruby:
@@ -170,7 +170,7 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-access_approval-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/accessapproval/v1
         ruby:
@@ -184,7 +184,7 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-advisory_notifications-v1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agent_registry
@@ -195,7 +195,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-agent_registry-v1
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/agentregistry/v1
   - name: google-cloud-ai_platform
@@ -216,7 +216,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-ai_platform-v1
-    version: 1.49.0
+    version: 1.50.0
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
@@ -240,7 +240,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-alloy_db-v1
-    version: 1.11.0
+    version: 1.12.0
     apis:
       - path: google/cloud/alloydb/v1
         ruby:
@@ -248,7 +248,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
   - name: google-cloud-alloy_db-v1alpha
-    version: 0.25.0
+    version: 0.26.0
     apis:
       - path: google/cloud/alloydb/v1alpha
         ruby:
@@ -256,7 +256,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
   - name: google-cloud-alloy_db-v1beta
-    version: 0.26.0
+    version: 0.27.0
     apis:
       - path: google/cloud/alloydb/v1beta
         ruby:
@@ -274,7 +274,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-api_gateway-v1
-    version: 2.8.0
+    version: 2.9.0
     apis:
       - path: google/cloud/apigateway/v1
         ruby:
@@ -288,7 +288,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-api_hub-v1
-    version: 1.0.3
+    version: 1.1.0
     apis:
       - path: google/cloud/apihub/v1
   - name: google-cloud-api_keys
@@ -299,7 +299,7 @@ libraries:
       wrapper_of:
         - v2:0.5
   - name: google-cloud-api_keys-v2
-    version: 0.14.2
+    version: 0.15.0
     apis:
       - path: google/api/apikeys/v2
   - name: google-cloud-api_registry
@@ -310,7 +310,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-api_registry-v1beta
-    version: 0.4.2
+    version: 0.5.0
     apis:
       - path: google/cloud/apiregistry/v1beta
   - name: google-cloud-apigee_connect
@@ -324,7 +324,7 @@ libraries:
       wrapper_of:
         - v1:0.6
   - name: google-cloud-apigee_connect-v1
-    version: 1.7.2
+    version: 1.8.0
     apis:
       - path: google/cloud/apigeeconnect/v1
         ruby:
@@ -341,7 +341,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-app_engine-v1
-    version: 1.8.2
+    version: 1.9.0
     apis:
       - path: google/appengine/v1
         ruby:
@@ -355,7 +355,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-app_hub-v1
-    version: 1.8.0
+    version: 1.9.0
     apis:
       - path: google/cloud/apphub/v1
   - name: google-cloud-app_optimize
@@ -366,7 +366,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-app_optimize-v1beta
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/appoptimize/v1beta
   - name: google-cloud-app_topology
@@ -377,7 +377,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-app_topology-v1
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/apptopology/v1
   - name: google-cloud-artifact_registry
@@ -391,14 +391,14 @@ libraries:
       wrapper_of:
         - v1:1.3
   - name: google-cloud-artifact_registry-v1
-    version: 1.14.1
+    version: 1.15.0
     apis:
       - path: google/devtools/artifactregistry/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ARTIFACT_REGISTRY
   - name: google-cloud-artifact_registry-v1beta2
-    version: 0.20.1
+    version: 0.21.0
     apis:
       - path: google/devtools/artifactregistry/v1beta2
         ruby:
@@ -416,7 +416,7 @@ libraries:
       wrapper_of:
         - v1:0.29
   - name: google-cloud-asset-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/asset/v1
         ruby:
@@ -439,14 +439,14 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-assured_workloads-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/assuredworkloads/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
   - name: google-cloud-assured_workloads-v1beta1
-    version: 0.26.1
+    version: 0.27.0
     apis:
       - path: google/cloud/assuredworkloads/v1beta1
         ruby:
@@ -460,7 +460,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-audit_manager-v1
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/auditmanager/v1
   - name: google-cloud-backupdr
@@ -475,7 +475,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-backupdr-v1
-    version: 1.11.2
+    version: 1.12.0
     apis:
       - path: google/cloud/backupdr/v1
         ruby:
@@ -483,7 +483,7 @@ libraries:
             ruby-cloud-namespace-override: Backupdr=BackupDR
             ruby-cloud-path-override: backup_dr=backupdr
   - name: google-cloud-backupdr-v1beta
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/backupdr/v1beta
         ruby:
@@ -498,7 +498,7 @@ libraries:
       wrapper_of:
         - v2:1.0
   - name: google-cloud-bare_metal_solution-v2
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/baremetalsolution/v2
   - name: google-cloud-batch
@@ -509,7 +509,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-batch-v1
-    version: 1.9.0
+    version: 1.10.0
     apis:
       - path: google/cloud/batch/v1
   - name: google-cloud-beyond_corp
@@ -537,28 +537,28 @@ libraries:
             ruby-cloud-wrapper-of: v1:0.4
     title_override: BeyondCorp API
   - name: google-cloud-beyond_corp-app_connections-v1
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
   - name: google-cloud-beyond_corp-app_connectors-v1
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
   - name: google-cloud-beyond_corp-app_gateways-v1
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
   - name: google-cloud-beyond_corp-client_gateways-v1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
         ruby:
@@ -572,7 +572,7 @@ libraries:
       wrapper_of:
         - v1:0.5
   - name: google-cloud-bigquery-analytics_hub-v1
-    version: 0.20.1
+    version: 0.21.0
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
   - name: google-cloud-bigquery-connection
@@ -586,7 +586,7 @@ libraries:
       wrapper_of:
         - v1:0.17
   - name: google-cloud-bigquery-connection-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/bigquery/connection/v1
         ruby:
@@ -600,7 +600,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-bigquery-data_exchange-v1beta1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
   - name: google-cloud-bigquery-data_policies
@@ -611,11 +611,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-bigquery-data_policies-v1
-    version: 1.4.1
+    version: 1.5.0
     apis:
       - path: google/cloud/bigquery/datapolicies/v1
   - name: google-cloud-bigquery-data_policies-v1beta1
-    version: 0.11.1
+    version: 0.12.0
     apis:
       - path: google/cloud/bigquery/datapolicies/v1beta1
   - name: google-cloud-bigquery-data_transfer
@@ -640,7 +640,7 @@ libraries:
       wrapper_of:
         - v1:0.12
   - name: google-cloud-bigquery-data_transfer-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
         ruby:
@@ -655,7 +655,7 @@ libraries:
       wrapper_of:
         - v2:0.9
   - name: google-cloud-bigquery-migration-v2
-    version: 0.23.0
+    version: 0.24.0
     apis:
       - path: google/cloud/bigquery/migration/v2
   - name: google-cloud-bigquery-reservation
@@ -669,7 +669,7 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-bigquery-reservation-v1
-    version: 1.14.0
+    version: 1.15.0
     apis:
       - path: google/cloud/bigquery/reservation/v1
         ruby:
@@ -686,14 +686,14 @@ libraries:
       wrapper_of:
         - v1:0.25
   - name: google-cloud-bigquery-storage-v1
-    version: 1.9.0
+    version: 1.10.0
     apis:
       - path: google/cloud/bigquery/storage/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_STORAGE
   - name: google-cloud-bigtable-admin-v2
-    version: 1.22.0
+    version: 1.23.0
     apis:
       - path: google/bigtable/admin/v2
         ruby:
@@ -705,7 +705,7 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
   - name: google-cloud-bigtable-v2
-    version: 1.19.0
+    version: 1.20.0
     apis:
       - path: google/bigtable/v2
         ruby:
@@ -736,21 +736,21 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-billing-budgets-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/billing/budgets/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BILLING_BUDGETS
   - name: google-cloud-billing-budgets-v1beta1
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/billing/budgets/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BILLING_BUDGETS
   - name: google-cloud-billing-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/billing/v1
         ruby:
@@ -768,7 +768,7 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-binary_authorization-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/binaryauthorization/v1
         ruby:
@@ -778,7 +778,7 @@ libraries:
             ruby-cloud-service-override: BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper
             ruby-cloud-yard-strict: "false"
   - name: google-cloud-binary_authorization-v1beta1
-    version: 0.20.1
+    version: 0.21.0
     apis:
       - path: google/cloud/binaryauthorization/v1beta1
         ruby:
@@ -796,14 +796,14 @@ libraries:
       wrapper_of:
         - v1:0.26
   - name: google-cloud-build-v1
-    version: 1.15.0
+    version: 1.16.0
     apis:
       - path: google/devtools/cloudbuild/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_BUILD
   - name: google-cloud-build-v2
-    version: 0.14.2
+    version: 0.15.0
     apis:
       - path: google/devtools/cloudbuild/v2
         ruby:
@@ -817,7 +817,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-capacity_planner-v1beta
-    version: 0.5.1
+    version: 0.6.0
     apis:
       - path: google/cloud/capacityplanner/v1beta
   - name: google-cloud-certificate_manager
@@ -828,7 +828,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-certificate_manager-v1
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/certificatemanager/v1
   - name: google-cloud-ces
@@ -839,11 +839,11 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-ces-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/ces/v1
   - name: google-cloud-ces-v1beta
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/ces/v1beta
   - name: google-cloud-channel
@@ -857,7 +857,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-channel-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/channel/v1
         ruby:
@@ -871,7 +871,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-chronicle-v1
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/chronicle/v1
   - name: google-cloud-cloud_controls_partner
@@ -882,11 +882,11 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-cloud_controls_partner-v1
-    version: 2.4.1
+    version: 2.5.0
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
   - name: google-cloud-cloud_controls_partner-v1beta
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/cloud/cloudcontrolspartner/v1beta
   - name: google-cloud-cloud_dms
@@ -901,7 +901,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-cloud_dms-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/clouddms/v1
         ruby:
@@ -917,11 +917,11 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-cloud_quotas-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/api/cloudquotas/v1
   - name: google-cloud-cloud_quotas-v1beta
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/api/cloudquotas/v1beta
   - name: google-cloud-cloud_security_compliance
@@ -932,7 +932,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-cloud_security_compliance-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
   - name: google-cloud-commerce-consumer-procurement
@@ -943,7 +943,7 @@ libraries:
       wrapper_of:
         - v1:1.1
   - name: google-cloud-commerce-consumer-procurement-v1
-    version: 1.10.0
+    version: 1.11.0
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
   - name: google-cloud-commerce_producer
@@ -954,7 +954,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-commerce_producer-v1beta
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
   - name: google-cloud-compute
@@ -968,7 +968,7 @@ libraries:
       wrapper_of:
         - v1:2.15
   - name: google-cloud-compute-v1
-    version: 4.1.0
+    version: 4.2.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -1083,7 +1083,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-confidential_computing-v1
-    version: 2.5.0
+    version: 2.6.0
     apis:
       - path: google/cloud/confidentialcomputing/v1
   - name: google-cloud-config_delivery
@@ -1094,7 +1094,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-config_delivery-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/configdelivery/v1
   - name: google-cloud-config_service
@@ -1105,7 +1105,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-config_service-v1
-    version: 2.12.0
+    version: 2.13.0
     apis:
       - path: google/cloud/config/v1
   - name: google-cloud-connectors
@@ -1116,7 +1116,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-connectors-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/connectors/v1
   - name: google-cloud-contact_center_insights
@@ -1127,7 +1127,7 @@ libraries:
       wrapper_of:
         - v1:0.20
   - name: google-cloud-contact_center_insights-v1
-    version: 1.12.0
+    version: 1.13.0
     apis:
       - path: google/cloud/contactcenterinsights/v1
   - name: google-cloud-container
@@ -1144,14 +1144,14 @@ libraries:
       wrapper_of:
         - v1:1.6
   - name: google-cloud-container-v1
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/container/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CONTAINER
   - name: google-cloud-container-v1beta1
-    version: 0.57.1
+    version: 0.58.0
     apis:
       - path: google/container/v1beta1
         ruby:
@@ -1178,7 +1178,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-container_analysis-v1
-    version: 1.8.2
+    version: 1.9.0
     apis:
       - path: google/devtools/containeranalysis/v1
         ruby:
@@ -1213,22 +1213,22 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-data_catalog-lineage-config_management-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
   - name: google-cloud-data_catalog-lineage-v1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/datacatalog/lineage/v1
   - name: google-cloud-data_catalog-v1
-    version: 2.8.1
+    version: 2.9.0
     apis:
       - path: google/cloud/datacatalog/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DATA_CATALOG
   - name: google-cloud-data_catalog-v1beta1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/datacatalog/v1beta1
   - name: google-cloud-data_fusion
@@ -1239,7 +1239,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-data_fusion-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/datafusion/v1
   - name: google-cloud-data_labeling
@@ -1253,7 +1253,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.7
   - name: google-cloud-data_labeling-v1beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/datalabeling/v1beta1
         ruby:
@@ -1267,7 +1267,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-database_center-v1beta
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/cloud/databasecenter/v1beta
   - name: google-cloud-dataflow
@@ -1282,7 +1282,7 @@ libraries:
       wrapper_of:
         - v1beta3:0.8
   - name: google-cloud-dataflow-v1beta3
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/dataflow/v1beta3
         ruby:
@@ -1297,11 +1297,11 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-dataform-v1
-    version: 1.4.0
+    version: 1.5.0
     apis:
       - path: google/cloud/dataform/v1
   - name: google-cloud-dataform-v1beta1
-    version: 1.4.0
+    version: 1.5.0
     apis:
       - path: google/cloud/dataform/v1beta1
         ruby:
@@ -1315,7 +1315,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-dataplex-v1
-    version: 2.10.1
+    version: 2.11.0
     apis:
       - path: google/cloud/dataplex/v1
   - name: google-cloud-dataproc
@@ -1333,7 +1333,7 @@ libraries:
       wrapper_of:
         - v1:0.24
   - name: google-cloud-dataproc-v1
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/cloud/dataproc/v1
         ruby:
@@ -1352,7 +1352,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.6
   - name: google-cloud-dataqna-v1alpha
-    version: 0.13.2
+    version: 0.14.0
     apis:
       - path: google/cloud/dataqna/v1alpha
         ruby:
@@ -1371,7 +1371,7 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-datastore-admin-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/datastore/admin/v1
         ruby:
@@ -1387,7 +1387,7 @@ libraries:
       - samples/index.yaml
       - samples/snippets.rb
   - name: google-cloud-datastore-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/datastore/v1
         ruby:
@@ -1401,11 +1401,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-datastream-v1
-    version: 1.8.0
+    version: 1.9.0
     apis:
       - path: google/cloud/datastream/v1
   - name: google-cloud-datastream-v1alpha1
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/cloud/datastream/v1alpha1
   - name: google-cloud-deploy
@@ -1416,7 +1416,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-deploy-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/deploy/v1
         ruby:
@@ -1430,7 +1430,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-developer_connect-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/developerconnect/v1
   - name: google-cloud-device_streaming
@@ -1441,7 +1441,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-device_streaming-v1
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/devicestreaming/v1
   - name: google-cloud-dialogflow
@@ -1471,7 +1471,7 @@ libraries:
       wrapper_of:
         - v3:0.24
   - name: google-cloud-dialogflow-cx-v3
-    version: 1.13.0
+    version: 1.14.0
     apis:
       - path: google/cloud/dialogflow/cx/v3
         ruby:
@@ -1479,7 +1479,7 @@ libraries:
             ruby-cloud-env-prefix: DIALOGFLOW
             ruby-cloud-namespace-override: Cx=CX
   - name: google-cloud-dialogflow-v2
-    version: 1.19.0
+    version: 1.20.0
     apis:
       - path: google/cloud/dialogflow/v2
         ruby:
@@ -1493,11 +1493,11 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-discovery_engine-v1
-    version: 2.12.0
+    version: 2.13.0
     apis:
       - path: google/cloud/discoveryengine/v1
   - name: google-cloud-discovery_engine-v1beta
-    version: 0.30.0
+    version: 0.31.0
     apis:
       - path: google/cloud/discoveryengine/v1beta
   - name: google-cloud-dlp
@@ -1523,7 +1523,7 @@ libraries:
       wrapper_of:
         - v2:0.20
   - name: google-cloud-dlp-v2
-    version: 1.19.0
+    version: 1.20.0
     apis:
       - path: google/privacy/dlp/v2
         ruby:
@@ -1548,7 +1548,7 @@ libraries:
       wrapper_of:
         - v1:1.4
   - name: google-cloud-document_ai-v1
-    version: 1.13.1
+    version: 1.14.0
     apis:
       - path: google/cloud/documentai/v1
         ruby:
@@ -1556,7 +1556,7 @@ libraries:
             ruby-cloud-env-prefix: DOCUMENT_AI
             ruby-cloud-namespace-override: DocumentAi=DocumentAI
   - name: google-cloud-document_ai-v1beta3
-    version: 0.49.1
+    version: 0.50.0
     apis:
       - path: google/cloud/documentai/v1beta3
         ruby:
@@ -1574,14 +1574,14 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-domains-v1
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/domains/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DOMAINS
   - name: google-cloud-domains-v1beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/domains/v1beta1
         ruby:
@@ -1595,7 +1595,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-edge_container-v1
-    version: 1.5.2
+    version: 1.6.0
     apis:
       - path: google/cloud/edgecontainer/v1
   - name: google-cloud-edge_network
@@ -1606,11 +1606,11 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-edge_network-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/edgenetwork/v1
   - name: google-cloud-error_reporting-v1beta1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/devtools/clouderrorreporting/v1beta1
         ruby:
@@ -1627,7 +1627,7 @@ libraries:
       wrapper_of:
         - v1:0.6
   - name: google-cloud-essential_contacts-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/essentialcontacts/v1
         ruby:
@@ -1654,14 +1654,14 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-eventarc-publishing-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/eventarc/publishing/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: EVENTARC
   - name: google-cloud-eventarc-v1
-    version: 2.8.1
+    version: 2.9.0
     apis:
       - path: google/cloud/eventarc/v1
         ruby:
@@ -1675,7 +1675,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-filestore-v1
-    version: 2.7.1
+    version: 2.8.0
     apis:
       - path: google/cloud/filestore/v1
         ruby:
@@ -1689,7 +1689,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-financial_services-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/financialservices/v1
   - name: google-cloud-firestore-admin
@@ -1703,14 +1703,14 @@ libraries:
       wrapper_of:
         - v1:0.14
   - name: google-cloud-firestore-admin-v1
-    version: 1.14.2
+    version: 1.15.0
     apis:
       - path: google/firestore/admin/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: FIRESTORE
   - name: google-cloud-firestore-v1
-    version: 2.5.0
+    version: 2.6.0
     apis:
       - path: google/firestore/v1
         ruby:
@@ -1725,7 +1725,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-ftp-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
@@ -1740,14 +1740,14 @@ libraries:
       wrapper_of:
         - v2:1.0
   - name: google-cloud-functions-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/functions/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: FUNCTIONS
   - name: google-cloud-functions-v2
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/functions/v2
         ruby:
@@ -1765,7 +1765,7 @@ libraries:
       wrapper_of:
         - v1alpha:0.0
   - name: google-cloud-gdc_hardware_management-v1alpha
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
         ruby:
@@ -1780,11 +1780,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-gemini_data_analytics-v1
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
   - name: google-cloud-gke_backup
@@ -1795,7 +1795,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-gke_backup-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/gkebackup/v1
   - name: google-cloud-gke_connect-gateway
@@ -1809,11 +1809,11 @@ libraries:
       wrapper_of:
         - v1:0.2
   - name: google-cloud-gke_connect-gateway-v1
-    version: 0.9.2
+    version: 0.10.0
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
   - name: google-cloud-gke_connect-gateway-v1beta1
-    version: 0.14.2
+    version: 0.15.0
     apis:
       - path: google/cloud/gkeconnect/gateway/v1beta1
         ruby:
@@ -1832,7 +1832,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-gke_hub-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/gkehub/v1
         ruby:
@@ -1843,7 +1843,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GKE_HUB
   - name: google-cloud-gke_hub-v1beta1
-    version: 0.21.1
+    version: 0.22.0
     apis:
       - path: google/cloud/gkehub/v1beta1
         ruby:
@@ -1857,7 +1857,7 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-gke_multi_cloud-v1
-    version: 0.21.1
+    version: 0.22.0
     apis:
       - path: google/cloud/gkemulticloud/v1
   - name: google-cloud-gke_recommender
@@ -1868,7 +1868,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-gke_recommender-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/gkerecommender/v1
   - name: google-cloud-gsuite_add_ons
@@ -1884,7 +1884,7 @@ libraries:
       wrapper_of:
         - v1:0.5
   - name: google-cloud-gsuite_add_ons-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/gsuiteaddons/v1
         ruby:
@@ -1901,7 +1901,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-hypercompute_cluster-v1beta
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
   - name: google-cloud-iap
@@ -1915,7 +1915,7 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-iap-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/iap/v1
         ruby:
@@ -1932,7 +1932,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-ids-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/ids/v1
         ruby:
@@ -1968,14 +1968,14 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-kms-inventory-v1
-    version: 0.24.0
+    version: 0.25.0
     apis:
       - path: google/cloud/kms/inventory/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
   - name: google-cloud-kms-v1
-    version: 1.16.0
+    version: 1.17.0
     apis:
       - path: google/cloud/kms/v1
         ruby:
@@ -2002,21 +2002,21 @@ libraries:
         - v2:1.0
         - v1:1.0
   - name: google-cloud-language-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/language/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: LANGUAGE
   - name: google-cloud-language-v1beta2
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/language/v1beta2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: LANGUAGE
   - name: google-cloud-language-v2
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/language/v2
   - name: google-cloud-license_manager
@@ -2027,7 +2027,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-license_manager-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/licensemanager/v1
   - name: google-cloud-life_sciences
@@ -2042,7 +2042,7 @@ libraries:
       wrapper_of:
         - v2beta:0.7
   - name: google-cloud-life_sciences-v2beta
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/lifesciences/v2beta
         ruby:
@@ -2050,7 +2050,7 @@ libraries:
             ruby-cloud-env-prefix: LIFE_SCIENCES
             ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
   - name: google-cloud-location
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/location
     keep:
@@ -2064,11 +2064,11 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-location_finder-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/locationfinder/v1
   - name: google-cloud-logging-v2
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/logging/v2
         ruby:
@@ -2084,7 +2084,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-lustre-v1
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/lustre/v1
   - name: google-cloud-maintenance-api
@@ -2095,11 +2095,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-maintenance-api-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/maintenance/api/v1
   - name: google-cloud-maintenance-api-v1beta
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/maintenance/api/v1beta
   - name: google-cloud-managed_identities
@@ -2113,7 +2113,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-managed_identities-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/managedidentities/v1
         ruby:
@@ -2134,11 +2134,11 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-managed_kafka-schema_registry-v1
-    version: 0.5.1
+    version: 0.6.0
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
   - name: google-cloud-managed_kafka-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/managedkafka/v1
   - name: google-cloud-media_translation
@@ -2152,7 +2152,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.8
   - name: google-cloud-media_translation-v1beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/mediatranslation/v1beta1
         ruby:
@@ -2169,14 +2169,14 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-memcache-v1
-    version: 2.6.2
+    version: 2.7.0
     apis:
       - path: google/cloud/memcache/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MEMCACHE
   - name: google-cloud-memcache-v1beta2
-    version: 0.18.2
+    version: 0.19.0
     apis:
       - path: google/cloud/memcache/v1beta2
         ruby:
@@ -2190,11 +2190,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-memorystore-v1
-    version: 1.11.1
+    version: 1.12.0
     apis:
       - path: google/cloud/memorystore/v1
   - name: google-cloud-memorystore-v1beta
-    version: 0.15.0
+    version: 0.16.0
     apis:
       - path: google/cloud/memorystore/v1beta
   - name: google-cloud-metastore
@@ -2208,14 +2208,14 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-metastore-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/metastore/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: METASTORE
   - name: google-cloud-metastore-v1beta
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/metastore/v1beta
         ruby:
@@ -2229,7 +2229,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-migration_center-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/migrationcenter/v1
   - name: google-cloud-monitoring
@@ -2267,7 +2267,7 @@ libraries:
       - samples/quickstart.rb
       - samples/uptime_check.rb
   - name: google-cloud-monitoring-dashboard-v1
-    version: 1.8.0
+    version: 1.9.0
     apis:
       - path: google/monitoring/dashboard/v1
         ruby:
@@ -2275,14 +2275,14 @@ libraries:
             ruby-cloud-env-prefix: MONITORING_DASHBOARD
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
   - name: google-cloud-monitoring-metrics_scope-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/monitoring/metricsscope/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
   - name: google-cloud-monitoring-v3
-    version: 1.10.1
+    version: 1.11.0
     apis:
       - path: google/monitoring/v3
         ruby:
@@ -2300,7 +2300,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-netapp-v1
-    version: 2.13.0
+    version: 2.14.0
     apis:
       - path: google/cloud/netapp/v1
         ruby:
@@ -2318,21 +2318,21 @@ libraries:
       wrapper_of:
         - v1:1.3
   - name: google-cloud-network_connectivity-v1
-    version: 1.15.1
+    version: 1.16.0
     apis:
       - path: google/cloud/networkconnectivity/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: NETWORK_CONNECTIVITY
   - name: google-cloud-network_connectivity-v1alpha1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/networkconnectivity/v1alpha1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: NETWORK_CONNECTIVITY
   - name: google-cloud-network_connectivity-v1beta
-    version: 0.3.2
+    version: 0.4.0
     apis:
       - path: google/cloud/networkconnectivity/v1beta
   - name: google-cloud-network_management
@@ -2343,7 +2343,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-network_management-v1
-    version: 2.12.1
+    version: 2.13.0
     apis:
       - path: google/cloud/networkmanagement/v1
   - name: google-cloud-network_security
@@ -2354,11 +2354,11 @@ libraries:
       wrapper_of:
         - v1beta1:0.7
   - name: google-cloud-network_security-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/networksecurity/v1
   - name: google-cloud-network_security-v1beta1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/networksecurity/v1beta1
   - name: google-cloud-network_services
@@ -2369,11 +2369,11 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-network_services-v1
-    version: 2.12.1
+    version: 2.13.0
     apis:
       - path: google/cloud/networkservices/v1
   - name: google-cloud-network_services-v1beta1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/networkservices/v1beta1
   - name: google-cloud-notebooks
@@ -2388,32 +2388,32 @@ libraries:
         - v1:1.0
         - v2:1.0
   - name: google-cloud-notebooks-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/notebooks/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: NOTEBOOKS
   - name: google-cloud-notebooks-v1beta1
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/notebooks/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: NOTEBOOKS
   - name: google-cloud-notebooks-v2
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/notebooks/v2
   - name: google-cloud-observability
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/observability/v1
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-observability-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/observability/v1
   - name: google-cloud-optimization
@@ -2424,7 +2424,7 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-optimization-v1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/optimization/v1
   - name: google-cloud-oracle_database
@@ -2435,7 +2435,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-oracle_database-v1
-    version: 1.1.1
+    version: 1.2.0
     apis:
       - path: google/cloud/oracledatabase/v1
   - name: google-cloud-orchestration-airflow-service
@@ -2446,7 +2446,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-orchestration-airflow-service-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/orchestration/airflow/service/v1
   - name: google-cloud-org_policy
@@ -2460,7 +2460,7 @@ libraries:
       wrapper_of:
         - v2:0.9
   - name: google-cloud-org_policy-v2
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/orgpolicy/v2
         ruby:
@@ -2477,14 +2477,14 @@ libraries:
       wrapper_of:
         - v1:0.15
   - name: google-cloud-os_config-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/osconfig/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: OS_CONFIG
   - name: google-cloud-os_config-v1alpha
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/osconfig/v1alpha
         ruby:
@@ -2503,7 +2503,7 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-os_login-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/oslogin/v1
         ruby:
@@ -2512,7 +2512,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: OS_LOGIN
   - name: google-cloud-os_login-v1beta
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/oslogin/v1beta
         ruby:
@@ -2528,11 +2528,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-parallelstore-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/parallelstore/v1
   - name: google-cloud-parallelstore-v1beta
-    version: 0.14.1
+    version: 0.15.0
     apis:
       - path: google/cloud/parallelstore/v1beta
   - name: google-cloud-parameter_manager
@@ -2622,7 +2622,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-parameter_manager-v1
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/parametermanager/v1
   - name: google-cloud-phishing_protection
@@ -2640,7 +2640,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.8
   - name: google-cloud-phishing_protection-v1beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/phishingprotection/v1beta1
         ruby:
@@ -2655,7 +2655,7 @@ libraries:
       wrapper_of:
         - v1:0.3
   - name: google-cloud-policy_simulator-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/policysimulator/v1
         ruby:
@@ -2675,14 +2675,14 @@ libraries:
             ruby-cloud-gem-name: google-cloud-policy_troubleshooter-iam
             ruby-cloud-wrapper-of: v3:0.3
   - name: google-cloud-policy_troubleshooter-iam-v3
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/cloud/policytroubleshooter/iam/v3
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-iam-v1=>0.5+<2.a;google-iam-v2=>0.3+<2.a
   - name: google-cloud-policy_troubleshooter-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/policytroubleshooter/v1
         ruby:
@@ -2699,7 +2699,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-private_catalog-v1beta1
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/cloud/privatecatalog/v1beta1
         ruby:
@@ -2714,7 +2714,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-privileged_access_manager-v1
-    version: 1.7.2
+    version: 1.8.0
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
   - name: google-cloud-product_registry
@@ -2725,7 +2725,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-product_registry-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/productregistry/v1
   - name: google-cloud-profiler
@@ -2739,14 +2739,14 @@ libraries:
       wrapper_of:
         - v2:0.9
   - name: google-cloud-profiler-v2
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/devtools/cloudprofiler/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: PROFILER
   - name: google-cloud-pubsub-v1
-    version: 1.19.0
+    version: 1.20.0
     apis:
       - path: google/pubsub/v1
         ruby:
@@ -2777,7 +2777,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-rapid_migration_assessment-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
   - name: google-cloud-recaptcha_enterprise
@@ -2808,14 +2808,14 @@ libraries:
       wrapper_of:
         - v1:1.6
   - name: google-cloud-recaptcha_enterprise-v1
-    version: 1.12.2
+    version: 1.13.0
     apis:
       - path: google/cloud/recaptchaenterprise/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
   - name: google-cloud-recaptcha_enterprise-v1beta1
-    version: 0.21.1
+    version: 0.22.0
     apis:
       - path: google/cloud/recaptchaenterprise/v1beta1
         ruby:
@@ -2833,7 +2833,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.8
   - name: google-cloud-recommendation_engine-v1beta1
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/recommendationengine/v1beta1
         ruby:
@@ -2851,7 +2851,7 @@ libraries:
       wrapper_of:
         - v1:0.17
   - name: google-cloud-recommender-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/recommender/v1
         ruby:
@@ -2878,22 +2878,22 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-redis-cluster-v1
-    version: 1.9.0
+    version: 1.10.0
     apis:
       - path: google/cloud/redis/cluster/v1
   - name: google-cloud-redis-cluster-v1beta1
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/redis/cluster/v1beta1
   - name: google-cloud-redis-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/redis/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: REDIS
   - name: google-cloud-redis-v1beta1
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/redis/v1beta1
         ruby:
@@ -2912,7 +2912,7 @@ libraries:
       wrapper_of:
         - v3:1.2
   - name: google-cloud-resource_manager-v3
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/resourcemanager/v3
         ruby:
@@ -2929,7 +2929,7 @@ libraries:
       wrapper_of:
         - v2:2.0
   - name: google-cloud-retail-v2
-    version: 2.10.0
+    version: 2.11.0
     apis:
       - path: google/cloud/retail/v2
         ruby:
@@ -2948,7 +2948,7 @@ libraries:
       wrapper_of:
         - v2:0.17
   - name: google-cloud-run-v2
-    version: 0.29.1
+    version: 0.30.0
     apis:
       - path: google/cloud/run/v2
         ruby:
@@ -2962,7 +2962,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.0
   - name: google-cloud-saas_platform-saas_service_mgmt-v1beta1
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
   - name: google-cloud-scheduler
@@ -2988,14 +2988,14 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-scheduler-v1
-    version: 1.7.2
+    version: 1.8.0
     apis:
       - path: google/cloud/scheduler/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SCHEDULER
   - name: google-cloud-scheduler-v1beta1
-    version: 0.18.2
+    version: 0.19.0
     apis:
       - path: google/cloud/scheduler/v1beta1
         ruby:
@@ -3138,21 +3138,21 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-secret_manager-v1
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/secretmanager/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECRET_MANAGER
   - name: google-cloud-secret_manager-v1beta1
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/secrets/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECRET_MANAGER
   - name: google-cloud-secret_manager-v1beta2
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/cloud/secretmanager/v1beta2
         ruby:
@@ -3166,7 +3166,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-secure_source_manager-v1
-    version: 2.9.0
+    version: 2.10.0
     apis:
       - path: google/cloud/securesourcemanager/v1
   - name: google-cloud-security-private_ca
@@ -3181,7 +3181,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-security-private_ca-v1
-    version: 2.8.1
+    version: 2.9.0
     apis:
       - path: google/cloud/security/privateca/v1
         ruby:
@@ -3189,7 +3189,7 @@ libraries:
             ruby-cloud-env-prefix: PRIVATE_CA
             ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1
   - name: google-cloud-security-private_ca-v1beta1
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/security/privateca/v1beta1
         ruby:
@@ -3207,14 +3207,14 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-security-public_ca-v1
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/security/publicca/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA::V1
   - name: google-cloud-security-public_ca-v1beta1
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/cloud/security/publicca/v1beta1
         ruby:
@@ -3239,21 +3239,21 @@ libraries:
         - v2:1.0
         - v1:1.0
   - name: google-cloud-security_center-v1
-    version: 1.12.0
+    version: 1.13.0
     apis:
       - path: google/cloud/securitycenter/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
   - name: google-cloud-security_center-v1p1beta1
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/securitycenter/v1p1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
   - name: google-cloud-security_center-v2
-    version: 1.10.0
+    version: 1.11.0
     apis:
       - path: google/cloud/securitycenter/v2
         ruby:
@@ -3267,7 +3267,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-security_center_management-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/securitycentermanagement/v1
   - name: google-cloud-service_control
@@ -3281,7 +3281,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-service_control-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/api/servicecontrol/v1
         ruby:
@@ -3307,14 +3307,14 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-service_directory-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/servicedirectory/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SERVICE_DIRECTORY
   - name: google-cloud-service_directory-v1beta1
-    version: 0.22.1
+    version: 0.23.0
     apis:
       - path: google/cloud/servicedirectory/v1beta1
         ruby:
@@ -3328,7 +3328,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-service_health-v1
-    version: 2.5.1
+    version: 2.6.0
     apis:
       - path: google/cloud/servicehealth/v1
   - name: google-cloud-service_management
@@ -3342,7 +3342,7 @@ libraries:
       wrapper_of:
         - v1:0.10
   - name: google-cloud-service_management-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/api/servicemanagement/v1
         ruby:
@@ -3359,7 +3359,7 @@ libraries:
       wrapper_of:
         - v1:0.6
   - name: google-cloud-service_usage-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/api/serviceusage/v1
         ruby:
@@ -3376,14 +3376,14 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-shell-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/shell/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_SHELL
   - name: google-cloud-spanner-admin-database-v1
-    version: 1.14.1
+    version: 1.15.0
     apis:
       - path: google/spanner/admin/database/v1
         ruby:
@@ -3391,7 +3391,7 @@ libraries:
             ruby-cloud-env-prefix: SPANNER
             ruby-cloud-wrapper-gem-override: google-cloud-spanner
   - name: google-cloud-spanner-admin-instance-v1
-    version: 2.8.1
+    version: 2.9.0
     apis:
       - path: google/spanner/admin/instance/v1
         ruby:
@@ -3399,7 +3399,7 @@ libraries:
             ruby-cloud-env-prefix: SPANNER
             ruby-cloud-wrapper-gem-override: google-cloud-spanner
   - name: google-cloud-spanner-v1
-    version: 1.19.2
+    version: 1.20.0
     apis:
       - path: google/spanner/v1
         ruby:
@@ -3422,7 +3422,7 @@ libraries:
         - v2:1.0
         - v1:1.2
   - name: google-cloud-speech-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/speech/v1
         ruby:
@@ -3432,7 +3432,7 @@ libraries:
       - acceptance/data
       - acceptance/google/cloud/speech/v1/speech_smoke_test.rb
   - name: google-cloud-speech-v1p1beta1
-    version: 0.30.1
+    version: 0.31.0
     apis:
       - path: google/cloud/speech/v1p1beta1
         ruby:
@@ -3442,18 +3442,18 @@ libraries:
       - acceptance/data
       - acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb
   - name: google-cloud-speech-v2
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/speech/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPEECH
   - name: google-cloud-sql-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/sql/v1
   - name: google-cloud-sql-v1beta4
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/sql/v1beta4
   - name: google-cloud-storage-control
@@ -3490,7 +3490,7 @@ libraries:
       wrapper_of:
         - v2:0.0
   - name: google-cloud-storage-control-v2
-    version: 1.14.1
+    version: 1.15.0
     apis:
       - path: google/storage/control/v2
   - name: google-cloud-storage_batch_operations
@@ -3512,7 +3512,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-storage_batch_operations-v1
-    version: 1.0.1
+    version: 1.1.0
     apis:
       - path: google/cloud/storagebatchoperations/v1
   - name: google-cloud-storage_insights
@@ -3523,7 +3523,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-storage_insights-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/storageinsights/v1
   - name: google-cloud-storage_transfer
@@ -3554,7 +3554,7 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-storage_transfer-v1
-    version: 1.11.1
+    version: 1.12.0
     apis:
       - path: google/storagetransfer/v1
   - name: google-cloud-support
@@ -3565,11 +3565,11 @@ libraries:
       wrapper_of:
         - v2:0.3
   - name: google-cloud-support-v2
-    version: 1.11.3
+    version: 1.12.0
     apis:
       - path: google/cloud/support/v2
   - name: google-cloud-support-v2beta
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/cloud/support/v2beta
   - name: google-cloud-talent
@@ -3587,14 +3587,14 @@ libraries:
       wrapper_of:
         - v4:1.3
   - name: google-cloud-talent-v4
-    version: 1.9.1
+    version: 1.10.0
     apis:
       - path: google/cloud/talent/v4
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TALENT
   - name: google-cloud-talent-v4beta1
-    version: 0.19.1
+    version: 0.20.0
     apis:
       - path: google/cloud/talent/v4beta1
         ruby:
@@ -3618,21 +3618,21 @@ libraries:
       wrapper_of:
         - v2:1.2
   - name: google-cloud-tasks-v2
-    version: 1.7.0
+    version: 1.8.0
     apis:
       - path: google/cloud/tasks/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
   - name: google-cloud-tasks-v2beta2
-    version: 0.18.2
+    version: 0.19.0
     apis:
       - path: google/cloud/tasks/v2beta2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
   - name: google-cloud-tasks-v2beta3
-    version: 0.20.2
+    version: 0.21.0
     apis:
       - path: google/cloud/tasks/v2beta3
         ruby:
@@ -3646,7 +3646,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-telco_automation-v1
-    version: 2.5.1
+    version: 2.6.0
     apis:
       - path: google/cloud/telcoautomation/v1
   - name: google-cloud-text_to_speech
@@ -3664,14 +3664,14 @@ libraries:
       wrapper_of:
         - v1:1.7
   - name: google-cloud-text_to_speech-v1
-    version: 1.19.1
+    version: 1.20.0
     apis:
       - path: google/cloud/texttospeech/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TEXTTOSPEECH
   - name: google-cloud-text_to_speech-v1beta1
-    version: 0.31.1
+    version: 0.32.0
     apis:
       - path: google/cloud/texttospeech/v1beta1
         ruby:
@@ -3688,21 +3688,21 @@ libraries:
       wrapper_of:
         - v1:0.6
   - name: google-cloud-tpu-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/tpu/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CLOUD_TPU
   - name: google-cloud-trace-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/devtools/cloudtrace/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRACE
   - name: google-cloud-trace-v2
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/devtools/cloudtrace/v2
         ruby:
@@ -3730,7 +3730,7 @@ libraries:
         - v3:0.11
         - v2:0.0
   - name: google-cloud-translate-v3
-    version: 1.10.1
+    version: 1.11.0
     apis:
       - path: google/cloud/translate/v3
         ruby:
@@ -3744,7 +3744,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-vector_search-v1
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/vectorsearch/v1
   - name: google-cloud-video-live_stream
@@ -3809,7 +3809,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-video-live_stream-v1
-    version: 2.7.1
+    version: 2.8.0
     apis:
       - path: google/cloud/video/livestream/v1
   - name: google-cloud-video-stitcher
@@ -3886,7 +3886,7 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-video-stitcher-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/video/stitcher/v1
   - name: google-cloud-video-transcoder
@@ -3927,7 +3927,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-video-transcoder-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/video/transcoder/v1
         ruby:
@@ -3947,35 +3947,35 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-video_intelligence-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/videointelligence/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
   - name: google-cloud-video_intelligence-v1beta2
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/videointelligence/v1beta2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
   - name: google-cloud-video_intelligence-v1p1beta1
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/videointelligence/v1p1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
   - name: google-cloud-video_intelligence-v1p2beta1
-    version: 0.18.1
+    version: 0.19.0
     apis:
       - path: google/cloud/videointelligence/v1p2beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
   - name: google-cloud-video_intelligence-v1p3beta1
-    version: 0.14.1
+    version: 0.15.0
     apis:
       - path: google/cloud/videointelligence/v1p3beta1
         ruby:
@@ -3996,7 +3996,7 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-vision-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/vision/v1
         ruby:
@@ -4016,7 +4016,7 @@ libraries:
       toys_tasks:
         - generate-helpers
   - name: google-cloud-vision-v1p3beta1
-    version: 0.20.1
+    version: 0.21.0
     apis:
       - path: google/cloud/vision/v1p3beta1
         ruby:
@@ -4036,7 +4036,7 @@ libraries:
       toys_tasks:
         - generate-helpers
   - name: google-cloud-vision-v1p4beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/vision/v1p4beta1
         ruby:
@@ -4065,7 +4065,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-vision_ai-v1
-    version: 1.5.1
+    version: 1.6.0
     apis:
       - path: google/cloud/visionai/v1
         ruby:
@@ -4082,7 +4082,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-vm_migration-v1
-    version: 2.9.1
+    version: 2.10.0
     apis:
       - path: google/cloud/vmmigration/v1
         ruby:
@@ -4096,7 +4096,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-vmware_engine-v1
-    version: 1.5.2
+    version: 1.6.0
     apis:
       - path: google/cloud/vmwareengine/v1
   - name: google-cloud-vpc_access
@@ -4110,7 +4110,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-cloud-vpc_access-v1
-    version: 1.7.1
+    version: 1.8.0
     apis:
       - path: google/cloud/vpcaccess/v1
         ruby:
@@ -4129,14 +4129,14 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-web_risk-v1
-    version: 1.8.1
+    version: 1.9.0
     apis:
       - path: google/cloud/webrisk/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEBRISK
   - name: google-cloud-web_risk-v1beta1
-    version: 0.16.1
+    version: 0.17.0
     apis:
       - path: google/cloud/webrisk/v1beta1
         ruby:
@@ -4154,14 +4154,14 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-web_security_scanner-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/websecurityscanner/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
   - name: google-cloud-web_security_scanner-v1beta
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/cloud/websecurityscanner/v1beta
         ruby:
@@ -4182,7 +4182,7 @@ libraries:
             ruby-cloud-gem-name: google-cloud-workflows-executions
             ruby-cloud-wrapper-of: v1:1.2
   - name: google-cloud-workflows-executions-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/workflows/executions/v1
         ruby:
@@ -4190,7 +4190,7 @@ libraries:
             ruby-cloud-env-prefix: WORKFLOWS
             ruby-cloud-wrapper-gem-override: google-cloud-workflows
   - name: google-cloud-workflows-executions-v1beta
-    version: 0.14.2
+    version: 0.15.0
     apis:
       - path: google/cloud/workflows/executions/v1beta
         ruby:
@@ -4198,14 +4198,14 @@ libraries:
             ruby-cloud-env-prefix: WORKFLOWS
             ruby-cloud-wrapper-gem-override: google-cloud-workflows
   - name: google-cloud-workflows-v1
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/workflows/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WORKFLOWS
   - name: google-cloud-workflows-v1beta
-    version: 0.17.1
+    version: 0.18.0
     apis:
       - path: google/cloud/workflows/v1beta
         ruby:
@@ -4219,7 +4219,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-workload_identity-v1
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/workloadidentity/v1
   - name: google-cloud-workload_manager
@@ -4230,7 +4230,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-workload_manager-v1
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/cloud/workloadmanager/v1
   - name: google-cloud-workstations
@@ -4241,11 +4241,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-workstations-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/cloud/workstations/v1
   - name: google-cloud-workstations-v1beta
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/cloud/workstations/v1beta
   - name: google-developers-developer_knowledge
@@ -4256,7 +4256,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-developers-developer_knowledge-v1
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/developers/knowledge/v1
   - name: google-iam-client
@@ -4282,14 +4282,14 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-iam-credentials-v1
-    version: 1.6.1
+    version: 1.7.0
     apis:
       - path: google/iam/credentials/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM_CREDENTIALS
   - name: google-iam-v1
-    version: 1.8.0
+    version: 1.9.0
     apis:
       - path: google/iam/v1
     keep:
@@ -4300,25 +4300,25 @@ libraries:
       delete_generation_output_paths:
         - AUTHENTICATION.md
   - name: google-iam-v1beta
-    version: 0.15.2
+    version: 0.16.0
     apis:
       - path: google/iam/v1beta
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM
   - name: google-iam-v2
-    version: 0.13.1
+    version: 0.14.0
     apis:
       - path: google/iam/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-iam-client
   - name: google-iam-v3
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/iam/v3
   - name: google-iam-v3beta
-    version: 0.7.1
+    version: 0.8.0
     apis:
       - path: google/iam/v3beta
   - name: google-identity-access_context_manager
@@ -4329,7 +4329,7 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-identity-access_context_manager-v1
-    version: 0.15.1
+    version: 0.16.0
     apis:
       - path: google/identity/accesscontextmanager/v1
         ruby:
@@ -4350,14 +4350,14 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-maps-fleet_engine-delivery-v1
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/maps/fleetengine/delivery/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-geo-type=>0.0+<2.a
   - name: google-maps-fleet_engine-v1
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/maps/fleetengine/v1
         ruby:
@@ -4371,7 +4371,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-maps-isochrones-v1
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/maps/isochrones/v1
   - name: google-maps-route_optimization
@@ -4383,7 +4383,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-maps-route_optimization-v1
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/maps/routeoptimization/v1
     copyright_year: "2026"
@@ -4395,7 +4395,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-shopping-css-v1
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/shopping/css/v1
         ruby:
@@ -4409,14 +4409,14 @@ libraries:
       wrapper_of:
         - v1beta:0.2
   - name: google-shopping-merchant-accounts-v1
-    version: 0.7.1
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/accounts/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-accounts-v1beta
-    version: 0.14.1
+    version: 0.15.0
     apis:
       - path: google/shopping/merchant/accounts/v1beta
         ruby:
@@ -4430,11 +4430,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-conversions-v1
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/conversions/v1
   - name: google-shopping-merchant-conversions-v1beta
-    version: 0.7.1
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/conversions/v1beta
   - name: google-shopping-merchant-data_sources
@@ -4445,14 +4445,14 @@ libraries:
       wrapper_of:
         - v1beta:0.2
   - name: google-shopping-merchant-data_sources-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/datasources/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-data_sources-v1beta
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/datasources/v1beta
         ruby:
@@ -4466,14 +4466,14 @@ libraries:
       wrapper_of:
         - v1beta:0.2
   - name: google-shopping-merchant-inventories-v1
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/inventories/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-inventories-v1beta
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/inventories/v1beta
         ruby:
@@ -4487,14 +4487,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-issue_resolution-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-issue_resolution-v1beta
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1beta
         ruby:
@@ -4508,14 +4508,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-lfp-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/lfp/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-lfp-v1beta
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/shopping/merchant/lfp/v1beta
         ruby:
@@ -4529,7 +4529,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-shopping-merchant-loyalty_customers-v1
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
   - name: google-shopping-merchant-notifications
@@ -4540,11 +4540,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-notifications-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/notifications/v1
   - name: google-shopping-merchant-notifications-v1beta
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/notifications/v1beta
         ruby:
@@ -4558,14 +4558,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-order_tracking-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-order_tracking-v1beta
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1beta
         ruby:
@@ -4579,14 +4579,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-products-v1
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/shopping/merchant/products/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-products-v1beta
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/products/v1beta
         ruby:
@@ -4600,14 +4600,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-promotions-v1
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/promotions/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-promotions-v1beta
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/promotions/v1beta
         ruby:
@@ -4621,11 +4621,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-quota-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/quota/v1
   - name: google-shopping-merchant-quota-v1beta
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/quota/v1beta
   - name: google-shopping-merchant-reports
@@ -4636,14 +4636,14 @@ libraries:
       wrapper_of:
         - v1beta:0.3
   - name: google-shopping-merchant-reports-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/reports/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-reports-v1beta
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/shopping/merchant/reports/v1beta
         ruby:
@@ -4657,14 +4657,14 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-reviews-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/shopping/merchant/reviews/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-reviews-v1beta
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/reviews/v1beta
         ruby:
@@ -4684,7 +4684,7 @@ libraries:
       wrapper_of:
         - v1:0.14
   - name: grafeas-v1
-    version: 1.10.1
+    version: 1.11.0
     apis:
       - path: grafeas/v1
         ruby:

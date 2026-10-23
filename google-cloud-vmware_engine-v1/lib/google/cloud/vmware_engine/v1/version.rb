@@ -21,7 +21,7 @@ module Google
   module Cloud
     module VmwareEngine
       module V1
-        VERSION = "1.5.2"
+        VERSION = "1.6.0"
       end
     end
   end

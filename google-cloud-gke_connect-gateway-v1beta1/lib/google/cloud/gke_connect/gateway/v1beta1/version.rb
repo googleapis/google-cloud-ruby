@@ -22,7 +22,7 @@ module Google
     module GkeConnect
       module Gateway
         module V1beta1
-          VERSION = "0.14.2"
+          VERSION = "0.15.0"
         end
       end
     end
