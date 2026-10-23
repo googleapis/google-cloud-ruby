@@ -20,7 +20,7 @@ sources:
 tools:
   gem:
     - name: gapic-generator-cloud
-      version: 0.52.0
+      version: 0.54.0
     - name: grpc-tools
       version: 1.78.1
     - name: toys
@@ -2372,6 +2372,10 @@ libraries:
     version: 2.12.1
     apis:
       - path: google/cloud/networkservices/v1
+  - name: google-cloud-network_services-v1beta1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/networkservices/v1beta1
   - name: google-cloud-notebooks
     version: 3.2.1
     apis:
@@ -2401,6 +2405,17 @@ libraries:
     version: 1.6.1
     apis:
       - path: google/cloud/notebooks/v2
+  - name: google-cloud-observability
+    version: 0.0.1
+    apis:
+      - path: google/cloud/observability/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-observability-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/observability/v1
   - name: google-cloud-optimization
     version: 1.5.1
     apis:
@@ -4641,6 +4656,13 @@ libraries:
     ruby:
       wrapper_of:
         - v1beta:0.0
+  - name: google-shopping-merchant-reviews-v1
+    version: 0.0.1
+    apis:
+      - path: google/shopping/merchant/reviews/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-reviews-v1beta
     version: 0.9.0
     apis:

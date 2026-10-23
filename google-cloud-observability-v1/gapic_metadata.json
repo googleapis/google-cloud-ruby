@@ -1,0 +1,128 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.observability.v1",
+  "libraryPackage": "::Google::Cloud::Observability::V1",
+  "services": {
+    "Observability": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Observability::V1::Observability::Client",
+          "rpcs": {
+            "GetScope": {
+              "methods": [
+                "get_scope"
+              ]
+            },
+            "UpdateScope": {
+              "methods": [
+                "update_scope"
+              ]
+            },
+            "GetBucket": {
+              "methods": [
+                "get_bucket"
+              ]
+            },
+            "ListBuckets": {
+              "methods": [
+                "list_buckets"
+              ]
+            },
+            "CreateBucket": {
+              "methods": [
+                "create_bucket"
+              ]
+            },
+            "UpdateBucket": {
+              "methods": [
+                "update_bucket"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "get_dataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "list_datasets"
+              ]
+            },
+            "GetView": {
+              "methods": [
+                "get_view"
+              ]
+            },
+            "ListViews": {
+              "methods": [
+                "list_views"
+              ]
+            },
+            "GetLink": {
+              "methods": [
+                "get_link"
+              ]
+            },
+            "ListLinks": {
+              "methods": [
+                "list_links"
+              ]
+            },
+            "CreateLink": {
+              "methods": [
+                "create_link"
+              ]
+            },
+            "UpdateLink": {
+              "methods": [
+                "update_link"
+              ]
+            },
+            "DeleteLink": {
+              "methods": [
+                "delete_link"
+              ]
+            },
+            "GetTraceScope": {
+              "methods": [
+                "get_trace_scope"
+              ]
+            },
+            "ListTraceScopes": {
+              "methods": [
+                "list_trace_scopes"
+              ]
+            },
+            "CreateTraceScope": {
+              "methods": [
+                "create_trace_scope"
+              ]
+            },
+            "UpdateTraceScope": {
+              "methods": [
+                "update_trace_scope"
+              ]
+            },
+            "DeleteTraceScope": {
+              "methods": [
+                "delete_trace_scope"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "get_settings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "update_settings"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

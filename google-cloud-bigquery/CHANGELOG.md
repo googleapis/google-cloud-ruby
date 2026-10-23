@@ -1,5 +1,11 @@
 # Release History
 
+### 1.64.1 (2026-10-22)
+
+#### Bug Fixes
+
+* Avoid method redefinition warnings on require ([#36649](https://github.com/googleapis/google-cloud-ruby/issues/36649)) ([1373baf](https://github.com/googleapis/google-cloud-ruby/commit/1373bafc9f74534c99f2496cb376787ce8bafba4)), refs [#36647](https://github.com/googleapis/google-cloud-ruby/issues/36647)
+
 ### 1.64.0 (2026-05-11)
 
 #### Features

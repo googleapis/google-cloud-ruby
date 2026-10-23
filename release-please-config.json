@@ -1205,6 +1205,10 @@
       "component": "google-cloud-network_services-v1",
       "version_file": "lib/google/cloud/network_services/v1/version.rb"
     },
+    "google-cloud-network_services-v1beta1": {
+      "component": "google-cloud-network_services-v1beta1",
+      "version_file": "lib/google/cloud/network_services/v1beta1/version.rb"
+    },
     "google-cloud-notebooks": {
       "component": "google-cloud-notebooks",
       "version_file": "lib/google/cloud/notebooks/version.rb"
@@ -1220,6 +1224,14 @@
     "google-cloud-notebooks-v2": {
       "component": "google-cloud-notebooks-v2",
       "version_file": "lib/google/cloud/notebooks/v2/version.rb"
+    },
+    "google-cloud-observability": {
+      "component": "google-cloud-observability",
+      "version_file": "lib/google/cloud/observability/version.rb"
+    },
+    "google-cloud-observability-v1": {
+      "component": "google-cloud-observability-v1",
+      "version_file": "lib/google/cloud/observability/v1/version.rb"
     },
     "google-cloud-optimization": {
       "component": "google-cloud-optimization",
@@ -2160,6 +2172,10 @@
     "google-shopping-merchant-reviews": {
       "component": "google-shopping-merchant-reviews",
       "version_file": "lib/google/shopping/merchant/reviews/version.rb"
+    },
+    "google-shopping-merchant-reviews-v1": {
+      "component": "google-shopping-merchant-reviews-v1",
+      "version_file": "lib/google/shopping/merchant/reviews/v1/version.rb"
     },
     "google-shopping-merchant-reviews-v1beta": {
       "component": "google-shopping-merchant-reviews-v1beta",
