@@ -1,28 +1,27 @@
-# -*- ruby -*-
-# encoding: utf-8
-
 require File.expand_path("lib/google/area120/tables/v1alpha1/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-area120-tables-v1alpha1"
-  gem.version       = Google::Area120::Tables::V1alpha1::VERSION
+  gem.name = "google-area120-tables-v1alpha1"
+  gem.version = Google::Area120::Tables::V1alpha1::VERSION
+  gem.authors = ["Google LLC"]
+  gem.email = "googleapis-packages@google.com"
+  gem.description =
+    "This gem is obsolete because the related Google backend is turned down. " \
+    "For more information, see https://cloud.google.com/terms/deprecation."
+  gem.summary = "This gem is obsolete because the related backend is turned down."
+  gem.post_install_message = <<~MESSAGE
 
-  gem.authors       = ["Google LLC"]
-  gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator. Note that google-area120-tables-v1alpha1 is a version-specific client library. For most uses, we recommend installing the main client library google-area120-tables instead. See the readme for more details."
-  gem.summary       = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
-  gem.license       = "Apache-2.0"
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    The google-area120-tables-v1alpha1 gem is OBSOLETE.
+    For more information, see:
+    https://cloud.google.com/terms/deprecation
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  gem.platform      = Gem::Platform::RUBY
-
-  gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      `git ls-files -- proto_docs/*`.split("\n") +
-                      ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
+  MESSAGE
+  gem.homepage = "https://github.com/googleapis/google-cloud-ruby"
+  gem.license = "Apache-2.0"
+  gem.platform = Gem::Platform::RUBY
+  gem.files = ["README.md", "LICENSE.md", ".yardopts", "lib/google/area120/tables/v1alpha1/version.rb"]
   gem.require_paths = ["lib"]
-
-  gem.required_ruby_version = ">= 3.2"
-
-  gem.add_dependency "gapic-common", "~> 1.6"
-  gem.add_dependency "google-cloud-errors", "~> 1.0"
+  gem.required_ruby_version = ">= 3.0"
 end
