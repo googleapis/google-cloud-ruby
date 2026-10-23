@@ -197,14 +197,10 @@ client library you are using, or the
 
 ## Supported Ruby Versions
 
-These libraries are currently supported on Ruby 2.6 through Ruby 3.1. Older
-versions of Ruby _may_ still work, but are unsupported and not recommended.
-
-In general, Google provides official support for Ruby versions that are actively
-supported by Ruby Core--that is, Ruby versions that are either in normal
-maintenance or in security maintenance, and not end of life. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Library Versioning
 
