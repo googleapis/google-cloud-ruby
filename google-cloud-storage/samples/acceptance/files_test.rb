@@ -225,20 +225,24 @@ describe "Files Snippets" do
   end
 
   it "download_file_requester_pays" do
-    bucket.requester_pays = true
-    bucket.create_file local_file, remote_file_name
+    rp_bucket = create_bucket_helper random_bucket_name
+    rp_bucket.user_project = true
+    rp_bucket.requester_pays = true
+    rp_bucket.create_file local_file, remote_file_name
 
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
 
       assert_output "Downloaded #{remote_file_name} using billing project #{storage_client.project}\n" do
-        download_file_requester_pays bucket_name:     bucket.name,
+        download_file_requester_pays bucket_name:     rp_bucket.name,
                                      file_name:       remote_file_name,
                                      local_file_path: tmpfile
       end
 
       assert File.file? tmpfile
     end
+  ensure
+    delete_bucket_helper rp_bucket.name if rp_bucket
   end
 
   it "download_encrypted_file" do
