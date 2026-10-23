@@ -23,7 +23,7 @@ module Google
       module Consumer
         module Procurement
           module V1
-            VERSION = "1.10.0"
+            VERSION = "1.11.0"
           end
         end
       end
