@@ -36,7 +36,7 @@ PATH
     google-cloud-bigquery (1.64.0)
       bigdecimal (>= 3.0, < 5)
       concurrent-ruby (~> 1.0)
-      google-apis-bigquery_v2 (~> 0.71)
+      google-apis-bigquery_v2 (~> 0.88)
       google-apis-core (>= 0.18, < 2)
       google-cloud-core (~> 1.6)
       googleauth (~> 1.9)
