@@ -160,7 +160,8 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     job.wait_until_done!
 
     _(job).must_be :done?
-    _(job).wont_be :failed?
+    # The cancel may land before or after the job finishes.
+    _(job.error["reason"]).must_equal "stopped" if job.failed?
   end
 
   it "creates an extract job with location" do
