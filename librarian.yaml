@@ -142,23 +142,6 @@ libraries:
     version: 0.12.0
     apis:
       - path: google/apps/meet/v2beta
-  - name: google-area120-tables
-    version: 0.9.1
-    apis:
-      - path: google/area120/tables/v1alpha1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-env-prefix: AREA120_TABLES
-    ruby:
-      wrapper_of:
-        - v1alpha1:0.7
-  - name: google-area120-tables-v1alpha1
-    version: 0.15.1
-    apis:
-      - path: google/area120/tables/v1alpha1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-env-prefix: AREA120_TABLES
   - name: google-cloud-access_approval
     version: 1.8.1
     apis:
