@@ -357,6 +357,8 @@ def run_in_dir dir
   end
 end
 
+# TODO(https://github.com/googleapis/google-cloud-ruby/issues/36677, b/578143763):
+# Remove once grpc publishes an x64-mingw-ucrt gem for >= 1.85.0.
 # grpc 1.85.0 was published without a precompiled x64-mingw-ucrt binary gem
 # (https://github.com/grpc/grpc/issues/43374), causing Bundler on Windows to
 # fall back to the source gem and fail linking against -lx64-ucrt-ruby400.
