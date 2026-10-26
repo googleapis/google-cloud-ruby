@@ -333,7 +333,9 @@ def run_in_dir dir
     if @bundle_task
       puts
       puts "#{dir}: bundle ...", :bold, :cyan
-      result = exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
+      result = with_windows_grpc_pin do
+        exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
+      end
       unless result.success?
         @errors << [dir, "bundle"]
         next
@@ -351,6 +353,26 @@ def run_in_dir dir
       puts "#{dir}: #{task} ...", :bold, :cyan
       success = exec(["toys", task] + verbosity_flags, env: @auth_env).success?
       @errors << [dir, task] unless success
+    end
+  end
+end
+
+# grpc 1.85.0 was published without a precompiled x64-mingw-ucrt binary gem
+# (https://github.com/grpc/grpc/issues/43374), causing Bundler on Windows to
+# fall back to the source gem and fail linking against -lx64-ucrt-ruby400.
+def with_windows_grpc_pin
+  return yield unless Gem.win_platform? && File.file?("Gemfile")
+  return yield if File.file?("Gemfile.lock") && !File.read("Gemfile.lock").include?("grpc (")
+  orig_gemfile = File.read "Gemfile"
+  return yield if orig_gemfile.match?(/^\s*gem\s+["']grpc["']/)
+  begin
+    File.write "Gemfile", "#{orig_gemfile.chomp}\ngem \"grpc\", \"< 1.85.0\"\n"
+    yield
+  ensure
+    File.write "Gemfile", orig_gemfile
+    if File.file? "Gemfile.lock"
+      lock = File.read "Gemfile.lock"
+      File.write "Gemfile.lock", lock.sub(/^  grpc \(< 1\.85\.0\)\r?\n/, "")
     end
   end
 end
