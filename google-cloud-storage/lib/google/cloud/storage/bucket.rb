@@ -2263,7 +2263,14 @@ module Google
         #
         # When running in Google Cloud environments (like Compute Engine, Cloud Run, or
         # Kubernetes Engine), the library automatically detects the environment and uses
-        # the IAM Credentials API to sign the URL. A local private key is not required.
+        # the IAM Credentials API to sign the URL. The IAM Credentials API calls are
+        # authorized using the Storage client's configured credentials, ensuring any custom
+        # credentials are respected. A local private key is not required.
+        #
+        # **Note**: Using the IAM Credentials API fallback introduces additional network
+        # latency and consumes IAM `signBlob` quota for each generated URL. Ensure the
+        # executing identity has the `roles/iam.serviceAccountTokenCreator` role
+        # (`iam.serviceAccounts.signBlob` permission) granted on the target service account.
         #
         # @see https://cloud.google.com/storage/docs/access-control/signed-urls
         #   Signed URLs guide

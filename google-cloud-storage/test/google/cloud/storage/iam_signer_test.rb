@@ -29,16 +29,30 @@ describe Google::Cloud::Storage::IAMSigner do
     mock_response.expect :signed_blob, expected_signature
 
     mock_service = Minitest::Mock.new
+    mock_client_options = OpenStruct.new
+    mock_service.expect :client_options, mock_client_options
+    mock_service.expect :client_options, mock_client_options
+    mock_service.expect :client_options, mock_client_options
+    mock_service.expect :request_options, OpenStruct.new
+    mock_service.expect :universe_domain=, nil, ["googleapis.com"]
     mock_service.expect :authorization=, nil, [mock_auth]
     mock_service.expect :sign_service_account_blob, mock_response do |resource, request|
       resource == expected_resource && request.payload == payload
     end
 
-    mock_credentials = Minitest::Mock.new
-    mock_credentials.expect :client, mock_auth
+    mock_credentials = OpenStruct.new client: mock_auth
+    api_service = OpenStruct.new(
+      client_options: OpenStruct.new(open_timeout_sec: 60, read_timeout_sec: 60, send_timeout_sec: 60),
+      request_options: OpenStruct.new(quota_project: "test_project"),
+      universe_domain: "googleapis.com"
+    )
+    mock_storage_service = OpenStruct.new(
+      credentials: mock_credentials,
+      service: api_service
+    )
 
     Google::Apis::IamcredentialsV1::IAMCredentialsService.stub :new, mock_service do
-      signer = Google::Cloud::Storage::IAMSigner.new mock_credentials
+      signer = Google::Cloud::Storage::IAMSigner.new mock_storage_service
       signature = signer.sign issuer, payload
 
       _(signature).must_equal expected_signature

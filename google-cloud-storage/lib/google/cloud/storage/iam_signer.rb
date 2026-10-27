@@ -23,11 +23,30 @@ module Google
       # @private
       # Helper class for signing blobs via the IAM Credentials API.
       class IAMSigner
-        def initialize credentials
+        def initialize storage_service
           require "google/apis/iamcredentials_v1"
 
           @client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
-          @client.authorization = credentials.client
+          
+          api_service = storage_service.service
+          @client.client_options.open_timeout_sec = api_service.client_options.open_timeout_sec
+          @client.client_options.read_timeout_sec = api_service.client_options.read_timeout_sec
+          @client.client_options.send_timeout_sec = api_service.client_options.send_timeout_sec
+
+          if api_service.request_options.quota_project
+            @client.request_options.quota_project = api_service.request_options.quota_project
+          end
+
+          if api_service.respond_to?(:universe_domain) && api_service.universe_domain
+            @client.universe_domain = api_service.universe_domain
+          end
+
+          auth_client = storage_service.credentials.client
+          if auth_client.respond_to? :duplicate
+            @client.authorization = auth_client.duplicate scope: ["https://www.googleapis.com/auth/iam"]
+          else
+            @client.authorization = auth_client
+          end
         end
 
         def sign issuer, string_to_sign

@@ -178,6 +178,54 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
   end
 
+  it "falls back to IAMSigner when using service_account_email" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      credentials.issuer = nil
+      credentials.signing_key = nil
+      client = credentials.client
+      def client.service_account_email; "wif_service_account@email.com"; end
+
+      iam_signer_mock = Minitest::Mock.new
+      iam_signer_mock.expect :sign, "iam-signature", ["wif_service_account@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+      Google::Cloud.env.stub :metadata?, false do
+        Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
+          signed_url = file.signed_url
+
+          signed_url_params = CGI::parse(URI(signed_url).query)
+          _(signed_url_params["GoogleAccessId"]).must_equal ["wif_service_account@email.com"]
+          _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("iam-signature").delete("\n")]
+        end
+      end
+
+      iam_signer_mock.verify
+    end
+  end
+
+  it "falls back to IAMSigner when using principal" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      credentials.issuer = nil
+      credentials.signing_key = nil
+      client = credentials.client
+      def client.principal; "impersonated_account@email.com"; end
+
+      iam_signer_mock = Minitest::Mock.new
+      iam_signer_mock.expect :sign, "iam-signature", ["impersonated_account@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
+
+      Google::Cloud.env.stub :metadata?, false do
+        Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
+          signed_url = file.signed_url
+
+          signed_url_params = CGI::parse(URI(signed_url).query)
+          _(signed_url_params["GoogleAccessId"]).must_equal ["impersonated_account@email.com"]
+          _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("iam-signature").delete("\n")]
+        end
+      end
+
+      iam_signer_mock.verify
+    end
+  end
+
   it "uses IAMSigner and auto-detects issuer if metadata? is true" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       credentials.issuer = nil

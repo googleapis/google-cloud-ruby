@@ -78,12 +78,26 @@ module Google
           end
 
           def determine_signing_key options = {}
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
             options[:signing_key] || options[:private_key] ||
-              options[:signer] || @service.credentials.signing_key
+              options[:signer] || (client.respond_to?(:signing_key) ? client.signing_key : nil)
+          end
+
+          def extract_issuer_from_credentials
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
+            if client.respond_to?(:issuer) && client.issuer
+              client.issuer
+            elsif client.respond_to?(:service_account_email) && client.service_account_email
+              client.service_account_email
+            elsif client.respond_to?(:principal) && client.principal
+              client.principal
+            else
+              nil
+            end
           end
 
           def determine_issuer options = {}
-            issuer = options[:issuer] || options[:client_email] || @service.credentials.issuer
+            issuer = options[:issuer] || options[:client_email] || extract_issuer_from_credentials
             if issuer.nil? && Google::Cloud.env.metadata?
               issuer = Google::Cloud.env.lookup_metadata "instance", "service-accounts/default/email"
             end
@@ -177,7 +191,7 @@ module Google
           def iam_signer_instance
             @iam_signer_instance ||= begin
               require "google/cloud/storage/iam_signer"
-              Google::Cloud::Storage::IAMSigner.new(@service.credentials)
+              Google::Cloud::Storage::IAMSigner.new(@service)
             end
           end
         end
