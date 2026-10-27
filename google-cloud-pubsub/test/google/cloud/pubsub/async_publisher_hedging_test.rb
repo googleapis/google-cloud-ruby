@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "base64"
 require "stringio"
 
 Thread.abort_on_exception = true
@@ -141,7 +142,16 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       end
     end
 
-    it "never hedges or touches the token bucket when batch has an ordering_key" do
+    it "rejects ordered messages and ordered batches when hedging is enabled, while preserving OrderedMessagesDisabled when hedging is disabled" do
+      unhedged = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
+      begin
+        assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
+          unhedged.publish "a", ordering_key: "k1"
+        end
+      ensure
+        unhedged.stop!
+      end
+
       publisher = Google::Cloud::PubSub::AsyncPublisher.new(
         topic_name,
         pubsub.service,
@@ -153,9 +163,15 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         end
         publisher.service.mocked_topic_admin = stub
 
+        err = assert_raises ArgumentError do
+          publisher.publish "a", ordering_key: "k1"
+        end
+        _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
+
+        cb_results = Queue.new
         ordered_item = OpenStruct.new msg: Google::Cloud::PubSub::V1::PubsubMessage.new(data: "a", ordering_key: "k1"),
                                       bytesize: 5,
-                                      callback: nil
+                                      callback: ->(res) { cb_results.push res }
         ordered_batch = OpenStruct.new "rebalance!" => [ordered_item],
                                        "reset!" => false,
                                        "total_message_bytes" => 5,
@@ -163,7 +179,11 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
                                        "items" => [ordered_item]
 
         publisher.send :publish_batch_sync, topic_name, ordered_batch
-        _(stub.call_count).must_equal 1
+        res = cb_results.pop
+        _(res).must_be :failed?
+        _(res.error).must_be_kind_of ArgumentError
+        _(res.error.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
+        _(stub.call_count).must_equal 0
         _(publisher.token_bucket.tokens).must_equal 0.0
       ensure
         publisher.stop!
@@ -421,6 +441,18 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(stub.calls[2][:handle]).wont_be :cancelled?
         # Started at 2.0, consumed 2 tokens, refilled 0.2 on win -> 0.2
         _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+
+        # Verify x-goog-pubsub-client-telemetry header on attempts 0, 1, and 2
+        telemetries = (0..2).map do |attempt_idx|
+          raw_b64 = stub.calls[attempt_idx][:options].metadata["x-goog-pubsub-client-telemetry"]
+          _(raw_b64).wont_be_nil
+          decoded = Google::Cloud::PubSub::V1::PubsubClientTelemetry.decode Base64.strict_decode64(raw_b64)
+          _(decoded.publish_operation.hedged_attempt_count).must_equal attempt_idx
+          _(decoded.publish_operation.publish_start_time.seconds).must_be :>, 0
+          decoded
+        end
+        _(telemetries[1].publish_operation.publish_start_time).must_equal telemetries[0].publish_operation.publish_start_time
+        _(telemetries[2].publish_operation.publish_start_time).must_equal telemetries[0].publish_operation.publish_start_time
       ensure
         publisher.stop!
       end
