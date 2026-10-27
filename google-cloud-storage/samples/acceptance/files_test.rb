@@ -20,6 +20,7 @@ require_relative "../storage_copy_file"
 require_relative "../storage_copy_file_archived_generation"
 require_relative "../storage_delete_file"
 require_relative "../storage_delete_file_archived_generation"
+require_relative "../storage_delete_object_contexts"
 require_relative "../storage_download_byte_range"
 require_relative "../storage_download_encrypted_file"
 require_relative "../storage_download_file"
@@ -385,6 +386,33 @@ describe "Files Snippets" do
         sleep 0.2
       end
       assert_equal "File: #{remote_file_name2} has context key: #{custom_context_key2}\n", out
+    end
+  end
+
+  describe "delete_object_contexts" do
+    let(:custom_context_key1) { "my-custom-key" }
+    let(:custom_context_value1) { "my-custom-value" }
+    let(:custom_context_key2) { "my-custom-key-2" }
+    let(:custom_context_value2) { "my-custom-value-2" }
+
+    before(:each) do
+      bucket.create_file local_file, remote_file_name
+
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name,
+                          custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name,
+                          custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+    end
+
+    it "deletes all custom object contexts" do
+      refute_empty bucket.file(remote_file_name).contexts.custom
+
+      assert_output "Deleted object contexts for object #{remote_file_name} in bucket #{bucket.name}.\n" do
+        delete_object_contexts bucket_name: bucket.name, file_name: remote_file_name
+      end
+
+      contexts = bucket.file(remote_file_name).contexts
+      assert_empty(contexts&.custom || {})
     end
   end
 
