@@ -13,8 +13,10 @@
 # limitations under the License.
 
 
+require "base64"
 require "monitor"
 require "concurrent"
+require "google/protobuf/well_known_types"
 require "google/cloud/pubsub/errors"
 require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"
@@ -161,6 +163,9 @@ module Google
 
           synchronize do
             raise AsyncPublisherStopped if @stopped
+            if @hedging_options && (@ordered || !msg.ordering_key.empty?)
+              raise ArgumentError, "Publish hedging and message ordering cannot be enabled at the same time."
+            end
             raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
 
             batch = resolve_batch_for_message msg
@@ -415,7 +420,7 @@ module Google
         rescue StandardError => e
           items = batch.items
 
-          unless batch.ordering_key.empty?
+          if !batch.ordering_key.empty? && !(@hedging_options && e.is_a?(ArgumentError))
             retry if publish_batch_error_retryable? e
             # Cancel the batch if the error is not to be retried.
             begin
@@ -458,7 +463,13 @@ module Google
           end
         end
 
+        CLIENT_TELEMETRY_HEADER = "x-goog-pubsub-client-telemetry".freeze
+
         def publish_items topic_name, batch, items
+          if @hedging_options && (@ordered || !batch.ordering_key.to_s.empty?)
+            raise ArgumentError, "Publish hedging and message ordering cannot be enabled at the same time."
+          end
+
           if hedge_batch? batch
             publish_items_hedged topic_name, batch, items
           else
@@ -485,7 +496,8 @@ module Google
           batch_context = {
             topic_name: topic_name,
             messages: items.map(&:msg),
-            compress: compress_batch?(batch)
+            compress: compress_batch?(batch),
+            publish_start_time: Time.now
           }
           coordinator = CancellationSharer.new(
             batch: batch_context,
@@ -532,10 +544,20 @@ module Google
         def execute_publish_attempt coordinator, batch_context, attempt_number, attempt_handle, call_options: nil
           return if attempt_handle.nil? || attempt_handle.cancelled? || coordinator.done?
 
+          effective_call_options = (call_options || {}).dup
+          metadata = (effective_call_options[:metadata] || {}).dup
+          if batch_context[:publish_start_time]
+            metadata[CLIENT_TELEMETRY_HEADER] = encode_client_telemetry(
+              attempt_number,
+              batch_context[:publish_start_time]
+            )
+          end
+          effective_call_options[:metadata] = metadata unless metadata.empty?
+
           response = @service.publish batch_context[:topic_name],
                                       batch_context[:messages],
                                       compress: batch_context[:compress],
-                                      call_options: call_options,
+                                      call_options: effective_call_options,
                                       attempt_handle: attempt_handle
           if attempt_handle.cancelled?
             coordinator.handle_attempt_failure attempt_number,
@@ -545,6 +567,20 @@ module Google
           end
         rescue StandardError => e
           coordinator.handle_attempt_failure attempt_number, e
+        end
+
+        def encode_client_telemetry attempt_number, publish_start_time
+          start_ts = Google::Protobuf::Timestamp.new(
+            seconds: publish_start_time.to_i,
+            nanos: publish_start_time.nsec
+          )
+          telemetry = Google::Cloud::PubSub::V1::PubsubClientTelemetry.new(
+            publish_operation: Google::Cloud::PubSub::V1::PubsubClientTelemetry::PublishOperation.new(
+              hedged_attempt_count: attempt_number,
+              publish_start_time: start_ts
+            )
+          )
+          Base64.strict_encode64 Google::Cloud::PubSub::V1::PubsubClientTelemetry.encode(telemetry)
         end
 
         PUBLISH_RETRY_ERRORS = [
