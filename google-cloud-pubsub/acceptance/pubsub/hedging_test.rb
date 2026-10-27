@@ -116,7 +116,7 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       end
       _(publisher.token_bucket.tokens).must_be_close_to 1.0, 1e-6
 
-      # Intercept the 6th batch: stall attempt 0 (call_options.nil?) on its AttemptHandle,
+      # Intercept the 6th batch: stall attempt 0 (call_options[:retry_policy].nil?) on its AttemptHandle,
       # while allowing hedged attempt 1 (call_options[:retry_policy][:retry_codes] == [])
       # to pass straight through to the live Pub/Sub service.
       orig_publish = publisher.service.method :publish
@@ -126,10 +126,10 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       publisher.service.define_singleton_method :publish do |t_name, msgs, **kwargs|
         call_opts = kwargs[:call_options]
         handle = kwargs[:attempt_handle]
-        if call_opts.nil? && attempt0_handle.nil?
+        if call_opts&.dig(:retry_policy).nil? && attempt0_handle.nil?
           attempt0_handle = handle
           handle.sleep_interruptibly 2.5
-        elsif call_opts
+        elsif call_opts&.dig(:retry_policy)
           hedged_call_count.increment
         end
         orig_publish.call t_name, msgs, **kwargs
@@ -185,10 +185,10 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       publisher.service.define_singleton_method :publish do |t_name, msgs, **kwargs|
         call_opts = kwargs[:call_options]
         handle = kwargs[:attempt_handle]
-        if call_opts.nil? && !intercepted_primary
+        if call_opts&.dig(:retry_policy).nil? && !intercepted_primary
           intercepted_primary = true
           handle.sleep_interruptibly 0.25
-        elsif call_opts && attempt1_handle.nil?
+        elsif call_opts&.dig(:retry_policy) && attempt1_handle.nil?
           attempt1_handle = handle
           handle.sleep_interruptibly 2.5
         end
@@ -275,7 +275,7 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
     end
   end
 
-  it "rejects enabling message ordering when hedging is enabled" do
+  it "rejects enabling message ordering or publishing with an ordering_key when hedging is enabled" do
     suffix = SecureRandom.hex 4
     topic = retrieve_topic "#{$topic_prefix}-hdg-ord-#{suffix}"
     publisher = pubsub.publisher(
@@ -291,6 +291,11 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
         publisher.enable_message_ordering!
       end
       _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
+
+      err2 = assert_raises ArgumentError do
+        publisher.publish_async "ordered-msg", ordering_key: "k1"
+      end
+      _(err2.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
     ensure
       publisher.async_publisher&.stop!
     end
