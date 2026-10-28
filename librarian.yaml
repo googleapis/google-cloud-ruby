@@ -106,7 +106,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-apps-chat-v1
-    version: 0.32.0
+    version: 0.33.0
     apis:
       - path: google/chat/v1
         ruby:
@@ -826,7 +826,7 @@ libraries:
     apis:
       - path: google/cloud/ces/v1
   - name: google-cloud-ces-v1beta
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/ces/v1beta
   - name: google-cloud-channel
@@ -1756,18 +1756,18 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement::V1alpha
             ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
   - name: google-cloud-gemini_data_analytics
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
     ruby:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-gemini_data_analytics-v1
-    version: 1.3.0
+    version: 1.4.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
-    version: 1.3.0
+    version: 1.4.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
   - name: google-cloud-gke_backup
@@ -2166,18 +2166,18 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: MEMCACHE
   - name: google-cloud-memorystore
-    version: 1.2.2
+    version: 1.3.0
     apis:
       - path: google/cloud/memorystore/v1
     ruby:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-memorystore-v1
-    version: 1.12.0
+    version: 1.13.0
     apis:
       - path: google/cloud/memorystore/v1
   - name: google-cloud-memorystore-v1beta
-    version: 0.16.0
+    version: 0.17.0
     apis:
       - path: google/cloud/memorystore/v1beta
   - name: google-cloud-metastore
@@ -2418,7 +2418,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-oracle_database-v1
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/oracledatabase/v1
   - name: google-cloud-orchestration-airflow-service
@@ -2861,11 +2861,11 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-redis-cluster-v1
-    version: 1.10.0
+    version: 1.11.0
     apis:
       - path: google/cloud/redis/cluster/v1
   - name: google-cloud-redis-cluster-v1beta1
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/redis/cluster/v1beta1
   - name: google-cloud-redis-v1
@@ -3432,11 +3432,11 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPEECH
   - name: google-cloud-sql-v1
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/sql/v1
   - name: google-cloud-sql-v1beta4
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/sql/v1beta4
   - name: google-cloud-storage-control
@@ -3873,7 +3873,7 @@ libraries:
     apis:
       - path: google/cloud/video/stitcher/v1
   - name: google-cloud-video-transcoder
-    version: 2.2.1
+    version: 2.3.0
     apis:
       - path: google/cloud/video/transcoder/v1
         ruby:
@@ -3910,7 +3910,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-video-transcoder-v1
-    version: 2.7.0
+    version: 2.8.0
     apis:
       - path: google/cloud/video/transcoder/v1
         ruby:
@@ -4272,7 +4272,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: IAM_CREDENTIALS
   - name: google-iam-v1
-    version: 1.9.0
+    version: 1.10.0
     apis:
       - path: google/iam/v1
     keep:
@@ -4604,7 +4604,7 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-shopping-merchant-quota-v1
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/quota/v1
   - name: google-shopping-merchant-quota-v1beta
