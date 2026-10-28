@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.10.0 (2026-10-28)
+
+#### Features
+
+* require gapic-common ~&gt; 1.6 ([#36678](https://github.com/googleapis/google-cloud-ruby/issues/36678)) 
+
 ### 1.9.0 (2026-10-26)
 
 #### Features
