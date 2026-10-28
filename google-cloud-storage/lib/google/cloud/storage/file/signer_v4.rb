@@ -193,15 +193,10 @@ module Google
 
           def extract_issuer_from_credentials
             client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
-            if client.respond_to?(:issuer) && client.issuer
-              client.issuer
-            elsif client.respond_to?(:service_account_email) && client.service_account_email
-              client.service_account_email
-            elsif client.respond_to?(:principal) && client.principal
-              client.principal
-            else
-              nil
+            [:issuer, :service_account_email, :principal].each do |method|
+              return client.public_send(method) if client.respond_to?(method) && client.public_send(method)
             end
+            nil
           end
 
           def determine_issuer issuer, client_email
@@ -375,9 +370,10 @@ module Google
 
 
           def iam_signer_instance
-            @iam_signer_instance ||= begin
+            @service.instance_variable_get(:@iam_signer) || begin
               require "google/cloud/storage/iam_signer"
-              Google::Cloud::Storage::IAMSigner.new(@service)
+              signer = Google::Cloud::Storage::IAMSigner.new(@service)
+              @service.instance_variable_set(:@iam_signer, signer)
             end
           end
         end
