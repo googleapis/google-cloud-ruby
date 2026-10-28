@@ -33,7 +33,6 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
       _(opts).wont_be_nil
       _(opts.enabled?).must_equal true
       _(opts.hedge_delay).must_equal 1.0
-      _(opts.delay).must_equal 1.0
       _(opts.max_tokens).must_equal 50
       _(opts.refill_ratio).must_equal 0.1
 
@@ -43,8 +42,8 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
       _(opts_true.refill_ratio).must_equal 0.1
     end
 
-    it "supports delay alias and string keys" do
-      opts = options_class.from({ "delay" => 0.25, "max_tokens" => 10, "refill_ratio" => 0.05 })
+    it "supports string keys" do
+      opts = options_class.from({ "hedge_delay" => 0.25, "max_tokens" => 10, "refill_ratio" => 0.05 })
       _(opts.hedge_delay).must_equal 0.25
       _(opts.max_tokens).must_equal 10
       _(opts.refill_ratio).must_equal 0.05
@@ -154,13 +153,13 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
       # 10 threads each refilling 200 times = 2,000 refills of 0.1 = 200.0 tokens total
       acquired_count = Concurrent::AtomicFixnum.new 0
 
-      refillers = Array.new(10) do
+      refillers = Array.new 10 do
         Thread.new do
           200.times { bucket.refill }
         end
       end
 
-      acquirers = Array.new(5) do
+      acquirers = Array.new 5 do
         Thread.new do
           400.times do
             acquired_count.increment if bucket.try_acquire_hedge_token
