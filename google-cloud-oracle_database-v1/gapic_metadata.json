@@ -210,6 +210,26 @@
                 "delete_odb_subnet"
               ]
             },
+            "ListOdbDnsZones": {
+              "methods": [
+                "list_odb_dns_zones"
+              ]
+            },
+            "GetOdbDnsZone": {
+              "methods": [
+                "get_odb_dns_zone"
+              ]
+            },
+            "CreateOdbDnsZone": {
+              "methods": [
+                "create_odb_dns_zone"
+              ]
+            },
+            "DeleteOdbDnsZone": {
+              "methods": [
+                "delete_odb_dns_zone"
+              ]
+            },
             "ListExadbVmClusters": {
               "methods": [
                 "list_exadb_vm_clusters"

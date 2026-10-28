@@ -36,7 +36,7 @@ def stop
   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new
+  request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new
 
   # Call the stop method.
   result = client.stop request

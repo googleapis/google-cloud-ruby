@@ -170,6 +170,16 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.list_odb_dns_zones.timeout = 60.0
+                  default_config.rpcs.list_odb_dns_zones.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
+                  default_config.rpcs.get_odb_dns_zone.timeout = 60.0
+                  default_config.rpcs.get_odb_dns_zone.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                  }
+
                   default_config.rpcs.list_exadb_vm_clusters.timeout = 60.0
                   default_config.rpcs.list_exadb_vm_clusters.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -4144,6 +4154,381 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @oracle_database_stub.delete_odb_subnet request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the ODB DNS Zones in a given ODB Network.
+              #
+              # @overload list_odb_dns_zones(request, options = nil)
+              #   Pass arguments to `list_odb_dns_zones` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_odb_dns_zones(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_odb_dns_zones` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent value for the OdbDnsZone in the following format:
+              #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #     If unspecified, at most 50 OdbDnsZones will be returned.
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              #   @param filter [::String]
+              #     Optional. An expression for filtering the results of the request.
+              #   @param order_by [::String]
+              #     Optional. An expression for ordering the results of the request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::OdbDnsZone>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::OdbDnsZone>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest.new
+              #
+              #   # Call the list_odb_dns_zones method.
+              #   result = client.list_odb_dns_zones request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::OracleDatabase::V1::OdbDnsZone.
+              #     p item
+              #   end
+              #
+              def list_odb_dns_zones request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_odb_dns_zones.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_odb_dns_zones.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_odb_dns_zones.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.list_odb_dns_zones request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_odb_dns_zones, "odb_dns_zones", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single ODB DNS Zone.
+              #
+              # @overload get_odb_dns_zone(request, options = nil)
+              #   Pass arguments to `get_odb_dns_zone` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_odb_dns_zone(name: nil)
+              #   Pass arguments to `get_odb_dns_zone` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the OdbDnsZone in the following format:
+              #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbDnsZones/\\{odb_dns_zone}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::OdbDnsZone]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::OracleDatabase::V1::OdbDnsZone]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest.new
+              #
+              #   # Call the get_odb_dns_zone method.
+              #   result = client.get_odb_dns_zone request
+              #
+              #   # The returned object is of type Google::Cloud::OracleDatabase::V1::OdbDnsZone.
+              #   p result
+              #
+              def get_odb_dns_zone request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_odb_dns_zone.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_odb_dns_zone.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_odb_dns_zone.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.get_odb_dns_zone request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new ODB DNS Zone in a given ODB Network.
+              #
+              # @overload create_odb_dns_zone(request, options = nil)
+              #   Pass arguments to `create_odb_dns_zone` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_odb_dns_zone(parent: nil, odb_dns_zone_id: nil, odb_dns_zone: nil, request_id: nil)
+              #   Pass arguments to `create_odb_dns_zone` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent value for the OdbDnsZone in the following format:
+              #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}.
+              #   @param odb_dns_zone_id [::String]
+              #     Required. The ID of the OdbDnsZone to create. This value is restricted
+              #     to (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$) and must be a maximum of 63
+              #     characters in length. The value must start with a letter and end with
+              #     a letter or a number.
+              #   @param odb_dns_zone [::Google::Cloud::OracleDatabase::V1::OdbDnsZone, ::Hash]
+              #     Required. Details of the OdbDnsZone instance to create.
+              #   @param request_id [::String]
+              #     Optional. An optional ID to identify the request. This value is used to
+              #     identify duplicate requests. If you make a request with the same request ID
+              #     and the original request is still in progress or completed, the server
+              #     ignores the second request. This prevents clients from
+              #     accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest.new
+              #
+              #   # Call the create_odb_dns_zone method.
+              #   result = client.create_odb_dns_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_odb_dns_zone request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_odb_dns_zone.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_odb_dns_zone.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_odb_dns_zone.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.create_odb_dns_zone request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single ODB DNS Zone.
+              #
+              # @overload delete_odb_dns_zone(request, options = nil)
+              #   Pass arguments to `delete_odb_dns_zone` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_odb_dns_zone(name: nil, request_id: nil)
+              #   Pass arguments to `delete_odb_dns_zone` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource in the following format:
+              #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbDnsZones/\\{odb_dns_zone}.
+              #   @param request_id [::String]
+              #     Optional. An optional ID to identify the request. This value is used to
+              #     identify duplicate requests. If you make a request with the same request ID
+              #     and the original request is still in progress or completed, the server
+              #     ignores the second request. This prevents clients from
+              #     accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest.new
+              #
+              #   # Call the delete_odb_dns_zone method.
+              #   result = client.delete_odb_dns_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_odb_dns_zone request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_odb_dns_zone.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_odb_dns_zone.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_odb_dns_zone.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.delete_odb_dns_zone request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
@@ -8300,6 +8685,26 @@ module Google
                   #
                   attr_reader :delete_odb_subnet
                   ##
+                  # RPC-specific configuration for `list_odb_dns_zones`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_odb_dns_zones
+                  ##
+                  # RPC-specific configuration for `get_odb_dns_zone`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_odb_dns_zone
+                  ##
+                  # RPC-specific configuration for `create_odb_dns_zone`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_odb_dns_zone
+                  ##
+                  # RPC-specific configuration for `delete_odb_dns_zone`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_odb_dns_zone
+                  ##
                   # RPC-specific configuration for `list_exadb_vm_clusters`
                   # @return [::Gapic::Config::Method]
                   #
@@ -8582,6 +8987,14 @@ module Google
                     @create_odb_subnet = ::Gapic::Config::Method.new create_odb_subnet_config
                     delete_odb_subnet_config = parent_rpcs.delete_odb_subnet if parent_rpcs.respond_to? :delete_odb_subnet
                     @delete_odb_subnet = ::Gapic::Config::Method.new delete_odb_subnet_config
+                    list_odb_dns_zones_config = parent_rpcs.list_odb_dns_zones if parent_rpcs.respond_to? :list_odb_dns_zones
+                    @list_odb_dns_zones = ::Gapic::Config::Method.new list_odb_dns_zones_config
+                    get_odb_dns_zone_config = parent_rpcs.get_odb_dns_zone if parent_rpcs.respond_to? :get_odb_dns_zone
+                    @get_odb_dns_zone = ::Gapic::Config::Method.new get_odb_dns_zone_config
+                    create_odb_dns_zone_config = parent_rpcs.create_odb_dns_zone if parent_rpcs.respond_to? :create_odb_dns_zone
+                    @create_odb_dns_zone = ::Gapic::Config::Method.new create_odb_dns_zone_config
+                    delete_odb_dns_zone_config = parent_rpcs.delete_odb_dns_zone if parent_rpcs.respond_to? :delete_odb_dns_zone
+                    @delete_odb_dns_zone = ::Gapic::Config::Method.new delete_odb_dns_zone_config
                     list_exadb_vm_clusters_config = parent_rpcs.list_exadb_vm_clusters if parent_rpcs.respond_to? :list_exadb_vm_clusters
                     @list_exadb_vm_clusters = ::Gapic::Config::Method.new list_exadb_vm_clusters_config
                     get_exadb_vm_cluster_config = parent_rpcs.get_exadb_vm_cluster if parent_rpcs.respond_to? :get_exadb_vm_cluster

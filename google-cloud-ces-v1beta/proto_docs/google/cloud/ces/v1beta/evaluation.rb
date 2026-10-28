@@ -584,6 +584,14 @@ module Google
         # @!attribute [r] golden_run_method
         #   @return [::Google::Cloud::Ces::V1beta::GoldenRunMethod]
         #     Output only. The method used to run the golden evaluation.
+        # @!attribute [r] root_span
+        #   @return [::Google::Cloud::Ces::V1beta::Span]
+        #     Output only. The root span of the evaluation execution, which includes
+        #     information about each step of the evaluation.
+        # @!attribute [r] outcome_metadata
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationResult::OutcomeMetadata]
+        #     Output only. The outcome metadata of the evaluation. Only populated if
+        #     execution_state is COMPLETE.
         class EvaluationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -934,10 +942,11 @@ module Google
           # The result of a user goal satisfaction check for a conversation.
           # @!attribute [r] score
           #   @return [::Integer]
-          #     Output only. The user task satisfaction score. Can be -1, 0, 1.
+          #     Output only. The user task satisfaction score. Can be -1, 0, 1, 2.
           # @!attribute [r] label
           #   @return [::String]
           #     Output only. The label associated with each score.
+          #     Score 2: Graceful Handoff
           #     Score 1: User Task Satisfied
           #     Score 0: User Task Not Satisfied
           #     Score -1: User Task Unspecified
@@ -1048,6 +1057,15 @@ module Google
 
             # Evaluation result execution was cancelled.
             CANCELLED = 4
+          end
+
+          # Metadata about the outcome of the evaluation.
+          module OutcomeMetadata
+            # Unspecified outcome metadata.
+            OUTCOME_METADATA_UNSPECIFIED = 0
+
+            # The evaluation resulted in a graceful handoff to a human representative.
+            GRACEFUL_HANDOFF = 1
           end
         end
 
@@ -1401,11 +1419,9 @@ module Google
 
         # EvaluationConfig configures settings for running the evaluation.
         # @!attribute [rw] input_audio_config
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Ces::V1beta::InputAudioConfig]
         #     Optional. Configuration for processing the input audio.
         # @!attribute [rw] output_audio_config
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Ces::V1beta::OutputAudioConfig]
         #     Optional. Configuration for generating the output audio.
         # @!attribute [rw] evaluation_channel
@@ -1496,8 +1512,8 @@ module Google
         #     Optional. The display name of the evaluation run.
         # @!attribute [rw] app_version
         #   @return [::String]
-        #     Optional. The app version to evaluate.
-        #     Format:
+        #     Optional. The app version to evaluate. At most one of `app_version` or
+        #     `deployment` can be set. Format:
         #     `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Ces::V1beta::EvaluationConfig]

@@ -73,7 +73,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 600.0
+                default_config.timeout = 1800.0
                 default_config.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
@@ -208,7 +208,7 @@ module Google
 
             ##
             # Answers a data question by generating a stream of
-            # [Message][google.cloud.geminidataanalytics.v1.Message] objects.
+            # {::Google::Cloud::GeminiDataAnalytics::V1beta::Message Message} objects.
             #
             # @overload chat(request, options = nil)
             #   Pass arguments to `chat` via a request object, either of type

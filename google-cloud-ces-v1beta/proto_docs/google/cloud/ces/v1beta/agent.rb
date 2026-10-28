@@ -27,7 +27,7 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::Agent::LlmAgent]
         #     Optional. The default agent type.
         #
-        #     Note: The following fields are mutually exclusive: `llm_agent`, `remote_dialogflow_agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `llm_agent`, `remote_dialogflow_agent`, `remote_a2a_agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remote_dialogflow_agent
         #   @return [::Google::Cloud::Ces::V1beta::Agent::RemoteDialogflowAgent]
         #     Optional. The remote
@@ -39,7 +39,13 @@ module Google
         #     should grant `roles/dialogflow.client` to the CES service agent
         #     `service-<PROJECT-NUMBER>@gcp-sa-ces.iam.gserviceaccount.com`.
         #
-        #     Note: The following fields are mutually exclusive: `remote_dialogflow_agent`, `llm_agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `remote_dialogflow_agent`, `llm_agent`, `remote_a2a_agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] remote_a2a_agent
+        #   @return [::Google::Cloud::Ces::V1beta::Agent::RemoteA2aAgent]
+        #     Optional. The remote [A2A](https://github.com/a2aproject/A2A) agent to be
+        #     used for the agent execution.
+        #
+        #     Note: The following fields are mutually exclusive: `remote_a2a_agent`, `llm_agent`, `remote_dialogflow_agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The unique identifier of the agent.
@@ -211,6 +217,16 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # The agent which will transfer execution to a remote
+          # [A2A](https://github.com/a2aproject/A2A) agent.
+          # @!attribute [rw] a2a_config
+          #   @return [::Google::Cloud::Ces::V1beta::RemoteA2aConfig]
+          #     Required. The A2A connection configuration.
+          class RemoteA2aAgent
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A toolset with a selection of its tools.

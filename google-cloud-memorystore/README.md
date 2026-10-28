@@ -37,8 +37,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/memorystore"
 
 client = Google::Cloud::Memorystore.memorystore
-request = ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new # (request fields as keyword arguments...)
-response = client.list_instances request
+request = ::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest.new # (request fields as keyword arguments...)
+response = client.list_acl_policies request
 ```
 
 ## Debug Logging

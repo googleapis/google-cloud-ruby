@@ -38,16 +38,16 @@ module Google
             # a "captured workload". This workload can be replayed later on a different
             # instance to safely test performance impacts, database upgrades,
             # configuration changes etc. before applying them to production.
-            rpc :Start, ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            rpc :Start, ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Stops capturing the query traffic and related operations executed on the
             # primary instance.
-            rpc :Stop, ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            rpc :Stop, ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Starts executing a captured workload on a separate Cloud SQL instance
             # provisioned for workload replay. This target instance simulates the
             # production environment without affecting the primary instance.
-            rpc :StartReplay, ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            rpc :StartReplay, ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Stops an active workload replay on the target Cloud SQL replay instance.
-            rpc :StopReplay, ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            rpc :StopReplay, ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Lists all captured workloads associated with the instance.
             rpc :List, ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesListRequest, ::Google::Cloud::Sql::V1beta4::WorkloadCapturesListResponse
           end

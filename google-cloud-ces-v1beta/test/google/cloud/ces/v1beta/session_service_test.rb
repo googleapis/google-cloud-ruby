@@ -287,6 +287,215 @@ class ::Google::Cloud::Ces::V1beta::SessionService::ClientTest < Minitest::Test
     end
   end
 
+  def test_stream_chat_ai_assistant
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    name = "hello world"
+    message = "hello world"
+    attached_gcs_uris = ["hello world"]
+    context_token = "hello world"
+    confirmation_response = {}
+    client_capabilities = [:CLIENT_CAPABILITY_UNSPECIFIED]
+    operation_completed_event = {}
+    resume_from_sequence_number = 42
+    attach_only = true
+
+    stream_chat_ai_assistant_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :stream_chat_ai_assistant, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["message"]
+      assert_equal ["hello world"], request["attached_gcs_uris"]
+      assert_equal "hello world", request["context_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::AssistantConfirmationResponse), request["confirmation_response"]
+      assert_equal [:CLIENT_CAPABILITY_UNSPECIFIED], request["client_capabilities"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::OperationCompletedEvent), request["operation_completed_event"]
+      assert_equal 42, request["resume_from_sequence_number"]
+      assert_equal true, request["attach_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stream_chat_ai_assistant_client_stub do
+      # Create client
+      c = ::Google::Cloud::Ces::V1beta::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.stream_chat_ai_assistant({ name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.stream_chat_ai_assistant name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.stream_chat_ai_assistant ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest.new(name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.stream_chat_ai_assistant({ name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.stream_chat_ai_assistant(::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest.new(name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stream_chat_ai_assistant_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_assistant_turn
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    turn_id = "hello world"
+
+    cancel_assistant_turn_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_assistant_turn, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["turn_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_assistant_turn_client_stub do
+      # Create client
+      c = ::Google::Cloud::Ces::V1beta::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.cancel_assistant_turn({ name: name, turn_id: turn_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.cancel_assistant_turn name: name, turn_id: turn_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.cancel_assistant_turn ::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest.new(name: name, turn_id: turn_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.cancel_assistant_turn({ name: name, turn_id: turn_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.cancel_assistant_turn(::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest.new(name: name, turn_id: turn_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_assistant_turn_client_stub.call_rpc_count
+    end
+  end
+
+  def test_generate_onboarding_suggestions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    max_suggestions = 42
+
+    generate_onboarding_suggestions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_onboarding_suggestions, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["max_suggestions"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_onboarding_suggestions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Ces::V1beta::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.generate_onboarding_suggestions({ name: name, max_suggestions: max_suggestions }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.generate_onboarding_suggestions name: name, max_suggestions: max_suggestions do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.generate_onboarding_suggestions ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest.new(name: name, max_suggestions: max_suggestions) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.generate_onboarding_suggestions({ name: name, max_suggestions: max_suggestions }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.generate_onboarding_suggestions(::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest.new(name: name, max_suggestions: max_suggestions), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_onboarding_suggestions_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -190,6 +190,13 @@ module Google
         # @!attribute [r] migration_config
         #   @return [::Google::Cloud::Memorystore::V1::MigrationConfig]
         #     Output only. Migration config for the instance.
+        # @!attribute [rw] acl_policy
+        #   @return [::String]
+        #     Optional. The ACL policy for the instance.
+        #     Format: projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}
+        # @!attribute [r] acl_policy_info
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicyInfo]
+        #     Output only. Details of the applied ACL policy.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -418,6 +425,29 @@ module Google
           end
         end
 
+        # Details of the applied ACL policy.
+        # @!attribute [r] applied_acl_policy
+        #   @return [::String]
+        #     Output only. The resource name of the applied ACL policy.
+        #     Format:
+        #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}"
+        # @!attribute [r] applied_acl_policy_revision
+        #   @return [::String]
+        #     Output only. The resource name of the applied ACL policy revision.
+        #     Format:
+        #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+        # @!attribute [r] applied_acl_policy_revision_number
+        #   @return [::Integer]
+        #     Output only. The revision number of the applied ACL policy revision.
+        # @!attribute [r] acl_policy_revision_statuses
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AclPolicyRevisionStatus>]
+        #     Output only. A list of status for various revisions of this ACL policy on
+        #     the instance.
+        class AclPolicyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for `StartMigration`.
         # @!attribute [rw] self_managed_source
         #   @return [::Google::Cloud::Memorystore::V1::SelfManagedSource]
@@ -517,6 +547,142 @@ module Google
             # Instance is successfully migrated.
             MIGRATED = 4
           end
+        end
+
+        # The ACL policy resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Full resource path of the ACL policy.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AclRule>]
+        #     Required. The ACL rules within the ACL policy.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicy::State]
+        #     Output only. The state of the ACL policy.
+        # @!attribute [r] etag
+        #   @return [::String]
+        #     Output only. Etag of the ACL policy.
+        # @!attribute [r] instance_acl_policy_attachments
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::InstanceAclPolicyAttachment>]
+        #     Output only. The ACL policy attachment status for each attached instance.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the ACL policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the ACL policy was last updated.
+        class AclPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the different states of an ACL policy.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # ACL policy has been created and is fully usable.
+            ACTIVE = 1
+
+            # ACL policy is being updated.
+            UPDATING = 2
+
+            # ACL policy is being deleted.
+            DELETING = 3
+          end
+        end
+
+        # The ACL policy revision resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the ACL policy revision.
+        #     Format:
+        #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+        # @!attribute [r] revision_number
+        #   @return [::Integer]
+        #     Output only. The revision number of the ACL policy revision.
+        # @!attribute [r] snapshot
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicy]
+        #     Output only. The snapshot of the ACL policy at the time of revision
+        #     creation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the revision was created.
+        # @!attribute [r] attached_instances
+        #   @return [::Array<::String>]
+        #     Output only. A list of instances that are attached to this ACL policy
+        #     revision.
+        class AclPolicyRevision
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AclPolicyRevisionStatus stores the per-revision status for an attached
+        # instance.
+        # @!attribute [r] acl_policy_revision
+        #   @return [::String]
+        #     Output only. The resource name of the ACL policy revision this status
+        #     refers to. Format:
+        #     "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}/revisions/\\{revision}"
+        # @!attribute [r] acl_policy_revision_number
+        #   @return [::Integer]
+        #     Output only. The revision number of the ACL policy revision this status
+        #     refers to.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicyRevisionStatus::State]
+        #     Output only. AclPolicyRevision state.
+        # @!attribute [r] error_message
+        #   @return [::String]
+        #     Output only. Human-readable error message providing more details for FAILED
+        #     states.
+        class AclPolicyRevisionStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum indicating the status of this ACL policy revision on the instance.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The instance is attempting to apply this revision.
+            APPLYING = 1
+
+            # The instance has successfully applied this revision.
+            APPLIED = 2
+
+            # The instance failed to apply this revision.
+            FAILED = 3
+          end
+        end
+
+        # InstanceAclPolicyAttachment stores the ACL policy status for an attached
+        # instance for the revisions successfully applied, under application or failed.
+        # @!attribute [r] instance
+        #   @return [::String]
+        #     Output only. The resource name of the attached instance.
+        #     Format:
+        #     "projects/\\{project}/locations/\\{location}/instances/\\{instance}"
+        # @!attribute [r] acl_policy_revision_statuses
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AclPolicyRevisionStatus>]
+        #     Output only. A list of status for various revisions of this ACL policy on
+        #     the instance.
+        class InstanceAclPolicyAttachment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single ACL rule which defines the policy for a user.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Specifies the IAM user or service account to be added to the ACL
+        #     policy. This username will be directly set on the Valkey OSS.
+        # @!attribute [rw] rule
+        #   @return [::String]
+        #     Required. The rule to be applied to the username. Ex: "on >password123 ~*
+        #     +@all" The format of the rule is defined by Valkey OSS:
+        #     https://valkey.io/topics/acl/
+        class AclRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The automated backup config for an instance.
@@ -1112,6 +1278,15 @@ module Google
         #   @return [::String]
         #     Optional. Defines zone where all resources will be allocated with
         #     SINGLE_ZONE mode. Ignored for MULTI_ZONE mode.
+        # @!attribute [rw] zones
+        #   @return [::Array<::String>]
+        #     Optional. Specify the zones of a multi-zone instance where Memorystore
+        #     instance allocates resources. This flag isn't applicable for single-zone
+        #     instances.
+        # @!attribute [r] active_zones
+        #   @return [::Array<::String>]
+        #     Output only. The exact list of zones where the instance currently has
+        #     active VMs.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1::ZoneDistributionConfig::ZoneDistributionMode]
         #     Optional. Current zone distribution mode. Defaults to MULTI_ZONE.
@@ -1163,6 +1338,85 @@ module Google
           end
         end
 
+        # Request for `ListAclPolicies`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the ACL policy location using the form:
+        #         `projects/{project}/locations/{location}`
+        #     where `location` refers to a Google Cloud region.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return.
+        #
+        #     If not specified, a default value of 1000 will be used by the service.
+        #     Regardless of the page_size value, the response may include a partial list
+        #     and a caller should only rely on response's
+        #     `next_page_token`
+        #     to determine if there are more ACL policies left to be queried.
+        #
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListAclPolicies` request, if any.
+        class ListAclPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for `ListAclPolicies`.
+        # @!attribute [rw] acl_policies
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AclPolicy>]
+        #     A list of ACL policies in the project in the specified location,
+        #     or across all locations.
+        #
+        #     If the `location` in the parent field of the request is "-", all regions
+        #     available to the project are queried, and the results aggregated.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
+        class ListAclPoliciesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `ListAclPolicyRevisions`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the ACL policy to list revisions for.
+        #     Format: "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}"
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListAclPolicyRevisions` request, if any.
+        class ListAclPolicyRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for `ListAclPolicyRevisions`.
+        # @!attribute [rw] acl_policy_revisions
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AclPolicyRevision>]
+        #     A list of ACL policy revisions.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
+        class ListAclPolicyRevisionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for [ListInstances][].
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1205,12 +1459,62 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for `GetAclPolicy`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Memorystore ACL policy resource name using the form:
+        #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy}`
+        #     where `location` refers to a Google Cloud region.
+        class GetAclPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `GetAclPolicyRevision`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Memorystore ACL policy revision resource name using the form:
+        #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy}/revisions/{revision}`
+        #     where `location` refers to a Google Cloud region.
+        class GetAclPolicyRevisionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for [GetInstance][].
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the instance to retrieve.
         #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
         class GetInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `CreateAclPolicy`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the ACL policy location using the form:
+        #         `projects/{project}/locations/{location}`
+        #     where `location` refers to a Google Cloud region.
+        # @!attribute [rw] acl_policy_id
+        #   @return [::String]
+        #     Required. The logical name of the ACL policy in the customer project
+        #     with the following restrictions:
+        #
+        #     * Must contain only lowercase letters, numbers, and hyphens.
+        #     * Must start with a letter.
+        #     * Must be between 1-63 characters.
+        #     * Must end with a number or a letter.
+        #     * Must be unique within the customer project / location
+        # @!attribute [rw] acl_policy
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicy]
+        #     Required. The ACL policy that is to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. Idempotent request UUID.
+        #     .
+        class CreateAclPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1255,6 +1559,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for `UpdateAclPolicy`.
+        # @!attribute [rw] acl_policy
+        #   @return [::Google::Cloud::Memorystore::V1::AclPolicy]
+        #     Required. The ACL policy to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask of fields to be updated. At least one path must be supplied
+        #     in this field. The elements of the repeated paths field may only include
+        #     these fields from `AclPolicy`:
+        #
+        #      *   `rules`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. Idempotent request UUID.
+        class UpdateAclPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for [UpdateInstance][].
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
@@ -1279,6 +1602,24 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class UpdateInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `DeleteAclPolicy`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Memorystore ACL policy resource name using the form:
+        #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy_id}`
+        #     where `location` refers to a Google Cloud region.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. Idempotent request UUID.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the ACL policy. If this is different from the server's
+        #     etag, the request will fail with an ABORTED error.
+        class DeleteAclPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

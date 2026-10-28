@@ -20,26 +20,28 @@ require "gapic/rest"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/gemini_data_analytics/v1beta/version"
-require "google/cloud/gemini_data_analytics/v1beta/bindings_override"
+require "google/cloud/ces/v1beta/version"
+require "google/cloud/ces/v1beta/bindings_override"
 
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/credentials"
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/rest/client"
+require "google/cloud/ces/v1beta/assistant_service/credentials"
+require "google/cloud/ces/v1beta/assistant_service/paths"
+require "google/cloud/ces/v1beta/assistant_service/rest/client"
 
 module Google
   module Cloud
-    module GeminiDataAnalytics
+    module Ces
       module V1beta
         ##
-        # DataA2AService defines the Agent-to-Agent (A2A) protocol service for Gemini
-        # Data Analytics.
+        # The service that manages assistant-related resources in Customer Engagement
+        # Suite (CES). The assistant, Arc, is a conversational agent embedded in CES
+        # applications to help users with building their agents.
         #
         # To load this service and instantiate a REST client:
         #
-        #     require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/rest"
-        #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Rest::Client.new
+        #     require "google/cloud/ces/v1beta/assistant_service/rest"
+        #     client = ::Google::Cloud::Ces::V1beta::AssistantService::Rest::Client.new
         #
-        module DataA2AService
+        module AssistantService
           # Client for the REST transport
           module Rest
           end
@@ -50,4 +52,4 @@ module Google
 end
 
 helper_path = ::File.join __dir__, "rest", "helpers.rb"
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/rest/helpers" if ::File.file? helper_path
+require "google/cloud/ces/v1beta/assistant_service/rest/helpers" if ::File.file? helper_path

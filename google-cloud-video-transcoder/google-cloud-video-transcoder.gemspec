@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "This API converts video files into formats suitable for consumer distribution. For more information, see the <a href=\"https://cloud.google.com/transcoder/docs/concepts/overview\">Transcoder API overview</a>."
-  gem.summary       = "This API converts video files into formats suitable for consumer distribution. For more information, see the <a href=\"https://cloud.google.com/transcoder/docs/concepts/overview\">Transcoder API overview</a>."
+  gem.description   = "This API converts video files into formats suitable for consumer distribution."
+  gem.summary       = "This API converts video files into formats suitable for consumer distribution."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

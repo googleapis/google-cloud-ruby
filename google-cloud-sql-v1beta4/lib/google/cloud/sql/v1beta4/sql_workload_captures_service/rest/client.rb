@@ -199,9 +199,9 @@ module Google
               #
               # @overload start(request, options = nil)
               #   Pass arguments to `start` via a request object, either of type
-              #   {::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest, ::Hash]
+              #   @param request [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -233,7 +233,7 @@ module Google
               #   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new
+              #   request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new
               #
               #   # Call the start method.
               #   result = client.start request
@@ -244,7 +244,7 @@ module Google
               def start request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -282,9 +282,9 @@ module Google
               #
               # @overload stop(request, options = nil)
               #   Pass arguments to `stop` via a request object, either of type
-              #   {::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest, ::Hash]
+              #   @param request [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -316,7 +316,7 @@ module Google
               #   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new
+              #   request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new
               #
               #   # Call the stop method.
               #   result = client.stop request
@@ -327,7 +327,7 @@ module Google
               def stop request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -366,9 +366,9 @@ module Google
               #
               # @overload start_replay(request, options = nil)
               #   Pass arguments to `start_replay` via a request object, either of type
-              #   {::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest, ::Hash]
+              #   @param request [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -402,7 +402,7 @@ module Google
               #   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new
+              #   request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new
               #
               #   # Call the start_replay method.
               #   result = client.start_replay request
@@ -413,7 +413,7 @@ module Google
               def start_replay request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -450,9 +450,9 @@ module Google
               #
               # @overload stop_replay(request, options = nil)
               #   Pass arguments to `stop_replay` via a request object, either of type
-              #   {::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest, ::Hash]
+              #   @param request [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -486,7 +486,7 @@ module Google
               #   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new
+              #   request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new
               #
               #   # Call the stop_replay method.
               #   result = client.stop_replay request
@@ -497,7 +497,7 @@ module Google
               def stop_replay request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h

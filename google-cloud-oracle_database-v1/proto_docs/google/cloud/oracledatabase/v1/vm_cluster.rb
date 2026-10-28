@@ -76,6 +76,11 @@ module Google
         #     Optional. The name of the backup OdbSubnet associated with the VM Cluster.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
+        # @!attribute [rw] odb_dns_zone
+        #   @return [::String]
+        #     Optional. Immutable. The name of the OdbDnsZone for using custom domain
+        #     name for the VM Cluster. Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbDnsZones/\\{odb_dns_zone}
         # @!attribute [r] identity_connector
         #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector]
         #     Output only. The identity connector details which will allow OCI to

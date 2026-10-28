@@ -20,12 +20,13 @@ require "googleauth"
 
 module Google
   module Cloud
-    module GeminiDataAnalytics
+    module Ces
       module V1beta
-        module DataA2AService
-          # Credentials for the DataA2AService API.
+        module AssistantService
+          # Credentials for the AssistantService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/ces",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [

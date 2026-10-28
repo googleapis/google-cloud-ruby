@@ -110,6 +110,20 @@ module Google
             #     [InterruptionSignal][google.cloud.ces.v1beta.BidiSessionServerMessage.interruption_signal]
             #     is received (e.g., user barge-in or new agent response).
             rpc :BidiRunSession, stream(::Google::Cloud::Ces::V1beta::BidiSessionClientMessage), stream(::Google::Cloud::Ces::V1beta::BidiSessionServerMessage)
+            # Runs Arc, the AI assistant, for the specified assistant session in a
+            # streaming fashion.
+            rpc :StreamChatAiAssistant, ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest, stream(::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse)
+            # Cancels the assistant session's in-flight turn, if any: the explicit user
+            # stop for a turn running detached from any stream. A cancel landing on a
+            # task that does not host the turn preempts it through the session turn
+            # epoch instead, ending it within one lease renewal.
+            rpc :CancelAssistantTurn, ::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest, ::Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse
+            # Generates personalized onboarding suggestions for the Arc
+            # zero state: classifies the requesting user (new / exploring / returning)
+            # from their assistant-session history in the app and returns suggestion
+            # chips (resume a session, continue work, or start something new) to render
+            # before any message is sent.
+            rpc :GenerateOnboardingSuggestions, ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest, ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse
           end
 
           Stub = Service.rpc_stub_class

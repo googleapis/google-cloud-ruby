@@ -18,6 +18,7 @@
 
 require "google/cloud/ces/v1beta/session_service"
 require "google/cloud/ces/v1beta/agent_service"
+require "google/cloud/ces/v1beta/assistant_service"
 require "google/cloud/ces/v1beta/evaluation_service"
 require "google/cloud/ces/v1beta/tool_service"
 require "google/cloud/ces/v1beta/widget_service"

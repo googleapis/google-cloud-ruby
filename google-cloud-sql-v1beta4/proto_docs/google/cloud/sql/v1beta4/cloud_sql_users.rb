@@ -255,6 +255,9 @@ module Google
 
             # Microsoft Entra ID user.
             ENTRAID_USER = 7
+
+            # Active Directory user.
+            ACTIVE_DIRECTORY_USER = 8
           end
 
           # The type of retained password.

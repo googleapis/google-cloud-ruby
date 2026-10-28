@@ -167,7 +167,7 @@ module Google
                   transcoder = Gapic::Rest::GrpcTranscoder.new
                                                           .with_bindings(
                                                             uri_method: :get,
-                                                            uri_template: "/accounts/v1/{name}",
+                                                            uri_template: "/quota/v1/{name}",
                                                             matches: [
                                                               ["name", %r{^accounts/[^/]+/limits/[^/]+/?$}, false]
                                                             ]
@@ -188,7 +188,7 @@ module Google
                   transcoder = Gapic::Rest::GrpcTranscoder.new
                                                           .with_bindings(
                                                             uri_method: :get,
-                                                            uri_template: "/accounts/v1/{parent}/limits",
+                                                            uri_template: "/quota/v1/{parent}/limits",
                                                             matches: [
                                                               ["parent", %r{^accounts/[^/]+/?$}, false]
                                                             ]

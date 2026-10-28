@@ -221,6 +221,18 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
     end
   end
 
+  def test_odb_dns_zone_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.odb_dns_zone_path project: "value0", location: "value1", odb_network: "value2", odb_dns_zone: "value3"
+      assert_equal "projects/value0/locations/value1/odbNetworks/value2/odbDnsZones/value3", path
+    end
+  end
+
   def test_odb_network_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

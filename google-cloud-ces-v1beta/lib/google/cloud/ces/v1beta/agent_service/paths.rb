@@ -128,6 +128,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Dashboard resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dashboards/{dashboard}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param dashboard [String]
+            #
+            # @return [::String]
+            def dashboard_path project:, location:, dashboard:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dashboards/#{dashboard}"
+            end
+
+            ##
             # Create a fully-qualified Dataset resource string.
             #
             # The resource will be in the following format:
@@ -412,22 +431,46 @@ module Google
             ##
             # Create a fully-qualified Service resource string.
             #
-            # The resource will be in the following format:
+            # @overload service_path(project:, location:, namespace:, service:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}`
+            #   `projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param namespace [String]
-            # @param service [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param namespace [String]
+            #   @param service [String]
+            #
+            # @overload service_path(project:, location:, service:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/services/{service}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param service [String]
             #
             # @return [::String]
-            def service_path project:, location:, namespace:, service:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+            def service_path **args
+              resources = {
+                "location:namespace:project:service" => (proc do |project:, location:, namespace:, service:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
+                  "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
+                end),
+                "location:project:service" => (proc do |project:, location:, service:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/services/#{service}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

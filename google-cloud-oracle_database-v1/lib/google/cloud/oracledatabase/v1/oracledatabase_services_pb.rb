@@ -118,6 +118,14 @@ module Google
             rpc :CreateOdbSubnet, ::Google::Cloud::OracleDatabase::V1::CreateOdbSubnetRequest, ::Google::Longrunning::Operation
             # Deletes a single ODB Subnet.
             rpc :DeleteOdbSubnet, ::Google::Cloud::OracleDatabase::V1::DeleteOdbSubnetRequest, ::Google::Longrunning::Operation
+            # Lists all the ODB DNS Zones in a given ODB Network.
+            rpc :ListOdbDnsZones, ::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest, ::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesResponse
+            # Gets details of a single ODB DNS Zone.
+            rpc :GetOdbDnsZone, ::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest, ::Google::Cloud::OracleDatabase::V1::OdbDnsZone
+            # Creates a new ODB DNS Zone in a given ODB Network.
+            rpc :CreateOdbDnsZone, ::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest, ::Google::Longrunning::Operation
+            # Deletes a single ODB DNS Zone.
+            rpc :DeleteOdbDnsZone, ::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest, ::Google::Longrunning::Operation
             # Lists all the Exadb (Exascale) VM Clusters for the given project and
             # location.
             rpc :ListExadbVmClusters, ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersRequest, ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersResponse

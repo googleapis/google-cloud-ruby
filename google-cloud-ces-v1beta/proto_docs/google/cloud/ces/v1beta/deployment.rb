@@ -121,7 +121,48 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::InstagramCredentials]
         #     Optional. Input only. Ephemeral Instagram credentials required when
         #     configuring a Instagram channel profile.
+        # @!attribute [rw] model_settings
+        #   @return [::Google::Cloud::Ces::V1beta::ModelSettings]
+        #     Optional. Model settings for the deployment.
+        #     Overrides model settings configured at the app/agent levels.
+        #     Note: Deployment-level model settings override is gated behind an
+        #     allowlist. Contact the CXAS team to enable this field.
+        # @!attribute [rw] modality
+        #   @return [::Google::Cloud::Ces::V1beta::Deployment::Modality]
+        #     Optional. The modality of the deployment.
+        #     Note: Deployment-level modality override is gated behind an allowlist.
+        #     Contact the CXAS team to enable this field.
+        # @!attribute [rw] agent_registry_deployment
+        #   @return [::Google::Cloud::Ces::V1beta::AgentRegistryDeployment]
+        #     Optional. Configuration for deploying this deployment to Agent Registry.
+        #     If present, this deployment will be published to Agent Registry.
         class Deployment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The modality of the deployment.
+          module Modality
+            # Unknown modality.
+            MODALITY_UNSPECIFIED = 0
+
+            # Text modality.
+            MODALITY_TEXT = 1
+
+            # Voice modality.
+            MODALITY_VOICE = 2
+
+            # Video modality.
+            MODALITY_VIDEO = 3
+          end
+        end
+
+        # Configuration and status for Agent Registry deployment.
+        # @!attribute [r] agent_registry_service_name
+        #   @return [::String]
+        #     Optional. Output only. The resource name of the deployed Agent Registry
+        #     service. Format:
+        #     `projects/{project}/locations/{location}/services/{service}`
+        class AgentRegistryDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -144,7 +185,7 @@ module Google
         #     Required. The WhatsApp Business Account ID.
         # @!attribute [rw] conversation_profile_id
         #   @return [::String]
-        #     Required. The Conversation Profile ID to use for the deployment.
+        #     Optional. The Conversation Profile ID to use for the deployment.
         class WhatsAppCredentials
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,7 +197,7 @@ module Google
         #     Required. The Meta auth code provided by the embedded signup flow.
         # @!attribute [rw] conversation_profile_id
         #   @return [::String]
-        #     Required. The Conversation Profile ID to use for the deployment.
+        #     Optional. The Conversation Profile ID to use for the deployment.
         class InstagramCredentials
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
