@@ -37,26 +37,24 @@ module Google
           MIN_REFILL_RATIO = 0.001
           MAX_REFILL_RATIO = 0.2
 
-          attr_reader :enabled
           attr_reader :hedge_delay
           attr_reader :max_tokens
           attr_reader :refill_ratio
 
-          alias enabled? enabled
-          alias delay hedge_delay
-
           def initialize enabled: DEFAULT_ENABLED,
-                         hedge_delay: nil,
-                         delay: nil,
-                         max_tokens: nil,
-                         refill_ratio: nil
-            @enabled = enabled.nil? ? DEFAULT_ENABLED : Boolean(enabled)
-            raw_delay = hedge_delay.nil? ? delay : hedge_delay
-            @hedge_delay = raw_delay.nil? ? DEFAULT_HEDGE_DELAY : raw_delay
+                         hedge_delay: DEFAULT_HEDGE_DELAY,
+                         max_tokens: DEFAULT_MAX_TOKENS,
+                         refill_ratio: DEFAULT_REFILL_RATIO
+            @enabled = enabled.nil? ? DEFAULT_ENABLED : validate_boolean!(enabled)
+            @hedge_delay = hedge_delay.nil? ? DEFAULT_HEDGE_DELAY : hedge_delay
             @max_tokens = max_tokens.nil? ? DEFAULT_MAX_TOKENS : max_tokens
             @refill_ratio = refill_ratio.nil? ? DEFAULT_REFILL_RATIO : refill_ratio
 
             validate_bounds! if @enabled
+          end
+
+          def enabled?
+            @enabled
           end
 
           ##
@@ -107,7 +105,6 @@ module Google
             new(
               enabled: fetch_opt(hash, :enabled, DEFAULT_ENABLED),
               hedge_delay: fetch_opt(hash, :hedge_delay),
-              delay: fetch_opt(hash, :delay),
               max_tokens: fetch_opt(hash, :max_tokens),
               refill_ratio: fetch_opt(hash, :refill_ratio)
             )
@@ -127,7 +124,7 @@ module Google
 
           private
 
-          def Boolean value # rubocop:disable Naming/MethodName
+          def validate_boolean! value
             return value if value == true || value == false
 
             raise ArgumentError, "enabled must be a boolean"
