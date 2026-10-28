@@ -367,8 +367,6 @@ module Google
             end
           end
 
-
-
           def iam_signer_instance
             @service.instance_variable_get(:@iam_signer) || begin
               require "google/cloud/storage/iam_signer"

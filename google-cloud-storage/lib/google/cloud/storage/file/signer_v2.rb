@@ -91,7 +91,6 @@ module Google
             nil
           end
 
-
           def determine_issuer options = {}
             issuer = options[:issuer] || options[:client_email] || extract_issuer_from_credentials
             if issuer.nil? && Google::Cloud.env.metadata?

@@ -624,7 +624,6 @@ describe "Files Snippets" do
               generate_signed_url_v4_workload_identity bucket_name: bucket.name,
                                                        file_name: remote_file_name
             end
-
             signed_url = out.scan(/http.*$/).first
             refute_nil signed_url
 

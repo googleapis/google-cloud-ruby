@@ -102,32 +102,13 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
   end
 
   it "raises SignedUrlUnavailable when missing both signing_key and issuer" do
-
-
     credentials.issuer = nil
-
-
     credentials.signing_key = nil
-
-
-  
-
-
     Google::Cloud.env.stub :metadata?, false do
-
-
       expect {
-
-
         bucket.signed_url file_path
-
-
       }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
-
-
     end
-
-
   end
 
   describe "Files with spaces in them" do

@@ -170,32 +170,13 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
   end
 
   it "raises SignedUrlUnavailable when missing both signing_key and issuer" do
-
-
     credentials.issuer = nil
-
-
     credentials.signing_key = nil
-
-
-  
-
-
     Google::Cloud.env.stub :metadata?, false do
-
-
       expect {
-
-
         bucket.signed_url file_path, version: :v4
-
-
       }.must_raise Google::Cloud::Storage::SignedUrlUnavailable
-
-
     end
-
-
   end
 
   it "raises with issuer and lambda with incorrect argument count" do
