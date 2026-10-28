@@ -462,6 +462,7 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     gcs_uri = "hello world"
+    json_patch_content = "hello world"
     parent = "hello world"
     display_name = "hello world"
     app_id = "hello world"
@@ -473,6 +474,8 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Ces::V1beta::ImportAppRequest, request
       assert_equal "hello world", request["gcs_uri"]
       assert_equal :gcs_uri, request.app
+      assert_equal "hello world", request["json_patch_content"]
+      assert_equal :json_patch_content, request.json_patch
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["display_name"]
       assert_equal "hello world", request["app_id"]
@@ -488,35 +491,35 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |response, operation|
+      c.import_app({ gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |response, operation|
+      c.import_app gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |response, operation|
+      c.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, grpc_options) do |response, operation|
+      c.import_app({ gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), grpc_options) do |response, operation|
+      c.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2963,6 +2966,66 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, create_app_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_app_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Ces::V1beta::AppVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    app_version = {}
+    update_mask = {}
+
+    update_app_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_app_version, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::AppVersion), request["app_version"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_app_version_client_stub do
+      # Create client
+      c = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_app_version({ app_version: app_version, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_app_version app_version: app_version, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_app_version ::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest.new(app_version: app_version, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_app_version({ app_version: app_version, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_app_version(::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest.new(app_version: app_version, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_app_version_client_stub.call_rpc_count
     end
   end
 

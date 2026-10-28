@@ -32,8 +32,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/memorystore/v1"
 
 client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new
-request = ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new # (request fields as keyword arguments...)
-response = client.list_instances request
+request = ::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest.new # (request fields as keyword arguments...)
+response = client.list_acl_policies request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-memorystore-v1/latest)

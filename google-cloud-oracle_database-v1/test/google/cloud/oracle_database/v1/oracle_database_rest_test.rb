@@ -2314,6 +2314,230 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     end
   end
 
+  def test_list_odb_dns_zones
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_odb_dns_zones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_odb_dns_zones_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_odb_dns_zones_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_odb_dns_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_odb_dns_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_odb_dns_zones ::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_odb_dns_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_odb_dns_zones(::Google::Cloud::OracleDatabase::V1::ListOdbDnsZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_odb_dns_zones_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_odb_dns_zone
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::OdbDnsZone.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_odb_dns_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_odb_dns_zone_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_odb_dns_zone_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_odb_dns_zone({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_odb_dns_zone name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_odb_dns_zone ::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_odb_dns_zone({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_odb_dns_zone(::Google::Cloud::OracleDatabase::V1::GetOdbDnsZoneRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_odb_dns_zone_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_odb_dns_zone
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    odb_dns_zone_id = "hello world"
+    odb_dns_zone = {}
+    request_id = "hello world"
+
+    create_odb_dns_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_odb_dns_zone_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_odb_dns_zone_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_odb_dns_zone({ parent: parent, odb_dns_zone_id: odb_dns_zone_id, odb_dns_zone: odb_dns_zone, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_odb_dns_zone parent: parent, odb_dns_zone_id: odb_dns_zone_id, odb_dns_zone: odb_dns_zone, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_odb_dns_zone ::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest.new(parent: parent, odb_dns_zone_id: odb_dns_zone_id, odb_dns_zone: odb_dns_zone, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_odb_dns_zone({ parent: parent, odb_dns_zone_id: odb_dns_zone_id, odb_dns_zone: odb_dns_zone, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_odb_dns_zone(::Google::Cloud::OracleDatabase::V1::CreateOdbDnsZoneRequest.new(parent: parent, odb_dns_zone_id: odb_dns_zone_id, odb_dns_zone: odb_dns_zone, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_odb_dns_zone_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_odb_dns_zone
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_odb_dns_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_odb_dns_zone_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_odb_dns_zone_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_odb_dns_zone({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_odb_dns_zone name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_odb_dns_zone ::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_odb_dns_zone({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_odb_dns_zone(::Google::Cloud::OracleDatabase::V1::DeleteOdbDnsZoneRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_odb_dns_zone_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_exadb_vm_clusters
     # Create test objects.
     client_result = ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersResponse.new

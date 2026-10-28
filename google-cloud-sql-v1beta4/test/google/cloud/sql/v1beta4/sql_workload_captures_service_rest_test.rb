@@ -114,7 +114,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object
-        c.start ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context) do |_result, response|
+        c.start ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -124,7 +124,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object with options
-        c.start(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context), call_options) do |_result, response|
+        c.start(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -170,7 +170,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object
-        c.stop ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context) do |_result, response|
+        c.stop ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -180,7 +180,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object with options
-        c.stop(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context), call_options) do |_result, response|
+        c.stop(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -227,7 +227,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object
-        c.start_replay ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id) do |_result, response|
+        c.start_replay ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -237,7 +237,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object with options
-        c.start_replay(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id), call_options) do |_result, response|
+        c.start_replay(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -283,7 +283,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object
-        c.stop_replay ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context) do |_result, response|
+        c.stop_replay ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -293,7 +293,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Rest::ClientTes
         end
 
         # Use protobuf object with options
-        c.stop_replay(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context), call_options) do |_result, response|
+        c.stop_replay(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

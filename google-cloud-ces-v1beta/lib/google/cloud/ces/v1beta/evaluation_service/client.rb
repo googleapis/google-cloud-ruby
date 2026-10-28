@@ -251,8 +251,8 @@ module Google
             #   @param display_name [::String]
             #     Optional. The display name of the evaluation run.
             #   @param app_version [::String]
-            #     Optional. The app version to evaluate.
-            #     Format:
+            #     Optional. The app version to evaluate. At most one of `app_version` or
+            #     `deployment` can be set. Format:
             #     `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
             #   @param config [::Google::Cloud::Ces::V1beta::EvaluationConfig, ::Hash]
             #     Optional. The configuration to use for the run.

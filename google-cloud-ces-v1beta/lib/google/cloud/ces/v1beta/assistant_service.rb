@@ -20,36 +20,38 @@ require "gapic/common"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/gemini_data_analytics/v1beta/version"
+require "google/cloud/ces/v1beta/version"
 
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/credentials"
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/client"
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/rest"
+require "google/cloud/ces/v1beta/assistant_service/credentials"
+require "google/cloud/ces/v1beta/assistant_service/paths"
+require "google/cloud/ces/v1beta/assistant_service/client"
+require "google/cloud/ces/v1beta/assistant_service/rest"
 
 module Google
   module Cloud
-    module GeminiDataAnalytics
+    module Ces
       module V1beta
         ##
-        # DataA2AService defines the Agent-to-Agent (A2A) protocol service for Gemini
-        # Data Analytics.
+        # The service that manages assistant-related resources in Customer Engagement
+        # Suite (CES). The assistant, Arc, is a conversational agent embedded in CES
+        # applications to help users with building their agents.
         #
         # @example Load this service and instantiate a gRPC client
         #
-        #     require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service"
-        #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client.new
+        #     require "google/cloud/ces/v1beta/assistant_service"
+        #     client = ::Google::Cloud::Ces::V1beta::AssistantService::Client.new
         #
         # @example Load this service and instantiate a REST client
         #
-        #     require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/rest"
-        #     client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Rest::Client.new
+        #     require "google/cloud/ces/v1beta/assistant_service/rest"
+        #     client = ::Google::Cloud::Ces::V1beta::AssistantService::Rest::Client.new
         #
-        module DataA2AService
+        module AssistantService
         end
       end
     end
   end
 end
 
-helper_path = ::File.join __dir__, "data_a2_a_service", "helpers.rb"
-require "google/cloud/gemini_data_analytics/v1beta/data_a2_a_service/helpers" if ::File.file? helper_path
+helper_path = ::File.join __dir__, "assistant_service", "helpers.rb"
+require "google/cloud/ces/v1beta/assistant_service/helpers" if ::File.file? helper_path

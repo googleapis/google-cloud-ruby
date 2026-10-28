@@ -839,7 +839,34 @@ module Google
         # @!attribute [rw] card
         #   @return [::Google::Apps::Card::V1::Card]
         #     A card. Maximum size is 32 KB.
+        # @!attribute [r] owner_user
+        #   @return [::Google::Apps::Chat::V1::User]
+        #     Output only. The app that owns the card.
         class CardWithId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ReplaceMessageCards API method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the message.
+        #
+        #     Format: `spaces/{space}/messages/{message}`
+        # @!attribute [rw] cards_v2
+        #   @return [::Array<::Google::Apps::Chat::V1::CardWithId>]
+        #     Optional. An array of
+        #     [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
+        #     to be included in the message. These cards will replace the existing cards
+        #     of the message. If empty, the original cards included in the message will
+        #     be cleared.
+        class ReplaceMessageCardsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ReplaceMessageCards API.
+        class ReplaceMessageCardsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

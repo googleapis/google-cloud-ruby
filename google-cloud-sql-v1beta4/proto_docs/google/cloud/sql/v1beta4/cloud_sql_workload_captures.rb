@@ -32,7 +32,7 @@ module Google
         # @!attribute [rw] start_workload_capture_context
         #   @return [::Google::Cloud::Sql::V1beta4::StartWorkloadCaptureContext]
         #     Optional. Contains details about the start workload capture operation.
-        class SqlWorkloadCapturesStartRequest
+        class WorkloadCapturesStartRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -47,7 +47,7 @@ module Google
         # @!attribute [rw] stop_workload_capture_context
         #   @return [::Google::Cloud::Sql::V1beta4::StopWorkloadCaptureContext]
         #     Optional. Contains details about the stop workload capture operation.
-        class SqlWorkloadCapturesStopRequest
+        class WorkloadCapturesStopRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -66,7 +66,7 @@ module Google
         # @!attribute [rw] workload_id
         #   @return [::String]
         #     Required. The ID of the workload to replay.
-        class SqlWorkloadCapturesStartReplayRequest
+        class WorkloadCapturesStartReplayRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -84,7 +84,7 @@ module Google
         # @!attribute [rw] stop_workload_replay_context
         #   @return [::Google::Cloud::Sql::V1beta4::StopWorkloadReplayContext]
         #     Optional. Contains details about the stop workload replay operation.
-        class SqlWorkloadCapturesStopReplayRequest
+        class WorkloadCapturesStopReplayRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

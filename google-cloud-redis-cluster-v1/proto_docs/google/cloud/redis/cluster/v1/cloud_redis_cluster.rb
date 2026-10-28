@@ -1758,6 +1758,14 @@ module Google
           #     Optional. When SINGLE ZONE distribution is selected, zone field would be
           #     used to allocate all resources in that zone. This is not applicable to
           #     MULTI_ZONE, and would be ignored for MULTI_ZONE clusters.
+          # @!attribute [rw] zones
+          #   @return [::Array<::String>]
+          #     Optional. Specify the zones of a multi-zone cluster where Redis Cluster
+          #     allocates resources. This flag isn't applicable for single-zone clusters.
+          # @!attribute [r] active_zones
+          #   @return [::Array<::String>]
+          #     Output only. The exact list of zones where the cluster currently has active
+          #     VMs.
           class ZoneDistributionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -188,6 +188,178 @@ class ::Google::Cloud::Ces::V1beta::SessionService::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_stream_chat_ai_assistant
+    # Create test objects.
+    client_result = ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    message = "hello world"
+    attached_gcs_uris = ["hello world"]
+    context_token = "hello world"
+    confirmation_response = {}
+    client_capabilities = [:CLIENT_CAPABILITY_UNSPECIFIED]
+    operation_completed_event = {}
+    resume_from_sequence_number = 42
+    attach_only = true
+
+    stream_chat_ai_assistant_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Ces::V1beta::SessionService::Rest::ServiceStub.stub :transcode_stream_chat_ai_assistant_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, stream_chat_ai_assistant_client_stub do
+        # Create client
+        c = ::Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.stream_chat_ai_assistant({ name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use named arguments
+        c.stream_chat_ai_assistant name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object
+        c.stream_chat_ai_assistant ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest.new(name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use hash object with options
+        c.stream_chat_ai_assistant({ name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object with options
+        c.stream_chat_ai_assistant(::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest.new(name: name, message: message, attached_gcs_uris: attached_gcs_uris, context_token: context_token, confirmation_response: confirmation_response, client_capabilities: client_capabilities, operation_completed_event: operation_completed_event, resume_from_sequence_number: resume_from_sequence_number, attach_only: attach_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Verify method calls
+        assert_equal 5, stream_chat_ai_assistant_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_assistant_turn
+    # Create test objects.
+    client_result = ::Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    turn_id = "hello world"
+
+    cancel_assistant_turn_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Ces::V1beta::SessionService::Rest::ServiceStub.stub :transcode_cancel_assistant_turn_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_assistant_turn_client_stub do
+        # Create client
+        c = ::Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.cancel_assistant_turn({ name: name, turn_id: turn_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.cancel_assistant_turn name: name, turn_id: turn_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.cancel_assistant_turn ::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest.new(name: name, turn_id: turn_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.cancel_assistant_turn({ name: name, turn_id: turn_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.cancel_assistant_turn(::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest.new(name: name, turn_id: turn_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_assistant_turn_client_stub.call_count
+      end
+    end
+  end
+
+  def test_generate_onboarding_suggestions
+    # Create test objects.
+    client_result = ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    max_suggestions = 42
+
+    generate_onboarding_suggestions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Ces::V1beta::SessionService::Rest::ServiceStub.stub :transcode_generate_onboarding_suggestions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, generate_onboarding_suggestions_client_stub do
+        # Create client
+        c = ::Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.generate_onboarding_suggestions({ name: name, max_suggestions: max_suggestions }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.generate_onboarding_suggestions name: name, max_suggestions: max_suggestions do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.generate_onboarding_suggestions ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest.new(name: name, max_suggestions: max_suggestions) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.generate_onboarding_suggestions({ name: name, max_suggestions: max_suggestions }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.generate_onboarding_suggestions(::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest.new(name: name, max_suggestions: max_suggestions), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, generate_onboarding_suggestions_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

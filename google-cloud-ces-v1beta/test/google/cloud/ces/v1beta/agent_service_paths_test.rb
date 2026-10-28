@@ -101,6 +101,18 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientPathsTest < Minitest::Te
     end
   end
 
+  def test_dashboard_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Ces::V1beta::AgentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dashboard_path project: "value0", location: "value1", dashboard: "value2"
+      assert_equal "projects/value0/locations/value1/dashboards/value2", path
+    end
+  end
+
   def test_dataset_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -260,6 +272,9 @@ class ::Google::Cloud::Ces::V1beta::AgentService::ClientPathsTest < Minitest::Te
 
       path = client.service_path project: "value0", location: "value1", namespace: "value2", service: "value3"
       assert_equal "projects/value0/locations/value1/namespaces/value2/services/value3", path
+
+      path = client.service_path project: "value0", location: "value1", service: "value2"
+      assert_equal "projects/value0/locations/value1/services/value2", path
     end
   end
 

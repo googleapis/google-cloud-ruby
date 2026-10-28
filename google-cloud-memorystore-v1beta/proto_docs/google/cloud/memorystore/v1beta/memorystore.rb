@@ -1278,6 +1278,15 @@ module Google
         #   @return [::String]
         #     Optional. Defines zone where all resources will be allocated with
         #     SINGLE_ZONE mode. Ignored for MULTI_ZONE mode.
+        # @!attribute [rw] zones
+        #   @return [::Array<::String>]
+        #     Optional. Specify the zones of a multi-zone instance where Memorystore
+        #     instance allocates resources. This flag isn't applicable for single-zone
+        #     instances.
+        # @!attribute [r] active_zones
+        #   @return [::Array<::String>]
+        #     Output only. The exact list of zones where the instance currently has
+        #     active VMs.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1beta::ZoneDistributionConfig::ZoneDistributionMode]
         #     Optional. Current zone distribution mode. Defaults to MULTI_ZONE.

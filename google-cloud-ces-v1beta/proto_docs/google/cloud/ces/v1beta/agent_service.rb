@@ -196,6 +196,17 @@ module Google
         #     structure.
         #
         #     Note: The following fields are mutually exclusive: `app_content`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] json_patch_content
+        #   @return [::String]
+        #     Optional. Patch content as a JSON string.
+        #
+        #     Note: The following fields are mutually exclusive: `json_patch_content`, `json_patch_gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] json_patch_gcs_uri
+        #   @return [::String]
+        #     Optional. A Cloud Storage URI pointing to a JSON file containing the
+        #     patches.
+        #
+        #     Note: The following fields are mutually exclusive: `json_patch_gcs_uri`, `json_patch_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name with the location of the app to import.
@@ -234,6 +245,11 @@ module Google
           # @!attribute [rw] conflict_resolution_strategy
           #   @return [::Google::Cloud::Ces::V1beta::ImportAppRequest::ImportOptions::ConflictResolutionStrategy]
           #     Optional. The strategy to use when resolving conflicts during import.
+          # @!attribute [rw] validate_only
+          #   @return [::Boolean]
+          #     Optional. Flag for dry-running the import process.
+          #     If set to true, the import process will only perform validations and will
+          #     not make any changes to the existing app or create a new one.
           class ImportOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -930,6 +946,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Response message for
+        # [AgentService.DeployChannel][google.cloud.ces.v1beta.AgentService.DeployChannel].
+        # @!attribute [rw] deployment
+        #   @return [::Google::Cloud::Ces::V1beta::Deployment]
+        #     The created deployment.
+        class DeployChannelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::Ces::V1beta::AgentService::Client#update_deployment AgentService.UpdateDeployment}.
         # @!attribute [rw] deployment
@@ -1157,6 +1183,20 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::AppVersion]
         #     Required. The app version to create.
         class CreateAppVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::AgentService::Client#update_app_version AgentService.UpdateAppVersion}.
+        # @!attribute [rw] app_version
+        #   @return [::Google::Cloud::Ces::V1beta::AppVersion]
+        #     Required. The app version to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        #     If empty, fields `display_name` and `description` will be updated.
+        class UpdateAppVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

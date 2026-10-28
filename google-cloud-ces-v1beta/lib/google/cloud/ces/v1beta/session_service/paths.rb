@@ -46,6 +46,46 @@ module Google
             end
 
             ##
+            # Create a fully-qualified App resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/apps/{app}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param app [String]
+            #
+            # @return [::String]
+            def app_path project:, location:, app:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/apps/#{app}"
+            end
+
+            ##
+            # Create a fully-qualified AssistantSession resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param app [String]
+            # @param assistant_session [String]
+            #
+            # @return [::String]
+            def assistant_session_path project:, location:, app:, assistant_session:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "app cannot contain /" if app.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/apps/#{app}/assistantSessions/#{assistant_session}"
+            end
+
+            ##
             # Create a fully-qualified Session resource string.
             #
             # The resource will be in the following format:

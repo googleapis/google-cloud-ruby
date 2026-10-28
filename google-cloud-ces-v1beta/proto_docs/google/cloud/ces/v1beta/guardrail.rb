@@ -28,31 +28,36 @@ module Google
         #     Optional. Guardrail that bans certain content from being used in the
         #     conversation.
         #
-        #     Note: The following fields are mutually exclusive: `content_filter`, `llm_prompt_security`, `llm_policy`, `model_safety`, `code_callback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `content_filter`, `llm_prompt_security`, `llm_policy`, `model_safety`, `code_callback`, `supervisor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] llm_prompt_security
         #   @return [::Google::Cloud::Ces::V1beta::Guardrail::LlmPromptSecurity]
         #     Optional. Guardrail that blocks the conversation if the prompt is
         #     considered unsafe based on the LLM classification.
         #
-        #     Note: The following fields are mutually exclusive: `llm_prompt_security`, `content_filter`, `llm_policy`, `model_safety`, `code_callback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `llm_prompt_security`, `content_filter`, `llm_policy`, `model_safety`, `code_callback`, `supervisor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] llm_policy
         #   @return [::Google::Cloud::Ces::V1beta::Guardrail::LlmPolicy]
         #     Optional. Guardrail that blocks the conversation if the LLM response is
         #     considered violating the policy based on the LLM classification.
         #
-        #     Note: The following fields are mutually exclusive: `llm_policy`, `content_filter`, `llm_prompt_security`, `model_safety`, `code_callback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `llm_policy`, `content_filter`, `llm_prompt_security`, `model_safety`, `code_callback`, `supervisor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] model_safety
         #   @return [::Google::Cloud::Ces::V1beta::Guardrail::ModelSafety]
         #     Optional. Guardrail that blocks the conversation if the LLM response is
         #     considered unsafe based on the model safety settings.
         #
-        #     Note: The following fields are mutually exclusive: `model_safety`, `content_filter`, `llm_prompt_security`, `llm_policy`, `code_callback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `model_safety`, `content_filter`, `llm_prompt_security`, `llm_policy`, `code_callback`, `supervisor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] code_callback
         #   @return [::Google::Cloud::Ces::V1beta::Guardrail::CodeCallback]
         #     Optional. Guardrail that potentially blocks the conversation based on the
         #     result of the callback execution.
         #
-        #     Note: The following fields are mutually exclusive: `code_callback`, `content_filter`, `llm_prompt_security`, `llm_policy`, `model_safety`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `code_callback`, `content_filter`, `llm_prompt_security`, `llm_policy`, `model_safety`, `supervisor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] supervisor
+        #   @return [::Google::Cloud::Ces::V1beta::Guardrail::Supervisor]
+        #     Optional. Guardrail that runs supervisor intervention.
+        #
+        #     Note: The following fields are mutually exclusive: `supervisor`, `content_filter`, `llm_prompt_security`, `llm_policy`, `model_safety`, `code_callback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The unique identifier of the guardrail.
@@ -102,6 +107,13 @@ module Google
           # @!attribute [rw] disregard_diacritics
           #   @return [::Boolean]
           #     Optional. If true, diacritics are ignored during matching.
+          # @!attribute [rw] sensitive_words_exemptions
+          #   @return [::Array<::String>]
+          #     Optional. Entries of the sensitive words list that this guardrail allows.
+          #     Only valid when match_type is SENSITIVE_WORDS. Each value must equal a
+          #     list entry (case-insensitive, surrounding whitespace ignored); other
+          #     values have no effect. Applies to this guardrail only. At most 1000
+          #     entries of up to 256 characters each.
           class ContentFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,6 +133,12 @@ module Google
 
               # Content is matched using regular expression syntax.
               REGEXP_MATCH = 3
+
+              # Content is matched against a system-managed list of sensitive words
+              # and phrases. Attaching a guardrail with this match type to an app or
+              # agent replaces the default sensitive words filter for the affected
+              # agents; disable the guardrail to opt out of the default filter.
+              SENSITIVE_WORDS = 4
             end
           end
 
@@ -176,7 +194,9 @@ module Google
           #     Optional. Model settings.
           # @!attribute [rw] prompt
           #   @return [::String]
-          #     Required. Policy prompt.
+          #     Required. Policy prompt. Supports session variable placeholders (`{var}`)
+          #     as well as `{agent_system_instruction}` to inject the agent's resolved
+          #     system instructions.
           # @!attribute [rw] policy_scope
           #   @return [::Google::Cloud::Ces::V1beta::Guardrail::LlmPolicy::PolicyScope]
           #     Required. Defines when to apply the policy check during the conversation.
@@ -253,6 +273,12 @@ module Google
 
               # The harm category is sexually explicit content.
               HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
+
+              # The harm category is profanity.
+              HARM_CATEGORY_PROFANITY = 5
+
+              # The harm category is toxic.
+              HARM_CATEGORY_TOXIC = 6
             end
 
             # Probability based thresholds levels for blocking.
@@ -316,6 +342,62 @@ module Google
           class CodeCallback
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Guardrail that runs supervisor intervention.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Ces::V1beta::Guardrail::Supervisor::Type]
+          #     Optional. The type of the supervisor.
+          # @!attribute [rw] detection_mode
+          #   @return [::Google::Cloud::Ces::V1beta::Guardrail::Supervisor::DetectionMode]
+          #     Optional. The detection mode of the supervisor.
+          class Supervisor
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type of supervisor.
+            module Type
+              # Type is unspecified.
+              TYPE_UNSPECIFIED = 0
+
+              # Invalid text issue type.
+              INVALID_TEXT = 1
+
+              # Language shift issue type.
+              LANGUAGE_SHIFT = 2
+
+              # Speaker shift issue type.
+              SPEAKER_SHIFT = 3
+
+              # Audio mismatch issue type.
+              AUDIO_MISMATCH = 4
+
+              # Missing tool call issue type.
+              MISSING_TOOL_CALL = 5
+
+              # Custom issue type.
+              CUSTOM = 6
+
+              # Choppy audio issue type.
+              CHOPPY_AUDIO = 7
+
+              # Agent profanity issue type.
+              PROFANITY = 8
+            end
+
+            # Detection mode of the supervisor.
+            module DetectionMode
+              # Detection mode is unspecified. Default to NON_BLOCKING.
+              DETECTION_MODE_UNSPECIFIED = 0
+
+              # Non blocking detection mode.
+              # Response is not blocked when the supervisor detection is ongoing.
+              NON_BLOCKING = 1
+
+              # Blocking detection mode.
+              # Response is blocked when the supervisor detection is ongoing.
+              BLOCKING = 2
+            end
           end
         end
       end

@@ -53,6 +53,30 @@ class ::Google::Cloud::Ces::V1beta::SessionService::ClientPathsTest < Minitest::
     end
   end
 
+  def test_app_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Ces::V1beta::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.app_path project: "value0", location: "value1", app: "value2"
+      assert_equal "projects/value0/locations/value1/apps/value2", path
+    end
+  end
+
+  def test_assistant_session_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Ces::V1beta::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.assistant_session_path project: "value0", location: "value1", app: "value2", assistant_session: "value3"
+      assert_equal "projects/value0/locations/value1/apps/value2/assistantSessions/value3", path
+    end
+  end
+
   def test_session_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

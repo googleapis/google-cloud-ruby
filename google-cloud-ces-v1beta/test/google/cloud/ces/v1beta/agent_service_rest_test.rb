@@ -422,6 +422,7 @@ class ::Google::Cloud::Ces::V1beta::AgentService::Rest::ClientTest < Minitest::T
 
     # Create request parameters for a unary method.
     gcs_uri = "hello world"
+    json_patch_content = "hello world"
     parent = "hello world"
     display_name = "hello world"
     app_id = "hello world"
@@ -442,27 +443,27 @@ class ::Google::Cloud::Ces::V1beta::AgentService::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |_result, response|
+        c.import_app({ gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |_result, response|
+        c.import_app gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |_result, response|
+        c.import_app ::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, call_options) do |_result, response|
+        c.import_app({ gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), call_options) do |_result, response|
+        c.import_app(::Google::Cloud::Ces::V1beta::ImportAppRequest.new(gcs_uri: gcs_uri, json_patch_content: json_patch_content, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2640,6 +2641,61 @@ class ::Google::Cloud::Ces::V1beta::AgentService::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, create_app_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_app_version
+    # Create test objects.
+    client_result = ::Google::Cloud::Ces::V1beta::AppVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    app_version = {}
+    update_mask = {}
+
+    update_app_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Ces::V1beta::AgentService::Rest::ServiceStub.stub :transcode_update_app_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_app_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Ces::V1beta::AgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_app_version({ app_version: app_version, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_app_version app_version: app_version, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_app_version ::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest.new(app_version: app_version, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_app_version({ app_version: app_version, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_app_version(::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest.new(app_version: app_version, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_app_version_client_stub.call_count
       end
     end
   end

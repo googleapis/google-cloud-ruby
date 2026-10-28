@@ -2963,6 +2963,61 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_replace_message_cards
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::ReplaceMessageCardsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    cards_v2 = [{}]
+
+    replace_message_cards_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_replace_message_cards_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, replace_message_cards_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.replace_message_cards({ name: name, cards_v2: cards_v2 }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.replace_message_cards name: name, cards_v2: cards_v2 do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.replace_message_cards ::Google::Apps::Chat::V1::ReplaceMessageCardsRequest.new(name: name, cards_v2: cards_v2) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.replace_message_cards({ name: name, cards_v2: cards_v2 }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.replace_message_cards(::Google::Apps::Chat::V1::ReplaceMessageCardsRequest.new(name: name, cards_v2: cards_v2), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, replace_message_cards_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

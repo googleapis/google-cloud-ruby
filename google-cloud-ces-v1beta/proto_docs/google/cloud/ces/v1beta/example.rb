@@ -161,6 +161,9 @@ module Google
         # @!attribute [rw] data
         #   @return [::String]
         #     Required. Raw bytes of the image.
+        # @!attribute [rw] alt_text
+        #   @return [::String]
+        #     Optional. The alternative text for the image.
         class Image
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -190,6 +193,16 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Optional. The input parameters and values for the tool in JSON object
         #     format.
+        # @!attribute [r] parent_tool_call_id
+        #   @return [::String]
+        #     Output only. The id of the tool call that caused this one, when it was
+        #     issued by a sub-agent working on behalf of a parent call. Empty for
+        #     top-level calls. Lets a client group a sub-agent's work under the call that
+        #     started it instead of rendering every step as a sibling.
+        # @!attribute [r] agent_name
+        #   @return [::String]
+        #     Output only. Human-readable name of the agent that issued this call, e.g.
+        #     "Contract Architect". Empty when the root agent issued it.
         class ToolCall
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,6 +233,16 @@ module Google
         #     Use "output" key to specify tool response and "error" key to specify
         #     error details (if any). If "output" and "error" keys are not specified,
         #     then whole "response" is treated as tool execution result.
+        # @!attribute [r] parent_tool_call_id
+        #   @return [::String]
+        #     Output only. The id of the tool call that caused this one, when it was
+        #     issued by a sub-agent working on behalf of a parent call. Empty for
+        #     top-level calls. Lets a client group a sub-agent's work under the call that
+        #     started it instead of rendering every step as a sibling.
+        # @!attribute [r] agent_name
+        #   @return [::String]
+        #     Output only. Human-readable name of the agent that issued this call, e.g.
+        #     "Contract Architect". Empty when the root agent issued it.
         class ToolResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
