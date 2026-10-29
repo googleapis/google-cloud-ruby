@@ -56,10 +56,10 @@ GEM
       rake (~> 13.3)
     google-style (1.30.1)
       rubocop (~> 1.63)
-    googleapis-common-protos (1.8.0)
-      google-protobuf (>= 3.18, < 5.a)
-      googleapis-common-protos-types (~> 1.20)
-      grpc (~> 1.41)
+    googleapis-common-protos (1.11.0)
+      google-protobuf (~> 4.26)
+      googleapis-common-protos-types (~> 1.21)
+      grpc (>= 1.84.1, < 2.a)
     googleapis-common-protos-types (1.24.0)
       google-protobuf (~> 4.26)
     googleauth (0.17.1)
@@ -167,8 +167,7 @@ DEPENDENCIES
   google-apis-core (>= 0.2, < 2)
   google-cloud-errors!
   google-style (~> 1.30.1)
-  googleapis-common-protos (~> 1.8)
-  grpc (~> 1.84, >= 1.84.1)
+  googleapis-common-protos (~> 1.11)
   minitest (~> 5.14)
   minitest-autotest (~> 1.0)
   minitest-focus (~> 1.1)
@@ -208,7 +207,7 @@ CHECKSUMS
   google-protobuf (4.36.2)
   google-protobuf (4.36.2-x86_64-linux-gnu)
   google-style (1.30.1) sha256=ae9260c1f86856d8179a17fb270ccc2137ec0c0baa2a728ab5c8e7d76ce4032a
-  googleapis-common-protos (1.8.0) sha256=bfe89cb75d1a8f13e4591d262a20333e145481d803adb74dd13ac0517decdffe
+  googleapis-common-protos (1.11.0)
   googleapis-common-protos-types (1.24.0)
   googleauth (0.17.1) sha256=d4a9cbce0d6b5fbb9e6f8e42c18ab44ea38594757952d94706461dabc4c28922
   grpc (1.85.0)
