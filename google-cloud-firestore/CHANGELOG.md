@@ -1,5 +1,14 @@
 # Release History
 
+### 3.3.0 (2026-10-29)
+
+#### Features
+
+* add x-goog-is-transaction routing header ([#36646](https://github.com/googleapis/google-cloud-ruby/issues/36646)) 
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 3.2.0 (2026-05-07)
 
 #### Features
