@@ -50,8 +50,7 @@ module Google
                           scheme: "https",
                           virtual_hosted_style: nil,
                           bucket_bound_hostname: nil
-            i = determine_issuer issuer, client_email
-            s = determine_signing_key signing_key, private_key, signer
+            i, signer_proc = issuer_and_signer issuer, client_email, signing_key, private_key, signer
 
             now = Time.now.utc
             base_fields = required_fields i, now
@@ -66,7 +65,7 @@ module Google
             policy_str = escape_characters p.to_json
 
             policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
-            signature = generate_signature s, policy
+            signature = signer_proc.call policy
 
             post_fields["x-goog-signature"] = signature
             post_fields["policy"] = policy
@@ -192,17 +191,27 @@ module Google
             "#{url}#{file_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
           end
 
+          def extract_issuer_from_credentials
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
+            [:issuer, :service_account_email, :principal].each do |method|
+              return client.public_send(method) if client.respond_to?(method) && client.public_send(method)
+            end
+            nil
+          end
+
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
-            issuer = issuer || client_email || @service.credentials.issuer
+            issuer = issuer || client_email || extract_issuer_from_credentials
+            if issuer.nil? && Google::Cloud.env.metadata?
+              issuer = Google::Cloud.env.lookup_metadata "instance", "service-accounts/default/email"
+            end
             raise SignedUrlUnavailable, error_msg("issuer (client_email)") unless issuer
             issuer
           end
 
           def determine_signing_key signing_key, private_key, signer
-            signing_key = signing_key || private_key || signer || @service.credentials.signing_key
-            raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
-            signing_key
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
+            signing_key || private_key || signer || (client.respond_to?(:signing_key) ? client.signing_key : nil)
           end
 
           def error_msg attr_name
@@ -214,14 +223,14 @@ module Google
             if signer.is_a? Proc
               lambda do |string_to_sign|
                 sig = signer.call string_to_sign
-                sig.unpack1 "H*"
+                sig.unpack1("H*").force_encoding "utf-8"
               end
             else
               signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
               # Sign string to sign
               lambda do |string_to_sign|
                 sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
-                sig.unpack1 "H*"
+                sig.unpack1("H*").force_encoding "utf-8"
               end
             end
           end
@@ -229,7 +238,14 @@ module Google
           def issuer_and_signer issuer, client_email, signing_key, private_key, signer
             issuer = determine_issuer issuer, client_email
             signing_key = determine_signing_key signing_key, private_key, signer
-            signer = service_account_signer signing_key
+            if signing_key
+              signer = service_account_signer signing_key
+            else
+              signer = lambda do |string_to_sign|
+                sig = iam_signer_instance.sign issuer, string_to_sign
+                sig.unpack1("H*").force_encoding "utf-8"
+              end
+            end
             [issuer, signer]
           end
 
@@ -351,17 +367,12 @@ module Google
             end
           end
 
-          def generate_signature signing_key, data
-            packed_signature = nil
-            if signing_key.is_a? Proc
-              packed_signature = signing_key.call data
-            else
-              unless signing_key.respond_to? :sign
-                signing_key = OpenSSL::PKey::RSA.new signing_key
-              end
-              packed_signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
+          def iam_signer_instance
+            @service.instance_variable_get(:@iam_signer) || begin
+              require "google/cloud/storage/iam_signer"
+              signer = Google::Cloud::Storage::IAMSigner.new(@service)
+              @service.instance_variable_set(:@iam_signer, signer)
             end
-            packed_signature.unpack1("H*").force_encoding "utf-8"
           end
         end
       end

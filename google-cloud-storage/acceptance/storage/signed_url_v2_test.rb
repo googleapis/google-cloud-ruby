@@ -84,6 +84,41 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   end
 
   describe Google::Cloud::Storage::Bucket, :signed_url do
+    it "should create a signed read url automatically using IAM API when on GCE/Workload Identity" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucketAuto.png"
+  
+      issuer = bucket.service.credentials.issuer
+      skip "Test requires a service account with an issuer" unless issuer
+  
+      bucket.service.credentials.stub :signing_key, nil do
+        bucket.service.credentials.stub :issuer, nil do
+          Google::Cloud.env.stub :metadata?, true do
+            Google::Cloud.env.stub :lookup_metadata, issuer do
+              five_min_from_now = 5 * 60
+              url = bucket.signed_url file.name,
+                                      method: "GET",
+                                      expires: five_min_from_now
+  
+              uri = URI url
+              http = Net::HTTP.new uri.host, uri.port
+              http.use_ssl = true
+              http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+  
+              resp = http.get uri.request_uri
+              _(resp.code).must_equal "200"
+  
+              Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+                tmpfile.binmode
+                tmpfile.write resp.body
+                _(tmpfile.size).must_equal local_file.size
+              end
+            end
+          end
+        end
+      end
+    end
+
     it "should create a signed read url with space in file name" do
       local_file = File.new files[:logo][:path]
       file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"

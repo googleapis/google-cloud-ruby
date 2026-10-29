@@ -78,14 +78,24 @@ module Google
           end
 
           def determine_signing_key options = {}
-            signing_key = options[:signing_key] || options[:private_key] ||
-                          options[:signer] || @service.credentials.signing_key
-            raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
-            signing_key
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
+            options[:signing_key] || options[:private_key] ||
+              options[:signer] || (client.respond_to?(:signing_key) ? client.signing_key : nil)
+          end
+
+          def extract_issuer_from_credentials
+            client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
+            [:issuer, :service_account_email, :principal].each do |method|
+              return client.public_send(method) if client.respond_to?(method) && client.public_send(method)
+            end
+            nil
           end
 
           def determine_issuer options = {}
-            issuer = options[:issuer] || options[:client_email] || @service.credentials.issuer
+            issuer = options[:issuer] || options[:client_email] || extract_issuer_from_credentials
+            if issuer.nil? && Google::Cloud.env.metadata?
+              issuer = Google::Cloud.env.lookup_metadata "instance", "service-accounts/default/email"
+            end
             raise SignedUrlUnavailable, error_msg("issuer (client_email)") unless issuer
             issuer
           end
@@ -111,7 +121,7 @@ module Google
             policy_str = p.to_json
             policy = Base64.strict_encode64(policy_str).delete "\n"
 
-            signature = generate_signature s, policy
+            signature = generate_signature i, s, policy
 
             fields[:GoogleAccessId] = i
             fields[:signature] = signature
@@ -126,19 +136,23 @@ module Google
             i = determine_issuer options
             s = determine_signing_key options
 
-            sig = generate_signature s, signature_str(options)
+            sig = generate_signature i, s, signature_str(options)
             generate_signed_url i, sig, options[:expires], options[:query]
           end
 
-          def generate_signature signing_key, secret
+          def generate_signature issuer, signing_key, secret
             unencoded_signature = ""
-            if signing_key.is_a? Proc
-              unencoded_signature = signing_key.call secret
-            else
-              unless signing_key.respond_to? :sign
-                signing_key = OpenSSL::PKey::RSA.new signing_key
+            if signing_key
+              if signing_key.is_a? Proc
+                unencoded_signature = signing_key.call secret
+              else
+                unless signing_key.respond_to? :sign
+                  signing_key = OpenSSL::PKey::RSA.new signing_key
+                end
+                unencoded_signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
               end
-              unencoded_signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
+            else
+              unencoded_signature = iam_signer_instance.sign issuer, secret
             end
             Base64.strict_encode64(unencoded_signature).delete "\n"
           end
@@ -167,6 +181,14 @@ module Google
 
           def url_escape str
             CGI.escape String str
+          end
+
+          def iam_signer_instance
+            @service.instance_variable_get(:@iam_signer) || begin
+              require "google/cloud/storage/iam_signer"
+              signer = Google::Cloud::Storage::IAMSigner.new(@service)
+              @service.instance_variable_set(:@iam_signer, signer)
+            end
           end
         end
       end

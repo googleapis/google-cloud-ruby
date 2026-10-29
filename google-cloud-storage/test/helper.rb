@@ -51,7 +51,18 @@ end
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
-  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:credentials) do
+    creds = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+    def creds.issuer=(val)
+      self.client.issuer = val
+      super
+    end
+    def creds.signing_key=(val)
+      self.client.signing_key = val
+      super
+    end
+    creds
+  end
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials, upload_chunk_size: 5 * 1024 * 1024 )) }
   let(:pubsub_topic_name) { "my-topic-name" }
   let(:file_obj) { StringIO.new("My test file") }
