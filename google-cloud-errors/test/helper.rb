@@ -31,6 +31,8 @@ require "minitest/rg"
 require "json"
 require "google/cloud/errors"
 require "grpc/errors"
+require "google/protobuf/well_known_types"
+require "google/rpc/error_details_pb"
 require "google/rpc/status_pb"
 
 def debug_info

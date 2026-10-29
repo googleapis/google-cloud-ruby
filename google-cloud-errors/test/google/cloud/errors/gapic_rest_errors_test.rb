@@ -15,7 +15,6 @@
 require "helper"
 require "google/cloud/errors"
 require "grpc/errors"
-require "google/gax/errors"
 require "google/rpc/status_pb"
 
 # These test confirm that REST exceptions corresponding to various HTTP status codes
