@@ -1,5 +1,11 @@
 # Release History
 
+### 0.45.2 (2026-10-29)
+
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 0.45.1 (2026-06-17)
 
 #### Bug Fixes
