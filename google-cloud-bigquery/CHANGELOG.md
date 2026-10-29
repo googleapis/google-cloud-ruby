@@ -1,5 +1,15 @@
 # Release History
 
+### 1.64.2 (2026-10-29)
+
+#### Bug Fixes
+
+* require google-apis-bigquery_v2 &gt;= 0.88 ([#36652](https://github.com/googleapis/google-cloud-ruby/issues/36652)) ([1529fac](https://github.com/googleapis/google-cloud-ruby/commit/1529fac28f616cbc25da4d24f4e9884f5083926d)), refs [#36610](https://github.com/googleapis/google-cloud-ruby/issues/36610)
+
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 1.64.1 (2026-10-22)
 
 #### Bug Fixes
