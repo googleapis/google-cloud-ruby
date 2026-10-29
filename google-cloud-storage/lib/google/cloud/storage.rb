@@ -70,6 +70,12 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [String] emulator_host Host of a Storage emulator, such as `localhost:9000` or
+      #   `http://localhost:9000`. `http://` is used when no scheme is given. Optional.
+      #   If the param is nil, uses the value of the `emulator_host` config, which defaults to the
+      #   `STORAGE_EMULATOR_HOST` environment variable. When set, the client sends requests to the
+      #   emulator instead of `endpoint`, connects anonymously unless `credentials` is given, and
+      #   does not require a project ID.
       # @param universe_domain [String] Override of the universe domain. Optional.
       #   If unset or nil, uses the default unvierse domain
       # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
@@ -97,7 +103,8 @@ module Google
                    timeout: nil, open_timeout: nil, read_timeout: nil,
                    send_timeout: nil, endpoint: nil, project: nil, keyfile: nil,
                    max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                   multiplier: nil, upload_chunk_size: nil, universe_domain: nil
+                   multiplier: nil, upload_chunk_size: nil, universe_domain: nil,
+                   emulator_host: nil
         scope             ||= configure.scope
         retries           ||= configure.retries
         timeout           ||= configure.timeout
@@ -105,20 +112,28 @@ module Google
         read_timeout      ||= configure.read_timeout || timeout
         send_timeout      ||= configure.send_timeout || timeout
         endpoint          ||= configure.endpoint
-        credentials       ||= keyfile || default_credentials(scope: scope)
         max_elapsed_time  ||= configure.max_elapsed_time
         base_interval     ||= configure.base_interval
         max_interval      ||= configure.max_interval
         multiplier        ||= configure.multiplier
         upload_chunk_size ||= configure.upload_chunk_size
         universe_domain   ||= configure.universe_domain
+        emulator_host     ||= configure.emulator_host
 
-        unless credentials.is_a? Google::Auth::Credentials
+        emulator_url = emulator_root_url emulator_host
+        if emulator_url
+          endpoint = emulator_url
+          credentials ||= keyfile
+        else
+          credentials ||= keyfile || default_credentials(scope: scope)
+        end
+
+        if credentials && !credentials.is_a?(Google::Auth::Credentials)
           credentials = Storage::Credentials.new credentials, scope: scope
         end
 
         project_id = resolve_project_id(project_id || project, credentials)
-        raise ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty? && !emulator_url
 
         Storage::Project.new(
           Storage::Service.new(
@@ -151,7 +166,8 @@ module Google
       # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
-      #   If the param is nil, uses the default endpoint.
+      #   If the param is nil, uses the default endpoint. Ignored when the `emulator_host` config
+      #   (or the `STORAGE_EMULATOR_HOST` environment variable) is set.
       # @param universe_domain [String] Override of the universe domain. Optional.
       #   If unset or nil, uses the default unvierse domain
       # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
@@ -179,6 +195,7 @@ module Google
         open_timeout ||= timeout
         read_timeout ||= timeout
         send_timeout ||= timeout
+        endpoint = emulator_root_url(configure.emulator_host) || endpoint
         Storage::Project.new(
           Storage::Service.new(
             nil, nil, retries: retries, timeout: timeout, open_timeout: open_timeout,
@@ -203,6 +220,9 @@ module Google
       #   parameter `keyfile` is considered deprecated, but may also be used.)
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `emulator_host` - (String) Host of a Storage emulator, such as
+      #   `localhost:9000`, or `nil` to connect to the live service. Defaults to
+      #   `ENV["STORAGE_EMULATOR_HOST"]`.
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `retries` - (Integer) Number of times to retry requests on server
@@ -254,6 +274,17 @@ module Google
         Google::Cloud.configure.storage.credentials ||
           Google::Cloud.configure.credentials ||
           Storage::Credentials.default(scope: scope)
+      end
+
+      ##
+      # @private Root URL for an emulator host, or nil if the host is blank.
+      # The API client appends paths such as `storage/v1/` directly to the
+      # root URL, so it must end with a slash.
+      def self.emulator_root_url emulator_host
+        url = emulator_host.to_s.strip
+        return nil if url.empty?
+        url = "http://#{url}" unless url.include? "://"
+        url.end_with?("/") ? url : "#{url}/"
       end
     end
   end
