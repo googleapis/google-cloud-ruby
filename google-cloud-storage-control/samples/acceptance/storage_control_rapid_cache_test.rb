@@ -24,6 +24,12 @@ describe "Storage Control Rapid Cache" do
   # enabled, located in the same region as the cache zone.
   let(:zone) { ENV["STORAGE_CONTROL_RAPID_CACHE_ZONE"] || "us-east1-b" }
   let(:bucket_name) { @bucket_name }
+  # The Rapid Cache ID must be the same as the zone.
+  let(:cache_id) { zone }
+  let(:cache_name) { "projects/_/buckets/#{bucket_name}/rapidCaches/#{cache_id}" }
+  # The disable operation only completes once the cache has been fully
+  # removed, which can take more than an hour, so bound the wait.
+  let(:disable_timeout) { 600 }
   # Like the Anywhere Cache tests, these tests are not run in CI because a
   # bucket cannot be deleted until its Rapid Cache has been fully removed,
   # which can take more than 30 minutes. Set
@@ -38,6 +44,8 @@ describe "Storage Control Rapid Cache" do
                          location: zone_region(zone),
                          uniform_bucket_level_access: true,
                          hierarchical_namespace: { enabled: true }
+    # Wait for the bucket metadata to propagate to the Storage Control API.
+    sleep 20
   end
 
   after :all do
@@ -49,29 +57,27 @@ describe "Storage Control Rapid Cache" do
   it "handles Rapid Cache lifecycle in sequence" do
     skip "Set STORAGE_CONTROL_RUN_RAPID_CACHE_TESTS to run Rapid Cache tests" unless run_tests
 
-    cache_id = nil
     out_disable = nil
     begin
       out_create, _err = capture_io do
         create_rapid_cache bucket_name: bucket_name, zone: zone
       end
-      prefix = "Created Rapid Cache: "
-      assert_includes out_create, prefix
-      cache_name = out_create.split(prefix, 2).last.split.first
-      # The Rapid Cache ID is assigned by the server.
-      cache_id = cache_name[%r{/rapidCaches/([^/]+)\z}, 1]
-      refute_nil cache_id
+      assert_includes out_create, "Created Rapid Cache: #{cache_name}"
+      assert_includes out_create, "Cache type: rapid-cache-ultra"
+      assert_includes out_create, "TTL: 86400 seconds"
 
       out_get, _err = capture_io do
         get_rapid_cache bucket_name: bucket_name, cache_id: cache_id
       end
-      assert_includes out_get, cache_name
+      assert_includes out_get, "Got Rapid Cache: #{cache_name}"
       assert_includes out_get, "Zone: #{zone}"
+      assert_includes out_get, "Cache type: rapid-cache-ultra"
+      assert_includes out_get, "State: running"
 
       out_list, _err = capture_io do
         list_rapid_caches bucket_name: bucket_name
       end
-      assert_includes out_list, cache_name
+      assert_includes out_list.lines.map(&:chomp), cache_name
 
       out_update, _err = capture_io do
         update_rapid_cache bucket_name: bucket_name, cache_id: cache_id, ttl_seconds: 172_800
@@ -79,32 +85,31 @@ describe "Storage Control Rapid Cache" do
       assert_includes out_update, "Updated Rapid Cache: #{cache_name}"
       assert_includes out_update, "TTL: 172800 seconds"
     ensure
-      # Always disable the cache so that it does not outlive the test. If the
-      # cache ID is unknown (e.g. create failed after the cache was created),
-      # disable every cache in the bucket. Do not let a disable failure hide an
-      # earlier failure.
-      (cache_id ? [cache_id] : rapid_cache_ids_helper(bucket_name)).each do |id|
-        out, _err = capture_io do
-          disable_rapid_cache bucket_name: bucket_name, cache_id: id
+      # Always disable the cache so that it does not outlive the test. Do not
+      # let a disable failure or timeout hide an earlier failure.
+      begin
+        out_disable, _err = capture_io do
+          disable_rapid_cache bucket_name: bucket_name, cache_id: cache_id, timeout: disable_timeout
         end
-        out_disable = out if id == cache_id
       rescue StandardError => e
-        puts "\nFailed to disable Rapid Cache #{id}: #{e.message}"
+        puts "\nDisable of Rapid Cache #{cache_name} did not complete: #{e.message}"
       end
     end
-    refute_nil out_disable, "disable_rapid_cache failed"
-    assert_includes out_disable, "Disabling Rapid Cache: #{cache_name}"
-    assert_includes out_disable, "Operation: "
 
-    # The cache moves to the "disabled" state shortly after the request.
-    out_state = ""
-    12.times do
-      out_state, _err = capture_io do
-        get_rapid_cache bucket_name: bucket_name, cache_id: cache_id
+    if out_disable
+      assert_includes out_disable, "Disabled Rapid Cache: #{cache_name}"
+    else
+      # The disable operation did not complete in time. The cache moves to the
+      # "disabled" state shortly after the request, so check the state instead.
+      out_state = ""
+      12.times do
+        out_state, _err = capture_io do
+          get_rapid_cache bucket_name: bucket_name, cache_id: cache_id
+        end
+        break if out_state.include? "State: disabled"
+        sleep 10
       end
-      break if out_state.include? "State: disabled"
-      sleep 10
+      assert_includes out_state, "State: disabled"
     end
-    assert_includes out_state, "State: disabled"
   end
 end

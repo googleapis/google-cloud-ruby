@@ -18,10 +18,11 @@ require "google/cloud/storage/control"
 # Retrieves the metadata of a Rapid Cache.
 #
 # @param bucket_name [String] The name of the bucket.
-# @param cache_id [String] The ID of the Rapid Cache.
+# @param cache_id [String] The ID of the Rapid Cache, which is the same as its
+#   zone (e.g., "us-east1-b").
 #
 # @example
-#   get_rapid_cache bucket_name: "your-unique-bucket-name", cache_id: "your-rapid-cache-id"
+#   get_rapid_cache bucket_name: "your-unique-bucket-name", cache_id: "us-east1-b"
 #
 def get_rapid_cache bucket_name:, cache_id:
   # Create a client object. The client can be reused for multiple calls.
@@ -36,6 +37,7 @@ def get_rapid_cache bucket_name:, cache_id:
 
   puts "Got Rapid Cache: #{rapid_cache.name}"
   puts "Zone: #{rapid_cache.zone}"
+  puts "Cache type: #{rapid_cache.cache_type}"
   puts "State: #{rapid_cache.state}"
 end
 # [END storage_control_get_rapid_cache]

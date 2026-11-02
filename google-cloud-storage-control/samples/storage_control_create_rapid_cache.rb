@@ -30,11 +30,17 @@ def create_rapid_cache bucket_name:, zone:
   storage_control_client = Google::Cloud::Storage::Control.storage_control
   # Set project to "_" to signify global bucket
   parent = storage_control_client.bucket_path project: "_", bucket: bucket_name
+  # The Rapid Cache ID must be the same as the zone.
+  name = storage_control_client.rapid_cache_path project: "_",
+                                                 bucket: bucket_name,
+                                                 rapid_cache: zone
 
-  # The Rapid Cache ID is assigned by the server.
   rapid_cache = Google::Cloud::Storage::Control::V2::RapidCache.new(
+    name: name,
     zone: zone,
-    cache_type: "rapid-cache-ultra"
+    cache_type: "rapid-cache-ultra",
+    # Keep cache entries for 24 hours.
+    ttl: Google::Protobuf::Duration.new(seconds: 86_400)
   )
   request = Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest.new(
     parent: parent,
@@ -50,7 +56,10 @@ def create_rapid_cache bucket_name:, zone:
   end
   raise operation.error.message if operation.error?
 
-  puts "Created Rapid Cache: #{operation.response.name}"
+  result = operation.response
+  puts "Created Rapid Cache: #{result.name}"
+  puts "Cache type: #{result.cache_type}"
+  puts "TTL: #{result.ttl.seconds} seconds"
 end
 # [END storage_control_create_rapid_cache]
 

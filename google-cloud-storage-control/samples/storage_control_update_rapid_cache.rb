@@ -18,13 +18,14 @@ require "google/cloud/storage/control"
 # Updates the time to live (TTL) of a Rapid Cache.
 #
 # @param bucket_name [String] The name of the bucket.
-# @param cache_id [String] The ID of the Rapid Cache.
+# @param cache_id [String] The ID of the Rapid Cache, which is the same as its
+#   zone (e.g., "us-east1-b").
 # @param ttl_seconds [Integer] The new TTL for cache entries, in seconds. The
 #   TTL must be between 1 hour and 7 days.
 #
 # @example
 #   update_rapid_cache bucket_name: "your-unique-bucket-name",
-#                      cache_id: "your-rapid-cache-id",
+#                      cache_id: "us-east1-b",
 #                      ttl_seconds: 172_800 # 2 days
 #
 def update_rapid_cache bucket_name:, cache_id:, ttl_seconds:

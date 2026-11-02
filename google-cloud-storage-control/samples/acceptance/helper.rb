@@ -46,20 +46,6 @@ def zone_region zone
   zone.sub(/-[a-z]\z/, "")
 end
 
-# Returns the IDs of the Rapid Caches of a bucket, or an empty array if they
-# cannot be listed.
-#
-# @param bucket_name [String] The name of the Google Cloud Storage bucket.
-def rapid_cache_ids_helper bucket_name
-  storage_control_client = Google::Cloud::Storage::Control.storage_control
-  # Set project to "_" to signify global bucket
-  parent = "projects/_/buckets/#{bucket_name}"
-  storage_control_client.list_rapid_caches(parent: parent).map { |cache| cache.name.split("/").last }
-rescue StandardError => e
-  puts "\nFailed to list Rapid Caches in bucket #{bucket_name}: #{e.message}"
-  []
-end
-
 # Best-effort deletion of a bucket that had a Rapid Cache.
 #
 # A bucket cannot be deleted until its Rapid Cache has been fully removed,
