@@ -120,16 +120,26 @@ $schema_names = 3.times.map { "#{$schema_prefix}-#{SecureRandom.hex(4)}".downcas
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
+  # Topic names embed the run's start time (see $topic_prefix), so this also deletes topics leaked by
+  # earlier runs that were killed before reaching this hook.
+  stale_before = Time.now.utc - (24 * 60 * 60)
   $topic_admin.list_topics(project: $pubsub.project_path).each do |topic|
-    if topic.name.include? $topic_prefix
-      response = $topic_admin.list_topic_subscriptions(topic: topic.name)
-      response.subscriptions.each do |subscription|
-        $subscription_admin.delete_subscription(subscription: subscription)
-      end
+    next unless topic.name.include?($topic_prefix) || acceptance_topic_created_before?(topic.name, stale_before)
+    response = $topic_admin.list_topic_subscriptions(topic: topic.name)
+    response.subscriptions.each do |subscription|
+      $subscription_admin.delete_subscription(subscription: subscription)
     end
+    $topic_admin.delete_topic topic: topic.name
+  rescue => e
+    puts "Error while cleaning up pubsub topic #{topic.name}.\n\n#{e}"
   end
 rescue => e
   puts "Error while cleaning up pubsub topics after tests.\n\n#{e}"
+end
+
+def acceptance_topic_created_before? topic_name, time
+  match = %r{/topics/ruby-topic-(\d{4})-(\d{2})-(\d{2})t(\d{2})-(\d{2})-(\d{2})z-}.match topic_name
+  !match.nil? && Time.utc(*match.captures.map(&:to_i)) < time
 end
 
 def clean_up_pubsub_snapshots
