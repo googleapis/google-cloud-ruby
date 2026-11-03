@@ -31,8 +31,32 @@ require "toys/utils/git_cache"
 require Toys::Utils::GitCache.new.get "https://github.com/googleapis/ruby-common-tools.git",
                                       path: "lib/sample_loader.rb", update: 300
 
+# Every topic ID shares this run's prefix, which embeds the run's start time, so Minitest.after_run
+# (below) can delete topics left behind by failed tests and by earlier runs that were killed.
+$topic_id_prefix = "ruby-pubsub-samples-test-topic-#{Time.now.utc.strftime '%Y-%m-%dt%H-%M-%Sz'}-" \
+                   "#{SecureRandom.hex 2}"
+
 def random_topic_id
-  "ruby-pubsub-samples-test-topic-#{SecureRandom.hex 4}"
+  "#{$topic_id_prefix}-#{SecureRandom.hex 4}"
+end
+
+def sample_topic_created_before? topic_name, time
+  pattern = %r{/topics/ruby-pubsub-samples-test-topic-(\d{4})-(\d{2})-(\d{2})t(\d{2})-(\d{2})-(\d{2})z-}
+  match = pattern.match topic_name
+  !match.nil? && Time.utc(*match.captures.map(&:to_i)) < time
+end
+
+Minitest.after_run do
+  pubsub = Google::Cloud::PubSub.new
+  stale_before = Time.now.utc - (24 * 60 * 60)
+  pubsub.topic_admin.list_topics(project: pubsub.project_path).each do |topic|
+    next unless topic.name.include?($topic_id_prefix) || sample_topic_created_before?(topic.name, stale_before)
+    pubsub.topic_admin.delete_topic topic: topic.name
+  rescue StandardError => e
+    puts "Error while cleaning up sample topic #{topic.name}: #{e}"
+  end
+rescue StandardError => e
+  puts "Error while cleaning up sample topics: #{e}"
 end
 
 def random_schema_id
