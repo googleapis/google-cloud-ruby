@@ -121,7 +121,7 @@ $schema_names = 3.times.map { "#{$schema_prefix}-#{SecureRandom.hex(4)}".downcas
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
   # Topic names embed the run's start time (see $topic_prefix), so this also deletes topics leaked by
-  # earlier runs that were killed before reaching this hook.
+  # earlier runs that were killed before reaching this hook or whose cleanup hit an error.
   stale_before = Time.now.utc - (24 * 60 * 60)
   $topic_admin.list_topics(project: $pubsub.project_path).each do |topic|
     next unless topic.name.include?($topic_prefix) || acceptance_topic_created_before?(topic.name, stale_before)
@@ -130,8 +130,6 @@ def clean_up_pubsub_topics
       $subscription_admin.delete_subscription(subscription: subscription)
     end
     $topic_admin.delete_topic topic: topic.name
-  rescue => e
-    puts "Error while cleaning up pubsub topic #{topic.name}.\n\n#{e}"
   end
 rescue => e
   puts "Error while cleaning up pubsub topics after tests.\n\n#{e}"

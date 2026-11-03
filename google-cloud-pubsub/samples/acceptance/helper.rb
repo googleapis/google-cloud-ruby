@@ -32,7 +32,8 @@ require Toys::Utils::GitCache.new.get "https://github.com/googleapis/ruby-common
                                       path: "lib/sample_loader.rb", update: 300
 
 # Every topic ID shares this run's prefix, which embeds the run's start time, so Minitest.after_run
-# (below) can delete topics left behind by failed tests and by earlier runs that were killed.
+# (below) can delete topics left behind by failed tests and by earlier runs that were killed or whose
+# cleanup hit an error.
 $topic_id_prefix = "ruby-pubsub-samples-test-topic-#{Time.now.utc.strftime '%Y-%m-%dt%H-%M-%Sz'}-" \
                    "#{SecureRandom.hex 2}"
 
@@ -52,8 +53,6 @@ Minitest.after_run do
   pubsub.topic_admin.list_topics(project: pubsub.project_path).each do |topic|
     next unless topic.name.include?($topic_id_prefix) || sample_topic_created_before?(topic.name, stale_before)
     pubsub.topic_admin.delete_topic topic: topic.name
-  rescue StandardError => e
-    puts "Error while cleaning up sample topic #{topic.name}: #{e}"
   end
 rescue StandardError => e
   puts "Error while cleaning up sample topics: #{e}"
