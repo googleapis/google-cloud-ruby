@@ -79,16 +79,14 @@ module Google
           # @return [String] The base64-encoded digest of the file's content.
           #
           def self._digest_for local_file, digest_class
-            if local_file.respond_to?(:read)
+            if local_file.respond_to?(:read) && !local_file.is_a?(Pathname)
               # Case 1: Input is an open stream (File or StringIO).
               local_file.rewind if local_file.respond_to?(:rewind)
-              
               digest = digest_class.new
               buf = +""
               while local_file.read(16_384, buf)
                 digest.update buf
               end
-              
               local_file.rewind if local_file.respond_to?(:rewind)
               digest.base64digest
             elsif local_file.respond_to?(:to_path) || local_file.is_a?(String)
