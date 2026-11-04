@@ -24,6 +24,7 @@ module Google
     module Sql
       module V1beta4
         module SqlUsersService
+          # Cloud SQL users service.
           class Service
 
             include ::GRPC::GenericService

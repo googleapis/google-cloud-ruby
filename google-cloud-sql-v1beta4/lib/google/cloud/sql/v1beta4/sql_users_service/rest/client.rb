@@ -30,6 +30,8 @@ module Google
             ##
             # REST client for the SqlUsersService service.
             #
+            # Cloud SQL users service.
+            #
             class Client
               # @private
               API_VERSION = ""

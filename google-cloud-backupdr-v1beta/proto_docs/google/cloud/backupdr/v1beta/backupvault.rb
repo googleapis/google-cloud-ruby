@@ -627,6 +627,9 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Output only. The list of KMS key versions used to encrypt the
         #     backup.
+        # @!attribute [r] verification_summary
+        #   @return [::Google::Cloud::BackupDR::V1beta::VerificationSummary]
+        #     Output only. The restore verification status of the backup.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -701,6 +704,34 @@ module Google
 
             # Operational backup.
             ON_DEMAND_OPERATIONAL = 3
+          end
+        end
+
+        # VerificationSummary contains the status and timestamp of the
+        # latest Automated Verification test.
+        # @!attribute [r] last_verification_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup was last verified.
+        # @!attribute [r] last_verification_state
+        #   @return [::Google::Cloud::BackupDR::V1beta::VerificationSummary::LastVerificationState]
+        #     Output only. The state of the last verification.
+        # @!attribute [r] last_verification_execution
+        #   @return [::String]
+        #     Output only. The last verification execution.
+        class VerificationSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # LastVerificationState represents the state of the verification.
+          module LastVerificationState
+            # Verification state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # Verification succeeded.
+            SUCCEEDED = 1
+
+            # Verification failed.
+            FAILED = 2
           end
         end
 

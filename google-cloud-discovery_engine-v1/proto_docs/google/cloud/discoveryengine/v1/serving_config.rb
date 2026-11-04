@@ -186,6 +186,9 @@ module Google
         #     Condition promote specifications.
         #
         #     Maximum number of specifications is 100.
+        # @!attribute [rw] answer_generation_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerGenerationSpec]
+        #     Optional. The specification for answer generation.
         class ServingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,6 +254,46 @@ module Google
           #     Specifies the expected behavior of content search.
           #     Only valid for content-search enabled data store.
           class GenericConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The specification for answer generation.
+        # @!attribute [rw] user_defined_classifier_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerGenerationSpec::UserDefinedClassifierSpec]
+        #     Optional. The specification for user specified classifier spec.
+        class AnswerGenerationSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The specification for user defined classifier.
+          # @!attribute [rw] enable_user_defined_classifier
+          #   @return [::Boolean]
+          #     Optional. Whether or not to enable and include user defined classifier.
+          # @!attribute [rw] preamble
+          #   @return [::String]
+          #     Optional. The preamble to be used for the user defined classifier.
+          # @!attribute [rw] model_id
+          #   @return [::String]
+          #     Optional. The model id to be used for the user defined classifier.
+          # @!attribute [rw] task_marker
+          #   @return [::String]
+          #     Optional. The task marker to be used for the user defined classifier.
+          # @!attribute [rw] top_p
+          #   @return [::Float]
+          #     Optional. The top-p value to be used for the user defined classifier.
+          # @!attribute [rw] top_k
+          #   @return [::Integer]
+          #     Optional. The top-k value to be used for the user defined classifier.
+          # @!attribute [rw] temperature
+          #   @return [::Float]
+          #     Optional. The temperature value to be used for the user defined
+          #     classifier.
+          # @!attribute [rw] seed
+          #   @return [::Integer]
+          #     Optional. The seed value to be used for the user defined classifier.
+          class UserDefinedClassifierSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

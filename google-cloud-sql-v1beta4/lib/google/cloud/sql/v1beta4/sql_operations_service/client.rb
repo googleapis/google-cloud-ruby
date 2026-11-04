@@ -28,6 +28,8 @@ module Google
           ##
           # Client for the SqlOperationsService service.
           #
+          # Service to fetch operations for database instances.
+          #
           class Client
             # @private
             API_VERSION = ""

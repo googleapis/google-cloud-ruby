@@ -31,6 +31,8 @@ module Google
     module Sql
       module V1beta4
         ##
+        # Service to manage Cloud SQL instances.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/sql/v1beta4/sql_instances_service/rest"

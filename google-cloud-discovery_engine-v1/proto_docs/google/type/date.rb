@@ -33,7 +33,7 @@ module Google
     # Related types:
     #
     # * [google.type.TimeOfDay][google.type.TimeOfDay]
-    # * [google.type.DateTime][google.type.DateTime]
+    # * {::Google::Type::DateTime google.type.DateTime}
     # * {::Google::Protobuf::Timestamp google.protobuf.Timestamp}
     # @!attribute [rw] year
     #   @return [::Integer]

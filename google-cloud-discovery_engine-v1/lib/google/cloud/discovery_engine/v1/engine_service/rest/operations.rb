@@ -1031,6 +1031,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/assistants/[^/]+/agents/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )

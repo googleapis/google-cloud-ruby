@@ -71,6 +71,9 @@ module Google
         #   @return [::String]
         #     Required. Identity outside the customer identity provider.
         #     The length limit of external identity will be of 100 characters.
+        # @!attribute [rw] external_identity_name
+        #   @return [::String]
+        #     Optional. The name of the external identity.
         class IdentityMappingEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

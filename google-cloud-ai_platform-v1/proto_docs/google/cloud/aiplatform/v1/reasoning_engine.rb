@@ -153,12 +153,17 @@ module Google
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::InlineSource]
           #     Source code is provided directly in the request.
           #
-          #     Note: The following fields are mutually exclusive: `inline_source`, `developer_connect_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `inline_source`, `developer_connect_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] developer_connect_source
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::DeveloperConnectSource]
           #     Source code is in a Git repository managed by Developer Connect.
           #
-          #     Note: The following fields are mutually exclusive: `developer_connect_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `developer_connect_source`, `inline_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] git_source
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::GitSource]
+          #     Source code is in a public Git repository.
+          #
+          #     Note: The following fields are mutually exclusive: `git_source`, `inline_source`, `developer_connect_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] python_spec
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::PythonSpec]
           #     Configuration for a Python application.
@@ -231,6 +236,23 @@ module Google
             #     specific repository, revision, and directory to use as the source code
             #     root.
             class DeveloperConnectSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies source code to be fetched from a public Git repository.
+            # @!attribute [rw] url
+            #   @return [::String]
+            #     Required. The HTTPS URL of the public Git repository to clone.
+            # @!attribute [rw] dir
+            #   @return [::String]
+            #     Optional. Directory, relative to the source root, in which to run the
+            #     build.
+            # @!attribute [rw] revision
+            #   @return [::String]
+            #     Required. The revision to fetch from the Git repository: a branch, a
+            #     tag, or a full commit SHA. Abbreviated commit SHAs are not supported.
+            class GitSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

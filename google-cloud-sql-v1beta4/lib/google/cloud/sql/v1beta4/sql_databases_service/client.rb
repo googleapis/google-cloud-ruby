@@ -28,6 +28,8 @@ module Google
           ##
           # Client for the SqlDatabasesService service.
           #
+          # Service to manage databases.
+          #
           class Client
             # @private
             API_VERSION = ""

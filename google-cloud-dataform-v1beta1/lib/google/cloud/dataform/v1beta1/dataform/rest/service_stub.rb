@@ -1754,6 +1754,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the fetch_workspace_history REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_workspace_history request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_workspace_history_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_workspace_history",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the commit_workspace_changes REST call
               #
               # @param request_pb [::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest]
@@ -2547,6 +2587,46 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Dataform::V1beta1::CompilationResult.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_compilation_result_long_running REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_compilation_result_long_running request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_compilation_result_long_running_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_compilation_result_long_running",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -4137,6 +4217,27 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the fetch_workspace_history REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_workspace_history_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta1/{name}:fetchHistory",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the commit_workspace_changes REST call
               #
               # @param request_pb [::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest]
@@ -4557,6 +4658,28 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1beta1/{parent}/compilationResults",
+                                                          body: "compilation_result",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_compilation_result_long_running REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_compilation_result_long_running_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta1/{parent}/compilationResults:createLongRunning",
                                                           body: "compilation_result",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]

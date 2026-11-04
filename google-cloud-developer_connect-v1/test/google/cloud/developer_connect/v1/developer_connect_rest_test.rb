@@ -698,6 +698,61 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ClientTest 
     end
   end
 
+  def test_open_git_repository_link_pull_request
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request = {}
+
+    open_git_repository_link_pull_request_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_open_git_repository_link_pull_request_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, open_git_repository_link_pull_request_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.open_git_repository_link_pull_request({ name: name, pull_request: pull_request }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.open_git_repository_link_pull_request name: name, pull_request: pull_request do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.open_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest.new(name: name, pull_request: pull_request) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.open_git_repository_link_pull_request({ name: name, pull_request: pull_request }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.open_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest.new(name: name, pull_request: pull_request), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, open_git_repository_link_pull_request_client_stub.call_count
+      end
+    end
+  end
+
   def test_fetch_linkable_git_repositories
     # Create test objects.
     client_result = ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesResponse.new
@@ -861,6 +916,520 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ClientTest 
 
         # Verify method calls
         assert_equal 5, fetch_git_refs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_diff_git_repository_link_commit
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    base_sha = "hello world"
+    head_sha = "hello world"
+    path_filters = ["hello world"]
+
+    diff_git_repository_link_commit_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_diff_git_repository_link_commit_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, diff_git_repository_link_commit_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.diff_git_repository_link_commit({ name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.diff_git_repository_link_commit name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.diff_git_repository_link_commit ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest.new(name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.diff_git_repository_link_commit({ name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.diff_git_repository_link_commit(::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest.new(name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, diff_git_repository_link_commit_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_git_repository_link_commit
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    commit_sha = "hello world"
+    view = :COMMIT_VIEW_UNSPECIFIED
+    path_filters = ["hello world"]
+
+    fetch_git_repository_link_commit_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_git_repository_link_commit_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_git_repository_link_commit_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_git_repository_link_commit({ name: name, commit_sha: commit_sha, view: view, path_filters: path_filters }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_git_repository_link_commit name: name, commit_sha: commit_sha, view: view, path_filters: path_filters do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_git_repository_link_commit ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest.new(name: name, commit_sha: commit_sha, view: view, path_filters: path_filters) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_git_repository_link_commit({ name: name, commit_sha: commit_sha, view: view, path_filters: path_filters }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_git_repository_link_commit(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest.new(name: name, commit_sha: commit_sha, view: view, path_filters: path_filters), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_git_repository_link_commit_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_git_repository_link_commit_list
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ref = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    view = :COMMIT_VIEW_UNSPECIFIED
+
+    fetch_git_repository_link_commit_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_git_repository_link_commit_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_git_repository_link_commit_list_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_git_repository_link_commit_list({ name: name, ref: ref, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_git_repository_link_commit_list name: name, ref: ref, page_size: page_size, page_token: page_token, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_git_repository_link_commit_list ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest.new(name: name, ref: ref, page_size: page_size, page_token: page_token, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_git_repository_link_commit_list({ name: name, ref: ref, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_git_repository_link_commit_list(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest.new(name: name, ref: ref, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_git_repository_link_commit_list_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_git_repository_link_file_blame
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ref = "hello world"
+    path = "hello world"
+    first_line = 42
+    last_line = 42
+
+    fetch_git_repository_link_file_blame_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_git_repository_link_file_blame_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_git_repository_link_file_blame_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_git_repository_link_file_blame({ name: name, ref: ref, path: path, first_line: first_line, last_line: last_line }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_git_repository_link_file_blame name: name, ref: ref, path: path, first_line: first_line, last_line: last_line do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_git_repository_link_file_blame ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest.new(name: name, ref: ref, path: path, first_line: first_line, last_line: last_line) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_git_repository_link_file_blame({ name: name, ref: ref, path: path, first_line: first_line, last_line: last_line }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_git_repository_link_file_blame(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest.new(name: name, ref: ref, path: path, first_line: first_line, last_line: last_line), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_git_repository_link_file_blame_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_git_repository_link_pull_request
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+
+    fetch_git_repository_link_pull_request_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_git_repository_link_pull_request_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_git_repository_link_pull_request_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_git_repository_link_pull_request name: name, pull_request_id: pull_request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_git_repository_link_pull_request_client_stub.call_count
+      end
+    end
+  end
+
+  def test_add_git_repository_link_pull_request_comment
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::PullRequestComment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    comment = {}
+
+    add_git_repository_link_pull_request_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_add_git_repository_link_pull_request_comment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_git_repository_link_pull_request_comment_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.add_git_repository_link_pull_request_comment({ name: name, pull_request_id: pull_request_id, comment: comment }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.add_git_repository_link_pull_request_comment name: name, pull_request_id: pull_request_id, comment: comment do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.add_git_repository_link_pull_request_comment ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.add_git_repository_link_pull_request_comment({ name: name, pull_request_id: pull_request_id, comment: comment }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.add_git_repository_link_pull_request_comment(::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_git_repository_link_pull_request_comment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_add_git_repository_link_pull_request_review_comment
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    comment = {}
+    commit_id = "hello world"
+
+    add_git_repository_link_pull_request_review_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_add_git_repository_link_pull_request_review_comment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_git_repository_link_pull_request_review_comment_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.add_git_repository_link_pull_request_review_comment({ name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.add_git_repository_link_pull_request_review_comment name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.add_git_repository_link_pull_request_review_comment ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.add_git_repository_link_pull_request_review_comment({ name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.add_git_repository_link_pull_request_review_comment(::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_git_repository_link_pull_request_review_comment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_modify_git_repository_link_pull_request
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    title = "hello world"
+    body = "hello world"
+    base_ref = "hello world"
+    state = :STATE_UNSPECIFIED
+
+    modify_git_repository_link_pull_request_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_modify_git_repository_link_pull_request_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, modify_git_repository_link_pull_request_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.modify_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.modify_git_repository_link_pull_request name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.modify_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.modify_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.modify_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, modify_git_repository_link_pull_request_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_git_repository_link_pull_request_list
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_git_repository_link_pull_request_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_git_repository_link_pull_request_list_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_git_repository_link_pull_request_list_client_stub do
+        # Create client
+        c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.fetch_git_repository_link_pull_request_list({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.fetch_git_repository_link_pull_request_list name: name, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.fetch_git_repository_link_pull_request_list ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.fetch_git_repository_link_pull_request_list({ name: name, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.fetch_git_repository_link_pull_request_list(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_git_repository_link_pull_request_list_client_stub.call_count
       end
     end
   end

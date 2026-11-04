@@ -54,10 +54,10 @@ module Google
         #     * `search-history` is the default model for site search dataStores.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
         #
         #     This field should NOT have a fixed value such as `unknown_visitor`.
         #
@@ -107,6 +107,322 @@ module Google
           #
           #     This field is only populated for the document-completable model.
           class QuerySuggestion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#advanced_complete_query CompletionService.AdvancedCompleteQuery}
+        # method.
+        # .
+        # @!attribute [rw] completion_config
+        #   @return [::String]
+        #     Required. The completion_config of the parent dataStore or engine resource
+        #     name for which the completion is performed, such as
+        #     `projects/*/locations/global/collections/default_collection/dataStores/*/completionConfig`
+        #     `projects/*/locations/global/collections/default_collection/engines/*/completionConfig`.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. The typeahead input used to fetch suggestions. Maximum length is
+        #     128 characters.
+        #
+        #     The query can not be empty for most of the suggestion types. If it is
+        #     empty, an `INVALID_ARGUMENT` error is returned. The exception is when the
+        #     suggestion_types contains only the type `RECENT_SEARCH`, the query can
+        #     be an empty string. The is called "zero prefix" feature, which returns
+        #     user's recently searched queries given the empty query.
+        # @!attribute [rw] query_model
+        #   @return [::String]
+        #     Specifies the autocomplete query model, which only applies to the QUERY
+        #     SuggestionType. This overrides any model specified in the Configuration >
+        #     Autocomplete section of the Cloud console. Currently supported values:
+        #
+        #     * `document` - Using suggestions generated from user-imported documents.
+        #     * `search-history` - Using suggestions generated from the past history of
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search SearchService.Search}
+        #     API calls. Do not use it when there is no traffic for Search API.
+        #     * `user-event` - Using suggestions generated from user-imported search
+        #     events.
+        #     * `document-completable` - Using suggestions taken directly from
+        #     user-imported document fields marked as completable.
+        #
+        #     Default values:
+        #
+        #     * `document` is the default model for regular dataStores.
+        #     * `search-history` is the default model for site search dataStores.
+        # @!attribute [rw] user_pseudo_id
+        #   @return [::String]
+        #     Optional. A unique identifier for tracking visitors. For example, this
+        #     could be implemented with an HTTP cookie, which should be able to uniquely
+        #     identify a visitor on a single device. This unique identifier should not
+        #     change if the visitor logs in or out of the website.
+        #
+        #     This field should NOT have a fixed value such as `unknown_visitor`.
+        #
+        #     This should be the same identifier as
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#user_pseudo_id UserEvent.user_pseudo_id}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#user_pseudo_id SearchRequest.user_pseudo_id}.
+        #
+        #     The field must be a UTF-8 encoded string with a length limit of 128
+        # @!attribute [rw] user_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::UserInfo]
+        #     Optional. Information about the end user.
+        #
+        #     This should be the same identifier information as
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#user_info UserEvent.user_info}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#user_info SearchRequest.user_info}.
+        # @!attribute [rw] include_tail_suggestions
+        #   @return [::Boolean]
+        #     Indicates if tail suggestions should be returned if there are no
+        #     suggestions that match the full query. Even if set to true, if there are
+        #     suggestions that match the full query, those are returned and no
+        #     tail suggestions are returned.
+        # @!attribute [rw] boost_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::BoostSpec]
+        #     Optional. Specification to boost suggestions matching the condition.
+        # @!attribute [rw] suggestion_types
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionType>]
+        #     Optional. Suggestion types to return. If empty or unspecified, query
+        #     suggestions are returned. Only one suggestion type is supported at the
+        #     moment.
+        # @!attribute [rw] suggestion_type_specs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionTypeSpec>]
+        #     Optional. Specification of each suggestion type.
+        # @!attribute [rw] experiment_ids
+        #   @return [::Array<::String>]
+        #     Optional. Experiment ids for this request.
+        class AdvancedCompleteQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specification to boost suggestions based on the condition of the
+          # suggestion.
+          # @!attribute [rw] condition_boost_specs
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::BoostSpec::ConditionBoostSpec>]
+          #     Condition boost specifications. If a suggestion matches multiple
+          #     conditions in the specifications, boost values from these specifications
+          #     are all applied and combined in a non-linear way. Maximum number of
+          #     specifications is 20.
+          #
+          #     Note: Currently only support language condition boost.
+          class BoostSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Boost applies to suggestions which match a condition.
+            # @!attribute [rw] condition
+            #   @return [::String]
+            #     An expression which specifies a boost condition. The syntax is the same
+            #     as [filter expression
+            #     syntax](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata#filter-expression-syntax).
+            #     Currently, the only supported condition is a list of BCP-47 lang codes.
+            #
+            #     Example:
+            #
+            #     * To boost suggestions in languages `en` or `fr`:
+            #     `(lang_code: ANY("en", "fr"))`
+            # @!attribute [rw] boost
+            #   @return [::Float]
+            #     Strength of the boost, which should be in [-1, 1].
+            #     Negative boost means demotion. Default is 0.0.
+            #
+            #     Setting to 1.0 gives the suggestions a big promotion. However, it does
+            #     not necessarily mean that the top result will be a boosted suggestion.
+            #
+            #     Setting to -1.0 gives the suggestions a big demotion. However, other
+            #     suggestions that are relevant might still be shown.
+            #
+            #     Setting to 0.0 means no boost applied. The boosting condition is
+            #     ignored.
+            class ConditionBoostSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Specification of each suggestion type.
+          # @!attribute [rw] suggestion_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionType]
+          #     Optional. Suggestion type.
+          # @!attribute [rw] max_suggestions
+          #   @return [::Integer]
+          #     Optional. Maximum number of suggestions to return for each suggestion
+          #     type.
+          class SuggestionTypeSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Suggestion type to return.
+          module SuggestionType
+            # Default value.
+            SUGGESTION_TYPE_UNSPECIFIED = 0
+
+            # Returns query suggestions.
+            QUERY = 1
+
+            # Returns people suggestions.
+            PEOPLE = 2
+
+            # Returns content suggestions.
+            CONTENT = 3
+
+            # Returns recent search suggestions.
+            RECENT_SEARCH = 4
+
+            # Returns Google Workspace suggestions.
+            GOOGLE_WORKSPACE = 5
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#advanced_complete_query CompletionService.AdvancedCompleteQuery}
+        # method.
+        # @!attribute [rw] query_suggestions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::QuerySuggestion>]
+        #     Results of the matched query suggestions. The result list is ordered and
+        #     the first result is a top suggestion.
+        # @!attribute [rw] tail_match_triggered
+        #   @return [::Boolean]
+        #     True if the returned suggestions are all tail suggestions.
+        #
+        #     For tail matching to be triggered, include_tail_suggestions in the request
+        #     must be true and there must be no suggestions that match the full query.
+        # @!attribute [rw] people_suggestions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::PersonSuggestion>]
+        #     Results of the matched people suggestions. The result list is ordered and
+        #     the first result is the top suggestion.
+        # @!attribute [rw] content_suggestions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::ContentSuggestion>]
+        #     Results of the matched content suggestions. The result list is ordered and
+        #     the first result is the top suggestion.
+        # @!attribute [rw] recent_search_suggestions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::RecentSearchSuggestion>]
+        #     Results of the matched "recent search" suggestions. The result list is
+        #     ordered and the first result is the top suggestion.
+        class AdvancedCompleteQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Suggestions as search queries.
+          # @!attribute [rw] suggestion
+          #   @return [::String]
+          #     The suggestion for the query.
+          # @!attribute [rw] completable_field_paths
+          #   @return [::Array<::String>]
+          #     The unique document field paths that serve as the source of this
+          #     suggestion if it was generated from completable fields.
+          #
+          #     This field is only populated for the document-completable model.
+          # @!attribute [rw] data_store
+          #   @return [::Array<::String>]
+          #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          class QuerySuggestion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Suggestions as people.
+          # @!attribute [rw] suggestion
+          #   @return [::String]
+          #     The suggestion for the query.
+          # @!attribute [rw] person_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::PersonSuggestion::PersonType]
+          #     The type of the person.
+          # @!attribute [rw] document
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Document]
+          #     The document data snippet in the suggestion. Only a subset of fields is
+          #     populated.
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          # @!attribute [rw] display_photo_uri
+          #   @return [::String]
+          #     The photo uri of the person suggestion.
+          # @!attribute [rw] destination_uri
+          #   @return [::String]
+          #     The destination uri of the person suggestion.
+          class PersonSuggestion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Classifies the person by identity source and entity kind; GOOGLE_GROUP
+            # takes precedence for groups regardless of their identity source.
+            module PersonType
+              # Default value.
+              PERSON_TYPE_UNSPECIFIED = 0
+
+              # The suggestion is from a GOOGLE_IDENTITY source.
+              CLOUD_IDENTITY = 1
+
+              # The suggestion is from a THIRD_PARTY_IDENTITY source.
+              THIRD_PARTY_IDENTITY = 2
+
+              # The suggestion is a group (e.g. a Google Group), not an individual.
+              GOOGLE_GROUP = 3
+            end
+          end
+
+          # Suggestions as content.
+          # @!attribute [rw] suggestion
+          #   @return [::String]
+          #     The suggestion for the query.
+          # @!attribute [rw] content_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse::ContentSuggestion::ContentType]
+          #     The type of the content suggestion.
+          # @!attribute [rw] document
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Document]
+          #     The document data snippet in the suggestion. Only a subset of fields will
+          #     be populated.
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     The name of the dataStore that this suggestion belongs to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          # @!attribute [rw] icon_uri
+          #   @return [::String]
+          #     The icon uri of the content suggestion.
+          # @!attribute [rw] destination_uri
+          #   @return [::String]
+          #     The destination uri of the content suggestion.
+          class ContentSuggestion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of the content returned for content suggestions.
+            module ContentType
+              # Default value.
+              CONTENT_TYPE_UNSPECIFIED = 0
+
+              # The suggestion is from a Google Workspace source.
+              GOOGLE_WORKSPACE = 1
+
+              # The suggestion is from a third party source.
+              THIRD_PARTY = 2
+            end
+          end
+
+          # Suggestions from recent search history.
+          # @!attribute [rw] suggestion
+          #   @return [::String]
+          #     The suggestion for the query.
+          # @!attribute [rw] recent_search_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time when this recent rearch happened.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score of each suggestion. The score is in the range of [0, 1].
+          class RecentSearchSuggestion
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

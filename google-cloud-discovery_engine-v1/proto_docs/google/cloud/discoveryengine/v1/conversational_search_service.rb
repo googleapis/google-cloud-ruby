@@ -233,6 +233,12 @@ module Google
         #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
         #     or
         #     `projects/*/locations/global/collections/default_collection/dataStores/*/servingConfigs/default_serving_config`.
+        #
+        #     Or the resource name of the agent engine serving config, such as:
+        #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_agent_answer`.
+        #     (use when `enable_agent_invocation` set to true, and you have custom
+        #     `AI_MODE` agent engine configured)
+        #
         #     This field is used to identify the serving configuration name, set
         #     of models used to make the search.
         # @!attribute [rw] query
@@ -864,6 +870,14 @@ module Google
         # @!attribute [rw] session
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Session]
         #     Required. The session to create.
+        # @!attribute [rw] session_id
+        #   @return [::String]
+        #     Optional. The ID to use for the session, which will become the final
+        #     component of the session's resource name.
+        #
+        #     This value should be 1-63 characters, and valid characters
+        #     are /[a-z0-9][a-z0-9-]\\{0,61}[a-z0-9]/. If not specified, a unique ID will
+        #     be generated.
         class CreateSessionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -927,7 +941,9 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     A comma-separated list of fields to filter by, in EBNF grammar.
+        #
         #     The supported fields are:
+        #
         #     * `user_pseudo_id`
         #     * `state`
         #     * `display_name`
@@ -936,29 +952,36 @@ module Google
         #     * `labels`
         #     * `create_time`
         #     * `update_time`
+        #     * `collaborative_project`
         #
         #     Examples:
-        #     "user_pseudo_id = some_id"
-        #     "display_name = \"some_name\""
-        #     "starred = true"
-        #     "is_pinned=true AND (NOT labels:hidden)"
-        #     "create_time > \"1970-01-01T12:00:00Z\""
+        #
+        #     * `user_pseudo_id = some_id`
+        #     * `display_name = "some_name"`
+        #     * `starred = true`
+        #     * `is_pinned=true AND (NOT labels:hidden)`
+        #     * `create_time > "1970-01-01T12:00:00Z"`
+        #     * `collaborative_project =
+        #          "projects/123/locations/global/collections/default_collection/engines/"
+        #          "default_engine/collaborative_projects/cp1"`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.
+        #
         #     Supported fields:
         #
         #       * `update_time`
         #       * `create_time`
         #       * `session_name`
         #       * `is_pinned`
+        #       * `display_name`
         #
         #     Example:
         #
-        #     * "update_time desc"
-        #     * "create_time"
-        #     * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+        #     * `update_time desc`
+        #     * `create_time`
+        #     * `is_pinned desc,update_time desc`: list sessions by is_pinned first, then
         #        by update_time.
         class ListSessionsRequest
           include ::Google::Protobuf::MessageExts

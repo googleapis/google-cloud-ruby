@@ -85,6 +85,49 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ContentPolicy resource string.
+            #
+            # @overload content_policy_path(organization:, location:, content_policy:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/contentPolicies/{content_policy}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param content_policy [String]
+            #
+            # @overload content_policy_path(project:, location:, content_policy:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/contentPolicies/{content_policy}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param content_policy [String]
+            #
+            # @return [::String]
+            def content_policy_path **args
+              resources = {
+                "content_policy:location:organization" => (proc do |organization:, location:, content_policy:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/contentPolicies/#{content_policy}"
+                end),
+                "content_policy:location:project" => (proc do |project:, location:, content_policy:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/contentPolicies/#{content_policy}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified CryptoKeyVersions resource string.
             #
             # The resource will be in the following format:
@@ -235,6 +278,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/identityMappingStores/#{identity_mapping_store}"
+            end
+
+            ##
+            # Create a fully-qualified Notebook resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/notebooks/{notebook}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param notebook [String]
+            #
+            # @return [::String]
+            def notebook_path project:, location:, notebook:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/notebooks/#{notebook}"
             end
 
             ##

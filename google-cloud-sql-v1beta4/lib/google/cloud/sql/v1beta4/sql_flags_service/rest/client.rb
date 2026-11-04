@@ -30,6 +30,8 @@ module Google
             ##
             # REST client for the SqlFlagsService service.
             #
+            # Service to manage database flags for Cloud SQL instances.
+            #
             class Client
               # @private
               API_VERSION = ""

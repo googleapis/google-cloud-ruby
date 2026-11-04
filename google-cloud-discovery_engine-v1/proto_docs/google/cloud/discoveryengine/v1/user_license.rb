@@ -34,7 +34,7 @@ module Google
         # @!attribute [r] license_assignment_state
         #   @return [::Google::Cloud::DiscoveryEngine::V1::UserLicense::LicenseAssignmentState]
         #     Output only. License assignment state of the user.
-        #     If the user is assigned with a license config, the user loggin will be
+        #     If the user is assigned with a license config, the user login will be
         #     assigned with the license;
         #     If the user's license assignment state is unassigned or unspecified, no
         #     license config will be associated to the user;
@@ -77,7 +77,22 @@ module Google
             # Users already logged in but cannot get license assigned will be assigned
             # NO_LICENSE state(License could be unassigned by admin).
             NO_LICENSE_ATTEMPTED_LOGIN = 4
+
+            # User is blocked from assigning a license.
+            BLOCKED = 5
           end
+        end
+
+        # Stats about users' licenses.
+        # @!attribute [rw] license_config
+        #   @return [::String]
+        #     Required. The LicenseConfig name.
+        # @!attribute [rw] used_license_count
+        #   @return [::Integer]
+        #     Required. The number of licenses used.
+        class LicenseConfigUsageStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

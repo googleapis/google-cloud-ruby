@@ -24,6 +24,7 @@ module Google
     module Sql
       module V1
         module SqlInstancesService
+          # Service to manage Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService

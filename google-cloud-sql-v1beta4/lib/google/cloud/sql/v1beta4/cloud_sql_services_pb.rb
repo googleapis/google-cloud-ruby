@@ -24,6 +24,7 @@ module Google
     module Sql
       module V1beta4
         module SqlBackupRunsService
+          # Service for managing database backups.
           class Service
 
             include ::GRPC::GenericService
@@ -47,6 +48,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlDatabasesService
+          # Service to manage databases.
           class Service
 
             include ::GRPC::GenericService
@@ -78,6 +80,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlFlagsService
+          # Service to manage database flags for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -93,6 +96,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlInstancesService
+          # Service to manage Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -248,6 +252,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlOperationsService
+          # Service to fetch operations for database instances.
           class Service
 
             include ::GRPC::GenericService
@@ -269,6 +274,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlSslCertsService
+          # Service to manage SSL certs for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -295,6 +301,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlBackupsService
+          # Service for managing database backups for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService

@@ -135,6 +135,8 @@ module Google
             rpc :FetchFileGitStatuses, ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest, ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesResponse
             # Fetches Git ahead/behind against a remote branch.
             rpc :FetchGitAheadBehind, ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest, ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse
+            # Fetches a Workspace's history of commits.
+            rpc :FetchWorkspaceHistory, ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest, ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryResponse
             # Applies a Git commit for uncommitted files in a Workspace.
             rpc :CommitWorkspaceChanges, ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest, ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse
             # Performs a Git reset for uncommitted files in a Workspace.
@@ -181,6 +183,9 @@ module Google
             rpc :GetCompilationResult, ::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest, ::Google::Cloud::Dataform::V1beta1::CompilationResult
             # Creates a new CompilationResult in a given project and location.
             rpc :CreateCompilationResult, ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest, ::Google::Cloud::Dataform::V1beta1::CompilationResult
+            # Creates a new CompilationResult in a given project and location
+            # asynchronously.
+            rpc :CreateCompilationResultLongRunning, ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest, ::Google::Longrunning::Operation
             # Returns CompilationResultActions in a given CompilationResult.
             rpc :QueryCompilationResultActions, ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest, ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsResponse
             # Lists WorkflowConfigs in a given Repository.

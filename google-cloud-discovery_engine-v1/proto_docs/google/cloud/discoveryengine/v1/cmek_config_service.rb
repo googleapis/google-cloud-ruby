@@ -72,9 +72,10 @@ module Google
         #   @return [::String]
         #     KMS key resource name which will be used to encrypt resources
         #     `projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{keyId}`.
-        # @!attribute [rw] kms_key_version
+        # @!attribute [r] kms_key_version
         #   @return [::String]
-        #     KMS key version resource name which will be used to encrypt resources
+        #     Output only. KMS key version resource name which will be used to encrypt
+        #     resources
         #     `<kms_key>/cryptoKeyVersions/{keyVersion}`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1::CmekConfig::State]
@@ -125,6 +126,10 @@ module Google
             # The KMS key is soft deleted. Some cleanup policy will eventually be
             # applied.
             DELETED = 8
+
+            # The KMS key is expired, meaning the key has been disabled for 30+ days.
+            # The customer can call DeleteCmekConfig to change the state to DELETED.
+            EXPIRED = 9
           end
 
           # States of NotebookLM.

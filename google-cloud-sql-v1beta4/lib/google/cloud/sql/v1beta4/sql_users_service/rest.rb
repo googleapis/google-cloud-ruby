@@ -30,6 +30,8 @@ module Google
     module Sql
       module V1beta4
         ##
+        # Cloud SQL users service.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/sql/v1beta4/sql_users_service/rest"

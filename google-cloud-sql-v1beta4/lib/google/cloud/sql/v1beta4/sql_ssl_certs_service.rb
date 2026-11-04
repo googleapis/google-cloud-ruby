@@ -31,6 +31,8 @@ module Google
     module Sql
       module V1beta4
         ##
+        # Service to manage SSL certs for Cloud SQL instances.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/sql/v1beta4/sql_ssl_certs_service"

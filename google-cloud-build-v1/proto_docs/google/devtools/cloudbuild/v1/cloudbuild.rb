@@ -2226,6 +2226,10 @@ module Google
 
             # Build must be verified.
             VERIFIED = 1
+
+            # Build verification is best effort. If provenance generation fails, the
+            # build will still succeed.
+            BEST_EFFORT = 3
           end
 
           # Supported Compute Engine machine types.
@@ -2311,7 +2315,8 @@ module Google
             # to Cloud Storage buckets in the build project.
             REGIONAL_USER_OWNED_BUCKET = 1
 
-            # Bucket is located in a Google-owned project and is not regionalized.
+            # Deprecated: Use `REGIONAL_USER_OWNED_BUCKET` instead. Bucket is located
+            # in a Google-owned project and is not regionalized.
             LEGACY_BUCKET = 2
           end
         end
@@ -2510,8 +2515,10 @@ module Google
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig]
         #     Network configuration for the pool.
         # @!attribute [rw] private_service_connect
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::PrivateServiceConnect]
-        #     Immutable. Private Service Connect(PSC) Network configuration for the pool.
+        #     Immutable. Deprecated: Private Service Connect is no longer supported.
+        #     Private Service Connect(PSC) Network configuration for the pool.
         class PrivatePoolV1Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2587,7 +2594,9 @@ module Google
             end
           end
 
+          # Deprecated: Private Service Connect is no longer supported.
           # Defines the Private Service Connect network configuration for the pool.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] network_attachment
           #   @return [::String]
           #     Required. Immutable. The network attachment that the worker network
