@@ -1,5 +1,12 @@
 # Release History
 
+### 2.0.0 (2026-11-04)
+
+#### Features
+
+* Bump version to 2.0.0 ([#36694](https://github.com/googleapis/google-cloud-ruby/issues/36694)) 
+* update API sources and regenerate ([#36692](https://github.com/googleapis/google-cloud-ruby/issues/36692)) 
+
 ### 1.10.0 (2026-10-26)
 
 #### Features
@@ -346,4 +353,3 @@
 ### 0.1.0 / 2020-03-16
 
 Initial release.
-
