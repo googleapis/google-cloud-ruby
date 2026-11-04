@@ -77,6 +77,11 @@ module Google
 
                   default_config.rpcs.update_audit_schedule.timeout = 60.0
 
+                  default_config.rpcs.get_audit_schedule.timeout = 60.0
+                  default_config.rpcs.get_audit_schedule.retry_policy = {
+                    initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_audit_schedules.timeout = 60.0
                   default_config.rpcs.list_audit_schedules.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -749,7 +754,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_audit_scope_report(scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil)
+              # @overload generate_audit_scope_report(scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil, parameter_overrides: nil)
               #   Pass arguments to `generate_audit_scope_report` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -785,6 +790,11 @@ module Google
               #       validation in custom UIs before submitting requests.
               #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
               #       safely without consuming resource quotas.
+              #   @param parameter_overrides [::Hash{::String => ::Google::Cloud::AuditManager::V1::ParameterOverrides, ::Hash}]
+              #     Optional. Maps dynamic parameter overrides by Cloud Control resource name
+              #     at execution time. For example,
+              #     `{"organizations/123/locations/global/cloudControls/control-1":
+              #     {parameters: [...]}}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AuditManager::V1::AuditScopeReport]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -858,7 +868,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil)
+              # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, parameter_overrides: nil, validate_only: nil)
               #   Pass arguments to `generate_audit_report` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -883,6 +893,11 @@ module Google
               #   @param compliance_framework [::String]
               #     Required. The framework that's used for the audit report. For example,
               #     `NIST_800_53`.
+              #   @param parameter_overrides [::Hash{::String => ::Google::Cloud::AuditManager::V1::ParameterOverrides, ::Hash}]
+              #     Optional. Maps dynamic parameter overrides by Cloud Control resource name
+              #     at execution time. For example,
+              #     `{"organizations/123/locations/global/cloudControls/control-1":
+              #     {parameters: [...]}}`
               #   @param validate_only [::Boolean]
               #     Optional. If `true`, only validates the request and does not generate the
               #     audit report. This executes standard request validation (such as schema,

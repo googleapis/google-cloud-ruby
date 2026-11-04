@@ -90,6 +90,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ClientTest
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
 
     list_user_licenses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -105,32 +106,86 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ClientTest
         end
 
         # Use hash object
-        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, list_user_licenses_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_license_configs_usage_stats
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    list_license_configs_usage_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ServiceStub.stub :transcode_list_license_configs_usage_stats_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_license_configs_usage_stats_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_license_configs_usage_stats({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_license_configs_usage_stats parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_license_configs_usage_stats ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_license_configs_usage_stats({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_license_configs_usage_stats(::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_license_configs_usage_stats_client_stub.call_count
       end
     end
   end

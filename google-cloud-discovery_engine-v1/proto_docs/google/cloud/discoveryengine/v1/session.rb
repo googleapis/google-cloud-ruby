@@ -55,6 +55,12 @@ module Google
         #   @return [::Boolean]
         #     Optional. Whether the session is pinned, pinned session will be displayed
         #     on the top of the session list.
+        # @!attribute [r] pending_async_assist_operation_id
+        #   @return [::String]
+        #     Output only. Full resource name of an in-progress AsyncAssist operation for
+        #     this session, e.g.
+        #     `projects/*/locations/*/collections/*/engines/*/sessions/*/operations/*`.
+        #     Set when the operation starts and cleared when it finishes.
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,6 +99,9 @@ module Google
           #     LLM model and version used, model parameters (temperature, grounding
           #     parameters, etc.). The prefix "google." is reserved for Google-developed
           #     functionality.
+          # @!attribute [rw] live
+          #   @return [::Boolean]
+          #     Optional. Indicates whether this turn is a live turn.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

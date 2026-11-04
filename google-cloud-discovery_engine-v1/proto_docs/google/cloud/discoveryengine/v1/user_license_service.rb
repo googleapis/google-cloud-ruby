@@ -25,13 +25,14 @@ module Google
         # {::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#list_user_licenses UserLicenseService.ListUserLicenses}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent [UserStore][] resource name, format:
+        #     Required. The parent {::Google::Cloud::DiscoveryEngine::V1::UserStore UserStore}
+        #     resource name, format:
         #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
-        #     requested. If unspecified, defaults to 10. The maximum value is 50; values
-        #     above 50 will be coerced to 50.
+        #     requested. If unspecified, defaults to 100. The maximum value is 1000;
+        #     values above 1000 will be coerced to 1000.
         #
         #     If this field is negative, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] page_token
@@ -48,7 +49,8 @@ module Google
         #     Supported fields:
         #
         #     * `license_assignment_state`
-        #
+        #     * `user_principal`
+        #     *
         #     Examples:
         #
         #     * `license_assignment_state = ASSIGNED` to list assigned user licenses.
@@ -57,6 +59,26 @@ module Google
         #     who attempted login but no license assigned.
         #     * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
         #     out users who attempted login but no license assigned.
+        #     * `user_principal = user1@example.com` to list user license for
+        #     `user1@example.com`.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The order in which the
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserLicense UserLicense}s are listed. The
+        #     value must be a comma-separated list of fields. Default sorting order is
+        #     ascending. To specify descending order for a field, append a " desc"
+        #     suffix. Redundant space characters in the syntax are insignificant.
+        #
+        #     Supported fields (only `user_principal` is supported for now):
+        #
+        #     * `user_principal`
+        #
+        #     If not set, the default ordering is by `user_principal`.
+        #
+        #     Examples:
+        #
+        #     * `user_principal` to order by `user_principal` in ascending order.
+        #     * `user_principal desc` to order by `user_principal` in descending order.
         class ListUserLicensesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,14 +100,39 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#list_license_configs_usage_stats UserLicenseService.ListLicenseConfigsUsageStats}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent branch resource name, such as
+        #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
+        class ListLicenseConfigsUsageStatsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#list_license_configs_usage_stats UserLicenseService.ListLicenseConfigsUsageStats}
+        # method.
+        # @!attribute [rw] license_config_usage_stats
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::LicenseConfigUsageStats>]
+        #     All the customer's
+        #     {::Google::Cloud::DiscoveryEngine::V1::LicenseConfigUsageStats LicenseConfigUsageStats}.
+        class ListLicenseConfigsUsageStatsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#batch_update_user_licenses UserLicenseService.BatchUpdateUserLicenses}
         # method.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest::InlineSource]
-        #     The inline source for the input content for document embeddings.
+        #     The inline source for the input content for license assignment.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent [UserStore][] resource name, format:
+        #     Required. The parent {::Google::Cloud::DiscoveryEngine::V1::UserStore UserStore}
+        #     resource name, format:
         #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
         # @!attribute [rw] delete_unassigned_user_licenses
         #   @return [::Boolean]

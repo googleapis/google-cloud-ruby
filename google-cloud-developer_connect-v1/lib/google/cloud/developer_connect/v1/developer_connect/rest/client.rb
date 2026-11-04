@@ -1321,6 +1321,89 @@ module Google
               end
 
               ##
+              # Opens a Pull Request in the remote SCM repository associated with a
+              # GitRepositoryLink.
+              #
+              # @overload open_git_repository_link_pull_request(request, options = nil)
+              #   Pass arguments to `open_git_repository_link_pull_request` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload open_git_repository_link_pull_request(name: nil, pull_request: nil)
+              #   Pass arguments to `open_git_repository_link_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The GitRepositoryLink resource name in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param pull_request [::Google::Cloud::DeveloperConnect::V1::PullRequest, ::Hash]
+              #     Required. The Pull Request details to open.
+              #     Input fields used: title, body, head_ref, base_ref.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest.new
+              #
+              #   # Call the open_git_repository_link_pull_request method.
+              #   result = client.open_git_repository_link_pull_request request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::PullRequest.
+              #   p result
+              #
+              def open_git_repository_link_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.open_git_repository_link_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.open_git_repository_link_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.open_git_repository_link_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.open_git_repository_link_pull_request request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # FetchLinkableGitRepositories returns a list of git repositories from an SCM
               # that are available to be added to a Connection.
               #
@@ -1572,6 +1655,823 @@ module Google
 
                 @developer_connect_stub.fetch_git_refs request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Diff commits for a GitRepositoryLink.
+              #
+              # @overload diff_git_repository_link_commit(request, options = nil)
+              #   Pass arguments to `diff_git_repository_link_commit` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload diff_git_repository_link_commit(name: nil, base_sha: nil, head_sha: nil, path_filters: nil)
+              #   Pass arguments to `diff_git_repository_link_commit` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink.
+              #   @param base_sha [::String]
+              #     Required. The base commit SHA or ref.
+              #   @param head_sha [::String]
+              #     Required. The head commit SHA or ref.
+              #   @param path_filters [::Array<::String>]
+              #     Optional. Path patterns or exact paths to filter returned files.
+              #     When `path_filters` is specified, `FileDiff.patch` is populated for all
+              #     matching files (use `["**"]` to include patches for all changed files).
+              #     When `path_filters` is omitted or empty, the full list of `FileDiff` is
+              #     returned without patch diffs (`FileDiff.patch` is empty).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest.new
+              #
+              #   # Call the diff_git_repository_link_commit method.
+              #   result = client.diff_git_repository_link_commit request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse.
+              #   p result
+              #
+              def diff_git_repository_link_commit request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.diff_git_repository_link_commit.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.diff_git_repository_link_commit.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.diff_git_repository_link_commit.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.diff_git_repository_link_commit request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetch Commit details from a Git repository link.
+              #
+              # @overload fetch_git_repository_link_commit(request, options = nil)
+              #   Pass arguments to `fetch_git_repository_link_commit` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_git_repository_link_commit(name: nil, commit_sha: nil, view: nil, path_filters: nil)
+              #   Pass arguments to `fetch_git_repository_link_commit` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param commit_sha [::String]
+              #     Required. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+              #     Git reference).
+              #   @param view [::Google::Cloud::DeveloperConnect::V1::CommitView]
+              #     Optional. The level of commit details to return in the response.
+              #     Defaults to `FULL` if unspecified. In `FULL` view, `files` metadata (paths
+              #     and statuses) are returned; `path_filters` must also be specified to
+              #     populate line patch hunks.
+              #   @param path_filters [::Array<::String>]
+              #     Optional. Path patterns or exact paths to filter returned files (only
+              #     applicable in `FULL` view).
+              #     When `path_filters` is specified, `FileDiff.patch` is populated for all
+              #     matching files (use `["**"]` to include patches for all changed files).
+              #     When `path_filters` is omitted or empty, the full list of `FileDiff` is
+              #     returned without patch diffs (`FileDiff.patch` is empty).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest.new
+              #
+              #   # Call the fetch_git_repository_link_commit method.
+              #   result = client.fetch_git_repository_link_commit request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse.
+              #   p result
+              #
+              def fetch_git_repository_link_commit request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_git_repository_link_commit.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_git_repository_link_commit.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_git_repository_link_commit.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.fetch_git_repository_link_commit request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetch a list of Commits from a Git repository link.
+              #
+              # @overload fetch_git_repository_link_commit_list(request, options = nil)
+              #   Pass arguments to `fetch_git_repository_link_commit_list` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_git_repository_link_commit_list(name: nil, ref: nil, page_size: nil, page_token: nil, view: nil)
+              #   Pass arguments to `fetch_git_repository_link_commit_list` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param ref [::String]
+              #     Optional. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+              #     Git reference) from which to start listing commits.
+              #   @param page_size [::Integer]
+              #     Optional. Number of results to return in the list. Default is 50. Max is
+              #     100.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `FetchGitRepositoryLinkCommitList` call. Provide this to retrieve the
+              #     subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `FetchGitRepositoryLinkCommitList` must match the call that provided the
+              #     page token.
+              #   @param view [::Google::Cloud::DeveloperConnect::V1::CommitView]
+              #     Optional. The level of commit details to return in the response.
+              #     Only `BASIC` is supported; `FULL` returns `INVALID_ARGUMENT`. Defaults to
+              #     `BASIC` if unspecified. Use `FetchGitRepositoryLinkCommit` to get file
+              #     diffs for a single commit.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::SCMCommit>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::SCMCommit>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest.new
+              #
+              #   # Call the fetch_git_repository_link_commit_list method.
+              #   result = client.fetch_git_repository_link_commit_list request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DeveloperConnect::V1::SCMCommit.
+              #     p item
+              #   end
+              #
+              def fetch_git_repository_link_commit_list request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_git_repository_link_commit_list.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_git_repository_link_commit_list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_git_repository_link_commit_list.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.fetch_git_repository_link_commit_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @developer_connect_stub, :fetch_git_repository_link_commit_list, "commits", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches blame information for a file or line range in a file.
+              #
+              # @overload fetch_git_repository_link_file_blame(request, options = nil)
+              #   Pass arguments to `fetch_git_repository_link_file_blame` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_git_repository_link_file_blame(name: nil, ref: nil, path: nil, first_line: nil, last_line: nil)
+              #   Pass arguments to `fetch_git_repository_link_file_blame` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param ref [::String]
+              #     Required. The SCM commit SHA, or symbolic revision (e.g., branch name, tag)
+              #     from which to fetch the blame.
+              #   @param path [::String]
+              #     Required. The file path within the repository.
+              #   @param first_line [::Integer]
+              #     Optional. The 1-indexed starting line number of the range to blame
+              #     (inclusive). If not specified, blame begins at line 1.
+              #   @param last_line [::Integer]
+              #     Optional. The 1-indexed ending line number of the range to blame
+              #     (inclusive). If not specified, blame extends to the end of the file.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest.new
+              #
+              #   # Call the fetch_git_repository_link_file_blame method.
+              #   result = client.fetch_git_repository_link_file_blame request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse.
+              #   p result
+              #
+              def fetch_git_repository_link_file_blame request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_git_repository_link_file_blame.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_git_repository_link_file_blame.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_git_repository_link_file_blame.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.fetch_git_repository_link_file_blame request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetch Pull Request details from a Git repository link.
+              #
+              # @overload fetch_git_repository_link_pull_request(request, options = nil)
+              #   Pass arguments to `fetch_git_repository_link_pull_request` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_git_repository_link_pull_request(name: nil, pull_request_id: nil)
+              #   Pass arguments to `fetch_git_repository_link_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param pull_request_id [::String]
+              #     Required. The ID of the Pull Request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest.new
+              #
+              #   # Call the fetch_git_repository_link_pull_request method.
+              #   result = client.fetch_git_repository_link_pull_request request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::PullRequest.
+              #   p result
+              #
+              def fetch_git_repository_link_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_git_repository_link_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_git_repository_link_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_git_repository_link_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.fetch_git_repository_link_pull_request request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Add a comment to a Pull Request.
+              #
+              # @overload add_git_repository_link_pull_request_comment(request, options = nil)
+              #   Pass arguments to `add_git_repository_link_pull_request_comment` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_git_repository_link_pull_request_comment(name: nil, pull_request_id: nil, comment: nil)
+              #   Pass arguments to `add_git_repository_link_pull_request_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param pull_request_id [::String]
+              #     Required. The ID of the Pull Request.
+              #   @param comment [::Google::Cloud::DeveloperConnect::V1::PullRequestComment, ::Hash]
+              #     Required. The comment to add.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequestComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequestComment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest.new
+              #
+              #   # Call the add_git_repository_link_pull_request_comment method.
+              #   result = client.add_git_repository_link_pull_request_comment request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::PullRequestComment.
+              #   p result
+              #
+              def add_git_repository_link_pull_request_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_git_repository_link_pull_request_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_git_repository_link_pull_request_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_git_repository_link_pull_request_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.add_git_repository_link_pull_request_comment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Add a review comment (inline on diff) to a Pull Request.
+              #
+              # @overload add_git_repository_link_pull_request_review_comment(request, options = nil)
+              #   Pass arguments to `add_git_repository_link_pull_request_review_comment` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_git_repository_link_pull_request_review_comment(name: nil, pull_request_id: nil, comment: nil, commit_id: nil)
+              #   Pass arguments to `add_git_repository_link_pull_request_review_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the GitRepositoryLink in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param pull_request_id [::String]
+              #     Required. The ID of the Pull Request.
+              #   @param comment [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment, ::Hash]
+              #     Required. The review comment to add.
+              #   @param commit_id [::String]
+              #     Optional. The commit SHA to comment on. If not specified, defaults to the
+              #     HEAD commit of the Pull Request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest.new
+              #
+              #   # Call the add_git_repository_link_pull_request_review_comment method.
+              #   result = client.add_git_repository_link_pull_request_review_comment request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment.
+              #   p result
+              #
+              def add_git_repository_link_pull_request_review_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_git_repository_link_pull_request_review_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_git_repository_link_pull_request_review_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_git_repository_link_pull_request_review_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.add_git_repository_link_pull_request_review_comment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Modifies a Pull Request in the remote SCM repository associated with a
+              # GitRepositoryLink.
+              #
+              # @overload modify_git_repository_link_pull_request(request, options = nil)
+              #   Pass arguments to `modify_git_repository_link_pull_request` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload modify_git_repository_link_pull_request(name: nil, pull_request_id: nil, title: nil, body: nil, base_ref: nil, state: nil)
+              #   Pass arguments to `modify_git_repository_link_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The GitRepositoryLink resource name in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param pull_request_id [::String]
+              #     Required. The SCM-specific Pull Request identifier (e.g., "45").
+              #   @param title [::String]
+              #     Optional. The title of the Pull Request.
+              #   @param body [::String]
+              #     Optional. The body description of the Pull Request.
+              #   @param base_ref [::String]
+              #     Optional. The target branch to merge into.
+              #   @param state [::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest::State]
+              #     Optional. The state of the Pull Request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest.new
+              #
+              #   # Call the modify_git_repository_link_pull_request method.
+              #   result = client.modify_git_repository_link_pull_request request
+              #
+              #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::PullRequest.
+              #   p result
+              #
+              def modify_git_repository_link_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.modify_git_repository_link_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.modify_git_repository_link_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.modify_git_repository_link_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.modify_git_repository_link_pull_request request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches a list of Pull Requests from the remote repository.
+              #
+              # @overload fetch_git_repository_link_pull_request_list(request, options = nil)
+              #   Pass arguments to `fetch_git_repository_link_pull_request_list` via a request object, either of type
+              #   {::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_git_repository_link_pull_request_list(name: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `fetch_git_repository_link_pull_request_list` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The GitRepositoryLink resource name in the format
+              #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters the pull requests returned in
+              #     the response. Only a single equality comparison on `state` is supported,
+              #     for example `state = "OPEN"`. Supported values are `OPEN`, `CLOSED`, and
+              #     `MERGED`. `DECLINED` is only supported for SCM providers that support
+              #     declining pull requests, and returns `INVALID_ARGUMENT` for GitHub, GitHub
+              #     Enterprise, GitLab, and GitLab Enterprise. Other values or expressions
+              #     return `INVALID_ARGUMENT`. Defaults to `state = "OPEN"` if unspecified.
+              #   @param page_size [::Integer]
+              #     Optional. Number of results to return in the list. Default is 20. Max is
+              #     100. A page may contain fewer than `page_size` results even when more
+              #     results are available; use `next_page_token` to check for more pages.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `FetchGitRepositoryLinkPullRequestList` call. Provide this to retrieve the
+              #     subsequent page.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::PullRequest>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::PullRequest>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest.new
+              #
+              #   # Call the fetch_git_repository_link_pull_request_list method.
+              #   result = client.fetch_git_repository_link_pull_request_list request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DeveloperConnect::V1::PullRequest.
+              #     p item
+              #   end
+              #
+              def fetch_git_repository_link_pull_request_list request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_git_repository_link_pull_request_list.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_git_repository_link_pull_request_list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_git_repository_link_pull_request_list.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_connect_stub.fetch_git_repository_link_pull_request_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @developer_connect_stub, :fetch_git_repository_link_pull_request_list, "pull_requests", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2901,6 +3801,11 @@ module Google
                   #
                   attr_reader :fetch_read_token
                   ##
+                  # RPC-specific configuration for `open_git_repository_link_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :open_git_repository_link_pull_request
+                  ##
                   # RPC-specific configuration for `fetch_linkable_git_repositories`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2915,6 +3820,51 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :fetch_git_refs
+                  ##
+                  # RPC-specific configuration for `diff_git_repository_link_commit`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :diff_git_repository_link_commit
+                  ##
+                  # RPC-specific configuration for `fetch_git_repository_link_commit`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_git_repository_link_commit
+                  ##
+                  # RPC-specific configuration for `fetch_git_repository_link_commit_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_git_repository_link_commit_list
+                  ##
+                  # RPC-specific configuration for `fetch_git_repository_link_file_blame`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_git_repository_link_file_blame
+                  ##
+                  # RPC-specific configuration for `fetch_git_repository_link_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_git_repository_link_pull_request
+                  ##
+                  # RPC-specific configuration for `add_git_repository_link_pull_request_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_git_repository_link_pull_request_comment
+                  ##
+                  # RPC-specific configuration for `add_git_repository_link_pull_request_review_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_git_repository_link_pull_request_review_comment
+                  ##
+                  # RPC-specific configuration for `modify_git_repository_link_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :modify_git_repository_link_pull_request
+                  ##
+                  # RPC-specific configuration for `fetch_git_repository_link_pull_request_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_git_repository_link_pull_request_list
                   ##
                   # RPC-specific configuration for `list_account_connectors`
                   # @return [::Gapic::Config::Method]
@@ -3000,12 +3950,32 @@ module Google
                     @fetch_read_write_token = ::Gapic::Config::Method.new fetch_read_write_token_config
                     fetch_read_token_config = parent_rpcs.fetch_read_token if parent_rpcs.respond_to? :fetch_read_token
                     @fetch_read_token = ::Gapic::Config::Method.new fetch_read_token_config
+                    open_git_repository_link_pull_request_config = parent_rpcs.open_git_repository_link_pull_request if parent_rpcs.respond_to? :open_git_repository_link_pull_request
+                    @open_git_repository_link_pull_request = ::Gapic::Config::Method.new open_git_repository_link_pull_request_config
                     fetch_linkable_git_repositories_config = parent_rpcs.fetch_linkable_git_repositories if parent_rpcs.respond_to? :fetch_linkable_git_repositories
                     @fetch_linkable_git_repositories = ::Gapic::Config::Method.new fetch_linkable_git_repositories_config
                     fetch_git_hub_installations_config = parent_rpcs.fetch_git_hub_installations if parent_rpcs.respond_to? :fetch_git_hub_installations
                     @fetch_git_hub_installations = ::Gapic::Config::Method.new fetch_git_hub_installations_config
                     fetch_git_refs_config = parent_rpcs.fetch_git_refs if parent_rpcs.respond_to? :fetch_git_refs
                     @fetch_git_refs = ::Gapic::Config::Method.new fetch_git_refs_config
+                    diff_git_repository_link_commit_config = parent_rpcs.diff_git_repository_link_commit if parent_rpcs.respond_to? :diff_git_repository_link_commit
+                    @diff_git_repository_link_commit = ::Gapic::Config::Method.new diff_git_repository_link_commit_config
+                    fetch_git_repository_link_commit_config = parent_rpcs.fetch_git_repository_link_commit if parent_rpcs.respond_to? :fetch_git_repository_link_commit
+                    @fetch_git_repository_link_commit = ::Gapic::Config::Method.new fetch_git_repository_link_commit_config
+                    fetch_git_repository_link_commit_list_config = parent_rpcs.fetch_git_repository_link_commit_list if parent_rpcs.respond_to? :fetch_git_repository_link_commit_list
+                    @fetch_git_repository_link_commit_list = ::Gapic::Config::Method.new fetch_git_repository_link_commit_list_config
+                    fetch_git_repository_link_file_blame_config = parent_rpcs.fetch_git_repository_link_file_blame if parent_rpcs.respond_to? :fetch_git_repository_link_file_blame
+                    @fetch_git_repository_link_file_blame = ::Gapic::Config::Method.new fetch_git_repository_link_file_blame_config
+                    fetch_git_repository_link_pull_request_config = parent_rpcs.fetch_git_repository_link_pull_request if parent_rpcs.respond_to? :fetch_git_repository_link_pull_request
+                    @fetch_git_repository_link_pull_request = ::Gapic::Config::Method.new fetch_git_repository_link_pull_request_config
+                    add_git_repository_link_pull_request_comment_config = parent_rpcs.add_git_repository_link_pull_request_comment if parent_rpcs.respond_to? :add_git_repository_link_pull_request_comment
+                    @add_git_repository_link_pull_request_comment = ::Gapic::Config::Method.new add_git_repository_link_pull_request_comment_config
+                    add_git_repository_link_pull_request_review_comment_config = parent_rpcs.add_git_repository_link_pull_request_review_comment if parent_rpcs.respond_to? :add_git_repository_link_pull_request_review_comment
+                    @add_git_repository_link_pull_request_review_comment = ::Gapic::Config::Method.new add_git_repository_link_pull_request_review_comment_config
+                    modify_git_repository_link_pull_request_config = parent_rpcs.modify_git_repository_link_pull_request if parent_rpcs.respond_to? :modify_git_repository_link_pull_request
+                    @modify_git_repository_link_pull_request = ::Gapic::Config::Method.new modify_git_repository_link_pull_request_config
+                    fetch_git_repository_link_pull_request_list_config = parent_rpcs.fetch_git_repository_link_pull_request_list if parent_rpcs.respond_to? :fetch_git_repository_link_pull_request_list
+                    @fetch_git_repository_link_pull_request_list = ::Gapic::Config::Method.new fetch_git_repository_link_pull_request_list_config
                     list_account_connectors_config = parent_rpcs.list_account_connectors if parent_rpcs.respond_to? :list_account_connectors
                     @list_account_connectors = ::Gapic::Config::Method.new list_account_connectors_config
                     get_account_connector_config = parent_rpcs.get_account_connector if parent_rpcs.respond_to? :get_account_connector

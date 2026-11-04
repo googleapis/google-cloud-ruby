@@ -146,6 +146,106 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_auto_protection_policy.timeout = 60.0
+
+                  default_config.rpcs.list_auto_protection_policies.timeout = 60.0
+                  default_config.rpcs.list_auto_protection_policies.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_auto_protection_policy.timeout = 60.0
+                  default_config.rpcs.get_auto_protection_policy.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_auto_protection_policy.timeout = 60.0
+
+                  default_config.rpcs.delete_auto_protection_policy.timeout = 60.0
+
+                  default_config.rpcs.create_auto_protection_policy_binding.timeout = 60.0
+
+                  default_config.rpcs.get_auto_protection_policy_binding.timeout = 60.0
+                  default_config.rpcs.get_auto_protection_policy_binding.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_auto_protection_policy_bindings.timeout = 60.0
+                  default_config.rpcs.list_auto_protection_policy_bindings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_applied_auto_protection_policies.timeout = 60.0
+                  default_config.rpcs.list_applied_auto_protection_policies.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.initiate_delete_auto_protection_policy_binding.timeout = 60.0
+
+                  default_config.rpcs.list_binding_matching_resources.timeout = 60.0
+                  default_config.rpcs.list_binding_matching_resources.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.create_restore_template.timeout = 60.0
+
+                  default_config.rpcs.get_restore_template.timeout = 60.0
+                  default_config.rpcs.get_restore_template.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_restore_templates.timeout = 60.0
+                  default_config.rpcs.list_restore_templates.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_restore_template.timeout = 60.0
+
+                  default_config.rpcs.delete_restore_template.timeout = 60.0
+
+                  default_config.rpcs.run_restore_template.timeout = 60.0
+
+                  default_config.rpcs.get_restore_template_execution.timeout = 60.0
+                  default_config.rpcs.get_restore_template_execution.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_restore_template_executions.timeout = 60.0
+                  default_config.rpcs.list_restore_template_executions.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.trigger_restore_cleanup.timeout = 60.0
+
+                  default_config.rpcs.create_restore_verification_plan.timeout = 60.0
+
+                  default_config.rpcs.create_restore_verification_plan_association.timeout = 60.0
+
+                  default_config.rpcs.get_restore_verification_plan_association.timeout = 60.0
+                  default_config.rpcs.get_restore_verification_plan_association.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_restore_verification_plan_associations.timeout = 60.0
+                  default_config.rpcs.list_restore_verification_plan_associations.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.delete_restore_verification_plan_association.timeout = 60.0
+
+                  default_config.rpcs.trigger_restore_verification.timeout = 60.0
+
+                  default_config.rpcs.get_restore_verification_plan.timeout = 60.0
+                  default_config.rpcs.get_restore_verification_plan.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_restore_verification_plans.timeout = 60.0
+                  default_config.rpcs.list_restore_verification_plans.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.delete_restore_verification_plan.timeout = 60.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -3447,7 +3547,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_backup_plan_association(name: nil, request_id: nil)
+              # @overload delete_backup_plan_association(name: nil, request_id: nil, auto_protection_policy_binding: nil)
               #   Pass arguments to `delete_backup_plan_association` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3469,6 +3569,12 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param auto_protection_policy_binding [::String]
+              #     Optional. This field is exclusively used by Backup and DR's auto-protection
+              #     feature. The resource name of the `AutoProtectionPolicyBinding` that
+              #     triggered the deletion of this association.
+              #     Format:
+              #     `projects/{project}/locations/{location}/autoProtectionPolicies/{policy}/bindings/{binding}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4065,6 +4171,2828 @@ module Google
               end
 
               ##
+              # Creates a new AutoProtectionPolicy in a given project and location.
+              #
+              # @overload create_auto_protection_policy(request, options = nil)
+              #   Pass arguments to `create_auto_protection_policy` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_auto_protection_policy(parent: nil, auto_protection_policy_id: nil, auto_protection_policy: nil, request_id: nil)
+              #   Pass arguments to `create_auto_protection_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this policy will be created.
+              #     Format: projects/\\{project}/locations/\\{location}
+              #   @param auto_protection_policy_id [::String]
+              #     Required. The ID to use for the policy.
+              #     This will become the final component of the policy's resource name.
+              #
+              #     This value must start with a lowercase letter followed by up to 62
+              #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+              #   @param auto_protection_policy [::Google::Cloud::BackupDR::V1::AutoProtectionPolicy, ::Hash]
+              #     Required. The AutoProtectionPolicy resource to create.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest.new
+              #
+              #   # Call the create_auto_protection_policy method.
+              #   result = client.create_auto_protection_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_auto_protection_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_auto_protection_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_auto_protection_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_auto_protection_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.create_auto_protection_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists AutoProtectionPolicies for a given project and location.
+              #
+              # @overload list_auto_protection_policies(request, options = nil)
+              #   Pass arguments to `list_auto_protection_policies` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_auto_protection_policies(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_auto_protection_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location for which to retrieve the list of
+              #     policies. Format: projects/\\{project}/locations/\\{location}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of policies to return in a single page.
+              #     If unspecified, a server-default value will be used.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+              #     page.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters resources listed in the
+              #     response. The following fields are filterable:
+              #   @param order_by [::String]
+              #     Optional. An expression that sorts the results in the response. The
+              #     following fields are sortable:
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AutoProtectionPolicy>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AutoProtectionPolicy>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest.new
+              #
+              #   # Call the list_auto_protection_policies method.
+              #   result = client.list_auto_protection_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy.
+              #     p item
+              #   end
+              #
+              def list_auto_protection_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_auto_protection_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_auto_protection_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_auto_protection_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_auto_protection_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_auto_protection_policies, "auto_protection_policies", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single AutoProtectionPolicy.
+              #
+              # @overload get_auto_protection_policy(request, options = nil)
+              #   Pass arguments to `get_auto_protection_policy` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_auto_protection_policy(name: nil)
+              #   Pass arguments to `get_auto_protection_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the policy to retrieve.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::AutoProtectionPolicy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::AutoProtectionPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest.new
+              #
+              #   # Call the get_auto_protection_policy method.
+              #   result = client.get_auto_protection_policy request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::AutoProtectionPolicy.
+              #   p result
+              #
+              def get_auto_protection_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_auto_protection_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_auto_protection_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_auto_protection_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_auto_protection_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single AutoProtectionPolicy.
+              #
+              # @overload update_auto_protection_policy(request, options = nil)
+              #   Pass arguments to `update_auto_protection_policy` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_auto_protection_policy(auto_protection_policy: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_auto_protection_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param auto_protection_policy [::Google::Cloud::BackupDR::V1::AutoProtectionPolicy, ::Hash]
+              #     Required. The policy to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     AutoProtectionPolicy resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest.new
+              #
+              #   # Call the update_auto_protection_policy method.
+              #   result = client.update_auto_protection_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_auto_protection_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_auto_protection_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_auto_protection_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_auto_protection_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.update_auto_protection_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single AutoProtectionPolicy.
+              #
+              # @overload delete_auto_protection_policy(request, options = nil)
+              #   Pass arguments to `delete_auto_protection_policy` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_auto_protection_policy(name: nil, etag: nil, request_id: nil)
+              #   Pass arguments to `delete_auto_protection_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the policy to delete.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}
+              #   @param etag [::String]
+              #     Optional. The current etag of the autoprotectionpolicy.
+              #     If an etag is provided and does not match the current etag of the
+              #     connection, deletion will be blocked.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest.new
+              #
+              #   # Call the delete_auto_protection_policy method.
+              #   result = client.delete_auto_protection_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_auto_protection_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_auto_protection_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_auto_protection_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_auto_protection_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.delete_auto_protection_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new AutoProtectionPolicyBinding in a given project and
+              # location.
+              #
+              # @overload create_auto_protection_policy_binding(request, options = nil)
+              #   Pass arguments to `create_auto_protection_policy_binding` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_auto_protection_policy_binding(parent: nil, auto_protection_policy_binding_id: nil, auto_protection_policy_binding: nil, request_id: nil)
+              #   Pass arguments to `create_auto_protection_policy_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this binding will be created.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}
+              #   @param auto_protection_policy_binding_id [::String]
+              #     Required. The ID to use for the binding.
+              #     This will become the final component of the binding's resource name.
+              #
+              #     This value must start with a lowercase letter followed by up to 62
+              #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+              #   @param auto_protection_policy_binding [::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding, ::Hash]
+              #     Required. The AutoProtectionPolicyBinding resource to create.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest.new
+              #
+              #   # Call the create_auto_protection_policy_binding method.
+              #   result = client.create_auto_protection_policy_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_auto_protection_policy_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_auto_protection_policy_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_auto_protection_policy_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_auto_protection_policy_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.create_auto_protection_policy_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the auto protection policy binding read from the CCFE tables.
+              #
+              # @overload get_auto_protection_policy_binding(request, options = nil)
+              #   Pass arguments to `get_auto_protection_policy_binding` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_auto_protection_policy_binding(name: nil)
+              #   Pass arguments to `get_auto_protection_policy_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the binding to retrieve.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}/bindings/\\{binding}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest.new
+              #
+              #   # Call the get_auto_protection_policy_binding method.
+              #   result = client.get_auto_protection_policy_binding request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding.
+              #   p result
+              #
+              def get_auto_protection_policy_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_auto_protection_policy_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_auto_protection_policy_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_auto_protection_policy_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_auto_protection_policy_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the auto protection policy bindings read from the CCFE tables.
+              #
+              # @overload list_auto_protection_policy_bindings(request, options = nil)
+              #   Pass arguments to `list_auto_protection_policy_bindings` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_auto_protection_policy_bindings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_auto_protection_policy_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location for which to retrieve the list of
+              #     policies. Format: projects/\\{project}/locations/\\{location}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of policies to return in a single page is 500.
+              #     If unspecified, a server-default value will be used.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListAutoProtectionPolicies` call. Provide this to retrieve the subsequent
+              #     page.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters resources listed in the
+              #     response. The following fields are filterable:
+              #   @param order_by [::String]
+              #     Optional. An expression that sorts the results in the response. The
+              #     following fields are sortable:
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest.new
+              #
+              #   # Call the list_auto_protection_policy_bindings method.
+              #   result = client.list_auto_protection_policy_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding.
+              #     p item
+              #   end
+              #
+              def list_auto_protection_policy_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_auto_protection_policy_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_auto_protection_policy_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_auto_protection_policy_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_auto_protection_policy_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_auto_protection_policy_bindings, "auto_protection_policy_bindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists AppliedAutoProtectionPolicies in a given project and location.
+              #
+              # @overload list_applied_auto_protection_policies(request, options = nil)
+              #   Pass arguments to `list_applied_auto_protection_policies` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_applied_auto_protection_policies(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_applied_auto_protection_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location for which to retrieve the list of
+              #     applied policies. Format: projects/\\{project}/locations/\\{location}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of applied policies to return in a single
+              #     page. The maximum value is 1000; values above 1000 will be coerced to
+              #     1000. If unspecified or set to 0, a default page size of 500 will be used.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListAppliedAutoProtectionPolicies` call.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters resources listed in the
+              #     response.
+              #   @param order_by [::String]
+              #     Optional. An expression that sorts the results in the response.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AppliedAutoProtectionPolicy>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::AppliedAutoProtectionPolicy>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest.new
+              #
+              #   # Call the list_applied_auto_protection_policies method.
+              #   result = client.list_applied_auto_protection_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::AppliedAutoProtectionPolicy.
+              #     p item
+              #   end
+              #
+              def list_applied_auto_protection_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_applied_auto_protection_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_applied_auto_protection_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_applied_auto_protection_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_applied_auto_protection_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_applied_auto_protection_policies, "applied_auto_protection_policies", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # InitiateDeleteAutoProtectionPolicyBinding initiates delete for
+              # AutoProtectionPolicy Binding
+              #
+              # @overload initiate_delete_auto_protection_policy_binding(request, options = nil)
+              #   Pass arguments to `initiate_delete_auto_protection_policy_binding` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload initiate_delete_auto_protection_policy_binding(name: nil, etag: nil, request_id: nil)
+              #   Pass arguments to `initiate_delete_auto_protection_policy_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the binding to delete.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}/bindings/\\{binding}
+              #   @param etag [::String]
+              #     Optional. The current etag of the AutoProtectionPolicyBinding.
+              #     If an etag is provided and does not match the current etag of the
+              #     binding, deletion will be blocked and an ABORTED error will be returned.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest.new
+              #
+              #   # Call the initiate_delete_auto_protection_policy_binding method.
+              #   result = client.initiate_delete_auto_protection_policy_binding request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def initiate_delete_auto_protection_policy_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.initiate_delete_auto_protection_policy_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.initiate_delete_auto_protection_policy_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.initiate_delete_auto_protection_policy_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.initiate_delete_auto_protection_policy_binding request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Binding Matching Resources for a given AutoProtectionPolicyBinding.
+              #
+              # @overload list_binding_matching_resources(request, options = nil)
+              #   Pass arguments to `list_binding_matching_resources` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_binding_matching_resources(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_binding_matching_resources` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project, location, auto protection policy and binding for
+              #     which to retrieve `BindingMatchingResources` information. Format:
+              #     `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`.
+              #     In Google Cloud Backup and DR, locations map to Google Cloud regions, for
+              #     example **us-central1**.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `BindingMatchingResources` to return in a
+              #     single response. The default page size is 100 and maximum page size is 200.
+              #     Note that the response may include a partial list and a caller should
+              #     only rely on the response's
+              #     {::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesResponse#next_page_token next_page_token}
+              #     received from a previous `ListBindingMatchingResources` call. Provide this
+              #     to retrieve the subsequent page in a multi-page list of results. When
+              #     paginating, all other parameters provided to `ListBindingMatchingResources`
+              #     must match the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BindingMatchingResource>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BindingMatchingResource>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest.new
+              #
+              #   # Call the list_binding_matching_resources method.
+              #   result = client.list_binding_matching_resources request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::BindingMatchingResource.
+              #     p item
+              #   end
+              #
+              def list_binding_matching_resources request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_binding_matching_resources.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_binding_matching_resources.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_binding_matching_resources.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_binding_matching_resources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_binding_matching_resources, "matching_resources", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new RestoreTemplate in a given project and location.
+              #
+              # @overload create_restore_template(request, options = nil)
+              #   Pass arguments to `create_restore_template` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_restore_template(parent: nil, restore_template_id: nil, restore_template: nil, request_id: nil)
+              #   Pass arguments to `create_restore_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The restore template project and location in the format
+              #     'projects/\\{project_id}/locations/\\{location}'.
+              #   @param restore_template_id [::String]
+              #     Required. The ID of the restore template to create. The ID must be
+              #     unique for the specified project and location.
+              #   @param restore_template [::Google::Cloud::BackupDR::V1::RestoreTemplate, ::Hash]
+              #     Required. A RestoreTemplate resource.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest.new
+              #
+              #   # Call the create_restore_template method.
+              #   result = client.create_restore_template request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_restore_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_restore_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_restore_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_restore_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.create_restore_template request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a RestoreTemplate.
+              #
+              # @overload get_restore_template(request, options = nil)
+              #   Pass arguments to `get_restore_template` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_template(name: nil)
+              #   Pass arguments to `get_restore_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the restore template to retrieve.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/restoreTemplates/\\{restore_template_id}'
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::RestoreTemplate]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::RestoreTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest.new
+              #
+              #   # Call the get_restore_template method.
+              #   result = client.get_restore_template request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::RestoreTemplate.
+              #   p result
+              #
+              def get_restore_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_restore_template request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestoreTemplates in a given project and location.
+              #
+              # @overload list_restore_templates(request, options = nil)
+              #   Pass arguments to `list_restore_templates` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_templates(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_templates` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location from which to list the restore
+              #     templates.
+              #     Format: `projects/{project}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListRestoreTemplates`
+              #     call.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreTemplate>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreTemplate>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest.new
+              #
+              #   # Call the list_restore_templates method.
+              #   result = client.list_restore_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::RestoreTemplate.
+              #     p item
+              #   end
+              #
+              def list_restore_templates request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_templates.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_templates.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_templates.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_restore_templates request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_restore_templates, "restore_templates", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the settings of a RestoreTemplate.
+              #
+              # @overload update_restore_template(request, options = nil)
+              #   Pass arguments to `update_restore_template` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_restore_template(update_mask: nil, restore_template: nil, request_id: nil, validate_only: nil)
+              #   Pass arguments to `update_restore_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #     Field mask is used to specify the fields to be overwritten in the
+              #     RestoreTemplate resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #   @param restore_template [::Google::Cloud::BackupDR::V1::RestoreTemplate, ::Hash]
+              #     Required. The restore template to update.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. Only validate the request, but do not perform mutations.
+              #     The default is 'false'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest.new
+              #
+              #   # Call the update_restore_template method.
+              #   result = client.update_restore_template request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_restore_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_restore_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_restore_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_restore_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.update_restore_template request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a RestoreTemplate.
+              #
+              # @overload delete_restore_template(request, options = nil)
+              #   Pass arguments to `delete_restore_template` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_restore_template(name: nil, request_id: nil, force: nil)
+              #   Pass arguments to `delete_restore_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the restore template to delete.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/restoreTemplates/\\{restore_template_id}'
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any child RestoreTemplateExecutions will also be
+              #     deleted. If false and the RestoreTemplate has any child executions, the
+              #     request will fail.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest.new
+              #
+              #   # Call the delete_restore_template method.
+              #   result = client.delete_restore_template request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_restore_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_restore_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_restore_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_restore_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.delete_restore_template request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Runs a RestoreTemplate.
+              #
+              # @overload run_restore_template(request, options = nil)
+              #   Pass arguments to `run_restore_template` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload run_restore_template(name: nil, backup: nil, request_id: nil)
+              #   Pass arguments to `run_restore_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the restore template to run.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/restoreTemplates/\\{restore_template_id}'
+              #   @param backup [::String]
+              #     Optional. The resource name of the Backup to restore from.
+              #     If not specified, the latest backup matching the backup selection
+              #     configuration in the RestoreTemplate will be used.
+              #     Format:
+              #     'projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault}/dataSources/\\{data_source}/backups/\\{backup}'
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest.new
+              #
+              #   # Call the run_restore_template method.
+              #   result = client.run_restore_template request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def run_restore_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.run_restore_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.run_restore_template.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.run_restore_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.run_restore_template request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a RestoreTemplateExecution.
+              #
+              # @overload get_restore_template_execution(request, options = nil)
+              #   Pass arguments to `get_restore_template_execution` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_template_execution(name: nil)
+              #   Pass arguments to `get_restore_template_execution` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the restore template execution to retrieve.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/restoreTemplates/\\{restore_template_id}/executions/\\{execution_id}'
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::RestoreTemplateExecution]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::RestoreTemplateExecution]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest.new
+              #
+              #   # Call the get_restore_template_execution method.
+              #   result = client.get_restore_template_execution request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::RestoreTemplateExecution.
+              #   p result
+              #
+              def get_restore_template_execution request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_template_execution.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_template_execution.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_template_execution.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_restore_template_execution request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestoreTemplateExecutions in a given project, location and restore
+              # template.
+              #
+              # @overload list_restore_template_executions(request, options = nil)
+              #   Pass arguments to `list_restore_template_executions` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_template_executions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_template_executions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project, location, and restore template for which to retrieve
+              #     executions information.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreTemplates/{restore_template}`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results.
+              #   @param filter [::String]
+              #     Optional. Filtering results.
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreTemplateExecution>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreTemplateExecution>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest.new
+              #
+              #   # Call the list_restore_template_executions method.
+              #   result = client.list_restore_template_executions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::RestoreTemplateExecution.
+              #     p item
+              #   end
+              #
+              def list_restore_template_executions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_template_executions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_template_executions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_template_executions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_restore_template_executions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_restore_template_executions, "restore_template_executions", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Triggers cleanup of restored resources created during execution.
+              #
+              # @overload trigger_restore_cleanup(request, options = nil)
+              #   Pass arguments to `trigger_restore_cleanup` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload trigger_restore_cleanup(name: nil, request_id: nil)
+              #   Pass arguments to `trigger_restore_cleanup` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the restore template execution.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/restoreTemplates/\\{restore_template_id}/executions/\\{execution_id}'
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest.new
+              #
+              #   # Call the trigger_restore_cleanup method.
+              #   result = client.trigger_restore_cleanup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def trigger_restore_cleanup request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.trigger_restore_cleanup.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.trigger_restore_cleanup.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.trigger_restore_cleanup.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.trigger_restore_cleanup request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new RestoreVerificationPlan in a given project and location.
+              #
+              # @overload create_restore_verification_plan(request, options = nil)
+              #   Pass arguments to `create_restore_verification_plan` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_restore_verification_plan(parent: nil, restore_verification_plan_id: nil, restore_verification_plan: nil, request_id: nil)
+              #   Pass arguments to `create_restore_verification_plan` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The `RestoreVerificationPlan` project and location in the format
+              #     `projects/{project}/locations/{location}`. In Google Cloud Backup and DR
+              #     locations map to Google Cloud regions, for example **us-central1**.
+              #   @param restore_verification_plan_id [::String]
+              #     Required. The name of the `RestoreVerificationPlan` to create. The name
+              #     must be unique for the specified project and location. The name must start
+              #     with a lowercase letter followed by up to 62 lowercase letters, numbers, or
+              #     hyphens. Pattern, `^[a-z]([-a-z0-9]*[a-z0-9])?$`.
+              #   @param restore_verification_plan [::Google::Cloud::BackupDR::V1::RestoreVerificationPlan, ::Hash]
+              #     Required. The `RestoreVerificationPlan` resource object to create.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest.new
+              #
+              #   # Call the create_restore_verification_plan method.
+              #   result = client.create_restore_verification_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_restore_verification_plan request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_restore_verification_plan.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_restore_verification_plan.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_restore_verification_plan.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.create_restore_verification_plan request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new RestoreVerificationPlanAssociation in a given
+              # RestoreVerificationPlan.
+              #
+              # @overload create_restore_verification_plan_association(request, options = nil)
+              #   Pass arguments to `create_restore_verification_plan_association` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_restore_verification_plan_association(parent: nil, restore_verification_plan_association_id: nil, restore_verification_plan_association: nil, request_id: nil)
+              #   Pass arguments to `create_restore_verification_plan_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this association will be created.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+              #   @param restore_verification_plan_association_id [::String]
+              #     Required. The ID to use for the association, which will become the final
+              #     component of the association's resource name.
+              #
+              #     This value should be 1-63 characters, and valid characters are
+              #     /[a-z0-9_-]/.
+              #   @param restore_verification_plan_association [::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation, ::Hash]
+              #     Required. The RestoreVerificationPlanAssociation resource to create.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know
+              #     that the server has already received the duplicate request and can avoid
+              #     responding with an error. The request ID must be a valid UUID with the
+              #     exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest.new
+              #
+              #   # Call the create_restore_verification_plan_association method.
+              #   result = client.create_restore_verification_plan_association request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_restore_verification_plan_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_restore_verification_plan_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_restore_verification_plan_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_restore_verification_plan_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.create_restore_verification_plan_association request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single RestoreVerificationPlanAssociation in a given
+              # RestoreVerificationPlan.
+              #
+              # @overload get_restore_verification_plan_association(request, options = nil)
+              #   Pass arguments to `get_restore_verification_plan_association` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_verification_plan_association(name: nil)
+              #   Pass arguments to `get_restore_verification_plan_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the RestoreVerificationPlanAssociation to
+              #     retrieve.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest.new
+              #
+              #   # Call the get_restore_verification_plan_association method.
+              #   result = client.get_restore_verification_plan_association request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation.
+              #   p result
+              #
+              def get_restore_verification_plan_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_verification_plan_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_verification_plan_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_verification_plan_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_restore_verification_plan_association request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestoreVerificationPlanAssociations in a given
+              # RestoreVerificationPlan.
+              #
+              # @overload list_restore_verification_plan_associations(request, options = nil)
+              #   Pass arguments to `list_restore_verification_plan_associations` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_verification_plan_associations(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_verification_plan_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent RestoreVerificationPlan name.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of associations to return. The service may
+              #     return fewer than this value.
+              #     If unspecified, at most 500 associations will be returned.
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListRestoreVerificationPlanAssociations` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListRestoreVerificationPlanAssociations` must match the call that provided
+              #     the page token.
+              #   @param filter [::String]
+              #     Optional. Filtering results.
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest.new
+              #
+              #   # Call the list_restore_verification_plan_associations method.
+              #   result = client.list_restore_verification_plan_associations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation.
+              #     p item
+              #   end
+              #
+              def list_restore_verification_plan_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_verification_plan_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_verification_plan_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_verification_plan_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_restore_verification_plan_associations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_restore_verification_plan_associations, "restore_verification_plan_associations", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single RestoreVerificationPlanAssociation in a given
+              # RestoreVerificationPlan.
+              #
+              # @overload delete_restore_verification_plan_association(request, options = nil)
+              #   Pass arguments to `delete_restore_verification_plan_association` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_restore_verification_plan_association(name: nil, request_id: nil)
+              #   Pass arguments to `delete_restore_verification_plan_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the RestoreVerificationPlanAssociation to
+              #     delete.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know
+              #     that the server has already received the duplicate request and can avoid
+              #     responding with an error. The request ID must be a valid UUID with the
+              #     exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest.new
+              #
+              #   # Call the delete_restore_verification_plan_association method.
+              #   result = client.delete_restore_verification_plan_association request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_restore_verification_plan_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_restore_verification_plan_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_restore_verification_plan_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_restore_verification_plan_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.delete_restore_verification_plan_association request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Triggers a new Restore Verification for the association in a given
+              # RestoreVerificationPlan.
+              #
+              # @overload trigger_restore_verification(request, options = nil)
+              #   Pass arguments to `trigger_restore_verification` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload trigger_restore_verification(name: nil, request_id: nil)
+              #   Pass arguments to `trigger_restore_verification` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the RestoreVerificationPlanAssociation to
+              #     trigger.
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know
+              #     that the server has already received the duplicate request and can avoid
+              #     responding with an error. The request ID must be a valid UUID with the
+              #     exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest.new
+              #
+              #   # Call the trigger_restore_verification method.
+              #   result = client.trigger_restore_verification request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def trigger_restore_verification request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.trigger_restore_verification.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.trigger_restore_verification.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.trigger_restore_verification.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.trigger_restore_verification request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single RestoreVerificationPlan. Returns the requested
+              # RestoreVerificationPlan.
+              #
+              # @overload get_restore_verification_plan(request, options = nil)
+              #   Pass arguments to `get_restore_verification_plan` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_verification_plan(name: nil)
+              #   Pass arguments to `get_restore_verification_plan` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the `RestoreVerificationPlan` to retrieve.
+              #
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::RestoreVerificationPlan]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::RestoreVerificationPlan]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest.new
+              #
+              #   # Call the get_restore_verification_plan method.
+              #   result = client.get_restore_verification_plan request
+              #
+              #   # The returned object is of type Google::Cloud::BackupDR::V1::RestoreVerificationPlan.
+              #   p result
+              #
+              def get_restore_verification_plan request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_verification_plan.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_verification_plan.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_verification_plan.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.get_restore_verification_plan request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestoreVerificationPlans in a given project and location.
+              #
+              # @overload list_restore_verification_plans(request, options = nil)
+              #   Pass arguments to `list_restore_verification_plans` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_verification_plans(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_verification_plans` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location for which to retrieve
+              #     `RestoreVerificationPlans` information. Format:
+              #     `projects/{project}/locations/{location}`. In Google Cloud Backup and DR,
+              #     locations map to Google Cloud regions, for example **us-central1**. To
+              #     retrieve restore verification plans for all locations, use
+              #     "-" for the `{location}` value.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `RestoreVerificationPlans` to return in a
+              #     single response. If not specified, a default value will be chosen by the
+              #     service. Note that the response may include a partial list and a caller
+              #     should only rely on the response's
+              #     {::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansResponse#next_page_token next_page_token}
+              #     received from a previous `ListRestoreVerificationPlans` call.
+              #     Provide this to retrieve the subsequent page in a multi-page list of
+              #     results. When paginating, all other parameters provided to
+              #     `ListRestoreVerificationPlans` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreVerificationPlan>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::RestoreVerificationPlan>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest.new
+              #
+              #   # Call the list_restore_verification_plans method.
+              #   result = client.list_restore_verification_plans request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::RestoreVerificationPlan.
+              #     p item
+              #   end
+              #
+              def list_restore_verification_plans request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_verification_plans.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_verification_plans.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_verification_plans.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_restore_verification_plans request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_restore_verification_plans, "restore_verification_plans", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single RestoreVerificationPlan. If the `force` flag is set to
+              # `true`, any RestoreVerificationPlanAssociations linked to this
+              # RestoreVerificationPlan will also be deleted.
+              #
+              # @overload delete_restore_verification_plan(request, options = nil)
+              #   Pass arguments to `delete_restore_verification_plan` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_restore_verification_plan(name: nil, request_id: nil, force: nil)
+              #   Pass arguments to `delete_restore_verification_plan` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the `RestoreVerificationPlan` to delete.
+              #
+              #     Format:
+              #     `projects/{project}/locations/{location}/restoreVerificationPlans/{restoreVerificationPlan}`
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any RestoreVerificationPlanAssociations linked to
+              #     this RestoreVerificationPlan will also be deleted.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest.new
+              #
+              #   # Call the delete_restore_verification_plan method.
+              #   result = client.delete_restore_verification_plan request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_restore_verification_plan request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_restore_verification_plan.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_restore_verification_plan.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_restore_verification_plan.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.delete_restore_verification_plan request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the BackupDR REST API.
               #
               # This class represents the configuration for BackupDR REST,
@@ -4404,6 +7332,151 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :initialize_service
+                  ##
+                  # RPC-specific configuration for `create_auto_protection_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_auto_protection_policy
+                  ##
+                  # RPC-specific configuration for `list_auto_protection_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_auto_protection_policies
+                  ##
+                  # RPC-specific configuration for `get_auto_protection_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auto_protection_policy
+                  ##
+                  # RPC-specific configuration for `update_auto_protection_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_auto_protection_policy
+                  ##
+                  # RPC-specific configuration for `delete_auto_protection_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_auto_protection_policy
+                  ##
+                  # RPC-specific configuration for `create_auto_protection_policy_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_auto_protection_policy_binding
+                  ##
+                  # RPC-specific configuration for `get_auto_protection_policy_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auto_protection_policy_binding
+                  ##
+                  # RPC-specific configuration for `list_auto_protection_policy_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_auto_protection_policy_bindings
+                  ##
+                  # RPC-specific configuration for `list_applied_auto_protection_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_applied_auto_protection_policies
+                  ##
+                  # RPC-specific configuration for `initiate_delete_auto_protection_policy_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :initiate_delete_auto_protection_policy_binding
+                  ##
+                  # RPC-specific configuration for `list_binding_matching_resources`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_binding_matching_resources
+                  ##
+                  # RPC-specific configuration for `create_restore_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_restore_template
+                  ##
+                  # RPC-specific configuration for `get_restore_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_template
+                  ##
+                  # RPC-specific configuration for `list_restore_templates`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_templates
+                  ##
+                  # RPC-specific configuration for `update_restore_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_restore_template
+                  ##
+                  # RPC-specific configuration for `delete_restore_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_restore_template
+                  ##
+                  # RPC-specific configuration for `run_restore_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :run_restore_template
+                  ##
+                  # RPC-specific configuration for `get_restore_template_execution`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_template_execution
+                  ##
+                  # RPC-specific configuration for `list_restore_template_executions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_template_executions
+                  ##
+                  # RPC-specific configuration for `trigger_restore_cleanup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :trigger_restore_cleanup
+                  ##
+                  # RPC-specific configuration for `create_restore_verification_plan`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_restore_verification_plan
+                  ##
+                  # RPC-specific configuration for `create_restore_verification_plan_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_restore_verification_plan_association
+                  ##
+                  # RPC-specific configuration for `get_restore_verification_plan_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_verification_plan_association
+                  ##
+                  # RPC-specific configuration for `list_restore_verification_plan_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_verification_plan_associations
+                  ##
+                  # RPC-specific configuration for `delete_restore_verification_plan_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_restore_verification_plan_association
+                  ##
+                  # RPC-specific configuration for `trigger_restore_verification`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :trigger_restore_verification
+                  ##
+                  # RPC-specific configuration for `get_restore_verification_plan`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_verification_plan
+                  ##
+                  # RPC-specific configuration for `list_restore_verification_plans`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_verification_plans
+                  ##
+                  # RPC-specific configuration for `delete_restore_verification_plan`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_restore_verification_plan
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4481,6 +7554,64 @@ module Google
                     @fetch_data_source_references_for_resource_type = ::Gapic::Config::Method.new fetch_data_source_references_for_resource_type_config
                     initialize_service_config = parent_rpcs.initialize_service if parent_rpcs.respond_to? :initialize_service
                     @initialize_service = ::Gapic::Config::Method.new initialize_service_config
+                    create_auto_protection_policy_config = parent_rpcs.create_auto_protection_policy if parent_rpcs.respond_to? :create_auto_protection_policy
+                    @create_auto_protection_policy = ::Gapic::Config::Method.new create_auto_protection_policy_config
+                    list_auto_protection_policies_config = parent_rpcs.list_auto_protection_policies if parent_rpcs.respond_to? :list_auto_protection_policies
+                    @list_auto_protection_policies = ::Gapic::Config::Method.new list_auto_protection_policies_config
+                    get_auto_protection_policy_config = parent_rpcs.get_auto_protection_policy if parent_rpcs.respond_to? :get_auto_protection_policy
+                    @get_auto_protection_policy = ::Gapic::Config::Method.new get_auto_protection_policy_config
+                    update_auto_protection_policy_config = parent_rpcs.update_auto_protection_policy if parent_rpcs.respond_to? :update_auto_protection_policy
+                    @update_auto_protection_policy = ::Gapic::Config::Method.new update_auto_protection_policy_config
+                    delete_auto_protection_policy_config = parent_rpcs.delete_auto_protection_policy if parent_rpcs.respond_to? :delete_auto_protection_policy
+                    @delete_auto_protection_policy = ::Gapic::Config::Method.new delete_auto_protection_policy_config
+                    create_auto_protection_policy_binding_config = parent_rpcs.create_auto_protection_policy_binding if parent_rpcs.respond_to? :create_auto_protection_policy_binding
+                    @create_auto_protection_policy_binding = ::Gapic::Config::Method.new create_auto_protection_policy_binding_config
+                    get_auto_protection_policy_binding_config = parent_rpcs.get_auto_protection_policy_binding if parent_rpcs.respond_to? :get_auto_protection_policy_binding
+                    @get_auto_protection_policy_binding = ::Gapic::Config::Method.new get_auto_protection_policy_binding_config
+                    list_auto_protection_policy_bindings_config = parent_rpcs.list_auto_protection_policy_bindings if parent_rpcs.respond_to? :list_auto_protection_policy_bindings
+                    @list_auto_protection_policy_bindings = ::Gapic::Config::Method.new list_auto_protection_policy_bindings_config
+                    list_applied_auto_protection_policies_config = parent_rpcs.list_applied_auto_protection_policies if parent_rpcs.respond_to? :list_applied_auto_protection_policies
+                    @list_applied_auto_protection_policies = ::Gapic::Config::Method.new list_applied_auto_protection_policies_config
+                    initiate_delete_auto_protection_policy_binding_config = parent_rpcs.initiate_delete_auto_protection_policy_binding if parent_rpcs.respond_to? :initiate_delete_auto_protection_policy_binding
+                    @initiate_delete_auto_protection_policy_binding = ::Gapic::Config::Method.new initiate_delete_auto_protection_policy_binding_config
+                    list_binding_matching_resources_config = parent_rpcs.list_binding_matching_resources if parent_rpcs.respond_to? :list_binding_matching_resources
+                    @list_binding_matching_resources = ::Gapic::Config::Method.new list_binding_matching_resources_config
+                    create_restore_template_config = parent_rpcs.create_restore_template if parent_rpcs.respond_to? :create_restore_template
+                    @create_restore_template = ::Gapic::Config::Method.new create_restore_template_config
+                    get_restore_template_config = parent_rpcs.get_restore_template if parent_rpcs.respond_to? :get_restore_template
+                    @get_restore_template = ::Gapic::Config::Method.new get_restore_template_config
+                    list_restore_templates_config = parent_rpcs.list_restore_templates if parent_rpcs.respond_to? :list_restore_templates
+                    @list_restore_templates = ::Gapic::Config::Method.new list_restore_templates_config
+                    update_restore_template_config = parent_rpcs.update_restore_template if parent_rpcs.respond_to? :update_restore_template
+                    @update_restore_template = ::Gapic::Config::Method.new update_restore_template_config
+                    delete_restore_template_config = parent_rpcs.delete_restore_template if parent_rpcs.respond_to? :delete_restore_template
+                    @delete_restore_template = ::Gapic::Config::Method.new delete_restore_template_config
+                    run_restore_template_config = parent_rpcs.run_restore_template if parent_rpcs.respond_to? :run_restore_template
+                    @run_restore_template = ::Gapic::Config::Method.new run_restore_template_config
+                    get_restore_template_execution_config = parent_rpcs.get_restore_template_execution if parent_rpcs.respond_to? :get_restore_template_execution
+                    @get_restore_template_execution = ::Gapic::Config::Method.new get_restore_template_execution_config
+                    list_restore_template_executions_config = parent_rpcs.list_restore_template_executions if parent_rpcs.respond_to? :list_restore_template_executions
+                    @list_restore_template_executions = ::Gapic::Config::Method.new list_restore_template_executions_config
+                    trigger_restore_cleanup_config = parent_rpcs.trigger_restore_cleanup if parent_rpcs.respond_to? :trigger_restore_cleanup
+                    @trigger_restore_cleanup = ::Gapic::Config::Method.new trigger_restore_cleanup_config
+                    create_restore_verification_plan_config = parent_rpcs.create_restore_verification_plan if parent_rpcs.respond_to? :create_restore_verification_plan
+                    @create_restore_verification_plan = ::Gapic::Config::Method.new create_restore_verification_plan_config
+                    create_restore_verification_plan_association_config = parent_rpcs.create_restore_verification_plan_association if parent_rpcs.respond_to? :create_restore_verification_plan_association
+                    @create_restore_verification_plan_association = ::Gapic::Config::Method.new create_restore_verification_plan_association_config
+                    get_restore_verification_plan_association_config = parent_rpcs.get_restore_verification_plan_association if parent_rpcs.respond_to? :get_restore_verification_plan_association
+                    @get_restore_verification_plan_association = ::Gapic::Config::Method.new get_restore_verification_plan_association_config
+                    list_restore_verification_plan_associations_config = parent_rpcs.list_restore_verification_plan_associations if parent_rpcs.respond_to? :list_restore_verification_plan_associations
+                    @list_restore_verification_plan_associations = ::Gapic::Config::Method.new list_restore_verification_plan_associations_config
+                    delete_restore_verification_plan_association_config = parent_rpcs.delete_restore_verification_plan_association if parent_rpcs.respond_to? :delete_restore_verification_plan_association
+                    @delete_restore_verification_plan_association = ::Gapic::Config::Method.new delete_restore_verification_plan_association_config
+                    trigger_restore_verification_config = parent_rpcs.trigger_restore_verification if parent_rpcs.respond_to? :trigger_restore_verification
+                    @trigger_restore_verification = ::Gapic::Config::Method.new trigger_restore_verification_config
+                    get_restore_verification_plan_config = parent_rpcs.get_restore_verification_plan if parent_rpcs.respond_to? :get_restore_verification_plan
+                    @get_restore_verification_plan = ::Gapic::Config::Method.new get_restore_verification_plan_config
+                    list_restore_verification_plans_config = parent_rpcs.list_restore_verification_plans if parent_rpcs.respond_to? :list_restore_verification_plans
+                    @list_restore_verification_plans = ::Gapic::Config::Method.new list_restore_verification_plans_config
+                    delete_restore_verification_plan_config = parent_rpcs.delete_restore_verification_plan if parent_rpcs.respond_to? :delete_restore_verification_plan
+                    @delete_restore_verification_plan = ::Gapic::Config::Method.new delete_restore_verification_plan_config
 
                     yield self if block_given?
                   end

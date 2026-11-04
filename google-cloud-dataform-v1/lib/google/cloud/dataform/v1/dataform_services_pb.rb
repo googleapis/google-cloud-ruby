@@ -169,6 +169,9 @@ module Google
             rpc :GetCompilationResult, ::Google::Cloud::Dataform::V1::GetCompilationResultRequest, ::Google::Cloud::Dataform::V1::CompilationResult
             # Creates a new CompilationResult in a given project and location.
             rpc :CreateCompilationResult, ::Google::Cloud::Dataform::V1::CreateCompilationResultRequest, ::Google::Cloud::Dataform::V1::CompilationResult
+            # Creates a new CompilationResult in a given project and location
+            # asynchronously.
+            rpc :CreateCompilationResultLongRunning, ::Google::Cloud::Dataform::V1::CreateCompilationResultRequest, ::Google::Longrunning::Operation
             # Returns CompilationResultActions in a given CompilationResult.
             rpc :QueryCompilationResultActions, ::Google::Cloud::Dataform::V1::QueryCompilationResultActionsRequest, ::Google::Cloud::Dataform::V1::QueryCompilationResultActionsResponse
             # Lists WorkflowConfigs in a given Repository.

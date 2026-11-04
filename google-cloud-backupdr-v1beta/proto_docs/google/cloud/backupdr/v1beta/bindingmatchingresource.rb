@@ -86,15 +86,15 @@ module Google
 
         # BindingMatchingResource contains the details of a resource that matches the
         # criteria of a binding.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Identifier. The resource name of the `BindingMatchingResource`.
-        #     Format:
+        #     Output only. Identifier. The resource name of the
+        #     `BindingMatchingResource`. Format:
         #     `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}/matchingResources/{matching_resource}`
-        # @!attribute [rw] resource
+        # @!attribute [r] resource
         #   @return [::String]
-        #     Required. Immutable. Resource name of the workload that matches the
-        #     criteria of the binding.
+        #     Output only. Resource name of the workload that matches the criteria of the
+        #     binding.
         #
         #     The format can be either a relative resource name (e.g.,
         #     `projects/my-project/zones/us-central1-a/instances/my-instance`) or a

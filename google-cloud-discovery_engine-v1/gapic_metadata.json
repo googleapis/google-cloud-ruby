@@ -5,6 +5,49 @@
   "protoPackage": "google.cloud.discoveryengine.v1",
   "libraryPackage": "::Google::Cloud::DiscoveryEngine::V1",
   "services": {
+    "AclConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::AclConfigService::Client",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "update_acl_config"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "get_acl_config"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client",
+          "rpcs": {
+            "StreamGenerateGroundedContent": {
+              "methods": [
+                "stream_generate_grounded_content"
+              ]
+            },
+            "GenerateGroundedContent": {
+              "methods": [
+                "generate_grounded_content"
+              ]
+            },
+            "CheckGrounding": {
+              "methods": [
+                "check_grounding"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SearchService": {
       "clients": {
         "grpc": {
@@ -32,6 +75,31 @@
             "StreamAssist": {
               "methods": [
                 "stream_assist"
+              ]
+            },
+            "CreateAssistant": {
+              "methods": [
+                "create_assistant"
+              ]
+            },
+            "DeleteAssistant": {
+              "methods": [
+                "delete_assistant"
+              ]
+            },
+            "UpdateAssistant": {
+              "methods": [
+                "update_assistant"
+              ]
+            },
+            "GetAssistant": {
+              "methods": [
+                "get_assistant"
+              ]
+            },
+            "ListAssistants": {
+              "methods": [
+                "list_assistants"
               ]
             }
           }
@@ -67,6 +135,30 @@
         }
       }
     },
+    "CollectionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::CollectionService::Client",
+          "rpcs": {
+            "DeleteCollection": {
+              "methods": [
+                "delete_collection"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompletionService": {
       "clients": {
         "grpc": {
@@ -75,6 +167,11 @@
             "CompleteQuery": {
               "methods": [
                 "complete_query"
+              ]
+            },
+            "AdvancedCompleteQuery": {
+              "methods": [
+                "advanced_complete_query"
               ]
             },
             "ImportSuggestionDenyListEntries": {
@@ -214,6 +311,30 @@
         }
       }
     },
+    "DataConnectorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::DataConnectorService::Client",
+          "rpcs": {
+            "SetUpDataConnector": {
+              "methods": [
+                "set_up_data_connector"
+              ]
+            },
+            "GetDataConnector": {
+              "methods": [
+                "get_data_connector"
+              ]
+            },
+            "UpdateDataConnector": {
+              "methods": [
+                "update_data_connector"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataStoreService": {
       "clients": {
         "grpc": {
@@ -242,6 +363,16 @@
             "UpdateDataStore": {
               "methods": [
                 "update_data_store"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
               ]
             }
           }
@@ -326,29 +457,15 @@
               "methods": [
                 "list_engines"
               ]
-            }
-          }
-        }
-      }
-    },
-    "GroundedGenerationService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client",
-          "rpcs": {
-            "StreamGenerateGroundedContent": {
+            },
+            "GetIamPolicy": {
               "methods": [
-                "stream_generate_grounded_content"
+                "get_iam_policy"
               ]
             },
-            "GenerateGroundedContent": {
+            "SetIamPolicy": {
               "methods": [
-                "generate_grounded_content"
-              ]
-            },
-            "CheckGrounding": {
-              "methods": [
-                "check_grounding"
+                "set_iam_policy"
               ]
             }
           }
@@ -393,6 +510,45 @@
             "ListIdentityMappingStores": {
               "methods": [
                 "list_identity_mapping_stores"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::LicenseConfigService::Client",
+          "rpcs": {
+            "CreateLicenseConfig": {
+              "methods": [
+                "create_license_config"
+              ]
+            },
+            "UpdateLicenseConfig": {
+              "methods": [
+                "update_license_config"
+              ]
+            },
+            "GetLicenseConfig": {
+              "methods": [
+                "get_license_config"
+              ]
+            },
+            "ListLicenseConfigs": {
+              "methods": [
+                "list_license_configs"
+              ]
+            },
+            "DistributeLicenseConfig": {
+              "methods": [
+                "distribute_license_config"
+              ]
+            },
+            "RetractLicenseConfig": {
+              "methods": [
+                "retract_license_config"
               ]
             }
           }
@@ -499,9 +655,29 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client",
           "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "create_serving_config"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "delete_serving_config"
+              ]
+            },
             "UpdateServingConfig": {
               "methods": [
                 "update_serving_config"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "get_serving_config"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "list_serving_configs"
               ]
             }
           }
@@ -665,9 +841,52 @@
                 "list_user_licenses"
               ]
             },
+            "ListLicenseConfigsUsageStats": {
+              "methods": [
+                "list_license_configs_usage_stats"
+              ]
+            },
             "BatchUpdateUserLicenses": {
               "methods": [
                 "batch_update_user_licenses"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::UserStoreService::Client",
+          "rpcs": {
+            "GetUserStore": {
+              "methods": [
+                "get_user_store"
+              ]
+            },
+            "UpdateUserStore": {
+              "methods": [
+                "update_user_store"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "WidgetConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::WidgetConfigService::Client",
+          "rpcs": {
+            "GetWidgetConfig": {
+              "methods": [
+                "get_widget_config"
+              ]
+            },
+            "UpdateWidgetConfig": {
+              "methods": [
+                "update_widget_config"
               ]
             }
           }

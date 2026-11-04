@@ -219,18 +219,19 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_user_licenses(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              # @overload list_user_licenses(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
               #   Pass arguments to `list_user_licenses` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent [UserStore][] resource name, format:
+              #     Required. The parent {::Google::Cloud::DiscoveryEngine::V1::UserStore UserStore}
+              #     resource name, format:
               #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
               #   @param page_size [::Integer]
               #     Optional. Requested page size. Server may return fewer items than
-              #     requested. If unspecified, defaults to 10. The maximum value is 50; values
-              #     above 50 will be coerced to 50.
+              #     requested. If unspecified, defaults to 100. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000.
               #
               #     If this field is negative, an INVALID_ARGUMENT error is returned.
               #   @param page_token [::String]
@@ -245,7 +246,8 @@ module Google
               #     Supported fields:
               #
               #     * `license_assignment_state`
-              #
+              #     * `user_principal`
+              #     *
               #     Examples:
               #
               #     * `license_assignment_state = ASSIGNED` to list assigned user licenses.
@@ -254,6 +256,25 @@ module Google
               #     who attempted login but no license assigned.
               #     * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
               #     out users who attempted login but no license assigned.
+              #     * `user_principal = user1@example.com` to list user license for
+              #     `user1@example.com`.
+              #   @param order_by [::String]
+              #     Optional. The order in which the
+              #     {::Google::Cloud::DiscoveryEngine::V1::UserLicense UserLicense}s are listed. The
+              #     value must be a comma-separated list of fields. Default sorting order is
+              #     ascending. To specify descending order for a field, append a " desc"
+              #     suffix. Redundant space characters in the syntax are insignificant.
+              #
+              #     Supported fields (only `user_principal` is supported for now):
+              #
+              #     * `user_principal`
+              #
+              #     If not set, the default ordering is by `user_principal`.
+              #
+              #     Examples:
+              #
+              #     * `user_principal` to order by `user_principal` in ascending order.
+              #     * `user_principal desc` to order by `user_principal` in descending order.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::UserLicense>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -319,6 +340,87 @@ module Google
               end
 
               ##
+              # Lists all the
+              # {::Google::Cloud::DiscoveryEngine::V1::LicenseConfigUsageStats LicenseConfigUsageStats}s
+              # associated with the project.
+              #
+              # @overload list_license_configs_usage_stats(request, options = nil)
+              #   Pass arguments to `list_license_configs_usage_stats` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_license_configs_usage_stats(parent: nil)
+              #   Pass arguments to `list_license_configs_usage_stats` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent branch resource name, such as
+              #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest.new
+              #
+              #   # Call the list_license_configs_usage_stats method.
+              #   result = client.list_license_configs_usage_stats request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsResponse.
+              #   p result
+              #
+              def list_license_configs_usage_stats request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_license_configs_usage_stats.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_license_configs_usage_stats.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_license_configs_usage_stats.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @user_license_service_stub.list_license_configs_usage_stats request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates the User License.
               # This method is used for batch assign/unassign licenses to users.
               #
@@ -338,9 +440,10 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest::InlineSource, ::Hash]
-              #     The inline source for the input content for document embeddings.
+              #     The inline source for the input content for license assignment.
               #   @param parent [::String]
-              #     Required. The parent [UserStore][] resource name, format:
+              #     Required. The parent {::Google::Cloud::DiscoveryEngine::V1::UserStore UserStore}
+              #     resource name, format:
               #     `projects/{project}/locations/{location}/userStores/{user_store_id}`.
               #   @param delete_unassigned_user_licenses [::Boolean]
               #     Optional. If true, if user licenses removed associated license config, the
@@ -567,6 +670,11 @@ module Google
                   #
                   attr_reader :list_user_licenses
                   ##
+                  # RPC-specific configuration for `list_license_configs_usage_stats`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_license_configs_usage_stats
+                  ##
                   # RPC-specific configuration for `batch_update_user_licenses`
                   # @return [::Gapic::Config::Method]
                   #
@@ -576,6 +684,8 @@ module Google
                   def initialize parent_rpcs = nil
                     list_user_licenses_config = parent_rpcs.list_user_licenses if parent_rpcs.respond_to? :list_user_licenses
                     @list_user_licenses = ::Gapic::Config::Method.new list_user_licenses_config
+                    list_license_configs_usage_stats_config = parent_rpcs.list_license_configs_usage_stats if parent_rpcs.respond_to? :list_license_configs_usage_stats
+                    @list_license_configs_usage_stats = ::Gapic::Config::Method.new list_license_configs_usage_stats_config
                     batch_update_user_licenses_config = parent_rpcs.batch_update_user_licenses if parent_rpcs.respond_to? :batch_update_user_licenses
                     @batch_update_user_licenses = ::Gapic::Config::Method.new batch_update_user_licenses_config
 

@@ -290,6 +290,11 @@
                 "create_compilation_result"
               ]
             },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "create_compilation_result_long_running"
+              ]
+            },
             "QueryCompilationResultActions": {
               "methods": [
                 "query_compilation_result_actions"

@@ -986,6 +986,53 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for DiffGitRepositoryLinkCommit.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink.
+        # @!attribute [rw] base_sha
+        #   @return [::String]
+        #     Required. The base commit SHA or ref.
+        # @!attribute [rw] head_sha
+        #   @return [::String]
+        #     Required. The head commit SHA or ref.
+        # @!attribute [rw] path_filters
+        #   @return [::Array<::String>]
+        #     Optional. Path patterns or exact paths to filter returned files.
+        #     When `path_filters` is specified, `FileDiff.patch` is populated for all
+        #     matching files (use `["**"]` to include patches for all changed files).
+        #     When `path_filters` is omitted or empty, the full list of `FileDiff` is
+        #     returned without patch diffs (`FileDiff.patch` is empty).
+        class DiffGitRepositoryLinkCommitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for DiffGitRepositoryLinkCommit.
+        # @!attribute [rw] files
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::FileDiff>]
+        #     The file diff extracted from the unified diff.
+        class DiffGitRepositoryLinkCommitResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for a file diff.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Relative path to the file in the repository.
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     Status of change: "ADDED", "MODIFIED", "REMOVED", "RENAMED".
+        # @!attribute [rw] patch
+        #   @return [::String]
+        #     Standard unified diff patch hunk for the file. Only populated when
+        #     `path_filters` is specified in the request; otherwise empty.
+        class FileDiff
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message for starting an OAuth flow.
         # @!attribute [rw] account_connector
         #   @return [::String]
@@ -1329,6 +1376,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for opening SCM Pull Request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The GitRepositoryLink resource name in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] pull_request
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+        #     Required. The Pull Request details to open.
+        #     Input fields used: title, body, head_ref, base_ref.
+        class OpenGitRepositoryLinkPullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for FetchLinkableGitRepositoriesRequest.
         # @!attribute [rw] connection
         #   @return [::String]
@@ -1445,6 +1506,454 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for FetchGitRepositoryLinkCommit.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] commit_sha
+        #   @return [::String]
+        #     Required. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+        #     Git reference).
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::DeveloperConnect::V1::CommitView]
+        #     Optional. The level of commit details to return in the response.
+        #     Defaults to `FULL` if unspecified. In `FULL` view, `files` metadata (paths
+        #     and statuses) are returned; `path_filters` must also be specified to
+        #     populate line patch hunks.
+        # @!attribute [rw] path_filters
+        #   @return [::Array<::String>]
+        #     Optional. Path patterns or exact paths to filter returned files (only
+        #     applicable in `FULL` view).
+        #     When `path_filters` is specified, `FileDiff.patch` is populated for all
+        #     matching files (use `["**"]` to include patches for all changed files).
+        #     When `path_filters` is omitted or empty, the full list of `FileDiff` is
+        #     returned without patch diffs (`FileDiff.patch` is empty).
+        class FetchGitRepositoryLinkCommitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for FetchGitRepositoryLinkCommit.
+        # @!attribute [rw] commit
+        #   @return [::Google::Cloud::DeveloperConnect::V1::SCMCommit]
+        #     The commit metadata.
+        # @!attribute [rw] files
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::FileDiff>]
+        #     List of file changes and patch diffs. Omitted when view is `BASIC`.
+        #     Patch diffs (`FileDiff.patch`) are only populated when `path_filters` is
+        #     specified in the request.
+        class FetchGitRepositoryLinkCommitResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for FetchGitRepositoryLinkCommitList.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     Optional. The commit SHA, or symbolic revision (e.g., branch name, tag, or
+        #     Git reference) from which to start listing commits.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of results to return in the list. Default is 50. Max is
+        #     100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `FetchGitRepositoryLinkCommitList` call. Provide this to retrieve the
+        #     subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `FetchGitRepositoryLinkCommitList` must match the call that provided the
+        #     page token.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::DeveloperConnect::V1::CommitView]
+        #     Optional. The level of commit details to return in the response.
+        #     Only `BASIC` is supported; `FULL` returns `INVALID_ARGUMENT`. Defaults to
+        #     `BASIC` if unspecified. Use `FetchGitRepositoryLinkCommit` to get file
+        #     diffs for a single commit.
+        class FetchGitRepositoryLinkCommitListRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for FetchGitRepositoryLinkCommitList.
+        # @!attribute [rw] commits
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::SCMCommit>]
+        #     The list of commit metadata.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchGitRepositoryLinkCommitListResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SCMCommit represents commit metadata.
+        # @!attribute [rw] sha
+        #   @return [::String]
+        #     Full 40-character SCM commit SHA.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Commit message text.
+        # @!attribute [rw] author
+        #   @return [::String]
+        #     The author's display name.
+        # @!attribute [rw] author_email
+        #   @return [::String]
+        #     The author's email address.
+        # @!attribute [rw] commit_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp when the commit was authored.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     The SCM provider's HTML URL link for this commit.
+        class SCMCommit
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for FetchGitRepositoryLinkFileBlame.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     Required. The SCM commit SHA, or symbolic revision (e.g., branch name, tag)
+        #     from which to fetch the blame.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. The file path within the repository.
+        # @!attribute [rw] first_line
+        #   @return [::Integer]
+        #     Optional. The 1-indexed starting line number of the range to blame
+        #     (inclusive). If not specified, blame begins at line 1.
+        # @!attribute [rw] last_line
+        #   @return [::Integer]
+        #     Optional. The 1-indexed ending line number of the range to blame
+        #     (inclusive). If not specified, blame extends to the end of the file.
+        class FetchGitRepositoryLinkFileBlameRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # BlameRange represents blame information for a range of lines.
+        # @!attribute [rw] first_line
+        #   @return [::Integer]
+        #     The 1-indexed starting line number of the range (inclusive).
+        # @!attribute [rw] last_line
+        #   @return [::Integer]
+        #     The 1-indexed ending line number of the range (inclusive).
+        # @!attribute [rw] commit
+        #   @return [::Google::Cloud::DeveloperConnect::V1::SCMCommit]
+        #     The commit metadata for this line range.
+        class BlameRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for FetchGitRepositoryLinkFileBlame.
+        # @!attribute [rw] ranges
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::BlameRange>]
+        #     The list of blame ranges for the file.
+        class FetchGitRepositoryLinkFileBlameResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for FetchGitRepositoryLinkPullRequest.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] pull_request_id
+        #   @return [::String]
+        #     Required. The ID of the Pull Request.
+        class FetchGitRepositoryLinkPullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing a SCM Pull Request.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. The ID of the PR.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Required. The title of the PR.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Optional. The body description of the PR.
+        # @!attribute [rw] head_ref
+        #   @return [::String]
+        #     Required. The source commit SHA of the head branch.
+        # @!attribute [rw] base_ref
+        #   @return [::String]
+        #     Required. The target commit SHA of the base branch.
+        # @!attribute [r] author
+        #   @return [::String]
+        #     Output only. The username of the author.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the PR was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the PR was updated.
+        # @!attribute [r] merge_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the PR was merged.
+        # @!attribute [r] close_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the PR was closed.
+        # @!attribute [r] decline_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the PR was declined. Only set for SCM providers that
+        #     support declining pull requests. Never set for GitHub, GitHub Enterprise,
+        #     GitLab, or GitLab Enterprise, where a pull request closed without being
+        #     merged is `CLOSED`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequest::State]
+        #     Output only. The current state of the PR.
+        # @!attribute [r] mergeability
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequest::Mergeability]
+        #     Output only. The mergeability state of the pull request.
+        # @!attribute [r] html_url
+        #   @return [::String]
+        #     Output only. The HTML URL of the pull request on the SCM provider.
+        class PullRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The state of the PR.
+          module State
+            # Default value.
+            STATE_UNSPECIFIED = 0
+
+            # The PR is open.
+            OPEN = 1
+
+            # The PR is closed.
+            CLOSED = 2
+
+            # The PR is merged.
+            MERGED = 3
+
+            # The PR is declined. Only used by SCM providers that support declining
+            # pull requests. Never used for GitHub, GitHub Enterprise, GitLab, or
+            # GitLab Enterprise, where a pull request closed without being merged is
+            # `CLOSED`.
+            DECLINED = 4
+          end
+
+          # The mergeability state of a pull request.
+          module Mergeability
+            # Mergeability state is unspecified.
+            MERGEABILITY_UNSPECIFIED = 0
+
+            # The pull request can be merged cleanly without Git conflicts.
+            MERGEABLE = 1
+
+            # The pull request has merge conflicts and cannot be merged cleanly.
+            CONFLICTING = 2
+
+            # The mergeability state is currently being computed asynchronously
+            # by the upstream SCM provider.
+            COMPUTING = 3
+          end
+        end
+
+        # Message representing a SCM Pull Request Comment.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. The ID of the comment.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Required. The body of the comment.
+        # @!attribute [r] author
+        #   @return [::String]
+        #     Output only. The username of the author.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the comment was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the comment was updated.
+        class PullRequestComment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for AddGitRepositoryLinkPullRequestComment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] pull_request_id
+        #   @return [::String]
+        #     Required. The ID of the Pull Request.
+        # @!attribute [rw] comment
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequestComment]
+        #     Required. The comment to add.
+        class AddGitRepositoryLinkPullRequestCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing a SCM Pull Request Review Comment (inline on diff).
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. The ID of the comment.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Required. The body of the comment.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. The file path to comment on.
+        # @!attribute [rw] first_line
+        #   @return [::Integer]
+        #     Optional. The first line of the comment range (inclusive). If not
+        #     specified, the comment applies only to the `last_line`.
+        # @!attribute [rw] last_line
+        #   @return [::Integer]
+        #     Required. The last line of the comment range (inclusive). If `first_line`
+        #     is not specified, the comment applies only to this line.
+        # @!attribute [rw] side
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment::DiffSide]
+        #     Optional. The side of the diff to comment on. Defaults to HEAD.
+        # @!attribute [r] author
+        #   @return [::String]
+        #     Output only. The username of the author.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the comment was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the comment was updated.
+        # @!attribute [r] commit_id
+        #   @return [::String]
+        #     Output only. The commit SHA the comment was actually applied to.
+        class PullRequestReviewComment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # DiffSide represents which side of the diff the comment is on.
+          module DiffSide
+            # Default value. This value is unused.
+            DIFF_SIDE_UNSPECIFIED = 0
+
+            # The side of the diff before changes (deleted or modified lines).
+            BASE = 1
+
+            # The side of the diff after changes (added or modified lines).
+            HEAD = 2
+          end
+        end
+
+        # Request message for AddGitRepositoryLinkPullRequestReviewComment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the GitRepositoryLink in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] pull_request_id
+        #   @return [::String]
+        #     Required. The ID of the Pull Request.
+        # @!attribute [rw] comment
+        #   @return [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment]
+        #     Required. The review comment to add.
+        # @!attribute [rw] commit_id
+        #   @return [::String]
+        #     Optional. The commit SHA to comment on. If not specified, defaults to the
+        #     HEAD commit of the Pull Request.
+        class AddGitRepositoryLinkPullRequestReviewCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for modifying SCM Pull Request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The GitRepositoryLink resource name in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] pull_request_id
+        #   @return [::String]
+        #     Required. The SCM-specific Pull Request identifier (e.g., "45").
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Optional. The title of the Pull Request.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Optional. The body description of the Pull Request.
+        # @!attribute [rw] base_ref
+        #   @return [::String]
+        #     Optional. The target branch to merge into.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest::State]
+        #     Optional. The state of the Pull Request.
+        class ModifyGitRepositoryLinkPullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State represents the state of the pull request.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The pull request is open.
+            OPEN = 1
+
+            # The pull request is closed.
+            CLOSED = 2
+          end
+        end
+
+        # Request message for FetchGitRepositoryLinkPullRequestList.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The GitRepositoryLink resource name in the format
+        #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter expression that filters the pull requests returned in
+        #     the response. Only a single equality comparison on `state` is supported,
+        #     for example `state = "OPEN"`. Supported values are `OPEN`, `CLOSED`, and
+        #     `MERGED`. `DECLINED` is only supported for SCM providers that support
+        #     declining pull requests, and returns `INVALID_ARGUMENT` for GitHub, GitHub
+        #     Enterprise, GitLab, and GitLab Enterprise. Other values or expressions
+        #     return `INVALID_ARGUMENT`. Defaults to `state = "OPEN"` if unspecified.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of results to return in the list. Default is 20. Max is
+        #     100. A page may contain fewer than `page_size` results even when more
+        #     results are available; use `next_page_token` to check for more pages.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `FetchGitRepositoryLinkPullRequestList` call. Provide this to retrieve the
+        #     subsequent page.
+        class FetchGitRepositoryLinkPullRequestListRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for FetchGitRepositoryLinkPullRequestList.
+        # @!attribute [rw] pull_requests
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::PullRequest>]
+        #     The list of Pull Requests.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchGitRepositoryLinkPullRequestListResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # AccountConnector encapsulates what a platform administrator needs to
         # configure for users to connect to the service providers, which includes,
         # among other fields, the OAuth client ID, client secret, and authorization and
@@ -1532,6 +2041,18 @@ module Google
         class ProviderOAuthConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The level of commit details to return in the response.
+        module CommitView
+          # Unspecified, defaults to BASIC.
+          COMMIT_VIEW_UNSPECIFIED = 0
+
+          # Basic view, returns commit metadata but no file diffs.
+          BASIC = 1
+
+          # Full view, returns commit metadata and file diffs.
+          FULL = 2
         end
 
         # SystemProvider is a list of providers that are owned by Developer Connect.

@@ -28,6 +28,8 @@ module Google
           ##
           # Client for the SqlBackupRunsService service.
           #
+          # Service for managing database backups.
+          #
           class Client
             # @private
             API_VERSION = ""

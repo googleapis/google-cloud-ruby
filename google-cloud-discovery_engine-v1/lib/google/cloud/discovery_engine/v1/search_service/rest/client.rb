@@ -292,6 +292,12 @@ module Google
               #     stores. For engines with a single data store, the specs directly under
               #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
               #     used.
+              #
+              #     On an engine with multiple data stores, this field is optional. If it's
+              #     empty, all of the engine's data stores are searched (blended search).
+              #     Unless it specifies exactly one data store, some request fields, such as
+              #     `order_by` and `query_expansion_spec`, aren't supported and return an
+              #     `INVALID_ARGUMENT` error.
               #   @param num_results_per_data_store [::Integer]
               #     Optional. The maximum number of results to retrieve from each data store.
               #     If not specified, it will use the
@@ -598,7 +604,7 @@ module Google
               #     entities, domains, sites or regions, for example, "Google US", "Google
               #     Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
               #     be exactly matched with
-              #     [UserEvent.entity][google.cloud.discoveryengine.v1.UserEvent.entity] to get
+              #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#entity UserEvent.entity} to get
               #     search results boosted by entity.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
@@ -771,6 +777,12 @@ module Google
               #     stores. For engines with a single data store, the specs directly under
               #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
               #     used.
+              #
+              #     On an engine with multiple data stores, this field is optional. If it's
+              #     empty, all of the engine's data stores are searched (blended search).
+              #     Unless it specifies exactly one data store, some request fields, such as
+              #     `order_by` and `query_expansion_spec`, aren't supported and return an
+              #     `INVALID_ARGUMENT` error.
               #   @param num_results_per_data_store [::Integer]
               #     Optional. The maximum number of results to retrieve from each data store.
               #     If not specified, it will use the
@@ -1077,7 +1089,7 @@ module Google
               #     entities, domains, sites or regions, for example, "Google US", "Google
               #     Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
               #     be exactly matched with
-              #     [UserEvent.entity][google.cloud.discoveryengine.v1.UserEvent.entity] to get
+              #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#entity UserEvent.entity} to get
               #     search results boosted by entity.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]

@@ -68,6 +68,21 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientPathsTest < 
     end
   end
 
+  def test_content_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.content_policy_path organization: "value0", location: "value1", content_policy: "value2"
+      assert_equal "organizations/value0/locations/value1/contentPolicies/value2", path
+
+      path = client.content_policy_path project: "value0", location: "value1", content_policy: "value2"
+      assert_equal "projects/value0/locations/value1/contentPolicies/value2", path
+    end
+  end
+
   def test_crypto_key_versions_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -131,6 +146,18 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientPathsTest < 
 
       path = client.identity_mapping_store_path project: "value0", location: "value1", identity_mapping_store: "value2"
       assert_equal "projects/value0/locations/value1/identityMappingStores/value2", path
+    end
+  end
+
+  def test_notebook_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.notebook_path project: "value0", location: "value1", notebook: "value2"
+      assert_equal "projects/value0/locations/value1/notebooks/value2", path
     end
   end
 

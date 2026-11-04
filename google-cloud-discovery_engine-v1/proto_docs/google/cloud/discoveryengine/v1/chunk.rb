@@ -83,6 +83,10 @@ module Google
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the document.
+          # @!attribute [rw] mime_type
+          #   @return [::String]
+          #     The mime type of the document.
+          #     https://www.iana.org/assignments/media-types/media-types.xhtml.
           # @!attribute [rw] struct_data
           #   @return [::Google::Protobuf::Struct]
           #     Data representation.

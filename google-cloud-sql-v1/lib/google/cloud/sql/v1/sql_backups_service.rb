@@ -32,6 +32,8 @@ module Google
     module Sql
       module V1
         ##
+        # Service for managing database backups for Cloud SQL instances.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/sql/v1/sql_backups_service"

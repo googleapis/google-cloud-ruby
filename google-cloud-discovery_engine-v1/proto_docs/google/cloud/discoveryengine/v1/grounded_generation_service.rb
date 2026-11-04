@@ -123,9 +123,27 @@ module Google
           # @!attribute [rw] max_output_tokens
           #   @return [::Integer]
           #     If specified, custom value for max output tokens will be used.
+          # @!attribute [rw] provisioned_throughput_setting
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GenerationSpec::ProvisionedThroughputSetting]
+          #     Optional. Setting for provisioned throughput.
           class GenerationSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Setting for provisioned throughput.
+            module ProvisionedThroughputSetting
+              # Default value. If the user has remaining provisioned throughput,
+              # provisioned throughput will be used. Otherwise, pay as you go will be
+              # used.
+              PROVISIONED_THROUGHPUT_SETTING_UNSPECIFIED = 0
+
+              # Only use provisioned throughput. If the user has no remaining
+              # provisioned throughput, an error will be returned.
+              PROVISIONED_THROUGHPUT_ONLY = 1
+
+              # Disables provisioned throughput.
+              PAY_AS_YOU_GO_ONLY = 2
+            end
           end
 
           # Describes the options to customize dynamic retrieval.
@@ -239,12 +257,26 @@ module Google
             #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::DynamicRetrievalConfiguration]
             #     Optional. Specifies the dynamic retrieval configuration for the given
             #     source.
+            # @!attribute [rw] exclude_domains
+            #   @return [::Array<::String>]
+            #     Optional. List of domains to be excluded from the search results.
+            # @!attribute [rw] blocking_confidence
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::Citation::PhishBlockThreshold]
+            #     Optional. Sites with confidence level chosen & above this value will be
+            #     blocked from the search results.
             class GoogleSearchSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Params for using enterprise web retrieval as grounding source.
+            # @!attribute [rw] exclude_domains
+            #   @return [::Array<::String>]
+            #     Optional. List of domains to be excluded from the search results.
+            # @!attribute [rw] blocking_confidence
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::Citation::PhishBlockThreshold]
+            #     Optional. Sites with confidence level chosen & above this value will be
+            #     blocked from the search results.
             class EnterpriseWebRetrievalSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -320,6 +352,9 @@ module Google
             # @!attribute [rw] images
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata>]
             #     Images from the web search.
+            # @!attribute [rw] videos
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::VideoMetadata>]
+            #     Videos from the web search.
             class GroundingMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -444,6 +479,9 @@ module Google
                 # @!attribute [rw] title
                 #   @return [::String]
                 #     The title of the website.
+                # @!attribute [rw] site_display_name
+                #   @return [::String]
+                #     The display name of the website.
                 class WebsiteInfo
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,6 +501,15 @@ module Google
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
+              end
+
+              # Metadata about a video from the web search.
+              # @!attribute [rw] youtube_external_id
+              #   @return [::String]
+              #     The external id of the video.
+              class VideoMetadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
           end
@@ -612,6 +659,66 @@ module Google
           class Claim
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A collection of source attributions for a piece of content.
+        # @!attribute [r] citations
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Citation>]
+        #     Output only. List of citations.
+        class CitationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source attributions for content.
+        # @!attribute [r] start_index
+        #   @return [::Integer]
+        #     Output only. Start index into the content.
+        # @!attribute [r] end_index
+        #   @return [::Integer]
+        #     Output only. End index into the content.
+        # @!attribute [r] uri
+        #   @return [::String]
+        #     Output only. Url reference of the attribution.
+        # @!attribute [r] title
+        #   @return [::String]
+        #     Output only. Title of the attribution.
+        # @!attribute [r] license
+        #   @return [::String]
+        #     Output only. License of the attribution.
+        # @!attribute [r] publication_date
+        #   @return [::Google::Type::Date]
+        #     Output only. Publication date of the attribution.
+        class Citation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # These are available confidence level user can set to block malicious urls
+          # with chosen confidence and above. For understanding different confidence of
+          # webrisk, please refer to
+          # https://cloud.google.com/web-risk/docs/reference/rpc/google.cloud.webrisk.v1eap1#confidencelevel
+          module PhishBlockThreshold
+            # Defaults to unspecified.
+            PHISH_BLOCK_THRESHOLD_UNSPECIFIED = 0
+
+            # Blocks Low and above confidence URL that is risky.
+            BLOCK_LOW_AND_ABOVE = 30
+
+            # Blocks Medium and above confidence URL that is risky.
+            BLOCK_MEDIUM_AND_ABOVE = 40
+
+            # Blocks High and above confidence URL that is risky.
+            BLOCK_HIGH_AND_ABOVE = 50
+
+            # Blocks Higher and above confidence URL that is risky.
+            BLOCK_HIGHER_AND_ABOVE = 55
+
+            # Blocks Very high and above confidence URL that is risky.
+            BLOCK_VERY_HIGH_AND_ABOVE = 60
+
+            # Blocks Extremely high confidence URL that is risky.
+            BLOCK_ONLY_EXTREMELY_HIGH = 100
           end
         end
       end

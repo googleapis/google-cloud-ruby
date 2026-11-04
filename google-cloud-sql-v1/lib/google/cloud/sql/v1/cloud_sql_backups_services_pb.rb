@@ -24,6 +24,7 @@ module Google
     module Sql
       module V1
         module SqlBackupsService
+          # Service for managing database backups for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService

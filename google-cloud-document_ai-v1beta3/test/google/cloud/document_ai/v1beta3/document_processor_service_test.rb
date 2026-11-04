@@ -535,6 +535,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     document_schema = {}
     input_data = {}
     base_processor_version = "hello world"
+    processor_version_overrides = {}
 
     train_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :train_processor_version, name
@@ -546,6 +547,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::DocumentSchema), request["document_schema"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::InputData), request["input_data"]
       assert_equal "hello world", request["base_processor_version"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::ProcessorVersionOverrides), request["processor_version_overrides"]
       refute_nil options
     end
 
@@ -556,35 +558,35 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version }) do |response, operation|
+      c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.train_processor_version custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version do |response, operation|
+      c.train_processor_version custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.train_processor_version ::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version) do |response, operation|
+      c.train_processor_version ::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version }, grpc_options) do |response, operation|
+      c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.train_processor_version(::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version), grpc_options) do |response, operation|
+      c.train_processor_version(::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

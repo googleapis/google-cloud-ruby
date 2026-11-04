@@ -110,6 +110,10 @@ module Google
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
 
+                default_config.rpcs.enable_managed_rotation.timeout = 60.0
+
+                default_config.rpcs.rotate_secret.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -1712,7 +1716,7 @@ module Google
             #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
             #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
-            #   @param cloud_sql_single_user_credentials [::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest::CloudSQLSingleUserCredentials, ::Hash]
+            #   @param cloud_sql_single_user_credentials [::Google::Cloud::SecretManager::V1::CloudSqlSingleUserCredentials, ::Hash]
             #     Credentials required for Cloud SQL DB for Single user Managed Rotation.
             #
             # @yield [response, operation] Access the result along with the RPC operation

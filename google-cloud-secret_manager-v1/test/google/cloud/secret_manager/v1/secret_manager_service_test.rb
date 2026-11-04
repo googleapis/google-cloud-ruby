@@ -994,8 +994,8 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
       assert_equal :enable_managed_rotation, name
       assert_kind_of ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest, request
       assert_equal "hello world", request["parent"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest::CloudSQLSingleUserCredentials), request["cloud_sql_single_user_credentials"]
-      assert_equal :cloud_sql_single_user_credentials, request.credentials
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1::CloudSqlSingleUserCredentials), request["cloud_sql_single_user_credentials"]
+      assert_equal :cloud_sql_single_user_credentials, request.credential
       refute_nil options
     end
 

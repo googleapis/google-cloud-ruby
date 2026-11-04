@@ -30,6 +30,8 @@ module Google
             ##
             # REST client for the SqlInstancesService service.
             #
+            # Service to manage Cloud SQL instances.
+            #
             class Client
               # @private
               API_VERSION = ""

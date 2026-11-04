@@ -1846,6 +1846,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    auto_protection_policy_binding = "hello world"
 
     delete_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1861,27 +1862,27 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.delete_backup_plan_association({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backup_plan_association({ name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete_backup_plan_association name: name, request_id: request_id do |_result, response|
+        c.delete_backup_plan_association name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete_backup_plan_association({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backup_plan_association({ name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2171,6 +2172,1637 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, initialize_service_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_auto_protection_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    auto_protection_policy_id = "hello world"
+    auto_protection_policy = {}
+    request_id = "hello world"
+
+    create_auto_protection_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_auto_protection_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_auto_protection_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_auto_protection_policy({ parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_auto_protection_policy parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_auto_protection_policy ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest.new(parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_auto_protection_policy({ parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_auto_protection_policy(::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest.new(parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_auto_protection_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_auto_protection_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_auto_protection_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_auto_protection_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_auto_protection_policies_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_auto_protection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_auto_protection_policies ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_auto_protection_policies(::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_auto_protection_policies_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_auto_protection_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auto_protection_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_auto_protection_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_auto_protection_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_auto_protection_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_auto_protection_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_auto_protection_policy ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_auto_protection_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_auto_protection_policy(::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_auto_protection_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_auto_protection_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    auto_protection_policy = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_auto_protection_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_auto_protection_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_auto_protection_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_auto_protection_policy({ auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_auto_protection_policy auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_auto_protection_policy ::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest.new(auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_auto_protection_policy({ auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_auto_protection_policy(::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest.new(auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_auto_protection_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_auto_protection_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    request_id = "hello world"
+
+    delete_auto_protection_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_auto_protection_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_auto_protection_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_auto_protection_policy({ name: name, etag: etag, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_auto_protection_policy name: name, etag: etag, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_auto_protection_policy ::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest.new(name: name, etag: etag, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_auto_protection_policy({ name: name, etag: etag, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_auto_protection_policy(::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest.new(name: name, etag: etag, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_auto_protection_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_auto_protection_policy_binding
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    auto_protection_policy_binding_id = "hello world"
+    auto_protection_policy_binding = {}
+    request_id = "hello world"
+
+    create_auto_protection_policy_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_auto_protection_policy_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_auto_protection_policy_binding_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_auto_protection_policy_binding({ parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_auto_protection_policy_binding parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest.new(parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_auto_protection_policy_binding({ parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest.new(parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_auto_protection_policy_binding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_auto_protection_policy_binding
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auto_protection_policy_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_auto_protection_policy_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_auto_protection_policy_binding_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_auto_protection_policy_binding({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_auto_protection_policy_binding name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_auto_protection_policy_binding({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_auto_protection_policy_binding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_auto_protection_policy_bindings
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_auto_protection_policy_bindings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_auto_protection_policy_bindings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_auto_protection_policy_bindings_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_auto_protection_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_auto_protection_policy_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_auto_protection_policy_bindings ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_auto_protection_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_auto_protection_policy_bindings(::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_auto_protection_policy_bindings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_applied_auto_protection_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_applied_auto_protection_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_applied_auto_protection_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_applied_auto_protection_policies_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_applied_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_applied_auto_protection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_applied_auto_protection_policies ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_applied_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_applied_auto_protection_policies(::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_applied_auto_protection_policies_client_stub.call_count
+      end
+    end
+  end
+
+  def test_initiate_delete_auto_protection_policy_binding
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    request_id = "hello world"
+
+    initiate_delete_auto_protection_policy_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_initiate_delete_auto_protection_policy_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, initiate_delete_auto_protection_policy_binding_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.initiate_delete_auto_protection_policy_binding({ name: name, etag: etag, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.initiate_delete_auto_protection_policy_binding name: name, etag: etag, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.initiate_delete_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest.new(name: name, etag: etag, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.initiate_delete_auto_protection_policy_binding({ name: name, etag: etag, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.initiate_delete_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest.new(name: name, etag: etag, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, initiate_delete_auto_protection_policy_binding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_binding_matching_resources
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_binding_matching_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_binding_matching_resources_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_binding_matching_resources_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_binding_matching_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_binding_matching_resources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_binding_matching_resources ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_binding_matching_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_binding_matching_resources(::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_binding_matching_resources_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_restore_template
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_template_id = "hello world"
+    restore_template = {}
+    request_id = "hello world"
+
+    create_restore_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_restore_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_restore_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_restore_template({ parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_restore_template parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_restore_template ::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest.new(parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_restore_template({ parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_restore_template(::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest.new(parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_restore_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_restore_template
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::RestoreTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_restore_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_restore_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_restore_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_restore_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_restore_template ::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_restore_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_restore_template(::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_restore_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_restore_templates
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_templates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_restore_templates_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_restore_templates_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_restore_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_restore_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_restore_templates ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_restore_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_restore_templates(::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_restore_templates_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_restore_template
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    restore_template = {}
+    request_id = "hello world"
+    validate_only = true
+
+    update_restore_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_update_restore_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_restore_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_restore_template({ update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_restore_template update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_restore_template ::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest.new(update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_restore_template({ update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_restore_template(::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest.new(update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_restore_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_restore_template
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+
+    delete_restore_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_restore_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_restore_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_restore_template({ name: name, request_id: request_id, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_restore_template name: name, request_id: request_id, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_restore_template ::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_restore_template({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_restore_template(::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_restore_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_run_restore_template
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    backup = "hello world"
+    request_id = "hello world"
+
+    run_restore_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_run_restore_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, run_restore_template_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.run_restore_template({ name: name, backup: backup, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.run_restore_template name: name, backup: backup, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.run_restore_template ::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest.new(name: name, backup: backup, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.run_restore_template({ name: name, backup: backup, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.run_restore_template(::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest.new(name: name, backup: backup, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, run_restore_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_restore_template_execution
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::RestoreTemplateExecution.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_template_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_restore_template_execution_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_restore_template_execution_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_restore_template_execution({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_restore_template_execution name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_restore_template_execution ::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_restore_template_execution({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_restore_template_execution(::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_restore_template_execution_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_restore_template_executions
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_template_executions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_restore_template_executions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_restore_template_executions_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_restore_template_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_restore_template_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_restore_template_executions ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_restore_template_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_restore_template_executions(::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_restore_template_executions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_trigger_restore_cleanup
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    trigger_restore_cleanup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_trigger_restore_cleanup_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, trigger_restore_cleanup_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.trigger_restore_cleanup({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.trigger_restore_cleanup name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.trigger_restore_cleanup ::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.trigger_restore_cleanup({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.trigger_restore_cleanup(::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, trigger_restore_cleanup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_restore_verification_plan
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_verification_plan_id = "hello world"
+    restore_verification_plan = {}
+    request_id = "hello world"
+
+    create_restore_verification_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_restore_verification_plan_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_restore_verification_plan_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_restore_verification_plan({ parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_restore_verification_plan parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_restore_verification_plan ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest.new(parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_restore_verification_plan({ parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_restore_verification_plan(::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest.new(parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_restore_verification_plan_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_restore_verification_plan_association
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_verification_plan_association_id = "hello world"
+    restore_verification_plan_association = {}
+    request_id = "hello world"
+
+    create_restore_verification_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_create_restore_verification_plan_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_restore_verification_plan_association_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_restore_verification_plan_association({ parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_restore_verification_plan_association parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest.new(parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_restore_verification_plan_association({ parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest.new(parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_restore_verification_plan_association_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_restore_verification_plan_association
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_verification_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_restore_verification_plan_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_restore_verification_plan_association_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_restore_verification_plan_association({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_restore_verification_plan_association name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_restore_verification_plan_association({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_restore_verification_plan_association_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_restore_verification_plan_associations
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_verification_plan_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_restore_verification_plan_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_restore_verification_plan_associations_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_restore_verification_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_restore_verification_plan_associations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_restore_verification_plan_associations ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_restore_verification_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_restore_verification_plan_associations(::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_restore_verification_plan_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_restore_verification_plan_association
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_restore_verification_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_restore_verification_plan_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_restore_verification_plan_association_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_restore_verification_plan_association({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_restore_verification_plan_association name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_restore_verification_plan_association({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_restore_verification_plan_association_client_stub.call_count
+      end
+    end
+  end
+
+  def test_trigger_restore_verification
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    trigger_restore_verification_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_trigger_restore_verification_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, trigger_restore_verification_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.trigger_restore_verification({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.trigger_restore_verification name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.trigger_restore_verification ::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.trigger_restore_verification({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.trigger_restore_verification(::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, trigger_restore_verification_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_restore_verification_plan
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::RestoreVerificationPlan.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_verification_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_get_restore_verification_plan_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_restore_verification_plan_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_restore_verification_plan({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_restore_verification_plan name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_restore_verification_plan ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_restore_verification_plan({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_restore_verification_plan(::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_restore_verification_plan_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_restore_verification_plans
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_verification_plans_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_restore_verification_plans_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_restore_verification_plans_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_restore_verification_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_restore_verification_plans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_restore_verification_plans ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_restore_verification_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_restore_verification_plans(::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_restore_verification_plans_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_restore_verification_plan
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+
+    delete_restore_verification_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_delete_restore_verification_plan_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_restore_verification_plan_client_stub do
+        # Create client
+        c = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_restore_verification_plan({ name: name, request_id: request_id, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_restore_verification_plan name: name, request_id: request_id, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_restore_verification_plan ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_restore_verification_plan({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_restore_verification_plan(::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_restore_verification_plan_client_stub.call_count
       end
     end
   end

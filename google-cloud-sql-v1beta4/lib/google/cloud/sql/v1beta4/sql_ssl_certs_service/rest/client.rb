@@ -30,6 +30,8 @@ module Google
             ##
             # REST client for the SqlSslCertsService service.
             #
+            # Service to manage SSL certs for Cloud SQL instances.
+            #
             class Client
               # @private
               API_VERSION = ""

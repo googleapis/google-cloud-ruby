@@ -262,10 +262,10 @@ module Google
             #     * `document` is the default model for regular dataStores.
             #     * `search-history` is the default model for site search dataStores.
             #   @param user_pseudo_id [::String]
-            #     A unique identifier for tracking visitors. For example, this could be
-            #     implemented with an HTTP cookie, which should be able to uniquely identify
-            #     a visitor on a single device. This unique identifier should not change if
-            #     the visitor logs in or out of the website.
+            #     Optional. A unique identifier for tracking visitors. For example, this
+            #     could be implemented with an HTTP cookie, which should be able to uniquely
+            #     identify a visitor on a single device. This unique identifier should not
+            #     change if the visitor logs in or out of the website.
             #
             #     This field should NOT have a fixed value such as `unknown_visitor`.
             #
@@ -340,6 +340,157 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @completion_service_stub.call_rpc :complete_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Completes the user input with advanced keyword suggestions.
+            #
+            # @overload advanced_complete_query(request, options = nil)
+            #   Pass arguments to `advanced_complete_query` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload advanced_complete_query(completion_config: nil, query: nil, query_model: nil, user_pseudo_id: nil, user_info: nil, include_tail_suggestions: nil, boost_spec: nil, suggestion_types: nil, suggestion_type_specs: nil, experiment_ids: nil)
+            #   Pass arguments to `advanced_complete_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param completion_config [::String]
+            #     Required. The completion_config of the parent dataStore or engine resource
+            #     name for which the completion is performed, such as
+            #     `projects/*/locations/global/collections/default_collection/dataStores/*/completionConfig`
+            #     `projects/*/locations/global/collections/default_collection/engines/*/completionConfig`.
+            #   @param query [::String]
+            #     Required. The typeahead input used to fetch suggestions. Maximum length is
+            #     128 characters.
+            #
+            #     The query can not be empty for most of the suggestion types. If it is
+            #     empty, an `INVALID_ARGUMENT` error is returned. The exception is when the
+            #     suggestion_types contains only the type `RECENT_SEARCH`, the query can
+            #     be an empty string. The is called "zero prefix" feature, which returns
+            #     user's recently searched queries given the empty query.
+            #   @param query_model [::String]
+            #     Specifies the autocomplete query model, which only applies to the QUERY
+            #     SuggestionType. This overrides any model specified in the Configuration >
+            #     Autocomplete section of the Cloud console. Currently supported values:
+            #
+            #     * `document` - Using suggestions generated from user-imported documents.
+            #     * `search-history` - Using suggestions generated from the past history of
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search SearchService.Search}
+            #     API calls. Do not use it when there is no traffic for Search API.
+            #     * `user-event` - Using suggestions generated from user-imported search
+            #     events.
+            #     * `document-completable` - Using suggestions taken directly from
+            #     user-imported document fields marked as completable.
+            #
+            #     Default values:
+            #
+            #     * `document` is the default model for regular dataStores.
+            #     * `search-history` is the default model for site search dataStores.
+            #   @param user_pseudo_id [::String]
+            #     Optional. A unique identifier for tracking visitors. For example, this
+            #     could be implemented with an HTTP cookie, which should be able to uniquely
+            #     identify a visitor on a single device. This unique identifier should not
+            #     change if the visitor logs in or out of the website.
+            #
+            #     This field should NOT have a fixed value such as `unknown_visitor`.
+            #
+            #     This should be the same identifier as
+            #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#user_pseudo_id UserEvent.user_pseudo_id}
+            #     and
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#user_pseudo_id SearchRequest.user_pseudo_id}.
+            #
+            #     The field must be a UTF-8 encoded string with a length limit of 128
+            #   @param user_info [::Google::Cloud::DiscoveryEngine::V1::UserInfo, ::Hash]
+            #     Optional. Information about the end user.
+            #
+            #     This should be the same identifier information as
+            #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#user_info UserEvent.user_info}
+            #     and
+            #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#user_info SearchRequest.user_info}.
+            #   @param include_tail_suggestions [::Boolean]
+            #     Indicates if tail suggestions should be returned if there are no
+            #     suggestions that match the full query. Even if set to true, if there are
+            #     suggestions that match the full query, those are returned and no
+            #     tail suggestions are returned.
+            #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::BoostSpec, ::Hash]
+            #     Optional. Specification to boost suggestions matching the condition.
+            #   @param suggestion_types [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionType>]
+            #     Optional. Suggestion types to return. If empty or unspecified, query
+            #     suggestions are returned. Only one suggestion type is supported at the
+            #     moment.
+            #   @param suggestion_type_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionTypeSpec, ::Hash>]
+            #     Optional. Specification of each suggestion type.
+            #   @param experiment_ids [::Array<::String>]
+            #     Optional. Experiment ids for this request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest.new
+            #
+            #   # Call the advanced_complete_query method.
+            #   result = client.advanced_complete_query request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse.
+            #   p result
+            #
+            def advanced_complete_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.advanced_complete_query.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.completion_config
+                header_params["completion_config"] = request.completion_config
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.advanced_complete_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.advanced_complete_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @completion_service_stub.call_rpc :advanced_complete_query, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -957,6 +1108,11 @@ module Google
                 #
                 attr_reader :complete_query
                 ##
+                # RPC-specific configuration for `advanced_complete_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :advanced_complete_query
+                ##
                 # RPC-specific configuration for `import_suggestion_deny_list_entries`
                 # @return [::Gapic::Config::Method]
                 #
@@ -981,6 +1137,8 @@ module Google
                 def initialize parent_rpcs = nil
                   complete_query_config = parent_rpcs.complete_query if parent_rpcs.respond_to? :complete_query
                   @complete_query = ::Gapic::Config::Method.new complete_query_config
+                  advanced_complete_query_config = parent_rpcs.advanced_complete_query if parent_rpcs.respond_to? :advanced_complete_query
+                  @advanced_complete_query = ::Gapic::Config::Method.new advanced_complete_query_config
                   import_suggestion_deny_list_entries_config = parent_rpcs.import_suggestion_deny_list_entries if parent_rpcs.respond_to? :import_suggestion_deny_list_entries
                   @import_suggestion_deny_list_entries = ::Gapic::Config::Method.new import_suggestion_deny_list_entries_config
                   purge_suggestion_deny_list_entries_config = parent_rpcs.purge_suggestion_deny_list_entries if parent_rpcs.respond_to? :purge_suggestion_deny_list_entries

@@ -194,6 +194,182 @@ module Google
               # Service calls
 
               ##
+              # Creates a ServingConfig.
+              #
+              # Note: The Google Cloud console works only with the default serving config.
+              # Additional ServingConfigs can be created and managed only via the API.
+              #
+              # A maximum of 100
+              # {::Google::Cloud::DiscoveryEngine::V1::ServingConfig ServingConfig}s are allowed
+              # in an {::Google::Cloud::DiscoveryEngine::V1::Engine Engine}, otherwise a
+              # RESOURCE_EXHAUSTED error is returned.
+              #
+              # @overload create_serving_config(request, options = nil)
+              #   Pass arguments to `create_serving_config` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::CreateServingConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::CreateServingConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_serving_config(parent: nil, serving_config: nil, serving_config_id: nil)
+              #   Pass arguments to `create_serving_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Full resource name of parent. Format:
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+              #   @param serving_config [::Google::Cloud::DiscoveryEngine::V1::ServingConfig, ::Hash]
+              #     Required. The ServingConfig to create.
+              #   @param serving_config_id [::String]
+              #     Required. The ID to use for the ServingConfig, which will become the final
+              #     component of the ServingConfig's resource name.
+              #
+              #     This value should be 4-63 characters, and valid characters
+              #     are /[a-zA-Z0-9][a-zA-Z0-9_-]+/.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::CreateServingConfigRequest.new
+              #
+              #   # Call the create_serving_config method.
+              #   result = client.create_serving_config request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::ServingConfig.
+              #   p result
+              #
+              def create_serving_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::CreateServingConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_serving_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_serving_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_serving_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @serving_config_service_stub.create_serving_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a ServingConfig.
+              #
+              # Returns a NOT_FOUND error if the ServingConfig does not exist.
+              #
+              # @overload delete_serving_config(request, options = nil)
+              #   Pass arguments to `delete_serving_config` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::DeleteServingConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::DeleteServingConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_serving_config(name: nil)
+              #   Pass arguments to `delete_serving_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the ServingConfig to delete. Format:
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::DeleteServingConfigRequest.new
+              #
+              #   # Call the delete_serving_config method.
+              #   result = client.delete_serving_config request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_serving_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::DeleteServingConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_serving_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_serving_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_serving_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @serving_config_service_stub.delete_serving_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates a ServingConfig.
               #
               # Returns a NOT_FOUND error if the ServingConfig does not exist.
@@ -282,6 +458,179 @@ module Google
               end
 
               ##
+              # Gets a ServingConfig.
+              #
+              # Returns a NotFound error if the ServingConfig does not exist.
+              #
+              # @overload get_serving_config(request, options = nil)
+              #   Pass arguments to `get_serving_config` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::GetServingConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::GetServingConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_serving_config(name: nil)
+              #   Pass arguments to `get_serving_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the ServingConfig to get. Format:
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::GetServingConfigRequest.new
+              #
+              #   # Call the get_serving_config method.
+              #   result = client.get_serving_config request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::ServingConfig.
+              #   p result
+              #
+              def get_serving_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::GetServingConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_serving_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_serving_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_serving_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @serving_config_service_stub.get_serving_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all ServingConfigs linked to this dataStore.
+              #
+              # @overload list_serving_configs(request, options = nil)
+              #   Pass arguments to `list_serving_configs` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::ListServingConfigsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::ListServingConfigsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_serving_configs(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_serving_configs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Full resource name of the parent resource. Format:
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+              #   @param page_size [::Integer]
+              #     Optional. Maximum number of results to return. If unspecified, defaults
+              #     to 100. If a value greater than 100 is provided, at most 100 results are
+              #     returned.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListServingConfigs` call.
+              #     Provide this to retrieve the subsequent page.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::ServingConfig>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::ServingConfig>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::ListServingConfigsRequest.new
+              #
+              #   # Call the list_serving_configs method.
+              #   result = client.list_serving_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1::ServingConfig.
+              #     p item
+              #   end
+              #
+              def list_serving_configs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::ListServingConfigsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_serving_configs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_serving_configs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_serving_configs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @serving_config_service_stub.list_serving_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @serving_config_service_stub, :list_serving_configs, "serving_configs", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ServingConfigService REST API.
               #
               # This class represents the configuration for ServingConfigService REST,
@@ -297,17 +646,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # update_serving_config to 20 seconds,
+              #   # create_serving_config to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.update_serving_config.timeout = 20.0
+              #     config.rpcs.create_serving_config.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.update_serving_config.timeout = 20.0
+              #     config.rpcs.create_serving_config.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -430,15 +779,43 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `create_serving_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_serving_config
+                  ##
+                  # RPC-specific configuration for `delete_serving_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_serving_config
+                  ##
                   # RPC-specific configuration for `update_serving_config`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_serving_config
+                  ##
+                  # RPC-specific configuration for `get_serving_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_serving_config
+                  ##
+                  # RPC-specific configuration for `list_serving_configs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_serving_configs
 
                   # @private
                   def initialize parent_rpcs = nil
+                    create_serving_config_config = parent_rpcs.create_serving_config if parent_rpcs.respond_to? :create_serving_config
+                    @create_serving_config = ::Gapic::Config::Method.new create_serving_config_config
+                    delete_serving_config_config = parent_rpcs.delete_serving_config if parent_rpcs.respond_to? :delete_serving_config
+                    @delete_serving_config = ::Gapic::Config::Method.new delete_serving_config_config
                     update_serving_config_config = parent_rpcs.update_serving_config if parent_rpcs.respond_to? :update_serving_config
                     @update_serving_config = ::Gapic::Config::Method.new update_serving_config_config
+                    get_serving_config_config = parent_rpcs.get_serving_config if parent_rpcs.respond_to? :get_serving_config
+                    @get_serving_config = ::Gapic::Config::Method.new get_serving_config_config
+                    list_serving_configs_config = parent_rpcs.list_serving_configs if parent_rpcs.respond_to? :list_serving_configs
+                    @list_serving_configs = ::Gapic::Config::Method.new list_serving_configs_config
 
                     yield self if block_given?
                   end

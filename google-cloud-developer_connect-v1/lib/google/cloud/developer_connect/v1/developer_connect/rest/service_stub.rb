@@ -514,6 +514,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the open_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #   A result object deserialized from the server's reply
+              def open_git_repository_link_pull_request request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_open_git_repository_link_pull_request_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "open_git_repository_link_pull_request",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the fetch_linkable_git_repositories REST call
               #
               # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest]
@@ -627,6 +667,366 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the diff_git_repository_link_commit REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse]
+              #   A result object deserialized from the server's reply
+              def diff_git_repository_link_commit request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_diff_git_repository_link_commit_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "diff_git_repository_link_commit",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_git_repository_link_commit REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_git_repository_link_commit request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_git_repository_link_commit_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_git_repository_link_commit",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_git_repository_link_commit_list REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_git_repository_link_commit_list request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_git_repository_link_commit_list_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_git_repository_link_commit_list",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_git_repository_link_file_blame REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_git_repository_link_file_blame request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_git_repository_link_file_blame_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_git_repository_link_file_blame",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #   A result object deserialized from the server's reply
+              def fetch_git_repository_link_pull_request request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_git_repository_link_pull_request_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_git_repository_link_pull_request",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the add_git_repository_link_pull_request_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequestComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequestComment]
+              #   A result object deserialized from the server's reply
+              def add_git_repository_link_pull_request_comment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_git_repository_link_pull_request_comment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "add_git_repository_link_pull_request_comment",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::PullRequestComment.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the add_git_repository_link_pull_request_review_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment]
+              #   A result object deserialized from the server's reply
+              def add_git_repository_link_pull_request_review_comment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_git_repository_link_pull_request_review_comment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "add_git_repository_link_pull_request_review_comment",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the modify_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::PullRequest]
+              #   A result object deserialized from the server's reply
+              def modify_git_repository_link_pull_request request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_modify_git_repository_link_pull_request_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "modify_git_repository_link_pull_request",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::PullRequest.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_git_repository_link_pull_request_list REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_git_repository_link_pull_request_list request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_git_repository_link_pull_request_list_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_git_repository_link_pull_request_list",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -1352,6 +1752,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the open_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_open_git_repository_link_pull_request_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:openPullRequest",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the fetch_linkable_git_repositories REST call
               #
               # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest]
@@ -1407,6 +1829,198 @@ module Google
                                                           uri_template: "/v1/{git_repository_link}:fetchGitRefs",
                                                           matches: [
                                                             ["git_repository_link", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the diff_git_repository_link_commit REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_diff_git_repository_link_commit_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:diffCommit",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_git_repository_link_commit REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_git_repository_link_commit_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:fetchCommit",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_git_repository_link_commit_list REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_git_repository_link_commit_list_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:fetchCommitList",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_git_repository_link_file_blame REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_git_repository_link_file_blame_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:fetchFileBlame",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_git_repository_link_pull_request_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:fetchPullRequest",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the add_git_repository_link_pull_request_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_add_git_repository_link_pull_request_comment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:addPullRequestComment",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the add_git_repository_link_pull_request_review_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_add_git_repository_link_pull_request_review_comment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:addPullRequestReviewComment",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the modify_git_repository_link_pull_request REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_modify_git_repository_link_pull_request_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:modifyPullRequest",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_git_repository_link_pull_request_list REST call
+              #
+              # @param request_pb [::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_git_repository_link_pull_request_list_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}:fetchPullRequestList",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/connections/[^/]+/gitRepositoryLinks/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -868,7 +868,6 @@ module Google
             #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
             #     * {::Google::Cloud::DiscoveryEngine::V1::SpannerSource SpannerSource}.
             #     * {::Google::Cloud::DiscoveryEngine::V1::CloudSqlSource CloudSqlSource}.
-            #     * {::Google::Cloud::DiscoveryEngine::V1::FirestoreSource FirestoreSource}.
             #     * {::Google::Cloud::DiscoveryEngine::V1::BigtableSource BigtableSource}.
             #   @param force_refresh_content [::Boolean]
             #     Optional. Whether to force refresh the unstructured content of the

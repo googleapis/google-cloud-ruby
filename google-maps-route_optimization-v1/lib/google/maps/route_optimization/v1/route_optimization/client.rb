@@ -251,10 +251,11 @@ module Google
             #     Required. Target project or location to make a call.
             #
             #     Format:
-            #     * `projects/{project-id}`
-            #     * `projects/{project-id}/locations/{location-id}`
             #
-            #     If no location is specified, a region will be chosen automatically.
+            #     * `projects/{project-id}`
+            #     * `projects/{project-id}/locations/-`
+            #
+            #     Regional `{location-id}` values are not supported.
             #   @param timeout [::Google::Protobuf::Duration, ::Hash]
             #     If this timeout is set, the server returns a response before the timeout
             #     period has elapsed or the server deadline for synchronous requests is
@@ -537,10 +538,11 @@ module Google
             #     Required. Target project and location to make a call.
             #
             #     Format:
-            #     * `projects/{project-id}`
-            #     * `projects/{project-id}/locations/{location-id}`
             #
-            #     If no location is specified, a region will be chosen automatically.
+            #     * `projects/{project-id}`
+            #     * `projects/{project-id}/locations/-`
+            #
+            #     Regional `{location-id}` values are not supported.
             #   @param model_configs [::Array<::Google::Maps::RouteOptimization::V1::BatchOptimizeToursRequest::AsyncModelConfig, ::Hash>]
             #     Required. Input/Output information each purchase model, such as file paths
             #     and data formats.
@@ -636,10 +638,6 @@ module Google
             # {::Google::Maps::RouteOptimization::V1::OptimizeToursResponse OptimizeToursResponse},
             # if successful.
             #
-            # Experimental: See
-            # https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-            # for more details.
-            #
             # @overload optimize_tours_long_running(request, options = nil)
             #   Pass arguments to `optimize_tours_long_running` via a request object, either of type
             #   {::Google::Maps::RouteOptimization::V1::OptimizeToursRequest} or an equivalent Hash.
@@ -659,10 +657,11 @@ module Google
             #     Required. Target project or location to make a call.
             #
             #     Format:
-            #     * `projects/{project-id}`
-            #     * `projects/{project-id}/locations/{location-id}`
             #
-            #     If no location is specified, a region will be chosen automatically.
+            #     * `projects/{project-id}`
+            #     * `projects/{project-id}/locations/-`
+            #
+            #     Regional `{location-id}` values are not supported.
             #   @param timeout [::Google::Protobuf::Duration, ::Hash]
             #     If this timeout is set, the server returns a response before the timeout
             #     period has elapsed or the server deadline for synchronous requests is
@@ -931,14 +930,10 @@ module Google
             # `<parent>/operations/<operation_id>` and can be used to track
             # progress of the computation. The
             # {::Google::Longrunning::Operation#metadata metadata} field type is
-            # {::Google::Maps::RouteOptimization::V1::OptimizeToursUriMetadata OptimizeToursLongRunningMetadata}.
+            # {::Google::Maps::RouteOptimization::V1::OptimizeToursUriMetadata OptimizeToursUriMetadata}.
             # The {::Google::Longrunning::Operation#response response} field type is
             # {::Google::Maps::RouteOptimization::V1::OptimizeToursUriResponse OptimizeToursUriResponse},
             # if successful.
-            #
-            # Experimental: See
-            # https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-            # for more details.
             #
             # @overload optimize_tours_uri(request, options = nil)
             #   Pass arguments to `optimize_tours_uri` via a request object, either of type
@@ -959,10 +954,11 @@ module Google
             #     Required. Target project or location to make a call.
             #
             #     Format:
-            #     * `projects/{project-id}`
-            #     * `projects/{project-id}/locations/{location-id}`
             #
-            #     If no location is specified, a region will be chosen automatically.
+            #     * `projects/{project-id}`
+            #     * `projects/{project-id}/locations/-`
+            #
+            #     Regional `{location-id}` values are not supported.
             #   @param input [::Google::Maps::RouteOptimization::V1::Uri, ::Hash]
             #     Required. The URI of the Cloud Storage object containing the
             #     `OptimizeToursRequest`.

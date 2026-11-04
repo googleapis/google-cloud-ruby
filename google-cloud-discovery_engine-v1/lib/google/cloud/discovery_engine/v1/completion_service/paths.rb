@@ -25,6 +25,68 @@ module Google
           # Path helper methods for the CompletionService API.
           module Paths
             ##
+            # Create a fully-qualified CompletionConfig resource string.
+            #
+            # @overload completion_config_path(project:, location:, data_store:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/completionConfig`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #
+            # @overload completion_config_path(project:, location:, collection:, data_store:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/completionConfig`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #
+            # @overload completion_config_path(project:, location:, collection:, engine:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/completionConfig`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #
+            # @return [::String]
+            def completion_config_path **args
+              resources = {
+                "data_store:location:project" => (proc do |project:, location:, data_store:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/completionConfig"
+                end),
+                "collection:data_store:location:project" => (proc do |project:, location:, collection:, data_store:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/completionConfig"
+                end),
+                "collection:engine:location:project" => (proc do |project:, location:, collection:, engine:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/completionConfig"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified DataStore resource string.
             #
             # @overload data_store_path(project:, location:, data_store:)

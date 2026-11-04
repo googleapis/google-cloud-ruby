@@ -11405,6 +11405,9 @@ module Google
         #        Advertisement(RA) packet (IPv6).  Google Cloud immediately but
         #        temporarily associates the forwarding rule IP address with that VM, and
         #        both new and in-flight packets are quickly delivered to that VM.
+        #        - HA_CONTROLLER: The Backend Service is managed by a High Availability
+        #        Controller. Failover and leader election are exclusively managed by the
+        #        HA Controller service.
         #
         #
         #
@@ -11498,6 +11501,9 @@ module Google
           #    Advertisement(RA) packet (IPv6).  Google Cloud immediately but
           #    temporarily associates the forwarding rule IP address with that VM, and
           #    both new and in-flight packets are quickly delivered to that VM.
+          #    - HA_CONTROLLER: The Backend Service is managed by a High Availability
+          #    Controller. Failover and leader election are exclusively managed by the
+          #    HA Controller service.
           #
           #
           #
@@ -12639,7 +12645,12 @@ module Google
         #     The maximum number of instances to create.
         # @!attribute [rw] instance_flexibility_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceFlexibilityPolicy]
-        #     A flexible specification of machine type of instances to create.
+        #     A specification of alternative machine types to use when creating
+        #     instances. A single bulkInsert request can create instances with multiple
+        #     different machine types based on capacity and quota availability. This
+        #     field is supported only for regional bulkInsert requests. For more
+        #     information, see About
+        #     instance flexibility for VMs created in bulk.
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::InstanceProperties]
         #     The instance properties defining the VM instances to be created. Required
@@ -12911,7 +12922,9 @@ module Google
         # @!attribute [rw] host
         #   @return [::String]
         #     If set, this invalidation rule will only apply to requests with a Host
-        #     header matching host.
+        #     header matching host. This field also accepts wildcards (*) to replace the
+        #     leftmost (or first) label of a hostname. For example, *.example.com will
+        #     match www.example.com, but not sub1.dev.example.com.
         # @!attribute [rw] path
         #   @return [::String]
         class CacheInvalidationRule
@@ -14270,6 +14283,12 @@ module Google
             MEMORY_OPTIMIZED_M3 = 276_301_372
 
             MEMORY_OPTIMIZED_M4 = 276_301_373
+
+            # CUD bucket for M4N machines with less than 6TB of memory.
+            MEMORY_OPTIMIZED_M4N = 512_278_961
+
+            # CUD bucket for M4N machines with 6TB of memory.
+            MEMORY_OPTIMIZED_M4N_6TB = 69_895_574
 
             MEMORY_OPTIMIZED_M4_6TB = 210_543_650
 
@@ -33061,15 +33080,8 @@ module Google
         # A flexible specification of machine types for instances to create.
         # @!attribute [rw] instance_selections
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstanceFlexibilityPolicyInstanceSelection}]
-        #     Specification of alternative, flexible instance subsets.
-        #     One of them will be selected to create the instances
-        #     based on various criteria, like:
-        #     - ranks,
-        #     - location policy,
-        #     - current capacity,
-        #     - available reservations (you can specify affinity in
-        #     InstanceProperties),
-        #     - SWAN/GOOSE limitations.
+        #     Specifies named instance selections that define properties for instances
+        #     created in bulk.
         #     Key is an arbitrary, unique RFC1035 string that identifies the instance
         #     selection.
         class InstanceFlexibilityPolicy
@@ -71449,7 +71461,10 @@ module Google
         #     Check the ProvisioningModel enum for the list of possible values.
         # @!attribute [rw] skip_guest_os_shutdown
         #   @return [::Boolean]
-        #     Default is false and there will be 120 seconds between GCE ACPI G2 Soft
+        #     Defines whether GCE ACPI G2 Soft
+        #     Off signal should be skipped during shutdown operation of VM.
+        #
+        #     Default is false, meaning there will be 120 seconds between GCE ACPI G2 Soft
         #     Off and ACPI G3 Mechanical
         #     Off for Standard VMs and 30 seconds for Spot VMs.
         # @!attribute [rw] termination_time
@@ -85463,8 +85478,10 @@ module Google
 
         # @!attribute [rw] phase1
         #   @return [::Google::Cloud::Compute::V1::VpnTunnelPhase1Algorithms]
+        #     Cipher algorithms for IKE phase 1.
         # @!attribute [rw] phase2
         #   @return [::Google::Cloud::Compute::V1::VpnTunnelPhase2Algorithms]
+        #     Cipher algorithms for IKE phase 2.
         class VpnTunnelCipherSuite
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -85531,12 +85548,16 @@ module Google
 
         # @!attribute [rw] dh
         #   @return [::Array<::String>]
+        #     Diffie-Hellman groups for IKE phase 1.
         # @!attribute [rw] encryption
         #   @return [::Array<::String>]
+        #     Encryption algorithms for IKE phase 1.
         # @!attribute [rw] integrity
         #   @return [::Array<::String>]
+        #     Integrity algorithms for IKE phase 1.
         # @!attribute [rw] prf
         #   @return [::Array<::String>]
+        #     Pseudo-random functions (PRF) for IKE phase 1.
         class VpnTunnelPhase1Algorithms
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -85544,10 +85565,13 @@ module Google
 
         # @!attribute [rw] encryption
         #   @return [::Array<::String>]
+        #     Encryption algorithms for IKE phase 2.
         # @!attribute [rw] integrity
         #   @return [::Array<::String>]
+        #     Integrity algorithms for IKE phase 2.
         # @!attribute [rw] pfs
         #   @return [::Array<::String>]
+        #     Perfect Forward Secrecy (PFS) groups for IKE phase 2.
         class VpnTunnelPhase2Algorithms
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
