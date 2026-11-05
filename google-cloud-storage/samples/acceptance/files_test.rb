@@ -612,23 +612,36 @@ describe "Files Snippets" do
     bucket.create_file local_file, remote_file_name
 
     # Skip this test if credentials lack an issuer since it is a prerequisite for automatic fallback
-    issuer = bucket.service.credentials.issuer
-    skip "Test requires a service account with an issuer" unless issuer
+    client = bucket.service.credentials.respond_to?(:client) ? bucket.service.credentials.client : bucket.service.credentials
+    issuer = nil
+    [:issuer, :service_account_email].each do |method|
+      issuer ||= client.public_send(method) if client.respond_to?(method) && !client.public_send(method).to_s.empty?
+    end
+    if !issuer && client.respond_to?(:impersonation_url) && !client.impersonation_url.to_s.empty?
+      match = client.impersonation_url.match(/serviceAccounts\/(.+?):generateAccessToken/)
+      issuer = match[1] if match
+    end
+
+    skip "Test requires a service account with an issuer email" unless issuer
 
     # Temporarily remove private key to trigger keyless environment logic
-    bucket.service.credentials.stub :signing_key, nil do
-      bucket.service.credentials.stub :issuer, nil do
-        Google::Cloud.env.stub :metadata?, true do
-          Google::Cloud.env.stub :lookup_metadata, issuer do
-            out, _err = capture_io do
-              generate_signed_url_v4_workload_identity bucket_name: bucket.name,
-                                                       file_name: remote_file_name
-            end
-            signed_url = out.scan(/http.*$/).first
-            refute_nil signed_url
+    client.stub :signing_key, nil do
+      client.stub :issuer, nil do
+        client.stub :service_account_email, nil do
+          client.stub :impersonation_url, nil do
+            Google::Cloud.env.stub :metadata?, true do
+              Google::Cloud.env.stub :lookup_metadata, issuer do
+                out, _err = capture_io do
+                  generate_signed_url_v4_workload_identity bucket_name: bucket.name,
+                                                           file_name: remote_file_name
+                end
+                signed_url = out.scan(/http.*$/).first
+                refute_nil signed_url
 
-            file_contents = Net::HTTP.get URI(signed_url)
-            assert_equal file_contents, File.read(local_file)
+                file_contents = Net::HTTP.get URI(signed_url)
+                assert_equal file_contents, File.read(local_file)
+              end
+            end
           end
         end
       end
