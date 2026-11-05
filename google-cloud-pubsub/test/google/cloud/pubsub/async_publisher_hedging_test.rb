@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "base64"
 require "stringio"
 
 Thread.abort_on_exception = true
@@ -32,7 +31,7 @@ class ScriptedHedgingTopicAdminStub
   end
 
   def publish_internal request, options = nil
-    handle = Thread.current[Google::Cloud::PubSub::TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY]
+    handle = Google::Cloud::PubSub::TopicAdmin::Client.current_attempt_handle
     call_index = @mutex.synchronize do
       idx = @calls.size
       @calls << { request: request, options: options, handle: handle }
@@ -44,14 +43,16 @@ end
 
 describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
   let(:topic_name) { "hedged-topic" }
+  let(:attempt_cancelled_err) { Google::Cloud::PubSub::AsyncPublisher.const_get :AttemptCancelledError }
 
   describe "default and custom configuration" do
     it "disables hedging by default when hedging option is omitted" do
       publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
       begin
-        _(publisher.hedging_options).must_be_nil
-        _(publisher.token_bucket).must_be_nil
-        _(publisher.hedging_scheduler).must_be_nil
+        _(publisher.hedging).must_be_nil
+        _(publisher.send(:hedging_options)).must_be_nil
+        _(publisher.send(:token_bucket)).must_be_nil
+        _(publisher.send(:hedging_scheduler)).must_be_nil
       ensure
         publisher.stop!
       end
@@ -60,14 +61,15 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
     it "enables hedging with library defaults when hedging: {} or hedging: true is passed" do
       publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, hedging: {}
       begin
-        _(publisher.hedging_options).wont_be_nil
-        _(publisher.hedging_options).must_be :enabled?
-        _(publisher.hedging_options.hedge_delay).must_equal 1.0
-        _(publisher.hedging_options.max_tokens).must_equal 50
-        _(publisher.hedging_options.refill_ratio).must_equal 0.1
-        _(publisher.token_bucket).wont_be_nil
-        _(publisher.token_bucket.tokens).must_equal 0.0
-        _(publisher.hedging_scheduler).wont_be_nil
+        _(publisher.hedging).must_equal(
+          { enabled: true, hedge_delay: 1.0, max_tokens: 50, refill_ratio: 0.1 }
+        )
+        _(publisher.hedging).must_be :frozen?
+        _(publisher.send(:hedging_options)).wont_be_nil
+        _(publisher.send(:hedging_options)).must_be :enabled?
+        _(publisher.send(:token_bucket)).wont_be_nil
+        _(publisher.send(:token_bucket).tokens).must_equal 0.0
+        _(publisher.send(:hedging_scheduler)).wont_be_nil
       ensure
         publisher.stop!
       end
@@ -80,11 +82,33 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         hedging: { enabled: false, hedge_delay: 0.2, max_tokens: 10, refill_ratio: 0.2 }
       )
       begin
-        _(publisher.hedging_options).must_be_nil
-        _(publisher.token_bucket).must_be_nil
-        _(publisher.hedging_scheduler).must_be_nil
+        _(publisher.hedging).must_be_nil
+        _(publisher.send(:hedging_options)).must_be_nil
+        _(publisher.send(:token_bucket)).must_be_nil
+        _(publisher.send(:hedging_scheduler)).must_be_nil
       ensure
         publisher.stop!
+      end
+    end
+
+    it "accepts string keys in async: hash on pubsub.publisher and initializes hedging on first publish_async" do
+      pub = pubsub.publisher(
+        topic_name,
+        skip_lookup: true,
+        async: { "hedging" => { "hedge_delay" => 0.25, "max_tokens" => 12 } }
+      )
+      stub = ScriptedHedgingTopicAdminStub.new do |_idx, req, _opts, _handle|
+        Google::Cloud::PubSub::V1::PublishResponse.new message_ids: Array.new(req[:messages].size, "str-key-1")
+      end
+      pubsub.service.mocked_topic_admin = stub
+
+      begin
+        pub.publish_async "msg"
+        _(pub.async_publisher.hedging).must_equal(
+          { enabled: true, hedge_delay: 0.25, max_tokens: 12, refill_ratio: 0.1 }
+        )
+      ensure
+        pub.async_publisher&.stop!
       end
     end
 
@@ -102,7 +126,19 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       end
 
       assert_raises ArgumentError do
+        Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, hedging: { typo_key: 1 }
+      end
+
+      assert_raises ArgumentError do
+        Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, hedging: { "typo_key" => 1 }
+      end
+
+      assert_raises ArgumentError do
         pubsub.publisher topic_name, skip_lookup: true, async: { hedging: { max_tokens: 300 } }
+      end
+
+      assert_raises ArgumentError do
+        Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, message_ordering: true
       end
     end
 
@@ -117,23 +153,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       end
     end
 
-    it "rejects enabling both hedging and message ordering" do
-      assert_raises ArgumentError do
-        Google::Cloud::PubSub::AsyncPublisher.new(
-          topic_name,
-          pubsub.service,
-          hedging: { hedge_delay: 0.2 },
-          message_ordering: true
-        )
-      end
-
+    it "rejects enabling both hedging and message ordering with OrderedMessagesDisabled" do
       publisher = Google::Cloud::PubSub::AsyncPublisher.new(
         topic_name,
         pubsub.service,
         hedging: { hedge_delay: 0.2 }
       )
       begin
-        err = assert_raises ArgumentError do
+        err = assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
           publisher.enable_message_ordering!
         end
         _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
@@ -142,12 +169,22 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       end
     end
 
-    it "rejects ordered messages and ordered batches when hedging is enabled, while preserving OrderedMessagesDisabled when hedging is disabled" do
-      unhedged = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
+    it "rejects ordered messages without leaking flow control capacity when hedging is enabled" do
+      unhedged = Google::Cloud::PubSub::AsyncPublisher.new(
+        topic_name,
+        pubsub.service,
+        flow_control: { message_limit: 1, limit_exceeded_behavior: :error }
+      )
       begin
         assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
           unhedged.publish "a", ordering_key: "k1"
         end
+        # Flow control permit must have been released so a valid unordered message succeeds
+        stub = ScriptedHedgingTopicAdminStub.new do |_idx, req, _opts, _handle|
+          Google::Cloud::PubSub::V1::PublishResponse.new message_ids: Array.new(req[:messages].size, "unhedged-ok")
+        end
+        unhedged.service.mocked_topic_admin = stub
+        unhedged.publish "valid-unordered"
       ensure
         unhedged.stop!
       end
@@ -155,7 +192,8 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       publisher = Google::Cloud::PubSub::AsyncPublisher.new(
         topic_name,
         pubsub.service,
-        hedging: { hedge_delay: 0.1, refill_ratio: 0.2 }
+        hedging: { hedge_delay: 0.1, refill_ratio: 0.2 },
+        flow_control: { message_limit: 1, limit_exceeded_behavior: :error }
       )
       begin
         stub = ScriptedHedgingTopicAdminStub.new do |_idx, req, _opts, _handle|
@@ -163,10 +201,13 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         end
         publisher.service.mocked_topic_admin = stub
 
-        err = assert_raises ArgumentError do
+        err = assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
           publisher.publish "a", ordering_key: "k1"
         end
         _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
+
+        # Flow control permit must have been released on error
+        publisher.publish "unordered-after-rejected-ordered"
 
         cb_results = Queue.new
         ordered_item = OpenStruct.new msg: Google::Cloud::PubSub::V1::PubsubMessage.new(data: "a", ordering_key: "k1"),
@@ -181,10 +222,8 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         publisher.send :publish_batch_sync, topic_name, ordered_batch
         res = cb_results.pop
         _(res).must_be :failed?
-        _(res.error).must_be_kind_of ArgumentError
+        _(res.error).must_be_kind_of Google::Cloud::PubSub::OrderedMessagesDisabled
         _(res.error.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
-        _(stub.call_count).must_equal 0
-        _(publisher.token_bucket.tokens).must_equal 0.0
       ensure
         publisher.stop!
       end
@@ -206,6 +245,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
         stub = ScriptedHedgingTopicAdminStub.new do |idx, req, _opts, handle|
@@ -221,7 +261,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
             # Slow batch #1 (attempt 0) when bucket has 1.0 token -> stalls until cancelled by hedged attempt 1 (idx 6)
             begin
               handle.sleep_interruptibly 2.0
-            rescue Google::Cloud::PubSub::AsyncPublisher::AttemptCancelledError
+            rescue attempt_cancelled_err
               raise GRPC::Cancelled, "cancelled by winner"
             end
             Google::Cloud::PubSub::V1::PublishResponse.new message_ids: ["slow1-primary"]
@@ -251,7 +291,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(res0).must_be :succeeded?
         _(res0.message_id).must_equal "cold-0"
         _(stub.call_count).must_equal 1
-        _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+        _(bucket.tokens).must_be_close_to 0.2, 1e-6
 
         # 2. Warmup 4 fast batches (bucket: 0.2 -> 1.0)
         4.times do |i|
@@ -259,7 +299,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
           _(res).must_be :succeeded?
         end
         _(stub.call_count).must_equal 5
-        _(publisher.token_bucket.tokens).must_be_close_to 1.0, 1e-6
+        _(bucket.tokens).must_be_close_to 1.0, 1e-6
 
         # 3. Slow batch with 1.0 token -> hedges and hedged attempt wins! (bucket: 1.0 - 1.0 + 0.2 = 0.2)
         res_hedged = publish_single.call "slow-1"
@@ -267,15 +307,16 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(res_hedged.message_id).must_equal "slow1-hedge-win"
         _(stub.call_count).must_equal 7
         _(stub.calls[5][:handle]).must_be :cancelled?
-        _(stub.calls[6][:options].retry_policy.retry_codes).must_equal []
-        _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+        _(stub.calls[6][:options].retry_policy).must_be_kind_of Proc
+        _(stub.calls[6][:options].retry_policy.call(GRPC::Unavailable.new)).must_equal false
+        _(bucket.tokens).must_be_close_to 0.2, 1e-6
 
         # 4. Next slow batch with 0.2 tokens -> rate limited, no hedge dispatched! (bucket: 0.2 + 0.2 = 0.4)
         res_limited = publish_single.call "slow-2"
         _(res_limited).must_be :succeeded?
         _(res_limited.message_id).must_equal "slow2-primary"
         _(stub.call_count).must_equal 8
-        _(publisher.token_bucket.tokens).must_be_close_to 0.4, 1e-6
+        _(bucket.tokens).must_be_close_to 0.4, 1e-6
 
         logs = log_io.string
         _(logs).must_include "Publishing hedged attempt 1"
@@ -296,10 +337,11 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        5.times { publisher.token_bucket.refill }
-        _(publisher.token_bucket.tokens).must_equal 1.0
+        5.times { bucket.refill }
+        _(bucket.tokens).must_equal 1.0
 
         stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, handle|
           if idx.zero?
@@ -325,8 +367,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(stub.call_count).must_equal 2
         _(stub.calls[0][:handle]).must_be :cancelled?
         _(stub.calls[1][:options].timeout).must_be :<=, 5.0
-        _(stub.calls[1][:options].retry_policy.retry_codes).must_equal []
-        _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+        _(stub.calls[1][:options].retry_policy).must_be_kind_of Proc
+        _(stub.calls[1][:options].retry_policy.call(GRPC::Unavailable.new)).must_equal false
+        _(bucket.tokens).must_be_close_to 0.2, 1e-6
       ensure
         publisher.stop!
       end
@@ -340,10 +383,11 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.2, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        5.times { publisher.token_bucket.refill }
-        _(publisher.token_bucket.tokens).must_equal 1.0
+        5.times { bucket.refill }
+        _(bucket.tokens).must_equal 1.0
 
         stub = ScriptedHedgingTopicAdminStub.new do |_idx, _req, _opts, _handle|
           Google::Cloud::PubSub::V1::PublishResponse.new message_ids: ["fast-orig"]
@@ -358,7 +402,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(res).must_be :succeeded?
         _(res.message_id).must_equal "fast-orig"
         _(stub.call_count).must_equal 1
-        _(publisher.token_bucket.tokens).must_be_close_to 1.2, 1e-6
+        _(bucket.tokens).must_be_close_to 1.2, 1e-6
       ensure
         publisher.stop!
       end
@@ -372,9 +416,10 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        5.times { publisher.token_bucket.refill }
+        5.times { bucket.refill }
         hedge_started = Concurrent::Event.new
 
         stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, handle|
@@ -399,7 +444,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(stub.call_count).must_equal 2
         _(stub.calls[0][:handle]).wont_be :cancelled?
         _(stub.calls[1][:handle]).must_be :cancelled?
-        _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+        _(bucket.tokens).must_be_close_to 0.2, 1e-6
       ensure
         publisher.stop!
       end
@@ -413,10 +458,11 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        10.times { publisher.token_bucket.refill }
-        _(publisher.token_bucket.tokens).must_equal 2.0
+        10.times { bucket.refill }
+        _(bucket.tokens).must_equal 2.0
 
         stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, handle|
           if idx < 2
@@ -440,26 +486,27 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         _(stub.calls[1][:handle]).must_be :cancelled?
         _(stub.calls[2][:handle]).wont_be :cancelled?
         # Started at 2.0, consumed 2 tokens, refilled 0.2 on win -> 0.2
-        _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+        _(bucket.tokens).must_be_close_to 0.2, 1e-6
 
         # Verify x-goog-pubsub-client-telemetry header on attempts 0, 1, and 2
         telemetries = (0..2).map do |attempt_idx|
           raw_b64 = stub.calls[attempt_idx][:options].metadata["x-goog-pubsub-client-telemetry"]
           _(raw_b64).wont_be_nil
-          decoded = Google::Cloud::PubSub::V1::PubsubClientTelemetry.decode Base64.strict_decode64(raw_b64)
+          decoded = Google::Cloud::PubSub::V1::PubsubClientTelemetry.decode raw_b64.unpack1("m0")
           _(decoded.publish_operation.hedged_attempt_count).must_equal attempt_idx
           _(decoded.publish_operation.publish_start_time.seconds).must_be :>, 0
           decoded
         end
-        _(telemetries[1].publish_operation.publish_start_time).must_equal telemetries[0].publish_operation.publish_start_time
-        _(telemetries[2].publish_operation.publish_start_time).must_equal telemetries[0].publish_operation.publish_start_time
+        start_time0 = telemetries[0].publish_operation.publish_start_time
+        _(telemetries[1].publish_operation.publish_start_time).must_equal start_time0
+        _(telemetries[2].publish_operation.publish_start_time).must_equal start_time0
       ensure
         publisher.stop!
       end
     end
   end
 
-  describe "asymmetric error handling" do
+  describe "asymmetric error handling and lifecycle resilience" do
     it "ignores hedged attempt failure while attempt 0 is still in flight and resolves when attempt 0 succeeds" do
       publisher = Google::Cloud::PubSub::AsyncPublisher.new(
         topic_name,
@@ -468,9 +515,10 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        5.times { publisher.token_bucket.refill }
+        5.times { bucket.refill }
         hedge_failed = Concurrent::Event.new
 
         stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, _handle|
@@ -506,9 +554,10 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
         interval: 0.005,
         hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
       )
+      bucket = publisher.send :token_bucket
 
       begin
-        5.times { publisher.token_bucket.refill }
+        5.times { bucket.refill }
         hedge_started = Concurrent::Event.new
 
         stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, handle|
@@ -535,6 +584,110 @@ describe Google::Cloud::PubSub::AsyncPublisher, :hedging, :mock_pubsub do
       ensure
         publisher.stop!
       end
+    end
+
+    it "does not deadlock coordinator.wait if a hedged attempt raises a non-StandardError Exception" do
+      prev_abort = Thread.abort_on_exception
+      prev_report = Thread.report_on_exception
+      Thread.abort_on_exception = false
+      Thread.report_on_exception = false
+      publisher = Google::Cloud::PubSub::AsyncPublisher.new(
+        topic_name,
+        pubsub.service,
+        max_messages: 1,
+        interval: 0.005,
+        hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
+      )
+      bucket = publisher.send :token_bucket
+
+      begin
+        5.times { bucket.refill }
+        hedge_raised = Concurrent::Event.new
+
+        stub = ScriptedHedgingTopicAdminStub.new do |idx, _req, _opts, _handle|
+          if idx.zero?
+            hedge_raised.wait 1.0
+            sleep 0.02
+            raise Google::Cloud::UnavailableError, "attempt 0 failed after hedged attempt crashed"
+          else
+            hedge_raised.set
+            raise NotImplementedError, "fatal non-StandardError in hedged attempt 1"
+          end
+        end
+        publisher.service.mocked_topic_admin = stub
+
+        results = Queue.new
+        publisher.publish("fatal-msg") { |r| results.push r }
+        publisher.flush
+
+        res = results.pop
+        _(res).must_be :failed?
+        _(res.error).must_be_kind_of Google::Cloud::UnavailableError
+      ensure
+        publisher.stop!
+        Thread.abort_on_exception = prev_abort
+        Thread.report_on_exception = prev_report
+      end
+    end
+
+    it "refunds token when hedging_thread_pool rejects a hedged attempt" do
+      publisher = Google::Cloud::PubSub::AsyncPublisher.new(
+        topic_name,
+        pubsub.service,
+        max_messages: 1,
+        interval: 0.005,
+        hedging: { hedge_delay: 0.1, max_tokens: 1, refill_ratio: 0.2 }
+      )
+      bucket = publisher.send :token_bucket
+      pool = publisher.send :hedging_thread_pool
+
+      begin
+        5.times { bucket.refill }
+        _(bucket.tokens).must_equal 1.0
+
+        # Shut down hedging_thread_pool before publishing so spawn_hedged_attempt returns false
+        pool.shutdown
+        pool.wait_for_termination 1.0
+
+        stub = ScriptedHedgingTopicAdminStub.new do |_idx, _req, _opts, _handle|
+          sleep 0.16
+          Google::Cloud::PubSub::V1::PublishResponse.new message_ids: ["pool-closed-ok"]
+        end
+        publisher.service.mocked_topic_admin = stub
+
+        results = Queue.new
+        publisher.publish("msg") { |r| results.push r }
+        publisher.flush
+
+        res = results.pop
+        _(res).must_be :succeeded?
+        _(res.message_id).must_equal "pool-closed-ok"
+        _(stub.call_count).must_equal 1
+        # Token acquired (1.0 -> 0.0), refunded when pool wasn't running (0.0 -> 1.0), capped at max_tokens=1
+        _(bucket.tokens).must_equal 1.0
+      ensure
+        publisher.stop!
+      end
+    end
+
+    it "does not shut down hedging_thread_pool when wait! is called before stop, and stop! drains cleanly" do
+      publisher = Google::Cloud::PubSub::AsyncPublisher.new(
+        topic_name,
+        pubsub.service,
+        max_messages: 1,
+        interval: 0.005,
+        hedging: { hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 }
+      )
+      pool = publisher.send :hedging_thread_pool
+
+      begin
+        # Calling wait!(0.02) on a live publisher should time out without killing hedging_thread_pool
+        publisher.wait! 0.02
+        _(pool).must_be :running?
+      ensure
+        publisher.stop! 1.0
+      end
+      _(pool).must_be :shutdown?
     end
   end
 end
