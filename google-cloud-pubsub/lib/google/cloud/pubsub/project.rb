@@ -133,6 +133,43 @@ module Google
         # @param [Hash] async A hash of values to configure the topic's
         #   {AsyncPublisher} that is created when {Publisher#publish_async}
         #   is called. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #   * `:max_bytes` (Integer) The maximum size of messages to be
+        #     collected before the batch is published. Default is 1,000,000
+        #     (1MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 100.
+        #   * `:interval` (Numeric) The number of seconds to collect messages
+        #     before the batch is published. Default is 0.01.
+        #   * `:threads` (Hash) The number of threads used to handle `:publish`
+        #     (default 2) and `:callback` (default 4).
+        #   * `:flow_control` (Hash) Flow control limits (`:message_limit`,
+        #     `:byte_limit`, `:limit_exceeded_behavior`).
+        #   * `:compress` (Boolean) Whether to enable gzip compression for
+        #     batches exceeding `:compression_bytes_threshold`. Default is
+        #     `false`.
+        #   * `:compression_bytes_threshold` (Integer) The byte threshold at
+        #     which batches are compressed when `:compress` is `true`. Default
+        #     is 240.
+        #   * `:hedging` (Hash, Boolean) Publish hedging configuration for
+        #     reducing tail latency by sending backup publish RPCs when a batch
+        #     exceeds `:hedge_delay`. Disabled by default (`nil` or `false`).
+        #     Pass `true` or a `Hash` with optional keys:
+        #     * `:enabled` (Boolean) Whether hedging is enabled. Default is
+        #       `true`.
+        #     * `:hedge_delay` (Numeric) Delay in seconds (`0.1..10.0`, strictly
+        #       less than the publish timeout) before dispatching a hedged
+        #       publish attempt. Default is `1.0`.
+        #     * `:max_tokens` (Integer) Maximum capacity of the client-side
+        #       hedge token bucket (`1..250`). Default is `50`.
+        #     * `:refill_ratio` (Numeric) Token credit added per successful
+        #       publish batch (`0.001..0.2`). Default is `0.1`.
+        #     Publish hedging cannot be combined with message ordering
+        #     ({Publisher#enable_message_ordering!}); attempting to enable both
+        #     or publish with an `ordering_key` raises
+        #     {Google::Cloud::PubSub::OrderedMessagesDisabled}.
         # @param [Boolean] skip_lookup Optionally create a {Publisher} object
         #   without verifying the topic resource exists on the Pub/Sub
         #   service. Calls made on this object will raise errors if the service

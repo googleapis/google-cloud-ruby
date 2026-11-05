@@ -129,17 +129,11 @@ module Google
           options = build_publish_call_options compress: compress,
                                                call_options: call_options,
                                                attempt_handle: attempt_handle
-          prev_handle = Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY]
-          Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY] = attempt_handle
-          begin
-            if options
-              topic_admin.publish_internal request, options
-            else
-              topic_admin.publish_internal request
-            end
-          ensure
-            attempt_handle&.clear_operation
-            Thread.current[TopicAdmin::Client::THREAD_ATTEMPT_HANDLE_KEY] = prev_handle
+          return invoke_publish_internal request, options unless attempt_handle
+
+          topic_admin.ensure_publish_operation_hook! if topic_admin.respond_to? :ensure_publish_operation_hook!
+          TopicAdmin::Client.with_attempt_handle attempt_handle do
+            invoke_publish_internal request, options
           end
         end
 
@@ -234,6 +228,14 @@ module Google
           end
         end
 
+        def invoke_publish_internal request, options
+          if options
+            topic_admin.publish_internal request, options
+          else
+            topic_admin.publish_internal request
+          end
+        end
+
         def build_publish_call_options compress: false, call_options: nil, attempt_handle: nil
           return nil if !compress && call_options.nil? && attempt_handle.nil?
 
@@ -252,14 +254,38 @@ module Google
 
         def resolve_retry_policy raw_retry_policy, attempt_handle
           return raw_retry_policy if attempt_handle.nil?
-          return raw_retry_policy if raw_retry_policy.is_a? TopicAdmin::CancellableRetryPolicy
+          return raw_retry_policy if raw_retry_policy.is_a? Proc
 
-          if raw_retry_policy.is_a? Hash
-            TopicAdmin::CancellableRetryPolicy.new attempt_handle: attempt_handle, **raw_retry_policy
-          elsif raw_retry_policy.nil?
-            TopicAdmin::CancellableRetryPolicy.new attempt_handle: attempt_handle
-          else
-            raw_retry_policy
+          policy_hash = default_publish_retry_policy_hash
+          policy_hash = policy_hash.merge raw_retry_policy.to_h if raw_retry_policy.respond_to? :to_h
+          policy = ::Gapic::CallOptions::RetryPolicy.new(**policy_hash)
+          build_cancellable_retry_proc policy, attempt_handle
+        end
+
+        def default_publish_retry_policy_hash
+          if @topic_admin.respond_to? :configure
+            cfg = @topic_admin.configure
+            if cfg.respond_to?(:rpcs) && cfg.rpcs.respond_to?(:publish) && cfg.rpcs.publish.retry_policy.is_a?(Hash)
+              return cfg.rpcs.publish.retry_policy
+            end
+            return cfg.retry_policy if cfg.respond_to?(:retry_policy) && cfg.retry_policy.is_a?(Hash)
+          end
+          V1::TopicAdmin::Client.configure.rpcs.publish.retry_policy.to_h
+        end
+
+        def build_cancellable_retry_proc policy, attempt_handle
+          current_delay = policy.initial_delay
+          proc do |error|
+            if attempt_handle.cancelled? ||
+               !error.is_a?(::GRPC::BadStatus) ||
+               !policy.retry_codes.include?(error.code)
+              false
+            else
+              delay_to_perform = [current_delay + Kernel.rand(0.0..policy.jitter), policy.max_delay].min
+              attempt_handle.sleep_interruptibly delay_to_perform
+              current_delay = [current_delay * policy.multiplier, policy.max_delay].min
+              true
+            end
           end
         end
       end

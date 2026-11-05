@@ -195,6 +195,50 @@ msgs = publisher.publish do |batch|
 end
 ```
 
+#### Publish Hedging
+
+To reduce tail latency during asynchronous batch publishing, you can configure
+publish hedging via the `async: { hedging: ... }` option on
+{Google::Cloud::PubSub::Project#publisher Project#publisher}. When hedging is
+enabled and the client-side token bucket has at least 1 full token, a backup
+publish RPC is dispatched if the original publish attempt takes longer than
+`hedge_delay` seconds, and the first attempt to succeed cancels the remaining
+attempts.
+
+* `:enabled` (`Boolean`) - Whether publish hedging is enabled. Default is `true`
+  when a `:hedging` hash is provided.
+* `:hedge_delay` (`Numeric`) - Seconds to wait before sending a hedged attempt
+  (`0.1..10.0`, and strictly less than the publish RPC timeout). Default is `1.0`.
+* `:max_tokens` (`Integer`) - Maximum capacity of the token bucket (`1..250`).
+  Default is `50`.
+* `:refill_ratio` (`Numeric`) - Token credit added per successful publish batch
+  (`0.001..0.2`). Default is `0.1`.
+
+Publish hedging cannot be used together with message ordering
+({Google::Cloud::PubSub::Publisher#enable_message_ordering!
+Publisher#enable_message_ordering!}) or `ordering_key`; attempting to use both
+raises {Google::Cloud::PubSub::OrderedMessagesDisabled}.
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new
+
+publisher = pubsub.publisher(
+  "my-topic",
+  async: {
+    hedging: {
+      hedge_delay: 0.5,
+      max_tokens: 50,
+      refill_ratio: 0.1
+    }
+  }
+)
+
+publisher.publish_async "task completed"
+publisher.async_publisher.stop!
+```
+
 ### Subscriber Client
 
 ```ruby

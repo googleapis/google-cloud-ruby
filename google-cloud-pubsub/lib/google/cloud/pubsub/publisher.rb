@@ -81,12 +81,6 @@ module Google
         end
 
         ##
-        # @private HedgingTokenBucket instance when publish hedging is enabled on the AsyncPublisher.
-        def token_bucket
-          @async_publisher&.token_bucket
-        end
-
-        ##
         # The name of the publisher.
         #
         # @return [String] A fully-qualified topic name in the form
@@ -359,6 +353,9 @@ module Google
         # See {#message_ordering?}.  See {#publish_async},
         # {Subscriber#listen}, and {Message#ordering_key}.
         #
+        # @raise [Google::Cloud::PubSub::OrderedMessagesDisabled] when publish
+        #   hedging is enabled.
+        #
         def enable_message_ordering!
           @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.enable_message_ordering!
@@ -396,21 +393,28 @@ module Google
         ##
         # @private New Publisher from a Google::Cloud::PubSub::V1::Topic object.
         def self.from_grpc grpc, service, async: nil
-          if async.is_a?(Hash) && (async.key?(:hedging) || async.key?("hedging"))
-            raw_hedging = async.key?(:hedging) ? async[:hedging] : async["hedging"]
-            ordering = async.key?(:message_ordering) ? async[:message_ordering] : async["message_ordering"]
-            AsyncPublisher::HedgingOptions.from(
-              raw_hedging,
-              message_ordering: !(!ordering),
+          normalized_async = normalize_async_opts async
+          if normalized_async&.key? :hedging
+            AsyncPublisher.const_get(:HedgingOptions).from(
+              normalized_async[:hedging],
               timeout: service&.publish_timeout
             )
           end
           new.tap do |t|
             t.grpc = grpc
             t.service = service
-            t.instance_variable_set :@async_opts, async if async
+            t.instance_variable_set :@async_opts, normalized_async if normalized_async
           end
         end
+
+        def self.normalize_async_opts async
+          return nil unless async.is_a? Hash
+
+          async.each_with_object({}) do |(key, value), acc|
+            acc[key.respond_to?(:to_sym) ? key.to_sym : key] = value
+          end
+        end
+        private_class_method :normalize_async_opts
 
         ##
         # @private New reference {Publisher} from a topic name without making

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "base64"
+require "English"
 require "monitor"
 require "concurrent"
 require "google/protobuf/well_known_types"
@@ -62,6 +62,9 @@ module Google
       # @attr_reader [Numeric] publish_threads The number of threads used to publish messages. Default is 2.
       # @attr_reader [Numeric] callback_threads The number of threads to handle the published messages' callbacks.
       #   Default is 4.
+      # @attr_reader [Hash] flow_control Flow control settings for limiting outstanding messages and bytes.
+      # @attr_reader [Hash, nil] hedging Publish hedging configuration hash (`:enabled`, `:hedge_delay`,
+      #   `:max_tokens`, `:refill_ratio`) when hedging is enabled, or `nil` when disabled.
       #
       class AsyncPublisher
         include MonitorMixin
@@ -73,16 +76,12 @@ module Google
         attr_reader :publish_threads
         attr_reader :callback_threads
         attr_reader :flow_control
-        attr_reader :hedging_options
-        attr_reader :token_bucket
-        attr_reader :hedging_scheduler
-        alias hedging hedging_options
+        attr_reader :hedging
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
                     :callback_thread_pool, :flow_controller,
-                    :compress, :compression_bytes_threshold,
-                    :hedging_thread_pool
+                    :compress, :compression_bytes_threshold
 
         ##
         # @private Create a new instance of the object.
@@ -95,8 +94,7 @@ module Google
                        flow_control: {},
                        compress: nil,
                        compression_bytes_threshold: nil,
-                       hedging: nil,
-                       message_ordering: false
+                       hedging: nil
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -112,7 +110,7 @@ module Google
             byte_limit: 10 * @max_bytes
           }.merge(flow_control).freeze
 
-          @ordered = !(!message_ordering)
+          @ordered = false
           init_hedging! hedging
 
           @published_at = nil
@@ -154,33 +152,39 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          bytesize = msg.to_proto.bytesize
           begin
-            @flow_controller.acquire msg.to_proto.bytesize
+            @flow_controller.acquire bytesize
           rescue FlowControlLimitError => e
             stop_publish ordering_key, e if ordering_key
             raise
           end
 
-          synchronize do
-            raise AsyncPublisherStopped if @stopped
-            if @hedging_options && (@ordered || !msg.ordering_key.empty?)
-              raise ArgumentError, "Publish hedging and message ordering cannot be enabled at the same time."
-            end
-            raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
+          added = false
+          begin
+            synchronize do
+              raise AsyncPublisherStopped if @stopped
+              if @hedging_options && (@ordered || !msg.ordering_key.empty?)
+                raise OrderedMessagesDisabled,
+                      "Publish hedging and message ordering cannot be enabled at the same time."
+              end
+              raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
 
-            batch = resolve_batch_for_message msg
-            if batch.canceled?
-              @flow_controller.release msg.to_proto.bytesize
-              raise OrderingKeyError, batch.ordering_key
+              batch = resolve_batch_for_message msg
+              raise OrderingKeyError, batch.ordering_key if batch.canceled?
+
+              batch_action = batch.add msg, callback
+              added = true
+              if batch_action == :full
+                publish_batches! reason: "batch full"
+              elsif @published_at.nil?
+                # Set initial time to now to start the background counter
+                @published_at = Time.now
+              end
+              @cond.signal
             end
-            batch_action = batch.add msg, callback
-            if batch_action == :full
-              publish_batches! reason: "batch full"
-            elsif @published_at.nil?
-              # Set initial time to now to start the background counter
-              @published_at = Time.now
-            end
-            @cond.signal
+          ensure
+            @flow_controller.release bytesize unless added
           end
 
           nil
@@ -198,9 +202,11 @@ module Google
             break if @stopped
 
             @stopped = true
+            @hedging_scheduler&.stop!
             publish_batches! stop: true, reason: "shutdown"
             @cond.signal
             @publish_thread_pool.shutdown
+            @hedging_thread_pool&.shutdown
           end
 
           self
@@ -221,12 +227,7 @@ module Google
         def wait! timeout = nil
           synchronize do
             @publish_thread_pool.wait_for_termination timeout
-
-            @hedging_scheduler&.stop!
-            if @hedging_thread_pool
-              @hedging_thread_pool.shutdown
-              @hedging_thread_pool.kill unless @hedging_thread_pool.wait_for_termination 0.1
-            end
+            @hedging_thread_pool&.wait_for_termination timeout
 
             @callback_thread_pool.shutdown
             @callback_thread_pool.wait_for_termination timeout
@@ -288,6 +289,9 @@ module Google
         #
         # See {#message_ordering?}. See {Publisher#publish_async},
         # {Subscriber#listen}, and {Message#ordering_key}.
+        #
+        # @raise [Google::Cloud::PubSub::OrderedMessagesDisabled] when publish
+        #   hedging is enabled.
         #
         def enable_message_ordering!
           synchronize do
@@ -420,7 +424,7 @@ module Google
         rescue StandardError => e
           items = batch.items
 
-          if !batch.ordering_key.empty? && !(@hedging_options && e.is_a?(ArgumentError))
+          if !batch.ordering_key.empty? && !(@hedging_options && e.is_a?(OrderedMessagesDisabled))
             retry if publish_batch_error_retryable? e
             # Cancel the batch if the error is not to be retried.
             begin
@@ -450,10 +454,15 @@ module Google
           @hedging_options = HedgingOptions.from hedging,
                                                  message_ordering: @ordered,
                                                  timeout: @service&.publish_timeout
+          @hedging = @hedging_options&.to_h
           return unless @hedging_options
 
           @token_bucket = HedgingTokenBucket.new @hedging_options
-          @hedging_thread_pool = Concurrent::CachedThreadPool.new
+          @hedging_thread_pool = Concurrent::ThreadPoolExecutor.new(
+            max_threads: @hedging_options.max_tokens,
+            max_queue: @hedging_options.max_tokens,
+            fallback_policy: :abort
+          )
           @hedging_scheduler = HedgingScheduler.new(
             hedge_delay: @hedging_options.hedge_delay,
             token_bucket: @token_bucket,
@@ -464,10 +473,11 @@ module Google
         end
 
         CLIENT_TELEMETRY_HEADER = "x-goog-pubsub-client-telemetry".freeze
+        private_constant :CLIENT_TELEMETRY_HEADER
 
         def publish_items topic_name, batch, items
           if @hedging_options && (@ordered || !batch.ordering_key.to_s.empty?)
-            raise ArgumentError, "Publish hedging and message ordering cannot be enabled at the same time."
+            raise OrderedMessagesDisabled, "Publish hedging and message ordering cannot be enabled at the same time."
           end
 
           if hedge_batch? batch
@@ -507,43 +517,71 @@ module Google
           attempt0_handle = coordinator.add_attempt 0
           @hedging_scheduler.schedule coordinator, attempt_number: 1
 
-          dispatch_attempt_task coordinator, batch_context, 0, attempt0_handle
+          execute_publish_attempt coordinator, batch_context, 0, attempt0_handle
           coordinator.wait
         end
 
         def dispatch_hedged_attempt coordinator, batch_context, attempt_number, attempt_timeout
+          return false unless @hedging_thread_pool&.running?
+
           handle = coordinator.add_attempt attempt_number
-          return unless handle
+          return false unless handle
 
           call_options = {
             timeout: attempt_timeout,
             retry_policy: { retry_codes: [] }
           }
-          dispatch_attempt_task coordinator, batch_context, attempt_number, handle,
-                                call_options: call_options
-        end
-
-        def dispatch_attempt_task coordinator, batch_context, attempt_number, attempt_handle, call_options: nil
-          if @hedging_thread_pool&.running?
-            Concurrent::Promises.future_on(
-              @hedging_thread_pool,
+          begin
+            @hedging_thread_pool.post(
               coordinator,
               batch_context,
               attempt_number,
-              attempt_handle,
+              handle,
               call_options
             ) do |coord, ctx, num, hdl, opts|
               execute_publish_attempt coord, ctx, num, hdl, call_options: opts
             end
-          else
-            execute_publish_attempt coordinator, batch_context, attempt_number, attempt_handle,
-                                    call_options: call_options
+            true
+          rescue Concurrent::RejectedExecutionError
+            handle.cancel!
+            coordinator.handle_attempt_failure attempt_number,
+                                               AttemptCancelledError.new("Hedge thread pool is full")
+            false
           end
         end
 
         def execute_publish_attempt coordinator, batch_context, attempt_number, attempt_handle, call_options: nil
           return if attempt_handle.nil? || attempt_handle.cancelled? || coordinator.done?
 
+          reported = false
+          begin
+            effective_call_options = build_attempt_call_options batch_context, attempt_number, call_options
+            response = @service.publish batch_context[:topic_name],
+                                        batch_context[:messages],
+                                        compress: batch_context[:compress],
+                                        call_options: effective_call_options,
+                                        attempt_handle: attempt_handle
+            reported = true
+            if attempt_handle.cancelled?
+              coordinator.handle_attempt_failure attempt_number,
+                                                 AttemptCancelledError.new("Publish attempt cancelled")
+            else
+              coordinator.handle_attempt_success attempt_number, response
+            end
+          rescue StandardError => e
+            reported = true
+            coordinator.handle_attempt_failure attempt_number, e
+          ensure
+            unless reported
+              coordinator.handle_attempt_failure(
+                attempt_number,
+                $ERROR_INFO || AttemptCancelledError.new("Publish attempt aborted")
+              )
+            end
+          end
+        end
+
+        def build_attempt_call_options batch_context, attempt_number, call_options
           effective_call_options = (call_options || {}).dup
           metadata = (effective_call_options[:metadata] || {}).dup
           if batch_context[:publish_start_time]
@@ -553,20 +591,7 @@ module Google
             )
           end
           effective_call_options[:metadata] = metadata unless metadata.empty?
-
-          response = @service.publish batch_context[:topic_name],
-                                      batch_context[:messages],
-                                      compress: batch_context[:compress],
-                                      call_options: effective_call_options,
-                                      attempt_handle: attempt_handle
-          if attempt_handle.cancelled?
-            coordinator.handle_attempt_failure attempt_number,
-                                               AttemptCancelledError.new("Publish attempt cancelled")
-          else
-            coordinator.handle_attempt_success attempt_number, response
-          end
-        rescue StandardError => e
-          coordinator.handle_attempt_failure attempt_number, e
+          effective_call_options
         end
 
         def encode_client_telemetry attempt_number, publish_start_time
@@ -580,13 +605,14 @@ module Google
               publish_start_time: start_ts
             )
           )
-          Base64.strict_encode64 Google::Cloud::PubSub::V1::PubsubClientTelemetry.encode(telemetry)
+          [Google::Cloud::PubSub::V1::PubsubClientTelemetry.encode(telemetry)].pack "m0"
         end
 
         PUBLISH_RETRY_ERRORS = [
           GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
           GRPC::ResourceExhausted, GRPC::Unauthenticated, GRPC::Unavailable
         ].freeze
+        private_constant :PUBLISH_RETRY_ERRORS
 
         def publish_batch_error_retryable? error
           PUBLISH_RETRY_ERRORS.any? { |klass| error.is_a? klass }
@@ -601,6 +627,13 @@ module Google
             cback.call p_result
           end
         end
+
+        private
+
+        attr_reader :hedging_options
+        attr_reader :token_bucket
+        attr_reader :hedging_scheduler
+        attr_reader :hedging_thread_pool
       end
     end
 
