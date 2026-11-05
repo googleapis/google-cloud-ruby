@@ -85,11 +85,17 @@ module Google
 
           def extract_issuer_from_credentials
             client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
-            [:issuer, :service_account_email, :principal].each do |method|
+            [:issuer, :service_account_email].each do |method|
               return client.public_send(method) if client.respond_to?(method) && client.public_send(method)
+            end
+
+            if client.respond_to?(:impersonation_url) && client.impersonation_url
+              match = client.impersonation_url.match(/serviceAccounts\/(.+?):generateAccessToken/)
+              return match[1] if match
             end
             nil
           end
+
 
           def determine_issuer options = {}
             issuer = options[:issuer] || options[:client_email] || extract_issuer_from_credentials
