@@ -42,11 +42,7 @@ module Google
           end
 
           auth_client = storage_service.credentials.client
-          if auth_client.respond_to? :duplicate
-            @client.authorization = auth_client.duplicate scope: ["https://www.googleapis.com/auth/iam"]
-          else
-            @client.authorization = auth_client
-          end
+          @client.authorization = auth_client
         end
 
         def sign issuer, string_to_sign

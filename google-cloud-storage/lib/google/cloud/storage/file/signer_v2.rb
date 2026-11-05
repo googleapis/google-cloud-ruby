@@ -86,7 +86,7 @@ module Google
           def extract_issuer_from_credentials
             client = @service.credentials.respond_to?(:client) ? @service.credentials.client : @service.credentials
             [:issuer, :service_account_email].each do |method|
-              return client.public_send(method) if client.respond_to?(method) && client.public_send(method)
+              return client.public_send(method) if client.respond_to?(method) && !client.public_send(method).to_s.empty?
             end
 
             if client.respond_to?(:impersonation_url) && client.impersonation_url

@@ -202,26 +202,19 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     end
   end
 
-  it "falls back to IAMSigner when using principal" do
+  it "falls back to IAMSigner when using impersonation_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       credentials.issuer = nil
       credentials.signing_key = nil
       client = credentials.client
-      def client.principal; "impersonated_account@email.com"; end
-
+      def client.impersonation_url; "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/target-sa@project.iam.gserviceaccount.com:generateAccessToken"; end
       iam_signer_mock = Minitest::Mock.new
-      iam_signer_mock.expect :sign, "iam-signature", ["impersonated_account@email.com", "GET\n\n\n1325376300\n/bucket/file.ext"]
-
+      iam_signer_mock.expect :sign, "iam-signature", ["target-sa@project.iam.gserviceaccount.com", String]
       Google::Cloud.env.stub :metadata?, false do
         Google::Cloud::Storage::IAMSigner.stub :new, iam_signer_mock do
-          signed_url = file.signed_url
-
-          signed_url_params = CGI::parse(URI(signed_url).query)
-          _(signed_url_params["GoogleAccessId"]).must_equal ["impersonated_account@email.com"]
-          _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("iam-signature").delete("\n")]
+          file.signed_url version: :v4
         end
       end
-
       iam_signer_mock.verify
     end
   end
