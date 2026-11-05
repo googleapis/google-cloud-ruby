@@ -19,10 +19,10 @@ require "google/cloud/pubsub/async_publisher/hedging_token_bucket"
 require "google/cloud/pubsub/async_publisher/cancellation_sharer"
 require "google/cloud/pubsub/async_publisher/hedging_scheduler"
 
-describe Google::Cloud::PubSub::AsyncPublisher::HedgingScheduler do
-  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket }
-  let(:sharer_class) { Google::Cloud::PubSub::AsyncPublisher::CancellationSharer }
-  let(:scheduler_class) { Google::Cloud::PubSub::AsyncPublisher::HedgingScheduler }
+describe Google::Cloud::PubSub::AsyncPublisher, :hedging_scheduler do
+  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :HedgingTokenBucket }
+  let(:sharer_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :CancellationSharer }
+  let(:scheduler_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :HedgingScheduler }
   let(:log_io) { StringIO.new }
   let(:ruby_logger) do
     Logger.new(log_io).tap do |l|
@@ -31,6 +31,15 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingScheduler do
     end
   end
   let(:internal_logger) { Google::Cloud::PubSub::InternalLogger.new ruby_logger }
+
+  it "hides HedgedRequest and HedgingScheduler as private constants" do
+    assert_raises NameError do
+      Google::Cloud::PubSub::AsyncPublisher::HedgedRequest
+    end
+    assert_raises NameError do
+      Google::Cloud::PubSub::AsyncPublisher::HedgingScheduler
+    end
+  end
 
   it "dispatches hedged attempts in FIFO order, caps timeout at 10s, and re-enqueues for multiple hedging" do
     now_time = 100.0
@@ -188,5 +197,43 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingScheduler do
 
     scheduler.stop!
     _(scheduler.stopped?).must_equal true
+  end
+
+  it "refunds token when dispatch returns false or raises and keeps background timer thread alive" do
+    bucket = bucket_class.new({ hedge_delay: 0.1, max_tokens: 10, refill_ratio: 0.2 })
+    5.times { bucket.refill }
+    _(bucket.tokens).must_equal 1.0
+
+    second_event = Concurrent::Event.new
+    call_num = 0
+
+    scheduler = scheduler_class.new(
+      hedge_delay: 0.1,
+      token_bucket: bucket,
+      auto_start: true
+    ) do |coordinator, _batch, attempt_number, _timeout|
+      call_num += 1
+      raise "unexpected dispatch error" if call_num == 1
+
+      coordinator.handle_attempt_success attempt_number, "recovered-hedge"
+      second_event.set
+      true
+    end
+
+    now = scheduler.now
+    sharer1 = sharer_class.new batch: ["msg-1"], token_bucket: bucket, deadline: now + 5.0
+    sharer1.add_attempt 0
+    scheduler.schedule sharer1
+
+    sharer2 = sharer_class.new batch: ["msg-2"], token_bucket: bucket, deadline: now + 5.0
+    sharer2.add_attempt 0
+    scheduler.schedule sharer2, send_after: now + 0.15
+
+    _(second_event.wait(1.0)).must_equal true
+    _(sharer2.wait(0.5)).must_equal "recovered-hedge"
+    # First dispatch raised -> refunded 1.0 token, so second dispatch was able to acquire that token and win (+0.2 refill)
+    _(bucket.tokens).must_be_close_to 0.2, 1e-6
+
+    scheduler.stop!
   end
 end

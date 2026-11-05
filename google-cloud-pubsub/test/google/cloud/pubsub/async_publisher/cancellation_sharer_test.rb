@@ -16,15 +16,27 @@ require "helper"
 require "google/cloud/pubsub/async_publisher/hedging_token_bucket"
 require "google/cloud/pubsub/async_publisher/cancellation_sharer"
 
-describe Google::Cloud::PubSub::AsyncPublisher::CancellationSharer do
-  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket }
-  let(:sharer_class) { Google::Cloud::PubSub::AsyncPublisher::CancellationSharer }
-  let(:handle_class) { Google::Cloud::PubSub::AsyncPublisher::AttemptHandle }
-  let(:cancelled_error_class) { Google::Cloud::PubSub::AsyncPublisher::AttemptCancelledError }
+describe Google::Cloud::PubSub::AsyncPublisher, :cancellation_sharer do
+  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :HedgingTokenBucket }
+  let(:sharer_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :CancellationSharer }
+  let(:handle_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :AttemptHandle }
+  let(:cancelled_error_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :AttemptCancelledError }
   let(:token_bucket) { bucket_class.new({ refill_ratio: 0.2, max_tokens: 10 }) }
   let(:batch_payload) { ["msg-1", "msg-2"] }
 
   describe "AttemptHandle" do
+    it "hides AttemptHandle, AttemptCancelledError, and CancellationSharer as private constants" do
+      assert_raises NameError do
+        Google::Cloud::PubSub::AsyncPublisher::AttemptHandle
+      end
+      assert_raises NameError do
+        Google::Cloud::PubSub::AsyncPublisher::AttemptCancelledError
+      end
+      assert_raises NameError do
+        Google::Cloud::PubSub::AsyncPublisher::CancellationSharer
+      end
+    end
+
     it "cancels a registered gRPC operation when cancel! is called" do
       handle = handle_class.new
       cancelled_ops = []
@@ -177,6 +189,19 @@ describe Google::Cloud::PubSub::AsyncPublisher::CancellationSharer do
       sharer.handle_attempt_success 0, "resp-0"
       _(reentered_done).must_equal true
       _(reentered_batch).must_be_nil
+    end
+
+    it "does not skip completion or subsequent callbacks when a callback raises" do
+      sharer = sharer_class.new batch: batch_payload, token_bucket: token_bucket, deadline: 100.0
+      sharer.add_attempt 0
+
+      second_callback_called = false
+      sharer.on_complete { raise "boom in callback 1" }
+      sharer.on_complete { second_callback_called = true }
+
+      _(sharer.handle_attempt_success(0, "resp-0")).must_equal true
+      _(second_callback_called).must_equal true
+      _(sharer.wait(0.1)).must_equal "resp-0"
     end
   end
 end

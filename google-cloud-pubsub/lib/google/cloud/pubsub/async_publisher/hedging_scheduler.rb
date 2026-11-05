@@ -177,18 +177,37 @@ module Google
             attempt_timeout = [remaining_timeout, MAX_HEDGED_ATTEMPT_TIMEOUT].min
 
             if @token_bucket.try_acquire_hedge_token
-              @logger&.log(:debug, LOG_SUBTAG) { "Publishing hedged attempt #{req.attempt_number}" }
+              dispatched = invoke_dispatch coordinator, batch, req.attempt_number, attempt_timeout
+              unless dispatched
+                @token_bucket.refund if @token_bucket.respond_to? :refund
+                return false
+              end
+
+              safe_log "Publishing hedged attempt #{req.attempt_number}"
               schedule(
                 coordinator,
                 attempt_number: req.attempt_number + 1,
                 send_after: current_time + @hedge_delay
               )
-              @dispatch_block&.call coordinator, batch, req.attempt_number, attempt_timeout
               true
             else
-              @logger&.log(:debug, LOG_SUBTAG) { "Hedging rate limited due to lack of tokens." }
+              safe_log "Hedging rate limited due to lack of tokens."
               false
             end
+          end
+
+          def invoke_dispatch coordinator, batch, attempt_number, attempt_timeout
+            return true unless @dispatch_block
+
+            @dispatch_block.call(coordinator, batch, attempt_number, attempt_timeout) != false
+          rescue StandardError
+            false
+          end
+
+          def safe_log message
+            @logger&.log(:debug, LOG_SUBTAG) { message }
+          rescue StandardError
+            nil
           end
 
           def ensure_timer_thread_locked
@@ -217,9 +236,13 @@ module Google
               end
 
               process_queue now if should_process
+            rescue StandardError
+              nil
             end
           end
         end
+
+        private_constant :HedgedRequest, :HedgingScheduler
       end
     end
 

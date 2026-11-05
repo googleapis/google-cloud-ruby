@@ -86,7 +86,13 @@ module Google
               end
             end
 
-            block.call if invoke_now
+            return unless invoke_now
+
+            begin
+              block.call
+            rescue StandardError
+              nil
+            end
           end
 
           ##
@@ -130,8 +136,16 @@ module Google
 
             return false unless transitioned
 
-            op.cancel if op.respond_to? :cancel
-            callbacks.each(&:call)
+            begin
+              op.cancel if op.respond_to? :cancel
+            rescue StandardError
+              nil
+            end
+            callbacks.each do |cb|
+              cb.call
+            rescue StandardError
+              nil
+            end
             true
           end
         end
@@ -244,10 +258,13 @@ module Google
 
             return false unless won
 
-            @token_bucket&.refill
-            other_handles.each(&:cancel!)
-            @completion_event.set
-            callbacks.each { |cb| cb.call response, nil, attempt_number }
+            begin
+              @token_bucket&.refill
+              other_handles.each(&:cancel!)
+            ensure
+              @completion_event.set
+            end
+            invoke_callbacks callbacks, response, nil, attempt_number
             true
           end
 
@@ -258,7 +275,7 @@ module Google
           # remaining attempts and fails the batch outside the lock.
           #
           # @param [Integer] attempt_number
-          # @param [StandardError] error
+          # @param [Exception] error
           # @return [Boolean] true if this failure terminated the batch.
           #
           def handle_attempt_failure attempt_number, error
@@ -287,16 +304,19 @@ module Google
 
             return false unless terminated
 
-            other_handles.each(&:cancel!)
-            @completion_event.set
-            callbacks.each { |cb| cb.call nil, error, attempt_number }
+            begin
+              other_handles.each(&:cancel!)
+            ensure
+              @completion_event.set
+            end
+            invoke_callbacks callbacks, nil, error, attempt_number
             true
           end
 
           ##
           # Cancels all running attempts and marks the batch done.
           #
-          # @param [StandardError] error
+          # @param [Exception] error
           # @return [Boolean]
           #
           def cancel_all! error = AttemptCancelledError.new("Batch publish cancelled")
@@ -320,9 +340,12 @@ module Google
 
             return false unless cancelled
 
-            handles.each(&:cancel!)
-            @completion_event.set
-            callbacks.each { |cb| cb.call nil, error, nil }
+            begin
+              handles.each(&:cancel!)
+            ensure
+              @completion_event.set
+            end
+            invoke_callbacks callbacks, nil, error, nil
             true
           end
 
@@ -349,7 +372,7 @@ module Google
               end
             end
 
-            block.call resp, err, winner if done_now
+            invoke_callbacks [block], resp, err, winner if done_now
           end
 
           ##
@@ -366,7 +389,19 @@ module Google
 
             resp
           end
+
+          private
+
+          def invoke_callbacks callbacks, response, error, winning_attempt
+            callbacks.each do |cb|
+              cb.call response, error, winning_attempt
+            rescue StandardError
+              nil
+            end
+          end
         end
+
+        private_constant :AttemptCancelledError, :AttemptHandle, :CancellationSharer
       end
     end
 
