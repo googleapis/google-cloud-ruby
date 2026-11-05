@@ -75,6 +75,19 @@ module Google
           end
 
           ##
+          # Refunds 1.0 full token (1,000 scaled units) back to the bucket,
+          # capped at max_tokens, when a hedged attempt cannot be dispatched.
+          #
+          # @return [Float] Updated logical token count.
+          #
+          def refund
+            @mutex.synchronize do
+              @scaled_tokens = [@scaled_tokens + HEDGE_TOKEN_SCALE, @scaled_max_tokens].min
+              @scaled_tokens.to_f / HEDGE_TOKEN_SCALE
+            end
+          end
+
+          ##
           # Returns the current logical token balance.
           #
           # @return [Float]
@@ -94,6 +107,8 @@ module Google
             @mutex.synchronize { @scaled_tokens }
           end
         end
+
+        private_constant :HedgingTokenBucket
       end
     end
 

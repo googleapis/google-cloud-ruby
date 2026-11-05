@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/errors"
+
 module Google
   module Cloud
     module PubSub
@@ -57,6 +59,15 @@ module Google
             @enabled
           end
 
+          def to_h
+            {
+              enabled: @enabled,
+              hedge_delay: @hedge_delay,
+              max_tokens: @max_tokens,
+              refill_ratio: @refill_ratio
+            }.freeze
+          end
+
           ##
           # Resolves and validates hedging options from a Hash, HedgingOptions, or nil.
           # Returns nil if hedging is not configured or explicitly disabled.
@@ -90,7 +101,7 @@ module Google
           def validate_message_ordering! message_ordering
             return unless @enabled && message_ordering
 
-            raise ArgumentError, "Publish hedging and message ordering cannot be enabled at the same time."
+            raise OrderedMessagesDisabled, "Publish hedging and message ordering cannot be enabled at the same time."
           end
 
           def validate_timeout! timeout
@@ -102,25 +113,14 @@ module Google
           end
 
           def self.from_hash hash
-            new(
-              enabled: fetch_opt(hash, :enabled, DEFAULT_ENABLED),
-              hedge_delay: fetch_opt(hash, :hedge_delay),
-              max_tokens: fetch_opt(hash, :max_tokens),
-              refill_ratio: fetch_opt(hash, :refill_ratio)
-            )
+            symbolized = hash.each_with_object({}) do |(key, value), acc|
+              raise ArgumentError, "unknown keyword: #{key.inspect}" unless key.is_a?(Symbol) || key.is_a?(String)
+
+              acc[key.to_sym] = value
+            end
+            new(**symbolized)
           end
           private_class_method :from_hash
-
-          def self.fetch_opt hash, key, default = nil
-            if hash.key? key
-              hash[key]
-            elsif hash.key? key.to_s
-              hash[key.to_s]
-            else
-              default
-            end
-          end
-          private_class_method :fetch_opt
 
           private
 
@@ -166,6 +166,8 @@ module Google
             num.respond_to?(:nan?) && (num.nan? || num.infinite?)
           end
         end
+
+        private_constant :HedgingOptions
       end
     end
 

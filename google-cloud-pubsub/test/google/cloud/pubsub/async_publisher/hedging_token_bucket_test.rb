@@ -16,11 +16,20 @@ require "helper"
 require "google/cloud/pubsub/async_publisher/hedging_options"
 require "google/cloud/pubsub/async_publisher/hedging_token_bucket"
 
-describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
-  let(:options_class) { Google::Cloud::PubSub::AsyncPublisher::HedgingOptions }
-  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket }
+describe Google::Cloud::PubSub::AsyncPublisher, :hedging_token_bucket do
+  let(:options_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :HedgingOptions }
+  let(:bucket_class) { Google::Cloud::PubSub::AsyncPublisher.const_get :HedgingTokenBucket }
 
   describe "HedgingOptions validation and defaults" do
+    it "hides HedgingOptions and HedgingTokenBucket as private constants on AsyncPublisher" do
+      assert_raises NameError do
+        Google::Cloud::PubSub::AsyncPublisher::HedgingOptions
+      end
+      assert_raises NameError do
+        Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket
+      end
+    end
+
     it "returns nil when options are nil, false, or enabled: false" do
       _(options_class.from(nil)).must_be_nil
       _(options_class.from(false)).must_be_nil
@@ -42,11 +51,21 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
       _(opts_true.refill_ratio).must_equal 0.1
     end
 
-    it "supports string keys" do
+    it "supports string keys and rejects unknown keys" do
       opts = options_class.from({ "hedge_delay" => 0.25, "max_tokens" => 10, "refill_ratio" => 0.05 })
       _(opts.hedge_delay).must_equal 0.25
       _(opts.max_tokens).must_equal 10
       _(opts.refill_ratio).must_equal 0.05
+      _(opts.to_h).must_equal({ enabled: true, hedge_delay: 0.25, max_tokens: 10, refill_ratio: 0.05 })
+      _(opts.to_h).must_be :frozen?
+
+      assert_raises ArgumentError do
+        options_class.from({ max_token: 10 })
+      end
+
+      assert_raises ArgumentError do
+        options_class.from({ "hedge_delays" => 0.5 })
+      end
     end
 
     it "validates hedge_delay bounds (0.1s..10.0s)" do
@@ -83,7 +102,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
     end
 
     it "rejects enabling hedging and message ordering simultaneously" do
-      err = assert_raises ArgumentError do
+      err = assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
         options_class.from({}, message_ordering: true)
       end
       _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
@@ -136,11 +155,16 @@ describe Google::Cloud::PubSub::AsyncPublisher::HedgingTokenBucket do
       _(bucket.scaled_tokens).must_equal 0
     end
 
-    it "caps accumulated tokens at max_tokens" do
+    it "caps accumulated tokens at max_tokens and supports refund" do
       bucket = bucket_class.new({ refill_ratio: 0.2, max_tokens: 2 })
       20.times { bucket.refill }
       _(bucket.tokens).must_equal 2.0
       _(bucket.scaled_tokens).must_equal 2000
+
+      _(bucket.try_acquire_hedge_token).must_equal true
+      _(bucket.tokens).must_equal 1.0
+      _(bucket.refund).must_equal 2.0
+      _(bucket.refund).must_equal 2.0
 
       _(bucket.try_acquire_hedge_token).must_equal true
       _(bucket.try_acquire_hedge_token).must_equal true
