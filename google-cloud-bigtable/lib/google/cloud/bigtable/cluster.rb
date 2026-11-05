@@ -42,6 +42,7 @@ module Google
       #
       #   # Delete
       #   cluster.delete
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class Cluster
         # @private
@@ -160,6 +161,7 @@ module Google
         # throughput and more consistent performance.
         #
         # @param serve_nodes [Integer] Number of nodes
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def nodes= serve_nodes
           @grpc.serve_nodes = serve_nodes
@@ -254,6 +256,7 @@ module Google
         #   else
         #     backup = job.backup
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def create_backup source_table, backup_id, expire_time
           source_table_id = source_table.respond_to?(:name) ? source_table.name : source_table
@@ -285,6 +288,7 @@ module Google
         #   if backup
         #     puts backup.backup_id
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def backup backup_id
           grpc = service.get_backup instance_id, cluster_id, backup_id
@@ -309,6 +313,7 @@ module Google
         #   cluster.backups.all do |backup|
         #     puts backup.backup_id
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def backups
           grpc = service.list_backups instance_id, cluster_id
@@ -345,6 +350,7 @@ module Google
         #   else
         #     cluster = job.cluster
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def save
           ensure_service!
@@ -357,6 +363,7 @@ module Google
         # Reloads cluster data.
         #
         # @return [Google::Cloud::Bigtable::Cluster]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def reload!
           @grpc = service.get_cluster instance_id, cluster_id
@@ -376,6 +383,7 @@ module Google
         #   instance = bigtable.instance "my-instance"
         #   cluster = instance.cluster "my-cluster"
         #   cluster.delete
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def delete
           ensure_service!
