@@ -78,7 +78,8 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
         res = publish_single_sync publisher, "hedged-e2e-#{i}"
         _(res).must_be :succeeded?
         expected_tokens = [(i + 1) * 0.2, 1.0].min
-        _(publisher.token_bucket.tokens).must_be_close_to expected_tokens, 1e-6
+        bucket = publisher.async_publisher.send :token_bucket
+        _(bucket.tokens).must_be_close_to expected_tokens, 1e-6
       end
 
       received = pull_messages subscriber, 10
@@ -107,6 +108,7 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       }
     )
     subscriber = pubsub.subscriber sub.name
+    orig_publish = nil
 
     begin
       # Warm up the token bucket to 1.0 token with 5 real publish batches
@@ -114,7 +116,8 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
         res = publish_single_sync publisher, "warmup-#{i}"
         _(res).must_be :succeeded?
       end
-      _(publisher.token_bucket.tokens).must_be_close_to 1.0, 1e-6
+      bucket = publisher.async_publisher.send :token_bucket
+      _(bucket.tokens).must_be_close_to 1.0, 1e-6
 
       # Intercept the 6th batch: stall attempt 0 (call_options[:retry_policy].nil?) on its AttemptHandle,
       # while allowing hedged attempt 1 (call_options[:retry_policy][:retry_codes] == [])
@@ -142,11 +145,12 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       _(attempt0_handle).wont_be_nil
       _(attempt0_handle).must_be :cancelled?
       # 1.0 - 1.0 (acquired) + 0.2 (refilled on win) = 0.2
-      _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+      _(bucket.tokens).must_be_close_to 0.2, 1e-6
 
       received = pull_messages subscriber, 6
       _(received.map(&:data)).must_include "hedged-winner-payload"
     ensure
+      publisher.service.define_singleton_method :publish, orig_publish if orig_publish
       publisher.async_publisher&.stop!
       $subscription_admin.delete_subscription subscription: sub.name
     end
@@ -170,26 +174,30 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       }
     )
     subscriber = pubsub.subscriber sub.name
+    orig_publish = nil
 
     begin
       5.times do |i|
         res = publish_single_sync publisher, "warmup-orig-#{i}"
         _(res).must_be :succeeded?
       end
-      _(publisher.token_bucket.tokens).must_be_close_to 1.0, 1e-6
+      bucket = publisher.async_publisher.send :token_bucket
+      _(bucket.tokens).must_be_close_to 1.0, 1e-6
 
       orig_publish = publisher.service.method :publish
       attempt1_handle = nil
       intercepted_primary = false
+      hedge_started = Concurrent::Event.new
 
       publisher.service.define_singleton_method :publish do |t_name, msgs, **kwargs|
         call_opts = kwargs[:call_options]
         handle = kwargs[:attempt_handle]
         if call_opts&.dig(:retry_policy).nil? && !intercepted_primary
           intercepted_primary = true
-          handle.sleep_interruptibly 0.25
+          hedge_started.wait 2.0
         elsif call_opts&.dig(:retry_policy) && attempt1_handle.nil?
           attempt1_handle = handle
+          hedge_started.set
           handle.sleep_interruptibly 2.5
         end
         orig_publish.call t_name, msgs, **kwargs
@@ -200,11 +208,12 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       _(res.message_id).wont_be :empty?
       _(attempt1_handle).wont_be_nil
       _(attempt1_handle).must_be :cancelled?
-      _(publisher.token_bucket.tokens).must_be_close_to 0.2, 1e-6
+      _(bucket.tokens).must_be_close_to 0.2, 1e-6
 
       received = pull_messages subscriber, 6
       _(received.map(&:data)).must_include "primary-after-hedge-payload"
     ensure
+      publisher.service.define_singleton_method :publish, orig_publish if orig_publish
       publisher.async_publisher&.stop!
       $subscription_admin.delete_subscription subscription: sub.name
     end
@@ -250,7 +259,8 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
         res = publish_single_sync publisher, "rl-warm-#{i}"
         _(res).must_be :succeeded?
       end
-      _(publisher.token_bucket.tokens).must_be_close_to 0.4, 1e-6
+      bucket = publisher.async_publisher.send :token_bucket
+      _(bucket.tokens).must_be_close_to 0.4, 1e-6
 
       orig_publish = custom_service.method :publish
       rpc_calls = Concurrent::AtomicFixnum.new 0
@@ -264,7 +274,7 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
       res = publish_single_sync publisher, "rate-limited-payload"
       _(res).must_be :succeeded?
       _(rpc_calls.value).must_equal 1
-      _(publisher.token_bucket.tokens).must_be_close_to 0.6, 1e-6
+      _(bucket.tokens).must_be_close_to 0.6, 1e-6
       _(log_io.string).must_include "Hedging rate limited due to lack of tokens."
 
       received = pull_messages subscriber, 3
@@ -287,12 +297,12 @@ describe Google::Cloud::PubSub, :hedging, :pubsub do
     )
 
     begin
-      err = assert_raises ArgumentError do
+      err = assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
         publisher.enable_message_ordering!
       end
       _(err.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
 
-      err2 = assert_raises ArgumentError do
+      err2 = assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
         publisher.publish_async "ordered-msg", ordering_key: "k1"
       end
       _(err2.message).must_include "Publish hedging and message ordering cannot be enabled at the same time."
