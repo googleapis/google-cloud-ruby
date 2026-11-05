@@ -3119,7 +3119,7 @@ libraries:
       - samples/view_secret_labels.rb
     ruby:
       wrapper_of:
-        - v1:1.2
+        - v1:2.0
   - name: google-cloud-secret_manager-v1
     version: 2.0.0
     apis:
