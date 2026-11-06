@@ -616,5 +616,6 @@ for a list of error conditions.
 
 ## Additional information
 
-Google Cloud Storage can be configured to use logging. To learn more, see the
+Google Cloud Storage can be configured to use an emulator or to enable logging.
+To learn more, see the [Emulator guide](EMULATOR.md) and
 [Logging guide](LOGGING.md).

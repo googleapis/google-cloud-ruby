@@ -19,7 +19,7 @@ describe Google::Cloud do
   describe "#storage" do
     it "calls out to Google::Cloud.storage" do
       gcloud = Google::Cloud.new
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_be :nil?
         _(keyfile).must_be :nil?
         _(scope).must_be :nil?
@@ -34,6 +34,7 @@ describe Google::Cloud do
         _(max_interval).must_be :nil?
         _(multiplier).must_be :nil?
         _(upload_chunk_size).must_be :nil?
+        _(emulator_host).must_be :nil?
         "storage-project-object-empty"
       }
       Google::Cloud.stub :storage, stubbed_storage do
@@ -44,7 +45,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.storage" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_be :nil?
@@ -59,6 +60,7 @@ describe Google::Cloud do
         _(max_interval).must_be :nil?
         _(multiplier).must_be :nil?
         _(upload_chunk_size).must_be :nil?
+        _(emulator_host).must_be :nil?
         "storage-project-object"
       }
       Google::Cloud.stub :storage, stubbed_storage do
@@ -69,7 +71,7 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.storage" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil) {
+      stubbed_storage = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil, emulator_host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
@@ -84,11 +86,13 @@ describe Google::Cloud do
         _(max_interval).must_equal 30
         _(multiplier).must_equal 1
         _(upload_chunk_size).must_equal 100
+        _(emulator_host).must_equal "localhost:9000"
         "storage-project-object-scoped"
       }
       Google::Cloud.stub :storage, stubbed_storage do
         project = gcloud.storage scope: "http://example.com/scope", retries: 5, timeout: 60, open_timeout: 30,
-                                 max_elapsed_time: 1000, base_interval: 2, max_interval: 30, multiplier: 1, upload_chunk_size: 100
+                                 max_elapsed_time: 1000, base_interval: 2, max_interval: 30, multiplier: 1, upload_chunk_size: 100,
+                                 emulator_host: "localhost:9000"
         _(project).must_equal "storage-project-object-scoped"
       end
     end
@@ -161,6 +165,18 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "passes emulator_host to Google::Cloud::Storage.new" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud.storage emulator_host: "localhost:9000"
+          _(storage.project).must_equal "project-id"
+          _(storage.service.credentials).must_be :nil?
+          _(storage.service.service.root_url).must_equal "http://localhost:9000/"
+        end
+      end
+    end
   end
 
   describe "Storage.anonymous" do
@@ -192,6 +208,18 @@ describe Google::Cloud do
           _(storage.project).must_be :nil?
           _(storage.service.credentials).must_be :nil?
         end
+      end
+    end
+
+    it "uses STORAGE_EMULATOR_HOST environment variable" do
+      emulator_check = ->(name) { (name == "STORAGE_EMULATOR_HOST") ? "localhost:9000" : nil }
+
+      # Clear all environment variables, except STORAGE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        storage = Google::Cloud::Storage.anonymous endpoint: "https://storage-endpoint.example.com/"
+        _(storage.project).must_be :nil?
+        _(storage.service.credentials).must_be :nil?
+        _(storage.service.service.root_url).must_equal "http://localhost:9000/"
       end
     end
   end
@@ -382,6 +410,105 @@ describe Google::Cloud do
               end
             end
           end
+        end
+      end
+    end
+  end
+
+  describe "Storage.new with an emulator" do
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
+
+    it "uses STORAGE_EMULATOR_HOST environment variable" do
+      emulator_check = ->(name) { (name == "STORAGE_EMULATOR_HOST") ? "localhost:9000" : nil }
+
+      # Clear all environment variables, except STORAGE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud::Storage.new
+          _(storage).must_be_kind_of Google::Cloud::Storage::Project
+          _(storage.project).must_equal "project-id"
+          _(storage.service.credentials).must_be :nil?
+          _(storage.service.service.root_url).must_equal "http://localhost:9000/"
+        end
+      end
+    end
+
+    it "uses provided emulator_host" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud::Storage.new emulator_host: "http://localhost:9000"
+          _(storage.project).must_equal "project-id"
+          _(storage.service.credentials).must_be :nil?
+          _(storage.service.service.root_url).must_equal "http://localhost:9000/"
+        end
+      end
+    end
+
+    it "keeps the scheme and trailing slash of emulator_host" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud::Storage.new emulator_host: "https://localhost:9000/"
+          _(storage.service.service.root_url).must_equal "https://localhost:9000/"
+        end
+      end
+    end
+
+    it "ignores a blank STORAGE_EMULATOR_HOST" do
+      emulator_check = ->(name) { (name == "STORAGE_EMULATOR_HOST") ? "" : nil }
+
+      # Clear all environment variables, except STORAGE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Storage::Credentials.stub :default, default_credentials do
+            _(Google::Cloud::Storage.configure.emulator_host).must_be :nil?
+
+            storage = Google::Cloud::Storage.new
+            _(storage.project).must_equal "project-id"
+            _(storage.service.credentials).must_equal default_credentials
+            _(storage.service.service.root_url).must_equal "https://storage.googleapis.com/"
+          end
+        end
+      end
+    end
+
+    it "does not require a project_id" do
+      # Clear all environment variables, and provide no project_id from any source
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: nil) do
+          storage = Google::Cloud::Storage.new emulator_host: "localhost:9000"
+          _(storage).must_be_kind_of Google::Cloud::Storage::Project
+          _(storage.project).must_equal ""
+        end
+      end
+    end
+
+    it "uses provided credentials" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud::Storage.new credentials: default_credentials, emulator_host: "localhost:9000"
+          _(storage.service.credentials).must_equal default_credentials
+          _(storage.service.service.root_url).must_equal "http://localhost:9000/"
+        end
+      end
+    end
+
+    it "takes precedence over endpoint" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          storage = Google::Cloud::Storage.new emulator_host: "localhost:9000",
+                                               endpoint: "https://storage-endpoint.example.com/"
+          _(storage.service.service.root_url).must_equal "http://localhost:9000/"
         end
       end
     end
@@ -657,6 +784,23 @@ describe Google::Cloud do
             end
           end
         end
+      end
+    end
+
+    it "uses storage config for emulator_host" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Storage.configure do |config|
+          config.project_id = "project-id"
+          config.emulator_host = "localhost:9000"
+        end
+
+        storage = Google::Cloud::Storage.new
+        _(storage).must_be_kind_of Google::Cloud::Storage::Project
+        _(storage.project).must_equal "project-id"
+        _(storage.service.credentials).must_be :nil?
+        _(storage.service.service.root_url).must_equal "http://localhost:9000/"
       end
     end
 
