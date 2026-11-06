@@ -32,13 +32,50 @@ def storage_client
   @storage_client ||= Google::Cloud::Storage.new
 end
 
-def create_bucket_helper bucket_name, uniform_bucket_level_access: nil, hierarchical_namespace: nil
+def create_bucket_helper bucket_name, uniform_bucket_level_access: nil, hierarchical_namespace: nil, location: nil
   retry_resource_exhaustion do
-    storage_client.create_bucket bucket_name do |b|
+    storage_client.create_bucket bucket_name, location: location do |b|
       b.uniform_bucket_level_access = uniform_bucket_level_access
       b.hierarchical_namespace = hierarchical_namespace
     end
   end
+end
+
+# Returns the region of a zone, e.g. "us-east1" for "us-east1-b".
+def zone_region zone
+  zone.sub(/-[a-z]\z/, "")
+end
+
+# Returns whether a bucket has a Rapid Cache that has not been disabled.
+#
+# @param bucket_name [String] The name of the Google Cloud Storage bucket.
+# @param cache_id [String] The ID of the Rapid Cache, which is the same as its
+#   zone.
+def rapid_cache_active? bucket_name, cache_id
+  storage_control_client = Google::Cloud::Storage::Control.storage_control
+  name = storage_control_client.rapid_cache_path project: "_", bucket: bucket_name, rapid_cache: cache_id
+  storage_control_client.get_rapid_cache(name: name).state != "disabled"
+rescue Google::Cloud::NotFoundError
+  false
+end
+
+# Best-effort deletion of a bucket that had a Rapid Cache.
+#
+# A bucket cannot be deleted until its Rapid Cache has been fully removed,
+# which can take more than 30 minutes after the cache is disabled. This method
+# retries briefly and then leaves the bucket for the stale bucket cleanup job.
+#
+# @param bucket_name [String] The name of the Google Cloud Storage bucket.
+def delete_bucket_with_rapid_cache_helper bucket_name, attempts: 6, interval: 20
+  attempts.times do |attempt|
+    delete_bucket_helper bucket_name
+    return true
+  rescue Google::Cloud::FailedPreconditionError, Google::Cloud::AlreadyExistsError => e
+    puts "\nBucket #{bucket_name} not deleted yet (attempt #{attempt + 1}/#{attempts}): #{e.message}"
+    sleep interval
+  end
+  puts "\nLeaving bucket #{bucket_name} for the stale bucket cleanup job."
+  false
 end
 
 def delete_bucket_helper bucket_name
