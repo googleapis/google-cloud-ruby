@@ -46,6 +46,19 @@ def zone_region zone
   zone.sub(/-[a-z]\z/, "")
 end
 
+# Returns whether a bucket has a Rapid Cache that has not been disabled.
+#
+# @param bucket_name [String] The name of the Google Cloud Storage bucket.
+# @param cache_id [String] The ID of the Rapid Cache, which is the same as its
+#   zone.
+def rapid_cache_active? bucket_name, cache_id
+  storage_control_client = Google::Cloud::Storage::Control.storage_control
+  name = storage_control_client.rapid_cache_path project: "_", bucket: bucket_name, rapid_cache: cache_id
+  storage_control_client.get_rapid_cache(name: name).state != "disabled"
+rescue Google::Cloud::NotFoundError
+  false
+end
+
 # Best-effort deletion of a bucket that had a Rapid Cache.
 #
 # A bucket cannot be deleted until its Rapid Cache has been fully removed,

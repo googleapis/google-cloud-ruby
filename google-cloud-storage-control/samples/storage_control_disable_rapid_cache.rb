@@ -36,13 +36,15 @@ def disable_rapid_cache bucket_name:, cache_id:, timeout: nil
 
   request = Google::Cloud::Storage::Control::V2::DisableRapidCacheRequest.new name: name
 
-  # Disabling a Rapid Cache is a long-running operation. Poll the operation
-  # until it completes.
+  # Disabling a Rapid Cache is a long-running operation. The operation only
+  # completes once the cache has been fully removed, which can take a long
+  # time. Poll the operation until it completes or the timeout is reached.
   operation = storage_control_client.disable_rapid_cache request
   deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout if timeout
   until operation.done?
     if deadline && Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
-      raise "Timed out waiting for operation #{operation.name}"
+      puts "Disable of Rapid Cache #{name} is still in progress: #{operation.name}"
+      return
     end
     sleep 5
     operation = storage_control_client.operations_client.get_operation name: operation.name
