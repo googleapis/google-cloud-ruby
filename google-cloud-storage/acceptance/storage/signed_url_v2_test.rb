@@ -84,6 +84,52 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   end
 
   describe Google::Cloud::Storage::Bucket, :signed_url do
+    it "should create a signed read url automatically using IAM API when on GCE/Workload Identity" do
+      local_file = File.new files[:logo][:path]
+      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucketAuto.png"
+      client = bucket.service.credentials.respond_to?(:client) ? bucket.service.credentials.client : bucket.service.credentials
+      issuer = nil
+      [:issuer, :service_account_email].each do |method|
+        issuer ||= client.public_send(method) if client.respond_to?(method) && !client.public_send(method).to_s.empty?
+      end
+      if !issuer && client.respond_to?(:impersonation_url) && !client.impersonation_url.to_s.empty?
+        match = client.impersonation_url.match(/serviceAccounts\/(.+?):generateAccessToken/)
+        issuer = match[1] if match
+      end
+
+      skip "Test requires a service account with an issuer email" unless issuer
+
+      client.stub :signing_key, nil do
+        client.stub :issuer, nil do
+          client.stub :service_account_email, nil do
+            client.stub :impersonation_url, nil do
+              Google::Cloud.env.stub :metadata?, true do
+                Google::Cloud.env.stub :lookup_metadata, issuer do
+                  five_min_from_now = 5 * 60
+                  url = bucket.signed_url file.name,
+                                          method: "GET",
+                                          expires: five_min_from_now
+
+                  uri = URI url
+                  http = Net::HTTP.new uri.host, uri.port
+                  http.use_ssl = true
+                  http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
+                  resp = http.get uri.request_uri
+                  _(resp.code).must_equal "200"
+
+                  Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+                    tmpfile.binmode
+                    tmpfile.write resp.body
+                    _(tmpfile.size).must_equal local_file.size
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
     it "should create a signed read url with space in file name" do
       local_file = File.new files[:logo][:path]
       file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"
