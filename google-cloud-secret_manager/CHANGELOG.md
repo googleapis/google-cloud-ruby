@@ -1,5 +1,11 @@
 # Release History
 
+### 3.0.0 (2026-11-09)
+
+#### Features
+
+* require google-cloud-secret_manager-v1 ~&gt; 2.0 ([#36695](https://github.com/googleapis/google-cloud-ruby/issues/36695)) 
+
 ### 2.3.0 (2026-11-04)
 
 #### Features
