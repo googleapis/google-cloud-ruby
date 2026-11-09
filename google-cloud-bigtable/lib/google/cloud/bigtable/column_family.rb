@@ -35,6 +35,7 @@ module Google
       #
       #   column_family = table.column_families["cf2"]
       #   puts column_family.gc_rule
+      # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
       #
       class ColumnFamily
         ##
