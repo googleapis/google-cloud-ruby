@@ -265,19 +265,20 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
     end
 
     results = table.mutate_rows entries
+    failed_entries = results.reject { |r| r.status.code.zero? }.map do |result|
+      Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry.new(
+        index: result.index,
+        status: Google::Rpc::Status.new(
+          code: result.status.code,
+          message: result.status.message
+        )
+      )
+    end
 
     Google::Bigtable::Testproxy::MutateRowsResult.new(
-      status: ok_status,
+      status: failed_entries.empty? ? ok_status : failed_entries.first.status,
       # Entries should include only the failed rows, where status != 0 (OK)
-      entries: results.reject { |r| r.status.code.zero? }.map do |result|
-        Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry.new(
-          index: result.index,
-          status: Google::Rpc::Status.new(
-            code: result.status.code,
-            message: result.status.message
-          )
-        )
-      end
+      entries: failed_entries
     )
   rescue Google::Cloud::Error => e
     LOGGER.info "BulkMutateRows failed: Caught #{e}"
@@ -364,7 +365,7 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
     result = table.read_modify_write_row(req.request.row_key, req.request.rules.map do |r|
       rule = Google::Cloud::Bigtable::ReadModifyWriteRule.new r.family_name, r.column_qualifier
       rule.append r.append_value if r.append_value && r.append_value != ""
-      rule.increment r.increment_amount if r.increment_amount&.positive?
+      rule.increment r.increment_amount if r.increment_amount&.nonzero?
       rule
     end)
 
