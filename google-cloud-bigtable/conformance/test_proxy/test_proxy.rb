@@ -365,7 +365,7 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
     result = table.read_modify_write_row(req.request.row_key, req.request.rules.map do |r|
       rule = Google::Cloud::Bigtable::ReadModifyWriteRule.new r.family_name, r.column_qualifier
       rule.append r.append_value if r.append_value && r.append_value != ""
-      rule.increment r.increment_amount if r.increment_amount&.positive?
+      rule.increment r.increment_amount if r.increment_amount&.nonzero?
       rule
     end)
 
