@@ -42,6 +42,22 @@ module Google
         # @!attribute [r] connection_state
         #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector::ConnectionState]
         #     Output only. The connection state of the identity connector.
+        # @!attribute [r] workload_identity_pool
+        #   @return [::String]
+        #     Output only. The resource name of the Workload Identity Pool
+        #     configured for identity federation with OCI. This exact pool name can be
+        #     used to configure VPC Service Controls (VPC-SC) egress rules.
+        #     Format:
+        #     `projects/{project}/locations/global/workloadIdentityPools/{workload_identity_pool}`
+        # @!attribute [r] identity_connector_id
+        #   @return [::String]
+        #     Output only. The unique partner identifier for the Identity Connector,
+        #     used to establish secure cross-cloud access between Google Cloud and OCI.
+        #     This corresponds directly to the ID of the OracleDbGcpIdentityConnector
+        #     resource in Oracle Cloud Infrastructure (OCI).
+        # @!attribute [r] lifecycle_state_details
+        #   @return [::String]
+        #     Output only. Additional information about the current lifecycle state.
         class IdentityConnector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

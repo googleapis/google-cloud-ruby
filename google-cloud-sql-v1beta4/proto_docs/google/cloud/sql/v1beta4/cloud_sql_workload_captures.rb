@@ -138,6 +138,9 @@ module Google
         # @!attribute [r] backup_id
         #   @return [::String]
         #     Output only. The base backup ID associated with the workload capture.
+        # @!attribute [r] capture_mode
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadCapture::WorkloadCaptureMode]
+        #     Output only. The capture mode of the workload capture.
         class WorkloadCapture
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,6 +164,19 @@ module Google
             # Cloud SQL automatically stops the capture due to a conflicting operation
             # or when the maximum duration is reached.
             TERMINATED = 4
+          end
+
+          # Specifies the mode of the workload capture.
+          module WorkloadCaptureMode
+            # Default value. This value is unused.
+            WORKLOAD_CAPTURE_MODE_UNSPECIFIED = 0
+
+            # Records and stores the workload without live replay.
+            CAPTURE_ONLY = 1
+
+            # Records the workload and simultaneously replays it on a live replay
+            # instance.
+            CAPTURE_AND_LIVE_REPLAY = 2
           end
         end
       end

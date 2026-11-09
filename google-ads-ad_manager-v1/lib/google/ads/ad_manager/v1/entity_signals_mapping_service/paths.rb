@@ -25,6 +25,57 @@ module Google
           # Path helper methods for the EntitySignalsMappingService API.
           module Paths
             ##
+            # Create a fully-qualified AudienceSegment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/audienceSegments/{audience_segment}`
+            #
+            # @param network_code [String]
+            # @param audience_segment [String]
+            #
+            # @return [::String]
+            def audience_segment_path network_code:, audience_segment:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/audienceSegments/#{audience_segment}"
+            end
+
+            ##
+            # Create a fully-qualified ContentBundle resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/contentBundles/{content_bundle}`
+            #
+            # @param network_code [String]
+            # @param content_bundle [String]
+            #
+            # @return [::String]
+            def content_bundle_path network_code:, content_bundle:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/contentBundles/#{content_bundle}"
+            end
+
+            ##
+            # Create a fully-qualified CustomTargetingValue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customTargetingValues/{custom_targeting_value}`
+            #
+            # @param network_code [String]
+            # @param custom_targeting_value [String]
+            #
+            # @return [::String]
+            def custom_targeting_value_path network_code:, custom_targeting_value:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customTargetingValues/#{custom_targeting_value}"
+            end
+
+            ##
             # Create a fully-qualified EntitySignalsMapping resource string.
             #
             # The resource will be in the following format:
@@ -53,6 +104,23 @@ module Google
             # @return [::String]
             def network_path network_code:
               "networks/#{network_code}"
+            end
+
+            ##
+            # Create a fully-qualified TaxonomyCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/taxonomyCategories/{taxonomy_category}`
+            #
+            # @param network_code [String]
+            # @param taxonomy_category [String]
+            #
+            # @return [::String]
+            def taxonomy_category_path network_code:, taxonomy_category:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/taxonomyCategories/#{taxonomy_category}"
             end
 
             extend self

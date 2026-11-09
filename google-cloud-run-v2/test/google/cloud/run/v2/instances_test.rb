@@ -132,6 +132,75 @@ class ::Google::Cloud::Run::V2::Instances::ClientTest < Minitest::Test
     end
   end
 
+  def test_update_instance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    instance = {}
+    validate_only = true
+    allow_missing = true
+
+    update_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_instance, name
+      assert_kind_of ::Google::Cloud::Run::V2::UpdateInstanceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Run::V2::Instance), request["instance"]
+      assert_equal true, request["validate_only"]
+      assert_equal true, request["allow_missing"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_instance_client_stub do
+      # Create client
+      c = ::Google::Cloud::Run::V2::Instances::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_instance({ update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_instance update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_instance ::Google::Cloud::Run::V2::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_instance({ update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_instance(::Google::Cloud::Run::V2::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_instance_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_instance
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -457,6 +526,188 @@ class ::Google::Cloud::Run::V2::Instances::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, start_instance_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Run::V2::Instances::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_iam_policy resource: resource, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_set_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Run::V2::Instances::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :test_iam_permissions, name
+      assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Run::V2::Instances::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, test_iam_permissions_client_stub.call_rpc_count
     end
   end
 

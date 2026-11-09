@@ -21,16 +21,28 @@ module Google
   module Cloud
     module VectorSearch
       module V1
-        # Defines a output fields struct for data in DataObject.
+        # Defines an output fields struct for data in DataObject.
+        #
+        # Output fields are opt-in. A search or query result contains only the data
+        # object name and ID, plus the fields listed here. If this message is unset or
+        # a list is empty, the corresponding part of the data object (`data`,
+        # `vectors` or metadata) is omitted from the result; it is not an indication
+        # that the stored data object is empty. Use `"*"` in a list to return all
+        # fields of that kind.
         # @!attribute [rw] data_fields
         #   @return [::Array<::String>]
-        #     Optional. The fields from the data fields to include in the output.
+        #     Optional. The fields from the data fields to include in the output. Use
+        #     `"*"` to include all data fields. If empty, `data` is omitted from results.
         # @!attribute [rw] vector_fields
         #   @return [::Array<::String>]
-        #     Optional. The fields from the vector fields to include in the output.
+        #     Optional. The fields from the vector fields to include in the output. Use
+        #     `"*"` to include all vector fields. If empty, `vectors` is omitted from
+        #     results.
         # @!attribute [rw] metadata_fields
         #   @return [::Array<::String>]
-        #     Optional. The fields from the DataObject metadata to include in the output.
+        #     Optional. The DataObject metadata fields to include in the output:
+        #     `create_time`, `update_time` and `etag`. Use `"*"` to include all metadata
+        #     fields. If empty, these fields are omitted from results.
         class OutputFields
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,8 +135,34 @@ module Google
         #     Required. The vector field to search.
         # @!attribute [rw] filter
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A JSON filter expression, e.g. \\{"genre": \\{"$eq": "sci-fi"}},
-        #     represented as a google.protobuf.Struct.
+        #     Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+        #     represented as a `google.protobuf.Struct`.
+        #
+        #     An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+        #     object in the filter must have exactly one key: either a field name mapped
+        #     to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+        #     or `$or` with a list of filters, or `$not` with one filter. Field
+        #     operators and their values: `$eq` and `$ne` take a string, number or bool;
+        #     `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+        #     take a list of strings; `$exists` takes a bool. Several keys in one object
+        #     (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+        #     use `$and` and `$eq` instead.
+        #
+        #     Logical operators can be nested at most 2 levels deep, e.g.
+        #     `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+        #     filters are rejected with `INVALID_ARGUMENT`.
+        #
+        #     Which filters are accepted depends on how the search is served. If it is
+        #     served by an approximate nearest neighbor (ANN) index (by default when a
+        #     ready index exists on `search_field`, or when one is selected via
+        #     `search_hint.index_hint`), every filtered field must be listed in
+        #     `Index.filter_fields` at index creation, `$or` and `$all` are accepted
+        #     only at the top level of the filter, and `$not` and `$exists` are not
+        #     supported. Not every unsupported filter is rejected: most produce
+        #     `INVALID_ARGUMENT`, but some are silently ignored, so do not rely on the
+        #     error. If no ready index exists on `search_field`, or if
+        #     `search_hint.knn_hint` is set, the search is served by K-Nearest Neighbor
+        #     (KNN) search, which has none of these filter restrictions.
         # @!attribute [rw] top_k
         #   @return [::Integer]
         #     Optional. The number of nearest neighbors to return.
@@ -167,8 +205,34 @@ module Google
         #     Optional. The fields to return in the search results.
         # @!attribute [rw] filter
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A JSON filter expression, e.g. \\{"genre": \\{"$eq": "sci-fi"}},
-        #     represented as a google.protobuf.Struct.
+        #     Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+        #     represented as a `google.protobuf.Struct`.
+        #
+        #     An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+        #     object in the filter must have exactly one key: either a field name mapped
+        #     to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+        #     or `$or` with a list of filters, or `$not` with one filter. Field
+        #     operators and their values: `$eq` and `$ne` take a string, number or bool;
+        #     `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+        #     take a list of strings; `$exists` takes a bool. Several keys in one object
+        #     (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+        #     use `$and` and `$eq` instead.
+        #
+        #     Logical operators can be nested at most 2 levels deep, e.g.
+        #     `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+        #     filters are rejected with `INVALID_ARGUMENT`.
+        #
+        #     Which filters are accepted depends on how the search is served. If it is
+        #     served by an approximate nearest neighbor (ANN) index (by default when a
+        #     ready index exists on `search_field`, or when one is selected via
+        #     `search_hint.index_hint`), every filtered field must be listed in
+        #     `Index.filter_fields` at index creation, `$or` and `$all` are accepted
+        #     only at the top level of the filter, and `$not` and `$exists` are not
+        #     supported. Not every unsupported filter is rejected: most produce
+        #     `INVALID_ARGUMENT`, but some are silently ignored, so do not rely on the
+        #     error. If no ready index exists on `search_field`, or if
+        #     `search_hint.knn_hint` is set, the search is served by K-Nearest Neighbor
+        #     (KNN) search, which has none of these filter restrictions.
         # @!attribute [rw] top_k
         #   @return [::Integer]
         #     Optional. The number of data objects to return.
@@ -200,9 +264,156 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
         #     represented as a `google.protobuf.Struct`.
+        #
+        #     An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+        #     object in the filter must have exactly one key: either a field name mapped
+        #     to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+        #     or `$or` with a list of filters, or `$not` with one filter. Field
+        #     operators and their values: `$eq` and `$ne` take a string, number or bool;
+        #     `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+        #     take a list of strings; `$exists` takes a bool. Several keys in one object
+        #     (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+        #     use `$and` and `$eq` instead.
+        #
+        #     Logical operators can be nested at most 2 levels deep, e.g.
+        #     `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+        #     filters are rejected with `INVALID_ARGUMENT`.
+        # @!attribute [rw] structured_query
+        #   @return [::Google::Cloud::VectorSearch::V1::StructuredQuery]
+        #     Optional. Structured query definition. When set, `search_text` and
+        #     `data_field_names` must be left empty; otherwise the request will be
+        #     rejected with an `INVALID_ARGUMENT` error. Conversely, when
+        #     `structured_query` is unset, both `search_text` and `data_field_names`
+        #     are required.
         class TextSearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A structured query for text search. Allows expressing field-targeted text
+        # queries combined via boolean operators, with optional per-node boosting.
+        # @!attribute [rw] text
+        #   @return [::Google::Cloud::VectorSearch::V1::TextQuery]
+        #     Optional. A leaf-level text query.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `unary`, `combine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] unary
+        #   @return [::Google::Cloud::VectorSearch::V1::UnaryQuery]
+        #     Optional. A query that applies a unary operator to a sub-query.
+        #
+        #     Note: The following fields are mutually exclusive: `unary`, `text`, `combine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] combine
+        #   @return [::Google::Cloud::VectorSearch::V1::CombinedQuery]
+        #     Optional. A query that combines multiple sub-queries with a boolean
+        #     operator.
+        #
+        #     Note: The following fields are mutually exclusive: `combine`, `text`, `unary`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] boost
+        #   @return [::Float]
+        #     Optional. Optional multiplier applied to this query node's contribution to
+        #     the final relevance score. Must be non-negative; if unset or 0, defaults
+        #     to 1.0. Values greater than 1.0 increase its influence on ranking, values
+        #     between 0.0 and 1.0 decrease it.
+        class StructuredQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A leaf-level text query targeting one or more data fields. When multiple
+        # fields are specified, this is equivalent to combining per-field matches with
+        # an OR operator (i.e. the query matches if the text is found in any of the
+        # listed fields).
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     Required. The text to search for.
+        # @!attribute [rw] fields
+        #   @return [::Array<::String>]
+        #     Required. The data fields to search against.
+        # @!attribute [rw] match_type
+        #   @return [::Google::Cloud::VectorSearch::V1::TextQuery::MatchType]
+        #     Optional. The matching strategy to apply for this query. If unset, defaults
+        #     to `TEXT`.
+        # @!attribute [rw] query_enhancement
+        #   @return [::Google::Cloud::VectorSearch::V1::QueryEnhancement]
+        #     Optional. The query enhancement settings to apply for this query.
+        class TextQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The matching strategy to apply when comparing `text` against the content
+          # of `fields`.
+          module MatchType
+            # Defaults to `TEXT`.
+            MATCH_TYPE_UNSPECIFIED = 0
+
+            # Treats `text` as individual search terms combined with an implicit
+            # AND: every term must appear in the field, in any order and any
+            # position. Case-insensitive.
+            TEXT = 1
+
+            # Matches only when the entire field value is exactly equal to `text`.
+            EXACT = 2
+          end
+        end
+
+        # Query enhancement settings. When enabled, expands the search terms with
+        # stemming, synonyms, and spelling corrections, and removes stop words.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. Whether query enhancement is enabled.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Optional. The IETF BCP 47 language tag, such as "en-US", for query
+        #     enhancement. If unset, the language is detected automatically. See
+        #     <https://en.wikipedia.org/wiki/IETF_language_tag>.
+        class QueryEnhancement
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A query that applies a unary operator to a sub-query.
+        # @!attribute [rw] op
+        #   @return [::Google::Cloud::VectorSearch::V1::UnaryQuery::Operator]
+        #     Required. The unary operator to apply.
+        # @!attribute [rw] sub_query
+        #   @return [::Google::Cloud::VectorSearch::V1::StructuredQuery]
+        #     Required. The sub-query the operator is applied to.
+        class UnaryQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Unary operators applicable to a sub-query.
+          module Operator
+            # Default value. This value is unused.
+            OPERATOR_UNSPECIFIED = 0
+
+            # Negates the sub-query.
+            NOT = 1
+          end
+        end
+
+        # A query that combines multiple sub-queries with a boolean operator.
+        # @!attribute [rw] op
+        #   @return [::Google::Cloud::VectorSearch::V1::CombinedQuery::Operator]
+        #     Required. The boolean operator used to combine the sub-queries.
+        # @!attribute [rw] sub_queries
+        #   @return [::Array<::Google::Cloud::VectorSearch::V1::StructuredQuery>]
+        #     Required. The sub-queries to be combined.
+        class CombinedQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Boolean operators used to combine sub-queries.
+          module Operator
+            # Default value. This value is unused.
+            OPERATOR_UNSPECIFIED = 0
+
+            # All sub-queries must match.
+            AND = 1
+
+            # At least one sub-query must match.
+            OR = 2
+          end
         end
 
         # Request for performing a single search.
@@ -278,8 +489,22 @@ module Google
         #     Format: `projects/{project}/locations/{location}/collections/{collection}`
         # @!attribute [rw] filter
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A JSON filter expression, e.g. \\{"genre": \\{"$eq": "sci-fi"}},
-        #     represented as a google.protobuf.Struct.
+        #     Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+        #     represented as a `google.protobuf.Struct`.
+        #
+        #     An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+        #     object in the filter must have exactly one key: either a field name mapped
+        #     to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+        #     or `$or` with a list of filters, or `$not` with one filter. Field
+        #     operators and their values: `$eq` and `$ne` take a string, number or bool;
+        #     `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+        #     take a list of strings; `$exists` takes a bool. Several keys in one object
+        #     (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+        #     use `$and` and `$eq` instead.
+        #
+        #     Logical operators can be nested at most 2 levels deep, e.g.
+        #     `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+        #     filters are rejected with `INVALID_ARGUMENT`.
         # @!attribute [rw] aggregate
         #   @return [::Google::Cloud::VectorSearch::V1::AggregationMethod]
         #     Required. The aggregation method to apply to the query.
@@ -306,8 +531,22 @@ module Google
         #     Format: `projects/{project}/locations/{location}/collections/{collection}`
         # @!attribute [rw] filter
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. A JSON filter expression, e.g. \\{"genre": \\{"$eq": "sci-fi"}},
-        #     represented as a google.protobuf.Struct.
+        #     Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+        #     represented as a `google.protobuf.Struct`.
+        #
+        #     An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+        #     object in the filter must have exactly one key: either a field name mapped
+        #     to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+        #     or `$or` with a list of filters, or `$not` with one filter. Field
+        #     operators and their values: `$eq` and `$ne` take a string, number or bool;
+        #     `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+        #     take a list of strings; `$exists` takes a bool. Several keys in one object
+        #     (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+        #     use `$and` and `$eq` instead.
+        #
+        #     Logical operators can be nested at most 2 levels deep, e.g.
+        #     `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+        #     filters are rejected with `INVALID_ARGUMENT`.
         # @!attribute [rw] output_fields
         #   @return [::Google::Cloud::VectorSearch::V1::OutputFields]
         #     Optional. Mask specifying which fields to return.

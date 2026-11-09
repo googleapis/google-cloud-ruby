@@ -258,6 +258,7 @@ class ::Google::Cloud::Run::V2::Services::Rest::ClientTest < Minitest::Test
     service = {}
     validate_only = true
     allow_missing = true
+    force_new_revision = true
 
     update_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -273,27 +274,27 @@ class ::Google::Cloud::Run::V2::Services::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.update_service update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_service update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.update_service ::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_service ::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.update_service(::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_service(::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

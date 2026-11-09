@@ -230,6 +230,12 @@ module Google
         #     ListMessages allows filtering by:
         #      * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
         #      * update_time
+        # @!attribute [rw] pending_write_wait_skipped
+        #   @return [::Boolean]
+        #     Optional. If true, the wait for in-flight writes on the most recent turn is
+        #     skipped. By default ListMessages waits for those writes to become durable
+        #     so a caller reading right after a chat turn does not miss the tail of that
+        #     turn's messages.
         class ListMessagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

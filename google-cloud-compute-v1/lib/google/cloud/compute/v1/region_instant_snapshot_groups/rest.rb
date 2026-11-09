@@ -32,7 +32,7 @@ module Google
         ##
         # The RegionInstantSnapshotGroups API.
         #
-        # This client uses RegionInstantSnapshotGroups version 2026-09-01.
+        # This client uses RegionInstantSnapshotGroups version 2026-11-01.
         #
         # To load this service and instantiate a REST client:
         #

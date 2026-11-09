@@ -70,7 +70,7 @@ module Google
         #     `projects/{project}/locations/{location}/cmekConfigs/{cmek_config}`.
         # @!attribute [rw] kms_key
         #   @return [::String]
-        #     KMS key resource name which will be used to encrypt resources
+        #     Required. KMS key resource name which will be used to encrypt resources
         #     `projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{keyId}`.
         # @!attribute [r] kms_key_version
         #   @return [::String]

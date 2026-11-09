@@ -77,6 +77,18 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientP
     end
   end
 
+  def test_disk_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.disk_path project: "value0", zone: "value1", disk: "value2"
+      assert_equal "projects/value0/zones/value1/disks/value2", path
+    end
+  end
+
   def test_disk_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -101,6 +113,57 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientP
     end
   end
 
+  def test_image_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.image_path project: "value0", image: "value1"
+      assert_equal "projects/value0/global/images/value1", path
+    end
+  end
+
+  def test_instance_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_path project: "value0", location: "value1", instance: "value2"
+      assert_equal "projects/value0/locations/value1/instances/value2", path
+    end
+  end
+
+  def test_instance_group_manager_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_group_manager_path project: "value0", zone: "value1", instance_group_manager: "value2"
+      assert_equal "projects/value0/zones/value1/instanceGroupManagers/value2", path
+
+      path = client.instance_group_manager_path project: "value0", region: "value1", instance_group_manager: "value2"
+      assert_equal "projects/value0/regions/value1/instanceGroupManagers/value2", path
+    end
+  end
+
+  def test_instance_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_template_path project: "value0", instance_template: "value1"
+      assert_equal "projects/value0/global/instanceTemplates/value1", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -110,18 +173,6 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientP
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
-    end
-  end
-
-  def test_lustre_instance_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.lustre_instance_path project: "value0", location: "value1", instance: "value2"
-      assert_equal "projects/value0/locations/value1/instances/value2", path
     end
   end
 
@@ -137,6 +188,18 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientP
     end
   end
 
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
+
   def test_reservation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -146,6 +209,57 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::ClientP
 
       path = client.reservation_path project: "value0", zone: "value1", reservation: "value2"
       assert_equal "projects/value0/zones/value1/reservations/value2", path
+    end
+  end
+
+  def test_reservation_block_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.reservation_block_path project: "value0", zone: "value1", reservation: "value2", reservation_block: "value3"
+      assert_equal "projects/value0/zones/value1/reservations/value2/reservationBlocks/value3", path
+    end
+  end
+
+  def test_reservation_sub_block_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.reservation_sub_block_path project: "value0", zone: "value1", reservation: "value2", reservation_block: "value3", reservation_sub_block: "value4"
+      assert_equal "projects/value0/zones/value1/reservations/value2/reservationBlocks/value3/reservationSubBlocks/value4", path
+    end
+  end
+
+  def test_snapshot_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.snapshot_path project: "value0", snapshot: "value1"
+      assert_equal "projects/value0/global/snapshots/value1", path
+
+      path = client.snapshot_path project: "value0", region: "value1", snapshot: "value2"
+      assert_equal "projects/value0/regions/value1/snapshots/value2", path
+    end
+  end
+
+  def test_storage_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.storage_pool_path project: "value0", zone: "value1", storage_pool: "value2"
+      assert_equal "projects/value0/zones/value1/storagePools/value2", path
     end
   end
 

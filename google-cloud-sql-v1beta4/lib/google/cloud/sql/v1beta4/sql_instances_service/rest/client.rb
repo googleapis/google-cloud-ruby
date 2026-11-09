@@ -2101,6 +2101,174 @@ module Google
               end
 
               ##
+              # Starts a Cloud SQL instance.
+              #
+              # @overload start(request, options = nil)
+              #   Pass arguments to `start` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload start(instance: nil, project: nil, location: nil)
+              #   Pass arguments to `start` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance to be
+              #     started.
+              #   @param location [::String]
+              #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+              #     If omitted, the region is determined from the instance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest.new
+              #
+              #   # Call the start method.
+              #   result = client.start request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::Operation.
+              #   p result
+              #
+              def start request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.start.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.start.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_instances_service_stub.start request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Stops a Cloud SQL instance.
+              #
+              # @overload stop(request, options = nil)
+              #   Pass arguments to `stop` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stop(instance: nil, project: nil, location: nil)
+              #   Pass arguments to `stop` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance to be
+              #     stopped.
+              #   @param location [::String]
+              #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+              #     If omitted, the region is determined from the instance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest.new
+              #
+              #   # Call the stop method.
+              #   result = client.stop request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::Operation.
+              #   p result
+              #
+              def stop request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stop.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stop.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stop.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_instances_service_stub.stop request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Restores a backup of a Cloud SQL instance. Using this operation might cause
               # your instance to restart.
               #
@@ -3476,6 +3644,90 @@ module Google
               end
 
               ##
+              # Execute SQL statements in read-only mode.
+              #
+              # @overload execute_sql_read_only(request, options = nil)
+              #   Pass arguments to `execute_sql_read_only` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_sql_read_only(instance: nil, project: nil, body: nil, location: nil)
+              #   Pass arguments to `execute_sql_read_only` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Database instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance.
+              #   @param body [::Google::Cloud::Sql::V1beta4::ExecuteSqlReadOnlyPayload, ::Hash]
+              #     Required. The request body.
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest.new
+              #
+              #   # Call the execute_sql_read_only method.
+              #   result = client.execute_sql_read_only request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse.
+              #   p result
+              #
+              def execute_sql_read_only request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_sql_read_only.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_sql_read_only.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_sql_read_only.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_instances_service_stub.execute_sql_read_only request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Execute SQL statements.
               #
               # @overload execute_sql(request, options = nil)
@@ -3902,6 +4154,95 @@ module Google
               end
 
               ##
+              # Repairs and recreates networking resources for a Cloud SQL instance. For
+              # Private Service Connect (PSC), this operation recreates PSC DNS write
+              # endpoints on specified VPC networks and reconciles Private Service Connect
+              # connectivity infrastructure for the instance.
+              #
+              # @overload reconcile_networking(request, options = nil)
+              #   Pass arguments to `reconcile_networking` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload reconcile_networking(instance: nil, project: nil, psc_dns: nil, location: nil)
+              #   Pass arguments to `reconcile_networking` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance.
+              #   @param psc_dns [::Google::Cloud::Sql::V1beta4::PscDnsReconcileNetworkingRequest, ::Hash]
+              #     Request to recreate Private Service Connect DNS write endpoints and
+              #     reconcile Private Service Connect connectivity infrastructure for the
+              #     instance.
+              #   @param location [::String]
+              #     Optional. Region of the Cloud SQL instance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest.new
+              #
+              #   # Call the reconcile_networking method.
+              #   result = client.reconcile_networking request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::Operation.
+              #   p result
+              #
+              def reconcile_networking request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.reconcile_networking.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.reconcile_networking.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reconcile_networking.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_instances_service_stub.reconcile_networking request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the SqlInstancesService REST API.
               #
               # This class represents the configuration for SqlInstancesService REST,
@@ -4160,6 +4501,16 @@ module Google
                   #
                   attr_reader :restart
                   ##
+                  # RPC-specific configuration for `start`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :start
+                  ##
+                  # RPC-specific configuration for `stop`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stop
+                  ##
                   # RPC-specific configuration for `restore_backup`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4240,6 +4591,11 @@ module Google
                   #
                   attr_reader :get_latest_recovery_time
                   ##
+                  # RPC-specific configuration for `execute_sql_read_only`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_sql_read_only
+                  ##
                   # RPC-specific configuration for `execute_sql`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4264,6 +4620,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :point_in_time_restore
+                  ##
+                  # RPC-specific configuration for `reconcile_networking`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :reconcile_networking
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4311,6 +4672,10 @@ module Google
                     @reset_ssl_config = ::Gapic::Config::Method.new reset_ssl_config_config
                     restart_config = parent_rpcs.restart if parent_rpcs.respond_to? :restart
                     @restart = ::Gapic::Config::Method.new restart_config
+                    start_config = parent_rpcs.start if parent_rpcs.respond_to? :start
+                    @start = ::Gapic::Config::Method.new start_config
+                    stop_config = parent_rpcs.stop if parent_rpcs.respond_to? :stop
+                    @stop = ::Gapic::Config::Method.new stop_config
                     restore_backup_config = parent_rpcs.restore_backup if parent_rpcs.respond_to? :restore_backup
                     @restore_backup = ::Gapic::Config::Method.new restore_backup_config
                     rotate_server_ca_config = parent_rpcs.rotate_server_ca if parent_rpcs.respond_to? :rotate_server_ca
@@ -4343,6 +4708,8 @@ module Google
                     @reset_replica_size = ::Gapic::Config::Method.new reset_replica_size_config
                     get_latest_recovery_time_config = parent_rpcs.get_latest_recovery_time if parent_rpcs.respond_to? :get_latest_recovery_time
                     @get_latest_recovery_time = ::Gapic::Config::Method.new get_latest_recovery_time_config
+                    execute_sql_read_only_config = parent_rpcs.execute_sql_read_only if parent_rpcs.respond_to? :execute_sql_read_only
+                    @execute_sql_read_only = ::Gapic::Config::Method.new execute_sql_read_only_config
                     execute_sql_config = parent_rpcs.execute_sql if parent_rpcs.respond_to? :execute_sql
                     @execute_sql = ::Gapic::Config::Method.new execute_sql_config
                     acquire_ssrs_lease_config = parent_rpcs.acquire_ssrs_lease if parent_rpcs.respond_to? :acquire_ssrs_lease
@@ -4353,6 +4720,8 @@ module Google
                     @pre_check_major_version_upgrade = ::Gapic::Config::Method.new pre_check_major_version_upgrade_config
                     point_in_time_restore_config = parent_rpcs.point_in_time_restore if parent_rpcs.respond_to? :point_in_time_restore
                     @point_in_time_restore = ::Gapic::Config::Method.new point_in_time_restore_config
+                    reconcile_networking_config = parent_rpcs.reconcile_networking if parent_rpcs.respond_to? :reconcile_networking
+                    @reconcile_networking = ::Gapic::Config::Method.new reconcile_networking_config
 
                     yield self if block_given?
                   end

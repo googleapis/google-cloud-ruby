@@ -25,6 +25,40 @@ module Google
           # Path helper methods for the PrivateAuctionDealService API.
           module Paths
             ##
+            # Create a fully-qualified AdCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adCategories/{ad_category}`
+            #
+            # @param network_code [String]
+            # @param ad_category [String]
+            #
+            # @return [::String]
+            def ad_category_path network_code:, ad_category:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adCategories/#{ad_category}"
+            end
+
+            ##
+            # Create a fully-qualified AdSpot resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adSpots/{ad_spot}`
+            #
+            # @param network_code [String]
+            # @param ad_spot [String]
+            #
+            # @return [::String]
+            def ad_spot_path network_code:, ad_spot:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adSpots/#{ad_spot}"
+            end
+
+            ##
             # Create a fully-qualified AdUnit resource string.
             #
             # The resource will be in the following format:
@@ -178,6 +212,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ContentLabel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/contentLabels/{content_label}`
+            #
+            # @param network_code [String]
+            # @param content_label [String]
+            #
+            # @return [::String]
+            def content_label_path network_code:, content_label:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/contentLabels/#{content_label}"
+            end
+
+            ##
             # Create a fully-qualified CustomTargetingKey resource string.
             #
             # The resource will be in the following format:
@@ -277,6 +328,23 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/geoTargets/#{geo_target}"
+            end
+
+            ##
+            # Create a fully-qualified InventoryUrl resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/inventoryUrls/{inventory_url}`
+            #
+            # @param network_code [String]
+            # @param inventory_url [String]
+            #
+            # @return [::String]
+            def inventory_url_path network_code:, inventory_url:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/inventoryUrls/#{inventory_url}"
             end
 
             ##
@@ -410,6 +478,23 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/privateAuctionDeals/#{private_auction_deal}"
+            end
+
+            ##
+            # Create a fully-qualified TaxonomyCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/taxonomyCategories/{taxonomy_category}`
+            #
+            # @param network_code [String]
+            # @param taxonomy_category [String]
+            #
+            # @return [::String]
+            def taxonomy_category_path network_code:, taxonomy_category:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/taxonomyCategories/#{taxonomy_category}"
             end
 
             extend self

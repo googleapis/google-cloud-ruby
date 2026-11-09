@@ -68,6 +68,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
         #     Holds list of the containers that defines the unit of execution for this
         #     Revision.
+        # @!attribute [rw] sandboxes
+        #   @return [::Google::Cloud::Run::V2::SandboxConfiguration]
+        #     Optional. Configuration for sandboxes.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     Optional. A list of Volumes to make available to containers.
@@ -92,6 +95,12 @@ module Google
         # @!attribute [rw] gpu_zonal_redundancy_disabled
         #   @return [::Boolean]
         #     Optional. True if GPU zonal redundancy is disabled on this worker pool.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Optional. Arbitrary identifier for the API client.
+        # @!attribute [rw] client_version
+        #   @return [::String]
+        #     Optional. Arbitrary version identifier for the API client.
         class WorkerPoolRevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

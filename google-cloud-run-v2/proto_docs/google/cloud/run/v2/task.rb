@@ -135,6 +135,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
         #     Holds the single container that defines the unit of execution for this
         #     task.
+        # @!attribute [rw] sandboxes
+        #   @return [::Google::Cloud::Run::V2::SandboxConfiguration]
+        #     Configuration for sandboxes.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     A list of Volumes to make available to containers.
@@ -202,6 +205,9 @@ module Google
         #   @return [::Boolean]
         #     Optional. Output only. True if GPU zonal redundancy is disabled on this
         #     task.
+        # @!attribute [rw] workload_identity_config
+        #   @return [::Google::Cloud::Run::V2::WorkloadIdentityConfig]
+        #     Optional. The Task's workload identity settings.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

@@ -1,8 +1,7 @@
 # Ruby Client for the Cluster Director API
 
-API Client library for the Cluster Director API
+The Cluster Director API lets you deploy, manage, and monitor clusters that run artificial intelligence (AI), machine learning (ML), or high performance computing (HPC) workloads.
 
-google-cloud-hypercompute_cluster is the official client library for the Cluster Director API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-hypercompute_cluster-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-hypercompute_cluster-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-hypercompute_cluster-v1beta/latest).
 
-See also the [Product Documentation](https://cloud.google.com/blog/products/compute/managed-slurm-and-other-cluster-director-enhancements)
+See also the [Product Documentation](https://cloud.google.com/cluster-director/docs)
 for more usage information.
 
 ## Quick Start

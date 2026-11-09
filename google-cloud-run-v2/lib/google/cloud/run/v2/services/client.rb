@@ -254,9 +254,10 @@ module Google
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
             #     Required. The Service instance to create.
             #   @param service_id [::String]
-            #     Required. The unique identifier for the Service. It must begin with letter,
+            #     Optional. The unique identifier for the Service. It must begin with letter,
             #     and cannot end with hyphen; must contain fewer than 50 characters.
             #     The name of the service becomes \\{parent}/services/\\{service_id}.
+            #     If not provided, the server will generate a unique `service_id`.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
             #     populated, without persisting the request or creating any resources.
@@ -544,7 +545,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_service(update_mask: nil, service: nil, validate_only: nil, allow_missing: nil)
+            # @overload update_service(update_mask: nil, service: nil, validate_only: nil, allow_missing: nil, force_new_revision: nil)
             #   Pass arguments to `update_service` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -560,6 +561,15 @@ module Google
             #     Optional. If set to true, and if the Service does not exist, it will create
             #     a new one. The caller must have 'run.services.create' permissions if this
             #     is set to true and the Service does not exist.
+            #   @param force_new_revision [::Boolean]
+            #     Optional. If set to true, a new revision will be created from the template
+            #     even if the system doesn't detect any changes from the previously deployed
+            #     revision.
+            #
+            #     This may be useful for cases where the underlying resources need to be
+            #     recreated or reinitialized. For example if the image is specified by label,
+            #     but the underlying image digest has changed) or if the container performs
+            #     deployment initialization work that needs to be performed again.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

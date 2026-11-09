@@ -605,6 +605,25 @@
           }
         }
       }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            },
+            "ListSearchedResults": {
+              "methods": [
+                "list_searched_results"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

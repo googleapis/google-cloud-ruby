@@ -61,6 +61,14 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
+        #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+        #     timestamps, full resource names on reference fields (for example, `order =
+        #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+        #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+        #     repeated-field matching, unquoted enums and booleans, uppercase
+        #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+        #     (...)`).
+        #
         #     **Filterable fields:**
         #
         #     * `creative`
@@ -71,7 +79,6 @@ module Google
         #     * `manualCreativeRotationWeight`
         #     * `name`
         #     * `sequentialCreativeRotationIndex`
-        #     * `sizes.canonicalName`
         #     * `startTime`
         #     * `status`
         #     * `targetingDisplayName`
@@ -114,6 +121,209 @@ module Google
         class ListLineItemCreativeAssociationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateLineItemCreativeAssociation` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `LineItemCreativeAssociation` will
+        #     be created. Format: `networks/{network_code}/lineItems/{line_item_id}`
+        # @!attribute [rw] line_item_creative_association
+        #   @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+        #     Required. The `LineItemCreativeAssociation` to create.
+        class CreateLineItemCreativeAssociationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateLineItemCreativeAssociations` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItemCreativeAssociations` will be
+        #     created. This request supports using the "-" character as a wildcard for
+        #     resources that span across multiple LineItem parents. Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+        #     `networks/{network_code}/lineItems/-`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest>]
+        #     Required. The `LineItemCreativeAssociation` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateLineItemCreativeAssociationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateLineItemCreativeAssociations` method.
+        # @!attribute [rw] line_item_creative_associations
+        #   @return [::Array<::Google::Ads::AdManager::V1::LineItemCreativeAssociation>]
+        #     The `LineItemCreativeAssociation` objects created.
+        class BatchCreateLineItemCreativeAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateLineItemCreativeAssociation` method.
+        # @!attribute [rw] line_item_creative_association
+        #   @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+        #     Required. The `LineItemCreativeAssociation` to update.
+        #     Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateLineItemCreativeAssociationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateLineItemCreativeAssociations` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItemCreativeAssociations` will be
+        #     updated. This request supports using the "-" character as a wildcard for
+        #     resources that span across multiple LineItem parents. Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+        #     `networks/{network_code}/lineItems/-`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest>]
+        #     Required. The `LineItemCreativeAssociation` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateLineItemCreativeAssociationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateLineItemCreativeAssociations` method.
+        # @!attribute [rw] line_item_creative_associations
+        #   @return [::Array<::Google::Ads::AdManager::V1::LineItemCreativeAssociation>]
+        #     The `LineItemCreativeAssociation` objects updated.
+        class BatchUpdateLineItemCreativeAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivateLineItemCreativeAssociations` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItemCreativeAssociations` will be
+        #     activated. This request supports using the "-" character as a wildcard for
+        #     resources that span across multiple LineItem parents. Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+        #     `networks/{network_code}/lineItems/-`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItemCreativeAssociation` objects to
+        #     activate. A maximum of 1000 objects can be activated in a batch. Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+        class BatchActivateLineItemCreativeAssociationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateLineItemCreativeAssociations` method.
+        class BatchActivateLineItemCreativeAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateLineItemCreativeAssociations` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItemCreativeAssociations` will be
+        #     deactivated.
+        #     This request supports using the "-" character as a wildcard for resources
+        #     that span across multiple LineItem parents.
+        #     Format: `networks/{network_code}/lineItems/{line_item_id}`
+        #     Format: `networks/{network_code}/lineItems/-`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItemCreativeAssociation` objects to
+        #     deactivate. A maximum of 1000 objects can be deactivated in a batch.
+        #     Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+        class BatchDeactivateLineItemCreativeAssociationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateLineItemCreativeAssociations` method.
+        class BatchDeactivateLineItemCreativeAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeleteLineItemCreativeAssociations` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItemCreativeAssociations` will be
+        #     deleted. This request supports using the "-" character as a wildcard for
+        #     resources that span across multiple LineItem parents. Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+        #     `networks/{network_code}/lineItems/-`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItemCreativeAssociation` objects to delete.
+        #     A maximum of 1000 objects can be deleted in a batch.
+        #     Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+        class BatchDeleteLineItemCreativeAssociationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `PreviewLineItemCreativeAssociation` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `LineItemCreativeAssociation` object to preview.
+        #     Format:
+        #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+        # @!attribute [rw] site_url
+        #   @return [::String]
+        #     Required. The URL of the site that the creative should be previewed in
+        class PreviewLineItemCreativeAssociationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `PreviewLineItemCreativeAssociation` method.
+        # @!attribute [rw] previews
+        #   @return [::Array<::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse::Preview>]
+        #     On-site previews of the `LineItemCreativeAssociation`. It has only
+        #     one element for non-native previews and one preview url per `NativeStyle`
+        #     associated.
+        class PreviewLineItemCreativeAssociationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the `Creative` and its corresponding preview URL. */
+          # @!attribute [rw] preview_type
+          #   @return [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse::PreviewType]
+          #     Represents the type of preview.
+          # @!attribute [rw] on_site_preview_url
+          #   @return [::String]
+          #     The URL for previewing this creative.
+          # @!attribute [rw] native_style
+          #   @return [::String]
+          #     The resource names of the `NativeStyle` for the preview.
+          #     Only relevant when PreviewType is NATIVE.
+          #     Format:
+          #     `networks/{network_code}/nativeStyles/{native_style_id}`
+          class Preview
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents preview types.
+          module PreviewType
+            # Default value. This value is unused.
+            PREVIEW_TYPE_UNSPECIFIED = 0
+
+            # Standard preview type.
+            STANDARD = 1
+
+            # `NativeStyle` preview type.
+            NATIVE = 2
+          end
         end
       end
     end

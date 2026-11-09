@@ -408,8 +408,8 @@ module Google
             # forwarded through Direct VPC egress.
             DIRECT_VPC_EGRESS_CONNECTION = 35
 
-            # Forwarding state: for packets originating from a serverless endpoint
-            # forwarded through public (external) connectivity.
+            # Forwarding state: for packets originating from a serverless
+            # endpoint forwarded through public (external) connectivity.
             SERVERLESS_EXTERNAL_CONNECTION = 36
 
             # Forwarding state: Layer 7 packet inspection by the firewall endpoint
@@ -467,13 +467,15 @@ module Google
         #     Name of a Compute Engine instance.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Compute Engine instance.
+        #     URI of a Compute Engine instance in format
+        #     "projects/\\{project}/zones/\\{zone}/instances/\\{instance}"
         # @!attribute [rw] interface
         #   @return [::String]
         #     Name of the network interface of a Compute Engine instance.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a Compute Engine network.
+        #     URI of a Compute Engine network in format
+        #     "projects/\\{project}/global/networks/\\{network}"
         # @!attribute [rw] internal_ip
         #   @return [::String]
         #     Internal IP address of the network interface.
@@ -489,7 +491,9 @@ module Google
         #     Service account authorized for the instance.
         # @!attribute [rw] psc_network_attachment_uri
         #   @return [::String]
-        #     URI of the PSC network attachment the NIC is attached to (if relevant).
+        #     URI of the PSC network attachment the NIC is attached to (if relevant) in
+        #     format
+        #     "projects/\\{project}/regions/\\{region}/networkAttachments/\\{network_attachment}"
         # @!attribute [rw] running
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
@@ -522,10 +526,12 @@ module Google
         #     Name of a Compute Engine network.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Compute Engine network.
+        #     URI of a Compute Engine network in format
+        #     "projects/\\{project}/global/networks/\\{network}"
         # @!attribute [rw] matched_subnet_uri
         #   @return [::String]
-        #     URI of the subnet matching the source IP address of the test.
+        #     URI of the subnet matching the source IP address of the test in format
+        #     "projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}"
         # @!attribute [rw] matched_ip_range
         #   @return [::String]
         #     The IP range of the subnet matching the source IP address of the test.
@@ -545,8 +551,9 @@ module Google
         #     firewall policy rules.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The URI of the firewall rule. This field is not applicable to implied
-        #     VPC firewall rules.
+        #     The URI of the firewall rule in format
+        #     "projects/\\{project}/global/firewalls/\\{firewall}". This field is not
+        #     applicable to implied VPC firewall rules.
         # @!attribute [rw] direction
         #   @return [::String]
         #     Possible values: INGRESS, EGRESS
@@ -558,7 +565,8 @@ module Google
         #     The priority of the firewall rule.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     The URI of the VPC network that the firewall rule is associated with.
+        #     The URI of the VPC network that the firewall rule is associated with in
+        #     format "projects/\\{project}/global/networks/\\{network}".
         #     This field is not applicable to hierarchical firewall policy rules.
         # @!attribute [rw] target_tags
         #   @return [::Array<::String>]
@@ -577,6 +585,12 @@ module Google
         #     The URI of the firewall policy that this rule is associated with.
         #     This field is not applicable to VPC firewall rules and implied VPC firewall
         #     rules.
+        #     Format:
+        #     * `locations/global/firewallPolicies/{policy_id}` (hierarchical policy)
+        #     * `projects/{project_id}/global/firewallPolicies/{policy_id}` (global
+        #     network firewall policy)
+        #     * `projects/{project_id}/regions/{region}/firewallPolicies/{policy_id}`
+        #     (regional network firewall policy)
         # @!attribute [rw] firewall_rule_type
         #   @return [::Google::Cloud::NetworkManagement::V1::FirewallInfo::FirewallRuleType]
         #     The firewall rule's type.
@@ -682,8 +696,9 @@ module Google
         #     Name of a route.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a route. SUBNET, STATIC, PEERING_SUBNET (only for peering network)
-        #     and POLICY_BASED routes only.
+        #     URI of a route in format
+        #     "projects/\\{project}/global/routes/\\{route}". SUBNET, STATIC,
+        #     PEERING_SUBNET (only for peering network) and POLICY_BASED routes only.
         # @!attribute [rw] region
         #   @return [::String]
         #     Region of the route. DYNAMIC, PEERING_DYNAMIC, POLICY_BASED and ADVERTISED
@@ -702,7 +717,8 @@ module Google
         #     in new tests.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a VPC network where route is located.
+        #     URI of a VPC network where route is located in format
+        #     "projects/\\{project}/global/networks/\\{network}".
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     Priority of the route.
@@ -723,16 +739,21 @@ module Google
         #     Protocols of the route. POLICY_BASED routes only.
         # @!attribute [rw] ncc_hub_uri
         #   @return [::String]
-        #     URI of the NCC Hub the route is advertised by. PEERING_SUBNET and
+        #     URI of the NCC Hub the route is advertised by in format
+        #     "projects/\\{project}/locations/global/hubs/\\{hub}". PEERING_SUBNET and
         #     PEERING_DYNAMIC routes that are advertised by NCC Hub only.
         # @!attribute [rw] ncc_spoke_uri
         #   @return [::String]
-        #     URI of the destination NCC Spoke. PEERING_SUBNET and PEERING_DYNAMIC routes
-        #     that are advertised by NCC Hub only.
+        #     URI of the destination NCC Spoke in format
+        #     "projects/\\{project}/locations/\\{location}/spokes/\\{spoke}" (regional) or
+        #     "projects/\\{project}/locations/global/spokes/\\{spoke}" (global).
+        #     PEERING_SUBNET and PEERING_DYNAMIC routes that are advertised by NCC Hub
+        #     only.
         # @!attribute [rw] advertised_route_source_router_uri
         #   @return [::String]
         #     For ADVERTISED dynamic routes, the URI of the Cloud Router that advertised
-        #     the corresponding IP prefix.
+        #     the corresponding IP prefix in format
+        #     "projects/\\{project}/regions/\\{region}/routers/\\{router}".
         # @!attribute [rw] advertised_route_next_hop_uri
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -746,11 +767,13 @@ module Google
         #     URI of the next hop resource.
         # @!attribute [rw] next_hop_network_uri
         #   @return [::String]
-        #     URI of a VPC network where the next hop resource is located.
+        #     URI of a VPC network where the next hop resource is located in format
+        #     "projects/\\{project}/global/networks/\\{network}".
         # @!attribute [rw] originating_route_uri
         #   @return [::String]
         #     For PEERING_SUBNET and PEERING_STATIC routes, the URI of the originating
         #     SUBNET/STATIC route.
+        #     Format: `projects/{project_id}/global/routes/{route_id}`
         # @!attribute [rw] originating_route_display_name
         #   @return [::String]
         #     For PEERING_SUBNET, PEERING_STATIC and PEERING_DYNAMIC routes, the name of
@@ -759,6 +782,8 @@ module Google
         #   @return [::String]
         #     For PEERING_SUBNET and PEERING_DYNAMIC routes that are advertised by NCC
         #     Hub, the URI of the corresponding route in NCC Hub's routing table.
+        #     Format:
+        #     `projects/{project_id}/locations/global/hubs/{hub_id}/routeTables/{route_table_id}/routes/{route_id}`
         class RouteInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -921,7 +946,10 @@ module Google
         #     Name of the forwarding rule.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of the forwarding rule.
+        #     URI of the forwarding rule in format
+        #     "projects/\\{project}/global/forwardingRules/\\{forwarding_rule}" (global) or
+        #     "projects/\\{project}/regions/\\{region}/forwardingRules/\\{forwarding_rule}"
+        #     (regional).
         # @!attribute [rw] matched_protocol
         #   @return [::String]
         #     Protocol defined in the forwarding rule that matches the packet.
@@ -936,7 +964,8 @@ module Google
         #     Target type of the forwarding rule.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     Network URI.
+        #     URI of a VPC network where the forwarding rule is located in format
+        #     "projects/\\{project}/global/networks/\\{network}".
         # @!attribute [rw] region
         #   @return [::String]
         #     Region of the forwarding rule. Set only for regional forwarding rules.
@@ -947,7 +976,8 @@ module Google
         # @!attribute [rw] psc_service_attachment_uri
         #   @return [::String]
         #     URI of the PSC service attachment this forwarding rule targets (if
-        #     applicable).
+        #     applicable) in format
+        #     "projects/\\{project}/regions/\\{region}/serviceAttachments/\\{service_attachment}".
         # @!attribute [rw] psc_google_api_target
         #   @return [::String]
         #     PSC Google API target this forwarding rule targets (if applicable).
@@ -974,7 +1004,12 @@ module Google
         #     Type of load balancer's backend configuration.
         # @!attribute [rw] backend_uri
         #   @return [::String]
-        #     Backend configuration URI.
+        #     URI of the backend associated with the load balancer.
+        #     Format:
+        #     * `projects/{project_id}/regions/{region}/backendServices/{backend_service_id}`
+        #     * `projects/{project_id}/global/backendServices/{backend_service_id}`
+        #     * `projects/{project_id}/regions/{region}/targetPools/{target_pool_id}`
+        #     * `projects/{project_id}/zones/{zone}/targetInstances/{target_instance_id}`
         class LoadBalancerInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1022,7 +1057,15 @@ module Google
         #     Name of a Compute Engine instance or network endpoint.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Compute Engine instance or network endpoint.
+        #     URI of the backend instance or network endpoint.
+        #     Format:
+        #     * `projects/{project_id}/zones/{zone}/instances/{instance_id}` (instance)
+        #     * `projects/{project_id}/zones/{zone}/networkEndpointGroups/{neg_id}`
+        #     (zonal NEG)
+        #     * `projects/{project_id}/regions/{region}/networkEndpointGroups/{neg_id}`
+        #     (regional NEG)
+        #     * `projects/{project_id}/global/networkEndpointGroups/{neg_id}` (global
+        #     NEG)
         # @!attribute [rw] health_check_firewall_state
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerBackend::HealthCheckFirewallState]
         #     State of the health check firewall configuration.
@@ -1060,7 +1103,9 @@ module Google
         #     Name of a hybrid subnet.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a hybrid subnet.
+        #     URI of the hybrid subnet.
+        #     Format:
+        #     `projects/{project_id}/regions/{region}/subnetworks/{subnetwork_id}`
         # @!attribute [rw] region
         #   @return [::String]
         #     Name of a Google Cloud region where the hybrid subnet is configured.
@@ -1075,18 +1120,24 @@ module Google
         #     Name of a VPN gateway.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a VPN gateway.
+        #     URI of the VPN gateway.
+        #     Format:
+        #     * `projects/{project_id}/regions/{region}/vpnGateways/{vpn_gateway_id}` (HA
+        #     VPN gateway)
+        #     * `projects/{project_id}/regions/{region}/targetVpnGateways/{target_vpn_gateway_id}` (Classic VPN gateway)
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a Compute Engine network where the VPN gateway is configured.
+        #     URI of the VPC network where the VPN gateway is configured.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the VPN gateway.
         # @!attribute [rw] vpn_tunnel_uri
         #   @return [::String]
-        #     A VPN tunnel that is associated with this VPN gateway.
+        #     URI of the VPN tunnel associated with the VPN gateway.
         #     There may be multiple VPN tunnels configured on a VPN gateway, and only
         #     the one relevant to the test is displayed.
+        #     Format: `projects/{project_id}/regions/{region}/vpnTunnels/{vpn_tunnel_id}`
         # @!attribute [rw] region
         #   @return [::String]
         #     Name of a Google Cloud region where this VPN gateway is configured.
@@ -1101,13 +1152,23 @@ module Google
         #     Name of a VPN tunnel.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a VPN tunnel.
+        #     URI of the VPN tunnel.
+        #     Format: `projects/{project_id}/regions/{region}/vpnTunnels/{vpn_tunnel_id}`
         # @!attribute [rw] source_gateway
         #   @return [::String]
         #     URI of the VPN gateway at local end of the tunnel.
+        #     Format:
+        #     * `projects/{project_id}/regions/{region}/vpnGateways/{vpn_gateway_id}` (HA
+        #     VPN gateway)
+        #     * `projects/{project_id}/regions/{region}/targetVpnGateways/{target_vpn_gateway_id}` (Classic VPN gateway)
         # @!attribute [rw] remote_gateway
         #   @return [::String]
         #     URI of a VPN gateway at remote end of the tunnel.
+        #     Format:
+        #     * `projects/{project_id}/regions/{region}/vpnGateways/{vpn_gateway_id}`
+        #     (GCP HA VPN gateway)
+        #     * `projects/{project_id}/global/peerVpnGateways/{peer_vpn_gateway_id}` (GCP
+        #     peer VPN gateway)
         # @!attribute [rw] remote_gateway_ip
         #   @return [::String]
         #     Remote VPN gateway's IP address.
@@ -1116,7 +1177,8 @@ module Google
         #     Local VPN gateway's IP address.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a Compute Engine network where the VPN tunnel is configured.
+        #     URI of the VPC network where the VPN tunnel is configured.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] region
         #   @return [::String]
         #     Name of a Google Cloud region where this VPN tunnel is configured.
@@ -1150,11 +1212,13 @@ module Google
         #     Name of an Interconnect attachment.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of an Interconnect attachment.
+        #     URI of the Interconnect attachment.
+        #     Format:
+        #     `projects/{project_id}/regions/{region}/interconnectAttachments/{attachment_id}`
         # @!attribute [rw] interconnect_uri
         #   @return [::String]
-        #     URI of the Interconnect where the Interconnect attachment is
-        #     configured.
+        #     URI of the Interconnect.
+        #     Format: `projects/{project_id}/global/interconnects/{interconnect_id}`
         # @!attribute [rw] region
         #   @return [::String]
         #     Name of a Google Cloud region where the Interconnect attachment is
@@ -1162,6 +1226,7 @@ module Google
         # @!attribute [rw] cloud_router_uri
         #   @return [::String]
         #     URI of the Cloud Router to be used for dynamic routing.
+        #     Format: `projects/{project_id}/regions/{region}/routers/{router_id}`
         # @!attribute [rw] type
         #   @return [::Google::Cloud::NetworkManagement::V1::InterconnectAttachmentInfo::Type]
         #     The type of interconnect attachment this is.
@@ -1212,9 +1277,11 @@ module Google
         # @!attribute [rw] source_network_uri
         #   @return [::String]
         #     URI of the network where this packet originates from.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] destination_network_uri
         #   @return [::String]
         #     URI of the network where this packet is sent to.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] source_agent_uri
         #   @return [::String]
         #     URI of the source telemetry agent this packet originates from.
@@ -1230,6 +1297,9 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that the packet is delivered to.
+        #     For example:
+        #     * `"projects/{project}/zones/{zone}/instances/{instance}"`
+        #     * `"projects/{project}/regions/{region}/networkEndpointGroups/{network_endpoint_group}"`
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the target (if applicable).
@@ -1359,6 +1429,11 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that the packet is forwarded to.
+        #     Format:
+        #     * `projects/{project_id}/global/networks/{network_id}` (VPC peering
+        #     network)
+        #     * `projects/{project_id}/regions/{region}/vpnGateways/{vpn_gateway_id}`
+        #     (VPN gateway)
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the target (if applicable).
@@ -1410,6 +1485,10 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that caused the abort.
+        #     Format:
+        #     * `projects/{project_id}/global/networks/{network_id}` (VPC network)
+        #     * `projects/{project_id}/zones/{zone}/instances/{instance_id}` (VM
+        #     instance)
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address that caused the abort.
@@ -1607,6 +1686,9 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that caused the drop.
+        #     Format:
+        #     * `projects/{project_id}/global/firewalls/{firewall_id}` (firewall rule)
+        #     * `projects/{project_id}/global/routes/{route_id}` (route)
         # @!attribute [rw] source_ip
         #   @return [::String]
         #     Source IP address of the dropped packet (if relevant).
@@ -2062,10 +2144,16 @@ module Google
         # cluster master.
         # @!attribute [rw] cluster_uri
         #   @return [::String]
-        #     URI of a GKE cluster.
+        #     URI of the GKE cluster.
+        #     Format:
+        #     * `projects/{project_id}/locations/{location}/clusters/{cluster_id}`
+        #     (regional cluster)
+        #     * `projects/{project_id}/zones/{zone}/clusters/{cluster_id}` (zonal
+        #     cluster)
         # @!attribute [rw] cluster_network_uri
         #   @return [::String]
-        #     URI of a GKE cluster network.
+        #     URI of the GKE cluster network.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] internal_ip
         #   @return [::String]
         #     Internal IP address of a GKE cluster control plane.
@@ -2096,6 +2184,7 @@ module Google
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     URI of the network containing the GKE Pod.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         class GkePodInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2210,11 +2299,12 @@ module Google
         #     Name of a Cloud SQL instance.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Cloud SQL instance.
+        #     URI of a Cloud SQL instance in format
+        #     "projects/\\{project}/instances/\\{instance}"
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     URI of a Cloud SQL instance network or empty string if the instance does
-        #     not have one.
+        #     not have one. In format "projects/\\{project}/global/networks/\\{network}".
         # @!attribute [rw] internal_ip
         #   @return [::String]
         #     Internal IP address of a Cloud SQL instance.
@@ -2235,10 +2325,12 @@ module Google
         #     Name of a Cloud Redis Instance.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Cloud Redis Instance.
+        #     URI of a Cloud Redis Instance in format
+        #     "projects/\\{project}/locations/\\{location}/instances/\\{instance}"
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a Cloud Redis Instance network.
+        #     URI of a Cloud Redis Instance network in format
+        #     "projects/\\{project}/global/networks/\\{network}".
         # @!attribute [rw] primary_endpoint_ip
         #   @return [::String]
         #     Primary endpoint IP address of a Cloud Redis Instance.
@@ -2286,7 +2378,9 @@ module Google
         #     Name of a Cloud Function.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Cloud Function.
+        #     URI of the Cloud Function.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/functions/{function_id}`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location in which the Cloud Function is deployed.
@@ -2304,13 +2398,17 @@ module Google
         #     Name of a Cloud Run revision.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Cloud Run revision.
+        #     URI of the Cloud Run revision.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/revisions/{revision_id}`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location in which this revision is deployed.
         # @!attribute [rw] service_uri
         #   @return [::String]
         #     URI of Cloud Run service this revision belongs to.
+        #     Format: `projects/{project_id}/locations/{location}/services/{service_id}`
+        #     Mutually exclusive with `worker_pool_uri`.
         class CloudRunRevisionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2322,7 +2420,8 @@ module Google
         #     Name of a Cloud Run job.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Cloud Run job.
+        #     URI of the Cloud Run job.
+        #     Format: `projects/{project_id}/locations/{location}/jobs/{job_id}`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location in which this job is deployed.
@@ -2337,7 +2436,8 @@ module Google
         #     Name of an App Engine version.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of an App Engine version.
+        #     URI of the App Engine version.
+        #     Format: `apps/{app_id}/services/{service_id}/versions/{version_id}`
         # @!attribute [rw] runtime
         #   @return [::String]
         #     Runtime of the App Engine version.
@@ -2356,6 +2456,8 @@ module Google
         # @!attribute [rw] uri
         #   @return [::String]
         #     URI of a VPC connector.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/connectors/{connector_id}`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location in which the VPC connector is deployed.
@@ -2368,10 +2470,13 @@ module Google
         # connection.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of direct access network.
+        #     URI of the VPC network for direct egress.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
-        #     URI of direct access subnetwork.
+        #     URI of the subnetwork for direct egress.
+        #     Format:
+        #     `projects/{project_id}/regions/{region}/subnetworks/{subnetwork_id}`
         # @!attribute [rw] selected_ip_range
         #   @return [::String]
         #     Selected IP range.
@@ -2404,7 +2509,8 @@ module Google
         #     IP protocol in string format, for example: "TCP", "UDP", "ICMP".
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of the network where NAT translation takes place.
+        #     URI of the VPC network where NAT translation takes place.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         # @!attribute [rw] old_source_ip
         #   @return [::String]
         #     Source IP address before NAT translation.
@@ -2433,7 +2539,8 @@ module Google
         #     UDP.
         # @!attribute [rw] router_uri
         #   @return [::String]
-        #     Uri of the Cloud Router. Only valid when type is CLOUD_NAT.
+        #     URI of the Cloud Router. Only valid when type is CLOUD_NAT.
+        #     Format: `projects/{project_id}/regions/{region}/routers/{router_id}`
         # @!attribute [rw] nat_gateway_name
         #   @return [::String]
         #     The name of Cloud NAT Gateway. Only valid when type is CLOUD_NAT.
@@ -2520,10 +2627,13 @@ module Google
         #     UDP.
         # @!attribute [rw] subnet_uri
         #   @return [::String]
-        #     Uri of proxy subnet.
+        #     URI of the proxy subnet.
+        #     Format:
+        #     `projects/{project_id}/regions/{region}/subnetworks/{subnetwork_id}`
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of the network where connection is proxied.
+        #     URI of the VPC network where connection is proxied.
+        #     Format: `projects/{project_id}/global/networks/{network_id}`
         class ProxyConnectionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2537,30 +2647,50 @@ module Google
         #     endpoint group backends.
         # @!attribute [rw] instance_uri
         #   @return [::String]
-        #     URI of the backend instance (if applicable). Populated for instance group
-        #     backends, and zonal NEG backends.
+        #     URI of the backend instance (if applicable) in format
+        #     "projects/\\{project}/zones/\\{zone}/instances/\\{instance}". Populated for
+        #     instance group backends, and zonal NEG backends.
         # @!attribute [rw] backend_service_uri
         #   @return [::String]
-        #     URI of the backend service this backend belongs to (if applicable).
+        #     URI of the backend service this backend belongs to (if applicable) in
+        #     format
+        #     "projects/\\{project}/regions/\\{region}/backendServices/\\{backend_service}"
+        #     (regional) or "projects/\\{project}/global/backendServices/\\{backend_service}"
+        #     (global).
         # @!attribute [rw] instance_group_uri
         #   @return [::String]
-        #     URI of the instance group this backend belongs to (if applicable).
+        #     URI of the instance group this backend belongs to (if applicable) in
+        #     format "projects/\\{project}/zones/\\{zone}/instanceGroups/\\{instance_group}".
         # @!attribute [rw] network_endpoint_group_uri
         #   @return [::String]
-        #     URI of the network endpoint group this backend belongs to (if applicable).
+        #     URI of the network endpoint group this backend belongs to (if applicable)
+        #     Format:
+        #     * `projects/{project_id}/zones/{zone}/networkEndpointGroups/{neg_id}`
+        #     (zonal NEG)
+        #     * `projects/{project_id}/regions/{region}/networkEndpointGroups/{neg_id}`
+        #     (regional NEG)
+        #     * `projects/{project_id}/global/networkEndpointGroups/{neg_id}` (global
+        #     NEG)
         # @!attribute [rw] backend_bucket_uri
         #   @return [::String]
-        #     URI of the backend bucket this backend targets (if applicable).
+        #     URI of the backend bucket this backend targets (if applicable) in format
+        #     "projects/\\{project}/global/backendBuckets/\\{backend_bucket}".
         # @!attribute [rw] psc_service_attachment_uri
         #   @return [::String]
         #     URI of the PSC service attachment this PSC NEG backend targets (if
-        #     applicable).
+        #     applicable) in format
+        #     "projects/\\{project}/regions/\\{region}/serviceAttachments/\\{service_attachment}".
         # @!attribute [rw] psc_google_api_target
         #   @return [::String]
         #     PSC Google API target this PSC NEG backend targets (if applicable).
         # @!attribute [rw] health_check_uri
         #   @return [::String]
         #     URI of the health check attached to this backend (if applicable).
+        #     Format:
+        #     * `projects/{project_id}/global/healthChecks/{health_check_id}`
+        #     * `projects/{project_id}/regions/{region}/healthChecks/{health_check_id}`
+        #     * `projects/{project_id}/global/httpHealthChecks/{health_check_id}`
+        #     (legacy)
         # @!attribute [r] health_check_firewalls_config_state
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerBackendInfo::HealthCheckFirewallsConfigState]
         #     Output only. Health check firewalls configuration state for the backend.
@@ -2613,7 +2743,8 @@ module Google
         # group backend.
         # @!attribute [rw] neg_uri
         #   @return [::String]
-        #     URI of the serverless network endpoint group.
+        #     URI of the serverless network endpoint group in format
+        #     "projects/\\{project}/regions/\\{region}/networkEndpointGroups/\\{network_endpoint_group}".
         class ServerlessNegInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2625,6 +2756,8 @@ module Google
         #   @return [::String]
         #     URI of the security profile group associated with this firewall packet
         #     inspection.
+        #     Format:
+        #     `organizations/{organization_id}/locations/global/securityProfileGroups/{security_profile_group_id}`
         class NgfwPacketInspectionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

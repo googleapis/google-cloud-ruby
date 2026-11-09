@@ -829,7 +829,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_messages(parent: nil, page_size: nil, page_token: nil, filter: nil, pending_write_wait_skipped: nil)
             #   Pass arguments to `list_messages` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -852,6 +852,11 @@ module Google
             #     ListMessages allows filtering by:
             #      * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
             #      * update_time
+            #   @param pending_write_wait_skipped [::Boolean]
+            #     Optional. If true, the wait for in-flight writes on the most recent turn is
+            #     skipped. By default ListMessages waits for those writes to become durable
+            #     so a caller reading right after a chat turn does not miss the tail of that
+            #     turn's messages.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::GeminiDataAnalytics::V1beta::StorageMessage>]

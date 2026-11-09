@@ -32,8 +32,9 @@ module Google
         #     Required. The Job instance to create.
         # @!attribute [rw] job_id
         #   @return [::String]
-        #     Required. The unique identifier for the Job. The name of the job becomes
+        #     Optional. The unique identifier for the Job. The name of the job becomes
         #     \\{parent}/jobs/\\{job_id}.
+        #     If not provided, the server will generate a unique `job_id`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated and default values
@@ -160,6 +161,10 @@ module Google
           #     Duration in seconds the task may be active before the system will
           #     actively try to mark it failed and kill associated containers. Will
           #     replace existing timeout_seconds value.
+          # @!attribute [rw] delay_execution
+          #   @return [::Boolean]
+          #     Optional. If true, the system will start the execution within the next 12
+          #     hours depending on available capacity.
           class Overrides
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,6 +340,9 @@ module Google
         #     The sum of job name and token length must be fewer than 63 characters.
         #
         #     Note: The following fields are mutually exclusive: `run_execution_token`, `start_execution_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] functional_type
+        #   @return [::Google::Cloud::Run::V2::FunctionalType]
+        #     Optional. The functional type of the Job.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. A system-generated fingerprint for this version of the

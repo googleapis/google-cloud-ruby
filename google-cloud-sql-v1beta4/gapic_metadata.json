@@ -202,6 +202,16 @@
                 "restart"
               ]
             },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
             "RestoreBackup": {
               "methods": [
                 "restore_backup"
@@ -282,6 +292,11 @@
                 "get_latest_recovery_time"
               ]
             },
+            "ExecuteSqlReadOnly": {
+              "methods": [
+                "execute_sql_read_only"
+              ]
+            },
             "ExecuteSql": {
               "methods": [
                 "execute_sql"
@@ -305,6 +320,11 @@
             "PointInTimeRestore": {
               "methods": [
                 "point_in_time_restore"
+              ]
+            },
+            "ReconcileNetworking": {
+              "methods": [
+                "reconcile_networking"
               ]
             }
           }
@@ -358,6 +378,21 @@
             "List": {
               "methods": [
                 "list"
+              ]
+            },
+            "UpdateCustomerManagedCertificate": {
+              "methods": [
+                "update_customer_managed_certificate"
+              ]
+            },
+            "DeleteCustomerManagedCertificate": {
+              "methods": [
+                "delete_customer_managed_certificate"
+              ]
+            },
+            "ListCustomerManagedCertificates": {
+              "methods": [
+                "list_customer_managed_certificates"
               ]
             }
           }

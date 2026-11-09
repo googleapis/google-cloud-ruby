@@ -271,6 +271,7 @@ class ::Google::Cloud::Run::V2::Services::ClientTest < Minitest::Test
     service = {}
     validate_only = true
     allow_missing = true
+    force_new_revision = true
 
     update_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_service, name
@@ -279,6 +280,7 @@ class ::Google::Cloud::Run::V2::Services::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Run::V2::Service), request["service"]
       assert_equal true, request["validate_only"]
       assert_equal true, request["allow_missing"]
+      assert_equal true, request["force_new_revision"]
       refute_nil options
     end
 
@@ -289,35 +291,35 @@ class ::Google::Cloud::Run::V2::Services::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+      c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.update_service update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+      c.update_service update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.update_service ::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+      c.update_service ::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_service({ update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.update_service(::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_service(::Google::Cloud::Run::V2::UpdateServiceRequest.new(update_mask: update_mask, service: service, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

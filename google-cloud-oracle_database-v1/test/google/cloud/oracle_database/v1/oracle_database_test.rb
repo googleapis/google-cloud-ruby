@@ -261,6 +261,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_cloud_exadata_infrastructure
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    cloud_exadata_infrastructure = {}
+    request_id = "hello world"
+
+    update_cloud_exadata_infrastructure_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_cloud_exadata_infrastructure, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructure), request["cloud_exadata_infrastructure"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_cloud_exadata_infrastructure_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_cloud_exadata_infrastructure({ update_mask: update_mask, cloud_exadata_infrastructure: cloud_exadata_infrastructure, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_cloud_exadata_infrastructure update_mask: update_mask, cloud_exadata_infrastructure: cloud_exadata_infrastructure, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest.new(update_mask: update_mask, cloud_exadata_infrastructure: cloud_exadata_infrastructure, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_cloud_exadata_infrastructure({ update_mask: update_mask, cloud_exadata_infrastructure: cloud_exadata_infrastructure, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest.new(update_mask: update_mask, cloud_exadata_infrastructure: cloud_exadata_infrastructure, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_cloud_exadata_infrastructure_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_cloud_exadata_infrastructure
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -593,6 +660,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_cloud_vm_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    cloud_vm_cluster = {}
+    request_id = "hello world"
+
+    update_cloud_vm_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_cloud_vm_cluster, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::CloudVmCluster), request["cloud_vm_cluster"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_cloud_vm_cluster_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_cloud_vm_cluster({ update_mask: update_mask, cloud_vm_cluster: cloud_vm_cluster, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_cloud_vm_cluster update_mask: update_mask, cloud_vm_cluster: cloud_vm_cluster, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_cloud_vm_cluster ::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest.new(update_mask: update_mask, cloud_vm_cluster: cloud_vm_cluster, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_cloud_vm_cluster({ update_mask: update_mask, cloud_vm_cluster: cloud_vm_cluster, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_cloud_vm_cluster(::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest.new(update_mask: update_mask, cloud_vm_cluster: cloud_vm_cluster, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_cloud_vm_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_cloud_vm_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -660,6 +794,258 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_enable_cloud_vm_cluster_identity_connector
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    enable_cloud_vm_cluster_identity_connector_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :enable_cloud_vm_cluster_identity_connector, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, enable_cloud_vm_cluster_identity_connector_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.enable_cloud_vm_cluster_identity_connector({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.enable_cloud_vm_cluster_identity_connector name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.enable_cloud_vm_cluster_identity_connector ::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.enable_cloud_vm_cluster_identity_connector({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.enable_cloud_vm_cluster_identity_connector(::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, enable_cloud_vm_cluster_identity_connector_client_stub.call_rpc_count
+    end
+  end
+
+  def test_disable_cloud_vm_cluster_identity_connector
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    disable_cloud_vm_cluster_identity_connector_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :disable_cloud_vm_cluster_identity_connector, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, disable_cloud_vm_cluster_identity_connector_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.disable_cloud_vm_cluster_identity_connector({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.disable_cloud_vm_cluster_identity_connector name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.disable_cloud_vm_cluster_identity_connector ::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.disable_cloud_vm_cluster_identity_connector({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.disable_cloud_vm_cluster_identity_connector(::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, disable_cloud_vm_cluster_identity_connector_client_stub.call_rpc_count
+    end
+  end
+
+  def test_enable_exadb_vm_cluster_identity_connector
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    enable_exadb_vm_cluster_identity_connector_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :enable_exadb_vm_cluster_identity_connector, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, enable_exadb_vm_cluster_identity_connector_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.enable_exadb_vm_cluster_identity_connector({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.enable_exadb_vm_cluster_identity_connector name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.enable_exadb_vm_cluster_identity_connector ::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.enable_exadb_vm_cluster_identity_connector({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.enable_exadb_vm_cluster_identity_connector(::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, enable_exadb_vm_cluster_identity_connector_client_stub.call_rpc_count
+    end
+  end
+
+  def test_disable_exadb_vm_cluster_identity_connector
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    disable_exadb_vm_cluster_identity_connector_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :disable_exadb_vm_cluster_identity_connector, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, disable_exadb_vm_cluster_identity_connector_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.disable_exadb_vm_cluster_identity_connector({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.disable_exadb_vm_cluster_identity_connector name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.disable_exadb_vm_cluster_identity_connector ::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.disable_exadb_vm_cluster_identity_connector({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.disable_exadb_vm_cluster_identity_connector(::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, disable_exadb_vm_cluster_identity_connector_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_entitlements
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::OracleDatabase::V1::ListEntitlementsResponse.new
@@ -724,6 +1110,75 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_entitlements_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_flex_components
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_flex_components_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_flex_components, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_flex_components_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_flex_components({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_flex_components parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_flex_components ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_flex_components({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_flex_components(::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_flex_components_client_stub.call_rpc_count
     end
   end
 
@@ -2372,6 +2827,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_odb_network
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    odb_network = {}
+    request_id = "hello world"
+
+    update_odb_network_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_odb_network, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::OdbNetwork), request["odb_network"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_odb_network_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_odb_network({ update_mask: update_mask, odb_network: odb_network, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_odb_network update_mask: update_mask, odb_network: odb_network, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_odb_network ::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest.new(update_mask: update_mask, odb_network: odb_network, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_odb_network({ update_mask: update_mask, odb_network: odb_network, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_odb_network(::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest.new(update_mask: update_mask, odb_network: odb_network, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_odb_network_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_odb_network
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -2632,6 +3154,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, create_odb_subnet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_odb_subnet
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    odb_subnet = {}
+    request_id = "hello world"
+
+    update_odb_subnet_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_odb_subnet, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::OdbSubnet), request["odb_subnet"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_odb_subnet_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_odb_subnet({ update_mask: update_mask, odb_subnet: odb_subnet, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_odb_subnet update_mask: update_mask, odb_subnet: odb_subnet, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_odb_subnet ::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest.new(update_mask: update_mask, odb_subnet: odb_subnet, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_odb_subnet({ update_mask: update_mask, odb_subnet: odb_subnet, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_odb_subnet(::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest.new(update_mask: update_mask, odb_subnet: odb_subnet, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_odb_subnet_client_stub.call_rpc_count
     end
   end
 
@@ -3558,6 +4147,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_exascale_db_storage_vault
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    exascale_db_storage_vault = {}
+    request_id = "hello world"
+
+    update_exascale_db_storage_vault_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_exascale_db_storage_vault, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault), request["exascale_db_storage_vault"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_exascale_db_storage_vault_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_exascale_db_storage_vault({ update_mask: update_mask, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_exascale_db_storage_vault update_mask: update_mask, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_exascale_db_storage_vault ::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest.new(update_mask: update_mask, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_exascale_db_storage_vault({ update_mask: update_mask, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_exascale_db_storage_vault(::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest.new(update_mask: update_mask, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_exascale_db_storage_vault_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_exascale_db_storage_vault
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -3687,6 +4343,75 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_db_system_initial_storage_sizes_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_db_system_compute_performances
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_db_system_compute_performances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_db_system_compute_performances, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_db_system_compute_performances_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_db_system_compute_performances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_db_system_compute_performances parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_db_system_compute_performances ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_db_system_compute_performances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_db_system_compute_performances(::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_db_system_compute_performances_client_stub.call_rpc_count
     end
   end
 
@@ -4142,6 +4867,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_db_system
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    db_system = {}
+    request_id = "hello world"
+
+    update_db_system_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_db_system, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::DbSystem), request["db_system"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_db_system_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_db_system({ update_mask: update_mask, db_system: db_system, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_db_system update_mask: update_mask, db_system: db_system, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_db_system ::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest.new(update_mask: update_mask, db_system: db_system, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_db_system({ update_mask: update_mask, db_system: db_system, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_db_system(::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest.new(update_mask: update_mask, db_system: db_system, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_db_system_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_db_system
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -4402,6 +5194,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, create_goldengate_deployment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_goldengate_deployment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    goldengate_deployment = {}
+    request_id = "hello world"
+
+    update_goldengate_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_goldengate_deployment, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::GoldengateDeployment), request["goldengate_deployment"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_goldengate_deployment_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_goldengate_deployment({ update_mask: update_mask, goldengate_deployment: goldengate_deployment, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_goldengate_deployment update_mask: update_mask, goldengate_deployment: goldengate_deployment, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_goldengate_deployment ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest.new(update_mask: update_mask, goldengate_deployment: goldengate_deployment, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_goldengate_deployment({ update_mask: update_mask, goldengate_deployment: goldengate_deployment, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_goldengate_deployment(::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest.new(update_mask: update_mask, goldengate_deployment: goldengate_deployment, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_goldengate_deployment_client_stub.call_rpc_count
     end
   end
 
@@ -4791,6 +5650,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, create_goldengate_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_goldengate_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    goldengate_connection = {}
+    request_id = "hello world"
+
+    update_goldengate_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_goldengate_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::GoldengateConnection), request["goldengate_connection"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_goldengate_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_goldengate_connection({ update_mask: update_mask, goldengate_connection: goldengate_connection, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_goldengate_connection update_mask: update_mask, goldengate_connection: goldengate_connection, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_goldengate_connection ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest.new(update_mask: update_mask, goldengate_connection: goldengate_connection, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_goldengate_connection({ update_mask: update_mask, goldengate_connection: goldengate_connection, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_goldengate_connection(::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest.new(update_mask: update_mask, goldengate_connection: goldengate_connection, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_goldengate_connection_client_stub.call_rpc_count
     end
   end
 
@@ -5471,6 +6397,73 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     end
   end
 
+  def test_update_goldengate_connection_assignment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    goldengate_connection_assignment = {}
+    request_id = "hello world"
+
+    update_goldengate_connection_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_goldengate_connection_assignment, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionAssignment), request["goldengate_connection_assignment"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_goldengate_connection_assignment_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_goldengate_connection_assignment({ update_mask: update_mask, goldengate_connection_assignment: goldengate_connection_assignment, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_goldengate_connection_assignment update_mask: update_mask, goldengate_connection_assignment: goldengate_connection_assignment, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_goldengate_connection_assignment ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest.new(update_mask: update_mask, goldengate_connection_assignment: goldengate_connection_assignment, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_goldengate_connection_assignment({ update_mask: update_mask, goldengate_connection_assignment: goldengate_connection_assignment, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_goldengate_connection_assignment(::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest.new(update_mask: update_mask, goldengate_connection_assignment: goldengate_connection_assignment, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_goldengate_connection_assignment_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_goldengate_connection_assignment
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -5593,6 +6586,456 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, test_goldengate_connection_assignment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_database_connections
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_database_connections_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_database_connections, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_database_connections_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_database_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_database_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_database_connections ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_database_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_database_connections(::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_database_connections_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_database_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::DatabaseConnection.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_database_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_database_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_database_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_database_connection({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_database_connection name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_database_connection ::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_database_connection({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_database_connection(::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_database_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_database_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    database_connection_id = "hello world"
+    database_connection = {}
+    request_id = "hello world"
+
+    create_database_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_database_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["database_connection_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::DatabaseConnection), request["database_connection"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_database_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_database_connection({ parent: parent, database_connection_id: database_connection_id, database_connection: database_connection, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_database_connection parent: parent, database_connection_id: database_connection_id, database_connection: database_connection, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_database_connection ::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest.new(parent: parent, database_connection_id: database_connection_id, database_connection: database_connection, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_database_connection({ parent: parent, database_connection_id: database_connection_id, database_connection: database_connection, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_database_connection(::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest.new(parent: parent, database_connection_id: database_connection_id, database_connection: database_connection, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_database_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_database_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    database_connection = {}
+    request_id = "hello world"
+
+    update_database_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_database_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OracleDatabase::V1::DatabaseConnection), request["database_connection"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_database_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_database_connection({ update_mask: update_mask, database_connection: database_connection, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_database_connection update_mask: update_mask, database_connection: database_connection, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_database_connection ::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest.new(update_mask: update_mask, database_connection: database_connection, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_database_connection({ update_mask: update_mask, database_connection: database_connection, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_database_connection(::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest.new(update_mask: update_mask, database_connection: database_connection, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_database_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_database_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_database_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_database_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_database_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_database_connection({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_database_connection name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_database_connection ::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_database_connection({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_database_connection(::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_database_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_test_database_connection
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    test_database_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :test_database_connection, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, test_database_connection_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.test_database_connection({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.test_database_connection name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.test_database_connection ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.test_database_connection({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.test_database_connection(::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, test_database_connection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_sql
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::ExecuteSqlResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    sql_statement = "hello world"
+    params = [{}]
+
+    execute_sql_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_sql, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["sql_statement"]
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::SqlParameter, request["params"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_sql_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.execute_sql({ name: name, sql_statement: sql_statement, params: params }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.execute_sql name: name, sql_statement: sql_statement, params: params do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.execute_sql ::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest.new(name: name, sql_statement: sql_statement, params: params) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.execute_sql({ name: name, sql_statement: sql_statement, params: params }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.execute_sql(::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest.new(name: name, sql_statement: sql_statement, params: params), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_sql_client_stub.call_rpc_count
     end
   end
 

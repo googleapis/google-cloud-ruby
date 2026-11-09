@@ -425,6 +425,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Instance start request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance to be
+        #     started.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+        #     If omitted, the region is determined from the instance.
+        class SqlInstancesStartRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance stop request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance to be
+        #     stopped.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+        #     If omitted, the region is determined from the instance.
+        class SqlInstancesStopRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Instance restore backup request.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -1484,6 +1518,15 @@ module Google
         #   @return [::Google::Cloud::Sql::V1::DatabaseInstance::DatabaseCenterIntegration]
         #     Optional. State of the Database Center integration for this instance.
         #     When unspecified, Database Center integration is enabled by default.
+        # @!attribute [r] workload_replay_config
+        #   @return [::Google::Cloud::Sql::V1::WorkloadReplayConfig]
+        #     Output only. The workload replay configuration for this instance. This
+        #     field is set only for workload replay instances.
+        # @!attribute [r] workload_capture_config
+        #   @return [::Google::Cloud::Sql::V1::WorkloadCaptureConfig]
+        #     Output only. The workload capture configuration for this instance. This
+        #     field is set only when an active workload capture is present on the
+        #     instance.
         class DatabaseInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1709,6 +1752,135 @@ module Google
 
             # The deployment is post-switchover.
             POST_SWITCHOVER = 2
+          end
+        end
+
+        # The workload replay configuration for a Cloud SQL replay instance.
+        # @!attribute [r] workload_id
+        #   @return [::String]
+        #     Output only. The ID of the captured workload being replayed.
+        # @!attribute [r] source_instance
+        #   @return [::String]
+        #     Output only. The name of the source instance, excluding the project ID,
+        #     where the workload was captured.
+        # @!attribute [r] replay_mode
+        #   @return [::Google::Cloud::Sql::V1::WorkloadReplayConfig::ReplayMode]
+        #     Output only. The mode of the workload replay.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1::WorkloadReplayConfig::State]
+        #     Output only. The state of the workload replay.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of the workload replay.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of the workload replay. This field is unset while
+        #     the replay is running.
+        class WorkloadReplayConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mode of workload replay.
+          module ReplayMode
+            # Default value. This value is unused.
+            REPLAY_MODE_UNSPECIFIED = 0
+
+            # Live workload replay mode.
+            LIVE = 1
+
+            # Offline (delayed) workload replay mode.
+            OFFLINE = 2
+          end
+
+          # The state of the workload replay.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Workload replay is currently running.
+            RUNNING = 1
+
+            # Workload replay completed successfully. Cloud SQL sets this state when
+            # all captured workload files finish replaying or when you explicitly
+            # stop the replay.
+            COMPLETED = 2
+
+            # Workload replay failed.
+            FAILED = 3
+
+            # Workload replay was terminated automatically. Cloud SQL sets this state
+            # when it automatically stops the replay because of a conflicting
+            # operation.
+            TERMINATED = 4
+          end
+        end
+
+        # The workload capture configuration for a Cloud SQL primary instance.
+        # @!attribute [r] workload_id
+        #   @return [::String]
+        #     Output only. The ID of the captured workload.
+        # @!attribute [r] capture_mode
+        #   @return [::Google::Cloud::Sql::V1::WorkloadCaptureConfig::CaptureMode]
+        #     Output only. The mode of the workload capture.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1::WorkloadCaptureConfig::State]
+        #     Output only. The state of the workload capture.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of the workload capture.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of the workload capture. This field is unset
+        #     while the capture is running.
+        # @!attribute [r] replay_instance
+        #   @return [::String]
+        #     Output only. The name of the replay instance, excluding the project ID, if
+        #     live replay is enabled.
+        # @!attribute [r] retention_days
+        #   @return [::Integer]
+        #     Output only. The retention period in days for the captured workload.
+        # @!attribute [r] backup_id
+        #   @return [::String]
+        #     Output only. The base backup ID associated with the workload capture.
+        # @!attribute [r] max_capture_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. The maximum duration for this workload capture.
+        class WorkloadCaptureConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mode of workload capture.
+          module CaptureMode
+            # Default value. This value is unused.
+            CAPTURE_MODE_UNSPECIFIED = 0
+
+            # Captures the workload on the primary instance without live replay.
+            CAPTURE_ONLY = 1
+
+            # Captures the workload and simultaneously replays it on a live replay
+            # instance.
+            CAPTURE_AND_LIVE_REPLAY = 2
+          end
+
+          # The state of the workload capture.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Workload capture is currently running.
+            RUNNING = 1
+
+            # Workload capture completed successfully. Cloud SQL sets this state when
+            # you explicitly stop the capture.
+            COMPLETED = 2
+
+            # Workload capture failed.
+            FAILED = 3
+
+            # Workload capture was terminated automatically. Cloud SQL sets this state
+            # when it automatically stops the capture because of a conflicting
+            # operation or because the capture reached its maximum duration.
+            TERMINATED = 4
           end
         end
 
@@ -2283,6 +2455,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Execute SQL statements request.
+        # Execute SQL statements in read-only mode request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Database instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] body
+        #   @return [::Google::Cloud::Sql::V1::ExecuteSqlReadOnlyPayload]
+        #     Required. The request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
+        class SqlInstancesExecuteSqlReadOnlyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] instance
         #   @return [::String]
         #     Required. Database instance ID. This does not include the project ID.
@@ -2296,6 +2487,47 @@ module Google
         #   @return [::String]
         #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesExecuteSqlRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request payload used to execute SQL statements in read-only mode.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     Optional. The name of an existing database user to connect to the database.
+        #     When `auto_iam_authn` is set to true, this field is ignored and the API
+        #     caller's IAM user is used.
+        # @!attribute [rw] sql_statement
+        #   @return [::String]
+        #     Required. SQL statements to run on the database. It can be a single
+        #     statement or a sequence of statements separated by semicolons.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Optional. Name of the database on which the statement will be executed.
+        #     For Postgres and SQL Server it's required, for MySQL it's optional.
+        # @!attribute [rw] password_secret_version
+        #   @return [::String]
+        #     Optional. The resource name of the Secret Manager secret holding the
+        #     password for the user to log into the database. The secret should be
+        #     created using the regional endpoint (for API) or from the Regional
+        #     Secrets page (for UI), and stored in the same region as the Cloud SQL
+        #     instance. The expected resource name format is
+        #     `projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}`.
+        #     This field is used together with the `user` field.
+        #     The secret resource name will not be stored.
+        #
+        #     Note: The following fields are mutually exclusive: `password_secret_version`, `auto_iam_authn`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_iam_authn
+        #   @return [::Boolean]
+        #     Optional. When set to true, the API caller identity associated with the
+        #     request is used for database authentication. The API caller must be an
+        #     IAM user in the database.
+        #
+        #     Note: The following fields are mutually exclusive: `auto_iam_authn`, `password_secret_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] row_limit
+        #   @return [::Integer]
+        #     Optional. The maximum number of rows returned per SQL statement.
+        class ExecuteSqlReadOnlyPayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2365,6 +2597,30 @@ module Google
             # Don't throw an error.
             ALLOW_PARTIAL_RESULT = 2
           end
+        end
+
+        # Execute SQL statements response.
+        # Execute SQL statements in read-only mode response.
+        # @!attribute [rw] messages
+        #   @return [::Array<::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlResponse::Message>]
+        #     A list of notices and warnings generated during query execution.
+        #     For PostgreSQL, this includes all notices and warnings.
+        #     For MySQL, this includes warnings generated by the last executed statement.
+        #     To retrieve all warnings for a multi-statement query, `SHOW WARNINGS` must
+        #     be executed after each statement.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Sql::V1::Metadata]
+        #     The additional metadata information regarding the execution of the SQL
+        #     statements.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Sql::V1::QueryResult>]
+        #     The list of results after executing all the SQL statements.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Contains the error from the database if the SQL execution failed.
+        class SqlInstancesExecuteSqlReadOnlyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] messages
@@ -2540,6 +2796,48 @@ module Google
         #     Required. The context for request to perform a PITR on a Google Cloud
         #     Backup and Disaster Recovery managed instance.
         class SqlInstancesPointInTimeRestoreRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlInstancesService.ReconcileNetworking.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] psc_dns
+        #   @return [::Google::Cloud::Sql::V1::PscDnsReconcileNetworkingRequest]
+        #     Request to recreate Private Service Connect DNS write endpoints and
+        #     reconcile Private Service Connect connectivity infrastructure for the
+        #     instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
+        class SqlInstancesReconcileNetworkingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request parameters specific to PSC DNS networking reconciliation.
+        # @!attribute [rw] networks
+        #   @return [::Array<::String>]
+        #     Optional. List of specific consumer VPC networks to reconcile. They must be
+        #     specified as full resource names (e.g.,
+        #     "projects/my-consumer-project/global/networks/prod-vpc"). If empty,
+        #     recreates Write Endpoints for all the consumer networks associated with
+        #     this instance.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. Set `true` to force the reset and reapplication of Private
+        #     Service Connect connectivity infrastructure if standard reconciliation does
+        #     not resolve automated DNS issues. This operation might cause a brief
+        #     disruption in network connectivity for connected VPC networks while
+        #     settings are reapplied. Use this option only when standard reconciliation
+        #     fails to resolve networking issues (for example, if connectivity resources
+        #     are stuck in an updating or creating state).
+        class PscDnsReconcileNetworkingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -802,6 +802,9 @@ module Google
 
             # ZLIB compression.
             ZLIB = 1
+
+            # Zstd compression.
+            ZSTD = 3
           end
 
           # The mode of the compression SMT.

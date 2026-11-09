@@ -1109,6 +1109,10 @@ module Google
         # @!attribute [r] connection_type
         #   @return [::Google::Cloud::Memorystore::V1::ConnectionType]
         #     Output only. Type of the PSC connection.
+        # @!attribute [rw] ip_version
+        #   @return [::Google::Cloud::Memorystore::V1::IpVersion]
+        #     Optional. Immutable. The IP version used for the PSC auto-created
+        #     endpoint. If not specified, defaults to IPV4.
         class PscAutoConnection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2193,6 +2197,18 @@ module Google
 
           # Connection that will be used as reader endpoint to access replicas.
           CONNECTION_TYPE_READER = 3
+        end
+
+        # IP version for PSC consumer endpoints.
+        module IpVersion
+          # Not specified. Defaults to IPV4 on CreateInstance.
+          IP_VERSION_UNSPECIFIED = 0
+
+          # IPv4 address family.
+          IPV4 = 1
+
+          # IPv6 address family.
+          IPV6 = 2
         end
       end
     end

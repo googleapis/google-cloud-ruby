@@ -141,6 +141,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DatabaseConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/databaseConnections/{database_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param database_connection [String]
+            #
+            # @return [::String]
+            def database_connection_path project:, location:, database_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/databaseConnections/#{database_connection}"
+            end
+
+            ##
             # Create a fully-qualified DbSystem resource string.
             #
             # The resource will be in the following format:
@@ -308,6 +327,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NetworkAttachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/networkAttachments/{network_attachment}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param network_attachment [String]
+            #
+            # @return [::String]
+            def network_attachment_path project:, region:, network_attachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/networkAttachments/#{network_attachment}"
+            end
+
+            ##
             # Create a fully-qualified OdbDnsZone resource string.
             #
             # The resource will be in the following format:
@@ -404,6 +442,25 @@ module Google
               raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
+            end
+
+            ##
+            # Create a fully-qualified WorkloadIdentityPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/workloadIdentityPools/{workload_identity_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param workload_identity_pool [String]
+            #
+            # @return [::String]
+            def workload_identity_pool_path project:, location:, workload_identity_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/workloadIdentityPools/#{workload_identity_pool}"
             end
 
             extend self

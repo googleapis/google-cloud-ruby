@@ -113,6 +113,18 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
     end
   end
 
+  def test_database_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.database_connection_path project: "value0", location: "value1", database_connection: "value2"
+      assert_equal "projects/value0/locations/value1/databaseConnections/value2", path
+    end
+  end
+
   def test_db_system_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -221,6 +233,18 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
     end
   end
 
+  def test_network_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_attachment_path project: "value0", region: "value1", network_attachment: "value2"
+      assert_equal "projects/value0/regions/value1/networkAttachments/value2", path
+    end
+  end
+
   def test_odb_dns_zone_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -278,6 +302,18 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
 
       path = client.secret_version_path project: "value0", secret: "value1", secret_version: "value2"
       assert_equal "projects/value0/secrets/value1/versions/value2", path
+    end
+  end
+
+  def test_workload_identity_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.workload_identity_pool_path project: "value0", location: "value1", workload_identity_pool: "value2"
+      assert_equal "projects/value0/locations/value1/workloadIdentityPools/value2", path
     end
   end
 end
