@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Conversions::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Conversions.conversion_sources_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Conversions::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Conversions.conversion_sources_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Rest::Client, client
     end
   end
 end

@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Promotions::ClientConstructionMinitest < Minit
       client = Google::Shopping::Merchant::Promotions.promotions_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Promotions::ClientConstructionMinitest < Minit
       client = Google::Shopping::Merchant::Promotions.promotions_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Promotions::V1::PromotionsService::Rest::Client, client
     end
   end
 end

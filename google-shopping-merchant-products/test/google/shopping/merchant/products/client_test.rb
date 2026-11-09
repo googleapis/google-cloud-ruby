@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Products::ClientConstructionMinitest < Minites
       client = Google::Shopping::Merchant::Products.product_inputs_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Products::V1::ProductInputsService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Products::ClientConstructionMinitest < Minites
       client = Google::Shopping::Merchant::Products.product_inputs_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Products::V1::ProductInputsService::Rest::Client, client
     end
   end
 
@@ -69,7 +69,7 @@ class Google::Shopping::Merchant::Products::ClientConstructionMinitest < Minites
       client = Google::Shopping::Merchant::Products.products_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Products::V1beta::ProductsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Products::V1::ProductsService::Client, client
     end
   end
 
@@ -79,7 +79,7 @@ class Google::Shopping::Merchant::Products::ClientConstructionMinitest < Minites
       client = Google::Shopping::Merchant::Products.products_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Products::V1beta::ProductsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Products::V1::ProductsService::Rest::Client, client
     end
   end
 end

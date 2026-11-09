@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/shopping/merchant/accounts"
 
-client = Google::Shopping::Merchant::Accounts.account_tax_service do |config|
+client = Google::Shopping::Merchant::Accounts.account_issue_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Shopping::Merchant::Accounts.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Shopping::Merchant::Accounts.account_tax_service
+client = Google::Shopping::Merchant::Accounts.account_issue_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/shopping/merchant/accounts"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Shopping::Merchant::Accounts.account_tax_service
+client = Google::Shopping::Merchant::Accounts.account_issue_service
 ```
 
 ### Local ADC file

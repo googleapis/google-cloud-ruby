@@ -15,7 +15,7 @@ for this library, google-shopping-merchant-accounts, to see the convenience meth
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-shopping-merchant-accounts-v1beta](https://rubydoc.info/gems/google-shopping-merchant-accounts-v1beta).
+[google-shopping-merchant-accounts-v1](https://rubydoc.info/gems/google-shopping-merchant-accounts-v1).
 
 See also the [Product Documentation](https://developers.google.com/merchant/api)
 for more usage information.
@@ -36,9 +36,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/shopping/merchant/accounts"
 
-client = Google::Shopping::Merchant::Accounts.account_tax_service
-request = ::Google::Shopping::Merchant::Accounts::V1beta::GetAccountTaxRequest.new # (request fields as keyword arguments...)
-response = client.get_account_tax request
+client = Google::Shopping::Merchant::Accounts.account_issue_service
+request = ::Google::Shopping::Merchant::Accounts::V1::ListAccountIssuesRequest.new # (request fields as keyword arguments...)
+response = client.list_account_issues request
 ```
 
 ## Debug Logging
@@ -69,7 +69,7 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-shopping-merchant-accounts-v1beta](https://rubydoc.info/gems/google-shopping-merchant-accounts-v1beta).
+[google-shopping-merchant-accounts-v1](https://rubydoc.info/gems/google-shopping-merchant-accounts-v1).
 
 ## Supported Ruby Versions
 
@@ -85,7 +85,7 @@ recommended.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-shopping-merchant-accounts`,
 and lower-level _versioned_ client libraries with names such as
-`google-shopping-merchant-accounts-v1beta`.
+`google-shopping-merchant-accounts-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -123,7 +123,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-shopping-merchant-accounts-v1beta`.
+is part of the name, e.g. `google-shopping-merchant-accounts-v1`.
 
 ### What about the google-apis-<name> clients?
 

@@ -4387,10 +4387,10 @@ libraries:
   - name: google-shopping-merchant-accounts
     version: 0.9.0
     apis:
-      - path: google/shopping/merchant/accounts/v1beta
+      - path: google/shopping/merchant/accounts/v1
     ruby:
       wrapper_of:
-        - v1beta:0.2
+        - v1:0.9
   - name: google-shopping-merchant-accounts-v1
     version: 0.9.0
     apis:
@@ -4408,10 +4408,10 @@ libraries:
   - name: google-shopping-merchant-conversions
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/conversions/v1beta
+      - path: google/shopping/merchant/conversions/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.6
   - name: google-shopping-merchant-conversions-v1
     version: 0.6.0
     apis:
@@ -4423,10 +4423,10 @@ libraries:
   - name: google-shopping-merchant-data_sources
     version: 0.6.0
     apis:
-      - path: google/shopping/merchant/datasources/v1beta
+      - path: google/shopping/merchant/datasources/v1
     ruby:
       wrapper_of:
-        - v1beta:0.2
+        - v1:0.7
   - name: google-shopping-merchant-data_sources-v1
     version: 0.7.0
     apis:
@@ -4444,10 +4444,10 @@ libraries:
   - name: google-shopping-merchant-inventories
     version: 0.8.0
     apis:
-      - path: google/shopping/merchant/inventories/v1beta
+      - path: google/shopping/merchant/inventories/v1
     ruby:
       wrapper_of:
-        - v1beta:0.2
+        - v1:0.8
   - name: google-shopping-merchant-inventories-v1
     version: 0.8.0
     apis:
@@ -4465,10 +4465,10 @@ libraries:
   - name: google-shopping-merchant-issue_resolution
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/issueresolution/v1beta
+      - path: google/shopping/merchant/issueresolution/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.7
   - name: google-shopping-merchant-issue_resolution-v1
     version: 0.7.0
     apis:
@@ -4486,10 +4486,10 @@ libraries:
   - name: google-shopping-merchant-lfp
     version: 0.6.0
     apis:
-      - path: google/shopping/merchant/lfp/v1beta
+      - path: google/shopping/merchant/lfp/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.6
   - name: google-shopping-merchant-lfp-v1
     version: 0.6.0
     apis:
@@ -4518,10 +4518,10 @@ libraries:
   - name: google-shopping-merchant-notifications
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/notifications/v1beta
+      - path: google/shopping/merchant/notifications/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.6
   - name: google-shopping-merchant-notifications-v1
     version: 0.6.0
     apis:
@@ -4536,10 +4536,10 @@ libraries:
   - name: google-shopping-merchant-order_tracking
     version: 0.4.0
     apis:
-      - path: google/shopping/merchant/ordertracking/v1beta
+      - path: google/shopping/merchant/ordertracking/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.6
   - name: google-shopping-merchant-order_tracking-v1
     version: 0.6.0
     apis:
@@ -4557,10 +4557,10 @@ libraries:
   - name: google-shopping-merchant-products
     version: 0.6.0
     apis:
-      - path: google/shopping/merchant/products/v1beta
+      - path: google/shopping/merchant/products/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.12
   - name: google-shopping-merchant-products-v1
     version: 0.12.0
     apis:
@@ -4578,10 +4578,10 @@ libraries:
   - name: google-shopping-merchant-promotions
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/promotions/v1beta
+      - path: google/shopping/merchant/promotions/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.6
   - name: google-shopping-merchant-promotions-v1
     version: 0.6.0
     apis:
@@ -4599,10 +4599,10 @@ libraries:
   - name: google-shopping-merchant-quota
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/quota/v1beta
+      - path: google/shopping/merchant/quota/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.8
   - name: google-shopping-merchant-quota-v1
     version: 0.8.0
     apis:
@@ -4614,10 +4614,10 @@ libraries:
   - name: google-shopping-merchant-reports
     version: 0.7.0
     apis:
-      - path: google/shopping/merchant/reports/v1beta
+      - path: google/shopping/merchant/reports/v1
     ruby:
       wrapper_of:
-        - v1beta:0.3
+        - v1:0.7
   - name: google-shopping-merchant-reports-v1
     version: 0.7.0
     apis:
@@ -4635,10 +4635,10 @@ libraries:
   - name: google-shopping-merchant-reviews
     version: 0.5.0
     apis:
-      - path: google/shopping/merchant/reviews/v1beta
+      - path: google/shopping/merchant/reviews/v1
     ruby:
       wrapper_of:
-        - v1beta:0.0
+        - v1:0.2
   - name: google-shopping-merchant-reviews-v1
     version: 0.2.0
     apis:

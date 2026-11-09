@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_inventory_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpInventoryService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_inventory_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpInventoryService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::Rest::Client, client
     end
   end
 
@@ -69,7 +69,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_merchant_state_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpMerchantStateService::Client, client
     end
   end
 
@@ -79,7 +79,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_merchant_state_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpMerchantStateService::Rest::Client, client
     end
   end
 
@@ -90,7 +90,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_sale_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Client, client
     end
   end
 
@@ -100,7 +100,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_sale_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Rest::Client, client
     end
   end
 
@@ -111,7 +111,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_store_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client, client
     end
   end
 
@@ -121,7 +121,7 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
       client = Google::Shopping::Merchant::Lfp.lfp_store_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Rest::Client, client
     end
   end
 end

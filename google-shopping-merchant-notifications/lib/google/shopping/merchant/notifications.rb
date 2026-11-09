@@ -32,8 +32,8 @@ module Google
         # Create a new client object for NotificationsApiService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client](https://rubydoc.info/gems/google-shopping-merchant-notifications-v1beta/Google/Shopping/Merchant/Notifications/V1beta/NotificationsApiService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Notifications::V1::NotificationsApiService::Client](https://rubydoc.info/gems/google-shopping-merchant-notifications-v1/Google/Shopping/Merchant/Notifications/V1/NotificationsApiService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the NotificationsApiService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -51,11 +51,11 @@ module Google
         # Service to manage notification subscriptions for merchants
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.notifications_api_service version: :v1beta, transport: :grpc, &block
+        def self.notifications_api_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/notifications/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Notifications
@@ -75,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the NotificationsApiService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.notifications_api_service_available? version: :v1beta, transport: :grpc
+        def self.notifications_api_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/notifications/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Notifications
                          .constants
