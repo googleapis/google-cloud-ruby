@@ -45,6 +45,7 @@ module Google
       #
       #   # Delete
       #   app_profile.delete
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class AppProfile
         # @private
@@ -119,6 +120,7 @@ module Google
         # Sets the description of the app profile.
         #
         # @param text [String] Description text
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def description= text
           @grpc.description = text
@@ -190,6 +192,7 @@ module Google
         #     allow_transactional_writes: true
         #   )
         #   app_profile.routing_policy = routing_policy
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def routing_policy= policy
           routing_policy_grpc = policy.to_grpc
@@ -261,6 +264,7 @@ module Google
         #
         #   # OR : Not ignoring warnings
         #   app_profile.delete
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def delete ignore_warnings: false
           ensure_service!
@@ -324,6 +328,7 @@ module Google
         #     app_profile = job.app_profile
         #     puts app_profile.name
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def save ignore_warnings: false
           ensure_service!
@@ -338,6 +343,7 @@ module Google
         # Reloads the app profile data.
         #
         # @return [Google::Cloud::Bigtable::AppProfile]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def reload!
           @grpc = service.get_app_profile instance_id, name
@@ -369,6 +375,7 @@ module Google
         #     description: "App profile for user data instance"
         #   )
         #   puts app_profile.routing_policy
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def self.multi_cluster_routing
           Google::Cloud::Bigtable::MultiClusterRoutingUseAny.new
@@ -408,6 +415,7 @@ module Google
         #     description: "App profile for user data instance"
         #   )
         #   puts app_profile.routing_policy
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def self.single_cluster_routing cluster_id, allow_transactional_writes: false
           Google::Cloud::Bigtable::SingleClusterRouting.new cluster_id, allow_transactional_writes

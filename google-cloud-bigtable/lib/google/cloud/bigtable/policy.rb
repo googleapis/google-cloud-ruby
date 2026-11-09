@@ -52,6 +52,7 @@ module Google
       #   policy.remove "roles/owner", "user:owner@example.com"
       #   policy.add "roles/owner", "user:newowner@example.com"
       #   policy.roles["roles/viewer"] = ["allUsers"]
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} or {Google::Cloud::Bigtable::Project#table_admin_client} instead.
       #
       class Policy
         attr_reader :etag
