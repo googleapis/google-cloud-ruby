@@ -264,4 +264,39 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     _(responses[1].status.message).must_equal "success"
     _(responses[1].status.details).must_equal []
   end
+
+  it "marks missing response entries as INTERNAL error without retrying" do
+    req_entries = req_entries_grpc
+    res = Google::Cloud::Bigtable::V2::MutateRowsResponse.new(
+      entries: [
+        { index: 0, status: { code: Google::Rpc::Code::OK, message: "success", details: [] } }
+      ]
+    )
+
+    mock = Minitest::Mock.new
+    req = {
+      table_name: table_path(instance_id, table_id),
+      entries: req_entries,
+      app_profile_id: app_profile_id
+    }
+    mock.expect :mutate_rows, [res], [req, nil]
+
+    bigtable.service.mocked_client = mock
+
+    mutation_entries = req_entries.map do |r|
+      entry = Google::Cloud::Bigtable::MutationEntry.new(r.row_key)
+      entry.mutations.concat(r.mutations)
+      entry
+    end
+    responses = table.mutate_rows(mutation_entries)
+
+    mock.verify
+    _(responses.length).must_equal 2
+    _(responses[0].index).must_equal 0
+    _(responses[0].status.code).must_equal Google::Rpc::Code::OK
+    _(responses[1].index).must_equal 1
+    _(responses[1].status.code).must_equal Google::Rpc::Code::INTERNAL
+    _(responses[1].status.description).must_equal "INTERNAL"
+    _(responses[1].status.message).must_equal "Missing entry result in MutateRows response"
+  end
 end
