@@ -148,6 +148,7 @@ describe "Datastore sample", :datastore do
   end
 
   it "supports kindless_query" do
+    skip "Disabled due to missing permissions in CI. See b/574170951"
     query = kindless_query
     entities = datastore.run query
 

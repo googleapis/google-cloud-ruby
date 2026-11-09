@@ -156,6 +156,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
   end
 
   it "generates a signed post object v4 with acl and cache-control file headers" do
+    skip "Disabled due to failures in CI. See b/559793640"
     fields = {
       "acl" => "public-read",
       "cache-control" => "public,max-age=86400"

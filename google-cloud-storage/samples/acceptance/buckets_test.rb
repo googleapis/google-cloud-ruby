@@ -305,13 +305,20 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+
+    after { delete_bucket_helper bucket.name }
+
     it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
-      bucket.requester_pays = false
+      retry_resource_exhaustion { bucket.requester_pays = false }
 
-      assert_output "Requester pays has been enabled for #{bucket.name}\n" do
-        enable_requester_pays bucket_name: bucket.name
+      retry_resource_exhaustion do
+        assert_output "Requester pays has been enabled for #{bucket.name}\n" do
+          enable_requester_pays bucket_name: bucket.name
+        end
       end
+      bucket.user_project = true
       bucket.refresh!
       assert bucket.requester_pays?
 
@@ -322,9 +329,12 @@ describe "Buckets Snippets" do
       assert bucket.requester_pays?
 
       # disable_requester_pays
-      assert_output "Requester pays has been disabled for #{bucket.name}\n" do
-        disable_requester_pays bucket_name: bucket.name
+      retry_resource_exhaustion do
+        assert_output "Requester pays has been disabled for #{bucket.name}\n" do
+          disable_requester_pays bucket_name: bucket.name
+        end
       end
+      bucket.user_project = nil
       bucket.refresh!
       refute bucket.requester_pays?
 
