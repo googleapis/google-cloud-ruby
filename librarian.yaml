@@ -1408,6 +1408,20 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-yard-strict: "false"
+  - name: google-cloud-design_center
+    version: 0.0.1
+    apis:
+      - path: google/cloud/designcenter/v1
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-design_center-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/designcenter/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-cloud-app_hub-v1=~>1.0;google-cloud-config_service-v1=~>2.0
   - name: google-cloud-developer_connect
     version: 2.5.0
     apis:

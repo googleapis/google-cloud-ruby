@@ -1,0 +1,17 @@
+{
+    "api_id": "designcenter.googleapis.com",
+    "api_shortname": "designcenter",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-design_center/latest",
+    "distribution_name": "google-cloud-design_center",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "designcenter",
+    "name_pretty": "Design Center API",
+    "product_documentation": "https://cloud.google.com/application-design-center/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Design and share deployable application architectures.",
+    "ruby-cloud-product-url": "https://cloud.google.com/application-design-center/docs",
+    "library_type": "GAPIC_AUTO"
+}

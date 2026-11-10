@@ -1,0 +1,418 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.designcenter.v1",
+  "libraryPackage": "::Google::Cloud::DesignCenter::V1",
+  "services": {
+    "DesignCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client",
+          "rpcs": {
+            "GetSpace": {
+              "methods": [
+                "get_space"
+              ]
+            },
+            "ListSpaces": {
+              "methods": [
+                "list_spaces"
+              ]
+            },
+            "CreateSpace": {
+              "methods": [
+                "create_space"
+              ]
+            },
+            "UpdateSpace": {
+              "methods": [
+                "update_space"
+              ]
+            },
+            "DeleteSpace": {
+              "methods": [
+                "delete_space"
+              ]
+            },
+            "GetApplicationTemplate": {
+              "methods": [
+                "get_application_template"
+              ]
+            },
+            "ListApplicationTemplates": {
+              "methods": [
+                "list_application_templates"
+              ]
+            },
+            "CreateApplicationTemplate": {
+              "methods": [
+                "create_application_template"
+              ]
+            },
+            "UpdateApplicationTemplate": {
+              "methods": [
+                "update_application_template"
+              ]
+            },
+            "ImportApplicationTemplate": {
+              "methods": [
+                "import_application_template"
+              ]
+            },
+            "DeleteApplicationTemplate": {
+              "methods": [
+                "delete_application_template"
+              ]
+            },
+            "CommitApplicationTemplate": {
+              "methods": [
+                "commit_application_template"
+              ]
+            },
+            "SnapshotApplicationTemplate": {
+              "methods": [
+                "snapshot_application_template"
+              ]
+            },
+            "GenerateApplicationTemplateIaC": {
+              "methods": [
+                "generate_application_template_ia_c"
+              ]
+            },
+            "ExportApplicationTemplateIaC": {
+              "methods": [
+                "export_application_template_ia_c"
+              ]
+            },
+            "GenerateApplicationTemplateRevisionIaC": {
+              "methods": [
+                "generate_application_template_revision_ia_c"
+              ]
+            },
+            "ExportApplicationTemplateRevisionIaC": {
+              "methods": [
+                "export_application_template_revision_ia_c"
+              ]
+            },
+            "GetComponent": {
+              "methods": [
+                "get_component"
+              ]
+            },
+            "ListComponents": {
+              "methods": [
+                "list_components"
+              ]
+            },
+            "CreateComponent": {
+              "methods": [
+                "create_component"
+              ]
+            },
+            "UpdateComponent": {
+              "methods": [
+                "update_component"
+              ]
+            },
+            "DeleteComponent": {
+              "methods": [
+                "delete_component"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "get_connection"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "create_connection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "update_connection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "delete_connection"
+              ]
+            },
+            "GetApplicationTemplateRevision": {
+              "methods": [
+                "get_application_template_revision"
+              ]
+            },
+            "ListApplicationTemplateRevisions": {
+              "methods": [
+                "list_application_template_revisions"
+              ]
+            },
+            "DeleteApplicationTemplateRevision": {
+              "methods": [
+                "delete_application_template_revision"
+              ]
+            },
+            "GetCatalog": {
+              "methods": [
+                "get_catalog"
+              ]
+            },
+            "ListCatalogs": {
+              "methods": [
+                "list_catalogs"
+              ]
+            },
+            "CreateCatalog": {
+              "methods": [
+                "create_catalog"
+              ]
+            },
+            "UpdateCatalog": {
+              "methods": [
+                "update_catalog"
+              ]
+            },
+            "DeleteCatalog": {
+              "methods": [
+                "delete_catalog"
+              ]
+            },
+            "CreateCatalogTemplate": {
+              "methods": [
+                "create_catalog_template"
+              ]
+            },
+            "GetCatalogTemplate": {
+              "methods": [
+                "get_catalog_template"
+              ]
+            },
+            "ListCatalogTemplates": {
+              "methods": [
+                "list_catalog_templates"
+              ]
+            },
+            "UpdateCatalogTemplate": {
+              "methods": [
+                "update_catalog_template"
+              ]
+            },
+            "DeleteCatalogTemplate": {
+              "methods": [
+                "delete_catalog_template"
+              ]
+            },
+            "CreateShare": {
+              "methods": [
+                "create_share"
+              ]
+            },
+            "ListShares": {
+              "methods": [
+                "list_shares"
+              ]
+            },
+            "GetShare": {
+              "methods": [
+                "get_share"
+              ]
+            },
+            "DeleteShare": {
+              "methods": [
+                "delete_share"
+              ]
+            },
+            "SyncShare": {
+              "methods": [
+                "sync_share"
+              ]
+            },
+            "GetSharedTemplate": {
+              "methods": [
+                "get_shared_template"
+              ]
+            },
+            "ListSharedTemplates": {
+              "methods": [
+                "list_shared_templates"
+              ]
+            },
+            "GetSharedTemplateRevision": {
+              "methods": [
+                "get_shared_template_revision"
+              ]
+            },
+            "ListSharedTemplateRevisions": {
+              "methods": [
+                "list_shared_template_revisions"
+              ]
+            },
+            "CreateCatalogTemplateRevision": {
+              "methods": [
+                "create_catalog_template_revision"
+              ]
+            },
+            "GetCatalogTemplateRevision": {
+              "methods": [
+                "get_catalog_template_revision"
+              ]
+            },
+            "ListCatalogTemplateRevisions": {
+              "methods": [
+                "list_catalog_template_revisions"
+              ]
+            },
+            "DeleteCatalogTemplateRevision": {
+              "methods": [
+                "delete_catalog_template_revision"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "create_application"
+              ]
+            },
+            "GetApplication": {
+              "methods": [
+                "get_application"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "list_applications"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "update_application"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "delete_application"
+              ]
+            },
+            "DeployApplication": {
+              "methods": [
+                "deploy_application"
+              ]
+            },
+            "PreviewApplication": {
+              "methods": [
+                "preview_application"
+              ]
+            },
+            "FetchApplicationAssessmentReport": {
+              "methods": [
+                "fetch_application_assessment_report"
+              ]
+            },
+            "GenerateApplicationAssessmentReport": {
+              "methods": [
+                "generate_application_assessment_report"
+              ]
+            },
+            "GenerateApplicationTemplateAssessmentReport": {
+              "methods": [
+                "generate_application_template_assessment_report"
+              ]
+            },
+            "GenerateAssessmentReport": {
+              "methods": [
+                "generate_assessment_report"
+              ]
+            },
+            "GenerateTerraformPlanAssessmentReport": {
+              "methods": [
+                "generate_terraform_plan_assessment_report"
+              ]
+            },
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "ListPolicies": {
+              "methods": [
+                "list_policies"
+              ]
+            },
+            "CreatePolicy": {
+              "methods": [
+                "create_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
+            "DeletePolicy": {
+              "methods": [
+                "delete_policy"
+              ]
+            },
+            "FetchFrameworks": {
+              "methods": [
+                "fetch_frameworks"
+              ]
+            },
+            "GenerateApplicationIaC": {
+              "methods": [
+                "generate_application_ia_c"
+              ]
+            },
+            "ExportApplicationIaC": {
+              "methods": [
+                "export_application_ia_c"
+              ]
+            },
+            "ImportApplicationTemplateIaC": {
+              "methods": [
+                "import_application_template_ia_c"
+              ]
+            },
+            "IngestApplicationTemplateIaC": {
+              "methods": [
+                "ingest_application_template_ia_c"
+              ]
+            },
+            "ImportApplicationIaC": {
+              "methods": [
+                "import_application_ia_c"
+              ]
+            },
+            "RegisterAppHubApplicationResources": {
+              "methods": [
+                "register_app_hub_application_resources"
+              ]
+            },
+            "ListApplicationTemplateSystemRevisions": {
+              "methods": [
+                "list_application_template_system_revisions"
+              ]
+            },
+            "GetApplicationTemplateSystemRevision": {
+              "methods": [
+                "get_application_template_system_revision"
+              ]
+            },
+            "RecommendIAMRoles": {
+              "methods": [
+                "recommend_iam_roles"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
