@@ -32,8 +32,8 @@ module Google
         # Create a new client object for ReportService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Reports::V1beta::ReportService::Client](https://rubydoc.info/gems/google-shopping-merchant-reports-v1beta/Google/Shopping/Merchant/Reports/V1beta/ReportService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Reports::V1::ReportService::Client](https://rubydoc.info/gems/google-shopping-merchant-reports-v1/Google/Shopping/Merchant/Reports/V1/ReportService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ReportService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -52,11 +52,11 @@ module Google
         # performance, and their competitive environment on Google.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.report_service version: :v1beta, transport: :grpc, &block
+        def self.report_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/reports/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Reports
@@ -76,11 +76,11 @@ module Google
         # or if the versioned client gem needs an update to support the ReportService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.report_service_available? version: :v1beta, transport: :grpc
+        def self.report_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/reports/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Reports
                          .constants

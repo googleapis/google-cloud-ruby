@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-shopping-merchant-products-v1beta", ">= 0.0", "< 2.a"
+  gem.add_dependency "google-shopping-merchant-products-v1", ">= 0.12", "< 2.a"
 end

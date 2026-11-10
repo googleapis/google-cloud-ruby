@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Reports::ClientConstructionMinitest < Minitest
       client = Google::Shopping::Merchant::Reports.report_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Reports::V1beta::ReportService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Reports::V1::ReportService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Reports::ClientConstructionMinitest < Minitest
       client = Google::Shopping::Merchant::Reports.report_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Reports::V1beta::ReportService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Reports::V1::ReportService::Rest::Client, client
     end
   end
 end

@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Notifications::ClientConstructionMinitest < Mi
       client = Google::Shopping::Merchant::Notifications.notifications_api_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Notifications::V1::NotificationsApiService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Notifications::ClientConstructionMinitest < Mi
       client = Google::Shopping::Merchant::Notifications.notifications_api_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Notifications::V1::NotificationsApiService::Rest::Client, client
     end
   end
 end

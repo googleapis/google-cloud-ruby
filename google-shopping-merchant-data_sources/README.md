@@ -15,7 +15,7 @@ for this library, google-shopping-merchant-data_sources, to see the convenience 
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-shopping-merchant-data_sources-v1beta](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1beta).
+[google-shopping-merchant-data_sources-v1](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1).
 
 See also the [Product Documentation](https://developers.google.com/merchant/api)
 for more usage information.
@@ -37,7 +37,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/shopping/merchant/data_sources"
 
 client = Google::Shopping::Merchant::DataSources.data_sources_service
-request = ::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new # (request fields as keyword arguments...)
+request = ::Google::Shopping::Merchant::DataSources::V1::GetDataSourceRequest.new # (request fields as keyword arguments...)
 response = client.get_data_source request
 ```
 
@@ -69,7 +69,7 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-shopping-merchant-data_sources-v1beta](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1beta).
+[google-shopping-merchant-data_sources-v1](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1).
 
 ## Supported Ruby Versions
 
@@ -85,7 +85,7 @@ recommended.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-shopping-merchant-data_sources`,
 and lower-level _versioned_ client libraries with names such as
-`google-shopping-merchant-data_sources-v1beta`.
+`google-shopping-merchant-data_sources-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -123,7 +123,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-shopping-merchant-data_sources-v1beta`.
+is part of the name, e.g. `google-shopping-merchant-data_sources-v1`.
 
 ### What about the google-apis-<name> clients?
 

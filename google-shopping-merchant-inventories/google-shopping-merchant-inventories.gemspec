@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Programmatically manage your Merchant Center accounts."
-  gem.summary       = "Programmatically manage your Merchant Center accounts."
+  gem.description   = "Programmatically manage your Merchant Center Accounts."
+  gem.summary       = "Programmatically manage your Merchant Center Accounts."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-shopping-merchant-inventories-v1beta", ">= 0.2", "< 2.a"
+  gem.add_dependency "google-shopping-merchant-inventories-v1", ">= 0.8", "< 2.a"
 end

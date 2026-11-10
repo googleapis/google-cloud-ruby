@@ -32,8 +32,8 @@ module Google
         # Create a new client object for DataSourcesService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1beta/Google/Shopping/Merchant/DataSources/V1beta/DataSourcesService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::DataSources::V1::DataSourcesService::Client](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1/Google/Shopping/Merchant/DataSources/V1/DataSourcesService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataSourcesService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -53,11 +53,11 @@ module Google
         # Center](https://support.google.com/merchants/answer/7439058) help article.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.data_sources_service version: :v1beta, transport: :grpc, &block
+        def self.data_sources_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/data_sources/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::DataSources
@@ -77,11 +77,11 @@ module Google
         # or if the versioned client gem needs an update to support the DataSourcesService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.data_sources_service_available? version: :v1beta, transport: :grpc
+        def self.data_sources_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/data_sources/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::DataSources
                          .constants
@@ -104,8 +104,8 @@ module Google
         # Create a new client object for FileUploadsService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1beta/Google/Shopping/Merchant/DataSources/V1beta/FileUploadsService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Client](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1/Google/Shopping/Merchant/DataSources/V1/FileUploadsService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the FileUploadsService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -123,11 +123,11 @@ module Google
         # Service to manage data source file uploads.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.file_uploads_service version: :v1beta, transport: :grpc, &block
+        def self.file_uploads_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/data_sources/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::DataSources
@@ -147,11 +147,11 @@ module Google
         # or if the versioned client gem needs an update to support the FileUploadsService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.file_uploads_service_available? version: :v1beta, transport: :grpc
+        def self.file_uploads_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/data_sources/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::DataSources
                          .constants
