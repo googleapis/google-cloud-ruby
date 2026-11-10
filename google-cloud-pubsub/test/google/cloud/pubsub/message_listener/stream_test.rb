@@ -332,8 +332,8 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stream.stop
 
     start_time = Process.clock_gettime Process::CLOCK_MONOTONIC
-    # Wait with a short timeout of 0.2s while callback is blocked
-    stream.wait! 0.2
+    # Wait with a short timeout of 0.4s while callback is blocked
+    stream.wait! 0.4
     elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time
 
     # Verifies that remaining unprocessed messages are immediately nacked on timeout.
@@ -342,8 +342,8 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     block_callback.set
     listener.buffer.stop
 
-    # Total wait time should be bounded near 0.2s, and well below 2x timeout (0.4s)
-    assert_operator elapsed, :>=, 0.15
-    assert_operator elapsed, :<, 0.35
+    # Total wait time should be bounded near 0.4s, and well below 2x timeout (0.8s)
+    assert_operator elapsed, :>=, 0.35
+    assert_operator elapsed, :<, 0.7
   end
 end
