@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.6.0 (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* point Merchant API wrapper gems to v1 ([#36702](https://github.com/googleapis/google-cloud-ruby/issues/36702))
+
+#### Features
+
+* point Merchant API wrapper gems to v1 ([#36702](https://github.com/googleapis/google-cloud-ruby/issues/36702)) 
+
 ### 0.5.0 (2026-11-04)
 
 #### Features
