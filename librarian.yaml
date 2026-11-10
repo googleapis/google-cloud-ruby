@@ -4398,13 +4398,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-accounts-v1beta
-    version: 0.16.0
-    apis:
-      - path: google/shopping/merchant/accounts/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-conversions
     version: 0.5.0
     apis:
@@ -4416,10 +4409,6 @@ libraries:
     version: 0.6.0
     apis:
       - path: google/shopping/merchant/conversions/v1
-  - name: google-shopping-merchant-conversions-v1beta
-    version: 0.9.0
-    apis:
-      - path: google/shopping/merchant/conversions/v1beta
   - name: google-shopping-merchant-data_sources
     version: 0.6.0
     apis:
@@ -4434,13 +4423,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-data_sources-v1beta
-    version: 0.11.0
-    apis:
-      - path: google/shopping/merchant/datasources/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-inventories
     version: 0.8.0
     apis:
@@ -4455,13 +4437,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-inventories-v1beta
-    version: 0.13.0
-    apis:
-      - path: google/shopping/merchant/inventories/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-issue_resolution
     version: 0.5.0
     apis:
@@ -4473,13 +4448,6 @@ libraries:
     version: 0.7.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-issue_resolution-v1beta
-    version: 0.8.0
-    apis:
-      - path: google/shopping/merchant/issueresolution/v1beta
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
@@ -4497,13 +4465,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-lfp-v1beta
-    version: 0.10.0
-    apis:
-      - path: google/shopping/merchant/lfp/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-loyalty_customers
     version: 0.2.0
     apis:
@@ -4526,13 +4487,6 @@ libraries:
     version: 0.6.0
     apis:
       - path: google/shopping/merchant/notifications/v1
-  - name: google-shopping-merchant-notifications-v1beta
-    version: 0.9.0
-    apis:
-      - path: google/shopping/merchant/notifications/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-order_tracking
     version: 0.4.0
     apis:
@@ -4547,13 +4501,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-order_tracking-v1beta
-    version: 0.6.0
-    apis:
-      - path: google/shopping/merchant/ordertracking/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-products
     version: 0.6.0
     apis:
@@ -4568,13 +4515,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-products-v1beta
-    version: 0.13.0
-    apis:
-      - path: google/shopping/merchant/products/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-promotions
     version: 0.5.0
     apis:
@@ -4589,13 +4529,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-promotions-v1beta
-    version: 0.9.0
-    apis:
-      - path: google/shopping/merchant/promotions/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-quota
     version: 0.5.0
     apis:
@@ -4607,10 +4540,6 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/shopping/merchant/quota/v1
-  - name: google-shopping-merchant-quota-v1beta
-    version: 0.9.0
-    apis:
-      - path: google/shopping/merchant/quota/v1beta
   - name: google-shopping-merchant-reports
     version: 0.7.0
     apis:
@@ -4625,13 +4554,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-reports-v1beta
-    version: 0.14.0
-    apis:
-      - path: google/shopping/merchant/reports/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-reviews
     version: 0.5.0
     apis:
@@ -4646,13 +4568,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
-  - name: google-shopping-merchant-reviews-v1beta
-    version: 0.11.0
-    apis:
-      - path: google/shopping/merchant/reviews/v1beta
-        ruby:
-          ruby_cloud_opts:
-            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: grafeas
     version: 1.9.0
     apis:
