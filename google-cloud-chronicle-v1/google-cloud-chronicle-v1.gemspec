@@ -24,5 +24,6 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "gapic-common", "~> 1.6"
+  gem.add_dependency "google-backstory", ">= 0.2", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 end

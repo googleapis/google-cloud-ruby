@@ -858,13 +858,8 @@ libraries:
     apis:
       - path: google/cloud/chronicle/v1
         ruby:
-          additional_protos:
-            - backstory/collection.proto
-            - backstory/data_access.proto
-            - backstory/entity.proto
-            - backstory/entity_risk.proto
-            - backstory/id.proto
-            - backstory/udm.proto
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-backstory=>=0.2+<2.a
   - name: google-cloud-cloud_controls_partner
     version: 2.3.0
     apis:
