@@ -18,7 +18,7 @@ module Google
   module Cloud
     module Run
       module Client
-        VERSION = "1.9.0"
+        VERSION = "1.10.0"
       end
     end
   end

@@ -30,25 +30,25 @@ tools:
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 libraries:
   - name: google-ads-ad_manager
-    version: 5.5.0
+    version: 5.6.0
     apis:
       - path: google/ads/admanager/v1
     ruby:
       wrapper_of:
         - v1:2.0
   - name: google-ads-ad_manager-v1
-    version: 5.6.0
+    version: 5.7.0
     apis:
       - path: google/ads/admanager/v1
   - name: google-ads-data_manager
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/ads/datamanager/v1
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-ads-data_manager-v1
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/ads/datamanager/v1
   - name: google-ads-marketing_platform-admin
@@ -822,7 +822,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-ces-v1
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/ces/v1
   - name: google-cloud-ces-v1beta
@@ -847,14 +847,14 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: CHANNEL
   - name: google-cloud-chronicle
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/chronicle/v1
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-chronicle-v1
-    version: 1.3.0
+    version: 1.4.0
     apis:
       - path: google/cloud/chronicle/v1
         ruby:
@@ -944,7 +944,7 @@ libraries:
     apis:
       - path: google/cloud/commerceproducer/v1beta
   - name: google-cloud-compute
-    version: 1.23.0
+    version: 1.24.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -954,7 +954,7 @@ libraries:
       wrapper_of:
         - v1:2.15
   - name: google-cloud-compute-v1
-    version: 4.3.0
+    version: 4.4.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -1301,7 +1301,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-dataplex-v1
-    version: 2.12.0
+    version: 2.13.0
     apis:
       - path: google/cloud/dataplex/v1
   - name: google-cloud-dataproc
@@ -1409,14 +1409,14 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-yard-strict: "false"
   - name: google-cloud-design_center
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/designcenter/v1
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-design_center-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/designcenter/v1
         ruby:
@@ -1493,7 +1493,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-discovery_engine-v1
-    version: 2.14.0
+    version: 2.15.0
     apis:
       - path: google/cloud/discoveryengine/v1
   - name: google-cloud-discovery_engine-v1beta
@@ -1780,11 +1780,11 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-gemini_data_analytics-v1
-    version: 1.5.0
+    version: 1.6.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
   - name: google-cloud-gemini_data_analytics-v1beta
-    version: 1.5.0
+    version: 1.6.0
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
   - name: google-cloud-gke_backup
@@ -1894,14 +1894,14 @@ libraries:
             ruby-cloud-namespace-override: GsuiteAddOns=GSuiteAddOns
             ruby-cloud-path-override: g_suite_add_ons=gsuite_add_ons
   - name: google-cloud-hypercompute_cluster
-    version: 1.1.0
+    version: 1.2.0
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
     ruby:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-hypercompute_cluster-v1beta
-    version: 1.2.0
+    version: 1.3.0
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
   - name: google-cloud-iap
@@ -1968,14 +1968,14 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-kms-inventory-v1
-    version: 0.26.0
+    version: 0.27.0
     apis:
       - path: google/cloud/kms/inventory/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
   - name: google-cloud-kms-v1
-    version: 1.18.0
+    version: 1.19.0
     apis:
       - path: google/cloud/kms/v1
         ruby:
@@ -2190,7 +2190,7 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-memorystore-v1
-    version: 1.14.0
+    version: 1.15.0
     apis:
       - path: google/cloud/memorystore/v1
   - name: google-cloud-memorystore-v1beta
@@ -2343,7 +2343,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-network_management-v1
-    version: 2.14.0
+    version: 2.15.0
     apis:
       - path: google/cloud/networkmanagement/v1
   - name: google-cloud-network_security
@@ -2435,7 +2435,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-oracle_database-v1
-    version: 1.4.0
+    version: 1.5.0
     apis:
       - path: google/cloud/oracledatabase/v1
   - name: google-cloud-orchestration-airflow-service
@@ -2746,7 +2746,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: PROFILER
   - name: google-cloud-pubsub-v1
-    version: 1.21.0
+    version: 1.22.0
     apis:
       - path: google/pubsub/v1
         ruby:
@@ -2936,7 +2936,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: RETAIL
   - name: google-cloud-run-client
-    version: 1.9.0
+    version: 1.10.0
     apis:
       - path: google/cloud/run/v2
         ruby:
@@ -2948,7 +2948,7 @@ libraries:
       wrapper_of:
         - v2:0.17
   - name: google-cloud-run-v2
-    version: 0.31.0
+    version: 0.32.0
     apis:
       - path: google/cloud/run/v2
         ruby:
@@ -2962,7 +2962,7 @@ libraries:
       wrapper_of:
         - v1beta1:0.0
   - name: google-cloud-saas_platform-saas_service_mgmt-v1
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1
   - name: google-cloud-saas_platform-saas_service_mgmt-v1beta1
@@ -3453,11 +3453,11 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SPEECH
   - name: google-cloud-sql-v1
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/sql/v1
   - name: google-cloud-sql-v1beta4
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/sql/v1beta4
   - name: google-cloud-storage-control
@@ -3748,7 +3748,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-vector_search-v1
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/vectorsearch/v1
   - name: google-cloud-video-live_stream
@@ -4406,7 +4406,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-accounts
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/accounts/v1
     ruby:
@@ -4427,7 +4427,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-conversions
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/conversions/v1
     ruby:
@@ -4442,7 +4442,7 @@ libraries:
     apis:
       - path: google/shopping/merchant/conversions/v1beta
   - name: google-shopping-merchant-data_sources
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/datasources/v1
     ruby:
@@ -4463,7 +4463,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-inventories
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/shopping/merchant/inventories/v1
     ruby:
@@ -4484,7 +4484,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-issue_resolution
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
     ruby:
@@ -4505,7 +4505,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
   - name: google-shopping-merchant-lfp
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/lfp/v1
     ruby:
@@ -4537,7 +4537,7 @@ libraries:
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
   - name: google-shopping-merchant-notifications
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/notifications/v1
     ruby:
@@ -4555,7 +4555,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-order_tracking
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1
     ruby:
@@ -4576,7 +4576,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-products
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/products/v1
     ruby:
@@ -4597,7 +4597,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-promotions
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/promotions/v1
     ruby:
@@ -4618,7 +4618,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-quota
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/quota/v1
     ruby:
@@ -4633,7 +4633,7 @@ libraries:
     apis:
       - path: google/shopping/merchant/quota/v1beta
   - name: google-shopping-merchant-reports
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/reports/v1
     ruby:
@@ -4654,7 +4654,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
   - name: google-shopping-merchant-reviews
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/shopping/merchant/reviews/v1
     ruby:
