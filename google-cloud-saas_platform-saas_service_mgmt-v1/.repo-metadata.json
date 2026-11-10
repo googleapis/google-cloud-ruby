@@ -1,0 +1,17 @@
+{
+    "api_id": "saasservicemgmt.googleapis.com",
+    "api_shortname": "saasservicemgmt",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-saas_platform-saas_service_mgmt-v1/latest",
+    "distribution_name": "google-cloud-saas_platform-saas_service_mgmt-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "saasservicemgmt",
+    "name_pretty": "App Lifecycle Manager V1 API",
+    "product_documentation": "https://docs.cloud.google.com/app-lifecycle-manager",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Model, deploy, and operate your SaaS at scale. Note that google-cloud-saas_platform-saas_service_mgmt-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-saas_platform-saas_service_mgmt instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/app-lifecycle-manager",
+    "library_type": "GAPIC_AUTO"
+}

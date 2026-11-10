@@ -2961,6 +2961,10 @@ libraries:
     ruby:
       wrapper_of:
         - v1beta1:0.0
+  - name: google-cloud-saas_platform-saas_service_mgmt-v1
+    version: 0.0.1
+    apis:
+      - path: google/cloud/saasplatform/saasservicemgmt/v1
   - name: google-cloud-saas_platform-saas_service_mgmt-v1beta1
     version: 0.10.0
     apis:
