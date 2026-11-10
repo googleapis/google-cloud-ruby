@@ -26,7 +26,9 @@ module Google
           # Credentials for the Executions API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/run",
+              "https://www.googleapis.com/auth/run.readonly"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

@@ -36,7 +36,8 @@ module Google
         #     Dockerhub is assumed.
         # @!attribute [rw] source_code
         #   @return [::Google::Cloud::Run::V2::SourceCode]
-        #     Optional. Location of the source.
+        #     Optional. Location of the source. This field is only supported in Cloud Run
+        #     Service.
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     Entrypoint array. Not executed within a shell.
@@ -90,6 +91,10 @@ module Google
         # @!attribute [r] build_info
         #   @return [::Google::Cloud::Run::V2::BuildInfo]
         #     Output only. The build info of the container image.
+        # @!attribute [rw] sandbox_launcher
+        #   @return [::Boolean]
+        #     Optional. Indicates that this container can act as a sandbox supervisor and
+        #     launch sandboxes.
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -208,6 +213,8 @@ module Google
         #   @return [::String]
         #     Optional. Path within the volume from which the container's volume should
         #     be mounted. Defaults to "" (volume's root).
+        #
+        #     This field is currently rejected in Secret volume mounts.
         class VolumeMount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -326,24 +333,36 @@ module Google
         # how to connect Cloud SQL and Cloud Run.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
-        #     The Cloud SQL instance connection names, as can be found in
-        #     https://console.cloud.google.com/sql/instances. Visit
-        #     https://cloud.google.com/sql/docs/mysql/connect-run for more information on
-        #     how to connect Cloud SQL and Cloud Run. Format:
-        #     \\{project}:\\{location}:\\{instance}
+        #     A list of Cloud SQL instance connection names. Cloud Run uses these
+        #     to establish connections to the specified Cloud SQL instances.
+        #     While the SQL instance name itself is unique within a project,
+        #     the full connection name requires the location for proper routing.
+        #     Format: `{project}:{location}:{instance}`
+        #     Example: `my-project:us-central1:my-instance`
+        #
+        #     You can find this value on the instance's **Overview** page in the
+        #     Google Cloud console or by using the following `gcloud` command:
+        #
+        #     ```sh
+        #     gcloud sql instances describe INSTANCE_NAME \
+        #       --format='value(connectionName)'
+        #     ```
+        #
+        #     Visit https://cloud.google.com/sql/docs/mysql/connect-run for more
+        #     information on how to connect Cloud SQL and Cloud Run.
         class CloudSqlInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # In memory (tmpfs) ephemeral storage.
+        # Represents in-memory (tmpfs) or disk-backed ephemeral storage.
         # It is ephemeral in the sense that when the sandbox is taken down, the data is
         # destroyed with it (it does not persist across sandbox runs).
         # @!attribute [rw] medium
         #   @return [::Google::Cloud::Run::V2::EmptyDirVolumeSource::Medium]
-        #     The medium on which the data is stored. Acceptable values today is only
-        #     MEMORY or none. When none, the default will currently be backed by memory
-        #     but could change over time. +optional
+        #     The medium on which the data is stored. Acceptable values are `MEMORY`,
+        #     `DISK`, or unset (`MEDIUM_UNSPECIFIED`). When unset, the default is
+        #     currently memory-backed but could change over time.
         # @!attribute [rw] size_limit
         #   @return [::String]
         #     Limit on the storage usable by this EmptyDir volume.
@@ -351,10 +370,11 @@ module Google
         #     The maximum usage on memory medium EmptyDir would be the minimum value
         #     between the SizeLimit specified here and the sum of memory limits of all
         #     containers. The default is nil which means that the limit is undefined.
-        #     More info:
-        #     https://cloud.google.com/run/docs/configuring/in-memory-volumes#configure-volume.
-        #     Info in Kubernetes:
-        #     https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+        #     For more information, see
+        #     [Configure in-memory volume
+        #     mounts](https://cloud.google.com/run/docs/configuring/in-memory-volumes#configure-volume)
+        #     and the [Kubernetes `emptyDir` volume
+        #     documentation](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir).
         class EmptyDirVolumeSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -367,6 +387,9 @@ module Google
 
             # Explicitly set the EmptyDir to be in memory. Uses tmpfs.
             MEMORY = 1
+
+            # Explicitly sets the EmptyDir to be a disk.
+            DISK = 2
           end
         end
 
@@ -385,8 +408,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a volume backed by a Cloud Storage bucket using Cloud Storage
-        # FUSE.
+        # Represents a volume backed by a Cloud Storage bucket (mounted via Cloud
+        # Storage FUSE or as a block device disk).
         # @!attribute [rw] bucket
         #   @return [::String]
         #     Cloud Storage Bucket name.
@@ -522,6 +545,15 @@ module Google
         # @!attribute [rw] cloud_storage_source
         #   @return [::Google::Cloud::Run::V2::SourceCode::CloudStorageSource]
         #     The source is a Cloud Storage bucket.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_storage_source`, `inlined_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] inlined_source
+        #   @return [::Google::Cloud::Run::V2::SourceCode::InlinedSource]
+        #     Optional. Input only. Source code inlined in the request. Cloud Run will
+        #     store the inlined_source to Cloud Storage and replace the field with
+        #     cloud_storage_source. This field is only supported in Cloud Run Service.
+        #
+        #     Note: The following fields are mutually exclusive: `inlined_source`, `cloud_storage_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceCode
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -537,6 +569,36 @@ module Google
           #   @return [::Integer]
           #     Optional. The Cloud Storage object generation.
           class CloudStorageSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Source file.
+          # @!attribute [rw] filename
+          #   @return [::String]
+          #     Required. Input only. The file name for the source code. e.g.,
+          #     `"index.js"` or
+          #     `"node_modules/dependency.js"`. The filename must be less than 255
+          #     characters and cannot contain `..`, `./`, `//`, or end with a `/`.
+          #     Cloud Run will place the files in the container subdirectories, please
+          #     use relative path to access the file.
+          # @!attribute [rw] content
+          #   @return [::String]
+          #     Required. Input only. Represents the exact, literal, and complete source
+          #     code of the file. Placeholders like `...` or comments such as `# [rest of
+          #     code]` should NEVER be used as omission. Every character in this field
+          #     will be built into the final container. Any omission will result in a
+          #     broken application.
+          class SourceFile
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Inlined source.
+          # @!attribute [rw] sources
+          #   @return [::Array<::Google::Cloud::Run::V2::SourceCode::SourceFile>]
+          #     Required. Input only. The source code.
+          class InlinedSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

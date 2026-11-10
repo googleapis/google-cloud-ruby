@@ -32,7 +32,7 @@ module Google
         ##
         # The HealthChecks API.
         #
-        # This client uses HealthChecks version 2026-09-01.
+        # This client uses HealthChecks version 2026-11-01.
         #
         # To load this service and instantiate a REST client:
         #

@@ -39,6 +39,8 @@ module Google
             rpc :GetCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::GetCloudExadataInfrastructureRequest, ::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructure
             # Creates a new Exadata Infrastructure in a given project and location.
             rpc :CreateCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::CreateCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single Exadata Infrastructure.
+            rpc :UpdateCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
             # Deletes a single Exadata Infrastructure.
             rpc :DeleteCloudExadataInfrastructure, ::Google::Cloud::OracleDatabase::V1::DeleteCloudExadataInfrastructureRequest, ::Google::Longrunning::Operation
             # Configures Exascale for a single Exadata Infrastructure.
@@ -49,10 +51,22 @@ module Google
             rpc :GetCloudVmCluster, ::Google::Cloud::OracleDatabase::V1::GetCloudVmClusterRequest, ::Google::Cloud::OracleDatabase::V1::CloudVmCluster
             # Creates a new VM Cluster in a given project and location.
             rpc :CreateCloudVmCluster, ::Google::Cloud::OracleDatabase::V1::CreateCloudVmClusterRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single Vm Cluster.
+            rpc :UpdateCloudVmCluster, ::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest, ::Google::Longrunning::Operation
             # Deletes a single VM Cluster.
             rpc :DeleteCloudVmCluster, ::Google::Cloud::OracleDatabase::V1::DeleteCloudVmClusterRequest, ::Google::Longrunning::Operation
+            # Enables the Workload Identity Connector for a Cloud VM Cluster.
+            rpc :EnableCloudVmClusterIdentityConnector, ::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest, ::Google::Longrunning::Operation
+            # Disables the Workload Identity Connector for a Cloud VM Cluster.
+            rpc :DisableCloudVmClusterIdentityConnector, ::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest, ::Google::Longrunning::Operation
+            # Enables the Workload Identity Connector for an Exadb VM Cluster.
+            rpc :EnableExadbVmClusterIdentityConnector, ::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest, ::Google::Longrunning::Operation
+            # Disables the Workload Identity Connector for an Exadb VM Cluster.
+            rpc :DisableExadbVmClusterIdentityConnector, ::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest, ::Google::Longrunning::Operation
             # Lists the entitlements in a given project.
             rpc :ListEntitlements, ::Google::Cloud::OracleDatabase::V1::ListEntitlementsRequest, ::Google::Cloud::OracleDatabase::V1::ListEntitlementsResponse
+            # Lists Flex Components in a given project and location.
+            rpc :ListFlexComponents, ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest, ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsResponse
             # Lists the database servers of an Exadata Infrastructure instance.
             rpc :ListDbServers, ::Google::Cloud::OracleDatabase::V1::ListDbServersRequest, ::Google::Cloud::OracleDatabase::V1::ListDbServersResponse
             # Lists the database nodes of a VM Cluster.
@@ -108,6 +122,9 @@ module Google
             rpc :GetOdbNetwork, ::Google::Cloud::OracleDatabase::V1::GetOdbNetworkRequest, ::Google::Cloud::OracleDatabase::V1::OdbNetwork
             # Creates a new ODB Network in a given project and location.
             rpc :CreateOdbNetwork, ::Google::Cloud::OracleDatabase::V1::CreateOdbNetworkRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` and `service_connectivity_config` of a single
+            # OdbNetwork.
+            rpc :UpdateOdbNetwork, ::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest, ::Google::Longrunning::Operation
             # Deletes a single ODB Network.
             rpc :DeleteOdbNetwork, ::Google::Cloud::OracleDatabase::V1::DeleteOdbNetworkRequest, ::Google::Longrunning::Operation
             # Lists all the ODB Subnets in a given ODB Network.
@@ -116,6 +133,8 @@ module Google
             rpc :GetOdbSubnet, ::Google::Cloud::OracleDatabase::V1::GetOdbSubnetRequest, ::Google::Cloud::OracleDatabase::V1::OdbSubnet
             # Creates a new ODB Subnet in a given ODB Network.
             rpc :CreateOdbSubnet, ::Google::Cloud::OracleDatabase::V1::CreateOdbSubnetRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single ODB Subnet.
+            rpc :UpdateOdbSubnet, ::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest, ::Google::Longrunning::Operation
             # Deletes a single ODB Subnet.
             rpc :DeleteOdbSubnet, ::Google::Cloud::OracleDatabase::V1::DeleteOdbSubnetRequest, ::Google::Longrunning::Operation
             # Lists all the ODB DNS Zones in a given ODB Network.
@@ -147,11 +166,16 @@ module Google
             rpc :GetExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::GetExascaleDbStorageVaultRequest, ::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault
             # Creates a new ExascaleDB Storage Vault resource.
             rpc :CreateExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::CreateExascaleDbStorageVaultRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single ExascaleDbStorageVault.
+            rpc :UpdateExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest, ::Google::Longrunning::Operation
             # Deletes a single ExascaleDB Storage Vault.
             rpc :DeleteExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::DeleteExascaleDbStorageVaultRequest, ::Google::Longrunning::Operation
             # Lists all the DbSystemInitialStorageSizes for the given project and
             # location.
             rpc :ListDbSystemInitialStorageSizes, ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesRequest, ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesResponse
+            # Lists all the DbSystemComputePerformances for the given project and
+            # location.
+            rpc :ListDbSystemComputePerformances, ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest, ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesResponse
             # Lists all the Databases for the given project, location and DbSystem.
             rpc :ListDatabases, ::Google::Cloud::OracleDatabase::V1::ListDatabasesRequest, ::Google::Cloud::OracleDatabase::V1::ListDatabasesResponse
             # Gets details of a single Database.
@@ -167,6 +191,8 @@ module Google
             rpc :GetDbSystem, ::Google::Cloud::OracleDatabase::V1::GetDbSystemRequest, ::Google::Cloud::OracleDatabase::V1::DbSystem
             # Creates a new DbSystem in a given project and location.
             rpc :CreateDbSystem, ::Google::Cloud::OracleDatabase::V1::CreateDbSystemRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single DbSystem.
+            rpc :UpdateDbSystem, ::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest, ::Google::Longrunning::Operation
             # Deletes a single DbSystem.
             rpc :DeleteDbSystem, ::Google::Cloud::OracleDatabase::V1::DeleteDbSystemRequest, ::Google::Longrunning::Operation
             # Lists all the GoldengateDeployments for the given project and location.
@@ -175,6 +201,8 @@ module Google
             rpc :GetGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeployment
             # Creates a new GoldengateDeployment in a given project and location.
             rpc :CreateGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateDeploymentRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single GoldengateDeployment.
+            rpc :UpdateGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest, ::Google::Longrunning::Operation
             # Deletes a single GoldengateDeployment.
             rpc :DeleteGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateDeploymentRequest, ::Google::Longrunning::Operation
             # Stops a single GoldengateDeployment.
@@ -187,6 +215,8 @@ module Google
             rpc :GetGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateConnection
             # Creates a new GoldengateConnection in a given project and location.
             rpc :CreateGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateConnectionRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single GoldengateConnection.
+            rpc :UpdateGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest, ::Google::Longrunning::Operation
             # Deletes a single GoldengateConnection.
             rpc :DeleteGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateConnectionRequest, ::Google::Longrunning::Operation
             # Lists GoldengateDeploymentVersions in a given project and location.
@@ -208,10 +238,26 @@ module Google
             # Creates a new GoldengateConnectionAssignment in a given project and
             # location.
             rpc :CreateGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateConnectionAssignmentRequest, ::Google::Longrunning::Operation
+            # Updates the `labels` of a single GoldengateConnectionAssignment.
+            rpc :UpdateGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest, ::Google::Longrunning::Operation
             # Deletes a single GoldengateConnectionAssignment.
             rpc :DeleteGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateConnectionAssignmentRequest, ::Google::Longrunning::Operation
             # Tests a single GoldengateConnectionAssignment.
             rpc :TestGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::TestGoldengateConnectionAssignmentRequest, ::Google::Cloud::OracleDatabase::V1::TestGoldengateConnectionAssignmentResponse
+            # Lists DatabaseConnections in a given project and location.
+            rpc :ListDatabaseConnections, ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest, ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsResponse
+            # Gets details of a single DatabaseConnection.
+            rpc :GetDatabaseConnection, ::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest, ::Google::Cloud::OracleDatabase::V1::DatabaseConnection
+            # Creates a new DatabaseConnection in a given project and location.
+            rpc :CreateDatabaseConnection, ::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single DatabaseConnection.
+            rpc :UpdateDatabaseConnection, ::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest, ::Google::Longrunning::Operation
+            # Deletes a single DatabaseConnection.
+            rpc :DeleteDatabaseConnection, ::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest, ::Google::Longrunning::Operation
+            # Tests connectivity of a DatabaseConnection.
+            rpc :TestDatabaseConnection, ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest, ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionResponse
+            # Executes a SQL statement on a DatabaseConnection.
+            rpc :ExecuteSql, ::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest, ::Google::Cloud::OracleDatabase::V1::ExecuteSqlResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -25,6 +25,11 @@
                 "create_cloud_exadata_infrastructure"
               ]
             },
+            "UpdateCloudExadataInfrastructure": {
+              "methods": [
+                "update_cloud_exadata_infrastructure"
+              ]
+            },
             "DeleteCloudExadataInfrastructure": {
               "methods": [
                 "delete_cloud_exadata_infrastructure"
@@ -50,14 +55,44 @@
                 "create_cloud_vm_cluster"
               ]
             },
+            "UpdateCloudVmCluster": {
+              "methods": [
+                "update_cloud_vm_cluster"
+              ]
+            },
             "DeleteCloudVmCluster": {
               "methods": [
                 "delete_cloud_vm_cluster"
               ]
             },
+            "EnableCloudVmClusterIdentityConnector": {
+              "methods": [
+                "enable_cloud_vm_cluster_identity_connector"
+              ]
+            },
+            "DisableCloudVmClusterIdentityConnector": {
+              "methods": [
+                "disable_cloud_vm_cluster_identity_connector"
+              ]
+            },
+            "EnableExadbVmClusterIdentityConnector": {
+              "methods": [
+                "enable_exadb_vm_cluster_identity_connector"
+              ]
+            },
+            "DisableExadbVmClusterIdentityConnector": {
+              "methods": [
+                "disable_exadb_vm_cluster_identity_connector"
+              ]
+            },
             "ListEntitlements": {
               "methods": [
                 "list_entitlements"
+              ]
+            },
+            "ListFlexComponents": {
+              "methods": [
+                "list_flex_components"
               ]
             },
             "ListDbServers": {
@@ -185,6 +220,11 @@
                 "create_odb_network"
               ]
             },
+            "UpdateOdbNetwork": {
+              "methods": [
+                "update_odb_network"
+              ]
+            },
             "DeleteOdbNetwork": {
               "methods": [
                 "delete_odb_network"
@@ -203,6 +243,11 @@
             "CreateOdbSubnet": {
               "methods": [
                 "create_odb_subnet"
+              ]
+            },
+            "UpdateOdbSubnet": {
+              "methods": [
+                "update_odb_subnet"
               ]
             },
             "DeleteOdbSubnet": {
@@ -275,6 +320,11 @@
                 "create_exascale_db_storage_vault"
               ]
             },
+            "UpdateExascaleDbStorageVault": {
+              "methods": [
+                "update_exascale_db_storage_vault"
+              ]
+            },
             "DeleteExascaleDbStorageVault": {
               "methods": [
                 "delete_exascale_db_storage_vault"
@@ -283,6 +333,11 @@
             "ListDbSystemInitialStorageSizes": {
               "methods": [
                 "list_db_system_initial_storage_sizes"
+              ]
+            },
+            "ListDbSystemComputePerformances": {
+              "methods": [
+                "list_db_system_compute_performances"
               ]
             },
             "ListDatabases": {
@@ -320,6 +375,11 @@
                 "create_db_system"
               ]
             },
+            "UpdateDbSystem": {
+              "methods": [
+                "update_db_system"
+              ]
+            },
             "DeleteDbSystem": {
               "methods": [
                 "delete_db_system"
@@ -338,6 +398,11 @@
             "CreateGoldengateDeployment": {
               "methods": [
                 "create_goldengate_deployment"
+              ]
+            },
+            "UpdateGoldengateDeployment": {
+              "methods": [
+                "update_goldengate_deployment"
               ]
             },
             "DeleteGoldengateDeployment": {
@@ -368,6 +433,11 @@
             "CreateGoldengateConnection": {
               "methods": [
                 "create_goldengate_connection"
+              ]
+            },
+            "UpdateGoldengateConnection": {
+              "methods": [
+                "update_goldengate_connection"
               ]
             },
             "DeleteGoldengateConnection": {
@@ -420,6 +490,11 @@
                 "create_goldengate_connection_assignment"
               ]
             },
+            "UpdateGoldengateConnectionAssignment": {
+              "methods": [
+                "update_goldengate_connection_assignment"
+              ]
+            },
             "DeleteGoldengateConnectionAssignment": {
               "methods": [
                 "delete_goldengate_connection_assignment"
@@ -428,6 +503,41 @@
             "TestGoldengateConnectionAssignment": {
               "methods": [
                 "test_goldengate_connection_assignment"
+              ]
+            },
+            "ListDatabaseConnections": {
+              "methods": [
+                "list_database_connections"
+              ]
+            },
+            "GetDatabaseConnection": {
+              "methods": [
+                "get_database_connection"
+              ]
+            },
+            "CreateDatabaseConnection": {
+              "methods": [
+                "create_database_connection"
+              ]
+            },
+            "UpdateDatabaseConnection": {
+              "methods": [
+                "update_database_connection"
+              ]
+            },
+            "DeleteDatabaseConnection": {
+              "methods": [
+                "delete_database_connection"
+              ]
+            },
+            "TestDatabaseConnection": {
+              "methods": [
+                "test_database_connection"
+              ]
+            },
+            "ExecuteSql": {
+              "methods": [
+                "execute_sql"
               ]
             }
           }

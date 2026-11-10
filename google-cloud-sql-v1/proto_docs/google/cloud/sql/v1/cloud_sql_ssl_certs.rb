@@ -114,6 +114,75 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for SqlSslCertsService.UpdateCustomerManagedCertificate.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] customer_managed_certificate_config
+        #   @return [::Google::Cloud::Sql::V1::CustomerManagedCertificateConfig]
+        #     Required. The customer managed certificate bundle SSL configuration to
+        #     update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the customer managed certificate bundle
+        #     configuration is not found, a new customer managed certificate bundle
+        #     configuration will be created. In this situation, `update_mask` is ignored.
+        # @!attribute [rw] certificate_bundle
+        #   @return [::String]
+        #     Required. Name tag of the customer managed certificate bundle to update. It
+        #     must start with a letter, be alphanumeric, and have a maximum length of 10
+        #     characters.
+        class UpdateCustomerManagedCertificateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlSslCertsService.DeleteCustomerManagedCertificate.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] certificate_bundle
+        #   @return [::String]
+        #     Required. Name tag of the customer managed certificate bundle to delete. It
+        #     must start with a letter, be alphanumeric, and have a maximum length of 10
+        #     characters.
+        class DeleteCustomerManagedCertificateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlSslCertsService.ListCustomerManagedCertificates.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        class ListCustomerManagedCertificatesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for SqlSslCertsService.ListCustomerManagedCertificates.
+        # @!attribute [rw] customer_managed_certificates
+        #   @return [::Array<::Google::Cloud::Sql::V1::CustomerManagedCertificateConfig>]
+        #     Required. List of customer managed SSL configurations for the instance.
+        #     Note: Sensitive private keys (e.g., PEER_CLIENT_KEY) are redacted in this
+        #     response.
+        class ListCustomerManagedCertificatesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

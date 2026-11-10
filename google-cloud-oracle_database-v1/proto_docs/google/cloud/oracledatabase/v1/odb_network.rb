@@ -28,7 +28,7 @@ module Google
         #     projects/\\{project}/locations/\\{region}/odbNetworks/\\{odb_network}
         # @!attribute [rw] network
         #   @return [::String]
-        #     Required. The name of the VPC network in the following format:
+        #     Required. Immutable. The name of the VPC network in the following format:
         #     projects/\\{project}/global/networks/\\{network}
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -45,9 +45,23 @@ module Google
         #     OdbNetwork.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. The GCP Oracle zone where OdbNetwork is hosted.
+        #     Optional. Immutable. The GCP Oracle zone where OdbNetwork is hosted.
         #     Example: us-east4-b-r2.
         #     If not specified, the system will pick a zone based on availability.
+        # @!attribute [rw] service_connectivity_config
+        #   @return [::Google::Cloud::OracleDatabase::V1::ServiceConnectivityConfig]
+        #     Optional. Configuration to enable the service (Oracledatabase@Google Cloud)
+        #     to establish connectivity to the database.
+        #
+        #     This should be specified if you intend to associate this OdbNetwork with a
+        #     DatabaseConnection resource to `ExecuteSQL` on the database, or to create a
+        #     ServiceIntegration with the Database.
+        #
+        #     Please don't specify it otherwise to avoid complicating the network setup.
+        # @!attribute [r] reconciling
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the OdbNetwork is currently reconciling
+        #     changes.
         class OdbNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -129,6 +143,38 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request for `OdbNetwork.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the OdbNetwork should be
+        #     updated. A field specified in the mask is updated. If a mask isn't
+        #     provided, the service treats this as an implied field mask equivalent to
+        #     all fields that are populated (have a non-empty value). To clear or unset a
+        #     field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] odb_network
+        #   @return [::Google::Cloud::OracleDatabase::V1::OdbNetwork]
+        #     Required. The resource being updated. Note only `labels` and
+        #     `service_connectivity_config` can be updated.
+        #     The provided labels will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing labels and update_mask will not update the labels.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateOdbNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request for `OdbNetwork.List`.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -175,6 +221,37 @@ module Google
         #     Required. The name of the OdbNetwork in the following format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}.
         class GetOdbNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a Private Service Connect (PSC) interface used by
+        # Oracledatabase@Google Cloud to establish private connectivity to the
+        # database.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Optional. The resource name of the Network Attachment that
+        #     Oracledatabase@Google Cloud will use to establish private connectivity to
+        #     the database via a Private Service Connect Interface (PSC-I).
+        #     Format:
+        #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{network_attachment}
+        class PscInterfaceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration to enable the service (Oracledatabase@Google Cloud) to
+        # establish connectivity to the database.
+        #
+        # This should be specified if you intend to associate this OdbNetwork with a
+        # DatabaseConnection resource to `ExecuteSQL` on the database, or to create a
+        # ServiceIntegration with the Database.
+        #
+        # Please don't specify it otherwise to avoid complicating the network setup.
+        # @!attribute [rw] psc_interface_config
+        #   @return [::Google::Cloud::OracleDatabase::V1::PscInterfaceConfig]
+        #     Optional. Configuration for Private Service Connect (PSC) interface.
+        class ServiceConnectivityConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

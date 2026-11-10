@@ -30,17 +30,17 @@ module Google
         #     projects/\\{project}/locations/\\{location}/exascaleDbStorageVaults/\\{exascale_db_storage_vault}
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The display name for the ExascaleDbStorageVault. The name does
-        #     not have to be unique within your project. The name must be 1-255
+        #     Required. Immutable. The display name for the ExascaleDbStorageVault. The
+        #     name does not have to be unique within your project. The name must be 1-255
         #     characters long and can only contain alphanumeric characters.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. The GCP Oracle zone where Oracle ExascaleDbStorageVault is
-        #     hosted. Example: us-east4-b-r2. If not specified, the system will pick a
-        #     zone based on availability.
+        #     Optional. Immutable. The GCP Oracle zone where Oracle
+        #     ExascaleDbStorageVault is hosted. Example: us-east4-b-r2. If not specified,
+        #     the system will pick a zone based on availability.
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVaultProperties]
-        #     Required. The properties of the ExascaleDbStorageVault.
+        #     Required. Immutable. The properties of the ExascaleDbStorageVault.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time when the ExascaleDbStorageVault was created.
@@ -53,7 +53,7 @@ module Google
         #     Optional. The labels or tags associated with the ExascaleDbStorageVault.
         # @!attribute [rw] exadata_infrastructure
         #   @return [::String]
-        #     Optional. The Exadata Infrastructure resource on which
+        #     Optional. Immutable. The Exadata Infrastructure resource on which
         #     ExascaleDbStorageVault
         #     resource is created, in the following format:
         #     projects/\\{project}/locations/\\{region}/cloudExadataInfrastuctures/\\{cloud_extradata_infrastructure}
@@ -163,6 +163,37 @@ module Google
         #     Required. The total storage allocation for the ExascaleDbStorageVault, in
         #     gigabytes (GB).
         class ExascaleDbStorageDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExascaleDbStorageVault.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the ExascaleDbStorageVault
+        #     should be updated. A field specified in the mask is updated. If a mask
+        #     isn't provided, the service treats this as an implied field mask equivalent
+        #     to all fields that are populated (have a non-empty value). To clear or
+        #     unset a field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] exascale_db_storage_vault
+        #   @return [::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault]
+        #     Required. The resource being updated. Note only labels can be updated.
+        #     The provided labels will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing labels and update_mask will not update the labels.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateExascaleDbStorageVaultRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

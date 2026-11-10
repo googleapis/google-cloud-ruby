@@ -45,17 +45,22 @@ module Google
         #   @return [::Google::Cloud::Run::V2::Condition::CommonReason]
         #     Output only. A common (service-level) reason for this condition.
         #
-        #     Note: The following fields are mutually exclusive: `reason`, `revision_reason`, `execution_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `reason`, `revision_reason`, `execution_reason`, `instance_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] revision_reason
         #   @return [::Google::Cloud::Run::V2::Condition::RevisionReason]
         #     Output only. A reason for the revision condition.
         #
-        #     Note: The following fields are mutually exclusive: `revision_reason`, `reason`, `execution_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `revision_reason`, `reason`, `execution_reason`, `instance_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] execution_reason
         #   @return [::Google::Cloud::Run::V2::Condition::ExecutionReason]
         #     Output only. A reason for the execution condition.
         #
-        #     Note: The following fields are mutually exclusive: `execution_reason`, `reason`, `revision_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `execution_reason`, `reason`, `revision_reason`, `instance_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] instance_reason
+        #   @return [::Google::Cloud::Run::V2::Condition::InstanceReason]
+        #     Output only. A reason for the instance condition.
+        #
+        #     Note: The following fields are mutually exclusive: `instance_reason`, `reason`, `revision_reason`, `execution_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -216,6 +221,27 @@ module Google
 
             # A delayed execution is waiting for a start time.
             DELAYED_START_PENDING = 6
+
+            # A delayed execution exceeded the maximum runtime duration.
+            DELAYED_EXECUTION_EXCEEDING_DURATION_LIMIT = 7
+          end
+
+          # Reasons specific to Instance resource.
+          module InstanceReason
+            # Default value.
+            INSTANCE_REASON_UNSPECIFIED = 0
+
+            # Instance deleted.
+            INSTANCE_DELETED = 1
+
+            # Instance stopped.
+            INSTANCE_STOPPED = 2
+
+            # Instance stopping.
+            INSTANCE_STOPPING = 3
+
+            # Instance exited with a non-zero exit code.
+            INSTANCE_NON_ZERO_EXIT_CODE = 4
           end
         end
       end

@@ -25,6 +25,40 @@ module Google
           # Path helper methods for the ForecastService API.
           module Paths
             ##
+            # Create a fully-qualified AdCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adCategories/{ad_category}`
+            #
+            # @param network_code [String]
+            # @param ad_category [String]
+            #
+            # @return [::String]
+            def ad_category_path network_code:, ad_category:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adCategories/#{ad_category}"
+            end
+
+            ##
+            # Create a fully-qualified AdSpot resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/adSpots/{ad_spot}`
+            #
+            # @param network_code [String]
+            # @param ad_spot [String]
+            #
+            # @return [::String]
+            def ad_spot_path network_code:, ad_spot:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/adSpots/#{ad_spot}"
+            end
+
+            ##
             # Create a fully-qualified AdUnit resource string.
             #
             # The resource will be in the following format:
@@ -39,6 +73,23 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/adUnits/#{ad_unit}"
+            end
+
+            ##
+            # Create a fully-qualified AllocationDeliveryProfile resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/allocationDeliveryProfiles/{allocation_delivery_profile}`
+            #
+            # @param network_code [String]
+            # @param allocation_delivery_profile [String]
+            #
+            # @return [::String]
+            def allocation_delivery_profile_path network_code:, allocation_delivery_profile:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/allocationDeliveryProfiles/#{allocation_delivery_profile}"
             end
 
             ##
@@ -144,6 +195,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Company resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/companies/{company}`
+            #
+            # @param network_code [String]
+            # @param company [String]
+            #
+            # @return [::String]
+            def company_path network_code:, company:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/companies/#{company}"
+            end
+
+            ##
             # Create a fully-qualified Content resource string.
             #
             # The resource will be in the following format:
@@ -175,6 +243,40 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/contentBundles/#{content_bundle}"
+            end
+
+            ##
+            # Create a fully-qualified ContentLabel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/contentLabels/{content_label}`
+            #
+            # @param network_code [String]
+            # @param content_label [String]
+            #
+            # @return [::String]
+            def content_label_path network_code:, content_label:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/contentLabels/#{content_label}"
+            end
+
+            ##
+            # Create a fully-qualified CustomField resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customFields/{custom_field}`
+            #
+            # @param network_code [String]
+            # @param custom_field [String]
+            #
+            # @return [::String]
+            def custom_field_path network_code:, custom_field:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customFields/#{custom_field}"
             end
 
             ##
@@ -277,6 +379,23 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/geoTargets/#{geo_target}"
+            end
+
+            ##
+            # Create a fully-qualified InventoryUrl resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/inventoryUrls/{inventory_url}`
+            #
+            # @param network_code [String]
+            # @param inventory_url [String]
+            #
+            # @return [::String]
+            def inventory_url_path network_code:, inventory_url:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/inventoryUrls/#{inventory_url}"
             end
 
             ##
@@ -413,6 +532,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Order resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/orders/{order}`
+            #
+            # @param network_code [String]
+            # @param order [String]
+            #
+            # @return [::String]
+            def order_path network_code:, order:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/orders/#{order}"
+            end
+
+            ##
             # Create a fully-qualified Placement resource string.
             #
             # The resource will be in the following format:
@@ -427,6 +563,23 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/placements/#{placement}"
+            end
+
+            ##
+            # Create a fully-qualified TaxonomyCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/taxonomyCategories/{taxonomy_category}`
+            #
+            # @param network_code [String]
+            # @param taxonomy_category [String]
+            #
+            # @return [::String]
+            def taxonomy_category_path network_code:, taxonomy_category:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/taxonomyCategories/#{taxonomy_category}"
             end
 
             extend self

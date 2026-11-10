@@ -238,8 +238,9 @@ module Google
             #   @param job [::Google::Cloud::Run::V2::Job, ::Hash]
             #     Required. The Job instance to create.
             #   @param job_id [::String]
-            #     Required. The unique identifier for the Job. The name of the job becomes
+            #     Optional. The unique identifier for the Job. The name of the job becomes
             #     \\{parent}/jobs/\\{job_id}.
+            #     If not provided, the server will generate a unique `job_id`.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
             #     populated, without persisting the request or creating any resources.

@@ -55,13 +55,19 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
+        #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+        #     timestamps, full resource names on reference fields (for example, `order =
+        #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+        #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+        #     repeated-field matching, unquoted enums and booleans, uppercase
+        #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+        #     (...)`).
+        #
         #     **Filterable fields:**
         #
         #     * `advertiser`
         #     * `displayName`
         #     * `name`
-        #     * `setTopBoxCreative.externalAssetId,providerId`
-        #     * `size.canonicalName,height,width`
         #     * `thirdPartyDataDeclarationStatus`
         #     * `updateTime`
         # @!attribute [rw] order_by
@@ -100,6 +106,84 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCreativesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateCreative` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `Creative` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] creative
+        #   @return [::Google::Ads::AdManager::V1::Creative]
+        #     Required. The `Creative` to create.
+        class CreateCreativeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateCreative` method.
+        # @!attribute [rw] creative
+        #   @return [::Google::Ads::AdManager::V1::Creative]
+        #     Required. The `Creative` to update.
+        #
+        #     The `Creative`'s name is used to identify the `Creative` to update. Format:
+        #     `networks/{network_code}/creatives/{creative_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateCreativeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateCreatives` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Creatives` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateCreativeRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateCreativeRequest>]
+        #     Required. The `Creative` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateCreativesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateCreatives` method.
+        # @!attribute [rw] creatives
+        #   @return [::Array<::Google::Ads::AdManager::V1::Creative>]
+        #     The `Creative` objects created.
+        class BatchCreateCreativesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateCreatives` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Creatives` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateCreativeRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateCreativeRequest>]
+        #     Required. The `Creative` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateCreativesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateCreatives` method.
+        # @!attribute [rw] creatives
+        #   @return [::Array<::Google::Ads::AdManager::V1::Creative>]
+        #     The `Creative` objects updated.
+        class BatchUpdateCreativesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

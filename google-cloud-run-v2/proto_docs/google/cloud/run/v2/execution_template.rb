@@ -67,6 +67,16 @@ module Google
         #   @return [::Google::Cloud::Run::V2::TaskTemplate]
         #     Required. Describes the task(s) that will be created when executing an
         #     execution.
+        # @!attribute [rw] delay_execution
+        #   @return [::Boolean]
+        #     Optional. If true, the system will start the execution within the next 12
+        #     hours depending on available capacity.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Optional. Arbitrary identifier for the API client.
+        # @!attribute [rw] client_version
+        #   @return [::String]
+        #     Optional. Arbitrary version identifier for the API client.
         class ExecutionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

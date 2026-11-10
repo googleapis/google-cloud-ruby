@@ -21,6 +21,44 @@ module Google
   module Cloud
     module Chronicle
       module V1
+        # An Entity provides additional context about an entity in a UDM event (asset,
+        # user, etc.). For example, a PROCESS_LAUNCH event describes that user
+        # 'abc@example.corp' launched process 'shady.exe'. The event does not include
+        # information that user 'abc@example.com' is a recently terminated employee who
+        # administers a server storing finance data. Information stored in one or more
+        # Entities can add this additional context.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the entity.
+        #     Format:
+        #     `projects/{project}/locations/{location}/instances/{instance}/entities/{entity}`
+        #     `projects/{project}/locations/{location}/instances/{instance}/analytics/{analytic}/entities/{entity}`
+        #     `projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}/entities/{entity}`
+        # @!attribute [rw] metadata
+        #   @return [::Google::Backstory::EntityMetadata]
+        #     Entity metadata such as timestamp, product, etc.
+        # @!attribute [rw] entity
+        #   @return [::Google::Backstory::Noun]
+        #     Noun in the UDM event that this entity represents.
+        # @!attribute [rw] additional
+        #   @return [::Google::Protobuf::Struct]
+        #     Important entity data that cannot be adequately represented within
+        #     the formal sections of the Entity.
+        # @!attribute [rw] risk_score
+        #   @return [::Google::Backstory::EntityRisk]
+        #     Represents the entity risk scores resource
+        # @!attribute [rw] metric
+        #   @return [::Google::Backstory::Metric]
+        #     Metric details of the entity. Used if EntityType is METRIC.
+        # @!attribute [rw] relations
+        #   @return [::Array<::Google::Backstory::Relation>]
+        #     One or more relationships between the entity (a) and other entities,
+        #     including the relationship type and related entity.
+        class Entity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A watchlist is a list of entities that allows for bulk operations over the
         # included entities.
         # @!attribute [rw] name

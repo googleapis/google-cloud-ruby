@@ -141,7 +141,7 @@ module Google
         #
         #     Note that this value might not be what was used
         #     as input. For example, if ALPHA was provided as input in the parent
-        #     resource, but only BETA and GA-level features are were, this field will be
+        #     resource, but only BETA and GA-level features are used, this field will be
         #     BETA.
         # @!attribute [r] service
         #   @return [::String]
@@ -166,8 +166,11 @@ module Google
         #     revision, and determines what permissions the revision has.
         # @!attribute [rw] containers
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
-        #     Holds the single container that defines the unit of execution for this
+        #     Holds the list which define the units of execution for this
         #     Revision.
+        # @!attribute [r] sandboxes
+        #   @return [::Google::Cloud::Run::V2::SandboxConfiguration]
+        #     Output only. Configuration for sandboxes.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     A list of Volumes to make available to containers.
@@ -219,6 +222,9 @@ module Google
         # @!attribute [rw] node_selector
         #   @return [::Google::Cloud::Run::V2::NodeSelector]
         #     The node selector for the revision.
+        # @!attribute [rw] workload_identity_config
+        #   @return [::Google::Cloud::Run::V2::WorkloadIdentityConfig]
+        #     Optional. The Revision's workload identity settings.
         # @!attribute [r] gpu_zonal_redundancy_disabled
         #   @return [::Boolean]
         #     Optional. Output only. True if GPU zonal redundancy is disabled on this
@@ -226,6 +232,15 @@ module Google
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. Email address of the authenticated creator.
+        # @!attribute [r] client
+        #   @return [::String]
+        #     Output only. Arbitrary identifier for the API client.
+        # @!attribute [r] client_version
+        #   @return [::String]
+        #     Output only. Arbitrary version identifier for the API client.
+        # @!attribute [r] ambient_networking
+        #   @return [::Google::Cloud::Run::V2::AmbientNetworking]
+        #     Output only. The ambient networking configuration for this revision.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

@@ -1328,6 +1328,118 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ClientTest < Min
     end
   end
 
+  def test_start
+    # Create test objects.
+    client_result = ::Google::Cloud::Sql::V1beta4::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    location = "hello world"
+
+    start_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ServiceStub.stub :transcode_start_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, start_client_stub do
+        # Create client
+        c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.start({ instance: instance, project: project, location: location }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.start instance: instance, project: project, location: location do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.start ::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest.new(instance: instance, project: project, location: location) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.start({ instance: instance, project: project, location: location }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.start(::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest.new(instance: instance, project: project, location: location), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, start_client_stub.call_count
+      end
+    end
+  end
+
+  def test_stop
+    # Create test objects.
+    client_result = ::Google::Cloud::Sql::V1beta4::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    location = "hello world"
+
+    stop_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ServiceStub.stub :transcode_stop_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, stop_client_stub do
+        # Create client
+        c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.stop({ instance: instance, project: project, location: location }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.stop instance: instance, project: project, location: location do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.stop ::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest.new(instance: instance, project: project, location: location) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.stop({ instance: instance, project: project, location: location }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.stop(::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest.new(instance: instance, project: project, location: location), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, stop_client_stub.call_count
+      end
+    end
+  end
+
   def test_restore_backup
     # Create test objects.
     client_result = ::Google::Cloud::Sql::V1beta4::Operation.new
@@ -2247,6 +2359,63 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ClientTest < Min
     end
   end
 
+  def test_execute_sql_read_only
+    # Create test objects.
+    client_result = ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    body = {}
+    location = "hello world"
+
+    execute_sql_read_only_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ServiceStub.stub :transcode_execute_sql_read_only_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_sql_read_only_client_stub do
+        # Create client
+        c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.execute_sql_read_only({ instance: instance, project: project, body: body, location: location }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.execute_sql_read_only instance: instance, project: project, body: body, location: location do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.execute_sql_read_only ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest.new(instance: instance, project: project, body: body, location: location) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.execute_sql_read_only({ instance: instance, project: project, body: body, location: location }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.execute_sql_read_only(::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest.new(instance: instance, project: project, body: body, location: location), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_sql_read_only_client_stub.call_count
+      end
+    end
+  end
+
   def test_execute_sql
     # Create test objects.
     client_result = ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlResponse.new
@@ -2525,6 +2694,63 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ClientTest < Min
 
         # Verify method calls
         assert_equal 5, point_in_time_restore_client_stub.call_count
+      end
+    end
+  end
+
+  def test_reconcile_networking
+    # Create test objects.
+    client_result = ::Google::Cloud::Sql::V1beta4::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    psc_dns = {}
+    location = "hello world"
+
+    reconcile_networking_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::ServiceStub.stub :transcode_reconcile_networking_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, reconcile_networking_client_stub do
+        # Create client
+        c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.reconcile_networking({ instance: instance, project: project, psc_dns: psc_dns, location: location }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.reconcile_networking instance: instance, project: project, psc_dns: psc_dns, location: location do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.reconcile_networking ::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest.new(instance: instance, project: project, psc_dns: psc_dns, location: location) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.reconcile_networking({ instance: instance, project: project, psc_dns: psc_dns, location: location }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.reconcile_networking(::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest.new(instance: instance, project: project, psc_dns: psc_dns, location: location), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, reconcile_networking_client_stub.call_count
       end
     end
   end

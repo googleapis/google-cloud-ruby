@@ -112,9 +112,44 @@ module Google
         # @!attribute [rw] agent_card
         #   @return [::Google::Cloud::Ces::V1::AgentCard]
         #     Required. The agent card of the remote agent that this tool invokes.
+        # @!attribute [rw] api_authentication
+        #   @return [::Google::Cloud::Ces::V1::ApiAuthentication]
+        #     Optional. Authentication configuration for calling the remote agent.
+        # @!attribute [rw] stateful_agent
+        #   @return [::Boolean]
+        #     Optional. When enabled, the interaction between the CXAS app and the remote
+        #     agent will share the same context. If the remote agent returns a
+        #     context_id, it will be persisted for the entirety of the session for this
+        #     remote agent tool.
+        # @!attribute [rw] input_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of input variable names of remote agent to GECX variable
+        #     names.
+        # @!attribute [rw] output_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of output variable names of remote agent to GECX variable
+        #     names.
         class RemoteAgentTool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class InputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class OutputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

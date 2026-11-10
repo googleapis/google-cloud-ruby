@@ -98,6 +98,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.list_flex_components.timeout = 60.0
+                default_config.rpcs.list_flex_components.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.list_db_servers.timeout = 60.0
                 default_config.rpcs.list_db_servers.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -203,6 +208,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.list_db_system_compute_performances.timeout = 60.0
+                default_config.rpcs.list_db_system_compute_performances.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.list_databases.timeout = 60.0
                 default_config.rpcs.list_databases.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -290,6 +300,16 @@ module Google
 
                 default_config.rpcs.get_goldengate_connection_assignment.timeout = 60.0
                 default_config.rpcs.get_goldengate_connection_assignment.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.list_database_connections.timeout = 60.0
+                default_config.rpcs.list_database_connections.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_database_connection.timeout = 60.0
+                default_config.rpcs.get_database_connection.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
@@ -727,6 +747,122 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @oracle_database_stub.call_rpc :create_cloud_exadata_infrastructure, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single Exadata Infrastructure.
+            #
+            # @overload update_cloud_exadata_infrastructure(request, options = nil)
+            #   Pass arguments to `update_cloud_exadata_infrastructure` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_cloud_exadata_infrastructure(update_mask: nil, cloud_exadata_infrastructure: nil, request_id: nil)
+            #   Pass arguments to `update_cloud_exadata_infrastructure` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     Exadata resource by the update. The fields specified in the `update_mask`
+            #     are relative to the resource, not the full request. A field will be
+            #     overwritten if it is in the mask. If the user does not provide a mask then
+            #     the service treats this as an implied field mask equivalent to all fields
+            #     that are populated (have a non-empty value). To clear or unset a field, the
+            #     field must be explicitly specified in the `update_mask`.
+            #   @param cloud_exadata_infrastructure [::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructure, ::Hash]
+            #     Required. The resource being updated. Note only `labels` can be updated.
+            #     The provided `labels` will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing `labels` and `update_mask` will not update the
+            #     labels. To clear all labels, specify `labels` in the `update_mask` and omit
+            #     or leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest.new
+            #
+            #   # Call the update_cloud_exadata_infrastructure method.
+            #   result = client.update_cloud_exadata_infrastructure request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_cloud_exadata_infrastructure request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateCloudExadataInfrastructureRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_cloud_exadata_infrastructure.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.cloud_exadata_infrastructure&.name
+                header_params["cloud_exadata_infrastructure.name"] = request.cloud_exadata_infrastructure.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_cloud_exadata_infrastructure.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_cloud_exadata_infrastructure.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_cloud_exadata_infrastructure, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -1244,6 +1380,120 @@ module Google
             end
 
             ##
+            # Updates the parameters of a single Vm Cluster.
+            #
+            # @overload update_cloud_vm_cluster(request, options = nil)
+            #   Pass arguments to `update_cloud_vm_cluster` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_cloud_vm_cluster(update_mask: nil, cloud_vm_cluster: nil, request_id: nil)
+            #   Pass arguments to `update_cloud_vm_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the VM Cluster should be
+            #     updated. A field specified in the mask is overwritten. If a mask isn't
+            #     provided, the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset
+            #     a field, the field must be explicitly specified in the `update_mask`.
+            #   @param cloud_vm_cluster [::Google::Cloud::OracleDatabase::V1::CloudVmCluster, ::Hash]
+            #     Required. The resource being updated. Note only `labels` can be updated.
+            #     The provided `labels` will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing `labels` and `update_mask` will not update the
+            #     labels. To clear all labels, specify `labels` in the `update_mask` and omit
+            #     or leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest.new
+            #
+            #   # Call the update_cloud_vm_cluster method.
+            #   result = client.update_cloud_vm_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_cloud_vm_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateCloudVmClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_cloud_vm_cluster.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.cloud_vm_cluster&.name
+                header_params["cloud_vm_cluster.name"] = request.cloud_vm_cluster.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_cloud_vm_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_cloud_vm_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_cloud_vm_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single VM Cluster.
             #
             # @overload delete_cloud_vm_cluster(request, options = nil)
@@ -1352,6 +1602,386 @@ module Google
             end
 
             ##
+            # Enables the Workload Identity Connector for a Cloud VM Cluster.
+            #
+            # @overload enable_cloud_vm_cluster_identity_connector(request, options = nil)
+            #   Pass arguments to `enable_cloud_vm_cluster_identity_connector` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload enable_cloud_vm_cluster_identity_connector(name: nil)
+            #   Pass arguments to `enable_cloud_vm_cluster_identity_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Cloud VM Cluster in the following format:
+            #     projects/\\{project}/locations/\\{location}/cloudVmClusters/\\{cloud_vm_cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest.new
+            #
+            #   # Call the enable_cloud_vm_cluster_identity_connector method.
+            #   result = client.enable_cloud_vm_cluster_identity_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def enable_cloud_vm_cluster_identity_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::EnableCloudVmClusterIdentityConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.enable_cloud_vm_cluster_identity_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.enable_cloud_vm_cluster_identity_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.enable_cloud_vm_cluster_identity_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :enable_cloud_vm_cluster_identity_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Disables the Workload Identity Connector for a Cloud VM Cluster.
+            #
+            # @overload disable_cloud_vm_cluster_identity_connector(request, options = nil)
+            #   Pass arguments to `disable_cloud_vm_cluster_identity_connector` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload disable_cloud_vm_cluster_identity_connector(name: nil)
+            #   Pass arguments to `disable_cloud_vm_cluster_identity_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Cloud VM Cluster in the following format:
+            #     projects/\\{project}/locations/\\{location}/cloudVmClusters/\\{cloud_vm_cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest.new
+            #
+            #   # Call the disable_cloud_vm_cluster_identity_connector method.
+            #   result = client.disable_cloud_vm_cluster_identity_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def disable_cloud_vm_cluster_identity_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::DisableCloudVmClusterIdentityConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.disable_cloud_vm_cluster_identity_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.disable_cloud_vm_cluster_identity_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.disable_cloud_vm_cluster_identity_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :disable_cloud_vm_cluster_identity_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Enables the Workload Identity Connector for an Exadb VM Cluster.
+            #
+            # @overload enable_exadb_vm_cluster_identity_connector(request, options = nil)
+            #   Pass arguments to `enable_exadb_vm_cluster_identity_connector` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload enable_exadb_vm_cluster_identity_connector(name: nil)
+            #   Pass arguments to `enable_exadb_vm_cluster_identity_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Exadb VM Cluster in the following format:
+            #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest.new
+            #
+            #   # Call the enable_exadb_vm_cluster_identity_connector method.
+            #   result = client.enable_exadb_vm_cluster_identity_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def enable_exadb_vm_cluster_identity_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::EnableExadbVmClusterIdentityConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.enable_exadb_vm_cluster_identity_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.enable_exadb_vm_cluster_identity_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.enable_exadb_vm_cluster_identity_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :enable_exadb_vm_cluster_identity_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Disables the Workload Identity Connector for an Exadb VM Cluster.
+            #
+            # @overload disable_exadb_vm_cluster_identity_connector(request, options = nil)
+            #   Pass arguments to `disable_exadb_vm_cluster_identity_connector` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload disable_exadb_vm_cluster_identity_connector(name: nil)
+            #   Pass arguments to `disable_exadb_vm_cluster_identity_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Exadb VM Cluster in the following format:
+            #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest.new
+            #
+            #   # Call the disable_exadb_vm_cluster_identity_connector method.
+            #   result = client.disable_exadb_vm_cluster_identity_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def disable_exadb_vm_cluster_identity_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::DisableExadbVmClusterIdentityConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.disable_exadb_vm_cluster_identity_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.disable_exadb_vm_cluster_identity_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.disable_exadb_vm_cluster_identity_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :disable_exadb_vm_cluster_identity_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the entitlements in a given project.
             #
             # @overload list_entitlements(request, options = nil)
@@ -1442,6 +2072,106 @@ module Google
 
               @oracle_database_stub.call_rpc :list_entitlements, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @oracle_database_stub, :list_entitlements, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists Flex Components in a given project and location.
+            #
+            # @overload list_flex_components(request, options = nil)
+            #   Pass arguments to `list_flex_components` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_flex_components(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_flex_components` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListFlexComponentsRequest
+            #     Format: projects/\\{project}/locations/\\{location}
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. An expression for filtering the results of the request. Only the
+            #     `shape` field is supported in the following format: `shape="{shape}"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::FlexComponent>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::FlexComponent>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest.new
+            #
+            #   # Call the list_flex_components method.
+            #   result = client.list_flex_components request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OracleDatabase::V1::FlexComponent.
+            #     p item
+            #   end
+            #
+            def list_flex_components request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ListFlexComponentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_flex_components.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_flex_components.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_flex_components.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :list_flex_components, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @oracle_database_stub, :list_flex_components, request, response, operation, options
                 yield response, operation if block_given?
                 throw :response, response
               end
@@ -2279,12 +3009,18 @@ module Google
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Field mask is used to specify the fields to be overwritten in the
-            #     Exadata resource by the update. The fields specified in the update_mask are
-            #     relative to the resource, not the full request. A field will be overwritten
-            #     if it is in the mask. If the user does not provide a mask then all fields
-            #     will be overwritten.
+            #     Exadata resource by the update. The fields specified in the `update_mask`
+            #     are relative to the resource, not the full request. A field will be
+            #     overwritten if it is in the mask. If the user does not provide a mask then
+            #     the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset
+            #     a field, the field must be explicitly specified in the `update_mask`.
             #   @param autonomous_database [::Google::Cloud::OracleDatabase::V1::AutonomousDatabase, ::Hash]
-            #     Required. The resource being updated
+            #     Required. The Autonomous Database resource being updated.
+            #     For `labels`, the provided map completely replaces existing labels; any
+            #     existing keys not included will be deleted. To clear all labels, specify
+            #     `labels` in the `update_mask` and omit or leave the `labels` field empty in
+            #     the update request.
             #   @param request_id [::String]
             #     Optional. An optional ID to identify the request. This value is used to
             #     identify duplicate requests. If you make a request with the same request ID
@@ -3942,6 +4678,122 @@ module Google
             end
 
             ##
+            # Updates the `labels` and `service_connectivity_config` of a single
+            # OdbNetwork.
+            #
+            # @overload update_odb_network(request, options = nil)
+            #   Pass arguments to `update_odb_network` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_odb_network(update_mask: nil, odb_network: nil, request_id: nil)
+            #   Pass arguments to `update_odb_network` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the OdbNetwork should be
+            #     updated. A field specified in the mask is updated. If a mask isn't
+            #     provided, the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset a
+            #     field, the field must be explicitly specified in the `update_mask`.
+            #   @param odb_network [::Google::Cloud::OracleDatabase::V1::OdbNetwork, ::Hash]
+            #     Required. The resource being updated. Note only `labels` and
+            #     `service_connectivity_config` can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest.new
+            #
+            #   # Call the update_odb_network method.
+            #   result = client.update_odb_network request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_odb_network request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateOdbNetworkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_odb_network.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.odb_network&.name
+                header_params["odb_network.name"] = request.odb_network.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_odb_network.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_odb_network.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_odb_network, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single ODB Network.
             #
             # @overload delete_odb_network(request, options = nil)
@@ -4336,6 +5188,120 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @oracle_database_stub.call_rpc :create_odb_subnet, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the `labels` of a single ODB Subnet.
+            #
+            # @overload update_odb_subnet(request, options = nil)
+            #   Pass arguments to `update_odb_subnet` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_odb_subnet(update_mask: nil, odb_subnet: nil, request_id: nil)
+            #   Pass arguments to `update_odb_subnet` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the OdbSubnet should be
+            #     updated. A field specified in the mask is updated. If a mask isn't
+            #     provided, the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset a
+            #     field, the field must be explicitly specified in the `update_mask`.
+            #   @param odb_subnet [::Google::Cloud::OracleDatabase::V1::OdbSubnet, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest.new
+            #
+            #   # Call the update_odb_subnet method.
+            #   result = client.update_odb_subnet request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_odb_subnet request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateOdbSubnetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_odb_subnet.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.odb_subnet&.name
+                header_params["odb_subnet.name"] = request.odb_subnet.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_odb_subnet.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_odb_subnet.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_odb_subnet, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -5282,9 +6248,16 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A mask specifying which fields in th VM Cluster should be
             #     updated. A field specified in the mask is overwritten. If a mask isn't
-            #     provided then all the fields in the VM Cluster are overwritten.
+            #     provided then the service treats this as an implied field mask equivalent
+            #     to all fields that are populated (have a non-empty value). To clear or
+            #     unset a field, the field must be explicitly specified in the `update_mask`.
             #   @param exadb_vm_cluster [::Google::Cloud::OracleDatabase::V1::ExadbVmCluster, ::Hash]
-            #     Required. The resource being updated.
+            #     Required. The ExadbVmCluster resource being updated.
+            #     Mutable fields that can be updated include `labels` and
+            #     `properties.node_count`. For `labels`, the provided map completely
+            #     replaces existing labels; any existing keys not included will be deleted.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
             #   @param request_id [::String]
             #     Optional. An optional ID to identify the request. This value is used to
             #     identify duplicate requests. If you make a request with the same request ID
@@ -5783,6 +6756,120 @@ module Google
             end
 
             ##
+            # Updates the `labels` of a single ExascaleDbStorageVault.
+            #
+            # @overload update_exascale_db_storage_vault(request, options = nil)
+            #   Pass arguments to `update_exascale_db_storage_vault` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_exascale_db_storage_vault(update_mask: nil, exascale_db_storage_vault: nil, request_id: nil)
+            #   Pass arguments to `update_exascale_db_storage_vault` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the ExascaleDbStorageVault
+            #     should be updated. A field specified in the mask is updated. If a mask
+            #     isn't provided, the service treats this as an implied field mask equivalent
+            #     to all fields that are populated (have a non-empty value). To clear or
+            #     unset a field, the field must be explicitly specified in the `update_mask`.
+            #   @param exascale_db_storage_vault [::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest.new
+            #
+            #   # Call the update_exascale_db_storage_vault method.
+            #   result = client.update_exascale_db_storage_vault request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_exascale_db_storage_vault request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateExascaleDbStorageVaultRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_exascale_db_storage_vault.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.exascale_db_storage_vault&.name
+                header_params["exascale_db_storage_vault.name"] = request.exascale_db_storage_vault.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_exascale_db_storage_vault.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_exascale_db_storage_vault.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_exascale_db_storage_vault, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single ExascaleDB Storage Vault.
             #
             # @overload delete_exascale_db_storage_vault(request, options = nil)
@@ -5981,6 +7068,108 @@ module Google
 
               @oracle_database_stub.call_rpc :list_db_system_initial_storage_sizes, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @oracle_database_stub, :list_db_system_initial_storage_sizes, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all the DbSystemComputePerformances for the given project and
+            # location.
+            #
+            # @overload list_db_system_compute_performances(request, options = nil)
+            #   Pass arguments to `list_db_system_compute_performances` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_db_system_compute_performances(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_db_system_compute_performances` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListDbSystemComputePerformancesRequest
+            #     Format: projects/\\{project}/locations/\\{location}
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. An expression for filtering the results of the request. Only the
+            #     `db_system_shape` field is supported in the following format:
+            #     `db_system_shape="{db_system_shape}"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbSystemComputePerformance>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbSystemComputePerformance>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest.new
+            #
+            #   # Call the list_db_system_compute_performances method.
+            #   result = client.list_db_system_compute_performances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OracleDatabase::V1::DbSystemComputePerformance.
+            #     p item
+            #   end
+            #
+            def list_db_system_compute_performances request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ListDbSystemComputePerformancesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_db_system_compute_performances.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_db_system_compute_performances.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_db_system_compute_performances.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :list_db_system_compute_performances, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @oracle_database_stub, :list_db_system_compute_performances, request, response, operation, options
                 yield response, operation if block_given?
                 throw :response, response
               end
@@ -6678,6 +7867,120 @@ module Google
             end
 
             ##
+            # Updates the `labels` of a single DbSystem.
+            #
+            # @overload update_db_system(request, options = nil)
+            #   Pass arguments to `update_db_system` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_db_system(update_mask: nil, db_system: nil, request_id: nil)
+            #   Pass arguments to `update_db_system` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the DbSystem should be updated.
+            #     A field specified in the mask is updated. If a mask isn't provided, the
+            #     service treats this as an implied field mask equivalent to all fields that
+            #     are populated (have a non-empty value).
+            #   @param db_system [::Google::Cloud::OracleDatabase::V1::DbSystem, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request. To clear or unset a
+            #     field, the field must be explicitly specified in the `update_mask`.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest.new
+            #
+            #   # Call the update_db_system method.
+            #   result = client.update_db_system request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_db_system request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateDbSystemRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_db_system.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.db_system&.name
+                header_params["db_system.name"] = request.db_system.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_db_system.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_db_system.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_db_system, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single DbSystem.
             #
             # @overload delete_db_system(request, options = nil)
@@ -7078,6 +8381,120 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @oracle_database_stub.call_rpc :create_goldengate_deployment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the `labels` of a single GoldengateDeployment.
+            #
+            # @overload update_goldengate_deployment(request, options = nil)
+            #   Pass arguments to `update_goldengate_deployment` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_goldengate_deployment(update_mask: nil, goldengate_deployment: nil, request_id: nil)
+            #   Pass arguments to `update_goldengate_deployment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the GoldengateDeployment should
+            #     be updated. A field specified in the mask is updated. If a mask isn't
+            #     provided, the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset
+            #     a field, the field must be explicitly specified in the `update_mask`.
+            #   @param goldengate_deployment [::Google::Cloud::OracleDatabase::V1::GoldengateDeployment, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest.new
+            #
+            #   # Call the update_goldengate_deployment method.
+            #   result = client.update_goldengate_deployment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_goldengate_deployment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateDeploymentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_goldengate_deployment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.goldengate_deployment&.name
+                header_params["goldengate_deployment.name"] = request.goldengate_deployment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_goldengate_deployment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_goldengate_deployment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_goldengate_deployment, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -7677,6 +9094,120 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @oracle_database_stub.call_rpc :create_goldengate_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the `labels` of a single GoldengateConnection.
+            #
+            # @overload update_goldengate_connection(request, options = nil)
+            #   Pass arguments to `update_goldengate_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_goldengate_connection(update_mask: nil, goldengate_connection: nil, request_id: nil)
+            #   Pass arguments to `update_goldengate_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the GoldengateConnection should
+            #     be updated. A field specified in the mask is updated. If a mask isn't
+            #     provided, the service treats this as an implied field mask equivalent to
+            #     all fields that are populated (have a non-empty value). To clear or unset a
+            #     field, the field must be explicitly specified in the `update_mask`.
+            #   @param goldengate_connection [::Google::Cloud::OracleDatabase::V1::GoldengateConnection, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest.new
+            #
+            #   # Call the update_goldengate_connection method.
+            #   result = client.update_goldengate_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_goldengate_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_goldengate_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.goldengate_connection&.name
+                header_params["goldengate_connection.name"] = request.goldengate_connection.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_goldengate_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_goldengate_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_goldengate_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -8725,6 +10256,121 @@ module Google
             end
 
             ##
+            # Updates the `labels` of a single GoldengateConnectionAssignment.
+            #
+            # @overload update_goldengate_connection_assignment(request, options = nil)
+            #   Pass arguments to `update_goldengate_connection_assignment` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_goldengate_connection_assignment(update_mask: nil, goldengate_connection_assignment: nil, request_id: nil)
+            #   Pass arguments to `update_goldengate_connection_assignment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the
+            #     GoldengateConnectionAssignment should be updated. A field specified in the
+            #     mask is updated. If a mask isn't provided, the service treats this as an
+            #     implied field mask equivalent to all fields that are populated (have a
+            #     non-empty value). To clear or unset a field, the field must be explicitly
+            #     specified in the `update_mask`.
+            #   @param goldengate_connection_assignment [::Google::Cloud::OracleDatabase::V1::GoldengateConnectionAssignment, ::Hash]
+            #     Required. The resource being updated. Note only labels can be updated.
+            #     The provided labels will completely replace the existing labels.
+            #     Any existing label keys that are not included in the update request will be
+            #     deleted. Not providing labels and update_mask will not update the labels.
+            #     To clear all labels, specify `labels` in the `update_mask` and omit or
+            #     leave the `labels` field empty in the update request.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest.new
+            #
+            #   # Call the update_goldengate_connection_assignment method.
+            #   result = client.update_goldengate_connection_assignment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_goldengate_connection_assignment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateGoldengateConnectionAssignmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_goldengate_connection_assignment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.goldengate_connection_assignment&.name
+                header_params["goldengate_connection_assignment.name"] = request.goldengate_connection_assignment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_goldengate_connection_assignment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_goldengate_connection_assignment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_goldengate_connection_assignment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single GoldengateConnectionAssignment.
             #
             # @overload delete_goldengate_connection_assignment(request, options = nil)
@@ -8917,6 +10563,695 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @oracle_database_stub.call_rpc :test_goldengate_connection_assignment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists DatabaseConnections in a given project and location.
+            #
+            # @overload list_database_connections(request, options = nil)
+            #   Pass arguments to `list_database_connections` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_database_connections(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_database_connections` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent value for the DatabaseConnection in the following
+            #     format: projects/\\{project}/locations/\\{location}.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of items to return.
+            #     If unspecified, at most 50 DatabaseConnections will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. An expression for filtering the results of the request.
+            #   @param order_by [::String]
+            #     Optional. An expression for ordering the results of the request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DatabaseConnection>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DatabaseConnection>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest.new
+            #
+            #   # Call the list_database_connections method.
+            #   result = client.list_database_connections request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OracleDatabase::V1::DatabaseConnection.
+            #     p item
+            #   end
+            #
+            def list_database_connections request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ListDatabaseConnectionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_database_connections.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_database_connections.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_database_connections.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :list_database_connections, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @oracle_database_stub, :list_database_connections, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single DatabaseConnection.
+            #
+            # @overload get_database_connection(request, options = nil)
+            #   Pass arguments to `get_database_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_database_connection(name: nil)
+            #   Pass arguments to `get_database_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DatabaseConnection in the following format:
+            #     projects/\\{project}/locations/\\{location}/databaseConnections/\\{database_connection}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OracleDatabase::V1::DatabaseConnection]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OracleDatabase::V1::DatabaseConnection]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest.new
+            #
+            #   # Call the get_database_connection method.
+            #   result = client.get_database_connection request
+            #
+            #   # The returned object is of type Google::Cloud::OracleDatabase::V1::DatabaseConnection.
+            #   p result
+            #
+            def get_database_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetDatabaseConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_database_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_database_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_database_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :get_database_connection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new DatabaseConnection in a given project and location.
+            #
+            # @overload create_database_connection(request, options = nil)
+            #   Pass arguments to `create_database_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_database_connection(parent: nil, database_connection_id: nil, database_connection: nil, request_id: nil)
+            #   Pass arguments to `create_database_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent value for the DatabaseConnection in the following
+            #     format: projects/\\{project}/locations/\\{location}.
+            #   @param database_connection_id [::String]
+            #     Required. The ID of the DatabaseConnection to create. This value is
+            #     restricted to (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$) and must be a maximum of
+            #     63 characters in length. The value must start with a letter and end with a
+            #     letter or a number.
+            #   @param database_connection [::Google::Cloud::OracleDatabase::V1::DatabaseConnection, ::Hash]
+            #     Required. Details of the DatabaseConnection instance to create.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest.new
+            #
+            #   # Call the create_database_connection method.
+            #   result = client.create_database_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_database_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::CreateDatabaseConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_database_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_database_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_database_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :create_database_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single DatabaseConnection.
+            #
+            # @overload update_database_connection(request, options = nil)
+            #   Pass arguments to `update_database_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_database_connection(update_mask: nil, database_connection: nil, request_id: nil)
+            #   Pass arguments to `update_database_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A mask specifying which fields in the DatabaseConnection should
+            #     be updated. A field specified in the mask is overwritten. If a mask isn't
+            #     provided then all the fields in the DatabaseConnection are overwritten.
+            #   @param database_connection [::Google::Cloud::OracleDatabase::V1::DatabaseConnection, ::Hash]
+            #     Required. The resource being updated.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest.new
+            #
+            #   # Call the update_database_connection method.
+            #   result = client.update_database_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_database_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::UpdateDatabaseConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_database_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.database_connection&.name
+                header_params["database_connection.name"] = request.database_connection.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_database_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_database_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :update_database_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single DatabaseConnection.
+            #
+            # @overload delete_database_connection(request, options = nil)
+            #   Pass arguments to `delete_database_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_database_connection(name: nil, request_id: nil)
+            #   Pass arguments to `delete_database_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource in the following format:
+            #     projects/\\{project}/locations/\\{location}/databaseConnections/\\{database_connection}.
+            #   @param request_id [::String]
+            #     Optional. An optional ID to identify the request. This value is used to
+            #     identify duplicate requests. If you make a request with the same request ID
+            #     and the original request is still in progress or completed, the server
+            #     ignores the second request. This prevents clients from
+            #     accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest.new
+            #
+            #   # Call the delete_database_connection method.
+            #   result = client.delete_database_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_database_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::DeleteDatabaseConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_database_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_database_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_database_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :delete_database_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Tests connectivity of a DatabaseConnection.
+            #
+            # @overload test_database_connection(request, options = nil)
+            #   Pass arguments to `test_database_connection` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload test_database_connection(name: nil)
+            #   Pass arguments to `test_database_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DatabaseConnection to test.
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}/databaseConnections/\\{database_connection}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest.new
+            #
+            #   # Call the test_database_connection method.
+            #   result = client.test_database_connection request
+            #
+            #   # The returned object is of type Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionResponse.
+            #   p result
+            #
+            def test_database_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::TestDatabaseConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.test_database_connection.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.test_database_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.test_database_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :test_database_connection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Executes a SQL statement on a DatabaseConnection.
+            #
+            # @overload execute_sql(request, options = nil)
+            #   Pass arguments to `execute_sql` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload execute_sql(name: nil, sql_statement: nil, params: nil)
+            #   Pass arguments to `execute_sql` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DatabaseConnection in the following format:
+            #     projects/\\{project}/locations/\\{location}/databaseConnections/\\{database_connection}.
+            #   @param sql_statement [::String]
+            #     Required. The SQL statement to execute.
+            #   @param params [::Array<::Google::Cloud::OracleDatabase::V1::SqlParameter, ::Hash>]
+            #     Optional. Optional: Bind variables (parameters) to be used with the SQL
+            #     statement. Supports named bind variables (e.g., :dept_id, :status in Oracle
+            #     SQL) or positional parameters (:1, :2).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OracleDatabase::V1::ExecuteSqlResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OracleDatabase::V1::ExecuteSqlResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest.new
+            #
+            #   # Call the execute_sql method.
+            #   result = client.execute_sql request
+            #
+            #   # The returned object is of type Google::Cloud::OracleDatabase::V1::ExecuteSqlResponse.
+            #   p result
+            #
+            def execute_sql request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ExecuteSqlRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.execute_sql.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.execute_sql.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.execute_sql.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :execute_sql, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -9124,6 +11459,11 @@ module Google
                 #
                 attr_reader :create_cloud_exadata_infrastructure
                 ##
+                # RPC-specific configuration for `update_cloud_exadata_infrastructure`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_cloud_exadata_infrastructure
+                ##
                 # RPC-specific configuration for `delete_cloud_exadata_infrastructure`
                 # @return [::Gapic::Config::Method]
                 #
@@ -9149,15 +11489,45 @@ module Google
                 #
                 attr_reader :create_cloud_vm_cluster
                 ##
+                # RPC-specific configuration for `update_cloud_vm_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_cloud_vm_cluster
+                ##
                 # RPC-specific configuration for `delete_cloud_vm_cluster`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_cloud_vm_cluster
                 ##
+                # RPC-specific configuration for `enable_cloud_vm_cluster_identity_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :enable_cloud_vm_cluster_identity_connector
+                ##
+                # RPC-specific configuration for `disable_cloud_vm_cluster_identity_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :disable_cloud_vm_cluster_identity_connector
+                ##
+                # RPC-specific configuration for `enable_exadb_vm_cluster_identity_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :enable_exadb_vm_cluster_identity_connector
+                ##
+                # RPC-specific configuration for `disable_exadb_vm_cluster_identity_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :disable_exadb_vm_cluster_identity_connector
+                ##
                 # RPC-specific configuration for `list_entitlements`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_entitlements
+                ##
+                # RPC-specific configuration for `list_flex_components`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_flex_components
                 ##
                 # RPC-specific configuration for `list_db_servers`
                 # @return [::Gapic::Config::Method]
@@ -9284,6 +11654,11 @@ module Google
                 #
                 attr_reader :create_odb_network
                 ##
+                # RPC-specific configuration for `update_odb_network`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_odb_network
+                ##
                 # RPC-specific configuration for `delete_odb_network`
                 # @return [::Gapic::Config::Method]
                 #
@@ -9303,6 +11678,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_odb_subnet
+                ##
+                # RPC-specific configuration for `update_odb_subnet`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_odb_subnet
                 ##
                 # RPC-specific configuration for `delete_odb_subnet`
                 # @return [::Gapic::Config::Method]
@@ -9374,6 +11754,11 @@ module Google
                 #
                 attr_reader :create_exascale_db_storage_vault
                 ##
+                # RPC-specific configuration for `update_exascale_db_storage_vault`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_exascale_db_storage_vault
+                ##
                 # RPC-specific configuration for `delete_exascale_db_storage_vault`
                 # @return [::Gapic::Config::Method]
                 #
@@ -9383,6 +11768,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_db_system_initial_storage_sizes
+                ##
+                # RPC-specific configuration for `list_db_system_compute_performances`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_db_system_compute_performances
                 ##
                 # RPC-specific configuration for `list_databases`
                 # @return [::Gapic::Config::Method]
@@ -9419,6 +11809,11 @@ module Google
                 #
                 attr_reader :create_db_system
                 ##
+                # RPC-specific configuration for `update_db_system`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_db_system
+                ##
                 # RPC-specific configuration for `delete_db_system`
                 # @return [::Gapic::Config::Method]
                 #
@@ -9438,6 +11833,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_goldengate_deployment
+                ##
+                # RPC-specific configuration for `update_goldengate_deployment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_goldengate_deployment
                 ##
                 # RPC-specific configuration for `delete_goldengate_deployment`
                 # @return [::Gapic::Config::Method]
@@ -9468,6 +11868,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_goldengate_connection
+                ##
+                # RPC-specific configuration for `update_goldengate_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_goldengate_connection
                 ##
                 # RPC-specific configuration for `delete_goldengate_connection`
                 # @return [::Gapic::Config::Method]
@@ -9519,6 +11924,11 @@ module Google
                 #
                 attr_reader :create_goldengate_connection_assignment
                 ##
+                # RPC-specific configuration for `update_goldengate_connection_assignment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_goldengate_connection_assignment
+                ##
                 # RPC-specific configuration for `delete_goldengate_connection_assignment`
                 # @return [::Gapic::Config::Method]
                 #
@@ -9528,6 +11938,41 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_goldengate_connection_assignment
+                ##
+                # RPC-specific configuration for `list_database_connections`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_database_connections
+                ##
+                # RPC-specific configuration for `get_database_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_database_connection
+                ##
+                # RPC-specific configuration for `create_database_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_database_connection
+                ##
+                # RPC-specific configuration for `update_database_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_database_connection
+                ##
+                # RPC-specific configuration for `delete_database_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_database_connection
+                ##
+                # RPC-specific configuration for `test_database_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :test_database_connection
+                ##
+                # RPC-specific configuration for `execute_sql`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :execute_sql
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -9537,6 +11982,8 @@ module Google
                   @get_cloud_exadata_infrastructure = ::Gapic::Config::Method.new get_cloud_exadata_infrastructure_config
                   create_cloud_exadata_infrastructure_config = parent_rpcs.create_cloud_exadata_infrastructure if parent_rpcs.respond_to? :create_cloud_exadata_infrastructure
                   @create_cloud_exadata_infrastructure = ::Gapic::Config::Method.new create_cloud_exadata_infrastructure_config
+                  update_cloud_exadata_infrastructure_config = parent_rpcs.update_cloud_exadata_infrastructure if parent_rpcs.respond_to? :update_cloud_exadata_infrastructure
+                  @update_cloud_exadata_infrastructure = ::Gapic::Config::Method.new update_cloud_exadata_infrastructure_config
                   delete_cloud_exadata_infrastructure_config = parent_rpcs.delete_cloud_exadata_infrastructure if parent_rpcs.respond_to? :delete_cloud_exadata_infrastructure
                   @delete_cloud_exadata_infrastructure = ::Gapic::Config::Method.new delete_cloud_exadata_infrastructure_config
                   configure_exascale_cloud_exadata_infrastructure_config = parent_rpcs.configure_exascale_cloud_exadata_infrastructure if parent_rpcs.respond_to? :configure_exascale_cloud_exadata_infrastructure
@@ -9547,10 +11994,22 @@ module Google
                   @get_cloud_vm_cluster = ::Gapic::Config::Method.new get_cloud_vm_cluster_config
                   create_cloud_vm_cluster_config = parent_rpcs.create_cloud_vm_cluster if parent_rpcs.respond_to? :create_cloud_vm_cluster
                   @create_cloud_vm_cluster = ::Gapic::Config::Method.new create_cloud_vm_cluster_config
+                  update_cloud_vm_cluster_config = parent_rpcs.update_cloud_vm_cluster if parent_rpcs.respond_to? :update_cloud_vm_cluster
+                  @update_cloud_vm_cluster = ::Gapic::Config::Method.new update_cloud_vm_cluster_config
                   delete_cloud_vm_cluster_config = parent_rpcs.delete_cloud_vm_cluster if parent_rpcs.respond_to? :delete_cloud_vm_cluster
                   @delete_cloud_vm_cluster = ::Gapic::Config::Method.new delete_cloud_vm_cluster_config
+                  enable_cloud_vm_cluster_identity_connector_config = parent_rpcs.enable_cloud_vm_cluster_identity_connector if parent_rpcs.respond_to? :enable_cloud_vm_cluster_identity_connector
+                  @enable_cloud_vm_cluster_identity_connector = ::Gapic::Config::Method.new enable_cloud_vm_cluster_identity_connector_config
+                  disable_cloud_vm_cluster_identity_connector_config = parent_rpcs.disable_cloud_vm_cluster_identity_connector if parent_rpcs.respond_to? :disable_cloud_vm_cluster_identity_connector
+                  @disable_cloud_vm_cluster_identity_connector = ::Gapic::Config::Method.new disable_cloud_vm_cluster_identity_connector_config
+                  enable_exadb_vm_cluster_identity_connector_config = parent_rpcs.enable_exadb_vm_cluster_identity_connector if parent_rpcs.respond_to? :enable_exadb_vm_cluster_identity_connector
+                  @enable_exadb_vm_cluster_identity_connector = ::Gapic::Config::Method.new enable_exadb_vm_cluster_identity_connector_config
+                  disable_exadb_vm_cluster_identity_connector_config = parent_rpcs.disable_exadb_vm_cluster_identity_connector if parent_rpcs.respond_to? :disable_exadb_vm_cluster_identity_connector
+                  @disable_exadb_vm_cluster_identity_connector = ::Gapic::Config::Method.new disable_exadb_vm_cluster_identity_connector_config
                   list_entitlements_config = parent_rpcs.list_entitlements if parent_rpcs.respond_to? :list_entitlements
                   @list_entitlements = ::Gapic::Config::Method.new list_entitlements_config
+                  list_flex_components_config = parent_rpcs.list_flex_components if parent_rpcs.respond_to? :list_flex_components
+                  @list_flex_components = ::Gapic::Config::Method.new list_flex_components_config
                   list_db_servers_config = parent_rpcs.list_db_servers if parent_rpcs.respond_to? :list_db_servers
                   @list_db_servers = ::Gapic::Config::Method.new list_db_servers_config
                   list_db_nodes_config = parent_rpcs.list_db_nodes if parent_rpcs.respond_to? :list_db_nodes
@@ -9601,6 +12060,8 @@ module Google
                   @get_odb_network = ::Gapic::Config::Method.new get_odb_network_config
                   create_odb_network_config = parent_rpcs.create_odb_network if parent_rpcs.respond_to? :create_odb_network
                   @create_odb_network = ::Gapic::Config::Method.new create_odb_network_config
+                  update_odb_network_config = parent_rpcs.update_odb_network if parent_rpcs.respond_to? :update_odb_network
+                  @update_odb_network = ::Gapic::Config::Method.new update_odb_network_config
                   delete_odb_network_config = parent_rpcs.delete_odb_network if parent_rpcs.respond_to? :delete_odb_network
                   @delete_odb_network = ::Gapic::Config::Method.new delete_odb_network_config
                   list_odb_subnets_config = parent_rpcs.list_odb_subnets if parent_rpcs.respond_to? :list_odb_subnets
@@ -9609,6 +12070,8 @@ module Google
                   @get_odb_subnet = ::Gapic::Config::Method.new get_odb_subnet_config
                   create_odb_subnet_config = parent_rpcs.create_odb_subnet if parent_rpcs.respond_to? :create_odb_subnet
                   @create_odb_subnet = ::Gapic::Config::Method.new create_odb_subnet_config
+                  update_odb_subnet_config = parent_rpcs.update_odb_subnet if parent_rpcs.respond_to? :update_odb_subnet
+                  @update_odb_subnet = ::Gapic::Config::Method.new update_odb_subnet_config
                   delete_odb_subnet_config = parent_rpcs.delete_odb_subnet if parent_rpcs.respond_to? :delete_odb_subnet
                   @delete_odb_subnet = ::Gapic::Config::Method.new delete_odb_subnet_config
                   list_odb_dns_zones_config = parent_rpcs.list_odb_dns_zones if parent_rpcs.respond_to? :list_odb_dns_zones
@@ -9637,10 +12100,14 @@ module Google
                   @get_exascale_db_storage_vault = ::Gapic::Config::Method.new get_exascale_db_storage_vault_config
                   create_exascale_db_storage_vault_config = parent_rpcs.create_exascale_db_storage_vault if parent_rpcs.respond_to? :create_exascale_db_storage_vault
                   @create_exascale_db_storage_vault = ::Gapic::Config::Method.new create_exascale_db_storage_vault_config
+                  update_exascale_db_storage_vault_config = parent_rpcs.update_exascale_db_storage_vault if parent_rpcs.respond_to? :update_exascale_db_storage_vault
+                  @update_exascale_db_storage_vault = ::Gapic::Config::Method.new update_exascale_db_storage_vault_config
                   delete_exascale_db_storage_vault_config = parent_rpcs.delete_exascale_db_storage_vault if parent_rpcs.respond_to? :delete_exascale_db_storage_vault
                   @delete_exascale_db_storage_vault = ::Gapic::Config::Method.new delete_exascale_db_storage_vault_config
                   list_db_system_initial_storage_sizes_config = parent_rpcs.list_db_system_initial_storage_sizes if parent_rpcs.respond_to? :list_db_system_initial_storage_sizes
                   @list_db_system_initial_storage_sizes = ::Gapic::Config::Method.new list_db_system_initial_storage_sizes_config
+                  list_db_system_compute_performances_config = parent_rpcs.list_db_system_compute_performances if parent_rpcs.respond_to? :list_db_system_compute_performances
+                  @list_db_system_compute_performances = ::Gapic::Config::Method.new list_db_system_compute_performances_config
                   list_databases_config = parent_rpcs.list_databases if parent_rpcs.respond_to? :list_databases
                   @list_databases = ::Gapic::Config::Method.new list_databases_config
                   get_database_config = parent_rpcs.get_database if parent_rpcs.respond_to? :get_database
@@ -9655,6 +12122,8 @@ module Google
                   @get_db_system = ::Gapic::Config::Method.new get_db_system_config
                   create_db_system_config = parent_rpcs.create_db_system if parent_rpcs.respond_to? :create_db_system
                   @create_db_system = ::Gapic::Config::Method.new create_db_system_config
+                  update_db_system_config = parent_rpcs.update_db_system if parent_rpcs.respond_to? :update_db_system
+                  @update_db_system = ::Gapic::Config::Method.new update_db_system_config
                   delete_db_system_config = parent_rpcs.delete_db_system if parent_rpcs.respond_to? :delete_db_system
                   @delete_db_system = ::Gapic::Config::Method.new delete_db_system_config
                   list_goldengate_deployments_config = parent_rpcs.list_goldengate_deployments if parent_rpcs.respond_to? :list_goldengate_deployments
@@ -9663,6 +12132,8 @@ module Google
                   @get_goldengate_deployment = ::Gapic::Config::Method.new get_goldengate_deployment_config
                   create_goldengate_deployment_config = parent_rpcs.create_goldengate_deployment if parent_rpcs.respond_to? :create_goldengate_deployment
                   @create_goldengate_deployment = ::Gapic::Config::Method.new create_goldengate_deployment_config
+                  update_goldengate_deployment_config = parent_rpcs.update_goldengate_deployment if parent_rpcs.respond_to? :update_goldengate_deployment
+                  @update_goldengate_deployment = ::Gapic::Config::Method.new update_goldengate_deployment_config
                   delete_goldengate_deployment_config = parent_rpcs.delete_goldengate_deployment if parent_rpcs.respond_to? :delete_goldengate_deployment
                   @delete_goldengate_deployment = ::Gapic::Config::Method.new delete_goldengate_deployment_config
                   stop_goldengate_deployment_config = parent_rpcs.stop_goldengate_deployment if parent_rpcs.respond_to? :stop_goldengate_deployment
@@ -9675,6 +12146,8 @@ module Google
                   @get_goldengate_connection = ::Gapic::Config::Method.new get_goldengate_connection_config
                   create_goldengate_connection_config = parent_rpcs.create_goldengate_connection if parent_rpcs.respond_to? :create_goldengate_connection
                   @create_goldengate_connection = ::Gapic::Config::Method.new create_goldengate_connection_config
+                  update_goldengate_connection_config = parent_rpcs.update_goldengate_connection if parent_rpcs.respond_to? :update_goldengate_connection
+                  @update_goldengate_connection = ::Gapic::Config::Method.new update_goldengate_connection_config
                   delete_goldengate_connection_config = parent_rpcs.delete_goldengate_connection if parent_rpcs.respond_to? :delete_goldengate_connection
                   @delete_goldengate_connection = ::Gapic::Config::Method.new delete_goldengate_connection_config
                   list_goldengate_deployment_versions_config = parent_rpcs.list_goldengate_deployment_versions if parent_rpcs.respond_to? :list_goldengate_deployment_versions
@@ -9695,10 +12168,26 @@ module Google
                   @get_goldengate_connection_assignment = ::Gapic::Config::Method.new get_goldengate_connection_assignment_config
                   create_goldengate_connection_assignment_config = parent_rpcs.create_goldengate_connection_assignment if parent_rpcs.respond_to? :create_goldengate_connection_assignment
                   @create_goldengate_connection_assignment = ::Gapic::Config::Method.new create_goldengate_connection_assignment_config
+                  update_goldengate_connection_assignment_config = parent_rpcs.update_goldengate_connection_assignment if parent_rpcs.respond_to? :update_goldengate_connection_assignment
+                  @update_goldengate_connection_assignment = ::Gapic::Config::Method.new update_goldengate_connection_assignment_config
                   delete_goldengate_connection_assignment_config = parent_rpcs.delete_goldengate_connection_assignment if parent_rpcs.respond_to? :delete_goldengate_connection_assignment
                   @delete_goldengate_connection_assignment = ::Gapic::Config::Method.new delete_goldengate_connection_assignment_config
                   test_goldengate_connection_assignment_config = parent_rpcs.test_goldengate_connection_assignment if parent_rpcs.respond_to? :test_goldengate_connection_assignment
                   @test_goldengate_connection_assignment = ::Gapic::Config::Method.new test_goldengate_connection_assignment_config
+                  list_database_connections_config = parent_rpcs.list_database_connections if parent_rpcs.respond_to? :list_database_connections
+                  @list_database_connections = ::Gapic::Config::Method.new list_database_connections_config
+                  get_database_connection_config = parent_rpcs.get_database_connection if parent_rpcs.respond_to? :get_database_connection
+                  @get_database_connection = ::Gapic::Config::Method.new get_database_connection_config
+                  create_database_connection_config = parent_rpcs.create_database_connection if parent_rpcs.respond_to? :create_database_connection
+                  @create_database_connection = ::Gapic::Config::Method.new create_database_connection_config
+                  update_database_connection_config = parent_rpcs.update_database_connection if parent_rpcs.respond_to? :update_database_connection
+                  @update_database_connection = ::Gapic::Config::Method.new update_database_connection_config
+                  delete_database_connection_config = parent_rpcs.delete_database_connection if parent_rpcs.respond_to? :delete_database_connection
+                  @delete_database_connection = ::Gapic::Config::Method.new delete_database_connection_config
+                  test_database_connection_config = parent_rpcs.test_database_connection if parent_rpcs.respond_to? :test_database_connection
+                  @test_database_connection = ::Gapic::Config::Method.new test_database_connection_config
+                  execute_sql_config = parent_rpcs.execute_sql if parent_rpcs.respond_to? :execute_sql
+                  @execute_sql = ::Gapic::Config::Method.new execute_sql_config
 
                   yield self if block_given?
                 end

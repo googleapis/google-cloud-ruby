@@ -191,6 +191,446 @@ class ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Cl
     end
   end
 
+  def test_create_line_item_creative_association
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::LineItemCreativeAssociation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    line_item_creative_association = {}
+
+    create_line_item_creative_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_create_line_item_creative_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_line_item_creative_association_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_line_item_creative_association({ parent: parent, line_item_creative_association: line_item_creative_association }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_line_item_creative_association parent: parent, line_item_creative_association: line_item_creative_association do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_line_item_creative_association ::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest.new(parent: parent, line_item_creative_association: line_item_creative_association) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_line_item_creative_association({ parent: parent, line_item_creative_association: line_item_creative_association }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_line_item_creative_association(::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest.new(parent: parent, line_item_creative_association: line_item_creative_association), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_line_item_creative_association_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_line_item_creative_associations
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_line_item_creative_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_batch_create_line_item_creative_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_line_item_creative_associations_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_line_item_creative_associations({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_line_item_creative_associations parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_line_item_creative_associations ::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_line_item_creative_associations({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_line_item_creative_associations(::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_line_item_creative_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_line_item_creative_association
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::LineItemCreativeAssociation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    line_item_creative_association = {}
+    update_mask = {}
+
+    update_line_item_creative_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_update_line_item_creative_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_line_item_creative_association_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_line_item_creative_association({ line_item_creative_association: line_item_creative_association, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_line_item_creative_association line_item_creative_association: line_item_creative_association, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_line_item_creative_association ::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest.new(line_item_creative_association: line_item_creative_association, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_line_item_creative_association({ line_item_creative_association: line_item_creative_association, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_line_item_creative_association(::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest.new(line_item_creative_association: line_item_creative_association, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_line_item_creative_association_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_line_item_creative_associations
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_line_item_creative_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_batch_update_line_item_creative_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_line_item_creative_associations_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_line_item_creative_associations({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_line_item_creative_associations parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_line_item_creative_associations ::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_line_item_creative_associations({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_line_item_creative_associations(::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_line_item_creative_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_line_item_creative_associations
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_line_item_creative_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_batch_activate_line_item_creative_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_line_item_creative_associations_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_line_item_creative_associations({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_line_item_creative_associations parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_line_item_creative_associations ::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_line_item_creative_associations({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_line_item_creative_associations(::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_line_item_creative_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_line_item_creative_associations
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_line_item_creative_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_batch_deactivate_line_item_creative_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_line_item_creative_associations_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_deactivate_line_item_creative_associations({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_deactivate_line_item_creative_associations parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_deactivate_line_item_creative_associations ::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_deactivate_line_item_creative_associations({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_deactivate_line_item_creative_associations(::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_line_item_creative_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_delete_line_item_creative_associations
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_delete_line_item_creative_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_batch_delete_line_item_creative_associations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_line_item_creative_associations_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_delete_line_item_creative_associations({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_delete_line_item_creative_associations parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_delete_line_item_creative_associations ::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_delete_line_item_creative_associations({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_delete_line_item_creative_associations(::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_line_item_creative_associations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_preview_line_item_creative_association
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    site_url = "hello world"
+
+    preview_line_item_creative_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::ServiceStub.stub :transcode_preview_line_item_creative_association_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, preview_line_item_creative_association_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.preview_line_item_creative_association({ name: name, site_url: site_url }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.preview_line_item_creative_association name: name, site_url: site_url do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.preview_line_item_creative_association ::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest.new(name: name, site_url: site_url) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.preview_line_item_creative_association({ name: name, site_url: site_url }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.preview_line_item_creative_association(::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest.new(name: name, site_url: site_url), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, preview_line_item_creative_association_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

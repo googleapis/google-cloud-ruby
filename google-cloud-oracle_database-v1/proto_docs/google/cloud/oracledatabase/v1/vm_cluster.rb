@@ -29,15 +29,15 @@ module Google
         #     projects/\\{project}/locations/\\{region}/cloudVmClusters/\\{cloud_vm_cluster}
         # @!attribute [rw] exadata_infrastructure
         #   @return [::String]
-        #     Required. The name of the Exadata Infrastructure resource on which VM
-        #     cluster resource is created, in the following format:
+        #     Required. Immutable. The name of the Exadata Infrastructure resource on
+        #     which VM cluster resource is created, in the following format:
         #     projects/\\{project}/locations/\\{region}/cloudExadataInfrastuctures/\\{cloud_extradata_infrastructure}
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. User friendly name for this resource.
+        #     Optional. Immutable. User friendly name for this resource.
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties]
-        #     Optional. Various properties of the VM Cluster.
+        #     Optional. Immutable. Various properties of the VM Cluster.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels or tags associated with the VM Cluster.
@@ -46,13 +46,14 @@ module Google
         #     Output only. The date and time that the VM cluster was created.
         # @!attribute [rw] cidr
         #   @return [::String]
-        #     Optional. Network settings. CIDR to use for cluster IP allocation.
+        #     Optional. Immutable. Network settings. CIDR to use for cluster IP
+        #     allocation.
         # @!attribute [rw] backup_subnet_cidr
         #   @return [::String]
-        #     Optional. CIDR range of the backup subnet.
+        #     Optional. Immutable. CIDR range of the backup subnet.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Optional. The name of the VPC network.
+        #     Optional. Immutable. The name of the VPC network.
         #     Format: projects/\\{project}/global/networks/\\{network}
         # @!attribute [r] gcp_oracle_zone
         #   @return [::String]
@@ -61,20 +62,20 @@ module Google
         #     CloudExadataInfrastructure. Example: us-east4-b-r2.
         # @!attribute [rw] odb_network
         #   @return [::String]
-        #     Optional. The name of the OdbNetwork associated with the VM Cluster.
-        #     Format:
+        #     Optional. Immutable. The name of the OdbNetwork associated with the VM
+        #     Cluster. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}
         #     It is optional but if specified, this should match the parent ODBNetwork of
         #     the odb_subnet and backup_odb_subnet.
         # @!attribute [rw] odb_subnet
         #   @return [::String]
-        #     Optional. The name of the OdbSubnet associated with the VM Cluster for
-        #     IP allocation. Format:
+        #     Optional. Immutable. The name of the OdbSubnet associated with the VM
+        #     Cluster for IP allocation. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
         # @!attribute [rw] backup_odb_subnet
         #   @return [::String]
-        #     Optional. The name of the backup OdbSubnet associated with the VM Cluster.
-        #     Format:
+        #     Optional. Immutable. The name of the backup OdbSubnet associated with the
+        #     VM Cluster. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
         # @!attribute [rw] odb_dns_zone
         #   @return [::String]
@@ -87,9 +88,16 @@ module Google
         #     securely access the resources in the customer project.
         # @!attribute [rw] exascale_db_storage_vault
         #   @return [::String]
-        #     Optional. The name of ExascaleDbStorageVault associated with the VM
-        #     Cluster. Format:
+        #     Optional. Immutable. The name of ExascaleDbStorageVault associated with the
+        #     VM Cluster. Format:
         #     projects/\\{project}/locations/\\{location}/exascaleDbStorageVaults/\\{exascale_db_storage_vault}
+        # @!attribute [rw] identity_connector_disabled
+        #   @return [::Boolean]
+        #     Optional. Input only. Immutable. If set to true, disables the automatic
+        #     provisioning of the Workload Identity Connector during creation. If set to
+        #     false or omitted, the Workload Identity Connector will be automatically
+        #     provisioned by default. Note: Provisioning the Workload Identity Connector
+        #     is a prerequisite for enabling Google Cloud CMEK.
         class CloudVmCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

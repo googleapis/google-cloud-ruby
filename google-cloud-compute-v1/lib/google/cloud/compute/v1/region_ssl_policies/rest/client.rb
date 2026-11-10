@@ -32,11 +32,11 @@ module Google
             #
             # The RegionSslPolicies API.
             #
-            # This client uses RegionSslPolicies version 2026-09-01.
+            # This client uses RegionSslPolicies version 2026-11-01.
             #
             class Client
               # @private
-              API_VERSION = "2026-09-01"
+              API_VERSION = "2026-11-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
@@ -80,6 +80,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.insert.timeout = 600.0
 
                   default_config.rpcs.list.timeout = 600.0
@@ -93,6 +98,10 @@ module Google
                   }
 
                   default_config.rpcs.patch.timeout = 600.0
+
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -398,6 +407,91 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @region_ssl_policies_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the access control policy for a resource. May be empty if no such
+              # policy or resource exists.
+              #
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyRegionSslPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyRegionSslPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, region: nil, resource: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param options_requested_policy_version [::Integer]
+              #     Requested IAM Policy version.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyRegionSslPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
+              def get_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyRegionSslPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_ssl_policies_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -947,6 +1041,175 @@ module Google
               end
 
               ##
+              # Sets the access control policy on the specified resource.
+              # Replaces any existing policy.
+              #
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyRegionSslPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyRegionSslPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_iam_policy(project: nil, region: nil, region_set_policy_request_resource: nil, resource: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param region_set_policy_request_resource [::Google::Cloud::Compute::V1::RegionSetPolicyRequest, ::Hash]
+              #     The body resource for this request
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyRegionSslPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
+              #   p result
+              #
+              def set_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyRegionSslPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_ssl_policies_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns permissions that a caller has on the specified resource.
+              #
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsRegionSslPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsRegionSslPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload test_iam_permissions(project: nil, region: nil, resource: nil, test_permissions_request_resource: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
+              #     The body resource for this request
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsRegionSslPolicyRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
+              #   p result
+              #
+              def test_iam_permissions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsRegionSslPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_ssl_policies_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the RegionSslPolicies REST API.
               #
               # This class represents the configuration for RegionSslPolicies REST,
@@ -1105,6 +1368,11 @@ module Google
                   #
                   attr_reader :get
                   ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1124,6 +1392,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :patch
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1131,6 +1409,8 @@ module Google
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
@@ -1139,6 +1419,10 @@ module Google
                     @list_available_features = ::Gapic::Config::Method.new list_available_features_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

@@ -954,6 +954,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the start REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesStartRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def start request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_start_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "start",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the stop REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesStopRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def stop request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_stop_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "stop",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the restore_backup REST call
               #
               # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesRestoreBackupRequest]
@@ -1594,6 +1674,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the execute_sql_read_only REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyResponse]
+              #   A result object deserialized from the server's reply
+              def execute_sql_read_only request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_execute_sql_read_only_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "execute_sql_read_only",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the execute_sql REST call
               #
               # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlRequest]
@@ -1783,6 +1903,46 @@ module Google
                   body: body || "",
                   params: query_string_params,
                   method_name: "point_in_time_restore",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the reconcile_networking REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesReconcileNetworkingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def reconcile_networking request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_reconcile_networking_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "reconcile_networking",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -2287,6 +2447,50 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the start REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesStartRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_start_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/projects/{project}/instances/{instance}:start",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the stop REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesStopRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_stop_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/projects/{project}/instances/{instance}:stop",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the restore_backup REST call
               #
               # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesRestoreBackupRequest]
@@ -2651,6 +2855,29 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the execute_sql_read_only REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_execute_sql_read_only_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/projects/{project}/instances/{instance}/executeSqlReadOnly",
+                                                          body: "body",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the execute_sql REST call
               #
               # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlRequest]
@@ -2756,6 +2983,29 @@ module Google
                                                           body: "context",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the reconcile_networking REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1::SqlInstancesReconcileNetworkingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_reconcile_networking_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/projects/{project}/instances/{instance}:reconcileNetworking",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

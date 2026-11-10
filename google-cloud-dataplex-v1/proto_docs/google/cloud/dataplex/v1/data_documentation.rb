@@ -58,12 +58,17 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::DatasetResult]
         #     Output only. Insights for a Dataset resource.
         #
-        #     Note: The following fields are mutually exclusive: `dataset_result`, `table_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dataset_result`, `table_result`, `data_product_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] table_result
         #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::TableResult]
         #     Output only. Insights for a Table resource.
         #
-        #     Note: The following fields are mutually exclusive: `table_result`, `dataset_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `table_result`, `dataset_result`, `data_product_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] data_product_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::DataProductResult]
+        #     Output only. Insights for a data product.
+        #
+        #     Note: The following fields are mutually exclusive: `data_product_result`, `dataset_result`, `table_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataDocumentationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,6 +108,37 @@ module Google
           class TableResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Generated metadata about a data product.
+          # @!attribute [r] overview
+          #   @return [::String]
+          #     Output only. A detailed description for the data product.
+          # @!attribute [r] queries
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationResult::Query>]
+          #     Output only. Unordered list. Sample SQL queries for the data product.
+          # @!attribute [r] asset_descriptions
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationResult::DataProductResult::AssetDescription>]
+          #     Output only. Unordered list. Generated descriptions for assets in the
+          #     data product. Note that some assets may not have a generated description.
+          #     Such assets will not be included in this list.
+          class DataProductResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Description for an asset in the data product.
+            # @!attribute [r] resource
+            #   @return [::String]
+            #     Output only. The service-qualified full resource name of the asset.
+            #     Example:
+            #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            # @!attribute [r] overview
+            #   @return [::String]
+            #     Output only. A generated description for the asset.
+            class AssetDescription
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Details of the relationship between the schema of two resources.

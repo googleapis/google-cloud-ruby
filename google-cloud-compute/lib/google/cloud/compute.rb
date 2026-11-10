@@ -66,7 +66,7 @@ module Google
       #
       # The AcceleratorTypes API.
       #
-      # This client uses AcceleratorTypes version 2026-09-01.
+      # This client uses AcceleratorTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -131,7 +131,7 @@ module Google
       #
       # The Addresses API.
       #
-      # This client uses Addresses version 2026-09-01.
+      # This client uses Addresses version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -196,7 +196,7 @@ module Google
       #
       # The Advice API.
       #
-      # This client uses Advice version 2026-09-01.
+      # This client uses Advice version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -261,7 +261,7 @@ module Google
       #
       # The Autoscalers API.
       #
-      # This client uses Autoscalers version 2026-09-01.
+      # This client uses Autoscalers version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -326,7 +326,7 @@ module Google
       #
       # The BackendBuckets API.
       #
-      # This client uses BackendBuckets version 2026-09-01.
+      # This client uses BackendBuckets version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -391,7 +391,7 @@ module Google
       #
       # The BackendServices API.
       #
-      # This client uses BackendServices version 2026-09-01.
+      # This client uses BackendServices version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -456,7 +456,7 @@ module Google
       #
       # The CrossSiteNetworks API.
       #
-      # This client uses CrossSiteNetworks version 2026-09-01.
+      # This client uses CrossSiteNetworks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -521,7 +521,7 @@ module Google
       #
       # The DiskTypes API.
       #
-      # This client uses DiskTypes version 2026-09-01.
+      # This client uses DiskTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -586,7 +586,7 @@ module Google
       #
       # The Disks API.
       #
-      # This client uses Disks version 2026-09-01.
+      # This client uses Disks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -651,7 +651,7 @@ module Google
       #
       # The ExternalVpnGateways API.
       #
-      # This client uses ExternalVpnGateways version 2026-09-01.
+      # This client uses ExternalVpnGateways version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -716,7 +716,7 @@ module Google
       #
       # The FirewallPolicies API.
       #
-      # This client uses FirewallPolicies version 2026-09-01.
+      # This client uses FirewallPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -781,7 +781,7 @@ module Google
       #
       # The Firewalls API.
       #
-      # This client uses Firewalls version 2026-09-01.
+      # This client uses Firewalls version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -846,7 +846,7 @@ module Google
       #
       # The ForwardingRules API.
       #
-      # This client uses ForwardingRules version 2026-09-01.
+      # This client uses ForwardingRules version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -911,7 +911,7 @@ module Google
       #
       # The FutureReservations API.
       #
-      # This client uses FutureReservations version 2026-09-01.
+      # This client uses FutureReservations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -976,7 +976,7 @@ module Google
       #
       # The GlobalAddresses API.
       #
-      # This client uses GlobalAddresses version 2026-09-01.
+      # This client uses GlobalAddresses version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1041,7 +1041,7 @@ module Google
       #
       # The GlobalForwardingRules API.
       #
-      # This client uses GlobalForwardingRules version 2026-09-01.
+      # This client uses GlobalForwardingRules version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1106,7 +1106,7 @@ module Google
       #
       # The GlobalFrontendSettings API.
       #
-      # This client uses GlobalFrontendSettingsService version 2026-09-01.
+      # This client uses GlobalFrontendSettingsService version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1171,7 +1171,7 @@ module Google
       #
       # The GlobalNetworkEndpointGroups API.
       #
-      # This client uses GlobalNetworkEndpointGroups version 2026-09-01.
+      # This client uses GlobalNetworkEndpointGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1236,7 +1236,7 @@ module Google
       #
       # The GlobalOperations API.
       #
-      # This client uses GlobalOperations version 2026-09-01.
+      # This client uses GlobalOperations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1301,7 +1301,7 @@ module Google
       #
       # The GlobalOrganizationOperations API.
       #
-      # This client uses GlobalOrganizationOperations version 2026-09-01.
+      # This client uses GlobalOrganizationOperations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1366,7 +1366,7 @@ module Google
       #
       # The GlobalPublicDelegatedPrefixes API.
       #
-      # This client uses GlobalPublicDelegatedPrefixes version 2026-09-01.
+      # This client uses GlobalPublicDelegatedPrefixes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1431,7 +1431,7 @@ module Google
       #
       # The GlobalVmExtensionPolicies API.
       #
-      # This client uses GlobalVmExtensionPolicies version 2026-09-01.
+      # This client uses GlobalVmExtensionPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1496,7 +1496,7 @@ module Google
       #
       # The HealthChecks API.
       #
-      # This client uses HealthChecks version 2026-09-01.
+      # This client uses HealthChecks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1561,7 +1561,7 @@ module Google
       #
       # The Hosts API.
       #
-      # This client uses Hosts version 2026-09-01.
+      # This client uses Hosts version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1626,7 +1626,7 @@ module Google
       #
       # The ImageFamilyViews API.
       #
-      # This client uses ImageFamilyViews version 2026-09-01.
+      # This client uses ImageFamilyViews version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1691,7 +1691,7 @@ module Google
       #
       # The ImageViews API.
       #
-      # This client uses ImageViews version 2026-09-01.
+      # This client uses ImageViews version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1756,7 +1756,7 @@ module Google
       #
       # The Images API.
       #
-      # This client uses Images version 2026-09-01.
+      # This client uses Images version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1821,7 +1821,7 @@ module Google
       #
       # The InstanceGroupManagerResizeRequests API.
       #
-      # This client uses InstanceGroupManagerResizeRequests version 2026-09-01.
+      # This client uses InstanceGroupManagerResizeRequests version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1886,7 +1886,7 @@ module Google
       #
       # The InstanceGroupManagers API.
       #
-      # This client uses InstanceGroupManagers version 2026-09-01.
+      # This client uses InstanceGroupManagers version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -1951,7 +1951,7 @@ module Google
       #
       # The InstanceGroups API.
       #
-      # This client uses InstanceGroups version 2026-09-01.
+      # This client uses InstanceGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2016,7 +2016,7 @@ module Google
       #
       # The InstanceSettings API.
       #
-      # This client uses InstanceSettingsService version 2026-09-01.
+      # This client uses InstanceSettingsService version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2081,7 +2081,7 @@ module Google
       #
       # The InstanceTemplates API.
       #
-      # This client uses InstanceTemplates version 2026-09-01.
+      # This client uses InstanceTemplates version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2146,7 +2146,7 @@ module Google
       #
       # The Instances API.
       #
-      # This client uses Instances version 2026-09-01.
+      # This client uses Instances version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2211,7 +2211,7 @@ module Google
       #
       # The InstantSnapshotGroups API.
       #
-      # This client uses InstantSnapshotGroups version 2026-09-01.
+      # This client uses InstantSnapshotGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2276,7 +2276,7 @@ module Google
       #
       # The InstantSnapshots API.
       #
-      # This client uses InstantSnapshots version 2026-09-01.
+      # This client uses InstantSnapshots version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2341,7 +2341,7 @@ module Google
       #
       # The InterconnectAttachmentGroups API.
       #
-      # This client uses InterconnectAttachmentGroups version 2026-09-01.
+      # This client uses InterconnectAttachmentGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2406,7 +2406,7 @@ module Google
       #
       # The InterconnectAttachments API.
       #
-      # This client uses InterconnectAttachments version 2026-09-01.
+      # This client uses InterconnectAttachments version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2471,7 +2471,7 @@ module Google
       #
       # The InterconnectGroups API.
       #
-      # This client uses InterconnectGroups version 2026-09-01.
+      # This client uses InterconnectGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2536,7 +2536,7 @@ module Google
       #
       # The InterconnectLocations API.
       #
-      # This client uses InterconnectLocations version 2026-09-01.
+      # This client uses InterconnectLocations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2601,7 +2601,7 @@ module Google
       #
       # The InterconnectRemoteLocations API.
       #
-      # This client uses InterconnectRemoteLocations version 2026-09-01.
+      # This client uses InterconnectRemoteLocations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2666,7 +2666,7 @@ module Google
       #
       # The Interconnects API.
       #
-      # This client uses Interconnects version 2026-09-01.
+      # This client uses Interconnects version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2731,7 +2731,7 @@ module Google
       #
       # The LicenseCodes API.
       #
-      # This client uses LicenseCodes version 2026-09-01.
+      # This client uses LicenseCodes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2796,7 +2796,7 @@ module Google
       #
       # The Licenses API.
       #
-      # This client uses Licenses version 2026-09-01.
+      # This client uses Licenses version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2861,7 +2861,7 @@ module Google
       #
       # The MachineImages API.
       #
-      # This client uses MachineImages version 2026-09-01.
+      # This client uses MachineImages version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2926,7 +2926,7 @@ module Google
       #
       # The MachineTypes API.
       #
-      # This client uses MachineTypes version 2026-09-01.
+      # This client uses MachineTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -2991,7 +2991,7 @@ module Google
       #
       # The ManagedRulesets API.
       #
-      # This client uses ManagedRulesets version 2026-09-01.
+      # This client uses ManagedRulesets version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3056,7 +3056,7 @@ module Google
       #
       # The NetworkAttachments API.
       #
-      # This client uses NetworkAttachments version 2026-09-01.
+      # This client uses NetworkAttachments version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3121,7 +3121,7 @@ module Google
       #
       # The NetworkEdgeSecurityServices API.
       #
-      # This client uses NetworkEdgeSecurityServices version 2026-09-01.
+      # This client uses NetworkEdgeSecurityServices version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3186,7 +3186,7 @@ module Google
       #
       # The NetworkEndpointGroups API.
       #
-      # This client uses NetworkEndpointGroups version 2026-09-01.
+      # This client uses NetworkEndpointGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3251,7 +3251,7 @@ module Google
       #
       # The NetworkFirewallPolicies API.
       #
-      # This client uses NetworkFirewallPolicies version 2026-09-01.
+      # This client uses NetworkFirewallPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3316,7 +3316,7 @@ module Google
       #
       # The NetworkProfiles API.
       #
-      # This client uses NetworkProfiles version 2026-09-01.
+      # This client uses NetworkProfiles version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3381,7 +3381,7 @@ module Google
       #
       # The Networks API.
       #
-      # This client uses Networks version 2026-09-01.
+      # This client uses Networks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3446,7 +3446,7 @@ module Google
       #
       # The NodeGroups API.
       #
-      # This client uses NodeGroups version 2026-09-01.
+      # This client uses NodeGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3511,7 +3511,7 @@ module Google
       #
       # The NodeTemplates API.
       #
-      # This client uses NodeTemplates version 2026-09-01.
+      # This client uses NodeTemplates version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3576,7 +3576,7 @@ module Google
       #
       # The NodeTypes API.
       #
-      # This client uses NodeTypes version 2026-09-01.
+      # This client uses NodeTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3641,7 +3641,7 @@ module Google
       #
       # The OrganizationSecurityPolicies API.
       #
-      # This client uses OrganizationSecurityPolicies version 2026-09-01.
+      # This client uses OrganizationSecurityPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3706,7 +3706,7 @@ module Google
       #
       # The PacketMirrorings API.
       #
-      # This client uses PacketMirrorings version 2026-09-01.
+      # This client uses PacketMirrorings version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3771,7 +3771,7 @@ module Google
       #
       # The PreviewFeatures API.
       #
-      # This client uses PreviewFeatures version 2026-09-01.
+      # This client uses PreviewFeatures version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3836,7 +3836,7 @@ module Google
       #
       # The ProjectViews API.
       #
-      # This client uses ProjectViews version 2026-09-01.
+      # This client uses ProjectViews version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3901,7 +3901,7 @@ module Google
       #
       # The Projects API.
       #
-      # This client uses Projects version 2026-09-01.
+      # This client uses Projects version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -3966,7 +3966,7 @@ module Google
       #
       # The PublicAdvertisedPrefixes API.
       #
-      # This client uses PublicAdvertisedPrefixes version 2026-09-01.
+      # This client uses PublicAdvertisedPrefixes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4031,7 +4031,7 @@ module Google
       #
       # The PublicDelegatedPrefixes API.
       #
-      # This client uses PublicDelegatedPrefixes version 2026-09-01.
+      # This client uses PublicDelegatedPrefixes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4096,7 +4096,7 @@ module Google
       #
       # The RegionAutoscalers API.
       #
-      # This client uses RegionAutoscalers version 2026-09-01.
+      # This client uses RegionAutoscalers version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4161,7 +4161,7 @@ module Google
       #
       # The RegionBackendBuckets API.
       #
-      # This client uses RegionBackendBuckets version 2026-09-01.
+      # This client uses RegionBackendBuckets version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4226,7 +4226,7 @@ module Google
       #
       # The RegionBackendServices API.
       #
-      # This client uses RegionBackendServices version 2026-09-01.
+      # This client uses RegionBackendServices version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4291,7 +4291,7 @@ module Google
       #
       # The RegionCommitments API.
       #
-      # This client uses RegionCommitments version 2026-09-01.
+      # This client uses RegionCommitments version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4356,7 +4356,7 @@ module Google
       #
       # The RegionCompositeHealthChecks API.
       #
-      # This client uses RegionCompositeHealthChecks version 2026-09-01.
+      # This client uses RegionCompositeHealthChecks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4421,7 +4421,7 @@ module Google
       #
       # The RegionDiskTypes API.
       #
-      # This client uses RegionDiskTypes version 2026-09-01.
+      # This client uses RegionDiskTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4486,7 +4486,7 @@ module Google
       #
       # The RegionDisks API.
       #
-      # This client uses RegionDisks version 2026-09-01.
+      # This client uses RegionDisks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4551,7 +4551,7 @@ module Google
       #
       # The RegionHealthAggregationPolicies API.
       #
-      # This client uses RegionHealthAggregationPolicies version 2026-09-01.
+      # This client uses RegionHealthAggregationPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4616,7 +4616,7 @@ module Google
       #
       # The RegionHealthCheckServices API.
       #
-      # This client uses RegionHealthCheckServices version 2026-09-01.
+      # This client uses RegionHealthCheckServices version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4681,7 +4681,7 @@ module Google
       #
       # The RegionHealthChecks API.
       #
-      # This client uses RegionHealthChecks version 2026-09-01.
+      # This client uses RegionHealthChecks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4746,7 +4746,7 @@ module Google
       #
       # The RegionHealthSources API.
       #
-      # This client uses RegionHealthSources version 2026-09-01.
+      # This client uses RegionHealthSources version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4811,7 +4811,7 @@ module Google
       #
       # The RegionInstanceGroupManagerResizeRequests API.
       #
-      # This client uses RegionInstanceGroupManagerResizeRequests version 2026-09-01.
+      # This client uses RegionInstanceGroupManagerResizeRequests version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4876,7 +4876,7 @@ module Google
       #
       # The RegionInstanceGroupManagers API.
       #
-      # This client uses RegionInstanceGroupManagers version 2026-09-01.
+      # This client uses RegionInstanceGroupManagers version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -4941,7 +4941,7 @@ module Google
       #
       # The RegionInstanceGroups API.
       #
-      # This client uses RegionInstanceGroups version 2026-09-01.
+      # This client uses RegionInstanceGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5006,7 +5006,7 @@ module Google
       #
       # The RegionInstanceTemplates API.
       #
-      # This client uses RegionInstanceTemplates version 2026-09-01.
+      # This client uses RegionInstanceTemplates version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5071,7 +5071,7 @@ module Google
       #
       # The RegionInstances API.
       #
-      # This client uses RegionInstances version 2026-09-01.
+      # This client uses RegionInstances version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5136,7 +5136,7 @@ module Google
       #
       # The RegionInstantSnapshotGroups API.
       #
-      # This client uses RegionInstantSnapshotGroups version 2026-09-01.
+      # This client uses RegionInstantSnapshotGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5201,7 +5201,7 @@ module Google
       #
       # The RegionInstantSnapshots API.
       #
-      # This client uses RegionInstantSnapshots version 2026-09-01.
+      # This client uses RegionInstantSnapshots version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5266,7 +5266,7 @@ module Google
       #
       # The RegionNetworkEndpointGroups API.
       #
-      # This client uses RegionNetworkEndpointGroups version 2026-09-01.
+      # This client uses RegionNetworkEndpointGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5331,7 +5331,7 @@ module Google
       #
       # The RegionNetworkFirewallPolicies API.
       #
-      # This client uses RegionNetworkFirewallPolicies version 2026-09-01.
+      # This client uses RegionNetworkFirewallPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5396,7 +5396,7 @@ module Google
       #
       # The RegionNotificationEndpoints API.
       #
-      # This client uses RegionNotificationEndpoints version 2026-09-01.
+      # This client uses RegionNotificationEndpoints version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5461,7 +5461,7 @@ module Google
       #
       # The RegionOperations API.
       #
-      # This client uses RegionOperations version 2026-09-01.
+      # This client uses RegionOperations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5526,7 +5526,7 @@ module Google
       #
       # The RegionSecurityPolicies API.
       #
-      # This client uses RegionSecurityPolicies version 2026-09-01.
+      # This client uses RegionSecurityPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5591,7 +5591,7 @@ module Google
       #
       # The RegionSnapshotSettings API.
       #
-      # This client uses RegionSnapshotSettings version 2026-09-01.
+      # This client uses RegionSnapshotSettings version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5656,7 +5656,7 @@ module Google
       #
       # The RegionSnapshots API.
       #
-      # This client uses RegionSnapshots version 2026-09-01.
+      # This client uses RegionSnapshots version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5721,7 +5721,7 @@ module Google
       #
       # The RegionSslCertificates API.
       #
-      # This client uses RegionSslCertificates version 2026-09-01.
+      # This client uses RegionSslCertificates version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5786,7 +5786,7 @@ module Google
       #
       # The RegionSslPolicies API.
       #
-      # This client uses RegionSslPolicies version 2026-09-01.
+      # This client uses RegionSslPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5851,7 +5851,7 @@ module Google
       #
       # The RegionTargetHttpProxies API.
       #
-      # This client uses RegionTargetHttpProxies version 2026-09-01.
+      # This client uses RegionTargetHttpProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5916,7 +5916,7 @@ module Google
       #
       # The RegionTargetHttpsProxies API.
       #
-      # This client uses RegionTargetHttpsProxies version 2026-09-01.
+      # This client uses RegionTargetHttpsProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -5981,7 +5981,7 @@ module Google
       #
       # The RegionTargetTcpProxies API.
       #
-      # This client uses RegionTargetTcpProxies version 2026-09-01.
+      # This client uses RegionTargetTcpProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6046,7 +6046,7 @@ module Google
       #
       # The RegionUrlMaps API.
       #
-      # This client uses RegionUrlMaps version 2026-09-01.
+      # This client uses RegionUrlMaps version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6111,7 +6111,7 @@ module Google
       #
       # The RegionZones API.
       #
-      # This client uses RegionZones version 2026-09-01.
+      # This client uses RegionZones version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6176,7 +6176,7 @@ module Google
       #
       # The Regions API.
       #
-      # This client uses Regions version 2026-09-01.
+      # This client uses Regions version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6241,7 +6241,7 @@ module Google
       #
       # The ReliabilityRisks API.
       #
-      # This client uses ReliabilityRisks version 2026-09-01.
+      # This client uses ReliabilityRisks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6306,7 +6306,7 @@ module Google
       #
       # The ReservationBlocks API.
       #
-      # This client uses ReservationBlocks version 2026-09-01.
+      # This client uses ReservationBlocks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6371,7 +6371,7 @@ module Google
       #
       # The ReservationSlots API.
       #
-      # This client uses ReservationSlots version 2026-09-01.
+      # This client uses ReservationSlots version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6436,7 +6436,7 @@ module Google
       #
       # The ReservationSubBlocks API.
       #
-      # This client uses ReservationSubBlocks version 2026-09-01.
+      # This client uses ReservationSubBlocks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6501,7 +6501,7 @@ module Google
       #
       # The Reservations API.
       #
-      # This client uses Reservations version 2026-09-01.
+      # This client uses Reservations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6566,7 +6566,7 @@ module Google
       #
       # The ResourcePolicies API.
       #
-      # This client uses ResourcePolicies version 2026-09-01.
+      # This client uses ResourcePolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6631,7 +6631,7 @@ module Google
       #
       # The RolloutPlans API.
       #
-      # This client uses RolloutPlans version 2026-09-01.
+      # This client uses RolloutPlans version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6696,7 +6696,7 @@ module Google
       #
       # The Rollouts API.
       #
-      # This client uses Rollouts version 2026-09-01.
+      # This client uses Rollouts version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6761,7 +6761,7 @@ module Google
       #
       # The Routers API.
       #
-      # This client uses Routers version 2026-09-01.
+      # This client uses Routers version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6826,7 +6826,7 @@ module Google
       #
       # The Routes API.
       #
-      # This client uses Routes version 2026-09-01.
+      # This client uses Routes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6891,7 +6891,7 @@ module Google
       #
       # The SecurityPolicies API.
       #
-      # This client uses SecurityPolicies version 2026-09-01.
+      # This client uses SecurityPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -6956,7 +6956,7 @@ module Google
       #
       # The ServiceAttachments API.
       #
-      # This client uses ServiceAttachments version 2026-09-01.
+      # This client uses ServiceAttachments version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7021,7 +7021,7 @@ module Google
       #
       # The SnapshotSettings API.
       #
-      # This client uses SnapshotSettingsService version 2026-09-01.
+      # This client uses SnapshotSettingsService version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7086,7 +7086,7 @@ module Google
       #
       # The Snapshots API.
       #
-      # This client uses Snapshots version 2026-09-01.
+      # This client uses Snapshots version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7151,7 +7151,7 @@ module Google
       #
       # The SslCertificates API.
       #
-      # This client uses SslCertificates version 2026-09-01.
+      # This client uses SslCertificates version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7216,7 +7216,7 @@ module Google
       #
       # The SslPolicies API.
       #
-      # This client uses SslPolicies version 2026-09-01.
+      # This client uses SslPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7281,7 +7281,7 @@ module Google
       #
       # The StoragePoolTypes API.
       #
-      # This client uses StoragePoolTypes version 2026-09-01.
+      # This client uses StoragePoolTypes version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7346,7 +7346,7 @@ module Google
       #
       # The StoragePools API.
       #
-      # This client uses StoragePools version 2026-09-01.
+      # This client uses StoragePools version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7411,7 +7411,7 @@ module Google
       #
       # The Subnetworks API.
       #
-      # This client uses Subnetworks version 2026-09-01.
+      # This client uses Subnetworks version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7476,7 +7476,7 @@ module Google
       #
       # The TargetGrpcProxies API.
       #
-      # This client uses TargetGrpcProxies version 2026-09-01.
+      # This client uses TargetGrpcProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7541,7 +7541,7 @@ module Google
       #
       # The TargetHttpProxies API.
       #
-      # This client uses TargetHttpProxies version 2026-09-01.
+      # This client uses TargetHttpProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7606,7 +7606,7 @@ module Google
       #
       # The TargetHttpsProxies API.
       #
-      # This client uses TargetHttpsProxies version 2026-09-01.
+      # This client uses TargetHttpsProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7671,7 +7671,7 @@ module Google
       #
       # The TargetInstances API.
       #
-      # This client uses TargetInstances version 2026-09-01.
+      # This client uses TargetInstances version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7736,7 +7736,7 @@ module Google
       #
       # The TargetPools API.
       #
-      # This client uses TargetPools version 2026-09-01.
+      # This client uses TargetPools version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7801,7 +7801,7 @@ module Google
       #
       # The TargetSslProxies API.
       #
-      # This client uses TargetSslProxies version 2026-09-01.
+      # This client uses TargetSslProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7866,7 +7866,7 @@ module Google
       #
       # The TargetTcpProxies API.
       #
-      # This client uses TargetTcpProxies version 2026-09-01.
+      # This client uses TargetTcpProxies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7931,7 +7931,7 @@ module Google
       #
       # The TargetVpnGateways API.
       #
-      # This client uses TargetVpnGateways version 2026-09-01.
+      # This client uses TargetVpnGateways version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -7996,7 +7996,7 @@ module Google
       #
       # The UrlMaps API.
       #
-      # This client uses UrlMaps version 2026-09-01.
+      # This client uses UrlMaps version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8061,7 +8061,7 @@ module Google
       #
       # The VpnGateways API.
       #
-      # This client uses VpnGateways version 2026-09-01.
+      # This client uses VpnGateways version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8126,7 +8126,7 @@ module Google
       #
       # The VpnTunnels API.
       #
-      # This client uses VpnTunnels version 2026-09-01.
+      # This client uses VpnTunnels version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8191,7 +8191,7 @@ module Google
       #
       # The WireGroups API.
       #
-      # This client uses WireGroups version 2026-09-01.
+      # This client uses WireGroups version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8256,7 +8256,7 @@ module Google
       #
       # The ZoneOperations API.
       #
-      # This client uses ZoneOperations version 2026-09-01.
+      # This client uses ZoneOperations version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8321,7 +8321,7 @@ module Google
       #
       # The ZoneVmExtensionPolicies API.
       #
-      # This client uses ZoneVmExtensionPolicies version 2026-09-01.
+      # This client uses ZoneVmExtensionPolicies version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
@@ -8386,7 +8386,7 @@ module Google
       #
       # The Zones API.
       #
-      # This client uses Zones version 2026-09-01.
+      # This client uses Zones version 2026-11-01.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.

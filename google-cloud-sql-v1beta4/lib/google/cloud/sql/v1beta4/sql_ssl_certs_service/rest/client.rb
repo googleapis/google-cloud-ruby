@@ -523,6 +523,264 @@ module Google
               end
 
               ##
+              # Upload and update customer managed certificate bundle for an existing
+              # Cloud SQL instance.
+              #
+              # @overload update_customer_managed_certificate(request, options = nil)
+              #   Pass arguments to `update_customer_managed_certificate` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_customer_managed_certificate(instance: nil, project: nil, customer_managed_certificate_config: nil, update_mask: nil, allow_missing: nil, certificate_bundle: nil)
+              #   Pass arguments to `update_customer_managed_certificate` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance.
+              #   @param customer_managed_certificate_config [::Google::Cloud::Sql::V1beta4::CustomerManagedCertificateConfig, ::Hash]
+              #     Required. The customer managed certificate bundle SSL configuration to
+              #     update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to be updated.
+              #   @param allow_missing [::Boolean]
+              #     Optional. If set to true, and the customer managed certificate bundle
+              #     configuration is not found, a new customer managed certificate bundle
+              #     configuration will be created. In this situation, `update_mask` is ignored.
+              #   @param certificate_bundle [::String]
+              #     Required. Name tag of the customer managed certificate bundle to update. It
+              #     must be alphanumeric and have a maximum length of 10 characters.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlSslCertsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest.new
+              #
+              #   # Call the update_customer_managed_certificate method.
+              #   result = client.update_customer_managed_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::Operation.
+              #   p result
+              #
+              def update_customer_managed_certificate request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_customer_managed_certificate.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_customer_managed_certificate.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_customer_managed_certificate.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_ssl_certs_service_stub.update_customer_managed_certificate request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Delete customer managed certificate bundle for an existing Cloud SQL
+              # instance.
+              #
+              # @overload delete_customer_managed_certificate(request, options = nil)
+              #   Pass arguments to `delete_customer_managed_certificate` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_customer_managed_certificate(instance: nil, project: nil, certificate_bundle: nil)
+              #   Pass arguments to `delete_customer_managed_certificate` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance.
+              #   @param certificate_bundle [::String]
+              #     Required. Name tag of the customer managed certificate bundle to delete. It
+              #     must be alphanumeric and have a maximum length of 10 characters.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlSslCertsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest.new
+              #
+              #   # Call the delete_customer_managed_certificate method.
+              #   result = client.delete_customer_managed_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::Operation.
+              #   p result
+              #
+              def delete_customer_managed_certificate request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_customer_managed_certificate.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_customer_managed_certificate.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_customer_managed_certificate.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_ssl_certs_service_stub.delete_customer_managed_certificate request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all customer managed certificate bundles for an existing Cloud SQL
+              # instance.
+              #
+              # @overload list_customer_managed_certificates(request, options = nil)
+              #   Pass arguments to `list_customer_managed_certificates` via a request object, either of type
+              #   {::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_customer_managed_certificates(instance: nil, project: nil)
+              #   Pass arguments to `list_customer_managed_certificates` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. Cloud SQL instance ID. This does not include the project ID.
+              #   @param project [::String]
+              #     Required. Project ID of the project that contains the instance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/sql/v1beta4"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Sql::V1beta4::SqlSslCertsService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest.new
+              #
+              #   # Call the list_customer_managed_certificates method.
+              #   result = client.list_customer_managed_certificates request
+              #
+              #   # The returned object is of type Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse.
+              #   p result
+              #
+              def list_customer_managed_certificates request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_customer_managed_certificates.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Sql::V1beta4::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_customer_managed_certificates.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_customer_managed_certificates.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @sql_ssl_certs_service_stub.list_customer_managed_certificates request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the SqlSslCertsService REST API.
               #
               # This class represents the configuration for SqlSslCertsService REST,
@@ -690,6 +948,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
+                  ##
+                  # RPC-specific configuration for `update_customer_managed_certificate`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_customer_managed_certificate
+                  ##
+                  # RPC-specific configuration for `delete_customer_managed_certificate`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_customer_managed_certificate
+                  ##
+                  # RPC-specific configuration for `list_customer_managed_certificates`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_customer_managed_certificates
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -701,6 +974,12 @@ module Google
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    update_customer_managed_certificate_config = parent_rpcs.update_customer_managed_certificate if parent_rpcs.respond_to? :update_customer_managed_certificate
+                    @update_customer_managed_certificate = ::Gapic::Config::Method.new update_customer_managed_certificate_config
+                    delete_customer_managed_certificate_config = parent_rpcs.delete_customer_managed_certificate if parent_rpcs.respond_to? :delete_customer_managed_certificate
+                    @delete_customer_managed_certificate = ::Gapic::Config::Method.new delete_customer_managed_certificate_config
+                    list_customer_managed_certificates_config = parent_rpcs.list_customer_managed_certificates if parent_rpcs.respond_to? :list_customer_managed_certificates
+                    @list_customer_managed_certificates = ::Gapic::Config::Method.new list_customer_managed_certificates_config
 
                     yield self if block_given?
                   end

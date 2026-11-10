@@ -28,10 +28,10 @@ module Google
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
         # @!attribute [rw] cidr_range
         #   @return [::String]
-        #     Required. The CIDR range of the subnet.
+        #     Required. Immutable. The CIDR range of the subnet.
         # @!attribute [rw] purpose
         #   @return [::Google::Cloud::OracleDatabase::V1::OdbSubnet::Purpose]
-        #     Required. Purpose of the subnet.
+        #     Required. Immutable. Purpose of the subnet.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels or tags associated with the resource.
@@ -110,6 +110,37 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateOdbSubnetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `OdbSubnet.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the OdbSubnet should be
+        #     updated. A field specified in the mask is updated. If a mask isn't
+        #     provided, the service treats this as an implied field mask equivalent to
+        #     all fields that are populated (have a non-empty value). To clear or unset a
+        #     field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] odb_subnet
+        #   @return [::Google::Cloud::OracleDatabase::V1::OdbSubnet]
+        #     Required. The resource being updated. Note only labels can be updated.
+        #     The provided labels will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing labels and update_mask will not update the labels.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateOdbSubnetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

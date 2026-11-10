@@ -232,10 +232,11 @@ module Google
               #   @param worker_pool [::Google::Cloud::Run::V2::WorkerPool, ::Hash]
               #     Required. The WorkerPool instance to create.
               #   @param worker_pool_id [::String]
-              #     Required. The unique identifier for the WorkerPool. It must begin with
+              #     Optional. The unique identifier for the WorkerPool. It must begin with
               #     letter, and cannot end with hyphen; must contain fewer than 50 characters.
               #     The name of the worker pool becomes
               #     `{parent}/workerPools/{worker_pool_id}`.
+              #     If not provided, the server will generate a unique `worker_pool_id`.
               #   @param validate_only [::Boolean]
               #     Optional. Indicates that the request should be validated and default values
               #     populated, without persisting the request or creating any resources.

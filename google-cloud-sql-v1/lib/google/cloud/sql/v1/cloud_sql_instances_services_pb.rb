@@ -120,6 +120,10 @@ module Google
             rpc :ResetSslConfig, ::Google::Cloud::Sql::V1::SqlInstancesResetSslConfigRequest, ::Google::Cloud::Sql::V1::Operation
             # Restarts a Cloud SQL instance.
             rpc :Restart, ::Google::Cloud::Sql::V1::SqlInstancesRestartRequest, ::Google::Cloud::Sql::V1::Operation
+            # Starts a Cloud SQL instance.
+            rpc :Start, ::Google::Cloud::Sql::V1::SqlInstancesStartRequest, ::Google::Cloud::Sql::V1::Operation
+            # Stops a Cloud SQL instance.
+            rpc :Stop, ::Google::Cloud::Sql::V1::SqlInstancesStopRequest, ::Google::Cloud::Sql::V1::Operation
             # Restores a backup of a Cloud SQL instance. Using this operation might cause
             # your instance to restart.
             rpc :RestoreBackup, ::Google::Cloud::Sql::V1::SqlInstancesRestoreBackupRequest, ::Google::Cloud::Sql::V1::Operation
@@ -164,6 +168,8 @@ module Google
             rpc :ResetReplicaSize, ::Google::Cloud::Sql::V1::SqlInstancesResetReplicaSizeRequest, ::Google::Cloud::Sql::V1::Operation
             # Get Latest Recovery Time for a given instance.
             rpc :GetLatestRecoveryTime, ::Google::Cloud::Sql::V1::SqlInstancesGetLatestRecoveryTimeRequest, ::Google::Cloud::Sql::V1::SqlInstancesGetLatestRecoveryTimeResponse
+            # Execute SQL statements in read-only mode.
+            rpc :ExecuteSqlReadOnly, ::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyRequest, ::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlReadOnlyResponse
             # Execute SQL statements.
             rpc :ExecuteSql, ::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlRequest, ::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlResponse
             # Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
@@ -175,6 +181,11 @@ module Google
             # Point in time restore for an instance managed by Google Cloud Backup and
             # Disaster Recovery.
             rpc :PointInTimeRestore, ::Google::Cloud::Sql::V1::SqlInstancesPointInTimeRestoreRequest, ::Google::Cloud::Sql::V1::Operation
+            # Repairs and recreates networking resources for a Cloud SQL instance. For
+            # Private Service Connect (PSC), this operation recreates PSC DNS write
+            # endpoints on specified VPC networks and reconciles Private Service Connect
+            # connectivity infrastructure for the instance.
+            rpc :ReconcileNetworking, ::Google::Cloud::Sql::V1::SqlInstancesReconcileNetworkingRequest, ::Google::Cloud::Sql::V1::Operation
           end
 
           Stub = Service.rpc_stub_class

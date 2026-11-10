@@ -23,20 +23,47 @@ module Google
       module V1
         # The `EntitySignalsMapping` resource.
         # @!attribute [rw] audience_segment_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     ID of an AudienceSegment that this mapping belongs to.
+        #     Deprecated: ID of an AudienceSegment that this mapping belongs to.
         #
         #     Note: The following fields are mutually exclusive: `audience_segment_id`, `content_bundle_id`, `custom_targeting_value_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content_bundle_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     ID of a ContentBundle that this mapping belongs to.
+        #     Deprecated: ID of a ContentBundle that this mapping belongs to.
         #
         #     Note: The following fields are mutually exclusive: `content_bundle_id`, `audience_segment_id`, `custom_targeting_value_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_targeting_value_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     ID of a CustomValue that this mapping belongs to.
+        #     Deprecated: ID of a CustomTargetingValue that this mapping belongs to.
         #
         #     Note: The following fields are mutually exclusive: `custom_targeting_value_id`, `audience_segment_id`, `content_bundle_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] audience_segment
+        #   @return [::String]
+        #     The resource name of an
+        #     {::Google::Ads::AdManager::V1::AudienceSegment AudienceSegment} that this
+        #     mapping belongs to. Format:
+        #     `networks/{network_code}/audienceSegments/{audience_segment_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `audience_segment`, `content_bundle`, `custom_targeting_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] content_bundle
+        #   @return [::String]
+        #     The resource name of a
+        #     {::Google::Ads::AdManager::V1::ContentBundle ContentBundle} that this mapping
+        #     belongs to. Format:
+        #     `networks/{network_code}/contentBundles/{content_bundle_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `content_bundle`, `audience_segment`, `custom_targeting_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] custom_targeting_value
+        #   @return [::String]
+        #     The resource name of a
+        #     {::Google::Ads::AdManager::V1::CustomTargetingValue CustomTargetingValue} that
+        #     this mapping belongs to. Format:
+        #     `networks/{network_code}/customTargetingValues/{custom_targeting_value_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `custom_targeting_value`, `audience_segment`, `content_bundle`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the `EntitySignalsMapping`.
@@ -47,9 +74,16 @@ module Google
         #   @return [::Integer]
         #     Output only. Deprecated: `EntitySignalsMapping` ID.
         # @!attribute [rw] taxonomy_category_ids
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Integer>]
-        #     Optional. The IDs of the categories that are associated with the
-        #     referencing entity.
+        #     Optional. Deprecated: The IDs of the categories that are associated with
+        #     the referencing entity.
+        # @!attribute [rw] taxonomy_categories
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the
+        #     {::Google::Ads::AdManager::V1::TaxonomyCategory TaxonomyCategory} that are
+        #     associated with the referencing entity. Format:
+        #     `networks/{network_code}/taxonomyCategories/{taxonomyCategoryId}`
         class EntitySignalsMapping
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

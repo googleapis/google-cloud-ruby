@@ -45,7 +45,378 @@ module Google
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
+        # @!attribute [r] progress
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::OperationProgress]
+        #     Output only. Progress of the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message describing the progress of a cluster mutation long-running operation.
+        # @!attribute [r] steps
+        #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::OperationStep>]
+        #     Output only. Steps and status of the operation.
+        class OperationProgress
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message describing the status of a single step in a cluster mutation
+        # long-running operation.
+        # @!attribute [r] create_network
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateNetwork]
+        #     Output only. If set, indicates that new network creation is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_private_service_access
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreatePrivateServiceAccess]
+        #     Output only. If set, indicates that new private service access creation
+        #     is part of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_private_service_access`, `create_network`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_filestore_instance
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateFilestoreInstance]
+        #     Output only. If set, indicates that new Filestore instance creation is
+        #     part of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_filestore_instance`, `create_network`, `create_private_service_access`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_storage_bucket
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateStorageBucket]
+        #     Output only. If set, indicates that new Cloud Storage bucket creation is
+        #     part of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_storage_bucket`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_lustre_instance
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateLustreInstance]
+        #     Output only. If set, indicates that new Lustre instance creation is part
+        #     of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_lustre_instance`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_orchestrator
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateOrchestrator]
+        #     Output only. If set, indicates that orchestrator creation is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_orchestrator`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_nodeset
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateNodeset]
+        #     Output only. If set, indicates that new nodeset creation is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_nodeset`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_partition
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreatePartition]
+        #     Output only. If set, indicates that new partition creation is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_partition`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_login_node
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CreateLoginNode]
+        #     Output only. If set, indicates that new login node creation is part of
+        #     the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_login_node`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] check_cluster_health
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::CheckClusterHealth]
+        #     Output only. If set, indicates that cluster health check is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `check_cluster_health`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] update_orchestrator
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::UpdateOrchestrator]
+        #     Output only. If set, indicates that an orchestrator update is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_orchestrator`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] update_nodeset
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::UpdateNodeset]
+        #     Output only. If set, indicates that nodeset update is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_nodeset`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] update_partition
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::UpdatePartition]
+        #     Output only. If set, indicates that partition update is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_partition`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] update_login_node
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::UpdateLoginNode]
+        #     Output only. If set, indicates that login node update is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_login_node`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_orchestrator
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteOrchestrator]
+        #     Output only. If set, indicates that orchestrator deletion is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_orchestrator`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_nodeset
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteNodeset]
+        #     Output only. If set, indicates that nodeset deletion is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_nodeset`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_partition
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeletePartition]
+        #     Output only. If set, indicates that partition deletion is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_partition`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_login_node
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteLoginNode]
+        #     Output only. If set, indicates that login node deletion is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_login_node`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_filestore_instance
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteFilestoreInstance]
+        #     Output only. If set, indicates that Filestore instance deletion is part
+        #     of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_filestore_instance`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_storage_bucket
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteStorageBucket]
+        #     Output only. If set, indicates that Cloud Storage bucket deletion is part
+        #     of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_storage_bucket`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_lustre_instance`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_lustre_instance
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteLustreInstance]
+        #     Output only. If set, indicates that Lustre instance deletion is part of
+        #     the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_lustre_instance`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_private_service_access`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_private_service_access
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeletePrivateServiceAccess]
+        #     Output only. If set, indicates that private service access deletion is
+        #     part of the operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_private_service_access`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] delete_network
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::DeleteNetwork]
+        #     Output only. If set, indicates that network deletion is part of the
+        #     operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_network`, `create_network`, `create_private_service_access`, `create_filestore_instance`, `create_storage_bucket`, `create_lustre_instance`, `create_orchestrator`, `create_nodeset`, `create_partition`, `create_login_node`, `check_cluster_health`, `update_orchestrator`, `update_nodeset`, `update_partition`, `update_login_node`, `delete_orchestrator`, `delete_nodeset`, `delete_partition`, `delete_login_node`, `delete_filestore_instance`, `delete_storage_bucket`, `delete_lustre_instance`, `delete_private_service_access`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::OperationStep::State]
+        #     Output only. State of the operation step.
+        class OperationStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of the operation step.
+          module State
+            # Unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # Initial state before step execution starts.
+            WAITING = 1
+
+            # Step execution is running in progress.
+            IN_PROGRESS = 2
+
+            # Step execution is completed.
+            DONE = 3
+          end
+        end
+
+        # When set in OperationStep, indicates that a new network should be created.
+        # @!attribute [r] network
+        #   @return [::String]
+        #     Output only. Name of the network to create, in the format
+        #     `projects/{project}/global/networks/{network}`.
+        class CreateNetwork
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a new private service access should
+        # be created.
+        class CreatePrivateServiceAccess
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a new filestore instance should be
+        # created.
+        # @!attribute [r] filestore
+        #   @return [::String]
+        #     Output only. Name of the Filestore instance, in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        class CreateFilestoreInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a new storage bucket should be
+        # created.
+        # @!attribute [r] bucket
+        #   @return [::String]
+        #     Output only. Name of the bucket.
+        class CreateStorageBucket
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a new lustre instance should be
+        # created.
+        # @!attribute [r] lustre
+        #   @return [::String]
+        #     Output only. Name of the Managed Lustre instance, in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        class CreateLustreInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that an orchestrator should be created.
+        class CreateOrchestrator
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a nodeset should be created.
+        # @!attribute [r] nodesets
+        #   @return [::Array<::String>]
+        #     Output only. Name of the nodeset to create
+        class CreateNodeset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a partition should be created.
+        # @!attribute [r] partitions
+        #   @return [::Array<::String>]
+        #     Output only. Name of the partition to create
+        class CreatePartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a login node should be created.
+        class CreateLoginNode
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that cluster health check should be
+        # performed.
+        class CheckClusterHealth
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that an orchestrator should be updated.
+        class UpdateOrchestrator
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a nodeset should be updated.
+        # @!attribute [r] nodesets
+        #   @return [::Array<::String>]
+        #     Output only. Name of the nodeset to update
+        class UpdateNodeset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a partition should be updated.
+        # @!attribute [r] partitions
+        #   @return [::Array<::String>]
+        #     Output only. Name of the partition to update
+        class UpdatePartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a login node should be updated.
+        class UpdateLoginNode
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that an orchestrator should be deleted.
+        class DeleteOrchestrator
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a nodeset should be deleted.
+        # @!attribute [r] nodesets
+        #   @return [::Array<::String>]
+        #     Output only. Name of the nodeset to delete
+        class DeleteNodeset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a partition should be deleted.
+        # @!attribute [r] partitions
+        #   @return [::Array<::String>]
+        #     Output only. Name of the partition to delete
+        class DeletePartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a login node should be deleted.
+        class DeleteLoginNode
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a Filestore instance should be
+        # deleted.
+        # @!attribute [r] filestore
+        #   @return [::String]
+        #     Output only. Name of the Filestore instance, in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        class DeleteFilestoreInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that Cloud Storage bucket should be
+        # deleted.
+        # @!attribute [r] bucket
+        #   @return [::String]
+        #     Output only. Name of the bucket.
+        class DeleteStorageBucket
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates that a Lustre instance should be
+        # deleted.
+        # @!attribute [r] lustre
+        #   @return [::String]
+        #     Output only. Name of the Managed Lustre instance, in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        class DeleteLustreInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates private service access deletion
+        # step.
+        class DeletePrivateServiceAccess
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in OperationStep, indicates network deletion step with the
+        # resource name.
+        # @!attribute [r] network
+        #   @return [::String]
+        #     Output only. Name of the network to delete, in the format
+        #     `projects/{project}/global/networks/{network}`.
+        class DeleteNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
