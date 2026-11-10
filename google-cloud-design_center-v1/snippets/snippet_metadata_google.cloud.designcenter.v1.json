@@ -1,0 +1,3215 @@
+{
+  "client_library": {
+    "name": "google-cloud-design_center-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.designcenter.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetSpace_sync",
+      "title": "Snippet for the get_space call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_space.",
+      "file": "design_center/get_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_space",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Space",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSpace",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetSpace",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListSpaces_sync",
+      "title": "Snippet for the list_spaces call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_spaces.",
+      "file": "design_center/list_spaces.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_spaces",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_spaces",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListSpacesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListSpacesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListSpaces",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListSpaces",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateSpace_sync",
+      "title": "Snippet for the create_space call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_space.",
+      "file": "design_center/create_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_space",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Space",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateSpace",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateSpace",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateSpace_sync",
+      "title": "Snippet for the update_space call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_space.",
+      "file": "design_center/update_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_space",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Space",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateSpace",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateSpace",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteSpace_sync",
+      "title": "Snippet for the delete_space call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_space.",
+      "file": "design_center/delete_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_space",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteSpace",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteSpace",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetApplicationTemplate_sync",
+      "title": "Snippet for the get_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template.",
+      "file": "design_center/get_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListApplicationTemplates_sync",
+      "title": "Snippet for the list_application_templates call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_templates.",
+      "file": "design_center/list_application_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_application_templates",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplatesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListApplicationTemplates",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListApplicationTemplates",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateApplicationTemplate_sync",
+      "title": "Snippet for the create_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_application_template.",
+      "file": "design_center/create_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateApplicationTemplate_sync",
+      "title": "Snippet for the update_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_application_template.",
+      "file": "design_center/update_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ImportApplicationTemplate_sync",
+      "title": "Snippet for the import_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_template.",
+      "file": "design_center/import_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ImportApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ImportApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ImportApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteApplicationTemplate_sync",
+      "title": "Snippet for the delete_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application_template.",
+      "file": "design_center/delete_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CommitApplicationTemplate_sync",
+      "title": "Snippet for the commit_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#commit_application_template.",
+      "file": "design_center/commit_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "commit_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#commit_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CommitApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplateRevision",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CommitApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CommitApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_SnapshotApplicationTemplate_sync",
+      "title": "Snippet for the snapshot_application_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#snapshot_application_template.",
+      "file": "design_center/snapshot_application_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "snapshot_application_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#snapshot_application_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::SnapshotApplicationTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "SnapshotApplicationTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.SnapshotApplicationTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateApplicationTemplateIaC_sync",
+      "title": "Snippet for the generate_application_template_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_ia_c.",
+      "file": "design_center/generate_application_template_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_application_template_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationTemplateIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationTemplateIaCResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateApplicationTemplateIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateApplicationTemplateIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ExportApplicationTemplateIaC_sync",
+      "title": "Snippet for the export_application_template_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_template_ia_c.",
+      "file": "design_center/export_application_template_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_application_template_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_template_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ExportApplicationTemplateIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ExportApplicationTemplateIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ExportApplicationTemplateIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateApplicationTemplateRevisionIaC_sync",
+      "title": "Snippet for the generate_application_template_revision_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_revision_ia_c.",
+      "file": "design_center/generate_application_template_revision_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_application_template_revision_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_revision_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationTemplateRevisionIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationTemplateRevisionIaCResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateApplicationTemplateRevisionIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateApplicationTemplateRevisionIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ExportApplicationTemplateRevisionIaC_sync",
+      "title": "Snippet for the export_application_template_revision_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_template_revision_ia_c.",
+      "file": "design_center/export_application_template_revision_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_application_template_revision_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_template_revision_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ExportApplicationTemplateRevisionIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ExportApplicationTemplateRevisionIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ExportApplicationTemplateRevisionIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetComponent_sync",
+      "title": "Snippet for the get_component call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_component.",
+      "file": "design_center/get_component.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_component",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_component",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetComponentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Component",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetComponent",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetComponent",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListComponents_sync",
+      "title": "Snippet for the list_components call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_components.",
+      "file": "design_center/list_components.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_components",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_components",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListComponentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListComponentsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListComponents",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListComponents",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateComponent_sync",
+      "title": "Snippet for the create_component call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_component.",
+      "file": "design_center/create_component.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_component",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_component",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateComponentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Component",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateComponent",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateComponent",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateComponent_sync",
+      "title": "Snippet for the update_component call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_component.",
+      "file": "design_center/update_component.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_component",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_component",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateComponentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Component",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateComponent",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateComponent",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteComponent_sync",
+      "title": "Snippet for the delete_component call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_component.",
+      "file": "design_center/delete_component.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_component",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_component",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteComponentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteComponent",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteComponent",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetConnection_sync",
+      "title": "Snippet for the get_connection call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_connection.",
+      "file": "design_center/get_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connection",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Connection",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetConnection",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetConnection",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListConnections_sync",
+      "title": "Snippet for the list_connections call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_connections.",
+      "file": "design_center/list_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connections",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListConnectionsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListConnections",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListConnections",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateConnection_sync",
+      "title": "Snippet for the create_connection call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_connection.",
+      "file": "design_center/create_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connection",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Connection",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateConnection",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateConnection",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateConnection_sync",
+      "title": "Snippet for the update_connection call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_connection.",
+      "file": "design_center/update_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connection",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Connection",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnection",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateConnection",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteConnection_sync",
+      "title": "Snippet for the delete_connection call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_connection.",
+      "file": "design_center/delete_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connection",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnection",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteConnection",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetApplicationTemplateRevision_sync",
+      "title": "Snippet for the get_application_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template_revision.",
+      "file": "design_center/get_application_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_application_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetApplicationTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplateRevision",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetApplicationTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetApplicationTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListApplicationTemplateRevisions_sync",
+      "title": "Snippet for the list_application_template_revisions call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_template_revisions.",
+      "file": "design_center/list_application_template_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_application_template_revisions",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_template_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplateRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplateRevisionsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListApplicationTemplateRevisions",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListApplicationTemplateRevisions",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteApplicationTemplateRevision_sync",
+      "title": "Snippet for the delete_application_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application_template_revision.",
+      "file": "design_center/delete_application_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_application_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteApplicationTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteApplicationTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteApplicationTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetCatalog_sync",
+      "title": "Snippet for the get_catalog call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog.",
+      "file": "design_center/get_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_catalog",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Catalog",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetCatalog",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetCatalog",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListCatalogs_sync",
+      "title": "Snippet for the list_catalogs call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalogs.",
+      "file": "design_center/list_catalogs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_catalogs",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalogs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListCatalogsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListCatalogsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListCatalogs",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListCatalogs",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateCatalog_sync",
+      "title": "Snippet for the create_catalog call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog.",
+      "file": "design_center/create_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_catalog",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Catalog",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateCatalog",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateCatalog",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateCatalog_sync",
+      "title": "Snippet for the update_catalog call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_catalog.",
+      "file": "design_center/update_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_catalog",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Catalog",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateCatalog",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateCatalog",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteCatalog_sync",
+      "title": "Snippet for the delete_catalog call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog.",
+      "file": "design_center/delete_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_catalog",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteCatalog",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteCatalog",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateCatalogTemplate_sync",
+      "title": "Snippet for the create_catalog_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog_template.",
+      "file": "design_center/create_catalog_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_catalog_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateCatalogTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::CatalogTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateCatalogTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateCatalogTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetCatalogTemplate_sync",
+      "title": "Snippet for the get_catalog_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog_template.",
+      "file": "design_center/get_catalog_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_catalog_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetCatalogTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::CatalogTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetCatalogTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetCatalogTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListCatalogTemplates_sync",
+      "title": "Snippet for the list_catalog_templates call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalog_templates.",
+      "file": "design_center/list_catalog_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_catalog_templates",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalog_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListCatalogTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListCatalogTemplatesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListCatalogTemplates",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListCatalogTemplates",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateCatalogTemplate_sync",
+      "title": "Snippet for the update_catalog_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_catalog_template.",
+      "file": "design_center/update_catalog_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_catalog_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_catalog_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateCatalogTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::CatalogTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateCatalogTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateCatalogTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteCatalogTemplate_sync",
+      "title": "Snippet for the delete_catalog_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog_template.",
+      "file": "design_center/delete_catalog_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_catalog_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteCatalogTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteCatalogTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteCatalogTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateShare_sync",
+      "title": "Snippet for the create_share call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_share.",
+      "file": "design_center/create_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_share",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateShare",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateShare",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListShares_sync",
+      "title": "Snippet for the list_shares call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shares.",
+      "file": "design_center/list_shares.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_shares",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shares",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListSharesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListSharesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListShares",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListShares",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetShare_sync",
+      "title": "Snippet for the get_share call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_share.",
+      "file": "design_center/get_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_share",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Share",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetShare",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetShare",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteShare_sync",
+      "title": "Snippet for the delete_share call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_share.",
+      "file": "design_center/delete_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_share",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteShare",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteShare",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_SyncShare_sync",
+      "title": "Snippet for the sync_share call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#sync_share.",
+      "file": "design_center/sync_share.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sync_share",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#sync_share",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::SyncShareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "SyncShare",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.SyncShare",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetSharedTemplate_sync",
+      "title": "Snippet for the get_shared_template call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_shared_template.",
+      "file": "design_center/get_shared_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_shared_template",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_shared_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetSharedTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::SharedTemplate",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSharedTemplate",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetSharedTemplate",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListSharedTemplates_sync",
+      "title": "Snippet for the list_shared_templates call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shared_templates.",
+      "file": "design_center/list_shared_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_shared_templates",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shared_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListSharedTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListSharedTemplatesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListSharedTemplates",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListSharedTemplates",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetSharedTemplateRevision_sync",
+      "title": "Snippet for the get_shared_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_shared_template_revision.",
+      "file": "design_center/get_shared_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_shared_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_shared_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetSharedTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::SharedTemplateRevision",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSharedTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetSharedTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListSharedTemplateRevisions_sync",
+      "title": "Snippet for the list_shared_template_revisions call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shared_template_revisions.",
+      "file": "design_center/list_shared_template_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_shared_template_revisions",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_shared_template_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListSharedTemplateRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListSharedTemplateRevisionsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListSharedTemplateRevisions",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListSharedTemplateRevisions",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateCatalogTemplateRevision_sync",
+      "title": "Snippet for the create_catalog_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog_template_revision.",
+      "file": "design_center/create_catalog_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_catalog_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_catalog_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateCatalogTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateCatalogTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateCatalogTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetCatalogTemplateRevision_sync",
+      "title": "Snippet for the get_catalog_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog_template_revision.",
+      "file": "design_center/get_catalog_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_catalog_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_catalog_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetCatalogTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::CatalogTemplateRevision",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetCatalogTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetCatalogTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListCatalogTemplateRevisions_sync",
+      "title": "Snippet for the list_catalog_template_revisions call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalog_template_revisions.",
+      "file": "design_center/list_catalog_template_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_catalog_template_revisions",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_catalog_template_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListCatalogTemplateRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListCatalogTemplateRevisionsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListCatalogTemplateRevisions",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListCatalogTemplateRevisions",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteCatalogTemplateRevision_sync",
+      "title": "Snippet for the delete_catalog_template_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog_template_revision.",
+      "file": "design_center/delete_catalog_template_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_catalog_template_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_catalog_template_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteCatalogTemplateRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteCatalogTemplateRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteCatalogTemplateRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreateApplication_sync",
+      "title": "Snippet for the create_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_application.",
+      "file": "design_center/create_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreateApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Application",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreateApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetApplication_sync",
+      "title": "Snippet for the get_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application.",
+      "file": "design_center/get_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Application",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListApplications_sync",
+      "title": "Snippet for the list_applications call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_applications.",
+      "file": "design_center/list_applications.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_applications",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_applications",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListApplicationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListApplicationsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListApplications",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListApplications",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdateApplication_sync",
+      "title": "Snippet for the update_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_application.",
+      "file": "design_center/update_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdateApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Application",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdateApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeleteApplication_sync",
+      "title": "Snippet for the delete_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application.",
+      "file": "design_center/delete_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeleteApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeleteApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeployApplication_sync",
+      "title": "Snippet for the deploy_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#deploy_application.",
+      "file": "design_center/deploy_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deploy_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#deploy_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeployApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeployApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeployApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_PreviewApplication_sync",
+      "title": "Snippet for the preview_application call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#preview_application.",
+      "file": "design_center/preview_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "preview_application",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#preview_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::PreviewApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "PreviewApplication",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.PreviewApplication",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_FetchApplicationAssessmentReport_sync",
+      "title": "Snippet for the fetch_application_assessment_report call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#fetch_application_assessment_report.",
+      "file": "design_center/fetch_application_assessment_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_application_assessment_report",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#fetch_application_assessment_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::FetchApplicationAssessmentReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::FetchApplicationAssessmentReportResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "FetchApplicationAssessmentReport",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.FetchApplicationAssessmentReport",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateApplicationAssessmentReport_sync",
+      "title": "Snippet for the generate_application_assessment_report call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_assessment_report.",
+      "file": "design_center/generate_application_assessment_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_application_assessment_report",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_assessment_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationAssessmentReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateApplicationAssessmentReport",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateApplicationAssessmentReport",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateApplicationTemplateAssessmentReport_sync",
+      "title": "Snippet for the generate_application_template_assessment_report call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_assessment_report.",
+      "file": "design_center/generate_application_template_assessment_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_application_template_assessment_report",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_template_assessment_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationTemplateAssessmentReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateApplicationTemplateAssessmentReport",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateApplicationTemplateAssessmentReport",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateAssessmentReport_sync",
+      "title": "Snippet for the generate_assessment_report call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_assessment_report.",
+      "file": "design_center/generate_assessment_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_assessment_report",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_assessment_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateAssessmentReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateAssessmentReport",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateAssessmentReport",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateTerraformPlanAssessmentReport_sync",
+      "title": "Snippet for the generate_terraform_plan_assessment_report call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_terraform_plan_assessment_report.",
+      "file": "design_center/generate_terraform_plan_assessment_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_terraform_plan_assessment_report",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_terraform_plan_assessment_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateTerraformPlanAssessmentReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateTerraformPlanAssessmentReport",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateTerraformPlanAssessmentReport",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetPolicy_sync",
+      "title": "Snippet for the get_policy call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_policy.",
+      "file": "design_center/get_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Policy",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetPolicy",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetPolicy",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListPolicies_sync",
+      "title": "Snippet for the list_policies call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_policies.",
+      "file": "design_center/list_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policies",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListPoliciesResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListPolicies",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListPolicies",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_CreatePolicy_sync",
+      "title": "Snippet for the create_policy call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_policy.",
+      "file": "design_center/create_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#create_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::CreatePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Policy",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicy",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.CreatePolicy",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_UpdatePolicy_sync",
+      "title": "Snippet for the update_policy call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_policy.",
+      "file": "design_center/update_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_policy",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#update_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::UpdatePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::Policy",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdatePolicy",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.UpdatePolicy",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_DeletePolicy_sync",
+      "title": "Snippet for the delete_policy call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_policy.",
+      "file": "design_center/delete_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#delete_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::DeletePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicy",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.DeletePolicy",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_FetchFrameworks_sync",
+      "title": "Snippet for the fetch_frameworks call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#fetch_frameworks.",
+      "file": "design_center/fetch_frameworks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_frameworks",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#fetch_frameworks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::FetchFrameworksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::FetchFrameworksResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "FetchFrameworks",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.FetchFrameworks",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GenerateApplicationIaC_sync",
+      "title": "Snippet for the generate_application_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_ia_c.",
+      "file": "design_center/generate_application_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_application_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#generate_application_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::GenerateApplicationIaCResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GenerateApplicationIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GenerateApplicationIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ExportApplicationIaC_sync",
+      "title": "Snippet for the export_application_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_ia_c.",
+      "file": "design_center/export_application_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_application_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#export_application_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ExportApplicationIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ExportApplicationIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ExportApplicationIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ImportApplicationTemplateIaC_sync",
+      "title": "Snippet for the import_application_template_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_template_ia_c.",
+      "file": "design_center/import_application_template_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_application_template_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_template_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ImportApplicationTemplateIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ImportApplicationTemplateIaCResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ImportApplicationTemplateIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ImportApplicationTemplateIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_IngestApplicationTemplateIaC_sync",
+      "title": "Snippet for the ingest_application_template_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#ingest_application_template_ia_c.",
+      "file": "design_center/ingest_application_template_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ingest_application_template_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#ingest_application_template_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::IngestApplicationTemplateIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "IngestApplicationTemplateIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.IngestApplicationTemplateIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ImportApplicationIaC_sync",
+      "title": "Snippet for the import_application_ia_c call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_ia_c.",
+      "file": "design_center/import_application_ia_c.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_application_ia_c",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#import_application_ia_c",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ImportApplicationIaCRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ImportApplicationIaCResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ImportApplicationIaC",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ImportApplicationIaC",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_RegisterAppHubApplicationResources_sync",
+      "title": "Snippet for the register_app_hub_application_resources call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#register_app_hub_application_resources.",
+      "file": "design_center/register_app_hub_application_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "register_app_hub_application_resources",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#register_app_hub_application_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::RegisterAppHubApplicationResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "RegisterAppHubApplicationResources",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.RegisterAppHubApplicationResources",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_ListApplicationTemplateSystemRevisions_sync",
+      "title": "Snippet for the list_application_template_system_revisions call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_template_system_revisions.",
+      "file": "design_center/list_application_template_system_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_application_template_system_revisions",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#list_application_template_system_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplateSystemRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ListApplicationTemplateSystemRevisionsResponse",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "ListApplicationTemplateSystemRevisions",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.ListApplicationTemplateSystemRevisions",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_GetApplicationTemplateSystemRevision_sync",
+      "title": "Snippet for the get_application_template_system_revision call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template_system_revision.",
+      "file": "design_center/get_application_template_system_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_application_template_system_revision",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#get_application_template_system_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::GetApplicationTemplateSystemRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DesignCenter::V1::ApplicationTemplateSystemRevision",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "GetApplicationTemplateSystemRevision",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.GetApplicationTemplateSystemRevision",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "designcenter_v1_generated_DesignCenter_RecommendIAMRoles_sync",
+      "title": "Snippet for the recommend_iam_roles call in the DesignCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DesignCenter::V1::DesignCenter::Client#recommend_iam_roles.",
+      "file": "design_center/recommend_iam_roles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recommend_iam_roles",
+        "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client#recommend_iam_roles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DesignCenter::V1::RecommendIAMRolesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DesignCenter::Client",
+          "full_name": "::Google::Cloud::DesignCenter::V1::DesignCenter::Client"
+        },
+        "method": {
+          "short_name": "RecommendIAMRoles",
+          "full_name": "google.cloud.designcenter.v1.DesignCenter.RecommendIAMRoles",
+          "service": {
+            "short_name": "DesignCenter",
+            "full_name": "google.cloud.designcenter.v1.DesignCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
