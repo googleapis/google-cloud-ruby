@@ -751,6 +751,8 @@
   "google-cloud-run-v2+FILLER": "0.0.0",
   "google-cloud-saas_platform-saas_service_mgmt": "0.4.0",
   "google-cloud-saas_platform-saas_service_mgmt+FILLER": "0.0.0",
+  "google-cloud-saas_platform-saas_service_mgmt-v1": "0.0.1",
+  "google-cloud-saas_platform-saas_service_mgmt-v1+FILLER": "0.0.0",
   "google-cloud-saas_platform-saas_service_mgmt-v1beta1": "0.10.0",
   "google-cloud-saas_platform-saas_service_mgmt-v1beta1+FILLER": "0.0.0",
   "google-cloud-scheduler": "3.3.0",
