@@ -307,6 +307,7 @@ describe "Buckets Snippets" do
   describe "requester_pays" do
     it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
+      bucket.user_project = true
       bucket.requester_pays = false
 
       assert_output "Requester pays has been enabled for #{bucket.name}\n" do
@@ -333,6 +334,10 @@ describe "Buckets Snippets" do
         get_requester_pays_status bucket_name: bucket.name
       end
       refute bucket.requester_pays?
+    ensure
+      bucket.user_project = true
+      bucket.requester_pays = false
+      bucket.user_project = nil
     end
   end
 

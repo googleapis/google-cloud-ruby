@@ -57,6 +57,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and is unable to get the file" do
+    skip PAP_SKIP_MESSAGE
     refute bucket.uniform_bucket_level_access?
     file = bucket.create_file local_file, "ReaderTest.png"
 
