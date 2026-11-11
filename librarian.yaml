@@ -2769,17 +2769,6 @@ libraries:
       - test/google/cloud/pubsub/v1/iam_policy_test.rb
       - test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb
       - test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb
-  - name: google-cloud-rapid_migration_assessment
-    version: 2.3.0
-    apis:
-      - path: google/cloud/rapidmigrationassessment/v1
-    ruby:
-      wrapper_of:
-        - v1:2.0
-  - name: google-cloud-rapid_migration_assessment-v1
-    version: 2.8.0
-    apis:
-      - path: google/cloud/rapidmigrationassessment/v1
   - name: google-cloud-recaptcha_enterprise
     version: 2.3.0
     apis:
