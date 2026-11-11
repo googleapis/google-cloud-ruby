@@ -40,8 +40,8 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
 
   let :bucket do
     b = safe_gcs_execute { storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location) }
-    b.default_kms_key = kms_key
-    b.customer_managed_encryption_enforcement_config = customer_managed_config
+    safe_gcs_execute { b.default_kms_key = kms_key }
+    safe_gcs_execute { b.customer_managed_encryption_enforcement_config = customer_managed_config }
     b
   end
 
@@ -71,7 +71,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
 
     it "can update its default kms key to another key" do
       _(bucket.default_kms_key).must_equal kms_key
-      bucket.default_kms_key = kms_key_2
+      safe_gcs_execute { bucket.default_kms_key = kms_key_2 }
       _(bucket.default_kms_key).must_equal kms_key_2
       bucket.reload!
       _(bucket.default_kms_key).must_equal kms_key_2
@@ -79,7 +79,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
 
     it "can remove its default kms key by setting encryption to nil" do
       _(bucket.default_kms_key).must_equal kms_key
-      bucket.default_kms_key = nil
+      safe_gcs_execute { bucket.default_kms_key = nil }
       _(bucket.default_kms_key).must_be :nil?
       bucket.reload!
       _(bucket.default_kms_key).must_be :nil?
@@ -101,10 +101,12 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     it "updates encryption enforcement configs" do
       _(bucket.customer_supplied_encryption_enforcement_config).must_be :nil?
 
-      bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config
+      safe_gcs_execute { bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config }
       _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
-      bucket.update do |b|
-        b.google_managed_encryption_enforcement_config = google_managed_config
+      safe_gcs_execute do
+        bucket.update do |b|
+          b.google_managed_encryption_enforcement_config = google_managed_config
+        end
       end
       _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
 
@@ -114,10 +116,12 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     end
 
     it "deletes all encryption enforcement configs" do
-      bucket.update do |b|
-        b.customer_managed_encryption_enforcement_config = nil
-        b.customer_supplied_encryption_enforcement_config = nil
-        b.google_managed_encryption_enforcement_config = nil
+      safe_gcs_execute do
+        bucket.update do |b|
+          b.customer_managed_encryption_enforcement_config = nil
+          b.customer_supplied_encryption_enforcement_config = nil
+          b.google_managed_encryption_enforcement_config = nil
+        end
       end
       # Removed all encryption enforcement configs without removing default_kms_key
       _(bucket.customer_managed_encryption_enforcement_config).must_be :nil?

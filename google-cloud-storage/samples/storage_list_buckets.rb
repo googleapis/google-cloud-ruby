@@ -18,7 +18,7 @@ def list_buckets
 
   storage = Google::Cloud::Storage.new
 
-  storage.buckets.each do |bucket|
+  storage.buckets.all do |bucket|
     puts bucket.name
   end
 end

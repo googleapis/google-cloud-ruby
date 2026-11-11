@@ -28,17 +28,21 @@ describe Google::Cloud::Storage::Bucket, :contexts, :storage do
   let(:file_name) { "CloudLogo1" }
   let(:file_name2) { "CloudLogo2" }
 
-  before(:all) do
+  before do
+    bucket.files.all { |f| f.delete rescue nil }
     bucket.create_file local_file, file_name
     bucket.create_file local_file, file_name2
-    custom_hash1 = context_custom_hash custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
-    custom_hash2 = context_custom_hash custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     set_object_contexts bucket_name: bucket.name, file_name: file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
     set_object_contexts bucket_name: bucket.name, file_name: file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
   end
 
+  after do
+    bucket.files.all { |f| f.delete rescue nil }
+  end
+
   it "lists objects with a specific context key and value" do
     list = bucket.files filter: "contexts.\"#{custom_context_key1}\"=\"#{custom_context_value1}\""
+    _(list).wont_be :empty?
     list.each do |file|
       _(file.name).must_equal file_name
     end
@@ -46,6 +50,7 @@ describe Google::Cloud::Storage::Bucket, :contexts, :storage do
 
   it "lists objects with a specific context key" do
     list = bucket.files filter: "contexts.\"#{custom_context_key1}\":*"
+    _(list).wont_be :empty?
     list.each do |file|
       _(file.name).must_equal file_name
     end
@@ -53,6 +58,7 @@ describe Google::Cloud::Storage::Bucket, :contexts, :storage do
 
   it "lists objects that do not have a specific context key" do
     list = bucket.files filter: "-contexts.\"#{custom_context_key1}\":*"
+    _(list).wont_be :empty?
     list.each do |file|
       _(file.name).wont_equal file_name
     end
@@ -60,6 +66,7 @@ describe Google::Cloud::Storage::Bucket, :contexts, :storage do
 
   it "lists objects that do not have a specific context key and value" do
     list = bucket.files filter: "-contexts.\"#{custom_context_key2}\"=\"#{custom_context_value2}\""
+    _(list).wont_be :empty?
     list.each do |file|
       _(file.name).must_equal file_name
       _(file.name).wont_equal file_name2

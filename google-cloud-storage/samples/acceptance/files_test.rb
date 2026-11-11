@@ -80,7 +80,6 @@ describe "Files Snippets" do
   end
 
   after do
-    bucket.requester_pays = false
     bucket.files.each(&:delete)
   end
 
@@ -225,20 +224,24 @@ describe "Files Snippets" do
   end
 
   it "download_file_requester_pays" do
-    bucket.requester_pays = true
-    bucket.create_file local_file, remote_file_name
+    rp_bucket = create_bucket_helper random_bucket_name
+    rp_bucket.user_project = true
+    rp_bucket.requester_pays = true
+    rp_bucket.create_file local_file, remote_file_name
 
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
 
       assert_output "Downloaded #{remote_file_name} using billing project #{storage_client.project}\n" do
-        download_file_requester_pays bucket_name:     bucket.name,
+        download_file_requester_pays bucket_name:     rp_bucket.name,
                                      file_name:       remote_file_name,
                                      local_file_path: tmpfile
       end
 
       assert File.file? tmpfile
     end
+  ensure
+    delete_bucket_helper rp_bucket.name if rp_bucket
   end
 
   it "download_encrypted_file" do
@@ -339,10 +342,12 @@ describe "Files Snippets" do
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
     it "fetches all object contexts" do
-
-      assert_output "Custom Contexts for #{remote_file_name} are:\nKey: #{custom_context_key1}, Value: #{custom_context_value1}\nKey: #{custom_context_key2}, Value: #{custom_context_value2}\n" do
+      out, _err = capture_io do
         get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
       end
+      assert_includes out, "Custom Contexts for #{remote_file_name} are:\n"
+      assert_includes out, "Key: #{custom_context_key1}, Value: #{custom_context_value1}\n"
+      assert_includes out, "Key: #{custom_context_key2}, Value: #{custom_context_value2}\n"
     end
   end
 
