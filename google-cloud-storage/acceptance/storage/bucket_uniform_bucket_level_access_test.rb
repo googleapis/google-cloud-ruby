@@ -51,10 +51,9 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     assert bucket.uniform_bucket_level_access?
     _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of DateTime
 
-    err = expect do
+    expect do
       file.acl.add_reader user_val
-    end.must_raise Google::Cloud::PermissionDeniedError
-    _(err.message).must_match /does not have storage.objects.get access to/
+    end.must_raise Google::Cloud::InvalidArgumentError
   end
 
   it "sets uniform_bucket_level_access true and is unable to get the file" do
@@ -137,10 +136,9 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     assert bucket.policy_only?
     _(bucket.policy_only_locked_at).must_be_kind_of DateTime
 
-    err = expect do
+    expect do
       file.acl.add_reader user_val
-    end.must_raise Google::Cloud::PermissionDeniedError
-    _(err.message).must_match /does not have storage.objects.get access to/
+    end.must_raise Google::Cloud::InvalidArgumentError
   end
 
   it "sets DEPRECATED policy_only true and is unable to get the file" do

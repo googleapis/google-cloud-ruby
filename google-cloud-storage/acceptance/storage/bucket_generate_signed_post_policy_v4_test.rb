@@ -157,7 +157,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
   it "generates a signed post object v4 with acl and cache-control file headers" do
     fields = {
-      "acl" => "public-read",
+      "acl" => "project-private",
       "cache-control" => "public,max-age=86400"
     }
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, fields: fields

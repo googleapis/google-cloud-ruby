@@ -241,6 +241,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     Tempfile.open "google-cloud" do |tmpfile|
+      tmpfile.binmode
       # write to the file since the mocked call won't
       tmpfile.write gzipped_data
       tmpfile.rewind
@@ -267,6 +268,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     file.gapi.crc32c = Digest::CRC32c.base64digest gzipped_data
 
     Tempfile.open "google-cloud" do |tmpfile|
+      tmpfile.binmode
       # write to the file since the mocked call won't
       tmpfile.write gzipped_data
       tmpfile.rewind
@@ -1614,7 +1616,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   def gzip_data data
-    gz = StringIO.new("")
+    gz = StringIO.new "".b
     z = Zlib::GzipWriter.new(gz)
     z.write data
     z.close # write the gzip footer
