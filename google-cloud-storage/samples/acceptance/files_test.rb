@@ -81,9 +81,9 @@ describe "Files Snippets" do
 
   after do
     bucket.user_project = true
-    bucket.requester_pays = false
-    bucket.user_project = nil
+    bucket.requester_pays = false if bucket.requester_pays?
     bucket.files.each(&:delete)
+    bucket.user_project = nil
   end
 
   it "list_files" do
@@ -242,6 +242,10 @@ describe "Files Snippets" do
 
       assert File.file? tmpfile
     end
+  ensure
+    bucket.user_project = true
+    bucket.requester_pays = false
+    sleep 2
   end
 
   it "download_encrypted_file" do

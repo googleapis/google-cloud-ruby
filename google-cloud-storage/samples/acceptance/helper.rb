@@ -55,7 +55,7 @@ end
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
-    bucket = storage_client.bucket bucket_name
+    bucket = storage_client.bucket bucket_name, user_project: true
     return unless bucket
 
     bucket.files.each(&:delete)
