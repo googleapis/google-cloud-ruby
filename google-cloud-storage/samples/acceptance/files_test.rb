@@ -80,10 +80,7 @@ describe "Files Snippets" do
   end
 
   after do
-    bucket.user_project = true
-    bucket.requester_pays = false if bucket.requester_pays?
     bucket.files.each(&:delete)
-    bucket.user_project = nil
   end
 
   it "list_files" do
@@ -245,6 +242,7 @@ describe "Files Snippets" do
   ensure
     bucket.user_project = true
     bucket.requester_pays = false
+    bucket.user_project = nil
     sleep 2
   end
 
