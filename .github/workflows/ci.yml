@@ -53,10 +53,21 @@ jobs:
             task: "--test"
       fail-fast: false
     runs-on: ${{ matrix.os }}
+    env:
+      # Load ruby-common-tools from the checkout below. Otherwise every toys run
+      # fetches it with load_git, which intermittently fails with
+      # "Unable to fetch commit: HEAD".
+      RUBY_COMMON_TOOLS: ${{ github.workspace }}/.ruby-common-tools
     steps:
     - name: Checkout repo
       uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       with:
+        persist-credentials: false
+    - name: Checkout ruby-common-tools
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      with:
+        repository: googleapis/ruby-common-tools
+        path: .ruby-common-tools
         persist-credentials: false
     - name: Install Ruby ${{ matrix.ruby }}
       uses: ruby/setup-ruby@d45b1a4e94b71acab930e56e79c6aa188764e7f9 # v1.316.0
@@ -80,7 +91,8 @@ jobs:
       run: |
         toys ci -v ${{ matrix.task }} --github-event-name="${GITHUB_EVENT_NAME}" --github-event-payload="${GITHUB_EVENT_PATH}" ${GITHUB_EVENT_INPUTS_FLAGS}
     - name: Open Issues
-      if: ${{ failure() }}
+      # toys ci writes the failures report only for scheduled runs.
+      if: ${{ failure() && github.event_name == 'schedule' }}
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
