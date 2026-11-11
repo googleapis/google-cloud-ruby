@@ -27,9 +27,6 @@ describe "Storage Control Rapid Cache" do
   # The Rapid Cache ID must be the same as the zone.
   let(:cache_id) { zone }
   let(:cache_name) { "projects/_/buckets/#{bucket_name}/rapidCaches/#{cache_id}" }
-  # The disable operation only completes once the cache has been fully
-  # removed, which can take more than an hour, so bound the wait.
-  let(:disable_timeout) { 600 }
   # Like the Anywhere Cache tests, these tests are not run in CI because a
   # bucket cannot be deleted until its Rapid Cache has been fully removed,
   # which can take more than 30 minutes. Set
@@ -54,7 +51,7 @@ describe "Storage Control Rapid Cache" do
     cache_active = @bucket_name && rapid_cache_active?(@bucket_name, zone)
     if cache_active
       capture_io do
-        disable_rapid_cache bucket_name: @bucket_name, cache_id: zone, timeout: disable_timeout
+        disable_rapid_cache bucket_name: @bucket_name, cache_id: zone
       end
     end
   ensure
@@ -79,6 +76,7 @@ describe "Storage Control Rapid Cache" do
     assert_includes out_get, "Zone: #{zone}"
     assert_includes out_get, "Cache type: rapid-cache-ultra"
     assert_includes out_get, "State: running"
+    assert_includes out_get, "TTL: "
 
     out_list, _err = capture_io do
       list_rapid_caches bucket_name: bucket_name
@@ -92,14 +90,14 @@ describe "Storage Control Rapid Cache" do
     assert_includes out_update, "TTL: 172800 seconds"
 
     out_disable, _err = capture_io do
-      disable_rapid_cache bucket_name: bucket_name, cache_id: cache_id, timeout: disable_timeout
+      disable_rapid_cache bucket_name: bucket_name, cache_id: cache_id
     end
-    # The disable operation may still be in progress after the timeout.
-    assert_includes out_disable, cache_name
+    assert_includes out_disable, "Started disabling Rapid Cache: #{cache_name}"
+    assert_includes out_disable, "Operation: "
 
-    # The cache moves to the "disabled" state shortly after the disable
-    # request, even if the operation has not completed yet. Wait up to about
-    # two minutes for the state change.
+    # The cache moves to the "disabled" state within seconds of the disable
+    # request, long before the operation completes. Wait up to about two
+    # minutes for the state change.
     cache_active = rapid_cache_active? bucket_name, cache_id
     12.times do
       break unless cache_active

@@ -39,6 +39,7 @@ def get_rapid_cache bucket_name:, cache_id:
   puts "Zone: #{rapid_cache.zone}"
   puts "Cache type: #{rapid_cache.cache_type}"
   puts "State: #{rapid_cache.state}"
+  puts "TTL: #{rapid_cache.ttl&.seconds} seconds"
 end
 # [END storage_control_get_rapid_cache]
 
