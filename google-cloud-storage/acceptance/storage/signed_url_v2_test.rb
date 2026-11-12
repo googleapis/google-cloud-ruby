@@ -88,6 +88,9 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       local_file = File.new files[:logo][:path]
       file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucketAuto.png"
       client = bucket.service.credentials.respond_to?(:client) ? bucket.service.credentials.client : bucket.service.credentials
+      client.define_singleton_method(:service_account_email) { nil } unless client.respond_to?(:service_account_email)
+      client.define_singleton_method(:impersonation_url) { nil } unless client.respond_to?(:impersonation_url)
+
       issuer = nil
       [:issuer, :service_account_email].each do |method|
         issuer ||= client.public_send(method) if client.respond_to?(method) && !client.public_send(method).to_s.empty?
