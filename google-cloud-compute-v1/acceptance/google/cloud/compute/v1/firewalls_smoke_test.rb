@@ -17,6 +17,11 @@ class FirewallsSmokeTest < Minitest::Test
   def teardown
     @firewalls.each do |firewall|
       @client.delete project: @default_project, firewall: firewall
+    rescue ::Google::Cloud::NotFoundError
+      # GCE Enforcer already removed the rule in the CI project.
+    rescue ::Google::Cloud::InvalidArgumentError => e
+      # GCE Enforcer's own delete of this rule is still running.
+      raise unless e.message.include? "is not ready"
     end
   end
 
@@ -33,8 +38,8 @@ class FirewallsSmokeTest < Minitest::Test
       ],
     }
     operation = @client.insert project: @default_project, firewall_resource: resource
-    @client_ops.wait operation: operation.operation.name, project: @default_project
     @firewalls.append @name
+    @client_ops.wait operation: operation.operation.name, project: @default_project
     fetched = @client.get project: @default_project, firewall: @name
     assert_equal "tcp", fetched.allowed[0].I_p_protocol
   end
