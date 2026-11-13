@@ -1,4 +1,4 @@
-# Copyright 2026 Google, Inc
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "uri"
-
 require_relative "regional_helper"
 
 describe "#create_regional_secret_with_cloud_sql_credentials", :regional_secret_manager_snippet do
@@ -25,7 +23,7 @@ describe "#create_regional_secret_with_cloud_sql_credentials", :regional_secret_
     end
     secret_id_regex = Regexp.escape secret_id
     assert_match %r{Created regional secret: projects/\S+locations/\S+/secrets/#{secret_id_regex}}, out
-    assert_match(/Grant this identity Cloud SQL IAM permissions/, out)
+    assert_match(/Grant the Cloud SQL User rotate IAM permissions/, out)
 
     fetched_secret = client.get_secret name: secret_name
     assert_equal :CLOUD_SQL_DB_CREDENTIALS, fetched_secret.secret_type
