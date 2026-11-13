@@ -49,7 +49,10 @@ module Google
       #   configuration to Google APIs can compromise the security of your systems and data.
       #
       class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"].freeze
+        SCOPE = [
+          "https://www.googleapis.com/auth/devstorage.full_control",
+          "https://www.googleapis.com/auth/iam"
+        ].freeze
         PATH_ENV_VARS = [
           "STORAGE_CREDENTIALS",
           "STORAGE_KEYFILE",
