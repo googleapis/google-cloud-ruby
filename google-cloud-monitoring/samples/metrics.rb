@@ -239,7 +239,7 @@ def list_metric_descriptors project_id:
   client = Google::Cloud::Monitoring.metric_service
   project_name = client.project_path project: project_id
 
-  results = client.list_metric_descriptors name: project_name
+  results = client.list_metric_descriptors name: project_name, page_size: 100
   results.each do |descriptor|
     p descriptor.type
   end

@@ -30,16 +30,16 @@ class MonitoringSpec < Minitest::Spec
   let(:project_path) { client.project_path project: project_id }
   let(:random_id) { rand(36**10).to_s(36) }
 
-  def retry_block count
-    secs = 1
+  def retry_block count, max_delay: 15
+    attempt = 0
     loop do
       begin
         return yield
       rescue StandardError => e
-        raise e if secs >= count
+        attempt += 1
+        raise e if attempt >= count
       end
-      sleep secs
-      secs += 1
+      sleep [2**(attempt - 1), max_delay].min
     end
   end
 end
