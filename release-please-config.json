@@ -2037,10 +2037,6 @@
       "component": "google-shopping-merchant-accounts-v1",
       "version_file": "lib/google/shopping/merchant/accounts/v1/version.rb"
     },
-    "google-shopping-merchant-accounts-v1beta": {
-      "component": "google-shopping-merchant-accounts-v1beta",
-      "version_file": "lib/google/shopping/merchant/accounts/v1beta/version.rb"
-    },
     "google-shopping-merchant-conversions": {
       "component": "google-shopping-merchant-conversions",
       "version_file": "lib/google/shopping/merchant/conversions/version.rb"
@@ -2048,10 +2044,6 @@
     "google-shopping-merchant-conversions-v1": {
       "component": "google-shopping-merchant-conversions-v1",
       "version_file": "lib/google/shopping/merchant/conversions/v1/version.rb"
-    },
-    "google-shopping-merchant-conversions-v1beta": {
-      "component": "google-shopping-merchant-conversions-v1beta",
-      "version_file": "lib/google/shopping/merchant/conversions/v1beta/version.rb"
     },
     "google-shopping-merchant-data_sources": {
       "component": "google-shopping-merchant-data_sources",
@@ -2061,10 +2053,6 @@
       "component": "google-shopping-merchant-data_sources-v1",
       "version_file": "lib/google/shopping/merchant/data_sources/v1/version.rb"
     },
-    "google-shopping-merchant-data_sources-v1beta": {
-      "component": "google-shopping-merchant-data_sources-v1beta",
-      "version_file": "lib/google/shopping/merchant/data_sources/v1beta/version.rb"
-    },
     "google-shopping-merchant-inventories": {
       "component": "google-shopping-merchant-inventories",
       "version_file": "lib/google/shopping/merchant/inventories/version.rb"
@@ -2072,10 +2060,6 @@
     "google-shopping-merchant-inventories-v1": {
       "component": "google-shopping-merchant-inventories-v1",
       "version_file": "lib/google/shopping/merchant/inventories/v1/version.rb"
-    },
-    "google-shopping-merchant-inventories-v1beta": {
-      "component": "google-shopping-merchant-inventories-v1beta",
-      "version_file": "lib/google/shopping/merchant/inventories/v1beta/version.rb"
     },
     "google-shopping-merchant-issue_resolution": {
       "component": "google-shopping-merchant-issue_resolution",
@@ -2085,10 +2069,6 @@
       "component": "google-shopping-merchant-issue_resolution-v1",
       "version_file": "lib/google/shopping/merchant/issue_resolution/v1/version.rb"
     },
-    "google-shopping-merchant-issue_resolution-v1beta": {
-      "component": "google-shopping-merchant-issue_resolution-v1beta",
-      "version_file": "lib/google/shopping/merchant/issue_resolution/v1beta/version.rb"
-    },
     "google-shopping-merchant-lfp": {
       "component": "google-shopping-merchant-lfp",
       "version_file": "lib/google/shopping/merchant/lfp/version.rb"
@@ -2096,10 +2076,6 @@
     "google-shopping-merchant-lfp-v1": {
       "component": "google-shopping-merchant-lfp-v1",
       "version_file": "lib/google/shopping/merchant/lfp/v1/version.rb"
-    },
-    "google-shopping-merchant-lfp-v1beta": {
-      "component": "google-shopping-merchant-lfp-v1beta",
-      "version_file": "lib/google/shopping/merchant/lfp/v1beta/version.rb"
     },
     "google-shopping-merchant-loyalty_customers": {
       "component": "google-shopping-merchant-loyalty_customers",
@@ -2117,10 +2093,6 @@
       "component": "google-shopping-merchant-notifications-v1",
       "version_file": "lib/google/shopping/merchant/notifications/v1/version.rb"
     },
-    "google-shopping-merchant-notifications-v1beta": {
-      "component": "google-shopping-merchant-notifications-v1beta",
-      "version_file": "lib/google/shopping/merchant/notifications/v1beta/version.rb"
-    },
     "google-shopping-merchant-order_tracking": {
       "component": "google-shopping-merchant-order_tracking",
       "version_file": "lib/google/shopping/merchant/order_tracking/version.rb"
@@ -2128,10 +2100,6 @@
     "google-shopping-merchant-order_tracking-v1": {
       "component": "google-shopping-merchant-order_tracking-v1",
       "version_file": "lib/google/shopping/merchant/order_tracking/v1/version.rb"
-    },
-    "google-shopping-merchant-order_tracking-v1beta": {
-      "component": "google-shopping-merchant-order_tracking-v1beta",
-      "version_file": "lib/google/shopping/merchant/order_tracking/v1beta/version.rb"
     },
     "google-shopping-merchant-products": {
       "component": "google-shopping-merchant-products",
@@ -2141,10 +2109,6 @@
       "component": "google-shopping-merchant-products-v1",
       "version_file": "lib/google/shopping/merchant/products/v1/version.rb"
     },
-    "google-shopping-merchant-products-v1beta": {
-      "component": "google-shopping-merchant-products-v1beta",
-      "version_file": "lib/google/shopping/merchant/products/v1beta/version.rb"
-    },
     "google-shopping-merchant-promotions": {
       "component": "google-shopping-merchant-promotions",
       "version_file": "lib/google/shopping/merchant/promotions/version.rb"
@@ -2152,10 +2116,6 @@
     "google-shopping-merchant-promotions-v1": {
       "component": "google-shopping-merchant-promotions-v1",
       "version_file": "lib/google/shopping/merchant/promotions/v1/version.rb"
-    },
-    "google-shopping-merchant-promotions-v1beta": {
-      "component": "google-shopping-merchant-promotions-v1beta",
-      "version_file": "lib/google/shopping/merchant/promotions/v1beta/version.rb"
     },
     "google-shopping-merchant-quota": {
       "component": "google-shopping-merchant-quota",
@@ -2165,10 +2125,6 @@
       "component": "google-shopping-merchant-quota-v1",
       "version_file": "lib/google/shopping/merchant/quota/v1/version.rb"
     },
-    "google-shopping-merchant-quota-v1beta": {
-      "component": "google-shopping-merchant-quota-v1beta",
-      "version_file": "lib/google/shopping/merchant/quota/v1beta/version.rb"
-    },
     "google-shopping-merchant-reports": {
       "component": "google-shopping-merchant-reports",
       "version_file": "lib/google/shopping/merchant/reports/version.rb"
@@ -2177,10 +2133,6 @@
       "component": "google-shopping-merchant-reports-v1",
       "version_file": "lib/google/shopping/merchant/reports/v1/version.rb"
     },
-    "google-shopping-merchant-reports-v1beta": {
-      "component": "google-shopping-merchant-reports-v1beta",
-      "version_file": "lib/google/shopping/merchant/reports/v1beta/version.rb"
-    },
     "google-shopping-merchant-reviews": {
       "component": "google-shopping-merchant-reviews",
       "version_file": "lib/google/shopping/merchant/reviews/version.rb"
@@ -2188,10 +2140,6 @@
     "google-shopping-merchant-reviews-v1": {
       "component": "google-shopping-merchant-reviews-v1",
       "version_file": "lib/google/shopping/merchant/reviews/v1/version.rb"
-    },
-    "google-shopping-merchant-reviews-v1beta": {
-      "component": "google-shopping-merchant-reviews-v1beta",
-      "version_file": "lib/google/shopping/merchant/reviews/v1beta/version.rb"
     },
     "grafeas": {
       "component": "grafeas",
