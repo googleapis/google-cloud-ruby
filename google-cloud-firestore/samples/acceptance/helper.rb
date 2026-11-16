@@ -84,3 +84,16 @@ def delete_composite_index name:
   request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new name: name
   $firestore_admin.delete_index request
 end
+
+##
+# Asserts that inspected Ruby hash output contains a key/value entry under both
+# Ruby <3.4 (`:key=>value`) and Ruby >=3.4 (`key: value`) formatting.
+#
+# @param output [String] Captured stdout output.
+# @param key [String, Symbol] Hash key name.
+# @param value [String] Inspected value fragment.
+def assert_hash_entry output, key, value
+  escaped_key = Regexp.escape key.to_s
+  escaped_value = Regexp.escape value.to_s
+  assert_match(/(?:#{escaped_key}: |:#{escaped_key}=>)#{escaped_value}/, output)
+end
