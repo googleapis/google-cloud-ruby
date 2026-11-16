@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n.google/cloud/ces/v1beta/file_search_tool.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"\xf3\x01\n\x0e\x46ileSearchTool\x12L\n\x0b\x63orpus_type\x18\x03 \x01(\x0e\x32\x32.google.cloud.ces.v1beta.FileSearchTool.CorpusTypeB\x03\xe0\x41\x01\x12\x11\n\x04name\x18\x04 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0b\x64\x65scription\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x66ile_corpus\x18\x06 \x01(\tB\x03\xe0\x41\x01\"L\n\nCorpusType\x12\x1b\n\x17\x43ORPUS_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n\nUSER_OWNED\x10\x01\x12\x11\n\rFULLY_MANAGED\x10\x02\x42\x63\n\x1b\x63om.google.cloud.ces.v1betaB\x13\x46ileSearchToolProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
+descriptor_data = "\n.google/cloud/ces/v1beta/file_search_tool.proto\x12\x17google.cloud.ces.v1beta\x1a\x1fgoogle/api/field_behavior.proto\"\xf7\x01\n\x0e\x46ileSearchTool\x12M\n\x0b\x63orpus_type\x18\x03 \x01(\x0e\x32\x32.google.cloud.ces.v1beta.FileSearchTool.CorpusTypeB\x04\xe2\x41\x01\x01\x12\x12\n\x04name\x18\x04 \x01(\tB\x04\xe2\x41\x01\x02\x12\x19\n\x0b\x64\x65scription\x18\x05 \x01(\tB\x04\xe2\x41\x01\x01\x12\x19\n\x0b\x66ile_corpus\x18\x06 \x01(\tB\x04\xe2\x41\x01\x01\"L\n\nCorpusType\x12\x1b\n\x17\x43ORPUS_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n\nUSER_OWNED\x10\x01\x12\x11\n\rFULLY_MANAGED\x10\x02\x42\x63\n\x1b\x63om.google.cloud.ces.v1betaB\x13\x46ileSearchToolProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

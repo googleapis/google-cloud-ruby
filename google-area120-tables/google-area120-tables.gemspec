@@ -1,27 +1,27 @@
-# -*- ruby -*-
-# encoding: utf-8
-
 require File.expand_path("lib/google/area120/tables/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-area120-tables"
-  gem.version       = Google::Area120::Tables::VERSION
+  gem.name = "google-area120-tables"
+  gem.version = Google::Area120::Tables::VERSION
+  gem.authors = ["Google LLC"]
+  gem.email = "googleapis-packages@google.com"
+  gem.description =
+    "This gem is obsolete because the related Google backend is turned down. " \
+    "For more information, see https://cloud.google.com/terms/deprecation."
+  gem.summary = "This gem is obsolete because the related backend is turned down."
+  gem.post_install_message = <<~MESSAGE
 
-  gem.authors       = ["Google LLC"]
-  gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
-  gem.summary       = "Area 120 Tables is a collaborative database program developed out of Google's Area 120 incubator."
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
-  gem.license       = "Apache-2.0"
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    The google-area120-tables gem is OBSOLETE.
+    For more information, see:
+    https://cloud.google.com/terms/deprecation
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  gem.platform      = Gem::Platform::RUBY
-
-  gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
+  MESSAGE
+  gem.homepage = "https://github.com/googleapis/google-cloud-ruby"
+  gem.license = "Apache-2.0"
+  gem.platform = Gem::Platform::RUBY
+  gem.files = ["README.md", "LICENSE.md", ".yardopts", "lib/google/area120/tables/version.rb"]
   gem.require_paths = ["lib"]
-
-  gem.required_ruby_version = ">= 3.2"
-
-  gem.add_dependency "google-area120-tables-v1alpha1", ">= 0.7", "< 2.a"
-  gem.add_dependency "google-cloud-core", "~> 1.6"
+  gem.required_ruby_version = ">= 3.0"
 end

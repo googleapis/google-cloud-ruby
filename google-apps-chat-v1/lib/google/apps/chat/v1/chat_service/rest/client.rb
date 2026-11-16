@@ -318,6 +318,11 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.replace_message_cards.timeout = 30.0
+                  default_config.rpcs.replace_message_cards.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -7026,6 +7031,104 @@ module Google
               end
 
               ##
+              # Replaces the cards included in a message.
+              #
+              # A Chat app can only replace cards on a human-created message if the message
+              # already contains cards, and the cards were created by the app.
+              #
+              # If the app replaces the cards with an empty list, the cards are removed.
+              # After removing the cards, the app cannot add cards back to the message.
+              #
+              # Requires [app
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #   - `https://www.googleapis.com/auth/chat.bot`
+              #
+              # @overload replace_message_cards(request, options = nil)
+              #   Pass arguments to `replace_message_cards` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::ReplaceMessageCardsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::ReplaceMessageCardsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload replace_message_cards(name: nil, cards_v2: nil)
+              #   Pass arguments to `replace_message_cards` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the message.
+              #
+              #     Format: `spaces/{space}/messages/{message}`
+              #   @param cards_v2 [::Array<::Google::Apps::Chat::V1::CardWithId, ::Hash>]
+              #     Optional. An array of
+              #     [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
+              #     to be included in the message. These cards will replace the existing cards
+              #     of the message. If empty, the original cards included in the message will
+              #     be cleared.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::ReplaceMessageCardsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::ReplaceMessageCardsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::ReplaceMessageCardsRequest.new
+              #
+              #   # Call the replace_message_cards method.
+              #   result = client.replace_message_cards request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::ReplaceMessageCardsResponse.
+              #   p result
+              #
+              def replace_message_cards request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ReplaceMessageCardsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.replace_message_cards.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.replace_message_cards.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.replace_message_cards.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.replace_message_cards request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ChatService REST API.
               #
               # This class represents the configuration for ChatService REST,
@@ -7433,6 +7536,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :move_section_item
+                  ##
+                  # RPC-specific configuration for `replace_message_cards`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :replace_message_cards
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -7540,6 +7648,8 @@ module Google
                     @list_section_items = ::Gapic::Config::Method.new list_section_items_config
                     move_section_item_config = parent_rpcs.move_section_item if parent_rpcs.respond_to? :move_section_item
                     @move_section_item = ::Gapic::Config::Method.new move_section_item_config
+                    replace_message_cards_config = parent_rpcs.replace_message_cards if parent_rpcs.respond_to? :replace_message_cards
+                    @replace_message_cards = ::Gapic::Config::Method.new replace_message_cards_config
 
                     yield self if block_given?
                   end

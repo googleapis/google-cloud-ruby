@@ -1467,6 +1467,130 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::ClientTest < Minitest:
     end
   end
 
+  def test_start
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    location = "hello world"
+
+    start_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :start, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, start_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.start({ instance: instance, project: project, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.start instance: instance, project: project, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.start ::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest.new(instance: instance, project: project, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.start({ instance: instance, project: project, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.start(::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest.new(instance: instance, project: project, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, start_client_stub.call_rpc_count
+    end
+  end
+
+  def test_stop
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    location = "hello world"
+
+    stop_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :stop, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stop_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.stop({ instance: instance, project: project, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.stop instance: instance, project: project, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.stop ::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest.new(instance: instance, project: project, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.stop({ instance: instance, project: project, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.stop(::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest.new(instance: instance, project: project, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stop_client_stub.call_rpc_count
+    end
+  end
+
   def test_restore_backup
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
@@ -2508,6 +2632,70 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::ClientTest < Minitest:
     end
   end
 
+  def test_execute_sql_read_only
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    body = {}
+    location = "hello world"
+
+    execute_sql_read_only_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_sql_read_only, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::ExecuteSqlReadOnlyPayload), request["body"]
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_sql_read_only_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.execute_sql_read_only({ instance: instance, project: project, body: body, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.execute_sql_read_only instance: instance, project: project, body: body, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.execute_sql_read_only ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest.new(instance: instance, project: project, body: body, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.execute_sql_read_only({ instance: instance, project: project, body: body, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.execute_sql_read_only(::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest.new(instance: instance, project: project, body: body, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_sql_read_only_client_stub.call_rpc_count
+    end
+  end
+
   def test_execute_sql
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlResponse.new
@@ -2819,6 +3007,71 @@ class ::Google::Cloud::Sql::V1beta4::SqlInstancesService::ClientTest < Minitest:
 
       # Verify method calls
       assert_equal 5, point_in_time_restore_client_stub.call_rpc_count
+    end
+  end
+
+  def test_reconcile_networking
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    psc_dns = {}
+    location = "hello world"
+
+    reconcile_networking_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :reconcile_networking, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::PscDnsReconcileNetworkingRequest), request["psc_dns"]
+      assert_equal :psc_dns, request.reconcile_data
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, reconcile_networking_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlInstancesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.reconcile_networking({ instance: instance, project: project, psc_dns: psc_dns, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.reconcile_networking instance: instance, project: project, psc_dns: psc_dns, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.reconcile_networking ::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest.new(instance: instance, project: project, psc_dns: psc_dns, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.reconcile_networking({ instance: instance, project: project, psc_dns: psc_dns, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.reconcile_networking(::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest.new(instance: instance, project: project, psc_dns: psc_dns, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, reconcile_networking_client_stub.call_rpc_count
     end
   end
 

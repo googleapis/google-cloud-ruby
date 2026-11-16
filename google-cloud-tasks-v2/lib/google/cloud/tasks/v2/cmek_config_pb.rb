@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n\'google/cloud/tasks/v2/cmek_config.proto\x12\x15google.cloud.tasks.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xb7\x01\n\nCmekConfig\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x37\n\x07kms_key\x18\x02 \x01(\tB&\xfa\x41#\n!cloudkms.googleapis.com/CryptoKey:]\xea\x41Z\n$cloudtasks.googleapis.com/CmekConfig\x12\x32projects/{project}/locations/{location}/cmekConfigB\xe9\x01\n\x19\x63om.google.cloud.tasks.v2B\x0f\x43mekConfigProtoP\x01Z>cloud.google.com/go/cloudtasks/apiv2/cloudtaskspb;cloudtaskspb\xea\x41x\n!cloudkms.googleapis.com/CryptoKey\x12Sprojects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}b\x06proto3"
+descriptor_data = "\n\'google/cloud/tasks/v2/cmek_config.proto\x12\x15google.cloud.tasks.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xb8\x01\n\nCmekConfig\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x37\n\x07kms_key\x18\x02 \x01(\tB&\xfa\x41#\n!cloudkms.googleapis.com/CryptoKey:]\xea\x41Z\n$cloudtasks.googleapis.com/CmekConfig\x12\x32projects/{project}/locations/{location}/cmekConfigB\xe9\x01\n\x19\x63om.google.cloud.tasks.v2B\x0f\x43mekConfigProtoP\x01Z>cloud.google.com/go/cloudtasks/apiv2/cloudtaskspb;cloudtaskspb\xea\x41x\n!cloudkms.googleapis.com/CryptoKey\x12Sprojects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

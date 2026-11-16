@@ -36,7 +36,7 @@ def start_replay
   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new
+  request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new
 
   # Call the start_replay method.
   result = client.start_replay request

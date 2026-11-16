@@ -24,6 +24,21 @@
               "methods": [
                 "bidi_run_session"
               ]
+            },
+            "StreamChatAiAssistant": {
+              "methods": [
+                "stream_chat_ai_assistant"
+              ]
+            },
+            "CancelAssistantTurn": {
+              "methods": [
+                "cancel_assistant_turn"
+              ]
+            },
+            "GenerateOnboardingSuggestions": {
+              "methods": [
+                "generate_onboarding_suggestions"
+              ]
             }
           }
         }
@@ -264,6 +279,11 @@
                 "create_app_version"
               ]
             },
+            "UpdateAppVersion": {
+              "methods": [
+                "update_app_version"
+              ]
+            },
             "DeleteAppVersion": {
               "methods": [
                 "delete_app_version"
@@ -287,6 +307,45 @@
             "GetChangelog": {
               "methods": [
                 "get_changelog"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AssistantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Ces::V1beta::AssistantService::Client",
+          "rpcs": {
+            "ListAssistantSessions": {
+              "methods": [
+                "list_assistant_sessions"
+              ]
+            },
+            "GetAssistantSession": {
+              "methods": [
+                "get_assistant_session"
+              ]
+            },
+            "CreateAssistantSession": {
+              "methods": [
+                "create_assistant_session"
+              ]
+            },
+            "DeleteAssistantSession": {
+              "methods": [
+                "delete_assistant_session"
+              ]
+            },
+            "RunAssistant": {
+              "methods": [
+                "run_assistant"
+              ]
+            },
+            "ChatAiAssistant": {
+              "methods": [
+                "chat_ai_assistant"
               ]
             }
           }

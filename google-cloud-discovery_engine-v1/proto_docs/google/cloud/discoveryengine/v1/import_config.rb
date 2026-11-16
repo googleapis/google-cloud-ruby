@@ -494,10 +494,10 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Operation create time.
-        # @!attribute [rw] update_time
+        # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Operation last update time. If the operation is done, this is also the
-        #     finish time.
+        #     Output only. Operation last update time. If the operation is done, this is
+        #     also the finish time.
         # @!attribute [rw] success_count
         #   @return [::Integer]
         #     Count of entries that were processed successfully.
@@ -656,7 +656,6 @@ module Google
         #     must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
         #     * {::Google::Cloud::DiscoveryEngine::V1::SpannerSource SpannerSource}.
         #     * {::Google::Cloud::DiscoveryEngine::V1::CloudSqlSource CloudSqlSource}.
-        #     * {::Google::Cloud::DiscoveryEngine::V1::FirestoreSource FirestoreSource}.
         #     * {::Google::Cloud::DiscoveryEngine::V1::BigtableSource BigtableSource}.
         # @!attribute [rw] force_refresh_content
         #   @return [::Boolean]
@@ -691,6 +690,9 @@ module Google
 
             # Calculates diff and replaces the entire document dataset. Existing
             # documents may be deleted if they are not present in the source location.
+            # When using this mode, there won't be any downtime on the dataset
+            # targeted. Any document that should remain unchanged or that should be
+            # updated will continue serving while the operation is running.
             FULL = 2
           end
         end

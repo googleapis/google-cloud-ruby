@@ -2164,12 +2164,14 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    auto_protection_policy_binding = "hello world"
 
     delete_backup_plan_association_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_backup_plan_association, name
       assert_kind_of ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
+      assert_equal "hello world", request["auto_protection_policy_binding"]
       refute_nil options
     end
 
@@ -2180,35 +2182,35 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.delete_backup_plan_association({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_backup_plan_association({ name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.delete_backup_plan_association name: name, request_id: request_id do |response, operation|
+      c.delete_backup_plan_association name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_backup_plan_association ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.delete_backup_plan_association({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_backup_plan_association({ name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_backup_plan_association(::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest.new(name: name, request_id: request_id, auto_protection_policy_binding: auto_protection_policy_binding), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2555,6 +2557,1933 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, initialize_service_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_auto_protection_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    auto_protection_policy_id = "hello world"
+    auto_protection_policy = {}
+    request_id = "hello world"
+
+    create_auto_protection_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_auto_protection_policy, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["auto_protection_policy_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy), request["auto_protection_policy"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_auto_protection_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_auto_protection_policy({ parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_auto_protection_policy parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_auto_protection_policy ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest.new(parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_auto_protection_policy({ parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_auto_protection_policy(::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest.new(parent: parent, auto_protection_policy_id: auto_protection_policy_id, auto_protection_policy: auto_protection_policy, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_auto_protection_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_auto_protection_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_auto_protection_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_auto_protection_policies, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_auto_protection_policies_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_auto_protection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_auto_protection_policies ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_auto_protection_policies(::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_auto_protection_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_auto_protection_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auto_protection_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_auto_protection_policy, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_auto_protection_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_auto_protection_policy({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_auto_protection_policy name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_auto_protection_policy ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_auto_protection_policy({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_auto_protection_policy(::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_auto_protection_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_auto_protection_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    auto_protection_policy = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_auto_protection_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_auto_protection_policy, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy), request["auto_protection_policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_auto_protection_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_auto_protection_policy({ auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_auto_protection_policy auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_auto_protection_policy ::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest.new(auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_auto_protection_policy({ auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_auto_protection_policy(::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest.new(auto_protection_policy: auto_protection_policy, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_auto_protection_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_auto_protection_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    request_id = "hello world"
+
+    delete_auto_protection_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_auto_protection_policy, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_auto_protection_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_auto_protection_policy({ name: name, etag: etag, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_auto_protection_policy name: name, etag: etag, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_auto_protection_policy ::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest.new(name: name, etag: etag, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_auto_protection_policy({ name: name, etag: etag, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_auto_protection_policy(::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest.new(name: name, etag: etag, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_auto_protection_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_auto_protection_policy_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    auto_protection_policy_binding_id = "hello world"
+    auto_protection_policy_binding = {}
+    request_id = "hello world"
+
+    create_auto_protection_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_auto_protection_policy_binding, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["auto_protection_policy_binding_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding), request["auto_protection_policy_binding"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_auto_protection_policy_binding_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_auto_protection_policy_binding({ parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_auto_protection_policy_binding parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest.new(parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_auto_protection_policy_binding({ parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest.new(parent: parent, auto_protection_policy_binding_id: auto_protection_policy_binding_id, auto_protection_policy_binding: auto_protection_policy_binding, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_auto_protection_policy_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_auto_protection_policy_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auto_protection_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_auto_protection_policy_binding, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_auto_protection_policy_binding_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_auto_protection_policy_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_auto_protection_policy_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_auto_protection_policy_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_auto_protection_policy_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_auto_protection_policy_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_auto_protection_policy_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_auto_protection_policy_bindings, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_auto_protection_policy_bindings_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_auto_protection_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_auto_protection_policy_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_auto_protection_policy_bindings ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_auto_protection_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_auto_protection_policy_bindings(::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_auto_protection_policy_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_applied_auto_protection_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_applied_auto_protection_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_applied_auto_protection_policies, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_applied_auto_protection_policies_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_applied_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_applied_auto_protection_policies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_applied_auto_protection_policies ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_applied_auto_protection_policies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_applied_auto_protection_policies(::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_applied_auto_protection_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_initiate_delete_auto_protection_policy_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    request_id = "hello world"
+
+    initiate_delete_auto_protection_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :initiate_delete_auto_protection_policy_binding, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, initiate_delete_auto_protection_policy_binding_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.initiate_delete_auto_protection_policy_binding({ name: name, etag: etag, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.initiate_delete_auto_protection_policy_binding name: name, etag: etag, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.initiate_delete_auto_protection_policy_binding ::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest.new(name: name, etag: etag, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.initiate_delete_auto_protection_policy_binding({ name: name, etag: etag, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.initiate_delete_auto_protection_policy_binding(::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest.new(name: name, etag: etag, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, initiate_delete_auto_protection_policy_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_binding_matching_resources
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_binding_matching_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_binding_matching_resources, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_binding_matching_resources_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_binding_matching_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_binding_matching_resources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_binding_matching_resources ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_binding_matching_resources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_binding_matching_resources(::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_binding_matching_resources_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_restore_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_template_id = "hello world"
+    restore_template = {}
+    request_id = "hello world"
+
+    create_restore_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_restore_template, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["restore_template_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::RestoreTemplate), request["restore_template"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_restore_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_restore_template({ parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_restore_template parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_restore_template ::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest.new(parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_restore_template({ parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_restore_template(::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest.new(parent: parent, restore_template_id: restore_template_id, restore_template: restore_template, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_restore_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_restore_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::RestoreTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_restore_template, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_restore_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_restore_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_restore_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_restore_template ::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_restore_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_restore_template(::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_restore_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_restore_templates
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_restore_templates, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_restore_templates_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_restore_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_restore_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_restore_templates ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_restore_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_restore_templates(::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_restore_templates_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_restore_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    restore_template = {}
+    request_id = "hello world"
+    validate_only = true
+
+    update_restore_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_restore_template, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::RestoreTemplate), request["restore_template"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_restore_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_restore_template({ update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_restore_template update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_restore_template ::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest.new(update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_restore_template({ update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_restore_template(::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest.new(update_mask: update_mask, restore_template: restore_template, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_restore_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_restore_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+
+    delete_restore_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_restore_template, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_restore_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_restore_template({ name: name, request_id: request_id, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_restore_template name: name, request_id: request_id, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_restore_template ::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_restore_template({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_restore_template(::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_restore_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_run_restore_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    backup = "hello world"
+    request_id = "hello world"
+
+    run_restore_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_restore_template, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["backup"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_restore_template_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.run_restore_template({ name: name, backup: backup, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.run_restore_template name: name, backup: backup, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.run_restore_template ::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest.new(name: name, backup: backup, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.run_restore_template({ name: name, backup: backup, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.run_restore_template(::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest.new(name: name, backup: backup, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_restore_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_restore_template_execution
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::RestoreTemplateExecution.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_template_execution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_restore_template_execution, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_restore_template_execution_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_restore_template_execution({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_restore_template_execution name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_restore_template_execution ::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_restore_template_execution({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_restore_template_execution(::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_restore_template_execution_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_restore_template_executions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_template_executions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_restore_template_executions, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_restore_template_executions_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_restore_template_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_restore_template_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_restore_template_executions ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_restore_template_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_restore_template_executions(::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_restore_template_executions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_trigger_restore_cleanup
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    trigger_restore_cleanup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :trigger_restore_cleanup, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, trigger_restore_cleanup_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.trigger_restore_cleanup({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.trigger_restore_cleanup name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.trigger_restore_cleanup ::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.trigger_restore_cleanup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.trigger_restore_cleanup(::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, trigger_restore_cleanup_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_restore_verification_plan
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_verification_plan_id = "hello world"
+    restore_verification_plan = {}
+    request_id = "hello world"
+
+    create_restore_verification_plan_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_restore_verification_plan, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["restore_verification_plan_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::RestoreVerificationPlan), request["restore_verification_plan"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_restore_verification_plan_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_restore_verification_plan({ parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_restore_verification_plan parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_restore_verification_plan ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest.new(parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_restore_verification_plan({ parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_restore_verification_plan(::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest.new(parent: parent, restore_verification_plan_id: restore_verification_plan_id, restore_verification_plan: restore_verification_plan, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_restore_verification_plan_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_restore_verification_plan_association
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    restore_verification_plan_association_id = "hello world"
+    restore_verification_plan_association = {}
+    request_id = "hello world"
+
+    create_restore_verification_plan_association_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_restore_verification_plan_association, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["restore_verification_plan_association_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation), request["restore_verification_plan_association"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_restore_verification_plan_association_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_restore_verification_plan_association({ parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_restore_verification_plan_association parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest.new(parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_restore_verification_plan_association({ parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest.new(parent: parent, restore_verification_plan_association_id: restore_verification_plan_association_id, restore_verification_plan_association: restore_verification_plan_association, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_restore_verification_plan_association_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_restore_verification_plan_association
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_verification_plan_association_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_restore_verification_plan_association, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_restore_verification_plan_association_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_restore_verification_plan_association({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_restore_verification_plan_association name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_restore_verification_plan_association({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_restore_verification_plan_association_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_restore_verification_plan_associations
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_verification_plan_associations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_restore_verification_plan_associations, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_restore_verification_plan_associations_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_restore_verification_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_restore_verification_plan_associations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_restore_verification_plan_associations ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_restore_verification_plan_associations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_restore_verification_plan_associations(::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_restore_verification_plan_associations_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_restore_verification_plan_association
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_restore_verification_plan_association_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_restore_verification_plan_association, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_restore_verification_plan_association_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_restore_verification_plan_association({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_restore_verification_plan_association name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_restore_verification_plan_association ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_restore_verification_plan_association({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_restore_verification_plan_association(::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_restore_verification_plan_association_client_stub.call_rpc_count
+    end
+  end
+
+  def test_trigger_restore_verification
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    trigger_restore_verification_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :trigger_restore_verification, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, trigger_restore_verification_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.trigger_restore_verification({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.trigger_restore_verification name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.trigger_restore_verification ::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.trigger_restore_verification({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.trigger_restore_verification(::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, trigger_restore_verification_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_restore_verification_plan
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::RestoreVerificationPlan.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_restore_verification_plan_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_restore_verification_plan, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_restore_verification_plan_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_restore_verification_plan({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_restore_verification_plan name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_restore_verification_plan ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_restore_verification_plan({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_restore_verification_plan(::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_restore_verification_plan_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_restore_verification_plans
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_restore_verification_plans_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_restore_verification_plans, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_restore_verification_plans_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_restore_verification_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_restore_verification_plans parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_restore_verification_plans ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_restore_verification_plans({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_restore_verification_plans(::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_restore_verification_plans_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_restore_verification_plan
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+
+    delete_restore_verification_plan_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_restore_verification_plan, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_restore_verification_plan_client_stub do
+      # Create client
+      c = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_restore_verification_plan({ name: name, request_id: request_id, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_restore_verification_plan name: name, request_id: request_id, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_restore_verification_plan ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_restore_verification_plan({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_restore_verification_plan(::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_restore_verification_plan_client_stub.call_rpc_count
     end
   end
 

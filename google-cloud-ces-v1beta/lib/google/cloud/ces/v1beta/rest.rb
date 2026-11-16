@@ -18,6 +18,7 @@
 
 require "google/cloud/ces/v1beta/session_service/rest"
 require "google/cloud/ces/v1beta/agent_service/rest"
+require "google/cloud/ces/v1beta/assistant_service/rest"
 require "google/cloud/ces/v1beta/evaluation_service/rest"
 require "google/cloud/ces/v1beta/tool_service/rest"
 require "google/cloud/ces/v1beta/widget_service/rest"

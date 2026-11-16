@@ -16,8 +16,8 @@ require "helper"
 
 describe Google::Cloud::Storage::File::Verifier, :mock_storage do
   let(:file_contents) { "The quick brown fox jumps over the lazy dog." }
-  let(:md5_digest) { "1B2M2Y8AsgTpgAmY7PhCfg==" }
-  let(:crc32c_digest) { "AAAAAA==" }
+  let(:md5_digest) { "5NkJwpDQ+xygaP+t3yLL0A==" }
+  let(:crc32c_digest) { "GQCXsw==" }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json corrected_file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, OpenStruct.new }
 
@@ -46,6 +46,26 @@ describe Google::Cloud::Storage::File::Verifier, :mock_storage do
   it "calculates crc32c digest" do
     Tempfile.open "google-cloud" do |tmpfile|
       tmpfile.write file_contents
+      digest = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
+      _(digest).must_equal crc32c_digest
+    end
+  end
+
+  it "calculates md5 digest for an unlinked file" do
+    Tempfile.open "google-cloud" do |tmpfile|
+      tmpfile.write file_contents
+      tmpfile.rewind
+      tmpfile.unlink
+      digest = Google::Cloud::Storage::File::Verifier.md5_for tmpfile
+      _(digest).must_equal md5_digest
+    end
+  end
+
+  it "calculates crc32c digest for an unlinked file" do
+    Tempfile.open "google-cloud" do |tmpfile|
+      tmpfile.write file_contents
+      tmpfile.rewind
+      tmpfile.unlink
       digest = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
       _(digest).must_equal crc32c_digest
     end

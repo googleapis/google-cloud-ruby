@@ -334,4 +334,25 @@ class Google::Cloud::Chronicle::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Rest::Client, client
     end
   end
+
+  def test_search_service_grpc
+    skip unless Google::Cloud::Chronicle.search_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::SearchService::Client, client
+    end
+  end
+
+  def test_search_service_rest
+    skip unless Google::Cloud::Chronicle.search_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::SearchService::Rest::Client, client
+    end
+  end
 end

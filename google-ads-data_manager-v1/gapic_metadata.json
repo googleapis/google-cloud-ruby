@@ -92,6 +92,20 @@
         }
       }
     },
+    "ReportingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::DataManager::V1::ReportingService::Client",
+          "rpcs": {
+            "RetrievePartnerMatchReport": {
+              "methods": [
+                "retrieve_partner_match_report"
+              ]
+            }
+          }
+        }
+      }
+    },
     "UserListDirectLicenseService": {
       "clients": {
         "grpc": {

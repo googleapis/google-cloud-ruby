@@ -25,6 +25,40 @@ module Google
           # Path helper methods for the LineItemCreativeAssociationService API.
           module Paths
             ##
+            # Create a fully-qualified Creative resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/creatives/{creative}`
+            #
+            # @param network_code [String]
+            # @param creative [String]
+            #
+            # @return [::String]
+            def creative_path network_code:, creative:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/creatives/#{creative}"
+            end
+
+            ##
+            # Create a fully-qualified CreativeSet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/creativeSets/{creative_set}`
+            #
+            # @param network_code [String]
+            # @param creative_set [String]
+            #
+            # @return [::String]
+            def creative_set_path network_code:, creative_set:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/creativeSets/#{creative_set}"
+            end
+
+            ##
             # Create a fully-qualified LineItem resource string.
             #
             # The resource will be in the following format:

@@ -32,11 +32,11 @@ module Google
             #
             # The HealthChecks API.
             #
-            # This client uses HealthChecks version 2026-09-01.
+            # This client uses HealthChecks version 2026-11-01.
             #
             class Client
               # @private
-              API_VERSION = "2026-09-01"
+              API_VERSION = "2026-11-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"

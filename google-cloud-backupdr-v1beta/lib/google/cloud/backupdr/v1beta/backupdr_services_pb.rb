@@ -41,6 +41,51 @@ module Google
             rpc :CreateManagementServer, ::Google::Cloud::BackupDR::V1beta::CreateManagementServerRequest, ::Google::Longrunning::Operation
             # Deletes a single ManagementServer.
             rpc :DeleteManagementServer, ::Google::Cloud::BackupDR::V1beta::DeleteManagementServerRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreTemplate in a given project and location.
+            rpc :CreateRestoreTemplate, ::Google::Cloud::BackupDR::V1beta::CreateRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Gets details of a RestoreTemplate.
+            rpc :GetRestoreTemplate, ::Google::Cloud::BackupDR::V1beta::GetRestoreTemplateRequest, ::Google::Cloud::BackupDR::V1beta::RestoreTemplate
+            # Lists RestoreTemplates in a given project and location.
+            rpc :ListRestoreTemplates, ::Google::Cloud::BackupDR::V1beta::ListRestoreTemplatesRequest, ::Google::Cloud::BackupDR::V1beta::ListRestoreTemplatesResponse
+            # Updates the settings of a RestoreTemplate.
+            rpc :UpdateRestoreTemplate, ::Google::Cloud::BackupDR::V1beta::UpdateRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Deletes a RestoreTemplate.
+            rpc :DeleteRestoreTemplate, ::Google::Cloud::BackupDR::V1beta::DeleteRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Runs a RestoreTemplate.
+            rpc :RunRestoreTemplate, ::Google::Cloud::BackupDR::V1beta::RunRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Gets details of a RestoreTemplateExecution.
+            rpc :GetRestoreTemplateExecution, ::Google::Cloud::BackupDR::V1beta::GetRestoreTemplateExecutionRequest, ::Google::Cloud::BackupDR::V1beta::RestoreTemplateExecution
+            # Lists RestoreTemplateExecutions in a given project, location and restore
+            # template.
+            rpc :ListRestoreTemplateExecutions, ::Google::Cloud::BackupDR::V1beta::ListRestoreTemplateExecutionsRequest, ::Google::Cloud::BackupDR::V1beta::ListRestoreTemplateExecutionsResponse
+            # Triggers cleanup of restored resources created during execution.
+            rpc :TriggerRestoreCleanup, ::Google::Cloud::BackupDR::V1beta::TriggerRestoreCleanupRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreVerificationPlan in a given project and location.
+            rpc :CreateRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1beta::CreateRestoreVerificationPlanRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :CreateRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1beta::CreateRestoreVerificationPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :GetRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1beta::GetRestoreVerificationPlanAssociationRequest, ::Google::Cloud::BackupDR::V1beta::RestoreVerificationPlanAssociation
+            # Lists RestoreVerificationPlanAssociations in a given
+            # RestoreVerificationPlan.
+            rpc :ListRestoreVerificationPlanAssociations, ::Google::Cloud::BackupDR::V1beta::ListRestoreVerificationPlanAssociationsRequest, ::Google::Cloud::BackupDR::V1beta::ListRestoreVerificationPlanAssociationsResponse
+            # Deletes a single RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :DeleteRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1beta::DeleteRestoreVerificationPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Triggers a new Restore Verification for the association in a given
+            # RestoreVerificationPlan.
+            rpc :TriggerRestoreVerification, ::Google::Cloud::BackupDR::V1beta::TriggerRestoreVerificationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single RestoreVerificationPlan. Returns the requested
+            # RestoreVerificationPlan.
+            rpc :GetRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1beta::GetRestoreVerificationPlanRequest, ::Google::Cloud::BackupDR::V1beta::RestoreVerificationPlan
+            # Lists RestoreVerificationPlans in a given project and location.
+            rpc :ListRestoreVerificationPlans, ::Google::Cloud::BackupDR::V1beta::ListRestoreVerificationPlansRequest, ::Google::Cloud::BackupDR::V1beta::ListRestoreVerificationPlansResponse
+            # Deletes a single RestoreVerificationPlan. If the `force` flag is set to
+            # `true`, any RestoreVerificationPlanAssociations linked to this
+            # RestoreVerificationPlan will also be deleted.
+            rpc :DeleteRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1beta::DeleteRestoreVerificationPlanRequest, ::Google::Longrunning::Operation
             # Creates a new BackupVault in a given project and location.
             rpc :CreateBackupVault, ::Google::Cloud::BackupDR::V1beta::CreateBackupVaultRequest, ::Google::Longrunning::Operation
             # Lists BackupVaults in a given project and location.

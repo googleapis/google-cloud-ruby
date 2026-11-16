@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n6google/cloud/oracledatabase/v1/location_metadata.proto\x12\x1egoogle.cloud.oracledatabase.v1\x1a\x1fgoogle/api/field_behavior.proto\"1\n\x10LocationMetadata\x12\x1d\n\x10gcp_oracle_zones\x18\x02 \x03(\tB\x03\xe0\x41\x03\x42\xef\x01\n\"com.google.cloud.oracledatabase.v1B\x15LocationMetadataProtoP\x01ZJcloud.google.com/go/oracledatabase/apiv1/oracledatabasepb;oracledatabasepb\xaa\x02\x1eGoogle.Cloud.OracleDatabase.V1\xca\x02\x1eGoogle\\Cloud\\OracleDatabase\\V1\xea\x02!Google::Cloud::OracleDatabase::V1b\x06proto3"
+descriptor_data = "\n6google/cloud/oracledatabase/v1/location_metadata.proto\x12\x1egoogle.cloud.oracledatabase.v1\x1a\x1fgoogle/api/field_behavior.proto\"2\n\x10LocationMetadata\x12\x1e\n\x10gcp_oracle_zones\x18\x02 \x03(\tB\x04\xe2\x41\x01\x03\x42\xef\x01\n\"com.google.cloud.oracledatabase.v1B\x15LocationMetadataProtoP\x01ZJcloud.google.com/go/oracledatabase/apiv1/oracledatabasepb;oracledatabasepb\xaa\x02\x1eGoogle.Cloud.OracleDatabase.V1\xca\x02\x1eGoogle\\Cloud\\OracleDatabase\\V1\xea\x02!Google::Cloud::OracleDatabase::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

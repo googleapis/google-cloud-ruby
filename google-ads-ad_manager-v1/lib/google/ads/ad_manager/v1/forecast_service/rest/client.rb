@@ -192,7 +192,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_availability_forecast(existing_line_item: nil, parent: nil, availability_forecast_options: nil)
+              # @overload run_availability_forecast(existing_line_item: nil, forecasting_line_item: nil, parent: nil, availability_forecast_options: nil)
               #   Pass arguments to `run_availability_forecast` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -201,6 +201,14 @@ module Google
               #     Optional. The resource name of the
               #     {::Google::Ads::AdManager::V1::LineItem LineItem} to be forecasted. Format:
               #     `networks/{network_code}/lineItems/{line_item_id}`
+              #
+              #     Note: The following parameters are mutually exclusive: `existing_line_item`, `forecasting_line_item`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param forecasting_line_item [::Google::Ads::AdManager::V1::ForecastingLineItem, ::Hash]
+              #     Optional. The
+              #     {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItem} to be
+              #     forecasted.
+              #
+              #     Note: The following parameters are mutually exclusive: `forecasting_line_item`, `existing_line_item`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. Format: `networks/{network_code}`
               #   @param availability_forecast_options [::Google::Ads::AdManager::V1::AvailabilityForecastOptions, ::Hash]
@@ -280,7 +288,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_delivery_forecast(existing_line_items: nil, parent: nil, delivery_forecast_options: nil)
+              # @overload run_delivery_forecast(existing_line_items: nil, forecasting_line_items: nil, parent: nil, delivery_forecast_options: nil)
               #   Pass arguments to `run_delivery_forecast` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -288,6 +296,14 @@ module Google
               #   @param existing_line_items [::Google::Ads::AdManager::V1::ExistingLineItemList, ::Hash]
               #     Optional. The resource names of the
               #     {::Google::Ads::AdManager::V1::LineItem LineItems} to be forecasted.
+              #
+              #     Note: The following parameters are mutually exclusive: `existing_line_items`, `forecasting_line_items`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param forecasting_line_items [::Google::Ads::AdManager::V1::ForecastingLineItemList, ::Hash]
+              #     Optional. The
+              #     {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItems} to be
+              #     forecasted.
+              #
+              #     Note: The following parameters are mutually exclusive: `forecasting_line_items`, `existing_line_items`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. Format: `networks/{network_code}`
               #   @param delivery_forecast_options [::Google::Ads::AdManager::V1::DeliveryForecastOptions, ::Hash]

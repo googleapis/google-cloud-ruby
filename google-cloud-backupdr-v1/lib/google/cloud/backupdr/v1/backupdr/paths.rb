@@ -25,6 +25,46 @@ module Google
           # Path helper methods for the BackupDR API.
           module Paths
             ##
+            # Create a fully-qualified AutoProtectionPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param auto_protection_policy [String]
+            #
+            # @return [::String]
+            def auto_protection_policy_path project:, location:, auto_protection_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autoProtectionPolicies/#{auto_protection_policy}"
+            end
+
+            ##
+            # Create a fully-qualified AutoProtectionPolicyBinding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param auto_protection_policy [String]
+            # @param binding [String]
+            #
+            # @return [::String]
+            def auto_protection_policy_binding_path project:, location:, auto_protection_policy:, binding:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "auto_protection_policy cannot contain /" if auto_protection_policy.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autoProtectionPolicies/#{auto_protection_policy}/bindings/#{binding}"
+            end
+
+            ##
             # Create a fully-qualified Backup resource string.
             #
             # The resource will be in the following format:
@@ -246,6 +286,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Job resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/jobs/{job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param job [String]
+            #
+            # @return [::String]
+            def job_path project:, location:, job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/jobs/#{job}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -279,6 +338,86 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/managementServers/#{managementserver}"
+            end
+
+            ##
+            # Create a fully-qualified RestoreTemplate resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreTemplates/{restore_template}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_template [String]
+            #
+            # @return [::String]
+            def restore_template_path project:, location:, restore_template:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreTemplates/#{restore_template}"
+            end
+
+            ##
+            # Create a fully-qualified RestoreTemplateExecution resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreTemplates/{restore_template}/executions/{execution}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_template [String]
+            # @param execution [String]
+            #
+            # @return [::String]
+            def restore_template_execution_path project:, location:, restore_template:, execution:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "restore_template cannot contain /" if restore_template.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreTemplates/#{restore_template}/executions/#{execution}"
+            end
+
+            ##
+            # Create a fully-qualified RestoreVerificationPlan resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_verification_plan [String]
+            #
+            # @return [::String]
+            def restore_verification_plan_path project:, location:, restore_verification_plan:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreVerificationPlans/#{restore_verification_plan}"
+            end
+
+            ##
+            # Create a fully-qualified RestoreVerificationPlanAssociation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreVerificationPlans/{restore_verification_plan}/associations/{association}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_verification_plan [String]
+            # @param association [String]
+            #
+            # @return [::String]
+            def restore_verification_plan_association_path project:, location:, restore_verification_plan:, association:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "restore_verification_plan cannot contain /" if restore_verification_plan.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreVerificationPlans/#{restore_verification_plan}/associations/#{association}"
             end
 
             ##

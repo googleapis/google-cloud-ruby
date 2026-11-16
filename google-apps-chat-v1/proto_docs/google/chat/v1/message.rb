@@ -238,6 +238,22 @@ module Google
         #     Creating a message with accessory widgets requires [app
         #     authentication]
         #     (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+        # @!attribute [rw] elements
+        #   @return [::Google::Apps::Chat::V1::Elements]
+        #     Optional. Additional message components, including inline `citations`
+        #     (where each citation is associated with a specific portion of the message
+        #     text) and `cited_sources` (which are general references used to generate
+        #     the response and are not directly linked to specific segments of the text).
+        #
+        #     On input, provide `elements` when creating or updating a message. On
+        #     output, both `citations` and `cited_sources` are populated when reading a
+        #     message that contains them. Callers can read structured citation metadata
+        #     from `elements`, while `formatted_text` also includes inline citation tags
+        #     or source links depending on `markup_syntax`.
+        #
+        #     These differ from `annotations`, which are output-only and offer
+        #     supplementary information tied to message fragments or the entire message
+        #     text.
         # @!attribute [rw] markup_syntax
         #   @return [::Google::Apps::Chat::V1::MarkupSyntax]
         #     Optional. Specifies how the server interprets the message `text` field
@@ -839,7 +855,34 @@ module Google
         # @!attribute [rw] card
         #   @return [::Google::Apps::Card::V1::Card]
         #     A card. Maximum size is 32 KB.
+        # @!attribute [r] owner_user
+        #   @return [::Google::Apps::Chat::V1::User]
+        #     Output only. The app that owns the card.
         class CardWithId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ReplaceMessageCards API method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the message.
+        #
+        #     Format: `spaces/{space}/messages/{message}`
+        # @!attribute [rw] cards_v2
+        #   @return [::Array<::Google::Apps::Chat::V1::CardWithId>]
+        #     Optional. An array of
+        #     [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
+        #     to be included in the message. These cards will replace the existing cards
+        #     of the message. If empty, the original cards included in the message will
+        #     be cleared.
+        class ReplaceMessageCardsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ReplaceMessageCards API.
+        class ReplaceMessageCardsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

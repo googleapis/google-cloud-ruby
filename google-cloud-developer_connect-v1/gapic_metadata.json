@@ -65,6 +65,11 @@
                 "fetch_read_token"
               ]
             },
+            "OpenGitRepositoryLinkPullRequest": {
+              "methods": [
+                "open_git_repository_link_pull_request"
+              ]
+            },
             "FetchLinkableGitRepositories": {
               "methods": [
                 "fetch_linkable_git_repositories"
@@ -78,6 +83,51 @@
             "FetchGitRefs": {
               "methods": [
                 "fetch_git_refs"
+              ]
+            },
+            "DiffGitRepositoryLinkCommit": {
+              "methods": [
+                "diff_git_repository_link_commit"
+              ]
+            },
+            "FetchGitRepositoryLinkCommit": {
+              "methods": [
+                "fetch_git_repository_link_commit"
+              ]
+            },
+            "FetchGitRepositoryLinkCommitList": {
+              "methods": [
+                "fetch_git_repository_link_commit_list"
+              ]
+            },
+            "FetchGitRepositoryLinkFileBlame": {
+              "methods": [
+                "fetch_git_repository_link_file_blame"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequest": {
+              "methods": [
+                "fetch_git_repository_link_pull_request"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestComment": {
+              "methods": [
+                "add_git_repository_link_pull_request_comment"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestReviewComment": {
+              "methods": [
+                "add_git_repository_link_pull_request_review_comment"
+              ]
+            },
+            "ModifyGitRepositoryLinkPullRequest": {
+              "methods": [
+                "modify_git_repository_link_pull_request"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequestList": {
+              "methods": [
+                "fetch_git_repository_link_pull_request_list"
               ]
             },
             "ListAccountConnectors": {

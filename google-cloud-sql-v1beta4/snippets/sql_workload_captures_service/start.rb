@@ -36,7 +36,7 @@ def start
   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new
+  request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new
 
   # Call the start method.
   result = client.start request

@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n6google/devtools/artifactregistry/v1/kfp_artifact.proto\x12#google.devtools.artifactregistry.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc4\x01\n\x0bKfpArtifact\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x0f\n\x07version\x18\x02 \x01(\t:\x90\x01\xea\x41\x8c\x01\n+artifactregistry.googleapis.com/KfpArtifact\x12]projects/{project}/locations/{location}/repositories/{repository}/kfpArtifacts/{kfp_artifact}B\xfb\x01\n\'com.google.devtools.artifactregistry.v1B\x10KfpArtifactProtoP\x01ZPcloud.google.com/go/artifactregistry/apiv1/artifactregistrypb;artifactregistrypb\xaa\x02 Google.Cloud.ArtifactRegistry.V1\xca\x02 Google\\Cloud\\ArtifactRegistry\\V1\xea\x02#Google::Cloud::ArtifactRegistry::V1b\x06proto3"
+descriptor_data = "\n6google/devtools/artifactregistry/v1/kfp_artifact.proto\x12#google.devtools.artifactregistry.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc5\x01\n\x0bKfpArtifact\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x0f\n\x07version\x18\x02 \x01(\t:\x90\x01\xea\x41\x8c\x01\n+artifactregistry.googleapis.com/KfpArtifact\x12]projects/{project}/locations/{location}/repositories/{repository}/kfpArtifacts/{kfp_artifact}B\xfb\x01\n\'com.google.devtools.artifactregistry.v1B\x10KfpArtifactProtoP\x01ZPcloud.google.com/go/artifactregistry/apiv1/artifactregistrypb;artifactregistrypb\xaa\x02 Google.Cloud.ArtifactRegistry.V1\xca\x02 Google\\Cloud\\ArtifactRegistry\\V1\xea\x02#Google::Cloud::ArtifactRegistry::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

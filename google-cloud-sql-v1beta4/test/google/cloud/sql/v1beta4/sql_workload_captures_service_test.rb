@@ -77,7 +77,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
 
     start_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start, name
-      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest, request
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest, request
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["instance"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::StartWorkloadCaptureContext), request["start_workload_capture_context"]
@@ -103,7 +103,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object
-      c.start ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context) do |response, operation|
+      c.start ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -115,7 +115,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      c.start(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context), grpc_options) do |response, operation|
+      c.start(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest.new(project: project, instance: instance, start_workload_capture_context: start_workload_capture_context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -139,7 +139,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
 
     stop_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :stop, name
-      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest, request
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest, request
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["instance"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::StopWorkloadCaptureContext), request["stop_workload_capture_context"]
@@ -165,7 +165,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object
-      c.stop ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context) do |response, operation|
+      c.stop ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -177,7 +177,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      c.stop(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context), grpc_options) do |response, operation|
+      c.stop(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest.new(project: project, instance: instance, stop_workload_capture_context: stop_workload_capture_context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,7 +202,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
 
     start_replay_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_replay, name
-      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest, request
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest, request
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["instance"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::StartWorkloadReplayContext), request["start_workload_replay_context"]
@@ -229,7 +229,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object
-      c.start_replay ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id) do |response, operation|
+      c.start_replay ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -241,7 +241,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      c.start_replay(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id), grpc_options) do |response, operation|
+      c.start_replay(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest.new(project: project, instance: instance, start_workload_replay_context: start_workload_replay_context, workload_id: workload_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -265,7 +265,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
 
     stop_replay_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :stop_replay, name
-      assert_kind_of ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest, request
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest, request
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["instance"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::StopWorkloadReplayContext), request["stop_workload_replay_context"]
@@ -291,7 +291,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object
-      c.stop_replay ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context) do |response, operation|
+      c.stop_replay ::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -303,7 +303,7 @@ class ::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      c.stop_replay(::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context), grpc_options) do |response, operation|
+      c.stop_replay(::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new(project: project, instance: instance, stop_workload_replay_context: stop_workload_replay_context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

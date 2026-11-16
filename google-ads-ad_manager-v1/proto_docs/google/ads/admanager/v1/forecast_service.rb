@@ -21,12 +21,21 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Request object for [RunAvailabilityForecast][] method.
+        # Request object for `RunAvailabilityForecast` method.
         # @!attribute [rw] existing_line_item
         #   @return [::String]
         #     Optional. The resource name of the
         #     {::Google::Ads::AdManager::V1::LineItem LineItem} to be forecasted. Format:
         #     `networks/{network_code}/lineItems/{line_item_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `existing_line_item`, `forecasting_line_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] forecasting_line_item
+        #   @return [::Google::Ads::AdManager::V1::ForecastingLineItem]
+        #     Optional. The
+        #     {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItem} to be
+        #     forecasted.
+        #
+        #     Note: The following fields are mutually exclusive: `forecasting_line_item`, `existing_line_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
@@ -38,7 +47,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [RunAvailabilityForecast][] method.
+        # Response object for `RunAvailabilityForecast` method.
         # @!attribute [rw] availability_forecast_result
         #   @return [::Google::Ads::AdManager::V1::AvailabilityForecast]
         #     The availability forecast.
@@ -47,11 +56,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [RunDeliveryForecast][] method.
+        # Request object for `RunDeliveryForecast` method.
         # @!attribute [rw] existing_line_items
         #   @return [::Google::Ads::AdManager::V1::ExistingLineItemList]
         #     Optional. The resource names of the
         #     {::Google::Ads::AdManager::V1::LineItem LineItems} to be forecasted.
+        #
+        #     Note: The following fields are mutually exclusive: `existing_line_items`, `forecasting_line_items`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] forecasting_line_items
+        #   @return [::Google::Ads::AdManager::V1::ForecastingLineItemList]
+        #     Optional. The
+        #     {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItems} to be
+        #     forecasted.
+        #
+        #     Note: The following fields are mutually exclusive: `forecasting_line_items`, `existing_line_items`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
@@ -63,7 +81,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [RunDeliveryForecast][] method.
+        # Response object for `RunDeliveryForecast` method.
         # @!attribute [rw] delivery_forecast_result
         #   @return [::Google::Ads::AdManager::V1::DeliveryForecastResult]
         #     The delivery forecast result.
@@ -72,7 +90,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [RunTrafficData][] method.
+        # Request object for `RunTrafficData` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Format: `networks/{network_code}`
@@ -94,7 +112,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [RunTrafficData][] method.
+        # Response object for `RunTrafficData` method.
         # @!attribute [rw] historical_time_series
         #   @return [::Google::Ads::AdManager::V1::TimeSeries]
         #     Time series of historical traffic ad opportunity counts.

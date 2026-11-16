@@ -1,0 +1,17 @@
+{
+    "api_id": "observability.googleapis.com",
+    "api_shortname": "observability",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-observability/latest",
+    "distribution_name": "google-cloud-observability",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "observability",
+    "name_pretty": "Observability API",
+    "product_documentation": "https://cloud.google.com/stackdriver/docs/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides functionality for configuring the observability scope, which controls the log, metric, and trace data that you can view.",
+    "ruby-cloud-product-url": "https://cloud.google.com/stackdriver/docs/",
+    "library_type": "GAPIC_AUTO"
+}

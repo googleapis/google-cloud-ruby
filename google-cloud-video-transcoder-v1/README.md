@@ -1,6 +1,6 @@
 # Ruby Client for the Transcoder V1 API
 
-This API converts video files into formats suitable for consumer distribution. For more information, see the <a href="https://cloud.google.com/transcoder/docs/concepts/overview">Transcoder API overview</a>.
+This API converts video files into formats suitable for consumer distribution.
 
 
 https://github.com/googleapis/google-cloud-ruby
@@ -84,12 +84,10 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 This library is supported on Ruby 3.2+.
 
-Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Older versions of Ruby _may_
-still work, but are unsupported and not recommended. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Which client should I use?
 

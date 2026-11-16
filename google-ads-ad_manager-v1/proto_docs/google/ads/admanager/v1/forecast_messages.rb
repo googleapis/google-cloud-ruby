@@ -26,12 +26,12 @@ module Google
         #   @return [::Boolean]
         #     Optional. When specified, forecast result for the availability line item
         #     will also include breakdowns by its targeting in
-        #     [AvailabilityForecast.targetingCriteriaBreakdowns][].
+        #     {::Google::Ads::AdManager::V1::AvailabilityForecast#targeting_criteria_breakdowns AvailabilityForecast.targetingCriteriaBreakdowns}.
         # @!attribute [rw] contending_line_items_included
         #   @return [::Boolean]
         #     Optional. When specified, the forecast result for the availability line
         #     item will also include contending line items in
-        #     [AvailabilityForecast.contendingLineItems][].
+        #     {::Google::Ads::AdManager::V1::AvailabilityForecast#contending_line_items AvailabilityForecast.contendingLineItems}.
         # @!attribute [rw] breakdown
         #   @return [::Google::Ads::AdManager::V1::ForecastBreakdownOptions]
         #     Optional. Configurations of forecast breakdowns.
@@ -77,25 +77,28 @@ module Google
         # @!attribute [rw] unit_type
         #   @return [::Google::Ads::AdManager::V1::UnitTypeEnum::UnitType]
         #     The unit with which the goal or cap of the LineItem is defined. Will be the
-        #     same value as [Goal.unitType][] for both a set line item or a
-        #     prospective one.
+        #     same value as {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType} for
+        #     both a set line item or a prospective one.
         # @!attribute [rw] available_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that can
-        #     be booked without affecting the delivery of any reserved line items.
-        #     Exceeding this value won't cause an overbook, but lower priority line items
-        #     may not run.
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that can be booked
+        #     without affecting the delivery of any reserved line items. Exceeding this
+        #     value won't cause an overbook, but lower priority line items may not run.
         # @!attribute [rw] delivered_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that have already been
-        #     served if the reservation is already running.
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that have already
+        #     been served if the reservation is already running.
         # @!attribute [rw] matched_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that match the specified
-        #     targeting and delivery settings.
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that match the
+        #     specified targeting and delivery settings.
         # @!attribute [rw] possible_units
         #   @return [::Integer]
-        #     The maximum number of units, defined by [Goal.unitType][], that could be
+        #     The maximum number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that could be
         #     booked by taking inventory away from lower priority line items and some
         #     same priority line items.
         #
@@ -103,12 +106,13 @@ module Google
         #     priority line items to underdeliver.
         # @!attribute [rw] reserved_units
         #   @return [::Integer]
-        #     The number of reserved units, defined by [Goal.unitType][], requested. This
+        #     The number of reserved units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, requested. This
         #     can be an absolute or percentage value.
         # @!attribute [rw] breakdowns
         #   @return [::Array<::Google::Ads::AdManager::V1::ForecastBreakdown>]
         #     The breakdowns for each time window defined in
-        #     [ForecastBreakdownOptions.timeWindows][].
+        #     {::Google::Ads::AdManager::V1::ForecastBreakdownOptions#time_windows ForecastBreakdownOptions.timeWindows}.
         #
         #     If no breakdown was requested through
         #     {::Google::Ads::AdManager::V1::AvailabilityForecastOptions#breakdown AvailabilityForecastOptions.breakdown},
@@ -179,7 +183,9 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     An optional name for this breakdown target, to be populated in the
-        #     corresponding [ForecastBreakdownEntry.displayName][] field.
+        #     corresponding
+        #     {::Google::Ads::AdManager::V1::ForecastBreakdownEntry#display_name ForecastBreakdownEntry.displayName}
+        #     field.
         # @!attribute [rw] targeting
         #   @return [::Google::Ads::AdManager::V1::Targeting]
         #     If specified, the targeting for this breakdown.
@@ -214,7 +220,8 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The optional name of this entry, as specified in the corresponding
-        #     [ForecastBreakdownTarget.displayName][] field.
+        #     {::Google::Ads::AdManager::V1::ForecastBreakdownTarget#display_name ForecastBreakdownTarget.displayName}
+        #     field.
         # @!attribute [rw] forecast
         #   @return [::Google::Ads::AdManager::V1::DeliveryForecast]
         #     The forecast of this entry.
@@ -343,20 +350,23 @@ module Google
         # @!attribute [rw] unit_type
         #   @return [::Google::Ads::AdManager::V1::UnitTypeEnum::UnitType]
         #     The unit with which the goal or cap of the LineItem is defined. Will be the
-        #     same value as [Goal.unitType][] for both a set line item or a prospective
-        #     one.
+        #     same value as {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType} for
+        #     both a set line item or a prospective one.
         # @!attribute [rw] predicted_delivery_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that will be delivered
-        #     by the line item. Delivery of existing line items that are of same or lower
-        #     priorities may be impacted.
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that will be
+        #     delivered by the line item. Delivery of existing line items that are of
+        #     same or lower priorities may be impacted.
         # @!attribute [rw] delivered_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that have already been
-        #     served if the reservation is already running.
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that have already
+        #     been served if the reservation is already running.
         # @!attribute [rw] matched_units
         #   @return [::Integer]
-        #     The number of units, defined by [Goal.unitType][], that match the
+        #     The number of units, defined by
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType}, that match the
         #     specified LineItem#targeting and delivery settings.
         class LineItemDeliveryForecast
           include ::Google::Protobuf::MessageExts
@@ -389,6 +399,34 @@ module Google
         #     names to be forecasted. Format:
         #     `networks/{network_code}/lineItems/{line_item_id}`
         class ExistingLineItemList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A {::Google::Ads::AdManager::V1::LineItem LineItem} or [ProposalLineItem][] to be
+        # forecasted along with an optional override advertiser.
+        # @!attribute [rw] line_item
+        #   @return [::Google::Ads::AdManager::V1::LineItem]
+        #     Optional. The {::Google::Ads::AdManager::V1::LineItem LineItem} to be
+        #     forecasted.
+        # @!attribute [rw] advertiser
+        #   @return [::String]
+        #     Optional. The resource name of the advertiser
+        #     {::Google::Ads::AdManager::V1::Company Company} for the prospective line item.
+        #     Format: `networks/{network_code}/companies/{company_id}`
+        class ForecastingLineItem
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # {::Google::Ads::AdManager::V1::ForecastingLineItemList ForecastingLineItemList} is
+        # a wrapper around a repeated field of
+        # {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItem} objects.
+        # @!attribute [rw] forecasting_line_items
+        #   @return [::Array<::Google::Ads::AdManager::V1::ForecastingLineItem>]
+        #     Required. The list of
+        #     {::Google::Ads::AdManager::V1::ForecastingLineItem ForecastingLineItem} objects.
+        class ForecastingLineItemList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -38,6 +38,7 @@ module Google
         #     puts cs.replication_state
         #     puts cs.encryption_infos.first.encryption_type
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         class ClusterState
           attr_reader :cluster_name

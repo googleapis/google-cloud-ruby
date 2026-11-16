@@ -54,6 +54,11 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp of when the notification config was last
         #     updated.
+        # @!attribute [rw] deletion_notifications_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the notifications will be sent for deleted
+        #     findings. When enabled, the filter defined in the streaming config is still
+        #     respected when sending deletion notifications.
         class NotificationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

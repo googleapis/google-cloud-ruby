@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::IssueResolution::ClientConstructionMinitest < 
       client = Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client, client
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::IssueResolution::ClientConstructionMinitest < 
       client = Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Rest::Client, client
     end
   end
 
@@ -69,7 +69,7 @@ class Google::Shopping::Merchant::IssueResolution::ClientConstructionMinitest < 
       client = Google::Shopping::Merchant::IssueResolution.issue_resolution_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client, client
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client, client
     end
   end
 
@@ -79,7 +79,7 @@ class Google::Shopping::Merchant::IssueResolution::ClientConstructionMinitest < 
       client = Google::Shopping::Merchant::IssueResolution.issue_resolution_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Rest::Client, client
     end
   end
 end

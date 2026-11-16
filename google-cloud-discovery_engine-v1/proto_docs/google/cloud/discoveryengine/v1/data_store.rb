@@ -134,6 +134,9 @@ module Google
         # @!attribute [rw] healthcare_fhir_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::HealthcareFhirConfig]
         #     Optional. Configuration for `HEALTHCARE_FHIR` vertical.
+        # @!attribute [rw] serving_config_data_store
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::ServingConfigDataStore]
+        #     Optional. Stores serving config at DataStore level.
         # @!attribute [rw] identity_mapping_store
         #   @return [::String]
         #     Immutable. The fully qualified resource name of the associated
@@ -141,6 +144,22 @@ module Google
         #     This field can only be set for acl_enabled DataStores with `THIRD_PARTY` or
         #     `GSUITE` IdP. Format:
         #     `projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}`.
+        # @!attribute [rw] is_infobot_faq_data_store
+        #   @return [::Boolean]
+        #     Optional. If set, this DataStore is an Infobot FAQ DataStore.
+        # @!attribute [rw] federated_search_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig]
+        #     Optional. If set, this DataStore is a federated search DataStore.
+        # @!attribute [rw] configurable_billing_approach
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::ConfigurableBillingApproach]
+        #     Optional. Configuration for configurable billing approach. See
+        # @!attribute [r] configurable_billing_approach_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when configurable_billing_approach was last
+        #     updated.
+        # @!attribute [rw] data_protection_policy
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::DataProtectionPolicy]
+        #     Optional. Specifies the data protection policy for the data store.
         class DataStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,6 +188,146 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Stores information regarding the serving configurations at DataStore level.
+          # @!attribute [rw] disabled_for_serving
+          #   @return [::Boolean]
+          #     Optional. If set true, the DataStore will not be available for serving
+          #     search requests.
+          class ServingConfigDataStore
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Stores information for federated search.
+          # @!attribute [rw] alloy_db_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::AlloyDbConfig]
+          #     AlloyDB config. If set, this DataStore is connected to AlloyDB.
+          #
+          #     Note: The following fields are mutually exclusive: `alloy_db_config`, `third_party_oauth_config`, `notebooklm_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] third_party_oauth_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::ThirdPartyOauthConfig]
+          #     Third Party OAuth config. If set, this DataStore is connected to a
+          #     third party application.
+          #
+          #     Note: The following fields are mutually exclusive: `third_party_oauth_config`, `alloy_db_config`, `notebooklm_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] notebooklm_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::NotebooklmConfig]
+          #     NotebookLM config. If set, this DataStore is connected to
+          #     NotebookLM Enterprise.
+          #
+          #     Note: The following fields are mutually exclusive: `notebooklm_config`, `alloy_db_config`, `third_party_oauth_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class FederatedSearchConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Stores information for connecting to AlloyDB.
+            # @!attribute [rw] alloydb_connection_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::AlloyDbConfig::AlloyDbConnectionConfig]
+            #     Required. Configuration for connecting to AlloyDB.
+            # @!attribute [rw] alloydb_ai_nl_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::AlloyDbConfig::AlloyDbAiNaturalLanguageConfig]
+            #     Optional. Configuration for Magic.
+            # @!attribute [rw] returned_fields
+            #   @return [::Array<::String>]
+            #     Optional. Fields to be returned in the search results. If empty, all
+            #     fields will be returned.
+            class AlloyDbConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Configuration for connecting to AlloyDB.
+              # @!attribute [rw] instance
+              #   @return [::String]
+              #     Required. The AlloyDB instance to connect to.
+              # @!attribute [rw] database
+              #   @return [::String]
+              #     Required. The AlloyDB database to connect to.
+              # @!attribute [rw] user
+              #   @return [::String]
+              #     Required. Database user.
+              #
+              #     If auth_mode = END_USER_ACCOUNT, it can be unset. In that case,
+              #     the user will be inferred on the AlloyDB side, based on the
+              #     authenticated user.
+              # @!attribute [rw] password
+              #   @return [::String]
+              #     Required. Database password.
+              #
+              #     If auth_mode = END_USER_ACCOUNT, it can be unset. In that case,
+              #     the password will be inferred on the AlloyDB side, based on the
+              #     authenticated user.
+              # @!attribute [rw] auth_mode
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::FederatedSearchConfig::AlloyDbConfig::AlloyDbConnectionConfig::AuthMode]
+              #     Optional. Auth mode.
+              # @!attribute [rw] enable_psvs
+              #   @return [::Boolean]
+              #     Optional. If true, enable PSVS for AlloyDB.
+              class AlloyDbConnectionConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Auth mode.
+                module AuthMode
+                  AUTH_MODE_UNSPECIFIED = 0
+
+                  # Uses P4SA when VAIS talks to AlloyDB.
+                  AUTH_MODE_SERVICE_ACCOUNT = 1
+
+                  # Uses EUC when VAIS talks to AlloyDB.
+                  AUTH_MODE_END_USER_ACCOUNT = 2
+                end
+              end
+
+              # Configuration for AlloyDB AI Natural Language.
+              # @!attribute [rw] nl_config_id
+              #   @return [::String]
+              #     Optional. AlloyDb AI NL config id, i.e. the value that was used for
+              #     calling `SELECT alloydb_ai_nl.g_create_configuration(...)`. Can be
+              #     empty.
+              class AlloyDbAiNaturalLanguageConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Stores information for third party applicationOAuth.
+            # @!attribute [rw] app_name
+            #   @return [::String]
+            #     Optional. The type of the application. E.g., "jira", "box", etc.
+            # @!attribute [rw] instance_name
+            #   @return [::String]
+            #     Optional. The instance name identifying the 3P app, e.g.,
+            #     "<tenant>-my". This is different from the instance_uri which is the
+            #     full URL of the 3P app e.g., "https://<tenant>-my.sharepoint.com".
+            class ThirdPartyOauthConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Config for connecting to NotebookLM Enterprise.
+            # @!attribute [rw] search_config
+            #   @return [::String]
+            #     Required. Search config name.
+            #
+            #     Format: projects/*/locations/global/notebookLmSearchConfigs/*
+            # @!attribute [rw] notebooks
+            #   @return [::Array<::String>]
+            #     Optional. Restricts this data store to the given notebooks. When empty,
+            #     the data store covers every notebook the querying user can access,
+            #     which is the existing behaviour.
+            #
+            #     Each entry is a full notebook resource name, such as
+            #     `projects/*/locations/*/notebooks/*`.
+            #
+            #     Scoping is enforced on results as well as requested upstream, so a
+            #     notebook outside this list cannot appear in a search response through
+            #     this data store even if the backend returns one.
+            class NotebooklmConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Content config of the data store.
           module ContentConfig
             # Default value.
@@ -189,6 +348,19 @@ module Google
             # data store are specified in the
             # {::Google::Cloud::DiscoveryEngine::V1::WorkspaceConfig WorkspaceConfig}.
             GOOGLE_WORKSPACE = 4
+          end
+
+          # Configuration for configurable billing approach.
+          module ConfigurableBillingApproach
+            # Default value. For Spark and non-Spark non-configurable billing approach.
+            CONFIGURABLE_BILLING_APPROACH_UNSPECIFIED = 0
+
+            # Use the subscription base + overage billing for indexing core for non
+            # embedding storage.
+            CONFIGURABLE_SUBSCRIPTION_INDEXING_CORE = 1
+
+            # Use the consumption pay-as-you-go billing for embedding storage add-on.
+            CONFIGURABLE_CONSUMPTION_EMBEDDING = 2
           end
         end
 
@@ -235,9 +407,11 @@ module Google
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DiscoveryEngine::V1::WorkspaceConfig::Type]
         #     The Google Workspace data source.
-        # @!attribute [rw] dasher_customer_id
+        # @!attribute [r] dasher_customer_id
         #   @return [::String]
-        #     Obfuscated Dasher customer ID.
+        #     Output only. Obfuscated Dasher customer ID. Derived by the server from
+        #     the project's GCP organization at data store creation time; any value
+        #     supplied in the request payload is ignored.
         # @!attribute [rw] super_admin_service_account
         #   @return [::String]
         #     Optional. The super admin service account for the workspace that will be
@@ -280,6 +454,9 @@ module Google
 
             # Workspace Data Store contains People data
             GOOGLE_PEOPLE = 8
+
+            # Workspace Data Store contains all Workspace apps data
+            GOOGLE_WORKSPACE = 9
           end
         end
       end

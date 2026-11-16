@@ -1,6 +1,6 @@
 # Ruby Client for the Merchant API
 
-Programmatically manage your Merchant Center accounts.
+Programmatically manage your Merchant Center Accounts.
 
 
 Actual client classes for the various versions of this API are defined in
@@ -15,7 +15,7 @@ for this library, google-shopping-merchant-reports, to see the convenience metho
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-shopping-merchant-reports-v1beta](https://rubydoc.info/gems/google-shopping-merchant-reports-v1beta).
+[google-shopping-merchant-reports-v1](https://rubydoc.info/gems/google-shopping-merchant-reports-v1).
 
 See also the [Product Documentation](https://developers.google.com/merchant/api)
 for more usage information.
@@ -37,7 +37,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/shopping/merchant/reports"
 
 client = Google::Shopping::Merchant::Reports.report_service
-request = ::Google::Shopping::Merchant::Reports::V1beta::SearchRequest.new # (request fields as keyword arguments...)
+request = ::Google::Shopping::Merchant::Reports::V1::SearchRequest.new # (request fields as keyword arguments...)
 response = client.search request
 ```
 
@@ -69,25 +69,23 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-shopping-merchant-reports-v1beta](https://rubydoc.info/gems/google-shopping-merchant-reports-v1beta).
+[google-shopping-merchant-reports-v1](https://rubydoc.info/gems/google-shopping-merchant-reports-v1).
 
 ## Supported Ruby Versions
 
 This library is supported on Ruby 3.2+.
 
-Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Older versions of Ruby _may_
-still work, but are unsupported and not recommended. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-shopping-merchant-reports`,
 and lower-level _versioned_ client libraries with names such as
-`google-shopping-merchant-reports-v1beta`.
+`google-shopping-merchant-reports-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -125,7 +123,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-shopping-merchant-reports-v1beta`.
+is part of the name, e.g. `google-shopping-merchant-reports-v1`.
 
 ### What about the google-apis-<name> clients?
 

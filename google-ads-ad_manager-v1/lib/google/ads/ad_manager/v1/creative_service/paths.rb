@@ -25,6 +25,40 @@ module Google
           # Path helper methods for the CreativeService API.
           module Paths
             ##
+            # Create a fully-qualified Asset resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/assets/{asset}`
+            #
+            # @param network_code [String]
+            # @param asset [String]
+            #
+            # @return [::String]
+            def asset_path network_code:, asset:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/assets/#{asset}"
+            end
+
+            ##
+            # Create a fully-qualified Company resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/companies/{company}`
+            #
+            # @param network_code [String]
+            # @param company [String]
+            #
+            # @return [::String]
+            def company_path network_code:, company:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/companies/#{company}"
+            end
+
+            ##
             # Create a fully-qualified Creative resource string.
             #
             # The resource will be in the following format:
@@ -42,6 +76,57 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CreativeSet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/creativeSets/{creative_set}`
+            #
+            # @param network_code [String]
+            # @param creative_set [String]
+            #
+            # @return [::String]
+            def creative_set_path network_code:, creative_set:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/creativeSets/#{creative_set}"
+            end
+
+            ##
+            # Create a fully-qualified CustomField resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customFields/{custom_field}`
+            #
+            # @param network_code [String]
+            # @param custom_field [String]
+            #
+            # @return [::String]
+            def custom_field_path network_code:, custom_field:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customFields/#{custom_field}"
+            end
+
+            ##
+            # Create a fully-qualified Label resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/labels/{label}`
+            #
+            # @param network_code [String]
+            # @param label [String]
+            #
+            # @return [::String]
+            def label_path network_code:, label:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/labels/#{label}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -53,6 +138,23 @@ module Google
             # @return [::String]
             def network_path network_code:
               "networks/#{network_code}"
+            end
+
+            ##
+            # Create a fully-qualified ThirdPartyCompany resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/thirdPartyCompanies/{third_party_company}`
+            #
+            # @param network_code [String]
+            # @param third_party_company [String]
+            #
+            # @return [::String]
+            def third_party_company_path network_code:, third_party_company:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/thirdPartyCompanies/#{third_party_company}"
             end
 
             extend self

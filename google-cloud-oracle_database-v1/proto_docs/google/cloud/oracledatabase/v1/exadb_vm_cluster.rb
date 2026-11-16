@@ -73,6 +73,13 @@ module Google
         #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector]
         #     Output only. The identity connector details which will allow OCI to
         #     securely access the resources in the customer project.
+        # @!attribute [rw] identity_connector_disabled
+        #   @return [::Boolean]
+        #     Optional. Input only. Immutable. If set to true, disables the automatic
+        #     provisioning of the Workload Identity Connector during creation. If set to
+        #     false or omitted, the Workload Identity Connector will be automatically
+        #     provisioned by default. Note: Provisioning the Workload Identity Connector
+        #     is a prerequisite for enabling Google Cloud CMEK.
         class ExadbVmCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

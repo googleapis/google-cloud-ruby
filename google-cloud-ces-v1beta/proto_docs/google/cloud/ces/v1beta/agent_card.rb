@@ -102,6 +102,62 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Shared configuration for connecting to a remote
+        # [A2A](https://github.com/a2aproject/A2A) agent.
+        # @!attribute [rw] agent_card
+        #   @return [::Google::Cloud::Ces::V1beta::AgentCard]
+        #     Optional. The full agent card defined inline.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_card`, `agent_registry`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] agent_registry
+        #   @return [::String]
+        #     Optional. Reference to the agent in the Agent Registry.
+        #     Format: `projects/{project}/locations/{location}/agents/{agent}`
+        #
+        #     Note: The following fields are mutually exclusive: `agent_registry`, `agent_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] api_authentication
+        #   @return [::Google::Cloud::Ces::V1beta::ApiAuthentication]
+        #     Optional. Authentication configuration for calling the remote agent.
+        #     Optional if the registry reference already handles authentication.
+        # @!attribute [rw] input_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of input variable names of remote agent to GECX variable
+        #     names.
+        # @!attribute [rw] output_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of output variable names of remote agent to GECX variable
+        #     names.
+        # @!attribute [rw] streaming_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether streaming is enabled for the remote agent.
+        # @!attribute [rw] context_id
+        #   @return [::String]
+        #     Optional. If not empty, interactions with the remote A2A agent will use
+        #     this context ID. This context_id field can refer to a session variable like
+        #     `$context.variables.order_agent_session_id`.
+        class RemoteA2aConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class InputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class OutputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Represents a tool that allows the agent to call another remote agent.
         # @!attribute [rw] name
         #   @return [::String]
@@ -112,9 +168,44 @@ module Google
         # @!attribute [rw] agent_card
         #   @return [::Google::Cloud::Ces::V1beta::AgentCard]
         #     Required. The agent card of the remote agent that this tool invokes.
+        # @!attribute [rw] api_authentication
+        #   @return [::Google::Cloud::Ces::V1beta::ApiAuthentication]
+        #     Optional. Authentication configuration for calling the remote agent.
+        # @!attribute [rw] stateful_agent
+        #   @return [::Boolean]
+        #     Optional. When enabled, the interaction between the CXAS app and the remote
+        #     agent will share the same context. If the remote agent returns a
+        #     context_id, it will be persisted for the entirety of the session for this
+        #     remote agent tool.
+        # @!attribute [rw] input_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of input variable names of remote agent to GECX variable
+        #     names.
+        # @!attribute [rw] output_variable_mapping
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Mapping of output variable names of remote agent to GECX variable
+        #     names.
         class RemoteAgentTool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class InputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class OutputVariableMappingEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

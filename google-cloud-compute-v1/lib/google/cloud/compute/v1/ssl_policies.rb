@@ -31,7 +31,7 @@ module Google
         ##
         # The SslPolicies API.
         #
-        # This client uses SslPolicies version 2026-09-01.
+        # This client uses SslPolicies version 2026-11-01.
         #
         # @example Load this service and instantiate a REST client
         #

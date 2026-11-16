@@ -30,6 +30,96 @@
                 "delete_management_server"
               ]
             },
+            "CreateRestoreTemplate": {
+              "methods": [
+                "create_restore_template"
+              ]
+            },
+            "GetRestoreTemplate": {
+              "methods": [
+                "get_restore_template"
+              ]
+            },
+            "ListRestoreTemplates": {
+              "methods": [
+                "list_restore_templates"
+              ]
+            },
+            "UpdateRestoreTemplate": {
+              "methods": [
+                "update_restore_template"
+              ]
+            },
+            "DeleteRestoreTemplate": {
+              "methods": [
+                "delete_restore_template"
+              ]
+            },
+            "RunRestoreTemplate": {
+              "methods": [
+                "run_restore_template"
+              ]
+            },
+            "GetRestoreTemplateExecution": {
+              "methods": [
+                "get_restore_template_execution"
+              ]
+            },
+            "ListRestoreTemplateExecutions": {
+              "methods": [
+                "list_restore_template_executions"
+              ]
+            },
+            "TriggerRestoreCleanup": {
+              "methods": [
+                "trigger_restore_cleanup"
+              ]
+            },
+            "CreateRestoreVerificationPlan": {
+              "methods": [
+                "create_restore_verification_plan"
+              ]
+            },
+            "CreateRestoreVerificationPlanAssociation": {
+              "methods": [
+                "create_restore_verification_plan_association"
+              ]
+            },
+            "GetRestoreVerificationPlanAssociation": {
+              "methods": [
+                "get_restore_verification_plan_association"
+              ]
+            },
+            "ListRestoreVerificationPlanAssociations": {
+              "methods": [
+                "list_restore_verification_plan_associations"
+              ]
+            },
+            "DeleteRestoreVerificationPlanAssociation": {
+              "methods": [
+                "delete_restore_verification_plan_association"
+              ]
+            },
+            "TriggerRestoreVerification": {
+              "methods": [
+                "trigger_restore_verification"
+              ]
+            },
+            "GetRestoreVerificationPlan": {
+              "methods": [
+                "get_restore_verification_plan"
+              ]
+            },
+            "ListRestoreVerificationPlans": {
+              "methods": [
+                "list_restore_verification_plans"
+              ]
+            },
+            "DeleteRestoreVerificationPlan": {
+              "methods": [
+                "delete_restore_verification_plan"
+              ]
+            },
             "CreateBackupVault": {
               "methods": [
                 "create_backup_vault"

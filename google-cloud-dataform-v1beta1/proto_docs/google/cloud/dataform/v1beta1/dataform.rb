@@ -125,6 +125,11 @@ module Google
           # @!attribute [rw] ssh_authentication_config
           #   @return [::Google::Cloud::Dataform::V1beta1::Repository::GitRemoteSettings::SshAuthenticationConfig]
           #     Optional. Authentication fields for remote uris using SSH protocol.
+          # @!attribute [rw] account_connector
+          #   @return [::String]
+          #     Optional. Resource name for the Account Connector used for personal
+          #     authentication. Must be in the format
+          #     `projects/*/locations/*/accountConnectors/*`
           # @!attribute [rw] git_repository_link
           #   @return [::String]
           #     Optional. Resource name for the `GitRepositoryLink` used for machine
@@ -678,7 +683,7 @@ module Google
         #     checkout for this workspace. If defined and greater than 0, the Git
         #     repository will be created as a shallow clone with the given depth,
         #     otherwise a full clone will be performed. This field is available only for
-        #     GitHub, Gitlab and 1p repositories with enabled branch management.
+        #     GitHub, GitLab and 1p repositories with enabled branch management.
         # @!attribute [r] shallow
         #   @return [::Boolean]
         #     Output only. If set to true, the workspace was created as a shallow clone.
@@ -977,6 +982,44 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `FetchWorkspaceHistory` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The workspace's name.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of commits to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
+        class FetchWorkspaceHistoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `FetchWorkspaceHistory` response message.
+        # @!attribute [rw] commits
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::CommitLogEntry>]
+        #     A list of commit logs, ordered by 'git log' default order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Optional. A token, which can be sent as `page_token` to retrieve the next
+        #     page. If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] reaches_shallow_boundary
+        #   @return [::Boolean]
+        #     Whether this response reaches the shallow boundary of the repository.
+        class FetchWorkspaceHistoryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `CommitWorkspaceChanges` request message.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1184,7 +1227,7 @@ module Google
         # Client-facing representation of a file entry in search results.
         # @!attribute [rw] path
         #   @return [::String]
-        #     File system path relative to the workspace root.
+        #     File system path relative to the file tree root.
         class FileSearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1902,6 +1945,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents the metadata of the `CreateCompilationResultLongRunning`
+        # operation.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. The ID of the LRO.
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. Server-defined resource path for the target of the operation.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Dataform::V1beta1::CreateCompilationResultMetadata::State]
+        #     Output only. The state of the LRO.
+        # @!attribute [r] create_compilation_result_request
+        #   @return [::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest]
+        #     Output only. The CreateCompilationResult requested.
+        class CreateCompilationResultMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of the LRO.
+          module State
+            # The state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The LRO has been created.
+            CREATED = 1
+
+            # The LRO is in progress.
+            RUNNING = 2
+
+            # The RPC call has finished.
+            FINISHED = 3
+
+            # The LRO has succeeded.
+            SUCCEEDED = 4
+
+            # The LRO has failed.
+            FAILED = 5
+          end
+        end
+
         # Represents an action identifier. If the action writes output, the output
         # will be written to the referenced database object.
         # @!attribute [rw] database
@@ -1963,32 +2046,37 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation]
         #     The database relation created/updated by this action.
         #
-        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`, `notebook`, `data_preparation`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] operations
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Operations]
         #     The database operations executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`, `notebook`, `data_preparation`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assertion
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Assertion]
         #     The assertion executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`, `notebook`, `data_preparation`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] declaration
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Declaration]
         #     The declaration declared by this action.
         #
-        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`, `notebook`, `data_preparation`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] notebook
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Notebook]
         #     The notebook executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `notebook`, `relation`, `operations`, `assertion`, `declaration`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `notebook`, `relation`, `operations`, `assertion`, `declaration`, `data_preparation`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_preparation
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::DataPreparation]
         #     The data preparation executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `data_preparation`, `relation`, `operations`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data_preparation`, `relation`, `operations`, `assertion`, `declaration`, `notebook`, `bigquery_unit_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bigquery_unit_test
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::BigQueryUnitTest]
+        #     The unit test executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_unit_test`, `relation`, `operations`, `assertion`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     This action's identifier. Unique within the compilation result.
@@ -2296,6 +2384,30 @@ module Google
             end
           end
 
+          # Represents a BigQuery unit test.
+          # @!attribute [rw] dependency_targets
+          #   @return [::Array<::Google::Cloud::Dataform::V1beta1::Target>]
+          #     A list of actions that this action depends on.
+          # @!attribute [rw] disabled
+          #   @return [::Boolean]
+          #     Whether this action is disabled (i.e. should not be run).
+          # @!attribute [rw] tags
+          #   @return [::Array<::String>]
+          #     Arbitrary, user-defined tags on this action.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name of the unit test.
+          # @!attribute [rw] test_query
+          #   @return [::String]
+          #     Test query to execute.
+          # @!attribute [rw] expected_output_query
+          #   @return [::String]
+          #     Expected output query to compare against the test query.
+          class BigQueryUnitTest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Simplified load configuration for actions
           # @!attribute [rw] replace
           #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::SimpleLoadMode]
@@ -2479,12 +2591,18 @@ module Google
         # @!attribute [rw] end_user_auth_config
         #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig::EndUserAuthenticationConfig]
         #     Optional. Configuration for end user authentication.
-        #     Note that this should not be set when `service_account` is used.
+        #     Do not set if `service_account` is used.
         # @!attribute [rw] query_priority
         #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig::QueryPriority]
         #     Optional. Specifies the priority for query execution in BigQuery.
         #     More information can be found at
         #     https://cloud.google.com/bigquery/docs/running-queries#queries.
+        # @!attribute [rw] concurrent_actions_limit
+        #   @return [::Integer]
+        #     Optional. Maximum number of actions that can be executed concurrently.
+        # @!attribute [rw] execution_mode
+        #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig::ExecutionMode]
+        #     Optional. Specifies the execution mode for the workflow invocation.
         class InvocationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2515,6 +2633,23 @@ module Google
             # More information can be found at
             # https://cloud.google.com/bigquery/docs/running-queries#batchqueries.
             BATCH = 2
+          end
+
+          # Execution mode for the workflow invocation.
+          # Determines whether to run actions or unit tests.
+          module ExecutionMode
+            # Default value.
+            EXECUTION_MODE_UNSPECIFIED = 0
+
+            # Default execution mode, which runs all actions except unit tests.
+            # Same as ALL_EXCEPT_UNIT_TESTS.
+            DEFAULT = 1
+
+            # Run all actions except unit tests.
+            ALL_EXCEPT_UNIT_TESTS = 2
+
+            # Run unit tests only.
+            UNIT_TESTS_ONLY = 3
           end
         end
 
@@ -2778,17 +2913,22 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::BigQueryAction]
         #     Output only. The workflow action's bigquery action details.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_action`, `notebook_action`, `data_preparation_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_action`, `notebook_action`, `data_preparation_action`, `bigquery_unit_test_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] notebook_action
         #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::NotebookAction]
         #     Output only. The workflow action's notebook action details.
         #
-        #     Note: The following fields are mutually exclusive: `notebook_action`, `bigquery_action`, `data_preparation_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `notebook_action`, `bigquery_action`, `data_preparation_action`, `bigquery_unit_test_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] data_preparation_action
         #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction]
         #     Output only. The workflow action's data preparation action details.
         #
-        #     Note: The following fields are mutually exclusive: `data_preparation_action`, `bigquery_action`, `notebook_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data_preparation_action`, `bigquery_action`, `notebook_action`, `bigquery_unit_test_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] bigquery_unit_test_action
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::BigQueryUnitTestAction]
+        #     Output only. The workflow action's unit test details.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_unit_test_action`, `bigquery_action`, `notebook_action`, `data_preparation_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     Output only. This action's identifier. Unique within the workflow
@@ -2950,6 +3090,32 @@ module Google
             end
           end
 
+          # Represents a workflow action that will run a BigQuery unit test.
+          # @!attribute [r] actual_results_job_id
+          #   @return [::String]
+          #     Output only. Job ID for the actual results.
+          # @!attribute [r] actual_results_sql_script
+          #   @return [::String]
+          #     Output only. SQL script for the actual results.
+          # @!attribute [r] expected_results_job_id
+          #   @return [::String]
+          #     Output only. Job ID for the expected results.
+          # @!attribute [r] expected_results_sql_script
+          #   @return [::String]
+          #     Output only. SQL script for the expected results.
+          # @!attribute [r] total_processed_bytes
+          #   @return [::Integer]
+          #     Output only. Total bytes processed for this action. Combined total for
+          #     actual and expected jobs.
+          # @!attribute [r] total_billed_bytes
+          #   @return [::Integer]
+          #     Output only. Total bytes billed for this action. Combined total for
+          #     actual and expected jobs.
+          class BigQueryUnitTestAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents the current state of a workflow invocation action.
           module State
             # The action has not yet been considered for invocation.
@@ -2974,6 +3140,10 @@ module Google
 
             # The action failed. A terminal state.
             FAILED = 6
+
+            # Execution of the action was queued waiting for an available concurrency
+            # slot.
+            QUEUED = 7
           end
         end
 

@@ -46,6 +46,15 @@ module Google
             rpc :Insert, ::Google::Cloud::Sql::V1::SqlSslCertsInsertRequest, ::Google::Cloud::Sql::V1::SslCertsInsertResponse
             # Lists all of the current SSL certificates for the instance.
             rpc :List, ::Google::Cloud::Sql::V1::SqlSslCertsListRequest, ::Google::Cloud::Sql::V1::SslCertsListResponse
+            # Upload and update customer managed certificate bundle for an existing Cloud
+            # SQL instance.
+            rpc :UpdateCustomerManagedCertificate, ::Google::Cloud::Sql::V1::UpdateCustomerManagedCertificateRequest, ::Google::Cloud::Sql::V1::Operation
+            # Delete customer managed certificate bundle for an existing Cloud SQL
+            # instance.
+            rpc :DeleteCustomerManagedCertificate, ::Google::Cloud::Sql::V1::DeleteCustomerManagedCertificateRequest, ::Google::Cloud::Sql::V1::Operation
+            # List all customer managed certificate bundles for an existing Cloud SQL
+            # instance.
+            rpc :ListCustomerManagedCertificates, ::Google::Cloud::Sql::V1::ListCustomerManagedCertificatesRequest, ::Google::Cloud::Sql::V1::ListCustomerManagedCertificatesResponse
           end
 
           Stub = Service.rpc_stub_class

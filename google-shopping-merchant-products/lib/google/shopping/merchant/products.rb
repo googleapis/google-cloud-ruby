@@ -32,8 +32,8 @@ module Google
         # Create a new client object for ProductInputsService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client](https://rubydoc.info/gems/google-shopping-merchant-products-v1beta/Google/Shopping/Merchant/Products/V1beta/ProductInputsService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Products::V1::ProductInputsService::Client](https://rubydoc.info/gems/google-shopping-merchant-products-v1/Google/Shopping/Merchant/Products/V1/ProductInputsService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ProductInputsService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -49,14 +49,13 @@ module Google
         # ## About ProductInputsService
         #
         # Service to use ProductInput resource.
-        # This service works for products with online channel only.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.product_inputs_service version: :v1beta, transport: :grpc, &block
+        def self.product_inputs_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/products/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Products
@@ -76,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the ProductInputsService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.product_inputs_service_available? version: :v1beta, transport: :grpc
+        def self.product_inputs_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/products/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Products
                          .constants
@@ -103,8 +102,8 @@ module Google
         # Create a new client object for ProductsService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Products::V1beta::ProductsService::Client](https://rubydoc.info/gems/google-shopping-merchant-products-v1beta/Google/Shopping/Merchant/Products/V1beta/ProductsService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Products::V1::ProductsService::Client](https://rubydoc.info/gems/google-shopping-merchant-products-v1/Google/Shopping/Merchant/Products/V1/ProductsService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ProductsService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -122,11 +121,11 @@ module Google
         # Service to use Product resource.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.products_service version: :v1beta, transport: :grpc, &block
+        def self.products_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/products/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Products
@@ -146,11 +145,11 @@ module Google
         # or if the versioned client gem needs an update to support the ProductsService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.products_service_available? version: :v1beta, transport: :grpc
+        def self.products_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/products/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Products
                          .constants

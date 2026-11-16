@@ -87,6 +87,11 @@ module Google
         #     stop being served. This attribute is derived from the Line item of the
         #     order that has the latest `LineItem.end_time`.
         # @!attribute [r] unlimited_end_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Boolean]
+        #     Output only. Deprecated: Indicates whether or not this Order has an end
+        #     time.
+        # @!attribute [r] end_time_unlimited
         #   @return [::Boolean]
         #     Output only. Indicates whether or not this Order has an end time.
         # @!attribute [rw] external_order_id

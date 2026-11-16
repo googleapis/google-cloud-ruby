@@ -154,6 +154,326 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              #   A result object deserialized from the server's reply
+              def create_line_item_creative_association request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_line_item_creative_association_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_line_item_creative_association",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::LineItemCreativeAssociation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_create_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_create_line_item_creative_associations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_create_line_item_creative_associations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_create_line_item_creative_associations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              #   A result object deserialized from the server's reply
+              def update_line_item_creative_association request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_line_item_creative_association_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_line_item_creative_association",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::LineItemCreativeAssociation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_update_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_update_line_item_creative_associations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_update_line_item_creative_associations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_update_line_item_creative_associations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_activate_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_activate_line_item_creative_associations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_activate_line_item_creative_associations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_activate_line_item_creative_associations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_deactivate_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_deactivate_line_item_creative_associations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_deactivate_line_item_creative_associations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_deactivate_line_item_creative_associations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_delete_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def batch_delete_line_item_creative_associations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_delete_line_item_creative_associations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_delete_line_item_creative_associations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the preview_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse]
+              #   A result object deserialized from the server's reply
+              def preview_line_item_creative_association request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_preview_line_item_creative_association_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "preview_line_item_creative_association",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get_line_item_creative_association REST call
@@ -190,6 +510,182 @@ module Google
                                                           uri_template: "/v1/{parent}/creatives",
                                                           matches: [
                                                             ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_line_item_creative_association_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives",
+                                                          body: "line_item_creative_association",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_create_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_create_line_item_creative_associations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives:batchCreate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_line_item_creative_association_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{line_item_creative_association.name}",
+                                                          body: "line_item_creative_association",
+                                                          matches: [
+                                                            ["line_item_creative_association.name", %r{^networks/[^/]+/lineItems/[^/]+/creatives/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_update_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_update_line_item_creative_associations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives:batchUpdate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_activate_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_activate_line_item_creative_associations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives:batchActivate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_deactivate_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_deactivate_line_item_creative_associations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives:batchDeactivate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_delete_line_item_creative_associations REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_delete_line_item_creative_associations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/creatives:batchDelete",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/lineItems/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the preview_line_item_creative_association REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_preview_line_item_creative_association_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:preview",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^networks/[^/]+/lineItems/[^/]+/creatives/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -80,6 +80,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Disk resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/disks/{disk}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param disk [String]
+            #
+            # @return [::String]
+            def disk_path project:, zone:, disk:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/disks/#{disk}"
+            end
+
+            ##
             # Create a fully-qualified DiskType resource string.
             #
             # The resource will be in the following format:
@@ -118,6 +137,102 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Image resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/images/{image}`
+            #
+            # @param project [String]
+            # @param image [String]
+            #
+            # @return [::String]
+            def image_path project:, image:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/images/#{image}"
+            end
+
+            ##
+            # Create a fully-qualified Instance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def instance_path project:, location:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}"
+            end
+
+            ##
+            # Create a fully-qualified InstanceGroupManager resource string.
+            #
+            # @overload instance_group_manager_path(project:, zone:, instance_group_manager:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}`
+            #
+            #   @param project [String]
+            #   @param zone [String]
+            #   @param instance_group_manager [String]
+            #
+            # @overload instance_group_manager_path(project:, region:, instance_group_manager:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}`
+            #
+            #   @param project [String]
+            #   @param region [String]
+            #   @param instance_group_manager [String]
+            #
+            # @return [::String]
+            def instance_group_manager_path **args
+              resources = {
+                "instance_group_manager:project:zone" => (proc do |project:, zone:, instance_group_manager:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+                  "projects/#{project}/zones/#{zone}/instanceGroupManagers/#{instance_group_manager}"
+                end),
+                "instance_group_manager:project:region" => (proc do |project:, region:, instance_group_manager:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+                  "projects/#{project}/regions/#{region}/instanceGroupManagers/#{instance_group_manager}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified InstanceTemplate resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/instanceTemplates/{instance_template}`
+            #
+            # @param project [String]
+            # @param instance_template [String]
+            #
+            # @return [::String]
+            def instance_template_path project:, instance_template:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/instanceTemplates/#{instance_template}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -132,25 +247,6 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
-            end
-
-            ##
-            # Create a fully-qualified LustreInstance resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/instances/{instance}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param instance [String]
-            #
-            # @return [::String]
-            def lustre_instance_path project:, location:, instance:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/instances/#{instance}"
             end
 
             ##
@@ -171,6 +267,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Project resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_path project:
+              "projects/#{project}"
+            end
+
+            ##
             # Create a fully-qualified Reservation resource string.
             #
             # The resource will be in the following format:
@@ -187,6 +297,110 @@ module Google
               raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
 
               "projects/#{project}/zones/#{zone}/reservations/#{reservation}"
+            end
+
+            ##
+            # Create a fully-qualified ReservationBlock resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param reservation [String]
+            # @param reservation_block [String]
+            #
+            # @return [::String]
+            def reservation_block_path project:, zone:, reservation:, reservation_block:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+              raise ::ArgumentError, "reservation cannot contain /" if reservation.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/reservations/#{reservation}/reservationBlocks/#{reservation_block}"
+            end
+
+            ##
+            # Create a fully-qualified ReservationSubBlock resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}/reservationSubBlocks/{reservation_sub_block}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param reservation [String]
+            # @param reservation_block [String]
+            # @param reservation_sub_block [String]
+            #
+            # @return [::String]
+            def reservation_sub_block_path project:, zone:, reservation:, reservation_block:, reservation_sub_block:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+              raise ::ArgumentError, "reservation cannot contain /" if reservation.to_s.include? "/"
+              raise ::ArgumentError, "reservation_block cannot contain /" if reservation_block.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/reservations/#{reservation}/reservationBlocks/#{reservation_block}/reservationSubBlocks/#{reservation_sub_block}"
+            end
+
+            ##
+            # Create a fully-qualified Snapshot resource string.
+            #
+            # @overload snapshot_path(project:, snapshot:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/global/snapshots/{snapshot}`
+            #
+            #   @param project [String]
+            #   @param snapshot [String]
+            #
+            # @overload snapshot_path(project:, region:, snapshot:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/regions/{region}/snapshots/{snapshot}`
+            #
+            #   @param project [String]
+            #   @param region [String]
+            #   @param snapshot [String]
+            #
+            # @return [::String]
+            def snapshot_path **args
+              resources = {
+                "project:snapshot" => (proc do |project:, snapshot:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/global/snapshots/#{snapshot}"
+                end),
+                "project:region:snapshot" => (proc do |project:, region:, snapshot:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+                  "projects/#{project}/regions/#{region}/snapshots/#{snapshot}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified StoragePool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/storagePools/{storage_pool}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param storage_pool [String]
+            #
+            # @return [::String]
+            def storage_pool_path project:, zone:, storage_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/storagePools/#{storage_pool}"
             end
 
             ##

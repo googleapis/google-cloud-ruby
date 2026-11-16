@@ -21,6 +21,12 @@ require_relative "../storage_create_bucket"
 require_relative "../storage_create_bucket_class_location"
 require_relative "../storage_create_bucket_dual_region"
 require_relative "../storage_create_bucket_hierarchical_namespace"
+require_relative "../storage_create_bucket_with_ip_filter"
+require_relative "../storage_get_bucket_ip_filter"
+require_relative "../storage_disable_ip_filtering"
+require_relative "../storage_delete_bucket_ip_filter"
+require_relative "../storage_enable_bucket_ip_filter"
+require_relative "../storage_list_bucket_ip_filters"
 require_relative "../storage_create_bucket_with_object_retention"
 require_relative "../storage_define_bucket_website_configuration"
 require_relative "../storage_delete_bucket"
@@ -175,6 +181,76 @@ describe "Buckets Snippets" do
     end
   end
 
+  describe "storage_bucket_ip_filter" do
+    let(:bucket_name) { random_bucket_name }
+
+    after do
+      delete_bucket_helper bucket_name
+    end
+
+    it "creates, updates, gets, lists, and removes IP filter config" do
+      # Creates IP filter enabled bucket
+      # We are intentionally setting the mode to "Disabled" to test the update functionality
+      # In real use-case, user would be setting it to "Enabled"
+      expected = "Created bucket #{bucket_name} with IP filter.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          create_bucket_with_ip_filter bucket_name: bucket_name, mode: "Disabled"
+        end
+      end
+
+      # Gets IP filter of an existing bucket
+      expected = "Bucket #{bucket_name} has IP filter mode: Disabled.\n" \
+                 "Allowed public network CIDR ranges: 0.0.0.0/0, ::/0\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          get_bucket_ip_filter bucket_name: bucket_name
+        end
+      end
+
+      # Lists IP filter configurations for buckets in the project
+      retry_resource_exhaustion do
+        out, _err = capture_io do
+          list_bucket_ip_filters
+        end
+        # Assert that the specific bucket we created in this test suite
+        # appears in the list with its IP filter mode
+        assert_includes out, "Bucket Name: #{bucket_name}, IP Filtering Mode: Disabled"
+      end
+
+      # Deletes IP filter of an existing bucket
+      expected = "Deleted IP filter rule for bucket #{bucket_name}.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          delete_bucket_ip_filter bucket_name: bucket_name
+        end
+        bucket = storage_client.bucket bucket_name, projection: "full"
+        ranges = bucket.ip_filter&.public_network_source&.allowed_ip_cidr_ranges
+        refute_nil ranges
+        refute_includes ranges, "0.0.0.0/0"
+        assert_includes ranges, "::/0"
+      end
+
+      # Disables IP filter of an existing bucket
+      expected = "Disabled IP filtering for bucket #{bucket_name}.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          disable_ip_filtering bucket_name: bucket_name
+        end
+      end
+
+      # Enables IP filter of an existing bucket
+      # We are intentionally setting the mode to "Disabled" to test the update functionality
+      # In real use-case, user would be setting it to "Enabled"
+      expected = "Configured IP filter for bucket #{bucket_name} (mode: Disabled).\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          enable_bucket_ip_filter bucket_name: bucket_name, mode: "Disabled"
+        end
+      end
+    end
+  end
+
   describe "storage_bucket_encryption_enforcement_config" do
     bucket_name = random_bucket_name
 
@@ -305,8 +381,12 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+    after { delete_bucket_helper bucket.name }
+
     it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
+      bucket.user_project = true
       bucket.requester_pays = false
 
       assert_output "Requester pays has been enabled for #{bucket.name}\n" do
@@ -333,6 +413,10 @@ describe "Buckets Snippets" do
         get_requester_pays_status bucket_name: bucket.name
       end
       refute bucket.requester_pays?
+    ensure
+      bucket.user_project = true
+      bucket.requester_pays = false
+      bucket.user_project = nil
     end
   end
 

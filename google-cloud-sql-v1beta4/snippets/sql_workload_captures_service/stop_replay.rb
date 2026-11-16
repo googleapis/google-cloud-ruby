@@ -36,7 +36,7 @@ def stop_replay
   client = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesService::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest.new
+  request = Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest.new
 
   # Call the stop_replay method.
   result = client.stop_replay request

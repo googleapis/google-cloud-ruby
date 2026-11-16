@@ -32,11 +32,11 @@ module Google
             #
             # The RegionUrlMaps API.
             #
-            # This client uses RegionUrlMaps version 2026-09-01.
+            # This client uses RegionUrlMaps version 2026-11-01.
             #
             class Client
               # @private
-              API_VERSION = "2026-09-01"
+              API_VERSION = "2026-11-01"
 
               # @private
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"

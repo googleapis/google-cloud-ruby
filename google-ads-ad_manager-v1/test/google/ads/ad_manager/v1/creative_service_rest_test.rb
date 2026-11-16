@@ -191,6 +191,226 @@ class ::Google::Ads::AdManager::V1::CreativeService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_create_creative
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Creative.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    creative = {}
+
+    create_creative_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CreativeService::Rest::ServiceStub.stub :transcode_create_creative_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_creative_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CreativeService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_creative({ parent: parent, creative: creative }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_creative parent: parent, creative: creative do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_creative ::Google::Ads::AdManager::V1::CreateCreativeRequest.new(parent: parent, creative: creative) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_creative({ parent: parent, creative: creative }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_creative(::Google::Ads::AdManager::V1::CreateCreativeRequest.new(parent: parent, creative: creative), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_creative_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_creative
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Creative.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    creative = {}
+    update_mask = {}
+
+    update_creative_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CreativeService::Rest::ServiceStub.stub :transcode_update_creative_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_creative_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CreativeService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_creative({ creative: creative, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_creative creative: creative, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_creative ::Google::Ads::AdManager::V1::UpdateCreativeRequest.new(creative: creative, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_creative({ creative: creative, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_creative(::Google::Ads::AdManager::V1::UpdateCreativeRequest.new(creative: creative, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_creative_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_creatives
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateCreativesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_creatives_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CreativeService::Rest::ServiceStub.stub :transcode_batch_create_creatives_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_creatives_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CreativeService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_creatives({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_creatives parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_creatives ::Google::Ads::AdManager::V1::BatchCreateCreativesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_creatives({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_creatives(::Google::Ads::AdManager::V1::BatchCreateCreativesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_creatives_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_creatives
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateCreativesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_creatives_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CreativeService::Rest::ServiceStub.stub :transcode_batch_update_creatives_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_creatives_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CreativeService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_creatives({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_creatives parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_creatives ::Google::Ads::AdManager::V1::BatchUpdateCreativesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_creatives({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_creatives(::Google::Ads::AdManager::V1::BatchUpdateCreativesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_creatives_client_stub.call_count
+      end
+    end
+  end
+
   def test_batch_activate_creatives
     # Create test objects.
     client_result = ::Google::Ads::AdManager::V1::BatchActivateCreativesResponse.new

@@ -1,5 +1,31 @@
 # Changelog
 
+### 1.12.0 (2026-11-04)
+
+#### Features
+
+* update API sources and regenerate ([#36692](https://github.com/googleapis/google-cloud-ruby/issues/36692)) 
+
+### 1.11.0 (2026-10-28)
+
+#### Features
+
+* update API sources and regenerate ([#36683](https://github.com/googleapis/google-cloud-ruby/issues/36683)) 
+
+### 1.10.0 (2026-10-26)
+
+#### Features
+
+* regenerate with gapic-generator-cloud 0.53.0 (gapic-common ~&gt; 1.5) ([#36635](https://github.com/googleapis/google-cloud-ruby/issues/36635)) 
+* regenerate with gapic-generator-cloud 0.54.0 (gapic-common ~&gt; 1.6) ([#36658](https://github.com/googleapis/google-cloud-ruby/issues/36658)) 
+* update API sources and regenerate ([#36650](https://github.com/googleapis/google-cloud-ruby/issues/36650)) 
+
+### 1.9.0 (2026-10-15)
+
+#### Features
+
+* update API sources and regenerate ([#36634](https://github.com/googleapis/google-cloud-ruby/issues/36634)) 
+
 ### 1.8.1 (2026-08-05)
 
 #### Bug Fixes

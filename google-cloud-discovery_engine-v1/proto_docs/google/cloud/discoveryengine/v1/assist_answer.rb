@@ -25,7 +25,7 @@ module Google
         # [AssistResponse][google.cloud.discoveryengine.v1.AssistResponse].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. Resource name of the `AssistAnswer`.
+        #     Immutable. Identifier. Resource name of the `AssistAnswer`.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}`
         #
@@ -34,12 +34,25 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::State]
         #     State of the answer generation.
+        # @!attribute [r] connector_display_names
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. Maps an internal connector agent name (the machine identifier
+        #     embedded in tool names, e.g. `custom_mcp_<fingerprint>_agent`) to the
+        #     connector's human-readable display name. Populated at serving time for
+        #     custom MCP / agent gateway connectors so user-facing surfaces (e.g. the
+        #     tool-call chip) can show the connector name instead of its internal
+        #     identifier. Empty when there are no such connectors.
         # @!attribute [rw] replies
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::Reply>]
         #     Replies of the assistant.
         # @!attribute [rw] assist_skipped_reasons
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::AssistSkippedReason>]
         #     Reasons for not answering the assist call.
+        # @!attribute [rw] customer_policy_enforcement_result
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult]
+        #     Optional. The field contains information about the various policy checks'
+        #     results like the banned phrases or the Model Armor checks. This field is
+        #     populated only if the assist call was skipped due to a policy violation.
         class AssistAnswer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48,7 +61,109 @@ module Google
           # @!attribute [rw] grounded_content
           #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent]
           #     Possibly grounded response text or media from the assistant.
+          # @!attribute [rw] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time when the reply was created.
           class Reply
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Customer policy enforcement results. Contains the results of the various
+          # policy checks, like the banned phrases or the Model Armor checks.
+          # @!attribute [rw] verdict
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult::Verdict]
+          #     Final verdict of the customer policy enforcement. If only one policy
+          #     blocked the processing, the verdict is BLOCK.
+          # @!attribute [rw] policy_results
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult::PolicyEnforcementResult>]
+          #     Customer policy enforcement results.
+          #     Populated only if the assist call was skipped due to a policy
+          #     violation. It contains results from those filters that blocked the
+          #     processing of the query.
+          # @!attribute [r] violation_source
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult::ViolationSource]
+          #     Output only. The source of the violation.
+          class CustomerPolicyEnforcementResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Customer policy enforcement result for the banned phrase policy.
+            # @!attribute [rw] banned_phrases
+            #   @return [::Array<::String>]
+            #     The banned phrases that were found in the query or the answer.
+            class BannedPhraseEnforcementResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Customer policy enforcement result for the Model Armor policy.
+            # @!attribute [rw] model_armor_violation
+            #   @return [::String]
+            #     The Model Armor violation that was found.
+            #
+            #     Note: The following fields are mutually exclusive: `model_armor_violation`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] error
+            #   @return [::Google::Rpc::Status]
+            #     The error returned by Model Armor if the policy enforcement failed
+            #     for some reason.
+            #
+            #     Note: The following fields are mutually exclusive: `error`, `model_armor_violation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class ModelArmorEnforcementResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Customer policy enforcement result for a single policy type.
+            # @!attribute [rw] banned_phrase_enforcement_result
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult::BannedPhraseEnforcementResult]
+            #     The policy enforcement result for the banned phrase policy.
+            #
+            #     Note: The following fields are mutually exclusive: `banned_phrase_enforcement_result`, `model_armor_enforcement_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] model_armor_enforcement_result
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer::CustomerPolicyEnforcementResult::ModelArmorEnforcementResult]
+            #     The policy enforcement result for the Model Armor policy.
+            #
+            #     Note: The following fields are mutually exclusive: `model_armor_enforcement_result`, `banned_phrase_enforcement_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class PolicyEnforcementResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The verdict of the customer policy enforcement.
+            module Verdict
+              # Unknown value.
+              UNSPECIFIED = 0
+
+              # There was no policy violation.
+              ALLOW = 1
+
+              # Processing was blocked by the customer policy.
+              BLOCK = 2
+            end
+
+            # If the assist call was skipped due to a policy violation, this contains
+            # the source of the violation.
+            module ViolationSource
+              # Unknown value.
+              VIOLATION_SOURCE_UNSPECIFIED = 0
+
+              # Violation found in the system response.
+              SYSTEM = 1
+
+              # Violation found in the user prompt.
+              PROMPT = 2
+
+              # Violation found in the user attachment.
+              ATTACHMENT = 3
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConnectorDisplayNamesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -69,6 +184,10 @@ module Google
 
             # Assist operation has been skipped.
             SKIPPED = 4
+
+            # Assist operation has been cancelled (e.g. client closed the stream).
+            # May contain a partial response.
+            CANCELLED = 5
           end
 
           # Possible reasons for not answering an assist call.
@@ -197,6 +316,10 @@ module Google
         # @!attribute [rw] content
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistantContent]
         #     The content.
+        # @!attribute [rw] citation_metadata
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::CitationMetadata]
+        #     Source attribution of the generated content. See also
+        #     https://cloud.google.com/vertex-ai/generative-ai/docs/learn/overview#citation_check
         class AssistantGroundedContent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -205,6 +328,9 @@ module Google
           # @!attribute [rw] segments
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent::TextGroundingMetadata::Segment>]
           #     Grounding information for parts of the text.
+          # @!attribute [rw] visual_segments
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent::TextGroundingMetadata::VisualSegment>]
+          #     Grounding information for parts of the visual content.
           # @!attribute [rw] references
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent::TextGroundingMetadata::Reference>]
           #     References for the grounded text.
@@ -235,18 +361,41 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # Grounding information for a visual segment.
+            # @!attribute [rw] reference_indices
+            #   @return [::Array<::Integer>]
+            #     References for the visual segment.
+            # @!attribute [rw] content_id
+            #   @return [::String]
+            #     The content id of the visual segment. In order to display the citation
+            #     of the visual element, this content_id needs to match with the
+            #     `grounded_content.content_metadata.content_id` field.
+            class VisualSegment
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Referenced content and related document metadata.
             # @!attribute [rw] content
             #   @return [::String]
             #     Referenced text content.
+            # @!attribute [rw] code_snippet
+            #   @return [::String]
+            #     Chunk of code snippet from the referenced document.
             # @!attribute [rw] document_metadata
             #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent::TextGroundingMetadata::Reference::DocumentMetadata]
             #     Document metadata.
+            # @!attribute [r] chunk_metadata
+            #   @return [::Google::Protobuf::Struct]
+            #     Output only. Generic structured chunk metadata from upstream data
+            #     source connectors.
             class Reference
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # Document metadata.
+              # @!attribute [rw] language
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistantGroundedContent::TextGroundingMetadata::Reference::DocumentMetadata::Language]
               # @!attribute [rw] document
               #   @return [::String]
               #     Document resource name.
@@ -265,9 +414,23 @@ module Google
               #     Domain name from the document URI. Note that the `uri` field may
               #     contain a URL that redirects to the actual website, in which case
               #     this will contain the domain name of the target site.
+              # @!attribute [rw] mime_type
+              #   @return [::String]
+              #     The mime type of the document.
+              #     https://www.iana.org/assignments/media-types/media-types.xhtml.
               class DocumentMetadata
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Language of the referenced content. For now, it is only used for
+                # code.
+                module Language
+                  LANGUAGE_UNSPECIFIED = 0
+
+                  PYTHON = 1
+
+                  SQL = 2
+                end
               end
             end
           end

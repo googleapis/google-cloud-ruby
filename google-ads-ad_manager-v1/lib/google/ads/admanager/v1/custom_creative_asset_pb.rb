@@ -9,7 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n3google/ads/admanager/v1/custom_creative_asset.proto\x12\x17google.ads.admanager.v1\x1a,google/ads/admanager/v1/creative_asset.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"~\n\x13\x43ustomCreativeAsset\x12\x1c\n\nmacro_name\x18\x01 \x01(\tB\x03\xe0\x41\x01H\x00\x88\x01\x01\x12:\n\x05\x61sset\x18\x06 \x01(\x0b\x32&.google.ads.admanager.v1.CreativeAssetB\x03\xe0\x41\x02\x42\r\n\x0b_macro_nameB\xcc\x01\n\x1b\x63om.google.ads.admanager.v1B\x18\x43ustomCreativeAssetProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n3google/ads/admanager/v1/custom_creative_asset.proto\x12\x17google.ads.admanager.v1\x1a,google/ads/admanager/v1/creative_asset.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x80\x01\n\x13\x43ustomCreativeAsset\x12\x1d\n\nmacro_name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x01H\x00\x88\x01\x01\x12;\n\x05\x61sset\x18\x06 \x01(\x0b\x32&.google.ads.admanager.v1.CreativeAssetB\x04\xe2\x41\x01\x02\x42\r\n\x0b_macro_nameB\xcc\x01\n\x1b\x63om.google.ads.admanager.v1B\x18\x43ustomCreativeAssetProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

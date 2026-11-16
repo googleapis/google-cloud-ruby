@@ -1354,6 +1354,61 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ClientT
     end
   end
 
+  def test_update_certificate_issuance_config
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    certificate_issuance_config = {}
+    update_mask = {}
+
+    update_certificate_issuance_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::ServiceStub.stub :transcode_update_certificate_issuance_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_certificate_issuance_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_certificate_issuance_config({ certificate_issuance_config: certificate_issuance_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_certificate_issuance_config certificate_issuance_config: certificate_issuance_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_certificate_issuance_config ::Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest.new(certificate_issuance_config: certificate_issuance_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_certificate_issuance_config({ certificate_issuance_config: certificate_issuance_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_certificate_issuance_config(::Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest.new(certificate_issuance_config: certificate_issuance_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_certificate_issuance_config_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_certificate_issuance_config
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

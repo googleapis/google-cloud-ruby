@@ -170,6 +170,9 @@ module Google
         #   @return [::String]
         #     Optional. The message content.
         #     Only one of `content` and `companion_query` should be set - not both.
+        # @!attribute [rw] response_messages
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ResponseMessage>]
+        #     Optional. Automated agent responses.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The message language.
@@ -967,6 +970,30 @@ module Google
         #     Response of the Dialogflow
         #     {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent Sessions.DetectIntent}
         #     call.
+        # @!attribute [rw] response_messages
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ResponseMessage>]
+        #     Response messages from the automated agent.
+        # @!attribute [rw] intent
+        #   @return [::String]
+        #     Name of the intent if an intent is matched for the query.
+        #     For a V2 query, the value format is `projects/<Project ID>/locations/
+        #     <Location ID>/agent/intents/<Intent ID>`.
+        #     For a V3 query, the value format is `projects/<Project ID>/locations/
+        #     <Location ID>/agents/<Agent ID>/intents/<Intent ID>`.
+        # @!attribute [rw] event
+        #   @return [::String]
+        #     Event name if an event is triggered for the query.
+        # @!attribute [rw] match_confidence
+        #   @return [::Float]
+        #     The confidence of the match. Values range from 0.0 (completely uncertain)
+        #     to 1.0 (completely certain).
+        #     This value is for informational purpose only and is only used to help match
+        #     the best intent within the classification threshold. This value may change
+        #     for the same end-user expression at any time due to a model retraining or
+        #     change in implementation.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     The collection of current parameters at the time of this response.
         # @!attribute [rw] automated_agent_reply_type
         #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply::AutomatedAgentReplyType]
         #     AutomatedAgentReply type.
@@ -980,6 +1007,9 @@ module Google
         #     The unique identifier of the current Dialogflow CX conversation page.
         #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
         #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+        # @!attribute [rw] call_companion_auth_code
+        #   @return [::String]
+        #     The auth code for accessing Call Companion UI.
         class AutomatedAgentReply
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1311,6 +1341,134 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class DocumentsMetadataFiltersEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response messages from an automated agent.
+        # @!attribute [rw] text
+        #   @return [::Google::Cloud::Dialogflow::V2::ResponseMessage::Text]
+        #     Returns a text response.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `payload`, `live_agent_handoff`, `end_interaction`, `mixed_audio`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] payload
+        #   @return [::Google::Protobuf::Struct]
+        #     Returns a response containing a custom, platform-specific payload.
+        #
+        #     Note: The following fields are mutually exclusive: `payload`, `text`, `live_agent_handoff`, `end_interaction`, `mixed_audio`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] live_agent_handoff
+        #   @return [::Google::Cloud::Dialogflow::V2::ResponseMessage::LiveAgentHandoff]
+        #     Hands off conversation to a live agent.
+        #
+        #     Note: The following fields are mutually exclusive: `live_agent_handoff`, `text`, `payload`, `end_interaction`, `mixed_audio`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] end_interaction
+        #   @return [::Google::Cloud::Dialogflow::V2::ResponseMessage::EndInteraction]
+        #     A signal that indicates the interaction with the Dialogflow agent has
+        #     ended.
+        #
+        #     Note: The following fields are mutually exclusive: `end_interaction`, `text`, `payload`, `live_agent_handoff`, `mixed_audio`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] mixed_audio
+        #   @return [::Google::Cloud::Dialogflow::V2::ResponseMessage::MixedAudio]
+        #     An audio response message composed of both the synthesized Dialogflow
+        #     agent responses and the audios hosted in places known to the client.
+        #
+        #     Note: The following fields are mutually exclusive: `mixed_audio`, `text`, `payload`, `live_agent_handoff`, `end_interaction`, `telephony_transfer_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] telephony_transfer_call
+        #   @return [::Google::Cloud::Dialogflow::V2::ResponseMessage::TelephonyTransferCall]
+        #     A signal that the client should transfer the phone call connected to
+        #     this agent to a third-party endpoint.
+        #
+        #     Note: The following fields are mutually exclusive: `telephony_transfer_call`, `text`, `payload`, `live_agent_handoff`, `end_interaction`, `mixed_audio`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ResponseMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The text response message.
+          # @!attribute [rw] text
+          #   @return [::Array<::String>]
+          #     A collection of text response variants. If multiple variants are
+          #     defined, only one text response variant is returned at runtime.
+          class Text
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Indicates that the conversation should be handed off to a human agent.
+          #
+          # Dialogflow only uses this to determine which conversations were handed off
+          # to a human agent for measurement purposes. What else to do with this signal
+          # is up to you and your handoff procedures.
+          #
+          # You may set this, for example:
+          #
+          # * In the entry fulfillment of a CX Page if entering the page indicates
+          #   something went extremely wrong in the conversation.
+          # * In a webhook response when you determine that the customer issue can only
+          #   be handled by a human.
+          # @!attribute [rw] metadata
+          #   @return [::Google::Protobuf::Struct]
+          #     Custom metadata for your handoff procedure. Dialogflow doesn't impose
+          #     any structure on this.
+          class LiveAgentHandoff
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Indicates that interaction with the Dialogflow agent has ended.
+          class EndInteraction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents an audio message that is composed of both segments
+          # synthesized from the Dialogflow agent prompts and ones hosted externally
+          # at the specified URIs.
+          # @!attribute [rw] segments
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::ResponseMessage::MixedAudio::Segment>]
+          #     Segments this audio response is composed of.
+          class MixedAudio
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents one segment of audio.
+            # @!attribute [rw] audio
+            #   @return [::String]
+            #     Raw audio synthesized from the Dialogflow agent's response using
+            #     the output config specified in the request.
+            #
+            #     Note: The following fields are mutually exclusive: `audio`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] uri
+            #   @return [::String]
+            #     Client-specific URI that points to an audio clip accessible to the
+            #     client.
+            #
+            #     Note: The following fields are mutually exclusive: `uri`, `audio`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] allow_playback_interruption
+            #   @return [::Boolean]
+            #     Whether the playback of this segment can be interrupted by the end
+            #     user's speech and the client should then start the next Dialogflow
+            #     request.
+            class Segment
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Represents the signal that telles the client to transfer the phone call
+          # connected to the agent to a third-party endpoint.
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     Transfer the call to a phone number
+          #     in [E.164 format](https://en.wikipedia.org/wiki/E.164).
+          #
+          #     Note: The following fields are mutually exclusive: `phone_number`, `sip_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] sip_uri
+          #   @return [::String]
+          #     Transfer the call to a SIP endpoint.
+          #
+          #     Note: The following fields are mutually exclusive: `sip_uri`, `phone_number`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class TelephonyTransferCall
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1961,6 +2119,10 @@ module Google
             #     Optional. If true, Gemini ASR will be used for transcription instead of
             #     Cloud Speech-to-Text. If false, Cloud Speech-to-Text will be used.
             #     If unset, this setting is inherited from the ConversationProfile.
+            # @!attribute [rw] disable_interim_input_transcripts
+            #   @return [::Boolean]
+            #     Optional. Disables emission of interim input transcriptions when set to
+            #     `true`.
             class VoiceSessionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

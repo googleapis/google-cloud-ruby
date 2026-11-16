@@ -1914,6 +1914,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_app_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Ces::V1beta::AppVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Ces::V1beta::AppVersion]
+              #   A result object deserialized from the server's reply
+              def update_app_version request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_app_version_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_app_version",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Ces::V1beta::AppVersion.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the delete_app_version REST call
               #
               # @param request_pb [::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest]
@@ -3093,6 +3133,28 @@ module Google
                                                           body: "app_version",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/apps/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_app_version REST call
+              #
+              # @param request_pb [::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_app_version_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta/{app_version.name}",
+                                                          body: "app_version",
+                                                          matches: [
+                                                            ["app_version.name", %r{^projects/[^/]+/locations/[^/]+/apps/[^/]+/versions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

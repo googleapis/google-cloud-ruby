@@ -24,3 +24,31 @@ else
            path: "toys/yoshi",
            update: true
 end
+
+# Work around two Bundler 4.0 + toys-core 0.22.0 issues during `toys test`:
+# 1. `load_git` (`Toys::Utils::GitCache`) requires `json` before any bundle is
+#    set up, activating the newest `json` in GEM_HOME (e.g. 3.1.0), which
+#    `modified_gemfile_content` then injects into the temporary Gemfile over the
+#    gem's locked `json` version.
+# 2. `delete_modified_gemfile` deletes the temporary lockfile in `setup_bundle`'s
+#    `ensure` block before the tool spawns its child ruby process, while Bundler
+#    4.0+ leaves `ENV["BUNDLE_LOCKFILE"]` pointing at that deleted lockfile.
+require "toys/utils/gems"
+unless Toys::Utils::Gems.private_method_defined? :configure_lockfile
+  Toys::Utils::Gems.prepend(
+    Module.new do
+      private
+
+      def create_modified_gemfile gemfile_path
+        ::Gem.loaded_specs.delete "json"
+        super
+      end
+
+      def delete_modified_gemfile modified_gemfile_path
+        ::FileUtils.rm_f modified_gemfile_path
+        modified_lockfile_path = find_lockfile_path modified_gemfile_path
+        ::Toys::Utils::Gems.delete_at_exit modified_lockfile_path
+      end
+    end
+  )
+end

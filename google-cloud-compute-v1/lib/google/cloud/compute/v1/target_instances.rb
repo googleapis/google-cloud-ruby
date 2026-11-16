@@ -31,7 +31,7 @@ module Google
         ##
         # The TargetInstances API.
         #
-        # This client uses TargetInstances version 2026-09-01.
+        # This client uses TargetInstances version 2026-11-01.
         #
         # @example Load this service and instantiate a REST client
         #

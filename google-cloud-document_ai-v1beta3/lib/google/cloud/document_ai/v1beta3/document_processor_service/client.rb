@@ -955,7 +955,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload train_processor_version(custom_document_extraction_options: nil, foundation_model_tuning_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
+            # @overload train_processor_version(custom_document_extraction_options: nil, foundation_model_tuning_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil, processor_version_overrides: nil)
             #   Pass arguments to `train_processor_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -983,6 +983,8 @@ module Google
             #     Optional. The processor version to use as a base for training. This
             #     processor version must be a child of `parent`. Format:
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
+            #   @param processor_version_overrides [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersionOverrides, ::Hash]
+            #     Optional. Options to override structures in the base processor version.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

@@ -309,6 +309,196 @@ class ::Google::Cloud::Sql::V1beta4::SqlSslCertsService::ClientTest < Minitest::
     end
   end
 
+  def test_update_customer_managed_certificate
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    customer_managed_certificate_config = {}
+    update_mask = {}
+    allow_missing = true
+    certificate_bundle = "hello world"
+
+    update_customer_managed_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_customer_managed_certificate, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1beta4::CustomerManagedCertificateConfig), request["customer_managed_certificate_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
+      assert_equal "hello world", request["certificate_bundle"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_customer_managed_certificate_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlSslCertsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_customer_managed_certificate({ instance: instance, project: project, customer_managed_certificate_config: customer_managed_certificate_config, update_mask: update_mask, allow_missing: allow_missing, certificate_bundle: certificate_bundle }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_customer_managed_certificate instance: instance, project: project, customer_managed_certificate_config: customer_managed_certificate_config, update_mask: update_mask, allow_missing: allow_missing, certificate_bundle: certificate_bundle do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_customer_managed_certificate ::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest.new(instance: instance, project: project, customer_managed_certificate_config: customer_managed_certificate_config, update_mask: update_mask, allow_missing: allow_missing, certificate_bundle: certificate_bundle) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_customer_managed_certificate({ instance: instance, project: project, customer_managed_certificate_config: customer_managed_certificate_config, update_mask: update_mask, allow_missing: allow_missing, certificate_bundle: certificate_bundle }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_customer_managed_certificate(::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest.new(instance: instance, project: project, customer_managed_certificate_config: customer_managed_certificate_config, update_mask: update_mask, allow_missing: allow_missing, certificate_bundle: certificate_bundle), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_customer_managed_certificate_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_customer_managed_certificate
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    certificate_bundle = "hello world"
+
+    delete_customer_managed_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_customer_managed_certificate, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["certificate_bundle"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_customer_managed_certificate_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlSslCertsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_customer_managed_certificate({ instance: instance, project: project, certificate_bundle: certificate_bundle }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_customer_managed_certificate instance: instance, project: project, certificate_bundle: certificate_bundle do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_customer_managed_certificate ::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest.new(instance: instance, project: project, certificate_bundle: certificate_bundle) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_customer_managed_certificate({ instance: instance, project: project, certificate_bundle: certificate_bundle }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_customer_managed_certificate(::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest.new(instance: instance, project: project, certificate_bundle: certificate_bundle), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_customer_managed_certificate_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_customer_managed_certificates
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+
+    list_customer_managed_certificates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_customer_managed_certificates, name
+      assert_kind_of ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["project"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_customer_managed_certificates_client_stub do
+      # Create client
+      c = ::Google::Cloud::Sql::V1beta4::SqlSslCertsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_customer_managed_certificates({ instance: instance, project: project }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_customer_managed_certificates instance: instance, project: project do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_customer_managed_certificates ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest.new(instance: instance, project: project) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_customer_managed_certificates({ instance: instance, project: project }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_customer_managed_certificates(::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest.new(instance: instance, project: project), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_customer_managed_certificates_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

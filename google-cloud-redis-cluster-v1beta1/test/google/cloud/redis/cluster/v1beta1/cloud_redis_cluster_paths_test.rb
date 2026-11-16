@@ -65,6 +65,18 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientPathsTe
     end
   end
 
+  def test_auth_token_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.auth_token_path project: "value0", location: "value1", cluster: "value2", token_auth_user: "value3", auth_token: "value4"
+      assert_equal "projects/value0/locations/value1/clusters/value2/tokenAuthUsers/value3/authTokens/value4", path
+    end
+  end
+
   def test_backup_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -206,6 +218,18 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientPathsTe
 
       path = client.shared_regional_certificate_authority_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1/sharedRegionalCertificateAuthority", path
+    end
+  end
+
+  def test_token_auth_user_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.token_auth_user_path project: "value0", location: "value1", cluster: "value2", token_auth_user: "value3"
+      assert_equal "projects/value0/locations/value1/clusters/value2/tokenAuthUsers/value3", path
     end
   end
 end

@@ -3190,6 +3190,61 @@ class ::Google::Cloud::Dataform::V1::Dataform::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_compilation_result_long_running
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    compilation_result = {}
+
+    create_compilation_result_long_running_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1::Dataform::Rest::ServiceStub.stub :transcode_create_compilation_result_long_running_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_compilation_result_long_running_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_compilation_result_long_running({ parent: parent, compilation_result: compilation_result }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_compilation_result_long_running parent: parent, compilation_result: compilation_result do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_compilation_result_long_running ::Google::Cloud::Dataform::V1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_compilation_result_long_running({ parent: parent, compilation_result: compilation_result }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_compilation_result_long_running(::Google::Cloud::Dataform::V1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_compilation_result_long_running_client_stub.call_count
+      end
+    end
+  end
+
   def test_query_compilation_result_actions
     # Create test objects.
     client_result = ::Google::Cloud::Dataform::V1::QueryCompilationResultActionsResponse.new

@@ -318,6 +318,73 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for SqlSslCertsService.UpdateCustomerManagedCertificate.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] customer_managed_certificate_config
+        #   @return [::Google::Cloud::Sql::V1beta4::CustomerManagedCertificateConfig]
+        #     Required. The customer managed certificate bundle SSL configuration to
+        #     update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the customer managed certificate bundle
+        #     configuration is not found, a new customer managed certificate bundle
+        #     configuration will be created. In this situation, `update_mask` is ignored.
+        # @!attribute [rw] certificate_bundle
+        #   @return [::String]
+        #     Required. Name tag of the customer managed certificate bundle to update. It
+        #     must be alphanumeric and have a maximum length of 10 characters.
+        class UpdateCustomerManagedCertificateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlSslCertsService.DeleteCustomerManagedCertificate.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] certificate_bundle
+        #   @return [::String]
+        #     Required. Name tag of the customer managed certificate bundle to delete. It
+        #     must be alphanumeric and have a maximum length of 10 characters.
+        class DeleteCustomerManagedCertificateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlSslCertsService.ListCustomerManagedCertificates.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        class ListCustomerManagedCertificatesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for SqlSslCertsService.ListCustomerManagedCertificates.
+        # @!attribute [rw] customer_managed_certificates
+        #   @return [::Array<::Google::Cloud::Sql::V1beta4::CustomerManagedCertificateConfig>]
+        #     Required. List of customer managed SSL configurations for the instance.
+        #     Note: Sensitive private keys (e.g., PEER_CLIENT_KEY) are redacted in this
+        #     response.
+        class ListCustomerManagedCertificatesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] instance
         #   @return [::String]
         #     The ID of the Cloud SQL instance to be cloned (source). This does not
@@ -658,6 +725,40 @@ module Google
         #   @return [::String]
         #     Optional. Region of the Cloud SQL instance.
         class SqlInstancesRestartRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance start request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance to be
+        #     started.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+        #     If omitted, the region is determined from the instance.
+        class SqlInstancesStartRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance stop request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance to be
+        #     stopped.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. The region of the Cloud SQL instance, for example `us-central1`.
+        #     If omitted, the region is determined from the instance.
+        class SqlInstancesStopRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1168,6 +1269,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Execute read only SQL statements request.
+        # Execute SQL statements in read-only mode request.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Database instance ID. This does not include the project ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] body
+        #   @return [::Google::Cloud::Sql::V1beta4::ExecuteSqlReadOnlyPayload]
+        #     Required. The request body.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
+        class SqlInstancesExecuteSqlReadOnlyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Execute SQL statements request.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -1210,6 +1330,47 @@ module Google
         #   @return [::String]
         #     The operation ID.
         class SqlInstancesReleaseSsrsLeaseResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request payload used to execute SQL statements in read-only mode.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     Optional. The name of an existing database user to connect to the database.
+        #     When `auto_iam_authn` is set to true, this field is ignored and the API
+        #     caller's IAM user is used.
+        # @!attribute [rw] sql_statement
+        #   @return [::String]
+        #     Required. SQL statements to run on the database. It can be a single
+        #     statement or a sequence of statements separated by semicolons.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Optional. Name of the database on which the statement will be executed.
+        #     For Postgres and SQL Server it's required, for MySQL it's optional.
+        # @!attribute [rw] password_secret_version
+        #   @return [::String]
+        #     Optional. The resource name of the Secret Manager secret holding the
+        #     password for the user to log into the database. The secret should be
+        #     created using the regional endpoint (for API) or from the Regional
+        #     Secrets page (for UI), and stored in the same region as the Cloud SQL
+        #     instance. The expected resource name format is
+        #     `projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}`.
+        #     This field is used together with the `user` field.
+        #     The secret resource name will not be stored.
+        #
+        #     Note: The following fields are mutually exclusive: `password_secret_version`, `auto_iam_authn`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_iam_authn
+        #   @return [::Boolean]
+        #     Optional. When set to true, the API caller identity associated with the
+        #     request is used for database authentication. The API caller must be an
+        #     IAM user in the database.
+        #
+        #     Note: The following fields are mutually exclusive: `auto_iam_authn`, `password_secret_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] row_limit
+        #   @return [::Integer]
+        #     Optional. The maximum number of rows returned per SQL statement.
+        class ExecuteSqlReadOnlyPayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1279,6 +1440,30 @@ module Google
             # Don't throw an error.
             ALLOW_PARTIAL_RESULT = 2
           end
+        end
+
+        # Execute SQL statements response.
+        # Execute SQL statements in read-only mode response.
+        # @!attribute [rw] messages
+        #   @return [::Array<::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlResponse::Message>]
+        #     A list of notices and warnings generated during query execution.
+        #     For PostgreSQL, this includes all notices and warnings.
+        #     For MySQL, this includes warnings generated by the last executed statement.
+        #     To retrieve all warnings for a multi-statement query, `SHOW WARNINGS` must
+        #     be executed after each statement.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Sql::V1beta4::Metadata]
+        #     The additional metadata information regarding the execution of the SQL
+        #     statements.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Sql::V1beta4::QueryResult>]
+        #     The list of results after executing all the SQL statements.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Contains the error from the database if the SQL execution failed.
+        class SqlInstancesExecuteSqlReadOnlyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] messages
@@ -1446,6 +1631,48 @@ module Google
         #     Required. The context for request to perform a PITR on a Google Cloud
         #     Backup and Disaster Recovery managed instance.
         class SqlInstancesPointInTimeRestoreRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SqlInstancesService.ReconcileNetworking.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Cloud SQL instance ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] psc_dns
+        #   @return [::Google::Cloud::Sql::V1beta4::PscDnsReconcileNetworkingRequest]
+        #     Request to recreate Private Service Connect DNS write endpoints and
+        #     reconcile Private Service Connect connectivity infrastructure for the
+        #     instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
+        class SqlInstancesReconcileNetworkingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request parameters specific to PSC DNS networking reconciliation.
+        # @!attribute [rw] networks
+        #   @return [::Array<::String>]
+        #     Optional. List of specific consumer VPC networks to reconcile. They must be
+        #     specified as full resource names (e.g.,
+        #     "projects/my-consumer-project/global/networks/prod-vpc"). If empty,
+        #     recreates Write Endpoints for all the consumer networks associated with
+        #     this instance.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. Set `true` to force the reset and reapplication of Private
+        #     Service Connect connectivity infrastructure if standard reconciliation does
+        #     not resolve automated DNS issues. This operation might cause a brief
+        #     disruption in network connectivity for connected VPC networks while
+        #     settings are reapplied. Use this option only when standard reconciliation
+        #     fails to resolve networking issues (for example, if connectivity resources
+        #     are stuck in an updating or creating state).
+        class PscDnsReconcileNetworkingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

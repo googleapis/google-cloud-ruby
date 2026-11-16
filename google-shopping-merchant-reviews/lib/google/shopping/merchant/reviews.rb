@@ -29,81 +29,11 @@ module Google
     module Merchant
       module Reviews
         ##
-        # Create a new client object for MerchantReviewsService.
-        #
-        # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewsService::Client](https://rubydoc.info/gems/google-shopping-merchant-reviews-v1beta/Google/Shopping/Merchant/Reviews/V1beta/MerchantReviewsService/Client)
-        # for a gRPC client for version V1beta of the API.
-        # However, you can specify a different API version by passing it in the
-        # `version` parameter. If the MerchantReviewsService service is
-        # supported by that API version, and the corresponding gem is available, the
-        # appropriate versioned client will be returned.
-        # You can also specify a different transport by passing `:rest` or `:grpc` in
-        # the `transport` parameter.
-        #
-        # Raises an exception if the currently installed versioned client gem for the
-        # given API version does not support the given transport of the MerchantReviewsService service.
-        # You can determine whether the method will succeed by calling
-        # {Google::Shopping::Merchant::Reviews.merchant_reviews_service_available?}.
-        #
-        # ## About MerchantReviewsService
-        #
-        # Service to manage merchant reviews.
-        #
-        # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
-        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
-        # @return [::Object] A client object for the specified version.
-        #
-        def self.merchant_reviews_service version: :v1beta, transport: :grpc, &block
-          require "google/shopping/merchant/reviews/#{version.to_s.downcase}"
-
-          package_name = Google::Shopping::Merchant::Reviews
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
-          service_module = Google::Shopping::Merchant::Reviews.const_get(package_name).const_get(:MerchantReviewsService)
-          service_module = service_module.const_get(:Rest) if transport == :rest
-          service_module.const_get(:Client).new(&block)
-        end
-
-        ##
-        # Determines whether the MerchantReviewsService service is supported by the current client.
-        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Reviews.merchant_reviews_service}.
-        # If false, that method will raise an exception. This could happen if the given
-        # API version does not exist or does not support the MerchantReviewsService service,
-        # or if the versioned client gem needs an update to support the MerchantReviewsService service.
-        #
-        # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
-        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
-        # @return [boolean] Whether the service is available.
-        #
-        def self.merchant_reviews_service_available? version: :v1beta, transport: :grpc
-          require "google/shopping/merchant/reviews/#{version.to_s.downcase}"
-          package_name = Google::Shopping::Merchant::Reviews
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
-          return false unless package_name
-          service_module = Google::Shopping::Merchant::Reviews.const_get package_name
-          return false unless service_module.const_defined? :MerchantReviewsService
-          service_module = service_module.const_get :MerchantReviewsService
-          if transport == :rest
-            return false unless service_module.const_defined? :Rest
-            service_module = service_module.const_get :Rest
-          end
-          service_module.const_defined? :Client
-        rescue ::LoadError
-          false
-        end
-
-        ##
         # Create a new client object for ProductReviewsService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Reviews::V1beta::ProductReviewsService::Client](https://rubydoc.info/gems/google-shopping-merchant-reviews-v1beta/Google/Shopping/Merchant/Reviews/V1beta/ProductReviewsService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Reviews::V1::ProductReviewsService::Client](https://rubydoc.info/gems/google-shopping-merchant-reviews-v1/Google/Shopping/Merchant/Reviews/V1/ProductReviewsService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ProductReviewsService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -121,11 +51,11 @@ module Google
         # Service to manage product reviews.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.product_reviews_service version: :v1beta, transport: :grpc, &block
+        def self.product_reviews_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/reviews/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Reviews
@@ -145,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the ProductReviewsService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.product_reviews_service_available? version: :v1beta, transport: :grpc
+        def self.product_reviews_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/reviews/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Reviews
                          .constants

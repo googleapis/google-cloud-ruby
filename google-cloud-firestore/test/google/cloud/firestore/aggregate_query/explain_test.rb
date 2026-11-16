@@ -66,7 +66,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :explain_options, :mock_fires
         explain_options: expected_explain_options
       )
 
-      firestore_mock.expect :run_aggregation_query, response_with_planning_metrics_only, [request]
+      firestore_mock.expect :run_aggregation_query, response_with_planning_metrics_only, [request, default_options]
 
       explain_result = aggregate_query.explain
       _(explain_result).must_be_kind_of Google::Cloud::Firestore::AggregateQueryExplainResult
@@ -82,7 +82,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :explain_options, :mock_fires
         explain_options: expected_explain_options
       )
 
-      firestore_mock.expect :run_aggregation_query, response_with_metrics_and_result, [request]
+      firestore_mock.expect :run_aggregation_query, response_with_metrics_and_result, [request, default_options]
 
       explain_result = aggregate_query.explain analyze: true
       _(explain_result).must_be_kind_of Google::Cloud::Firestore::AggregateQueryExplainResult

@@ -360,6 +360,9 @@ module Google
         #     Optional. The set of allowed formats for this line item.
         #     If empty, all formats are allowed. This property only applies
         #     to programmatic video line items.
+        # @!attribute [rw] allocation_delivery_profile
+        #   @return [::String]
+        #     Optional. The allocation delivery profile for the line item.
         class LineItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

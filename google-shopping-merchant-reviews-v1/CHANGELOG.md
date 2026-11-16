@@ -1,0 +1,16 @@
+# Changelog
+
+### 0.2.0 (2026-11-04)
+
+#### Features
+
+* update API sources and regenerate ([#36692](https://github.com/googleapis/google-cloud-ruby/issues/36692)) 
+
+### 0.1.0 (2026-10-26)
+
+#### Features
+
+* onboard a new library ([#36651](https://github.com/googleapis/google-cloud-ruby/issues/36651)) 
+* regenerate with gapic-generator-cloud 0.54.0 (gapic-common ~&gt; 1.6) ([#36658](https://github.com/googleapis/google-cloud-ruby/issues/36658)) 
+
+## Release History

@@ -36,9 +36,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/gemini_data_analytics"
 
-client = Google::Cloud::GeminiDataAnalytics.data_a2_a_service
-request = ::Google::Cloud::GeminiDataAnalytics::V1beta::SendMessageRequest.new # (request fields as keyword arguments...)
-response = client.send_message request
+client = Google::Cloud::GeminiDataAnalytics.data_agent_service
+request = ::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest.new # (request fields as keyword arguments...)
+response = client.list_data_agents request
 ```
 
 ## Debug Logging
@@ -75,12 +75,10 @@ working, try updating the versioned clients in your bundle or installed gems:
 
 This library is supported on Ruby 3.2+.
 
-Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Older versions of Ruby _may_
-still work, but are unsupported and not recommended. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Which client should I use?
 

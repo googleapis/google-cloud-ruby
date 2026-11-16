@@ -29,22 +29,22 @@ module Google
         #     projects/\\{project}/locations/\\{region}/goldengateDeployments/\\{goldengate_deployment}
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentProperties]
-        #     Required. The properties of the GoldengateDeployment.
+        #     Required. Immutable. The properties of the GoldengateDeployment.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. The GCP Oracle zone where Oracle GoldengateDeployment is hosted.
-        #     Example: us-east4-b-r2.
-        #     If not specified, the system will pick a zone based on availability.
+        #     Optional. Immutable. The GCP Oracle zone where Oracle GoldengateDeployment
+        #     is hosted. Example: us-east4-b-r2. If not specified, the system will pick a
+        #     zone based on availability.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels or tags associated with the GoldengateDeployment.
         # @!attribute [rw] odb_network
         #   @return [::String]
-        #     Optional. The name of the OdbNetwork associated with the
+        #     Optional. Immutable. The name of the OdbNetwork associated with the
         #     GoldengateDeployment.
         # @!attribute [rw] odb_subnet
         #   @return [::String]
-        #     Required. The name of the OdbSubnet associated with the
+        #     Required. Immutable. The name of the OdbSubnet associated with the
         #     GoldengateDeployment for IP allocation.
         # @!attribute [r] entitlement_id
         #   @return [::String]
@@ -52,7 +52,7 @@ module Google
         #     GoldengateDeployment
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The display name for the GoldengateDeployment.
+        #     Required. Immutable. The display name for the GoldengateDeployment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time that the GoldengateDeployment was created.
@@ -335,7 +335,8 @@ module Google
         # The Ogg data of the GoldengateDeployment.
         # @!attribute [rw] admin_password
         #   @return [::String]
-        #     Optional. The Goldengate deployment console password in plain text.
+        #     Optional. Input only. The Goldengate deployment console password in plain
+        #     text.
         #
         #     Note: The following fields are mutually exclusive: `admin_password`, `admin_password_secret_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] admin_password_secret_version
@@ -613,6 +614,37 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateGoldengateDeploymentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `GoldengateDeployment.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the GoldengateDeployment should
+        #     be updated. A field specified in the mask is updated. If a mask isn't
+        #     provided, the service treats this as an implied field mask equivalent to
+        #     all fields that are populated (have a non-empty value). To clear or unset
+        #     a field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] goldengate_deployment
+        #   @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeployment]
+        #     Required. The resource being updated. Note only labels can be updated.
+        #     The provided labels will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing labels and update_mask will not update the labels.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateGoldengateDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

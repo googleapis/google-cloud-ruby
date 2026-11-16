@@ -66,4 +66,39 @@ describe Google::Cloud::PubSub::MessageListener, :error, :mock_pubsub do
 
     # stub requests are not guaranteed, so don't check in this test
   end
+
+  it "sends only one initial request on a restarted stream" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    # The first stream fails before its initial request was ever read off the request queue.
+    response_groups = [[GRPC::Unavailable.new], [pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = 0
+
+    subscriber.service.mocked_subscription_admin = stub
+    listener = subscriber.listen streams: 1 do |msg|
+      msg.ack!
+      called += 1
+    end
+
+    listener.start
+
+    listener_retries = 0
+    while called < 1
+      fail "total number of calls were never made" if listener_retries > 500
+      listener_retries += 1
+      sleep 0.01
+    end
+
+    listener.stop
+    listener.wait!
+
+    _(stub.requests.count).must_equal 2
+    # Stopping the listener ends the request enumerator, so it can be read in full.
+    restarted_requests = stub.requests.last.to_a
+    initial_requests = restarted_requests.reject { |req| req.subscription.empty? }
+    _(initial_requests.count).must_equal 1
+    _(restarted_requests.first).must_equal initial_requests.first
+    _(restarted_requests.drop(1).map(&:protocol_version).uniq - [0]).must_be :empty?
+  end
 end

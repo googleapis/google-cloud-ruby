@@ -126,6 +126,10 @@ module Google
         # @!attribute [rw] tool_fake_config
         #   @return [::Google::Cloud::Ces::V1beta::ToolFakeConfig]
         #     Optional. Configuration for tool behavior in fake mode.
+        # @!attribute [r] read_only
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the tool is read-only. If true, the tool
+        #     cannot be modified by the user.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

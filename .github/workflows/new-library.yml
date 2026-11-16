@@ -44,7 +44,7 @@ jobs:
       uses: bazel-contrib/setup-bazel@083175551ceeceebc757ebee2127fde78840ca77 # 0.18.0
     - name: Install tools
       run: |
-        gem install --no-document toys
+        gem install --no-document toys -v '~> 0.22.0'
     - name: Create library
       run: |
         toys new-library -v --bazelisk --pull --pull-googleapis --test --fork --bootstrap-releases "${GITHUB_EVENT_INPUTS_PROTOPATH}"

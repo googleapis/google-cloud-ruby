@@ -45,6 +45,7 @@ module Google
       #
       #   # Delete
       #   backup.delete
+      # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
       #
       class Backup
         # @private
@@ -159,6 +160,7 @@ module Google
         # delete the backup and free the resources used by the backup.
         #
         # @param [Time] new_expire_time The new expiration time of the backup.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def expire_time= new_expire_time
           @grpc.expire_time = Convert.time_to_timestamp new_expire_time
@@ -278,6 +280,7 @@ module Google
         #   backup.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def policy
           ensure_service!
@@ -316,6 +319,7 @@ module Google
         #   updated_policy = backup.update_policy policy
         #
         #   puts updated_policy.roles
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def update_policy new_policy
           ensure_service!
@@ -353,6 +357,7 @@ module Google
         #   )
         #   permissions.include? "bigtable.backups.delete" #=> false
         #   permissions.include? "bigtable.backups.get" #=> true
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def test_iam_permissions *permissions
           ensure_service!
@@ -413,6 +418,7 @@ module Google
         #     table = job.table
         #     optimized = job.optimize_table_operation_name
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def restore table_id, instance: nil
           table_instance_id = instance.respond_to?(:instance_id) ? instance.instance_id : instance
@@ -468,6 +474,7 @@ module Google
         #   else
         #     backup = job.backup
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def copy dest_project_id:, dest_instance_id:, dest_cluster_id:, new_backup_id:, expire_time:
           grpc = service.copy_backup project_id: dest_project_id,
@@ -498,6 +505,7 @@ module Google
         #   # Update
         #   backup.expire_time = Time.now + 60 * 60 * 7
         #   backup.save
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def save
           ensure_service!
@@ -510,6 +518,7 @@ module Google
         # Reloads backup data.
         #
         # @return [Google::Cloud::Bigtable::Backup]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def reload!
           @grpc = service.get_backup instance_id, cluster_id, backup_id
@@ -531,6 +540,7 @@ module Google
         #   backup = cluster.backup "my-backup"
         #
         #   backup.delete
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete
           ensure_service!

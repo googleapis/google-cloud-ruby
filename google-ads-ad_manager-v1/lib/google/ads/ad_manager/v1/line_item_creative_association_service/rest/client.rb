@@ -298,6 +298,14 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
+              #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+              #     timestamps, full resource names on reference fields (for example, `order =
+              #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+              #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+              #     repeated-field matching, unquoted enums and booleans, uppercase
+              #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+              #     (...)`).
+              #
               #     **Filterable fields:**
               #
               #     * `creative`
@@ -308,7 +316,6 @@ module Google
               #     * `manualCreativeRotationWeight`
               #     * `name`
               #     * `sequentialCreativeRotationIndex`
-              #     * `sizes.canonicalName`
               #     * `startTime`
               #     * `status`
               #     * `targetingDisplayName`
@@ -378,6 +385,683 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @line_item_creative_association_service_stub, :list_line_item_creative_associations, "line_item_creative_associations", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a `LineItemCreativeAssociation` object.
+              #
+              # @overload create_line_item_creative_association(request, options = nil)
+              #   Pass arguments to `create_line_item_creative_association` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_line_item_creative_association(parent: nil, line_item_creative_association: nil)
+              #   Pass arguments to `create_line_item_creative_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `LineItemCreativeAssociation` will
+              #     be created. Format: `networks/{network_code}/lineItems/{line_item_id}`
+              #   @param line_item_creative_association [::Google::Ads::AdManager::V1::LineItemCreativeAssociation, ::Hash]
+              #     Required. The `LineItemCreativeAssociation` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest.new
+              #
+              #   # Call the create_line_item_creative_association method.
+              #   result = client.create_line_item_creative_association request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::LineItemCreativeAssociation.
+              #   p result
+              #
+              def create_line_item_creative_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_line_item_creative_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_line_item_creative_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_line_item_creative_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.create_line_item_creative_association request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `LineItemCreativeAssociation` objects.
+              #
+              # @overload batch_create_line_item_creative_associations(request, options = nil)
+              #   Pass arguments to `batch_create_line_item_creative_associations` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_line_item_creative_associations(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_line_item_creative_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItemCreativeAssociations` will be
+              #     created. This request supports using the "-" character as a wildcard for
+              #     resources that span across multiple LineItem parents. Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+              #     `networks/{network_code}/lineItems/-`
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateLineItemCreativeAssociationRequest, ::Hash>]
+              #     Required. The `LineItemCreativeAssociation` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest.new
+              #
+              #   # Call the batch_create_line_item_creative_associations method.
+              #   result = client.batch_create_line_item_creative_associations request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsResponse.
+              #   p result
+              #
+              def batch_create_line_item_creative_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateLineItemCreativeAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_line_item_creative_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_line_item_creative_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_line_item_creative_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.batch_create_line_item_creative_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `LineItemCreativeAssociation` object.
+              #
+              # @overload update_line_item_creative_association(request, options = nil)
+              #   Pass arguments to `update_line_item_creative_association` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_line_item_creative_association(line_item_creative_association: nil, update_mask: nil)
+              #   Pass arguments to `update_line_item_creative_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param line_item_creative_association [::Google::Ads::AdManager::V1::LineItemCreativeAssociation, ::Hash]
+              #     Required. The `LineItemCreativeAssociation` to update.
+              #     Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::LineItemCreativeAssociation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest.new
+              #
+              #   # Call the update_line_item_creative_association method.
+              #   result = client.update_line_item_creative_association request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::LineItemCreativeAssociation.
+              #   p result
+              #
+              def update_line_item_creative_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_line_item_creative_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_line_item_creative_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_line_item_creative_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.update_line_item_creative_association request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `LineItemCreativeAssociation` objects.
+              #
+              # @overload batch_update_line_item_creative_associations(request, options = nil)
+              #   Pass arguments to `batch_update_line_item_creative_associations` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_line_item_creative_associations(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_line_item_creative_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItemCreativeAssociations` will be
+              #     updated. This request supports using the "-" character as a wildcard for
+              #     resources that span across multiple LineItem parents. Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+              #     `networks/{network_code}/lineItems/-`
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateLineItemCreativeAssociationRequest, ::Hash>]
+              #     Required. The `LineItemCreativeAssociation` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest.new
+              #
+              #   # Call the batch_update_line_item_creative_associations method.
+              #   result = client.batch_update_line_item_creative_associations request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsResponse.
+              #   p result
+              #
+              def batch_update_line_item_creative_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateLineItemCreativeAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_line_item_creative_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_line_item_creative_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_line_item_creative_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.batch_update_line_item_creative_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Activate a list of `LineItemCreativeAssociation` objects.
+              #
+              # @overload batch_activate_line_item_creative_associations(request, options = nil)
+              #   Pass arguments to `batch_activate_line_item_creative_associations` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_line_item_creative_associations(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_line_item_creative_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItemCreativeAssociations` will be
+              #     activated. This request supports using the "-" character as a wildcard for
+              #     resources that span across multiple LineItem parents. Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+              #     `networks/{network_code}/lineItems/-`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItemCreativeAssociation` objects to
+              #     activate. A maximum of 1000 objects can be activated in a batch. Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest.new
+              #
+              #   # Call the batch_activate_line_item_creative_associations method.
+              #   result = client.batch_activate_line_item_creative_associations request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsResponse.
+              #   p result
+              #
+              def batch_activate_line_item_creative_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateLineItemCreativeAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_line_item_creative_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_line_item_creative_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_line_item_creative_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.batch_activate_line_item_creative_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `LineItemCreativeAssociation` objects.
+              #
+              # @overload batch_deactivate_line_item_creative_associations(request, options = nil)
+              #   Pass arguments to `batch_deactivate_line_item_creative_associations` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_line_item_creative_associations(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_line_item_creative_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItemCreativeAssociations` will be
+              #     deactivated.
+              #     This request supports using the "-" character as a wildcard for resources
+              #     that span across multiple LineItem parents.
+              #     Format: `networks/{network_code}/lineItems/{line_item_id}`
+              #     Format: `networks/{network_code}/lineItems/-`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItemCreativeAssociation` objects to
+              #     deactivate. A maximum of 1000 objects can be deactivated in a batch.
+              #     Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest.new
+              #
+              #   # Call the batch_deactivate_line_item_creative_associations method.
+              #   result = client.batch_deactivate_line_item_creative_associations request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsResponse.
+              #   p result
+              #
+              def batch_deactivate_line_item_creative_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateLineItemCreativeAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_line_item_creative_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_line_item_creative_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_line_item_creative_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.batch_deactivate_line_item_creative_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a list of `LineItemCreativeAssociation` objects.
+              #
+              # @overload batch_delete_line_item_creative_associations(request, options = nil)
+              #   Pass arguments to `batch_delete_line_item_creative_associations` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_line_item_creative_associations(parent: nil, names: nil)
+              #   Pass arguments to `batch_delete_line_item_creative_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `LineItemCreativeAssociations` will be
+              #     deleted. This request supports using the "-" character as a wildcard for
+              #     resources that span across multiple LineItem parents. Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}` Format:
+              #     `networks/{network_code}/lineItems/-`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `LineItemCreativeAssociation` objects to delete.
+              #     A maximum of 1000 objects can be deleted in a batch.
+              #     Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest.new
+              #
+              #   # Call the batch_delete_line_item_creative_associations method.
+              #   result = client.batch_delete_line_item_creative_associations request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def batch_delete_line_item_creative_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeleteLineItemCreativeAssociationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_line_item_creative_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_line_item_creative_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_line_item_creative_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.batch_delete_line_item_creative_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetch previews for the
+              # {::Google::Ads::AdManager::V1::LineItemCreativeAssociation LineItemCreativeAssociation}.
+              #
+              # @overload preview_line_item_creative_association(request, options = nil)
+              #   Pass arguments to `preview_line_item_creative_association` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload preview_line_item_creative_association(name: nil, site_url: nil)
+              #   Pass arguments to `preview_line_item_creative_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `LineItemCreativeAssociation` object to preview.
+              #     Format:
+              #     `networks/{network_code}/lineItems/{line_item_id}/creatives/{creative_id}`
+              #   @param site_url [::String]
+              #     Required. The URL of the site that the creative should be previewed in
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest.new
+              #
+              #   # Call the preview_line_item_creative_association method.
+              #   result = client.preview_line_item_creative_association request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationResponse.
+              #   p result
+              #
+              def preview_line_item_creative_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::PreviewLineItemCreativeAssociationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.preview_line_item_creative_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.preview_line_item_creative_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.preview_line_item_creative_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @line_item_creative_association_service_stub.preview_line_item_creative_association request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -541,6 +1225,46 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `create_line_item_creative_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_line_item_creative_association
+                  ##
+                  # RPC-specific configuration for `batch_create_line_item_creative_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `update_line_item_creative_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_line_item_creative_association
+                  ##
+                  # RPC-specific configuration for `batch_update_line_item_creative_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `batch_activate_line_item_creative_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_line_item_creative_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `batch_delete_line_item_creative_associations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_line_item_creative_associations
+                  ##
+                  # RPC-specific configuration for `preview_line_item_creative_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :preview_line_item_creative_association
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -548,6 +1272,22 @@ module Google
                     @get_line_item_creative_association = ::Gapic::Config::Method.new get_line_item_creative_association_config
                     list_line_item_creative_associations_config = parent_rpcs.list_line_item_creative_associations if parent_rpcs.respond_to? :list_line_item_creative_associations
                     @list_line_item_creative_associations = ::Gapic::Config::Method.new list_line_item_creative_associations_config
+                    create_line_item_creative_association_config = parent_rpcs.create_line_item_creative_association if parent_rpcs.respond_to? :create_line_item_creative_association
+                    @create_line_item_creative_association = ::Gapic::Config::Method.new create_line_item_creative_association_config
+                    batch_create_line_item_creative_associations_config = parent_rpcs.batch_create_line_item_creative_associations if parent_rpcs.respond_to? :batch_create_line_item_creative_associations
+                    @batch_create_line_item_creative_associations = ::Gapic::Config::Method.new batch_create_line_item_creative_associations_config
+                    update_line_item_creative_association_config = parent_rpcs.update_line_item_creative_association if parent_rpcs.respond_to? :update_line_item_creative_association
+                    @update_line_item_creative_association = ::Gapic::Config::Method.new update_line_item_creative_association_config
+                    batch_update_line_item_creative_associations_config = parent_rpcs.batch_update_line_item_creative_associations if parent_rpcs.respond_to? :batch_update_line_item_creative_associations
+                    @batch_update_line_item_creative_associations = ::Gapic::Config::Method.new batch_update_line_item_creative_associations_config
+                    batch_activate_line_item_creative_associations_config = parent_rpcs.batch_activate_line_item_creative_associations if parent_rpcs.respond_to? :batch_activate_line_item_creative_associations
+                    @batch_activate_line_item_creative_associations = ::Gapic::Config::Method.new batch_activate_line_item_creative_associations_config
+                    batch_deactivate_line_item_creative_associations_config = parent_rpcs.batch_deactivate_line_item_creative_associations if parent_rpcs.respond_to? :batch_deactivate_line_item_creative_associations
+                    @batch_deactivate_line_item_creative_associations = ::Gapic::Config::Method.new batch_deactivate_line_item_creative_associations_config
+                    batch_delete_line_item_creative_associations_config = parent_rpcs.batch_delete_line_item_creative_associations if parent_rpcs.respond_to? :batch_delete_line_item_creative_associations
+                    @batch_delete_line_item_creative_associations = ::Gapic::Config::Method.new batch_delete_line_item_creative_associations_config
+                    preview_line_item_creative_association_config = parent_rpcs.preview_line_item_creative_association if parent_rpcs.respond_to? :preview_line_item_creative_association
+                    @preview_line_item_creative_association = ::Gapic::Config::Method.new preview_line_item_creative_association_config
 
                     yield self if block_given?
                   end

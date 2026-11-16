@@ -292,13 +292,19 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
+              #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+              #     timestamps, full resource names on reference fields (for example, `order =
+              #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+              #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+              #     repeated-field matching, unquoted enums and booleans, uppercase
+              #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+              #     (...)`).
+              #
               #     **Filterable fields:**
               #
               #     * `advertiser`
               #     * `displayName`
               #     * `name`
-              #     * `setTopBoxCreative.externalAssetId,providerId`
-              #     * `size.canonicalName,height,width`
               #     * `thirdPartyDataDeclarationStatus`
               #     * `updateTime`
               #   @param order_by [::String]
@@ -366,6 +372,338 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @creative_service_stub, :list_creatives, "creatives", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a `Creative` object.
+              #
+              # @overload create_creative(request, options = nil)
+              #   Pass arguments to `create_creative` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateCreativeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateCreativeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_creative(parent: nil, creative: nil)
+              #   Pass arguments to `create_creative` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `Creative` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param creative [::Google::Ads::AdManager::V1::Creative, ::Hash]
+              #     Required. The `Creative` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Creative]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Creative]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CreativeService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateCreativeRequest.new
+              #
+              #   # Call the create_creative method.
+              #   result = client.create_creative request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Creative.
+              #   p result
+              #
+              def create_creative request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateCreativeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_creative.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_creative.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_creative.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @creative_service_stub.create_creative request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a `Creative` object.
+              #
+              # @overload update_creative(request, options = nil)
+              #   Pass arguments to `update_creative` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateCreativeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateCreativeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_creative(creative: nil, update_mask: nil)
+              #   Pass arguments to `update_creative` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param creative [::Google::Ads::AdManager::V1::Creative, ::Hash]
+              #     Required. The `Creative` to update.
+              #
+              #     The `Creative`'s name is used to identify the `Creative` to update. Format:
+              #     `networks/{network_code}/creatives/{creative_id}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Creative]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Creative]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CreativeService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateCreativeRequest.new
+              #
+              #   # Call the update_creative method.
+              #   result = client.update_creative request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Creative.
+              #   p result
+              #
+              def update_creative request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateCreativeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_creative.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_creative.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_creative.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @creative_service_stub.update_creative request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `Creative` objects.
+              #
+              # @overload batch_create_creatives(request, options = nil)
+              #   Pass arguments to `batch_create_creatives` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateCreativesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateCreativesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_creatives(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_creatives` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Creatives` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateCreativeRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateCreativeRequest, ::Hash>]
+              #     Required. The `Creative` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateCreativesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateCreativesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CreativeService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateCreativesRequest.new
+              #
+              #   # Call the batch_create_creatives method.
+              #   result = client.batch_create_creatives request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateCreativesResponse.
+              #   p result
+              #
+              def batch_create_creatives request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateCreativesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_creatives.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_creatives.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_creatives.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @creative_service_stub.batch_create_creatives request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `Creative` objects.
+              #
+              # @overload batch_update_creatives(request, options = nil)
+              #   Pass arguments to `batch_update_creatives` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateCreativesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateCreativesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_creatives(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_creatives` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Creatives` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateCreativeRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateCreativeRequest, ::Hash>]
+              #     Required. The `Creative` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateCreativesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateCreativesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CreativeService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateCreativesRequest.new
+              #
+              #   # Call the batch_update_creatives method.
+              #   result = client.batch_update_creatives request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateCreativesResponse.
+              #   p result
+              #
+              def batch_update_creatives request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateCreativesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_creatives.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_creatives.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_creatives.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @creative_service_stub.batch_update_creatives request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -692,6 +1030,26 @@ module Google
                   #
                   attr_reader :list_creatives
                   ##
+                  # RPC-specific configuration for `create_creative`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_creative
+                  ##
+                  # RPC-specific configuration for `update_creative`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_creative
+                  ##
+                  # RPC-specific configuration for `batch_create_creatives`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_creatives
+                  ##
+                  # RPC-specific configuration for `batch_update_creatives`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_creatives
+                  ##
                   # RPC-specific configuration for `batch_activate_creatives`
                   # @return [::Gapic::Config::Method]
                   #
@@ -708,6 +1066,14 @@ module Google
                     @get_creative = ::Gapic::Config::Method.new get_creative_config
                     list_creatives_config = parent_rpcs.list_creatives if parent_rpcs.respond_to? :list_creatives
                     @list_creatives = ::Gapic::Config::Method.new list_creatives_config
+                    create_creative_config = parent_rpcs.create_creative if parent_rpcs.respond_to? :create_creative
+                    @create_creative = ::Gapic::Config::Method.new create_creative_config
+                    update_creative_config = parent_rpcs.update_creative if parent_rpcs.respond_to? :update_creative
+                    @update_creative = ::Gapic::Config::Method.new update_creative_config
+                    batch_create_creatives_config = parent_rpcs.batch_create_creatives if parent_rpcs.respond_to? :batch_create_creatives
+                    @batch_create_creatives = ::Gapic::Config::Method.new batch_create_creatives_config
+                    batch_update_creatives_config = parent_rpcs.batch_update_creatives if parent_rpcs.respond_to? :batch_update_creatives
+                    @batch_update_creatives = ::Gapic::Config::Method.new batch_update_creatives_config
                     batch_activate_creatives_config = parent_rpcs.batch_activate_creatives if parent_rpcs.respond_to? :batch_activate_creatives
                     @batch_activate_creatives = ::Gapic::Config::Method.new batch_activate_creatives_config
                     batch_deactivate_creatives_config = parent_rpcs.batch_deactivate_creatives if parent_rpcs.respond_to? :batch_deactivate_creatives

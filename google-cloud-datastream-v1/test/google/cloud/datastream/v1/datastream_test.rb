@@ -1067,11 +1067,13 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     object = "hello world"
+    event_filter = {}
 
     start_backfill_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_backfill_job, name
       assert_kind_of ::Google::Cloud::Datastream::V1::StartBackfillJobRequest, request
       assert_equal "hello world", request["object"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastream::V1::EventFilter), request["event_filter"]
       refute_nil options
     end
 
@@ -1082,31 +1084,31 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.start_backfill_job({ object: object }) do |response, operation|
+      c.start_backfill_job({ object: object, event_filter: event_filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.start_backfill_job object: object do |response, operation|
+      c.start_backfill_job object: object, event_filter: event_filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object) do |response, operation|
+      c.start_backfill_job ::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object, event_filter: event_filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.start_backfill_job({ object: object }, grpc_options) do |response, operation|
+      c.start_backfill_job({ object: object, event_filter: event_filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object), grpc_options) do |response, operation|
+      c.start_backfill_job(::Google::Cloud::Datastream::V1::StartBackfillJobRequest.new(object: object, event_filter: event_filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

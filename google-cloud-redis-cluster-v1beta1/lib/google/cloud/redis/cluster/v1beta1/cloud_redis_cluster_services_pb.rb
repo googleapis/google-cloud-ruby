@@ -149,6 +149,22 @@ module Google
               # require critical update. After preview, there will be no critical update
               # needed for backup.
               rpc :BackupCluster, ::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest, ::Google::Longrunning::Operation
+              # Lists all the token auth users for a token based auth enabled cluster.
+              rpc :ListTokenAuthUsers, ::Google::Cloud::Redis::Cluster::V1beta1::ListTokenAuthUsersRequest, ::Google::Cloud::Redis::Cluster::V1beta1::ListTokenAuthUsersResponse
+              # Gets a specific token auth user for a basic auth enabled cluster.
+              rpc :GetTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1beta1::GetTokenAuthUserRequest, ::Google::Cloud::Redis::Cluster::V1beta1::TokenAuthUser
+              # Lists all the auth tokens for a specific token auth user.
+              rpc :ListAuthTokens, ::Google::Cloud::Redis::Cluster::V1beta1::ListAuthTokensRequest, ::Google::Cloud::Redis::Cluster::V1beta1::ListAuthTokensResponse
+              # Gets a specific auth token for a specific token auth user.
+              rpc :GetAuthToken, ::Google::Cloud::Redis::Cluster::V1beta1::GetAuthTokenRequest, ::Google::Cloud::Redis::Cluster::V1beta1::AuthToken
+              # Adds a token auth user for a token based auth enabled cluster.
+              rpc :AddTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1beta1::AddTokenAuthUserRequest, ::Google::Longrunning::Operation
+              # Deletes a token auth user for a token based auth enabled cluster.
+              rpc :DeleteTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1beta1::DeleteTokenAuthUserRequest, ::Google::Longrunning::Operation
+              # Adds a auth token for a user of a token based auth enabled cluster.
+              rpc :AddAuthToken, ::Google::Cloud::Redis::Cluster::V1beta1::AddAuthTokenRequest, ::Google::Longrunning::Operation
+              # Removes a auth token for a user of a token based auth enabled instance.
+              rpc :DeleteAuthToken, ::Google::Cloud::Redis::Cluster::V1beta1::DeleteAuthTokenRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

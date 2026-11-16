@@ -31,6 +31,8 @@ module Google
     module Sql
       module V1beta4
         ##
+        # Service for managing database backups for Cloud SQL instances.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/sql/v1beta4/sql_backups_service/rest"

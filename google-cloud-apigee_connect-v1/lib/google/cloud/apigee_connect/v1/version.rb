@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ApigeeConnect
       module V1
-        VERSION = "1.7.2"
+        VERSION = "1.9.0"
       end
     end
   end

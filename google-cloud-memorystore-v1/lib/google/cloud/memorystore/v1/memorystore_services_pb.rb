@@ -33,14 +33,49 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.memorystore.v1.Memorystore'
 
+            # Lists all ACL policies owned by a project in either the specified
+            # location (region) or all locations.
+            #
+            # The location should have the following format:
+            #
+            # * `projects/{project_id}/locations/{location_id}`
+            #
+            # If `location_id` is specified as `-` (wildcard), then all regions
+            # available to the project are queried, and the results are aggregated.
+            rpc :ListAclPolicies, ::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest, ::Google::Cloud::Memorystore::V1::ListAclPoliciesResponse
             # Lists Instances in a given project and location.
             rpc :ListInstances, ::Google::Cloud::Memorystore::V1::ListInstancesRequest, ::Google::Cloud::Memorystore::V1::ListInstancesResponse
+            # Gets the details of a specific Memorystore ACL policy.
+            rpc :GetAclPolicy, ::Google::Cloud::Memorystore::V1::GetAclPolicyRequest, ::Google::Cloud::Memorystore::V1::AclPolicy
             # Gets details of a single Instance.
             rpc :GetInstance, ::Google::Cloud::Memorystore::V1::GetInstanceRequest, ::Google::Cloud::Memorystore::V1::Instance
+            # Creates an ACL policy.
+            # The creation is executed synchronously and the policy is available for use
+            # immediately after the RPC returns.
+            rpc :CreateAclPolicy, ::Google::Cloud::Memorystore::V1::CreateAclPolicyRequest, ::Google::Cloud::Memorystore::V1::AclPolicy
             # Creates a new Instance in a given project and location.
             rpc :CreateInstance, ::Google::Cloud::Memorystore::V1::CreateInstanceRequest, ::Google::Longrunning::Operation
+            # Updates the ACL policy.
+            #
+            # The operation will apply the updated ACL policy to all the linked
+            # instances. The operation will return success if it successfully applied the
+            # policy to all the instances. If the operation completed with a failure, the
+            # service will continue to apply the policy via reconciliation for the failed
+            # instances even after operation completion to ensure eventual consistency.
+            #
+            # Completed longrunning.Operation will contain the new ACL policy object
+            # in the response field.
+            rpc :UpdateAclPolicy, ::Google::Cloud::Memorystore::V1::UpdateAclPolicyRequest, ::Google::Longrunning::Operation
             # Updates the parameters of a single Instance.
             rpc :UpdateInstance, ::Google::Cloud::Memorystore::V1::UpdateInstanceRequest, ::Google::Longrunning::Operation
+            # Deletes a specific ACL policy. This action will delete the ACL policy and
+            # all the rules associated with it. An ACL policy cannot be deleted if it is
+            # attached to an instance.
+            rpc :DeleteAclPolicy, ::Google::Cloud::Memorystore::V1::DeleteAclPolicyRequest, ::Google::Longrunning::Operation
+            # Gets details of a specific ACL policy revision.
+            rpc :GetAclPolicyRevision, ::Google::Cloud::Memorystore::V1::GetAclPolicyRevisionRequest, ::Google::Cloud::Memorystore::V1::AclPolicyRevision
+            # Lists all ACL policy revisions in a given ACL policy.
+            rpc :ListAclPolicyRevisions, ::Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsRequest, ::Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsResponse
             # Deletes a single Instance.
             rpc :DeleteInstance, ::Google::Cloud::Memorystore::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Gets details about the certificate authority for an Instance.

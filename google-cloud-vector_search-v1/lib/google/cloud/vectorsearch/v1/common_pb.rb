@@ -4,8 +4,10 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 
-descriptor_data = "\n)google/cloud/vectorsearch/v1/common.proto\x12\x1cgoogle.cloud.vectorsearch.v1*W\n\x0e\x44istanceMetric\x12\x1f\n\x1b\x44ISTANCE_METRIC_UNSPECIFIED\x10\x00\x12\x0f\n\x0b\x44OT_PRODUCT\x10\x01\x12\x13\n\x0f\x43OSINE_DISTANCE\x10\x02\x42\xd7\x01\n com.google.cloud.vectorsearch.v1B\x0b\x43ommonProtoP\x01ZDcloud.google.com/go/vectorsearch/apiv1/vectorsearchpb;vectorsearchpb\xaa\x02\x1cGoogle.Cloud.VectorSearch.V1\xca\x02\x1cGoogle\\Cloud\\VectorSearch\\V1\xea\x02\x1fGoogle::Cloud::VectorSearch::V1b\x06proto3"
+
+descriptor_data = "\n)google/cloud/vectorsearch/v1/common.proto\x12\x1cgoogle.cloud.vectorsearch.v1\x1a\x1fgoogle/api/field_behavior.proto*W\n\x0e\x44istanceMetric\x12\x1f\n\x1b\x44ISTANCE_METRIC_UNSPECIFIED\x10\x00\x12\x0f\n\x0b\x44OT_PRODUCT\x10\x01\x12\x13\n\x0f\x43OSINE_DISTANCE\x10\x02\x42\xd7\x01\n com.google.cloud.vectorsearch.v1B\x0b\x43ommonProtoP\x01ZDcloud.google.com/go/vectorsearch/apiv1/vectorsearchpb;vectorsearchpb\xaa\x02\x1cGoogle.Cloud.VectorSearch.V1\xca\x02\x1cGoogle\\Cloud\\VectorSearch\\V1\xea\x02\x1fGoogle::Cloud::VectorSearch::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

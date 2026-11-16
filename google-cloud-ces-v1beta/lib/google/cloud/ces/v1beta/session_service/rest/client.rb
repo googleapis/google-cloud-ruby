@@ -83,6 +83,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: []
                   }
 
+                  default_config.rpcs.stream_chat_ai_assistant.timeout = 3600.0
+                  default_config.rpcs.stream_chat_ai_assistant.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: []
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -377,6 +382,294 @@ module Google
               end
 
               ##
+              # Runs Arc, the AI assistant, for the specified assistant session in a
+              # streaming fashion.
+              #
+              # @overload stream_chat_ai_assistant(request, options = nil)
+              #   Pass arguments to `stream_chat_ai_assistant` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stream_chat_ai_assistant(name: nil, message: nil, attached_gcs_uris: nil, context_token: nil, confirmation_response: nil, client_capabilities: nil, operation_completed_event: nil, resume_from_sequence_number: nil, attach_only: nil)
+              #   Pass arguments to `stream_chat_ai_assistant` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The assistant session to be used to run the assistant.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
+              #   @param message [::String]
+              #     Optional. The message to send to the assistant agent. May be empty when
+              #     `confirmation_response` is set (answering a pending confirmation without
+              #     adding a new message); at least one of the two must be provided.
+              #   @param attached_gcs_uris [::Array<::String>]
+              #     Optional. Cloud Storage URIs for files uploaded by the user during this
+              #     turn. Example: "gs://cxas-transient-uploads/uuid/prd.pdf"
+              #   @param context_token [::String]
+              #     Optional. Opaque onboarding context token returned by
+              #     {::Google::Cloud::Ces::V1beta::SessionService::Rest::Client#generate_onboarding_suggestions SessionService.GenerateOnboardingSuggestions}.
+              #     When set and still fresh, the server reuses the onboarding snapshot
+              #     computed for the zero state instead of recomputing it for the first
+              #     conversation turn.
+              #   @param confirmation_response [::Google::Cloud::Ces::V1beta::AssistantConfirmationResponse, ::Hash]
+              #     Optional. The user's answer to a pending
+              #     {::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest AssistantConfirmationRequest}.
+              #     When set, the server resumes the paused agent with this answer instead of
+              #     (or in addition to) starting a new prompt turn.
+              #   @param client_capabilities [::Array<::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest::ClientCapability>]
+              #     Optional. Response features this client can render. The server only emits
+              #     events that need a capability (e.g. `confirmation_request`) when the
+              #     capability is declared, so older clients never receive events they would
+              #     silently drop.
+              #   @param operation_completed_event [::Google::Cloud::Ces::V1beta::OperationCompletedEvent, ::Hash]
+              #     Optional. Resumes an assistant session paused waiting for a client-managed
+              #     long-running operation to complete.
+              #   @param resume_from_sequence_number [::Integer]
+              #     Optional. Optional cursor to resume and replay events from an in-flight or
+              #     completed turn.
+              #   @param attach_only [::Boolean]
+              #     Optional. Optional flag to attach to an existing in-flight turn without
+              #     submitting a new message.
+              # @return [::Enumerable<::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest.new
+              #
+              #   # Call the stream_chat_ai_assistant method to start streaming.
+              #   output = client.stream_chat_ai_assistant request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
+              def stream_chat_ai_assistant request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stream_chat_ai_assistant.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stream_chat_ai_assistant.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stream_chat_ai_assistant.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                ::Gapic::Rest::ServerStream.new(
+                  ::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse,
+                  ::Gapic::Rest::ThreadedEnumerator.new do |in_q, out_q|
+                    @session_service_stub.stream_chat_ai_assistant request, options do |chunk|
+                      in_q.deq
+                      out_q.enq chunk
+                    end
+                  end
+                )
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancels the assistant session's in-flight turn, if any: the explicit user
+              # stop for a turn running detached from any stream. A cancel landing on a
+              # task that does not host the turn preempts it through the session turn
+              # epoch instead, ending it within one lease renewal.
+              #
+              # @overload cancel_assistant_turn(request, options = nil)
+              #   Pass arguments to `cancel_assistant_turn` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_assistant_turn(name: nil, turn_id: nil)
+              #   Pass arguments to `cancel_assistant_turn` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The assistant session whose in-flight turn to cancel.
+              #   @param turn_id [::String]
+              #     Optional. The turn to cancel; empty cancels whichever turn is running. A
+              #     cancel naming a turn that is no longer the running one is a no-op.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest.new
+              #
+              #   # Call the cancel_assistant_turn method.
+              #   result = client.cancel_assistant_turn request
+              #
+              #   # The returned object is of type Google::Cloud::Ces::V1beta::CancelAssistantTurnResponse.
+              #   p result
+              #
+              def cancel_assistant_turn request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::CancelAssistantTurnRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_assistant_turn.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_assistant_turn.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_assistant_turn.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @session_service_stub.cancel_assistant_turn request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Generates personalized onboarding suggestions for the Arc
+              # zero state: classifies the requesting user (new / exploring / returning)
+              # from their assistant-session history in the app and returns suggestion
+              # chips (resume a session, continue work, or start something new) to render
+              # before any message is sent.
+              #
+              # @overload generate_onboarding_suggestions(request, options = nil)
+              #   Pass arguments to `generate_onboarding_suggestions` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload generate_onboarding_suggestions(name: nil, max_suggestions: nil)
+              #   Pass arguments to `generate_onboarding_suggestions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The app whose zero state is being rendered.
+              #     Format: `projects/{project}/locations/{location}/apps/{app}`
+              #   @param max_suggestions [::Integer]
+              #     Optional. Maximum number of suggestions to return. Defaults to 4 when
+              #     unset.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::SessionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest.new
+              #
+              #   # Call the generate_onboarding_suggestions method.
+              #   result = client.generate_onboarding_suggestions request
+              #
+              #   # The returned object is of type Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse.
+              #   p result
+              #
+              def generate_onboarding_suggestions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.generate_onboarding_suggestions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.generate_onboarding_suggestions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.generate_onboarding_suggestions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @session_service_stub.generate_onboarding_suggestions request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the SessionService REST API.
               #
               # This class represents the configuration for SessionService REST,
@@ -541,6 +834,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :stream_run_session
+                  ##
+                  # RPC-specific configuration for `stream_chat_ai_assistant`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stream_chat_ai_assistant
+                  ##
+                  # RPC-specific configuration for `cancel_assistant_turn`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_assistant_turn
+                  ##
+                  # RPC-specific configuration for `generate_onboarding_suggestions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :generate_onboarding_suggestions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -548,6 +856,12 @@ module Google
                     @run_session = ::Gapic::Config::Method.new run_session_config
                     stream_run_session_config = parent_rpcs.stream_run_session if parent_rpcs.respond_to? :stream_run_session
                     @stream_run_session = ::Gapic::Config::Method.new stream_run_session_config
+                    stream_chat_ai_assistant_config = parent_rpcs.stream_chat_ai_assistant if parent_rpcs.respond_to? :stream_chat_ai_assistant
+                    @stream_chat_ai_assistant = ::Gapic::Config::Method.new stream_chat_ai_assistant_config
+                    cancel_assistant_turn_config = parent_rpcs.cancel_assistant_turn if parent_rpcs.respond_to? :cancel_assistant_turn
+                    @cancel_assistant_turn = ::Gapic::Config::Method.new cancel_assistant_turn_config
+                    generate_onboarding_suggestions_config = parent_rpcs.generate_onboarding_suggestions if parent_rpcs.respond_to? :generate_onboarding_suggestions
+                    @generate_onboarding_suggestions = ::Gapic::Config::Method.new generate_onboarding_suggestions_config
 
                     yield self if block_given?
                   end

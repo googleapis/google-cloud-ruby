@@ -76,7 +76,7 @@ module Google
               ##
               # Baseline implementation for the start REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -116,7 +116,7 @@ module Google
               ##
               # Baseline implementation for the stop REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -156,7 +156,7 @@ module Google
               ##
               # Baseline implementation for the start_replay REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -196,7 +196,7 @@ module Google
               ##
               # Baseline implementation for the stop_replay REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -278,7 +278,7 @@ module Google
               #
               # GRPC transcoding helper method for the start REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -301,7 +301,7 @@ module Google
               #
               # GRPC transcoding helper method for the stop REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -324,7 +324,7 @@ module Google
               #
               # GRPC transcoding helper method for the start_replay REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStartReplayRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStartReplayRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -348,7 +348,7 @@ module Google
               #
               # GRPC transcoding helper method for the stop_replay REST call
               #
-              # @param request_pb [::Google::Cloud::Sql::V1beta4::SqlWorkloadCapturesStopReplayRequest]
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::WorkloadCapturesStopReplayRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters

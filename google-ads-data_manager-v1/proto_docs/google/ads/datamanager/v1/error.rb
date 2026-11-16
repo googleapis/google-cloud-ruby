@@ -78,7 +78,7 @@ module Google
           # Maximum number of audience members allowed per request is 10,000.
           TOO_MANY_AUDIENCE_MEMBERS = 17
 
-          # Maximum number of user identifiers allowed per audience member is 10.
+          # Maximum number of user identifiers allowed per record is 10.
           TOO_MANY_USER_IDENTIFIERS = 18
 
           # Maximum number of destinations allowed per request is 10.
@@ -114,6 +114,9 @@ module Google
 
           # The conversion action type is not valid.
           INVALID_CONVERSION_ACTION_TYPE = 29
+
+          # Encryption is not supported for this request.
+          ENCRYPTION_NOT_SUPPORTED = 132
 
           # The currency code is not supported.
           INVALID_CURRENCY_CODE = 30
@@ -417,8 +420,7 @@ module Google
           # Insights missing for this dimension.
           INSIGHTS_MISSING_FOR_DIMENSION = 123
 
-          # A required prerequisite link (such as a Google Ads link) must exist for
-          # the Google Analytics property to perform this operation.
+          # Deprecated: Error is unused in the Data Manager API.
           REQUIRED_PREREQUISITE_LINK_MISSING = 124
 
           # The remove as of time must be in the past or present. Future timestamps are
@@ -434,13 +436,42 @@ module Google
 
           # The ad identifier does not belong to the account.
           #
-          # For example, the {::Google::Ads::DataManager::V1::AdIdentifiers#gclid `gclid`}
+          # For example, the {::Google::Ads::DataManager::V1::AdIdentifiers#gclid gclid}
           # isn't associated with the
-          # {::Google::Ads::DataManager::V1::Destination#operating_account `operating_account`}
+          # {::Google::Ads::DataManager::V1::Destination#operating_account operating_account}
           # and
-          # {::Google::Ads::DataManager::V1::Destination#product_destination_id `product_destination_id`}
+          # {::Google::Ads::DataManager::V1::Destination#product_destination_id product_destination_id}
           # of the destination.
           INVALID_AD_IDENTIFIER_FOR_ACCOUNT = 128
+
+          # The account type is not a supported `client_account_type` for a
+          # {::Google::Ads::DataManager::V1::UserListDirectLicense UserListDirectLicense}.
+          UNSUPPORTED_ACCOUNT_TYPE_FOR_USER_LIST_DIRECT_LICENSE = 129
+
+          # Duplicate elements in a list in the request.
+          DUPLICATE_ELEMENTS = 130
+
+          # The baseline location is not supported for generating insights.
+          #
+          # When
+          # {::Google::Ads::DataManager::V1::Baseline#location_auto_detection_enabled location_auto_detection_enabled}
+          # is set to `true`, this error indicates that the detected majority location
+          # for the audience is not among the supported locations.
+          #
+          # To resolve this, explicitly specify a supported location in
+          # {::Google::Ads::DataManager::V1::Baseline#baseline_location baseline_location},
+          # or retry once the audience list updates with a supported majority location.
+          # See https://support.google.com/google-ads/answer/11161206 for the list of
+          # supported countries.
+          UNSUPPORTED_BASELINE_LOCATION = 131
+
+          # The {::Google::Ads::DataManager::V1::Event#event_timestamp event_timestamp}
+          # cannot be earlier than the
+          # {::Google::Ads::DataManager::V1::CallInfo#start_timestamp start_timestamp}.
+          CONVERSION_PRECEDES_CALL = 133
+
+          # The date is not valid.
+          INVALID_DATE = 134
         end
       end
     end

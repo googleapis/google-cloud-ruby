@@ -138,6 +138,281 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ClientTest <
     end
   end
 
+  def test_create_assistant
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    assistant = {}
+    assistant_id = "hello world"
+
+    create_assistant_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ServiceStub.stub :transcode_create_assistant_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_assistant_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_assistant({ parent: parent, assistant: assistant, assistant_id: assistant_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_assistant parent: parent, assistant: assistant, assistant_id: assistant_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_assistant ::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest.new(parent: parent, assistant: assistant, assistant_id: assistant_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_assistant({ parent: parent, assistant: assistant, assistant_id: assistant_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_assistant(::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest.new(parent: parent, assistant: assistant, assistant_id: assistant_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_assistant_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_assistant
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_assistant_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ServiceStub.stub :transcode_delete_assistant_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_assistant_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_assistant({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_assistant name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_assistant ::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_assistant({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_assistant(::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_assistant_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_assistant
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    assistant = {}
+    update_mask = {}
+
+    update_assistant_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ServiceStub.stub :transcode_update_assistant_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_assistant_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_assistant({ assistant: assistant, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_assistant assistant: assistant, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_assistant ::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest.new(assistant: assistant, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_assistant({ assistant: assistant, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_assistant(::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest.new(assistant: assistant, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_assistant_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_assistant
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_assistant_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ServiceStub.stub :transcode_get_assistant_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_assistant_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_assistant({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_assistant name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_assistant ::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_assistant({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_assistant(::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_assistant_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_assistants
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_assistants_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::ServiceStub.stub :transcode_list_assistants_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_assistants_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_assistants({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_assistants parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_assistants ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_assistants({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_assistants(::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_assistants_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

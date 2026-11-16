@@ -225,11 +225,14 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
+              #     Required. The location and project in which this Instance should be
+              #     created.
               #   @param instance [::Google::Cloud::Run::V2::Instance, ::Hash]
               #   @param instance_id [::String]
-              #     Required. The unique identifier for the Instance. It must begin with
+              #     Optional. The unique identifier for the Instance. It must begin with
               #     letter, and cannot end with hyphen; must contain fewer than 50 characters.
               #     The name of the instance becomes \\{parent}/instances/\\{instance_id}.
+              #     If not provided, the server will generate a unique `instance_id`.
               #   @param validate_only [::Boolean]
               #     Optional. Indicates that the request should be validated and default values
               #     populated, without persisting the request or creating any resources.
@@ -301,7 +304,103 @@ module Google
               end
 
               ##
-              # Deletes a Instance
+              # Updates an Instance.
+              #
+              # @overload update_instance(request, options = nil)
+              #   Pass arguments to `update_instance` via a request object, either of type
+              #   {::Google::Cloud::Run::V2::UpdateInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Run::V2::UpdateInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_instance(update_mask: nil, instance: nil, validate_only: nil, allow_missing: nil)
+              #   Pass arguments to `update_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to be updated.
+              #   @param instance [::Google::Cloud::Run::V2::Instance, ::Hash]
+              #     Required. The Instance to be updated.
+              #   @param validate_only [::Boolean]
+              #     Optional. Indicates that the request should be validated and default values
+              #     populated, without persisting the request or updating any resources.
+              #   @param allow_missing [::Boolean]
+              #     Optional. If set to `true`, and if the Instance does not exist, it will
+              #     create a new one. The caller must have `run.instances.create` permissions
+              #     if this is set to `true` and the Instance does not exist.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Run::V2::UpdateInstanceRequest.new
+              #
+              #   # Call the update_instance method.
+              #   result = client.update_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Run::V2::UpdateInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Run::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.update_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an Instance
               #
               # @overload delete_instance(request, options = nil)
               #   Pass arguments to `delete_instance` via a request object, either of type
@@ -319,6 +418,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
+              #     Required. The name of the Instance to delete.
               #   @param validate_only [::Boolean]
               #     Optional. Indicates that the request should be validated without actually
               #     deleting any resources.
@@ -393,7 +493,7 @@ module Google
               end
 
               ##
-              # Gets a Instance
+              # Gets an Instance
               #
               # @overload get_instance(request, options = nil)
               #   Pass arguments to `get_instance` via a request object, either of type
@@ -411,6 +511,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
+              #     Required. The name of the Instance to retrieve.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Run::V2::Instance]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -489,8 +590,6 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The location and project to list resources on.
-              #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
-              #     project id or number.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of Instances to return in this call.
               #   @param page_token [::String]
@@ -583,9 +682,6 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the Instance to stop.
-              #     Format:
-              #     `projects/{project}/locations/{location}/instances/{instance}`,
-              #     where `{project}` can be project id or number.
               #   @param validate_only [::Boolean]
               #     Optional. Indicates that the request should be validated without actually
               #     stopping any resources.
@@ -678,10 +774,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the Instance to stop.
-              #     Format:
-              #     `projects/{project}/locations/{location}/instances/{instance}`,
-              #     where `{project}` can be project id or number.
+              #     Required. The name of the Instance to start.
               #   @param validate_only [::Boolean]
               #     Optional. Indicates that the request should be validated without actually
               #     stopping any resources.
@@ -750,6 +843,266 @@ module Google
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the IAM Access Control policy currently in effect for the given
+              # Instance. This result does not include any inherited policies.
+              #
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_iam_policy(resource: nil, options: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being requested.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+              #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+              #     `GetIamPolicy`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def get_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Run::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.get_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Sets the IAM Access control policy for the specified Instance. Overwrites
+              # any existing policy.
+              #
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being specified.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+              #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+              #     the policy is limited to a few 10s of KB. An empty policy is a
+              #     valid policy but certain Cloud Platform services (such as Projects)
+              #     might reject them.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+              #     the fields in the mask will be modified. If no mask is provided, the
+              #     following default mask is used:
+              #
+              #     `paths: "bindings, etag"`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def set_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Run::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns permissions that a caller has on the specified Instance.
+              #
+              # There are no permissions required for making this API call.
+              #
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload test_iam_permissions(resource: nil, permissions: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy detail is being requested.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param permissions [::Array<::String>]
+              #     The set of permissions to check for the `resource`. Permissions with
+              #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+              #     information see
+              #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Iam::V1::TestIamPermissionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/run/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Run::V2::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
+              def test_iam_permissions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Run::V2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -909,6 +1262,11 @@ module Google
                   #
                   attr_reader :create_instance
                   ##
+                  # RPC-specific configuration for `update_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_instance
+                  ##
                   # RPC-specific configuration for `delete_instance`
                   # @return [::Gapic::Config::Method]
                   #
@@ -933,11 +1291,28 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :start_instance
+                  ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
                     create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                     @create_instance = ::Gapic::Config::Method.new create_instance_config
+                    update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
+                    @update_instance = ::Gapic::Config::Method.new update_instance_config
                     delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                     get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
@@ -948,6 +1323,12 @@ module Google
                     @stop_instance = ::Gapic::Config::Method.new stop_instance_config
                     start_instance_config = parent_rpcs.start_instance if parent_rpcs.respond_to? :start_instance
                     @start_instance = ::Gapic::Config::Method.new start_instance_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

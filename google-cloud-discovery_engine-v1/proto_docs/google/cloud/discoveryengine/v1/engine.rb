@@ -88,7 +88,7 @@ module Google
         #     If {::Google::Cloud::DiscoveryEngine::V1::Engine#solution_type solution_type} is
         #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT},
         #     multiple {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}s in the
-        #     same [Collection][google.cloud.discoveryengine.v1.Collection] can be
+        #     same {::Google::Cloud::DiscoveryEngine::V1::Collection Collection} can be
         #     associated here.
         #
         #     Note that when used in
@@ -107,10 +107,104 @@ module Google
         # @!attribute [rw] common_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::CommonConfig]
         #     Common config spec that specifies the metadata of the engine.
+        # @!attribute [rw] knowledge_graph_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::KnowledgeGraphConfig]
+        #     Optional. Configurations for the Knowledge Graph. Only applicable if
+        #     {::Google::Cloud::DiscoveryEngine::V1::Engine#solution_type solution_type} is
+        #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
+        # @!attribute [rw] app_type
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::AppType]
+        #     Optional. Immutable. This the application type which this engine resource
+        #     represents. NOTE: this is a new concept independ of existing industry
+        #     vertical or solution type.
         # @!attribute [rw] disable_analytics
         #   @return [::Boolean]
         #     Optional. Whether to disable analytics for searches performed on this
         #     engine.
+        # @!attribute [rw] session_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SessionConfig]
+        #     Optional. Non-empty default. Session config for the engine.
+        # @!attribute [rw] features
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1::Engine::FeatureState}]
+        #     Optional. Feature config for the engine to opt in or opt out of features.
+        #     Supported keys:
+        #
+        #     * `*`: all features, if it's present, all other feature state settings are
+        #            ignored.
+        #     * `agent-gallery`
+        #     * `no-code-agent-builder`
+        #     * `prompt-gallery`
+        #     * `model-selector`
+        #     * `notebook-lm`
+        #     * `people-search`
+        #     * `people-search-org-chart`
+        #     * `bi-directional-audio`
+        #     * `speech-to-text`
+        #     * `feedback`
+        #     * `session-sharing`
+        #     * `personalization-memory`
+        #     * `personalization-suggested-highlights`
+        #     * `mobile-app-access`
+        #     * `disable-agent-sharing`
+        #     * `disable-image-generation`
+        #     * `disable-video-generation`
+        #     * `disable-onedrive-upload`
+        #     * `disable-talk-to-content`
+        #     * `disable-google-drive-upload`
+        #     * `disable-welcome-emails`
+        #     * `disable-canvas`
+        #     * `canvas-workspace`
+        #     * `canvas-app-builder`
+        #     * `skills`
+        #     * `skill-sharing`
+        #     * `skill-sharing-without-admin-approval`
+        #     * `disable-projects`
+        #     * `sobi`
+        #     * `enable-end-user-sharing-with-groups`
+        #     * `single-agent-orchestration`
+        #     * `multi-agent-orchestration`
+        #     * `cross-product-intelligence`
+        #     * `workflow-agents`
+        #     * `in-app-notifications`
+        #     * `code-extraction`
+        # @!attribute [r] cmek_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::CmekConfig]
+        #     Output only. CMEK-related information for the Engine.
+        # @!attribute [rw] configurable_billing_approach
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::ConfigurableBillingApproach]
+        #     Optional. Configuration for configurable billing approach.
+        # @!attribute [rw] model_configs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1::Engine::ModelState}]
+        #     Optional. Maps a model name to its specific configuration for this engine.
+        #     This allows admin users to turn on/off individual models. This only stores
+        #     models whose states are overridden by the admin.
+        #
+        #     When the state is unspecified, or model_configs is empty for this
+        #     model, the system will decide if this model should be available or not
+        #     based on the default configuration. For example, a preview model
+        #     should be disabled by default if the admin has not chosen to enable it.
+        # @!attribute [rw] observability_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::ObservabilityConfig]
+        #     Optional. Observability config for the engine.
+        # @!attribute [rw] connector_tenant_info
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Maps a connector ID (e.g., "hybrid-github", "shopify") to
+        #     tenant-specific information required for that connector. The structure of
+        #     the tenant information string is connector-dependent.
+        # @!attribute [rw] agent_gateway_setting
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AgentGatewaySetting]
+        #     Optional. The agent gateway setting for the engine.
+        # @!attribute [rw] marketplace_agent_visibility
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MarketplaceAgentVisibility]
+        #     Optional. The visibility of marketplace agents in the agent gallery.
+        # @!attribute [rw] procurement_contact_emails
+        #   @return [::Array<::String>]
+        #     Optional. The emails of the procurement contacts.
+        # @!attribute [r] associated_agent_registry
+        #   @return [::String]
+        #     Output only. The Agent registry containing the agents, MCP servers and
+        #     tools associated with this engine. Derived server-side from the linked
+        #     Agent Gateway's registry.
         class Engine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,6 +220,16 @@ module Google
           #     Defaults to
           #     {::Google::Cloud::DiscoveryEngine::V1::SearchTier::SEARCH_TIER_STANDARD SearchTier.SEARCH_TIER_STANDARD}
           #     if not specified.
+          # @!attribute [rw] required_subscription_tier
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SubscriptionTier]
+          #     Optional. The required subscription tier of this engine.
+          #
+          #     If the required subscription tier is search, user with higher license
+          #     tier like assist can still access the standalone app associated with this
+          #     engine.
+          #
+          #     Web grounding feature is only available on the app if it is set as
+          #     {::Google::Cloud::DiscoveryEngine::V1::SubscriptionTier::SUBSCRIPTION_TIER_SEARCH_AND_ASSISTANT SubscriptionTier.SUBSCRIPTION_TIER_SEARCH_AND_ASSISTANT}.
           # @!attribute [rw] search_add_ons
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchAddOn>]
           #     The add-on that this search engine enables.
@@ -351,6 +455,57 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration message for the Knowledge Graph.
+          # @!attribute [rw] enable_cloud_knowledge_graph
+          #   @return [::Boolean]
+          #     Whether to enable the Cloud Knowledge Graph for the engine.
+          #
+          #     Defaults to false if not specified.
+          # @!attribute [rw] cloud_knowledge_graph_types
+          #   @return [::Array<::String>]
+          #     Specify entity types to support.
+          # @!attribute [rw] enable_private_knowledge_graph
+          #   @return [::Boolean]
+          #     Whether to enable the Private Knowledge Graph for the engine.
+          #
+          #     Defaults to false if not specified.
+          # @!attribute [rw] private_knowledge_graph_types
+          #   @return [::Array<::String>]
+          #     Specify entity types to support.
+          # @!attribute [rw] feature_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::KnowledgeGraphConfig::FeatureConfig]
+          #     Optional. Feature config for the Knowledge Graph.
+          class KnowledgeGraphConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Feature config for the Knowledge Graph.
+            # @!attribute [rw] disable_private_kg_query_understanding
+            #   @return [::Boolean]
+            #     Whether to disable the private KG query understanding for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_enrichment
+            #   @return [::Boolean]
+            #     Whether to disable the private KG enrichment for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_auto_complete
+            #   @return [::Boolean]
+            #     Whether to disable the private KG auto complete for the engine.
+            #
+            #     Defaults to false if not specified.
+            # @!attribute [rw] disable_private_kg_query_ui_chips
+            #   @return [::Boolean]
+            #     Whether to disable the private KG for query UI chips.
+            #
+            #     Defaults to false if not specified.
+            class FeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Additional information of a Chat Engine.
           # Fields in this message are output only.
           # @!attribute [rw] dialogflow_agent
@@ -363,6 +518,101 @@ module Google
           class ChatEngineMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::FeatureState]
+          class FeaturesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::ModelState]
+          class ModelConfigsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConnectorTenantInfoEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The app of the engine.
+          module AppType
+            # All non specified apps.
+            APP_TYPE_UNSPECIFIED = 0
+
+            # App type for intranet search and Agentspace.
+            APP_TYPE_INTRANET = 1
+          end
+
+          # The state of the feature for the engine.
+          module FeatureState
+            # The feature state is unspecified.
+            FEATURE_STATE_UNSPECIFIED = 0
+
+            # The feature is turned on to be accessible.
+            FEATURE_STATE_ON = 1
+
+            # The feature is turned off to be inaccessible.
+            FEATURE_STATE_OFF = 2
+          end
+
+          # Configuration for configurable billing approach.
+          module ConfigurableBillingApproach
+            # Default value. For Spark and non-Spark non-configurable billing approach.
+            # General pricing model.
+            CONFIGURABLE_BILLING_APPROACH_UNSPECIFIED = 0
+
+            # The billing approach follows configurations specified by customer.
+            CONFIGURABLE_BILLING_APPROACH_ENABLED = 1
+          end
+
+          # The status of the model for the engine.
+          module ModelState
+            # The model state is unspecified.
+            MODEL_STATE_UNSPECIFIED = 0
+
+            # The model is enabled by admin.
+            MODEL_ENABLED = 1
+
+            # The model is disabled by admin.
+            MODEL_DISABLED = 2
+          end
+
+          # Represents which marketplace agents are visible to any users in agent
+          # gallery.
+          module MarketplaceAgentVisibility
+            # Defaults to `MARKETPLACE_AGENT_VISIBILITY_UNSPECIFIED`.
+            MARKETPLACE_AGENT_VISIBILITY_UNSPECIFIED = 0
+
+            # Only agents that are currently available for use by the user are visible.
+            SHOW_AVAILABLE_AGENTS_ONLY = 1
+
+            # Show marketplace agents that the user does not yet have access to but
+            # are integrated into the engine. This level also includes all agents
+            # visible with `SHOW_AVAILABLE_AGENTS_ONLY`.
+            SHOW_AGENTS_ALREADY_INTEGRATED = 2
+
+            # Show all agents visible with `SHOW_AGENTS_ALREADY_INTEGRATED`, plus
+            # agents that have already been purchased by the project/organization, even
+            # if they are not currently integrated into the engine.
+            SHOW_AGENTS_ALREADY_PURCHASED = 3
+
+            # All agents in the marketplace are visible, regardless of access or
+            # purchase status. This level encompasses all agents shown in the previous
+            # levels.
+            SHOW_ALL_AGENTS = 4
           end
         end
       end
