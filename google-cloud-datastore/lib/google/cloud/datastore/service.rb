@@ -45,7 +45,7 @@ module Google
           return mocked_service if mocked_service
           @service ||= V1::Datastore::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Datastore::VERSION
@@ -167,6 +167,19 @@ module Google
         end
 
         protected
+
+        ##
+        # Applies the timeout to the client-wide config and to every RPC config.
+        # The generated client gives each RPC its own default timeout, which takes
+        # precedence over the client-wide one.
+        def override_client_config_timeouts config
+          config.timeout = timeout
+          rpc_names = config.rpcs.methods - Object.methods
+          rpc_names.each do |rpc_name|
+            rpc = config.rpcs.send rpc_name
+            rpc.timeout = timeout if rpc.respond_to? :timeout=
+          end
+        end
 
         def generate_read_options consistency, transaction, read_time
           if consistency == :eventual
