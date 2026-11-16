@@ -199,7 +199,7 @@ module Google
           #     Optional. A description of the space. For example, describe the space's
           #     discussion topic, functional purpose, or participants.
           #
-          #     Supports up to 150 characters.
+          #     Supports up to 4,096 characters.
           # @!attribute [rw] guidelines
           #   @return [::String]
           #     Optional. The space's rules, expectations, and etiquette.

@@ -61,6 +61,47 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AnswerRecord resource string.
+            #
+            # @overload answer_record_path(project:, answer_record:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/answerRecords/{answer_record}`
+            #
+            #   @param project [String]
+            #   @param answer_record [String]
+            #
+            # @overload answer_record_path(project:, location:, answer_record:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/answerRecords/{answer_record}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param answer_record [String]
+            #
+            # @return [::String]
+            def answer_record_path **args
+              resources = {
+                "answer_record:project" => (proc do |project:, answer_record:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/answerRecords/#{answer_record}"
+                end),
+                "answer_record:location:project" => (proc do |project:, location:, answer_record:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/answerRecords/#{answer_record}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified App resource string.
             #
             # The resource will be in the following format:
@@ -96,6 +137,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/securitySettings/#{security_settings}"
+            end
+
+            ##
+            # Create a fully-qualified CompanionAgent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/companionAgents/{companion_agent}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param companion_agent [String]
+            #
+            # @return [::String]
+            def companion_agent_path project:, location:, companion_agent:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/companionAgents/#{companion_agent}"
             end
 
             ##

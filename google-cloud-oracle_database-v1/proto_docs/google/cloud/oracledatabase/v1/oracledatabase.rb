@@ -101,6 +101,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request for `CloudExadataInfrastructure.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     Exadata resource by the update. The fields specified in the `update_mask`
+        #     are relative to the resource, not the full request. A field will be
+        #     overwritten if it is in the mask. If the user does not provide a mask then
+        #     the service treats this as an implied field mask equivalent to all fields
+        #     that are populated (have a non-empty value). To clear or unset a field, the
+        #     field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] cloud_exadata_infrastructure
+        #   @return [::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructure]
+        #     Required. The resource being updated. Note only `labels` can be updated.
+        #     The provided `labels` will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing `labels` and `update_mask` will not update the
+        #     labels. To clear all labels, specify `labels` in the `update_mask` and omit
+        #     or leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateCloudExadataInfrastructureRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request for `CloudExadataInfrastructure.Delete`.
         # @!attribute [rw] name
         #   @return [::String]
@@ -199,6 +232,37 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateCloudVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `CloudVmCluster.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the VM Cluster should be
+        #     updated. A field specified in the mask is overwritten. If a mask isn't
+        #     provided, the service treats this as an implied field mask equivalent to
+        #     all fields that are populated (have a non-empty value). To clear or unset
+        #     a field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] cloud_vm_cluster
+        #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmCluster]
+        #     Required. The resource being updated. Note only `labels` can be updated.
+        #     The provided `labels` will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing `labels` and `update_mask` will not update the
+        #     labels. To clear all labels, specify `labels` in the `update_mask` and omit
+        #     or leave the `labels` field empty in the update request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateCloudVmClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -510,13 +574,19 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Field mask is used to specify the fields to be overwritten in the
-        #     Exadata resource by the update. The fields specified in the update_mask are
-        #     relative to the resource, not the full request. A field will be overwritten
-        #     if it is in the mask. If the user does not provide a mask then all fields
-        #     will be overwritten.
+        #     Exadata resource by the update. The fields specified in the `update_mask`
+        #     are relative to the resource, not the full request. A field will be
+        #     overwritten if it is in the mask. If the user does not provide a mask then
+        #     the service treats this as an implied field mask equivalent to
+        #     all fields that are populated (have a non-empty value). To clear or unset
+        #     a field, the field must be explicitly specified in the `update_mask`.
         # @!attribute [rw] autonomous_database
         #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabase]
-        #     Required. The resource being updated
+        #     Required. The Autonomous Database resource being updated.
+        #     For `labels`, the provided map completely replaces existing labels; any
+        #     existing keys not included will be deleted. To clear all labels, specify
+        #     `labels` in the `update_mask` and omit or leave the `labels` field empty in
+        #     the update request.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional ID to identify the request. This value is used to
@@ -900,16 +970,23 @@ module Google
         end
 
         # The request for `ExadbVmCluster.Update`. We only support adding the
-        # Virtual Machine to the ExadbVmCluster. Rest of the fields in ExadbVmCluster
-        # are immutable.
+        # Virtual Machine to the ExadbVmCluster and updating labels. Rest of the fields
+        # in ExadbVmCluster are immutable.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. A mask specifying which fields in th VM Cluster should be
         #     updated. A field specified in the mask is overwritten. If a mask isn't
-        #     provided then all the fields in the VM Cluster are overwritten.
+        #     provided then the service treats this as an implied field mask equivalent
+        #     to all fields that are populated (have a non-empty value). To clear or
+        #     unset a field, the field must be explicitly specified in the `update_mask`.
         # @!attribute [rw] exadb_vm_cluster
         #   @return [::Google::Cloud::OracleDatabase::V1::ExadbVmCluster]
-        #     Required. The resource being updated.
+        #     Required. The ExadbVmCluster resource being updated.
+        #     Mutable fields that can be updated include `labels` and
+        #     `properties.node_count`. For `labels`, the provided map completely
+        #     replaces existing labels; any existing keys not included will be deleted.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional ID to identify the request. This value is used to
@@ -945,6 +1022,46 @@ module Google
         #     Required. The list of host names of db nodes to be removed from the
         #     ExadbVmCluster.
         class RemoveVirtualMachineExadbVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `CloudVmCluster.EnableCloudVmClusterIdentityConnector`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Cloud VM Cluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/cloudVmClusters/\\{cloud_vm_cluster}
+        class EnableCloudVmClusterIdentityConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.EnableExadbVmClusterIdentityConnector`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Exadb VM Cluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}
+        class EnableExadbVmClusterIdentityConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `CloudVmCluster.DisableCloudVmClusterIdentityConnector`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Cloud VM Cluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/cloudVmClusters/\\{cloud_vm_cluster}
+        class DisableCloudVmClusterIdentityConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.DisableExadbVmClusterIdentityConnector`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Exadb VM Cluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}
+        class DisableExadbVmClusterIdentityConnectorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

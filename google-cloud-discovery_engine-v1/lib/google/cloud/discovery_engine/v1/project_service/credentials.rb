@@ -26,7 +26,9 @@ module Google
           # Credentials for the ProjectService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/discoveryengine.readwrite",
+              "https://www.googleapis.com/auth/discoveryengine.serving.readwrite"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

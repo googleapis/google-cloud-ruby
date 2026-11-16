@@ -78,9 +78,11 @@ module Google
         #     Optional. The credit status of the
         #     {::Google::Ads::AdManager::V1::Company Company}.
         #
-        #     This attribute defaults to [CompanyCreditStatus.ACTIVE][] if basic
-        #     settings are enabled and [CompanyCreditStatus.ON_HOLD][] if advance
-        #     settings are enabled.
+        #     This attribute defaults to
+        #     {::Google::Ads::AdManager::V1::CompanyCreditStatusEnum::CompanyCreditStatus::ACTIVE CompanyCreditStatusEnum.CompanyCreditStatus.ACTIVE}
+        #     if basic settings are enabled and
+        #     {::Google::Ads::AdManager::V1::CompanyCreditStatusEnum::CompanyCreditStatus::ON_HOLD CompanyCreditStatusEnum.CompanyCreditStatus.ON_HOLD}
+        #     if advance settings are enabled.
         # @!attribute [rw] applied_labels
         #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
         #     Optional. The labels that are directly applied to the

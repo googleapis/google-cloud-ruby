@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n>google/cloud/aiplatform/v1/notebook_runtime_template_ref.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"z\n\x1aNotebookRuntimeTemplateRef\x12\\\n\x19notebook_runtime_template\x18\x01 \x01(\tB9\xe0\x41\x05\xfa\x41\x33\n1aiplatform.googleapis.com/NotebookRuntimeTemplateB\xdd\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x1fNotebookRuntimeTemplateRefProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n>google/cloud/aiplatform/v1/notebook_runtime_template_ref.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"{\n\x1aNotebookRuntimeTemplateRef\x12]\n\x19notebook_runtime_template\x18\x01 \x01(\tB:\xe2\x41\x01\x05\xfa\x41\x33\n1aiplatform.googleapis.com/NotebookRuntimeTemplateB\xdd\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x1fNotebookRuntimeTemplateRefProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

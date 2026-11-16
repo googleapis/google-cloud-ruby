@@ -138,13 +138,13 @@ module Google
         # Estimated number of members in this user list in different target networks.
         # @!attribute [r] display_network_members_count
         #   @return [::Integer]
-        #     Output only. Estimated number of members in this user list, on the Google
-        #     Display Network.
+        #     Output only. Estimated number of active members in this user list on the
+        #     Google Display Network over the last 30 days.
         # @!attribute [r] search_network_members_count
         #   @return [::Integer]
-        #     Output only. Estimated number of members in this user list in the
-        #     google.com domain. These are the members available for targeting in Search
-        #     campaigns.
+        #     Output only. Estimated number of active members in this user list in the
+        #     google.com domain over the last 30 days. These are the members available
+        #     for targeting in Search campaigns.
         # @!attribute [r] youtube_members_count
         #   @return [::Integer]
         #     Output only. Estimated number of members in this user list on YouTube.

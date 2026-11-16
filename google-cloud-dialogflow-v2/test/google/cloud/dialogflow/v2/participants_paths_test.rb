@@ -77,6 +77,21 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientPathsTest < Minitest:
     end
   end
 
+  def test_intent_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::Participants::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.intent_path project: "value0", intent: "value1"
+      assert_equal "projects/value0/agent/intents/value1", path
+
+      path = client.intent_path project: "value0", location: "value1", intent: "value2"
+      assert_equal "projects/value0/locations/value1/agent/intents/value2", path
+    end
+  end
+
   def test_message_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

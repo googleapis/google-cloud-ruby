@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Request object for [GetViewabilityProvider][] method.
+        # Request object for `GetViewabilityProvider` method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the
@@ -32,34 +32,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [ListViewabilityProviders][] method.
+        # Request object for `ListViewabilityProviders` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of
-        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s.
+        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders}.
         #     Format: `networks/{network_code}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of
-        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s to
+        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} to
         #     return. The service may return fewer than this value. If unspecified, at
-        #     most 50 {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s
+        #     most 50 {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders}
         #     will be returned. The maximum value is 1000; values above 1000 will be
         #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous
-        #     [ListViewabilityProviders][] call. Provide this to retrieve the subsequent
-        #     page.
+        #     Optional. A page token, received from a previous `ListViewabilityProviders`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     [ListViewabilityProviders][] must match the call that provided the page
+        #     `ListViewabilityProviders` must match the call that provided the page
         #     token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Expression to filter the response.
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
+        #
+        #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+        #     timestamps, full resource names on reference fields (for example, `order =
+        #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+        #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+        #     repeated-field matching, unquoted enums and booleans, uppercase
+        #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+        #     (...)`).
         #
         #     **Filterable fields:**
         #
@@ -89,7 +96,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [ListViewabilityProviders][] containing matching
+        # Response object for `ListViewabilityProviders` containing matching
         # {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider} objects.
         # @!attribute [rw] viewability_providers
         #   @return [::Array<::Google::Ads::AdManager::V1::ViewabilityProvider>]
@@ -118,7 +125,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [CreateViewabilityProvider][] method.
+        # Request object for `CreateViewabilityProvider` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where this
@@ -134,11 +141,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [BatchCreateViewabilityProviders][] method.
+        # Request object for `BatchCreateViewabilityProviders` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where
-        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s will be
+        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} will be
         #     created. Format: `networks/{network_code}` The parent field in the
         #     CreateViewabilityProviderRequest must match this field.
         # @!attribute [rw] requests
@@ -151,7 +158,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [BatchCreateViewabilityProviders][] method.
+        # Response object for `BatchCreateViewabilityProviders` method.
         # @!attribute [rw] viewability_providers
         #   @return [::Array<::Google::Ads::AdManager::V1::ViewabilityProvider>]
         #     The {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}
@@ -161,7 +168,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [UpdateViewabilityProvider][] method.
+        # Request object for `UpdateViewabilityProvider` method.
         # @!attribute [rw] viewability_provider
         #   @return [::Google::Ads::AdManager::V1::ViewabilityProvider]
         #     Required. The
@@ -180,11 +187,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request object for [BatchUpdateViewabilityProviders][] method.
+        # Request object for `BatchUpdateViewabilityProviders` method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where
-        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}s will be
+        #     {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProviders} will be
         #     updated. Format: `networks/{network_code}` The parent field in the
         #     UpdateViewabilityProviderRequest must match this field.
         # @!attribute [rw] requests
@@ -197,7 +204,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response object for [BatchUpdateViewabilityProviders][] method.
+        # Response object for `BatchUpdateViewabilityProviders` method.
         # @!attribute [rw] viewability_providers
         #   @return [::Array<::Google::Ads::AdManager::V1::ViewabilityProvider>]
         #     The {::Google::Ads::AdManager::V1::ViewabilityProvider ViewabilityProvider}

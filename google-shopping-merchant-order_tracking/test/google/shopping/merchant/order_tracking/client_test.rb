@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::OrderTracking::ClientConstructionMinitest < Mi
       client = Google::Shopping::Merchant::OrderTracking.order_tracking_signals_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::OrderTracking::V1::OrderTrackingSignalsService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::OrderTracking::ClientConstructionMinitest < Mi
       client = Google::Shopping::Merchant::OrderTracking.order_tracking_signals_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::OrderTracking::V1::OrderTrackingSignalsService::Rest::Client, client
     end
   end
 end

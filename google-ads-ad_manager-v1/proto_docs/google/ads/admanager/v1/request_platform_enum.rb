@@ -21,7 +21,8 @@ module Google
   module Ads
     module AdManager
       module V1
-        # Wrapper message for [RequestPlatform].
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::RequestPlatformEnum::RequestPlatform RequestPlatform}.
         #
         # Describes the platform from which a request is made and on which the ad is
         # rendered. In the event of multiple platforms, the platform that ultimately

@@ -21,7 +21,7 @@ module Google
   module Ads
     module MarketingPlatform
       module Admin
-        VERSION = "0.3.1"
+        VERSION = "0.4.0"
       end
     end
   end

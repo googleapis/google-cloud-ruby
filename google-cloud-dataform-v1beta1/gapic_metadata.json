@@ -220,6 +220,11 @@
                 "fetch_git_ahead_behind"
               ]
             },
+            "FetchWorkspaceHistory": {
+              "methods": [
+                "fetch_workspace_history"
+              ]
+            },
             "CommitWorkspaceChanges": {
               "methods": [
                 "commit_workspace_changes"
@@ -318,6 +323,11 @@
             "CreateCompilationResult": {
               "methods": [
                 "create_compilation_result"
+              ]
+            },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "create_compilation_result_long_running"
               ]
             },
             "QueryCompilationResultActions": {

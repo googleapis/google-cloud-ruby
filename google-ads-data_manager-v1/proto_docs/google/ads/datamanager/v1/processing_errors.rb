@@ -38,6 +38,10 @@ module Google
         # @!attribute [rw] reason
         #   @return [::Google::Ads::DataManager::V1::ProcessingErrorReason]
         #     The error reason of the failed records.
+        # @!attribute [rw] record_indices
+        #   @return [::Array<::Integer>]
+        #     The 0-based indices of the records in the original request that failed
+        #     with this error reason.
         class ErrorCount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -59,6 +63,10 @@ module Google
         # @!attribute [rw] reason
         #   @return [::Google::Ads::DataManager::V1::ProcessingWarningReason]
         #     The warning reason.
+        # @!attribute [rw] record_indices
+        #   @return [::Array<::Integer>]
+        #     The 0-based indices of the records in the original request that had this
+        #     warning reason.
         class WarningCount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -230,6 +238,22 @@ module Google
           # External attribution data is missing. Sending events to a destination for
           # an external attribution conversion action isn't supported.
           PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44
+
+          # The destination was created too recently. Try again in a few hours.
+          PROCESSING_ERROR_REASON_DESTINATION_TOO_RECENTLY_CREATED = 45
+
+          # The matched click is older than the conversion action's configured
+          # click-through conversion lookback window (or the 90-day click TTL).
+          PROCESSING_ERROR_REASON_EXPIRED_CLICK = 46
+
+          # The call is still being processed.
+          PROCESSING_ERROR_REASON_TOO_RECENT_CALL = 47
+
+          # The call is too old for this conversion to be imported.
+          PROCESSING_ERROR_REASON_EXPIRED_CALL = 48
+
+          # The call was not found.
+          PROCESSING_ERROR_REASON_INVALID_CALL = 49
         end
 
         # The processing warning reason.
@@ -267,6 +291,17 @@ module Google
 
           # The system failed to authenticate with AWS.
           PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
+
+          # A {::Google::Ads::DataManager::V1::CustomVariable CustomVariable} or
+          # {::Google::Ads::DataManager::V1::ItemCustomVariable ItemCustomVariable} is not
+          # enabled in the account.
+          PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 10
+
+          # The value of a {::Google::Ads::DataManager::V1::CustomVariable CustomVariable}
+          # or {::Google::Ads::DataManager::V1::ItemCustomVariable ItemCustomVariable} is
+          # not among the predefined allowed values configured for the custom variable
+          # on the destination account and will be replaced by an uncategorized value.
+          PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED = 11
         end
 
         # Reasons for non-blocking warnings returned during ingestion.
@@ -338,6 +373,9 @@ module Google
           # The {::Google::Ads::DataManager::V1::CartData#merchant_id `merchant_id`} is
           # invalid.
           WARNING_REASON_INVALID_MERCHANT_ID = 14
+
+          # The number format is invalid.
+          WARNING_REASON_INVALID_NUMBER_FORMAT = 15
         end
       end
     end

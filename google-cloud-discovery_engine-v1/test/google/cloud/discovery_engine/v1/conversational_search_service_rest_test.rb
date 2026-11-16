@@ -612,6 +612,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     parent = "hello world"
     session = {}
+    session_id = "hello world"
 
     create_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -627,27 +628,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
         end
 
         # Use hash object
-        c.create_session({ parent: parent, session: session }) do |_result, response|
+        c.create_session({ parent: parent, session: session, session_id: session_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.create_session parent: parent, session: session do |_result, response|
+        c.create_session parent: parent, session: session, session_id: session_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.create_session ::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest.new(parent: parent, session: session) do |_result, response|
+        c.create_session ::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.create_session({ parent: parent, session: session }, call_options) do |_result, response|
+        c.create_session({ parent: parent, session: session, session_id: session_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.create_session(::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest.new(parent: parent, session: session), call_options) do |_result, response|
+        c.create_session(::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

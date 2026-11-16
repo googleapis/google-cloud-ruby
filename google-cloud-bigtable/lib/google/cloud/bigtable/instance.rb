@@ -60,6 +60,7 @@ module Google
       #   else
       #     instance = job.instance
       #   end
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class Instance
         # @private
@@ -108,6 +109,7 @@ module Google
         # to avoid confusion.
         #
         # @param value [String] The descriptive name for the instance.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def display_name= value
           @grpc.display_name = value
@@ -209,6 +211,7 @@ module Google
         #   instance.type = :PRODUCTION
         #   instance.development? # false
         #   instance.production? # true
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def type= instance_type
           @grpc.type = instance_type
@@ -240,6 +243,7 @@ module Google
         # Sets the Cloud Labels for the instance.
         #
         # @param labels [Hash{String=>String}] The Cloud Labels.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def labels= labels
           labels ||= {}
@@ -285,6 +289,7 @@ module Google
         #     puts instance.name
         #     puts instance.labels
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def save
           ensure_service!
@@ -298,6 +303,7 @@ module Google
         # Reloads instance data.
         #
         # @return [Google::Cloud::Bigtable::Instance]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def reload!
           @grpc = service.get_instance instance_id
@@ -316,6 +322,7 @@ module Google
         #
         #   instance = bigtable.instance "my-instance"
         #   instance.delete
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def delete
           ensure_service!
@@ -345,6 +352,7 @@ module Google
         #   instance.clusters.all do |cluster|
         #     puts cluster.cluster_id
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def clusters token: nil
           ensure_service!
@@ -370,6 +378,7 @@ module Google
         #
         #   cluster = instance.cluster "my-cluster"
         #   puts cluster.cluster_id
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def cluster cluster_id
           ensure_service!
@@ -422,6 +431,7 @@ module Google
         #   else
         #     cluster = job.cluster
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def create_cluster cluster_id, location, nodes: nil, storage_type: nil
           ensure_service!
@@ -456,6 +466,7 @@ module Google
         #   instance.tables.all do |table|
         #     puts table.name
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def tables
           ensure_service!
@@ -603,6 +614,7 @@ module Google
         #   end
         #
         #   puts table
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def create_table name, column_families: nil, granularity: nil, initial_splits: nil, &block
           ensure_service!
@@ -703,6 +715,7 @@ module Google
         #     ignore_warnings: true
         #   )
         #   puts app_profile.name
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def create_app_profile name, routing_policy, description: nil, etag: nil, ignore_warnings: false
           ensure_service!
@@ -750,6 +763,7 @@ module Google
         #   if app_profile
         #     puts app_profile.name
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def app_profile app_profile_id
           ensure_service!
@@ -778,6 +792,7 @@ module Google
         #   instance.app_profiles.all do |app_profile|
         #     puts app_profile.name
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def app_profiles
           ensure_service!
@@ -817,6 +832,7 @@ module Google
         #   instance.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def policy
           ensure_service!
@@ -853,6 +869,7 @@ module Google
         #   updated_policy = instance.update_policy policy
         #
         #   puts updated_policy.roles
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def update_policy new_policy
           ensure_service!
@@ -897,6 +914,7 @@ module Google
         #   )
         #   permissions.include? "bigtable.instances.get" #=> true
         #   permissions.include? "bigtable.instances.update" #=> false
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def test_iam_permissions *permissions
           ensure_service!

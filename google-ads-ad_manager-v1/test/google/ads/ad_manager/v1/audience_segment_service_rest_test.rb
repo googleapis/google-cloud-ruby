@@ -301,6 +301,116 @@ class ::Google::Ads::AdManager::V1::AudienceSegmentService::Rest::ClientTest < M
     end
   end
 
+  def test_update_audience_segment
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::AudienceSegment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    audience_segment = {}
+    update_mask = {}
+
+    update_audience_segment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AudienceSegmentService::Rest::ServiceStub.stub :transcode_update_audience_segment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_audience_segment_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_audience_segment({ audience_segment: audience_segment, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_audience_segment audience_segment: audience_segment, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_audience_segment ::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest.new(audience_segment: audience_segment, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_audience_segment({ audience_segment: audience_segment, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_audience_segment(::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest.new(audience_segment: audience_segment, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_audience_segment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_audience_segments
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_audience_segments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::AudienceSegmentService::Rest::ServiceStub.stub :transcode_batch_update_audience_segments_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_audience_segments_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_audience_segments({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_audience_segments parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_audience_segments ::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_audience_segments({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_audience_segments(::Google::Ads::AdManager::V1::BatchUpdateAudienceSegmentsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_audience_segments_client_stub.call_count
+      end
+    end
+  end
+
   def test_batch_activate_audience_segments
     # Create test objects.
     client_result = ::Google::Ads::AdManager::V1::BatchActivateAudienceSegmentsResponse.new

@@ -92,7 +92,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
-    return_partial_success = true
     service_project_number = 42
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -109,27 +108,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -497,7 +496,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
     router = "hello world"
 
     get_nat_mapping_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -514,27 +512,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
+        c.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, router: router }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_nat_mapping_info filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
+        c.get_nat_mapping_info filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, router: router do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
+        c.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, router: router) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
+        c.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, router: router }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
+        c.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, router: router), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -728,7 +726,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -744,27 +741,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -792,7 +789,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     policy_applied = true
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
     route_type = "hello world"
     router = "hello world"
 
@@ -810,27 +806,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list_bgp_routes({ address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, return_partial_success: return_partial_success, route_type: route_type, router: router }) do |_result, response|
+        c.list_bgp_routes({ address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, route_type: route_type, router: router }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_bgp_routes address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, return_partial_success: return_partial_success, route_type: route_type, router: router do |_result, response|
+        c.list_bgp_routes address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, route_type: route_type, router: router do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_bgp_routes ::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest.new(address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, return_partial_success: return_partial_success, route_type: route_type, router: router) do |_result, response|
+        c.list_bgp_routes ::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest.new(address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, route_type: route_type, router: router) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_bgp_routes({ address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, return_partial_success: return_partial_success, route_type: route_type, router: router }, call_options) do |_result, response|
+        c.list_bgp_routes({ address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, route_type: route_type, router: router }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_bgp_routes(::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest.new(address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, return_partial_success: return_partial_success, route_type: route_type, router: router), call_options) do |_result, response|
+        c.list_bgp_routes(::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest.new(address_family: address_family, destination_prefix: destination_prefix, filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, peer: peer, policy_applied: policy_applied, project: project, region: region, route_type: route_type, router: router), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -854,7 +850,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
     router = "hello world"
 
     list_named_sets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -871,27 +866,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
+        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_named_sets filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
+        c.list_named_sets filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_named_sets ::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
+        c.list_named_sets ::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
+        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_named_sets(::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
+        c.list_named_sets(::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -915,7 +910,6 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     project = "hello world"
     region = "hello world"
-    return_partial_success = true
     router = "hello world"
 
     list_route_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -932,27 +926,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.list_route_policies({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
+        c.list_route_policies({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_route_policies filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
+        c.list_route_policies filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_route_policies ::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
+        c.list_route_policies ::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_route_policies({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
+        c.list_route_policies({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_route_policies(::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
+        c.list_route_policies(::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, router: router), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

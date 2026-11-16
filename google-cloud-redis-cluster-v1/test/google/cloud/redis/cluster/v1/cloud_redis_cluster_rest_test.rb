@@ -134,6 +134,62 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
     end
   end
 
+  def test_list_acl_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acl_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_list_acl_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_acl_policies_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_acl_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_acl_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_acl_policies ::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_acl_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_acl_policies(::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_acl_policies_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_cluster
     # Create test objects.
     client_result = ::Google::Cloud::Redis::Cluster::V1::Cluster.new
@@ -184,6 +240,60 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
 
         # Verify method calls
         assert_equal 5, get_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_acl_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::AclPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_get_acl_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_acl_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_acl_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_acl_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_acl_policy ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_acl_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_acl_policy(::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_acl_policy_client_stub.call_count
       end
     end
   end
@@ -244,6 +354,62 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
     end
   end
 
+  def test_update_acl_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    acl_policy = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_acl_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_update_acl_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_acl_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_acl_policy({ acl_policy: acl_policy, update_mask: update_mask, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_acl_policy acl_policy: acl_policy, update_mask: update_mask, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_acl_policy ::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest.new(acl_policy: acl_policy, update_mask: update_mask, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_acl_policy({ acl_policy: acl_policy, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_acl_policy(::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest.new(acl_policy: acl_policy, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_acl_policy_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_cluster
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -295,6 +461,172 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
 
         # Verify method calls
         assert_equal 5, delete_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_acl_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    etag = "hello world"
+
+    delete_acl_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_delete_acl_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_acl_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_acl_policy({ name: name, request_id: request_id, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_acl_policy name: name, request_id: request_id, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_acl_policy ::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest.new(name: name, request_id: request_id, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_acl_policy({ name: name, request_id: request_id, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_acl_policy(::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest.new(name: name, request_id: request_id, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_acl_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_acl_policy_revision
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_policy_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_get_acl_policy_revision_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_acl_policy_revision_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_acl_policy_revision({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_acl_policy_revision name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_acl_policy_revision ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_acl_policy_revision({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_acl_policy_revision(::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_acl_policy_revision_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_acl_policy_revisions
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acl_policy_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_list_acl_policy_revisions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_acl_policy_revisions_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_acl_policy_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_acl_policy_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_acl_policy_revisions ::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_acl_policy_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_acl_policy_revisions(::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_acl_policy_revisions_client_stub.call_count
       end
     end
   end
@@ -352,6 +684,63 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
 
         # Verify method calls
         assert_equal 5, create_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_acl_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::AclPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    acl_policy_id = "hello world"
+    acl_policy = {}
+    request_id = "hello world"
+
+    create_acl_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_create_acl_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_acl_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_acl_policy({ parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_acl_policy parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_acl_policy ::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest.new(parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_acl_policy({ parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_acl_policy(::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest.new(parent: parent, acl_policy_id: acl_policy_id, acl_policy: acl_policy, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_acl_policy_client_stub.call_count
       end
     end
   end
@@ -902,6 +1291,450 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ClientTest <
 
         # Verify method calls
         assert_equal 5, backup_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_token_auth_users
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_token_auth_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_list_token_auth_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_token_auth_users_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_token_auth_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_token_auth_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_token_auth_users ::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_token_auth_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_token_auth_users(::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_token_auth_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_token_auth_user
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::TokenAuthUser.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_token_auth_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_get_token_auth_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_token_auth_user_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_token_auth_user({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_token_auth_user name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_token_auth_user ::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_token_auth_user({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_token_auth_user(::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_token_auth_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_auth_tokens
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::ListAuthTokensResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_auth_tokens_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_list_auth_tokens_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_auth_tokens_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_auth_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_auth_tokens parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_auth_tokens ::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_auth_tokens({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_auth_tokens(::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_auth_tokens_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_auth_token
+    # Create test objects.
+    client_result = ::Google::Cloud::Redis::Cluster::V1::AuthToken.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auth_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_get_auth_token_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_auth_token_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_auth_token({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_auth_token name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_auth_token ::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_auth_token({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_auth_token(::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_auth_token_client_stub.call_count
+      end
+    end
+  end
+
+  def test_add_token_auth_user
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    cluster = "hello world"
+    token_auth_user = "hello world"
+
+    add_token_auth_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_add_token_auth_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_token_auth_user_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.add_token_auth_user({ cluster: cluster, token_auth_user: token_auth_user }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.add_token_auth_user cluster: cluster, token_auth_user: token_auth_user do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.add_token_auth_user ::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest.new(cluster: cluster, token_auth_user: token_auth_user) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.add_token_auth_user({ cluster: cluster, token_auth_user: token_auth_user }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.add_token_auth_user(::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest.new(cluster: cluster, token_auth_user: token_auth_user), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_token_auth_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_token_auth_user
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+
+    delete_token_auth_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_delete_token_auth_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_token_auth_user_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_token_auth_user({ name: name, request_id: request_id, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_token_auth_user name: name, request_id: request_id, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_token_auth_user ::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_token_auth_user({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_token_auth_user(::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_token_auth_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_add_auth_token
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    token_auth_user = "hello world"
+    auth_token = {}
+
+    add_auth_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_add_auth_token_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_auth_token_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.add_auth_token({ token_auth_user: token_auth_user, auth_token: auth_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.add_auth_token token_auth_user: token_auth_user, auth_token: auth_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.add_auth_token ::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest.new(token_auth_user: token_auth_user, auth_token: auth_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.add_auth_token({ token_auth_user: token_auth_user, auth_token: auth_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.add_auth_token(::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest.new(token_auth_user: token_auth_user, auth_token: auth_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_auth_token_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_auth_token
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_auth_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::ServiceStub.stub :transcode_delete_auth_token_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_auth_token_client_stub do
+        # Create client
+        c = ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_auth_token({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_auth_token name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_auth_token ::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_auth_token({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_auth_token(::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_auth_token_client_stub.call_count
       end
     end
   end

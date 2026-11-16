@@ -517,7 +517,9 @@ module Google
               end
 
               ##
-              # Returns the [DefaultThirdPartyDataDeclaration] for this network.
+              # Returns the
+              # {::Google::Ads::AdManager::V1::DefaultThirdPartyDataDeclaration DefaultThirdPartyDataDeclaration}
+              # for this network.
               #
               # @overload get_default_third_party_data_declaration(request, options = nil)
               #   Pass arguments to `get_default_third_party_data_declaration` via a request object, either of type

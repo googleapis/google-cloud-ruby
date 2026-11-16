@@ -88,13 +88,23 @@ module Google
 
                   default_config.rpcs.list_clusters.timeout = 600.0
 
+                  default_config.rpcs.list_acl_policies.timeout = 600.0
+
                   default_config.rpcs.get_cluster.timeout = 600.0
+
+                  default_config.rpcs.get_acl_policy.timeout = 600.0
 
                   default_config.rpcs.update_cluster.timeout = 600.0
 
+                  default_config.rpcs.update_acl_policy.timeout = 600.0
+
                   default_config.rpcs.delete_cluster.timeout = 600.0
 
+                  default_config.rpcs.delete_acl_policy.timeout = 600.0
+
                   default_config.rpcs.create_cluster.timeout = 600.0
+
+                  default_config.rpcs.create_acl_policy.timeout = 600.0
 
                   default_config.rpcs.get_cluster_certificate_authority.timeout = 600.0
 
@@ -369,6 +379,120 @@ module Google
               end
 
               ##
+              # Lists all ACL policies owned by a project in either the specified
+              # location (region) or all locations.
+              #
+              # The location should have the following format:
+              #
+              # * `projects/{project_id}/locations/{location_id}`
+              #
+              # If `location_id` is specified as `-` (wildcard), then all regions
+              # available to the project are queried, and the results are aggregated.
+              #
+              # @overload list_acl_policies(request, options = nil)
+              #   Pass arguments to `list_acl_policies` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_acl_policies(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_acl_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the ACL policy location using the form:
+              #         `projects/{project_id}/locations/{location_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     {::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesResponse#next_page_token `next_page_token`}
+              #     to determine if there are more ACL policies left to be queried.
+              #
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAclPolicies` request, if any.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AclPolicy>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AclPolicy>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest.new
+              #
+              #   # Call the list_acl_policies method.
+              #   result = client.list_acl_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Redis::Cluster::V1::AclPolicy.
+              #     p item
+              #   end
+              #
+              def list_acl_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_acl_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_acl_policies.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_acl_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :list_acl_policies, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @cloud_redis_cluster_stub, :list_acl_policies, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets the details of a specific Redis cluster.
               #
               # @overload get_cluster(request, options = nil)
@@ -449,6 +573,93 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_redis_cluster_stub.call_rpc :get_cluster, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the details of a specific Redis Cluster ACL policy.
+              #
+              # @overload get_acl_policy(request, options = nil)
+              #   Pass arguments to `get_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_acl_policy(name: nil)
+              #   Pass arguments to `get_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Redis ACL policy resource name using the form:
+              #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1::AclPolicy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1::AclPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest.new
+              #
+              #   # Call the get_acl_policy method.
+              #   result = client.get_acl_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::AclPolicy.
+              #   p result
+              #
+              def get_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_acl_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :get_acl_policy, request, options: options do |response, operation|
                   yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
@@ -564,6 +775,117 @@ module Google
               end
 
               ##
+              # Updates the ACL policy.
+              #
+              # The operation applies the updated ACL policy to all of the linked clusters.
+              # If Memorystore can apply the policy to all clusters, then the operation
+              # returns a SUCCESS status. If Memorystore can't apply the policy to all
+              # clusters, then to ensure eventual consistency, Memorystore uses
+              # reconciliation to apply the policy to the failed clusters.
+              #
+              # Completed longrunning.Operation will contain the new ACL policy object in
+              # the response field.
+              #
+              # @overload update_acl_policy(request, options = nil)
+              #   Pass arguments to `update_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_acl_policy(acl_policy: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param acl_policy [::Google::Cloud::Redis::Cluster::V1::AclPolicy, ::Hash]
+              #     Required. The ACL policy to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Mask of fields to be updated. At least one path must be supplied
+              #     in this field. The elements of the repeated paths field may only include
+              #     these fields from `AclPolicy`:
+              #
+              #      *   `rules`
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest.new
+              #
+              #   # Call the update_acl_policy method.
+              #   result = client.update_acl_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.acl_policy&.name
+                  header_params["acl_policy.name"] = request.acl_policy.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_acl_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :update_acl_policy, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes a specific Redis cluster. Cluster stops serving and data is
               # deleted.
               #
@@ -655,6 +977,294 @@ module Google
 
                 @cloud_redis_cluster_stub.call_rpc :delete_cluster, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a specific ACL policy. This action will delete the ACL policy and
+              # all the rules associated with it. An ACL policy cannot be deleted if it is
+              # attached to a cluster.
+              #
+              # @overload delete_acl_policy(request, options = nil)
+              #   Pass arguments to `delete_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_acl_policy(name: nil, request_id: nil, etag: nil)
+              #   Pass arguments to `delete_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Redis ACL policy resource name using the form:
+              #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              #   @param etag [::String]
+              #     Optional. Etag of the ACL policy. If this is different from the server's
+              #     etag, the request will fail with an ABORTED error.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest.new
+              #
+              #   # Call the delete_acl_policy method.
+              #   result = client.delete_acl_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_acl_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :delete_acl_policy, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a specific ACL policy revision.
+              #
+              # @overload get_acl_policy_revision(request, options = nil)
+              #   Pass arguments to `get_acl_policy_revision` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_acl_policy_revision(name: nil)
+              #   Pass arguments to `get_acl_policy_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Redis ACL policy revision resource name using the form:
+              #         `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}/revisions/{revision_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest.new
+              #
+              #   # Call the get_acl_policy_revision method.
+              #   result = client.get_acl_policy_revision request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::AclPolicyRevision.
+              #   p result
+              #
+              def get_acl_policy_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_acl_policy_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_acl_policy_revision.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_acl_policy_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :get_acl_policy_revision, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all ACL policy revisions in a given ACL policy.
+              #
+              # @overload list_acl_policy_revisions(request, options = nil)
+              #   Pass arguments to `list_acl_policy_revisions` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_acl_policy_revisions(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_acl_policy_revisions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The name of the ACL policy to list revisions for.
+              #     Format:
+              #     "projects/\\{project_id}/locations/\\{location_id}/aclPolicies/\\{acl_policy_id}"
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAclPolicyRevisions` request, if any.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest.new
+              #
+              #   # Call the list_acl_policy_revisions method.
+              #   result = client.list_acl_policy_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision.
+              #     p item
+              #   end
+              #
+              def list_acl_policy_revisions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_acl_policy_revisions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_acl_policy_revisions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_acl_policy_revisions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :list_acl_policy_revisions, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @cloud_redis_cluster_stub, :list_acl_policy_revisions, request, response, operation, options
                   yield response, operation if block_given?
                   throw :response, response
                 end
@@ -773,6 +1383,109 @@ module Google
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an ACL policy.
+              # The creation is executed synchronously and the policy is available for use
+              # immediately after the RPC returns.
+              #
+              # @overload create_acl_policy(request, options = nil)
+              #   Pass arguments to `create_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_acl_policy(parent: nil, acl_policy_id: nil, acl_policy: nil, request_id: nil)
+              #   Pass arguments to `create_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the cluster location using the form:
+              #         `projects/{project_id}/locations/{location_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #   @param acl_policy_id [::String]
+              #     Required. The logical name of the ACL policy in the customer project
+              #     with the following restrictions:
+              #
+              #     * Must contain only lowercase letters, numbers, and hyphens.
+              #     * Must start with a letter.
+              #     * Must be between 1-63 characters.
+              #     * Must end with a number or a letter.
+              #     * Must be unique within the customer project / location
+              #   @param acl_policy [::Google::Cloud::Redis::Cluster::V1::AclPolicy, ::Hash]
+              #     Required. The ACL policy that is to be created.
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              #     .
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1::AclPolicy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1::AclPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest.new
+              #
+              #   # Call the create_acl_policy method.
+              #   result = client.create_acl_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::AclPolicy.
+              #   p result
+              #
+              def create_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_acl_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :create_acl_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1749,6 +2462,802 @@ module Google
               end
 
               ##
+              # Lists all the token auth users for a token based auth enabled cluster.
+              #
+              # @overload list_token_auth_users(request, options = nil)
+              #   Pass arguments to `list_token_auth_users` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_token_auth_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_token_auth_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource that this token based auth user will be
+              #     listed for. Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #     {::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersResponse#next_page_token `next_page_token`}
+              #     to determine if there are more clusters left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     [ListTokenAuthUsers] request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::TokenAuthUser>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::TokenAuthUser>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest.new
+              #
+              #   # Call the list_token_auth_users method.
+              #   result = client.list_token_auth_users request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Redis::Cluster::V1::TokenAuthUser.
+              #     p item
+              #   end
+              #
+              def list_token_auth_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_token_auth_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_token_auth_users.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_token_auth_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :list_token_auth_users, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @cloud_redis_cluster_stub, :list_token_auth_users, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a specific token auth user for a basic auth enabled cluster.
+              #
+              # @overload get_token_auth_user(request, options = nil)
+              #   Pass arguments to `get_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_token_auth_user(name: nil)
+              #   Pass arguments to `get_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of token auth user for a token based auth enabled
+              #     cluster. Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1::TokenAuthUser]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1::TokenAuthUser]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest.new
+              #
+              #   # Call the get_token_auth_user method.
+              #   result = client.get_token_auth_user request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::TokenAuthUser.
+              #   p result
+              #
+              def get_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_token_auth_user.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :get_token_auth_user, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the auth tokens for a specific token auth user.
+              #
+              # @overload list_auth_tokens(request, options = nil)
+              #   Pass arguments to `list_auth_tokens` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_auth_tokens(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_auth_tokens` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource that this auth token will be listed for.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000. If not specified, a default
+              #     value of 1000 will be used by the service. Regardless of the page_size
+              #     value, the response may include a partial list and a caller should only
+              #     rely on response's
+              #     {::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersResponse#next_page_token `next_page_token`}
+              #     to determine if there are more clusters left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     [ListTokenAuthUsers] request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AuthToken>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::AuthToken>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest.new
+              #
+              #   # Call the list_auth_tokens method.
+              #   result = client.list_auth_tokens request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Redis::Cluster::V1::AuthToken.
+              #     p item
+              #   end
+              #
+              def list_auth_tokens request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_auth_tokens.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_auth_tokens.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_auth_tokens.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :list_auth_tokens, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @cloud_redis_cluster_stub, :list_auth_tokens, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a specific auth token for a specific token auth user.
+              #
+              # @overload get_auth_token(request, options = nil)
+              #   Pass arguments to `get_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_auth_token(name: nil)
+              #   Pass arguments to `get_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of auth token for a token based auth enabled cluster.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Redis::Cluster::V1::AuthToken]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Redis::Cluster::V1::AuthToken]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest.new
+              #
+              #   # Call the get_auth_token method.
+              #   result = client.get_auth_token request
+              #
+              #   # The returned object is of type Google::Cloud::Redis::Cluster::V1::AuthToken.
+              #   p result
+              #
+              def get_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_auth_token.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :get_auth_token, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a token auth user for a token based auth enabled cluster.
+              #
+              # @overload add_token_auth_user(request, options = nil)
+              #   Pass arguments to `add_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload add_token_auth_user(cluster: nil, token_auth_user: nil)
+              #   Pass arguments to `add_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param cluster [::String]
+              #     Required. The cluster resource that this token auth user will be added for.
+              #     Format: projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+              #   @param token_auth_user [::String]
+              #     Required. The id of the token auth user to add.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest.new
+              #
+              #   # Call the add_token_auth_user method.
+              #   result = client.add_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.add_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.cluster
+                  header_params["cluster"] = request.cluster
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.add_token_auth_user.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.add_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :add_token_auth_user, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a token auth user for a token based auth enabled cluster.
+              #
+              # @overload delete_token_auth_user(request, options = nil)
+              #   Pass arguments to `delete_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_token_auth_user(name: nil, request_id: nil, force: nil)
+              #   Pass arguments to `delete_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user to delete.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any child auth tokens of this user will also be
+              #     deleted. Otherwise, the request will only work if the user has no auth
+              #     tokens.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest.new
+              #
+              #   # Call the delete_token_auth_user method.
+              #   result = client.delete_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_token_auth_user.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :delete_token_auth_user, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a auth token for a user of a token based auth enabled cluster.
+              #
+              # @overload add_auth_token(request, options = nil)
+              #   Pass arguments to `add_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload add_auth_token(token_auth_user: nil, auth_token: nil)
+              #   Pass arguments to `add_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param token_auth_user [::String]
+              #     Required. The name of the token auth user resource that this auth token
+              #     will be added for. Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}
+              #   @param auth_token [::Google::Cloud::Redis::Cluster::V1::AuthToken, ::Hash]
+              #     Required. The auth token to add.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest.new
+              #
+              #   # Call the add_auth_token method.
+              #   result = client.add_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.add_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.token_auth_user
+                  header_params["token_auth_user"] = request.token_auth_user
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.add_auth_token.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.add_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :add_auth_token, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Removes a auth token for a user of a token based auth enabled instance.
+              #
+              # @overload delete_auth_token(request, options = nil)
+              #   Pass arguments to `delete_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_auth_token(name: nil)
+              #   Pass arguments to `delete_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user resource that this auth token
+              #     will be deleted from. Format:
+              #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/redis/cluster/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest.new
+              #
+              #   # Call the delete_auth_token method.
+              #   result = client.delete_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Redis::Cluster::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_auth_token.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_redis_cluster_stub.call_rpc :delete_auth_token, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the CloudRedisCluster API.
               #
               # This class represents the configuration for CloudRedisCluster,
@@ -1939,25 +3448,60 @@ module Google
                   #
                   attr_reader :list_clusters
                   ##
+                  # RPC-specific configuration for `list_acl_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_acl_policies
+                  ##
                   # RPC-specific configuration for `get_cluster`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_cluster
+                  ##
+                  # RPC-specific configuration for `get_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_acl_policy
                   ##
                   # RPC-specific configuration for `update_cluster`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_cluster
                   ##
+                  # RPC-specific configuration for `update_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_acl_policy
+                  ##
                   # RPC-specific configuration for `delete_cluster`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_cluster
                   ##
+                  # RPC-specific configuration for `delete_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_acl_policy
+                  ##
+                  # RPC-specific configuration for `get_acl_policy_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_acl_policy_revision
+                  ##
+                  # RPC-specific configuration for `list_acl_policy_revisions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_acl_policy_revisions
+                  ##
                   # RPC-specific configuration for `create_cluster`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_cluster
+                  ##
+                  # RPC-specific configuration for `create_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_acl_policy
                   ##
                   # RPC-specific configuration for `get_cluster_certificate_authority`
                   # @return [::Gapic::Config::Method]
@@ -2008,19 +3552,73 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :backup_cluster
+                  ##
+                  # RPC-specific configuration for `list_token_auth_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_token_auth_users
+                  ##
+                  # RPC-specific configuration for `get_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_token_auth_user
+                  ##
+                  # RPC-specific configuration for `list_auth_tokens`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_auth_tokens
+                  ##
+                  # RPC-specific configuration for `get_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auth_token
+                  ##
+                  # RPC-specific configuration for `add_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_token_auth_user
+                  ##
+                  # RPC-specific configuration for `delete_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_token_auth_user
+                  ##
+                  # RPC-specific configuration for `add_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_auth_token
+                  ##
+                  # RPC-specific configuration for `delete_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_auth_token
 
                   # @private
                   def initialize parent_rpcs = nil
                     list_clusters_config = parent_rpcs.list_clusters if parent_rpcs.respond_to? :list_clusters
                     @list_clusters = ::Gapic::Config::Method.new list_clusters_config
+                    list_acl_policies_config = parent_rpcs.list_acl_policies if parent_rpcs.respond_to? :list_acl_policies
+                    @list_acl_policies = ::Gapic::Config::Method.new list_acl_policies_config
                     get_cluster_config = parent_rpcs.get_cluster if parent_rpcs.respond_to? :get_cluster
                     @get_cluster = ::Gapic::Config::Method.new get_cluster_config
+                    get_acl_policy_config = parent_rpcs.get_acl_policy if parent_rpcs.respond_to? :get_acl_policy
+                    @get_acl_policy = ::Gapic::Config::Method.new get_acl_policy_config
                     update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                     @update_cluster = ::Gapic::Config::Method.new update_cluster_config
+                    update_acl_policy_config = parent_rpcs.update_acl_policy if parent_rpcs.respond_to? :update_acl_policy
+                    @update_acl_policy = ::Gapic::Config::Method.new update_acl_policy_config
                     delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                     @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
+                    delete_acl_policy_config = parent_rpcs.delete_acl_policy if parent_rpcs.respond_to? :delete_acl_policy
+                    @delete_acl_policy = ::Gapic::Config::Method.new delete_acl_policy_config
+                    get_acl_policy_revision_config = parent_rpcs.get_acl_policy_revision if parent_rpcs.respond_to? :get_acl_policy_revision
+                    @get_acl_policy_revision = ::Gapic::Config::Method.new get_acl_policy_revision_config
+                    list_acl_policy_revisions_config = parent_rpcs.list_acl_policy_revisions if parent_rpcs.respond_to? :list_acl_policy_revisions
+                    @list_acl_policy_revisions = ::Gapic::Config::Method.new list_acl_policy_revisions_config
                     create_cluster_config = parent_rpcs.create_cluster if parent_rpcs.respond_to? :create_cluster
                     @create_cluster = ::Gapic::Config::Method.new create_cluster_config
+                    create_acl_policy_config = parent_rpcs.create_acl_policy if parent_rpcs.respond_to? :create_acl_policy
+                    @create_acl_policy = ::Gapic::Config::Method.new create_acl_policy_config
                     get_cluster_certificate_authority_config = parent_rpcs.get_cluster_certificate_authority if parent_rpcs.respond_to? :get_cluster_certificate_authority
                     @get_cluster_certificate_authority = ::Gapic::Config::Method.new get_cluster_certificate_authority_config
                     get_shared_regional_certificate_authority_config = parent_rpcs.get_shared_regional_certificate_authority if parent_rpcs.respond_to? :get_shared_regional_certificate_authority
@@ -2041,6 +3639,22 @@ module Google
                     @export_backup = ::Gapic::Config::Method.new export_backup_config
                     backup_cluster_config = parent_rpcs.backup_cluster if parent_rpcs.respond_to? :backup_cluster
                     @backup_cluster = ::Gapic::Config::Method.new backup_cluster_config
+                    list_token_auth_users_config = parent_rpcs.list_token_auth_users if parent_rpcs.respond_to? :list_token_auth_users
+                    @list_token_auth_users = ::Gapic::Config::Method.new list_token_auth_users_config
+                    get_token_auth_user_config = parent_rpcs.get_token_auth_user if parent_rpcs.respond_to? :get_token_auth_user
+                    @get_token_auth_user = ::Gapic::Config::Method.new get_token_auth_user_config
+                    list_auth_tokens_config = parent_rpcs.list_auth_tokens if parent_rpcs.respond_to? :list_auth_tokens
+                    @list_auth_tokens = ::Gapic::Config::Method.new list_auth_tokens_config
+                    get_auth_token_config = parent_rpcs.get_auth_token if parent_rpcs.respond_to? :get_auth_token
+                    @get_auth_token = ::Gapic::Config::Method.new get_auth_token_config
+                    add_token_auth_user_config = parent_rpcs.add_token_auth_user if parent_rpcs.respond_to? :add_token_auth_user
+                    @add_token_auth_user = ::Gapic::Config::Method.new add_token_auth_user_config
+                    delete_token_auth_user_config = parent_rpcs.delete_token_auth_user if parent_rpcs.respond_to? :delete_token_auth_user
+                    @delete_token_auth_user = ::Gapic::Config::Method.new delete_token_auth_user_config
+                    add_auth_token_config = parent_rpcs.add_auth_token if parent_rpcs.respond_to? :add_auth_token
+                    @add_auth_token = ::Gapic::Config::Method.new add_auth_token_config
+                    delete_auth_token_config = parent_rpcs.delete_auth_token if parent_rpcs.respond_to? :delete_auth_token
+                    @delete_auth_token = ::Gapic::Config::Method.new delete_auth_token_config
 
                     yield self if block_given?
                   end

@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/discovery_engine/v1"
 
-client = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Client.new
-request = ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new # (request fields as keyword arguments...)
-response = client.search request
+client = ::Google::Cloud::DiscoveryEngine::V1::AclConfigService::Client.new
+request = ::Google::Cloud::DiscoveryEngine::V1::UpdateAclConfigRequest.new # (request fields as keyword arguments...)
+response = client.update_acl_config request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest)
@@ -74,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/discovery_engine/v1"
 require "logger"
 
-client = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Client.new do |config|
+client = ::Google::Cloud::DiscoveryEngine::V1::AclConfigService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -87,12 +87,10 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 This library is supported on Ruby 3.2+.
 
-Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Older versions of Ruby _may_
-still work, but are unsupported and not recommended. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Which client should I use?
 

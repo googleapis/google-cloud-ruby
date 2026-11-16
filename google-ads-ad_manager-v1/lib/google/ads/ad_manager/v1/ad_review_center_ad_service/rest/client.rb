@@ -29,7 +29,7 @@ module Google
             ##
             # REST client for the AdReviewCenterAdService service.
             #
-            # Provides methods for handling AdReviewCenterAd objects.
+            # Provides methods for handling `AdReviewCenterAd` objects.
             #
             class Client
               # @private
@@ -203,20 +203,22 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_ad_review_center_ads(status: nil, manual_review_status: nil, parent: nil, page_size: nil, page_token: nil, ad_review_center_ad_id: nil, date_time_range: nil, search_text: nil, buyer_account_id: nil)
+              # @overload search_ad_review_center_ads(status: nil, manual_review_status: nil, parent: nil, page_size: nil, page_token: nil, ad_review_center_ad_id: nil, date_time_range: nil, search_text: nil, buyer_account_id: nil, ad_response_id: nil, advertiser_display_names: nil, language_codes: nil, region_codes: nil, ad_types: nil, advertiser_apps: nil, publisher_domains: nil, new_in_last_days: nil, label_ids: nil)
               #   Pass arguments to `search_ad_review_center_ads` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param status [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
               #     Optional. Only return ads with the given status.
+              #     Use this filter for web properties where [Manual Creative Review
+              #     (MCR)](https://support.google.com/admanager/answer/2913553) is not
+              #     enabled.
               #
               #     Note: The following parameters are mutually exclusive: `status`, `manual_review_status`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param manual_review_status [::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus]
-              #     Optional. Only return ads with the given manual review status. Only
-              #     available for networks with Manual Creative Review enabled. For more
-              #     information, see
-              #     https://support.google.com/admanager/answer/2586531#manual-creative-review.
+              #     Optional. Only return ads with the given manual review status.
+              #     Use this filter for web properties where [Manual Creative Review
+              #     (MCR)](https://support.google.com/admanager/answer/2913553) is enabled.
               #
               #     Note: The following parameters are mutually exclusive: `manual_review_status`, `status`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
@@ -247,9 +249,8 @@ module Google
               #     no other filter can be set (other than page size and page token).
               #   @param date_time_range [::Google::Type::Interval, ::Hash]
               #     Optional. If provided, only return ads that served within the given date
-              #     range (inclusive). The  date range must be within the last 30 days. If not
-              #     provided, the date range will be the last 30 days. This filter does not
-              #     apply to the PENDING manual review status.
+              #     range (inclusive). The date range must be within the last 30 days. If not
+              #     provided, the date range will be the last 30 days.
               #   @param search_text [::Array<::String>]
               #     Optional. If provided, restrict the search to AdReviewCenterAds associated
               #     with the text (including any text on the ad or in the destination URL). If
@@ -260,6 +261,35 @@ module Google
               #     Optional. If provided, restrict the search to creatives belonging to one of
               #     the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
               #     buyer account IDs can be found using the `ProgrammaticBuyerService`.
+              #   @param ad_response_id [::Array<::String>]
+              #     Optional. If provided, only return ads with the given ad response IDs.
+              #     This filter is exclusive and cannot be combined with any other filters.
+              #     Maximum of 10 IDs can be specified.
+              #   @param advertiser_display_names [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives with the given
+              #     advertiser names.
+              #   @param language_codes [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives serving in the
+              #     given language codes.
+              #   @param region_codes [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives serving in the
+              #     given region codes.
+              #   @param ad_types [::Array<::Google::Ads::AdManager::V1::ArcCreativeFormatEnum::ArcCreativeFormat>]
+              #     Optional. If provided, restrict the search to creatives with the given ad
+              #     types.
+              #   @param advertiser_apps [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives promoting the given
+              #     app.
+              #   @param publisher_domains [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives belonging to the
+              #     given publisher domain.
+              #   @param new_in_last_days [::Integer]
+              #     Optional. If provided, restrict the search to creatives which appeared for
+              #     the first time within the past X days. Must be within the last 30 days (1
+              #     to 30, inclusive).
+              #   @param label_ids [::Array<::String>]
+              #     Optional. If provided, restrict the search to creatives associated with the
+              #     given custom label IDs.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::AdReviewCenterAd>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -539,6 +569,198 @@ module Google
               end
 
               ##
+              # Fetches all custom labels for a publisher. Custom labels can help you
+              # filter and find creatives with the associated label. For more information,
+              # see https://support.google.com/admanager/answer/13812863.
+              #
+              # @overload fetch_ad_review_center_custom_labels(request, options = nil)
+              #   Pass arguments to `fetch_ad_review_center_custom_labels` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_ad_review_center_custom_labels(parent: nil)
+              #   Pass arguments to `fetch_ad_review_center_custom_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of AdReviewCenterAds
+              #     custom labels. Format:
+              #     networks/\\{network_code}/webProperties/\\{web_property_code}
+              #
+              #     Since a network can only have a single web property of each
+              #     `ExchangeSyndicationProduct`, you can use the
+              #     `ExchangeSyndicationProduct` as an alias for the web property code:
+              #
+              #     `networks/{network_code}/webProperties/display`
+              #
+              #     `networks/{network_code}/webProperties/videoAndAudio`
+              #
+              #     `networks/{network_code}/webProperties/mobileApp`
+              #
+              #     `networks/{network_code}/webProperties/games`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest.new
+              #
+              #   # Call the fetch_ad_review_center_custom_labels method.
+              #   result = client.fetch_ad_review_center_custom_labels request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse.
+              #   p result
+              #
+              def fetch_ad_review_center_custom_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_ad_review_center_custom_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_ad_review_center_custom_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_ad_review_center_custom_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_review_center_ad_service_stub.fetch_ad_review_center_custom_labels request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Performs batch apply on custom labels associated with Ad review center ads.
+              # Custom labels can help you filter and find creatives with the associated
+              # label. For more information, see
+              # https://support.google.com/admanager/answer/13812863.
+              #
+              # @overload batch_apply_ad_review_center_custom_labels(request, options = nil)
+              #   Pass arguments to `batch_apply_ad_review_center_custom_labels` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_apply_ad_review_center_custom_labels(parent: nil, add_labels: nil, remove_labels: nil)
+              #   Pass arguments to `batch_apply_ad_review_center_custom_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of AdReviewCenterAds.
+              #     Format: networks/\\{network_code}/webProperties/\\{web_property_code}
+              #
+              #     Since a network can only have a single web property of each
+              #     `ExchangeSyndicationProduct`, you can use the
+              #     `ExchangeSyndicationProduct` as an alias for the web property code:
+              #
+              #     `networks/{network_code}/webProperties/display`
+              #
+              #     `networks/{network_code}/webProperties/videoAndAudio`
+              #
+              #     `networks/{network_code}/webProperties/mobileApp`
+              #
+              #     `networks/{network_code}/webProperties/games`
+              #   @param add_labels [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest::BatchLabelAction, ::Hash]
+              #     Optional. Labels to add to the specified ads.
+              #   @param remove_labels [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest::BatchLabelAction, ::Hash]
+              #     Optional. Labels to remove from the specified ads.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest.new
+              #
+              #   # Call the batch_apply_ad_review_center_custom_labels method.
+              #   result = client.batch_apply_ad_review_center_custom_labels request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsResponse.
+              #   p result
+              #
+              def batch_apply_ad_review_center_custom_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_apply_ad_review_center_custom_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_apply_ad_review_center_custom_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_apply_ad_review_center_custom_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_review_center_ad_service_stub.batch_apply_ad_review_center_custom_labels request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AdReviewCenterAdService REST API.
               #
               # This class represents the configuration for AdReviewCenterAdService REST,
@@ -701,6 +923,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :batch_block_ad_review_center_ads
+                  ##
+                  # RPC-specific configuration for `fetch_ad_review_center_custom_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_ad_review_center_custom_labels
+                  ##
+                  # RPC-specific configuration for `batch_apply_ad_review_center_custom_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_apply_ad_review_center_custom_labels
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -710,6 +942,10 @@ module Google
                     @batch_allow_ad_review_center_ads = ::Gapic::Config::Method.new batch_allow_ad_review_center_ads_config
                     batch_block_ad_review_center_ads_config = parent_rpcs.batch_block_ad_review_center_ads if parent_rpcs.respond_to? :batch_block_ad_review_center_ads
                     @batch_block_ad_review_center_ads = ::Gapic::Config::Method.new batch_block_ad_review_center_ads_config
+                    fetch_ad_review_center_custom_labels_config = parent_rpcs.fetch_ad_review_center_custom_labels if parent_rpcs.respond_to? :fetch_ad_review_center_custom_labels
+                    @fetch_ad_review_center_custom_labels = ::Gapic::Config::Method.new fetch_ad_review_center_custom_labels_config
+                    batch_apply_ad_review_center_custom_labels_config = parent_rpcs.batch_apply_ad_review_center_custom_labels if parent_rpcs.respond_to? :batch_apply_ad_review_center_custom_labels
+                    @batch_apply_ad_review_center_custom_labels = ::Gapic::Config::Method.new batch_apply_ad_review_center_custom_labels_config
 
                     yield self if block_given?
                   end

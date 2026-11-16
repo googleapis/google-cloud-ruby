@@ -19,6 +19,7 @@
 require "google/ads/data_manager/v1/ingestion_service"
 require "google/ads/data_manager/v1/marketing_data_insights_service"
 require "google/ads/data_manager/v1/partner_link_service"
+require "google/ads/data_manager/v1/reporting_service"
 require "google/ads/data_manager/v1/user_list_direct_license_service"
 require "google/ads/data_manager/v1/user_list_global_license_service"
 require "google/ads/data_manager/v1/user_list_service"

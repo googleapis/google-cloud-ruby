@@ -234,6 +234,126 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_customer_managed_certificate REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #   A result object deserialized from the server's reply
+              def update_customer_managed_certificate request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_customer_managed_certificate_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_customer_managed_certificate",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1beta4::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_customer_managed_certificate REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_customer_managed_certificate request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_customer_managed_certificate_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_customer_managed_certificate",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1beta4::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_customer_managed_certificates REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse]
+              #   A result object deserialized from the server's reply
+              def list_customer_managed_certificates request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_customer_managed_certificates_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_customer_managed_certificates",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the delete REST call
@@ -316,6 +436,75 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_customer_managed_certificate REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_customer_managed_certificate_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false],
+                                                            ["certificate_bundle", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_customer_managed_certificate REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_customer_managed_certificate_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates/{certificate_bundle}",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["instance", %r{^[^/]+/?$}, false],
+                                                            ["certificate_bundle", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_customer_managed_certificates REST call
+              #
+              # @param request_pb [::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_customer_managed_certificates_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/sql/v1beta4/projects/{project}/instances/{instance}/customerManagedCertificates",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["instance", %r{^[^/]+/?$}, false]

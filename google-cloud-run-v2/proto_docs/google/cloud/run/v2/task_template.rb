@@ -27,6 +27,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
         #     Holds the single container that defines the unit of execution for this
         #     task.
+        # @!attribute [rw] sandboxes
+        #   @return [::Google::Cloud::Run::V2::SandboxConfiguration]
+        #     Optional. Configuration for sandboxes.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     Optional. A list of Volumes to make available to containers.
@@ -65,6 +68,9 @@ module Google
         # @!attribute [rw] gpu_zonal_redundancy_disabled
         #   @return [::Boolean]
         #     Optional. True if GPU zonal redundancy is disabled on this task template.
+        # @!attribute [rw] workload_identity_config
+        #   @return [::Google::Cloud::Run::V2::WorkloadIdentityConfig]
+        #     Optional. The Task's workload identity settings.
         class TaskTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

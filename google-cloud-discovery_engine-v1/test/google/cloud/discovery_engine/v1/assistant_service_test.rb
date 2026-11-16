@@ -148,6 +148,311 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
     end
   end
 
+  def test_create_assistant
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    assistant = {}
+    assistant_id = "hello world"
+
+    create_assistant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_assistant, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::Assistant), request["assistant"]
+      assert_equal "hello world", request["assistant_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_assistant_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_assistant({ parent: parent, assistant: assistant, assistant_id: assistant_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_assistant parent: parent, assistant: assistant, assistant_id: assistant_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_assistant ::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest.new(parent: parent, assistant: assistant, assistant_id: assistant_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_assistant({ parent: parent, assistant: assistant, assistant_id: assistant_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_assistant(::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest.new(parent: parent, assistant: assistant, assistant_id: assistant_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_assistant_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_assistant
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_assistant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_assistant, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_assistant_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_assistant({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_assistant name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_assistant ::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_assistant({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_assistant(::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_assistant_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_assistant
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    assistant = {}
+    update_mask = {}
+
+    update_assistant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_assistant, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::Assistant), request["assistant"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_assistant_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_assistant({ assistant: assistant, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_assistant assistant: assistant, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_assistant ::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest.new(assistant: assistant, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_assistant({ assistant: assistant, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_assistant(::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest.new(assistant: assistant, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_assistant_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_assistant
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::Assistant.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_assistant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_assistant, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_assistant_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_assistant({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_assistant name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_assistant ::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_assistant({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_assistant(::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_assistant_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_assistants
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_assistants_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_assistants, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_assistants_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_assistants({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_assistants parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_assistants ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_assistants({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_assistants(::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_assistants_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

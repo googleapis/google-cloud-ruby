@@ -368,7 +368,6 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
-    return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -384,27 +383,27 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
         end
 
         # Use hash object
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -523,6 +522,63 @@ class ::Google::Cloud::Compute::V1::Interconnects::Rest::ClientTest < Minitest::
 
         # Verify method calls
         assert_equal 5, set_labels_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_name
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    interconnect = "hello world"
+    interconnects_set_name_request_resource = {}
+    project = "hello world"
+    request_id = "hello world"
+
+    set_name_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Interconnects::Rest::ServiceStub.stub :transcode_set_name_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_name_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.set_name({ interconnect: interconnect, interconnects_set_name_request_resource: interconnects_set_name_request_resource, project: project, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.set_name interconnect: interconnect, interconnects_set_name_request_resource: interconnects_set_name_request_resource, project: project, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.set_name ::Google::Cloud::Compute::V1::SetNameInterconnectRequest.new(interconnect: interconnect, interconnects_set_name_request_resource: interconnects_set_name_request_resource, project: project, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.set_name({ interconnect: interconnect, interconnects_set_name_request_resource: interconnects_set_name_request_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.set_name(::Google::Cloud::Compute::V1::SetNameInterconnectRequest.new(interconnect: interconnect, interconnects_set_name_request_resource: interconnects_set_name_request_resource, project: project, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_name_client_stub.call_count
       end
     end
   end

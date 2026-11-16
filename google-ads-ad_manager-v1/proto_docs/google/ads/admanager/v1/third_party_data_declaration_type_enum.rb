@@ -22,7 +22,7 @@ module Google
     module AdManager
       module V1
         # Wrapper message for
-        # {::Google::Ads::AdManager::V1::ThirdPartyDataDeclarationTypeEnum ThirdPartyDataDeclarationTypeEnum}
+        # {::Google::Ads::AdManager::V1::ThirdPartyDataDeclarationTypeEnum::ThirdPartyDataDeclarationType ThirdPartyDataDeclarationType}
         class ThirdPartyDataDeclarationTypeEnum
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

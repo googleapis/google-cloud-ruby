@@ -63,6 +63,7 @@ module Google
       #   puts table.column_families["cf1"].gc_rule.max_versions
       #   puts table.column_families["cf2"].gc_rule.max_age
       #   puts table.column_families["cf3"].gc_rule.union
+      # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
       #
       class GcRule
         # @private
@@ -234,6 +235,7 @@ module Google
         #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def self.max_versions versions
           new.tap do |gc_rule|
@@ -255,6 +257,7 @@ module Google
         #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def self.max_age age
           new.tap do |gc_rule|
@@ -281,6 +284,7 @@ module Google
         #     )
         #     cfm.add "cf1", gc_rule: gc_rule
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def self.union *rules
           new.tap do |gc_rule|
@@ -307,6 +311,7 @@ module Google
         #     )
         #     cfm.add "cf1", gc_rule: gc_rule
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def self.intersection *rules
           new.tap do |gc_rule|

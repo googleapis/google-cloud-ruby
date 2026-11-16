@@ -140,6 +140,9 @@ module Google
             #   @return [::Boolean]
             #     Optional. If true, the LLM based annotation is added to the image
             #     during parsing.
+            # @!attribute [rw] enable_llm_layout_parsing
+            #   @return [::Boolean]
+            #     Optional. If true, the pdf layout will be refined using an LLM.
             # @!attribute [rw] structured_content_types
             #   @return [::Array<::String>]
             #     Optional. Contains the required structure types to extract from the
@@ -155,6 +158,10 @@ module Google
             # @!attribute [rw] exclude_html_ids
             #   @return [::Array<::String>]
             #     Optional. List of HTML ids to exclude from the parsed content.
+            # @!attribute [rw] enable_get_processed_document
+            #   @return [::Boolean]
+            #     Optional. If true, the processed document will be made available for
+            #     the GetProcessedDocument API.
             class LayoutParsingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

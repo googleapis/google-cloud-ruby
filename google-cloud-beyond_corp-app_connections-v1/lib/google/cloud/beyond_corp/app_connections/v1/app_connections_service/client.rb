@@ -45,6 +45,10 @@ module Google
             # The AppConnectionsService service provides methods to manage
             # (create/read/update/delete) BeyondCorp AppConnections.
             #
+            #
+            # Deprecated: App Connector is deprecated and creation of new App Connector
+            # resources is no longer permitted. Use Security Gateway instead.
+            #
             class Client
               # @private
               API_VERSION = ""
@@ -62,6 +66,8 @@ module Google
               #
               # See {::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client::Configuration}
               # for a description of the configuration fields.
+              #
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #
@@ -246,6 +252,8 @@ module Google
               ##
               # Lists AppConnections in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload list_app_connections(request, options = nil)
               #   Pass arguments to `list_app_connections` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnections::V1::ListAppConnectionsRequest} or an equivalent Hash.
@@ -269,8 +277,8 @@ module Google
               #     If not specified, a default value of 50 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     [next_page_token][BeyondCorp.ListAppConnectionsResponse.next_page_token] to
-              #     determine if there are more instances left to be queried.
+              #     {::Google::Cloud::BeyondCorp::AppConnections::V1::ListAppConnectionsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous
               #     ListAppConnectionsRequest, if any.
@@ -354,6 +362,8 @@ module Google
 
               ##
               # Gets details of a single AppConnection.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload get_app_connection(request, options = nil)
               #   Pass arguments to `get_app_connection` via a request object, either of type
@@ -441,6 +451,8 @@ module Google
               ##
               # Creates a new AppConnection in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload create_app_connection(request, options = nil)
               #   Pass arguments to `create_app_connection` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnections::V1::CreateAppConnectionRequest} or an equivalent Hash.
@@ -472,9 +484,9 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
-              #     ID, the server can check if original operation with the same request ID
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
               #
@@ -560,6 +572,8 @@ module Google
               ##
               # Updates the parameters of a single AppConnection.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload update_app_connection(request, options = nil)
               #   Pass arguments to `update_app_connection` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnections::V1::UpdateAppConnectionRequest} or an equivalent Hash.
@@ -592,9 +606,9 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
-              #     ID, the server can check if original operation with the same request ID
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
               #
@@ -682,6 +696,8 @@ module Google
               ##
               # Deletes a single AppConnection.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload delete_app_connection(request, options = nil)
               #   Pass arguments to `delete_app_connection` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnections::V1::DeleteAppConnectionRequest} or an equivalent Hash.
@@ -706,9 +722,9 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes after the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
-              #     ID, the server can check if original operation with the same request ID
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if the original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
               #
@@ -796,6 +812,8 @@ module Google
               # An internal method called by a connector to find AppConnections to connect
               # to.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload resolve_app_connections(request, options = nil)
               #   Pass arguments to `resolve_app_connections` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnections::V1::ResolveAppConnectionsRequest} or an equivalent Hash.
@@ -823,7 +841,7 @@ module Google
               #     If not specified, a default value of 50 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     [next_page_token][BeyondCorp.ResolveAppConnectionsResponse.next_page_token]
+              #     {::Google::Cloud::BeyondCorp::AppConnections::V1::ResolveAppConnectionsResponse#next_page_token next_page_token}
               #     to determine if there are more instances left to be queried.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous

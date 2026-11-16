@@ -32,6 +32,8 @@ module Google
         ##
         # The RegionDisks API.
         #
+        # This client uses RegionDisks version 2026-11-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/region_disks/rest"

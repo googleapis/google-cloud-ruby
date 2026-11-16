@@ -43,8 +43,8 @@ module Google
         # @!attribute [rw] score
         #   @return [::Float]
         #     The score of this record based on the given query and selected model.
-        #     The score will be rounded to 2 decimal places. If the score is close to 0,
-        #     it will be rounded to 0.0001 to avoid returning unset.
+        #     The score will be rounded to 4 decimal places. If the score is close to 0,
+        #     it will be rounded to 0.00001 to avoid returning unset.
         class RankingRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -73,7 +73,7 @@ module Google
         #     The query to use.
         # @!attribute [rw] records
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::RankingRecord>]
-        #     Required. A list of records to rank. At most 200 records to rank.
+        #     Required. A list of records to rank.
         # @!attribute [rw] ignore_record_details_in_response
         #   @return [::Boolean]
         #     If true, the response will contain only record ID and score. By default, it

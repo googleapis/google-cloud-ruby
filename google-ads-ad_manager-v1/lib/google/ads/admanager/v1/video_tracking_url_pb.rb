@@ -8,7 +8,7 @@ require 'google/ads/admanager/v1/conversion_event_enum_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n0google/ads/admanager/v1/video_tracking_url.proto\x12\x17google.ads.admanager.v1\x1a\x33google/ads/admanager/v1/conversion_event_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\x81\x01\n\x10VideoTrackingUrl\x12[\n\x10\x63onversion_event\x18\x01 \x01(\x0e\x32<.google.ads.admanager.v1.ConversionEventEnum.ConversionEventB\x03\xe0\x41\x02\x12\x10\n\x03url\x18\x02 \x01(\tB\x03\xe0\x41\x01\x42\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15VideoTrackingUrlProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n0google/ads/admanager/v1/video_tracking_url.proto\x12\x17google.ads.admanager.v1\x1a\x33google/ads/admanager/v1/conversion_event_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\x83\x01\n\x10VideoTrackingUrl\x12\\\n\x10\x63onversion_event\x18\x01 \x01(\x0e\x32<.google.ads.admanager.v1.ConversionEventEnum.ConversionEventB\x04\xe2\x41\x01\x02\x12\x11\n\x03url\x18\x02 \x01(\tB\x04\xe2\x41\x01\x01\x42\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15VideoTrackingUrlProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

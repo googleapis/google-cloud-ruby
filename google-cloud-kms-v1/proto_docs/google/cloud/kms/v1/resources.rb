@@ -298,6 +298,9 @@ module Google
             # Cavium HSM attestation V2 compressed with gzip. This is a new format
             # introduced in Cavium's version 3.2-08.
             CAVIUM_V2_COMPRESSED = 4
+
+            # Cavium HSM attestation V209, introduced in Cavium's version 2.09-0702.
+            CAVIUM_V209 = 5
           end
         end
 

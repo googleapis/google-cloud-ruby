@@ -98,7 +98,7 @@ module Google
         # @!attribute [rw] additional_event_parameters
         #   @return [::Array<::Google::Ads::DataManager::V1::EventParameter>]
         #     Optional. A bucket of any [event
-        #     parameters](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
+        #     parameters](https://developers.google.com/data-manager/api/reference/analytics/recommended-events)
         #     to be included within the event that were not already specified using other
         #     structured fields.
         # @!attribute [rw] third_party_user_data
@@ -114,6 +114,10 @@ module Google
         #   @return [::String]
         #     Optional. A unique identifier for the user instance of an app client for
         #     this GA4 app stream.
+        # @!attribute [rw] call_info
+        #   @return [::Google::Ads::DataManager::V1::CallInfo]
+        #     Optional. Information gathered about the call (if any) which led to this
+        #     event.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,6 +167,9 @@ module Google
         #   @return [::String]
         #     Optional. A unique identifier for an unauthenticated user (user who is not
         #     signed-in), as defined by the publisher.
+        # @!attribute [rw] lead_id
+        #   @return [::String]
+        #     Optional. Google generated ID issued when user submits a lead form.
         class AdIdentifiers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

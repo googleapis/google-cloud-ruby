@@ -72,6 +72,11 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo]
         #     Output only. Information about Generative AI model-based processor
         #     versions.
+        # @!attribute [r] grounding_settings
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::GroundingSettings]
+        #     Output only. The grounding settings of the processor version. This can only
+        #     be set using TrainProcessorVersionRequest to override the default grounding
+        #     settings.
         class ProcessorVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,6 +281,40 @@ module Google
             # The processor is being deleted, will be removed if successful.
             DELETING = 7
           end
+        end
+
+        # Settings for grounding extractions.
+        # @!attribute [rw] grounding_type
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::GroundingSettings::GroundingType]
+        #     The type of grounding to apply.
+        class GroundingSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Grounding type options.
+          module GroundingType
+            # The default value. Behaves like HARD.
+            GROUNDING_TYPE_UNSPECIFIED = 0
+
+            # Requires exact match with OCR text for extractions.
+            HARD = 1
+
+            # Allows for minor discrepancies between LLM output and OCR text.
+            OCR_RELAXED = 2
+
+            # LLM extractions are used without strict OCR matching. Bounding boxes may
+            # be approximated or absent.
+            NO_GROUNDING = 3
+          end
+        end
+
+        # Overrides to apply when creating a new processor version.
+        # @!attribute [rw] grounding_settings
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::GroundingSettings]
+        #     Optional. Grounding settings to override the default values.
+        class ProcessorVersionOverrides
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

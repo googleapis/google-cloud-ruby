@@ -111,9 +111,24 @@ module Google
         #       validation in custom UIs before submitting requests.
         #     * **CI/CD & Automation**: Test your scripts, permissions, and parameters
         #       safely without consuming resource quotas.
+        # @!attribute [rw] parameter_overrides
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AuditManager::V1::ParameterOverrides}]
+        #     Optional. Maps dynamic parameter overrides by Cloud Control resource name
+        #     at execution time. For example,
+        #     `{"organizations/123/locations/global/cloudControls/control-1":
+        #     {parameters: [...]}}`
         class GenerateAuditScopeReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AuditManager::V1::ParameterOverrides]
+          class ParameterOverridesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Format for the audit scope report.
           module AuditScopeReportFormat
@@ -153,6 +168,12 @@ module Google
         #   @return [::String]
         #     Required. The framework that's used for the audit report. For example,
         #     `NIST_800_53`.
+        # @!attribute [rw] parameter_overrides
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AuditManager::V1::ParameterOverrides}]
+        #     Optional. Maps dynamic parameter overrides by Cloud Control resource name
+        #     at execution time. For example,
+        #     `{"organizations/123/locations/global/cloudControls/control-1":
+        #     {parameters: [...]}}`
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If `true`, only validates the request and does not generate the
@@ -171,6 +192,15 @@ module Google
         class GenerateAuditReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AuditManager::V1::ParameterOverrides]
+          class ParameterOverridesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Format for the audit report.
           module AuditReportFormat
@@ -523,9 +553,22 @@ module Google
         #   @return [::String]
         #     Output only. Project number, folder ID, or organization ID that the audit
         #     report was generated for.
+        # @!attribute [r] cloud_control_parameter_states
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AuditManager::V1::CloudControlParameterStates}]
+        #     Output only. Parameter values provided by the user and values for
+        #     tunable parameters, stored in the DB, keyed by control name.
         class AuditReport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AuditManager::V1::CloudControlParameterStates]
+          class CloudControlParameterStatesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Different states of report generation.
           module ReportGenerationState
@@ -883,9 +926,24 @@ module Google
         # @!attribute [r] error_message
         #   @return [::String]
         #     Output only. Describes the error if the schedule is in an error state.
+        # @!attribute [rw] parameter_overrides
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AuditManager::V1::ParameterOverrides}]
+        #     Optional. Maps dynamic parameter overrides by Cloud Control resource name
+        #     at execution time. For example,
+        #     `{"organizations/123/locations/global/cloudControls/control-1":
+        #     {parameters: [...]}}`
         class AuditSchedule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AuditManager::V1::ParameterOverrides]
+          class ParameterOverridesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Format for the audit report.
           module AuditReportFormat

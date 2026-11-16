@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Datastream
       module V1
-        # Oracle database profile.
+        # Profile for connecting to an Oracle source.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the Oracle connection.
@@ -106,7 +106,7 @@ module Google
           end
         end
 
-        # MySQL database profile.
+        # Profile for connecting to a MySQL source.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the MySQL connection.
@@ -132,7 +132,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # PostgreSQL database profile.
+        # Profile for connecting to a PostgreSQL source.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the PostgreSQL connection.
@@ -165,7 +165,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # SQLServer database profile.
+        # Profile for connecting to a SQLServer source.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the SQLServer connection.
@@ -182,6 +182,9 @@ module Google
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. Database for the SQLServer connection.
+        # @!attribute [rw] ssl_config
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerSslConfig]
+        #     Optional. SSL configuration for the SQLServer connection.
         # @!attribute [rw] secret_manager_stored_password
         #   @return [::String]
         #     Optional. A reference to a Secret Manager resource name storing the
@@ -192,13 +195,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Salesforce profile
+        # Profile for connecting to a Salesforce source.
         # @!attribute [rw] domain
         #   @return [::String]
         #     Required. Domain endpoint for the Salesforce connection.
         # @!attribute [rw] user_credentials
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Datastream::V1::SalesforceProfile::UserCredentials]
-        #     User-password authentication.
+        #     Deprecated: Salesforce is retiring Username-Password authentication.
+        #     Use `oauth2_client_credentials` instead.
         #
         #     Note: The following fields are mutually exclusive: `user_credentials`, `oauth2_client_credentials`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oauth2_client_credentials
@@ -210,7 +215,9 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Username-password credentials.
+          # Deprecated: Salesforce is retiring Username-Password authentication.
+          # Use `Oauth2ClientCredentials` instead.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] username
           #   @return [::String]
           #     Required. Username for the Salesforce connection.
@@ -256,7 +263,7 @@ module Google
           end
         end
 
-        # MongoDB profile.
+        # Profile for connecting to a MongoDB source.
         # @!attribute [rw] host_addresses
         #   @return [::Array<::Google::Cloud::Datastream::V1::HostAddress>]
         #     Required. List of host addresses for a MongoDB cluster.
@@ -293,9 +300,31 @@ module Google
         #     Standard connection format.
         #
         #     Note: The following fields are mutually exclusive: `standard_connection_format`, `srv_connection_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] additional_options
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Specifies additional options for the MongoDB connection.
+        #
+        #     The options should be sent as key-value pairs, for example:
+        #     `additional_options =
+        #     {"serverSelectionTimeoutMS": "10000", "directConnection": "true"}`.
+        #
+        #     Keys are case-sensitive and should match the official MongoDB connection
+        #     string options:
+        #     https://www.mongodb.com/docs/manual/reference/connection-string-options/
+        #
+        #     The server will not modify the values provided by the user.
         class MongodbProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AdditionalOptionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A HostAddress represents a transport end point, which is the combination
@@ -311,6 +340,130 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Profile for connecting to a Spanner source.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Immutable. Cloud Spanner database resource.
+        #     This field is immutable.
+        #     Must be in the format:
+        #     projects/\\{project}/instances/\\{instance}/databases/\\{database_id}.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Optional. The Spanner endpoint to connect to. Defaults to the global
+        #     endpoint (https://spanner.googleapis.com). Must be in the format:
+        #     https://spanner.\\{region}.rep.googleapis.com.
+        class SpannerProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # OAuth Client Credentials.
+        # @!attribute [rw] client_id
+        #   @return [::String]
+        #     Required. Client ID for OAuth Client Credentials.
+        # @!attribute [rw] client_secret
+        #   @return [::Google::Cloud::Datastream::V1::Secret]
+        #     Required. Client secret for OAuth Client Credentials.
+        class OauthClientCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # OAuth Refresh Token Credentials.
+        # @!attribute [rw] oauth_client_credentials
+        #   @return [::Google::Cloud::Datastream::V1::OauthClientCredentials]
+        #     Required. Specifies the OAuth Client Credentials.
+        # @!attribute [rw] refresh_token
+        #   @return [::Google::Cloud::Datastream::V1::Secret]
+        #     Required. Specifies the OAuth Refresh Token.
+        class OauthRefreshTokenCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # User-password credentials.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username for the connection.
+        # @!attribute [rw] password
+        #   @return [::Google::Cloud::Datastream::V1::Secret]
+        #     Required. Password for the connection.
+        class UserPasswordCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Profile for connecting to a Salesforce Marketing Cloud source.
+        # @!attribute [rw] subdomain
+        #   @return [::String]
+        #     Required. Subdomain for the Salesforce Marketing Cloud connection.
+        #     Example: if your specific endpoint is
+        #     `https://{your-specific-subdomain}.rest.marketingcloudapis.com/`,
+        #     the subdomain is `{your-specific-subdomain}`.
+        #     Must be 1-63 characters, start and end with an alphanumeric character,
+        #     and contain only lowercase letters, numbers, and hyphens (-).
+        # @!attribute [rw] oauth_client_credentials
+        #   @return [::Google::Cloud::Datastream::V1::OauthClientCredentials]
+        #     Required. Input only. Credentials for authenticating with the Salesforce
+        #     Marketing Cloud API.
+        class SalesforceMarketingCloudProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Profile for connecting to a Dataverse source.
+        # @!attribute [rw] tenant_id
+        #   @return [::String]
+        #     Required. Tenant id of the Microsoft Dataverse instance.
+        # @!attribute [rw] environment_url
+        #   @return [::String]
+        #     Required. Environment URL of the Microsoft Dataverse instance.
+        #     Example:  `<subdomain>.crm.dynamics.com`
+        # @!attribute [rw] oauth_client_credentials
+        #   @return [::Google::Cloud::Datastream::V1::OauthClientCredentials]
+        #     Required. Credentials for authenticating with the Dataverse API.
+        class DataverseProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Profile for connecting to a ServiceNow source.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The instance of the ServiceNow account. This is the `<instance>`
+        #     part of the URL `https://<instance>.service-now.com`.
+        # @!attribute [rw] user_password_credentials
+        #   @return [::Google::Cloud::Datastream::V1::UserPasswordCredentials]
+        #     User-password authentication.
+        #
+        #     Note: The following fields are mutually exclusive: `user_password_credentials`, `oauth_client_credentials`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] oauth_client_credentials
+        #   @return [::Google::Cloud::Datastream::V1::OauthClientCredentials]
+        #     Credentials for authenticating with the ServiceNow API.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth_client_credentials`, `user_password_credentials`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ServiceNowProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Profile for connecting to a Workday source.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Required. Host for the Workday connection. Must be a valid hostname (e.g.,
+        #     `wd3-impl-services1.workday.com`).
+        # @!attribute [rw] tenant
+        #   @return [::String]
+        #     Required. Tenant for the Workday connection (e.g., `google12`).
+        # @!attribute [rw] oauth_refresh_token_credentials
+        #   @return [::Google::Cloud::Datastream::V1::OauthRefreshTokenCredentials]
+        #     Required. Credentials for authenticating with the Workday API.
+        #     OAuth Refresh Token credentials for authenticating with the Workday API.
+        class WorkdayProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Srv connection format.
         class SrvConnectionFormat
           include ::Google::Protobuf::MessageExts
@@ -319,27 +472,31 @@ module Google
 
         # Standard connection format.
         # @!attribute [rw] direct_connection
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Specifies whether the client connects directly to the host[:port]
-        #     in the connection URI.
+        #     Optional. Deprecated: Use the `additional_options` map to specify the
+        #     `directConnection` parameter instead.
+        #     For example: `additional_options = {"directConnection": "true"}`.
+        #     Specifies whether the client connects directly to the host[:port] in the
+        #     connection URI.
         class StandardConnectionFormat
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Cloud Storage bucket profile.
+        # Profile for connecting to a Cloud Storage destination.
         # @!attribute [rw] bucket
         #   @return [::String]
         #     Required. The Cloud Storage bucket name.
         # @!attribute [rw] root_path
         #   @return [::String]
-        #     The root path inside the Cloud Storage bucket.
+        #     Optional. The root path inside the Cloud Storage bucket.
         class GcsProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # BigQuery warehouse profile.
+        # Profile for connecting to a BigQuery destination.
         class BigQueryProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -522,6 +679,26 @@ module Google
           end
         end
 
+        # A confidential piece of information where the actual value is either directly
+        # specified in the message as a raw string or stored in GCP secret manager.
+        # @!attribute [rw] raw_value
+        #   @return [::String]
+        #     Optional. Input only. The actual raw value of the secret as plain text.
+        #
+        #     Note: The following fields are mutually exclusive: `raw_value`, `secret_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] secret_version
+        #   @return [::String]
+        #     Optional. A Secret Manager resource name storing the actual value of the
+        #     secret. Supported formats:
+        #       * projects/\\{project}/locations/\\{location}/secrets/\\{secret}/versions/\\{version}
+        #       * projects/\\{project}/secrets/\\{secret}/versions/\\{version}
+        #
+        #     Note: The following fields are mutually exclusive: `secret_version`, `raw_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Secret
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # MongoDB SSL configuration information.
         # @!attribute [rw] client_key
         #   @return [::String]
@@ -607,6 +784,68 @@ module Google
         class OracleSslConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQL Server SSL configuration information.
+        # @!attribute [rw] encryption_not_enforced
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerSslConfig::EncryptionNotEnforced]
+        #     If set, Datastream will not enforce encryption. If the DB server mandates
+        #     encryption, then connection will be encrypted but server identity will
+        #     not be authenticated.
+        #
+        #     Note: The following fields are mutually exclusive: `encryption_not_enforced`, `basic_encryption`, `encryption_and_server_validation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] basic_encryption
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerSslConfig::BasicEncryption]
+        #     If set, Datastream will enforce encryption without authenticating server
+        #     identity. Server certificates will be trusted by default.
+        #
+        #     Note: The following fields are mutually exclusive: `basic_encryption`, `encryption_not_enforced`, `encryption_and_server_validation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] encryption_and_server_validation
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerSslConfig::EncryptionAndServerValidation]
+        #     If set, Datastream will enforce encryption and authenticate server
+        #     identity.
+        #
+        #     Note: The following fields are mutually exclusive: `encryption_and_server_validation`, `encryption_not_enforced`, `basic_encryption`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class SqlServerSslConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message to represent the option where encryption is not enforced. An empty
+          # message right now to allow future extensibility.
+          class EncryptionNotEnforced
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message to represent the option where Datastream will enforce encryption
+          # without authenticating server identity. Server certificates will be trusted
+          # by default.
+          class BasicEncryption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message to represent the option where Datastream will enforce encryption
+          # and authenticate server identity. ca_certificate must be set if user
+          # selects this option.
+          # @!attribute [rw] ca_certificate
+          #   @return [::String]
+          #     Optional. Input only. PEM-encoded certificate of the CA that signed the
+          #     source database server's certificate.
+          # @!attribute [rw] server_certificate_hostname
+          #   @return [::String]
+          #     Optional. The hostname mentioned in the Subject or SAN extension of the
+          #     server certificate. This field is used for bypassing the hostname
+          #     validation while verifying server certificate. This is required for
+          #     scenarios where the host name that datastream connects to is different
+          #     from the certificate's subject. This specifically happens for private
+          #     connectivity. It could also happen when the customer provides
+          #     a public IP in connection profile but the same is not present in the
+          #     server certificate.
+          class EncryptionAndServerValidation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # PostgreSQL SSL configuration information.
@@ -700,44 +939,69 @@ module Google
         #     Output only. Reserved for future use.
         # @!attribute [rw] oracle_profile
         #   @return [::Google::Cloud::Datastream::V1::OracleProfile]
-        #     Oracle ConnectionProfile configuration.
+        #     Profile for connecting to an Oracle source.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_profile
         #   @return [::Google::Cloud::Datastream::V1::GcsProfile]
-        #     Cloud Storage ConnectionProfile configuration.
+        #     Profile for connecting to a Cloud Storage destination.
         #
-        #     Note: The following fields are mutually exclusive: `gcs_profile`, `oracle_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gcs_profile`, `oracle_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_profile
         #   @return [::Google::Cloud::Datastream::V1::MysqlProfile]
-        #     MySQL ConnectionProfile configuration.
+        #     Profile for connecting to a MySQL source.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_profile`, `oracle_profile`, `gcs_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_profile`, `oracle_profile`, `gcs_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_profile
         #   @return [::Google::Cloud::Datastream::V1::BigQueryProfile]
-        #     BigQuery Connection Profile configuration.
+        #     Profile for connecting to a BigQuery destination.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_profile
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlProfile]
-        #     PostgreSQL Connection Profile configuration.
+        #     Profile for connecting to a PostgreSQL source.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_profile
         #   @return [::Google::Cloud::Datastream::V1::SqlServerProfile]
-        #     SQLServer Connection Profile configuration.
+        #     Profile for connecting to a SQLServer source.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `salesforce_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_profile
         #   @return [::Google::Cloud::Datastream::V1::SalesforceProfile]
-        #     Salesforce Connection Profile configuration.
+        #     Profile for connecting to a Salesforce source.
         #
-        #     Note: The following fields are mutually exclusive: `salesforce_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `mongodb_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `salesforce_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mongodb_profile
         #   @return [::Google::Cloud::Datastream::V1::MongodbProfile]
-        #     MongoDB Connection Profile configuration.
+        #     Profile for connecting to a MongoDB source.
         #
-        #     Note: The following fields are mutually exclusive: `mongodb_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mongodb_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] spanner_profile
+        #   @return [::Google::Cloud::Datastream::V1::SpannerProfile]
+        #     Profile for connecting to a Spanner source.
+        #
+        #     Note: The following fields are mutually exclusive: `spanner_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] dataverse_profile
+        #   @return [::Google::Cloud::Datastream::V1::DataverseProfile]
+        #     Profile for connecting to a Dataverse source.
+        #
+        #     Note: The following fields are mutually exclusive: `dataverse_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] salesforce_marketing_cloud_profile
+        #   @return [::Google::Cloud::Datastream::V1::SalesforceMarketingCloudProfile]
+        #     Profile for connecting to a Salesforce Marketing Cloud source.
+        #
+        #     Note: The following fields are mutually exclusive: `salesforce_marketing_cloud_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `service_now_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] service_now_profile
+        #   @return [::Google::Cloud::Datastream::V1::ServiceNowProfile]
+        #     Profile for connecting to a ServiceNow source.
+        #
+        #     Note: The following fields are mutually exclusive: `service_now_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `workday_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] workday_profile
+        #   @return [::Google::Cloud::Datastream::V1::WorkdayProfile]
+        #     Optional. Profile for connecting to a Workday source.
+        #
+        #     Note: The following fields are mutually exclusive: `workday_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`, `salesforce_profile`, `mongodb_profile`, `spanner_profile`, `dataverse_profile`, `salesforce_marketing_cloud_profile`, `service_now_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::Datastream::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
@@ -770,7 +1034,7 @@ module Google
         # Oracle Column.
         # @!attribute [rw] column
         #   @return [::String]
-        #     Column name.
+        #     The column name.
         # @!attribute [rw] data_type
         #   @return [::String]
         #     The Oracle data type.
@@ -803,7 +1067,7 @@ module Google
         # Oracle table.
         # @!attribute [rw] table
         #   @return [::String]
-        #     Table name.
+        #     The table name.
         # @!attribute [rw] oracle_columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::OracleColumn>]
         #     Oracle columns in the schema.
@@ -817,7 +1081,7 @@ module Google
         # Oracle schema.
         # @!attribute [rw] schema
         #   @return [::String]
-        #     Schema name.
+        #     The schema name.
         # @!attribute [rw] oracle_tables
         #   @return [::Array<::Google::Cloud::Datastream::V1::OracleTable>]
         #     Tables in the schema.
@@ -835,13 +1099,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Oracle data source configuration
+        # Configuration for syncing data from an Oracle source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
-        #     Oracle objects to include in the stream.
+        #     The Oracle objects to include in the stream.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
-        #     Oracle objects to exclude from the stream.
+        #     The Oracle objects to exclude from the stream.
         # @!attribute [rw] max_concurrent_cdc_tasks
         #   @return [::Integer]
         #     Maximum number of concurrent CDC tasks. The number should be non-negative.
@@ -930,7 +1194,7 @@ module Google
         # PostgreSQL Column.
         # @!attribute [rw] column
         #   @return [::String]
-        #     Column name.
+        #     The column name.
         # @!attribute [rw] data_type
         #   @return [::String]
         #     The PostgreSQL data type.
@@ -960,7 +1224,7 @@ module Google
         # PostgreSQL table.
         # @!attribute [rw] table
         #   @return [::String]
-        #     Table name.
+        #     The table name.
         # @!attribute [rw] postgresql_columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::PostgresqlColumn>]
         #     PostgreSQL columns in the schema.
@@ -974,7 +1238,7 @@ module Google
         # PostgreSQL schema.
         # @!attribute [rw] schema
         #   @return [::String]
-        #     Schema name.
+        #     The schema name.
         # @!attribute [rw] postgresql_tables
         #   @return [::Array<::Google::Cloud::Datastream::V1::PostgresqlTable>]
         #     Tables in the schema.
@@ -992,13 +1256,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # PostgreSQL data source configuration
+        # Configuration for syncing data from a PostgreSQL source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
-        #     PostgreSQL objects to include in the stream.
+        #     The PostgreSQL objects to include in the stream.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
-        #     PostgreSQL objects to exclude from the stream.
+        #     The PostgreSQL objects to exclude from the stream.
         # @!attribute [rw] replication_slot
         #   @return [::String]
         #     Required. Immutable. The name of the logical replication slot that's
@@ -1020,7 +1284,7 @@ module Google
         # SQLServer Column.
         # @!attribute [rw] column
         #   @return [::String]
-        #     Column name.
+        #     The column name.
         # @!attribute [rw] data_type
         #   @return [::String]
         #     The SQLServer data type.
@@ -1050,7 +1314,7 @@ module Google
         # SQLServer table.
         # @!attribute [rw] table
         #   @return [::String]
-        #     Table name.
+        #     The table name.
         # @!attribute [rw] columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::SqlServerColumn>]
         #     SQLServer columns in the schema.
@@ -1064,7 +1328,7 @@ module Google
         # SQLServer schema.
         # @!attribute [rw] schema
         #   @return [::String]
-        #     Schema name.
+        #     The schema name.
         # @!attribute [rw] tables
         #   @return [::Array<::Google::Cloud::Datastream::V1::SqlServerTable>]
         #     Tables in the schema.
@@ -1082,13 +1346,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # SQLServer data source configuration
+        # Configuration for syncing data from a SQLServer source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
-        #     SQLServer objects to include in the stream.
+        #     The SQLServer objects to include in the stream.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
-        #     SQLServer objects to exclude from the stream.
+        #     The SQLServer objects to exclude from the stream.
         # @!attribute [rw] max_concurrent_cdc_tasks
         #   @return [::Integer]
         #     Max concurrent CDC tasks.
@@ -1117,15 +1381,36 @@ module Google
         end
 
         # Configuration to use Change Tables CDC read method.
+        # @!attribute [rw] ddl_config
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerChangeTables::SqlServerDdlConfig]
+        #     Optional. DDL configuration for change tables.
         class SqlServerChangeTables
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # DDL configuration for change tables.
+          # @!attribute [rw] auto_create_new_capture_instance_on_ddl
+          #   @return [::Boolean]
+          #     Optional. If set to true, Datastream will automatically create a new
+          #     capture instance when DDL is detected on a table.The customer will be
+          #     responsible for deleting it so that the next set of DDLs can be handled.
+          #     The default is false and it means that DDL's will not be handled .
+          # @!attribute [rw] auto_delete_old_capture_instance
+          #   @return [::Boolean]
+          #     Optional. If set to true, Datastream will automatically delete the old
+          #     capture instance after creating a new one to support a DDL change. The
+          #     default is false and means that the customer has to delete the old
+          #     capture instance manually.
+          class SqlServerDdlConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # MySQL Column.
         # @!attribute [rw] column
         #   @return [::String]
-        #     Column name.
+        #     The column name.
         # @!attribute [rw] data_type
         #   @return [::String]
         #     The MySQL data type. Full data types list can be found here:
@@ -1159,7 +1444,7 @@ module Google
         # MySQL table.
         # @!attribute [rw] table
         #   @return [::String]
-        #     Table name.
+        #     The table name.
         # @!attribute [rw] mysql_columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::MysqlColumn>]
         #     MySQL columns in the database.
@@ -1173,7 +1458,7 @@ module Google
         # MySQL database.
         # @!attribute [rw] database
         #   @return [::String]
-        #     Database name.
+        #     The database name.
         # @!attribute [rw] mysql_tables
         #   @return [::Array<::Google::Cloud::Datastream::V1::MysqlTable>]
         #     Tables in the database.
@@ -1191,13 +1476,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # MySQL source configuration
+        # Configuration for syncing data from a MySQL source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
-        #     MySQL objects to retrieve from the source.
+        #     The MySQL objects to retrieve from the source.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
-        #     MySQL objects to exclude from the stream.
+        #     The MySQL objects to exclude from the stream.
         # @!attribute [rw] max_concurrent_cdc_tasks
         #   @return [::Integer]
         #     Maximum number of concurrent CDC tasks. The number should be non negative.
@@ -1234,18 +1519,18 @@ module Google
           end
         end
 
-        # Salesforce source configuration
+        # Configuration for syncing data from a Salesforce source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
-        #     Salesforce objects to retrieve from the source.
+        #     The Salesforce objects to retrieve from the source.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
-        #     Salesforce objects to exclude from the stream.
+        #     The Salesforce objects to exclude from the stream.
         # @!attribute [rw] polling_interval
         #   @return [::Google::Protobuf::Duration]
         #     Required. Salesforce objects polling interval. The interval at which new
-        #     changes will be polled for each object. The duration must be between 5
-        #     minutes and 24 hours.
+        #     changes will be polled for each object. The duration must be from `5
+        #     minutes` to `24 hours`, inclusive.
         class SalesforceSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1263,7 +1548,7 @@ module Google
         # Salesforce object.
         # @!attribute [rw] object_name
         #   @return [::String]
-        #     Object name.
+        #     The object name.
         # @!attribute [rw] fields
         #   @return [::Array<::Google::Cloud::Datastream::V1::SalesforceField>]
         #     Salesforce fields.
@@ -1278,7 +1563,7 @@ module Google
         # Salesforce field.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Field name.
+        #     The field name.
         # @!attribute [rw] data_type
         #   @return [::String]
         #     The data type.
@@ -1290,18 +1575,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # MongoDB source configuration.
+        # Configuration for syncing data from a MongoDB source.
         # @!attribute [rw] include_objects
         #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
-        #     MongoDB collections to include in the stream.
+        #     The MongoDB collections to include in the stream.
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
-        #     MongoDB collections to exclude from the stream.
+        #     The MongoDB collections to exclude from the stream.
         # @!attribute [rw] max_concurrent_backfill_tasks
         #   @return [::Integer]
         #     Optional. Maximum number of concurrent backfill tasks. The number should be
         #     non-negative and less than or equal to 50. If not set (or set to 0), the
         #     system's default value is used
+        # @!attribute [rw] json_mode
+        #   @return [::Google::Cloud::Datastream::V1::MongodbJsonMode]
+        #     Optional. MongoDB JSON mode to use for the stream.
         class MongodbSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1319,7 +1607,7 @@ module Google
         # MongoDB Database.
         # @!attribute [rw] database
         #   @return [::String]
-        #     Database name.
+        #     The database name.
         # @!attribute [rw] collections
         #   @return [::Array<::Google::Cloud::Datastream::V1::MongodbCollection>]
         #     Collections in the database.
@@ -1331,7 +1619,7 @@ module Google
         # MongoDB Collection.
         # @!attribute [rw] collection
         #   @return [::String]
-        #     Collection name.
+        #     The collection name.
         # @!attribute [rw] fields
         #   @return [::Array<::Google::Cloud::Datastream::V1::MongodbField>]
         #     Fields in the collection.
@@ -1343,8 +1631,221 @@ module Google
         # MongoDB Field.
         # @!attribute [rw] field
         #   @return [::String]
-        #     Field name.
+        #     The field name.
         class MongodbField
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for syncing data from a Spanner source.
+        # @!attribute [rw] change_stream_name
+        #   @return [::String]
+        #     Required. Immutable. The change stream name to use for the stream.
+        # @!attribute [rw] spanner_rpc_priority
+        #   @return [::Google::Cloud::Datastream::V1::SpannerSourceConfig::SpannerRpcPriority]
+        #     Optional. The RPC priority to use for the stream.
+        # @!attribute [rw] fgac_role
+        #   @return [::String]
+        #     Optional. The FGAC role to use for the stream.
+        # @!attribute [rw] max_concurrent_cdc_tasks
+        #   @return [::Integer]
+        #     Optional. Maximum number of concurrent CDC tasks.
+        # @!attribute [rw] max_concurrent_backfill_tasks
+        #   @return [::Integer]
+        #     Optional. Maximum number of concurrent backfill tasks.
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SpannerDatabase]
+        #     Optional. The Spanner objects to retrieve from the data source. If some
+        #     objects are both included and excluded, an error will be thrown.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SpannerDatabase]
+        #     Optional. The Spanner objects to avoid retrieving. If some objects are both
+        #     included and excluded, an error will be thrown.
+        # @!attribute [rw] backfill_data_boost_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether to use Data Boost for Spanner backfills. Defaults to
+        #     false if not set.
+        class SpannerSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The RPC priority to use for the stream.
+          module SpannerRpcPriority
+            # Unspecified RPC priority.
+            SPANNER_RPC_PRIORITY_UNSPECIFIED = 0
+
+            # Low RPC priority.
+            LOW = 1
+
+            # Medium RPC priority.
+            MEDIUM = 2
+
+            # High RPC priority.
+            HIGH = 3
+          end
+        end
+
+        # Spanner database structure.
+        # @!attribute [rw] schemas
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SpannerSchema>]
+        #     Optional. Spanner schemas in the database.
+        class SpannerDatabase
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spanner schema.
+        # @!attribute [rw] schema
+        #   @return [::String]
+        #     Required. The schema name.
+        # @!attribute [rw] tables
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SpannerTable>]
+        #     Optional. Spanner tables in the schema.
+        class SpannerSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spanner table.
+        # @!attribute [rw] table
+        #   @return [::String]
+        #     Required. The table name.
+        # @!attribute [rw] columns
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SpannerColumn>]
+        #     Optional. Spanner columns in the table.
+        class SpannerTable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spanner column.
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     Required. The column name.
+        # @!attribute [rw] data_type
+        #   @return [::String]
+        #     Optional. Spanner data type.
+        # @!attribute [rw] is_primary_key
+        #   @return [::Boolean]
+        #     Optional. Whether or not the column is a primary key.
+        # @!attribute [rw] ordinal_position
+        #   @return [::Integer]
+        #     Optional. The ordinal position of the column in the table.
+        class SpannerColumn
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for syncing data from a Dataverse source.
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to retrieve from the source.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to exclude from the stream.
+        # @!attribute [rw] polling_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Incremental sync polling interval for all objects. If not set, a
+        #     default value of `5 minutes` is used. The duration must be from `5 minutes`
+        #     to `24 hours`, inclusive.
+        class DataverseSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for syncing data from a Salesforce Marketing Cloud source.
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to retrieve from the source.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to exclude from the stream.
+        # @!attribute [rw] polling_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Incremental sync polling interval for all objects. If not set, a
+        #     default value of `5 minutes` is used. The duration must be from `5 minutes`
+        #     to `24 hours`, inclusive.
+        # @!attribute [rw] full_refresh_polling_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Specifies the polling interval for a full refresh of objects that
+        #     do not support incremental sync. If not set, a default value of 24 hours is
+        #     used. The duration must be between 1 and 24 hours, inclusive.
+        class SalesforceMarketingCloudSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for syncing data from a ServiceNow source.
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to retrieve from the source.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to exclude from the stream.
+        # @!attribute [rw] polling_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Incremental sync polling interval for all objects. If not set, a
+        #     default value of `5 minutes` is used. The duration must be from `5 minutes`
+        #     to `24 hours`, inclusive.
+        class ServiceNowSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for syncing data from a Workday source.
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to retrieve from the source.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. The objects to exclude from the stream.
+        # @!attribute [rw] polling_interval
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Incremental sync polling interval for all objects. If not set, a
+        #     default value of `5 minutes` is used. The duration must be from `5 minutes`
+        #     to `24 hours`, inclusive.
+        class WorkdaySourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source catalog.
+        # @!attribute [rw] objects
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SourceObject>]
+        #     Optional. Source objects in the catalog.
+        class SourceCatalog
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source object.
+        # @!attribute [rw] object_name
+        #   @return [::String]
+        #     Required. The object name.
+        # @!attribute [rw] properties
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SourceProperty>]
+        #     Optional. Source properties. When unspecified as part of include objects,
+        #     includes everything, when unspecified as part of exclude objects, excludes
+        #     nothing.
+        class SourceObject
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source property.
+        # @!attribute [rw] property_name
+        #   @return [::String]
+        #     Required. The property name.
+        # @!attribute [rw] properties
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SourceProperty>]
+        #     Optional. Source properties. When specified, it means that the current
+        #     property contains nested properties of its own. When unspecified as part of
+        #     include objects, includes everything, when unspecified as part of exclude
+        #     objects, excludes nothing.
+        # @!attribute [rw] primary_key
+        #   @return [::Boolean]
+        #     Optional. Whether or not the property is a primary key.
+        class SourceProperty
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1358,32 +1859,57 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig]
         #     Oracle data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_source_config
         #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig]
         #     MySQL data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_source_config`, `oracle_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_source_config`, `oracle_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_source_config
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlSourceConfig]
         #     PostgreSQL data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_source_config`, `oracle_source_config`, `mysql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_source_config`, `oracle_source_config`, `mysql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_source_config
         #   @return [::Google::Cloud::Datastream::V1::SqlServerSourceConfig]
         #     SQLServer data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `salesforce_source_config`, `mongodb_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_source_config
         #   @return [::Google::Cloud::Datastream::V1::SalesforceSourceConfig]
         #     Salesforce data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `salesforce_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `mongodb_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `salesforce_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mongodb_source_config
         #   @return [::Google::Cloud::Datastream::V1::MongodbSourceConfig]
         #     MongoDB data source configuration.
         #
-        #     Note: The following fields are mutually exclusive: `mongodb_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mongodb_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] spanner_source_config
+        #   @return [::Google::Cloud::Datastream::V1::SpannerSourceConfig]
+        #     Spanner data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `spanner_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] dataverse_source_config
+        #   @return [::Google::Cloud::Datastream::V1::DataverseSourceConfig]
+        #     Dataverse data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `dataverse_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] salesforce_marketing_cloud_source_config
+        #   @return [::Google::Cloud::Datastream::V1::SalesforceMarketingCloudSourceConfig]
+        #     Salesforce Marketing Cloud data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `salesforce_marketing_cloud_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `service_now_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] service_now_source_config
+        #   @return [::Google::Cloud::Datastream::V1::ServiceNowSourceConfig]
+        #     ServiceNow data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `service_now_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `workday_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] workday_source_config
+        #   @return [::Google::Cloud::Datastream::V1::WorkdaySourceConfig]
+        #     Optional. Workday data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `workday_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`, `salesforce_source_config`, `mongodb_source_config`, `spanner_source_config`, `dataverse_source_config`, `salesforce_marketing_cloud_source_config`, `service_now_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1429,6 +1955,81 @@ module Google
             # Gzip compression.
             GZIP = 2
           end
+        end
+
+        # BigQuery clustering configuration.
+        # @!attribute [rw] columns
+        #   @return [::Array<::String>]
+        #     Required. Column names to set as clustering columns.
+        class BigQueryClustering
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Ingestion time partitioning. see
+        # https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time
+        # @!attribute [rw] partitioning_time_granularity
+        #   @return [::Google::Cloud::Datastream::V1::PartitioningTimeGranularity]
+        #     Optional. Partition granularity
+        class IngestionTimePartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Time unit column partitioning. see
+        # https://cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     Required. The partitioning column.
+        # @!attribute [rw] partitioning_time_granularity
+        #   @return [::Google::Cloud::Datastream::V1::PartitioningTimeGranularity]
+        #     Optional. Partition granularity.
+        class TimeUnitPartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Integer range partitioning. see
+        # https://cloud.google.com/bigquery/docs/partitioned-tables#integer_range
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     Required. The partitioning column.
+        # @!attribute [rw] start
+        #   @return [::Integer]
+        #     Required. The starting value for range partitioning (inclusive).
+        # @!attribute [rw] end
+        #   @return [::Integer]
+        #     Required. The ending value for range partitioning (exclusive).
+        # @!attribute [rw] interval
+        #   @return [::Integer]
+        #     Required. The interval of each range within the partition.
+        class IntegerRangePartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # BigQuery partitioning configuration.
+        # @!attribute [rw] integer_range_partition
+        #   @return [::Google::Cloud::Datastream::V1::IntegerRangePartition]
+        #     Integer range partitioning.
+        #
+        #     Note: The following fields are mutually exclusive: `integer_range_partition`, `time_unit_partition`, `ingestion_time_partition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] time_unit_partition
+        #   @return [::Google::Cloud::Datastream::V1::TimeUnitPartition]
+        #     Time unit column partitioning.
+        #
+        #     Note: The following fields are mutually exclusive: `time_unit_partition`, `integer_range_partition`, `ingestion_time_partition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ingestion_time_partition
+        #   @return [::Google::Cloud::Datastream::V1::IngestionTimePartition]
+        #     Ingestion time partitioning.
+        #
+        #     Note: The following fields are mutually exclusive: `ingestion_time_partition`, `integer_range_partition`, `time_unit_partition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] require_partition_filter
+        #   @return [::Boolean]
+        #     Optional. If true, queries over the table require a partition filter.
+        class BigQueryPartitioning
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Google Cloud Storage destination configuration
@@ -1672,6 +2273,9 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] rule_sets
+        #   @return [::Array<::Google::Cloud::Datastream::V1::Stream::RuleSet>]
+        #     Optional. Rule sets to apply to the stream.
         class Stream
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1682,32 +2286,43 @@ module Google
           #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
           #     Oracle data source objects to avoid backfilling.
           #
-          #     Note: The following fields are mutually exclusive: `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mysql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
           #     MySQL data source objects to avoid backfilling.
           #
-          #     Note: The following fields are mutually exclusive: `mysql_excluded_objects`, `oracle_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mysql_excluded_objects`, `oracle_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] postgresql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
           #     PostgreSQL data source objects to avoid backfilling.
           #
-          #     Note: The following fields are mutually exclusive: `postgresql_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `postgresql_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_server_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
           #     SQLServer data source objects to avoid backfilling
           #
-          #     Note: The following fields are mutually exclusive: `sql_server_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `sql_server_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] salesforce_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
           #     Salesforce data source objects to avoid backfilling
           #
-          #     Note: The following fields are mutually exclusive: `salesforce_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `mongodb_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `salesforce_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mongodb_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
           #     MongoDB data source objects to avoid backfilling
           #
-          #     Note: The following fields are mutually exclusive: `mongodb_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mongodb_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `spanner_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] spanner_excluded_objects
+          #   @return [::Google::Cloud::Datastream::V1::SpannerDatabase]
+          #     Spanner data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `spanner_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `saas_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] saas_excluded_objects
+          #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+          #     Source catalog data source objects to avoid backfilling. This is mainly
+          #     used to represent SaaS applications objects.
+          #
+          #     Note: The following fields are mutually exclusive: `saas_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`, `salesforce_excluded_objects`, `mongodb_excluded_objects`, `spanner_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BackfillAllStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1717,6 +2332,43 @@ module Google
           class BackfillNoneStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A set of rules to apply to a set of objects.
+          # @!attribute [rw] customization_rules
+          #   @return [::Array<::Google::Cloud::Datastream::V1::Stream::RuleSet::CustomizationRule>]
+          #     Required. List of customization rules to apply.
+          # @!attribute [rw] object_filter
+          #   @return [::Google::Cloud::Datastream::V1::Stream::RuleSet::ObjectFilter]
+          #     Required. Object filter to apply the customization rules to.
+          class RuleSet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Object filter to apply the rules to.
+            # @!attribute [rw] source_object_identifier
+            #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier]
+            #     Specific source object identifier.
+            class ObjectFilter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A customization rule to apply to a set of objects.
+            # @!attribute [rw] bigquery_partitioning
+            #   @return [::Google::Cloud::Datastream::V1::BigQueryPartitioning]
+            #     BigQuery partitioning rule.
+            #
+            #     Note: The following fields are mutually exclusive: `bigquery_partitioning`, `bigquery_clustering`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] bigquery_clustering
+            #   @return [::Google::Cloud::Datastream::V1::BigQueryClustering]
+            #     BigQuery clustering rule.
+            #
+            #     Note: The following fields are mutually exclusive: `bigquery_clustering`, `bigquery_partitioning`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class CustomizationRule
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key
@@ -1785,6 +2437,11 @@ module Google
         # @!attribute [rw] source_object
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier]
         #     The object identifier in the data source.
+        # @!attribute [r] customization_rules
+        #   @return [::Array<::Google::Cloud::Datastream::V1::Stream::RuleSet::CustomizationRule>]
+        #     Output only. The customization rules for the object. These rules are
+        #     derived from the parent Stream's `rule_sets` and represent the intended
+        #     configuration for the object.
         class StreamObject
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1795,32 +2452,37 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::OracleObjectIdentifier]
         #     Oracle data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::MysqlObjectIdentifier]
         #     Mysql data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_identifier`, `oracle_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_identifier`, `oracle_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::PostgresqlObjectIdentifier]
         #     PostgreSQL data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_identifier`, `oracle_identifier`, `mysql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_identifier`, `oracle_identifier`, `mysql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::SqlServerObjectIdentifier]
         #     SQLServer data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `salesforce_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `salesforce_identifier`, `mongodb_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::SalesforceObjectIdentifier]
         #     Salesforce data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `salesforce_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `salesforce_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `mongodb_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mongodb_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::MongodbObjectIdentifier]
         #     MongoDB data source object identifier.
         #
-        #     Note: The following fields are mutually exclusive: `mongodb_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mongodb_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `spanner_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] spanner_identifier
+        #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::SpannerObjectIdentifier]
+        #     Spanner data source object identifier.
+        #
+        #     Note: The following fields are mutually exclusive: `spanner_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`, `salesforce_identifier`, `mongodb_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceObjectIdentifier
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1893,6 +2555,18 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Spanner data source object identifier.
+          # @!attribute [rw] schema
+          #   @return [::String]
+          #     Optional. The schema name.
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     Required. The table name.
+          class SpannerObjectIdentifier
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Represents a backfill job on a specific stream object.
@@ -1911,6 +2585,9 @@ module Google
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Datastream::V1::Error>]
         #     Output only. Errors which caused the backfill job to fail.
+        # @!attribute [r] event_filter
+        #   @return [::Google::Cloud::Datastream::V1::EventFilter]
+        #     Output only. The filter for performing a partial backfill.
         class BackfillJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1957,6 +2634,17 @@ module Google
             # Object backfill job was triggered manually using the dedicated API.
             MANUAL = 2
           end
+        end
+
+        # Represents a filter for included data on a stream object.
+        # @!attribute [rw] sql_where_clause
+        #   @return [::String]
+        #     An SQL-query Where clause selecting which data should be included, not
+        #     including the "WHERE" keyword. e.g., `t.key1 = 'value1' AND t.key2 =
+        #     'value2'`
+        class EventFilter
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represent a user-facing Error.
@@ -2115,22 +2803,32 @@ module Google
           #   @return [::Google::Cloud::Datastream::V1::MysqlLogPosition]
           #     MySQL specific log position to start replicating from.
           #
-          #     Note: The following fields are mutually exclusive: `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`, `mysql_gtid_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`, `mysql_gtid_position`, `mongodb_change_stream_position`, `spanner_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] oracle_scn_position
           #   @return [::Google::Cloud::Datastream::V1::OracleScnPosition]
           #     Oracle SCN to start replicating from.
           #
-          #     Note: The following fields are mutually exclusive: `oracle_scn_position`, `mysql_log_position`, `sql_server_lsn_position`, `mysql_gtid_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `oracle_scn_position`, `mysql_log_position`, `sql_server_lsn_position`, `mysql_gtid_position`, `mongodb_change_stream_position`, `spanner_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_server_lsn_position
           #   @return [::Google::Cloud::Datastream::V1::SqlServerLsnPosition]
           #     SqlServer LSN to start replicating from.
           #
-          #     Note: The following fields are mutually exclusive: `sql_server_lsn_position`, `mysql_log_position`, `oracle_scn_position`, `mysql_gtid_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `sql_server_lsn_position`, `mysql_log_position`, `oracle_scn_position`, `mysql_gtid_position`, `mongodb_change_stream_position`, `spanner_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mysql_gtid_position
           #   @return [::Google::Cloud::Datastream::V1::MysqlGtidPosition]
           #     MySQL GTID set to start replicating from.
           #
-          #     Note: The following fields are mutually exclusive: `mysql_gtid_position`, `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mysql_gtid_position`, `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`, `mongodb_change_stream_position`, `spanner_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] mongodb_change_stream_position
+          #   @return [::Google::Cloud::Datastream::V1::MongodbChangeStreamPosition]
+          #     MongoDB change stream position to start replicating from.
+          #
+          #     Note: The following fields are mutually exclusive: `mongodb_change_stream_position`, `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`, `mysql_gtid_position`, `spanner_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] spanner_change_stream_position
+          #   @return [::Google::Cloud::Datastream::V1::SpannerChangeStreamPosition]
+          #     Optional. Spanner change stream position to start replicating from.
+          #
+          #     Note: The following fields are mutually exclusive: `spanner_change_stream_position`, `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`, `mysql_gtid_position`, `mongodb_change_stream_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SpecificStartPosition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2174,6 +2872,56 @@ module Google
         class MysqlGtidPosition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MongoDB change stream position
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Required. The timestamp to start change stream from.
+        class MongodbChangeStreamPosition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a position in a Spanner change stream from which to start
+        # replicating.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Required. The timestamp to start change stream queries from.
+        #     The timestamp must be a positive value.
+        class SpannerChangeStreamPosition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MongoDB JSON mode.
+        module MongodbJsonMode
+          # Unspecified JSON mode.
+          MONGODB_JSON_MODE_UNSPECIFIED = 0
+
+          # Strict JSON mode.
+          STRICT = 1
+
+          # Canonical JSON mode.
+          CANONICAL = 2
+        end
+
+        # Partitioning granularity for time partitions.
+        module PartitioningTimeGranularity
+          # Unspecified partitioing interval.
+          PARTITIONING_TIME_GRANULARITY_UNSPECIFIED = 0
+
+          # Hourly partitioning.
+          PARTITIONING_TIME_GRANULARITY_HOUR = 1
+
+          # Daily partitioning.
+          PARTITIONING_TIME_GRANULARITY_DAY = 2
+
+          # Monthly partitioning.
+          PARTITIONING_TIME_GRANULARITY_MONTH = 3
+
+          # Yearly partitioning.
+          PARTITIONING_TIME_GRANULARITY_YEAR = 4
         end
       end
     end

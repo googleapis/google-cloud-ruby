@@ -157,6 +157,16 @@
                 "restart"
               ]
             },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
             "RestoreBackup": {
               "methods": [
                 "restore_backup"
@@ -237,6 +247,11 @@
                 "get_latest_recovery_time"
               ]
             },
+            "ExecuteSqlReadOnly": {
+              "methods": [
+                "execute_sql_read_only"
+              ]
+            },
             "ExecuteSql": {
               "methods": [
                 "execute_sql"
@@ -260,6 +275,11 @@
             "PointInTimeRestore": {
               "methods": [
                 "point_in_time_restore"
+              ]
+            },
+            "ReconcileNetworking": {
+              "methods": [
+                "reconcile_networking"
               ]
             }
           }
@@ -294,6 +314,40 @@
             "DeleteBackup": {
               "methods": [
                 "delete_backup"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BlueGreenDeploymentsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Sql::V1::BlueGreenDeploymentsService::Client",
+          "rpcs": {
+            "CreateBlueGreenDeployment": {
+              "methods": [
+                "create_blue_green_deployment"
+              ]
+            },
+            "GetBlueGreenDeployment": {
+              "methods": [
+                "get_blue_green_deployment"
+              ]
+            },
+            "SwitchoverBlueGreenDeployment": {
+              "methods": [
+                "switchover_blue_green_deployment"
+              ]
+            },
+            "ListBlueGreenDeployments": {
+              "methods": [
+                "list_blue_green_deployments"
+              ]
+            },
+            "DeleteBlueGreenDeployment": {
+              "methods": [
+                "delete_blue_green_deployment"
               ]
             }
           }
@@ -465,6 +519,21 @@
               "methods": [
                 "list"
               ]
+            },
+            "UpdateCustomerManagedCertificate": {
+              "methods": [
+                "update_customer_managed_certificate"
+              ]
+            },
+            "DeleteCustomerManagedCertificate": {
+              "methods": [
+                "delete_customer_managed_certificate"
+              ]
+            },
+            "ListCustomerManagedCertificates": {
+              "methods": [
+                "list_customer_managed_certificates"
+              ]
             }
           }
         }
@@ -512,6 +581,40 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SqlWorkloadCapturesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Sql::V1::SqlWorkloadCapturesService::Client",
+          "rpcs": {
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "StartReplay": {
+              "methods": [
+                "start_replay"
+              ]
+            },
+            "StopReplay": {
+              "methods": [
+                "stop_replay"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
               ]
             }
           }

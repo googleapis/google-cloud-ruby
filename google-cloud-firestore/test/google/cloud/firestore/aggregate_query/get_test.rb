@@ -157,7 +157,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           )
         )
       ].to_enum
-      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
+      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params, default_options]
 
       aggregate_query = query.aggregate_query.add_count aggregate_alias: "total_score" # custom alias
       results_enum = aggregate_query.get
@@ -295,7 +295,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           )
         )
       ].to_enum
-      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
+      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params, default_options]
 
       aggregate_query = query.aggregate_query.add_sum 'score', aggregate_alias: "total_score" # custom alias
       results_enum = aggregate_query.get
@@ -433,7 +433,7 @@ describe Google::Cloud::Firestore::AggregateQuery, :add_count, :mock_firestore d
           )
         )
       ].to_enum
-      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params]
+      firestore_mock.expect :run_aggregation_query, mocked_response, [expected_params, default_options]
 
       aggregate_query = query.aggregate_query.add_avg 'score', aggregate_alias: "total_score" # custom alias
       results_enum = aggregate_query.get

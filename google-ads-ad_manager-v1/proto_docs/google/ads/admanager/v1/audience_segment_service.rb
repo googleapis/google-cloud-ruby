@@ -55,6 +55,22 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
+        #      Notes specific to AudienceSegmentService:
+        #      * `OR` operator: Not supported. Multiple conditions can only be combined
+        #        using `AND`. Use `IN` for multi-value matching on a single field.
+        #      * `NOT` operator: Cannot wrap compound expressions. For example, `NOT (A
+        #      AND B)`.
+        #      * Text-based searches (for example, from using wildcards) are
+        #        case-insensitive. Other string comparisons are case-sensitive.
+        #
+        #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+        #     timestamps, full resource names on reference fields (for example, `order =
+        #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+        #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+        #     repeated-field matching, unquoted enums and booleans, uppercase
+        #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+        #     (...)`).
+        #
         #     **Filterable fields:**
         #
         #     * `adIdSize`
@@ -71,6 +87,7 @@ module Google
         #     * `thirdPartyAudienceSegment.approvalStatus`
         #     * `thirdPartyAudienceSegment.cost`
         #     * `thirdPartyAudienceSegment.endTime`
+        #     * `thirdPartyAudienceSegment.licenseType`
         #     * `thirdPartyAudienceSegment.startTime`
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -147,6 +164,43 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::AudienceSegment>]
         #     The `AudienceSegment` objects created.
         class BatchCreateAudienceSegmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateAudienceSegment` method.
+        # @!attribute [rw] audience_segment
+        #   @return [::Google::Ads::AdManager::V1::AudienceSegment]
+        #     Required. The `AudienceSegment` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateAudienceSegmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateAudienceSegments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AudienceSegments` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateAudienceSegmentRequest.audienceSegment must
+        #     match this field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateAudienceSegmentRequest>]
+        #     Required. The `AudienceSegment` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateAudienceSegmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateAudienceSegments` method.
+        # @!attribute [rw] audience_segments
+        #   @return [::Array<::Google::Ads::AdManager::V1::AudienceSegment>]
+        #     The `AudienceSegment` objects updated.
+        class BatchUpdateAudienceSegmentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

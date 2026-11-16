@@ -41,7 +41,8 @@ module Google
         #     Output only. The status of this DaiEncodingProfile.
         #
         #     DAI encoding profiles are created in the
-        #     [DaiEncodingProfileStatus.ACTIVE][] state by default.
+        #     {::Google::Ads::AdManager::V1::DaiEncodingProfileStatusEnum::DaiEncodingProfileStatus::ACTIVE DaiEncodingProfileStatusEnum.DaiEncodingProfileStatus.ACTIVE}
+        #     state by default.
         #
         #     Only active profiles will be allowed to be associated with live streams.
         # @!attribute [rw] variant_type

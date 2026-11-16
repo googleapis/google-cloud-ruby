@@ -167,6 +167,27 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_source_upload_grpc
+    skip unless Google::Cloud::Run.source_upload_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Run.source_upload transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Run::V2::SourceUpload::Client, client
+    end
+  end
+
+  def test_source_upload_rest
+    skip unless Google::Cloud::Run.source_upload_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Run.source_upload transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::SourceUpload::Rest::Client, client
+    end
+  end
+
   def test_tasks_grpc
     skip unless Google::Cloud::Run.tasks_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do

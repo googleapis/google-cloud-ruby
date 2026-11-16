@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Conversions
         module V1beta
-          VERSION = "0.7.1"
+          VERSION = "1.0.0"
         end
       end
     end

@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n)google/cloud/connectors/v1/settings.proto\x12\x1agoogle.cloud.connectors.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"T\n\x18GetGlobalSettingsRequest\x12\x38\n\x04name\x18\x01 \x01(\tB*\xe0\x41\x02\xfa\x41$\n\"connectors.googleapis.com/Settings\"\x9b\x01\n\x08Settings\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x12\n\x05vpcsc\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12\x11\n\x04payg\x18\x03 \x01(\x08\x42\x03\xe0\x41\x03:U\xea\x41R\n\"connectors.googleapis.com/Settings\x12,projects/{project}/locations/global/settingsBq\n\x1e\x63om.google.cloud.connectors.v1B\rSettingsProtoP\x01Z>cloud.google.com/go/connectors/apiv1/connectorspb;connectorspbb\x06proto3"
+descriptor_data = "\n)google/cloud/connectors/v1/settings.proto\x12\x1agoogle.cloud.connectors.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"U\n\x18GetGlobalSettingsRequest\x12\x39\n\x04name\x18\x01 \x01(\tB+\xe2\x41\x01\x02\xfa\x41$\n\"connectors.googleapis.com/Settings\"\x9e\x01\n\x08Settings\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\xe2\x41\x01\x03\x12\x13\n\x05vpcsc\x18\x02 \x01(\x08\x42\x04\xe2\x41\x01\x01\x12\x12\n\x04payg\x18\x03 \x01(\x08\x42\x04\xe2\x41\x01\x03:U\xea\x41R\n\"connectors.googleapis.com/Settings\x12,projects/{project}/locations/global/settingsBq\n\x1e\x63om.google.cloud.connectors.v1B\rSettingsProtoP\x01Z>cloud.google.com/go/connectors/apiv1/connectorspb;connectorspbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

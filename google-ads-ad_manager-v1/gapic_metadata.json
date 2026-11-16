@@ -58,6 +58,16 @@
               "methods": [
                 "batch_block_ad_review_center_ads"
               ]
+            },
+            "FetchAdReviewCenterCustomLabels": {
+              "methods": [
+                "fetch_ad_review_center_custom_labels"
+              ]
+            },
+            "BatchApplyAdReviewCenterCustomLabels": {
+              "methods": [
+                "batch_apply_ad_review_center_custom_labels"
+              ]
             }
           }
         }
@@ -264,6 +274,25 @@
         }
       }
     },
+    "AudienceSegmentCategoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AudienceSegmentCategoryService::Client",
+          "rpcs": {
+            "GetAudienceSegmentCategory": {
+              "methods": [
+                "get_audience_segment_category"
+              ]
+            },
+            "ListAudienceSegmentCategories": {
+              "methods": [
+                "list_audience_segment_categories"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AudienceSegmentService": {
       "clients": {
         "grpc": {
@@ -287,6 +316,16 @@
             "BatchCreateAudienceSegments": {
               "methods": [
                 "batch_create_audience_segments"
+              ]
+            },
+            "UpdateAudienceSegment": {
+              "methods": [
+                "update_audience_segment"
+              ]
+            },
+            "BatchUpdateAudienceSegments": {
+              "methods": [
+                "batch_update_audience_segments"
               ]
             },
             "BatchActivateAudienceSegments": {
@@ -457,6 +496,25 @@
             "BatchArchiveCdnConfigs": {
               "methods": [
                 "batch_archive_cdn_configs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ChangeEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ChangeEventService::Client",
+          "rpcs": {
+            "GetChangeEvent": {
+              "methods": [
+                "get_change_event"
+              ]
+            },
+            "ListChangeEvents": {
+              "methods": [
+                "list_change_events"
               ]
             }
           }
@@ -719,6 +777,55 @@
             "ListContent": {
               "methods": [
                 "list_content"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CreativeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CreativeService::Client",
+          "rpcs": {
+            "GetCreative": {
+              "methods": [
+                "get_creative"
+              ]
+            },
+            "ListCreatives": {
+              "methods": [
+                "list_creatives"
+              ]
+            },
+            "CreateCreative": {
+              "methods": [
+                "create_creative"
+              ]
+            },
+            "UpdateCreative": {
+              "methods": [
+                "update_creative"
+              ]
+            },
+            "BatchCreateCreatives": {
+              "methods": [
+                "batch_create_creatives"
+              ]
+            },
+            "BatchUpdateCreatives": {
+              "methods": [
+                "batch_update_creatives"
+              ]
+            },
+            "BatchActivateCreatives": {
+              "methods": [
+                "batch_activate_creatives"
+              ]
+            },
+            "BatchDeactivateCreatives": {
+              "methods": [
+                "batch_deactivate_creatives"
               ]
             }
           }
@@ -1177,6 +1284,84 @@
         }
       }
     },
+    "ForecastAdjustmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ForecastAdjustmentService::Client",
+          "rpcs": {
+            "GetForecastAdjustment": {
+              "methods": [
+                "get_forecast_adjustment"
+              ]
+            },
+            "ListForecastAdjustments": {
+              "methods": [
+                "list_forecast_adjustments"
+              ]
+            },
+            "CreateForecastAdjustment": {
+              "methods": [
+                "create_forecast_adjustment"
+              ]
+            },
+            "BatchCreateForecastAdjustments": {
+              "methods": [
+                "batch_create_forecast_adjustments"
+              ]
+            },
+            "BatchActivateForecastAdjustments": {
+              "methods": [
+                "batch_activate_forecast_adjustments"
+              ]
+            },
+            "BatchDeactivateForecastAdjustments": {
+              "methods": [
+                "batch_deactivate_forecast_adjustments"
+              ]
+            },
+            "UpdateForecastAdjustment": {
+              "methods": [
+                "update_forecast_adjustment"
+              ]
+            },
+            "BatchUpdateForecastAdjustments": {
+              "methods": [
+                "batch_update_forecast_adjustments"
+              ]
+            },
+            "CalculateDailyAdOpportunityCounts": {
+              "methods": [
+                "calculate_daily_ad_opportunity_counts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ForecastService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ForecastService::Client",
+          "rpcs": {
+            "RunAvailabilityForecast": {
+              "methods": [
+                "run_availability_forecast"
+              ]
+            },
+            "RunDeliveryForecast": {
+              "methods": [
+                "run_delivery_forecast"
+              ]
+            },
+            "RunTrafficData": {
+              "methods": [
+                "run_traffic_data"
+              ]
+            }
+          }
+        }
+      }
+    },
     "GeoTargetService": {
       "clients": {
         "grpc": {
@@ -1245,6 +1430,65 @@
         }
       }
     },
+    "LineItemCreativeAssociationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LineItemCreativeAssociationService::Client",
+          "rpcs": {
+            "GetLineItemCreativeAssociation": {
+              "methods": [
+                "get_line_item_creative_association"
+              ]
+            },
+            "ListLineItemCreativeAssociations": {
+              "methods": [
+                "list_line_item_creative_associations"
+              ]
+            },
+            "CreateLineItemCreativeAssociation": {
+              "methods": [
+                "create_line_item_creative_association"
+              ]
+            },
+            "BatchCreateLineItemCreativeAssociations": {
+              "methods": [
+                "batch_create_line_item_creative_associations"
+              ]
+            },
+            "UpdateLineItemCreativeAssociation": {
+              "methods": [
+                "update_line_item_creative_association"
+              ]
+            },
+            "BatchUpdateLineItemCreativeAssociations": {
+              "methods": [
+                "batch_update_line_item_creative_associations"
+              ]
+            },
+            "BatchActivateLineItemCreativeAssociations": {
+              "methods": [
+                "batch_activate_line_item_creative_associations"
+              ]
+            },
+            "BatchDeactivateLineItemCreativeAssociations": {
+              "methods": [
+                "batch_deactivate_line_item_creative_associations"
+              ]
+            },
+            "BatchDeleteLineItemCreativeAssociations": {
+              "methods": [
+                "batch_delete_line_item_creative_associations"
+              ]
+            },
+            "PreviewLineItemCreativeAssociation": {
+              "methods": [
+                "preview_line_item_creative_association"
+              ]
+            }
+          }
+        }
+      }
+    },
     "LineItemService": {
       "clients": {
         "grpc": {
@@ -1258,6 +1502,95 @@
             "ListLineItems": {
               "methods": [
                 "list_line_items"
+              ]
+            },
+            "CreateLineItem": {
+              "methods": [
+                "create_line_item"
+              ]
+            },
+            "BatchCreateLineItems": {
+              "methods": [
+                "batch_create_line_items"
+              ]
+            },
+            "UpdateLineItem": {
+              "methods": [
+                "update_line_item"
+              ]
+            },
+            "BatchUpdateLineItems": {
+              "methods": [
+                "batch_update_line_items"
+              ]
+            },
+            "BatchActivateLineItems": {
+              "methods": [
+                "batch_activate_line_items"
+              ]
+            },
+            "BatchPauseLineItems": {
+              "methods": [
+                "batch_pause_line_items"
+              ]
+            },
+            "BatchResumeLineItems": {
+              "methods": [
+                "batch_resume_line_items"
+              ]
+            },
+            "BatchResumeAndOverbookLineItems": {
+              "methods": [
+                "batch_resume_and_overbook_line_items"
+              ]
+            },
+            "BatchDeleteLineItems": {
+              "methods": [
+                "batch_delete_line_items"
+              ]
+            },
+            "BatchReserveLineItems": {
+              "methods": [
+                "batch_reserve_line_items"
+              ]
+            },
+            "BatchReserveAndOverbookLineItems": {
+              "methods": [
+                "batch_reserve_and_overbook_line_items"
+              ]
+            },
+            "BatchReleaseLineItems": {
+              "methods": [
+                "batch_release_line_items"
+              ]
+            },
+            "BatchArchiveLineItems": {
+              "methods": [
+                "batch_archive_line_items"
+              ]
+            },
+            "BatchUnarchiveLineItems": {
+              "methods": [
+                "batch_unarchive_line_items"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LineItemTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LineItemTemplateService::Client",
+          "rpcs": {
+            "GetLineItemTemplate": {
+              "methods": [
+                "get_line_item_template"
+              ]
+            },
+            "ListLineItemTemplates": {
+              "methods": [
+                "list_line_item_templates"
               ]
             }
           }
@@ -1433,9 +1766,19 @@
                 "list_native_styles"
               ]
             },
+            "CreateNativeStyle": {
+              "methods": [
+                "create_native_style"
+              ]
+            },
             "BatchCreateNativeStyles": {
               "methods": [
                 "batch_create_native_styles"
+              ]
+            },
+            "UpdateNativeStyle": {
+              "methods": [
+                "update_native_style"
               ]
             },
             "BatchUpdateNativeStyles": {
@@ -1803,6 +2146,105 @@
         }
       }
     },
+    "ProposalService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ProposalService::Client",
+          "rpcs": {
+            "GetProposal": {
+              "methods": [
+                "get_proposal"
+              ]
+            },
+            "ListProposals": {
+              "methods": [
+                "list_proposals"
+              ]
+            },
+            "CreateProposal": {
+              "methods": [
+                "create_proposal"
+              ]
+            },
+            "BatchCreateProposals": {
+              "methods": [
+                "batch_create_proposals"
+              ]
+            },
+            "UpdateProposal": {
+              "methods": [
+                "update_proposal"
+              ]
+            },
+            "BatchUpdateProposals": {
+              "methods": [
+                "batch_update_proposals"
+              ]
+            },
+            "BatchArchiveProposals": {
+              "methods": [
+                "batch_archive_proposals"
+              ]
+            },
+            "BatchUnarchiveProposals": {
+              "methods": [
+                "batch_unarchive_proposals"
+              ]
+            },
+            "BatchPauseProposals": {
+              "methods": [
+                "batch_pause_proposals"
+              ]
+            },
+            "BatchResumeProposals": {
+              "methods": [
+                "batch_resume_proposals"
+              ]
+            },
+            "BatchRequestBuyerReviewProposals": {
+              "methods": [
+                "batch_request_buyer_review_proposals"
+              ]
+            },
+            "BatchRequestBuyerAcceptProposals": {
+              "methods": [
+                "batch_request_buyer_accept_proposals"
+              ]
+            },
+            "BatchReserveProposals": {
+              "methods": [
+                "batch_reserve_proposals"
+              ]
+            },
+            "BatchRedraftProposals": {
+              "methods": [
+                "batch_redraft_proposals"
+              ]
+            },
+            "BatchDiscardDraftProposals": {
+              "methods": [
+                "batch_discard_draft_proposals"
+              ]
+            },
+            "BatchTerminateProposals": {
+              "methods": [
+                "batch_terminate_proposals"
+              ]
+            },
+            "BatchPushToOrderProposals": {
+              "methods": [
+                "batch_push_to_order_proposals"
+              ]
+            },
+            "FetchMarketplaceComments": {
+              "methods": [
+                "fetch_marketplace_comments"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ReportService": {
       "clients": {
         "grpc": {
@@ -2133,6 +2575,45 @@
         }
       }
     },
+    "TrafficForecastSegmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::TrafficForecastSegmentService::Client",
+          "rpcs": {
+            "GetTrafficForecastSegment": {
+              "methods": [
+                "get_traffic_forecast_segment"
+              ]
+            },
+            "ListTrafficForecastSegments": {
+              "methods": [
+                "list_traffic_forecast_segments"
+              ]
+            },
+            "CreateTrafficForecastSegment": {
+              "methods": [
+                "create_traffic_forecast_segment"
+              ]
+            },
+            "BatchCreateTrafficForecastSegments": {
+              "methods": [
+                "batch_create_traffic_forecast_segments"
+              ]
+            },
+            "UpdateTrafficForecastSegment": {
+              "methods": [
+                "update_traffic_forecast_segment"
+              ]
+            },
+            "BatchUpdateTrafficForecastSegments": {
+              "methods": [
+                "batch_update_traffic_forecast_segments"
+              ]
+            }
+          }
+        }
+      }
+    },
     "UserService": {
       "clients": {
         "grpc": {
@@ -2141,6 +2622,41 @@
             "GetUser": {
               "methods": [
                 "get_user"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "list_users"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "create_user"
+              ]
+            },
+            "BatchCreateUsers": {
+              "methods": [
+                "batch_create_users"
+              ]
+            },
+            "BatchActivateUsers": {
+              "methods": [
+                "batch_activate_users"
+              ]
+            },
+            "BatchDeactivateUsers": {
+              "methods": [
+                "batch_deactivate_users"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "update_user"
+              ]
+            },
+            "BatchUpdateUsers": {
+              "methods": [
+                "batch_update_users"
               ]
             }
           }
@@ -2180,6 +2696,79 @@
             "BatchUpdateViewabilityProviders": {
               "methods": [
                 "batch_update_viewability_providers"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "YieldGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::YieldGroupService::Client",
+          "rpcs": {
+            "GetYieldGroup": {
+              "methods": [
+                "get_yield_group"
+              ]
+            },
+            "ListYieldGroups": {
+              "methods": [
+                "list_yield_groups"
+              ]
+            },
+            "CreateYieldGroup": {
+              "methods": [
+                "create_yield_group"
+              ]
+            },
+            "BatchCreateYieldGroups": {
+              "methods": [
+                "batch_create_yield_groups"
+              ]
+            },
+            "UpdateYieldGroup": {
+              "methods": [
+                "update_yield_group"
+              ]
+            },
+            "BatchUpdateYieldGroups": {
+              "methods": [
+                "batch_update_yield_groups"
+              ]
+            },
+            "BatchActivateYieldGroups": {
+              "methods": [
+                "batch_activate_yield_groups"
+              ]
+            },
+            "BatchDeactivateYieldGroups": {
+              "methods": [
+                "batch_deactivate_yield_groups"
+              ]
+            },
+            "BatchArchiveYieldGroups": {
+              "methods": [
+                "batch_archive_yield_groups"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "YieldPartnerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::YieldPartnerService::Client",
+          "rpcs": {
+            "GetYieldPartner": {
+              "methods": [
+                "get_yield_partner"
+              ]
+            },
+            "ListYieldPartners": {
+              "methods": [
+                "list_yield_partners"
               ]
             }
           }

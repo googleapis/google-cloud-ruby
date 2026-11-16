@@ -32,9 +32,10 @@ module Google
         #     Required. The Service instance to create.
         # @!attribute [rw] service_id
         #   @return [::String]
-        #     Required. The unique identifier for the Service. It must begin with letter,
+        #     Optional. The unique identifier for the Service. It must begin with letter,
         #     and cannot end with hyphen; must contain fewer than 50 characters.
         #     The name of the service becomes \\{parent}/services/\\{service_id}.
+        #     If not provided, the server will generate a unique `service_id`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated and default values
@@ -60,6 +61,16 @@ module Google
         #     Optional. If set to true, and if the Service does not exist, it will create
         #     a new one. The caller must have 'run.services.create' permissions if this
         #     is set to true and the Service does not exist.
+        # @!attribute [rw] force_new_revision
+        #   @return [::Boolean]
+        #     Optional. If set to true, a new revision will be created from the template
+        #     even if the system doesn't detect any changes from the previously deployed
+        #     revision.
+        #
+        #     This may be useful for cases where the underlying resources need to be
+        #     recreated or reinitialized. For example if the image is specified by label,
+        #     but the underlying image digest has changed) or if the container performs
+        #     deployment initialization work that needs to be performed again.
         class UpdateServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -259,6 +270,9 @@ module Google
         # @!attribute [rw] iap_enabled
         #   @return [::Boolean]
         #     Optional. IAP settings on the Service.
+        # @!attribute [rw] ssh_enabled
+        #   @return [::Boolean]
+        #     Optional. Enables SSH access to the Service.
         # @!attribute [rw] multi_region_settings
         #   @return [::Google::Cloud::Run::V2::Service::MultiRegionSettings]
         #     Optional. Settings for multi-region deployment.
@@ -316,6 +330,9 @@ module Google
         # @!attribute [rw] build_config
         #   @return [::Google::Cloud::Run::V2::BuildConfig]
         #     Optional. Configuration for building a Cloud Run function.
+        # @!attribute [rw] functional_type
+        #   @return [::Google::Cloud::Run::V2::FunctionalType]
+        #     Optional. The functional type of the Service.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Returns true if the Service is currently being acted upon by

@@ -261,7 +261,8 @@ module Google
 
         # Response message for
         # {::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client#purge_completion_suggestions CompletionService.PurgeCompletionSuggestions}
-        # method.
+        # method. If the long running operation is successfully done, then this
+        # message is returned by the google.longrunning.Operations.response field.
         # @!attribute [rw] purge_succeeded
         #   @return [::Boolean]
         #     Whether the completion suggestions were successfully purged.

@@ -109,6 +109,75 @@ module Google
             rpc :FetchDataSourceReferencesForResourceType, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse
             # Initializes the service related config for a project.
             rpc :InitializeService, ::Google::Cloud::BackupDR::V1::InitializeServiceRequest, ::Google::Longrunning::Operation
+            # Creates a new AutoProtectionPolicy in a given project and location.
+            rpc :CreateAutoProtectionPolicy, ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyRequest, ::Google::Longrunning::Operation
+            # Lists AutoProtectionPolicies for a given project and location.
+            rpc :ListAutoProtectionPolicies, ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesRequest, ::Google::Cloud::BackupDR::V1::ListAutoProtectionPoliciesResponse
+            # Gets details of a single AutoProtectionPolicy.
+            rpc :GetAutoProtectionPolicy, ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyRequest, ::Google::Cloud::BackupDR::V1::AutoProtectionPolicy
+            # Updates the parameters of a single AutoProtectionPolicy.
+            rpc :UpdateAutoProtectionPolicy, ::Google::Cloud::BackupDR::V1::UpdateAutoProtectionPolicyRequest, ::Google::Longrunning::Operation
+            # Deletes a single AutoProtectionPolicy.
+            rpc :DeleteAutoProtectionPolicy, ::Google::Cloud::BackupDR::V1::DeleteAutoProtectionPolicyRequest, ::Google::Longrunning::Operation
+            # Creates a new AutoProtectionPolicyBinding in a given project and
+            # location.
+            rpc :CreateAutoProtectionPolicyBinding, ::Google::Cloud::BackupDR::V1::CreateAutoProtectionPolicyBindingRequest, ::Google::Longrunning::Operation
+            # Returns the auto protection policy binding read from the CCFE tables.
+            rpc :GetAutoProtectionPolicyBinding, ::Google::Cloud::BackupDR::V1::GetAutoProtectionPolicyBindingRequest, ::Google::Cloud::BackupDR::V1::AutoProtectionPolicyBinding
+            # Returns the auto protection policy bindings read from the CCFE tables.
+            rpc :ListAutoProtectionPolicyBindings, ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsRequest, ::Google::Cloud::BackupDR::V1::ListAutoProtectionPolicyBindingsResponse
+            # Lists AppliedAutoProtectionPolicies in a given project and location.
+            rpc :ListAppliedAutoProtectionPolicies, ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesRequest, ::Google::Cloud::BackupDR::V1::ListAppliedAutoProtectionPoliciesResponse
+            # InitiateDeleteAutoProtectionPolicyBinding initiates delete for
+            # AutoProtectionPolicy Binding
+            rpc :InitiateDeleteAutoProtectionPolicyBinding, ::Google::Cloud::BackupDR::V1::InitiateDeleteAutoProtectionPolicyBindingRequest, ::Google::Longrunning::Operation
+            # Lists Binding Matching Resources for a given AutoProtectionPolicyBinding.
+            rpc :ListBindingMatchingResources, ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesRequest, ::Google::Cloud::BackupDR::V1::ListBindingMatchingResourcesResponse
+            # Creates a new RestoreTemplate in a given project and location.
+            rpc :CreateRestoreTemplate, ::Google::Cloud::BackupDR::V1::CreateRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Gets details of a RestoreTemplate.
+            rpc :GetRestoreTemplate, ::Google::Cloud::BackupDR::V1::GetRestoreTemplateRequest, ::Google::Cloud::BackupDR::V1::RestoreTemplate
+            # Lists RestoreTemplates in a given project and location.
+            rpc :ListRestoreTemplates, ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesRequest, ::Google::Cloud::BackupDR::V1::ListRestoreTemplatesResponse
+            # Updates the settings of a RestoreTemplate.
+            rpc :UpdateRestoreTemplate, ::Google::Cloud::BackupDR::V1::UpdateRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Deletes a RestoreTemplate.
+            rpc :DeleteRestoreTemplate, ::Google::Cloud::BackupDR::V1::DeleteRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Runs a RestoreTemplate.
+            rpc :RunRestoreTemplate, ::Google::Cloud::BackupDR::V1::RunRestoreTemplateRequest, ::Google::Longrunning::Operation
+            # Gets details of a RestoreTemplateExecution.
+            rpc :GetRestoreTemplateExecution, ::Google::Cloud::BackupDR::V1::GetRestoreTemplateExecutionRequest, ::Google::Cloud::BackupDR::V1::RestoreTemplateExecution
+            # Lists RestoreTemplateExecutions in a given project, location and restore
+            # template.
+            rpc :ListRestoreTemplateExecutions, ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsRequest, ::Google::Cloud::BackupDR::V1::ListRestoreTemplateExecutionsResponse
+            # Triggers cleanup of restored resources created during execution.
+            rpc :TriggerRestoreCleanup, ::Google::Cloud::BackupDR::V1::TriggerRestoreCleanupRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreVerificationPlan in a given project and location.
+            rpc :CreateRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :CreateRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1::CreateRestoreVerificationPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :GetRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanAssociationRequest, ::Google::Cloud::BackupDR::V1::RestoreVerificationPlanAssociation
+            # Lists RestoreVerificationPlanAssociations in a given
+            # RestoreVerificationPlan.
+            rpc :ListRestoreVerificationPlanAssociations, ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsRequest, ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlanAssociationsResponse
+            # Deletes a single RestoreVerificationPlanAssociation in a given
+            # RestoreVerificationPlan.
+            rpc :DeleteRestoreVerificationPlanAssociation, ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Triggers a new Restore Verification for the association in a given
+            # RestoreVerificationPlan.
+            rpc :TriggerRestoreVerification, ::Google::Cloud::BackupDR::V1::TriggerRestoreVerificationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single RestoreVerificationPlan. Returns the requested
+            # RestoreVerificationPlan.
+            rpc :GetRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1::GetRestoreVerificationPlanRequest, ::Google::Cloud::BackupDR::V1::RestoreVerificationPlan
+            # Lists RestoreVerificationPlans in a given project and location.
+            rpc :ListRestoreVerificationPlans, ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansRequest, ::Google::Cloud::BackupDR::V1::ListRestoreVerificationPlansResponse
+            # Deletes a single RestoreVerificationPlan. If the `force` flag is set to
+            # `true`, any RestoreVerificationPlanAssociations linked to this
+            # RestoreVerificationPlan will also be deleted.
+            rpc :DeleteRestoreVerificationPlan, ::Google::Cloud::BackupDR::V1::DeleteRestoreVerificationPlanRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -44,10 +44,11 @@ module Google
         #     Required. Target project or location to make a call.
         #
         #     Format:
-        #     * `projects/{project-id}`
-        #     * `projects/{project-id}/locations/{location-id}`
         #
-        #     If no location is specified, a region will be chosen automatically.
+        #     * `projects/{project-id}`
+        #     * `projects/{project-id}/locations/-`
+        #
+        #     Regional `{location-id}` values are not supported.
         # @!attribute [rw] input
         #   @return [::Google::Maps::RouteOptimization::V1::Uri]
         #     Required. The URI of the Cloud Storage object containing the
@@ -93,10 +94,11 @@ module Google
         #     Required. Target project and location to make a call.
         #
         #     Format:
-        #     * `projects/{project-id}`
-        #     * `projects/{project-id}/locations/{location-id}`
         #
-        #     If no location is specified, a region will be chosen automatically.
+        #     * `projects/{project-id}`
+        #     * `projects/{project-id}/locations/-`
+        #
+        #     Regional `{location-id}` values are not supported.
         # @!attribute [rw] model_configs
         #   @return [::Array<::Google::Maps::RouteOptimization::V1::BatchOptimizeToursRequest::AsyncModelConfig>]
         #     Required. Input/Output information each purchase model, such as file paths
@@ -148,10 +150,11 @@ module Google
         #     Required. Target project or location to make a call.
         #
         #     Format:
-        #     * `projects/{project-id}`
-        #     * `projects/{project-id}/locations/{location-id}`
         #
-        #     If no location is specified, a region will be chosen automatically.
+        #     * `projects/{project-id}`
+        #     * `projects/{project-id}/locations/-`
+        #
+        #     Regional `{location-id}` values are not supported.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     If this timeout is set, the server returns a response before the timeout
@@ -451,7 +454,10 @@ module Google
           #     fields of the same name.
           # @!attribute [rw] skipped_mandatory_shipment_count
           #   @return [::Integer]
-          #     Number of mandatory shipments skipped.
+          #     Number of high priority shipments skipped.
+          #     High priority shipments are those with an unset
+          #     {::Google::Maps::RouteOptimization::V1::Shipment#penalty_cost Shipment.penalty_cost}
+          #     field.
           # @!attribute [rw] used_vehicle_count
           #   @return [::Integer]
           #     Number of vehicles used. Note: if a vehicle route is empty and
@@ -833,14 +839,14 @@ module Google
         #     considered as null.
         # @!attribute [rw] penalty_cost
         #   @return [::Float]
-        #     If the shipment is not completed, this penalty is added to the overall
-        #     cost of the routes. A shipment is considered completed if one of its pickup
-        #     and delivery alternatives is visited. The cost may be expressed in the
-        #     same unit used for all other cost-related fields in the model and must be
-        #     positive.
+        #     Optional. If the shipment is not completed, this penalty is added to the
+        #     overall cost of the routes. A shipment is considered completed if one of
+        #     its pickup and delivery alternatives is visited. The cost may be expressed
+        #     in the same unit used for all other cost-related fields in the model and
+        #     must be non-negative.
         #
-        #     *IMPORTANT*: If this penalty is not specified, it is considered infinite,
-        #     i.e. the shipment must be completed.
+        #     *IMPORTANT*: If this penalty is not specified, it is considered higher
+        #     priority than shipments with a specified `penalty cost`.
         # @!attribute [rw] allowed_vehicle_indices
         #   @return [::Array<::Integer>]
         #     The set of vehicles that may perform this shipment. If empty, all vehicles
@@ -1094,6 +1100,7 @@ module Google
 
             # In this mode, two shipments with incompatible types can never be on the
             # same vehicle at the same time:
+            #
             # * They can share the same vehicle only if one is delivered before the
             #   other is picked up.
             # * When both shipments are pickups-only (no deliveries) or deliveries-only
@@ -1574,12 +1581,14 @@ module Google
           #     makes the route incur a cost, quadratic in the duration. This cost adds
           #     up to other costs defined in the model, with the same unit.
           #
-          #     If defined, `quadratic_soft_max_duration` must be nonnegative. If
-          #     `max_duration` is also defined, `quadratic_soft_max_duration` must be
-          #     less than `max_duration`, and the difference must be no larger than one
-          #     day:
+          #     If `quadratic_soft_max_duration` is set, the following conditions must be
+          #     met:
           #
-          #        `max_duration - quadratic_soft_max_duration <= 86400 seconds`
+          #     *   It must be non-negative.
+          #     *   `max_duration` must be defined.
+          #     *   `quadratic_soft_max_duration` must be less than `max_duration`.
+          #     *   The difference must be no more than one day:
+          #         `max_duration - quadratic_soft_max_duration <= 86400 seconds`
           # @!attribute [rw] cost_per_square_hour_after_quadratic_soft_max
           #   @return [::Float]
           #     Cost per square hour incurred if the
@@ -1635,6 +1644,13 @@ module Google
 
             # Travel mode corresponding to walking directions.
             WALKING = 2
+
+            # Two-wheeled, motorized vehicle. For example, motorcycle. Note that this
+            # differs from the BICYCLING travel mode which covers human-powered mode.
+            # This travel mode is supported only in the countries listed at
+            # [Countries and regions supported for two-wheeled
+            # vehicles](https://developers.google.com/maps/documentation/routes/coverage-two-wheeled).
+            TWO_WHEELER = 5
           end
 
           # Policy on how a vehicle can be unloaded. Applies only to shipments having
@@ -2201,6 +2217,12 @@ module Google
           #     Experimental: See
           #     https://developers.google.com/maps/tt/route-optimization/experimental/u-turn-avoidance/make-request
           #     for more details.
+          # @!attribute [rw] visit_type
+          #   @return [::Google::Maps::RouteOptimization::V1::ShipmentRoute::Visit::VisitType]
+          #     Optional. Specifies the type of the visit.
+          #     Overrides the
+          #     {::Google::Maps::RouteOptimization::V1::ShipmentRoute::Visit#is_pickup Visit.is_pickup}
+          #     field.
           class Visit
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2212,6 +2234,20 @@ module Google
             class LoadDemandsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Indicates whether the visit is a pickup, a delivery, or a visit to a
+            # [Stop][google.maps.routeoptimization.v1.Stop]. Visits to a stop are used
+            # only when multimodal optimization is enabled.
+            module VisitType
+              # Unspecified visit type.
+              VISIT_TYPE_UNSPECIFIED = 0
+
+              # Visit corresponds to a shipment pickup.
+              PICKUP_SHIPMENT = 1
+
+              # Visit corresponds to a shipment delivery.
+              DELIVER_SHIPMENT = 2
             end
           end
 
@@ -2517,7 +2553,7 @@ module Google
 
         # Aggregated metrics for
         # {::Google::Maps::RouteOptimization::V1::ShipmentRoute ShipmentRoute} (resp. for
-        # {::Google::Maps::RouteOptimization::V1::OptimizeToursResponse OptimizeToursResponse}
+        # {::Google::Maps::RouteOptimization::V1::OptimizeToursResponse OptimizeToursResponse})
         # over all
         # {::Google::Maps::RouteOptimization::V1::ShipmentRoute::Transition Transition}
         # and/or {::Google::Maps::RouteOptimization::V1::ShipmentRoute::Visit Visit} (resp.
@@ -2529,7 +2565,10 @@ module Google
         #     counts once.
         # @!attribute [rw] performed_mandatory_shipment_count
         #   @return [::Integer]
-        #     Number of mandatory shipments performed.
+        #     Number of high priority shipments performed. High priority shipments are
+        #     those with an unset
+        #     {::Google::Maps::RouteOptimization::V1::Shipment#penalty_cost Shipment.penalty_cost}
+        #     field.
         #
         #     Experimental: This field's behavior or existence may change in future.
         # @!attribute [rw] performed_shipment_penalty_cost_sum

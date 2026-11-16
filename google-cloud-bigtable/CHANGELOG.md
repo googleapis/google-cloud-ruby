@@ -1,5 +1,21 @@
 # Release History
 
+### 2.13.2 (2026-11-10)
+
+#### Bug Fixes
+
+* fix multiple conformance tests ([#36699](https://github.com/googleapis/google-cloud-ruby/issues/36699)) 
+#### Documentation
+
+* mark legacy handwritten instance admin classes and me… ([#36696](https://github.com/googleapis/google-cloud-ruby/issues/36696)) 
+* mark legacy handwritten table admin classes and methods as deprecated ([#36701](https://github.com/googleapis/google-cloud-ruby/issues/36701)) 
+
+### 2.13.1 (2026-10-29)
+
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 2.13.0 (2026-06-11)
 
 #### Features

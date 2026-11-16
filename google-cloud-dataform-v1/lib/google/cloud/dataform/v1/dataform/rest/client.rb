@@ -5115,6 +5115,97 @@ module Google
               end
 
               ##
+              # Creates a new CompilationResult in a given project and location
+              # asynchronously.
+              #
+              # @overload create_compilation_result_long_running(request, options = nil)
+              #   Pass arguments to `create_compilation_result_long_running` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1::CreateCompilationResultRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1::CreateCompilationResultRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_compilation_result_long_running(parent: nil, compilation_result: nil)
+              #   Pass arguments to `create_compilation_result_long_running` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository in which to create the compilation result. Must be
+              #     in the format `projects/*/locations/*/repositories/*`.
+              #   @param compilation_result [::Google::Cloud::Dataform::V1::CompilationResult, ::Hash]
+              #     Required. The compilation result to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1::CreateCompilationResultRequest.new
+              #
+              #   # Call the create_compilation_result_long_running method.
+              #   result = client.create_compilation_result_long_running request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_compilation_result_long_running request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1::CreateCompilationResultRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_compilation_result_long_running.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_compilation_result_long_running.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_compilation_result_long_running.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.create_compilation_result_long_running request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns CompilationResultActions in a given CompilationResult.
               #
               # @overload query_compilation_result_actions(request, options = nil)
@@ -7014,6 +7105,11 @@ module Google
                   #
                   attr_reader :create_compilation_result
                   ##
+                  # RPC-specific configuration for `create_compilation_result_long_running`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_compilation_result_long_running
+                  ##
                   # RPC-specific configuration for `query_compilation_result_actions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -7213,6 +7309,8 @@ module Google
                     @get_compilation_result = ::Gapic::Config::Method.new get_compilation_result_config
                     create_compilation_result_config = parent_rpcs.create_compilation_result if parent_rpcs.respond_to? :create_compilation_result
                     @create_compilation_result = ::Gapic::Config::Method.new create_compilation_result_config
+                    create_compilation_result_long_running_config = parent_rpcs.create_compilation_result_long_running if parent_rpcs.respond_to? :create_compilation_result_long_running
+                    @create_compilation_result_long_running = ::Gapic::Config::Method.new create_compilation_result_long_running_config
                     query_compilation_result_actions_config = parent_rpcs.query_compilation_result_actions if parent_rpcs.respond_to? :query_compilation_result_actions
                     @query_compilation_result_actions = ::Gapic::Config::Method.new query_compilation_result_actions_config
                     list_workflow_configs_config = parent_rpcs.list_workflow_configs if parent_rpcs.respond_to? :list_workflow_configs

@@ -31,7 +31,7 @@ jobs:
         ruby-version: "3.3"
     - name: Install tools
       run: |
-        gem install --no-document toys
+        gem install --no-document toys -v '~> 0.22.0'
     - name: Update PR
       run: |
         toys update-pr -v ${GITHUB_EVENT_INPUTS_OPTIONS} ${GITHUB_EVENT_INPUTS_PR}

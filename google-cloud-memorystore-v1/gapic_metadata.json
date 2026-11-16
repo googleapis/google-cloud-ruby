@@ -10,9 +10,19 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::Memorystore::V1::Memorystore::Client",
           "rpcs": {
+            "ListAclPolicies": {
+              "methods": [
+                "list_acl_policies"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "list_instances"
+              ]
+            },
+            "GetAclPolicy": {
+              "methods": [
+                "get_acl_policy"
               ]
             },
             "GetInstance": {
@@ -20,14 +30,39 @@
                 "get_instance"
               ]
             },
+            "CreateAclPolicy": {
+              "methods": [
+                "create_acl_policy"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "create_instance"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "update_acl_policy"
+              ]
+            },
             "UpdateInstance": {
               "methods": [
                 "update_instance"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "delete_acl_policy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "get_acl_policy_revision"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "list_acl_policy_revisions"
               ]
             },
             "DeleteInstance": {

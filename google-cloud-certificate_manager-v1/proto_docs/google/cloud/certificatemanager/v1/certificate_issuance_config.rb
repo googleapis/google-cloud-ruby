@@ -28,21 +28,21 @@ module Google
         #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of certificate configs to return per call.
+        #     Optional. Maximum number of certificate configs to return per call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-        #     Indicates that this is a continuation of a prior
-        #     `ListCertificateIssuanceConfigs` call, and that the system should return
-        #     the next page of data.
+        #     Optional. The value returned by the last
+        #     `ListCertificateIssuanceConfigsResponse`. Indicates that this is a
+        #     continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
+        #     system should return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the Certificates Configs returned.
+        #     Optional. Filter expression to restrict the Certificates Configs returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of Certificate Config field names used to specify the order of the
-        #     returned results. The default sorting order is ascending. To specify
-        #     descending order for a field, add a suffix `" desc"`.
+        #     Optional. A list of Certificate Config field names used to specify the
+        #     order of the returned results. The default sorting order is ascending. To
+        #     specify descending order for a field, add a suffix `" desc"`.
         class ListCertificateIssuanceConfigsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,6 +91,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for the `UpdateCertificateIssuanceConfig` method.
+        # @!attribute [rw] certificate_issuance_config
+        #   @return [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig]
+        #     Required. A definition of the certificate issuance config to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+        class UpdateCertificateIssuanceConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for the `DeleteCertificateIssuanceConfig` method.
         # @!attribute [rw] name
         #   @return [::String]
@@ -104,7 +118,7 @@ module Google
         # CertificateIssuanceConfig specifies how to issue and manage a certificate.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the certificate issuance config.
+        #     Identifier. A user-defined name of the certificate issuance config.
         #     CertificateIssuanceConfig names must be unique globally and match pattern
         #     `projects/*/locations/*/certificateIssuanceConfigs/*`.
         # @!attribute [r] create_time
@@ -115,10 +129,11 @@ module Google
         #     Output only. The last update timestamp of a CertificateIssuanceConfig.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a CertificateIssuanceConfig.
+        #     Optional. Set of labels associated with a CertificateIssuanceConfig.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a CertificateIssuanceConfig.
+        #     Optional. One or more paragraphs of text description of a
+        #     CertificateIssuanceConfig.
         # @!attribute [rw] certificate_authority_config
         #   @return [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig::CertificateAuthorityConfig]
         #     Required. The CA that issues the workload certificate. It includes the CA
@@ -134,6 +149,12 @@ module Google
         # @!attribute [rw] key_algorithm
         #   @return [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig::KeyAlgorithm]
         #     Required. The key algorithm to use when generating the private key.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class CertificateIssuanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,6 +185,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

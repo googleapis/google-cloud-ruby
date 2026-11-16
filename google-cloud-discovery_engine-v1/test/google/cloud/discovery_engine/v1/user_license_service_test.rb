@@ -75,6 +75,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
 
     list_user_licenses_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_user_licenses, name
@@ -83,6 +84,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -93,35 +95,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
       end
 
       # Use hash object
-      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -129,6 +131,64 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::ClientTest < Min
 
       # Verify method calls
       assert_equal 5, list_user_licenses_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_license_configs_usage_stats
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    list_license_configs_usage_stats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_license_configs_usage_stats, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_license_configs_usage_stats_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_license_configs_usage_stats({ parent: parent }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_license_configs_usage_stats parent: parent do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_license_configs_usage_stats ::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest.new(parent: parent) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_license_configs_usage_stats({ parent: parent }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_license_configs_usage_stats(::Google::Cloud::DiscoveryEngine::V1::ListLicenseConfigsUsageStatsRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_license_configs_usage_stats_client_stub.call_rpc_count
     end
   end
 

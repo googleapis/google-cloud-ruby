@@ -28,55 +28,70 @@ module Google
         #     the format `projects/*/locations/*`.
         # @!attribute [rw] connection_profile
         #   @return [::Google::Cloud::Datastream::V1::ConnectionProfile]
-        #     An ad-hoc connection profile configuration.
+        #     Optional. An ad-hoc connection profile configuration.
         #
         #     Note: The following fields are mutually exclusive: `connection_profile`, `connection_profile_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] connection_profile_name
         #   @return [::String]
-        #     A reference to an existing connection profile.
+        #     Optional. A reference to an existing connection profile.
         #
         #     Note: The following fields are mutually exclusive: `connection_profile_name`, `connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] full_hierarchy
         #   @return [::Boolean]
-        #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-        #     current level (FALSE).
+        #     Optional. Whether to retrieve the full hierarchy of data objects (TRUE)
+        #     or only the current level (FALSE).
         #
         #     Note: The following fields are mutually exclusive: `full_hierarchy`, `hierarchy_depth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hierarchy_depth
         #   @return [::Integer]
-        #     The number of hierarchy levels below the current level to be retrieved.
+        #     Optional. The number of hierarchy levels below the current level to be
+        #     retrieved.
         #
         #     Note: The following fields are mutually exclusive: `hierarchy_depth`, `full_hierarchy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oracle_rdbms
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
-        #     Oracle RDBMS to enrich with child data objects and metadata.
+        #     Optional. Oracle RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
-        #     MySQL RDBMS to enrich with child data objects and metadata.
+        #     Optional. MySQL RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
-        #     PostgreSQL RDBMS to enrich with child data objects and metadata.
+        #     Optional. PostgreSQL RDBMS to enrich with child data objects and
+        #     metadata.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_rdbms
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
-        #     SQLServer RDBMS to enrich with child data objects and metadata.
+        #     Optional. SQLServer RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_org
         #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
-        #     Salesforce organization to enrich with child data objects and metadata.
+        #     Optional. Salesforce organization to enrich with child data objects and
+        #     metadata.
         #
-        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mongodb_cluster
         #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
-        #     MongoDB cluster to enrich with child data objects and metadata.
+        #     Optional. MongoDB cluster to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] spanner_database
+        #   @return [::Google::Cloud::Datastream::V1::SpannerDatabase]
+        #     Optional. Spanner database to enrich with child data objects and
+        #     metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `spanner_database`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] source_catalog
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Optional. Source catalog to enrich with child data objects and metadata.
+        #     This is mainly used to represent SaaS sources databases.
+        #
+        #     Note: The following fields are mutually exclusive: `source_catalog`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -87,32 +102,43 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
         #     Enriched Oracle RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     Enriched MySQL RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
         #     Enriched PostgreSQL RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_rdbms
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
         #     Enriched SQLServer RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_org
         #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
         #     Enriched Salesforce organization.
         #
-        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mongodb_cluster
         #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
         #     Enriched MongoDB cluster.
         #
-        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `spanner_database`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] spanner_database
+        #   @return [::Google::Cloud::Datastream::V1::SpannerDatabase]
+        #     Enriched Spanner database.
+        #
+        #     Note: The following fields are mutually exclusive: `spanner_database`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `source_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] source_catalog
+        #   @return [::Google::Cloud::Datastream::V1::SourceCatalog]
+        #     Enriched source catalog. This is mainly used to represent SaaS sources
+        #     databases.
+        #
+        #     Note: The following fields are mutually exclusive: `source_catalog`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`, `spanner_database`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,10 +151,10 @@ module Google
         #     returned. Must be in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of Ips to return, will likely not be specified.
+        #     Optional. Maximum number of Ips to return, will likely not be specified.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListStaticIps` call.
+        #     Optional. A page token, received from a previous `ListStaticIps` call.
         #     will likely not be specified.
         class FetchStaticIpsRequest
           include ::Google::Protobuf::MessageExts
@@ -154,22 +180,22 @@ module Google
         #     Required. The parent that owns the collection of connection profiles.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of connection profiles to return.
+        #     Optional. Maximum number of connection profiles to return.
         #     If unspecified, at most 50 connection profiles will be returned.
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token received from a previous `ListConnectionProfiles` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. Page token received from a previous `ListConnectionProfiles`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to `ListConnectionProfiles`
         #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter request.
+        #     Optional. Filter request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Order by fields for the result.
+        #     Optional. Order by fields for the result.
         class ListConnectionProfilesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,22 +331,22 @@ module Google
         #     Required. The parent that owns the collection of streams.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of streams to return.
+        #     Optional. Maximum number of streams to return.
         #     If unspecified, at most 50 streams will  be returned. The maximum
         #     value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token received from a previous `ListStreams` call.
+        #     Optional. Page token received from a previous `ListStreams` call.
         #     Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to `ListStreams`
         #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter request.
+        #     Optional. Filter request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Order by fields for the result.
+        #     Optional. Order by fields for the result.
         class ListStreamsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -494,6 +520,11 @@ module Google
         #   @return [::String]
         #     Required. The name of the stream object resource to start a backfill job
         #     for.
+        # @!attribute [rw] event_filter
+        #   @return [::Google::Cloud::Datastream::V1::EventFilter]
+        #     Optional. Optional event filter. If not set, or empty, the backfill will be
+        #     performed on the entire object. This is currently used for partial backfill
+        #     and only supported for SQL sources.
         class StartBackfillJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -534,12 +565,12 @@ module Google
         #     Required. The parent stream that owns the collection of objects.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of objects to return. Default is 50.
+        #     Optional. Maximum number of objects to return. Default is 50.
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token received from a previous `ListStreamObjectsRequest` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. Page token received from a previous `ListStreamObjectsRequest`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListStreamObjectsRequest` must match the call that provided the page
@@ -647,18 +678,18 @@ module Google
         #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token received from a previous `ListPrivateConnections` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. Page token received from a previous `ListPrivateConnections`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListPrivateConnections` must match the call that provided the page
         #     token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter request.
+        #     Optional. Filter request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Order by fields for the result.
+        #     Optional. Order by fields for the result.
         class ListPrivateConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -753,13 +784,13 @@ module Google
         #     Required. The parent that owns the collection of Routess.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of Routes to return. The service may return
+        #     Optional. Maximum number of Routes to return. The service may return
         #     fewer than this value. If unspecified, at most 50 Routes
         #     will be returned. The maximum value is 1000; values above 1000 will be
         #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Page token received from a previous `ListRoutes` call.
+        #     Optional. Page token received from a previous `ListRoutes` call.
         #     Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
@@ -767,10 +798,10 @@ module Google
         #     token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter request.
+        #     Optional. Filter request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Order by fields for the result.
+        #     Optional. Order by fields for the result.
         class ListRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

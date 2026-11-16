@@ -28,6 +28,12 @@ module Google
         #     Identifier. The resource name of the `DaiAuthenticationKey`.
         #     Format:
         #     `networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}`
+        # @!attribute [r] key
+        #   @return [::String]
+        #     Output only. The value of the secure key.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The date and time this DaiAuthenticationKey was created.
         # @!attribute [r] status
         #   @return [::Google::Ads::AdManager::V1::DaiAuthenticationKeyStatusEnum::DaiAuthenticationKeyStatus]
         #     Output only. The status of this DaiAuthenticationKey.

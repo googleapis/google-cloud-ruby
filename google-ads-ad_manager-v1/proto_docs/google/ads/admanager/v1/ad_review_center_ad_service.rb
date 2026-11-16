@@ -25,14 +25,16 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
         #     Optional. Only return ads with the given status.
+        #     Use this filter for web properties where [Manual Creative Review
+        #     (MCR)](https://support.google.com/admanager/answer/2913553) is not
+        #     enabled.
         #
         #     Note: The following fields are mutually exclusive: `status`, `manual_review_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] manual_review_status
         #   @return [::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus]
-        #     Optional. Only return ads with the given manual review status. Only
-        #     available for networks with Manual Creative Review enabled. For more
-        #     information, see
-        #     https://support.google.com/admanager/answer/2586531#manual-creative-review.
+        #     Optional. Only return ads with the given manual review status.
+        #     Use this filter for web properties where [Manual Creative Review
+        #     (MCR)](https://support.google.com/admanager/answer/2913553) is enabled.
         #
         #     Note: The following fields are mutually exclusive: `manual_review_status`, `status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
@@ -68,9 +70,8 @@ module Google
         # @!attribute [rw] date_time_range
         #   @return [::Google::Type::Interval]
         #     Optional. If provided, only return ads that served within the given date
-        #     range (inclusive). The  date range must be within the last 30 days. If not
-        #     provided, the date range will be the last 30 days. This filter does not
-        #     apply to the PENDING manual review status.
+        #     range (inclusive). The date range must be within the last 30 days. If not
+        #     provided, the date range will be the last 30 days.
         # @!attribute [rw] search_text
         #   @return [::Array<::String>]
         #     Optional. If provided, restrict the search to AdReviewCenterAds associated
@@ -83,6 +84,44 @@ module Google
         #     Optional. If provided, restrict the search to creatives belonging to one of
         #     the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
         #     buyer account IDs can be found using the `ProgrammaticBuyerService`.
+        # @!attribute [rw] ad_response_id
+        #   @return [::Array<::String>]
+        #     Optional. If provided, only return ads with the given ad response IDs.
+        #     This filter is exclusive and cannot be combined with any other filters.
+        #     Maximum of 10 IDs can be specified.
+        # @!attribute [rw] advertiser_display_names
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives with the given
+        #     advertiser names.
+        # @!attribute [rw] language_codes
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives serving in the
+        #     given language codes.
+        # @!attribute [rw] region_codes
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives serving in the
+        #     given region codes.
+        # @!attribute [rw] ad_types
+        #   @return [::Array<::Google::Ads::AdManager::V1::ArcCreativeFormatEnum::ArcCreativeFormat>]
+        #     Optional. If provided, restrict the search to creatives with the given ad
+        #     types.
+        # @!attribute [rw] advertiser_apps
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives promoting the given
+        #     app.
+        # @!attribute [rw] publisher_domains
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives belonging to the
+        #     given publisher domain.
+        # @!attribute [rw] new_in_last_days
+        #   @return [::Integer]
+        #     Optional. If provided, restrict the search to creatives which appeared for
+        #     the first time within the past X days. Must be within the last 30 days (1
+        #     to 30, inclusive).
+        # @!attribute [rw] label_ids
+        #   @return [::Array<::String>]
+        #     Optional. If provided, restrict the search to creatives associated with the
+        #     given custom label IDs.
         class SearchAdReviewCenterAdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -185,6 +224,102 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Request object for `FetchAdReviewCenterCustomLabels` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of AdReviewCenterAds
+        #     custom labels. Format:
+        #     networks/\\{network_code}/webProperties/\\{web_property_code}
+        #
+        #     Since a network can only have a single web property of each
+        #     `ExchangeSyndicationProduct`, you can use the
+        #     `ExchangeSyndicationProduct` as an alias for the web property code:
+        #
+        #     `networks/{network_code}/webProperties/display`
+        #
+        #     `networks/{network_code}/webProperties/videoAndAudio`
+        #
+        #     `networks/{network_code}/webProperties/mobileApp`
+        #
+        #     `networks/{network_code}/webProperties/games`
+        class FetchAdReviewCenterCustomLabelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `FetchAdReviewCenterCustomLabels` method.
+        # @!attribute [r] custom_labels
+        #   @return [::Array<::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse::CustomLabel>]
+        #     Output only. The list of custom labels.
+        class FetchAdReviewCenterCustomLabelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A custom label for an Ad Review Center ad. Custom labels can help you
+          # filter and find creatives with the associated label. For more information,
+          # see https://support.google.com/admanager/answer/13812863.
+          # @!attribute [r] label_id
+          #   @return [::String]
+          #     Output only. The unique identifier of the custom label.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The user-defined display name of the custom label.
+          class CustomLabel
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request object for `BatchApplyAdReviewCenterCustomLabels` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of AdReviewCenterAds.
+        #     Format: networks/\\{network_code}/webProperties/\\{web_property_code}
+        #
+        #     Since a network can only have a single web property of each
+        #     `ExchangeSyndicationProduct`, you can use the
+        #     `ExchangeSyndicationProduct` as an alias for the web property code:
+        #
+        #     `networks/{network_code}/webProperties/display`
+        #
+        #     `networks/{network_code}/webProperties/videoAndAudio`
+        #
+        #     `networks/{network_code}/webProperties/mobileApp`
+        #
+        #     `networks/{network_code}/webProperties/games`
+        # @!attribute [rw] add_labels
+        #   @return [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest::BatchLabelAction]
+        #     Optional. Labels to add to the specified ads.
+        # @!attribute [rw] remove_labels
+        #   @return [::Google::Ads::AdManager::V1::BatchApplyAdReviewCenterCustomLabelsRequest::BatchLabelAction]
+        #     Optional. Labels to remove from the specified ads.
+        class BatchApplyAdReviewCenterCustomLabelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Actions to perform on custom labels for batch updates.
+          # @!attribute [rw] names
+          #   @return [::Array<::String>]
+          #     Required. The resource names of the `AdReviewCenterAd`s to update.
+          #     Format:
+          #     `networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad_id}`
+          # @!attribute [rw] label_ids
+          #   @return [::Array<::String>]
+          #     Required. The
+          #     {::Google::Ads::AdManager::V1::FetchAdReviewCenterCustomLabelsResponse::CustomLabel#label_id labelId}
+          #     to add or remove.
+          class BatchLabelAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response object for `BatchApplyAdReviewCenterCustomLabels` method.
+        class BatchApplyAdReviewCenterCustomLabelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

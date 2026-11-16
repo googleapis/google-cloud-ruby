@@ -33,7 +33,7 @@ module Google
         # @!attribute [rw] additional_user_properties
         #   @return [::Array<::Google::Ads::DataManager::V1::UserProperty>]
         #     Optional. A bucket of any additional [user
-        #     properties](https://developers.google.com/analytics/devguides/collection/protocol/ga4/user-properties)
+        #     properties](https://support.google.com/analytics/answer/9355671)
         #     for the user associated with this event.
         class UserProperties
           include ::Google::Protobuf::MessageExts
@@ -41,7 +41,7 @@ module Google
         end
 
         # A bucket of any additional [user
-        # properties](https://developers.google.com/analytics/devguides/collection/protocol/ga4/user-properties)
+        # properties](https://support.google.com/analytics/answer/9355671)
         # for the user associated with this event.
         # @!attribute [rw] property_name
         #   @return [::String]

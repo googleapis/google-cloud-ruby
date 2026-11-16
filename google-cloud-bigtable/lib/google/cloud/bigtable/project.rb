@@ -134,6 +134,7 @@ module Google
         #   instances.all do |instance|
         #     puts instance.instance_id
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def instances token: nil
           ensure_service!
@@ -157,6 +158,7 @@ module Google
         #   if instance
         #     puts instance.instance_id
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def instance instance_id
           ensure_service!
@@ -257,6 +259,7 @@ module Google
         #   else
         #     instance = job.instance
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def create_instance instance_id, display_name: nil, type: nil, labels: nil, clusters: nil
           labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
@@ -291,6 +294,7 @@ module Google
         #     puts cluster.cluster_id
         #     puts cluster.ready?
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
         #
         def clusters token: nil
           ensure_service!
@@ -314,6 +318,7 @@ module Google
         #     puts table.name
         #     puts table.column_families
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def tables instance_id
           ensure_service!
@@ -455,6 +460,7 @@ module Google
         #   end
         #
         #   puts table
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def create_table instance_id, table_id, column_families: nil, granularity: nil, initial_splits: nil, &block
           ensure_service!
@@ -483,6 +489,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   bigtable.delete_table "my-instance", "my-table"
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete_table instance_id, table_id
           service.delete_table instance_id, table_id
@@ -535,6 +542,7 @@ module Google
         #   else
         #     backup = job.backup
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def copy_backup dest_project_id:, dest_instance_id:, dest_cluster_id:, new_backup_id:,
                         source_instance_id:, source_cluster_id:, source_backup_id:, expire_time:

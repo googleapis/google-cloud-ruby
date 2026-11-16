@@ -70,6 +70,42 @@ module Google
             SERVING = 5
           end
         end
+
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::ArcCreativeFormatEnum::ArcCreativeFormat ArcCreativeFormat}
+        #
+        # Message representing the ad review center creative formats which is about how
+        # the creative is rendered for the end user.
+        class ArcCreativeFormatEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the status of an ArcCreativeFormat.
+          #
+          # New values may be added in the future.
+          module ArcCreativeFormat
+            # Not specified value
+            ARC_CREATIVE_FORMAT_UNSPECIFIED = 0
+
+            # Text based creatives.
+            TEXT = 1
+
+            # Image creatives.
+            IMAGE = 2
+
+            # Video creatives.
+            VIDEO = 3
+
+            # Audio creatives.
+            AUDIO = 4
+
+            # Creatives leading to mobile app stores.
+            APP_INSTALLS = 5
+
+            # Creatives leading to rich media.
+            RICH_MEDIA = 6
+          end
+        end
       end
     end
   end

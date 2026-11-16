@@ -1,5 +1,59 @@
 # Release History
 
+### 4.4.0 (2026-11-10)
+
+#### Features
+
+* update API sources and regenerate ([#36703](https://github.com/googleapis/google-cloud-ruby/issues/36703)) 
+
+### 4.3.0 (2026-11-04)
+
+#### Features
+
+* update API sources and regenerate ([#36692](https://github.com/googleapis/google-cloud-ruby/issues/36692)) 
+
+### 4.2.0 (2026-10-26)
+
+#### Features
+
+* regenerate with gapic-generator-cloud 0.53.0 (gapic-common ~&gt; 1.5) ([#36635](https://github.com/googleapis/google-cloud-ruby/issues/36635)) 
+* regenerate with gapic-generator-cloud 0.54.0 (gapic-common ~&gt; 1.6) ([#36658](https://github.com/googleapis/google-cloud-ruby/issues/36658)) 
+* update API sources and regenerate ([#36650](https://github.com/googleapis/google-cloud-ruby/issues/36650)) 
+
+### 4.1.0 (2026-10-15)
+
+#### Features
+
+* update API sources and regenerate ([#36634](https://github.com/googleapis/google-cloud-ruby/issues/36634)) 
+
+### 4.0.1 (2026-10-12)
+
+#### Bug Fixes
+
+* surface GCE operation errors in quickstart sample and test ([#36620](https://github.com/googleapis/google-cloud-ruby/issues/36620)) 
+
+### 4.0.0 (2026-10-01)
+
+### ⚠ BREAKING CHANGES
+
+* all AggregatedList RPCs return_partial_success fields removed
+* all AggregatedList RPCs behavior is now return_partial_success=true
+* remove various legacy fields and enums removed from the API
+* update Compute v1 API to version 2026-09-01 ([#36616](https://github.com/googleapis/google-cloud-ruby/issues/36616))
+
+#### Features
+
+* update API sources and regenerate ([#36613](https://github.com/googleapis/google-cloud-ruby/issues/36613)) 
+* update Compute v1 API to version 2026-09-01 ([#36616](https://github.com/googleapis/google-cloud-ruby/issues/36616)) 
+#### Bug Fixes
+
+* all AggregatedList RPCs behavior is now return_partial_success=true 
+* all AggregatedList RPCs return_partial_success fields removed 
+* remove various legacy fields and enums removed from the API 
+#### Documentation
+
+* see https://docs.cloud.google.com/compute/docs/release-notes 
+
 ### 3.12.0 (2026-09-22)
 
 #### Features

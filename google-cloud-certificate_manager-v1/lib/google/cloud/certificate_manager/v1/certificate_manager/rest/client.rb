@@ -374,17 +374,17 @@ module Google
               #     Required. The project and location from which the certificate should be
               #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of certificates to return per call.
+              #     Optional. Maximum number of certificates to return per call.
               #   @param page_token [::String]
-              #     The value returned by the last `ListCertificatesResponse`. Indicates that
-              #     this is a continuation of a prior `ListCertificates` call, and that the
-              #     system should return the next page of data.
+              #     Optional. The value returned by the last `ListCertificatesResponse`.
+              #     Indicates that this is a continuation of a prior `ListCertificates` call,
+              #     and that the system should return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the Certificates returned.
+              #     Optional. Filter expression to restrict the Certificates returned.
               #   @param order_by [::String]
-              #     A list of Certificate field names used to specify the order of the returned
-              #     results. The default sorting order is ascending. To specify descending
-              #     order for a field, add a suffix `" desc"`.
+              #     Optional. A list of Certificate field names used to specify the order of
+              #     the returned results. The default sorting order is ascending. To specify
+              #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::Certificate>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -821,16 +821,16 @@ module Google
               #     Required. The project and location from which the certificate maps should
               #     be listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of certificate maps to return per call.
+              #     Optional. Maximum number of certificate maps to return per call.
               #   @param page_token [::String]
-              #     The value returned by the last `ListCertificateMapsResponse`. Indicates
-              #     that this is a continuation of a prior `ListCertificateMaps` call, and that
-              #     the system should return the next page of data.
+              #     Optional. The value returned by the last `ListCertificateMapsResponse`.
+              #     Indicates that this is a continuation of a prior `ListCertificateMaps`
+              #     call, and that the system should return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the Certificates Maps returned.
+              #     Optional. Filter expression to restrict the Certificates Maps returned.
               #   @param order_by [::String]
-              #     A list of Certificate Map field names used to specify the order of the
-              #     returned results. The default sorting order is ascending. To specify
+              #     Optional. A list of Certificate Map field names used to specify the order
+              #     of the returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMap>]
@@ -1271,19 +1271,20 @@ module Google
               #     certificate map entries should be listed, specified in the format
               #     `projects/*/locations/*/certificateMaps/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of certificate map entries to return. The service may return
-              #     fewer than this value.
-              #     If unspecified, at most 50 certificate map entries will be returned.
-              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #     Optional. Maximum number of certificate map entries to return. The service
+              #     may return fewer than this value. If unspecified, at most 50 certificate
+              #     map entries will be returned. The maximum value is 1000; values above 1000
+              #     will be coerced to 1000.
               #   @param page_token [::String]
-              #     The value returned by the last `ListCertificateMapEntriesResponse`.
-              #     Indicates that this is a continuation of a prior
-              #     `ListCertificateMapEntries` call, and that the system should return the
-              #     next page of data.
+              #     Optional. The value returned by the last
+              #     `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+              #     of a prior `ListCertificateMapEntries` call, and that the system should
+              #     return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the returned Certificate Map Entries.
+              #     Optional. Filter expression to restrict the returned Certificate Map
+              #     Entries.
               #   @param order_by [::String]
-              #     A list of Certificate Map Entry field names used to specify
+              #     Optional. A list of Certificate Map Entry field names used to specify
               #     the order of the returned results. The default sorting order is ascending.
               #     To specify descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1722,16 +1723,16 @@ module Google
               #     Required. The project and location from which the dns authorizations should
               #     be listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of dns authorizations to return per call.
+              #     Optional. Maximum number of dns authorizations to return per call.
               #   @param page_token [::String]
-              #     The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-              #     that this is a continuation of a prior `ListDnsAuthorizations` call, and
-              #     that the system should return the next page of data.
+              #     Optional. The value returned by the last `ListDnsAuthorizationsResponse`.
+              #     Indicates that this is a continuation of a prior `ListDnsAuthorizations`
+              #     call, and that the system should return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the Dns Authorizations returned.
+              #     Optional. Filter expression to restrict the Dns Authorizations returned.
               #   @param order_by [::String]
-              #     A list of Dns Authorization field names used to specify the order of the
-              #     returned results. The default sorting order is ascending. To specify
+              #     Optional. A list of Dns Authorization field names used to specify the order
+              #     of the returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::DnsAuthorization>]
@@ -2169,18 +2170,18 @@ module Google
               #     Required. The project and location from which the certificate should be
               #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of certificate configs to return per call.
+              #     Optional. Maximum number of certificate configs to return per call.
               #   @param page_token [::String]
-              #     The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-              #     Indicates that this is a continuation of a prior
-              #     `ListCertificateIssuanceConfigs` call, and that the system should return
-              #     the next page of data.
+              #     Optional. The value returned by the last
+              #     `ListCertificateIssuanceConfigsResponse`. Indicates that this is a
+              #     continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
+              #     system should return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the Certificates Configs returned.
+              #     Optional. Filter expression to restrict the Certificates Configs returned.
               #   @param order_by [::String]
-              #     A list of Certificate Config field names used to specify the order of the
-              #     returned results. The default sorting order is ascending. To specify
-              #     descending order for a field, add a suffix `" desc"`.
+              #     Optional. A list of Certificate Config field names used to specify the
+              #     order of the returned results. The default sorting order is ascending. To
+              #     specify descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2417,6 +2418,97 @@ module Google
               end
 
               ##
+              # Updates a CertificateIssuanceConfig.
+              #
+              # @overload update_certificate_issuance_config(request, options = nil)
+              #   Pass arguments to `update_certificate_issuance_config` via a request object, either of type
+              #   {::Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_certificate_issuance_config(certificate_issuance_config: nil, update_mask: nil)
+              #   Pass arguments to `update_certificate_issuance_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param certificate_issuance_config [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig, ::Hash]
+              #     Required. A definition of the certificate issuance config to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The update mask applies to the resource. For the `FieldMask`
+              #     definition, see
+              #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/certificate_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest.new
+              #
+              #   # Call the update_certificate_issuance_config method.
+              #   result = client.update_certificate_issuance_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_certificate_issuance_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::UpdateCertificateIssuanceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_certificate_issuance_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_certificate_issuance_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_certificate_issuance_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @certificate_manager_stub.update_certificate_issuance_config request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes a single CertificateIssuanceConfig.
               #
               # @overload delete_certificate_issuance_config(request, options = nil)
@@ -2526,16 +2618,16 @@ module Google
               #     Required. The project and location from which the TrustConfigs should be
               #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Maximum number of TrustConfigs to return per call.
+              #     Optional. Maximum number of TrustConfigs to return per call.
               #   @param page_token [::String]
-              #     The value returned by the last `ListTrustConfigsResponse`. Indicates
-              #     that this is a continuation of a prior `ListTrustConfigs` call, and that
-              #     the system should return the next page of data.
+              #     Optional. The value returned by the last `ListTrustConfigsResponse`.
+              #     Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+              #     and that the system should return the next page of data.
               #   @param filter [::String]
-              #     Filter expression to restrict the TrustConfigs returned.
+              #     Optional. Filter expression to restrict the TrustConfigs returned.
               #   @param order_by [::String]
-              #     A list of TrustConfig field names used to specify the order of the
-              #     returned results. The default sorting order is ascending. To specify
+              #     Optional. A list of TrustConfig field names used to specify the order of
+              #     the returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::TrustConfig>]
@@ -2886,7 +2978,7 @@ module Google
               #     Required. A name of the TrustConfig to delete. Must be in the format
               #     `projects/*/locations/*/trustConfigs/*`.
               #   @param etag [::String]
-              #     The current etag of the TrustConfig.
+              #     Optional. The current etag of the TrustConfig.
               #     If an etag is provided and does not match the current etag of the resource,
               #     deletion will be blocked and an ABORTED error will be returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -3227,6 +3319,11 @@ module Google
                   #
                   attr_reader :create_certificate_issuance_config
                   ##
+                  # RPC-specific configuration for `update_certificate_issuance_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_certificate_issuance_config
+                  ##
                   # RPC-specific configuration for `delete_certificate_issuance_config`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3305,6 +3402,8 @@ module Google
                     @get_certificate_issuance_config = ::Gapic::Config::Method.new get_certificate_issuance_config_config
                     create_certificate_issuance_config_config = parent_rpcs.create_certificate_issuance_config if parent_rpcs.respond_to? :create_certificate_issuance_config
                     @create_certificate_issuance_config = ::Gapic::Config::Method.new create_certificate_issuance_config_config
+                    update_certificate_issuance_config_config = parent_rpcs.update_certificate_issuance_config if parent_rpcs.respond_to? :update_certificate_issuance_config
+                    @update_certificate_issuance_config = ::Gapic::Config::Method.new update_certificate_issuance_config_config
                     delete_certificate_issuance_config_config = parent_rpcs.delete_certificate_issuance_config if parent_rpcs.respond_to? :delete_certificate_issuance_config
                     @delete_certificate_issuance_config = ::Gapic::Config::Method.new delete_certificate_issuance_config_config
                     list_trust_configs_config = parent_rpcs.list_trust_configs if parent_rpcs.respond_to? :list_trust_configs

@@ -45,6 +45,10 @@ module Google
             # The AppConnectorsService provides methods to manage
             # (create/read/update/delete) BeyondCorp AppConnectors.
             #
+            #
+            # Deprecated: App Connector is deprecated and creation of new App Connector
+            # resources is no longer permitted. Use Security Gateway instead.
+            #
             class Client
               # @private
               API_VERSION = ""
@@ -62,6 +66,8 @@ module Google
               #
               # See {::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client::Configuration}
               # for a description of the configuration fields.
+              #
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #
@@ -246,6 +252,8 @@ module Google
               ##
               # Lists AppConnectors in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload list_app_connectors(request, options = nil)
               #   Pass arguments to `list_app_connectors` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsRequest} or an equivalent Hash.
@@ -269,8 +277,8 @@ module Google
               #     If not specified, a default value of 50 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     [next_page_token][BeyondCorp.ListAppConnectorsResponse.next_page_token] to
-              #     determine if there are more instances left to be queried.
+              #     {::Google::Cloud::BeyondCorp::AppConnectors::V1::ListAppConnectorsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
               #   @param page_token [::String]
               #     Optional. The next_page_token value returned from a previous
               #     ListAppConnectorsRequest, if any.
@@ -354,6 +362,8 @@ module Google
 
               ##
               # Gets details of a single AppConnector.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload get_app_connector(request, options = nil)
               #   Pass arguments to `get_app_connector` via a request object, either of type
@@ -441,6 +451,8 @@ module Google
               ##
               # Creates a new AppConnector in a given project and location.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload create_app_connector(request, options = nil)
               #   Pass arguments to `create_app_connector` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnectors::V1::CreateAppConnectorRequest} or an equivalent Hash.
@@ -473,8 +485,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -561,6 +573,8 @@ module Google
               ##
               # Updates the parameters of a single AppConnector.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload update_app_connector(request, options = nil)
               #   Pass arguments to `update_app_connector` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnectors::V1::UpdateAppConnectorRequest} or an equivalent Hash.
@@ -591,8 +605,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -679,6 +693,8 @@ module Google
               ##
               # Deletes a single AppConnector.
               #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
               # @overload delete_app_connector(request, options = nil)
               #   Pass arguments to `delete_app_connector` via a request object, either of type
               #   {::Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest} or an equivalent Hash.
@@ -703,8 +719,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes after the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -789,7 +805,98 @@ module Google
               end
 
               ##
+              # Gets instance configuration for a given AppConnector.
+              # An internal method called by a AppConnector to get its container config.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
+              # @overload resolve_instance_config(request, options = nil)
+              #   Pass arguments to `resolve_instance_config` via a request object, either of type
+              #   {::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload resolve_instance_config(app_connector: nil)
+              #   Pass arguments to `resolve_instance_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param app_connector [::String]
+              #     Required. BeyondCorp AppConnector name using the form:
+              #     `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector}`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/beyond_corp/app_connectors/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest.new
+              #
+              #   # Call the resolve_instance_config method.
+              #   result = client.resolve_instance_config request
+              #
+              #   # The returned object is of type Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigResponse.
+              #   p result
+              #
+              def resolve_instance_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BeyondCorp::AppConnectors::V1::ResolveInstanceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.resolve_instance_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BeyondCorp::AppConnectors::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.app_connector
+                  header_params["app_connector"] = request.app_connector
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.resolve_instance_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.resolve_instance_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @app_connectors_service_stub.call_rpc :resolve_instance_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Report status for a given connector.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload report_status(request, options = nil)
               #   Pass arguments to `report_status` via a request object, either of type
@@ -817,8 +924,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -1113,6 +1220,11 @@ module Google
                   #
                   attr_reader :delete_app_connector
                   ##
+                  # RPC-specific configuration for `resolve_instance_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resolve_instance_config
+                  ##
                   # RPC-specific configuration for `report_status`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1130,6 +1242,8 @@ module Google
                     @update_app_connector = ::Gapic::Config::Method.new update_app_connector_config
                     delete_app_connector_config = parent_rpcs.delete_app_connector if parent_rpcs.respond_to? :delete_app_connector
                     @delete_app_connector = ::Gapic::Config::Method.new delete_app_connector_config
+                    resolve_instance_config_config = parent_rpcs.resolve_instance_config if parent_rpcs.respond_to? :resolve_instance_config
+                    @resolve_instance_config = ::Gapic::Config::Method.new resolve_instance_config_config
                     report_status_config = parent_rpcs.report_status if parent_rpcs.respond_to? :report_status
                     @report_status = ::Gapic::Config::Method.new report_status_config
 

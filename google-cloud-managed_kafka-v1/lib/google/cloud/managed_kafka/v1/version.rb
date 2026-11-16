@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ManagedKafka
       module V1
-        VERSION = "1.9.1"
+        VERSION = "1.11.0"
       end
     end
   end

@@ -150,6 +150,9 @@ module Google
           # @!attribute [rw] message
           #   @return [::String]
           #     Optional. The error message of the function.
+          # @!attribute [rw] retryable
+          #   @return [::Boolean]
+          #     Optional. Specifies whether the tool call is retryable.
           class Error
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

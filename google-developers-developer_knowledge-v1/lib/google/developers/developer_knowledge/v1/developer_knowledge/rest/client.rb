@@ -38,11 +38,14 @@ module Google
             #
             # A typical use case is to first use
             # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client#search_document_chunks DeveloperKnowledge.SearchDocumentChunks}
-            # to find relevant page URIs based on a query, and then use
+            # to find relevant document chunks based on a query, and then use
             # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client#get_document DeveloperKnowledge.GetDocument}
             # or
             # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client#batch_get_documents DeveloperKnowledge.BatchGetDocuments}
-            # to fetch the full content of the top results.
+            # with document resource names (such as
+            # {::Google::Developers::DeveloperKnowledge::V1::DocumentChunk#parent DocumentChunk.parent}
+            # or `documents/{uri_without_scheme}`) to fetch the full content of the top
+            # results.
             #
             # All document content is provided in Markdown format.
             #
@@ -86,6 +89,11 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.search_document_chunks.timeout = 60.0
+                  default_config.rpcs.search_document_chunks.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
 
                   default_config.rpcs.get_document.timeout = 60.0
                   default_config.rpcs.get_document.retry_policy = {

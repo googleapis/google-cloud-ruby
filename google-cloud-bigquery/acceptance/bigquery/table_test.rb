@@ -999,7 +999,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     _(load_job).must_be :done?
 
-    _(load_job).wont_be :failed?
+    # The cancel may land before or after the job finishes.
+    _(load_job.error["reason"]).must_equal "stopped" if load_job.failed?
   end
 
   it "extracts data to a url in your bucket with extract_job" do

@@ -30,7 +30,7 @@ jobs:
         ruby-version: "3.4"
     - name: Install tools
       run: |
-        gem install --no-document toys
+        gem install --no-document toys -v '~> 0.22.0'
     - name: Delete-library
       run: |
         toys delete-library -v --fork ${GITHUB_EVENT_INPUTS_FLAGS} ${GITHUB_EVENT_INPUTS_GEM}

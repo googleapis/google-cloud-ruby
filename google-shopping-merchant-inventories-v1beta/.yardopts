@@ -1,12 +1,9 @@
 --no-private
---title="Merchant V1BETA API"
---exclude _pb\.rb$
+--title="Obsolete Gem google-shopping-merchant-inventories-v1beta"
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
-./proto_docs/**/*.rb
 -
 README.md
 LICENSE.md
-AUTHENTICATION.md

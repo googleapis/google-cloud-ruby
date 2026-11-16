@@ -1,5 +1,15 @@
 # Release History
 
+### 3.5.1 (2026-11-03)
+
+#### Bug Fixes
+
+* Don't resend an unsent initial request on stream restart ([#36680](https://github.com/googleapis/google-cloud-ruby/issues/36680)) ([bd2bf19](https://github.com/googleapis/google-cloud-ruby/commit/bd2bf19a6bf7ddae48face73c6503e8751d216f7)), refs [#36679](https://github.com/googleapis/google-cloud-ruby/issues/36679)
+
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 3.5.0 (2026-09-14)
 
 #### Features

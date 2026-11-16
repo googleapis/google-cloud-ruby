@@ -767,7 +767,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_app(gcs_uri: nil, app_content: nil, parent: nil, display_name: nil, app_id: nil, import_options: nil, ignore_app_lock: nil)
+              # @overload import_app(gcs_uri: nil, app_content: nil, json_patch_content: nil, json_patch_gcs_uri: nil, parent: nil, display_name: nil, app_id: nil, import_options: nil, ignore_app_lock: nil)
               #   Pass arguments to `import_app` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -783,6 +783,15 @@ module Google
               #     structure.
               #
               #     Note: The following parameters are mutually exclusive: `app_content`, `gcs_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param json_patch_content [::String]
+              #     Optional. Patch content as a JSON string.
+              #
+              #     Note: The following parameters are mutually exclusive: `json_patch_content`, `json_patch_gcs_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param json_patch_gcs_uri [::String]
+              #     Optional. A Cloud Storage URI pointing to a JSON file containing the
+              #     patches.
+              #
+              #     Note: The following parameters are mutually exclusive: `json_patch_gcs_uri`, `json_patch_content`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The parent resource name with the location of the app to import.
               #   @param display_name [::String]
@@ -4238,6 +4247,87 @@ module Google
               end
 
               ##
+              # Updates the specified app version.
+              #
+              # @overload update_app_version(request, options = nil)
+              #   Pass arguments to `update_app_version` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_app_version(app_version: nil, update_mask: nil)
+              #   Pass arguments to `update_app_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param app_version [::Google::Cloud::Ces::V1beta::AppVersion, ::Hash]
+              #     Required. The app version to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #     If empty, fields `display_name` and `description` will be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Ces::V1beta::AppVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Ces::V1beta::AppVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::AgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::UpdateAppVersionRequest.new
+              #
+              #   # Call the update_app_version method.
+              #   result = client.update_app_version request
+              #
+              #   # The returned object is of type Google::Cloud::Ces::V1beta::AppVersion.
+              #   p result
+              #
+              def update_app_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_app_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_app_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_app_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @agent_service_stub.update_app_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes the specified app version.
               #
               # @overload delete_app_version(request, options = nil)
@@ -5106,6 +5196,11 @@ module Google
                   #
                   attr_reader :create_app_version
                   ##
+                  # RPC-specific configuration for `update_app_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_app_version
+                  ##
                   # RPC-specific configuration for `delete_app_version`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5225,6 +5320,8 @@ module Google
                     @get_app_version = ::Gapic::Config::Method.new get_app_version_config
                     create_app_version_config = parent_rpcs.create_app_version if parent_rpcs.respond_to? :create_app_version
                     @create_app_version = ::Gapic::Config::Method.new create_app_version_config
+                    update_app_version_config = parent_rpcs.update_app_version if parent_rpcs.respond_to? :update_app_version
+                    @update_app_version = ::Gapic::Config::Method.new update_app_version_config
                     delete_app_version_config = parent_rpcs.delete_app_version if parent_rpcs.respond_to? :delete_app_version
                     @delete_app_version = ::Gapic::Config::Method.new delete_app_version_config
                     restore_app_version_config = parent_rpcs.restore_app_version if parent_rpcs.respond_to? :restore_app_version

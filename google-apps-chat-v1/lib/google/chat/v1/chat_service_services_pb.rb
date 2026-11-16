@@ -1170,6 +1170,20 @@ module Google
             #
             #   - `https://www.googleapis.com/auth/chat.users.sections`
             rpc :MoveSectionItem, ::Google::Apps::Chat::V1::MoveSectionItemRequest, ::Google::Apps::Chat::V1::MoveSectionItemResponse
+            # Replaces the cards included in a message.
+            #
+            # A Chat app can only replace cards on a human-created message if the message
+            # already contains cards, and the cards were created by the app.
+            #
+            # If the app replaces the cards with an empty list, the cards are removed.
+            # After removing the cards, the app cannot add cards back to the message.
+            #
+            # Requires [app
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+            # with the [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #   - `https://www.googleapis.com/auth/chat.bot`
+            rpc :ReplaceMessageCards, ::Google::Apps::Chat::V1::ReplaceMessageCardsRequest, ::Google::Apps::Chat::V1::ReplaceMessageCardsResponse
           end
 
           Stub = Service.rpc_stub_class

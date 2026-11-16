@@ -84,6 +84,10 @@ module Google
           # @!attribute [rw] root_span
           #   @return [::Google::Cloud::Ces::V1beta::Span]
           #     Optional. The root span of the action processing.
+          # @!attribute [rw] user_intended_text
+          #   @return [::String]
+          #     Optional. The intended ground-truth text from the Simulated Caller
+          #     (Polysynth). Only populated when word error rate metrics are enabled.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

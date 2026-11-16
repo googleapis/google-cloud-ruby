@@ -381,8 +381,12 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+    after { delete_bucket_helper bucket.name }
+
     it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
+      bucket.user_project = true
       bucket.requester_pays = false
 
       assert_output "Requester pays has been enabled for #{bucket.name}\n" do
@@ -409,6 +413,10 @@ describe "Buckets Snippets" do
         get_requester_pays_status bucket_name: bucket.name
       end
       refute bucket.requester_pays?
+    ensure
+      bucket.user_project = true
+      bucket.requester_pays = false
+      bucket.user_project = nil
     end
   end
 

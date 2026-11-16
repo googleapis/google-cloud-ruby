@@ -60,6 +60,9 @@ module Google
             rpc :FetchReadWriteToken, ::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest, ::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenResponse
             # Fetches read token of a given gitRepositoryLink.
             rpc :FetchReadToken, ::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest, ::Google::Cloud::DeveloperConnect::V1::FetchReadTokenResponse
+            # Opens a Pull Request in the remote SCM repository associated with a
+            # GitRepositoryLink.
+            rpc :OpenGitRepositoryLinkPullRequest, ::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest, ::Google::Cloud::DeveloperConnect::V1::PullRequest
             # FetchLinkableGitRepositories returns a list of git repositories from an SCM
             # that are available to be added to a Connection.
             rpc :FetchLinkableGitRepositories, ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest, ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesResponse
@@ -70,6 +73,25 @@ module Google
             rpc :FetchGitHubInstallations, ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsResponse
             # Fetch the list of branches or tags for a given repository.
             rpc :FetchGitRefs, ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse
+            # Diff commits for a GitRepositoryLink.
+            rpc :DiffGitRepositoryLinkCommit, ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest, ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse
+            # Fetch Commit details from a Git repository link.
+            rpc :FetchGitRepositoryLinkCommit, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse
+            # Fetch a list of Commits from a Git repository link.
+            rpc :FetchGitRepositoryLinkCommitList, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse
+            # Fetches blame information for a file or line range in a file.
+            rpc :FetchGitRepositoryLinkFileBlame, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse
+            # Fetch Pull Request details from a Git repository link.
+            rpc :FetchGitRepositoryLinkPullRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest, ::Google::Cloud::DeveloperConnect::V1::PullRequest
+            # Add a comment to a Pull Request.
+            rpc :AddGitRepositoryLinkPullRequestComment, ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest, ::Google::Cloud::DeveloperConnect::V1::PullRequestComment
+            # Add a review comment (inline on diff) to a Pull Request.
+            rpc :AddGitRepositoryLinkPullRequestReviewComment, ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest, ::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment
+            # Modifies a Pull Request in the remote SCM repository associated with a
+            # GitRepositoryLink.
+            rpc :ModifyGitRepositoryLinkPullRequest, ::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest, ::Google::Cloud::DeveloperConnect::V1::PullRequest
+            # Fetches a list of Pull Requests from the remote repository.
+            rpc :FetchGitRepositoryLinkPullRequestList, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse
             # Lists AccountConnectors in a given project and location.
             rpc :ListAccountConnectors, ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest, ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsResponse
             # Gets details of a single AccountConnector.

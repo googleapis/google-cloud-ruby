@@ -788,6 +788,66 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
     end
   end
 
+  def test_open_git_repository_link_pull_request
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request = {}
+
+    open_git_repository_link_pull_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :open_git_repository_link_pull_request, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DeveloperConnect::V1::PullRequest), request["pull_request"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, open_git_repository_link_pull_request_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.open_git_repository_link_pull_request({ name: name, pull_request: pull_request }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.open_git_repository_link_pull_request name: name, pull_request: pull_request do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.open_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest.new(name: name, pull_request: pull_request) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.open_git_repository_link_pull_request({ name: name, pull_request: pull_request }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.open_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::OpenGitRepositoryLinkPullRequestRequest.new(name: name, pull_request: pull_request), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, open_git_repository_link_pull_request_client_stub.call_rpc_count
+    end
+  end
+
   def test_fetch_linkable_git_repositories
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesResponse.new
@@ -974,6 +1034,594 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
       # Verify method calls
       assert_equal 5, fetch_git_refs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_diff_git_repository_link_commit
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    base_sha = "hello world"
+    head_sha = "hello world"
+    path_filters = ["hello world"]
+
+    diff_git_repository_link_commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :diff_git_repository_link_commit, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["base_sha"]
+      assert_equal "hello world", request["head_sha"]
+      assert_equal ["hello world"], request["path_filters"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, diff_git_repository_link_commit_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.diff_git_repository_link_commit({ name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.diff_git_repository_link_commit name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.diff_git_repository_link_commit ::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest.new(name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.diff_git_repository_link_commit({ name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.diff_git_repository_link_commit(::Google::Cloud::DeveloperConnect::V1::DiffGitRepositoryLinkCommitRequest.new(name: name, base_sha: base_sha, head_sha: head_sha, path_filters: path_filters), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, diff_git_repository_link_commit_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_git_repository_link_commit
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    commit_sha = "hello world"
+    view = :COMMIT_VIEW_UNSPECIFIED
+    path_filters = ["hello world"]
+
+    fetch_git_repository_link_commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_repository_link_commit, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["commit_sha"]
+      assert_equal :COMMIT_VIEW_UNSPECIFIED, request["view"]
+      assert_equal ["hello world"], request["path_filters"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_repository_link_commit_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_git_repository_link_commit({ name: name, commit_sha: commit_sha, view: view, path_filters: path_filters }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_git_repository_link_commit name: name, commit_sha: commit_sha, view: view, path_filters: path_filters do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_git_repository_link_commit ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest.new(name: name, commit_sha: commit_sha, view: view, path_filters: path_filters) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_git_repository_link_commit({ name: name, commit_sha: commit_sha, view: view, path_filters: path_filters }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_git_repository_link_commit(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitRequest.new(name: name, commit_sha: commit_sha, view: view, path_filters: path_filters), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_repository_link_commit_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_git_repository_link_commit_list
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ref = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    view = :COMMIT_VIEW_UNSPECIFIED
+
+    fetch_git_repository_link_commit_list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_repository_link_commit_list, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["ref"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :COMMIT_VIEW_UNSPECIFIED, request["view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_repository_link_commit_list_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_git_repository_link_commit_list({ name: name, ref: ref, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_git_repository_link_commit_list name: name, ref: ref, page_size: page_size, page_token: page_token, view: view do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_git_repository_link_commit_list ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest.new(name: name, ref: ref, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_git_repository_link_commit_list({ name: name, ref: ref, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_git_repository_link_commit_list(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkCommitListRequest.new(name: name, ref: ref, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_repository_link_commit_list_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_git_repository_link_file_blame
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ref = "hello world"
+    path = "hello world"
+    first_line = 42
+    last_line = 42
+
+    fetch_git_repository_link_file_blame_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_repository_link_file_blame, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["ref"]
+      assert_equal "hello world", request["path"]
+      assert_equal 42, request["first_line"]
+      assert_equal 42, request["last_line"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_repository_link_file_blame_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_git_repository_link_file_blame({ name: name, ref: ref, path: path, first_line: first_line, last_line: last_line }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_git_repository_link_file_blame name: name, ref: ref, path: path, first_line: first_line, last_line: last_line do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_git_repository_link_file_blame ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest.new(name: name, ref: ref, path: path, first_line: first_line, last_line: last_line) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_git_repository_link_file_blame({ name: name, ref: ref, path: path, first_line: first_line, last_line: last_line }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_git_repository_link_file_blame(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkFileBlameRequest.new(name: name, ref: ref, path: path, first_line: first_line, last_line: last_line), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_repository_link_file_blame_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_git_repository_link_pull_request
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+
+    fetch_git_repository_link_pull_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_repository_link_pull_request, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["pull_request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_repository_link_pull_request_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_git_repository_link_pull_request name: name, pull_request_id: pull_request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_repository_link_pull_request_client_stub.call_rpc_count
+    end
+  end
+
+  def test_add_git_repository_link_pull_request_comment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::PullRequestComment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    comment = {}
+
+    add_git_repository_link_pull_request_comment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :add_git_repository_link_pull_request_comment, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["pull_request_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DeveloperConnect::V1::PullRequestComment), request["comment"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, add_git_repository_link_pull_request_comment_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.add_git_repository_link_pull_request_comment({ name: name, pull_request_id: pull_request_id, comment: comment }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.add_git_repository_link_pull_request_comment name: name, pull_request_id: pull_request_id, comment: comment do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.add_git_repository_link_pull_request_comment ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.add_git_repository_link_pull_request_comment({ name: name, pull_request_id: pull_request_id, comment: comment }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.add_git_repository_link_pull_request_comment(::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, add_git_repository_link_pull_request_comment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_add_git_repository_link_pull_request_review_comment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    comment = {}
+    commit_id = "hello world"
+
+    add_git_repository_link_pull_request_review_comment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :add_git_repository_link_pull_request_review_comment, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["pull_request_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DeveloperConnect::V1::PullRequestReviewComment), request["comment"]
+      assert_equal "hello world", request["commit_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, add_git_repository_link_pull_request_review_comment_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.add_git_repository_link_pull_request_review_comment({ name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.add_git_repository_link_pull_request_review_comment name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.add_git_repository_link_pull_request_review_comment ::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.add_git_repository_link_pull_request_review_comment({ name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.add_git_repository_link_pull_request_review_comment(::Google::Cloud::DeveloperConnect::V1::AddGitRepositoryLinkPullRequestReviewCommentRequest.new(name: name, pull_request_id: pull_request_id, comment: comment, commit_id: commit_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, add_git_repository_link_pull_request_review_comment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_modify_git_repository_link_pull_request
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::PullRequest.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    pull_request_id = "hello world"
+    title = "hello world"
+    body = "hello world"
+    base_ref = "hello world"
+    state = :STATE_UNSPECIFIED
+
+    modify_git_repository_link_pull_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :modify_git_repository_link_pull_request, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["pull_request_id"]
+      assert_equal "hello world", request["title"]
+      assert_equal "hello world", request["body"]
+      assert_equal "hello world", request["base_ref"]
+      assert_equal :STATE_UNSPECIFIED, request["state"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, modify_git_repository_link_pull_request_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.modify_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.modify_git_repository_link_pull_request name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.modify_git_repository_link_pull_request ::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.modify_git_repository_link_pull_request({ name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.modify_git_repository_link_pull_request(::Google::Cloud::DeveloperConnect::V1::ModifyGitRepositoryLinkPullRequestRequest.new(name: name, pull_request_id: pull_request_id, title: title, body: body, base_ref: base_ref, state: state), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, modify_git_repository_link_pull_request_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_git_repository_link_pull_request_list
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_git_repository_link_pull_request_list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_git_repository_link_pull_request_list, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_git_repository_link_pull_request_list_client_stub do
+      # Create client
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_git_repository_link_pull_request_list({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_git_repository_link_pull_request_list name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_git_repository_link_pull_request_list ::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_git_repository_link_pull_request_list({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_git_repository_link_pull_request_list(::Google::Cloud::DeveloperConnect::V1::FetchGitRepositoryLinkPullRequestListRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_git_repository_link_pull_request_list_client_stub.call_rpc_count
     end
   end
 

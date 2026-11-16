@@ -1737,6 +1737,10 @@ module Google
         #     caused the event.
         #     This field is currently only used by Webhook, Pub/Sub, Manual, and Cron
         #     triggers.
+        # @!attribute [rw] approval_config
+        #   @return [::Google::Cloud::Build::V1::ApprovalConfig]
+        #     Configuration for manual approval to start a build invocation of this
+        #     BuildTrigger.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account used for all user-controlled operations including
@@ -2168,6 +2172,13 @@ module Google
         #     Optional. Option to specify whether structured logging is enabled.
         #
         #     If true, JSON-formatted logs are parsed as structured logs.
+        # @!attribute [rw] worker_release
+        #   @return [::String]
+        #     Optional. Option to specify which release or release channel
+        #     (rapid|regular|stable) to use to run this build.
+        # @!attribute [r] resolved_worker_release
+        #   @return [::String]
+        #     Output only. Worker release resolved from the release channel.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2184,6 +2195,16 @@ module Google
           #     WorkerPool.
           #
           #     Format projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId}
+          # @!attribute [r] worker_release
+          #   @return [::String]
+          #     Output only. OUTPUT_ONLY. The release or release channel used to run the
+          #     Build. This is set to the same value as
+          #     `PrivatePoolV1Config.WorkerConfig.worker_release` for the UI to easily
+          #     access.
+          # @!attribute [r] resolved_worker_release
+          #   @return [::String]
+          #     Output only. OUTPUT_ONLY. Worker release resolved from the release
+          #     channel.
           class PoolOption
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2205,6 +2226,10 @@ module Google
 
             # Build must be verified.
             VERIFIED = 1
+
+            # Build verification is best effort. If provenance generation fails, the
+            # build will still succeed.
+            BEST_EFFORT = 3
           end
 
           # Supported Compute Engine machine types.
@@ -2290,7 +2315,8 @@ module Google
             # to Cloud Storage buckets in the build project.
             REGIONAL_USER_OWNED_BUCKET = 1
 
-            # Bucket is located in a Google-owned project and is not regionalized.
+            # Deprecated: Use `REGIONAL_USER_OWNED_BUCKET` instead. Bucket is located
+            # in a Google-owned project and is not regionalized.
             LEGACY_BUCKET = 2
           end
         end
@@ -2489,8 +2515,10 @@ module Google
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig]
         #     Network configuration for the pool.
         # @!attribute [rw] private_service_connect
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::PrivateServiceConnect]
-        #     Immutable. Private Service Connect(PSC) Network configuration for the pool.
+        #     Immutable. Deprecated: Private Service Connect is no longer supported.
+        #     Private Service Connect(PSC) Network configuration for the pool.
         class PrivatePoolV1Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2514,6 +2542,10 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enable nested virtualization on the worker, if supported by the
           #     machine type. By default, nested virtualization is disabled.
+          # @!attribute [rw] worker_release
+          #   @return [::String]
+          #     Optional. Option to specify which release or release channel
+          #     (rapid|regular|stable) to use to run this build.
           class WorkerConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2562,7 +2594,9 @@ module Google
             end
           end
 
+          # Deprecated: Private Service Connect is no longer supported.
           # Defines the Private Service Connect network configuration for the pool.
+          # @deprecated This message is deprecated and may be removed in the next major version update.
           # @!attribute [rw] network_attachment
           #   @return [::String]
           #     Required. Immutable. The network attachment that the worker network

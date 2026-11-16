@@ -104,6 +104,27 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_companion_agents_grpc
+    skip unless Google::Cloud::Dialogflow.companion_agents_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow.companion_agents transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::CompanionAgents::Client, client
+    end
+  end
+
+  def test_companion_agents_rest
+    skip unless Google::Cloud::Dialogflow.companion_agents_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Dialogflow.companion_agents transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::CompanionAgents::Rest::Client, client
+    end
+  end
+
   def test_contexts_grpc
     skip unless Google::Cloud::Dialogflow.contexts_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do

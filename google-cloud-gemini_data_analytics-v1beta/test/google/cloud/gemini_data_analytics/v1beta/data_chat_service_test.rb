@@ -475,6 +475,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    pending_write_wait_skipped = true
 
     list_messages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_messages, name
@@ -483,6 +484,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal true, request["pending_write_wait_skipped"]
       refute_nil options
     end
 
@@ -493,35 +495,35 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use hash object
-      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

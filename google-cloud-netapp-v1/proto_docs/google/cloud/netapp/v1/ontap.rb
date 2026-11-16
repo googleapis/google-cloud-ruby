@@ -37,7 +37,7 @@ module Google
         #     ```
         # @!attribute [rw] ontap_path
         #   @return [::String]
-        #     Required. The resource path of the ONTAP resource.
+        #     Required. The path of the ONTAP resource.
         #     Format:
         #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
         #     For example:

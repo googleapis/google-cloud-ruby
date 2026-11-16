@@ -286,9 +286,10 @@ module Google
             # Section name: "reason_for_cancellation".
             REASON_FOR_CANCELLATION = 4
 
-            # "Unsatisfied" or "Satisfied" depending on the customer's feelings at
-            # the end of the conversation.
-            # Section name: "customer_satisfaction".
+            # Customer satisfaction derived from the text transcript only (not audio).
+            # Categorized based on customer statements by the end of the conversation.
+            # `D` for dissatisfied and `N` for neutral or satisfied (default).
+            # Section name: `customer_satisfaction`.
             CUSTOMER_SATISFACTION = 5
 
             # Key entities extracted from the conversation, such as ticket number,
@@ -398,8 +399,10 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesToolSpec>]
         #     Optional. List of CES tool specs that the generator can choose from.
         # @!attribute [rw] ces_app_specs
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesAppSpec>]
-        #     Optional. List of CES app specs that the generator can choose from.
+        #     Optional. Deprecated: Use `ces_tool_specs` instead.
+        #     List of CES app specs that the generator can choose from.
         class Generator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

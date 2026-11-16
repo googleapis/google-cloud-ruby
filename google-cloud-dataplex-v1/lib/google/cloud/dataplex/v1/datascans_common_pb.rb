@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n/google/cloud/dataplex/v1/datascans_common.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xbe\x01\n\x1f\x44\x61taScanCatalogPublishingStatus\x12S\n\x05state\x18\x01 \x01(\x0e\x32?.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.StateB\x03\xe0\x41\x03\"F\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\r\n\tSUCCEEDED\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\x12\x0b\n\x07SKIPPED\x10\x03\x42p\n\x1c\x63om.google.cloud.dataplex.v1B\x14\x44\x61taScansCommonProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
+descriptor_data = "\n/google/cloud/dataplex/v1/datascans_common.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xbf\x01\n\x1f\x44\x61taScanCatalogPublishingStatus\x12T\n\x05state\x18\x01 \x01(\x0e\x32?.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.StateB\x04\xe2\x41\x01\x03\"F\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\r\n\tSUCCEEDED\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\x12\x0b\n\x07SKIPPED\x10\x03\x42p\n\x1c\x63om.google.cloud.dataplex.v1B\x14\x44\x61taScansCommonProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

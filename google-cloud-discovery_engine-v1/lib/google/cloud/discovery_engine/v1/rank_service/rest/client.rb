@@ -231,7 +231,7 @@ module Google
               #   @param query [::String]
               #     The query to use.
               #   @param records [::Array<::Google::Cloud::DiscoveryEngine::V1::RankingRecord, ::Hash>]
-              #     Required. A list of records to rank. At most 200 records to rank.
+              #     Required. A list of records to rank.
               #   @param ignore_record_details_in_response [::Boolean]
               #     If true, the response will contain only record ID and score. By default, it
               #     is false, the response will contain record details.

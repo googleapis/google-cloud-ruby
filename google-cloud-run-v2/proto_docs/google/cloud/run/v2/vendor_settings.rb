@@ -113,6 +113,18 @@ module Google
         #     have. When unspecified, the field is set to the server default value of
         #     100. For more information see
         #     https://cloud.google.com/run/docs/configuring/max-instances
+        # @!attribute [rw] cpu_utilization
+        #   @return [::Float]
+        #     Optional. Determines a threshold for CPU utilization before scaling begins.
+        #     Accepted values are between `0.1` and `0.90` (inclusive) or `0.0` to
+        #     disable CPU utilization as threshold for scaling. CPU and concurrency
+        #     scaling cannot both be disabled.
+        # @!attribute [rw] concurrency_utilization
+        #   @return [::Float]
+        #     Optional. Determines a threshold for concurrency utilization before scaling
+        #     begins. Accepted values are between `0.1` and `0.95` (inclusive) or `0.0`
+        #     to disable concurrency utilization as threshold for scaling. CPU and
+        #     concurrency scaling cannot both be disabled.
         class RevisionScaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,6 +138,18 @@ module Google
         #     `projects/{project}/locations/global/meshes/{mesh}`, where `{project}` can
         #     be project id or number.
         class ServiceMesh
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for Ambient Networking.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. Whether ambient networking is enabled.
+        # @!attribute [rw] ambient_scope
+        #   @return [::Google::Cloud::Run::V2::AmbientScope]
+        #     The ambient networking scope of the instance.
+        class AmbientNetworking
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -213,8 +237,8 @@ module Google
         #     updates.
         # @!attribute [rw] worker_pool
         #   @return [::String]
-        #     Optional. Name of the Cloud Build Custom Worker Pool that should be used to
-        #     build the Cloud Run function. The format of this field is
+        #     Optional. Name of the Cloud Build private pool that should be used to build
+        #     the Cloud Run function. The format of this field is
         #     `projects/{project}/locations/{region}/workerPools/{workerPool}` where
         #     `{project}` and `{region}` are the project id and region respectively where
         #     the worker pool is defined and `{workerPool}` is the short name of the
@@ -239,6 +263,36 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Workload identity settings.
+        # @!attribute [rw] identity
+        #   @return [::String]
+        #     Optional. The Revision's SPIFFE workload identity. Enables provisioning of
+        #     SPIFFE workload certificates.
+        # @!attribute [rw] identity_type
+        #   @return [::Google::Cloud::Run::V2::IdentityType]
+        #     Optional. The type of identity to use.
+        # @!attribute [rw] identity_certificate_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls whether an instance receives a MWLID certificate.
+        #     Corresponds to the intention of the original --[no-]identity-certificate
+        #     flag.
+        class WorkloadIdentityConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The ambient networking scopes of the instance.
+        module AmbientScope
+          # Unspecified.
+          AMBIENT_SCOPE_UNSPECIFIED = 0
+
+          # Regional ambient networking.
+          AMBIENT_SCOPE_REGIONAL = 1
+
+          # Global ambient networking.
+          AMBIENT_SCOPE_GLOBAL = 2
         end
 
         # Allowed ingress traffic for the Container.
@@ -281,6 +335,30 @@ module Google
 
           # Shuts down existing instances, and prevents creation of new ones.
           SHUTDOWN = 2
+        end
+
+        # Identity type.
+        module IdentityType
+          # Unspecified
+          IDENTITY_TYPE_UNSPECIFIED = 0
+
+          # Service account identity.
+          IDENTITY_TYPE_SERVICE_ACCOUNT = 1
+
+          # Agent identity.
+          IDENTITY_TYPE_AGENT_IDENTITY = 3
+        end
+
+        # Represents the functional type.
+        module FunctionalType
+          # Specifies that the functional type is unspecified.
+          FUNCTIONAL_TYPE_UNSPECIFIED = 0
+
+          # Represents an AGENT functional type.
+          FUNCTIONAL_TYPE_AGENT = 1
+
+          # Represents an MCP_SERVER functional type.
+          FUNCTIONAL_TYPE_MCP_SERVER = 2
         end
       end
     end

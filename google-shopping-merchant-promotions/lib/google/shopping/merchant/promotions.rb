@@ -32,8 +32,8 @@ module Google
         # Create a new client object for PromotionsService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Client](https://rubydoc.info/gems/google-shopping-merchant-promotions-v1beta/Google/Shopping/Merchant/Promotions/V1beta/PromotionsService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Promotions::V1::PromotionsService::Client](https://rubydoc.info/gems/google-shopping-merchant-promotions-v1/Google/Shopping/Merchant/Promotions/V1/PromotionsService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the PromotionsService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -51,11 +51,11 @@ module Google
         # Service to manage promotions for products.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.promotions_service version: :v1beta, transport: :grpc, &block
+        def self.promotions_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/promotions/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Promotions
@@ -75,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the PromotionsService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.promotions_service_available? version: :v1beta, transport: :grpc
+        def self.promotions_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/promotions/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Promotions
                          .constants

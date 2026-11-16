@@ -44,6 +44,9 @@ module Google
             # GenerateDiscoveredResourcesTopology requests and responses for a given
             # domain.
             rpc :GetSchema, ::Google::Cloud::AppTopology::V1::GetSchemaRequest, ::Google::Cloud::AppTopology::V1::Schema
+            # Explores the topology schema starting from given node types or label names
+            # up to a specified hop depth.
+            rpc :ExploreSchema, ::Google::Cloud::AppTopology::V1::ExploreSchemaRequest, ::Google::Cloud::AppTopology::V1::ExploreSchemaResponse
             # Retrieves the specified topology domain.
             rpc :GetDomain, ::Google::Cloud::AppTopology::V1::GetDomainRequest, ::Google::Cloud::AppTopology::V1::Domain
             # Lists the topology domains available in a specific location.

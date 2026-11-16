@@ -74,6 +74,7 @@ module Google
       #   end
       #
       #   puts table.column_families["cf3"] #=> nil
+      # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
       #
       class ColumnFamilyMap
         include Enumerable
@@ -202,6 +203,7 @@ module Google
         #     column_families.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #     column_families.add "cf5", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def add name, positional_gc_rule = nil, gc_rule: nil
           raise ArgumentError, "column family #{name.inspect} already exists" if @column_families.has_key? name
@@ -246,6 +248,7 @@ module Google
         #
         #     column_families.update "cf2", gc_rule: rule_union
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def update name, gc_rule: nil
           raise ArgumentError, "column family #{name.inspect} does not exist" unless @column_families.has_key? name
@@ -275,6 +278,7 @@ module Google
         #   table.column_families do |column_families|
         #     column_families.delete "cf3"
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete name
           raise ArgumentError, "column family #{name.inspect} does not exist" unless @column_families.has_key? name

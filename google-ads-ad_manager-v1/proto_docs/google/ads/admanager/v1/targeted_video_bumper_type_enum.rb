@@ -29,8 +29,11 @@ module Google
 
           # Represents the options for targetable bumper positions, surrounding an ad
           # pod, within a video stream. This includes before and after the supported ad
-          # pod positions, `VideoPositionType.PREROLL`, `VideoPositionType.MIDROLL`,
-          # and `VideoPositionType.POSTROLL`.
+          # pod positions,
+          # {::Google::Ads::AdManager::V1::VideoPositionEnum::VideoPosition::PREROLL VideoPositionEnum.VideoPosition.PREROLL},
+          # {::Google::Ads::AdManager::V1::VideoPositionEnum::VideoPosition::MIDROLL VideoPositionEnum.VideoPosition.MIDROLL},
+          # and
+          # {::Google::Ads::AdManager::V1::VideoPositionEnum::VideoPosition::POSTROLL VideoPositionEnum.VideoPosition.POSTROLL}.
           module TargetedVideoBumperType
             # Default value. This value is unused.
             TARGETED_VIDEO_BUMPER_TYPE_UNSPECIFIED = 0

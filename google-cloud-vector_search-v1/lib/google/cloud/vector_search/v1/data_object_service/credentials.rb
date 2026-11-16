@@ -26,7 +26,9 @@ module Google
           # Credentials for the DataObjectService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/vectorsearch",
+              "https://www.googleapis.com/auth/vectorsearch.readonly"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

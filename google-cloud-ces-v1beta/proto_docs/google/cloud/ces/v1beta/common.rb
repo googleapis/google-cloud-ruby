@@ -57,9 +57,30 @@ module Google
         #     Temperature controls the randomness of the model's responses. Lower
         #     temperatures produce responses that are more predictable. Higher
         #     temperatures produce responses that are more creative.
+        # @!attribute [rw] thinking_level
+        #   @return [::Google::Cloud::Ces::V1beta::ModelSettings::ThinkingLevel]
+        #     Optional. The thinking level of the model.
         class ModelSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Thinking level configuration for the model.
+          module ThinkingLevel
+            # Thinking level is unspecified.
+            THINKING_LEVEL_UNSPECIFIED = 0
+
+            # Default thinking level.
+            DEFAULT = 1
+
+            # Low thinking level.
+            LOW = 2
+
+            # Medium thinking level.
+            MEDIUM = 3
+
+            # High thinking level.
+            HIGH = 4
+          end
         end
 
         # Action that is taken when a certain precondition is met.
@@ -435,6 +456,29 @@ module Google
             # mutated, the evaluation channel/run method are the same.
             SKIP_IF_UNCHANGED = 2
           end
+        end
+
+        # Represents a UI event payload.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     The media type (MIME type) indicating the format of the UI event payload
+        #     (e.g., "application/json+a2ui").
+        # @!attribute [rw] json_payload
+        #   @return [::String]
+        #     The JSON payload representing the A2UI surface.
+        class UiEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Session checkpoint containing inferred user intent for session title and UI.
+        # @!attribute [rw] user_intent
+        #   @return [::String]
+        #     Inferred user goal or topic for the session (e.g. "Building E-Commerce
+        #     Support Agent").
+        class SessionCheckpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The execution type of the tool or toolset.

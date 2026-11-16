@@ -28,19 +28,19 @@ module Google
         #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of TrustConfigs to return per call.
+        #     Optional. Maximum number of TrustConfigs to return per call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The value returned by the last `ListTrustConfigsResponse`. Indicates
-        #     that this is a continuation of a prior `ListTrustConfigs` call, and that
-        #     the system should return the next page of data.
+        #     Optional. The value returned by the last `ListTrustConfigsResponse`.
+        #     Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+        #     and that the system should return the next page of data.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter expression to restrict the TrustConfigs returned.
+        #     Optional. Filter expression to restrict the TrustConfigs returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A list of TrustConfig field names used to specify the order of the
-        #     returned results. The default sorting order is ascending. To specify
+        #     Optional. A list of TrustConfig field names used to specify the order of
+        #     the returned results. The default sorting order is ascending. To specify
         #     descending order for a field, add a suffix `" desc"`.
         class ListTrustConfigsRequest
           include ::Google::Protobuf::MessageExts
@@ -112,7 +112,7 @@ module Google
         #     `projects/*/locations/*/trustConfigs/*`.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     The current etag of the TrustConfig.
+        #     Optional. The current etag of the TrustConfig.
         #     If an etag is provided and does not match the current etag of the resource,
         #     deletion will be blocked and an ABORTED error will be returned.
         class DeleteTrustConfigRequest
@@ -123,8 +123,8 @@ module Google
         # Defines a trust config.
         # @!attribute [rw] name
         #   @return [::String]
-        #     A user-defined name of the trust config. TrustConfig names must be
-        #     unique globally and match pattern
+        #     Identifier. A user-defined name of the trust config. TrustConfig names must
+        #     be unique globally and match pattern
         #     `projects/*/locations/*/trustConfigs/*`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -134,23 +134,39 @@ module Google
         #     Output only. The last update timestamp of a TrustConfig.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Set of labels associated with a TrustConfig.
+        #     Optional. Set of labels associated with a TrustConfig.
         # @!attribute [rw] description
         #   @return [::String]
-        #     One or more paragraphs of text description of a TrustConfig.
+        #     Optional. One or more paragraphs of text description of a TrustConfig.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This checksum is computed by the server based on the value of other
         #     fields, and may be sent on update and delete requests to ensure the
         #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] spiffe_trust_stores
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::CertificateManager::V1::TrustConfig::TrustStore}]
+        #     Optional. Defines a mapping from a trust domain to a TrustStore. This is
+        #     used for SPIFFE certificate validation.
         # @!attribute [rw] trust_stores
         #   @return [::Array<::Google::Cloud::CertificateManager::V1::TrustConfig::TrustStore>]
-        #     Set of trust stores to perform validation against.
+        #     Optional. Set of trust stores to perform validation against.
         #
         #     This field is supported when TrustConfig is configured with Load Balancers,
         #     currently not supported for SPIFFE certificate validation.
         #
         #     Only one TrustStore specified is currently allowed.
+        # @!attribute [rw] allowlisted_certificates
+        #   @return [::Array<::Google::Cloud::CertificateManager::V1::TrustConfig::AllowlistedCertificate>]
+        #     Optional. A certificate matching an allowlisted certificate is always
+        #     considered valid as long as the certificate is parseable, proof of private
+        #     key possession is established, and constraints on the certificate's SAN
+        #     field are met.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class TrustConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,11 +197,11 @@ module Google
           # Defines a trust store.
           # @!attribute [rw] trust_anchors
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::TrustConfig::TrustAnchor>]
-          #     List of Trust Anchors to be used while performing validation
+          #     Optional. List of Trust Anchors to be used while performing validation
           #     against a given TrustStore.
           # @!attribute [rw] intermediate_cas
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::TrustConfig::IntermediateCA>]
-          #     Set of intermediate CA certificates used for the path building
+          #     Optional. Set of intermediate CA certificates used for the path building
           #     phase of chain validation.
           #
           #     The field is currently not supported if TrustConfig is used for the
@@ -195,11 +211,39 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Defines an allowlisted certificate.
+          # @!attribute [rw] pem_certificate
+          #   @return [::String]
+          #     Required. PEM certificate that is allowlisted. The certificate can be up
+          #     to 5k bytes, and must be a parseable X.509 certificate.
+          class AllowlistedCertificate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::CertificateManager::V1::TrustConfig::TrustStore]
+          class SpiffeTrustStoresEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

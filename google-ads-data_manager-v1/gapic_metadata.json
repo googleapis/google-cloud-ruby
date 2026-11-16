@@ -30,6 +30,16 @@
                 "ingest_events"
               ]
             },
+            "IngestUsers": {
+              "methods": [
+                "ingest_users"
+              ]
+            },
+            "RemoveUsers": {
+              "methods": [
+                "remove_users"
+              ]
+            },
             "IngestAdEvents": {
               "methods": [
                 "ingest_ad_events"
@@ -76,6 +86,20 @@
             "SearchPartnerLinks": {
               "methods": [
                 "search_partner_links"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReportingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::DataManager::V1::ReportingService::Client",
+          "rpcs": {
+            "RetrievePartnerMatchReport": {
+              "methods": [
+                "retrieve_partner_match_report"
               ]
             }
           }

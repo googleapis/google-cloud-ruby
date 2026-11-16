@@ -32,8 +32,8 @@ module Google
         # Create a new client object for LfpInventoryService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Lfp::V1beta::LfpInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1beta/Google/Shopping/Merchant/Lfp/V1beta/LfpInventoryService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1/Google/Shopping/Merchant/Lfp/V1/LfpInventoryService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LfpInventoryService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -53,11 +53,11 @@ module Google
         # inventories for a merchant.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.lfp_inventory_service version: :v1beta, transport: :grpc, &block
+        def self.lfp_inventory_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Lfp
@@ -77,11 +77,11 @@ module Google
         # or if the versioned client gem needs an update to support the LfpInventoryService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.lfp_inventory_service_available? version: :v1beta, transport: :grpc
+        def self.lfp_inventory_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Lfp
                          .constants
@@ -104,8 +104,8 @@ module Google
         # Create a new client object for LfpMerchantStateService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1beta/Google/Shopping/Merchant/Lfp/V1beta/LfpMerchantStateService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Lfp::V1::LfpMerchantStateService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1/Google/Shopping/Merchant/Lfp/V1/LfpMerchantStateService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LfpMerchantStateService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -124,12 +124,15 @@ module Google
         # partner](https://support.google.com/merchants/answer/7676652) to get the
         # state of a merchant.
         #
+        # For information about onboarding a retailer, see [How to onboard a
+        # retailer](https://support.google.com/merchants/answer/15243706).
+        #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.lfp_merchant_state_service version: :v1beta, transport: :grpc, &block
+        def self.lfp_merchant_state_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Lfp
@@ -149,11 +152,11 @@ module Google
         # or if the versioned client gem needs an update to support the LfpMerchantStateService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.lfp_merchant_state_service_available? version: :v1beta, transport: :grpc
+        def self.lfp_merchant_state_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Lfp
                          .constants
@@ -176,8 +179,8 @@ module Google
         # Create a new client object for LfpSaleService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1beta/Google/Shopping/Merchant/Lfp/V1beta/LfpSaleService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1/Google/Shopping/Merchant/Lfp/V1/LfpSaleService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LfpSaleService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -197,11 +200,11 @@ module Google
         # data for a merchant.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.lfp_sale_service version: :v1beta, transport: :grpc, &block
+        def self.lfp_sale_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Lfp
@@ -221,11 +224,11 @@ module Google
         # or if the versioned client gem needs an update to support the LfpSaleService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.lfp_sale_service_available? version: :v1beta, transport: :grpc
+        def self.lfp_sale_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Lfp
                          .constants
@@ -248,8 +251,8 @@ module Google
         # Create a new client object for LfpStoreService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1beta/Google/Shopping/Merchant/Lfp/V1beta/LfpStoreService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1/Google/Shopping/Merchant/Lfp/V1/LfpStoreService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LfpStoreService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -269,11 +272,11 @@ module Google
         # stores for a merchant.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.lfp_store_service version: :v1beta, transport: :grpc, &block
+        def self.lfp_store_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Lfp
@@ -293,11 +296,11 @@ module Google
         # or if the versioned client gem needs an update to support the LfpStoreService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.lfp_store_service_available? version: :v1beta, transport: :grpc
+        def self.lfp_store_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Lfp
                          .constants

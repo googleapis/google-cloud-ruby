@@ -429,6 +429,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    pending_write_wait_skipped = true
 
     list_messages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -444,27 +445,27 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
         end
 
         # Use hash object
-        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_messages ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_messages(::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, pending_write_wait_skipped: pending_write_wait_skipped), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

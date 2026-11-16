@@ -35,9 +35,11 @@ module Google
 
             # Creates an Instance.
             rpc :CreateInstance, ::Google::Cloud::Run::V2::CreateInstanceRequest, ::Google::Longrunning::Operation
-            # Deletes a Instance
+            # Updates an Instance.
+            rpc :UpdateInstance, ::Google::Cloud::Run::V2::UpdateInstanceRequest, ::Google::Longrunning::Operation
+            # Deletes an Instance
             rpc :DeleteInstance, ::Google::Cloud::Run::V2::DeleteInstanceRequest, ::Google::Longrunning::Operation
-            # Gets a Instance
+            # Gets an Instance
             rpc :GetInstance, ::Google::Cloud::Run::V2::GetInstanceRequest, ::Google::Cloud::Run::V2::Instance
             # Lists Instances. Results are sorted by creation time, descending.
             rpc :ListInstances, ::Google::Cloud::Run::V2::ListInstancesRequest, ::Google::Cloud::Run::V2::ListInstancesResponse
@@ -45,6 +47,16 @@ module Google
             rpc :StopInstance, ::Google::Cloud::Run::V2::StopInstanceRequest, ::Google::Longrunning::Operation
             # Starts an Instance.
             rpc :StartInstance, ::Google::Cloud::Run::V2::StartInstanceRequest, ::Google::Longrunning::Operation
+            # Gets the IAM Access Control policy currently in effect for the given
+            # Instance. This result does not include any inherited policies.
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Sets the IAM Access control policy for the specified Instance. Overwrites
+            # any existing policy.
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Returns permissions that a caller has on the specified Instance.
+            #
+            # There are no permissions required for making this API call.
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class

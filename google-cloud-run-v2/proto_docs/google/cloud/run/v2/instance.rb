@@ -23,13 +23,16 @@ module Google
       module V2
         # @!attribute [rw] parent
         #   @return [::String]
+        #     Required. The location and project in which this Instance should be
+        #     created.
         # @!attribute [rw] instance
         #   @return [::Google::Cloud::Run::V2::Instance]
         # @!attribute [rw] instance_id
         #   @return [::String]
-        #     Required. The unique identifier for the Instance. It must begin with
+        #     Optional. The unique identifier for the Instance. It must begin with
         #     letter, and cannot end with hyphen; must contain fewer than 50 characters.
         #     The name of the instance becomes \\{parent}/instances/\\{instance_id}.
+        #     If not provided, the server will generate a unique `instance_id`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. Indicates that the request should be validated and default values
@@ -39,8 +42,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for updating an Instance.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated.
+        # @!attribute [rw] instance
+        #   @return [::Google::Cloud::Run::V2::Instance]
+        #     Required. The Instance to be updated.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Indicates that the request should be validated and default values
+        #     populated, without persisting the request or updating any resources.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to `true`, and if the Instance does not exist, it will
+        #     create a new one. The caller must have `run.instances.create` permissions
+        #     if this is set to `true` and the Instance does not exist.
+        class UpdateInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] name
         #   @return [::String]
+        #     Required. The name of the Instance to retrieve.
         class GetInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48,6 +73,7 @@ module Google
 
         # @!attribute [rw] name
         #   @return [::String]
+        #     Required. The name of the Instance to delete.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. Indicates that the request should be validated without actually
@@ -65,8 +91,6 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project to list resources on.
-        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
-        #     project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of Instances to return in this call.
@@ -100,9 +124,6 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Instance to stop.
-        #     Format:
-        #     `projects/{project}/locations/{location}/instances/{instance}`,
-        #     where `{project}` can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. Indicates that the request should be validated without actually
@@ -119,10 +140,7 @@ module Google
         # Request message for starting an Instance.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the Instance to stop.
-        #     Format:
-        #     `projects/{project}/locations/{location}/instances/{instance}`,
-        #     where `{project}` can be project id or number.
+        #     Required. The name of the Instance to start.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. Indicates that the request should be validated without actually
@@ -140,12 +158,9 @@ module Google
         # region.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The fully qualified name of this Instance. In CreateInstanceRequest, this
-        #     field is ignored, and instead composed from CreateInstanceRequest.parent
-        #     and CreateInstanceRequest.instance_id.
-        #
-        #     Format:
-        #     projects/\\{project}/locations/\\{location}/instances/\\{instance_id}
+        #     The fully qualified name of this Instance. In `CreateInstanceRequest`, this
+        #     field is ignored, and instead composed from `CreateInstanceRequest.parent`
+        #     and `CreateInstanceRequest.instance_id`.
         # @!attribute [rw] description
         #   @return [::String]
         #     User-provided description of the Instance. This field currently has a
@@ -159,7 +174,7 @@ module Google
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
-        #     Please note that unlike v1, this is an int64 value. As with most Google
+        #     Please note that unlike v1, this is an `int64` value. As with most Google
         #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -194,14 +209,13 @@ module Google
         #   @return [::Google::Api::LaunchStage]
         #     The launch stage as defined by [Google Cloud Platform
         #      Launch Stages](https://cloud.google.com/terms/launch-stages).
-        #      Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA
-        #      is assumed.
-        #      Set the launch stage to a preview stage on input to allow use of preview
-        #      features in that stage. On read (or output), describes whether the
-        #      resource uses preview features.
-        #     <p>
-        #      For example, if ALPHA is provided as input, but only BETA and GA-level
-        #      features are used, this field will be BETA on output.
+        #      Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified,
+        #      `GA` is assumed. Set the launch stage to a preview stage on input to allow
+        #      use of preview features in that stage. On read (or output), describes
+        #      whether the resource uses preview features.
+        #
+        #      For example, if `ALPHA` is provided as input, but only `BETA` and
+        #      `GA`-level features are used, this field will be `BETA` on output.
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
         #     Settings for the Binary Authorization feature.
@@ -216,6 +230,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Run::V2::Container>]
         #     Required. Holds the single container that defines the unit of execution for
         #     this Instance.
+        # @!attribute [rw] sandboxes
+        #   @return [::Google::Cloud::Run::V2::SandboxConfiguration]
+        #     Optional. Configuration for sandboxes.
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     A list of Volumes to make available to containers.
@@ -229,7 +246,7 @@ module Google
         #     The action to take if the encryption key is revoked.
         # @!attribute [rw] encryption_key_shutdown_duration
         #   @return [::Google::Protobuf::Duration]
-        #     If encryption_key_revocation_action is SHUTDOWN, the duration before
+        #     If `encryption_key_revocation_action` is `SHUTDOWN`, the duration before
         #     shutting down all instances. The minimum increment is 1 hour.
         # @!attribute [rw] node_selector
         #   @return [::Google::Cloud::Run::V2::NodeSelector]
@@ -241,20 +258,29 @@ module Google
         #   @return [::Google::Cloud::Run::V2::IngressTraffic]
         #     Optional. Provides the ingress settings for this Instance. On output,
         #     returns the currently observed ingress settings, or
-        #     INGRESS_TRAFFIC_UNSPECIFIED if no revision is active.
+        #     `INGRESS_TRAFFIC_UNSPECIFIED` if no revision is active.
         # @!attribute [rw] invoker_iam_disabled
         #   @return [::Boolean]
-        #     Optional. Disables IAM permission check for run.routes.invoke for callers
+        #     Optional. Disables IAM permission check for `run.routes.invoke` for callers
         #     of this Instance. For more information, visit
         #     https://cloud.google.com/run/docs/securing/managing-access#invoker_check.
+        # @!attribute [rw] default_uri_disabled
+        #   @return [::Boolean]
+        #     Optional. Disables public resolution of the default URI of this Instance.
         # @!attribute [rw] iap_enabled
         #   @return [::Boolean]
         #     Optional. IAP settings on the Instance.
+        # @!attribute [rw] ssh_enabled
+        #   @return [::Boolean]
+        #     Optional. Enables SSH access to the Instance.
+        # @!attribute [rw] restart_policy
+        #   @return [::Google::Cloud::Run::V2::Instance::RestartPolicy]
+        #     Optional. Restart policy for the Instance.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
         #     Output only. The generation of this Instance currently serving traffic. See
         #     comments in `reconciling` for additional information on reconciliation
-        #     process in Cloud Run. Please note that unlike v1, this is an int64 value.
+        #     process in Cloud Run. Please note that unlike v1, this is an `int64` value.
         #     As with most Google APIs, its JSON representation will be a `string`
         #     instead of an `integer`.
         # @!attribute [r] log_uri
@@ -284,15 +310,15 @@ module Google
         #     Output only. All URLs serving traffic for this Instance.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Returns true if the Instance is currently being acted upon by
-        #     the system to bring it into the desired state.
+        #     Output only. Returns `true` if the Instance is currently being acted upon
+        #     by the system to bring it into the desired state.
         #
         #     When a new Instance is created, or an existing one is updated, Cloud Run
         #     will asynchronously perform all necessary steps to bring the Instance to
         #     the desired serving state. This process is called reconciliation. While
         #     reconciliation is in process, `observed_generation` will have a transient
         #     value that might mismatch the intended state.
-        #      Once reconciliation is over (and this field is false), there are two
+        #      Once reconciliation is over (and this field is `false`), there are two
         #     possible outcomes: reconciliation succeeded and the serving state matches
         #     the Instance, or there was an error, and reconciliation failed. This state
         #     can be found in `terminal_condition.state`.
@@ -320,6 +346,22 @@ module Google
           class AnnotationsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Restart policy options for the instance. If not provided, the default is
+          # `ON_FAILURE`.
+          module RestartPolicy
+            # Unspecified restart policy.
+            RESTART_POLICY_UNSPECIFIED = 0
+
+            # Always restart the instance.
+            ALWAYS = 1
+
+            # Restart if the instance terminates with non-zero exit code.
+            ON_FAILURE = 2
+
+            # Never restart the instance.
+            NEVER = 3
           end
         end
       end

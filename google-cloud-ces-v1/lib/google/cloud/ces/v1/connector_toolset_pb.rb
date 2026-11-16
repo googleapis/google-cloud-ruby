@@ -9,7 +9,7 @@ require 'google/cloud/ces/v1/auth_pb'
 require 'google/cloud/ces/v1/connector_tool_pb'
 
 
-descriptor_data = "\n+google/cloud/ces/v1/connector_toolset.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/cloud/ces/v1/auth.proto\x1a(google/cloud/ces/v1/connector_tool.proto\"\xaa\x01\n\x10\x43onnectorToolset\x12\x17\n\nconnection\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12@\n\x0b\x61uth_config\x18\x02 \x01(\x0b\x32&.google.cloud.ces.v1.EndUserAuthConfigB\x03\xe0\x41\x01\x12;\n\x11\x63onnector_actions\x18\x03 \x03(\x0b\x32\x1b.google.cloud.ces.v1.ActionB\x03\xe0\x41\x02\x42]\n\x17\x63om.google.cloud.ces.v1B\x15\x43onnectorToolsetProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
+descriptor_data = "\n+google/cloud/ces/v1/connector_toolset.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/cloud/ces/v1/auth.proto\x1a(google/cloud/ces/v1/connector_tool.proto\"\xad\x01\n\x10\x43onnectorToolset\x12\x18\n\nconnection\x18\x01 \x01(\tB\x04\xe2\x41\x01\x02\x12\x41\n\x0b\x61uth_config\x18\x02 \x01(\x0b\x32&.google.cloud.ces.v1.EndUserAuthConfigB\x04\xe2\x41\x01\x01\x12<\n\x11\x63onnector_actions\x18\x03 \x03(\x0b\x32\x1b.google.cloud.ces.v1.ActionB\x04\xe2\x41\x01\x02\x42]\n\x17\x63om.google.cloud.ces.v1B\x15\x43onnectorToolsetProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

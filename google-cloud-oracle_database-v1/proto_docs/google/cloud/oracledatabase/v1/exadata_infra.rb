@@ -30,19 +30,19 @@ module Google
         #     projects/\\{project}/locations/\\{region}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. User friendly name for this resource.
+        #     Optional. Immutable. User friendly name for this resource.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. The GCP Oracle zone where Oracle Exadata Infrastructure is
-        #     hosted. Example: us-east4-b-r2. If not specified, the system will pick a
-        #     zone based on availability.
+        #     Optional. Immutable. The GCP Oracle zone where Oracle Exadata
+        #     Infrastructure is hosted. Example: us-east4-b-r2. If not specified, the
+        #     system will pick a zone based on availability.
         # @!attribute [r] entitlement_id
         #   @return [::String]
         #     Output only. Entitlement ID of the private offer against which this
         #     infrastructure resource is provisioned.
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructureProperties]
-        #     Optional. Various properties of the infra.
+        #     Optional. Immutable. Various properties of the infra.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels or tags associated with the resource.

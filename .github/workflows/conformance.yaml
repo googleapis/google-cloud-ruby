@@ -37,7 +37,7 @@ jobs:
       with:
         go-version: '>=1.23.0'
     - name: Install tools
-      run: "gem install --no-document toys"
+      run: "gem install --no-document toys -v '~> 0.22.0'"
     - name: Install dependencies
       run: "cd google-cloud-bigtable/conformance/test_proxy && bundle install"
     - name: Run tests

@@ -850,6 +850,12 @@ module Google
             #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
             #     or
             #     `projects/*/locations/global/collections/default_collection/dataStores/*/servingConfigs/default_serving_config`.
+            #
+            #     Or the resource name of the agent engine serving config, such as:
+            #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_agent_answer`.
+            #     (use when `enable_agent_invocation` set to true, and you have custom
+            #     `AI_MODE` agent engine configured)
+            #
             #     This field is used to identify the serving configuration name, set
             #     of models used to make the search.
             #   @param query [::Google::Cloud::DiscoveryEngine::V1::Query, ::Hash]
@@ -1010,6 +1016,12 @@ module Google
             #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
             #     or
             #     `projects/*/locations/global/collections/default_collection/dataStores/*/servingConfigs/default_serving_config`.
+            #
+            #     Or the resource name of the agent engine serving config, such as:
+            #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_agent_answer`.
+            #     (use when `enable_agent_invocation` set to true, and you have custom
+            #     `AI_MODE` agent engine configured)
+            #
             #     This field is used to identify the serving configuration name, set
             #     of models used to make the search.
             #   @param query [::Google::Cloud::DiscoveryEngine::V1::Query, ::Hash]
@@ -1246,7 +1258,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_session(parent: nil, session: nil)
+            # @overload create_session(parent: nil, session: nil, session_id: nil)
             #   Pass arguments to `create_session` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1256,6 +1268,13 @@ module Google
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}`
             #   @param session [::Google::Cloud::DiscoveryEngine::V1::Session, ::Hash]
             #     Required. The session to create.
+            #   @param session_id [::String]
+            #     Optional. The ID to use for the session, which will become the final
+            #     component of the session's resource name.
+            #
+            #     This value should be 1-63 characters, and valid characters
+            #     are /[a-z0-9][a-z0-9-]\\{0,61}[a-z0-9]/. If not specified, a unique ID will
+            #     be generated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::Session]
@@ -1626,7 +1645,9 @@ module Google
             #     Provide this to retrieve the subsequent page.
             #   @param filter [::String]
             #     A comma-separated list of fields to filter by, in EBNF grammar.
+            #
             #     The supported fields are:
+            #
             #     * `user_pseudo_id`
             #     * `state`
             #     * `display_name`
@@ -1635,28 +1656,35 @@ module Google
             #     * `labels`
             #     * `create_time`
             #     * `update_time`
+            #     * `collaborative_project`
             #
             #     Examples:
-            #     "user_pseudo_id = some_id"
-            #     "display_name = \"some_name\""
-            #     "starred = true"
-            #     "is_pinned=true AND (NOT labels:hidden)"
-            #     "create_time > \"1970-01-01T12:00:00Z\""
+            #
+            #     * `user_pseudo_id = some_id`
+            #     * `display_name = "some_name"`
+            #     * `starred = true`
+            #     * `is_pinned=true AND (NOT labels:hidden)`
+            #     * `create_time > "1970-01-01T12:00:00Z"`
+            #     * `collaborative_project =
+            #          "projects/123/locations/global/collections/default_collection/engines/"
+            #          "default_engine/collaborative_projects/cp1"`
             #   @param order_by [::String]
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
+            #
             #     Supported fields:
             #
             #       * `update_time`
             #       * `create_time`
             #       * `session_name`
             #       * `is_pinned`
+            #       * `display_name`
             #
             #     Example:
             #
-            #     * "update_time desc"
-            #     * "create_time"
-            #     * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+            #     * `update_time desc`
+            #     * `create_time`
+            #     * `is_pinned desc,update_time desc`: list sessions by is_pinned first, then
             #        by update_time.
             #
             # @yield [response, operation] Access the result along with the RPC operation

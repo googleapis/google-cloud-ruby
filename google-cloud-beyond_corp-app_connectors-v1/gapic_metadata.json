@@ -35,6 +35,11 @@
                 "delete_app_connector"
               ]
             },
+            "ResolveInstanceConfig": {
+              "methods": [
+                "resolve_instance_config"
+              ]
+            },
             "ReportStatus": {
               "methods": [
                 "report_status"

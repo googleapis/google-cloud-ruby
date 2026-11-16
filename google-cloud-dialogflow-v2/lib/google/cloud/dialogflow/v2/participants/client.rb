@@ -83,6 +83,10 @@ module Google
 
                 default_config.rpcs.streaming_analyze_content.timeout = 220.0
 
+                default_config.rpcs.bidi_streaming_analyze_content.timeout = 1800.0
+
+                default_config.rpcs.streaming_reactive_companion_suggestions.timeout = 5400.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -794,6 +798,163 @@ module Google
             end
 
             ##
+            # Bidirectional endless streaming version of
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content StreamingAnalyzeContent}.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the bidi_streaming_analyze_content method to start streaming.
+            #   output = client.bidi_streaming_analyze_content input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def bidi_streaming_analyze_content request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Dialogflow::V2::BidiStreamingAnalyzeContentRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.bidi_streaming_analyze_content.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.bidi_streaming_analyze_content.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.bidi_streaming_analyze_content.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @participants_stub.call_rpc :bidi_streaming_analyze_content, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # External streaming API for direct human-agent-to-bot chats.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_reactive_companion_suggestions method to start streaming.
+            #   output = client.streaming_reactive_companion_suggestions input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def streaming_reactive_companion_suggestions request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Dialogflow::V2::StreamingReactiveCompanionSuggestionsRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.streaming_reactive_companion_suggestions.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.streaming_reactive_companion_suggestions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.streaming_reactive_companion_suggestions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @participants_stub.call_rpc :streaming_reactive_companion_suggestions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets suggested articles for a participant based on specific historical
             # messages.
             #
@@ -1414,6 +1575,16 @@ module Google
                 #
                 attr_reader :streaming_analyze_content
                 ##
+                # RPC-specific configuration for `bidi_streaming_analyze_content`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :bidi_streaming_analyze_content
+                ##
+                # RPC-specific configuration for `streaming_reactive_companion_suggestions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :streaming_reactive_companion_suggestions
+                ##
                 # RPC-specific configuration for `suggest_articles`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1448,6 +1619,10 @@ module Google
                   @analyze_content = ::Gapic::Config::Method.new analyze_content_config
                   streaming_analyze_content_config = parent_rpcs.streaming_analyze_content if parent_rpcs.respond_to? :streaming_analyze_content
                   @streaming_analyze_content = ::Gapic::Config::Method.new streaming_analyze_content_config
+                  bidi_streaming_analyze_content_config = parent_rpcs.bidi_streaming_analyze_content if parent_rpcs.respond_to? :bidi_streaming_analyze_content
+                  @bidi_streaming_analyze_content = ::Gapic::Config::Method.new bidi_streaming_analyze_content_config
+                  streaming_reactive_companion_suggestions_config = parent_rpcs.streaming_reactive_companion_suggestions if parent_rpcs.respond_to? :streaming_reactive_companion_suggestions
+                  @streaming_reactive_companion_suggestions = ::Gapic::Config::Method.new streaming_reactive_companion_suggestions_config
                   suggest_articles_config = parent_rpcs.suggest_articles if parent_rpcs.respond_to? :suggest_articles
                   @suggest_articles = ::Gapic::Config::Method.new suggest_articles_config
                   suggest_faq_answers_config = parent_rpcs.suggest_faq_answers if parent_rpcs.respond_to? :suggest_faq_answers

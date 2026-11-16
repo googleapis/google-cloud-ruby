@@ -65,6 +65,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when the app version was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the app version was last updated.
         # @!attribute [r] snapshot
         #   @return [::Google::Cloud::Ces::V1beta::AppSnapshot]
         #     Output only. The snapshot of the app when the version is created.

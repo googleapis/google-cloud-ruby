@@ -32,8 +32,8 @@ module Google
         # Create a new client object for LocalInventoryService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-inventories-v1beta/Google/Shopping/Merchant/Inventories/V1beta/LocalInventoryService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-inventories-v1/Google/Shopping/Merchant/Inventories/V1/LocalInventoryService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the LocalInventoryService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -51,11 +51,11 @@ module Google
         # Service to manage local inventory for products
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.local_inventory_service version: :v1beta, transport: :grpc, &block
+        def self.local_inventory_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Inventories
@@ -75,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the LocalInventoryService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.local_inventory_service_available? version: :v1beta, transport: :grpc
+        def self.local_inventory_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Inventories
                          .constants
@@ -102,8 +102,8 @@ module Google
         # Create a new client object for RegionalInventoryService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::Inventories::V1beta::RegionalInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-inventories-v1beta/Google/Shopping/Merchant/Inventories/V1beta/RegionalInventoryService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::Inventories::V1::RegionalInventoryService::Client](https://rubydoc.info/gems/google-shopping-merchant-inventories-v1/Google/Shopping/Merchant/Inventories/V1/RegionalInventoryService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the RegionalInventoryService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -122,11 +122,11 @@ module Google
         # `regions` resource and API to manage regions definitions.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.regional_inventory_service version: :v1beta, transport: :grpc, &block
+        def self.regional_inventory_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::Inventories
@@ -146,11 +146,11 @@ module Google
         # or if the versioned client gem needs an update to support the RegionalInventoryService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.regional_inventory_service_available? version: :v1beta, transport: :grpc
+        def self.regional_inventory_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::Inventories
                          .constants

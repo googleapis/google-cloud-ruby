@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.6.0 (2026-10-26)
+
+#### Features
+
+* regenerate with gapic-generator-cloud 0.53.0 (gapic-common ~&gt; 1.5) ([#36635](https://github.com/googleapis/google-cloud-ruby/issues/36635)) 
+* regenerate with gapic-generator-cloud 0.54.0 (gapic-common ~&gt; 1.6) ([#36658](https://github.com/googleapis/google-cloud-ruby/issues/36658)) 
+#### Documentation
+
+* link to the published Ruby version support policy ([#36660](https://github.com/googleapis/google-cloud-ruby/issues/36660)) 
+
 ### 1.5.1 (2026-08-05)
 
 #### Bug Fixes

@@ -133,6 +133,7 @@ module Google
         #   * `:FULL` - Populates all fields.
         #
         # @return [Google::Cloud::Bigtable::Table]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def reload! view: nil
           view ||= :SCHEMA_VIEW
@@ -167,6 +168,7 @@ module Google
         #     puts cs.replication_state
         #     puts cs.encryption_infos.first.encryption_type
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def cluster_states
           check_view_and_load :FULL, skip_if: [:ENCRYPTION_VIEW, :REPLICATION_VIEW]
@@ -239,6 +241,7 @@ module Google
         #   end
         #
         #   puts table.column_families["cf3"] #=> nil
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def column_families
           check_view_and_load :SCHEMA_VIEW
@@ -263,6 +266,7 @@ module Google
         # or `FULL`. Previously loaded data is retained.
         #
         # @return [Symbol]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def granularity
           check_view_and_load :SCHEMA_VIEW
@@ -273,6 +277,7 @@ module Google
         # The table keeps data versioned at a granularity of 1 ms.
         #
         # @return [Boolean]
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def granularity_millis?
           granularity == :MILLIS
@@ -311,6 +316,7 @@ module Google
         #   table.policy do |p|
         #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def policy
           ensure_service!
@@ -347,6 +353,7 @@ module Google
         #   updated_policy = table.update_policy policy
         #
         #   puts updated_policy.roles
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def update_policy new_policy
           ensure_service!
@@ -382,6 +389,7 @@ module Google
         #   )
         #   permissions.include? "bigtable.tables.delete" #=> false
         #   permissions.include? "bigtable.tables.get" #=> true
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def test_iam_permissions *permissions
           ensure_service!
@@ -401,6 +409,7 @@ module Google
         #
         #   table = bigtable.table "my-instance", "my-table"
         #   table.delete
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete
           ensure_service!
@@ -439,6 +448,7 @@ module Google
         #   else
         #     p "Table does not exist"
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def exists?
           !service.get_table(instance_id, name, view: :NAME_ONLY).nil?
@@ -495,6 +505,7 @@ module Google
         #   table = instance.table "my-table"
         #
         #   table.generate_consistency_token # "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF"
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def generate_consistency_token
           ensure_service!
@@ -522,6 +533,7 @@ module Google
         #   if table.check_consistency token
         #     puts "Replication is consistent"
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def check_consistency token
           ensure_service!
@@ -558,6 +570,7 @@ module Google
         #   if table.wait_for_replication timeout: 300, check_interval: 10
         #     puts "Replication done"
         #   end
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def wait_for_replication timeout: 600, check_interval: 5
           raise InvalidArgumentError, "'check_interval' cannot be greater than timeout" if check_interval > timeout
@@ -593,6 +606,7 @@ module Google
         #
         #   # With timeout
         #   table.delete_all_rows timeout: 120 # 120 seconds.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete_all_rows timeout: nil
           drop_row_range delete_all_data: true, timeout: timeout
@@ -615,6 +629,7 @@ module Google
         #
         #   # With timeout
         #   table.delete_rows_by_prefix "user-1", timeout: 120 # 120 seconds.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def delete_rows_by_prefix prefix, timeout: nil
           drop_row_range row_key_prefix: prefix, timeout: timeout
@@ -640,6 +655,7 @@ module Google
         #
         #   # Delete all data With timeout
         #   table.drop_row_range delete_all_data: true, timeout: 120 # 120 seconds.
+        # @deprecated Use {Google::Cloud::Bigtable::Project#table_admin_client} instead.
         #
         def drop_row_range row_key_prefix: nil, delete_all_data: nil, timeout: nil
           ensure_service!

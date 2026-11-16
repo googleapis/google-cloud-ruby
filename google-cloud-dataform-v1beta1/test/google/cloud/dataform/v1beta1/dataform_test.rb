@@ -2705,6 +2705,73 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     end
   end
 
+  def test_fetch_workspace_history
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_workspace_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_workspace_history, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_workspace_history_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.fetch_workspace_history({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.fetch_workspace_history name: name, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.fetch_workspace_history ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.fetch_workspace_history({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.fetch_workspace_history(::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_workspace_history_client_stub.call_rpc_count
+    end
+  end
+
   def test_commit_workspace_changes
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse.new
@@ -3950,6 +4017,71 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, create_compilation_result_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_compilation_result_long_running
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    compilation_result = {}
+
+    create_compilation_result_long_running_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_compilation_result_long_running, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::CompilationResult), request["compilation_result"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_compilation_result_long_running_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_compilation_result_long_running({ parent: parent, compilation_result: compilation_result }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_compilation_result_long_running parent: parent, compilation_result: compilation_result do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_compilation_result_long_running ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_compilation_result_long_running({ parent: parent, compilation_result: compilation_result }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_compilation_result_long_running(::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_compilation_result_long_running_client_stub.call_rpc_count
     end
   end
 
